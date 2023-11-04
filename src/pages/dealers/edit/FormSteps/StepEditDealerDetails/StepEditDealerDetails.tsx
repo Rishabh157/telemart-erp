@@ -51,7 +51,6 @@ const StepEditDealerDetails = ({
             <div className="grid grid-cols-3 gap-4 gap-y-5">
                 {formFields?.map((field: FieldType) => {
                     const { type = 'text', name, label, placeholder } = field
-
                     switch (type) {
                         case 'text':
                             return (
@@ -75,6 +74,11 @@ const StepEditDealerDetails = ({
                             return (
                                 <div key={name}>
                                     <ATMTextField
+                                        disabled={
+                                            name === 'openingBalance'
+                                                ? true
+                                                : false
+                                        }
                                         name={name}
                                         value={values[name]}
                                         onChange={(e) => {

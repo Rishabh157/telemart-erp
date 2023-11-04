@@ -505,6 +505,7 @@ const InwardDealerTabsListingWrapper = () => {
     const handleDispatchBarcode = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
             const {
+                wareHouseLabel,
                 dtw,
                 companyId,
                 barcodeNumber,

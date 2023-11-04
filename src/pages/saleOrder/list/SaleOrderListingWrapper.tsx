@@ -177,6 +177,15 @@ const SaleOrderListingWrapper = () => {
             ),
         },
         {
+            field: 'warehouseStateLabel',
+            headerName: 'State',
+            flex: 'flex-[0.8_0.8_0%]',
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => (
+                <span> {row?.documents[0]?.warehouseStateLabel} </span>
+            ),
+        },
+        {
             field: 'items',
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
