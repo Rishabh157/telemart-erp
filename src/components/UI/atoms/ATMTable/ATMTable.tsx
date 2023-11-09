@@ -68,7 +68,7 @@ const ATMTable = <T extends {}>({
             {/* Columns */}
             <div
                 className={twMerge(
-                    `flex items-center border-b sticky top-0 border-slate-300 bg-slate-50`,
+                    `flex items-center border-b sticky top-0 border-slate-300 bg-slate-50 z-[1000]`,
                     `${headerClassName}`
                 )}
             >

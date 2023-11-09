@@ -162,7 +162,7 @@ const WarehouseTransferListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'wtNumber',
+            field: 'wtsNumber',
             headerName: 'wt Number',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => (
@@ -215,7 +215,7 @@ const WarehouseTransferListingWrapper = () => {
             },
         },
         {
-            field: 'firstApprovedActionStatus',
+            field: 'firstApproved',
             headerName: 'First Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
@@ -250,7 +250,7 @@ const WarehouseTransferListingWrapper = () => {
             },
         },
         {
-            field: 'secondApprovedActionByStatus',
+            field: 'secondApproved',
             headerName: 'Second Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
@@ -450,7 +450,7 @@ const WarehouseTransferListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        moduleName={UserModuleNameTypes.WarehouseTransfer}
+                        moduleName={UserModuleNameTypes.wtsTransfer}
                         isEdit
                         isDelete
                         handleEditActionButton={() => {
@@ -485,7 +485,7 @@ const WarehouseTransferListingWrapper = () => {
                     columns={getAllowedAuthorizedColumns(
                         checkUserAccess,
                         columns,
-                        UserModuleNameTypes.WarehouseTransfer,
+                        UserModuleNameTypes.wtsTransfer,
                         UserModuleActionTypes.List
                     )}
                     rows={items}
