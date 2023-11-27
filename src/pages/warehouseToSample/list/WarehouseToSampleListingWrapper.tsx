@@ -212,7 +212,7 @@ const WarehouseToSampleListingWrapper = () => {
             },
         },
         {
-            field: 'firstApprovedActionStatus',
+            field: 'firstApproved',
             headerName: 'First Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
@@ -247,7 +247,7 @@ const WarehouseToSampleListingWrapper = () => {
             },
         },
         {
-            field: 'secondApprovedActionByStatus',
+            field: 'secondApproved',
             headerName: 'Second Status',
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
@@ -447,7 +447,9 @@ const WarehouseToSampleListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        moduleName={UserModuleNameTypes.WarehouseTransfer}
+                        moduleName={
+                            UserModuleNameTypes.warehouseToSampleTransfer
+                        }
                         isEdit
                         isDelete
                         handleEditActionButton={() => {
@@ -482,7 +484,7 @@ const WarehouseToSampleListingWrapper = () => {
                     columns={getAllowedAuthorizedColumns(
                         checkUserAccess,
                         columns,
-                        UserModuleNameTypes.WarehouseTransfer,
+                        UserModuleNameTypes.warehouseToSampleTransfer,
                         UserModuleActionTypes.List
                     )}
                     rows={items}

@@ -193,9 +193,12 @@ const SaleOrderListingWrapper = () => {
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
                     <div className="w-full">
-                        {row?.documents?.map((item) => {
+                        {row?.documents?.map((item, ind) => {
                             return (
-                                <div className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                <div
+                                    key={ind}
+                                    className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center"
+                                >
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
@@ -305,7 +308,7 @@ const SaleOrderListingWrapper = () => {
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
-                    <div>
+                    <div className="z-0">
                         {!row?.dhApproved ? (
                             <Stack direction="row" spacing={1}>
                                 {row?.dhApproved === null ? (
@@ -395,6 +398,7 @@ const SaleOrderListingWrapper = () => {
                                         }}
                                     >
                                         <Chip
+                                            className="z-0"
                                             label="ACC Pending "
                                             color="warning"
                                             variant="outlined"

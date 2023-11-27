@@ -11,7 +11,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ActionAuthHOC from 'src/ActionAuthHoc'
 
 // |-- Internal Dependencies --|
@@ -22,7 +22,6 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
-    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
@@ -48,9 +47,7 @@ const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
     const saleOrderState: any = useSelector(
         (state: RootState) => state.returnToVendor
     )
-    const { pathname } = useLocation()
-    const path = pathname.split('/')[1]
-    const isDealerPath = path === 'dealers'
+
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
@@ -62,27 +59,13 @@ const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
         }
     }, [])
     return (
-        <div
-            className={`px-4 ${
-                path === 'dealers'
-                    ? 'h-[calc(100vh-185px)]'
-                    : 'h-[calc(100vh-55px)]'
-            }`}
-        >
+        <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Return To Vendor </ATMPageHeading>
                 <ActionAuthHOC
-                    moduleName={
-                        isDealerPath
-                            ? UserModuleNameTypes.dealer
-                            : UserModuleNameTypes.saleOrder
-                    }
-                    actionName={
-                        isDealerPath
-                            ? UserModuleAddActionTypes.dealerSalesOrderAdd
-                            : UserModuleActionTypes.Add
-                    }
+                    moduleName={UserModuleNameTypes.rtvTransfer}
+                    actionName={UserModuleActionTypes.Add}
                     component={
                         <button
                             onClick={() => navigate('/return-to-vendor/add')}
@@ -94,13 +77,7 @@ const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
                 />
             </div>
 
-            <div
-                className={` border flex flex-col  rounded bg-white ${
-                    path === 'dealers'
-                        ? 'h-[calc(100%-50px)]'
-                        : 'h-[calc(100%-75px)]'
-                }`}
-            >
+            <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}

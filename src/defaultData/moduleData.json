@@ -609,17 +609,6 @@
                     "fields": []
                 },
                 {
-                    "actionId": "warehouseActionInwardInventoriesRtvId",
-                    "actionUrl": "/warehouse/view/:id/inward-inventories/rtv",
-                    "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_RTV",
-                    "parentGroup": [
-                        "VIEW",
-                        "TAB_WAREHOUSE_DETAILS",
-                        "TAB_WAREHOUSE_INWARD_INVENTORIES"
-                    ],
-                    "fields": []
-                },
-                {
                     "actionId": "warehouseActionInwardInventoriesWarehouseId",
                     "actionUrl": "/warehouse/view/:id/inward-inventories/warehoue",
                     "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE",
@@ -830,22 +819,432 @@
                     ]
                 },
                 {
-                    "actionId": "saleOrderActionAddId",
-                    "actionUrl": "/sale-order/add-sale-order",
+                    "actionId": "rtvOrderActionAddId",
+                    "actionUrl": "/return-to-vendor/add",
                     "actionName": "ADD",
                     "parentGroup": [],
                     "fields": []
                 },
                 {
-                    "actionId": "saleOrderActionEditId",
-                    "actionUrl": "/sale-order/edit-sale-order/:id",
+                    "actionId": "rtvOrderActionEditId",
+                    "actionUrl": "/return-to-vendor/edit/:id",
                     "actionName": "EDIT",
                     "parentGroup": [],
                     "fields": []
                 },
                 {
-                    "actionId": "saleOrderActionDeleteId",
-                    "actionUrl": "/sale-order/delete",
+                    "actionId": "rtvOrderActionDeleteId",
+                    "actionUrl": "/rtv/delete",
+                    "actionName": "DELETE",
+                    "parentGroup": [],
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "moduleId": "wtsTransferOrderId",
+            "moduleName": "WAREHOUSE_TRANSFER",
+            "moduleAction": [
+                {
+                    "actionId": "wtsTransferActionListId",
+                    "actionUrl": "/warehouse-transfer",
+                    "actionName": "LIST",
+                    "parentGroup": [],
+                    "fields": [
+                        {
+                            "fieldId": "wtsNo1",
+                            "fieldName": "WT Number",
+                            "fieldValue": "wtsNumber"
+                        },
+                        {
+                            "fieldId": "wtsNo2",
+                            "fieldName": "From Warehouse",
+                            "fieldValue": "fromWarehouseLabel"
+                        },
+                        {
+                            "fieldId": "wtsNo3",
+                            "fieldName": "To Warehouse",
+                            "fieldValue": "toWarehouseLabel"
+                        },
+                        {
+                            "fieldId": "wtsNo4",
+                            "fieldName": "Items / Quantity",
+                            "fieldValue": "items"
+                        },
+                        {
+                            "fieldId": "wtsNo5",
+                            "fieldName": "First level Status",
+                            "fieldValue": "firstApproved"
+                        },
+                        {
+                            "fieldId": "wtsNo6",
+                            "fieldName": "Level first Approved By",
+                            "fieldValue": "firstApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "wtsNo7",
+                            "fieldName": "First Approved Date",
+                            "fieldValue": "firstApprovedAt"
+                        },
+                        {
+                            "fieldId": "wtsNo8",
+                            "fieldName": "Second Level Status",
+                            "fieldValue": "secondApproved"
+                        },
+                        {
+                            "fieldId": "wtsNo9",
+                            "fieldName": "Level Second Approved By",
+                            "fieldValue": "secondApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "wtsNo10",
+                            "fieldName": "Second Approved Date",
+                            "fieldValue": "secondApprovedAt"
+                        },
+                        {
+                            "fieldId": "wtsNo11",
+                            "fieldName": "Inserted Date",
+                            "fieldValue": "createdAt"
+                        },
+                        {
+                            "fieldId": "wtsNo12",
+                            "fieldName": "Updated Date",
+                            "fieldValue": "updatedAt"
+                        },
+                        {
+                            "fieldId": "wtsNo13",
+                            "fieldName": "Approval Level",
+                            "fieldValue": "Approved"
+                        }
+                    ]
+                },
+                {
+                    "actionId": "wtsActionAddId",
+                    "actionUrl": "/warehouse-transfer/add",
+                    "actionName": "ADD",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "wtsActionEditId",
+                    "actionUrl": "/warehouse-transfer/edit/:id",
+                    "actionName": "EDIT",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "wtsActionDeleteId",
+                    "actionUrl": "/wts/delete",
+                    "actionName": "DELETE",
+                    "parentGroup": [],
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "moduleId": "wtsampleTransferOrderId",
+            "moduleName": "WAREHOUSE_TO_SAMPLE",
+            "moduleAction": [
+                {
+                    "actionId": "wtsTransferActionListId",
+                    "actionUrl": "//warehouse-to-sample",
+                    "actionName": "LIST",
+                    "parentGroup": [],
+                    "fields": [
+                        {
+                            "fieldId": "wtsampleNo1",
+                            "fieldName": "WT Number",
+                            "fieldValue": "wtsNumber"
+                        },
+                        {
+                            "fieldId": "wtsampleNo2",
+                            "fieldName": "From Warehouse",
+                            "fieldValue": "fromWarehouseLabel"
+                        },
+                        {
+                            "fieldId": "wtsampleNo3",
+                            "fieldName": "To Receiver Name",
+                            "fieldValue": "toName"
+                        },
+                        {
+                            "fieldId": "wtsampleNo4",
+                            "fieldName": "Items / Quantity",
+                            "fieldValue": "items"
+                        },
+                        {
+                            "fieldId": "wtsampleNo5",
+                            "fieldName": "First level Status",
+                            "fieldValue": "firstApproved"
+                        },
+                        {
+                            "fieldId": "wtsampleNo6",
+                            "fieldName": "Level first Approved By",
+                            "fieldValue": "firstApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "wtsampleNo7",
+                            "fieldName": "First Approved Date",
+                            "fieldValue": "firstApprovedAt"
+                        },
+                        {
+                            "fieldId": "wtsampleNo8",
+                            "fieldName": "Second Level Status",
+                            "fieldValue": "secondApproved"
+                        },
+                        {
+                            "fieldId": "wtsampleNo9",
+                            "fieldName": "Level Second Approved By",
+                            "fieldValue": "secondApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "wtsampleNo10",
+                            "fieldName": "Second Approved Date",
+                            "fieldValue": "secondApprovedAt"
+                        },
+                        {
+                            "fieldId": "wtsampleNo11",
+                            "fieldName": "Inserted Date",
+                            "fieldValue": "createdAt"
+                        },
+                        {
+                            "fieldId": "wtsampleNo12",
+                            "fieldName": "Updated Date",
+                            "fieldValue": "updatedAt"
+                        },
+                        {
+                            "fieldId": "wtsampleNo13",
+                            "fieldName": "Approval Level",
+                            "fieldValue": "Approved"
+                        }
+                    ]
+                },
+                {
+                    "actionId": "wtsampleActionAddId",
+                    "actionUrl": "/warehouse-transfer/add",
+                    "actionName": "ADD",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "wtsampleActionEditId",
+                    "actionUrl": "/warehouse-transfer/edit/:id",
+                    "actionName": "EDIT",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "wtsampleActionDeleteId",
+                    "actionUrl": "/wts/delete",
+                    "actionName": "DELETE",
+                    "parentGroup": [],
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "moduleId": "wtcTransferOrderId",
+            "moduleName": "WAREHOUSE_TO_COMPANY_TRANSFER",
+            "moduleAction": [
+                {
+                    "actionId": "wtsTransferActionListId",
+                    "actionUrl": "/warehouse-to-company",
+                    "actionName": "LIST",
+                    "parentGroup": [],
+                    "fields": [
+                        {
+                            "fieldId": "wtcNo1",
+                            "fieldName": "WTC Number",
+                            "fieldValue": "wtcNumber"
+                        },
+                        {
+                            "fieldId": "wtcNo2",
+                            "fieldName": "From Warehouse",
+                            "fieldValue": "fromWarehouseLabel"
+                        },
+                        {
+                            "fieldId": "wtcNo3",
+                            "fieldName": "Company Name",
+                            "fieldValue": "toCompanyLabel"
+                        },
+                        {
+                            "fieldId": "wtcNo4",
+                            "fieldName": "To Warehouse",
+                            "fieldValue": "toWarehouseLabel"
+                        },
+                        {
+                            "fieldId": "wtcNo5",
+                            "fieldName": "Items / Quantity",
+                            "fieldValue": "items"
+                        },
+                        {
+                            "fieldId": "wtcNo6",
+                            "fieldName": "First level Status",
+                            "fieldValue": "firstApproved"
+                        },
+                        {
+                            "fieldId": "wtcNo7",
+                            "fieldName": "Level first Approved By",
+                            "fieldValue": "firstApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "wtcNo8",
+                            "fieldName": "First Approved Date",
+                            "fieldValue": "firstApprovedAt"
+                        },
+                        {
+                            "fieldId": "wtcNo9",
+                            "fieldName": "Second Level Status",
+                            "fieldValue": "secondApproved"
+                        },
+                        {
+                            "fieldId": "wtcNo10",
+                            "fieldName": "Level Second Approved By",
+                            "fieldValue": "secondApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "wtcNo11",
+                            "fieldName": "Second Approved Date",
+                            "fieldValue": "secondApprovedAt"
+                        },
+                        {
+                            "fieldId": "wtcNo12",
+                            "fieldName": "Inserted Date",
+                            "fieldValue": "createdAt"
+                        },
+                        {
+                            "fieldId": "wtcNo13",
+                            "fieldName": "Updated Date",
+                            "fieldValue": "updatedAt"
+                        },
+                        {
+                            "fieldId": "wtcNo14",
+                            "fieldName": "Approval Level",
+                            "fieldValue": "Approved"
+                        }
+                    ]
+                },
+                {
+                    "actionId": "wtcActionAddId",
+                    "actionUrl": "/warehouse-to-company/add",
+                    "actionName": "ADD",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "wtcActionEditId",
+                    "actionUrl": "/warehouse-to-company/edit/:id",
+                    "actionName": "EDIT",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "wtcActionDeleteId",
+                    "actionUrl": "/wtc/delete",
+                    "actionName": "DELETE",
+                    "parentGroup": [],
+                    "fields": []
+                }
+            ]
+        },
+        {
+            "moduleId": "wtcTransferOrderId",
+            "moduleName": "WAREHOUSE_TO_COMPANY_TRANSFER",
+            "moduleAction": [
+                {
+                    "actionId": "wtsTransferActionListId",
+                    "actionUrl": "/warehouse-to-company",
+                    "actionName": "LIST",
+                    "parentGroup": [],
+                    "fields": [
+                        {
+                            "fieldId": "wtcNo1",
+                            "fieldName": "WTC Number",
+                            "fieldValue": "wtcNumber"
+                        },
+                        {
+                            "fieldId": "wtcNo2",
+                            "fieldName": "From Warehouse",
+                            "fieldValue": "fromWarehouseLabel"
+                        },
+                        {
+                            "fieldId": "wtcNo3",
+                            "fieldName": "Company Name",
+                            "fieldValue": "toCompanyLabel"
+                        },
+                        {
+                            "fieldId": "wtcNo4",
+                            "fieldName": "To Warehouse",
+                            "fieldValue": "toWarehouseLabel"
+                        },
+                        {
+                            "fieldId": "wtcNo5",
+                            "fieldName": "Items / Quantity",
+                            "fieldValue": "items"
+                        },
+                        {
+                            "fieldId": "wtcNo6",
+                            "fieldName": "First level Status",
+                            "fieldValue": "firstApproved"
+                        },
+                        {
+                            "fieldId": "wtcNo7",
+                            "fieldName": "Level first Approved By",
+                            "fieldValue": "firstApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "wtcNo8",
+                            "fieldName": "First Approved Date",
+                            "fieldValue": "firstApprovedAt"
+                        },
+                        {
+                            "fieldId": "wtcNo9",
+                            "fieldName": "Second Level Status",
+                            "fieldValue": "secondApproved"
+                        },
+                        {
+                            "fieldId": "wtcNo10",
+                            "fieldName": "Level Second Approved By",
+                            "fieldValue": "secondApprovedActionBy"
+                        },
+                        {
+                            "fieldId": "wtcNo11",
+                            "fieldName": "Second Approved Date",
+                            "fieldValue": "secondApprovedAt"
+                        },
+                        {
+                            "fieldId": "wtcNo12",
+                            "fieldName": "Inserted Date",
+                            "fieldValue": "createdAt"
+                        },
+                        {
+                            "fieldId": "wtcNo13",
+                            "fieldName": "Updated Date",
+                            "fieldValue": "updatedAt"
+                        },
+                        {
+                            "fieldId": "wtcNo14",
+                            "fieldName": "Approval Level",
+                            "fieldValue": "Approved"
+                        }
+                    ]
+                },
+                {
+                    "actionId": "wtcActionAddId",
+                    "actionUrl": "/warehouse-to-company/add",
+                    "actionName": "ADD",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "wtcActionEditId",
+                    "actionUrl": "/warehouse-to-company/edit/:id",
+                    "actionName": "EDIT",
+                    "parentGroup": [],
+                    "fields": []
+                },
+                {
+                    "actionId": "wtcActionDeleteId",
+                    "actionUrl": "/wtc/delete",
                     "actionName": "DELETE",
                     "parentGroup": [],
                     "fields": []
@@ -1115,27 +1514,6 @@
                             "fieldValue": "total"
                         }
                     ]
-                },
-                {
-                    "actionId": "inquiryActionAddId",
-                    "actionUrl": "/inquiry/add",
-                    "actionName": "ADD",
-                    "parentGroup": [],
-                    "fields": []
-                },
-                {
-                    "actionId": "inquiryActionEditId",
-                    "actionUrl": "/inquiry/edit/:id",
-                    "actionName": "EDIT",
-                    "parentGroup": [],
-                    "fields": []
-                },
-                {
-                    "actionId": "inquiryActionDeleteId",
-                    "actionUrl": "/inquiry/delete",
-                    "actionName": "DELETE",
-                    "parentGroup": [],
-                    "fields": []
                 }
             ]
         },

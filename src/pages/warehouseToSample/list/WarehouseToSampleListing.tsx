@@ -22,7 +22,6 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
-    UserModuleAddActionTypes,
 } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
@@ -54,7 +53,6 @@ const WarehouseToSampleListing = ({
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
-    const isDealerPath = path === 'dealers'
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
@@ -77,16 +75,8 @@ const WarehouseToSampleListing = ({
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse To Sample Transfer </ATMPageHeading>
                 <ActionAuthHOC
-                    moduleName={
-                        isDealerPath
-                            ? UserModuleNameTypes.dealer
-                            : UserModuleNameTypes.WarehouseTransfer
-                    }
-                    actionName={
-                        isDealerPath
-                            ? UserModuleAddActionTypes.dealerSalesOrderAdd
-                            : UserModuleActionTypes.Add
-                    }
+                    moduleName={UserModuleNameTypes.warehouseToSampleTransfer}
+                    actionName={UserModuleActionTypes.Add}
                     component={
                         <button
                             onClick={() => navigate('/warehouse-to-sample/add')}

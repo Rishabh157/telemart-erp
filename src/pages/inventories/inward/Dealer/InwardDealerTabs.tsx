@@ -43,7 +43,7 @@ const InwardDealerTabs = ({ columns, rows }: Props) => {
 
     return (
         // <div className="px-4 h-full flex flex-col gap-2 w-full">
-        <div className=" h-[calc(100vh-150px)]  bg-white ">
+        <div className="h-[calc(100vh-150px)] bg-white ">
             {/* Page Header */}
             {/* <div className="flex justify-between items-center ">
                 <ATMPageHeading> Outward Requests </ATMPageHeading>

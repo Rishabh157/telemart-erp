@@ -1168,10 +1168,8 @@ const PageRoutes = () => {
                         element={
                             <ActionAuthHOC
                                 component={<AddRTVendorWrapper />}
-                                moduleName={UserModuleNameTypes.wareHouse}
-                                actionName={
-                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
-                                }
+                                moduleName={UserModuleNameTypes.rtvTransfer}
+                                actionName={UserModuleActionTypes.Add}
                                 isRedirect
                             />
                         }
@@ -1181,24 +1179,20 @@ const PageRoutes = () => {
                         element={
                             <ActionAuthHOC
                                 component={<EditRTVendorWrapper />}
-                                moduleName={UserModuleNameTypes.wareHouse}
-                                actionName={
-                                    UserModuleWarehouseTabsTypes.outwardInventoriesRTV
-                                }
+                                moduleName={UserModuleNameTypes.rtvTransfer}
+                                actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />
                         }
                     />
 
-                    {/* Warehouse To Warehouse Transfere */}
+                    {/* Warehouse To Warehouse Transfer */}
                     <Route
                         path="/warehouse-transfer"
                         element={
                             <AuthHOC
                                 component={<WarehouseTransferListingWrapper />}
-                                moduleName={
-                                    UserModuleNameTypes.WarehouseTransfer
-                                }
+                                moduleName={UserModuleNameTypes.wtsTransfer}
                             />
                         }
                     ></Route>
@@ -1207,9 +1201,7 @@ const PageRoutes = () => {
                         element={
                             <ActionAuthHOC
                                 component={<AddWarehouseTransferWrapper />}
-                                moduleName={
-                                    UserModuleNameTypes.WarehouseTransfer
-                                }
+                                moduleName={UserModuleNameTypes.wtsTransfer}
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
                             />
@@ -1220,22 +1212,21 @@ const PageRoutes = () => {
                         element={
                             <ActionAuthHOC
                                 component={<EditWarehouseTransferWrapper />}
-                                moduleName={
-                                    UserModuleNameTypes.WarehouseTransfer
-                                }
+                                moduleName={UserModuleNameTypes.wtsTransfer}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />
                         }
                     />
 
+                    {/* Warehouse To Company Warehouse Transfer */}
                     <Route
                         path="/warehouse-to-company"
                         element={
                             <AuthHOC
                                 component={<WarehouseToComapnyListingWrapper />}
                                 moduleName={
-                                    UserModuleNameTypes.warehouseToComapny
+                                    UserModuleNameTypes.warehouseToCompanyTransfer
                                 }
                             />
                         }
@@ -1248,7 +1239,7 @@ const PageRoutes = () => {
                                     <AddWarehouseToComapnyTransferWrapper />
                                 }
                                 moduleName={
-                                    UserModuleNameTypes.warehouseToComapny
+                                    UserModuleNameTypes.warehouseToCompanyTransfer
                                 }
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
@@ -1261,7 +1252,7 @@ const PageRoutes = () => {
                             <ActionAuthHOC
                                 component={<EditWarehouseToComapnyWrapper />}
                                 moduleName={
-                                    UserModuleNameTypes.warehouseToComapny
+                                    UserModuleNameTypes.warehouseToCompanyTransfer
                                 }
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
@@ -1269,15 +1260,15 @@ const PageRoutes = () => {
                         }
                     />
 
-                    {/* WAREHOUSE TO SAMPLE */}
+                    {/* WAREHOUSE TO SAMPLE Transfer */}
                     <Route
                         path="/warehouse-to-sample"
                         element={
-                            <ActionAuthHOC
+                            <AuthHOC
                                 component={<WarehouseToSampleListingWrapper />}
-                                moduleName={UserModuleNameTypes.vendor}
-                                actionName={UserModuleTabsTypes.vendorLedger}
-                                isRedirect
+                                moduleName={
+                                    UserModuleNameTypes.warehouseToSampleTransfer
+                                }
                             />
                         }
                     />
@@ -1286,8 +1277,10 @@ const PageRoutes = () => {
                         element={
                             <ActionAuthHOC
                                 component={<AddWarehouseToSampleWrapper />}
-                                moduleName={UserModuleNameTypes.vendor}
-                                actionName={UserModuleTabsTypes.vendorLedger}
+                                moduleName={
+                                    UserModuleNameTypes.warehouseToSampleTransfer
+                                }
+                                actionName={UserModuleActionTypes.Add}
                                 isRedirect
                             />
                         }
@@ -1297,8 +1290,10 @@ const PageRoutes = () => {
                         element={
                             <ActionAuthHOC
                                 component={<EditWarehouseToSampleWrapper />}
-                                moduleName={UserModuleNameTypes.vendor}
-                                actionName={UserModuleTabsTypes.vendorLedger}
+                                moduleName={
+                                    UserModuleNameTypes.warehouseToSampleTransfer
+                                }
+                                actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />
                         }

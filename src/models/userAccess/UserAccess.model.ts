@@ -95,7 +95,11 @@ export enum UserModuleNameTypes {
     user = 'USER',
     wareHouse = 'WAREHOUSE',
     saleOrder = 'SALE_ORDER',
+    // new modules
     rtvTransfer = 'RTV_TRANSFER',
+    wtsTransfer = 'WAREHOUSE_TRANSFER',
+    warehouseToSampleTransfer = 'WAREHOUSE_TO_SAMPLE',
+    warehouseToCompanyTransfer = 'WAREHOUSE_TO_COMPANY_TRANSFER',
     asr = 'ASR',
     purchaseOrder = 'PURCHASE_ORDER',
     grn = 'GRN',

@@ -81,37 +81,6 @@ const AddWarehouseTransfer = ({
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
-    // const dealerWarehouse: any = useSelector(
-    //     (state: RootState) => state.warehouse
-    // )
-    // const { userData } = useSelector((state: RootState) => state?.auth)
-    // const companyId = userData?.companyId
-
-    // const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
-    //     {
-    //         companyId,
-    //         dealerId,
-    //     },
-    //     {
-    //         skip: !dealerId,
-    //     }
-    // )
-
-    // useEffect(() => {
-    //     if (!isLoading && !isFetching) {
-    //         dispatch(setDealerWarehouse(data?.data))
-    //     }
-    // }, [data, isLoading, isFetching, dealerId, dispatch])
-
-    // const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
-    //     (ele: any) => {
-    //         return {
-    //             label: ele.wareHouseName,
-    //             value: ele._id,
-    //         }
-    //     }
-    // )
-
     useEffect(() => {
         const val: any = productPriceOptions?.find(
             (e) => e['key'] === productGroup
@@ -167,20 +136,21 @@ const AddWarehouseTransfer = ({
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
-                            <ATMTextField
-                                name="wtNumber"
-                                value={values.wtNumber}
-                                label="Warehouse transfer No."
-                                placeholder="WT Number"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'wtNumber',
-                                        e.target.value
-                                    )
-                                }
-                                className="mt-0 rounded"
-                            />
-
+                            <div className="mt-2">
+                                <ATMTextField
+                                    name="wtNumber"
+                                    value={values.wtNumber}
+                                    placeholder="WT Number"
+                                    label="Warehouse transfer No."
+                                    className="rounded"
+                                    onChange={(e) =>
+                                        handleSetFieldValue(
+                                            'wtNumber',
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
                             {/* from Warehouse */}
                             <ATMSelectSearchable
                                 name="fromWarehouseId"
@@ -199,6 +169,7 @@ const AddWarehouseTransfer = ({
                                 label="From warehouse (company)"
                                 selectLabel="Select Warehouse"
                             />
+
                             {/* to Warehouse */}
                             <ATMSelectSearchable
                                 name="toWarehouseId"
