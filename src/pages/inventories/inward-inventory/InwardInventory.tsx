@@ -3,7 +3,7 @@
 /// ==============================================
 // Filename:InwardInventory.tsx
 // Type: Add Component
-// Last Updated: OCTOBER 20, 2023
+// Last Updated: NOVEMBER 30, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -69,6 +69,14 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         })
     }
 
+    const getCartonBoxSize = () => {
+        let boxItems = cartonBoxOption?.find((ele) => ele?.value === packaging)
+        if (boxItems) {
+            return barcodes.length === boxItems.itemCount
+        }
+        return false
+    }
+
     return (
         <div className="p-4 h-[calc(100vh-95px)] overflow-auto ">
             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -106,6 +114,8 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         value={packaging}
                         onChange={(e) => {
                             setPackaging(e.target.value)
+                            setBarcodes([])
+                            setBarcode('')
                         }}
                         options={cartonBoxOption}
                         label="Packaging"
@@ -141,7 +151,9 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     <ATMTextField
                         name=""
                         disabled={
-                            packaging?.length === 0 || wareHouse?.length === 0
+                            packaging?.length === 0 ||
+                            wareHouse?.length === 0 ||
+                            getCartonBoxSize()
                         }
                         value={barcode}
                         onChange={(e) => {
