@@ -62,6 +62,7 @@ export type SaleOrderListResponseTypes = {
         dealerLabel: string
         companyWarehouseLabel: string
         warehouseLabel: string
+        warehouseStateLabel: string
     }[]
 }
 

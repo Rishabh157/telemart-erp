@@ -120,19 +120,19 @@ export const navigation: NavItemType[] = [
         label: 'Warehouse Transfer',
         icon: TbBuildingWarehouse,
         path: '/warehouse-transfer',
-        name: UserModuleNameTypes.WarehouseTransfer,
+        name: UserModuleNameTypes.wtsTransfer,
     },
     {
         label: 'Sample Transfer',
         icon: BiTestTube,
         path: '/warehouse-to-sample',
-        name: UserModuleNameTypes.WarehouseTransfer,
+        name: UserModuleNameTypes.warehouseToSampleTransfer,
     },
     {
         label: 'WTC Transfer',
         icon: TbBuildingWarehouse,
         path: '/warehouse-to-company',
-        name: UserModuleNameTypes.warehouseToComapny,
+        name: UserModuleNameTypes.warehouseToCompanyTransfer,
     },
     {
         label: 'Inquiry',

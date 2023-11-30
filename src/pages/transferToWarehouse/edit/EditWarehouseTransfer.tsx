@@ -214,10 +214,11 @@ const EditWarehouseTransfer = ({
                                 label="To Warehouse"
                                 selectLabel="Select Warehouse"
                             />
-                            <div className="-mt-2">
+                            <div className="-mt-[0.3rem]">
                                 <ATMTextArea
                                     minRows={1}
                                     name="remark"
+                                    className="rounded"
                                     value={values.remark}
                                     onChange={(e) =>
                                         handleSetFieldValue('remark', e)

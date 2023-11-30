@@ -45,11 +45,11 @@ const CallListingWrapper = () => {
             ),
         },
         {
-            field: 'incomingCallerNo',
-            headerName: 'Incoming Caller No',
+            field: 'mobileNo',
+            headerName: 'Mobile Number',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.incomingCallerNo} </span>
+                <span> {row?.mobileNo} </span>
             ),
         },
         {

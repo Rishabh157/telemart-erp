@@ -62,13 +62,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
         }
     }, [])
     return (
-        <div
-            className={`px-4 ${
-                path === 'dealers'
-                    ? 'h-[calc(100vh-185px)]'
-                    : 'h-[calc(100vh-55px)]'
-            }`}
-        >
+        <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Sale Orders </ATMPageHeading>
@@ -94,13 +88,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 />
             </div>
 
-            <div
-                className={` border flex flex-col  rounded bg-white ${
-                    path === 'dealers'
-                        ? 'h-[calc(100%-50px)]'
-                        : 'h-[calc(100%-75px)]'
-                }`}
-            >
+            <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}
@@ -124,7 +112,6 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                         isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
