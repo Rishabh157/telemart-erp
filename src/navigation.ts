@@ -114,7 +114,7 @@ export const navigation: NavItemType[] = [
     //     label: 'Inventory Management',
     //     icon: TfiLayoutMediaOverlayAlt2,
     //     path: '/inventory-management',
-    //     name: 'InventoryManagement'
+    //     name: 'InventoryManagement',
     // },
     {
         label: 'Warehouse Transfer',
