@@ -158,6 +158,7 @@ const EditSaleOrder = ({
                             {/* SO Number */}
                             <ATMTextField
                                 name="soNumber"
+                                disabled={true}
                                 value={values.soNumber}
                                 label="SO Number"
                                 placeholder="SO Number"

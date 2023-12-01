@@ -135,8 +135,8 @@ const steps = [
         validationSchema: object({
             faq: array().of(
                 object().shape({
-                    question: string().required('Question is required'),
-                    answer: string().required('Answer is required'),
+                    question: string(),
+                    answer: string(),
                 })
             ),
         }),

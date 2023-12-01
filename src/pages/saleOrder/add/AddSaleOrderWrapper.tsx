@@ -34,7 +34,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {}
 
 export type FormInitialValues = {
-    soNumber: string
+    // soNumber: string
     dealerId: string
     dealerWareHouseId: string
     companyWareHouseId: string
@@ -134,7 +134,7 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        soNumber: '',
+        // soNumber: '',
         dealerId: '',
         dealerWareHouseId: '',
         companyWareHouseId: '',
@@ -150,7 +150,7 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        soNumber: string().required('Sale order number is required'),
+        // soNumber: string().required('Sale order number is required'),
         dealerId: string().required('Please select a dealer'),
         dealerWareHouseId: string().required(
             'Please select a  Dealer Warehouse'
@@ -177,7 +177,7 @@ const AddSaleOrderWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addSalesOrder({
-                soNumber: values.soNumber,
+                // soNumber: values.soNumber,
                 dealerId: values.dealerId,
                 dealerWareHouseId: values.dealerWareHouseId,
                 companyWareHouseId: values.companyWareHouseId,

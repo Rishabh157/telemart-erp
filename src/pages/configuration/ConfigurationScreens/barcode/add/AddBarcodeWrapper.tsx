@@ -96,9 +96,7 @@ const AddBarcodeWrapper = (props: Props) => {
         quantity: number()
             .moreThan(0, 'Quantity must be greater than 0')
             .required('Quantity is required'),
-        lotNumber: number()
-            .moreThan(0, 'LotNumber must be greater than 0')
-            .required('Lot number is required'),
+        lotNumber: string().required('Batch number is required'),
         // wareHouseId: string().required('Warehouse is required'),
     })
 

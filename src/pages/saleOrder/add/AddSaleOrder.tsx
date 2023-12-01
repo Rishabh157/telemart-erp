@@ -155,21 +155,8 @@ const AddSaleOrder = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 gap-3">
                             {/* SO Number */}
-                            <ATMTextField
-                                name="soNumber"
-                                value={values.soNumber}
-                                label="SO Number"
-                                placeholder="SO Number"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'soNumber',
-                                        e.target.value
-                                    )
-                                }
-                                className="mt-0 rounded"
-                            />
 
                             {/* Dealer */}
                             <div className="-mt-2">

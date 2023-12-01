@@ -17,7 +17,10 @@ import { MdOutbond } from 'react-icons/md'
 import { BiFilter } from 'react-icons/bi'
 
 // |-- Internal Dependencies --|
-import { BarcodeListResponseType, ProductBarcodeGroupResponse } from 'src/models'
+import {
+    BarcodeListResponseType,
+    ProductBarcodeGroupResponse,
+} from 'src/models'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 import {
     setActiveTabIndex,
@@ -163,7 +166,7 @@ const BarcodeListingWrapper = () => {
         page: cbPage,
         rowsPerPage: cbrowsPerPage,
         searchValue: cbsearchValue,
-        items: cbitems,
+        // items: cbitems,
     } = CartonBoxBarcodeState
 
     const {
@@ -206,23 +209,23 @@ const BarcodeListingWrapper = () => {
     const [selectedCartonBoxBarcodes, setSelectedCartonBoxBarcodes] =
         React.useState<barcodecardType[]>([])
 
-    const onCartonBoxBarcodeSelect = (
-        e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        barcode: barcodecardType,
-        isBarcodeSeleted: boolean
-    ) => {
-        e.stopPropagation()
-        let newValue = []
-        if (isBarcodeSeleted) {
-            newValue = selectedCartonBoxBarcodes.filter(
-                (seleted: barcodecardType) => seleted._id !== barcode._id
-            )
-        } else {
-            newValue = [...selectedCartonBoxBarcodes, barcode]
-        }
+    // const onCartonBoxBarcodeSelect = (
+    //     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    //     barcode: barcodecardType,
+    //     isBarcodeSeleted: boolean
+    // ) => {
+    //     e.stopPropagation()
+    //     let newValue = []
+    //     if (isBarcodeSeleted) {
+    //         newValue = selectedCartonBoxBarcodes.filter(
+    //             (seleted: barcodecardType) => seleted._id !== barcode._id
+    //         )
+    //     } else {
+    //         newValue = [...selectedCartonBoxBarcodes, barcode]
+    //     }
 
-        setSelectedCartonBoxBarcodes(newValue)
-    }
+    //     setSelectedCartonBoxBarcodes(newValue)
+    // }
 
     const [selectedProductGroup, setSelectedProductGroup] = React.useState<
         ProductBarcodeGroupResponse[]
@@ -256,7 +259,8 @@ const BarcodeListingWrapper = () => {
         let newValue = []
         if (isBarcodeSeleted) {
             newValue = selectedBarcodes.filter(
-                (seleted: BarcodeListResponseType) => seleted._id !== barcode._id
+                (seleted: BarcodeListResponseType) =>
+                    seleted._id !== barcode._id
             )
         } else {
             newValue = [...selectedBarcodes, barcode]
@@ -273,10 +277,10 @@ const BarcodeListingWrapper = () => {
             name: 'PRODUCT_BARCODE',
         },
         {
-            label: 'Carton Box Barcode',
+            label: 'Reprint Barcode / Outerbox',
             icon: MdOutbond,
             index: 1,
-            name: 'CARTON_BOX_BARCODE',
+            name: 'REPRINT_BARCODE_OUTERBOX',
         },
         {
             label: 'Barcode Group',
@@ -342,12 +346,7 @@ const BarcodeListingWrapper = () => {
                         //}
                     />
                 ) : activeTabIndex === 1 ? (
-                    <CartonBoxBarcodeListing
-                        rows={cbitems}
-                        selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
-                        onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
-                        onBarcodeClick={() => {}}
-                    />
+                    <CartonBoxBarcodeListing />
                 ) : (
                     <ProductGroupListing
                         rows={pgItems}
