@@ -98,8 +98,8 @@ const AddBarcode = ({
                             <ATMTextField
                                 name="lotNumber"
                                 value={values.lotNumber}
-                                label="Lot Number"
-                                placeholder="Lot Number"
+                                label="Batch Number"
+                                placeholder="Batch Number"
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {

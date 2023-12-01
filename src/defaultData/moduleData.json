@@ -2621,7 +2621,7 @@
                 {
                     "actionId": "barcodeActionCartonBoxBarCodeId",
                     "actionUrl": "",
-                    "actionName": "CARTON_BOX_BARCODE",
+                    "actionName": "REPRINT_BARCODE_OUTERBOX",
                     "parentGroup": [],
                     "fields": []
                 },

@@ -122,7 +122,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                             <div className="mt-4">
                                 <label className="text-slate-700 font-medium">
                                     {' '}
-                                    Dimensions{' '}
+                                    Dimensions (in cm){' '}
                                 </label>
                                 <div className="flex gap-2 -mt-1">
                                     {/* Height */}

@@ -9,32 +9,22 @@
 import React from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 
-// |-- Internal Dependencies --|
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    setRowsPerPage,
-    setPage,
-    setSearchValue,
-} from 'src/redux/slices/CartonBoxBarcodeSlice'
-import CartonBoxBarcodeDetailCard from './CartonBoxBarcodeDetailCard'
+// // |-- Internal Dependencies --|
+// import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+// import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+// import {
+//     setRowsPerPage,
+//     setPage,
+//     setSearchValue,
+// } from 'src/redux/slices/CartonBoxBarcodeSlice'
+// import CartonBoxBarcodeDetailCard from './CartonBoxBarcodeDetailCard'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+// import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
-type Props = {
-    rows: any[]
-    selectedCartonBoxBarcodes: barcodecardType[]
-    onCartonBoxBarcodeSelect: (
-        e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        barcode: barcodecardType,
-        isBarcodeSeleted: boolean
-    ) => void
-    onBarcodeClick?: () => void
-}
 export type barcodecardType = {
     _id?: string
     label: String
@@ -42,28 +32,14 @@ export type barcodecardType = {
     count?: string
 }
 
-const CartonBoxBarcodeListing = ({
-    rows,
-    selectedCartonBoxBarcodes,
-    onCartonBoxBarcodeSelect,
-    onBarcodeClick,
-}: Props) => {
+const CartonBoxBarcodeListing = () => {
     // Hooks
-    const dispatch = useDispatch<AppDispatch>()
-    const cartonBoxBarcodeState: any = useSelector(
-        (state: RootState) => state.cartonBoxBarcode
-    )
-    //  const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const datas = cartonBoxBarcodeState?.items?.map((ele: any) => {
-        return {
-            _id: ele._id,
-            label: ele.cartonboxLabel,
-            barcodenumber: ele.barcodeNumber,
-            count: ele.count,
-        }
-    })
+    // const dispatch = useDispatch<AppDispatch>()
+    // const cartonBoxBarcodeState: any = useSelector(
+    //     (state: RootState) => state.cartonBoxBarcode
+    // )
 
-    const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState
+    // const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState
 
     return (
         <div className="px-4  h-[calc(100%-55px)]  flex flex-col gap-3 pt-4">
@@ -71,7 +47,8 @@ const CartonBoxBarcodeListing = ({
 
             <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white ">
                 {/* Header */}
-                <ATMTableHeader
+
+                {/* <ATMTableHeader
                     searchValue={searchValue}
                     page={page}
                     rowCount={totalItems}
@@ -82,20 +59,20 @@ const CartonBoxBarcodeListing = ({
                     }
                     // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                />
+                /> */}
 
                 {/* Barcode Detail Cards */}
-                <div className="grow overflow-auto  ">
+                {/* <div className="grow overflow-auto  ">
                     <CartonBoxBarcodeDetailCard
                         barcodeList={datas}
                         selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
                         onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
                         onBarcodeClick={() => {}}
                     />
-                </div>
+                </div> */}
 
                 {/* Pagination */}
-                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
+                {/* <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}
@@ -103,7 +80,7 @@ const CartonBoxBarcodeListing = ({
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />
-                </div>
+                </div> */}
             </div>
 
             {/* {isFilterOpen && (
