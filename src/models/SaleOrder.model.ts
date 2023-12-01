@@ -95,7 +95,7 @@ export type SaleOrderListResponse = {
 }
 
 export type AddSaleOrder = {
-    soNumber: string
+    // soNumber: string
     dealerId: string
     dealerWareHouseId: string
     companyWareHouseId: string
