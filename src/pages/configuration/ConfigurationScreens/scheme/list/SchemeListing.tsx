@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -53,7 +53,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.scheme}
                     actionName={UserModuleActionTypes.Add}
                     component={

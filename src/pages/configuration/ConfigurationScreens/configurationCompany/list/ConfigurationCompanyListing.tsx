@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -71,7 +71,7 @@ const ConfigurationCompanyListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Company </ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.company}
                     actionName={UserModuleActionTypes.Add}
                     component={

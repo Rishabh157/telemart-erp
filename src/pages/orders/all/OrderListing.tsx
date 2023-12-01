@@ -39,7 +39,7 @@ import {
     setTotalItems,
     setFilterValue,
 } from 'src/redux/slices/orderSlice'
-// import ActionAuthHOC from 'src/ActionAuthHoc'
+// import AuthenticationHOC from 'src/AuthenticationHOC'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 // Dispatching imports

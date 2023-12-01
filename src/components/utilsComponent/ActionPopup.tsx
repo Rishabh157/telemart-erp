@@ -12,7 +12,7 @@ import React, { ReactNode } from 'react'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { Popover } from '@mui/material'
 import { HiDotsHorizontal } from 'react-icons/hi'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -73,7 +73,7 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                         >
                             <>
                                 {isView && (
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         moduleName={moduleName as string}
                                         actionName={UserModuleActionTypes.View}
                                         component={
@@ -87,7 +87,7 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                     />
                                 )}
                                 {isEdit && (
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         moduleName={moduleName}
                                         actionName={UserModuleActionTypes.Edit}
                                         component={
@@ -115,7 +115,7 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                     </button>
                                 )}
                                 {isDelete && (
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         moduleName={moduleName}
                                         actionName={
                                             UserModuleActionTypes.Delete

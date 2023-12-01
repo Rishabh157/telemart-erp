@@ -29,7 +29,7 @@ import {
     setFilterBy,
 } from 'src/redux/slices/DealerLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import {
     UserModuleNameTypes,
     UserModuleAddActionTypes,
@@ -100,7 +100,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    <ActionAuthHOC
+                    <AuthenticationHOC
                         moduleName={UserModuleNameTypes.dealer}
                         actionName={
                             UserModuleAddActionTypes.dealerLedgerCreditAmout
@@ -119,7 +119,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                             </button>
                         }
                     />
-                    <ActionAuthHOC
+                    <AuthenticationHOC
                         moduleName={UserModuleNameTypes.dealer}
                         actionName={
                             UserModuleAddActionTypes.dealerLedgerCreditNote
@@ -136,7 +136,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                             </button>
                         }
                     />
-                    <ActionAuthHOC
+                    <AuthenticationHOC
                         moduleName={UserModuleNameTypes.dealer}
                         actionName={
                             UserModuleAddActionTypes.dealerLedgerDebitNote

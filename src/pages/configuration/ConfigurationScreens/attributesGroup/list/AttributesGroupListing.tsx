@@ -10,7 +10,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -71,7 +71,7 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Attributes Group </ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.attributeGroup}
                     actionName={UserModuleActionTypes.Add}
                     component={

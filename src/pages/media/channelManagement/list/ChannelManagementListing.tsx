@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -72,7 +72,7 @@ const ChannelManagementListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Channel Management </ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.channelManagement}
                     actionName={UserModuleActionTypes.Add}
                     component={

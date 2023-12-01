@@ -40,7 +40,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/PurchaseOrderSlice'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
@@ -312,7 +312,7 @@ const PurchaseOrderListingWrapper = () => {
                 >
                     <>
                         {row?.approval?.length > 1 && (
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                                 actionName={UserModuleActionTypes.genrateGrn}
                                 component={
@@ -343,7 +343,7 @@ const PurchaseOrderListingWrapper = () => {
                                 }
                             />
                         )}
-                        <ActionAuthHOC
+                        <AuthenticationHOC
                             moduleName={UserModuleNameTypes.grn}
                             actionName={UserModuleActionTypes.List}
                             component={

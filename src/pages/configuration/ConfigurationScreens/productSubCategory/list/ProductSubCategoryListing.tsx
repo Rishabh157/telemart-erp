@@ -29,7 +29,7 @@ import {
 } from 'src/redux/slices/productSubCategorySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSearchValue } from 'src/redux/slices/productSubCategorySlice'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -77,7 +77,7 @@ const ProductSubCategoryListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Product Sub Categories </ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.productSubCategory}
                     actionName={UserModuleActionTypes.Add}
                     component={

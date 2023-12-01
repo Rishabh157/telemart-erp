@@ -10,7 +10,7 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -64,7 +64,7 @@ const LocationListView = ({
         <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
             <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
                 {listHeading}
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.locations}
                     actionName={actionName}
                     component={

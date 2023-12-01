@@ -12,7 +12,7 @@ import { IconType } from 'react-icons'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -60,7 +60,7 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[78px]  p-1">
                     <ATMPageHeading> Inventories </ATMPageHeading>
-                    <ActionAuthHOC
+                    <AuthenticationHOC
                         moduleName={UserModuleNameTypes.wareHouse}
                         actionName={
                             UserModuleAddActionTypes.tabWarehouseInventoryAdd

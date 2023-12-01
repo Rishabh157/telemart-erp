@@ -7,7 +7,10 @@ import { LoginPage } from './pages'
 import { setCheckUserAccess } from './redux/slices/access/userAcessSlice'
 import { RootState } from './redux/store'
 import { useGetUserAccessQuery } from './services/useraccess/UserAccessServices'
-import { isCheckAuthorizedModuleAction } from './userAccess/getAuthorizedModules'
+import {
+    isCheckAuthorizedModule,
+    isCheckAuthorizedModuleAction,
+} from './userAccess/getAuthorizedModules'
 
 type Props = {
     component: React.ReactNode
@@ -26,19 +29,10 @@ const AuthenticationHOC = ({
     const dispatch = useDispatch()
     const accessToken = localStorage.getItem('authToken')
     const location = useLocation()
-
-    useEffect(() => {
-        // Check if there is an access token and redirect to dashboard if available
-        if (accessToken) {
-            navigate(`${location.pathname ? location.pathname : '/dashboard'}`)
-        }
-    }, [accessToken, navigate, location.pathname])
-
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
     const { userData } = useSelector((state: RootState) => state.auth)
-
     const { data, isLoading, isFetching } = useGetUserAccessQuery(
         {
             userId: userData?.userId ? (userData?.userId as string) : null,
@@ -48,7 +42,18 @@ const AuthenticationHOC = ({
             skip: !userData?.companyId,
         }
     )
-
+    useEffect(() => {
+        // Check if there is an access token and redirect to dashboard if available
+        if (accessToken) {
+            navigate(
+                `${location.pathname ? location.pathname : '/dashboard'}`,
+                {
+                    state: location?.state,
+                }
+            )
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [accessToken, navigate, location.pathname])
     useEffect(() => {
         if (userData?.userRole === 'ADMIN') return
         // Update checkUserAccess when data is available
@@ -59,36 +64,11 @@ const AuthenticationHOC = ({
                 dispatch(setCheckUserAccess([]))
             }
         }
-        return () => {
-            if (location?.state !== null)
-                navigate(`${location.pathname}`, {
-                    state: location?.state,
-                })
-        }
+
         //eslint-disable-next-line
     }, [data, isLoading, isFetching, dispatch, userData?.userRole])
-    useEffect(() => {
-        // Create a new location object with updated state and search
-        const updatedLocation = {
-            ...location,
-            state: { ...location.state },
-            search: location?.search,
-        }
-
-        // Use the navigate function to navigate to the updated location
-        navigate(updatedLocation)
-        //eslint-disable-next-line
-    }, [])
 
     // Determine if the user is authorized based on their role and module/action
-    let isAuthorized =
-        userData?.userRole === 'ADMIN'
-            ? true
-            : isCheckAuthorizedModuleAction(
-                  checkUserAccess,
-                  moduleName,
-                  actionName
-              )
 
     if (!checkUserAccess.modules.length && userData?.userRole !== 'ADMIN') {
         // Show loading spinner if user access data is not available yet
@@ -98,20 +78,49 @@ const AuthenticationHOC = ({
             </div>
         )
     }
-
+    const getAuthorised = () => {
+        let isAuthorized = false
+        if (actionName) {
+            isAuthorized =
+                userData?.userRole === 'ADMIN'
+                    ? true
+                    : (isCheckAuthorizedModuleAction(
+                          checkUserAccess,
+                          moduleName,
+                          actionName
+                      ) as boolean)
+        } else {
+            isAuthorized =
+                userData?.userRole === 'ADMIN'
+                    ? true
+                    : isCheckAuthorizedModule(checkUserAccess, moduleName)
+        }
+        return isAuthorized
+    }
+    console.log(
+    moduleName,
+    actionName ,
+    isRedirect ,)
     return (
         <>
             {accessToken ? (
-                isAuthorized ? (
+                getAuthorised() ? (
                     <>
+                        {/* {component} */}
+                        {/* {console.log('location3333333')} */}
                         {/* Pass location.state to the component if it exists, otherwise pass null */}
                         {React.cloneElement(component as React.ReactElement, {
                             location: location.state || null,
                         })}
                     </>
-                ) : isRedirect ? (
-                    <AccessDenied />
-                ) : null
+                ) : // isRedirect we used on actioncomponent on pageroute
+                actionName ? (
+                    isRedirect ? (
+                        <AccessDenied />
+                    ) : null
+                ) : (
+                    navigate(`/dashboard`)
+                )
             ) : (
                 <LoginPage pathName={location.pathname} />
             )}

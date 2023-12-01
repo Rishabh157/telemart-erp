@@ -29,7 +29,7 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { setRowsPerPage, setPage } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSearchValue } from 'src/redux/slices/dealerSlice'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -57,7 +57,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Dealers </ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.dealer}
                     actionName={UserModuleActionTypes.Add}
                     component={

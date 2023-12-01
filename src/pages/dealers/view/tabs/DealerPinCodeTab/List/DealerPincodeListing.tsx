@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -57,7 +57,7 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Pincode</ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.dealer}
                     actionName={UserModuleAddActionTypes.dealerPincodeAdd}
                     component={

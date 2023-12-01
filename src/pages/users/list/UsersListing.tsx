@@ -25,7 +25,7 @@ import {
     setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/NewUserSlice'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -57,7 +57,7 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Users </ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.user}
                     actionName={UserModuleActionTypes.Add}
                     component={
