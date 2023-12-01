@@ -14,7 +14,7 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { useNavigate } from 'react-router-dom'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -54,7 +54,7 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Disposition Three </ATMPageHeading>
-                    <ActionAuthHOC
+                    <AuthenticationHOC
                         moduleName={UserModuleNameTypes.dispositionThree}
                         actionName={UserModuleActionTypes.Add}
                         component={

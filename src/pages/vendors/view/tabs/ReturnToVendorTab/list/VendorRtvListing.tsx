@@ -62,7 +62,7 @@ const VendorRtvListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             {/* <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Return To Vendor </ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={
                         isDealerPath
                             ? UserModuleNameTypes.dealer

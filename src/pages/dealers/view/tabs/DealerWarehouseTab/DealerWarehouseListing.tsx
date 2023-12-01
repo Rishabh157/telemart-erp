@@ -12,7 +12,7 @@ import React, { useState, useEffect } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -74,7 +74,7 @@ const DealerWarehouseListing = ({
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 {isShowAddWarehouseButton && (
-                    <ActionAuthHOC
+                    <AuthenticationHOC
                         moduleName={UserModuleNameTypes.dealer}
                         actionName={UserModuleAddActionTypes.dealerWareHouseAdd}
                         component={

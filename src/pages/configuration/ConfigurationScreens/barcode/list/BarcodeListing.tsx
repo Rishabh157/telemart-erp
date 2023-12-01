@@ -23,7 +23,7 @@ import BarcodeDetailsCard from './components/BarcodeDetailsCard/BarcodeDetailsCa
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
@@ -59,7 +59,7 @@ const BarcodeListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Barcode </ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.barcode}
                     actionName={UserModuleActionTypes.Add}
                     component={

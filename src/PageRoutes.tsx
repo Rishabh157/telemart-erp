@@ -20,8 +20,8 @@ import {
     UserModuleWarehouseTabsTypes,
 } from 'src/models/userAccess/UserAccess.model'
 import { v4 as uuidv4 } from 'uuid'
-import ActionAuthHOC from './ActionAuthHoc'
-import AuthHOC from './AuthHOC'
+import AuthenticationHOC from './AuthenticationHOC'
+// import AuthenticationHOC from './AuthenticationHOC'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
 import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
@@ -295,7 +295,7 @@ const PageRoutes = () => {
                     <Route
                         path="/vendors"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<VendorsListingWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                             />
@@ -304,7 +304,7 @@ const PageRoutes = () => {
                     <Route
                         path="warehouse/so-order/dispatched-invoice"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<DispatchedInvoice />}
                                 moduleName={UserModuleNameTypes.vendor}
                             />
@@ -313,7 +313,7 @@ const PageRoutes = () => {
                     <Route
                         path="/vendors/add-vendor"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddVendorWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.Add}
@@ -324,7 +324,7 @@ const PageRoutes = () => {
                     <Route
                         path="/vendors/edit-vendor/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditVendorWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.Edit}
@@ -336,7 +336,7 @@ const PageRoutes = () => {
                     <Route
                         path="/vendors/:vendorId"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewVendor />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.View}
@@ -347,7 +347,7 @@ const PageRoutes = () => {
                         <Route
                             path="general-information"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={
                                         <VendorGeneralInformationTabWrapper />
                                     }
@@ -362,7 +362,7 @@ const PageRoutes = () => {
                         <Route
                             path="purchase-order"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={
                                         <VendorPurchaseOrderTabWrapper />
                                     }
@@ -377,7 +377,7 @@ const PageRoutes = () => {
                         <Route
                             path="purchase-order/add"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<AddPurchaseOrderTabWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
                                     actionName={
@@ -390,7 +390,7 @@ const PageRoutes = () => {
                         {/* <Route
                             path="warehouse"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<VendorWarehouseTabWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
                                     actionName={
@@ -403,7 +403,7 @@ const PageRoutes = () => {
                         {/* <Route
                             path="warehouse/add"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<AddVendorWarehouseWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
                                     actionName={
@@ -416,7 +416,7 @@ const PageRoutes = () => {
                         {/* <Route
                             path="warehouse/:id"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<EditVendorWarehouseWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
                                     actionName={UserModuleActionTypes.Edit}
@@ -427,7 +427,7 @@ const PageRoutes = () => {
                         <Route
                             path="return-to-vendor"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<VendorRtvListingWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
                                     actionName={
@@ -440,7 +440,7 @@ const PageRoutes = () => {
                         <Route
                             path="ledger"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<VendorListLedgerTabWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
                                     actionName={
@@ -453,7 +453,7 @@ const PageRoutes = () => {
                         <Route
                             path="activities"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<VendorActivityTabWrapper />}
                                     moduleName={UserModuleNameTypes.vendor}
                                     actionName={
@@ -469,7 +469,7 @@ const PageRoutes = () => {
                     <Route
                         path="/dealers"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<DealersListingWrapper />}
                                 moduleName={'DEALER'}
                             />
@@ -478,7 +478,7 @@ const PageRoutes = () => {
                     <Route
                         path="/dealers/add-dealer"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddDealerWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.Add}
@@ -489,7 +489,7 @@ const PageRoutes = () => {
                     <Route
                         path="/dealers/edit-dealer/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditDealerWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.Edit}
@@ -501,7 +501,7 @@ const PageRoutes = () => {
                     <Route
                         path="/dealers/:dealerId"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewDealer />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.View}
@@ -512,7 +512,7 @@ const PageRoutes = () => {
                         <Route
                             path="general-information"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={
                                         <DealerGeneralInformationTabWrapper />
                                     }
@@ -527,7 +527,7 @@ const PageRoutes = () => {
                         <Route
                             path="warehouse"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<DealerWarehouseTabWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -540,7 +540,7 @@ const PageRoutes = () => {
                         <Route
                             path="warehouse/add-warehouse"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<AddDealerWarehouseWarpper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -553,7 +553,7 @@ const PageRoutes = () => {
                         <Route
                             path="warehouse/:id"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<EditDealerWarehouseWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={UserModuleActionTypes.Edit}
@@ -564,7 +564,7 @@ const PageRoutes = () => {
                         <Route
                             path="sale-order"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<DealerSalesOrderTabWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -580,7 +580,7 @@ const PageRoutes = () => {
                         <Route
                             path="ledger"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<DealerListLedgerTabWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -593,7 +593,7 @@ const PageRoutes = () => {
                         <Route
                             path="order-ledger"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={
                                         <DealerOrderLedgerListTabWrapper />
                                     }
@@ -609,7 +609,7 @@ const PageRoutes = () => {
                         <Route
                             path="activities"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<DealerActivityTabWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -622,7 +622,7 @@ const PageRoutes = () => {
                         <Route
                             path="pincode"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<ListDealerPincodeTabWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -635,7 +635,7 @@ const PageRoutes = () => {
                         <Route
                             path="pincode/add"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<AddDealerPinCodeTabWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -648,7 +648,7 @@ const PageRoutes = () => {
                         <Route
                             path="scheme"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<ListDealerSchemeTabWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -661,7 +661,7 @@ const PageRoutes = () => {
                         <Route
                             path="scheme/add"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<AddDealerSchemeTabWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={
@@ -674,7 +674,7 @@ const PageRoutes = () => {
                         <Route
                             path="scheme/edit/:schemeId"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<EditDealerSchemeWrapper />}
                                     moduleName={UserModuleNameTypes.dealer}
                                     actionName={UserModuleActionTypes.Edit}
@@ -697,7 +697,7 @@ const PageRoutes = () => {
                     <Route
                         path="/dealers-ratio"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<DealersRatioListingWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                             />
@@ -708,7 +708,7 @@ const PageRoutes = () => {
                     <Route
                         path="users"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<UsersListingWrapper />}
                                 moduleName={UserModuleNameTypes.user}
                             />
@@ -717,7 +717,7 @@ const PageRoutes = () => {
                     <Route
                         path="/users/add-user"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddUserWrapper />}
                                 moduleName={UserModuleNameTypes.user}
                                 actionName={UserModuleActionTypes.Add}
@@ -728,7 +728,7 @@ const PageRoutes = () => {
                     <Route
                         path="/users/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditUserWrapper />}
                                 moduleName={UserModuleNameTypes.user}
                                 actionName={UserModuleActionTypes.Edit}
@@ -741,7 +741,7 @@ const PageRoutes = () => {
                     <Route
                         path="/warehouse"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<WarehousesListingWrapper />}
                                 moduleName={UserModuleNameTypes.wareHouse}
                             />
@@ -750,7 +750,7 @@ const PageRoutes = () => {
                     <Route
                         path="/warehouse/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.wareHouse}
                                 actionName={UserModuleActionTypes.Add}
@@ -761,7 +761,7 @@ const PageRoutes = () => {
                     <Route
                         path="/warehouse/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.wareHouse}
                                 actionName={UserModuleActionTypes.Edit}
@@ -773,7 +773,7 @@ const PageRoutes = () => {
                     <Route
                         path="warehouse/view/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<InventorisTabsLayout />}
                                 moduleName={UserModuleNameTypes.wareHouse}
                                 actionName={UserModuleActionTypes.View}
@@ -784,7 +784,7 @@ const PageRoutes = () => {
                         <Route
                             path="inventories"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<InventoryListingWrapper />}
                                     moduleName={UserModuleNameTypes.wareHouse}
                                     actionName={
@@ -797,7 +797,7 @@ const PageRoutes = () => {
                         <Route
                             path="inventories/inward-inventory/add"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<InwardInventoryWrapper />}
                                     moduleName={UserModuleNameTypes.wareHouse}
                                     actionName={
@@ -811,7 +811,7 @@ const PageRoutes = () => {
                         <Route
                             path="outward-inventories"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<OutwardTabs />}
                                     moduleName={UserModuleNameTypes.wareHouse}
                                     actionName={
@@ -824,7 +824,7 @@ const PageRoutes = () => {
                             <Route
                                 path="dealer"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <OutwardDealerTabsListingWrapper />
                                         }
@@ -841,7 +841,7 @@ const PageRoutes = () => {
                             <Route
                                 path="customer"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <OutwardCustomerTabsListingWrapper />
                                         }
@@ -858,7 +858,7 @@ const PageRoutes = () => {
                             <Route
                                 path="rtv"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <OutwardRTVTabsListingWrapper />
                                         }
@@ -876,7 +876,7 @@ const PageRoutes = () => {
                             <Route
                                 path="warehoue"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <OutwardWarehouseTransferListingWrapper />
                                         }
@@ -893,7 +893,7 @@ const PageRoutes = () => {
                             <Route
                                 path="sample"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <OutwardSampleTabsListingWrapper />
                                         }
@@ -910,7 +910,7 @@ const PageRoutes = () => {
                             <Route
                                 path="ecom"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <OutwardEcomTabsListingWrapper />
                                         }
@@ -927,7 +927,7 @@ const PageRoutes = () => {
                             <Route
                                 path="replacement"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <OutwardReplacementTabsListingWrapper />
                                         }
@@ -944,7 +944,7 @@ const PageRoutes = () => {
                             <Route
                                 path="company"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <OutwardWarehouseToComapnyListingWrapper />
                                         }
@@ -962,7 +962,7 @@ const PageRoutes = () => {
                         <Route
                             path="inward-inventories"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<InwardsTabs />}
                                     moduleName={UserModuleNameTypes.wareHouse}
                                     actionName={
@@ -975,7 +975,7 @@ const PageRoutes = () => {
                             <Route
                                 path="dealer"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <InwardDealerTabsListingWrapper />
                                         }
@@ -992,7 +992,7 @@ const PageRoutes = () => {
                             <Route
                                 path="customer"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <InwardCustomerTabsListingWrapper />
                                         }
@@ -1010,7 +1010,7 @@ const PageRoutes = () => {
                             <Route
                                 path="warehoue"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <InwardWarehouseTabsListingWrapper />
                                         }
@@ -1027,7 +1027,7 @@ const PageRoutes = () => {
                             <Route
                                 path="sample"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <InwardSampleTabsListingWrapper />
                                         }
@@ -1044,7 +1044,7 @@ const PageRoutes = () => {
                             <Route
                                 path="ecom"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <InwardEcomTabsListingWrapper />
                                         }
@@ -1061,7 +1061,7 @@ const PageRoutes = () => {
                             <Route
                                 path="replacement"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <InwardReplacementTabsListingWrapper />
                                         }
@@ -1078,7 +1078,7 @@ const PageRoutes = () => {
                             <Route
                                 path="company"
                                 element={
-                                    <ActionAuthHOC
+                                    <AuthenticationHOC
                                         component={
                                             <InwardCompanyTabsListingWrapper />
                                         }
@@ -1097,7 +1097,7 @@ const PageRoutes = () => {
                         <Route
                             path="warehouse-details"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<ViewWarehouseWrapper />}
                                     moduleName={UserModuleNameTypes.wareHouse}
                                     actionName={UserModuleActionTypes.View}
@@ -1111,7 +1111,7 @@ const PageRoutes = () => {
                     <Route
                         path="/inventory-flow"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<InventoryFlowListingWrapper />}
                                 moduleName={UserModuleNameTypes.inventoryFlow}
                                 actionName={UserModuleActionTypes.View}
@@ -1124,7 +1124,7 @@ const PageRoutes = () => {
                     <Route
                         path="/sale-order"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<SaleOrderListingWrapper />}
                                 moduleName={UserModuleNameTypes.saleOrder}
                             />
@@ -1133,7 +1133,7 @@ const PageRoutes = () => {
                     <Route
                         path="/sale-order/add-sale-order"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddSaleOrderWrapper />}
                                 moduleName={UserModuleNameTypes.saleOrder}
                                 actionName={UserModuleActionTypes.Add}
@@ -1144,7 +1144,7 @@ const PageRoutes = () => {
                     <Route
                         path="/sale-order/edit-sale-order/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditSaleOrderWrapper />}
                                 moduleName={UserModuleNameTypes.saleOrder}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1157,7 +1157,7 @@ const PageRoutes = () => {
                     <Route
                         path="/return-to-vendor"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<RTVListingWrapper />}
                                 moduleName={UserModuleNameTypes.rtvTransfer}
                             />
@@ -1166,7 +1166,7 @@ const PageRoutes = () => {
                     <Route
                         path="/return-to-vendor/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddRTVendorWrapper />}
                                 moduleName={UserModuleNameTypes.rtvTransfer}
                                 actionName={UserModuleActionTypes.Add}
@@ -1177,7 +1177,7 @@ const PageRoutes = () => {
                     <Route
                         path="/return-to-vendor/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditRTVendorWrapper />}
                                 moduleName={UserModuleNameTypes.rtvTransfer}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1190,7 +1190,7 @@ const PageRoutes = () => {
                     <Route
                         path="/warehouse-transfer"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<WarehouseTransferListingWrapper />}
                                 moduleName={UserModuleNameTypes.wtsTransfer}
                             />
@@ -1199,7 +1199,7 @@ const PageRoutes = () => {
                     <Route
                         path="warehouse-transfer/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddWarehouseTransferWrapper />}
                                 moduleName={UserModuleNameTypes.wtsTransfer}
                                 actionName={UserModuleActionTypes.Add}
@@ -1210,7 +1210,7 @@ const PageRoutes = () => {
                     <Route
                         path="warehouse-transfer/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditWarehouseTransferWrapper />}
                                 moduleName={UserModuleNameTypes.wtsTransfer}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1223,7 +1223,7 @@ const PageRoutes = () => {
                     <Route
                         path="/warehouse-to-company"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<WarehouseToComapnyListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.warehouseToCompanyTransfer
@@ -1234,7 +1234,7 @@ const PageRoutes = () => {
                     <Route
                         path="warehouse-to-company/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={
                                     <AddWarehouseToComapnyTransferWrapper />
                                 }
@@ -1249,7 +1249,7 @@ const PageRoutes = () => {
                     <Route
                         path="warehouse-to-company/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditWarehouseToComapnyWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.warehouseToCompanyTransfer
@@ -1264,7 +1264,7 @@ const PageRoutes = () => {
                     <Route
                         path="/warehouse-to-sample"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<WarehouseToSampleListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.warehouseToSampleTransfer
@@ -1275,7 +1275,7 @@ const PageRoutes = () => {
                     <Route
                         path="/warehouse-to-sample/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddWarehouseToSampleWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.warehouseToSampleTransfer
@@ -1288,7 +1288,7 @@ const PageRoutes = () => {
                     <Route
                         path="/warehouse-to-sample/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditWarehouseToSampleWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.warehouseToSampleTransfer
@@ -1303,7 +1303,7 @@ const PageRoutes = () => {
                     <Route
                         path="/asr"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ASRListingWrapper />}
                                 moduleName={UserModuleNameTypes.asr}
                             />
@@ -1312,7 +1312,7 @@ const PageRoutes = () => {
                     <Route
                         path="/asr/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddASRWrapper />}
                                 moduleName={UserModuleNameTypes.asr}
                                 actionName={UserModuleActionTypes.Add}
@@ -1323,7 +1323,7 @@ const PageRoutes = () => {
                     <Route
                         path="/asr/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditASRWrapper />}
                                 moduleName={UserModuleNameTypes.asr}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1336,7 +1336,7 @@ const PageRoutes = () => {
                     <Route
                         path="/purchase-order"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<PurchaseOrderListingWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                             />
@@ -1345,7 +1345,7 @@ const PageRoutes = () => {
                     <Route
                         path="/purchase-order/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddPurchaseOrderWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                                 actionName={UserModuleActionTypes.Add}
@@ -1356,7 +1356,7 @@ const PageRoutes = () => {
                     <Route
                         path="/purchase-order/view/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewPurchaseOrderWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                                 actionName={UserModuleActionTypes.View}
@@ -1367,7 +1367,7 @@ const PageRoutes = () => {
                     <Route
                         path="/purchase-order/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditPurchaseOrderWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1380,7 +1380,7 @@ const PageRoutes = () => {
                     <Route
                         path="/grn"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<GRNListingWrapper />}
                                 moduleName={UserModuleNameTypes.grn}
                             />
@@ -1390,7 +1390,7 @@ const PageRoutes = () => {
                     <Route
                         path="/grn/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddGRNWrapper />}
                                 moduleName={UserModuleNameTypes.purchaseOrder}
                                 actionName={UserModuleActionTypes.genrateGrn}
@@ -1403,7 +1403,7 @@ const PageRoutes = () => {
                     <Route
                         path="/inquiry"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<InquiryListingWrapper />}
                                 moduleName={UserModuleNameTypes.inquiry}
                             />
@@ -1413,7 +1413,7 @@ const PageRoutes = () => {
                     <Route
                         path="/inquiry/view/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<InquiryViewWrapper />}
                                 moduleName={UserModuleNameTypes.inquiry}
                                 actionName={UserModuleActionTypes.View}
@@ -1426,7 +1426,7 @@ const PageRoutes = () => {
                     <Route
                         path="/orders"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<Order />}
                                 moduleName={UserModuleNameTypes.order}
                             />
@@ -1437,7 +1437,7 @@ const PageRoutes = () => {
                     <Route
                         path="/call"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<CallListingWrapper />}
                                 moduleName={UserModuleNameTypes.callerPage}
                                 actionName={UserModuleActionTypes.List}
@@ -1456,7 +1456,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/attributes"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<AttributesListingWrapper />}
                                 moduleName={UserModuleNameTypes.attribute}
                             />
@@ -1465,7 +1465,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/attributes/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddAttributeWrapper />}
                                 moduleName={UserModuleNameTypes.attribute}
                                 actionName={UserModuleActionTypes.Add}
@@ -1476,7 +1476,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/attributes/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditAttributeWrapper />}
                                 moduleName={UserModuleNameTypes.attribute}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1488,7 +1488,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/attributes-group"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<AttributesGroupListingWrapper />}
                                 moduleName={UserModuleNameTypes.attributeGroup}
                             />
@@ -1498,7 +1498,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/attributes-group/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddAttributeGroupWrapper />}
                                 moduleName={UserModuleNameTypes.attributeGroup}
                                 actionName={UserModuleActionTypes.Add}
@@ -1509,7 +1509,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/attributes-group/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditAttributeGroupWrapper />}
                                 moduleName={UserModuleNameTypes.attributeGroup}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1522,7 +1522,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-category"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ProductCategoryListingWrapper />}
                                 moduleName={UserModuleNameTypes.productCategory}
                             />
@@ -1531,7 +1531,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-category/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddProductCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.productCategory}
                                 actionName={UserModuleActionTypes.Add}
@@ -1542,7 +1542,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-category/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditProductCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.productCategory}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1555,7 +1555,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-sub-category"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ProductSubCategoryListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.productSubCategory
@@ -1566,7 +1566,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-sub-category/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddProductSubCategoryWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.productSubCategory
@@ -1579,7 +1579,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-sub-category/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditProductSubCategoryWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.productSubCategory
@@ -1594,7 +1594,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-group"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ProductGroupListingWrapper />}
                                 moduleName={UserModuleNameTypes.productGroup}
                             />
@@ -1604,7 +1604,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-group/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddProductGroupWrapper />}
                                 moduleName={UserModuleNameTypes.productGroup}
                                 actionName={UserModuleActionTypes.Add}
@@ -1616,7 +1616,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product-group/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditProductGroupWrapper />}
                                 moduleName={UserModuleNameTypes.productGroup}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1629,7 +1629,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/scheme"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<SchemeListingWrapper />}
                                 moduleName={UserModuleNameTypes.scheme}
                             />
@@ -1638,7 +1638,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/scheme/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddSchemeWrapper />}
                                 moduleName={UserModuleNameTypes.scheme}
                                 actionName={UserModuleActionTypes.Add}
@@ -1649,7 +1649,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/scheme/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditSchemeWrapper />}
                                 moduleName={UserModuleNameTypes.scheme}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1662,7 +1662,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/item"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ItemListingWrapper />}
                                 moduleName={UserModuleNameTypes.item}
                             />
@@ -1671,7 +1671,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/item/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddItemWrapper />}
                                 moduleName={UserModuleNameTypes.item}
                                 actionName={UserModuleActionTypes.Add}
@@ -1682,7 +1682,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/item/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditItemWrapper />}
                                 moduleName={UserModuleNameTypes.attributeGroup}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1695,7 +1695,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/products"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ProductsListingWrapper />}
                                 moduleName={UserModuleNameTypes.product}
                             />
@@ -1705,7 +1705,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/products/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddProductWrapper />}
                                 moduleName={UserModuleNameTypes.product}
                                 actionName={UserModuleActionTypes.Add}
@@ -1716,7 +1716,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/product/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditProductWrapper />}
                                 moduleName={UserModuleNameTypes.product}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1729,7 +1729,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/carton-box"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<CartonBoxListingWrapper />}
                                 moduleName={UserModuleNameTypes.cartonBox}
                             />
@@ -1738,7 +1738,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/carton-box/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddCartonBoxWrapper />}
                                 moduleName={UserModuleNameTypes.cartonBox}
                                 actionName={UserModuleActionTypes.Add}
@@ -1750,7 +1750,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/carton-box/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditCartonBoxWrapper />}
                                 moduleName={UserModuleNameTypes.cartonBox}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1763,7 +1763,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/company"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={
                                     <ConfigurationCompanyListingWrapper />
                                 }
@@ -1774,7 +1774,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/company/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddCompanyWrapper />}
                                 moduleName={UserModuleNameTypes.company}
                                 actionName={UserModuleActionTypes.Add}
@@ -1785,7 +1785,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/company/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditCompanyWrapper />}
                                 moduleName={UserModuleNameTypes.company}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1798,7 +1798,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/company-branch"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<CompanyBranchListingWrapper />}
                                 moduleName={UserModuleNameTypes.companyBranch}
                             />
@@ -1807,7 +1807,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/company-branch/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddCompanyBranchWrapper />}
                                 moduleName={UserModuleNameTypes.companyBranch}
                                 actionName={UserModuleActionTypes.Add}
@@ -1818,7 +1818,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/company-branch/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditCompanyBranchWrapper />}
                                 moduleName={UserModuleNameTypes.companyBranch}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1831,7 +1831,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/barcode"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<BarcodeListingWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                             />
@@ -1840,7 +1840,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/barcode/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddBarcodeWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                                 actionName={UserModuleActionTypes.Add}
@@ -1851,7 +1851,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/barcode/carton-box-items/:cartonboxcode"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewBarcodeWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                                 actionName={UserModuleActionTypes.View}
@@ -1863,7 +1863,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/barcode/carton-box/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddCbBarcodeWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                                 actionName={UserModuleActionTypes.Add}
@@ -1875,7 +1875,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/barcode/:barcodeId"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewBarcodeWrapper />}
                                 moduleName={UserModuleNameTypes.barcode}
                                 actionName={UserModuleActionTypes.View}
@@ -1894,7 +1894,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/language"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<LanguageListingWrapper />}
                                 moduleName={UserModuleNameTypes.language}
                             />
@@ -1903,7 +1903,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/language/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddLanguageWrapper />}
                                 moduleName={UserModuleNameTypes.language}
                                 actionName={UserModuleActionTypes.Add}
@@ -1914,7 +1914,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/language/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditLanguageWrapper />}
                                 moduleName={UserModuleNameTypes.language}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1927,7 +1927,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/dealers-category"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<DealersCategoryListingWrapper />}
                                 moduleName={UserModuleNameTypes.dealerCategory}
                             />
@@ -1936,7 +1936,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/dealers-category/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddDealersCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.dealerCategory}
                                 actionName={UserModuleActionTypes.Add}
@@ -1947,7 +1947,7 @@ const PageRoutes = () => {
                     <Route
                         path="/configurations/dealers-category/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditDealersCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.dealerCategory}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1966,7 +1966,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-group"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ChannelGroupListingWrapper />}
                                 moduleName={UserModuleNameTypes.channelGroup}
                             />
@@ -1975,7 +1975,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-group/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddChannelGroupWrapper />}
                                 moduleName={UserModuleNameTypes.channelGroup}
                                 actionName={UserModuleActionTypes.Add}
@@ -1986,7 +1986,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-group/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditChannelGroupWrapper />}
                                 moduleName={UserModuleNameTypes.channelGroup}
                                 actionName={UserModuleActionTypes.Edit}
@@ -1999,7 +1999,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-category"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ChannelCategoryListingWrapper />}
                                 moduleName={UserModuleNameTypes.channelCategory}
                             />
@@ -2008,7 +2008,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-category/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddChannelCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.channelCategory}
                                 actionName={UserModuleActionTypes.Add}
@@ -2019,7 +2019,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel-category/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditChannelCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.channelCategory}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2032,7 +2032,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ChannelManagementListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.channelManagement
@@ -2043,7 +2043,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddChannelManagementWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.channelManagement
@@ -2056,7 +2056,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/channel/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditChannelManagementWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.channelManagement
@@ -2071,7 +2071,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/did"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<DidManagementListingWrapper />}
                                 moduleName={UserModuleNameTypes.didManagement}
                             />
@@ -2080,7 +2080,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/did/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddDidManagementWrapper />}
                                 moduleName={UserModuleNameTypes.didManagement}
                                 actionName={UserModuleActionTypes.Add}
@@ -2091,7 +2091,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/did/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditDidManagementWrapper />}
                                 moduleName={UserModuleNameTypes.didManagement}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2104,7 +2104,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/artist"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ArtistListingWrapper />}
                                 moduleName={UserModuleNameTypes.artist}
                                 actionName={UserModuleActionTypes.List}
@@ -2114,7 +2114,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/artist/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddArtistWrapper />}
                                 moduleName={UserModuleNameTypes.artist}
                                 actionName={UserModuleActionTypes.Add}
@@ -2125,7 +2125,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/artist/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditArtistWrapper />}
                                 moduleName={UserModuleNameTypes.artist}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2139,7 +2139,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/tape"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<TapeManagementListingWrapper />}
                                 moduleName={UserModuleNameTypes.tapeManangement}
                             />
@@ -2148,7 +2148,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/tape/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddTapeManagementWrapper />}
                                 moduleName={UserModuleNameTypes.tapeManangement}
                                 actionName={UserModuleActionTypes.Add}
@@ -2159,7 +2159,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/tape/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditTapeManagementWrapper />}
                                 moduleName={UserModuleNameTypes.tapeManangement}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2172,7 +2172,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/competitor"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={
                                     <CompetitorManagementListingWrapper />
                                 }
@@ -2183,7 +2183,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/competitor/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddCompetitorWrapper />}
                                 moduleName={UserModuleNameTypes.competitor}
                                 actionName={UserModuleActionTypes.Add}
@@ -2194,7 +2194,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/competitor/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditCompetitorWraper />}
                                 moduleName={UserModuleNameTypes.competitor}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2208,7 +2208,7 @@ const PageRoutes = () => {
                     <Route
                         path="media/slot"
                         element={
-                            // <ActionAuthHOC
+                            // <AuthenticationHOC
                             //     component={
                             <ViewSlot />
                             // }
@@ -2223,7 +2223,7 @@ const PageRoutes = () => {
                         <Route
                             path="add"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<AddSlotManagementWrapper />}
                                     moduleName={
                                         UserModuleNameTypes.slotManagement
@@ -2236,7 +2236,7 @@ const PageRoutes = () => {
                         <Route
                             path="edit/:id"
                             element={
-                                <ActionAuthHOC
+                                <AuthenticationHOC
                                     component={<EditSlotManagementWrapper />}
                                     moduleName={
                                         UserModuleNameTypes.slotManagement
@@ -2259,7 +2259,7 @@ const PageRoutes = () => {
                     {/* <Route
                         path="media/slot"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<SlotManagementListingWrapper />}
                                 moduleName={UserModuleNameTypes.slotManagement}
                             />
@@ -2268,7 +2268,7 @@ const PageRoutes = () => {
                     {/* <Route
                         path="media/slot/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddSlotManagementWrapper />}
                                 moduleName={UserModuleNameTypes.slotManagement}
                                 actionName={UserModuleActionTypes.Add}
@@ -2287,7 +2287,7 @@ const PageRoutes = () => {
                     <Route
                         path="assets/assets-management"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<AssetsRequestWrapper />}
                                 moduleName={UserModuleNameTypes.assetRequest}
                             />
@@ -2296,7 +2296,7 @@ const PageRoutes = () => {
                     <Route
                         path="assets/assets-management/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddAssetsRequestWrapper />}
                                 moduleName={UserModuleNameTypes.assetRequest}
                                 actionName={UserModuleActionTypes.Add}
@@ -2307,7 +2307,7 @@ const PageRoutes = () => {
                     <Route
                         path="assets/assets-management/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditAssetsRequestwrapper />}
                                 moduleName={UserModuleNameTypes.assetRequest}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2320,7 +2320,7 @@ const PageRoutes = () => {
                     <Route
                         path="/assets/assets-category"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<AssetsCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.assetCategory}
                             />
@@ -2329,7 +2329,7 @@ const PageRoutes = () => {
                     <Route
                         path="/assets/assets-category/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddAssetsCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.assetCategory}
                                 actionName={UserModuleActionTypes.Add}
@@ -2340,7 +2340,7 @@ const PageRoutes = () => {
                     <Route
                         path="/assets/assets-category/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditAssetsCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.assetCategory}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2353,7 +2353,7 @@ const PageRoutes = () => {
                     <Route
                         path="/assets/assets-location"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<AssetsLocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetLocation}
                             />
@@ -2362,7 +2362,7 @@ const PageRoutes = () => {
                     <Route
                         path="/assets/assets-location/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddAssetsLocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetLocation}
                                 actionName={UserModuleActionTypes.Add}
@@ -2373,7 +2373,7 @@ const PageRoutes = () => {
                     <Route
                         path="/assets/assets-location/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditAssetsLocatonWrapper />}
                                 moduleName={UserModuleNameTypes.assetLocation}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2386,7 +2386,7 @@ const PageRoutes = () => {
                     <Route
                         path="assets/assets-relocation"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<AssetsRelocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetRelocation}
                             />
@@ -2395,7 +2395,7 @@ const PageRoutes = () => {
                     <Route
                         path="assets/assets-relocation/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddAssetsRelocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetRelocation}
                                 actionName={UserModuleActionTypes.Add}
@@ -2408,7 +2408,7 @@ const PageRoutes = () => {
                     <Route
                         path="assets/assets-allocation"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<AssetsAllocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetAllocation}
                             />
@@ -2417,7 +2417,7 @@ const PageRoutes = () => {
                     <Route
                         path="assets/assets-allocation/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddAssetsAllocationWrapper />}
                                 moduleName={UserModuleNameTypes.assetAllocation}
                                 actionName={UserModuleActionTypes.Add}
@@ -2430,7 +2430,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-one"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<DispositionOneListingWrapper />}
                                 moduleName={UserModuleNameTypes.dispositionOne}
                             />
@@ -2439,7 +2439,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-one/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddDispositionOneWrappper />}
                                 moduleName={UserModuleNameTypes.dispositionOne}
                                 actionName={UserModuleActionTypes.Add}
@@ -2450,7 +2450,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-one/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditDispositionOneWrappper />}
                                 moduleName={UserModuleNameTypes.dispositionOne}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2463,7 +2463,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-two"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<DispositionTwoListingWrapper />}
                                 moduleName={UserModuleNameTypes.dispositionTwo}
                             />
@@ -2472,7 +2472,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-two/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddDispositionTwoWrapper />}
                                 moduleName={UserModuleNameTypes.dispositionTwo}
                                 actionName={UserModuleActionTypes.Add}
@@ -2483,7 +2483,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-two/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditDispositionTwoWrapper />}
                                 moduleName={UserModuleNameTypes.dispositionTwo}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2496,7 +2496,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<DispositionThreeListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionThree
@@ -2507,7 +2507,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddDispositionThreeWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionThree
@@ -2520,7 +2520,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditDispositionThreeWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionThree
@@ -2533,7 +2533,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-three/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewDispositionThreeWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionThree
@@ -2548,7 +2548,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-one"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<InitialCallOneListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerOne
@@ -2559,7 +2559,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-one/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddInitialCallOneWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerOne
@@ -2572,7 +2572,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-one/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditInitialCallOneWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerOne
@@ -2587,7 +2587,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-two"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<InitialCallTwoListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerTwo
@@ -2598,7 +2598,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-two/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddInitialCallTwoWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerTwo
@@ -2611,7 +2611,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-two/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditInitialCallTwoWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerTwo
@@ -2626,7 +2626,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-three"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<InitialCallThreeListingWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerThree
@@ -2637,7 +2637,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-three/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddInitialCallThreeWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerThree
@@ -2650,7 +2650,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-three/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditInitialCallThreeWrapper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerThree
@@ -2663,7 +2663,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/initialcall-three/view/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewInitialCallThreeWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.initialCallerThree
@@ -2678,7 +2678,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-complaint"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={
                                     <DispositionComplaintListingWrapper />
                                 }
@@ -2691,7 +2691,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-complaint/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddDispositionComplaintWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionComplaint
@@ -2704,7 +2704,7 @@ const PageRoutes = () => {
                     <Route
                         path="dispositions/disposition-complaint/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditDispositionComplaintWrappper />}
                                 moduleName={
                                     UserModuleNameTypes.dispositionComplaint
@@ -2719,7 +2719,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<WebstieListingWrapper />}
                                 moduleName={UserModuleNameTypes.website}
                             />
@@ -2728,7 +2728,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddWebsiteWrapper />}
                                 moduleName={UserModuleNameTypes.website}
                                 actionName={UserModuleActionTypes.Add}
@@ -2739,7 +2739,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditWebsiteWrapper />}
                                 moduleName={UserModuleNameTypes.website}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2752,7 +2752,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-blog"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<ListWebstieBlogWrapper />}
                                 moduleName={UserModuleNameTypes.websiteBlog}
                             />
@@ -2761,7 +2761,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-blog/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddWebsiteBlogWrapper />}
                                 moduleName={UserModuleNameTypes.websiteBlog}
                                 actionName={UserModuleActionTypes.Add}
@@ -2772,7 +2772,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-blog/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditWebsiteBlogWrapper />}
                                 moduleName={UserModuleNameTypes.websiteBlog}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2783,7 +2783,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-blog/view/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<WebsiteBlogViewWrapper />}
                                 moduleName={UserModuleNameTypes.websiteBlog}
                                 actionName={UserModuleActionTypes.View}
@@ -2796,7 +2796,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-page"
                         element={
-                            <AuthHOC
+                            <AuthenticationHOC
                                 component={<WebsitePageListingWrapper />}
                                 moduleName={UserModuleNameTypes.websitePage}
                             />
@@ -2805,7 +2805,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-page/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddWebsitePageWrapper />}
                                 moduleName={UserModuleNameTypes.websitePage}
                                 actionName={UserModuleActionTypes.Add}
@@ -2816,7 +2816,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-page/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditWebsitePageWrapper />}
                                 moduleName={UserModuleNameTypes.websitePage}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2827,7 +2827,7 @@ const PageRoutes = () => {
                     <Route
                         path="all-websites/website-page/view/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewWebsitePageWrapper />}
                                 moduleName={UserModuleNameTypes.websitePage}
                                 actionName={UserModuleActionTypes.View}
@@ -2840,7 +2840,7 @@ const PageRoutes = () => {
                     <Route
                         path="/all-websites/website-tags"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<WebsiteTagListingWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
                                 actionName={UserModuleActionTypes.List}
@@ -2850,7 +2850,7 @@ const PageRoutes = () => {
                     <Route
                         path="/all-websites/website-tags/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddWebsiteTagsWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
                                 actionName={UserModuleActionTypes.Add}
@@ -2861,7 +2861,7 @@ const PageRoutes = () => {
                     <Route
                         path="/all-websites/website-tags/edit/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<EditWebsiteTagWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
                                 actionName={UserModuleActionTypes.Edit}
@@ -2872,7 +2872,7 @@ const PageRoutes = () => {
                     <Route
                         path="/all-websites/website-tags/:id"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<ViewWebsiteTagsWrapper />}
                                 moduleName={UserModuleNameTypes.websiteTags}
                                 actionName={UserModuleActionTypes.View}
@@ -2889,7 +2889,7 @@ const PageRoutes = () => {
                     <Route
                         path="/vendors/:vendorId/warehouse/add"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddVendorWarehouseWrapper />}
                                 moduleName={UserModuleNameTypes.vendor}
                                 actionName={UserModuleActionTypes.Add}
@@ -2900,7 +2900,7 @@ const PageRoutes = () => {
                     <Route
                         path="/dealers/:dealerId/sale-order/add-sale-order"
                         element={
-                            <ActionAuthHOC
+                            <AuthenticationHOC
                                 component={<AddSaleOrderWrapper />}
                                 moduleName={UserModuleNameTypes.dealer}
                                 actionName={UserModuleActionTypes.Add}

@@ -29,7 +29,7 @@ import {
     setFilterBy,
 } from 'src/redux/slices/VendorLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import {
     UserModuleNameTypes,
     UserModuleAddActionTypes,
@@ -109,7 +109,7 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                     >
                         + Cr. Amount
                     </button> */}
-                    <ActionAuthHOC
+                    <AuthenticationHOC
                         moduleName={UserModuleNameTypes.vendor}
                         actionName={
                             UserModuleAddActionTypes.vendorLedgerCreditNote
@@ -126,7 +126,7 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                             </button>
                         }
                     />
-                    <ActionAuthHOC
+                    <AuthenticationHOC
                         moduleName={UserModuleNameTypes.vendor}
                         actionName={
                             UserModuleAddActionTypes.vendorLedgerDebitNote

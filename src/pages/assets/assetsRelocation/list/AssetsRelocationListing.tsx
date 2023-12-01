@@ -10,7 +10,7 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { useNavigate } from 'react-router-dom'
-import ActionAuthHOC from 'src/ActionAuthHoc'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -46,7 +46,7 @@ const AssetsRelocationListing = () => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>Assets Relocation</ATMPageHeading>
-                <ActionAuthHOC
+                <AuthenticationHOC
                     moduleName={UserModuleNameTypes.assetRelocation}
                     actionName={UserModuleActionTypes.Add}
                     component={
