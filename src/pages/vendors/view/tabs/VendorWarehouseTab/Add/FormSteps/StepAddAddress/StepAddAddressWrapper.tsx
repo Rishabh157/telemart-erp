@@ -18,14 +18,14 @@ import { FormInitialValues } from '../../AddVendorWarehouseWrapper'
 import StepAddAddress from './StepAddAddress'
 import { Field } from 'src/models/FormField/FormField.model'
 import { useGetAllPincodeByDistrictQuery } from 'src/services/PinCodeService'
-import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
-import { useGetAllStateByCountryQuery } from 'src/services/StateService'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
+import useCountryStates from 'src/hooks/useCountryStates'
+import useStateDistricts from 'src/hooks/useStateDistricts'
 
 // |-- Types --|
 type Props = {
@@ -165,42 +165,22 @@ const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
     const [billingPincodeData, setBillingPincodeData] = useState<any>()
 
     //registraion
-    const {
-        data: stateData,
-        isLoading: stateIsLoading,
-        isFetching: stateIsFetching,
-    } = useGetAllStateByCountryQuery(formikProps.values.regd_address.country, {
-        skip: !formikProps.values.regd_address.country,
-    })
-    //billing
-    const {
-        data: StateDataB,
-        isLoading: stateIsLoadingB,
-        isFetching: stateIsFetchingB,
-    } = useGetAllStateByCountryQuery(
-        formikProps.values.billing_address.country,
-        {
-            skip: !formikProps.values.billing_address.country,
-        }
+
+    const { countryStates } = useCountryStates(
+        formikProps.values.regd_address.country
     )
-    //registraion
-    const {
-        data: districtData,
-        isLoading: districtIsLoading,
-        isFetching: districtIsFetching,
-    } = useGetAllDistrictByStateQuery(formikProps.values.regd_address.state, {
-        skip: !formikProps.values.regd_address.state,
-    })
+
     //billing
-    const {
-        data: districtDataB,
-        isLoading: districtIsLoadingB,
-        isFetching: districtIsFetchingB,
-    } = useGetAllDistrictByStateQuery(
-        formikProps.values.billing_address.state,
-        {
-            skip: !formikProps.values.billing_address.state,
-        }
+    const { countryStates: StateDataB } = useCountryStates(
+        formikProps.values.billing_address.country
+    )
+
+    const { stateDistricts } = useStateDistricts(
+        formikProps.values.regd_address.state
+    )
+    //billing district
+    const { stateDistricts: districtDataB } = useStateDistricts(
+        formikProps.values.billing_address.state
     )
     //registration
     const {
@@ -235,20 +215,29 @@ const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
 
     //registration
     useEffect(() => {
-        dispatch(setAllStates(stateData?.data))
-    }, [stateData, stateIsLoading, stateIsFetching])
-    //billing
+        if (countryStates) {
+            dispatch(setAllStates(countryStates))
+        }
+    }, [countryStates, dispatch])
+    //billing state
     useEffect(() => {
-        setBillingStateData(StateDataB?.data)
-    }, [StateDataB, stateIsLoadingB, stateIsFetchingB])
+        if (StateDataB) {
+            setBillingStateData(StateDataB)
+        }
+    }, [StateDataB, dispatch])
+    //registration
     //registration
     useEffect(() => {
-        dispatch(setAllDistrict(districtData?.data))
-    }, [districtData, districtIsLoading, districtIsFetching])
+        if (stateDistricts) {
+            dispatch(setAllDistrict(stateDistricts))
+        }
+    }, [stateDistricts, dispatch])
     //billing
     useEffect(() => {
-        setBillingDistrictData(districtDataB?.data)
-    }, [districtDataB, districtIsLoadingB, districtIsFetchingB])
+        if (districtDataB) {
+            setBillingDistrictData(districtDataB)
+        }
+    }, [districtDataB, dispatch])
     //registration
     useEffect(() => {
         dispatch(setAllPincodes(pincodeData?.data))

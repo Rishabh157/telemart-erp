@@ -206,8 +206,8 @@ const BarcodeListingWrapper = () => {
         BarcodeListResponseType[]
     >([])
 
-    const [selectedCartonBoxBarcodes, setSelectedCartonBoxBarcodes] =
-        React.useState<barcodecardType[]>([])
+    // const [selectedCartonBoxBarcodes, setSelectedCartonBoxBarcodes] =
+    //     React.useState<barcodecardType[]>([])
 
     // const onCartonBoxBarcodeSelect = (
     //     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,

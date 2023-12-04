@@ -25,7 +25,6 @@ import {
     useGetDealerWarehouseByIdQuery,
     useUpdateDealerWarehouseMutation,
 } from 'src/services/DealerWarehouseService'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
 
 // |-- Redux --|
@@ -36,6 +35,7 @@ import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import useCountries from 'src/hooks/useCountry'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -161,17 +161,15 @@ const EditDealerWarehouseWrapper = () => {
     const navigate = useNavigate()
     const [updateDealerWarehouse] = useUpdateDealerWarehouseMutation()
 
-    const {
-        data: countryData,
-        isLoading: countryIsLoading,
-        isFetching: countryIsFetching,
-    } = useGetAllCountryQuery('')
-
+   
+    const { country } = useCountries()
     useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setAllCountry(countryData?.data))
+        if (country) {
+            dispatch(setAllCountry(country))
         }
-    }, [countryData, countryIsLoading, countryIsFetching])
+    }, [country, dispatch])
+
+
 
     // From Initial Values
     const initialValues: FormInitialValues = {

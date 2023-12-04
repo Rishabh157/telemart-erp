@@ -24,7 +24,6 @@ import {
 import { showToast } from 'src/utils'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { CountryListResponse } from 'src/models/Country.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { LanguageListResponse } from 'src/models'
@@ -37,6 +36,8 @@ import { RootState } from 'src/redux/store'
 import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { setSelectedItem } from 'src/redux/slices/media/channelManagementSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import useCountries from 'src/hooks/useCountry'
+import { setAllCountry } from 'src/redux/slices/countrySlice'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -65,7 +66,6 @@ const EditChannelManagementWrapper = () => {
     const params = useParams()
     const Id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [countryData, setCountryData] = useState([])
     const [languageData, setlanguageData] = useState([])
     const [channelCategoryData, setChannelCategoryData] = useState([])
     const {
@@ -74,6 +74,8 @@ const EditChannelManagementWrapper = () => {
         isFetching: chIsFetching,
     } = useGetChannelByIdQuery(Id)
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { allCountry } = useSelector((state: RootState) => state?.country)
+
     const { selectedItem } = useSelector(
         (state: RootState) => state?.channelManagement
     )
@@ -92,11 +94,8 @@ const EditChannelManagementWrapper = () => {
         isFetching: isCategoryFetching,
         data: categoryDataApi,
     } = useGetAllChannelCategoryQuery(userData?.companyId)
-    const {
-        isLoading: isCountryLoading,
-        isFetching: isCountryFetching,
-        data: countryDataApi,
-    } = useGetAllCountryQuery('')
+ 
+    const { country } = useCountries()
 
     const {
         isLoading,
@@ -110,10 +109,11 @@ const EditChannelManagementWrapper = () => {
         }
     }, [isLoading, isFetching, channelGroupsData, dispatch])
     useEffect(() => {
-        if (!isCountryLoading && !isCountryFetching) {
-            setCountryData(countryDataApi?.data)
+        if (country) {
+            dispatch(setAllCountry(country))
         }
-    }, [isCountryLoading, isCountryFetching, countryDataApi])
+    }, [country, dispatch])
+   
     useEffect(() => {
         if (!isLanguageLoading && !isLanguageFetching) {
             setlanguageData(languageDataApi?.data)
@@ -220,7 +220,7 @@ const EditChannelManagementWrapper = () => {
                 }
             }
         ),
-        countryOption: countryData?.map((country: CountryListResponse) => {
+        countryOption: allCountry?.map((country: CountryListResponse) => {
             return {
                 label: country.countryName,
                 value: country._id,

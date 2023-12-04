@@ -14,16 +14,16 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import CountryListing from './CountryListing'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setItems } from 'src/redux/slices/countrySlice'
+import useCountries from 'src/hooks/useCountry'
 
 const CountryListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+    const { country } = useCountries()
     const { items }: any = useSelector((state: RootState) => state.country)
 
     const contries = items?.map((elem: any) => {
@@ -32,10 +32,13 @@ const CountryListingWrapper = () => {
             value: elem._id,
         }
     })
-
     useEffect(() => {
-        dispatch(setItems(data?.data))
-    }, [data, isLoading, isFetching])
+        if (country) {
+            dispatch(setItems(country))
+        }
+    }, [country, dispatch])
+
+
 
     return <CountryListing contries={contries} items={contries} />
 }

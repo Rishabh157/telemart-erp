@@ -21,7 +21,6 @@ import { showToast } from 'src/utils'
 import AddChannelManagement from './AddChannelManagement'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
 import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { CountryListResponse } from 'src/models/Country.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { LanguageListResponse } from 'src/models'
@@ -32,6 +31,8 @@ import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
+import useCountries from 'src/hooks/useCountry'
+import { setAllCountry } from 'src/redux/slices/countrySlice'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -58,10 +59,10 @@ const AddChannelManagementWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [countryData, setCountryData] = useState([])
+    // const [countryData, setCountryData] = useState([])
     const [languageData, setlanguageData] = useState([])
     const [channelCategoryData, setChannelCategoryData] = useState([])
-
+    const { allCountry:countryData } = useSelector((state: RootState) => state?.country)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { channelgroup }: any = useSelector(
         (state: RootState) => state?.channelGroup
@@ -77,11 +78,8 @@ const AddChannelManagementWrapper = () => {
         isFetching: isCategoryFetching,
         data: categoryDataApi,
     } = useGetAllChannelCategoryQuery(userData?.companyId)
-    const {
-        isLoading: isCountryLoading,
-        isFetching: isCountryFetching,
-        data: countryDataApi,
-    } = useGetAllCountryQuery('')
+    
+    const { country } = useCountries()
 
     const {
         isLoading,
@@ -94,11 +92,12 @@ const AddChannelManagementWrapper = () => {
             dispatch(setChannelGroups(channelGroupsData?.data || []))
         }
     }, [isLoading, isFetching, channelGroupsData, dispatch])
+   
     useEffect(() => {
-        if (!isCountryLoading && !isCountryFetching) {
-            setCountryData(countryDataApi?.data)
+        if (country) {
+            dispatch(setAllCountry(country))
         }
-    }, [isCountryLoading, isCountryFetching, countryDataApi])
+    }, [country, dispatch])
     useEffect(() => {
         if (!isLanguageLoading && !isLanguageFetching) {
             setlanguageData(languageDataApi?.data)

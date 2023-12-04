@@ -22,14 +22,14 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useGetAllStateByCountryQuery } from 'src/services/StateService'
-import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import useCountryStates from 'src/hooks/useCountryStates'
+import useStateDistricts from 'src/hooks/useStateDistricts'
 
 // |-- Types --|
 type Props = {
@@ -66,28 +66,30 @@ const EditChannelManagement = ({
     const { allDistricts }: any = useSelector(
         (state: RootState) => state.district
     )
-    const {
-        data: stateData,
-        isLoading: stateIsLoading,
-        isFetching: stateIsFetching,
-    } = useGetAllStateByCountryQuery(formikProps.values.country, {
-        skip: !formikProps.values.country,
-    })
-    const {
-        data: districtData,
-        isLoading: districtIsLoading,
-        isFetching: districtIsFetching,
-    } = useGetAllDistrictByStateQuery(formikProps.values.state, {
-        skip: !formikProps.values.state,
-    })
-    useEffect(() => {
-        dispatch(setAllStates(stateData?.data))
-    }, [stateData, stateIsLoading, stateIsFetching, dispatch])
+    const { countryStates } = useCountryStates(formikProps.values.country)
+
+    const { stateDistricts } = useStateDistricts(formikProps.values.state)
+
 
     //district
     useEffect(() => {
-        dispatch(setAllDistrict(districtData?.data))
-    }, [districtData, districtIsLoading, districtIsFetching, dispatch])
+        if (stateDistricts) {
+            dispatch(setAllDistrict(stateDistricts))
+        }
+    }, [stateDistricts, dispatch])
+    //state
+    useEffect(() => {
+        if (countryStates) {
+            dispatch(setAllStates(countryStates))
+        }
+    }, [countryStates, dispatch])
+
+    //district
+    // useEffect(() => {
+    //     if (!districtIsLoading && !districtIsFetching) {
+    //         dispatch(setAllDistrict(districtData?.data))
+    //     }
+    // }, [districtData, districtIsLoading, districtIsFetching, dispatch])
 
     dropdownOptions = {
         ...dropdownOptions,

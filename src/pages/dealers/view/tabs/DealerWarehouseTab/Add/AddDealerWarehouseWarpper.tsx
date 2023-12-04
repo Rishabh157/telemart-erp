@@ -22,7 +22,6 @@ import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrap
 import AddDealerWarehouse from './AddDealerWarehouse'
 import { useAddDealerWarehouseMutation } from 'src/services/DealerWarehouseService'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
@@ -32,6 +31,7 @@ import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import useCountries from 'src/hooks/useCountry'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -151,13 +151,13 @@ const AddDealerWarehouseWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addDealerWarehouse] = useAddDealerWarehouseMutation()
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+    const { country } = useCountries()
 
     useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setAllCountry(data?.data))
+        if (country) {
+            dispatch(setAllCountry(country))
         }
-    }, [data, isLoading, isFetching])
+    }, [country, dispatch])
 
     // States
     const [apiStatus, setApiStatus] = useState(false)
