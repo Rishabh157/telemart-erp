@@ -12,13 +12,13 @@ import { showToast } from 'src/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
 import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import useCountries from 'src/hooks/useCountry'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -138,13 +138,14 @@ const AddWarehouseWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addWareHouse] = useAddWareHouseMutation()
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
-
+    const { country } = useCountries()
     useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setAllCountry(data?.data))
+        if (country) {
+            dispatch(setAllCountry(country))
         }
-    }, [data, isLoading, isFetching])
+    }, [country, dispatch])
+
+
 
     // States
     const [apiStatus, setApiStatus] = useState(false)

@@ -7,7 +7,7 @@
 
 // |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import type { PayloadAction, Slice } from '@reduxjs/toolkit'
 
 // |-- Internal Dependencies --|
 import { CountryListResponse } from 'src/models/Country.model'
@@ -45,7 +45,7 @@ const initialState: CountrySliceStateType = {
     filterValue: '',
 }
 
-const countrySlice: any = createSlice({
+const countrySlice:  Slice<CountrySliceStateType> = createSlice({
     name: 'country',
     initialState,
     reducers: {

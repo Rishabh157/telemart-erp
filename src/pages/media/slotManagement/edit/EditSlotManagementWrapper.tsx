@@ -72,7 +72,6 @@ const EditSlotManagementWrapper = () => {
         (state: RootState) => state?.slotManagement
     )
 
-    // const [editSlotMangementApi] = useUpdateSlotMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { channelgroup }: any = useSelector(
@@ -97,11 +96,6 @@ const EditSlotManagementWrapper = () => {
             dispatch(setSelectedItems(dataSmApi?.data || []))
         }
     }, [smisLoading, smisFetching, dataSmApi, dispatch])
-    // const {
-    //     isLoading: isLanguageLoading,
-    //     isFetching: isLanguageFetching,
-    //     data: languageDataApi,
-    // } = useGetAllLanguageQuery('')
 
     const {
         isLoading: isCategoryLoading,
@@ -121,11 +115,7 @@ const EditSlotManagementWrapper = () => {
         }
     }, [isChannelMgtLoading, isChannelMgtFetching, ChannelMgtDataApi, dispatch])
 
-    // const {
-    //     isLoading: isCountryLoading,
-    //     isFetching: isCountryFetching,
-    //     data: countryDataApi,
-    // } = useGetAllCountryQuery('')
+
 
     const {
         isLoading,
@@ -151,17 +141,7 @@ const EditSlotManagementWrapper = () => {
         }
     }, [isTapeMgtLoading, isTapeMgtFetching, TapeMgtdata, dispatch])
 
-    // useEffect(() => {
-    //     if (!isCountryLoading && !isCountryFetching) {
-    //         setCountryData(countryDataApi?.data)
-    //     }
-    // }, [isCountryLoading, isCountryFetching, countryDataApi])
 
-    // useEffect(() => {
-    //     if (!isLanguageLoading && !isLanguageFetching) {
-    //         setlanguageData(languageDataApi?.data)
-    //     }
-    // }, [isLanguageLoading, isLanguageFetching, languageDataApi])
 
     useEffect(() => {
         if (!isCategoryLoading && !isCategoryFetching) {

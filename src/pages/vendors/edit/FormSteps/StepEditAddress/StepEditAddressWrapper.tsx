@@ -17,9 +17,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FormInitialValues } from '../../EditVendorWrapper'
 import StepEditAddress from './StepEditAddress'
 import { Field } from 'src/models/FormField/FormField.model'
-import { useGetAllCountryQuery } from 'src/services/CountryService'
-import { useGetAllStateByCountryQuery } from 'src/services/StateService'
-import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 import { useGetAllPincodeByDistrictQuery } from 'src/services/PinCodeService'
 
 // |-- Redux --|
@@ -28,6 +25,9 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
+import useCountries from 'src/hooks/useCountry'
+import useCountryStates from 'src/hooks/useCountryStates'
+import useStateDistricts from 'src/hooks/useStateDistricts'
 
 // |-- Types --|
 type Props = {
@@ -152,44 +152,26 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     const [billingDistrictData, setBillingDistrictData] = useState<any>()
     const [billingPincodeData, setBillingPincodeData] = useState<any>()
 
-    const { data, isLoading, isFetching } = useGetAllCountryQuery('')
+    const { country } = useCountries()
+
     //registraion
-    const {
-        data: stateData,
-        isLoading: stateIsLoading,
-        isFetching: stateIsFetching,
-    } = useGetAllStateByCountryQuery(formikProps.values.regd_address.country, {
-        skip: !formikProps.values.regd_address.country,
-    })
+
+    const { countryStates } = useCountryStates(
+        formikProps.values.regd_address.country
+    )
+
     //billing
-    const {
-        data: StateDataB,
-        isLoading: stateIsLoadingB,
-        isFetching: stateIsFetchingB,
-    } = useGetAllStateByCountryQuery(
-        formikProps.values.billing_address.country,
-        {
-            skip: !formikProps.values.billing_address.country,
-        }
+    const { countryStates: StateDataB } = useCountryStates(
+        formikProps.values.billing_address.country
     )
     //registraion
-    const {
-        data: districtData,
-        isLoading: districtIsLoading,
-        isFetching: districtIsFetching,
-    } = useGetAllDistrictByStateQuery(formikProps.values.regd_address.state, {
-        skip: !formikProps.values.regd_address.state,
-    })
-    //billing
-    const {
-        data: districtDataB,
-        isLoading: districtIsLoadingB,
-        isFetching: districtIsFetchingB,
-    } = useGetAllDistrictByStateQuery(
-        formikProps.values.billing_address.state,
-        {
-            skip: !formikProps.values.billing_address.state,
-        }
+
+    const { stateDistricts } = useStateDistricts(
+        formikProps.values.regd_address.state
+    )
+    //billing district
+    const { stateDistricts: districtDataB } = useStateDistricts(
+        formikProps.values.billing_address.state
     )
     //registration
     const {
@@ -224,27 +206,37 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     )
 
     useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setAllCountry(data?.data))
+        if (country) {
+            dispatch(setAllCountry(country))
         }
-    }, [data, isLoading, isFetching])
+    }, [country, dispatch])
 
     //registration
+
     useEffect(() => {
-        dispatch(setAllStates(stateData?.data))
-    }, [stateData, stateIsLoading, stateIsFetching])
-    //billing
+        if (countryStates) {
+            dispatch(setAllStates(countryStates))
+        }
+    }, [countryStates, dispatch])
+    //billing state
     useEffect(() => {
-        setBillingStateData(StateDataB?.data)
-    }, [StateDataB, stateIsLoadingB, stateIsFetchingB])
-    //registration
-    useEffect(() => {
-        dispatch(setAllDistrict(districtData?.data))
-    }, [districtData, districtIsLoading, districtIsFetching])
-    //billing
-    useEffect(() => {
-        setBillingDistrictData(districtDataB?.data)
-    }, [districtDataB, districtIsLoadingB, districtIsFetchingB])
+        if (StateDataB) {
+            setBillingStateData(StateDataB)
+        }
+    }, [StateDataB, dispatch])
+
+   //registration
+   useEffect(() => {
+    if (stateDistricts) {
+        dispatch(setAllDistrict(stateDistricts))
+    }
+}, [stateDistricts, dispatch])
+//billing
+useEffect(() => {
+    if (districtDataB) {
+        setBillingDistrictData(districtDataB)
+    }
+}, [districtDataB, dispatch])
     //registration
     useEffect(() => {
         dispatch(setAllPincodes(pincodeData?.data))
