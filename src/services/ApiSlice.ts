@@ -27,7 +27,9 @@ export const apiSlice = createApi({
         baseUrl: `${BASE_URL}`,
 
         prepareHeaders: (headers, { getState, endpoint }) => {
-            const authToken = (getState() as any)?.auth?.accessToken
+            const authToken =
+                (getState() as any)?.auth?.accessToken ||
+                localStorage.getItem('authToken')
             const deviceId = localStorage.getItem('device-id')
 
             if (authToken) {

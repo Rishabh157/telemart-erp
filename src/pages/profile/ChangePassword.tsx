@@ -9,11 +9,13 @@
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { setAccessToken, setRefreshToken } from 'src/redux/slices/authSlice'
 import { useChangePasswordMutation } from 'src/services/UserServices'
+import { showToast } from 'src/utils'
 
 const ChangePassword = () => {
     const { userData } = useSelector((state: any) => state.auth)
@@ -22,6 +24,7 @@ const ChangePassword = () => {
     const [errorInitiate, setErrorInitiate] = useState(false)
     const [apiError, setApiError] = useState('')
     const [changePassWord, changePasswordInfo] = useChangePasswordMutation()
+    const dispatch =useDispatch()
     const handleClick = () => {
         if (currentPass && newPassword) {
             changePassWord({
@@ -32,10 +35,17 @@ const ChangePassword = () => {
                 .then((res) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
-                            localStorage.setItem('authToken', res?.data?.token)
+                            showToast('success', 'Password Changed successfully')
+                            dispatch(setAccessToken(res?.data?.data?.token))
+                            dispatch(
+                                setRefreshToken(
+                                    res?.data?.data?.refreshToken
+                                )
+                            )
+                            localStorage.setItem('authToken', res?.data?.data.token)
                             localStorage.setItem(
                                 'refreshToken',
-                                res?.data?.refreshToken
+                                res?.data?.data.refreshToken
                             )
                             setApiError('')
                         } else {
