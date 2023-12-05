@@ -103,7 +103,7 @@ const formFields: {
     },
 
     {
-        sectionName: 'billing_address',
+        sectionName: 'Billing address',
         fields: [
             {
                 name: 'billing_address.phone',

@@ -7,9 +7,9 @@
 
 // |-- Internal Dependencies --|
 import {
-    AddUser,
+    // AddUser,
     AddNewUser,
-    UpdateUser,
+    // UpdateUser,
     UpdateNewUser,
     ChangeCompany,
 } from 'src/models'
@@ -18,20 +18,6 @@ import apiSlice from './ApiSlice'
 
 export const userApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        //***** GET *****/
-        getUsers: builder.query({
-            providesTags: ['user'],
-            query: (body: PaginationType) => ({
-                url: '',
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                body,
-            }),
-        }),
-
         //***** LOGIN *****/
         changePassword: builder.mutation({
             invalidatesTags: ['user'],
@@ -40,7 +26,7 @@ export const userApi = apiSlice.injectEndpoints({
                 newPassword: string
                 userId: string
             }) => ({
-                url: '/admin/change-password',
+                url: '/user/change-password',
                 method: 'PUT',
                 body,
             }),
@@ -50,7 +36,7 @@ export const userApi = apiSlice.injectEndpoints({
         login: builder.mutation({
             invalidatesTags: ['user'],
             query: (body: { userName: string; password: string }) => ({
-                url: '/admin/login',
+                url: '/user/login',
                 method: 'POST',
                 body,
             }),
@@ -60,7 +46,7 @@ export const userApi = apiSlice.injectEndpoints({
         refreshToken: builder.mutation({
             invalidatesTags: ['user'],
             query: (body: { refreshToken: string }) => ({
-                url: '/admin/refresh',
+                url: '/user/refresh-token',
                 method: 'POST',
                 body,
             }),
@@ -70,7 +56,7 @@ export const userApi = apiSlice.injectEndpoints({
         logout: builder.mutation({
             invalidatesTags: ['user'],
             query: () => ({
-                url: '/admin/logout',
+                url: '/user/logout',
                 method: 'POST',
             }),
         }),
@@ -79,28 +65,8 @@ export const userApi = apiSlice.injectEndpoints({
         logoutFromAll: builder.mutation({
             invalidatesTags: ['user'],
             query: (body: { logoutAll: boolean }) => ({
-                url: '/admin/logout',
+                url: '/user/logout',
                 method: 'POST',
-                body,
-            }),
-        }),
-
-        //***** ADD *****/
-        addUser: builder.mutation({
-            invalidatesTags: ['user'],
-            query: (body: AddUser) => ({
-                url: '/register',
-                method: 'POST',
-                body,
-            }),
-        }),
-
-        //***** Update *****/
-        updateUser: builder.mutation({
-            invalidatesTags: ['user'],
-            query: ({ body, id }: UpdateUser) => ({
-                url: `/${id}`,
-                method: 'PUT',
                 body,
             }),
         }),
@@ -170,9 +136,6 @@ export const userApi = apiSlice.injectEndpoints({
     }),
 })
 export const {
-    useGetUsersQuery,
-    useAddUserMutation,
-    useUpdateUserMutation,
     useGetUserByIdQuery,
     useLoginMutation,
     useLogoutMutation,

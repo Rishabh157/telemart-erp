@@ -70,35 +70,5 @@ export const getHierarchyByDept = ({
     }
 
     return defaultComponent[department] || []
-    // switch (department) {
-    //   case GetHierarchByDeptProps.salesDepartment:
-    //     return Hierarchy.salesDepartment
-    //   case GetHierarchByDeptProps.hrDepartment:
-    //     return Hierarchy.hrDepartment
-    //   case GetHierarchByDeptProps.distributionDepartment:
-    //     return Hierarchy.distributionDepartment
-    //   case GetHierarchByDeptProps.financeDepartment:
-    //     return Hierarchy.financeDepartment
-    //   case GetHierarchByDeptProps.mediaDepartment:
-    //     return Hierarchy.mediaDepartment
-    //   case GetHierarchByDeptProps.mediaProductionDepartment:
-    //     return Hierarchy.mediaProductionDepartment
-    //   case GetHierarchByDeptProps.ITDepartment:
-    //     return Hierarchy.ITDepartment
-    //   case GetHierarchByDeptProps.DevelopmentDepartment:
-    //     return Hierarchy.DevelopmentDepartment
-    //   case GetHierarchByDeptProps.webDepartment:
-    //     return Hierarchy.webDepartment
-    //   case GetHierarchByDeptProps.operationDepartment:
-    //     return Hierarchy.operationDepartment
-    //   case GetHierarchByDeptProps.qualityDepartment:
-    //     return Hierarchy.qualityDepartment
-    //   case GetHierarchByDeptProps.logisticDepartment:
-    //     return Hierarchy.logisticDepartment
-    //   case GetHierarchByDeptProps.mapingAndMISDepartment:
-    //     return Hierarchy.mapingAndMISDepartment
-    //   case GetHierarchByDeptProps.adminDepartment:
-    //     return Hierarchy.adminDepartment
-    //   default: return null
-    // }
+  
 }
