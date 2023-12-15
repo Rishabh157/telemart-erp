@@ -129,7 +129,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         setApiStatus(true)
         const newPincodeDetail = values.pincodeDetail.map((ele: any) => {
             const { district, ...rest } = ele // use object destructuring to remove the _id property
-            return rest // return the new object without the _id property
+            return { ...rest, districtId: district } // return the new object without the _id property
         })
         setTimeout(() => {
             addDealerPincode({
@@ -149,7 +149,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
                 }
                 setApiStatus(false)
             })
-        }, 1000)
+        }, 1000)    
     }
 
     return (

@@ -110,7 +110,8 @@ const EditUserWrapper = (props: Props) => {
             .min(10, 'Mobile number must be 10 digits')
             .trim()
             .matches(regIndiaPhone, 'Invalid Mobile Number'),
-        email: string().email('Invalid Email ID').required('Email is required'),
+        email: string().email('Invalid Email ID'),
+        // .required('Email is required'),
         branchId: string().required('branch name is required'),
         password: string(),
         userDepartment: string().required('User Department is required'),

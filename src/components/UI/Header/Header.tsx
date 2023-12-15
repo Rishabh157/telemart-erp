@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 // |-- External Dependencies --|
 import { BsMoon, BsSun } from 'react-icons/bs'
@@ -24,13 +24,14 @@ import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setDeviceId, setUserData } from 'src/redux/slices/authSlice'
+import { ThemeContext } from 'src/App'
 
 const Header = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
     const [isShowNotification, setIsShowNotification] = useState(false)
     const deviceIditem = localStorage.getItem('device-id') || ''
-
+    const { theme, toggleTheme } = useContext(ThemeContext)
     useEffect(() => {
         dispatch(setDeviceId(deviceIditem))
     }, [deviceIditem, dispatch])
@@ -38,9 +39,7 @@ const Header = () => {
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
     const [company, setCompany] = useState(userData?.companyId || '')
-    const color = localStorage.getItem('themeColor')
-    const themeColor = color ? JSON.parse(color) : ''
-    const [siteMode, setSiteMode] = useState(themeColor)
+
     const [companyName, setCompanyName] = useState('')
     const { data, isFetching, isLoading } = useGetAllCompaniesQuery('', {
         skip: !userData?.companyId,
@@ -122,34 +121,19 @@ const Header = () => {
                             children={
                                 <>
                                     <div
-                                        onClick={() => {
-                                            setSiteMode('black')
-
-                                            localStorage.setItem(
-                                                'themeColor',
-                                                JSON.stringify('black')
-                                            )
-                                            window.location.reload()
-                                        }}
+                                    
+                                        onClick={toggleTheme}
                                         className={` ${
-                                            siteMode === 'black' &&
+                                            theme === 'black' &&
                                             'text-[#dd9c4c]'
                                         } p-2 px-4 text-lg font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
                                     >
                                         <BsMoon /> Dark
                                     </div>
                                     <div
-                                        onClick={() => {
-                                            setSiteMode('white')
-
-                                            localStorage.setItem(
-                                                'themeColor',
-                                                JSON.stringify('white')
-                                            )
-                                            window.location.reload()
-                                        }}
+                                        onClick={toggleTheme}
                                         className={`${
-                                            siteMode === 'white' &&
+                                            theme === 'white' &&
                                             'text-[#dd9c4c]'
                                         } p-2 px-4 text-lg font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
                                     >
@@ -158,7 +142,7 @@ const Header = () => {
                                 </>
                             }
                             buttonName={
-                                siteMode === 'black' ? (
+                                theme === 'black' ? (
                                     <BsMoon
                                         size={20}
                                         className="cursor-pointer"
