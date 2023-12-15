@@ -23,6 +23,7 @@ import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { ThemeContext } from 'src/App'
 
 const mediaNavigation: NavItemType[] = [
     {
@@ -95,13 +96,12 @@ const MediaLayout = ({ children }: Props) => {
     const navigate = useNavigate()
 
     const currentPath = `/media/${location.pathname?.split('/')[2]}`
-    const bgColorLocal = localStorage.getItem('themeColor') as string
-    const bgColor = JSON.parse(bgColorLocal) as string | null
+    const { theme } = React.useContext(ThemeContext);
 
     return (
         <div
             className={`flex h-screen w-screen relative ${
-                bgColor === 'black' ? 'bg-invert' : ''
+                theme === 'black' ? 'bg-invert' : ''
             }`}
         >
             {/* Side Navigation Bar */}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
@@ -8,6 +8,7 @@ import { MdEmojiEvents } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CiMonitor } from 'react-icons/ci'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { ThemeContext } from 'src/App'
 
 const dispositionNavigation: NavItemType[] = [
     {
@@ -68,12 +69,11 @@ const DispositionLayout = ({ children }: Props) => {
     const navigate = useNavigate()
 
     const currentPath = `/dispositions/${location.pathname?.split('/')[2]}`
-    const bgColorLocal = localStorage.getItem('themeColor') as string
-    const bgColor = JSON.parse(bgColorLocal) as string | null
+    const { theme } = useContext(ThemeContext);
     return (
         <div
             className={`flex h-screen w-screen relative ${
-                bgColor === 'black' ? 'bg-invert' : ''
+                theme === 'black' ? 'bg-invert' : ''
             }`}
         >
             {/* Side Navigation Bar */}

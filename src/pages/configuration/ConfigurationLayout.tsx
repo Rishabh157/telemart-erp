@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 // |-- External Dependencies --|
 import { NavItemType } from 'src/navigation'
@@ -30,6 +30,7 @@ import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { ThemeContext } from 'src/App'
 
 const configurationNavigation: NavItemType[] = [
     {
@@ -150,13 +151,14 @@ const ConfigurationLayout = ({ children }: Props) => {
     const navigate = useNavigate()
 
     const currentPath = `/configurations/${location.pathname?.split('/')[2]}`
-    const bgColorLocal = localStorage.getItem('themeColor') as string
-    const bgColor = JSON.parse(bgColorLocal) as string | null
+    // const bgColorLocal = localStorage.getItem('themeColor') as string
+    // const bgColor = JSON.parse(bgColorLocal) as string | null
+    const { theme } = useContext(ThemeContext);
 
     return (
         <div
             className={`flex h-screen w-screen relative ${
-                bgColor === 'black' ? 'bg-invert' : ''
+                theme === 'black' ? 'bg-invert' : ''
             }`}
         >
             {/* Side Navigation Bar */}

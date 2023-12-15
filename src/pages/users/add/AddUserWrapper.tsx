@@ -51,6 +51,8 @@ const AddUserWrapper = (props: Props) => {
     const [addNewUser] = useAddNewUserMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
+
+
     const initialValues: FormInitialValues = {
         firstName: '',
         lastName: '',
@@ -81,7 +83,8 @@ const AddUserWrapper = (props: Props) => {
             .min(10, 'Mobile number must be 10 digits')
             .trim()
             .matches(regIndiaPhone, 'Invalid Mobile Number'),
-        email: string().email('Invalid Email ID').required('Email is required'),
+        email: string().email('Invalid Email ID'),
+        // .required('Email is required'),
         branchId: string().required('branch name is required'),
         userDepartment: string().required('User Department is required'),
         userRole: string().required('User Role is required'),

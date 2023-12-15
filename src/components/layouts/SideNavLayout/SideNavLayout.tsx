@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useContext } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,6 +20,7 @@ import VerticalNavBar from '../../UI/VerticalNavBar/VerticalNavBar'
 // |-- Redux --|
 import { setIsCollapsed } from 'src/redux/slices/SideNavLayout'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { ThemeContext } from 'src/App'
 
 // |-- Types --|
 type Props = {
@@ -40,12 +41,13 @@ const SideNavLayout = ({ children }: Props) => {
 
     const location = useLocation()
     const currentPath = `/${location.pathname?.split('/')[1]}`
-    const bgColorLocal = localStorage.getItem('themeColor')
-    const bgColor = bgColorLocal ? JSON.parse(bgColorLocal) : ''
+    // const bgColorLocal = localStorage.getItem('themeColor')
+    const { theme } = useContext(ThemeContext);
+    // const bgColor = bgColorLocal ? JSON.parse(bgColorLocal) : ''
     return (
         <div
             className={`flex h-screen w-screen ${
-                bgColor === 'black' ? 'bg-invert' : ''
+                theme === 'black' ? 'bg-invert' : ''
             }`}
         >
             {/* Side Navigation Bar */}
