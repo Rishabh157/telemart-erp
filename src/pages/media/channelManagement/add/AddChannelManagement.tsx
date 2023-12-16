@@ -28,9 +28,9 @@ import { RootState } from 'src/redux/store'
 // import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import useCountryStates from 'src/hooks/useCountryStates'
+import useStatesByCountry from 'src/hooks/useStatesByCountry'
 import { setAllStates } from 'src/redux/slices/statesSlice'
-import useStateDistricts from 'src/hooks/useStateDistricts'
+import useStateDistricts from 'src/hooks/useDistrictsByState'
 
 // |-- Types --|
 type Props = {
@@ -67,17 +67,16 @@ const AddChannelManagement = ({
     const { allDistricts }: any = useSelector(
         (state: RootState) => state.district
     )
-    const { countryStates } = useCountryStates(formikProps.values.country)
-
+    const { stateByCountry } = useStatesByCountry(formikProps.values.country)
 
     const { stateDistricts } = useStateDistricts(formikProps.values.state)
 
     //state
     useEffect(() => {
-        if (countryStates) {
-            dispatch(setAllStates(countryStates))
+        if (stateByCountry) {
+            dispatch(setAllStates(stateByCountry))
         }
-    }, [countryStates, dispatch])
+    }, [stateByCountry, dispatch])
 
     //district
     useEffect(() => {

@@ -76,6 +76,7 @@ const AddDealerScheme = ({
                                     <div className="flex flex-col gap-y-5 px-3">
                                         {values.details?.map((item, index) => {
                                             const { schemeId, pincodes } = item
+                                            console.log(pincodes,"pincodes")
                                             return (
                                                 <div
                                                     key={index}

@@ -40,6 +40,15 @@ export const tehsilApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+        // distric wise tehsil auth
+        getAllTehsilByDistrict: builder.query({
+            providesTags: ['Tehsil'],
+            query: (id: string) => ({
+                url: `/tehsil/get-district-tehsil/${id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
         //***** ADD *****/
         AddTehsil: builder.mutation({
             invalidatesTags: ['Tehsil'],
@@ -106,4 +115,5 @@ export const {
     useDeleteTehsilMutation,
     useGetAllTehsilQuery,
     useGetAllTehsilUnauthQuery,
+    useGetAllTehsilByDistrictQuery
 } = tehsilApi

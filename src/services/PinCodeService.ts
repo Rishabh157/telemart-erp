@@ -22,11 +22,31 @@ export const pincodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET *****/
+        //***** GET pincide By coutryId *****/
+        getAllPincodeByCountry: builder.query({
+            providesTags: ['pincode'],
+            query: (countryId) => ({
+                url: `/pincode/get-country-pincode/${countryId}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET pincide By DistrictID *****/
         getAllPincodeByDistrict: builder.query({
             providesTags: ['pincode'],
-            query: (id) => ({
-                url: `/pincode/get-country-pincode/${id}`,
+            query: (districtId) => ({
+                url: `/pincode/get-district-pincode/${districtId}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET pincide By tehsilId *****/
+        getAllPincodeByTehsil: builder.query({
+            providesTags: ['pincode'],
+            query: (tehsilId) => ({
+                url: `/pincode/get-tehsil-pincode/${tehsilId}`,
                 method: 'GET',
                 // body,
             }),
@@ -42,7 +62,7 @@ export const pincodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        getAllPincodeUnauth: builder.query({
+        getAllPincodeByTehsilUnauth: builder.query({
             providesTags: ['pincode'],
             query: (id: string) => ({
                 url: `/pincode/get-tehsil-pincode/unauth/${id}`,
@@ -125,7 +145,9 @@ export const {
     useExportPincodeDataMutation,
     useDeletePincodeMutation,
     useGetAllPincodeQuery,
+    useGetAllPincodeByTehsilQuery,
+    useGetAllPincodeByCountryQuery,
+    useGetAllPincodeByTehsilUnauthQuery,
     useGetAllPincodeByDistrictQuery,
-    useGetAllPincodeUnauthQuery,
     useGetAllInfoByPincodeMutation,
 } = pincodeApi

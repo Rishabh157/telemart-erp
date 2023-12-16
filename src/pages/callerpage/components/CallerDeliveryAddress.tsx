@@ -33,7 +33,7 @@ import { TehsilListResponse } from 'src/models/Tehsil.model'
 import { setAllTehsils } from 'src/redux/slices/tehsilSlice'
 
 // Pincode
-import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
+import { useGetAllPincodeByTehsilUnauthQuery } from 'src/services/PinCodeService'
 import { PincodeListResponse } from 'src/models/Pincode.model'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 
@@ -134,7 +134,7 @@ const CallerDeliveryAddress = ({
         data: pinCodeData,
         isFetching: pinCodeFetching,
         isLoading: pinCodeLoading,
-    } = useGetAllPincodeUnauthQuery(values.tehsilId || '', {
+    } = useGetAllPincodeByTehsilUnauthQuery(values.tehsilId || '', {
         skip: !values.tehsilId,
     })
 

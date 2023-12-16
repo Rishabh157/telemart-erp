@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:SchemeListingWrapper.tsx
 // Type: List Component
-// Last Updated: JULY 04, 2023
+// Last Updated: DEC 16, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -114,14 +114,7 @@ const SchemeListingWrapper = () => {
                 return <span> {row.schemePrice} </span>
             },
         },
-        // {
-        //     field: 'commission',
-        //     headerName: 'Commission',
-        //     flex: 'flex-[1_1_0%]',
-        //     renderCell: (row: SchemeListResponse) => {
-        //         return <span> {row.commission} </span>
-        //     },
-        // },
+
         {
             field: 'actions',
             headerName: 'Actions',

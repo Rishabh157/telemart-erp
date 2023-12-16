@@ -137,7 +137,8 @@ const AddPurchaseOrderWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        poCode: string().required('Purchase order code is required'),
+        // eslint-disable-next-line no-useless-escape
+        poCode: string().required('Purchase order code is required').matches(/^[a-zA-Z]+[^\/\\]*$/, 'Only alphabetical characters are allowed, except / and \\'),
         vendorId: string().required('Please select a vendor'),
         wareHouseId: string().required('Please select a warehouse'),
         purchaseOrder: array().of(

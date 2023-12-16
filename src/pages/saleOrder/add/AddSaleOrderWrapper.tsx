@@ -150,7 +150,7 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        // soNumber: string().required('Sale order number is required'),
+        // soNumber: string().required('Sale order number is required').matches(/^[a-zA-Z]+$/, 'Only alphabetical characters are allowed'),
         dealerId: string().required('Please select a dealer'),
         dealerWareHouseId: string().required(
             'Please select a  Dealer Warehouse'

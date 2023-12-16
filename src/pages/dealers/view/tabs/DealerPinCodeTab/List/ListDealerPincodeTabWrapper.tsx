@@ -68,7 +68,7 @@ const ListDealerPincodeTabWrapper = () => {
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: DealersPincodeListResponse) => (
-                <span> {row.pincode} </span>
+                <span> {row.pincode?.join(', ')} </span>
             ),
         },
 
