@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-// import { array, number, object, string } from 'yup'
+import { array, number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -342,28 +342,33 @@ const EditWarehouseToComapnyWrapper = (props: Props) => {
         id: editWarehouseToComapny.id,
     }
 
-    // // Form Validation Schema
-    // const validationSchema = object({
-    //     soNumber: string().required('Sale order number is required'),
-    //     dealerId: string().required('Please select a dealer'),
-    //     dealerWareHouseId: string().required(
-    //         'Please select a  Dealer Warehouse'
-    //     ),
-    //     companyWareHouseId: string().required('Please select a warehouse'),
-    //     productSalesOrder: array().of(
-    //         object().shape({
-    //             productGroupId: string().required(
-    //                 'Please select a product name'
-    //             ),
-    //             rate: number()
-    //                 .min(1, 'Rate must be greater than 0')
-    //                 .required('Please enter rate'),
-    //             quantity: number()
-    //                 .min(1, 'Quantity must be greater than 0')
-    //                 .required('Please enter quantity'),
-    //         })
-    //     ),
-    // })
+    // Form Validation Schema
+    const validationSchema = object({
+        wtcNumber: string()
+            .required('WTC order number is required')
+            .matches(
+                // eslint-disable-next-line no-useless-escape
+                /^[a-zA-Z]+[^\/\\]*$/,
+                'Only alphabetical characters are allowed, except / and \\'
+            ),
+        fromWarehouseId: string().required('Please select warehouse'),
+        toCompanyId: string().required('Please select company'),
+        toWarehouseId: string().required('Please select warehouse'),
+        remark: string(),
+        productSalesOrder: array().of(
+            object().shape({
+                productGroupId: string().required(
+                    'Please select a product name'
+                ),
+                rate: number()
+                    .min(1, 'Rate must be greater than 0')
+                    .required('Please enter rate'),
+                quantity: number()
+                    .min(1, 'Quantity must be greater than 0')
+                    .required('Please enter quantity'),
+            })
+        ),
+    })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -425,7 +430,7 @@ const EditWarehouseToComapnyWrapper = (props: Props) => {
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
-                // validationSchema={validationSchema}
+                validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {

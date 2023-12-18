@@ -63,7 +63,6 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const { allItems: schemeItems }: any = useSelector(
         (state: RootState) => state?.scheme
     )
-
     const schemeOptions = schemeItems?.map((ele: any) => {
         return {
             label: ele.schemeName,
@@ -81,11 +80,15 @@ const DealerPinCodeTabWrapper = (props: Props) => {
 
     useEffect(() => {
         if (!pinCodeIsLoading && !pinCodeIsFetching) {
-            let options = pinCodeList?.data?.map((item: any) => {
-                return {
-                    label: item?.pincode,
-                    value: item?.pincode,
-                }
+            let options: any = []
+            pinCodeList?.data?.map((item: any) => {
+                return (options = [
+                    ...options,
+                    {
+                        label: item.pincode,
+                        value: item.pincode,
+                    },
+                ])
             })
             setPinCodeOptions(options)
         }

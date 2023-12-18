@@ -13,18 +13,16 @@ import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { array, number, object, string } from 'yup'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddDealerPincode from './AddDealerPincode'
 import { useAddDealerPincodeMutation } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
-import { useGetAllPincodeQuery } from 'src/services/PinCodeService'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllPincodes as setAllDealerPincodes } from 'src/redux/slices/pincodeSlice'
+import { RootState } from 'src/redux/store'
 import { useGetAllDistrictQuery } from 'src/services/DistricService'
+import { useSelector } from 'react-redux'
 
 // |-- Types --|
 type Props = {}
@@ -43,22 +41,11 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [allDistricts, setAllDistricts] = useState([])
     const [addDealerPincode] = useAddDealerPincodeMutation()
-    const dealerPincodeState: any = useSelector(
-        (state: RootState) => state.dealerPincode
-    )
-    const { items } = dealerPincodeState
-
-    const {
-        data: pinCodeData,
-        isLoading: pinCodeIsLoading,
-        isFetching: pinCodeIsFetching,
-    } = useGetAllPincodeQuery('')
 
     const {
         data: districtData,
@@ -66,31 +53,13 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         isFetching: districtIsFetching,
     } = useGetAllDistrictQuery('')
 
-    useEffect(() => {
-        const unmatchedObjects = pinCodeData?.data.filter(
-            (item2: any) =>
-                !items.some((item1: any) => item1.pincode === item2.pincode)
-        )
 
-        dispatch(setAllDealerPincodes(unmatchedObjects))
-    }, [pinCodeData, pinCodeIsLoading, pinCodeIsFetching, dispatch])
 
     useEffect(() => {
         if (!districtIsLoading && !districtIsFetching) {
             setAllDistricts(districtData?.data)
         }
     }, [districtData, districtIsLoading, districtIsFetching])
-
-    const { allPincodes: pincodeItems }: any = useSelector(
-        (state: RootState) => state?.pincode
-    )
-
-    const pincodeOptions = pincodeItems?.map((ele: any) => {
-        return {
-            label: ele.pincode,
-            value: ele.pincode,
-        }
-    })
 
     const DistrictOptions = allDistricts?.map((ele: any) => {
         return {
@@ -149,7 +118,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
                 }
                 setApiStatus(false)
             })
-        }, 1000)    
+        }, 1000)
     }
 
     return (
@@ -164,7 +133,6 @@ const DealerPinCodeTabWrapper = (props: Props) => {
                         <AddDealerPincode
                             apiStatus={apiStatus}
                             formikProps={formikProps}
-                            pincodeOptions={pincodeOptions}
                             DistrictOptions={DistrictOptions}
                         />
                     )

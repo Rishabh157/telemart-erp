@@ -21,10 +21,10 @@ import store from './redux/store'
 export const ThemeContext = createContext<{
     theme: string
     toggleTheme: () => void
-}>({ theme: 'light', toggleTheme: () => {} })
+}>({ theme: 'white', toggleTheme: () => {} })
 
 function App() {
-    const [theme, setTheme] = React.useState('black')
+    const [theme, setTheme] = React.useState('white')
 
     const toggleTheme = () => {
         setTheme((curr) => (curr === 'white' ? 'black' : 'white'))

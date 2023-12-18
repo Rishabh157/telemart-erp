@@ -7,7 +7,7 @@
 
 export type DealersPincodeListResponse = {
     dealerId: string
-    pincode: string
+    pincode: string[]
     estTime: number
     companyId: string
     isActive: boolean

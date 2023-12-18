@@ -33,6 +33,7 @@ import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGrou
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedItem } from 'src/redux/slices/returnToVendorSlice'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
+import { array, number, object, string } from 'yup'
 
 // |-- Types --|
 type Props = {}
@@ -255,23 +256,31 @@ const EditRTVendorWrapper = (props: Props) => {
     }
 
     // Form Validation Schema
-    // const validationSchema = object({
-    //     rtvNo: string().required('Sale order number is required'),
-    //     vendorId: string().required('please select a vendor'),
-    //     remark: string(),
-    //     warehouseId: string().required('please select a warehouse'),
-    //     productSalesOrder: object().shape({
-    //         productGroupId: string().required('Please select a product name'),
-    //         rate: number()
-    //             .min(0, 'Rate must be greater than 0')
-    //             .required('Please enter rate')
-    //             .nullable(),
-    //         quantity: number()
-    //             .min(0, 'Quantity must be greater than 0')
-    //             .required('Please enter quantity')
-    //             .nullable(),
-    //     }),
-    // })
+    const validationSchema = object({
+        rtvNo: string()
+            .required('return to vendor number is required')
+            .matches(
+                // eslint-disable-next-line no-useless-escape
+                /^[a-zA-Z]+[^\/\\]*$/,
+                'Only alphabetical characters are allowed, except / and \\'
+            ),
+        remark: string(),
+        vendorId: string().required('please select a vendor'),
+        warehouseId: string().required('please select warehouse'),
+        productSalesOrder: array().of(
+            object().shape({
+                productGroupId: string().required(
+                    'Please select a product name'
+                ),
+                rate: number()
+                    .min(1, 'Rate must be greater than 0')
+                    .required('Please enter rate'),
+                quantity: number()
+                    .min(1, 'Quantity must be greater than 0')
+                    .required('Please enter quantity'),
+            })
+        ),
+    })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -333,7 +342,7 @@ const EditRTVendorWrapper = (props: Props) => {
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
-                // validationSchema={validationSchema}
+                validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {

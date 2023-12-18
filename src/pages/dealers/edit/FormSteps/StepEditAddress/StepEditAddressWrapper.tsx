@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FormInitialValues } from '../../EditDealerWrapper'
 import StepAddAddress from './StepEditAddress'
 import { Field } from 'src/models/FormField/FormField.model'
-import { useGetAllPincodeByDistrictQuery } from 'src/services/PinCodeService'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -25,8 +24,9 @@ import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 import useCountries from 'src/hooks/useCountry'
-import useCountryStates from 'src/hooks/useCountryStates'
-import useStateDistricts from 'src/hooks/useStateDistricts'
+import useStatesByCountry from 'src/hooks/useStatesByCountry'
+import useStateDistricts from 'src/hooks/useDistrictsByState'
+import usePincodesByDistrict from 'src/hooks/usePincodesByDistrict'
 
 // |-- Types --|
 type Props = {
@@ -163,11 +163,11 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     //hooks call
     const { country } = useCountries()
     //REGSITRATION state hook
-    const { countryStates } = useCountryStates(
+    const { stateByCountry } = useStatesByCountry(
         formikProps.values.registrationAddress.countryId
     )
     //billing state hook
-    const { countryStates: StateDataB } = useCountryStates(
+    const { stateByCountry: StateDataB } = useStatesByCountry(
         formikProps.values.billingAddress.countryId
     )
     // //registraion
@@ -180,26 +180,12 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         formikProps.values.billingAddress.stateId
     )
     //registration
-    const {
-        data: pincodeData,
-        isLoading: pincodeIsLoading,
-        isFetching: pincodeIsFetching,
-    } = useGetAllPincodeByDistrictQuery(
-        formikProps.values.registrationAddress.countryId,
-        {
-            skip: !formikProps.values.registrationAddress.countryId,
-        }
+    const { pincodeByDistrict } = usePincodesByDistrict(
+        formikProps.values.registrationAddress.districtId
     )
     //billing
-    const {
-        data: pincodeDataB,
-        isLoading: pincodeIsLoadingB,
-        isFetching: pincodeIsFetchingB,
-    } = useGetAllPincodeByDistrictQuery(
-        formikProps.values.billingAddress.countryId,
-        {
-            skip: !formikProps.values.billingAddress.countryId,
-        }
+    const { pincodeByDistrict: pincodeDataB } = usePincodesByDistrict(
+        formikProps.values.billingAddress.districtId
     )
 
     useEffect(() => {
@@ -208,10 +194,10 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         }
     }, [country, dispatch])
     useEffect(() => {
-        if (countryStates) {
-            dispatch(setAllStates(countryStates))
+        if (stateByCountry) {
+            dispatch(setAllStates(stateByCountry))
         }
-    }, [countryStates, dispatch])
+    }, [stateByCountry, dispatch])
 
     useEffect(() => {
         if (StateDataB) {
@@ -233,12 +219,16 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     }, [districtDataB, dispatch])
     //registration
     useEffect(() => {
-        dispatch(setAllPincodes(pincodeData?.data))
-    }, [pincodeData, pincodeIsLoading, pincodeIsFetching, dispatch])
+        if (pincodeByDistrict) {
+            dispatch(setAllPincodes(pincodeByDistrict))
+        }
+    }, [pincodeByDistrict, dispatch])
     //billing
     useEffect(() => {
-        setBillingPincodeData(pincodeDataB?.data)
-    }, [pincodeDataB, pincodeIsLoadingB, pincodeIsFetchingB, dispatch])
+        if (pincodeDataB) {
+            setBillingPincodeData(pincodeDataB)
+        }
+    }, [pincodeDataB, dispatch])
 
     const counrtyOptions = allCountry?.map((ele: any) => {
         return { label: ele?.countryName, value: ele?._id }

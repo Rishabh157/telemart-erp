@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 
 const useStateDistricts = (stateId?: string) => {
-    const [stateDistricts, setStateCities] = useState<any[]>([])
+    const [stateDistricts, setStateTehsil] = useState<any[]>([])
 
     const { data, isLoading, isFetching } = useGetAllDistrictByStateQuery(
         stateId || '',
@@ -12,7 +12,7 @@ const useStateDistricts = (stateId?: string) => {
     useMemo(() => {
         if (!isLoading && !isFetching) {
             const result: any[] = data?.data
-            setStateCities(result || [])
+            setStateTehsil(result || [])
         }
     }, [data, isLoading, isFetching])
 

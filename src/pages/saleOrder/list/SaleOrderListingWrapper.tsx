@@ -173,7 +173,15 @@ const SaleOrderListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => (
-                <span> {row?.dealerName} </span>
+                <span
+                    className="underline text-primary-main"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() =>
+                        navigate(`/dealers/${row?.documents[0]?.dealerId}/general-information`)
+                    }
+                >
+                    {row?.dealerName.replaceAll('_', ' ')}
+                </span>
             ),
         },
         {

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /// ==============================================
 // Filename:AddWarehouseTransferWrapper.tsx
 // Type: Add Component
@@ -10,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-// import { array, number, object, string } from 'yup'
+import { array, number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -145,33 +146,42 @@ const AddWarehouseTransferWrapper = (props: Props) => {
         wtNumber: '',
         fromWarehouseId: '',
         toWarehouseId: '',
-        productSalesOrder: [],
+        productSalesOrder: [
+            {
+                productGroupId: '',
+                rate: 0,
+                quantity: 0,
+            },
+        ],
         remark: '',
         companyId: '',
     }
 
     // Form Validation Schema
-    // const validationSchema = object({
-    //     soNumber: string().required('Sale order number is required'),
-    //     dealerId: string().required('Please select a dealer'),
-    //     dealerWareHouseId: string().required(
-    //         'Please select a  Dealer Warehouse'
-    //     ),
-    //     companyWareHouseId: string().required('Please select a warehouse'),
-    //     productSalesOrder: array().of(
-    //         object().shape({
-    //             productGroupId: string().required(
-    //                 'Please select a product name'
-    //             ),
-    //             rate: number()
-    //                 .min(1, 'Rate must be greater than 0')
-    //                 .required('Please enter rate'),
-    //             quantity: number()
-    //                 .min(1, 'Quantity must be greater than 0')
-    //                 .required('Please enter quantity'),
-    //         })
-    //     ),
-    // })
+    const validationSchema = object({
+        wtNumber: string()
+            .required('WTW number is required')
+            .matches(
+                /^[a-zA-Z]+[^\/\\]*$/,
+                'Only alphabetical characters are allowed, except / and \\'
+            ),
+        fromWarehouseId: string().required('please select warehouse'),
+        toWarehouseId: string().required('please select warehouse'),
+        remark: string(),
+        productSalesOrder: array().of(
+            object().shape({
+                productGroupId: string().required(
+                    'Please select a product name'
+                ),
+                rate: number()
+                    .min(1, 'Rate must be greater than 0')
+                    .required('Please enter rate'),
+                quantity: number()
+                    .min(1, 'Quantity must be greater than 0')
+                    .required('Please enter quantity'),
+            })
+        ),
+    })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -205,7 +215,7 @@ const AddWarehouseTransferWrapper = (props: Props) => {
         <SideNavLayout>
             <Formik
                 initialValues={initialValues}
-                // validationSchema={validationSchema}
+                validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {

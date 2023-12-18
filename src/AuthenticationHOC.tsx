@@ -97,17 +97,13 @@ const AuthenticationHOC = ({
         }
         return isAuthorized
     }
-    console.log(
-    moduleName,
-    actionName ,
-    isRedirect ,)
+
     return (
         <>
             {accessToken ? (
                 getAuthorised() ? (
                     <>
                         {/* {component} */}
-                        {/* {console.log('location3333333')} */}
                         {/* Pass location.state to the component if it exists, otherwise pass null */}
                         {React.cloneElement(component as React.ReactElement, {
                             location: location.state || null,

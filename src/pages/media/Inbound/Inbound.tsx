@@ -27,7 +27,7 @@ import { FormInitialValues } from './InboundWrapper'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
 import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
 import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
-import { useGetAllPincodeUnauthQuery } from 'src/services/PinCodeService'
+import { useGetAllPincodeByTehsilUnauthQuery } from 'src/services/PinCodeService'
 import { useInboundSchemeQuery } from 'src/services/SchemeService'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
@@ -94,7 +94,7 @@ const Inbound: React.FC<Props> = ({
         data: PCdata,
         isFetching: PCisFetching,
         isLoading: PCisLoading,
-    } = useGetAllPincodeUnauthQuery('')
+    } = useGetAllPincodeByTehsilUnauthQuery('')
 
     useEffect(() => {
         if (!PCisLoading && !PCisFetching) {

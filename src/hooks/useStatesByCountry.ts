@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react'
 import { useGetAllStateByCountryQuery } from 'src/services/StateService'
 
-const useCountryStates = (countryId?: string) => {
-    const [countryStates, setCountryStates] = useState<any[]>([])
+const useStatesByCountry = (countryId?: string) => {
+    const [stateByCountry, setCountryStates] = useState<any[]>([])
 
     const {
         data,
@@ -17,7 +17,7 @@ const useCountryStates = (countryId?: string) => {
         }
     }, [data, isDataLoading, isFetching])
 
-    return { countryStates, isDataLoading }
+    return { stateByCountry, isDataLoading }
 }
 
-export default useCountryStates
+export default useStatesByCountry

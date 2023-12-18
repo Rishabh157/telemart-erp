@@ -156,7 +156,8 @@ const AddRTVendorWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        rtvNo: string().required('return to vendor number is required'),
+        // eslint-disable-next-line no-useless-escape
+        rtvNo: string().required('return to vendor number is required').matches(/^[a-zA-Z]+[^\/\\]*$/, 'Only alphabetical characters are allowed, except / and \\'),
         remark: string(),
         vendorId: string().required('please select a vendor'),
         warehouseId: string().required('please select warehouse'),
