@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
 
 // |-- Internal Dependencies --|
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import {
     OutwardRequestDealerListResponse,
@@ -62,6 +62,7 @@ const OutwardDealerTabsListingWrapper = () => {
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<OutwardRequestDealerListResponse | null>(null)
     const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
     const params = useParams()
     const warehouseId = params.id
     const salesOrderState: any = useSelector(
@@ -134,7 +135,17 @@ const OutwardDealerTabsListingWrapper = () => {
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
             renderCell: (row: OutwardRequestDealerListResponse) => (
-                <span> {capitalizeFirstLetter(row?.dealerName || '')} </span>
+                <span
+                    className="underline text-primary-main"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() =>
+                        navigate(
+                            `/dealers/${row?.documents[0]?.dealerId}/general-information`
+                        )
+                    }
+                >
+                    {capitalizeFirstLetter(row?.dealerName || '')}
+                </span>
             ),
         },
         {

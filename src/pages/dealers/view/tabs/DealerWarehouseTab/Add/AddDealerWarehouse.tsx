@@ -15,13 +15,12 @@ import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './AddDealerWarehouseWarpper'
 
 // |-- Redux --|
+import { useParams } from 'react-router-dom'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
-import { useParams } from 'react-router-dom'
 
 // |-- Types --|
 type Props = {
@@ -66,11 +65,11 @@ const AddDealerWarehouse = ({
                 </div>
 
                 {/* Page Heading */}
-                <div className="pt-1">
+                {/* <div className="pt-1">
                     <ATMPageHeading> Add New warehouse </ATMPageHeading>
-                </div>
+                </div> */}
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat pt-1">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium">

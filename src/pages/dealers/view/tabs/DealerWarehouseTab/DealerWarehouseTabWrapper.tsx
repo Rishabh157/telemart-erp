@@ -170,8 +170,8 @@ const DealerWarehouseTabWrapper = (props: Props) => {
         params: [
             'wareHouseCode',
             'wareHouseName',
-            'country',
-            'email',
+            // 'country',
+            // 'email',
             'registrationAddress',
             'billingAddress',
             'contactInformation',

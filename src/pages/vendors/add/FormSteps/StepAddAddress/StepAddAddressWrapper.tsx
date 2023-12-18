@@ -155,7 +155,6 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
 
     const { country } = useCountries()
 
-    console.log(country, 'country')
     //registraion
 
     const { stateByCountry } = useStatesByCountry(
@@ -176,7 +175,6 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
     const { stateDistricts: districtDataB } = useStateDistricts(
         formikProps.values.billing_address.state
     )
-
     //registration
     const { pincodeByDistrict } = usePincodesByDistrict(
         formikProps.values.regd_address.district

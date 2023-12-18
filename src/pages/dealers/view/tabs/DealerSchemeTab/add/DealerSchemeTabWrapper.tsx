@@ -82,15 +82,13 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         if (!pinCodeIsLoading && !pinCodeIsFetching) {
             let options: any = []
             pinCodeList?.data?.map((item: any) => {
-                return item?.pincode?.foreach((pincode: any) => {
-                    options = [
-                        ...options,
-                        {
-                            label: pincode,
-                            value: pincode,
-                        },
-                    ]
-                })
+                return (options = [
+                    ...options,
+                    {
+                        label: item.pincode,
+                        value: item.pincode,
+                    },
+                ])
             })
             setPinCodeOptions(options)
         }

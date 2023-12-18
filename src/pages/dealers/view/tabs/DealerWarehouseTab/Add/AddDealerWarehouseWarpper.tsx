@@ -71,16 +71,16 @@ export type FormInitialValues = {
 // Form Steps
 const steps = [
     {
-        label: 'Company Details',
+        label: 'Warehouse Details',
         component: StepAddCompanyDetailsWrapper,
         validationSchema: object({
             warehouseCode: string().required('code is required'),
             warehouseName: string().required('name is required'),
-            country: string().required('please select country'),
-            email: string()
-                .email('Invalid Email')
-                .required('Email is required')
-                .email('Email address is invalid'),
+            // country: string().required('please select country'),
+            // email: string()
+            //     .email('Invalid Email')
+            //     .required('Email is required')
+            //     .email('Email address is invalid'),
         }),
     },
     {

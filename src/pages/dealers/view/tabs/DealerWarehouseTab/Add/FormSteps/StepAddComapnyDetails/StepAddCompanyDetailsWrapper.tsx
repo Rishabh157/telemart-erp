@@ -40,19 +40,19 @@ const formFields: FieldType[] = [
         label: 'Warehouse Name',
         placeholder: 'Warehouse Name',
     },
-    {
-        name: 'country',
-        label: 'Country',
-        placeholder: 'Country',
-        type: 'select',
-        optionAccessKey: 'countryOptions',
-    },
+    // {
+    //     name: 'country',
+    //     label: 'Country',
+    //     placeholder: 'Country',
+    //     type: 'select',
+    //     optionAccessKey: 'countryOptions',
+    // },
 
-    {
-        name: 'email',
-        label: 'Email',
-        placeholder: 'Email',
-    },
+    // {
+    //     name: 'email',
+    //     label: 'Email',
+    //     placeholder: 'Email',
+    // },
 ]
 
 const StepAddCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
