@@ -26,6 +26,7 @@ import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 // import { TiFlowSwitch } from 'react-icons/ti'
 import { UserModuleNameTypes } from './models/userAccess/UserAccess.model'
+import { TiFlowSwitch } from 'react-icons/ti'
 //import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
@@ -92,12 +93,12 @@ export const navigation: NavItemType[] = [
         path: '/grn',
         name: UserModuleNameTypes.grn,
     },
-    // {
-    //     label: 'Inventory Flow',
-    //     icon: TiFlowSwitch,
-    //     path: '/inventory-flow',
-    //     name: UserModuleNameTypes.inventoryFlow,
-    // },
+    {
+        label: 'Inventory Flow',
+        icon: TiFlowSwitch,
+        path: '/inventory-flow',
+        name: UserModuleNameTypes.inventoryFlow,
+    },
     {
         label: 'Sale Order',
         icon: CgNotes,
