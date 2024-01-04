@@ -53,7 +53,7 @@ const UsersListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetNewUsersQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['userName', 'mobile', 'lastName'],
+        params: ['userName', 'mobile', 'email', 'userRole', 'userDepartment'],
         page: page,
         filterBy: [
             {
