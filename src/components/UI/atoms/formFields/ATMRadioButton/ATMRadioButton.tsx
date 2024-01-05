@@ -7,7 +7,7 @@
 
 // |-- Built-in Dependencies --|
 import React from 'react'
-
+import { twMerge } from 'tailwind-merge'
 // |-- External Dependencies --|
 import { ErrorMessage } from 'formik'
 
@@ -24,6 +24,7 @@ export type Props = {
     className?: string
     onChange: (e: string) => void
     isSubmitting?: boolean
+    labelCalassName?: string
 }
 
 const ATMRadioButton = ({
@@ -35,11 +36,17 @@ const ATMRadioButton = ({
     className = 'mt-2',
     onChange,
     isSubmitting = true,
+    labelCalassName,
 }: Props) => {
     return (
         <div className="relative mt-4  w-full">
             {label && (
-                <label className="text-slate-700 text-sm font-semibold">
+                <label
+                    className={twMerge(
+                        'text-slate-700 text-sm font-semibold',
+                        `${labelCalassName}`
+                    )}
+                >
                     {label}
                     {required && <span className="text-red-500"> * </span>}
                 </label>
@@ -69,7 +76,11 @@ const ATMRadioButton = ({
                             onClick={() => {
                                 onChange(option.value as string)
                             }}
-                            className="ml-1 xs:text-xs sm:text-sm  lg:text-base md:text-sm "
+                            className={`ml-1 ${
+                                !labelCalassName
+                                    ? 'xs:text-xs sm:text-sm lg:text-base md:text-sm'
+                                    : 'text-xs'
+                            }`}
                         >
                             {option.label}
                         </label>

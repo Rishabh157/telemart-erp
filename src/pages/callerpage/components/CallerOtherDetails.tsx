@@ -28,8 +28,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
     return (
         <>
             {/* Other Details */}
-            <div className="bg-[#87527C] p-2">
-                <h2 className="text-[15px] font-bold text-white">
+            <div className="bg-[#87527C] py-1 px-2">
+                <h2 className="text-[14px] font-bold text-white">
                     OTHER DETAILS
                 </h2>
             </div>
@@ -37,12 +37,14 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
                 <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
                     <div className="grid grid-cols-12">
-                        <div className="col-span-4 pt-1">
-                            Gender <span className="text-red-500"> * </span>
+                        <div className="col-span-4 pt-1 text-xs font-medium flex items-center">
+                            Gender
+                            <span className="text-red-500 text-xs"> * </span>
                         </div>
                         <div className="col-span-4">
                             <div className="-mt-5">
                                 <ATMRadioButton
+                                    labelCalassName="text-xs"
                                     name="gender"
                                     value={values.gender}
                                     options={genderOption || []}
@@ -56,6 +58,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
 
                     <ATMSelectSearchable
                         isMulti
+                        labelSize="xs"
                         componentClass="mt-2"
                         label="Order For"
                         size="xs"
@@ -80,6 +83,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     {isOrderOtherFieldEnable && (
                         <ATMTextField
                             label=""
+                            labelSize="xs"
                             labelDirection="horizontal"
                             extraClassField="mt-2"
                             size="xs"
@@ -97,6 +101,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                         label="Age Group"
                         maxMenuHeight={150}
                         size="xs"
+                        labelSize="xs"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         selectLabel="select age group"
@@ -119,7 +124,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                         extraClassField="mt-0"
                         label="Email-ID"
                         size="xs"
-                        labelSize="small"
+                        labelSize="xs"
                         labelDirection="horizontal"
                         // isSubmitting
                         name="emailId"
@@ -131,14 +136,17 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     />
 
                     <div className="grid grid-cols-12">
-                        <div className="col-span-4 pt-3">Social Media</div>
+                        <div className="col-span-4 pt-3">
+                            <span className="text-xs font-medium">
+                                Social Media
+                            </span>
+                        </div>
                         <div className="col-span-8 flex gap-x-4 px-1 items-center">
                             <ATMCheckbox
                                 extraClasses="mt-2"
                                 required
                                 label="Facebook"
-                                labelClasses="text-slate-700 text-[15px] pt-1 font-medium mb-1 select-none"
-                                // labelClass="font-semibold text-sm"
+                                labelClasses="text-slate-700 text-xs font-medium pt-1 mb-1 select-none"
                                 checked={isFacebookId}
                                 onChange={(e) => setFacebookId(e)}
                             />
@@ -172,7 +180,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 extraClasses="mt-2"
                                 required
                                 label="Instagram"
-                                labelClasses="text-slate-700 text-[15px] pt-1 font-medium mb-1 select-none"
+                                labelClasses="text-slate-700 text-xs font-medium pt-1 mb-1 select-none"
                                 checked={isInstagramId}
                                 onChange={(e) => {
                                     setInstagramId(e)
@@ -199,10 +207,11 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                             )}
                         </div>
                     </div>
-                    <div className="h-[165px]">
+                    <div className="h-[145px]">
                         <ATMSelectSearchable
                             isMulti
                             isMenuOpen
+                            labelSize="xs"
                             name="medicalIssue"
                             value={values.medicalIssue}
                             labelDirection="horizontal"
@@ -225,6 +234,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                             <div className="-mt-6 p-4">
                                 <ATMRadioButton
                                     label="Payment Mode :"
+                                    labelCalassName="text-xs"
                                     name="paymentMode"
                                     value={values.paymentMode || ''}
                                     className="mt-1"

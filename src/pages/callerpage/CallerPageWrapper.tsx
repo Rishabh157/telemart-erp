@@ -88,16 +88,18 @@ const CallerPageWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'ageGroup',
-            headerName: 'ORDER NO',
+            headerName: 'Order No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => <span>{row.ageGroup} </span>,
         },
         {
             field: 'didNo',
-            headerName: 'ENQ NO',
+            headerName: 'Enq No.',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => <span> {row.didNo} </span>,
         },
         {
@@ -105,97 +107,109 @@ const CallerPageWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => (
                 <span> {row.flagStatus} </span>
             ),
         },
         {
             field: 'name',
-            headerName: 'NAME',
+            headerName: 'Name',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => <span> {row.agentName} </span>,
         },
         {
             field: 'city',
-            headerName: 'CITY',
+            headerName: 'City',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => (
                 <span> {row.districtLabel} </span>
             ),
         },
         {
             field: 'pincode',
-            headerName: 'PINCODE',
+            headerName: 'Pincode',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => (
                 <span> {row.pincodeLabel} </span>
             ),
         },
         {
             field: 'alternateNo',
-            headerName: 'PHONE',
+            headerName: 'Phone',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => <span> {row.mobileNo} </span>,
         },
         {
             field: 'disposition',
-            headerName: 'DISPOSITION',
+            headerName: 'Disposition',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => (
                 <span> {row.dispositionLevelThreeLabel} </span>
             ),
         },
         {
             field: 'scheme',
-            headerName: 'SCHEME',
+            headerName: 'Scheme',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => (
                 <span> {row.schemeName} </span>
             ),
         },
         {
             field: 'shippingCharge',
-            headerName: 'SHIPPING CHARGE',
+            headerName: 'Shipping Charge',
             flex: 'flex-[4_4_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => (
                 <span> {row.deliveryCharges} </span>
             ),
         },
         {
             field: 'discount',
-            headerName: 'DISCOUNT',
+            headerName: 'Discount',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => <span> null </span>,
         },
         {
             field: 'amount',
-            headerName: 'AMOUNT',
+            headerName: 'Amount',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => (
                 <span> {row.totalAmount} </span>
             ),
         },
         {
             field: 'remark',
-            headerName: 'REMARKS',
+            headerName: 'Remark',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => <span> {row.remark} </span>,
         },
         {
             field: 'compl',
-            headerName: 'COMPL',
+            headerName: 'Complaint',
             flex: 'flex-[3_3_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: CallerResponse) => <span> </span>,
         },
     ]

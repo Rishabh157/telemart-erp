@@ -25,7 +25,7 @@ const CallerButton = ({
                 type={'button'}
                 disabled={disabled}
                 className={twMerge(
-                    `border w-full bg-[#15616E] text-white rounded p-2 flex gap-2 justify-center items-center ${className} ${
+                    `border w-full bg-[#15616E] text-white rounded px-2 py-1 text-sm flex gap-2 justify-center items-center ${className} ${
                         disabled || isLoading ? 'opacity-[.60]' : ''
                     }`
                 )}

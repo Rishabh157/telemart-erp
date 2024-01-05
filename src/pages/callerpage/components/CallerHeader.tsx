@@ -18,50 +18,49 @@ const CallerHeader = ({
 }: // Status,
 CallerHeaderPropsTypes) => {
     return (
-        <div className="bg-[#87527C] py-3 px-2">
+        <div className="bg-[#87527C] py-1 px-2">
             <div className="flex justify-between gap-x-6 ">
-                {/* <div className="flex justify-evenly gap-x-6"> */}
                 <div className="w-full">
-                    <h3 className="text-white font-bold text-[14px]">
+                    <h3 className="text-white font-semibold text-xs">
                         CAMPAIGN
                     </h3>
-                    <div className=" bg-white text-center p-1 rounded bedge text-[#15616E] text-[14px] font-bold">
+                    <div className="bg-white text-center p-1 rounded bedge text-[#15616E] font-semibold text-xs">
                         {CampaignName}
                     </div>
                 </div>
 
                 <div className="w-full">
-                    <h3 className="text-white font-extrabold text-[14px]">
+                    <h3 className="text-white font-semibold text-xs">
                         CALL TYPE
                     </h3>
-                    <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
+                    <div className="bg-white p-1 text-center rounded bedge text-[#15616E] font-semibold text-xs">
                         {CallType}
                     </div>
                 </div>
 
                 <div className="w-full">
-                    <h3 className="text-white font-extrabold text-[14px]">
+                    <h3 className="text-white font-semibold text-xs">
                         INCOMING NO.
                     </h3>
-                    <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
+                    <div className="bg-white p-1 text-center rounded bedge text-[#15616E] font-semibold text-xs">
                         {IncomingNo}
                     </div>
                 </div>
 
                 <div className="w-full">
-                    <h3 className="text-white font-extrabold text-[14px]">
+                    <h3 className="text-white font-semibold text-xs">
                         CUSTOMER
                     </h3>
-                    <div className=" bg-green-500 p-1 text-center rounded bedge text-white text-[14px] font-bold h-7">
-                        {CustomerName}
+                    <div className=" bg-green-500 p-1 text-center rounded bedge text-white font-semibold text-xs">
+                        <span className="opacity-0">
+                            {CustomerName || 'hello'}
+                        </span>
                     </div>
                 </div>
 
                 <div className="w-full">
-                    <h3 className="text-white font-extrabold text-[14px]">
-                        DID NO
-                    </h3>
-                    <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] text-[14px] font-bold">
+                    <h3 className="text-white font-semibold text-xs">DID NO</h3>
+                    <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] font-semibold text-xs">
                         {DidNumber}
                     </div>
                 </div>
