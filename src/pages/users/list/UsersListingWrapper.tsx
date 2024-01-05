@@ -16,7 +16,10 @@ import { useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { useGetNewUsersQuery } from 'src/services/UserServices'
+import {
+    useGetNewUsersQuery,
+    useDeactiveUserMutation,
+} from 'src/services/UserServices'
 import UsersListing from './UsersListing'
 import {
     getDepartmentLabel,
@@ -37,6 +40,9 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/NewUserSlice'
+import { Chip } from '@mui/material'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
@@ -48,7 +54,7 @@ const UsersListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     //const [currentId, setCurrentId] = useState('')
     const navigate = useNavigate()
-
+    const [deactiveUser] = useDeactiveUserMutation()
     const dispatch = useDispatch<AppDispatch>()
     const { data, isFetching, isLoading } = useGetNewUsersQuery({
         limit: rowsPerPage,
@@ -135,22 +141,63 @@ const UsersListingWrapper = () => {
                 </span>
             ),
         },
-        // {
-        //     field: 'userRole',
-        //     headerName: 'User Role',
-        //     flex: 'flex-[1_1_0%]',
-        //     renderCell: (row: any) => {
-        //         return (
-        //             <span>
-        //                 {' '}
-        //                 {getUserRoleLabel(
-        //                     row.userRole,
-        //                     row.userDepartment
-        //                 )}{' '}
-        //             </span>
-        //         )
-        //     },
-        // },
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => {
+                return (
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                        {row.isActive ? (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive User',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Active"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive Scheme',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Deactive"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
+                    </span>
+                )
+            },
+        },
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -203,6 +250,23 @@ const UsersListingWrapper = () => {
     //     })
     // }
 
+    const handleDeactive = (rowId: string) => {
+        setShowDropdown(false)
+        deactiveUser(rowId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Status changed successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     return (
         <SideNavLayout>
             <UsersListing
