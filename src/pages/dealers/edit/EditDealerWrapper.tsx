@@ -175,8 +175,8 @@ const steps = [
         component: StepEditDocumentsWrapper,
         validationSchema: object({
             document: object().shape({
-                gstNumber: string().required('GST number is required'),
-                gstCertificate: mixed().required('GST certificate is required'),
+                // gstNumber: string().required('GST number is required'),
+                // gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')
                     .max(14, 'maximum 12 digit')
