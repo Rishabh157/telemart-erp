@@ -87,7 +87,7 @@ const ATMTextField = ({
                 <div
                     className={`flex gap-1 ${
                         labelDirection === 'horizontal'
-                            ? `  col-span-4 w-full h-full flex items-center `
+                            ? `col-span-4 w-full h-full flex items-center `
                             : ' '
                     }`}
                 >

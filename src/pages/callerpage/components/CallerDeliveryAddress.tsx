@@ -330,8 +330,8 @@ const CallerDeliveryAddress = ({
 
     return (
         <>
-            <div className="bg-[#87527C] p-2">
-                <h2 className="text-[15px] font-bold text-white">
+            <div className="bg-[#87527C] py-1 px-2">
+                <h2 className="text-[13px] font-bold text-white">
                     DELIVERY ADDRESS
                 </h2>
             </div>
@@ -339,12 +339,10 @@ const CallerDeliveryAddress = ({
             {/* Delivery Address Section */}
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
                 {/* FOR SHOWING 2 INPUT FIELDS */}
-                {/*  */}
-
-                <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
+                <div className="col-span-6 pb-1  gap-x-2 border-r-[1px] px-6 border-grey-800">
                     <div className="grid grid-cols-12">
-                        <div className="col-span-4 pt-2">
-                            <span className="text-slate-700 text-sm font-medium">
+                        <div className="col-span-4 flex items-center">
+                            <span className="text-slate-700 text-xs font-medium">
                                 Pincode
                             </span>
                         </div>
@@ -352,7 +350,7 @@ const CallerDeliveryAddress = ({
                             <div className="grid grid-cols-12 gap-x-2">
                                 <div className="col-span-6">
                                     <ATMSelectSearchable
-                                        componentClass="mt-1"
+                                        componentClass=""
                                         size="xs"
                                         name="pincodeId"
                                         selectLabel="select pincode"
@@ -384,7 +382,7 @@ const CallerDeliveryAddress = ({
                                         maxLength={6}
                                         minLength={6}
                                         size="small"
-                                        extraClassField="mt-2"
+                                        extraClassField="mt-1"
                                         className="py-[18px] rounded"
                                         placeholder="Search pincode"
                                         name=""
@@ -394,7 +392,7 @@ const CallerDeliveryAddress = ({
                                         }
                                     />
                                 </div>
-                                <div className="col-span-2 mt-2">
+                                <div className="col-span-2 mt-1">
                                     <CallerButton
                                         text="Search"
                                         type="button"
@@ -415,9 +413,10 @@ const CallerDeliveryAddress = ({
                     </div>
 
                     <ATMSelectSearchable
-                        componentClass="mt-2"
+                        componentClass="mt-1"
                         label="State"
                         size="xs"
+                        labelSize="xs"
                         labelDirection="horizontal"
                         selectLabel="select state"
                         classDirection="grid grid-cols-3"
@@ -434,9 +433,10 @@ const CallerDeliveryAddress = ({
                         }}
                     />
                     <ATMSelectSearchable
-                        componentClass="mt-2"
+                        componentClass="mt-1"
                         label="District"
                         size="xs"
+                        labelSize="xs"
                         selectLabel="select district"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
@@ -454,11 +454,12 @@ const CallerDeliveryAddress = ({
                     />
                 </div>
 
-                <div className="col-span-4 py-2 px-8   border-r-[1px]">
+                <div className="col-span-4 pb-1 px-8 border-r-[1px]">
                     <ATMSelectSearchable
-                        componentClass="mt-2"
+                        componentClass="mt-1"
                         label="Tehsil/Taluka"
                         size="xs"
+                        labelSize="xs"
                         selectLabel="select tehsil/taluka"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
@@ -477,9 +478,10 @@ const CallerDeliveryAddress = ({
                     />
 
                     <ATMSelectSearchable
-                        componentClass="  mt-2"
+                        componentClass="mt-1"
                         label="Area"
                         size="xs"
+                        labelSize="xs"
                         selectLabel="select area"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
@@ -495,12 +497,12 @@ const CallerDeliveryAddress = ({
                 </div>
 
                 {/* Delevery Duration */}
-                <div className="col-span-2 py-2 p-2 pl-8 flex justify-center items-center">
+                <div className="col-span-2 pl-4 flex justify-center items-center">
                     <div className="px-4">
-                        <div className="bg-gray-200 p-3 text-[#34727F] font-semibold text-center text-[15px]">
+                        <div className="bg-gray-200 p-3 text-[#34727F] font-semibold text-center text-[13px]">
                             Expected Delivery In
                         </div>
-                        <div className="bg-[#407C86] p-2 text-white font-bold text-center">
+                        <div className="bg-[#407C86] p-2 text-sm text-white font-bold text-center">
                             4 to 24 Hrs
                         </div>
                     </div>
@@ -509,10 +511,11 @@ const CallerDeliveryAddress = ({
 
             {/*  Billing Address */}
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
-                <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
+                <div className="col-span-6 pb-1 gap-x-4 border-r-[1px] px-6 border-grey-800">
                     <ATMSelectSearchable
                         componentClass="mt-1"
                         labelDirection="horizontal"
+                        labelSize="xs"
                         label="Type of Address"
                         size="xs"
                         selectLabel="select address"
@@ -526,6 +529,7 @@ const CallerDeliveryAddress = ({
 
                     <ATMTextField
                         label="Customer Name"
+                        labelSize="xs"
                         size="xs"
                         extraClassField="mt-0"
                         labelDirection="horizontal"
@@ -539,7 +543,7 @@ const CallerDeliveryAddress = ({
 
                     <div className="grid grid-cols-12">
                         <div className="col-span-4 pt-2">
-                            <label className="text-slate-700 text-sm font-medium">
+                            <label className="text-slate-700 text-xs font-medium">
                                 Prefferred Delivery Time And Date
                             </label>
                         </div>
@@ -549,7 +553,7 @@ const CallerDeliveryAddress = ({
                                     <ATMSelectSearchable
                                         componentClass="mt-1"
                                         size="xs"
-                                        selectLabel="select start time"
+                                        selectLabel="start time"
                                         name="preffered_delivery_start_time"
                                         value={
                                             values.preffered_delivery_start_time ||
@@ -574,7 +578,8 @@ const CallerDeliveryAddress = ({
                                     <ATMSelectSearchable
                                         componentClass="mt-1"
                                         size="xs"
-                                        selectLabel="select end time"
+                                        labelSize="xs"
+                                        selectLabel="end time"
                                         name="preffered_delivery_end_time"
                                         value={
                                             values.preffered_delivery_end_time ||
@@ -613,6 +618,7 @@ const CallerDeliveryAddress = ({
                         extraClassField="-mt-1"
                         label="House/Flat/Shop/Office No."
                         size="xs"
+                        labelSize="xs"
                         placeholder="enter house/flat/shop/office no."
                         labelDirection="horizontal"
                         name="houseNumber"
@@ -629,6 +635,7 @@ const CallerDeliveryAddress = ({
                         extraClassField="mt-0"
                         label="Street/Sector/Building/ Appartment"
                         size="xs"
+                        labelSize="xs"
                         labelDirection="horizontal"
                         placeholder="enter street/sector/building/appartment"
                         name="streetNumber"
@@ -645,6 +652,7 @@ const CallerDeliveryAddress = ({
                         extraClassField="mt-0"
                         label="Landmark"
                         size="xs"
+                        labelSize="xs"
                         placeholder="enter landmark"
                         labelDirection="horizontal"
                         name="landmark"
@@ -661,6 +669,7 @@ const CallerDeliveryAddress = ({
                     <ATMTextField
                         extraClassField="mt-0"
                         label="Alternate Mobile No"
+                        labelSize="xs"
                         placeholder="enter alternate mobile number"
                         value={values.alternateNo}
                         maxLength={10}
@@ -675,26 +684,13 @@ const CallerDeliveryAddress = ({
                         }}
                     />
 
-                    {/* <div className="grid grid-cols-12 mt-2">
-                        <div className="col-span-4 pt-2 text-slate-700 text-sm font-medium">
-                            Alternate Mobile No
-                        </div>
-                        <div className="col-span-8 px-">
-                            <ATMOtpInput
-                                length={10}
-                                values={otp}
-                                setValues={setotp}
-                                onChange={(e) =>  e}
-                            />
-                        </div>
-                    </div> */}
-
                     <ATMTextField
                         extraClassField="mt-0"
                         label="WhatsApp Number"
                         placeholder="enter whatsapp number"
                         value={values.whatsappNo}
                         size="xs"
+                        labelSize="xs"
                         labelDirection="horizontal"
                         name="whatsappNo"
                         maxLength={10}
@@ -707,7 +703,7 @@ const CallerDeliveryAddress = ({
                         }}
                     />
                 </div>
-                <div className="col-span-6 py-2 px-8 border-r-[1px]">
+                <div className="col-span-6 pb-1 px-8 border-r-[1px]">
                     <div className="-mt-3">
                         <ATMTextArea
                             isDisable={true}

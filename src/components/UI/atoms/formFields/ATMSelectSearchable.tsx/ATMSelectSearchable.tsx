@@ -46,6 +46,7 @@ type Props = {
     isMenuOpen?: boolean
     maxMenuHeight?: number
     isValueWithLable?: boolean
+    menuPosition?: 'fixed' | 'absolute'
 }
 
 const ATMSelectSearchable = ({
@@ -75,6 +76,7 @@ const ATMSelectSearchable = ({
     isMenuOpen = undefined,
     isValueWithLable = false,
     maxMenuHeight = 300,
+    menuPosition = 'fixed',
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -244,7 +246,7 @@ const ATMSelectSearchable = ({
                     isOptionDisabled={(options: any) => options.value === ''}
                     placeholder={`${selectLabel}`}
                     autoFocus={false}
-
+                    menuPosition={menuPosition}
                     // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
                 />
             </div>

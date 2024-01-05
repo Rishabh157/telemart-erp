@@ -242,10 +242,11 @@ const CallerPage: React.FC<Props> = ({
             <CallerOtherDetails setFieldValue={setFieldValue} values={values} />
 
             {/* Disposition Section  */}
-            <div className="grid grid-cols-12 items-center border-[1px] px-3 pb-6 mt-1 border-grey-700 z-50">
+            <div className="grid grid-cols-12 items-center border-[1px] px-3 pb-1 border-grey-700 z-[5000]">
                 <div className="col-span-3 px-3">
                     <ATMSelectSearchable
                         required
+                        labelClass="text-xs font-medium"
                         label="Disposition Level 1"
                         componentClass="mt-2"
                         selectLabel="select disposition level 1"
@@ -254,6 +255,7 @@ const CallerPage: React.FC<Props> = ({
                         value={values.dispositionLevelTwoId || ''}
                         // isSubmitting
                         options={dropdownOptions.dispositionTwoOptions || []}
+                        menuPosition="absolute"
                         onChange={(e) => {
                             setFieldValue('dispositionLevelTwoId', e)
                         }}
@@ -262,6 +264,7 @@ const CallerPage: React.FC<Props> = ({
                 <div className="col-span-3 px-3">
                     <ATMSelectSearchable
                         required
+                        labelClass="text-xs font-medium"
                         label="Disposition Level 2"
                         componentClass="mt-2"
                         selectLabel="select disposition level 2"
@@ -275,22 +278,22 @@ const CallerPage: React.FC<Props> = ({
                         }}
                     />
                 </div>
-                <div className="col-span-1 px-3 pt-8">
+                <div className="col-span-1 px-3 pt-7">
                     <CallerButton
                         // disabled={!dirty || isSubmitting}
                         isLoading={isLoading}
                         text="Save"
                         type="submit"
-                        className="py-2"
+                        className="py-[8px]"
                         onClick={() => formikProps.handleSubmit()}
                     />
                 </div>
             </div>
 
             {/* Data Table  */}
-            <div className="border-[1px] pb-2 mt-1 border-grey-700 pt-2">
+            <div className="border-[1px] border-grey-700">
                 <ATMTable
-                    headerClassName="bg-[#87527c] py-2 text-white"
+                    headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column}
                     rows={rows}
                 />

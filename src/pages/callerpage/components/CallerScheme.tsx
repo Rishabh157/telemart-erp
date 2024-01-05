@@ -87,8 +87,8 @@ const CallerScheme = ({
 
     return (
         <>
-            <div className="grid grid-cols-12 mt-1 px-2">
-                <div className="col-span-2 items-center mt-3 text-sm font-semibold">
+            <div className="grid grid-cols-12 px-2 pb-[1px]">
+                <div className="col-span-2 mt-3 text-xs font-semibold">
                     Search By Scheme
                 </div>
                 <div className="col-span-3 px-2">
@@ -112,7 +112,7 @@ const CallerScheme = ({
                         />
                     </div>
                 </div>
-                <div className="col-span-3 px-2 pb-2">
+                <div className="col-span-3 px-2">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
                             size="xs"
@@ -136,56 +136,56 @@ const CallerScheme = ({
 
             {values?.schemeId ? (
                 <React.Fragment>
-                    <div className="bg-[#87527C] mt-1">
-                        <div className="grid grid-cols-12 p-2">
+                    <div className="bg-[#87527C]">
+                        <div className="grid grid-cols-12 py-1 px-2">
                             <div className="col-span-4">
-                                <h2 className="text-[15px] font-bold text-white">
+                                <h2 className="font-semibold text-xs text-white">
                                     SCHEME
                                 </h2>
                             </div>
                             <div className="col-span-2">
-                                <h2 className="text-[15px] font-bold text-white">
+                                <h2 className="font-semibold text-xs text-white">
                                     PRICE
                                 </h2>
                             </div>
                             <div className="col-span-2">
-                                <h2 className="text-[15px] font-bold text-white pl-3">
+                                <h2 className="font-semibold text-xs text-white pl-3">
                                     QTY
                                 </h2>
                             </div>
                             <div className="col-span-2">
-                                <h2 className="text-[15px] font-bold text-white">
+                                <h2 className="font-semibold text-xs text-white">
                                     DELIVERY CHARGES
                                 </h2>
                             </div>
                             <div className="col-span-2">
-                                <h2 className="text-[15px] font-bold text-white">
+                                <h2 className="font-semibold text-xs text-white">
                                     TOTAL AMOUNT
                                 </h2>
                             </div>
                         </div>
 
                         <div className="bg-yellow-500">
-                            <div className="grid grid-cols-12 p-2">
-                                <div className="col-span-4">
-                                    <h2 className="text-[15px] font-bold text-white">
+                            <div className="grid grid-cols-12 py-1 px-2">
+                                <div className="col-span-4 flex items-center">
+                                    <h2 className="font-semibold text-xs text-white">
                                         {schemeDetails?.schemeName}
                                     </h2>
                                 </div>
-                                <div className="col-span-2">
-                                    <h2 className="text-[15px] font-bold text-white">
+                                <div className="col-span-2 flex items-center">
+                                    <h2 className="font-semibold text-xs text-white">
                                         {schemeDetails?.price}.00
                                     </h2>
                                 </div>
-                                <div className="col-span-2">
-                                    <h2 className="relative flex items-center justify-start text-[15px] font-bold text-white">
+                                <div className="col-span-2 flex items-center">
+                                    <h2 className="flex gap-x-6 items-center justify-start text-[15px] font-bold text-white">
                                         <button
                                             disabled={
                                                 schemeDetails.quantity > 1
                                                     ? false
                                                     : true
                                             }
-                                            className={`w-[28px] h-[28px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full mr-4 text-[18px]  ${
+                                            className={`w-[22px] h-[22px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full text-[15px]  ${
                                                 schemeDetails.quantity > 1
                                                     ? 'text-[black]'
                                                     : 'text-[#c2c2c2]'
@@ -199,12 +199,12 @@ const CallerScheme = ({
                                         >
                                             -
                                         </button>
-                                        <span className="absolute left-10">
+                                        <span className="">
                                             {schemeDetails.quantity}
                                         </span>
                                         <button
                                             type="button"
-                                            className="w-[28px] h-[28px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full ml-4 text-[18px] text-black "
+                                            className="w-[22px] h-[22px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full text-[15px] text-black "
                                             onClick={(e) => {
                                                 e.preventDefault()
                                                 e.stopPropagation()
@@ -215,13 +215,13 @@ const CallerScheme = ({
                                         </button>
                                     </h2>
                                 </div>
-                                <div className="col-span-2">
-                                    <h2 className="text-[15px] font-bold text-white">
+                                <div className="col-span-2 flex items-center">
+                                    <h2 className="text-[15px] font-semibold text-xs">
                                         {schemeDetails?.deliveryCharges}.00
                                     </h2>
                                 </div>
-                                <div className="col-span-2">
-                                    <h2 className="text-[15px] font-bold text-white">
+                                <div className="col-span-2 flex items-center">
+                                    <h2 className="text-[15px] font-semibold text-xs">
                                         {schemeDetails?.totalAmount}.00
                                     </h2>
                                 </div>
