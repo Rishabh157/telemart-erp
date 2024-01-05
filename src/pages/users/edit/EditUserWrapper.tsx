@@ -104,12 +104,12 @@ const EditUserWrapper = (props: Props) => {
         firstName: string().required('First Name is required'),
         lastName: string().required('Last Name is required'),
         userName: string().required('User Name is required'),
-        mobile: string()
-            .required('Mobile No is required')
-            .max(10, 'Mobile number must be 10 digits')
-            .min(10, 'Mobile number must be 10 digits')
-            .trim()
-            .matches(regIndiaPhone, 'Invalid Mobile Number'),
+        // mobile: string()
+        //     .required('Mobile No is required')
+        //     .max(10, 'Mobile number must be 10 digits')
+        //     .min(10, 'Mobile number must be 10 digits')
+        //     .trim()
+        //     .matches(regIndiaPhone, 'Invalid Mobile Number'),
         email: string().email('Invalid Email ID'),
         // .required('Email is required'),
         branchId: string().required('branch name is required'),
