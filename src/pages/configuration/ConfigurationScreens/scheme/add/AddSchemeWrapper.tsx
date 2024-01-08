@@ -70,7 +70,7 @@ const steps = [
         label: 'Scheme Details',
         component: StepAddSchemeDetailsWrapper,
         validationSchema: object({
-            schemeCode: string().required('Scheme code is required'),
+            // schemeCode: string().required('Scheme code is required'),
             category: string().required('Category is required'),
             subCategory: string().required('Sub category is required'),
             schemeName: string().required('Scheme Name is required'),
