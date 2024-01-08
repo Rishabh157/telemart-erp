@@ -246,7 +246,7 @@ const ATMSelectSearchable = ({
                     isOptionDisabled={(options: any) => options.value === ''}
                     placeholder={`${selectLabel}`}
                     autoFocus={false}
-                    menuPosition={menuPosition}
+                    // menuPosition={menuPosition}
                     // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
                 />
             </div>

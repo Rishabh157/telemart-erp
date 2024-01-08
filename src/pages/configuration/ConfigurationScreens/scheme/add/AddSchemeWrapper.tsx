@@ -35,7 +35,7 @@ import {
 
 // |-- Types --|
 export type FormInitialValues = {
-    schemeCode: string
+    // schemeCode: string
     category: string
     subCategory: string
     schemeName: string
@@ -161,7 +161,7 @@ const AddSchemeWrapper = () => {
 
     // From Initial Values
     const initialValues: FormInitialValues = {
-        schemeCode: '',
+        // schemeCode: '',
         category: '',
         subCategory: '',
         schemeName: '',
@@ -207,7 +207,7 @@ const AddSchemeWrapper = () => {
             dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 AddSchemes({
-                    schemeCode: values.schemeCode,
+                    // schemeCode: values.schemeCode,
                     schemeName: values.schemeName,
                     category: values.category,
                     subCategory: values.subCategory,
