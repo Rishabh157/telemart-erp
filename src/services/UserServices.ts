@@ -119,6 +119,14 @@ export const userApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //***** Update  User deactive *****/
+        deactiveUser: builder.mutation({
+            invalidatesTags: ['newUser'],
+            query: (id: string) => ({
+                url: `/user/status-change/${id}`,
+                method: 'PUT',
+            }),
+        }),
         //***** get Manager And Executive via Distribution department   *****/
         getDistributionsRole: builder.mutation({
             invalidatesTags: ['user'],
@@ -147,4 +155,5 @@ export const {
     useUpdateNewUserMutation,
     useUpdateCompanyByAdminMutation,
     useGetDistributionsRoleMutation,
+    useDeactiveUserMutation,
 } = userApi
