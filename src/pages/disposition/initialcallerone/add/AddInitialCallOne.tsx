@@ -8,6 +8,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -68,6 +69,35 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                         {/* Form */}
                         <div className="grow py-8 px-3 ">
                             <div className="grid grid-cols-3 gap-4">
+                                {/*  */}
+                                <div className="mt-2">
+                                    <ATMSelectSearchable
+                                        name=""
+                                        // labelClass="mt-0"
+                                        labelSpan="mb-2"
+                                        label="Call Type"
+                                        componentClass="mt-2"
+                                        // selectLabel={`Select ${label}`}
+                                        value={''}
+                                        options={[
+                                            {
+                                                label: 'Complaint',
+                                                value: 'COMPLAINT',
+                                            },
+                                            {
+                                                label: 'Inquiry',
+                                                value: 'INQUIRY',
+                                            },
+                                        ]}
+                                        onChange={(e: any) => {
+                                            handleSetFieldValue(
+                                                'initialCallName',
+                                                e.target.value
+                                            )
+                                        }}
+                                    />
+                                </div>
+
                                 {/* languageName */}
                                 <ATMTextField
                                     name="initialCallName"
@@ -81,6 +111,8 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                         )
                                     }
                                 />
+
+                                {/*  */}
                             </div>
                         </div>
                     </div>
