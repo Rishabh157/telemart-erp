@@ -10,6 +10,7 @@ import { showToast } from 'src/utils'
 import {
     useGetinitialCallerOneQuery,
     useDeleteinitialCallerOneMutation,
+    useDeactiveInitialCallerOneMutation,
 } from 'src/services/configurations/InitialCallerOneServices'
 import {
     setIsTableLoading,
@@ -24,7 +25,7 @@ import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
-
+import { Chip } from '@mui/material'
 // export type language ={
 //     languageId:string[];
 
@@ -45,6 +46,7 @@ const InitialCallOneListingWrapper = () => {
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
+    const [deactiveInitialCallerOne] = useDeactiveInitialCallerOneMutation()
     const { data, isFetching, isLoading } = useGetinitialCallerOneQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -83,7 +85,62 @@ const InitialCallOneListingWrapper = () => {
                 <span> {row.initialCallName} </span>
             ),
         },
-
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => {
+                return (
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                        {row.isActive ? (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive ',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Active"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive ',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Deactive"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
+                    </span>
+                )
+            },
+        },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -117,7 +174,23 @@ const InitialCallOneListingWrapper = () => {
             align: 'end',
         },
     ]
-
+    const handleDeactive = (rowId: string) => {
+        setShowDropdown(false)
+        deactiveInitialCallerOne(rowId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Status changed successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const handleDelete = () => {
         setShowDropdown(false)
         deleteTape(currentId).then((res: any) => {

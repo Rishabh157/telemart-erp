@@ -99,6 +99,13 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        deactiveDispositionThree: builder.mutation({
+            invalidatesTags: ['dispositionThree'],
+            query: (id: string) => ({
+                url: `/disposition-three/status-change/${id}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 export const {
@@ -110,4 +117,5 @@ export const {
     useDeletedispositionThreeMutation,
     useGetAlldispositionThreeQuery,
     useGetAllUnAuthDispositionThreeQuery,
+    useDeactiveDispositionThreeMutation
 } = dispositionThreeApi

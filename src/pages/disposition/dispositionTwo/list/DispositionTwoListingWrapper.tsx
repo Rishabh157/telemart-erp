@@ -7,6 +7,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import {
+    useDeactiveDispositionTwoMutation,
     useDeletedispositionTwoMutation,
     useGetdispositionTwoQuery,
 } from 'src/services/configurations/DispositionTwoServices'
@@ -23,6 +24,7 @@ import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
+import { Chip } from '@mui/material'
 
 const DispositionTwoListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -45,7 +47,7 @@ const DispositionTwoListingWrapper = () => {
     )
 
     const { page, rowsPerPage } = dispositionTwoState
-
+    const [deactiveUser] = useDeactiveDispositionTwoMutation()
     const { data, isFetching, isLoading } = useGetdispositionTwoQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -89,7 +91,62 @@ const DispositionTwoListingWrapper = () => {
                 <span> {row?.dispostionOneLabel} </span>
             ),
         },
-
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => {
+                return (
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                        {row.isActive ? (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive ',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Active"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive ',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Deactive"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
+                    </span>
+                )
+            },
+        },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -123,7 +180,23 @@ const DispositionTwoListingWrapper = () => {
             align: 'end',
         },
     ]
-
+    const handleDeactive = (rowId: string) => {
+        setShowDropdown(false)
+        deactiveUser(rowId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Status changed successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const handleDelete = () => {
         setShowDropdown(false)
         deleteDispositonTwo(currentId).then((res: any) => {
