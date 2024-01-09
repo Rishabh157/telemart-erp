@@ -20,6 +20,7 @@ import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
+import DispositionTwoListFilterFormDialogWrapper from './DispositionTwoFilter/DispositionTwoListFilterFormDialogWrapper'
 
 type Props = {
     columns: any[]
@@ -40,6 +41,10 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         dispositionTwoState
+
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Disposition',
@@ -92,8 +97,18 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onSearch={(newValue) => {
                             dispatch(setSearchValue(newValue))
                         }}
-                        //  isFilter
+                        isFilter
+                        onFilterClick={() => {
+                            setIsOpenFilterFormDialog(true)
+                        }}
                     />
+
+                    {isOpenFilterFormDialog && (
+                        <DispositionTwoListFilterFormDialogWrapper
+                            open
+                            onClose={() => setIsOpenFilterFormDialog(false)}
+                        />
+                    )}
 
                     {/* Table */}
                     <div className="grow overflow-auto  ">

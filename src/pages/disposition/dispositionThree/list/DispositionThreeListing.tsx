@@ -19,6 +19,7 @@ import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
+import DispositionThreeListFilterFormDialogWrapper from './DispositionThreeFilter/DispositionThreeListFilterFormDialogWrapper'
 
 type Props = {
     columns: any[]
@@ -35,6 +36,8 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         dispositionThreeState
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Disposition',
@@ -83,8 +86,18 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onSearch={(newValue) => {
                             dispatch(setSearchValue(newValue))
                         }}
-                        //  isFilter
+                        isFilter
+                        onFilterClick={() => {
+                            setIsOpenFilterFormDialog(true)
+                        }}
                     />
+
+                    {isOpenFilterFormDialog && (
+                        <DispositionThreeListFilterFormDialogWrapper
+                            open
+                            onClose={() => setIsOpenFilterFormDialog(false)}
+                        />
+                    )}
 
                     {/* Table */}
                     <div className="grow overflow-auto  ">

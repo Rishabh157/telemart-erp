@@ -46,7 +46,7 @@ const DispositionTwoListingWrapper = () => {
         (state: RootState) => state.dispositionTwo
     )
 
-    const { page, rowsPerPage } = dispositionTwoState
+    const { page, rowsPerPage, isActive } = dispositionTwoState
     const [deactiveUser] = useDeactiveDispositionTwoMutation()
     const { data, isFetching, isLoading } = useGetdispositionTwoQuery({
         limit: rowsPerPage,
@@ -57,6 +57,11 @@ const DispositionTwoListingWrapper = () => {
             {
                 fieldName: 'dispositionOneId',
                 value: filterValue ? filterValue : [],
+            },
+            {
+                fieldName: 'isActive',
+                value:
+                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
             },
         ],
         dateFilter: {},

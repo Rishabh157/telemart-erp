@@ -24,6 +24,7 @@ export interface InitialCallerThreeSliceStateType {
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
     filterValue: string
+    isActive: string
 }
 
 const initialState: InitialCallerThreeSliceStateType = {
@@ -38,6 +39,7 @@ const initialState: InitialCallerThreeSliceStateType = {
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
     filterValue: '',
+    isActive: '',
 }
 
 const initialCallerThreeSlice: Slice<InitialCallerThreeSliceStateType> =
@@ -95,6 +97,9 @@ const initialCallerThreeSlice: Slice<InitialCallerThreeSliceStateType> =
             ) => {
                 state.selectedInitialCallerThree = action.payload
             },
+            setIsActivateUser: (state, action: PayloadAction<string>) => {
+                state.isActive = action.payload
+            },
         },
     })
 
@@ -110,5 +115,6 @@ export const {
     setSelectedInitialCallerThree,
     setAllItems,
     setFilterValue,
+    setIsActivateUser,
 } = initialCallerThreeSlice.actions
 export default initialCallerThreeSlice.reducer

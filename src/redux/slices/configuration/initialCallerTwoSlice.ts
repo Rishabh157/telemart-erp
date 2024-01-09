@@ -24,6 +24,7 @@ export interface InitialCallerTwoSliceStateType {
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
     filterValue: string
+    isActive: string
 }
 
 const initialState: InitialCallerTwoSliceStateType = {
@@ -38,6 +39,7 @@ const initialState: InitialCallerTwoSliceStateType = {
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
     filterValue: '',
+    isActive: '',
 }
 
 const initialCallerTwoSlice: Slice<InitialCallerTwoSliceStateType> =
@@ -95,6 +97,9 @@ const initialCallerTwoSlice: Slice<InitialCallerTwoSliceStateType> =
             ) => {
                 state.selectedInitialCallerTwo = action.payload
             },
+            setIsActivateUser: (state, action: PayloadAction<string>) => {
+                state.isActive = action.payload
+            },
         },
     })
 
@@ -110,5 +115,6 @@ export const {
     setSelectedInitialCallerTwo,
     setAllItems,
     setFilterValue,
+    setIsActivateUser,
 } = initialCallerTwoSlice.actions
 export default initialCallerTwoSlice.reducer

@@ -30,7 +30,7 @@ import { Chip } from '@mui/material'
 const DispositionThreeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const { searchValue, filterValue, items }: any = useSelector(
+    const { searchValue, filterValue, items, isActive }: any = useSelector(
         (state: RootState) => state.dispositionThree
     )
     const { checkUserAccess } = useSelector(
@@ -56,6 +56,11 @@ const DispositionThreeListingWrapper = () => {
             {
                 fieldName: '',
                 value: filterValue ? filterValue : [],
+            },
+            {
+                fieldName: 'isActive',
+                value:
+                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
             },
         ],
         dateFilter: {},

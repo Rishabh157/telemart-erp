@@ -44,7 +44,8 @@ const DispositionOneListingWrapper = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { page, rowsPerPage, searchValue, items } = dispositionOneState
+    const { page, rowsPerPage, searchValue, items, isActive } =
+        dispositionOneState
 
     const dispatch = useDispatch<AppDispatch>()
     const [deactiveDispositionOne] = useDeactiveDispositionOneMutation()
@@ -56,8 +57,9 @@ const DispositionOneListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'isActive',
+                value:
+                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
             },
         ],
         dateFilter: {},

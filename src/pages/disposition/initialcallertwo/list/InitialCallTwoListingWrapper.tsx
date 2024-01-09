@@ -39,7 +39,8 @@ const InitialCallTwoListingWrapper = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { page, rowsPerPage, searchValue, items } = initialCallTwoState
+    const { page, rowsPerPage, searchValue, items, isActive } =
+        initialCallTwoState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -51,8 +52,9 @@ const InitialCallTwoListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'isActive',
+                value:
+                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
             },
         ],
         dateFilter: {},

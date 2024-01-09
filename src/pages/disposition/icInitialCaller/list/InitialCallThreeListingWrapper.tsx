@@ -10,7 +10,7 @@ import {
 import {
     useDeleteInitialCallerThreeMutation,
     useGetInitialCallerThreeQuery,
-    useDeactiveInitialCallerThreeMutation
+    useDeactiveInitialCallerThreeMutation,
 } from 'src/services/configurations/InitialCallerThreeServices'
 import { useNavigate } from 'react-router-dom'
 import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
@@ -37,7 +37,8 @@ const InitialCallThreeListingWrapper = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { page, rowsPerPage, searchValue, items } = initialCallThreeState
+    const { page, rowsPerPage, searchValue, items, isActive } =
+        initialCallThreeState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -48,8 +49,9 @@ const InitialCallThreeListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'isActive',
+                value:
+                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
             },
         ],
         dateFilter: {},

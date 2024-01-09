@@ -24,6 +24,7 @@ export interface DispositionThreeSliceStateType {
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
     filterValue: string
+    isActive: string
 }
 
 const initialState: DispositionThreeSliceStateType = {
@@ -38,6 +39,7 @@ const initialState: DispositionThreeSliceStateType = {
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
     filterValue: '',
+    isActive: '',
 }
 
 const dispositionThreeSlice: Slice<DispositionThreeSliceStateType> =
@@ -95,6 +97,9 @@ const dispositionThreeSlice: Slice<DispositionThreeSliceStateType> =
             ) => {
                 state.selectedDispostionThree = action.payload
             },
+            setIsActivateUser: (state, action: PayloadAction<string>) => {
+                state.isActive = action.payload
+            },
         },
     })
 
@@ -110,5 +115,6 @@ export const {
     setFilterValue,
     setSelectedDispostionThree,
     setAllItems,
+    setIsActivateUser,
 } = dispositionThreeSlice.actions
 export default dispositionThreeSlice.reducer

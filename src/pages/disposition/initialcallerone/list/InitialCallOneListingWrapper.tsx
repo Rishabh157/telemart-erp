@@ -42,7 +42,8 @@ const InitialCallOneListingWrapper = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { page, rowsPerPage, searchValue, items } = initialCallOneState
+    const { page, rowsPerPage, searchValue, items, isActive } =
+        initialCallOneState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -54,8 +55,9 @@ const InitialCallOneListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'isActive',
+                value:
+                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
             },
         ],
         dateFilter: {},
