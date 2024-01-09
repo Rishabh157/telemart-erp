@@ -34,12 +34,13 @@ export const initialCallerTwoApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+
+        // get all
         getAllinitialCallerTwoById: builder.query({
             providesTags: ['initialCallerTwo'],
-            query: (Id) => ({
-                url: `/initialcall-two/get-all/${Id}`,
+            query: ({ id, callType }) => ({
+                url: `/initialcall-two/get-all/${id}/calltype/${callType}`,
                 method: 'GET',
-                // body,
             }),
         }),
 

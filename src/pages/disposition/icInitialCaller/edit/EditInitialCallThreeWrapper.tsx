@@ -17,6 +17,7 @@ import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/in
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
+    callType: string
     initialCallName: string
     initialCallOneId: string
     initialCallTwoId: string
@@ -38,6 +39,7 @@ const EditInitialCallThreeWrapper = () => {
     )
 
     const initialValues: FormInitialValues = {
+        callType: selectedInitialCallerThree?.callType || '',
         initialCallName: selectedInitialCallerThree?.initialCallName || '',
         initialCallOneId: selectedInitialCallerThree?.initialCallOneId || '',
         initialCallTwoId: selectedInitialCallerThree?.initialCallTwoId || '',
@@ -71,6 +73,7 @@ const EditInitialCallThreeWrapper = () => {
     }, [data, isLoading, isFetching, dispatch])
 
     const validationSchema = object({
+        callType: string().required('Requiredd'),
         initialCallName: string().required('Requiredd'),
         initialCallOneId: string().required('Required'),
         initialCallTwoId: string().required('Required'),
@@ -85,6 +88,7 @@ const EditInitialCallThreeWrapper = () => {
         setTimeout(() => {
             editInitialCallThree({
                 body: {
+                    callType: values.callType,
                     initialCallName: values.initialCallName,
                     initialCallOneId: values.initialCallOneId,
                     initialCallTwoId: values.initialCallTwoId,

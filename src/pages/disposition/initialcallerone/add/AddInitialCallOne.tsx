@@ -69,16 +69,13 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                         {/* Form */}
                         <div className="grow py-8 px-3 ">
                             <div className="grid grid-cols-3 gap-4">
-                                {/*  */}
                                 <div className="mt-2">
                                     <ATMSelectSearchable
-                                        name=""
-                                        // labelClass="mt-0"
+                                        name="callType"
                                         labelSpan="mb-2"
                                         label="Call Type"
                                         componentClass="mt-2"
-                                        // selectLabel={`Select ${label}`}
-                                        value={''}
+                                        value={values.callType}
                                         options={[
                                             {
                                                 label: 'Complaint',
@@ -89,10 +86,10 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                                 value: 'INQUIRY',
                                             },
                                         ]}
-                                        onChange={(e: any) => {
+                                        onChange={(newValue: any) => {
                                             handleSetFieldValue(
-                                                'initialCallName',
-                                                e.target.value
+                                                'callType',
+                                                newValue
                                             )
                                         }}
                                     />
@@ -111,8 +108,6 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                         )
                                     }
                                 />
-
-                                {/*  */}
                             </div>
                         </div>
                     </div>
