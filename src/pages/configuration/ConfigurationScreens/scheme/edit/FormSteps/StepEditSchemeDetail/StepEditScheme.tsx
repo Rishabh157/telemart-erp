@@ -59,17 +59,7 @@ const StepEditScheme = ({
     return (
         <div className="py-6 px-7 flex flex-col gap-5">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
-                {/* Scheme Code */}
-                <ATMTextField
-                    name={'schemeCode'}
-                    value={values.schemeCode}
-                    onChange={(e) => {
-                        handleSetFieldValue('schemeCode', e.target.value)
-                    }}
-                    label="Scheme Code"
-                    placeholder="Scheme Code"
-                    className="shadow bg-white rounded"
-                />
+           
                 {/* Category */}
                 <div className="-mt-2">
                     <ATMSelectSearchable

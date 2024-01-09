@@ -203,6 +203,11 @@ const CallerScheme = ({
                                             {schemeDetails.quantity}
                                         </span>
                                         <button
+                                            disabled={
+                                                schemeDetails.quantity < 9
+                                                    ? false
+                                                    : true
+                                            }
                                             type="button"
                                             className="w-[22px] h-[22px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full text-[15px] text-black "
                                             onClick={(e) => {
