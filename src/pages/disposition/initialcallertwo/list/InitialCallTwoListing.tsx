@@ -19,6 +19,7 @@ import {
     setSearchValue,
 } from 'src/redux/slices/configuration/initialCallerTwoSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import InitialCallerTwoListFilterFormDialogWrapper from './InitialCallerTwoFilter/InitialCallerTwoListFilterFormDialogWrapper'
 
 type Props = {
     columns: any[]
@@ -34,6 +35,8 @@ const InitialCallTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         initialCallTwoState
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -83,8 +86,18 @@ const InitialCallTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <InitialCallerTwoListFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">

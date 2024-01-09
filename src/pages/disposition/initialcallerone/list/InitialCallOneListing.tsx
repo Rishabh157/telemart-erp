@@ -19,6 +19,7 @@ import {
     setSearchValue,
 } from 'src/redux/slices/configuration/initialCallerOneSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import InitialCallerOneListFilterFormDialogWrapper from './InitialCallerOneFilter/InitialCallerOneListFilterFormDialogWrapper'
 
 type Props = {
     columns: any[]
@@ -34,6 +35,8 @@ const InitialCalloneListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         initialCalloneState
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -83,8 +86,18 @@ const InitialCalloneListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <InitialCallerOneListFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">

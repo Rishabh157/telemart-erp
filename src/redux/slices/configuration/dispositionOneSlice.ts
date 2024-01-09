@@ -23,6 +23,7 @@ export interface DispositionOneSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
+    isActive: string
 }
 
 const initialState: DispositionOneSliceStateType = {
@@ -36,6 +37,7 @@ const initialState: DispositionOneSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
+    isActive: '',
 }
 
 const dispositionOneSlice: Slice<DispositionOneSliceStateType> = createSlice({
@@ -89,6 +91,9 @@ const dispositionOneSlice: Slice<DispositionOneSliceStateType> = createSlice({
         ) => {
             state.selectedDispositionOne = action.payload
         },
+        setIsActivateUser: (state, action: PayloadAction<string>) => {
+            state.isActive = action.payload
+        },
     },
 })
 
@@ -103,5 +108,6 @@ export const {
     setSelectedId,
     setSelectedDispositionOne,
     setAllItems,
+    setIsActivateUser,
 } = dispositionOneSlice.actions
 export default dispositionOneSlice.reducer

@@ -19,6 +19,7 @@ import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
+import InitialCallerThreeListFilterFormDialogWrapper from './InitialCallerThreeFilter/InitialCallerThreeListFilterFormDialogWrapper'
 
 type Props = {
     columns: any[]
@@ -34,6 +35,8 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         initialCallThreeState
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -84,8 +87,18 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onSearch={(newValue) => {
                             dispatch(setSearchValue(newValue))
                         }}
-                        //  isFilter
+                        isFilter
+                        onFilterClick={() => {
+                            setIsOpenFilterFormDialog(true)
+                        }}
                     />
+
+                    {isOpenFilterFormDialog && (
+                        <InitialCallerThreeListFilterFormDialogWrapper
+                            open
+                            onClose={() => setIsOpenFilterFormDialog(false)}
+                        />
+                    )}
 
                     {/* Table */}
                     <div className="grow overflow-auto  ">

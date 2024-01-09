@@ -10,6 +10,7 @@ import {
 import {
     useDeleteInitialCallerThreeMutation,
     useGetInitialCallerThreeQuery,
+    useDeactiveInitialCallerThreeMutation,
 } from 'src/services/configurations/InitialCallerThreeServices'
 import { useNavigate } from 'react-router-dom'
 import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
@@ -23,10 +24,11 @@ import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
-
+import { Chip } from '@mui/material'
 const InitialCallThreeListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
+    const [deactiveInitialCallerThree] = useDeactiveInitialCallerThreeMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const initialCallThreeState: any = useSelector(
@@ -35,7 +37,8 @@ const InitialCallThreeListingWrapper = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { page, rowsPerPage, searchValue, items } = initialCallThreeState
+    const { page, rowsPerPage, searchValue, items, isActive } =
+        initialCallThreeState
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -46,8 +49,9 @@ const InitialCallThreeListingWrapper = () => {
         page: page,
         filterBy: [
             {
-                fieldName: '',
-                value: [],
+                fieldName: 'isActive',
+                value:
+                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
             },
         ],
         dateFilter: {},
@@ -101,7 +105,62 @@ const InitialCallThreeListingWrapper = () => {
                 <span> {row.initialCallTwoLabel} </span>
             ),
         },
-
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => {
+                return (
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                        {row.isActive ? (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive ',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Active"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive ',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Deactive"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
+                    </span>
+                )
+            },
+        },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -139,7 +198,23 @@ const InitialCallThreeListingWrapper = () => {
             align: 'end',
         },
     ]
-
+    const handleDeactive = (rowId: string) => {
+        setShowDropdown(false)
+        deactiveInitialCallerThree(rowId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Status changed successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const handleDelete = () => {
         setShowDropdown(false)
         deleteIniticallthree(currentId).then((res: any) => {

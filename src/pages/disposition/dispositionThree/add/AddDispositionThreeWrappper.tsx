@@ -193,11 +193,12 @@ const AddDispositionThreeWrappper = () => {
             { label: 'invoiceSent', value: 'INVOICE SENT' },
         ],
         applicableCriteriaOptions: [
-            { label: 'IS ORDER', value: 'IS ORDER' },
-            { label: 'IS PREPAID', value: 'IS PREPAID' },
-            { label: 'IS CALLBACK', value: 'IS CALLBACK' },
-            { label: 'IS REPLACEMENT', value: 'IS REPLACEMENT' },
-            { label: 'IS INQUIRY', value: 'IS INQUIRY' },
+            { label: 'IS ORDER', value: 'IS_ORDER' },
+            { label: 'IS PREPAID', value: 'IS_PREPAID' },
+            { label: 'IS CALLBACK', value: 'IS_CALLBACK' },
+            { label: 'IS REPLACEMENT', value: 'IS_REPLACEMENT' },
+            { label: 'IS INQUIRY', value: 'IS_INQUIRY' },
+            { label: 'IS URJENT', value: 'IS_ORDER' },
         ],
     }
 

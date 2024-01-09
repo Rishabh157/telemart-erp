@@ -89,6 +89,13 @@ export const initialCallerOneApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+        deactiveInitialCallerOne: builder.mutation({
+            invalidatesTags: ['initialCallerOne'],
+            query: (id: string) => ({
+                url: `/initialcall-one/status-change/${id}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 export const {
@@ -99,4 +106,5 @@ export const {
     useExportinitialCallerOneDataMutation,
     useDeleteinitialCallerOneMutation,
     useGetAllinitialCallerOneQuery,
+    useDeactiveInitialCallerOneMutation
 } = initialCallerOneApi

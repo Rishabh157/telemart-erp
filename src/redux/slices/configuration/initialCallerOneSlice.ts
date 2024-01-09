@@ -23,6 +23,7 @@ export interface InitialCallerOneSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
+    isActive: string
 }
 
 const initialState: InitialCallerOneSliceStateType = {
@@ -36,6 +37,7 @@ const initialState: InitialCallerOneSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
+    isActive: '',
 }
 
 const initialCallerOneSlice: Slice<InitialCallerOneSliceStateType> =
@@ -90,6 +92,9 @@ const initialCallerOneSlice: Slice<InitialCallerOneSliceStateType> =
             ) => {
                 state.selectedInitialOne = action.payload
             },
+            setIsActivateUser: (state, action: PayloadAction<string>) => {
+                state.isActive = action.payload
+            },
         },
     })
 
@@ -104,5 +109,6 @@ export const {
     setSelectedId,
     setSelectedInitialOne,
     setAllItems,
+    setIsActivateUser,
 } = initialCallerOneSlice.actions
 export default initialCallerOneSlice.reducer

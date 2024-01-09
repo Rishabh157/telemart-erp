@@ -109,6 +109,14 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        deactiveDispositionTwo: builder.mutation({
+            invalidatesTags: ['dispositionTwo'],
+            query: (id: string) => ({
+                url: `/disposition-two/status-change/${id}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 export const {
@@ -121,4 +129,5 @@ export const {
     useGetAlldispositionTwoQuery,
     useGetAlldispositionTwounauthQuery,
     useGetAllUnAuthdispositionTwoQuery,
+    useDeactiveDispositionTwoMutation
 } = dispositionTwoApi
