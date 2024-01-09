@@ -51,7 +51,7 @@ export type dimension = {
 }
 
 export type AddSchemes = {
-    schemeCode: string
+    // schemeCode: string
     schemeName: string
     category: string
     subCategory: string
@@ -71,7 +71,7 @@ export type AddSchemes = {
 
 export type UpdateScheme = {
     body: {
-        schemeCode: string
+        // schemeCode: string
         schemeName: string
         category: string
         subCategory: string

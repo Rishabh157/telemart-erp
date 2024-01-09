@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { object, string } from 'yup'
+import { number, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -309,6 +309,11 @@ const CallerPageWrapper = () => {
         autoFillingShippingAddress: string(),
         // isRecording: boolean(),
         gender: string(),
+        schemeQuantity: number()
+            .integer()
+            .min(1, 'Scheme quantity must be at least 1')
+            .max(9, 'Scheme quantity cannot exceed 9')
+            .required('Scheme quantity is required'),
         // orderFor: string(),
         orderForOtherText: string(),
         ageGroup: string(),

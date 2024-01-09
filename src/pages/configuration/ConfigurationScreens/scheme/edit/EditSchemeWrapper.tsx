@@ -40,7 +40,7 @@ import { setAllItems as setAllSubCategory } from 'src/redux/slices/productSubCat
 
 // |-- Types --|
 export type FormInitialValues = {
-    schemeCode: string
+    // schemeCode: string
     category: string
     subCategory: string
     schemeName: string
@@ -75,7 +75,7 @@ const steps = [
         label: 'Scheme Details',
         component: StepEditSchemeDetailsWrapper,
         validationSchema: object({
-            schemeCode: string().required('Scheme code is required'),
+            // schemeCode: string().required('Scheme code is required'),
             category: string().required('Category is required'),
             subCategory: string().required('Sub category is required'),
             schemeName: string().required('Scheme Name is required'),
@@ -190,7 +190,7 @@ const EditSchemeWrapper = () => {
 
     // From Initial Values
     const initialValues: FormInitialValues = {
-        schemeCode: selectedItem?.schemeCode || '',
+        // schemeCode: selectedItem?.schemeCode || '',
         category: selectedItem?.category || '',
         subCategory: selectedItem?.subCategory || '',
         schemeName: selectedItem?.schemeName || '',
@@ -322,7 +322,7 @@ const EditSchemeWrapper = () => {
             setTimeout(() => {
                 UpdateScheme({
                     body: {
-                        schemeCode: values.schemeCode,
+                        // schemeCode: values.schemeCode,
                         schemeName: values.schemeName,
                         category: values.category,
                         subCategory: values.subCategory,

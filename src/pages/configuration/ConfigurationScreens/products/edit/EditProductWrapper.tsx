@@ -100,7 +100,7 @@ const steps = [
                 width: number().required('Required'),
                 depth: number().required('Required'),
             }),
-            description: string().required('Required'),
+            description: string(),
         }),
     },
     {
