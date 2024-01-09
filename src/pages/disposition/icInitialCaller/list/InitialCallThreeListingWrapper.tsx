@@ -80,6 +80,14 @@ const InitialCallThreeListingWrapper = () => {
             ),
         },
         {
+            field: 'callType',
+            headerName: 'Call Type',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InitialCallerThreeListResponse) => (
+                <span> {row.callType} </span>
+            ),
+        },
+        {
             field: 'initialCallOneLabel',
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',

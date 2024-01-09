@@ -14,6 +14,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     initialCallName: string
+    callType: string
 }
 const EditInitialCallOneWrapper = () => {
     const navigate = useNavigate()
@@ -31,9 +32,11 @@ const EditInitialCallOneWrapper = () => {
 
     const initialValues: FormInitialValues = {
         initialCallName: selectedInitialOne?.initialCallName || '',
+        callType: selectedInitialOne?.callType || '',
     }
     const validationSchema = object({
         initialCallName: string().required('Required'),
+        callType: string().required('Required'),
     })
 
     const { data, isFetching, isLoading } = useGetinitialCallerOneByIdQuery(Id)
@@ -52,6 +55,7 @@ const EditInitialCallOneWrapper = () => {
             editInitialcallOne({
                 body: {
                     initialCallName: values.initialCallName,
+                    callType: values.callType,
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',

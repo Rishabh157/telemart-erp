@@ -10,6 +10,7 @@ export type InitialCallerTwoListResponse = {
     initialCallName: string
     initailCallNameLabel: string
     initialCallOneLabel: string
+    callType: string
     companyId: string
     isActive: boolean
     isDeleted: boolean
@@ -22,6 +23,7 @@ export type InitialCallerTwoListResponse = {
 export type AddInitialCallerTwo = {
     initialCallName: string
     initialCallOneId: string
+    callType: string
     companyId: string
 }
 
@@ -29,6 +31,7 @@ export type UpdateInitialCallerTwo = {
     body: {
         initialCallName: string
         initialCallOneId: string
+        callType: string
         companyId: string
     }
     id: string

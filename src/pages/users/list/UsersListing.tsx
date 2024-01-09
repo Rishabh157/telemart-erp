@@ -30,6 +30,7 @@ import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
+import UserListFilterFormDialogWrapper from './UserFilter/UserListFilterFormDialogWrapper'
 
 // |-- Types --|
 export type Props = {
@@ -51,6 +52,8 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     // States
     const [selectedRows, setSelectedRows] = useState([])
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
 
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
@@ -86,9 +89,18 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <UserListFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto">

@@ -15,6 +15,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 export type FormInitialValues = {
     initialCallName: string
     initialCallOneId: string
+    callType: string
     initialCallTwoId: string
     complaintType: string
     emailType: string
@@ -42,6 +43,7 @@ const AddInitialCallThreeWrappper = () => {
     const initialValues: FormInitialValues = {
         initialCallName: '',
         initialCallOneId: '',
+        callType: '',
         initialCallTwoId: '',
         complaintType: '',
         emailType: '',
@@ -51,6 +53,7 @@ const AddInitialCallThreeWrappper = () => {
     const validationSchema = object({
         initialCallName: string().required('Required'),
         initialCallOneId: string().required('Required'),
+        callType: string().required('Required'),
         initialCallTwoId: string().required('Required'),
         complaintType: string().required(' Required'),
         emailType: string().required('Required'),
@@ -64,6 +67,7 @@ const AddInitialCallThreeWrappper = () => {
             addIntialCallThree({
                 initialCallName: values.initialCallName,
                 initialCallOneId: values.initialCallOneId,
+                callType: values.callType,
                 initialCallTwoId: values.initialCallTwoId,
                 complaintType: values.complaintType,
                 emailType: values.emailType,

@@ -24,6 +24,7 @@ export type InitialStateType = {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedDealerId: string
+    isActive: string
 }
 
 const initialState: InitialStateType = {
@@ -37,6 +38,7 @@ const initialState: InitialStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedDealerId: '',
+    isActive: '',
 }
 
 const NewUserSlice: any = createSlice({
@@ -90,6 +92,9 @@ const NewUserSlice: any = createSlice({
         ) => {
             state.allItems = action.payload
         },
+        setIsActivateUser: (state, action: PayloadAction<string>) => {
+            state.isActive = action.payload
+        },
     },
 })
 
@@ -104,5 +109,6 @@ export const {
     setSelectedDealerId,
     setSelectedItem,
     setAllItems,
+    setIsActivateUser,
 } = NewUserSlice.actions
 export default NewUserSlice.reducer
