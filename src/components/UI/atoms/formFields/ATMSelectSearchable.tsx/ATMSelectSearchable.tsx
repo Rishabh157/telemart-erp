@@ -206,9 +206,10 @@ const ATMSelectSearchable = ({
                 >
                     {label && (
                         <label
-                            className={`text-slate-700   ${getLabelFont(
-                                labelSize
-                            )}  ${labelClass}`}
+                            className={twMerge(
+                                `text-slate-700   ${getLabelFont(labelSize)}`,
+                                `${labelClass}`
+                            )}
                         >
                             {label}
                             {required && (

@@ -80,7 +80,15 @@ const InitialCallOneListingWrapper = () => {
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: InitialCallerOneListResponse) => (
-                <span> {row.initialCallName} </span>
+                <span className="capitalize"> {row.initialCallName} </span>
+            ),
+        },
+        {
+            field: 'callType',
+            headerName: 'Call Type',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InitialCallerOneListResponse) => (
+                <span className="capitalize"> {row.callType} </span>
             ),
         },
 

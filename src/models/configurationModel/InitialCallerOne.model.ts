@@ -9,6 +9,7 @@
 export type InitialCallerOneListResponse = {
     initialCallName: string
     initailCallNameLabel: string
+    callType: string
     companyId: string
     isActive: boolean
     isDeleted: boolean
@@ -20,12 +21,14 @@ export type InitialCallerOneListResponse = {
 
 export type AddInitialCallerOne = {
     initialCallName: string
+    callType: string
     companyId: string
 }
 
 export type UpdateInitialCallerOne = {
     body: {
         initialCallName: string
+        callType: string
         companyId: string
     }
     id: string

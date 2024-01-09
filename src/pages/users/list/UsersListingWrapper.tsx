@@ -30,8 +30,6 @@ import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
-//import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-//import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
@@ -50,7 +48,7 @@ const UsersListingWrapper = () => {
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { items, page, rowsPerPage, searchValue } = userState
+    const { items, page, rowsPerPage, searchValue, isActive } = userState
     const [showDropdown, setShowDropdown] = useState(false)
     //const [currentId, setCurrentId] = useState('')
     const navigate = useNavigate()
@@ -65,6 +63,11 @@ const UsersListingWrapper = () => {
             {
                 fieldName: 'companyId',
                 value: userData?.companyId as string,
+            },
+            {
+                fieldName: 'isActive',
+                value:
+                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
             },
         ],
         dateFilter: {},
@@ -231,24 +234,6 @@ const UsersListingWrapper = () => {
             align: 'end',
         },
     ]
-
-    // const handleDelete = () => {
-    //     setShowDropdown(false)
-    //     deleteUser(currentId).then((res) => {
-    //         if ('data' in res) {
-    //             if (res?.data?.status) {
-    //                 showToast('success', 'User deleted successfully!')
-    //             } else {
-    //                 showToast('error', res?.data?.message)
-    //             }
-    //         } else {
-    //             showToast(
-    //                 'error',
-    //                 'Something went wrong, Please try again later'
-    //             )
-    //         }
-    //     })
-    // }
 
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)

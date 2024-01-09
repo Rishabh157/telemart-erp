@@ -10,6 +10,7 @@ export type InitialCallerThreeListResponse = {
     initialCallName: string
     initialCallOneLabel: string
     initialCallTwoLabel: string
+    callType: string
     initialCallOneId: string
     initialCallTwoId: string
     companyId: string
@@ -61,6 +62,7 @@ export type AddInitialCallerThree = {
     initialCallName: string
     initialCallOneId: string
     initialCallTwoId: string
+    callType: string
     complaintType: string
     emailType: string
     smsType: string
@@ -73,6 +75,7 @@ export type UpdateInitialCallerThree = {
         initialCallName: string
         initialCallOneId: string
         initialCallTwoId: string
+        callType: string
         complaintType: string
         emailType: string
         smsType: string

@@ -53,8 +53,16 @@ const EditInitialCallThree = ({
         isFetching: dispositionisFetching,
         isLoading: dispositionisLoading,
     } = useGetAllinitialCallerTwoByIdQuery(
-        formikProps.values.initialCallOneId,
-        { skip: !formikProps.values.initialCallOneId }
+        {
+            id: formikProps.values.initialCallOneId,
+            callType: formikProps.values.callType,
+        },
+        {
+            skip: !(
+                formikProps.values.initialCallOneId &&
+                formikProps.values.callType
+            ),
+        }
     )
 
     dropdownoptions = {
@@ -114,6 +122,32 @@ const EditInitialCallThree = ({
                         {/* Form */}
                         <div className="grow py-8 px-3 ">
                             <div className="grid grid-cols-3 gap-4">
+                                <div className="mt-2">
+                                    <ATMSelectSearchable
+                                        name="callType"
+                                        labelSpan="mb-2"
+                                        label="Call Type"
+                                        componentClass="mt-2"
+                                        value={values.callType}
+                                        options={[
+                                            {
+                                                label: 'Complaint',
+                                                value: 'COMPLAINT',
+                                            },
+                                            {
+                                                label: 'Inquiry',
+                                                value: 'INQUIRY',
+                                            },
+                                        ]}
+                                        onChange={(newValue: any) => {
+                                            handleSetFieldValue(
+                                                'callType',
+                                                newValue
+                                            )
+                                        }}
+                                    />
+                                </div>
+
                                 {/* languageName */}
                                 <ATMTextField
                                     name="initialCallName"
