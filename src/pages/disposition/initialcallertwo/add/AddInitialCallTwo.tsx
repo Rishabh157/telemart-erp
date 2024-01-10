@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddInitialCallTwoWrapper'
 import { FormikProps } from 'formik'
@@ -10,21 +10,18 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
-    dropdownOptions: {
-        initicalCallOneOptions: SelectOption[]
-    }
 }
 
-const AddInitialCallTwo = ({
-    formikProps,
-    apiStatus,
-    dropdownOptions,
-}: Props) => {
+const AddInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const [initicalCallOneOptions, setiniticalCallOneOptions] = useState<
+        SelectOption[]
+    >([])
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Initial Call',
@@ -39,6 +36,27 @@ const AddInitialCallTwo = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery(
+        values.callType,
+        {
+            skip: !values.callType,
+        }
+    )
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) {
+            const filterOption = data?.data?.map((ele:any) => {
+                return {
+                    label: ele.initialCallName,
+                    value: ele._id,
+                }
+            })
+            setiniticalCallOneOptions(filterOption || [])
+        }
+    }, [isFetching, isLoading, data, dispatch])
+
+    console.log('initicalCallOneOptions: ', initicalCallOneOptions)
     return (
         <>
             <div className="">
@@ -104,9 +122,7 @@ const AddInitialCallTwo = ({
 
                                 {/* initialcall one */}
                                 <ATMSelectSearchable
-                                    options={
-                                        dropdownOptions.initicalCallOneOptions
-                                    }
+                                    options={initicalCallOneOptions}
                                     name="initialCallOneId"
                                     value={values.initialCallOneId}
                                     label="Initial Call One"
