@@ -4,10 +4,8 @@ import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
-import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 import { useNavigate, useParams } from 'react-router-dom'
 import DispositionLayout from '../../DispositionLayout'
-import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
 import {
     useGetinitialCallerTwoByIdQuery,
     useUpdateinitialCallerTwoMutation,
@@ -29,13 +27,9 @@ const EditInitialCallTwoWrapper = () => {
     const [editInitialCallTwo] = useUpdateinitialCallerTwoMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.initialCallerOne
-    )
     const { selectedInitialCallerTwo }: any = useSelector(
         (state: RootState) => state?.initialCallerTwo
     )
-    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
 
     const {
         data: InitialCallData,
@@ -43,18 +37,6 @@ const EditInitialCallTwoWrapper = () => {
         isLoading: InitialCallIsLoading,
     } = useGetinitialCallerTwoByIdQuery(Id)
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setAllItems(data?.data || []))
-        }
-    }, [isFetching, isLoading, data, dispatch])
-
-    const initicalCallOneOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.initialCallName,
-            value: ele._id,
-        }
-    })
     useEffect(() => {
         if (!InitialCallIsFetching && !InitialCallIsLoading) {
             dispatch(setSelectedInitialCallerTwo(InitialCallData?.data || []))
@@ -99,9 +81,6 @@ const EditInitialCallTwoWrapper = () => {
             })
         }, 1000)
     }
-    const dropdownOptions = {
-        initicalCallOneOptions,
-    }
 
     return (
         <>
@@ -117,7 +96,6 @@ const EditInitialCallTwoWrapper = () => {
                             <EditInitialCallTwo
                                 apiStatus={apiStatus}
                                 formikProps={formikProps}
-                                dropdownOptions={dropdownOptions}
                             />
                         )
                     }}
