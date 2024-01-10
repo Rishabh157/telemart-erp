@@ -28,8 +28,8 @@ export const initialCallerOneApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAllinitialCallerOne: builder.query({
             providesTags: ['initialCallerOne'],
-            query: () => ({
-                url: '/initialcall-one',
+            query: (callType) => ({
+                url: `/initialcall-one/calltype/${callType}`,
                 method: 'GET',
                 // body,
             }),
@@ -106,5 +106,5 @@ export const {
     useExportinitialCallerOneDataMutation,
     useDeleteinitialCallerOneMutation,
     useGetAllinitialCallerOneQuery,
-    useDeactiveInitialCallerOneMutation
+    useDeactiveInitialCallerOneMutation,
 } = initialCallerOneApi
