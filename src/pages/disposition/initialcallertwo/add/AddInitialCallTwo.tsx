@@ -46,7 +46,7 @@ const AddInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
-            const filterOption = data?.data?.map((ele:any) => {
+            const filterOption = data?.data?.map((ele: any) => {
                 return {
                     label: ele.initialCallName,
                     value: ele._id,
@@ -56,7 +56,6 @@ const AddInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
         }
     }, [isFetching, isLoading, data, dispatch])
 
-    console.log('initicalCallOneOptions: ', initicalCallOneOptions)
     return (
         <>
             <div className="">
