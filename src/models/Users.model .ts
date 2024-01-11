@@ -65,6 +65,10 @@ export type userData = {
     lastName: string
     branchId: string
     allowedIp: string[]
+    isAgent: boolean
+    callCenterId: string | null
+    floorManagerId: string | null
+    teamLeadId: string | null
 }
 
 export type ChangeCompany = {
@@ -84,6 +88,10 @@ export type UsersNewListResponse = {
     updatedAt: string
     _id: string
     __v: number
+    isAgent: boolean
+    callCenterId: string | null
+    floorManagerId: string | null
+    teamLeadId: string | null
 }
 
 export type AddNewUser = {
@@ -98,6 +106,10 @@ export type AddNewUser = {
     password: string
     companyId: string
     allowedIp: string[]
+    isAgent: boolean
+    callCenterId: string | null
+    floorManagerId: string | null
+    teamLeadId: string | null
 }
 
 export type UpdateNewUser = {
@@ -112,6 +124,10 @@ export type UpdateNewUser = {
         userRole: string
         companyId: string
         allowedIp: string[]
+        isAgent: boolean
+        callCenterId: string | null
+        floorManagerId: string | null
+        teamLeadId: string | null
     }
     id: string
 }

@@ -156,6 +156,20 @@ export const userApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+           // ****  Floor manger by call center
+           getTeamLeadrUserByCallCenterId: builder.query({
+            providesTags: ['user', 'newUser'],
+            query: ({
+                companyId,
+                callCenterId,
+            }: {
+                companyId: string
+                callCenterId: string
+            }) => ({
+                url: `/user/get-team-leads/company/${companyId}/call-center/${callCenterId}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -172,4 +186,5 @@ export const {
     useGetDistributionsRoleMutation,
     useDeactiveUserMutation,
     useGetFloorMangerUserByCallCenterIdQuery,
+    useGetTeamLeadrUserByCallCenterIdQuery
 } = userApi
