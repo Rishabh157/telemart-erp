@@ -19,7 +19,9 @@ import { FormInitialValues } from './AddUserWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMSelectSearchable, {
+    SelectOption,
+} from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { userDepartmentOptions } from 'src/utils'
 import {
     GetHierarchByDeptProps,
@@ -33,11 +35,15 @@ import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
 import { CompanyBranchListResponse } from 'src/models'
 import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
+import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    dropDownOption: {
+        callCenterOptions: SelectOption[]
+    }
 }
 
 // Breadcrumbs
@@ -51,9 +57,11 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddUser = ({ formikProps, apiStatus }: Props) => {
+const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const { values, setFieldValue } = formikProps
+    // console.log("errors",errors,values)
     const [userRole, setuserRole] = useState<any[]>([])
+    
 
     const [branchOptionList, setBranchOptionList] = useState([])
 
@@ -82,7 +90,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
         setuserRole(departmentroles)
     }, [values])
     const dispatch = useDispatch()
-    const handleSetFieldValue = (name: string, value: string) => {
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
@@ -121,7 +129,7 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grow py-8 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-3 gap-4 pb-3">
                             {/* FirstName */}
                             <ATMTextField
                                 name="firstName"
@@ -238,6 +246,50 @@ const AddUser = ({ formikProps, apiStatus }: Props) => {
                                 }
                                 options={userRole}
                                 label="User Role"
+                            />
+                            {/* user admin  */}
+                            <ATMSwitchButton
+                                label="isAgent"
+                                name="isAgent"
+                                value={values.isAgent}
+                                onChange={(e) =>
+                                    handleSetFieldValue('isAgent', e)
+                                }
+                            />
+                            <ATMSelectSearchable
+                                required
+                                name="callCenterId"
+                                value={values.callCenterId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('callCenterId', e)
+                                }
+                                options={dropDownOption.callCenterOptions}
+                                label="Call Center"
+                            />
+                            {/* Floor Manager Name */}
+                            <ATMSelectSearchable
+                            isHidden={!values.isAgent}
+                                required
+                                name="floorManagerId"
+                                value={values.floorManagerId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('floorManagerId', e)
+                                }
+                                options={userRole}
+                                label="Floor Manager"
+                            />
+
+                            {/* Team Lead Name */}
+                            <ATMSelectSearchable
+                             isHidden={!values.isAgent}
+                                required
+                                name="teamLeadId"
+                                value={values.teamLeadId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('teamLeadId', e)
+                                }
+                                options={userRole}
+                                label="Team Lead"
                             />
                         </div>
                         <FieldArray name="allowedIps">

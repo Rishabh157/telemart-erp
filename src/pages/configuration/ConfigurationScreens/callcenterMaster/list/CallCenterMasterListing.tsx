@@ -1,7 +1,7 @@
 /// ==============================================
-// Filename:DealerSupervisorListing.tsx
-// Type: View Component
-// Last Updated: JUNE 26, 2023
+// Filename:CallCenterMasterListing.tsx
+// Type: List Component
+// Last Updated: JUNE 24, 2023
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -10,20 +10,28 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate, useParams } from 'react-router'
+import { useNavigate } from 'react-router-dom'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
+import ATMBreadCrumbs, {
+    BreadcrumbType,
+} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-
-// |-- Redux --|
+import {
+    UserModuleActionTypes,
+    UserModuleNameTypes,
+} from 'src/models/userAccess/UserAccess.model'
 import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/DealerSupervisorSlice'
+} from 'src/redux/slices/CallCenterMasterSlice'
+
+// |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
@@ -31,57 +39,78 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DealerSupervisorListing = ({ columns, rows }: Props) => {
-    // const params = useParams()
-    // const dealerId: any = params.dealerId
-
+const CallCenterMasterListing = ({ columns, rows, setShowDropdown }: Props) => {
+    // const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const dealerSupervisorState: any = useSelector(
-        (state: RootState) => state.dealerSupervisor
+    const [selectedRows, setSelectedRows] = useState([])
+    const callCenterState: any = useSelector(
+        (state: RootState) => state.callCenter
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-    // const navigate = useNavigate()
-    const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
-        dealerSupervisorState
+        callCenterState
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: 'Configuration',
+            path: '/dashboard',
+        },
+        {
+            label: 'Call Center',
+        },
+    ]
 
     return (
-        <div className="px-4 h-[calc(100vh-195px)] ">
-            {/* Page Header */}
-            <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Supervisor</ATMPageHeading>
-                {/* <button
-                    onClick={() =>
-                        navigate('/dealers/' + dealerId + '/supervisor/add')
-                    }
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add
-                </button> */}
+        <div className="px-4 h-full pt-3">
+            {/* Breadcrumbs */}
+            <div className="h-[30px]">
+                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">
+            {/* Page Header */}
+            <div className="flex justify-between items-center h-[45px]">
+                <ATMPageHeading> Call Center </ATMPageHeading>
+                <AuthenticationHOC
+                    moduleName={UserModuleNameTypes.attribute}
+                    actionName={UserModuleActionTypes.Add}
+                    component={
+                        <button
+                            onClick={() =>
+                                navigate('/configurations/callcenter-master/add')
+                            }
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add{' '}
+                        </button>
+                    }
+                />
+            </div>
+
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
-                    page={page}
                     searchValue={searchValue}
+                    page={page}
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
+                        isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
                         // isCheckbox={true}
@@ -90,7 +119,7 @@ const DealerSupervisorListing = ({ columns, rows }: Props) => {
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="h-full overflow-auto"
-                        isLoading={isTableLoading}
+                        setShowDropdown={setShowDropdown}
                     />
                 </div>
 
@@ -115,4 +144,4 @@ const DealerSupervisorListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default DealerSupervisorListing
+export default CallCenterMasterListing

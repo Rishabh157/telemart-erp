@@ -6,23 +6,29 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React, {  useRef, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { object, string } from 'yup'
+import { boolean, object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddUser from './AddUser'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { useAddNewUserMutation } from 'src/services/UserServices'
+import {
+    useAddNewUserMutation,
+    useGetFloorMangerUserByCallCenterIdQuery,
+} from 'src/services/UserServices'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
+import { setItems } from 'src/redux/slices/CallCenterMasterSlice'
+import { CallCenterMasterListResponse } from 'src/models'
 
 // |-- Types --|
 type Props = {}
@@ -39,6 +45,10 @@ export type FormInitialValues = {
     userRole: string
     companyId: string
     allowedIps: { allowedIp: string }[]
+    isAgent: boolean
+    callCenterId: string
+    floorManagerId: string
+    teamLeadId: string
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -50,8 +60,8 @@ const AddUserWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addNewUser] = useAddNewUserMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-
-
+    const { items } = useSelector((state: RootState) => state?.callCenter)
+    const ref = useRef<any>(null)
 
     const initialValues: FormInitialValues = {
         firstName: '',
@@ -69,6 +79,11 @@ const AddUserWrapper = (props: Props) => {
                 allowedIp: '',
             },
         ],
+        isAgent: false,
+
+        callCenterId: '',
+        floorManagerId: '',
+        teamLeadId: '',
     }
 
     // Form Validation Schema
@@ -77,18 +92,43 @@ const AddUserWrapper = (props: Props) => {
         lastName: string().required('Last Name is required'),
         userName: string().required('User Name is required'),
 
+        isAgent: boolean(),
+        teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
+            console.log('isAgent', isAgent)
+            return isAgent[0]
+                ? schema.required('Team Lead ID is required')
+                : schema.notRequired()
+        }),
+        floorManagerId: string().when(['isAgent'], (isAgent, schema) => {
+            console.log('isAgent', isAgent)
+            return isAgent[0]
+                ? schema.required('Floor Manager is required')
+                : schema.notRequired()
+        }),
+        callCenterId: string().when(
+            'userDepartment',
+            (userDepartment: any, schema: any) => {
+                console.log(userDepartment, 'userDepartment')
+                return userDepartment.includes('SALES_DEPARTMENT')
+                    ? schema.required(
+                          'Call Center ID is required for Sales department'
+                      )
+                    : schema.notRequired()
+            }
+        ),
+
+        branchId: string().required('branch name is required'),
+        userDepartment: string().required('User Department is required'),
+        userRole: string().required('User Role is required'),
+        password: string().required('Password is required'),
+        // email: string().email('Invalid Email ID'),
+        // .required('Email is required'),
         // mobile: string()
         //     .required('Mobile No is required')
         //     .max(10, 'Mobile number must be 10 digits')
         //     .min(10, 'Mobile number must be 10 digits')
         //     .trim()
         //     .matches(regIndiaPhone, 'Invalid Mobile Number'),
-        email: string().email('Invalid Email ID'),
-        // .required('Email is required'),
-        branchId: string().required('branch name is required'),
-        userDepartment: string().required('User Department is required'),
-        userRole: string().required('User Role is required'),
-        password: string().required('Password is required'),
     })
 
     //    Form Submit Handler
@@ -127,18 +167,63 @@ const AddUserWrapper = (props: Props) => {
             })
         }, 1000)
     }
+    const { isLoading, isFetching, data } = useGetAllCallCenterMasterQuery(
+        userData?.companyId,
+        {
+            skip: !userData?.companyId,
+        }
+    )
+    React.useEffect(() => {
+        if (!isLoading && !isFetching) {
+            dispatch(setItems(data?.data))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading, isFetching])
+    const dropDownOption = {
+        callCenterOptions: items?.map(
+            (assetCategory: CallCenterMasterListResponse) => {
+                return {
+                    label: assetCategory.callCenterName,
+                    value: assetCategory._id,
+                }
+            }
+        ),
+    }
+    console.log(ref?.current,"ref?.callCenterId")
+    console.log(ref?.current?.values?.callCenterId,"ref?.callCenterId")
+    const {
+        data: floorMangers,
+        isFetching: floorManagerIsFetching,
+        isLoading: floorManagerIsLoading,
+    } = useGetFloorMangerUserByCallCenterIdQuery(
+        {
+            companyId: userData?.companyId as string,
+            callCenterId: ref?.current?.values?.callCenterId as any,
+        },
+        {
+            skip: !(userData?.companyId && ref?.current?.values?.callCenterId),
+        }
+    )
+    React.useEffect(() => {
+        if (!floorManagerIsFetching && !floorManagerIsLoading) {
+            dispatch(setItems(floorMangers?.data))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [floorManagerIsFetching, floorManagerIsLoading])
     return (
         <SideNavLayout>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
+                innerRef={ref as any}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (
                         <AddUser
                             apiStatus={apiStatus}
                             formikProps={formikProps}
+                            dropDownOption={dropDownOption}
                         />
                     )
                 }}

@@ -160,6 +160,7 @@ export enum UserModuleNameTypes {
     locations = 'LOCATIONS',
     WarehouseTransfer = 'WAREHOUSETRANSFER',
     warehouseToComapny = 'WAREHOUSETOCOMPANY',
+    callCenterMaster="CALL_CENTER_MASTER"
 }
 
 //  export const myMove = {

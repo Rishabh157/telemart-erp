@@ -24,7 +24,7 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/DealerSupervisorSlice'
+} from 'src/redux/slices/DealerSupervisorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 

@@ -239,3 +239,9 @@ export type {
     BarcodeFlowListResponse,
     BarcodeFlowDataListResponsee,
 } from './InventoryFlow.modal'
+
+export type {
+    CallCenterMasterListResponse,
+    AddCallCenterMaster,
+    UpdateCallCenterMaster
+} from './CallCenterMaster.model'
