@@ -47,6 +47,7 @@ type Props = {
     maxMenuHeight?: number
     isValueWithLable?: boolean
     menuPosition?: 'fixed' | 'absolute'
+    isHidden?:boolean
 }
 
 const ATMSelectSearchable = ({
@@ -77,6 +78,7 @@ const ATMSelectSearchable = ({
     isValueWithLable = false,
     maxMenuHeight = 300,
     menuPosition = 'fixed',
+    isHidden=false
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -189,7 +191,7 @@ const ATMSelectSearchable = ({
         }
     }
     return (
-        <div className={`${componentClass} relative`}>
+        <div className={`${componentClass} relative`} hidden={isHidden}>
             <div
                 className={`  ${
                     labelDirection === 'horizontal'

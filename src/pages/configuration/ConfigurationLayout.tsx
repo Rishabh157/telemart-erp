@@ -128,6 +128,12 @@ const configurationNavigation: NavItemType[] = [
         path: '/configurations/dealers-category',
         name: UserModuleNameTypes.dealerCategory,
     },
+     {
+        label: 'Call Center',
+        icon: BiCategoryAlt,
+        path: '/configurations/callcenter-master',
+        name: UserModuleNameTypes.callCenterMaster,
+    },
 
     {
         label: 'Hierarchy (Org..*)',

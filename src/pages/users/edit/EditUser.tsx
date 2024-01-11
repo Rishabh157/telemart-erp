@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -33,11 +33,18 @@ import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
 import { CompanyBranchListResponse } from 'src/models'
+import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+import { useGetFloorMangerUserByCallCenterIdQuery, useGetTeamLeadrUserByCallCenterIdQuery } from 'src/services/UserServices'
+import { RootState } from 'src/redux/store'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    dropDownOption: {
+        callCenterOptions: SelectOption[]
+    }
 }
 
 // Breadcrumbs
@@ -51,10 +58,12 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const EditUser = ({ formikProps, apiStatus }: Props) => {
+const EditUser = ({ formikProps, apiStatus,dropDownOption }: Props) => {
     const { values, setFieldValue } = formikProps
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const [userRole, setuserRole] = useState<any[]>([])
-
+    const [florManagerOptionList, setFlorManagerOptionList] = useState([])
+    const [teamLeadOptionList, setTeamLeadOptionList] = useState([])
     const [branchOptionList, setBranchOptionList] = useState([])
 
     const { data, isFetching, isLoading } = useGetAllCompaniesBranchQuery('')
@@ -83,10 +92,61 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
     }, [values])
 
     const dispatch = useDispatch()
-    const handleSetFieldValue = (name: string, value: string) => {
+    const handleSetFieldValue = (name: string, value: string| boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+    const {
+        data: floorMangers,
+        isFetching: floorManagerIsFetching,
+        isLoading: floorManagerIsLoading,
+    } = useGetFloorMangerUserByCallCenterIdQuery(
+        {
+            companyId: userData?.companyId as string,
+            callCenterId: values?.callCenterId as any,
+        },
+        {
+            skip: !values?.callCenterId,
+        }
+    )
+    React.useEffect(() => {
+        if (!floorManagerIsFetching && !floorManagerIsLoading) {
+            const filteredFloor = floorMangers?.data?.map((ele: any) => {
+                return {
+                    label: ele?.userName,
+                    value: ele?._id,
+                }
+            })
+            setFlorManagerOptionList(filteredFloor)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [floorManagerIsFetching, floorManagerIsLoading, floorMangers])
+
+    const {
+        data: teamLeadData,
+        isFetching: teamLeadIsFetching,
+        isLoading: teamLeadIsLoading,
+    } = useGetTeamLeadrUserByCallCenterIdQuery(
+        {
+            companyId: userData?.companyId as string,
+            callCenterId: values?.callCenterId as any,
+        },
+        {
+            skip: !values?.callCenterId,
+        }
+    )
+    React.useEffect(() => {
+        if (!teamLeadIsFetching && !teamLeadIsLoading) {
+            const filteredFloor = teamLeadData?.data?.map((ele: any) => {
+                return {
+                    label: ele?.userName,
+                    value: ele?._id,
+                }
+            })
+            setTeamLeadOptionList(filteredFloor)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [teamLeadIsFetching, teamLeadIsLoading, floorMangers])
     return (
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
@@ -239,6 +299,49 @@ const EditUser = ({ formikProps, apiStatus }: Props) => {
                                 }
                                 options={userRole}
                                 label="User Role"
+                            />
+                             <ATMSwitchButton
+                                label="isAgent"
+                                name="isAgent"
+                                value={values.isAgent}
+                                onChange={(e) =>
+                                    handleSetFieldValue('isAgent', e)
+                                }
+                            />
+                            <ATMSelectSearchable
+                                required
+                                name="callCenterId"
+                                value={values.callCenterId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('callCenterId', e)
+                                }
+                                options={dropDownOption.callCenterOptions}
+                                label="Call Center"
+                            />
+                            {/* Floor Manager Name */}
+                            <ATMSelectSearchable
+                                isHidden={!values.isAgent}
+                                required
+                                name="floorManagerId"
+                                value={values.floorManagerId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('floorManagerId', e)
+                                }
+                                options={florManagerOptionList}
+                                label="Floor Manager"
+                            />
+
+                            {/* Team Lead Name */}
+                            <ATMSelectSearchable
+                                isHidden={!values.isAgent}
+                                required
+                                name="teamLeadId"
+                                value={values.teamLeadId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('teamLeadId', e)
+                                }
+                                options={teamLeadOptionList}
+                                label="Team Lead"
                             />
                         </div>
                         <FieldArray name="allowedIps">

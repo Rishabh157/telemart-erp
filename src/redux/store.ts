@@ -31,7 +31,7 @@ import DealerLedgerSlice from './slices/DealerLedgerSlice'
 import DealerWarehouseSlice from './slices/DealerWarehouseSlice'
 import DealerOrderLedgerSlice from './slices/dealerOrderLedgerSlice'
 import VendorWarehouseSlice from './slices/VendorWarehouseSlice'
-import DealerSupervisorSlice from './DealerSupervisorSlice'
+import DealerSupervisorSlice from './slices/DealerSupervisorSlice'
 import GRNSlice from './slices/GRNSlice'
 import inventorySlice from './slices/inventorySlice'
 import itemSlice from './slices/itemSlice'
@@ -95,6 +95,7 @@ import warehouseToSampleSlice from './slices/warehouseToSampleSlice'
 import warehouseToComapnySlice from './slices/WarehouseToComapnySlice'
 import InventoryFlowSlice from './slices/InventoryFlowSlice'
 import InwardDealerSlice from './slices/InwardDealerSlice'
+import CallCenterMasterSlice from './slices/CallCenterMasterSlice'
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
@@ -187,6 +188,7 @@ const store = configureStore({
         warehouseToComapny: warehouseToComapnySlice,
         inventoryFlow: InventoryFlowSlice,
         inwardDealer: InwardDealerSlice,
+        callCenter:CallCenterMasterSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

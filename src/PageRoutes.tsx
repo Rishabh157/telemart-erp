@@ -261,6 +261,9 @@ import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWareho
 import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
 import VendorRtvListingWrapper from './pages/vendors/view/tabs/ReturnToVendorTab/list/VendorRtvListingWrapper'
 import InventoryFlowListingWrapper from './pages/inventoryFlow/list/InventoryFlowListingWrapper'
+import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/list/CallCenterMasterListingWrapper'
+import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
+import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1950,6 +1953,38 @@ const PageRoutes = () => {
                             <AuthenticationHOC
                                 component={<EditDealersCategoryWrapper />}
                                 moduleName={UserModuleNameTypes.dealerCategory}
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
+                    />
+                     {/* Configurations -> call center master */}
+                     <Route
+                        path="/configurations/callcenter-master"
+                        element={
+                            <AuthenticationHOC
+                                component={<CallCenterMasterListingWrapper />}
+                                moduleName={UserModuleNameTypes.callCenterMaster}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/configurations/callcenter-master/add"
+                        element={
+                            <AuthenticationHOC
+                                component={<AddCallCenterMasterWrapper />}
+                                moduleName={UserModuleNameTypes.callCenterMaster}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="/configurations/callcenter-master/:id"
+                        element={
+                            <AuthenticationHOC
+                                component={<EditCallCenterMasterWrapper />}
+                                moduleName={UserModuleNameTypes.callCenterMaster}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />
