@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
@@ -7,9 +7,7 @@ import { Formik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import AddInitialCallTwo from './AddInitialCallTwo'
 import { useAddinitialCallerTwoMutation } from 'src/services/configurations/InitialCallerTwoServices'
-import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
 import DispositionLayout from '../../DispositionLayout'
-import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
@@ -25,24 +23,6 @@ const AddInitialCallTwoWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.initialCallerOne
-    )
-
-    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setAllItems(data?.data || []))
-        }
-    }, [isFetching, isLoading, data, dispatch])
-
-    const initicalCallOneOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.initialCallName,
-            value: ele._id,
-        }
-    })
     const initialValues: FormInitialValues = {
         initialCallName: '',
         callType: '',
@@ -78,10 +58,6 @@ const AddInitialCallTwoWrapper = () => {
         }, 1000)
     }
 
-    const dropdownOptions = {
-        initicalCallOneOptions,
-    }
-
     return (
         <>
             <DispositionLayout>
@@ -95,7 +71,6 @@ const AddInitialCallTwoWrapper = () => {
                             <AddInitialCallTwo
                                 apiStatus={apiStatus}
                                 formikProps={formikProps}
-                                dropdownOptions={dropdownOptions}
                             />
                         )
                     }}

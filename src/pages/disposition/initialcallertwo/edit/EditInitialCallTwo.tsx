@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
 import { FormikProps } from 'formik'
@@ -11,21 +11,18 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { FormInitialValues } from '../add/AddInitialCallTwoWrapper'
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
-    dropdownOptions: {
-        initicalCallOneOptions: SelectOption[]
-    }
 }
 
-const EditInitialCallTwo = ({
-    formikProps,
-    apiStatus,
-    dropdownOptions,
-}: Props) => {
+const EditInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    const [initicalCallOneOptions, setiniticalCallOneOptions] = useState<
+        SelectOption[]
+    >([])
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -41,6 +38,25 @@ const EditInitialCallTwo = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery(
+        values.callType,
+        {
+            skip: !values.callType,
+        }
+    )
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) {
+            const filterOption = data?.data?.map((ele: any) => {
+                return {
+                    label: ele.initialCallName,
+                    value: ele._id,
+                }
+            })
+            setiniticalCallOneOptions(filterOption || [])
+        }
+    }, [isFetching, isLoading, data, dispatch])
 
     return (
         <>
@@ -108,9 +124,7 @@ const EditInitialCallTwo = ({
                                 {/* languageName */}
 
                                 <ATMSelectSearchable
-                                    options={
-                                        dropdownOptions.initicalCallOneOptions
-                                    }
+                                    options={initicalCallOneOptions}
                                     name="initialCallOneId"
                                     value={values.initialCallOneId}
                                     label="Initial Call One"
