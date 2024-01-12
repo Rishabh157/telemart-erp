@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { array, object, string } from 'yup'
+import { array, boolean, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useAddInitialCallerThreeMutation } from 'src/services/configurations/InitialCallerThreeServices'
@@ -21,6 +21,8 @@ export type FormInitialValues = {
     emailType: string
     smsType: string
     returnType: string[]
+    isPnd: boolean
+    cancelFlag: boolean
 }
 const AddInitialCallThreeWrappper = () => {
     const navigate = useNavigate()
@@ -49,6 +51,8 @@ const AddInitialCallThreeWrappper = () => {
         emailType: '',
         smsType: '',
         returnType: [''],
+        isPnd: false,
+        cancelFlag: false,
     }
     const validationSchema = object({
         initialCallName: string().required('Required'),
@@ -59,6 +63,8 @@ const AddInitialCallThreeWrappper = () => {
         emailType: string().required('Required'),
         smsType: string().required('Required'),
         returnType: array().of(string().required('Required')),
+        isPnd: boolean().required('Required'),
+        cancelFlag: boolean().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -74,6 +80,8 @@ const AddInitialCallThreeWrappper = () => {
                 smsType: values.smsType,
                 returnType: values.returnType,
                 companyId: userData?.companyId || '',
+                isPnd: values.isPnd,
+                cancelFlag: values.cancelFlag,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { useGetAllinitialCallerTwoByIdQuery } from 'src/services/configurations/InitialCallerTwoServices'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -240,6 +241,30 @@ const AddInitialCallThree = ({
                                         handleSetFieldValue('complaintType', e)
                                     }
                                 />
+
+                                <div className="mt-2 flex gap-x-8">
+                                    <ATMCheckbox
+                                        label="Pnd"
+                                        extraClasses=""
+                                        required
+                                        labelClasses="select-none"
+                                        checked={values.isPnd}
+                                        onChange={(e) =>
+                                            setFieldValue('isPnd', e)
+                                        }
+                                    />
+
+                                    <ATMCheckbox
+                                        label="Cancel Flag"
+                                        extraClasses=""
+                                        required
+                                        labelClasses="select-none"
+                                        checked={values.cancelFlag}
+                                        onChange={(e) =>
+                                            setFieldValue('cancelFlag', e)
+                                        }
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
