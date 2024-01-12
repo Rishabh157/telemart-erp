@@ -17,7 +17,6 @@ export type FormInitialValues = {
     initialCallOneId: string
     callType: string
     initialCallTwoId: string
-    complaintType: string
     emailType: string
     smsType: string
     returnType: string[]
@@ -47,7 +46,7 @@ const AddInitialCallThreeWrappper = () => {
         initialCallOneId: '',
         callType: '',
         initialCallTwoId: '',
-        complaintType: '',
+
         emailType: '',
         smsType: '',
         returnType: [''],
@@ -59,7 +58,6 @@ const AddInitialCallThreeWrappper = () => {
         initialCallOneId: string().required('Required'),
         callType: string().required('Required'),
         initialCallTwoId: string().required('Required'),
-        complaintType: string().required(' Required'),
         emailType: string().required('Required'),
         smsType: string().required('Required'),
         returnType: array().of(string().required('Required')),
@@ -75,7 +73,6 @@ const AddInitialCallThreeWrappper = () => {
                 initialCallOneId: values.initialCallOneId,
                 callType: values.callType,
                 initialCallTwoId: values.initialCallTwoId,
-                complaintType: values.complaintType,
                 emailType: values.emailType,
                 smsType: values.smsType,
                 returnType: values.returnType,
@@ -129,8 +126,14 @@ const AddInitialCallThreeWrappper = () => {
     ]
 
     const complainttype = [
-        { label: 'complaint', value: 'COMPLAINT' },
-        { label: 'enquiry', value: 'ENQUIRY' },
+        {
+            label: 'Complaint',
+            value: 'COMPLAINT',
+        },
+        {
+            label: 'Inquiry',
+            value: 'INQUIRY',
+        },
     ]
 
     const returntype = [

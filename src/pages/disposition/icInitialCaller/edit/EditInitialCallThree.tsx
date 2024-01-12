@@ -129,16 +129,7 @@ const EditInitialCallThree = ({
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                        options={[
-                                            {
-                                                label: 'Complaint',
-                                                value: 'COMPLAINT',
-                                            },
-                                            {
-                                                label: 'Inquiry',
-                                                value: 'INQUIRY',
-                                            },
-                                        ]}
+                                        options={dropdownoptions.complainttypeOptions}
                                         onChange={(newValue: any) => {
                                             handleSetFieldValue(
                                                 'callType',
@@ -227,18 +218,7 @@ const EditInitialCallThree = ({
                                         handleSetFieldValue('emailType', e)
                                     }
                                 />
-                                <ATMSelectSearchable
-                                    options={
-                                        dropdownoptions.complainttypeOptions
-                                    }
-                                    required
-                                    name="complaintType"
-                                    value={values.complaintType}
-                                    label="Complaint Type"
-                                    onChange={(e) =>
-                                        handleSetFieldValue('complaintType', e)
-                                    }
-                                />
+                              
                             </div>
                         </div>
                     </div>

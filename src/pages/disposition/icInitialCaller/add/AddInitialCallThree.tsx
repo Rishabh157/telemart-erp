@@ -131,16 +131,9 @@ const AddInitialCallThree = ({
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                        options={[
-                                            {
-                                                label: 'Complaint',
-                                                value: 'COMPLAINT',
-                                            },
-                                            {
-                                                label: 'Inquiry',
-                                                value: 'INQUIRY',
-                                            },
-                                        ]}
+                                         options={
+                                            dropdownoptions.complainttypeOptions
+                                        }
                                         onChange={(newValue: any) => {
                                             handleSetFieldValue(
                                                 'callType',
@@ -229,19 +222,7 @@ const AddInitialCallThree = ({
                                         handleSetFieldValue('emailType', e)
                                     }
                                 />
-                                <ATMSelectSearchable
-                                    options={
-                                        dropdownoptions.complainttypeOptions
-                                    }
-                                    required
-                                    name="complaintType"
-                                    value={values.complaintType}
-                                    label="Complaint Type"
-                                    onChange={(e) =>
-                                        handleSetFieldValue('complaintType', e)
-                                    }
-                                />
-
+       
                                 <div className="mt-2 flex gap-x-8">
                                     <ATMCheckbox
                                         label="Pnd"
