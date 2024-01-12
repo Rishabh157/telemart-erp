@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { array, boolean, object, string } from 'yup'
@@ -7,9 +7,7 @@ import { Formik } from 'formik'
 import { useAddInitialCallerThreeMutation } from 'src/services/configurations/InitialCallerThreeServices'
 import AddInitialCallThree from './AddInitialCallThree'
 import { useNavigate } from 'react-router-dom'
-import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
-import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
@@ -33,14 +31,6 @@ const AddInitialCallThreeWrappper = () => {
         (state: RootState) => state?.initialCallerOne
     )
 
-    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setAllItems(data?.data))
-        }
-    }, [data, isLoading, isFetching, dispatch])
-
     const initialValues: FormInitialValues = {
         initialCallName: '',
         initialCallOneId: '',
@@ -61,8 +51,8 @@ const AddInitialCallThreeWrappper = () => {
         emailType: string().required('Required'),
         smsType: string().required('Required'),
         returnType: array().of(string().required('Required')),
-        isPnd: boolean().required('Required'),
-        cancelFlag: boolean().required('Required'),
+        isPnd: boolean(),
+        cancelFlag: boolean(),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -143,9 +133,10 @@ const AddInitialCallThreeWrappper = () => {
     ]
 
     const EmailType = [
-        { label: 'personalEmail', value: 'PERSONAL EMAIL' },
-        { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
-        { label: 'companyEmail', value: 'COMPANY EMAIL' },
+        { label: 'Personal Email', value: 'PERSONAL_EMAIL' },
+        { label: 'Buisness Email', value: 'BUISNESS_EMAIL' },
+        { label: 'Company Email', value: 'COMPANY_EMAIL' },
+        { label: 'Official Email', value: 'OFFICIAL_EMAIL' },
     ]
 
     const dropdownoptions = {

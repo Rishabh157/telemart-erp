@@ -13,6 +13,8 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import { setAllItems as setAllItemsdisposition } from 'src/redux/slices/configuration/initialCallerTwoSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -33,7 +35,9 @@ const EditInitialCallThree = ({
     dropdownoptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
-
+    const [initialCalleOneOption, setInitialCalleOneOption] = React.useState<
+        any[]
+    >([])
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -64,6 +68,25 @@ const EditInitialCallThree = ({
             ),
         }
     )
+
+    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery(
+        values.callType,
+        {
+            skip: !values.callType,
+        }
+    )
+
+    useEffect(() => {
+        if (!isLoading && !isFetching) {
+            const filterOption = data?.data?.map((ele: any) => {
+                return {
+                    label: ele?.initialCallName,
+                    value: ele?._id,
+                }
+            })
+            setInitialCalleOneOption(filterOption)
+        }
+    }, [data, isLoading, isFetching, dispatch])
 
     dropdownoptions = {
         ...dropdownoptions,
@@ -129,7 +152,9 @@ const EditInitialCallThree = ({
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                        options={dropdownoptions.complainttypeOptions}
+                                        options={
+                                            dropdownoptions.complainttypeOptions
+                                        }
                                         onChange={(newValue: any) => {
                                             handleSetFieldValue(
                                                 'callType',
@@ -154,10 +179,7 @@ const EditInitialCallThree = ({
                                     }
                                 />
                                 <ATMSelectSearchable
-                                    options={
-                                        dropdownoptions.initialCallOneOptions ||
-                                        []
-                                    }
+                                    options={initialCalleOneOption}
                                     name="initialCallOneId"
                                     required
                                     value={values.initialCallOneId}
@@ -218,7 +240,30 @@ const EditInitialCallThree = ({
                                         handleSetFieldValue('emailType', e)
                                     }
                                 />
-                              
+
+                                <div className="mt-2 flex gap-x-8">
+                                    <ATMCheckbox
+                                        label="Pnd"
+                                        extraClasses=""
+                                        required
+                                        labelClasses="select-none"
+                                        checked={values.isPnd}
+                                        onChange={(e) =>
+                                            setFieldValue('isPnd', e)
+                                        }
+                                    />
+
+                                    <ATMCheckbox
+                                        label="Cancel Flag"
+                                        extraClasses=""
+                                        required
+                                        labelClasses="select-none"
+                                        checked={values.cancelFlag}
+                                        onChange={(e) =>
+                                            setFieldValue('cancelFlag', e)
+                                        }
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

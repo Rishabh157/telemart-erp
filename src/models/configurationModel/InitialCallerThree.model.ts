@@ -72,8 +72,8 @@ export type UpdateInitialCallerThree = {
         initialCallOneId: string
         initialCallTwoId: string
         callType: string
-         // isPnd: boolean
-        // cancelFlag: boolean
+         isPnd: boolean
+        cancelFlag: boolean
         emailType: string
         smsType: string
         returnType: string[]

@@ -14,6 +14,7 @@ import { RootState } from 'src/redux/store'
 import { useGetAllinitialCallerTwoByIdQuery } from 'src/services/configurations/InitialCallerTwoServices'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
+import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -34,6 +35,9 @@ const AddInitialCallThree = ({
     dropdownoptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+    const [initialCalleOneOption, setInitialCalleOneOption] = React.useState<
+        any[]
+    >([])
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -64,6 +68,25 @@ const AddInitialCallThree = ({
             ),
         }
     )
+
+    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery(
+        values.callType,
+        {
+            skip: !values.callType,
+        }
+    )
+
+    useEffect(() => {
+        if (!isLoading && !isFetching) {
+            const filterOption = data?.data?.map((ele: any) => {
+                return {
+                    label: ele?.initialCallName,
+                    value: ele?._id,
+                }
+            })
+            setInitialCalleOneOption(filterOption)
+        }
+    }, [data, isLoading, isFetching, dispatch])
 
     dropdownoptions = {
         ...dropdownoptions,
@@ -131,7 +154,7 @@ const AddInitialCallThree = ({
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                         options={
+                                        options={
                                             dropdownoptions.complainttypeOptions
                                         }
                                         onChange={(newValue: any) => {
@@ -158,10 +181,7 @@ const AddInitialCallThree = ({
                                     }
                                 />
                                 <ATMSelectSearchable
-                                    options={
-                                        dropdownoptions.initialCallOneOptions ||
-                                        []
-                                    }
+                                    options={initialCalleOneOption}
                                     name="initialCallOneId"
                                     required
                                     value={values.initialCallOneId}
@@ -222,7 +242,7 @@ const AddInitialCallThree = ({
                                         handleSetFieldValue('emailType', e)
                                     }
                                 />
-       
+
                                 <div className="mt-2 flex gap-x-8">
                                     <ATMCheckbox
                                         label="Pnd"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { array, object, string } from 'yup'
+import { array, boolean, object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -11,8 +11,6 @@ import {
     useGetInitialCallerThreeByIdQuery,
     useUpdateInitialCallerThreeMutation,
 } from 'src/services/configurations/InitialCallerThreeServices'
-import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
-import { setAllItems } from 'src/redux/slices/configuration/initialCallerOneSlice'
 import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/initialCallerThreeSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
@@ -21,10 +19,11 @@ export type FormInitialValues = {
     initialCallName: string
     initialCallOneId: string
     initialCallTwoId: string
- 
     emailType: string
     smsType: string
     returnType: string[]
+    isPnd: boolean
+    cancelFlag: boolean
 }
 const EditInitialCallThreeWrapper = () => {
     const navigate = useNavigate()
@@ -43,17 +42,17 @@ const EditInitialCallThreeWrapper = () => {
         initialCallName: selectedInitialCallerThree?.initialCallName || '',
         initialCallOneId: selectedInitialCallerThree?.initialCallOneId || '',
         initialCallTwoId: selectedInitialCallerThree?.initialCallTwoId || '',
-      
         emailType: selectedInitialCallerThree?.emailType || '',
         smsType: selectedInitialCallerThree?.smsType || '',
         returnType: selectedInitialCallerThree?.returnType || [''],
+        isPnd: selectedInitialCallerThree?.isPnd,
+        cancelFlag: selectedInitialCallerThree?.cancelFlag,
     }
 
     const { allItems }: any = useSelector(
         (state: RootState) => state?.initialCallerOne
     )
 
-    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery('')
     const {
         data: Icdata,
         isFetching: IcisFetching,
@@ -66,21 +65,17 @@ const EditInitialCallThreeWrapper = () => {
         }
     }, [Icdata, IcisLoading, IcisFetching, dispatch])
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setAllItems(data?.data || []))
-        }
-    }, [data, isLoading, isFetching, dispatch])
-
     const validationSchema = object({
         callType: string().required('Requiredd'),
         initialCallName: string().required('Requiredd'),
         initialCallOneId: string().required('Required'),
         initialCallTwoId: string().required('Required'),
-      
+
         emailType: string().required('Required'),
         smsType: string().required('Required'),
         returnType: array().of(string().required('Required')),
+        isPnd: boolean(),
+        cancelFlag: boolean(),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -92,11 +87,13 @@ const EditInitialCallThreeWrapper = () => {
                     initialCallName: values.initialCallName,
                     initialCallOneId: values.initialCallOneId,
                     initialCallTwoId: values.initialCallTwoId,
-                   
+
                     emailType: values.emailType,
                     smsType: values.smsType,
                     returnType: values.returnType,
                     companyId: userData?.companyId || '',
+                    isPnd: values.isPnd,
+                    cancelFlag: values.cancelFlag,
                 },
                 id: Id || '',
             }).then((res: any) => {
@@ -157,9 +154,10 @@ const EditInitialCallThreeWrapper = () => {
     ]
 
     const EmailType = [
-        { label: 'personalEmail', value: 'PERSONAL EMAIL' },
-        { label: 'officialEmail', value: 'OFFICIAL EMAIL' },
-        { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
+        { label: 'Personal Email', value: 'PERSONAL_EMAIL' },
+        { label: 'Buisness Email', value: 'BUISNESS_EMAIL' },
+        { label: 'Company Email', value: 'COMPANY_EMAIL' },
+        { label: 'Official Email', value: 'OFFICIAL_EMAIL' },
     ]
 
     const dropdownoptions = {
