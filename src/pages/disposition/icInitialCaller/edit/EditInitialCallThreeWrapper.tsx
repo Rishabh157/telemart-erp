@@ -21,7 +21,7 @@ export type FormInitialValues = {
     initialCallName: string
     initialCallOneId: string
     initialCallTwoId: string
-    complaintType: string
+ 
     emailType: string
     smsType: string
     returnType: string[]
@@ -43,7 +43,7 @@ const EditInitialCallThreeWrapper = () => {
         initialCallName: selectedInitialCallerThree?.initialCallName || '',
         initialCallOneId: selectedInitialCallerThree?.initialCallOneId || '',
         initialCallTwoId: selectedInitialCallerThree?.initialCallTwoId || '',
-        complaintType: selectedInitialCallerThree?.complaintType || '',
+      
         emailType: selectedInitialCallerThree?.emailType || '',
         smsType: selectedInitialCallerThree?.smsType || '',
         returnType: selectedInitialCallerThree?.returnType || [''],
@@ -77,7 +77,7 @@ const EditInitialCallThreeWrapper = () => {
         initialCallName: string().required('Requiredd'),
         initialCallOneId: string().required('Required'),
         initialCallTwoId: string().required('Required'),
-        complaintType: string().required(' Required'),
+      
         emailType: string().required('Required'),
         smsType: string().required('Required'),
         returnType: array().of(string().required('Required')),
@@ -92,7 +92,7 @@ const EditInitialCallThreeWrapper = () => {
                     initialCallName: values.initialCallName,
                     initialCallOneId: values.initialCallOneId,
                     initialCallTwoId: values.initialCallTwoId,
-                    complaintType: values.complaintType,
+                   
                     emailType: values.emailType,
                     smsType: values.smsType,
                     returnType: values.returnType,
@@ -140,8 +140,14 @@ const EditInitialCallThreeWrapper = () => {
     ]
 
     const complainttype = [
-        { label: 'complaint', value: 'COMPLAINT' },
-        { label: 'enquiry', value: 'ENQUIRY' },
+        {
+            label: 'Complaint',
+            value: 'COMPLAINT',
+        },
+        {
+            label: 'Inquiry',
+            value: 'INQUIRY',
+        },
     ]
 
     const returntype = [

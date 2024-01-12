@@ -130,16 +130,7 @@ const AddInitialCallThree = ({
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                        options={[
-                                            {
-                                                label: 'Complaint',
-                                                value: 'COMPLAINT',
-                                            },
-                                            {
-                                                label: 'Inquiry',
-                                                value: 'INQUIRY',
-                                            },
-                                        ]}
+                                        options={dropdownoptions.complainttypeOptions}
                                         onChange={(newValue: any) => {
                                             handleSetFieldValue(
                                                 'callType',
@@ -228,7 +219,7 @@ const AddInitialCallThree = ({
                                         handleSetFieldValue('emailType', e)
                                     }
                                 />
-                                <ATMSelectSearchable
+                                {/* <ATMSelectSearchable
                                     options={
                                         dropdownoptions.complainttypeOptions
                                     }
@@ -239,7 +230,7 @@ const AddInitialCallThree = ({
                                     onChange={(e) =>
                                         handleSetFieldValue('complaintType', e)
                                     }
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>

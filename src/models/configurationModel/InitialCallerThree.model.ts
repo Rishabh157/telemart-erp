@@ -22,10 +22,7 @@ export type InitialCallerThreeListResponse = {
     __v: number
 }
 
-enum comapintType {
-    complaint = 'COMPLAINT',
-    enquiry = 'ENQUIRY',
-}
+
 
 enum emailType {
     personalEmail = 'PERSONAL EMAIL',
@@ -63,7 +60,6 @@ export type AddInitialCallerThree = {
     initialCallOneId: string
     initialCallTwoId: string
     callType: string
-    complaintType: string
     emailType: string
     smsType: string
     returnType: string[]
@@ -76,7 +72,7 @@ export type UpdateInitialCallerThree = {
         initialCallOneId: string
         initialCallTwoId: string
         callType: string
-        complaintType: string
+
         emailType: string
         smsType: string
         returnType: string[]
