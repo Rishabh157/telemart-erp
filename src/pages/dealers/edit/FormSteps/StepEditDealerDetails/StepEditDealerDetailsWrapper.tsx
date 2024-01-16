@@ -58,8 +58,8 @@ const formFields: FieldType[] = [
     },
     {
         name: 'openingBalance',
-        label: 'Opeaning Balance',
-        placeholder: 'Opeaning Balance',
+        label: 'Opening Balance',
+        placeholder: 'Opening  Balance',
         type: 'number',
     },
     {
@@ -75,9 +75,9 @@ const formFields: FieldType[] = [
     //     type: 'switch-button',
     // },
     {
-        name: 'firstName',
-        label: 'First Name',
-        placeholder: 'First Name',
+        name: 'firmName',
+        label: 'Party(firm) Name',
+        placeholder: 'Party Name',
     },
     {
         name: 'lastName',

@@ -180,7 +180,6 @@ const AddPurchaseOrderTabWrapper = (props: Props) => {
 
         setTimeout(() => {
             addPurchaseOrder({
-                poCode: values.poCode,
                 vendorId: values.vendorId,
                 wareHouseId: values.wareHouseId,
                 isEditable: values.isEditable,

@@ -36,7 +36,7 @@ export type PurchaseOrderListResponse = {
 }
 
 export type addPurchaseOrder = {
-    poCode: string
+
     vendorId: string
     wareHouseId: string
     isEditable: boolean
@@ -51,7 +51,7 @@ export type addPurchaseOrder = {
 
 export type UpdatePurchaseOrder = {
     body: {
-        poCode: string
+
         vendorId: string
         wareHouseId: string
         isEditable: boolean

@@ -35,7 +35,6 @@ import useCountries from 'src/hooks/useCountry'
 
 // |-- Types --|
 export type FormInitialValues = {
-    warehouseCode: string
     warehouseName: string
     country: string
     email: string
@@ -74,7 +73,6 @@ const steps = [
         label: 'Company Details',
         component: StepAddCompanyDetailsWrapper,
         validationSchema: object({
-            warehouseCode: string().required('code is required'),
             warehouseName: string().required('name is required'),
             country: string().required('please select country'),
             email: string()
@@ -166,7 +164,6 @@ const AddVendorWarehouseWrapper = () => {
 
     // From Initial Values
     const initialValues: FormInitialValues = {
-        warehouseCode: '',
         warehouseName: '',
         country: '',
         email: '',
@@ -222,7 +219,6 @@ const AddVendorWarehouseWrapper = () => {
             dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 addVendorWarehouse({
-                    wareHouseCode: values.warehouseCode,
                     wareHouseName: values.warehouseName,
                     country: values.country,
                     email: values.email,

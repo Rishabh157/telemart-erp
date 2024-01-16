@@ -22,7 +22,7 @@ import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrap
 import AddDealerWarehouse from './AddDealerWarehouse'
 import { useAddDealerWarehouseMutation } from 'src/services/DealerWarehouseService'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
-import { showToast } from 'src/utils'
+import { showToast, validationofGst } from 'src/utils'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -35,7 +35,6 @@ import useCountries from 'src/hooks/useCountry'
 
 // |-- Types --|
 export type FormInitialValues = {
-    warehouseCode: string
     warehouseName: string
     country: string
     email: string
@@ -74,7 +73,6 @@ const steps = [
         label: 'Warehouse Details',
         component: StepAddCompanyDetailsWrapper,
         validationSchema: object({
-            warehouseCode: string().required('code is required'),
             warehouseName: string().required('name is required'),
             // country: string().required('please select country'),
             // email: string()
@@ -108,7 +106,10 @@ const steps = [
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
-                gstNumber: string().required('GST Number is required'),
+                gstNumber: string().matches(
+                    validationofGst,
+                    'gst number must be 15 digit'
+                ),
                 gstCertificate: string().required(
                     'GST Certificate is required'
                 ),
@@ -166,7 +167,6 @@ const AddDealerWarehouseWrapper = () => {
 
     // From Initial Values
     const initialValues: FormInitialValues = {
-        warehouseCode: '',
         warehouseName: '',
         country: '',
         email: '',
@@ -214,7 +214,6 @@ const AddDealerWarehouseWrapper = () => {
             dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 addDealerWarehouse({
-                    wareHouseCode: values.warehouseCode,
                     wareHouseName: values.warehouseName,
                     country: values.country,
                     email: values.email,

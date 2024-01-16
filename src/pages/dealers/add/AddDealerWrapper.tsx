@@ -23,7 +23,7 @@ import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrap
 import StepAddDocumentsWrapper from './FormSteps/StepAddDocuments/StepAddDocumentsWrapper'
 import StepAddOthersWrapper from './FormSteps/StepAddOthers/StepAddOthersWrapper'
 import { useAddDealerMutation } from 'src/services/DealerServices'
-import { showToast } from 'src/utils'
+import { showToast, validationofGst } from 'src/utils'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
@@ -88,7 +88,9 @@ export type FormInitialValues = {
     zonalManagerId: string | null
     zonalExecutiveId: string | null
 }
-
+export const gstNumberRegex = RegExp(
+    /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/
+)
 // export const adharNoRegexp = RegExp(
 //     /[0-9]{4}[\-][0-9]{4}[\-][0-9]{4}[\-][0-9]{4}/
 // )
@@ -178,7 +180,9 @@ const steps = [
         component: StepAddDocumentsWrapper,
         validationSchema: object({
             document: object().shape({
-                // gstNumber: string().required('GST number is required'),
+                gstNumber: string()
+                .matches(validationofGst, 'gst number must be 15 digit'),
+                // .required('GST number is required'),
                 // gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')
