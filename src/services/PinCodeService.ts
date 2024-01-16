@@ -135,6 +135,15 @@ export const pincodeApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        // **** GET All info BY Pincode auth
+        getAllInfoByPincodeAuth: builder.mutation({
+            invalidatesTags: ['pincode'],
+            query: (pincode: string) => ({
+                url: `/pincode/get-by-pincode/${pincode}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -150,4 +159,5 @@ export const {
     useGetAllPincodeByTehsilUnauthQuery,
     useGetAllPincodeByDistrictQuery,
     useGetAllInfoByPincodeMutation,
+    useGetAllInfoByPincodeAuthMutation,
 } = pincodeApi

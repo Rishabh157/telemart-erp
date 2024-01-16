@@ -22,6 +22,7 @@ import { showToast } from 'src/utils'
 import {
     useDeleteDealerMutation,
     useGetDealersQuery,
+    useApproveDealerStatusMutation,
 } from 'src/services/DealerServices'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
@@ -37,6 +38,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { Chip } from '@mui/material'
 
 const DealersListingWrapper = () => {
     const dealerState: any = useSelector((state: RootState) => state.dealer)
@@ -49,9 +51,28 @@ const DealersListingWrapper = () => {
 
     const navigate = useNavigate()
     const [deletedealer] = useDeleteDealerMutation()
+    const [approveDealer] = useApproveDealerStatusMutation()
 
     const { page, rowsPerPage, items, searchValue } = dealerState
     const dispatch = useDispatch<AppDispatch>()
+
+    const handleDeactive = (rowId: string) => {
+        setShowDropdown(false)
+        approveDealer(rowId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Status changed successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
 
     // const navigate = useNavigate();
     const columns: columnTypes[] = [
@@ -109,6 +130,66 @@ const DealersListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: DealersListResponse) => {
                 return <span> {row.billingAddressStateName} </span>
+            },
+        },
+        {
+            field: 'isApproved',
+            headerName: 'Approval',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => {
+                return (
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                        {row.isApproved ? (
+                            <Chip
+                                // onClick={() => {
+                                //     showConfirmationDialog({
+                                //         title: 'Disapproved',
+                                //         text: `Do you want to ${
+                                //             row.isApproved
+                                //                 ? 'Disapprove this dealer'
+                                //                 : 'Approve this dealer'
+                                //         }`,
+                                //         showCancelButton: true,
+                                //         next: (res) => {
+                                //             return res.isConfirmed
+                                //                 ? handleDeactive(row?._id)
+                                //                 : setShowDropdown(false)
+                                //         },
+                                //     })
+                                // }}
+                                className="cursor-pointer"
+                                label="Approved"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Approved',
+                                        text: `Do you want to ${
+                                            row.isApproved
+                                                ? 'Disapprove this dealer'
+                                                : 'Approval this dealer'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Disapproved"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
+                    </span>
+                )
             },
         },
         {

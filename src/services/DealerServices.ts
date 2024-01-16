@@ -66,6 +66,15 @@ export const dealerApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** approve dealer status *****/
+        approveDealerStatus: builder.mutation({
+            invalidatesTags: ['dealer'],
+            query: (id) => ({
+                url: `dealer/dealer-approve/${id}`,
+                method: 'PUT',
+            }),
+        }),
+
         // **** GET BY ID
         getDealerById: builder.query({
             providesTags: ['dealer'],
@@ -96,4 +105,5 @@ export const {
     useGetDealerByIdQuery,
     useDeleteDealerMutation,
     useChangeDealerStatusMutation,
+    useApproveDealerStatusMutation,
 } = dealerApi

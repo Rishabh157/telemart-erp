@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:StepAddAddressWrapper.tsx
 // Type: ADD Component
@@ -27,6 +28,7 @@ import useCountries from 'src/hooks/useCountry'
 import useStatesByCountry from 'src/hooks/useStatesByCountry'
 import useStateDistricts from 'src/hooks/useDistrictsByState'
 import usePincodesByDistrict from 'src/hooks/usePincodesByDistrict'
+import useAllInfoByPincode from 'src/hooks/useAllInfoByPincode'
 
 // |-- Types --|
 type Props = {
@@ -267,6 +269,110 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
         billingDistrictOptions,
         billingPincodeOptions,
     }
+    const [isOpenSearchPincode, setIsOpenSearchPincode] = React.useState<any>({
+        'billingAddress.pincode': false,
+        'registrationAddress.pincode': false,
+    })
+
+    // For Regd./Billing address autofill
+    const { pincodeData, isDataLoading } = useAllInfoByPincode(
+        formikProps.values.registrationAddress.pincodeSearch
+    )
+
+    useEffect(() => {
+        if (!isDataLoading) {
+            if (pincodeData !== null) {
+                setIsOpenSearchPincode((prev: any) => {
+                    return {
+                        ...prev,
+                        'registrationAddress.pincode': false,
+                    }
+                })
+                formikProps.setFieldValue(
+                    'registrationAddress.country',
+                    pincodeData?.countryId
+                )
+                formikProps.setFieldValue(
+                    'registrationAddress.state',
+                    pincodeData?.stateId
+                )
+                formikProps.setFieldValue(
+                    'registrationAddress.district',
+                    pincodeData?.districtId
+                )
+                formikProps.setFieldValue(
+                    'registrationAddress.pincode',
+                    pincodeData?._id
+                )
+            } else {
+                setIsOpenSearchPincode((prev: any) => {
+                    return {
+                        ...prev,
+                        'registrationAddress.pincode': true,
+                    }
+                })
+            }
+        }
+    }, [pincodeData, isDataLoading])
+
+    // For Billing Address autofill
+    const {
+        pincodeData: pincodeDataBilling,
+        isDataLoading: isLoadingPincodeDataBilling,
+    } = useAllInfoByPincode(formikProps.values.billingAddress.pincodeSearch)
+
+    useEffect(() => {
+        if (!isLoadingPincodeDataBilling) {
+            if (pincodeDataBilling !== null) {
+                setIsOpenSearchPincode((prev: any) => {
+                    return {
+                        ...prev,
+                        'billingAddress.pincode': false,
+                    }
+                })
+                formikProps.setFieldValue(
+                    'billingAddress.country',
+                    pincodeDataBilling?.countryId
+                )
+                formikProps.setFieldValue(
+                    'billingAddress.state',
+                    pincodeDataBilling?.stateId
+                )
+                formikProps.setFieldValue(
+                    'billingAddress.district',
+                    pincodeDataBilling?.districtId
+                )
+                formikProps.setFieldValue(
+                    'billingAddress.pincode',
+                    pincodeDataBilling?._id
+                )
+            } else {
+                setIsOpenSearchPincode((prev: any) => {
+                    return {
+                        ...prev,
+                        'billingAddress.pincode': true,
+                    }
+                })
+            }
+        }
+    }, [pincodeDataBilling, isLoadingPincodeDataBilling])
+
+    const handleAutoSearchPincode = (
+        name: string,
+        newValue: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        if (name === 'billingAddress.pincode') {
+            formikProps.setFieldValue(
+                'billingAddress.pincodeSearch',
+                newValue.target.value
+            )
+        } else {
+            formikProps.setFieldValue(
+                'registrationAddress.pincodeSearch',
+                newValue.target.value
+            )
+        }
+    }
 
     return (
         <>
@@ -274,6 +380,9 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
                 formikProps={formikProps}
                 formFields={formFields}
                 dropdownOptions={dropdownOptions}
+                handleAutoSearchPincode={handleAutoSearchPincode}
+                isOpenSearchPincode={isOpenSearchPincode}
+                setIsOpenSearchPincode={setIsOpenSearchPincode}
             />
         </>
     )

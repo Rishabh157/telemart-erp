@@ -58,6 +58,7 @@ export type FormInitialValues = {
         state: string
         district: string
         pincode: string
+        pincodeSearch: string
     }
     billingAddress: {
         phone: string
@@ -66,6 +67,7 @@ export type FormInitialValues = {
         state: string
         district: string
         pincode: string
+        pincodeSearch: string
     }
     contactInformation: {
         name: string
@@ -236,6 +238,7 @@ const AddDealerWrapper = () => {
             state: '',
             district: '',
             pincode: '',
+            pincodeSearch: '',
         },
 
         billingAddress: {
@@ -245,6 +248,7 @@ const AddDealerWrapper = () => {
             state: '',
             district: '',
             pincode: '',
+            pincodeSearch: '',
         },
         contactInformation: [
             {
