@@ -84,20 +84,21 @@ const DealerListLedgerTabWrapper = () => {
                 return <span> {row.remark} </span>
             },
         },
-        {
-            field: 'creditAmount',
-            headerName: 'Credit Amount',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: LedgerListResponse) => (
-                <span> {row.creditAmount} </span>
-            ),
-        },
+       
         {
             field: 'debitAmount',
             headerName: 'Debit Amount',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
                 <span> {row.debitAmount} </span>
+            ),
+        },
+        {
+            field: 'creditAmount',
+            headerName: 'Credit Amount',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: LedgerListResponse) => (
+                <span> {row.creditAmount} </span>
             ),
         },
         {

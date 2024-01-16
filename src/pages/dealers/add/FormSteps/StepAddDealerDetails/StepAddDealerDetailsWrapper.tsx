@@ -46,8 +46,8 @@ const formFields: FieldType[] = [
     },
     {
         name: 'firmName',
-        label: 'Firm Name',
-        placeholder: 'Firm Name',
+        label: 'Party(firm) Name',
+        placeholder: 'Party Name',
     },
     {
         name: 'creditLimit',
@@ -57,8 +57,8 @@ const formFields: FieldType[] = [
     },
     {
         name: 'openingBalance',
-        label: 'Opeaning Balance',
-        placeholder: 'Opeaning Balance',
+        label: 'Opening  Balance',
+        placeholder: 'Opening  Balance',
         type: 'number',
     },
     {

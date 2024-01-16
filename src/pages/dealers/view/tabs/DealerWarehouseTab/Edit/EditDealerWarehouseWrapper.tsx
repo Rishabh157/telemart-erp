@@ -20,7 +20,7 @@ import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/St
 import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
 import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
 import EditDealerWarehouse from './EditDealerWarehouse'
-import { showToast } from 'src/utils'
+import { showToast, validationofGst } from 'src/utils'
 import {
     useGetDealerWarehouseByIdQuery,
     useUpdateDealerWarehouseMutation,
@@ -39,7 +39,6 @@ import useCountries from 'src/hooks/useCountry'
 
 // |-- Types --|
 export type FormInitialValues = {
-    warehouseCode: string
     warehouseName: string
     country: string
     email: string
@@ -78,7 +77,6 @@ const steps = [
         label: 'Company Details',
         component: StepEditCompanyDetailsWrapper,
         validationSchema: object({
-            warehouseCode: string().required('warehouseCode is required'),
             warehouseName: string().required('warehouse Name is required'),
             country: string().required('please select country'),
             email: string().required('Required').email('Invalid email'),
@@ -107,7 +105,10 @@ const steps = [
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
-                gstNumber: string().required('GST Number is required'),
+                gstNumber: string().matches(
+                    validationofGst,
+                    'gst number must be 15 digit'
+                ),
                 gstCertificate: string().required(
                     'GST Certificate is required'
                 ),
@@ -173,7 +174,6 @@ const EditDealerWarehouseWrapper = () => {
 
     // From Initial Values
     const initialValues: FormInitialValues = {
-        warehouseCode: selectedItem?.wareHouseCode || '',
         warehouseName: selectedItem?.wareHouseName || '',
         country: selectedItem?.country || '',
         email: selectedItem?.email || '',
@@ -220,7 +220,6 @@ const EditDealerWarehouseWrapper = () => {
             setTimeout(() => {
                 updateDealerWarehouse({
                     body: {
-                        wareHouseCode: values.warehouseCode,
                         wareHouseName: values.warehouseName,
                         country: values.country,
                         email: values.email,

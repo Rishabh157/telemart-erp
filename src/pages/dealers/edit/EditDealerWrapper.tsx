@@ -26,7 +26,7 @@ import {
     useGetDealerByIdQuery,
     useUpdateDealerMutation,
 } from 'src/services/DealerServices'
-import { showToast } from 'src/utils'
+import { showToast, validationofGst } from 'src/utils'
 import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 
@@ -175,7 +175,8 @@ const steps = [
         component: StepEditDocumentsWrapper,
         validationSchema: object({
             document: object().shape({
-                // gstNumber: string().required('GST number is required'),
+                gstNumber: string()
+                .matches(validationofGst, 'gst number must be 15 digit'),
                 // gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')
