@@ -31,28 +31,23 @@ export type FieldType = Field<'countryOptions'>
 
 const formFields: FieldType[] = [
     {
-        name: 'warehouseCode',
-        label: 'Warehouse Code',
-        placeholder: 'Warehouse Code',
-    },
-    {
         name: 'warehouseName',
         label: 'Warehouse Name',
         placeholder: 'Warehouse Name',
     },
-    // {
-    //     name: 'country',
-    //     label: 'Country',
-    //     placeholder: 'Country',
-    //     type: 'select',
-    //     optionAccessKey: 'countryOptions',
-    // },
+    {
+        name: 'country',
+        label: 'Country',
+        placeholder: 'Country',
+        type: 'select',
+        optionAccessKey: 'countryOptions',
+    },
 
-    // {
-    //     name: 'email',
-    //     label: 'Email',
-    //     placeholder: 'Email',
-    // },
+    {
+        name: 'email',
+        label: 'Email',
+        placeholder: 'Email',
+    },
 ]
 
 const StepAddCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {

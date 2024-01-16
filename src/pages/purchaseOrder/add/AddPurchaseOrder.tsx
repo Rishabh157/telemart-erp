@@ -111,19 +111,7 @@ const AddPurchaseOrder = ({
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* PO Code */}
-                            <ATMTextField
-                                name="poCode"
-                                value={values.poCode}
-                                label="PO Code"
-                                placeholder="PO Code"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'poCode',
-                                        e.target.value
-                                    )
-                                }
-                                className="mt-0 rounded"
-                            />
+                         
 
                             {/* Vendor */}
                             <div className="-mt-2">

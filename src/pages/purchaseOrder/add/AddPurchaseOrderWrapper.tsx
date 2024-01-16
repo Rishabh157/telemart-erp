@@ -35,7 +35,6 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {}
 
 export type FormInitialValues = {
-    poCode: string
     vendorId: string
     wareHouseId: string
     isEditable: boolean
@@ -121,7 +120,6 @@ const AddPurchaseOrderWrapper = (props: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        poCode: '',
         vendorId: '',
         wareHouseId: '',
         isEditable: true,
@@ -138,7 +136,6 @@ const AddPurchaseOrderWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         // eslint-disable-next-line no-useless-escape
-        poCode: string().required('Purchase order code is required').matches(/^[a-zA-Z]+[^\/\\]*$/, 'Only alphabetical characters are allowed, except / and \\'),
         vendorId: string().required('Please select a vendor'),
         wareHouseId: string().required('Please select a warehouse'),
         purchaseOrder: array().of(
@@ -172,7 +169,6 @@ const AddPurchaseOrderWrapper = (props: Props) => {
 
         setTimeout(() => {
             addPurchaseOrder({
-                poCode: values.poCode,
                 vendorId: values.vendorId,
                 wareHouseId: values.wareHouseId,
                 isEditable: values.isEditable,

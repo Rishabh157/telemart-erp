@@ -40,7 +40,6 @@ import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
 type Props = {}
 
 export type FormInitialValues = {
-    poCode: string
     vendorId: string
     wareHouseId: string
     isEditable: boolean
@@ -80,7 +79,6 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     }, [poData, poIsLoading, poIsFetching])
 
     const initialValues: FormInitialValues = {
-        poCode: selectedItems?.poCode || '',
         vendorId: selectedItems?.vendorId || '',
         wareHouseId: selectedItems?.wareHouseId || '',
         isEditable: selectedItems?.isEditable || true,
@@ -160,7 +158,6 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         // eslint-disable-next-line no-useless-escape
-        poCode: string().required('Purchase order code is required').matches(/^[a-zA-Z]+[^\/\\]*$/, 'Only alphabetical characters are allowed, except / and \\'),
         vendorId: string().required('Please select a vendor'),
         wareHouseId: string().required('Please select a warehouse'),
         purchaseOrder: object({
@@ -196,7 +193,6 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         setTimeout(() => {
             UpdatePurchaseOrder({
                 body: {
-                    poCode: values?.poCode,
                     vendorId: values?.vendorId,
                     wareHouseId: values?.wareHouseId,
                     isEditable: values?.isEditable,

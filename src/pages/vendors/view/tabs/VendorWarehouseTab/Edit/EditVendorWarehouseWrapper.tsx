@@ -39,7 +39,6 @@ import useCountries from 'src/hooks/useCountry'
 
 // |-- Types --|
 export type FormInitialValues = {
-    warehouseCode: string
     warehouseName: string
     country: string
     email: string
@@ -78,7 +77,6 @@ const steps = [
         label: 'Company Details',
         component: StepEditCompanyDetailsWrapper,
         validationSchema: object({
-            warehouseCode: string().required('warehouseCode is required'),
             warehouseName: string().required('warehouse Name is required'),
             country: string().required('please select country'),
             email: string().required('Required').email('Invalid email'),
@@ -176,7 +174,6 @@ const EditVendorWarehouseWrapper = () => {
 
     // From Initial Values
     const initialValues: FormInitialValues = {
-        warehouseCode: selectedItem?.wareHouseCode || '',
         warehouseName: selectedItem?.wareHouseName || '',
         country: selectedItem?.country || '',
         email: selectedItem?.email || '',
@@ -223,7 +220,6 @@ const EditVendorWarehouseWrapper = () => {
             setTimeout(() => {
                 updateVendorWarehouse({
                     body: {
-                        wareHouseCode: values.warehouseCode,
                         wareHouseName: values.warehouseName,
                         country: values.country,
                         email: values.email,

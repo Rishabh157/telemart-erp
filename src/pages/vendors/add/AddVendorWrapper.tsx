@@ -23,7 +23,7 @@ import StepAddCompanyDetailsWrapper from './FormSteps/StepAddComapnyDetails/Step
 import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
 import StepAddDocumentsWrapper from './FormSteps/StepAddDocuments/StepAddDocumentsWrapper'
 import { useAddVendorMutation } from 'src/services/VendorServices'
-import { showToast } from 'src/utils'
+import { showToast, validationofGst } from 'src/utils'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -151,7 +151,9 @@ const steps = [
         label: 'Document',
         component: StepAddDocumentsWrapper,
         validationSchema: object({
-            gst_no: string().required('GST number is required'),
+            // gst_no: string().required('GST number is required'),
+            gst_no: string()
+                .matches(validationofGst, 'gst number must be 15 digit'),
             gst_certificate: string()
                 // .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),
