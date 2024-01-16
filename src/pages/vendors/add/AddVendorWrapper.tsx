@@ -153,7 +153,7 @@ const steps = [
         validationSchema: object({
             // gst_no: string().required('GST number is required'),
             gst_no: string()
-                .matches(validationofGst, 'gst number must be 15 digit'),
+                .matches(validationofGst, 'gst number must be valid'),
             gst_certificate: string()
                 // .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),

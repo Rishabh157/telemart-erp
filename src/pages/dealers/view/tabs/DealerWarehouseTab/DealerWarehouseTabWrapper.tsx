@@ -79,9 +79,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: WarehousesListResponse) => {
-                return (
-                    <span className=" "> {row.registrationCountryName} </span>
-                )
+                return <span className=" "> {row.registrationStateName} </span>
             },
         },
         {

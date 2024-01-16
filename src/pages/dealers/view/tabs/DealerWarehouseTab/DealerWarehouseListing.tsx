@@ -73,24 +73,24 @@ const DealerWarehouseListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
-                {isShowAddWarehouseButton && (
-                    <AuthenticationHOC
-                        moduleName={UserModuleNameTypes.dealer}
-                        actionName={UserModuleAddActionTypes.dealerWareHouseAdd}
-                        component={
-                            <button
-                                onClick={() =>
-                                    navigate(`${AddpathName}`, {
-                                        state: { params },
-                                    })
-                                }
-                                className="bg-primary-main text-white rounded py-1 px-3"
-                            >
-                                + Add
-                            </button>
-                        }
-                    />
-                )}
+                {/* {isShowAddWarehouseButton && ( */}
+                <AuthenticationHOC
+                    moduleName={UserModuleNameTypes.dealer}
+                    actionName={UserModuleAddActionTypes.dealerWareHouseAdd}
+                    component={
+                        <button
+                            onClick={() =>
+                                navigate(`${AddpathName}`, {
+                                    state: { params },
+                                })
+                            }
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Add
+                        </button>
+                    }
+                />
+                {/* )} */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

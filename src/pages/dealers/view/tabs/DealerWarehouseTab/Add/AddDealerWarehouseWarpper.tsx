@@ -46,6 +46,7 @@ export type FormInitialValues = {
         state: string
         district: string
         pincode: string
+        pincodeSearch: string
     }
     billing_address: {
         gstNumber: string
@@ -56,6 +57,7 @@ export type FormInitialValues = {
         state: string
         district: string
         pincode: string
+        pincodeSearch: string
     }
     contact_informations: {
         name: string
@@ -108,11 +110,9 @@ const steps = [
                 address: string().required('Address is required'),
                 gstNumber: string().matches(
                     validationofGst,
-                    'gst number must be 15 digit'
+                    'gst number must be valid'
                 ),
-                gstCertificate: string().required(
-                    'GST Certificate is required'
-                ),
+                gstCertificate: string(),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
                 district: string().required('Please choose a district'),
@@ -178,6 +178,7 @@ const AddDealerWarehouseWrapper = () => {
             state: '',
             district: '',
             pincode: '',
+            pincodeSearch: '',
         },
         billing_address: {
             gstNumber: '',
@@ -188,6 +189,7 @@ const AddDealerWarehouseWrapper = () => {
             state: '',
             district: '',
             pincode: '',
+            pincodeSearch: '',
         },
         contact_informations: [
             {

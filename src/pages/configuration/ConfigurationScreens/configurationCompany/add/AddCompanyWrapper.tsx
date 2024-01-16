@@ -57,7 +57,7 @@ const steps = [
             companyName: string().required('Company name is required'),
             websiteUrl: string().url().required('Website url is required'),
             gstNo: string()
-                .matches(validationofGst, 'gst number must be 15 digit')
+                .matches(validationofGst, 'gst number must be valid')
                 .required('GST number is required'),
             address: string().required('Address is required'),
             phoneNo: string()
