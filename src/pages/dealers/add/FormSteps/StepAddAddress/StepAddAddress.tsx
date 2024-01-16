@@ -11,6 +11,7 @@ import React from 'react'
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
+import { CiSearch } from 'react-icons/ci'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -22,6 +23,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -42,6 +44,12 @@ type Props = {
         fields: FieldType[]
     }[]
     dropdownOptions: DropdownOptions
+    handleAutoSearchPincode: (
+        name: string,
+        newValue: React.ChangeEvent<HTMLInputElement>
+    ) => void
+    isOpenSearchPincode: any
+    setIsOpenSearchPincode: any
 }
 type FieldType = Field<
     | 'counrtyOptions'
@@ -57,6 +65,9 @@ const StepAddAddress = ({
     formikProps,
     formFields,
     dropdownOptions,
+    handleAutoSearchPincode,
+    isOpenSearchPincode,
+    setIsOpenSearchPincode,
 }: Props) => {
     const dispatch = useDispatch()
 
@@ -140,40 +151,120 @@ const StepAddAddress = ({
                                         )
                                     case 'select':
                                         return (
-                                            <div
-                                                className="-mt-4"
-                                                key={name || index}
-                                            >
-                                                <ATMSelectSearchable
-                                                    label={label}
-                                                    name={name}
-                                                    value={
-                                                        name.includes('.')
-                                                            ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
-                                                            : values[name]
-                                                    }
-                                                    options={
-                                                        dropdownOptions[
-                                                            field.optionAccessKey ||
-                                                                'counrtyOptions'
-                                                        ]
-                                                    }
-                                                    onChange={(e) => {
-                                                        setFieldValue(name, e)
-                                                    }}
-                                                    // size="small"
-                                                    selectClass="shadow mt-2"
-                                                    isSubmitting={isSubmitting}
-                                                />
-                                            </div>
+                                            <>
+                                                <div
+                                                    className="-mt-4"
+                                                    key={name || index}
+                                                >
+                                                    <ATMSelectSearchable
+                                                        label={label}
+                                                        name={name}
+                                                        value={
+                                                            name.includes('.')
+                                                                ? values[
+                                                                      name.split(
+                                                                          '.'
+                                                                      )[0]
+                                                                  ][
+                                                                      name.split(
+                                                                          '.'
+                                                                      )[1]
+                                                                  ]
+                                                                : values[name]
+                                                        }
+                                                        options={
+                                                            dropdownOptions[
+                                                                field.optionAccessKey ||
+                                                                    'counrtyOptions'
+                                                            ]
+                                                        }
+                                                        onChange={(e) => {
+                                                            setFieldValue(
+                                                                name,
+                                                                e
+                                                            )
+                                                        }}
+                                                        // size="small"
+                                                        selectClass="shadow mt-2"
+                                                        isSubmitting={
+                                                            isSubmitting
+                                                        }
+                                                    />
+                                                </div>
+
+                                                {label === 'Pincode' && (
+                                                    <>
+                                                        <div
+                                                            className="flex justify-center items-center bg-slate-400 w-8 h-9 rounded mt-8 cursor-pointer"
+                                                            onClick={() => {
+                                                                setIsOpenSearchPincode(
+                                                                    (
+                                                                        prev: any
+                                                                    ) => {
+                                                                        return {
+                                                                            ...prev,
+                                                                            [name]: true,
+                                                                        }
+                                                                    }
+                                                                )
+                                                            }}
+                                                        >
+                                                            <CiSearch
+                                                                size={20}
+                                                                color="bg-blue-400"
+                                                            />
+                                                        </div>
+                                                        <DialogLogBox
+                                                            fullWidth={false}
+                                                            isOpen={
+                                                                isOpenSearchPincode[
+                                                                    name
+                                                                ]
+                                                            }
+                                                            handleClose={() =>
+                                                                setIsOpenSearchPincode(
+                                                                    (
+                                                                        prev: any
+                                                                    ) => {
+                                                                        return {
+                                                                            ...prev,
+                                                                            [name]: false,
+                                                                        }
+                                                                    }
+                                                                )
+                                                            }
+                                                            component={
+                                                                <div className="px-4 py-2">
+                                                                    <ATMTextField
+                                                                        name=""
+                                                                        value={
+                                                                            name ===
+                                                                            'billingAddress.pincode'
+                                                                                ? values[
+                                                                                      'billingAddress.pincodeSearch'
+                                                                                  ]
+                                                                                : values[
+                                                                                      'registrationAddress.pincodeSearch'
+                                                                                  ]
+                                                                        }
+                                                                        onChange={(
+                                                                            newValue
+                                                                        ) => {
+                                                                            handleAutoSearchPincode(
+                                                                                name,
+                                                                                newValue
+                                                                            )
+                                                                        }}
+                                                                        label="Search Pincode"
+                                                                        placeholder="Enter Pincode"
+                                                                        className="shadow bg-white rounded"
+                                                                    />
+                                                                </div>
+                                                            }
+                                                        />
+                                                    </>
+                                                )}
+                                            </>
                                         )
                                     case 'checkbox':
                                         return (

@@ -176,7 +176,7 @@ const steps = [
         validationSchema: object({
             document: object().shape({
                 gstNumber: string()
-                .matches(validationofGst, 'gst number must be 15 digit'),
+                .matches(validationofGst, 'gst number must be valid'),
                 // gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')

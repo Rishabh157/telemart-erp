@@ -110,9 +110,7 @@ const steps = [
                     validationofGst,
                     'gst number must be 15 digit'
                 ),
-                gstCertificate: string().required(
-                    'GST Certificate is required'
-                ),
+                gstCertificate: string(),
                 country: string().required('Please choose a country'),
                 state: string().required('Please choose a state'),
                 district: string().required('Please choose a district'),
@@ -174,7 +172,6 @@ const EditWarehouseWrapper = () => {
             dispatch(setAllCountry(country))
         }
     }, [country, dispatch])
-   
 
     // From Initial Values
     const initialValues: FormInitialValues = {

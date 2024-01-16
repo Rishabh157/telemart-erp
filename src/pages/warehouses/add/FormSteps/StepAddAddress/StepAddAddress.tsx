@@ -24,6 +24,8 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { CiSearch } from 'react-icons/ci'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -55,12 +57,21 @@ type Props = {
         fields: FieldType[]
     }[]
     dropdownOptions: DropdownOptions
+    handleAutoSearchPincode: (
+        name: string,
+        newValue: React.ChangeEvent<HTMLInputElement>
+    ) => void
+    isOpenSearchPincode: any
+    setIsOpenSearchPincode: any
 }
 
 const StepAddAddress = ({
     formikProps,
     formFields,
     dropdownOptions,
+    handleAutoSearchPincode,
+    isOpenSearchPincode,
+    setIsOpenSearchPincode,
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
@@ -209,7 +220,7 @@ const StepAddAddress = ({
                                         )
                                     case 'select':
                                         return (
-                                            <div className="-mt-2" key={name}>
+                                            <div className={`"-mt-2" ${label === 'Pincode' && 'flex gap-x-4'}`} key={name}>
                                                 <ATMSelectSearchable
                                                     label={label}
                                                     selectLabel={label}
@@ -238,6 +249,79 @@ const StepAddAddress = ({
                                                     }
                                                     isSubmitting={isSubmitting}
                                                 />
+
+                                                {label === 'Pincode' && (
+                                                    <>
+                                                        <div
+                                                            className="flex justify-center items-center bg-slate-400 w-8 h-9 rounded mt-11 cursor-pointer"
+                                                            onClick={() => {
+                                                                setIsOpenSearchPincode(
+                                                                    (
+                                                                        prev: any
+                                                                    ) => {
+                                                                        return {
+                                                                            ...prev,
+                                                                            [name]: true,
+                                                                        }
+                                                                    }
+                                                                )
+                                                            }}
+                                                        >
+                                                            <CiSearch
+                                                                size={20}
+                                                                color="bg-blue-400"
+                                                            />
+                                                        </div>
+                                                        <DialogLogBox
+                                                            fullWidth={false}
+                                                            isOpen={
+                                                                isOpenSearchPincode[
+                                                                    name
+                                                                ]
+                                                            }
+                                                            handleClose={() =>
+                                                                setIsOpenSearchPincode(
+                                                                    (
+                                                                        prev: any
+                                                                    ) => {
+                                                                        return {
+                                                                            ...prev,
+                                                                            [name]: false,
+                                                                        }
+                                                                    }
+                                                                )
+                                                            }
+                                                            component={
+                                                                <div className="px-4 py-2">
+                                                                    <ATMTextField
+                                                                        name=""
+                                                                        value={
+                                                                            name ===
+                                                                            'billing_address.pincode'
+                                                                                ? values[
+                                                                                      'billing_address.pincodeSearch'
+                                                                                  ]
+                                                                                : values[
+                                                                                      'regd_address.pincodeSearch'
+                                                                                  ]
+                                                                        }
+                                                                        onChange={(
+                                                                            newValue
+                                                                        ) => {
+                                                                            handleAutoSearchPincode(
+                                                                                name,
+                                                                                newValue
+                                                                            )
+                                                                        }}
+                                                                        label="Search Pincode"
+                                                                        placeholder="Enter Pincode"
+                                                                        className="shadow bg-white rounded"
+                                                                    />
+                                                                </div>
+                                                            }
+                                                        />
+                                                    </>
+                                                )}
                                             </div>
                                         )
                                     case 'checkbox':
