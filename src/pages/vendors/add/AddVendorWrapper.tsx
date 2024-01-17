@@ -47,6 +47,7 @@ export type FormInitialValues = {
         state: string
         district: string
         pincode: string
+        pincodeSearch: string
     }
     billing_address: {
         phone: string
@@ -55,6 +56,7 @@ export type FormInitialValues = {
         state: string
         district: string
         pincode: string
+        pincodeSearch: string
     }
     contact_informations: {
         name: string
@@ -152,11 +154,12 @@ const steps = [
         component: StepAddDocumentsWrapper,
         validationSchema: object({
             // gst_no: string().required('GST number is required'),
-            gst_no: string()
-                .matches(validationofGst, 'gst number must be valid'),
-            gst_certificate: string()
-                // .url('GST Certificate must be valid URL')
-                .required('GST certificate is required'),
+            gst_no: string().matches(
+                validationofGst,
+                'gst number must be valid'
+            ),
+            gst_certificate: string(),
+            // .url('GST Certificate must be valid URL')
             declaration_form: string(),
             // .url('Form must be valid URL'),
         }),
@@ -212,6 +215,7 @@ const AddVendorWrapper = () => {
             state: '',
             district: '',
             pincode: '',
+            pincodeSearch: '',
         },
         billing_address: {
             phone: '',
@@ -220,6 +224,7 @@ const AddVendorWrapper = () => {
             state: '',
             district: '',
             pincode: '',
+            pincodeSearch: '',
         },
         contact_informations: [
             {

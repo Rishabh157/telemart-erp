@@ -28,6 +28,7 @@ import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import useAllInfoByPincode from 'src/hooks/useAllInfoByPincode'
 
 // |-- Types --|
 type Props = {
@@ -272,12 +273,120 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
         billingPincodeOptions,
     }
 
+    const [isOpenSearchPincode, setIsOpenSearchPincode] = useState<any>({
+        'billing_address.pincode': false,
+        'regd_address.pincode': false,
+    })
+
+    // For Regd./Billing address autofill
+    const { pincodeData, isDataLoading } = useAllInfoByPincode(
+        formikProps.values.regd_address.pincodeSearch
+    )
+
+    useEffect(() => {
+        if (!isDataLoading) {
+            if (pincodeData !== null) {
+                setIsOpenSearchPincode((prev: any) => {
+                    return {
+                        ...prev,
+                        'regd_address.pincode': false,
+                    }
+                })
+                formikProps.setFieldValue(
+                    'regd_address.country',
+                    pincodeData?.countryId
+                )
+                formikProps.setFieldValue(
+                    'regd_address.state',
+                    pincodeData?.stateId
+                )
+                formikProps.setFieldValue(
+                    'regd_address.district',
+                    pincodeData?.districtId
+                )
+                formikProps.setFieldValue(
+                    'regd_address.pincode',
+                    pincodeData?._id
+                )
+            } else {
+                setIsOpenSearchPincode((prev: any) => {
+                    return {
+                        ...prev,
+                        'regd_address.pincode': true,
+                    }
+                })
+            }
+        }
+    }, [pincodeData, isDataLoading])
+
+    // For Billing Address autofill
+    const {
+        pincodeData: pincodeDataBilling,
+        isDataLoading: isLoadingPincodeDataBilling,
+    } = useAllInfoByPincode(formikProps.values.billing_address.pincodeSearch)
+
+    useEffect(() => {
+        if (!isLoadingPincodeDataBilling) {
+            if (pincodeDataBilling !== null) {
+                setIsOpenSearchPincode((prev: any) => {
+                    return {
+                        ...prev,
+                        'billing_address.pincode': false,
+                    }
+                })
+                formikProps.setFieldValue(
+                    'billing_address.country',
+                    pincodeDataBilling?.countryId
+                )
+                formikProps.setFieldValue(
+                    'billing_address.state',
+                    pincodeDataBilling?.stateId
+                )
+                formikProps.setFieldValue(
+                    'billing_address.district',
+                    pincodeDataBilling?.districtId
+                )
+                formikProps.setFieldValue(
+                    'billing_address.pincode',
+                    pincodeDataBilling?._id
+                )
+            } else {
+                setIsOpenSearchPincode((prev: any) => {
+                    return {
+                        ...prev,
+                        'billing_address.pincode': true,
+                    }
+                })
+            }
+        }
+    }, [pincodeDataBilling, isLoadingPincodeDataBilling])
+
+    const handleAutoSearchPincode = (
+        name: string,
+        newValue: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        if (name === 'billing_address.pincode') {
+            formikProps.setFieldValue(
+                'billing_address.pincodeSearch',
+                newValue.target.value
+            )
+        } else {
+            formikProps.setFieldValue(
+                'regd_address.pincodeSearch',
+                newValue.target.value
+            )
+        }
+    }
+
     return (
         <>
             <StepAddAddress
                 formikProps={formikProps}
                 formFields={formFields}
                 dropdownOptions={dropdownOptions}
+                handleAutoSearchPincode={handleAutoSearchPincode}
+                isOpenSearchPincode={isOpenSearchPincode}
+                setIsOpenSearchPincode={setIsOpenSearchPincode}
             />
         </>
     )
