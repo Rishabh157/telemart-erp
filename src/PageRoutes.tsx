@@ -264,6 +264,7 @@ import InventoryFlowListingWrapper from './pages/inventoryFlow/list/InventoryFlo
 import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/list/CallCenterMasterListingWrapper'
 import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
+import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2316,6 +2317,10 @@ const PageRoutes = () => {
                     <Route
                         path="media/caller-page"
                         element={<CallerPageWrapper />}
+                    />
+                    <Route
+                        path="media/customer-page"
+                        element={<CustomerPageWrapper />}
                     />
 
                     {/* Assets -> Assets Management */}

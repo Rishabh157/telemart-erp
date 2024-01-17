@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import CallerButton from './components/CallerButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { FormInitialValues } from './CallerPageWrapper'
+import { FormInitialValues } from './CustomerPageWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -60,7 +60,7 @@ export interface SchemeDetailsPropTypes {
     totalAmount: number
 }
 
-const CallerPage: React.FC<Props> = ({
+const CustomerPage: React.FC<Props> = ({
     formikProps,
     didItems,
     column,
@@ -130,7 +130,7 @@ const CallerPage: React.FC<Props> = ({
         data: singleSchemeData,
         isFetching: isSingleSchemeFetching,
         isLoading: isSingleSchemeLoading,
-    } = useGetSchemeByIdUnAuthQuery(values.schemeId, {
+    } = useGetSchemeByIdUnAuthQuery(values?.schemeId, {
         skip: !formikProps?.values?.schemeId,
     })
 
@@ -151,7 +151,7 @@ const CallerPage: React.FC<Props> = ({
         singleSchemeData,
         isSingleSchemeLoading,
         isSingleSchemeFetching,
-        values.productGroupId,
+        values?.productGroupId,
     ])
 
     // Disposition Three Data
@@ -207,6 +207,7 @@ const CallerPage: React.FC<Props> = ({
         // eslint-disable-next-line
     }, [schemeDetails])
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const dropdownOptions = {
         dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
@@ -217,7 +218,7 @@ const CallerPage: React.FC<Props> = ({
     }
 
     return (
-        <div className="bg-white px-4">
+        <div className="bg-white px-4 h-[2000px]">
             <CallerPageTopNav agentName={values.agentName as string} />
             <CallerHeader
                 CampaignName={values.campaign || ''}
@@ -234,7 +235,6 @@ const CallerPage: React.FC<Props> = ({
                 schemeDetails={schemeDetails}
                 companyId={companyId}
             />
-
             <CallerDeliveryAddress
                 setFieldValue={setFieldValue}
                 values={values}
@@ -255,7 +255,8 @@ const CallerPage: React.FC<Props> = ({
                         name="dispositionLevelTwoId"
                         value={values.dispositionLevelTwoId || ''}
                         // isSubmitting
-                        options={dropdownOptions.dispositionTwoOptions || []}
+                        // options={dropdownOptions.dispositionTwoOptions || []}
+                        options={[]}
                         menuPosition="absolute"
                         onChange={(e) => {
                             setFieldValue('dispositionLevelTwoId', e)
@@ -273,7 +274,8 @@ const CallerPage: React.FC<Props> = ({
                         name="dispositionLevelThreeId"
                         value={values.dispositionLevelThreeId || ''}
                         // isSubmitting
-                        options={dropdownOptions.dispositionThreeOptions || []}
+                        // options={dropdownOptions.dispositionThreeOptions || []}
+                        options={[]}
                         onChange={(e) => {
                             setFieldValue('dispositionLevelThreeId', e)
                         }}
@@ -296,11 +298,12 @@ const CallerPage: React.FC<Props> = ({
                 <ATMTable
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column}
-                    rows={rows}
+                    rows={[]}
+                    // rows={rows}
                 />
             </div>
         </div>
     )
 }
 
-export default CallerPage
+export default CustomerPage

@@ -80,6 +80,12 @@ const mediaNavigation: NavItemType[] = [
         path: '/media/caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
         name: 'INBOUND',
     },
+    {
+        label: 'Customer Page',
+        icon: MdViewTimeline,
+        path: '/media/customer-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
+        name: 'INBOUND',
+    },
 ]
 
 type Props = {

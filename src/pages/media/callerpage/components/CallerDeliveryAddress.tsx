@@ -3,7 +3,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { RootState } from 'src/redux/store'
 import CallerButton from './CallerButton'
-import { FormInitialValues } from '../CallerPageWrapper'
+import { FormInitialValues } from '../CustomerPageWrapper'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
@@ -710,7 +710,6 @@ const CallerDeliveryAddress = ({
                             name="autoFillingShippingAddress"
                             value={handleAutoFillShippingAddress(values) || ''}
                             placeholder="AUTOFILL SHIPPING ADDRESS"
-                            className='placeholder:text-sm'
                             minRows={9}
                             readOnly={true}
                             onChange={(value) =>
