@@ -232,7 +232,7 @@ import OutwardTabs from './pages/inventories/outward'
 import OutwardWarehouseToComapnyListingWrapper from './pages/inventories/outward/Company/list/OutwardWarehouseToComapnyListingWrapper'
 import OutwardCustomerTabsListingWrapper from './pages/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
 import OutwardDealerTabsListingWrapper from './pages/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
-import DispatchedInvoice from './pages/inventories/outward/Dealer/components/DispatchedInvoice'
+import DispatchedInvoice from './pages/saleOrder/list/components/DispatchedInvoiceWrapper'
 import OutwardEcomTabsListingWrapper from './pages/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
 import OutwardReplacementTabsListingWrapper from './pages/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
 import OutwardRTVTabsListingWrapper from './pages/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
@@ -305,7 +305,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                    <Route
+                    {/* <Route
                         path="warehouse/so-order/dispatched-invoice"
                         element={
                             <AuthenticationHOC
@@ -313,7 +313,7 @@ const PageRoutes = () => {
                                 moduleName={UserModuleNameTypes.vendor}
                             />
                         }
-                    />
+                    /> */}
                     <Route
                         path="/vendors/add-vendor"
                         element={
@@ -1133,6 +1133,10 @@ const PageRoutes = () => {
                                 moduleName={UserModuleNameTypes.saleOrder}
                             />
                         }
+                    />
+                    <Route
+                        path="/sale-order/:id/invoice"
+                        element={<DispatchedInvoice />}
                     />
                     <Route
                         path="/sale-order/add-sale-order"
@@ -1959,13 +1963,15 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                     {/* Configurations -> call center master */}
-                     <Route
+                    {/* Configurations -> call center master */}
+                    <Route
                         path="/configurations/callcenter-master"
                         element={
                             <AuthenticationHOC
                                 component={<CallCenterMasterListingWrapper />}
-                                moduleName={UserModuleNameTypes.callCenterMaster}
+                                moduleName={
+                                    UserModuleNameTypes.callCenterMaster
+                                }
                             />
                         }
                     />
@@ -1974,7 +1980,9 @@ const PageRoutes = () => {
                         element={
                             <AuthenticationHOC
                                 component={<AddCallCenterMasterWrapper />}
-                                moduleName={UserModuleNameTypes.callCenterMaster}
+                                moduleName={
+                                    UserModuleNameTypes.callCenterMaster
+                                }
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
                             />
@@ -1985,7 +1993,9 @@ const PageRoutes = () => {
                         element={
                             <AuthenticationHOC
                                 component={<EditCallCenterMasterWrapper />}
-                                moduleName={UserModuleNameTypes.callCenterMaster}
+                                moduleName={
+                                    UserModuleNameTypes.callCenterMaster
+                                }
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />

@@ -23,10 +23,10 @@ enum comapintType {
 }
 
 enum emailType {
-    personalEmail = 'PERSONAL EMAIL',
-    officialEmail = 'OFFICIAL EMAIL',
-    buisnessEmail = 'BUISNESS EMAIL',
-    companyEmail = 'COMPANY EMAIL',
+    personalEmail = 'PERSONAL_EMAIL',
+    officialEmail = 'PERSONAL_EMAIL',
+    buisnessEmail = 'BUISNESS_EMAIL',
+    companyEmail = 'COMPANY_EMAIL',
 }
 
 enum smsType {

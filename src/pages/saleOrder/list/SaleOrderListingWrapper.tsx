@@ -177,7 +177,9 @@ const SaleOrderListingWrapper = () => {
                     className="underline text-primary-main"
                     style={{ cursor: 'pointer' }}
                     onClick={() =>
-                        navigate(`/dealers/${row?.documents[0]?.dealerId}/general-information`)
+                        navigate(
+                            `/dealers/${row?.documents[0]?.dealerId}/general-information`
+                        )
                     }
                 >
                     {row?.dealerName.replaceAll('_', ' ')}
@@ -453,53 +455,101 @@ const SaleOrderListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: SaleOrderListResponseTypes) =>
-                row?.dhApproved === null &&
-                row?.accApproved === null && (
-                    <ActionPopup
-                        moduleName={UserModuleNameTypes.saleOrder}
-                        isEdit
-                        isDelete
-                        handleEditActionButton={() => {
-                            navigate(`/sale-order/edit-sale-order/${row?._id}`)
-                        }}
-                        handleDeleteActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Delete SaleOrder',
-                                text: 'Do you want to delete SaleOrder?',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDelete()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                    />
-                ),
+            renderCell: (row: SaleOrderListResponseTypes) => (
+                <ActionPopup
+                    moduleName={UserModuleNameTypes.saleOrder}
+                    isEdit={
+                        row?.dhApproved === null && row?.accApproved === null
+                    }
+                    isDelete={
+                        row?.dhApproved === null && row?.accApproved === null
+                    }
+                    isCustomBtn={row?.accApproved === true}
+                    customBtnText="Invoice"
+                    handleCustomActionButton={() => {
+                        navigate(
+                            `/sale-order/${row?.documents?.[0]?._id}/invoice`
+                        )
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/sale-order/edit-sale-order/${row?._id}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete SaleOrder',
+                            text: 'Do you want to delete SaleOrder?',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                />
+            ),
             align: 'end',
         },
+        // {
+        //     field: 'actions',
+        //     headerName: 'Actions',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: SaleOrderListResponseTypes) =>
+        //         row?.dhApproved === null &&
+        //         row?.accApproved === null && (
+        //             <ActionPopup
+        //                 moduleName={UserModuleNameTypes.saleOrder}
+        //                 isEdit
+        //                 isDelete
+        //                 isCustomBtn={true}
+        //                 customBtnText="Invoice"
+        //                 handleCustomActionButton={() => {
+        //                     navigate(
+        //                         `/sale-order/${row?.documents?.[0]?._id}/invoice`
+        //                     )
+        //                 }}
+        //                 handleEditActionButton={() => {
+        //                     navigate(`/sale-order/edit-sale-order/${row?._id}`)
+        //                 }}
+        //                 handleDeleteActionButton={() => {
+        //                     showConfirmationDialog({
+        //                         title: 'Delete SaleOrder',
+        //                         text: 'Do you want to delete SaleOrder?',
+        //                         showCancelButton: true,
+        //                         next: (res: any) => {
+        //                             return res.isConfirmed
+        //                                 ? handleDelete()
+        //                                 : setShowDropdown(false)
+        //                         },
+        //                     })
+        //                 }}
+        //                 handleOnAction={() => {
+        //                     setShowDropdown(!showDropdown)
+        //                     setCurrentId(row?._id)
+        //                 }}
+        //             />
+        //         ),
+        //     align: 'end',
+        // },
     ]
 
     return (
-        <>
-            <SideNavLayout>
-                <SaleOrderListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.saleOrder,
-                        UserModuleActionTypes.List
-                    )}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <SaleOrderListing
+                columns={getAllowedAuthorizedColumns(
+                    checkUserAccess,
+                    columns,
+                    UserModuleNameTypes.saleOrder,
+                    UserModuleActionTypes.List
+                )}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </SideNavLayout>
     )
 }
 
