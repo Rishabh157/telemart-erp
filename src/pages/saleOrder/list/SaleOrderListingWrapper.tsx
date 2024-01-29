@@ -505,7 +505,7 @@ const SaleOrderListingWrapper = () => {
                         moduleName={UserModuleNameTypes.saleOrder}
                         isEdit
                         isDelete
-                        isCustomBtn={true}
+                        isCustomBtn={false}
                         customBtnText="Invoice"
                         handleCustomActionButton={() => {
                             navigate(
