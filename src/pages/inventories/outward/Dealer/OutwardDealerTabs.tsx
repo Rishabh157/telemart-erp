@@ -12,11 +12,9 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
 import {
@@ -44,49 +42,6 @@ const OutwardDealerTabs = ({ columns, rows }: Props) => {
     return (
         // <div className="px-4 h-full flex flex-col gap-2 w-full">
         <div className=" h-[calc(100vh-160px)]  bg-white ">
-            {/* Page Header */}
-            {/* <div className="flex justify-between items-center ">
-                <ATMPageHeading> Outward Requests </ATMPageHeading>
-                <button className="bg-primary-main text-white rounded p px-3">
-                    + Assign Courier
-                </button>
-            </div> */}
-
-            {/* Tabs */}
-            {/* <div className="h-[40px] border flex gap-2 items-center   shadow rounded ">
-                {/* <TabScrollable tabs={tabs} />
-                 */}
-            {/*  <TabScrollable
-                    tabs={tabs}
-                    // setActiveTabHandle={setActiveTabHandle}
-                    active={activeTab}
-                />
-            </div> */}
-
-            {/* <div className="flex shadow rounded items-center gap-3 bg-white w-full overflow-auto px-3 ">
-                {tabs.map((tab, tabIndex) => {
-                    const { label } = tab
-                    return (
-                        <button
-                            type="button"
-                            onClick={() => setActiveTab(label)}
-                            key={tabIndex}
-                            className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${
-                                activeTab === label
-                                    ? 'bg-slate-100 text-primary-main '
-                                    : 'text-slate-500'
-                            }`}
-                        >
-                            <div>
-                                {' '}
-                                <tab.icon className="text-xl" />{' '}
-                            </div>
-                            <div className="font-medium"> {label} </div>
-                        </button>
-                    )
-                })}
-            </div> */}
-
             <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
