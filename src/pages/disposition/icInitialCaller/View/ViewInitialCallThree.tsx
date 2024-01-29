@@ -22,10 +22,6 @@ const breadcrumbs: BreadcrumbType[] = [
 const ViewInitialCallThree = ({ formikProps }: Props) => {
     const { values } = formikProps
 
-    // dropdownOptions = {
-    //     ...dropdownOptions,
-    // }
-
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -81,6 +77,18 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
                                     Email Type:
                                 </label>
                                 <span>{values.emailType}</span>
+                            </div>
+                            <div className="flex mb-2">
+                                <label className="w-60 font-medium text-l">
+                                    Cancle Flag:
+                                </label>
+                                <span>{values.cancelFlag ? 'Yes' : 'No'}</span>
+                            </div>
+                            <div className="flex mb-2">
+                                <label className="w-60 font-medium text-l">
+                                 Pnd:
+                                </label>
+                                <span>{values.isPnd ? 'Yes' : 'No'}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">

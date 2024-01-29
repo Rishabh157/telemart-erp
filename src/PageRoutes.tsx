@@ -885,7 +885,7 @@ const PageRoutes = () => {
                                             <OutwardWarehouseTransferListingWrapper />
                                         }
                                         moduleName={
-                                            UserModuleNameTypes.WarehouseTransfer
+                                            UserModuleNameTypes.wareHouse
                                         }
                                         actionName={
                                             UserModuleWarehouseTabsTypes.outwardInventoriesWareHouse
@@ -953,7 +953,7 @@ const PageRoutes = () => {
                                             <OutwardWarehouseToComapnyListingWrapper />
                                         }
                                         moduleName={
-                                            UserModuleNameTypes.warehouseToComapny
+                                            UserModuleNameTypes.wareHouse
                                         }
                                         actionName={
                                             UserModuleWarehouseTabsTypes.outwardInventoriesCompany
