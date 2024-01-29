@@ -265,7 +265,7 @@ import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationS
 import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
 import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
-
+import VenderInvoice from './pages/saleOrder/VenderInvoice'
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -286,6 +286,7 @@ const PageRoutes = () => {
         <>
             <BrowserRouter>
                 <Routes>
+                <Route path="/vender-invoice" element={<VenderInvoice />} />
                     {/* Login */}
                     <Route path="/" element={<Auth />} />
                     {/* Page not found */}

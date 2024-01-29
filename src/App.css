@@ -122,3 +122,9 @@ body {
     background-color: #03314e !important;
 }
 /* scroll tabs css */
+.table-right th{
+border-right: 1px solid black;
+}
+.table-right td{
+    border-right: 1px solid black;
+    }
