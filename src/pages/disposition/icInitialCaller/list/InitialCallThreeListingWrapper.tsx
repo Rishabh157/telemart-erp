@@ -106,6 +106,22 @@ const InitialCallThreeListingWrapper = () => {
             ),
         },
         {
+            field: 'cancelFlag',
+            headerName: 'cancel flag',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InitialCallerThreeListResponse) => (
+                <span> {row.cancelFlag ? 'Yes' : 'No'} </span>
+            ),
+        },
+        {
+            field: 'isPnd',
+            headerName: 'Pnd',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: InitialCallerThreeListResponse) => (
+                <span> {row.isPnd ? 'Yes' : 'No'} </span>
+            ),
+        },
+        {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
