@@ -19,8 +19,8 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
 
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: 'Disposition One',
-            path: '/dispositions/disposition-one',
+            label: 'NDR Disposition',
+            path: '/dispositions/ndr-disposition',
         },
         {
             label: 'Add ',

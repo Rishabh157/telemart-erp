@@ -34,16 +34,6 @@ export const ndrDispositionApi = apiSlice.injectEndpoints({
         // body,
       }),
     }),
-    getAlldispositionOneunauth: builder.query({
-      providesTags: ['ndr-disposition'],
-
-      query: () => ({
-        url: '/disposition-one/unauth/get-all',
-        method: 'GET',
-        extra: 'true,"dsfdsf',
-        // body,
-      }),
-    }),
 
     //***** ADD *****/
     addNdrDisposition: builder.mutation({
@@ -100,6 +90,5 @@ export const {
   useGetNdrdispositionByIdQuery,
   useDeleteNdrDispositionMutation,
   useGetNdrdispositionQuery,
-  useGetAlldispositionOneunauthQuery,
   useDeactiveNdrDispositionMutation,
 } = ndrDispositionApi
