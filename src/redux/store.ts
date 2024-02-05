@@ -96,6 +96,7 @@ import warehouseToComapnySlice from './slices/WarehouseToComapnySlice'
 import InventoryFlowSlice from './slices/InventoryFlowSlice'
 import InwardDealerSlice from './slices/InwardDealerSlice'
 import CallCenterMasterSlice from './slices/CallCenterMasterSlice'
+import ndrDispositionSlice from './slices/configuration/ndrDispositionSlice'
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
@@ -173,6 +174,7 @@ const store = configureStore({
         initialCallerThree: initialCallerThreeSlice,
         websitePage: websitePageSlice,
         dispositionTwo: dispositionTwoSlice,
+        ndrDisposition: ndrDispositionSlice,
         order: orderSlice,
         inquiry: inquirySlice,
         dispositionComplaint: dispositionComplaintSlice,
@@ -188,7 +190,7 @@ const store = configureStore({
         warehouseToComapny: warehouseToComapnySlice,
         inventoryFlow: InventoryFlowSlice,
         inwardDealer: InwardDealerSlice,
-        callCenter:CallCenterMasterSlice,
+        callCenter: CallCenterMasterSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

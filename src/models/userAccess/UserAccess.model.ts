@@ -148,6 +148,8 @@ export enum UserModuleNameTypes {
     initialCallerTwo = 'INITIAL_CALLER_TWO',
     initialCallerThree = 'INITIAL_CALLER_THREE',
     dispositionComplaint = 'DISPOSITION_COMPLAINT',
+    ndrDisposition = 'NDR_DISPOSITION',
+
     website = 'WEBSITE',
     websiteBlog = 'WEBSITE_BLOG',
     websitePage = 'WEBSITE_PAGE',
@@ -160,7 +162,7 @@ export enum UserModuleNameTypes {
     locations = 'LOCATIONS',
     WarehouseTransfer = 'WAREHOUSETRANSFER',
     warehouseToComapny = 'WAREHOUSETOCOMPANY',
-    callCenterMaster="CALL_CENTER_MASTER"
+    callCenterMaster = "CALL_CENTER_MASTER"
 }
 
 //  export const myMove = {

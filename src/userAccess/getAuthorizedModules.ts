@@ -51,6 +51,7 @@ export const dispositionModule = [
     UserModuleNameTypes.initialCallerTwo,
     UserModuleNameTypes.initialCallerThree,
     UserModuleNameTypes.dispositionComplaint,
+    UserModuleNameTypes.ndrDisposition,
 ]
 
 export const allWebsiteModule = [

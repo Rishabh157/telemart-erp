@@ -19,6 +19,7 @@ const tagTypes = [
     'companyBranch',
     'rtv-master',
     'wts-master',
+    'ndr-disposition',
 ]
 
 export const apiSlice = createApi({
