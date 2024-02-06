@@ -266,6 +266,8 @@ import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScree
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
 import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
 import VenderInvoice from './pages/saleOrder/VenderInvoice'
+import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
+
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
     if (deviceId === '') {
@@ -286,7 +288,7 @@ const PageRoutes = () => {
         <>
             <BrowserRouter>
                 <Routes>
-                <Route path="/vender-invoice" element={<VenderInvoice />} />
+                    <Route path="/vender-invoice" element={<VenderInvoice />} />
                     {/* Login */}
                     <Route path="/" element={<Auth />} />
                     {/* Page not found */}
@@ -2475,6 +2477,12 @@ const PageRoutes = () => {
                                 isRedirect
                             />
                         }
+                    />
+
+                    {/* Customer Complain */}
+                    <Route
+                        path="/customer-complain"
+                        element={<CustomerComplainWrapper />}
                     />
 
                     {/* Dispositions -> Disposition One */}
