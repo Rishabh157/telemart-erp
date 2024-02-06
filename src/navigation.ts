@@ -27,6 +27,7 @@ import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 // import { TiFlowSwitch } from 'react-icons/ti'
 import { UserModuleNameTypes } from './models/userAccess/UserAccess.model'
 import { TiFlowSwitch } from 'react-icons/ti'
+import { RiCustomerServiceLine } from "react-icons/ri";
 //import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
@@ -152,6 +153,12 @@ export const navigation: NavItemType[] = [
         icon: IoCallOutline,
         path: '/call',
         name: UserModuleNameTypes.callerPage,
+    },
+    {
+        label: 'Customer Complain',
+        icon: RiCustomerServiceLine,
+        path: '/customer-complain',
+        name: UserModuleNameTypes.configuration,
     },
     {
         label: 'Configurations',
