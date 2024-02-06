@@ -266,7 +266,10 @@ import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScree
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
 import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
 import VenderInvoice from './pages/saleOrder/VenderInvoice'
-import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
+ import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
+import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/list/NdrDispositionListingWrapper'
+import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/AddNdrDispositionWrapper'
+import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2768,6 +2771,41 @@ const PageRoutes = () => {
                                 moduleName={
                                     UserModuleNameTypes.dispositionComplaint
                                 }
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
+                    />
+                    {/* Dispositions ->NDR Disposition One */}
+                    <Route
+                        path="dispositions/ndr-disposition"
+                        element={
+                            <AuthenticationHOC
+                                component={<NdrDispositionListingWrapper />}
+                                moduleName={UserModuleNameTypes.ndrDisposition}
+                            />
+                        }
+                    />
+
+                    {/* Dispositions ->NDR Disposition Add */}
+
+                    <Route
+                        path="dispositions/ndr-disposition/add"
+                        element={
+                            <AuthenticationHOC
+                                component={<AddNdrDispositionWrapper />}
+                                moduleName={UserModuleNameTypes.ndrDisposition}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="dispositions/ndr-disposition/:id"
+                        element={
+                            <AuthenticationHOC
+                                component={<EditNdrDispositionWrapper />}
+                                moduleName={UserModuleNameTypes.ndrDisposition}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />
