@@ -4,7 +4,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { RootState } from 'src/redux/store'
 import CallerButton from './CallerButton'
 import { FormInitialValues } from '../CallerPageWrapper'
-import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+// import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { endTimesOptions, startTimesOptions } from './constants'
@@ -73,7 +73,7 @@ const CallerDeliveryAddress = ({
         SelectOption[] | []
     >([])
 
-    const [isRecording, setIsRecording] = React.useState<boolean>(false)
+    // const [isRecording, setIsRecording] = React.useState<boolean>(false)
 
     // /////////////////////////////////////////////////////////////////////////////////////////////////////////
     const dispatch = useDispatch()
@@ -723,7 +723,7 @@ const CallerDeliveryAddress = ({
                     </div>
 
                     {/* FOR MOBILE INPUT FIELD */}
-                    <div className="-mt-4">
+                    {/* <div className="-mt-4">
                         <ATMSwitchButton
                             label="Recording"
                             name=""
@@ -736,7 +736,7 @@ const CallerDeliveryAddress = ({
                                 // setFieldValue('isRecording', e)
                             }}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

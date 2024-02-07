@@ -70,12 +70,15 @@ type BarcodeListResponseType = {
     updatedAt: string
 }
 
+
 const OrderListing = ({
     tabName,
     orderStatus,
+    currentStatus,
 }: {
     tabName: string
     orderStatus: string
+    currentStatus: string
 }) => {
     // Hooks
     const navigate = useNavigate()
@@ -119,6 +122,10 @@ const OrderListing = ({
             {
                 fieldName: 'approved',
                 value: orderStatus === 'approved' ? true : false,
+            },
+            {
+                fieldName: 'status',
+                value: currentStatus,
             },
         ],
         dateFilter: {},

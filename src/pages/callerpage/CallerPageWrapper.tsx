@@ -20,6 +20,7 @@ import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
 import { CallerResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
+import { statusProps } from '../orders'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -282,7 +283,7 @@ const CallerPageWrapper = () => {
         dispositionLevelTwoId: null,
         dispositionLevelThreeId: null,
         alternateNo: '',
-        status: 'FRESH',
+        status: statusProps.fresh,
     }
 
     // Form validation schema

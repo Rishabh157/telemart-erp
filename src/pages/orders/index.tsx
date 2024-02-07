@@ -33,6 +33,19 @@ interface tabsProps {
     path: string
     name: string
 }
+export enum statusProps {
+    fresh = 'FRESH',
+    all = 'ALL',
+    prepaid = 'PREPAID',
+    delivered = 'DELIVERD',
+    doorCancelled = 'DOORCANCELLED',
+    hold = 'HOLD',
+    psc = 'PSC',
+    una = 'UNA',
+    pnd = 'PND',
+    urgent = 'URGENT',
+    nonAction = 'NON_ACTION',
+}
 
 const ViewOrder = () => {
     const tabs: tabsProps[] = [
@@ -111,7 +124,8 @@ const ViewOrder = () => {
     const queryParams = new URLSearchParams(search)
 
     // Access specific query parameters by their names
-    const activeTab = queryParams.get('orderStatus')
+    const activeTab: keyof typeof statusProps | string | null =
+        queryParams.get('orderStatus')
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
@@ -158,6 +172,10 @@ const ViewOrder = () => {
         setActiveTabLabel(labelTab)
     }, [activeTab, allowedTabs])
 
+    const getStatus = (status: keyof typeof statusProps ) => {
+        return statusProps[status] || ''
+    }
+
     return (
         <SideNavLayout>
             <div className="h-[calc(100vh-55px)]">
@@ -180,6 +198,7 @@ const ViewOrder = () => {
                             <OrderListing
                                 tabName={allowedTabs[activeTabIndex].name}
                                 orderStatus={activeTab as string}
+                                currentStatus={getStatus(activeTab as keyof typeof statusProps)}
                             />
                         </div>
                     </div>
