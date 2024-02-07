@@ -47,7 +47,6 @@ export const OrderApi = apiSlice.injectEndpoints({
             providesTags: ['order'],
             query: (id) => ({
                 url: `/order-inquiry/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -105,6 +104,25 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //**  Get Warehosue and dealer of specific order
+        getDealerOfOrder: builder.query({
+            // providesTags: ['order'],
+            query: ({ companyId, schemeId, pincodeId }) => ({
+                url: `/dealer-scheme/scheme/${schemeId}/pincode/${pincodeId}`,
+                method: 'GET',
+            }),
+        }),
+
+        //***** Dispached Order Barcode *****/
+        assignOrderToDealerOrWarehouse: builder.mutation({
+            // invalidatesTags: ['order'],
+            query: (body: any) => ({
+                url: '/order-inquiry/assign-order',
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -116,4 +134,6 @@ export const {
     useGetOrderFlowQuery,
     useGetAllOrderQuery,
     useDispatchedOrderBarcodeMutation,
+    useGetDealerOfOrderQuery,
+    useAssignOrderToDealerOrWarehouseMutation,
 } = OrderApi

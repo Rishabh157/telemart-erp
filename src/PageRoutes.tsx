@@ -266,7 +266,7 @@ import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScree
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
 import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
 import VenderInvoice from './pages/saleOrder/VenderInvoice'
- import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
+import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
 import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/list/NdrDispositionListingWrapper'
 import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/AddNdrDispositionWrapper'
 import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
@@ -1446,6 +1446,10 @@ const PageRoutes = () => {
                             />
                         }
                     ></Route>
+                    <Route
+                        path="/orders/view/:id"
+                        element={<OrderViewWrapper />}
+                    />
 
                     {/* Call */}
                     <Route
