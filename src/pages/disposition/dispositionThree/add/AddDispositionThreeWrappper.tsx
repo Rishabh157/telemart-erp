@@ -152,10 +152,12 @@ const AddDispositionThreeWrappper = () => {
         ),
         priorityOptions,
         emailTypeOptions: [
-            { label: 'personalEmail', value: 'PERSONAL EMAIL' },
-            { label: 'officialEmail', value: 'OFFICIAL EMAIL' },
-            { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
+            { label: 'Personal Email', value: 'PERSONAL_EMAIL' },
+            { label: 'Official Email', value: 'OFFICIAL_EMAIL' },
+            { label: 'Buisness Email', value: 'BUISNESS_EMAIL' },
+            { label: 'Company Email', value: 'COMPANY_EMAIL' },
         ],
+
         whatsAppOptions: [
             { label: 'template 1', value: 'TEMP ONE' },
             { label: 'template 2', value: 'TEMP TWO' },

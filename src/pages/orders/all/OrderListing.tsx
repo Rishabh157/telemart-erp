@@ -50,6 +50,7 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { AlertText } from 'src/pages/callerpage/components/constants'
+import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 
 // Types
 type BarcodeListResponseType = {
@@ -99,7 +100,10 @@ const OrderListing = ({
     const [selectedRows, setSelectedRows] = useState([])
     const [currentId, setCurrentId] = useState<string>('')
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
-    const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
+    // const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
+    const [selectedOrder, setSelectedOrder] = useState<any>(null)
+    const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] =
+        useState<boolean>(false)
     const orderState: any = useSelector((state: RootState) => state.order)
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
@@ -250,7 +254,7 @@ const OrderListing = ({
         },
         {
             field: 'orderStatus',
-            headerName: 'Status',
+            headerName: 'Status jhh',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-slate-800">{row?.orderStatus}</span>
@@ -260,42 +264,105 @@ const OrderListing = ({
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: OrderListResponse) =>
-                row?.orderStatus !== 'NOT_DISPATCHED' ? (
-                    ''
-                ) : (
-                    <ActionPopup
-                        moduleName={UserModuleNameTypes.order}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                        children={
-                            <>
-                                <button
-                                    onClick={() => {
-                                        setIsFlowDialogShow(true)
-                                    }}
-                                    className="w-full text-left px-4 py-2 hover:bg-gray-100 hidden"
-                                >
-                                    Flow
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        setIsShow(true)
-                                        setBarcodeQuantity(row?.shcemeQuantity)
-                                        setSelectedItemsTobeDispatch(row)
-                                    }}
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                >
-                                    Dispatch
-                                </button>
-                            </>
-                        }
-                    />
-                ),
+            renderCell: (row: OrderListResponse) => (
+                <ActionPopup
+                    moduleName={UserModuleNameTypes.order}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    children={
+                        <>
+                            {/* <button
+                                onClick={() => {
+                                    setIsFlowDialogShow(true)
+                                }}
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Flow
+                            </button> */}
+                            {/* <button
+                                onClick={() => {
+                                    // navigate(`view/${row?._id}`)
+                                    navigate(`/orders/view/${row?._id}`)
+                                }}
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View
+                            </button> */}
+                            <button
+                                onClick={() => {
+                                    setIsOrderAssigneeFormOpen(true)
+                                    setSelectedOrder(row)
+                                }}
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Order Assignee
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setIsShow(true)
+                                    setBarcodeQuantity(row?.shcemeQuantity)
+                                    setSelectedItemsTobeDispatch(row)
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Dispatch
+                            </button>
+                        </>
+                    }
+                />
+            ),
             align: 'end',
         },
+        // {
+        //     field: 'actions',
+        //     headerName: 'Actions',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: OrderListResponse) =>
+        //         row?.orderStatus !== 'NOT_DISPATCHED' ? (
+        //             ''
+        //         ) : (
+        //             <ActionPopup
+        //                 moduleName={UserModuleNameTypes.order}
+        //                 handleOnAction={() => {
+        //                     setShowDropdown(!showDropdown)
+        //                     setCurrentId(row?._id)
+        //                 }}
+        //                 children={
+        //                     <>
+        //                         <button
+        //                             onClick={() => {
+        //                                 setIsFlowDialogShow(true)
+        //                             }}
+        //                             className="w-full text-left px-4 py-2 hover:bg-gray-100 hidden"
+        //                         >
+        //                             Flow
+        //                         </button>
+        //                         <button
+        //                             onClick={() => {
+        //                                 setIsFlowDialogShow(true)
+        //                             }}
+        //                             className="w-full text-left px-4 py-2 hover:bg-gray-100 hidden"
+        //                         >
+        //                             Order Assignee
+        //                         </button>
+        //                         <button
+        //                             onClick={() => {
+        //                                 setIsShow(true)
+        //                                 setBarcodeQuantity(row?.shcemeQuantity)
+        //                                 setSelectedItemsTobeDispatch(row)
+        //                             }}
+        //                             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+        //                         >
+        //                             Dispatch
+        //                         </button>
+        //                     </>
+        //                 }
+        //             />
+        //         ),
+        //     align: 'end',
+        // },
     ]
 
     // Dispatching Methods
@@ -456,11 +523,21 @@ const OrderListing = ({
                 </div>
 
                 {/* Flow */}
-                <DialogLogBox
+                {/* <DialogLogBox
                     maxWidth="sm"
                     handleClose={() => setIsFlowDialogShow(false)}
                     isOpen={isFlowDialogShow}
                     component={<div className="py-4 flex justify-center"></div>}
+                /> */}
+
+                <DialogLogBox
+                    maxWidth="md"
+                    handleClose={() => {
+                        setIsOrderAssigneeFormOpen(false)
+                        setSelectedOrder(null)
+                    }}
+                    isOpen={isOrderAssigneeFormOpen}
+                    component={<AddOrderAssigneeFormWrapper selectedOrder={selectedOrder} />}
                 />
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">

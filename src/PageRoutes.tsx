@@ -232,7 +232,7 @@ import OutwardTabs from './pages/inventories/outward'
 import OutwardWarehouseToComapnyListingWrapper from './pages/inventories/outward/Company/list/OutwardWarehouseToComapnyListingWrapper'
 import OutwardCustomerTabsListingWrapper from './pages/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
 import OutwardDealerTabsListingWrapper from './pages/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
-import DispatchedInvoice from './pages/inventories/outward/Dealer/components/DispatchedInvoice'
+import DispatchedInvoice from './pages/saleOrder/list/components/DispatchedInvoiceWrapper'
 import OutwardEcomTabsListingWrapper from './pages/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
 import OutwardReplacementTabsListingWrapper from './pages/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
 import OutwardRTVTabsListingWrapper from './pages/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
@@ -265,6 +265,11 @@ import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationS
 import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
 import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
+import VenderInvoice from './pages/saleOrder/VenderInvoice'
+import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
+import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/list/NdrDispositionListingWrapper'
+import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/AddNdrDispositionWrapper'
+import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -286,6 +291,7 @@ const PageRoutes = () => {
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/vender-invoice" element={<VenderInvoice />} />
                     {/* Login */}
                     <Route path="/" element={<Auth />} />
                     {/* Page not found */}
@@ -305,7 +311,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                    <Route
+                    {/* <Route
                         path="warehouse/so-order/dispatched-invoice"
                         element={
                             <AuthenticationHOC
@@ -313,7 +319,7 @@ const PageRoutes = () => {
                                 moduleName={UserModuleNameTypes.vendor}
                             />
                         }
-                    />
+                    /> */}
                     <Route
                         path="/vendors/add-vendor"
                         element={
@@ -885,7 +891,7 @@ const PageRoutes = () => {
                                             <OutwardWarehouseTransferListingWrapper />
                                         }
                                         moduleName={
-                                            UserModuleNameTypes.WarehouseTransfer
+                                            UserModuleNameTypes.wareHouse
                                         }
                                         actionName={
                                             UserModuleWarehouseTabsTypes.outwardInventoriesWareHouse
@@ -953,7 +959,7 @@ const PageRoutes = () => {
                                             <OutwardWarehouseToComapnyListingWrapper />
                                         }
                                         moduleName={
-                                            UserModuleNameTypes.warehouseToComapny
+                                            UserModuleNameTypes.wareHouse
                                         }
                                         actionName={
                                             UserModuleWarehouseTabsTypes.outwardInventoriesCompany
@@ -1133,6 +1139,10 @@ const PageRoutes = () => {
                                 moduleName={UserModuleNameTypes.saleOrder}
                             />
                         }
+                    />
+                    <Route
+                        path="/sale-order/:id/invoice"
+                        element={<DispatchedInvoice />}
                     />
                     <Route
                         path="/sale-order/add-sale-order"
@@ -1436,6 +1446,10 @@ const PageRoutes = () => {
                             />
                         }
                     ></Route>
+                    <Route
+                        path="/orders/view/:id"
+                        element={<OrderViewWrapper />}
+                    />
 
                     {/* Call */}
                     <Route
@@ -1959,13 +1973,15 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                     {/* Configurations -> call center master */}
-                     <Route
+                    {/* Configurations -> call center master */}
+                    <Route
                         path="/configurations/callcenter-master"
                         element={
                             <AuthenticationHOC
                                 component={<CallCenterMasterListingWrapper />}
-                                moduleName={UserModuleNameTypes.callCenterMaster}
+                                moduleName={
+                                    UserModuleNameTypes.callCenterMaster
+                                }
                             />
                         }
                     />
@@ -1974,7 +1990,9 @@ const PageRoutes = () => {
                         element={
                             <AuthenticationHOC
                                 component={<AddCallCenterMasterWrapper />}
-                                moduleName={UserModuleNameTypes.callCenterMaster}
+                                moduleName={
+                                    UserModuleNameTypes.callCenterMaster
+                                }
                                 actionName={UserModuleActionTypes.Add}
                                 isRedirect
                             />
@@ -1985,7 +2003,9 @@ const PageRoutes = () => {
                         element={
                             <AuthenticationHOC
                                 component={<EditCallCenterMasterWrapper />}
-                                moduleName={UserModuleNameTypes.callCenterMaster}
+                                moduleName={
+                                    UserModuleNameTypes.callCenterMaster
+                                }
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />
@@ -2466,6 +2486,12 @@ const PageRoutes = () => {
                         }
                     />
 
+                    {/* Customer Complain */}
+                    <Route
+                        path="/customer-complain"
+                        element={<CustomerComplainWrapper />}
+                    />
+
                     {/* Dispositions -> Disposition One */}
                     <Route
                         path="dispositions/disposition-one"
@@ -2749,6 +2775,41 @@ const PageRoutes = () => {
                                 moduleName={
                                     UserModuleNameTypes.dispositionComplaint
                                 }
+                                actionName={UserModuleActionTypes.Edit}
+                                isRedirect
+                            />
+                        }
+                    />
+                    {/* Dispositions ->NDR Disposition One */}
+                    <Route
+                        path="dispositions/ndr-disposition"
+                        element={
+                            <AuthenticationHOC
+                                component={<NdrDispositionListingWrapper />}
+                                moduleName={UserModuleNameTypes.ndrDisposition}
+                            />
+                        }
+                    />
+
+                    {/* Dispositions ->NDR Disposition Add */}
+
+                    <Route
+                        path="dispositions/ndr-disposition/add"
+                        element={
+                            <AuthenticationHOC
+                                component={<AddNdrDispositionWrapper />}
+                                moduleName={UserModuleNameTypes.ndrDisposition}
+                                actionName={UserModuleActionTypes.Add}
+                                isRedirect
+                            />
+                        }
+                    />
+                    <Route
+                        path="dispositions/ndr-disposition/:id"
+                        element={
+                            <AuthenticationHOC
+                                component={<EditNdrDispositionWrapper />}
+                                moduleName={UserModuleNameTypes.ndrDisposition}
                                 actionName={UserModuleActionTypes.Edit}
                                 isRedirect
                             />

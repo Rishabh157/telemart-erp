@@ -44,6 +44,7 @@
         "react-scripts": "5.0.1",
         "react-select": "^5.7.3",
         "react-tabs-scrollable": "^2.0.5-alpha",
+        "react-to-print": "^2.14.15",
         "rsuite": "^5.41.0",
         "sweetalert2": "^11.6.15",
         "tailwind-merge": "^1.13.1",

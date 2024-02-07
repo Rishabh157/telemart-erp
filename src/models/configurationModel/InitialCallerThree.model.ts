@@ -18,10 +18,12 @@ export type InitialCallerThreeListResponse = {
     isDeleted: boolean
     createdAt: string
     updatedAt: string
+    isPnd: boolean
+    cancelFlag: boolean
     _id: string
     __v: number
 }
- 
+
 enum emailType {
     personalEmail = 'PERSONAL EMAIL',
     officialEmail = 'OFFICIAL EMAIL',
@@ -72,7 +74,7 @@ export type UpdateInitialCallerThree = {
         initialCallOneId: string
         initialCallTwoId: string
         callType: string
-         isPnd: boolean
+        isPnd: boolean
         cancelFlag: boolean
         emailType: string
         smsType: string

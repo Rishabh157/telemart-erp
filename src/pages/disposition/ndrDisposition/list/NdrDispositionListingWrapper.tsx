@@ -1,58 +1,54 @@
 import React, { useEffect, useState } from 'react'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import InitialCallThreeListing from './InitialCallThreeListing'
+import { useNavigate } from 'react-router-dom'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { showToast } from 'src/utils'
+import { Chip } from '@mui/material'
+import {
+    useGetNdrdispositionQuery,
+    useDeleteNdrDispositionMutation,
+    useDeactiveNdrDispositionMutation,
+} from 'src/services/configurations/NdrDisositionServices'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/configuration/initialCallerThreeSlice'
-import {
-    useDeleteInitialCallerThreeMutation,
-    useGetInitialCallerThreeQuery,
-    useDeactiveInitialCallerThreeMutation,
-} from 'src/services/configurations/InitialCallerThreeServices'
-import { useNavigate } from 'react-router-dom'
-import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
+} from 'src/redux/slices/configuration/ndrDispositionSlice'
+import DispositionLayout from '../../DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
-import { Chip } from '@mui/material'
-const InitialCallThreeListingWrapper = () => {
+import NdrDispositionListing from './NdrDispositionListing'
+
+
+const NdrDispositionListingWrapper = () => {
     const navigate = useNavigate()
-    const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
-    const [deactiveInitialCallerThree] = useDeactiveInitialCallerThreeMutation()
+    const [deleteTape] = useDeleteNdrDispositionMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    const initialCallThreeState: any = useSelector(
-        (state: RootState) => state.initialCallerThree
+
+    const ndrDispositionState: any = useSelector(
+        (state: RootState) => state.ndrDisposition
     )
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const { page, rowsPerPage, searchValue, items, isActive } =
-        initialCallThreeState
+    const { page, rowsPerPage, searchValue, items } = ndrDispositionState
 
     const dispatch = useDispatch<AppDispatch>()
+    const [deactiveDispositionOne] = useDeactiveNdrDispositionMutation()
     // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetInitialCallerThreeQuery({
+    const { data, isFetching, isLoading } = useGetNdrdispositionQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['initailCallName'],
+        params: ['ndrDisposition'],
         page: page,
         filterBy: [
-            {
-                fieldName: 'isActive',
-                value:
-                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
-            },
         ],
         dateFilter: {},
         orderBy: 'createdAt',
@@ -74,51 +70,11 @@ const InitialCallThreeListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'initialCallName',
-            headerName: 'Initial Call Three',
+            field: 'ndrDisposition',
+            headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallName} </span>
-            ),
-        },
-        {
-            field: 'callType',
-            headerName: 'Call Type',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.callType} </span>
-            ),
-        },
-        {
-            field: 'initialCallOneLabel',
-            headerName: 'Initial Call One',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallOneLabel} </span>
-            ),
-        },
-        {
-            field: 'initialCallTwoLabel',
-            headerName: 'Initial Call Two',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallTwoLabel} </span>
-            ),
-        },
-        {
-            field: 'cancelFlag',
-            headerName: 'cancel flag',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.cancelFlag ? 'Yes' : 'No'} </span>
-            ),
-        },
-        {
-            field: 'isPnd',
-            headerName: 'Pnd',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.isPnd ? 'Yes' : 'No'} </span>
+            renderCell: (row: any) => (
+                <span> {row?.ndrDisposition} </span>
             ),
         },
         {
@@ -133,9 +89,8 @@ const InitialCallThreeListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -155,9 +110,8 @@ const InitialCallThreeListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -177,30 +131,27 @@ const InitialCallThreeListingWrapper = () => {
                 )
             },
         },
+
         {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.initialCallerThree}
-                    isView
+                    moduleName={UserModuleNameTypes.ndrDisposition}
                     isEdit
                     isDelete
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                    handleViewActionButton={() => {
-                        navigate(`view/${row?._id}`)
-                    }}
                     handleEditActionButton={() => {
                         navigate(`${row?._id}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
-                            title: 'Delete InitialCaller-Three',
-                            text: 'Do you want to delete InitialCaller-Three?',
+                            title: 'Delete NDR Disposition',
+                            text: 'Do you want to delete NDR Disposition?',
                             showCancelButton: true,
                             next: (res: any) => {
                                 return res.isConfirmed
@@ -216,7 +167,7 @@ const InitialCallThreeListingWrapper = () => {
     ]
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)
-        deactiveInitialCallerThree(rowId).then((res: any) => {
+        deactiveDispositionOne(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Status changed successfully!')
@@ -233,13 +184,10 @@ const InitialCallThreeListingWrapper = () => {
     }
     const handleDelete = () => {
         setShowDropdown(false)
-        deleteIniticallthree(currentId).then((res: any) => {
+        deleteTape(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Initiacall-Three deleted successfully!'
-                    )
+                    showToast('success', 'Deleted successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -255,19 +203,21 @@ const InitialCallThreeListingWrapper = () => {
     return (
         <>
             <DispositionLayout>
-                <InitialCallThreeListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.initialCallerThree,
-                        UserModuleActionTypes.List
-                    )}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
+                <div className="h-full">
+                    <NdrDispositionListing
+                        columns={getAllowedAuthorizedColumns(
+                            checkUserAccess,
+                            columns,
+                            UserModuleNameTypes.ndrDisposition,
+                            UserModuleActionTypes.List
+                        )}
+                        rows={items}
+                        setShowDropdown={setShowDropdown}
+                    />
+                </div>
             </DispositionLayout>
         </>
     )
 }
 
-export default InitialCallThreeListingWrapper
+export default NdrDispositionListingWrapper
