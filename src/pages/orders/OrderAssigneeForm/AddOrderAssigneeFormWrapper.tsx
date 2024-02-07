@@ -12,7 +12,6 @@ import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import { object, mixed } from 'yup'
 // import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import AddPurchaseOrder from './AddOrderAssigneeForm'
@@ -28,6 +27,7 @@ import {
 // |-- Types --|
 type Props = {
     selectedOrder: any
+    handleClose: () => void
 }
 
 export type FormInitialValues = {
@@ -35,8 +35,7 @@ export type FormInitialValues = {
     wareHouseId: string
 }
 
-const AddOrderAssigneeFormWrapper = ({ selectedOrder }: Props) => {
-    const navigate = useNavigate()
+const AddOrderAssigneeFormWrapper = ({ selectedOrder, handleClose }: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [companyWarehouse, setCompanyWarehouse] = useState<any[]>([])
     const [dealer, setDealer] = useState<any>([])
@@ -121,7 +120,7 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder }: Props) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'assign order successfully!')
-                        navigate('/orders')
+                        handleClose()
                     } else {
                         showToast('error', res?.data?.message)
                     }
