@@ -536,6 +536,10 @@ const OrderListing = ({
                     component={
                         <AddOrderAssigneeFormWrapper
                             selectedOrder={selectedOrder}
+                            handleClose={() => {
+                                setIsOrderAssigneeFormOpen(false)
+                                setSelectedOrder(null)
+                            }}
                         />
                     }
                 />
