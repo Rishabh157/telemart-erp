@@ -165,8 +165,3 @@ export enum UserModuleNameTypes {
     callCenterMaster = "CALL_CENTER_MASTER"
 }
 
-//  export const myMove = {
-//     ...UserModuleActionTypes,
-//     ...UserModuleTabsTypes,
-//     ...UserModuleAddActionTypes,
-//   }

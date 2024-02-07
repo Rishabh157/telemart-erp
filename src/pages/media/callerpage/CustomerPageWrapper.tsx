@@ -20,6 +20,7 @@ import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
 import { CallerResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
+import { statusProps } from 'src/pages/orders'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -282,7 +283,7 @@ const CustomerPageWrapper = () => {
         dispositionLevelTwoId: null,
         dispositionLevelThreeId: null,
         alternateNo: '',
-        status: 'FRESH',
+        status: statusProps.fresh,
     }
 
     // Form validation schema
@@ -291,11 +292,7 @@ const CustomerPageWrapper = () => {
         productGroupId: string().required('product group id is required'),
         // DELEVERY ADDRESS SELECT OPTIONS
         countryId: string(),
-        // pincodeId: string(),
-        // stateId: string(),
-        // areaId: string(),
-        // districtId: string(),
-        // tehsilId: string(),
+  
         typeOfAddress: string(),
         reciversName: string(),
         deliveryTimeAndDate: string(),

@@ -10,8 +10,8 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useSelector } from 'react-redux'
+import { object, mixed } from 'yup'
+// import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -19,7 +19,7 @@ import AddPurchaseOrder from './AddOrderAssigneeForm'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
+// import { RootState } from 'src/redux/store'
 import {
     useGetDealerOfOrderQuery,
     useAssignOrderToDealerOrWarehouseMutation,
@@ -40,10 +40,9 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder }: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [companyWarehouse, setCompanyWarehouse] = useState<any[]>([])
     const [dealer, setDealer] = useState<any>([])
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    // const { userData } = useSelector((state: RootState) => state?.auth)
     const [assignOrderToDealerOrWarehouse] =
         useAssignOrderToDealerOrWarehouseMutation()
-    console.log('selectedOrder', selectedOrder)
 
     const {
         data: dealerOfOrderData,
@@ -52,16 +51,15 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder }: Props) => {
     } = useGetDealerOfOrderQuery(
         {
             schemeId: selectedOrder?.schemeId,
-            pincodeId: selectedOrder?.pincodeId,
+            pincodeId: selectedOrder?.pincodeLabel,
         },
         {
-            skip: !selectedOrder?.schemeId || !selectedOrder?.pincodeId,
+            skip: !selectedOrder?.schemeId || !selectedOrder?.pincodeLabel,
         }
     )
 
     useEffect(() => {
         if (!isDealerOfOrderDataLoading && !isDealerOfOrderDataFetching) {
-            console.log('dealerOfOrderData', dealerOfOrderData)
             // dealerAndCompanyWarehouse,
             setCompanyWarehouse(dealerOfOrderData?.companyWarehouse)
             setDealer(dealerOfOrderData?.dealerData)
@@ -72,19 +70,12 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder }: Props) => {
         isDealerOfOrderDataLoading,
     ])
 
-    const dealerOptions = [
-        {
-            label: '',
-            value: '',
-        },
-    ]
-    // const dealerOptions = dealer?.map((ele: any) => {
-    //     return {
-    //         label: ele?.dealerName,
-    //         value: ele?._id,
-    //     }
-    // })
-
+    const dealerOptions = dealer?.map((ele: any) => {
+        return {
+            label: ele?.dealerName,
+            value: ele?.dealerId,
+        }
+    })
     const warehouseOptions = companyWarehouse?.map((ele: any) => {
         return {
             label: ele?.wareHouseName,
@@ -98,11 +89,23 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder }: Props) => {
         wareHouseId: '',
     }
 
-    // Form Validation Schema
     const validationSchema = object({
-        // eslint-disable-next-line no-useless-escape
-        dealerId: string().required('Please select a vendor'),
-        wareHouseId: string().required('Please select a warehouse'),
+        dealerId: mixed().test(
+            'dealerOrWarehouse',
+            'Please select either a vendor or a warehouse',
+            function (value) {
+                const wareHouseId = this.parent.wareHouseId
+                return (value || wareHouseId) && !(value && wareHouseId)
+            }
+        ),
+        wareHouseId: mixed().test(
+            'dealerOrWarehouse',
+            'Please select either a vendor or a warehouse',
+            function (value) {
+                const dealerId = this.parent.dealerId
+                return (value || dealerId) && !(value && dealerId)
+            }
+        ),
     })
 
     //    Form Submit Handler
@@ -111,8 +114,8 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder }: Props) => {
 
         setTimeout(() => {
             assignOrderToDealerOrWarehouse({
-                dealerId: values.dealerId,
-                warehouseId: values.wareHouseId,
+                dealerId: values.dealerId || null,
+                warehouseId: values.wareHouseId || null,
                 orderId: selectedOrder?._id,
             }).then((res: any) => {
                 if ('data' in res) {

@@ -21,8 +21,6 @@ const CustomerComplain: React.FC<Props> = ({
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
 
-    console.log('inside the state ', customerDetails)
-
     return (
         <div className="bg-white px-4">
             {/* <CallerPageTopNav agentName={values.agentName as string} /> */}
@@ -39,7 +37,7 @@ const CustomerComplain: React.FC<Props> = ({
                     headerClassName="bg-[#cdddf2] py-2 text-white z-0"
                     columns={column || []}
                     rows={customerDetails?.orderListing}
-                    onRowClick={(row) => console.log('CLICK ROW', row)}
+                    onRowClick={(row) => {}}
                 />
             </div>
 

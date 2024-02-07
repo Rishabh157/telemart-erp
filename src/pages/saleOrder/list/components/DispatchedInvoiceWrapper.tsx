@@ -4,12 +4,9 @@ import { useReactToPrint } from 'react-to-print'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import DispatchedInvoiceTemplate from './DispatchedInvoiceTemplate'
 import { useGetSalesOrderInvoiceQuery } from 'src/services/SalesOrderService'
-import { useParams } from 'react-router-dom'
 
 const DispatchedInvoiceWrapper = () => {
     const navigate = useNavigate()
-    const { id } = useParams()
-    console.log('params : ', id)
     const saleOrderInvoiceRef = React.useRef(null)
 
     const handlePrint = useReactToPrint({
@@ -20,7 +17,7 @@ const DispatchedInvoiceWrapper = () => {
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            console.log('data', data)
+            // console.log('data', data)
         }
     }, [isLoading, isFetching, data])
 

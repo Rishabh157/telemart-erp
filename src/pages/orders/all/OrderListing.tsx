@@ -74,9 +74,11 @@ type BarcodeListResponseType = {
 const OrderListing = ({
     tabName,
     orderStatus,
+    currentStatus,
 }: {
     tabName: string
     orderStatus: string
+    currentStatus: string
 }) => {
     // Hooks
     const navigate = useNavigate()
@@ -124,6 +126,10 @@ const OrderListing = ({
                 fieldName: 'approved',
                 value: orderStatus === 'approved' ? true : false,
             },
+            {
+                fieldName: 'status',
+                value: currentStatus,
+            },
         ],
         dateFilter: {},
         orderBy: 'createdAt',
@@ -152,7 +158,7 @@ const OrderListing = ({
 
     useEffect(() => {
         if (!isOrderFlowFetching && !isOrderFlowLoading) {
-            return orderFlowData
+            // console.log('orderFlowData: ', orderFlowData)
         }
     }, [isOrderFlowLoading, isOrderFlowFetching, orderFlowData])
 
@@ -247,7 +253,7 @@ const OrderListing = ({
         },
         {
             field: 'orderStatus',
-            headerName: 'Status jhh',
+            headerName: 'Status',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-slate-800">{row?.orderStatus}</span>
@@ -263,6 +269,12 @@ const OrderListing = ({
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
+                    }}
+                    isCustomBtn={true}
+                    customBtnText="Order Assignee"
+                    handleCustomActionButton={() => {
+                        setIsOrderAssigneeFormOpen(true)
+                        setSelectedOrder(row)
                     }}
                     children={
                         <>
@@ -283,15 +295,6 @@ const OrderListing = ({
                             >
                                 View
                             </button> */}
-                            <button
-                                onClick={() => {
-                                    setIsOrderAssigneeFormOpen(true)
-                                    setSelectedOrder(row)
-                                }}
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Order Assignee
-                            </button>
                             <button
                                 onClick={() => {
                                     setIsShow(true)
@@ -530,7 +533,11 @@ const OrderListing = ({
                         setSelectedOrder(null)
                     }}
                     isOpen={isOrderAssigneeFormOpen}
-                    component={<AddOrderAssigneeFormWrapper selectedOrder={selectedOrder} />}
+                    component={
+                        <AddOrderAssigneeFormWrapper
+                            selectedOrder={selectedOrder}
+                        />
+                    }
                 />
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
