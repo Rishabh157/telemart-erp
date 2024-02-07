@@ -292,11 +292,7 @@ const CustomerPageWrapper = () => {
         productGroupId: string().required('product group id is required'),
         // DELEVERY ADDRESS SELECT OPTIONS
         countryId: string(),
-        // pincodeId: string(),
-        // stateId: string(),
-        // areaId: string(),
-        // districtId: string(),
-        // tehsilId: string(),
+  
         typeOfAddress: string(),
         reciversName: string(),
         deliveryTimeAndDate: string(),

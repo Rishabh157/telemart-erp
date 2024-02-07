@@ -254,7 +254,7 @@ const OrderListing = ({
         },
         {
             field: 'orderStatus',
-            headerName: 'Status jhh',
+            headerName: 'Status',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-slate-800">{row?.orderStatus}</span>

@@ -76,7 +76,7 @@ const Header = () => {
             (updateCompanyInfo: any) => {
                 if (updateCompanyInfo?.data?.status) {
                     const {
-                        _id,
+                        userId,
                         firstName,
                         lastName,
                         email,
@@ -86,9 +86,11 @@ const Header = () => {
                         userType,
                         userRole,
                         branchId,
+                        authToken,
+                        refreshToken
                     } = updateCompanyInfo?.data?.data
                     let userData = {
-                        userId: _id,
+                        userId: userId,
                         fullName: firstName + lastName,
                         firstName: firstName,
                         lastName: lastName,
@@ -101,8 +103,13 @@ const Header = () => {
                         branchId: branchId,
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
+                    localStorage.setItem('authToken',authToken)
+                    localStorage.setItem('refreshToken',refreshToken)
                     dispatch(setUserData(userData))
-                    window.location.href = '/dashboard'
+                    setTimeout(()=>{
+
+                        window.location.href = '/dashboard'
+                    },500)
                 }
             }
         )
