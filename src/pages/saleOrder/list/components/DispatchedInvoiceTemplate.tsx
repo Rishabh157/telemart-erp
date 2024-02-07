@@ -8,7 +8,6 @@ type Props = {
 
 const DispatchedInvoiceTemplate = React.forwardRef(
     ({ saleOrderData }: Props, ref: any) => {
-        console.log(saleOrderData)
         return (
             <div
                 ref={ref}

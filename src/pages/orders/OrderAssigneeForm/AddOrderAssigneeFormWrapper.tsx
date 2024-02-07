@@ -10,10 +10,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import {
-    object,
-    // string
-} from 'yup'
+import { object, mixed } from 'yup'
 // import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -92,18 +89,23 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder }: Props) => {
         wareHouseId: '',
     }
 
-    // Form Validation Schema
     const validationSchema = object({
-        // dealerId: string().when('wareHouseId', {
-        //     is: (wareHouseId) => wareHouseId === undefined || wareHouseId === null || wareHouseId === '',
-        //     then: string().required('Please select a vendor or warehouse'),
-        //     otherwise: string().notRequired()
-        // }),
-        // wareHouseId: string().when('dealerId', {
-        //     is: (dealerId) => dealerId === undefined || dealerId === null || dealerId === '',
-        //     then: string().required('Please select a vendor or warehouse'),
-        //     otherwise: string().notRequired()
-        // })
+        dealerId: mixed().test(
+            'dealerOrWarehouse',
+            'Please select either a vendor or a warehouse',
+            function (value) {
+                const wareHouseId = this.parent.wareHouseId
+                return (value || wareHouseId) && !(value && wareHouseId)
+            }
+        ),
+        wareHouseId: mixed().test(
+            'dealerOrWarehouse',
+            'Please select either a vendor or a warehouse',
+            function (value) {
+                const dealerId = this.parent.dealerId
+                return (value || dealerId) && !(value && dealerId)
+            }
+        ),
     })
 
     //    Form Submit Handler

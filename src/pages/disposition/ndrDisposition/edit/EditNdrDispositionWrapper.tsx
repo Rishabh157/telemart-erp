@@ -30,7 +30,6 @@ const EditNdrDispositionWrapper = () => {
     )
 
     const { data, isLoading, isFetching } = useGetNdrdispositionByIdQuery(Id)
-    console.log(data, "data")
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispositionOne?.ndrDisposition || '',
     }
