@@ -1,29 +1,35 @@
 import React from 'react'
+import { FormikProps } from 'formik'
+import { FormInitialValues } from './CustomerComplainOrderDetailsWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { FormInitialValues } from '../CustomerComplainWrapper'
-import { CustomerDetailsPropsTypes } from '../CustomerComplainWrapper'
+import { CustomerDetailsPropsTypes } from '../../CustomerComplainWrapper'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import moment from 'moment'
+import { handleValidNumber } from 'src/utils/methods/numberMethods'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import CustomerComplaintDetailsWrapper from '../CustomerComplaintDetails/CustomerComplaintDetailsWrapper'
 
+// |-- Types --|
 type Props = {
-    values: FormInitialValues
-    setFieldValue: (
-        field: string,
-        value: any,
-        shouldValidate?: boolean | undefined
-    ) => void
-    handleSubmit: () => void
-    customerDetails: CustomerDetailsPropsTypes
+    formikProps: FormikProps<FormInitialValues>
+    apiStatus?: boolean
+    customerDetails: CustomerDetailsPropsTypes | null
 }
 
-const CustomerComplainOrderDetails = ({
-    values,
-    setFieldValue,
-    handleSubmit,
+const CustomerComplainOrderDetailsForm = ({
+    formikProps,
     customerDetails,
 }: Props) => {
+    const { values, setFieldValue } = formikProps
+
+    const [
+        isOpenCustomerComplaitDetailModel,
+        setIsOpenCustomerComplaitDetailModel,
+    ] = React.useState<boolean>(false)
+
     const columnsOfCourierStatus: columnTypes[] = [
         {
             field: 'name',
@@ -50,10 +56,9 @@ const CustomerComplainOrderDetails = ({
             // renderCell: (row: any) => <span> {row.flagOrderStatus} </span>,
         },
     ]
-    // console.log('values)))', values)
 
     return (
-        <div className="py-1 px-2">
+        <div className="py-1">
             <div>
                 {/* Customer Details Section */}
                 <div className="w-full mt-4 bg-[#e9f1fb] border-[1px] border-black p-2">
@@ -71,7 +76,7 @@ const CustomerComplainOrderDetails = ({
                                         </span>
                                         {' : '}
                                         <span className="text-[18px] flex-1 text-end text-blue-500 font-bold">
-                                            3478563478
+                                            {values?.orderNo}
                                         </span>
                                     </div>
                                     <div className="flex justify-between items-center">
@@ -80,7 +85,7 @@ const CustomerComplainOrderDetails = ({
                                         </span>
                                         {':'}
                                         <span className="text-sm  flex-1 cursor-pointer text-end">
-                                            FRESH ORDER
+                                            {values.disposition}
                                         </span>
                                     </div>
                                     <div className="flex justify-between items-center">
@@ -89,7 +94,7 @@ const CustomerComplainOrderDetails = ({
                                         </span>
                                         {':'}
                                         <span className="text-sm flex-1 cursor-pointer text-end">
-                                            PDF
+                                            {values.invoice || 'PDF'}
                                         </span>
                                     </div>
                                 </div>
@@ -102,7 +107,9 @@ const CustomerComplainOrderDetails = ({
                                             </span>
                                             {' : '}
                                             <span className="flex-1 text-end text-sm">
-                                                25-01-2024
+                                                {moment(
+                                                    values.orderDate
+                                                ).format('DD-MM-YYYY')}
                                             </span>
                                         </div>
                                         <div className="flex justify-between items-center">
@@ -111,7 +118,7 @@ const CustomerComplainOrderDetails = ({
                                             </span>
                                             {':'}
                                             <span className="flex-1 text-green-500 text-end text-sm">
-                                                Delivered
+                                                {values.orderStatus}
                                             </span>
                                         </div>
                                         <div className="flex justify-between items-center">
@@ -120,7 +127,10 @@ const CustomerComplainOrderDetails = ({
                                             </span>
                                             {':'}
                                             <span className="text-sm flex-1 text-end">
-                                                29-01-2024 14:47:39
+                                                {/* 29-01-2024 14:47:39 */}
+                                                {moment(
+                                                    values.dispatchTime
+                                                ).format('DD-MM-YYYY HH:mm:ss')}
                                             </span>
                                         </div>
                                     </div>
@@ -181,11 +191,8 @@ const CustomerComplainOrderDetails = ({
                                             isValueWithLable
                                             isDisabled={true}
                                             onChange={(e) => {
-                                                // setFieldValue('stateId', e?.value || '')
-                                                // setFieldValue('stateLabel', e?.label || '')
-                                                // if (!e.value) {
-                                                //     handleRemoveAddressRelated('stateId')
-                                                // }
+                                                // console.log(e)
+                                                // setFieldValue(e)
                                             }}
                                         />
                                         <div>
@@ -199,11 +206,15 @@ const CustomerComplainOrderDetails = ({
                                                 className="mt-0 rounded"
                                                 name="reciversName"
                                                 placeholder=""
+                                                // value={values.discount}
                                                 value={0.0}
                                                 readOnly
                                                 disabled
                                                 onChange={(e) => {
-                                                    // setFieldValue('reciversName', e.target.value)
+                                                    // setFieldValue(
+                                                    //     'discount',
+                                                    //     e.target.value
+                                                    // )
                                                 }}
                                             />
                                         </div>
@@ -223,13 +234,19 @@ const CustomerComplainOrderDetails = ({
                                                 extraClassField="mt-0"
                                                 labelDirection="horizontal"
                                                 className="mt-0 rounded"
-                                                name="reciversName"
+                                                name="discount"
                                                 placeholder=""
-                                                value={0.0}
-                                                readOnly
-                                                disabled
+                                                value={values.discount}
+                                                // readOnly
+                                                // disabled
                                                 onChange={(e) => {
-                                                    // setFieldValue('reciversName', e.target.value)
+                                                    handleValidNumber(e) &&
+                                                        setFieldValue(
+                                                            'discount',
+                                                            parseInt(
+                                                                e.target.value
+                                                            )
+                                                        )
                                                 }}
                                             />
                                         </div>
@@ -251,11 +268,17 @@ const CustomerComplainOrderDetails = ({
                                                 className="mt-0 rounded"
                                                 name="reciversName"
                                                 placeholder=""
-                                                value={0.0}
-                                                readOnly
-                                                disabled
+                                                value={values.total}
+                                                // readOnly
+                                                // disabled
                                                 onChange={(e) => {
-                                                    // setFieldValue('reciversName', e.target.value)
+                                                    handleValidNumber(e) &&
+                                                        setFieldValue(
+                                                            'total',
+                                                            parseInt(
+                                                                e.target.value
+                                                            )
+                                                        )
                                                 }}
                                             />
                                         </div>
@@ -302,7 +325,7 @@ const CustomerComplainOrderDetails = ({
                                         </p>
                                     </div>
                                     <div className="mt-8">
-                                        <div className="h-80">
+                                        <div className="h-24">
                                             <ATMTable
                                                 headerClassName="py-2 bg-[#cdddf2] text-white z-0"
                                                 columns={
@@ -335,8 +358,42 @@ const CustomerComplainOrderDetails = ({
                             </div>
                         </div>
                     </div>
+                    {/* Create Companin Button and Send SMS button */}
 
-                    <div>
+                    <div className="flex justify-center items-center gap-x-4">
+                        <button
+                            type="button"
+                            className="bg-[#0c56aa] text-[#bfdbff] hover:text-white px-1 py-1 rounded font-semibold text-xs"
+                            onClick={() =>
+                                setIsOpenCustomerComplaitDetailModel(true)
+                            }
+                        >
+                            Create Complaint
+                        </button>
+
+                        <button
+                            disabled
+                            type="button"
+                            className="bg-[#0c56aa] text-[#bfdbff] px-1 py-1 rounded font-semibold text-xs cursor-not-allowed"
+                            onClick={() => {}}
+                        >
+                            Send SMS
+                        </button>
+
+                        <DialogLogBox
+                            isOpen={isOpenCustomerComplaitDetailModel}
+                            handleClose={() =>
+                                setIsOpenCustomerComplaitDetailModel(false)
+                            }
+                            component={
+                                <CustomerComplaintDetailsWrapper
+                                    orderId={values.orderId}
+                                />
+                            }
+                        />
+                    </div>
+
+                    <div className="hidden">
                         <div className="mt-4">
                             <table className="border border-gray-400">
                                 <thead>
@@ -391,4 +448,4 @@ const CustomerComplainOrderDetails = ({
     )
 }
 
-export default CustomerComplainOrderDetails
+export default CustomerComplainOrderDetailsForm

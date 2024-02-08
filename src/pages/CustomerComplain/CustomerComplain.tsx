@@ -4,7 +4,7 @@ import { FormInitialValues } from './CustomerComplainWrapper'
 import { FormikProps } from 'formik'
 import CustomerComplainHeader from './components/CustomerComplainHeader'
 import { CustomerDetailsPropsTypes } from './CustomerComplainWrapper'
-import CustomerComplainOrderDetails from './components/CustomerComplainOrderDetails'
+import CustomerComplainOrderDetailsWrapper from './components/CustomerComplainOrderDetails/CustomerComplainOrderDetailsWrapper'
 // import { SelectOption } from 'src/models/FormField/FormField.model'
 
 type Props = {
@@ -20,6 +20,7 @@ const CustomerComplain: React.FC<Props> = ({
     column,
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
+    const [selectedOrderId, setSelectedOrderId] = React.useState<string>('')
 
     return (
         <div className="bg-white px-4">
@@ -32,21 +33,21 @@ const CustomerComplain: React.FC<Props> = ({
             />
 
             {/* Data Table  */}
-            <div className="border-[1px] border-grey-700 h-40 overflow-y-scroll">
-                <ATMTable
-                    headerClassName="bg-[#cdddf2] py-2 text-white z-0"
-                    columns={column || []}
-                    rows={customerDetails?.orderListing}
-                    onRowClick={(row) => {}}
-                />
-            </div>
 
-            <CustomerComplainOrderDetails
-                values={values}
-                setFieldValue={setFieldValue}
-                handleSubmit={handleSubmit}
-                customerDetails={customerDetails}
-            />
+            {selectedOrderId !== '' ? (
+                <CustomerComplainOrderDetailsWrapper
+                    orderId={selectedOrderId}
+                />
+            ) : (
+                <div className="border-[1px] border-grey-700 h-40 overflow-y-scroll">
+                    <ATMTable
+                        headerClassName="bg-[#cdddf2] py-2 text-white z-0"
+                        columns={column || []}
+                        rows={customerDetails?.orderListing}
+                        onRowClick={(row) => setSelectedOrderId(row?._id)}
+                    />
+                </div>
+            )}
         </div>
     )
 }
