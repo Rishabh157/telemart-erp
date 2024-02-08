@@ -86,7 +86,7 @@ const Header = () => {
                         userType,
                         userRole,
                         branchId,
-                        authToken,
+                        token,
                         refreshToken
                     } = updateCompanyInfo?.data?.data
                     let userData = {
@@ -103,13 +103,12 @@ const Header = () => {
                         branchId: branchId,
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
-                    localStorage.setItem('authToken',authToken)
+                    localStorage.setItem('authToken',token)
                     localStorage.setItem('refreshToken',refreshToken)
                     dispatch(setUserData(userData))
-                    setTimeout(()=>{
-
                         window.location.href = '/dashboard'
-                    },500)
+
+
                 }
             }
         )
