@@ -50,14 +50,15 @@ const AddOrderAssigneeForm = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
-        <div className=" h-[calc(100vh-55px)] overflow-auto">
+        <div className="h-[calc(50vh-20px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2">
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat pb-4">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium">
-                            Order Assignee
+                            Add Order Assignee
                         </div>
 
                         {/* BUTTON - Add SO */}
@@ -77,11 +78,11 @@ const AddOrderAssigneeForm = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-2 gap-4">
                             {/* PO Code */}
 
                             {/* Vendor */}
-                            <div className="-mt-2">
+                            <div className="-mt-2 z-[5000000]">
                                 <ATMSelectSearchable
                                     name="dealerId"
                                     value={values.dealerId}
@@ -90,6 +91,10 @@ const AddOrderAssigneeForm = ({
                                     }
                                     options={dropdownOptions.dealerOptions}
                                     label="Dealer"
+                                    // menuPosition="absolute"
+                                    isDisabled={
+                                        values.wareHouseId !== '' ? true : false
+                                    }
                                 />
                             </div>
 
@@ -103,6 +108,9 @@ const AddOrderAssigneeForm = ({
                                     }
                                     options={dropdownOptions.warehouseOptions}
                                     label="Warehouse (Company)"
+                                    isDisabled={
+                                        values.dealerId !== '' ? true : false
+                                    }
                                 />
                             </div>
                         </div>

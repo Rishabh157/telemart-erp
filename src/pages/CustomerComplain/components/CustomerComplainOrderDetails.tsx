@@ -50,7 +50,7 @@ const CustomerComplainOrderDetails = ({
             // renderCell: (row: any) => <span> {row.flagOrderStatus} </span>,
         },
     ]
-    console.log('values)))', values)
+    // console.log('values)))', values)
 
     return (
         <div className="py-1 px-2">

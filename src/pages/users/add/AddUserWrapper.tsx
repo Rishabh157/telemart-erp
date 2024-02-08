@@ -46,9 +46,9 @@ export type FormInitialValues = {
     companyId: string
     allowedIps: { allowedIp: string }[]
     isAgent: boolean
-    callCenterId: string 
-    floorManagerId: string 
-    teamLeadId: string 
+    callCenterId: string
+    floorManagerId: string
+    teamLeadId: string
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -94,13 +94,11 @@ const AddUserWrapper = (props: Props) => {
 
         isAgent: boolean(),
         teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
-            console.log('isAgent', isAgent)
             return isAgent[0]
                 ? schema.required('Team Lead ID is required')
                 : schema.notRequired()
         }),
         floorManagerId: string().when(['isAgent'], (isAgent, schema) => {
-            console.log('isAgent', isAgent)
             return isAgent[0]
                 ? schema.required('Floor Manager is required')
                 : schema.notRequired()
@@ -108,7 +106,6 @@ const AddUserWrapper = (props: Props) => {
         callCenterId: string().when(
             'userDepartment',
             (userDepartment: any, schema: any) => {
-                console.log(userDepartment, 'userDepartment')
                 return userDepartment.includes('SALES_DEPARTMENT')
                     ? schema.required(
                           'Call Center ID is required for Sales department'

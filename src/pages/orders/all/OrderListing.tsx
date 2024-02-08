@@ -71,7 +71,6 @@ type BarcodeListResponseType = {
     updatedAt: string
 }
 
-
 const OrderListing = ({
     tabName,
     orderStatus,
@@ -159,7 +158,7 @@ const OrderListing = ({
 
     useEffect(() => {
         if (!isOrderFlowFetching && !isOrderFlowLoading) {
-            return orderFlowData
+            // console.log('orderFlowData: ', orderFlowData)
         }
     }, [isOrderFlowLoading, isOrderFlowFetching, orderFlowData])
 
@@ -271,6 +270,12 @@ const OrderListing = ({
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
+                    isCustomBtn={true}
+                    customBtnText="Order Assignee"
+                    handleCustomActionButton={() => {
+                        setIsOrderAssigneeFormOpen(true)
+                        setSelectedOrder(row)
+                    }}
                     children={
                         <>
                             {/* <button
@@ -290,15 +295,6 @@ const OrderListing = ({
                             >
                                 View
                             </button> */}
-                            <button
-                                onClick={() => {
-                                    setIsOrderAssigneeFormOpen(true)
-                                    setSelectedOrder(row)
-                                }}
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Order Assignee
-                            </button>
                             <button
                                 onClick={() => {
                                     setIsShow(true)
@@ -537,7 +533,15 @@ const OrderListing = ({
                         setSelectedOrder(null)
                     }}
                     isOpen={isOrderAssigneeFormOpen}
-                    component={<AddOrderAssigneeFormWrapper selectedOrder={selectedOrder} />}
+                    component={
+                        <AddOrderAssigneeFormWrapper
+                            selectedOrder={selectedOrder}
+                            handleClose={() => {
+                                setIsOrderAssigneeFormOpen(false)
+                                setSelectedOrder(null)
+                            }}
+                        />
+                    }
                 />
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
