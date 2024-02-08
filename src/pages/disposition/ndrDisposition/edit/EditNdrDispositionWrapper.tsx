@@ -16,6 +16,10 @@ import EditNdrDisposition from './EditNdrDisposition'
 
 export type FormInitialValues = {
     dispositionName: string
+    priority: string
+    smsType: string
+    emailType: string
+    rtoAttempt: string
 }
 const EditNdrDispositionWrapper = () => {
     const navigate = useNavigate()
@@ -32,6 +36,10 @@ const EditNdrDispositionWrapper = () => {
     const { data, isLoading, isFetching } = useGetNdrdispositionByIdQuery(Id)
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispositionOne?.ndrDisposition || '',
+        priority: selectedDispositionOne?.priority,
+        smsType: selectedDispositionOne?.smsType,
+        emailType: selectedDispositionOne?.emailType,
+        rtoAttempt: selectedDispositionOne?.rtoAttempt,
     }
 
     useEffect(() => {
@@ -41,6 +49,10 @@ const EditNdrDispositionWrapper = () => {
 
     const validationSchema = object({
         dispositionName: string().required('Required'),
+        priority: string().required('Required'),
+        smsType: string().required('Required'),
+        emailType: string().required('Required'),
+        rtoAttempt: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -49,6 +61,10 @@ const EditNdrDispositionWrapper = () => {
             editDispositionOne({
                 body: {
                     ndrDisposition: values?.dispositionName,
+                    priority: values?.priority,
+                    smsType: values?.smsType,
+                    emailType: values?.emailType,
+                    rtoAttempt: values?.rtoAttempt,
                 },
                 id: Id || '',
             }).then((res: any) => {
