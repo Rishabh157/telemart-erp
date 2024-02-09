@@ -8,6 +8,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { RTOTypeOptions, emailTypeOptions, smstypeOptions } from '../add/AddNdrDisposition'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -30,6 +32,19 @@ const EditNdrDisposition = ({ formikProps, apiStatus }: Props) => {
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
+    }
+    const priorityOptions = () => {
+        let Opoptions: any = []
+        for (let i = 1; i <= 50; i++) {
+            Opoptions = [
+                ...Opoptions,
+                {
+                    label: i.toString(),
+                    value: i.toString(),
+                },
+            ]
+        }
+        return Opoptions
     }
     return (
         <>
@@ -79,6 +94,43 @@ const EditNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                                             'dispositionName',
                                             e.target.value
                                         )
+                                    }
+                                />
+                                 <ATMSelectSearchable
+                                    options={smstypeOptions()}
+                                    name="smsType"
+                                    value={values.smsType}
+                                    label="Sms type"
+                                    onChange={(e) =>
+                                        handleSetFieldValue('smsType', e)
+                                    }
+                                />
+
+                                <ATMSelectSearchable
+                                    options={emailTypeOptions()}
+                                    name="emailType"
+                                    value={values.emailType}
+                                    label="emailType"
+                                    onChange={(e) =>
+                                        handleSetFieldValue('emailType', e)
+                                    }
+                                />
+                                <ATMSelectSearchable
+                                    name="priority"
+                                    value={values.priority}
+                                    label="priority"
+                                    options={priorityOptions()}
+                                    onChange={(e) =>
+                                        handleSetFieldValue('priority', e)
+                                    }
+                                />
+                                <ATMSelectSearchable
+                                    options={RTOTypeOptions()}
+                                    name="rtoAttempt"
+                                    value={values.rtoAttempt}
+                                    label="rtoAttempt"
+                                    onChange={(e) =>
+                                        handleSetFieldValue('rtoAttempt', e)
                                     }
                                 />
                             </div>
