@@ -35,6 +35,15 @@ export const initialCallerThreeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        // get all initial call two by one id and call type
+        getAllinitialCallThreeByTwoByAndCallType: builder.query({
+            providesTags: ['initialCallerTwo'],
+            query: ({ id, callType }) => ({
+                url: `/initialcall-three/get-all/${id}/calltype/${callType}`,
+                method: 'GET',
+            }),
+        }),
+
         //***** ADD *****/
         addInitialCallerThree: builder.mutation({
             invalidatesTags: ['initialCallerThree'],
@@ -50,7 +59,6 @@ export const initialCallerThreeApi = apiSlice.injectEndpoints({
             invalidatesTags: ['initialCallerThree'],
             query: ({ body, id }: UpdateInitialCallerThree) => ({
                 url: `/initialcall-three/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -61,7 +69,6 @@ export const initialCallerThreeApi = apiSlice.injectEndpoints({
             providesTags: ['initialCallerThree'],
             query: (id) => ({
                 url: `/initialcall-three/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -70,7 +77,6 @@ export const initialCallerThreeApi = apiSlice.injectEndpoints({
         exportInitialCallerThreeData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
@@ -101,10 +107,11 @@ export const initialCallerThreeApi = apiSlice.injectEndpoints({
 export const {
     useGetInitialCallerThreeQuery,
     useAddInitialCallerThreeMutation,
+    useGetAllinitialCallThreeByTwoByAndCallTypeQuery,
     useUpdateInitialCallerThreeMutation,
     useGetInitialCallerThreeByIdQuery,
     useExportInitialCallerThreeDataMutation,
     useDeleteInitialCallerThreeMutation,
     useGetAllInitialCallerThreeQuery,
-    useDeactiveInitialCallerThreeMutation
+    useDeactiveInitialCallerThreeMutation,
 } = initialCallerThreeApi

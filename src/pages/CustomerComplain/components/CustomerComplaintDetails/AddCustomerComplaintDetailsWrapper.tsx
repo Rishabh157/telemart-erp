@@ -5,11 +5,12 @@ import CustomerComplaintDetailsForm from './CustomerComplaintDetailsForm'
 import { useGetOrderByIdQuery } from 'src/services/OrderService'
 import { OrderListResponse } from 'src/models'
 import { CircularProgress } from '@mui/material'
-
-// import { showToast } from 'src/utils'
+import { useAddCustomerComplainMutation } from 'src/services/CustomerComplainServices'
+import { showToast } from 'src/utils'
 
 type Props = {
     orderId: string
+    handleClose: () => void
 }
 
 export type FormInitialValues = {
@@ -26,9 +27,12 @@ export type FormInitialValues = {
     remark: string
 }
 
-const CustomerComplaintDetailsWrapper = ({ orderId }: Props) => {
+const AddCustomerComplaintDetailsWrapper = ({
+    orderId,
+    handleClose,
+}: Props) => {
     const [orderDetails, setOrderDetails] = React.useState<OrderListResponse>()
-    console.log('orderDetails: ', orderDetails)
+    const [addComplaint, addComplaintInfo] = useAddCustomerComplainMutation()
 
     const initialValues: FormInitialValues = {
         orderNo: orderDetails?.orderNumber || 0,
@@ -66,22 +70,38 @@ const CustomerComplaintDetailsWrapper = ({ orderId }: Props) => {
     }, [data, isLoading, isFetching])
 
     const onSubmitHandler = (values: FormInitialValues) => {
-        // addDealer({}).then((res) => {
-        //     if ('data' in res) {
-        //         if (res?.data?.status) {
-        //             showToast('success', 'Dealer added successfully!')
-        //             // navigate('/dealers')
-        //         } else {
-        //             showToast('error', res?.data?.message)
-        //         }
-        //     } else {
-        //         showToast('error', 'Something went wrong')
-        //     }
-        // })
-        // setApiStatus(false)
-    }
+        console.log('onSubmitHandler ', values)
 
-    console.log('orderDetails', orderDetails)
+        const formatedValues = {
+            orderId,
+            orderNumber: values.orderNo,
+            schemeId: orderDetails?.schemeId,
+            schemeName: values.schemeName,
+            schemeCode: values.schemeCode,
+            orderStatus: values.orderStatus,
+            courierStatus: values.courierStatus,
+            callType: values.callType,
+            icOne: values.initialCallOne,
+            icTwo: values.initialCallTwo,
+            icThree: values.initialCallThree,
+            status: values.status,
+            remark: values.remark,
+        }
+
+        addComplaint(formatedValues).then((res: any) => {
+            if ('data' in res) {
+                console.log('inside the create complain', res)
+                if (res?.data?.status) {
+                    showToast('success', 'complaint added successfully!')
+                    handleClose()
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
+    }
 
     return (
         <Formik
@@ -97,11 +117,15 @@ const CustomerComplaintDetailsWrapper = ({ orderId }: Props) => {
                             <CircularProgress />
                         </div>
                     )}
-                    <CustomerComplaintDetailsForm formikProps={formikProps} />
+                    <CustomerComplaintDetailsForm
+                        formType="ADD"
+                        formikProps={formikProps}
+                        apiStatus={addComplaintInfo?.isLoading}
+                    />
                 </Form>
             )}
         </Formik>
     )
 }
 
-export default CustomerComplaintDetailsWrapper
+export default AddCustomerComplaintDetailsWrapper

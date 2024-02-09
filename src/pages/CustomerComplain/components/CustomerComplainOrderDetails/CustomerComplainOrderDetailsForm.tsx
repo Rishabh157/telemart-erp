@@ -10,7 +10,7 @@ import ATMTable, {
 import moment from 'moment'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import CustomerComplaintDetailsWrapper from '../CustomerComplaintDetails/CustomerComplaintDetailsWrapper'
+import AddCustomerComplaintDetailsWrapper from '../CustomerComplaintDetails/AddCustomerComplaintDetailsWrapper'
 
 // |-- Types --|
 type Props = {
@@ -386,61 +386,16 @@ const CustomerComplainOrderDetailsForm = ({
                                 setIsOpenCustomerComplaitDetailModel(false)
                             }
                             component={
-                                <CustomerComplaintDetailsWrapper
+                                <AddCustomerComplaintDetailsWrapper
                                     orderId={values.orderId}
+                                    handleClose={() =>
+                                        setIsOpenCustomerComplaitDetailModel(
+                                            false
+                                        )
+                                    }
                                 />
                             }
                         />
-                    </div>
-
-                    <div className="hidden">
-                        <div className="mt-4">
-                            <table className="border border-gray-400">
-                                <thead>
-                                    <tr className="bg-#cdddf2">
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Action
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            No.
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Date
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Order No.
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Call Type
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Issue Category (IC1:IC2:IC3)
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Status (Return Type)
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Stage
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Last Remark
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Last Updated By
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Last Updated Date
-                                        </th>
-                                        <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                            Total Calls
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {/* <!-- Table body content goes here --> */}
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
