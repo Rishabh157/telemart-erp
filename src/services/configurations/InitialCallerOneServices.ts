@@ -15,7 +15,8 @@ import {
 
 export const initialCallerOneApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        //***** GET *****/
+
+        //***** GET With Pagination *****/
         getinitialCallerOne: builder.query({
             providesTags: ['initialCallerOne'],
             query: (body: PaginationType) => ({
@@ -50,7 +51,6 @@ export const initialCallerOneApi = apiSlice.injectEndpoints({
             invalidatesTags: ['initialCallerOne'],
             query: ({ body, id }: UpdateInitialCallerOne) => ({
                 url: `/initialcall-one/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -61,7 +61,6 @@ export const initialCallerOneApi = apiSlice.injectEndpoints({
             providesTags: ['initialCallerOne'],
             query: (id) => ({
                 url: `/initialcall-one/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -70,7 +69,6 @@ export const initialCallerOneApi = apiSlice.injectEndpoints({
         exportinitialCallerOneData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
@@ -85,10 +83,11 @@ export const initialCallerOneApi = apiSlice.injectEndpoints({
             invalidatesTags: ['initialCallerOne'],
             query: (id) => ({
                 url: `/initialcall-one/${id}`,
-
                 method: 'DELETE',
             }),
         }),
+
+        // Deactive Initial Caller One
         deactiveInitialCallerOne: builder.mutation({
             invalidatesTags: ['initialCallerOne'],
             query: (id: string) => ({
