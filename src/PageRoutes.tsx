@@ -270,6 +270,7 @@ import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWr
 import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/list/NdrDispositionListingWrapper'
 import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/AddNdrDispositionWrapper'
 import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
+import RetailInvoice from './Receipt/RetailInvoice/RetailInvoice'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -3044,6 +3045,11 @@ const PageRoutes = () => {
                     <Route
                         path="configurations/user-access"
                         element={<UserAccessWrapper />}
+                    />
+
+                    <Route
+                        path="retail-invoice"
+                        element={<RetailInvoice />}
                     />
                     {/* ############# NOT FOR USE ############# */}
                 </Routes>
