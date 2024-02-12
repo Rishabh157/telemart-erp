@@ -1,15 +1,12 @@
-import React from 'react'
-import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { FormInitialValues } from './CustomerComplainWrapper'
 import { FormikProps } from 'formik'
-import CustomerComplainHeader from './components/CustomerComplainHeader'
-import { CustomerDetailsPropsTypes } from './CustomerComplainWrapper'
-import CustomerComplainOrderDetailsWrapper from './components/CustomerComplainOrderDetails/CustomerComplainOrderDetailsWrapper'
-import ComplaintListingWrapper from './components/ComplaintListing/ComplaintListingWrapper'
-import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { BsArrowRepeat } from 'react-icons/bs'
+import React from 'react'
 import { CiBoxList } from 'react-icons/ci'
 import { MdOutlineFormatListNumbered } from 'react-icons/md'
+import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { CustomerDetailsPropsTypes, FormInitialValues } from './CustomerComplainWrapper'
+import ComplaintListingWrapper from './components/ComplaintListing/ComplaintListingWrapper'
+import CustomerComplainHeader from './components/CustomerComplainHeader'
+import CustomerComplainOrderDetailsWrapper from './components/CustomerComplainOrderDetails/CustomerComplainOrderDetailsWrapper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
