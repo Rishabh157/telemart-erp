@@ -21,10 +21,8 @@ const CustomerComplainHeader = ({
     handleSubmit,
     customerDetails,
 }: Props) => {
-    console.log('values)))', values)
-
     return (
-        <div className="py-1 px-2">
+        <div className="py-1">
             <div>
                 {/* Search Header */}
                 <div className="w-full bg-[#e9f1fb] p-2">

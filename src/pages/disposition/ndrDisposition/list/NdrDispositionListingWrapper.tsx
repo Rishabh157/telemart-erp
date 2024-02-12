@@ -78,6 +78,38 @@ const NdrDispositionListingWrapper = () => {
             ),
         },
         {
+            field: 'emailType',
+            headerName: 'Email type',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: any) => (
+                <span> {row?.emailType} </span>
+            ),
+        },
+        {
+            field: 'smsType',
+            headerName: 'Sms Type',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: any) => (
+                <span> {row?.smsType} </span>
+            ),
+        },
+        {
+            field: 'rtoAttempt',
+            headerName: 'Rto Attempt',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: any) => (
+                <span> {row?.rtoAttempt} </span>
+            ),
+        },
+        {
+            field: 'priority',
+            headerName: 'Priority',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: any) => (
+                <span> {row?.priority} </span>
+            ),
+        },
+        {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',

@@ -384,7 +384,7 @@ const AddDealerWrapper = () => {
                 validateOnChange={true}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
+                    <Form>
                         <AddDealers
                             formikProps={formikProps}
                             steps={steps}
