@@ -6,8 +6,6 @@ import CustomerComplainHeader from './components/CustomerComplainHeader'
 import { CustomerDetailsPropsTypes } from './CustomerComplainWrapper'
 import CustomerComplainOrderDetailsWrapper from './components/CustomerComplainOrderDetails/CustomerComplainOrderDetailsWrapper'
 import ComplaintListingWrapper from './components/ComplaintListing/ComplaintListingWrapper'
-import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { BsArrowRepeat } from 'react-icons/bs'
 import { CiBoxList } from 'react-icons/ci'
 import { MdOutlineFormatListNumbered } from 'react-icons/md'
 
@@ -24,7 +22,7 @@ const CustomerComplain: React.FC<Props> = ({
     column,
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
-    const [selectedOrderId, setSelectedOrderId] = React.useState<string>('')
+    const [selectedOrderId, setSelectedOrderId] = React.useState<string>('LLL')
     const [activeTab, setActiveTab] = React.useState<string>('ORDER')
 
     return (

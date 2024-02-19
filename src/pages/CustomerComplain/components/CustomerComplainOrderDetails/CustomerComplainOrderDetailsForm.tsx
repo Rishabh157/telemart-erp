@@ -11,6 +11,7 @@ import moment from 'moment'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddCustomerComplaintDetailsWrapper from '../CustomerComplaintDetails/AddCustomerComplaintDetailsWrapper'
+import AddCustomerNDRDetailsWrapper from '../CustomerNdr/AddCustomerNDRDetailsWrapper'
 
 // |-- Types --|
 type Props = {
@@ -29,6 +30,9 @@ const CustomerComplainOrderDetailsForm = ({
         isOpenCustomerComplaitDetailModel,
         setIsOpenCustomerComplaitDetailModel,
     ] = React.useState<boolean>(false)
+
+    const [isOpenCustomerNDRDetailModel, setIsOpenCustomerNDRDetailModel] =
+        React.useState<boolean>(false)
 
     const columnsOfCourierStatus: columnTypes[] = [
         {
@@ -152,12 +156,12 @@ const CustomerComplainOrderDetailsForm = ({
                                                 orderStatus: 'DELIVERED',
                                             },
                                             {
-                                                name: 'Rishabh',
+                                                name: 'Imran',
                                                 date: '29-01-2024 14:47:39',
                                                 orderStatus: 'DELIVERED',
                                             },
                                             {
-                                                name: 'Rishabh',
+                                                name: 'Chris',
                                                 date: '29-01-2024 14:47:39',
                                                 orderStatus: 'DELIVERED',
                                             },
@@ -370,7 +374,6 @@ const CustomerComplainOrderDetailsForm = ({
                         >
                             Create Complaint
                         </button>
-
                         <button
                             disabled
                             type="button"
@@ -379,7 +382,16 @@ const CustomerComplainOrderDetailsForm = ({
                         >
                             Send SMS
                         </button>
-
+                        <button
+                            type="button"
+                            className="bg-[#0c56aa] text-[#bfdbff] hover:text-white px-1 py-1 rounded font-semibold text-xs"
+                            onClick={() =>
+                                setIsOpenCustomerNDRDetailModel(true)
+                            }
+                        >
+                            Create NDR
+                        </button>
+                        {/* Create Complain Form */}
                         <DialogLogBox
                             isOpen={isOpenCustomerComplaitDetailModel}
                             handleClose={() =>
@@ -392,6 +404,22 @@ const CustomerComplainOrderDetailsForm = ({
                                         setIsOpenCustomerComplaitDetailModel(
                                             false
                                         )
+                                    }
+                                />
+                            }
+                        />
+                        {/* Create NDR Form */}
+                        <DialogLogBox
+                            fullScreen
+                            isOpen={isOpenCustomerNDRDetailModel}
+                            handleClose={() =>
+                                setIsOpenCustomerNDRDetailModel(false)
+                            }
+                            component={
+                                <AddCustomerNDRDetailsWrapper
+                                    orderId={values.orderId}
+                                    handleClose={() =>
+                                        setIsOpenCustomerNDRDetailModel(false)
                                     }
                                 />
                             }
