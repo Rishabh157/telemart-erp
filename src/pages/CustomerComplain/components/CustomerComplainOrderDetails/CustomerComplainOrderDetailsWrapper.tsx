@@ -9,6 +9,7 @@ import { CircularProgress } from '@mui/material'
 
 type Props = {
     orderId: string
+    setIsOpenCustomerOrderModel: any
 }
 
 export type FormInitialValues = {
@@ -24,7 +25,7 @@ export type FormInitialValues = {
     total: number
 }
 
-const CustomerComplainOrderDetailsWrapper = ({ orderId }: Props) => {
+const CustomerComplainOrderDetailsWrapper = ({ orderId, setIsOpenCustomerOrderModel, }: Props) => {
     const [orderDetails, setOrderDetails] = React.useState<OrderListResponse>()
 
     const initialValues: FormInitialValues = {
@@ -80,6 +81,7 @@ const CustomerComplainOrderDetailsWrapper = ({ orderId }: Props) => {
                         </div>
                     )}
                     <CustomerComplainOrderDetailsForm
+                        setIsOpenCustomerOrderModel={setIsOpenCustomerOrderModel}
                         customerDetails={null}
                         // customerDetails={{customerDetails}}
                         formikProps={formikProps}

@@ -1,15 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import { object, string } from 'yup'
-import CustomerComplaintDetailsForm from './CustomerComplaintDetailsForm'
-import { useGetOrderByIdQuery } from 'src/services/OrderService'
-import { OrderListResponse } from 'src/models'
+import CustomerNDRDetailsForm from './CustomerNDRDetailsForm'
+// import { useGetOrderByIdQuery } from 'src/services/OrderService'
+// import { OrderListResponse } from 'src/models'
 import { CircularProgress } from '@mui/material'
-import { useAddCustomerComplainMutation } from 'src/services/CustomerComplainServices'
+import {
+    useGetComplaintByIdQuery,
+    useUpdateCustomerComplainMutation,
+} from 'src/services/CustomerComplainServices'
 import { showToast } from 'src/utils'
 
 type Props = {
-    orderId: string
+    complaintId: string
     handleClose: () => void
 }
 
@@ -27,25 +31,30 @@ export type FormInitialValues = {
     remark: string
 }
 
-const AddCustomerComplaintDetailsWrapper = ({
-    orderId,
-    handleClose,
-}: Props) => {
-    const [orderDetails, setOrderDetails] = React.useState<OrderListResponse>()
-    const [addComplaint, addComplaintInfo] = useAddCustomerComplainMutation()
+const EditCustomerNDRDetailsWrapper = ({ complaintId, handleClose }: Props) => {
+    const [complaintOrderDetails, setComplaintOrderDetails] =
+        React.useState<any>()
+    const { isLoading, isFetching, data } = useGetComplaintByIdQuery<any>(
+        complaintId,
+        {
+            skip: !complaintId,
+        }
+    )
+    const [updateComplaint, updateComplaintInfo] =
+        useUpdateCustomerComplainMutation()
 
     const initialValues: FormInitialValues = {
-        orderNo: orderDetails?.orderNumber || 0,
-        schemeName: orderDetails?.schemeName || '',
-        schemeCode: orderDetails?.schemeName || '',
-        orderStatus: orderDetails?.status || '',
-        courierStatus: orderDetails?.status || '',
-        callType: orderDetails?.callType || '',
-        initialCallOne: '',
-        initialCallTwo: '',
-        initialCallThree: '',
-        status: '',
-        remark: orderDetails?.remark || '',
+        orderNo: complaintOrderDetails?.orderNumber || 0,
+        schemeName: complaintOrderDetails?.schemeName || '',
+        schemeCode: complaintOrderDetails?.schemeName || '',
+        orderStatus: complaintOrderDetails?.status || '',
+        courierStatus: complaintOrderDetails?.status || '',
+        callType: complaintOrderDetails?.callType || '',
+        initialCallOne: complaintOrderDetails?.icOne,
+        initialCallTwo: complaintOrderDetails?.icTwo,
+        initialCallThree: complaintOrderDetails?.icThree,
+        status: complaintOrderDetails?.status,
+        remark: complaintOrderDetails?.remark || '',
     }
 
     // Form Validation Schema
@@ -59,22 +68,21 @@ const AddCustomerComplaintDetailsWrapper = ({
         remark: string().required('remark is required'),
     })
 
-    const { data, isLoading, isFetching } = useGetOrderByIdQuery(orderId, {
-        skip: !orderId,
-    })
+    // const { data, isLoading, isFetching } = useGetOrderByIdQuery(orderId, {
+    //     skip: !orderId,
+    // })
 
     React.useEffect(() => {
         if (!isLoading && !isFetching) {
-            setOrderDetails(data?.data)
+            setComplaintOrderDetails(data?.data[0])
         }
     }, [data, isLoading, isFetching])
 
     const onSubmitHandler = (values: FormInitialValues) => {
-
         const formatedValues = {
-            orderId,
+            orderId: complaintOrderDetails?.orderId,
             orderNumber: values.orderNo,
-            schemeId: orderDetails?.schemeId,
+            schemeId: complaintOrderDetails?.schemeId,
             schemeName: values.schemeName,
             schemeCode: values.schemeCode,
             orderStatus: values.orderStatus,
@@ -87,19 +95,20 @@ const AddCustomerComplaintDetailsWrapper = ({
             remark: values.remark,
         }
 
-        addComplaint(formatedValues).then((res: any) => {
-            if ('data' in res) {
-                console.log('inside the create complain', res)
-                if (res?.data?.status) {
-                    showToast('success', 'complaint added successfully!')
-                    handleClose()
+        updateComplaint({ id: complaintId, body: formatedValues }).then(
+            (res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'updated successfully!')
+                        handleClose()
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
                 } else {
-                    showToast('error', res?.data?.message)
+                    showToast('error', 'Something went wrong')
                 }
-            } else {
-                showToast('error', 'Something went wrong')
             }
-        })
+        )
     }
 
     return (
@@ -116,15 +125,15 @@ const AddCustomerComplaintDetailsWrapper = ({
                             <CircularProgress />
                         </div>
                     )}
-                    <CustomerComplaintDetailsForm
-                        formType="ADD"
+                    {/* <CustomerNDRDetailsForm
+                        formType="EDIT"
                         formikProps={formikProps}
-                        apiStatus={addComplaintInfo?.isLoading}
-                    />
+                        apiStatus={updateComplaintInfo?.isLoading}
+                    /> */}
                 </Form>
             )}
         </Formik>
     )
 }
 
-export default AddCustomerComplaintDetailsWrapper
+export default EditCustomerNDRDetailsWrapper

@@ -293,11 +293,16 @@ const PageRoutes = () => {
                 <Routes>
                     <Route path="/vender-invoice" element={<VenderInvoice />} />
                     {/* Login */}
-                    <Route path="/" element={<Auth />} />
+                    <Route path="/login" element={<Auth />} />
                     {/* Page not found */}
                     <Route path="*" element={<PageNotFound />} />
                     {/* Dashboard */}
-                    <Route path="/dashboard" element={<DashboardWrappper />} />
+                    <Route path="/dashboard" element={
+                        <AuthenticationHOC
+                            component={<DashboardWrappper />}
+                            moduleName={UserModuleNameTypes.dashboard}
+                        />
+                    } />
                     {/* Profile */}
                     <Route path="/profile" element={<ProfileWrappper />} />
 

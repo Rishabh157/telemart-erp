@@ -1,12 +1,12 @@
 import React from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import { object, string } from 'yup'
-import CustomerComplaintDetailsForm from './CustomerComplaintDetailsForm'
+import CustomerNDRDetailsForm from './CustomerNDRDetailsForm'
 import { useGetOrderByIdQuery } from 'src/services/OrderService'
 import { OrderListResponse } from 'src/models'
 import { CircularProgress } from '@mui/material'
 import { useAddCustomerComplainMutation } from 'src/services/CustomerComplainServices'
-import { showToast } from 'src/utils'
+// import { showToast } from 'src/utils'
 
 type Props = {
     orderId: string
@@ -14,37 +14,57 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    customerName: string
+    mobileNumber: string
+    alternateNumber1: string
+    alternateNumber2: string
     orderNo: number
+    orderStatus: string
     schemeName: string
     schemeCode: string
-    orderStatus: string
+    courier: string
     courierStatus: string
-    callType: string
-    initialCallOne: string
-    initialCallTwo: string
-    initialCallThree: string
-    status: string
+    courierRemark: string
+    remarkTimestamp: string
+    address1: string
+    address2: string
+    pincode: string
+    district: string
+    state: string
+    callDisposition: string
+    rtoReattemptReason: string
+    validateCourierRemark: string
+    reAttemptDate: string
     remark: string
 }
 
-const AddCustomerComplaintDetailsWrapper = ({
-    orderId,
-    handleClose,
-}: Props) => {
+const AddCustomerNDRDetailsWrapper = ({ orderId, handleClose }: Props) => {
     const [orderDetails, setOrderDetails] = React.useState<OrderListResponse>()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [addComplaint, addComplaintInfo] = useAddCustomerComplainMutation()
 
     const initialValues: FormInitialValues = {
+        customerName: '',
+        mobileNumber: '',
+        alternateNumber1: '',
+        alternateNumber2: '',
         orderNo: orderDetails?.orderNumber || 0,
+        orderStatus: orderDetails?.status || '',
         schemeName: orderDetails?.schemeName || '',
         schemeCode: orderDetails?.schemeName || '',
-        orderStatus: orderDetails?.status || '',
+        courier: '',
         courierStatus: orderDetails?.status || '',
-        callType: orderDetails?.callType || '',
-        initialCallOne: '',
-        initialCallTwo: '',
-        initialCallThree: '',
-        status: '',
+        courierRemark: '',
+        remarkTimestamp: '',
+        address1: '',
+        address2: '',
+        pincode: '',
+        district: '',
+        state: '',
+        callDisposition: '',
+        rtoReattemptReason: '',
+        validateCourierRemark: '',
+        reAttemptDate: '',
         remark: orderDetails?.remark || '',
     }
 
@@ -70,36 +90,33 @@ const AddCustomerComplaintDetailsWrapper = ({
     }, [data, isLoading, isFetching])
 
     const onSubmitHandler = (values: FormInitialValues) => {
-
-        const formatedValues = {
-            orderId,
-            orderNumber: values.orderNo,
-            schemeId: orderDetails?.schemeId,
-            schemeName: values.schemeName,
-            schemeCode: values.schemeCode,
-            orderStatus: values.orderStatus,
-            courierStatus: values.courierStatus,
-            callType: values.callType,
-            icOne: values.initialCallOne,
-            icTwo: values.initialCallTwo,
-            icThree: values.initialCallThree,
-            status: values.status,
-            remark: values.remark,
-        }
-
-        addComplaint(formatedValues).then((res: any) => {
-            if ('data' in res) {
-                console.log('inside the create complain', res)
-                if (res?.data?.status) {
-                    showToast('success', 'complaint added successfully!')
-                    handleClose()
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-        })
+        // const formatedValues = {
+        //     orderId,
+        //     orderNumber: values.orderNo,
+        //     schemeId: orderDetails?.schemeId,
+        //     schemeName: values.schemeName,
+        //     schemeCode: values.schemeCode,
+        //     orderStatus: values.orderStatus,
+        //     courierStatus: values.courierStatus,
+        //     callType: values.callType,
+        //     icOne: values.initialCallOne,
+        //     icTwo: values.initialCallTwo,
+        //     icThree: values.initialCallThree,
+        //     status: values.status,
+        //     remark: values.remark,
+        // }
+        // addComplaint(formatedValues).then((res: any) => {
+        //     if ('data' in res) {
+        //         if (res?.data?.status) {
+        //             showToast('success', 'complaint added successfully!')
+        //             handleClose()
+        //         } else {
+        //             showToast('error', res?.data?.message)
+        //         }
+        //     } else {
+        //         showToast('error', 'Something went wrong')
+        //     }
+        // })
     }
 
     return (
@@ -116,7 +133,7 @@ const AddCustomerComplaintDetailsWrapper = ({
                             <CircularProgress />
                         </div>
                     )}
-                    <CustomerComplaintDetailsForm
+                    <CustomerNDRDetailsForm
                         formType="ADD"
                         formikProps={formikProps}
                         apiStatus={addComplaintInfo?.isLoading}
@@ -127,4 +144,4 @@ const AddCustomerComplaintDetailsWrapper = ({
     )
 }
 
-export default AddCustomerComplaintDetailsWrapper
+export default AddCustomerNDRDetailsWrapper

@@ -28,7 +28,7 @@ export type ATMTextFieldPropTypes = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     autoFocus?: boolean
     label?: string
-    size?: 'small' | 'medium' | 'large' | 'xs'
+    size?: 'small' | 'medium' | 'large' | 'xs' | 'xxs'
     isSubmitting?: boolean
     onBlur?: ((e: any) => void) & React.FocusEventHandler<HTMLInputElement>
     extraClassField?: string
@@ -40,7 +40,7 @@ export type ATMTextFieldPropTypes = {
     isPassWordVisible?: boolean
     labelDirection?: 'horizontal' | 'vertical'
     classDirection?: string
-    labelSize?: 'small' | 'medium' | 'large' | 'xs'
+    labelSize?: 'small' | 'medium' | 'large' | 'xs' | 'xxs'
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -78,18 +78,16 @@ const ATMTextField = ({
     return (
         <div className={twMerge('relative mt-3', `${extraClassField}`)}>
             <div
-                className={`  ${
-                    labelDirection === 'horizontal'
+                className={`  ${labelDirection === 'horizontal'
                         ? `  gap-2 w-full  ${classDirection}`
                         : ' '
-                }`}
+                    }`}
             >
                 <div
-                    className={`flex gap-1 ${
-                        labelDirection === 'horizontal'
+                    className={`flex gap-1 ${labelDirection === 'horizontal'
                             ? `col-span-4 w-full h-full flex items-center `
                             : ' '
-                    }`}
+                        }`}
                 >
                     {label && (
                         <label
@@ -123,11 +121,9 @@ const ATMTextField = ({
                     }}
                     className={`${getInputHeight(
                         size
-                    )}  w-full px-2 text-slate-700 border ${
-                        disabled ? 'bg-blue-100' : ''
-                    } border-slate-400 outline-blue-400   ${
-                        labelDirection === 'horizontal' ? 'col-span-8' : ''
-                    } ${className}`}
+                    )}  w-full px-2 text-slate-700 border ${disabled ? 'bg-blue-100' : ''
+                        } border-slate-400 outline-blue-400   ${labelDirection === 'horizontal' ? 'col-span-8' : ''
+                        } ${className}`}
                     {...rest}
                     onBlur={onBlur}
                     autoComplete="off"
