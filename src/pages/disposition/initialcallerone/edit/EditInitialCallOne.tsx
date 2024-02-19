@@ -31,6 +31,20 @@ const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+    const callTypeOptions = [
+        {
+            label: 'Complaint',
+            value: 'COMPLAINT',
+        },
+        {
+            label: 'Inquiry',
+            value: 'INQUIRY',
+        },
+        {
+            label: 'feddback',
+            value: 'FEEDBACK',
+        },
+    ]
     return (
         <>
             <div className="">
@@ -75,16 +89,7 @@ const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                        options={[
-                                            {
-                                                label: 'Complaint',
-                                                value: 'COMPLAINT',
-                                            },
-                                            {
-                                                label: 'Inquiry',
-                                                value: 'INQUIRY',
-                                            },
-                                        ]}
+                                        options={callTypeOptions}
                                         onChange={(newValue: any) => {
                                             handleSetFieldValue(
                                                 'callType',

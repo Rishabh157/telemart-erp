@@ -12,6 +12,10 @@ import AddNdrDisposition from './AddNdrDisposition'
 
 export type FormInitialValues = {
     ndrDisposition: string
+    priority: string
+    smsType: string
+    emailType: string
+    rtoAttempt: string
 }
 const AddNdrDispositionWrapper = () => {
     const navigate = useNavigate()
@@ -21,9 +25,17 @@ const AddNdrDispositionWrapper = () => {
 
     const initialValues: FormInitialValues = {
         ndrDisposition: '',
+        priority: '',
+        smsType: '',
+        emailType: '',
+        rtoAttempt: '',
     }
     const validationSchema = object({
         ndrDisposition: string().required('Required'),
+        priority: string().required('Required'),
+        smsType: string().required('Required'),
+        emailType: string().required('Required'),
+        rtoAttempt: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -31,6 +43,10 @@ const AddNdrDispositionWrapper = () => {
         setTimeout(() => {
             addDisposition({
                 ndrDisposition: values.ndrDisposition,
+                priority:  values.priority,
+                smsType:  values.smsType,
+                emailType:  values.emailType,
+                rtoAttempt:  values.rtoAttempt,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -50,7 +66,6 @@ const AddNdrDispositionWrapper = () => {
     return (
         <>
             <DispositionLayout>
-                {' '}
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
