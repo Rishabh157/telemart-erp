@@ -1,12 +1,15 @@
 import { FormikProps } from 'formik'
 import React from 'react'
-import { CiBoxList } from 'react-icons/ci'
-import { MdOutlineFormatListNumbered } from 'react-icons/md'
+// import { CiBoxList } from 'react-icons/ci'
+// import { MdOutlineFormatListNumbered } from 'react-icons/md'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { CustomerDetailsPropsTypes, FormInitialValues } from './CustomerComplainWrapper'
 import ComplaintListingWrapper from './components/ComplaintListing/ComplaintListingWrapper'
 import CustomerComplainHeader from './components/CustomerComplainHeader'
+// import CustomerComplainOrderDetailsWrapper from './components/CustomerComplainOrderDetails/CustomerComplainOrderDetailsWrapper'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import CustomerComplainOrderDetailsWrapper from './components/CustomerComplainOrderDetails/CustomerComplainOrderDetailsWrapper'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -22,63 +25,75 @@ const CustomerComplain: React.FC<Props> = ({
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
     const [selectedOrderId, setSelectedOrderId] = React.useState<string>('')
-    const [activeTab, setActiveTab] = React.useState<string>('ORDER')
+    // const [activeTab, setActiveTab] = React.useState<string>('ORDER')
+    const [
+        isOpenCustomerComplaitDetailModel,
+        setIsOpenCustomerComplaitDetailModel,
+    ] = React.useState<boolean>(false)
 
     return (
-        <div className="bg-white px-4">
-            {/* <CallerPageTopNav agentName={values.agentName as string} /> */}
-            <CustomerComplainHeader
-                values={values}
-                setFieldValue={setFieldValue}
-                handleSubmit={handleSubmit}
-                customerDetails={customerDetails}
-            />
-
-            {/* Tabs */}
-            <div className="flex gap-x-4">
-                <div
-                    className={`flex cursor-pointer font-semibold p-1 rounded ${
-                        activeTab === 'ORDER' && 'bg-[#03314e] text-white'
-                    }`}
-                    onClick={() => setActiveTab('ORDER')}
-                >
-                    <div className=" text-sm mr-2 mt-1 ">
-                        <CiBoxList />
-                    </div>
-                    <div className="text-sm">Orders</div>
-                </div>
-                <div
-                    className={`flex cursor-pointer font-semibold p-1 rounded ${
-                        activeTab === 'COMPLAINT' && 'bg-[#03314e] text-white'
-                    }`}
-                    onClick={() => setActiveTab('COMPLAINT')}
-                >
-                    <div className=" text-sm mr-2 mt-1 ">
-                        <MdOutlineFormatListNumbered />
-                    </div>
-                    <div className="text-sm">Complains</div>
-                </div>
-            </div>
-
-            {activeTab === 'ORDER' &&
-                (selectedOrderId !== '' ? (
-                    <CustomerComplainOrderDetailsWrapper
-                        orderId={selectedOrderId}
+        <SideNavLayout >
+            <div className="bg-white px-2 h-[calc(100vh-55px)]">
+                {/* <CallerPageTopNav agentName={values.agentName as string} /> */}
+                <div className='h-[40vh]'>
+                    <CustomerComplainHeader
+                        values={values}
+                        setFieldValue={setFieldValue}
+                        handleSubmit={handleSubmit}
+                        customerDetails={customerDetails}
                     />
-                ) : (
-                    <div className="border-[1px] border-grey-700 h-auto overflow-y-scroll">
+                </div>
+
+                <div className='w-full h-[calc(60%)] mt-4 '>
+                    <h1 className="text-sm font-semibold mb-2 px-2 ">
+                        Orders
+                    </h1>
+                    <div className="border-[1px] border-grey-700 h-[calc(90%)]  overflow-y-scroll ">
+                        {/* {selectedOrderId !== '' ? ( */}
+                        {/* <div className='-mt-4'> */}
+                        <DialogLogBox
+                            isOpen={isOpenCustomerComplaitDetailModel}
+                            handleClose={() =>
+                                setIsOpenCustomerComplaitDetailModel(false)
+                            }
+                            component={
+                                <CustomerComplainOrderDetailsWrapper
+                                    orderId={selectedOrderId}
+                                    setIsOpenCustomerOrderModel={setIsOpenCustomerComplaitDetailModel}
+                                />
+                            }
+                        />
+                        {/* <CustomerComplainOrderDetailsWrapper
+                                    orderId={selectedOrderId}
+                                    
+                                /> */}
+                        {/* </div> */}
+                        {/* ) : */}
                         <ATMTable
-                            headerClassName="bg-[#cdddf2] py-2 text-white z-0"
+                            // headerClassName="bg-[#cdddf2] py-2 text-white z-0   "
                             columns={column || []}
                             rows={customerDetails?.orderListing}
-                            onRowClick={(row) => setSelectedOrderId(row?._id)}
+                            onRowClick={(row) => {
+                                setIsOpenCustomerComplaitDetailModel(true)
+                                setSelectedOrderId(row?._id)
+                            }}
                         />
+                        {/* } */}
                     </div>
-                ))}
+                </div>
 
-            {/* Listing Of Complaint When Complaint tab is active */}
-            {activeTab === 'COMPLAINT' && <ComplaintListingWrapper />}
-        </div>
+
+                <div className='w-full h-[calc(60%)] mb-4 '>
+                    <h1 className="text-sm font-semibold my-1 px-2 ">
+                        Complaints History
+                    </h1>
+                    <div className=" h-[calc(94%)] overflow-y-scroll ">
+                        <ComplaintListingWrapper />
+                    </div>
+                </div>
+
+            </div>
+        </SideNavLayout>
     )
 }
 

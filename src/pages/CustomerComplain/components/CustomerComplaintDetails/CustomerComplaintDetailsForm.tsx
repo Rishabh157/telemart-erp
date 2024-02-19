@@ -15,7 +15,29 @@ type Props = {
     apiStatus: boolean
     formType: 'ADD' | 'EDIT'
 }
-
+const callTypeOption = [
+    {
+        label: 'Complaint',
+        value: 'COMPLAINT',
+    },
+    {
+        label: 'Inquiry',
+        value: 'INQUIRY',
+    },
+]
+const statusOption = [
+    {
+        label: 'Open',
+        value: 'OPEN',
+    },
+    {
+        label: 'Pending',
+        value: 'PENDING',
+    },
+    {
+        label: 'Closed', value: 'CLOSED',
+    },
+]
 const CustomerComplaintDetailsForm = ({
     formikProps,
     apiStatus,
@@ -117,16 +139,7 @@ const CustomerComplaintDetailsForm = ({
                             classDirection="grid grid-cols-3"
                             name="callType"
                             value={values.callType || ''}
-                            options={[
-                                {
-                                    label: 'Complaint',
-                                    value: 'COMPLAINT',
-                                },
-                                {
-                                    label: 'Inquiry',
-                                    value: 'INQUIRY',
-                                },
-                            ]}
+                            options={callTypeOption}
                             onChange={(e) => {
                                 setFieldValue('callType', e)
                                 if (e === 'COMPLAINT') {
@@ -197,21 +210,9 @@ const CustomerComplaintDetailsForm = ({
                             selectLabel="select status"
                             classDirection="grid grid-cols-3"
                             name="status"
+                            isDisabled={values?.callType === 'INQUIRY'}
                             value={values.status || ''}
-                            options={[
-                                {
-                                    label: 'Open',
-                                    value: 'OPEN',
-                                },
-                                {
-                                    label: 'Pending',
-                                    value: 'PENDING',
-                                },
-                                {
-                                    label: 'Closed',
-                                    value: 'CLOSED',
-                                },
-                            ]}
+                            options={statusOption}
                             onChange={(e) => {
                                 setFieldValue('status', e)
                             }}

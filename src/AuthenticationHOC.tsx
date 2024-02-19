@@ -51,6 +51,8 @@ const AuthenticationHOC = ({
                     state: location?.state,
                 }
             )
+        } else {
+            navigate('/')
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [accessToken, navigate, location.pathname])
@@ -85,10 +87,10 @@ const AuthenticationHOC = ({
                 userData?.userRole === 'ADMIN'
                     ? true
                     : (isCheckAuthorizedModuleAction(
-                          checkUserAccess,
-                          moduleName,
-                          actionName
-                      ) as boolean)
+                        checkUserAccess,
+                        moduleName,
+                        actionName
+                    ) as boolean)
         } else {
             isAuthorized =
                 userData?.userRole === 'ADMIN'
@@ -110,13 +112,13 @@ const AuthenticationHOC = ({
                         })}
                     </>
                 ) : // isRedirect we used on actioncomponent on pageroute
-                actionName ? (
-                    isRedirect ? (
-                        <AccessDenied />
-                    ) : null
-                ) : (
-                    navigate(`/dashboard`)
-                )
+                    actionName ? (
+                        isRedirect ? (
+                            <AccessDenied />
+                        ) : null
+                    ) : (
+                        navigate(`/dashboard`)
+                    )
             ) : (
                 <LoginPage pathName={location.pathname} />
             )}

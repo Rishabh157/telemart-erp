@@ -70,7 +70,6 @@ const AddCustomerComplaintDetailsWrapper = ({
     }, [data, isLoading, isFetching])
 
     const onSubmitHandler = (values: FormInitialValues) => {
-        console.log('onSubmitHandler ', values)
 
         const formatedValues = {
             orderId,
