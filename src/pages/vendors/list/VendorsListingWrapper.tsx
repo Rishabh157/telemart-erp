@@ -19,7 +19,6 @@ import { VendorsListResponse } from 'src/models'
 import {
     useDeleteVendorMutation,
     useGetPaginationVendorsQuery,
-    // useGetVendorsQuery,
 } from 'src/services/VendorServices'
 import VendorsListing from './VendorsListing'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
@@ -41,17 +40,16 @@ import { AppDispatch, RootState } from 'src/redux/store'
 
 const VendorsListingWrapper = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch<AppDispatch>()
+    const [showDropdown, setShowDropdown] = useState(false)
     const vendorState: any = useSelector((state: RootState) => state.vendor)
+    const { page, rowsPerPage, searchValue, items } = vendorState
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { page, rowsPerPage, searchValue, items } = vendorState
     const [currentId, setCurrentId] = useState('')
-    const [showDropdown, setShowDropdown] = useState(false)
     const [deleteVendor] = useDeleteVendorMutation()
-
-    const dispatch = useDispatch<AppDispatch>()
 
     const columns: columnTypes[] = [
         {

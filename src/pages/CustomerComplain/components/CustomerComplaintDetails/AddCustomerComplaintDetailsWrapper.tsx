@@ -70,7 +70,6 @@ const AddCustomerComplaintDetailsWrapper = ({
     }, [data, isLoading, isFetching])
 
     const onSubmitHandler = (values: FormInitialValues) => {
-
         const formatedValues = {
             orderId,
             orderNumber: values.orderNo,
@@ -87,19 +86,22 @@ const AddCustomerComplaintDetailsWrapper = ({
             remark: values.remark,
         }
 
-        addComplaint(formatedValues).then((res: any) => {
-            if ('data' in res) {
-                console.log('inside the create complain', res)
-                if (res?.data?.status) {
-                    showToast('success', 'complaint added successfully!')
-                    handleClose()
+        addComplaint(formatedValues)
+            .then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'complaint added successfully!')
+                        handleClose()
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
                 } else {
-                    showToast('error', res?.data?.message)
+                    showToast('error', res?.error?.data?.message)
                 }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-        })
+            })
+            .catch((res) => {
+                showToast('error', res?.data?.message)
+            })
     }
 
     return (

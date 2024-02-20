@@ -76,11 +76,11 @@ const steps = [
         component: StepAddCompanyDetailsWrapper,
         validationSchema: object({
             warehouseName: string().required('name is required'),
-            // country: string().required('please select country'),
-            // email: string()
-            //     .email('Invalid Email')
-            //     .required('Email is required')
-            //     .email('Email address is invalid'),
+            country: string().required('please select country'),
+            email: string()
+                .email('Invalid Email')
+                .required('Email is required')
+                .email('Email address is invalid'),
         }),
     },
     {

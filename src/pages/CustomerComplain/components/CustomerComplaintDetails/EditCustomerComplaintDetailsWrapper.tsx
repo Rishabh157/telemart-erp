@@ -99,15 +99,16 @@ const EditCustomerComplaintDetailsWrapper = ({
 
         updateComplaint({ id: complaintId, body: formatedValues }).then(
             (res: any) => {
+                console.log("res",res)
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'updated successfully!')
                         handleClose()
                     } else {
-                        showToast('error', res?.data?.message)
+                        showToast('error', res?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.message)
                 }
             }
         )

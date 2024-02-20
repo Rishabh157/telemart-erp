@@ -100,15 +100,6 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    {/* <button
-                        onClick={() => {
-                            setIsOpenModel(true)
-                            setOpenModel(NoteType.VENDOR_AMOUNT_CREDITED)
-                        }}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Cr. Amount
-                    </button> */}
                     <AuthenticationHOC
                         moduleName={UserModuleNameTypes.vendor}
                         actionName={

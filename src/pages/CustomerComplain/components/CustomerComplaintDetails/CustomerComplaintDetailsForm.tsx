@@ -145,7 +145,7 @@ const CustomerComplaintDetailsForm = ({
                                 if (e === 'COMPLAINT') {
                                     setFieldValue('status', 'OPEN')
                                 } else if (e === 'INQUIRY') {
-                                    setFieldValue('status', 'CLOSE')
+                                    setFieldValue('status', 'CLOSED')
                                 }
                             }}
                         />

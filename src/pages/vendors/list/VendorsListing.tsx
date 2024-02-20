@@ -45,7 +45,6 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
-
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         vendorState
     return (
@@ -83,8 +82,6 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -93,15 +90,11 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                         isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
-                        // onRowClick={(row: VendorsListResponse) =>
-                        //   navigate(`${row._id}/general-information`)
-                        // }
                     />
                 </div>
 
