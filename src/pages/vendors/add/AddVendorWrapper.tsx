@@ -153,15 +153,12 @@ const steps = [
         label: 'Document',
         component: StepAddDocumentsWrapper,
         validationSchema: object({
-            // gst_no: string().required('GST number is required'),
             gst_no: string().matches(
                 validationofGst,
                 'gst number must be valid'
             ),
             gst_certificate: string(),
-            // .url('GST Certificate must be valid URL')
             declaration_form: string(),
-            // .url('Form must be valid URL'),
         }),
     },
     {
@@ -185,7 +182,6 @@ const steps = [
                         'Please select account type'
                     ),
                     cancelledCheque: string(),
-                    // .url('Cancle Cheque must be valid URL'),
                 })
             ),
         }),
