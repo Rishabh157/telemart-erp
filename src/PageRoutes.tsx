@@ -270,6 +270,7 @@ import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWr
 import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/list/NdrDispositionListingWrapper'
 import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/AddNdrDispositionWrapper'
 import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
+import WelcomePage from './pages/welcome/WelcomePage'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2982,6 +2983,7 @@ const PageRoutes = () => {
                         }
                     />
 
+                    <Route path="/welcome" element={<WelcomePage />} />
                     {/* ############# NOT FOR USE ############# */}
                     {/* <Route
                         path="/approved-orders/view/:id"
@@ -3045,6 +3047,7 @@ const PageRoutes = () => {
                         path="configurations/user-access"
                         element={<UserAccessWrapper />}
                     />
+
                     {/* ############# NOT FOR USE ############# */}
                 </Routes>
             </BrowserRouter>

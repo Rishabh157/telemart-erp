@@ -21,6 +21,7 @@ import { CallerResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 import { statusProps } from '../orders'
+import { useNavigate } from 'react-router-dom'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -218,6 +219,7 @@ const CallerPageWrapper = () => {
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
     )
+    const navigate = useNavigate()
 
     const { page, rowsPerPage, searchValue, items } = inboundCallerState
 
@@ -402,6 +404,7 @@ const CallerPageWrapper = () => {
                     if (res?.data?.status) {
                         showToast('success', 'caller added successfully!')
                         localStorage.removeItem('callerPageData')
+                        navigate('/welcome')
                     } else {
                         showToast('error', res?.data?.message)
                     }
