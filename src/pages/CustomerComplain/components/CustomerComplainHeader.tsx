@@ -1,6 +1,5 @@
 import React from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { FormInitialValues } from '../CustomerComplainWrapper'
 import { CustomerDetailsPropsTypes } from '../CustomerComplainWrapper'
 
@@ -21,24 +20,22 @@ const CustomerComplainHeader = ({
     handleSubmit,
     customerDetails,
 }: Props) => {
-    console.log('values)))', values)
-
     return (
-        <div className="py-1 px-2">
+        <div className="py-1">
             <div>
                 {/* Search Header */}
-                <div className="w-full bg-[#e9f1fb] p-2">
-                    <div className="grid gap-x-8 grid-cols-8">
+                <div className="w-full shadow border rounded bg-white p-2">
+                    <div className="grid gap-x-4 gap-y-3 grid-cols-4 py-1">
                         <ATMTextField
                             name=""
                             label="Incoming No."
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            placeholder=""
+                            placeholder="Incoming No."
                             value={values.incomingNumber || ''}
                             onChange={(e) => {
                                 setFieldValue('incomingNumber', e.target.value)
@@ -47,14 +44,14 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Contact No."
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
                             name=""
-                            placeholder=""
+                            placeholder="Contact No."
                             value={values.contactNumber || ''}
                             onChange={(e) => {
                                 setFieldValue('contactNumber', e.target.value)
@@ -63,14 +60,14 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Order No."
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
                             name=""
-                            placeholder=""
+                            placeholder="Order No."
                             value={values.orderNumber || ''}
                             onChange={(e) => {
                                 setFieldValue('orderNumber', e.target.value)
@@ -79,14 +76,14 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Complaint No."
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
                             name=""
-                            placeholder=""
+                            placeholder="Complaint No."
                             value={values.complaintNumber || ''}
                             onChange={(e) => {
                                 setFieldValue('complaintNumber', e.target.value)
@@ -95,14 +92,14 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Email"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
                             name=""
-                            placeholder=""
+                            placeholder="Email"
                             value={values.email || ''}
                             onChange={(e) => {
                                 setFieldValue('email', e.target.value)
@@ -111,14 +108,14 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Ref Order No."
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
                             name=""
-                            placeholder=""
+                            placeholder="Ref Order No."
                             value={values.refOrderNumber || ''}
                             onChange={(e) => {
                                 setFieldValue('refOrderNumber', e.target.value)
@@ -127,14 +124,14 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Barcode No."
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
                             name=""
-                            placeholder=""
+                            placeholder="Barcode No."
                             value={values.barcode || ''}
                             onChange={(e) => {
                                 setFieldValue('barcode', e.target.value)
@@ -142,7 +139,7 @@ const CustomerComplainHeader = ({
                         />
 
                         {/* Search Button and Reset Button */}
-                        <div className="flex items-center gap-x-6">
+                        <div className="flex justify-end items-end gap-x-6">
                             <button
                                 onClick={handleSubmit}
                                 type="button"
@@ -170,16 +167,16 @@ const CustomerComplainHeader = ({
                 </div>
 
                 {/* Customer Details Section */}
-                <div className="w-full mt-4 bg-[#e9f1fb] border-[1px] border-black p-2">
+                <div className="w-full mt-4 shadow border rounded bg-white p-2 my-2">
                     <h1 className="text-sm font-semibold mb-2">
                         Customer Details
                     </h1>
 
-                    <div className="grid gap-x-16 grid-cols-5">
+                    <div className="grid grid-cols-4 gap-x-4 gap-y-2">
                         <ATMTextField
                             label="Name"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -196,8 +193,8 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Email"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -214,8 +211,8 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Gender"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -229,13 +226,11 @@ const CustomerComplainHeader = ({
                                 // setFieldValue('reciversName', e.target.value)
                             }}
                         />
-                    </div>
-
-                    <div className="grid gap-x-16 grid-cols-5 mt-2">
+                        
                         <ATMTextField
                             label="Incoming No"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -252,8 +247,8 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Mobile No"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -270,8 +265,8 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Alternate No1"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -288,8 +283,8 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Alternate No2"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -303,13 +298,11 @@ const CustomerComplainHeader = ({
                                 // setFieldValue('reciversName', e.target.value)
                             }}
                         />
-                    </div>
 
-                    <div className="grid gap-x-16 grid-cols-5 mt-2">
                         <ATMTextField
                             label="Address1"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -326,8 +319,8 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Address2"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -344,8 +337,8 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Address3"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -362,8 +355,8 @@ const CustomerComplainHeader = ({
 
                         <ATMTextField
                             label="Address4"
-                            labelSize="xs"
-                            size="xs"
+                            labelSize="xxs"
+                            size="xxs"
                             labelClass=""
                             extraClassField="mt-0"
                             labelDirection="horizontal"
@@ -377,90 +370,61 @@ const CustomerComplainHeader = ({
                                 // setFieldValue('reciversName', e.target.value)
                             }}
                         />
-                    </div>
 
-                    {/* Location */}
-                    <div className="grid gap-x-16 grid-cols-5 mt-2">
-                        <ATMSelectSearchable
-                            componentClass=""
-                            label="District"
-                            size="xs"
-                            labelSize="xs"
+
+                        {/* Location */}
+                        <ATMTextField
+                            label="district"
+                            labelSize="xxs"
+                            size="xxs"
+                            labelClass=""
+                            extraClassField="mt-0"
                             labelDirection="horizontal"
-                            selectLabel="select state"
-                            classDirection="grid grid-cols-3"
-                            name="stateId"
+                            className="mt-0 rounded"
+                            name="district"
+                            placeholder=""
                             value={customerDetails?.district}
-                            options={[
-                                {
-                                    label: customerDetails?.district,
-                                    value: customerDetails?.district,
-                                },
-                            ]}
-                            isValueWithLable
-                            isDisabled={true}
+                            readOnly
+                            disabled
                             onChange={(e) => {
-                                // setFieldValue('stateId', e?.value || '')
-                                // setFieldValue('stateLabel', e?.label || '')
-                                // if (!e.value) {
-                                //     handleRemoveAddressRelated('stateId')
-                                // }
+                                // setFieldValue('reciversName', e.target.value)
                             }}
                         />
-
-                        <ATMSelectSearchable
-                            componentClass=""
-                            label="State"
-                            size="xs"
-                            labelSize="xs"
+                        <ATMTextField
+                            label="state"
+                            labelSize="xxs"
+                            size="xxs"
+                            labelClass=""
+                            extraClassField="mt-0"
                             labelDirection="horizontal"
-                            selectLabel="select state"
-                            classDirection="grid grid-cols-3"
-                            name="stateId"
-                            options={[
-                                {
-                                    label: customerDetails?.state,
-                                    value: customerDetails?.state,
-                                },
-                            ]}
-                            value={customerDetails?.state || ''}
-                            isValueWithLable
-                            isDisabled={true}
+                            className="mt-0 rounded"
+                            name="state"
+                            placeholder=""
+                            value={customerDetails?.state}
+                            readOnly
+                            disabled
                             onChange={(e) => {
-                                // setFieldValue('stateId', e?.value || '')
-                                // setFieldValue('stateLabel', e?.label || '')
-                                // if (!e.value) {
-                                //     handleRemoveAddressRelated('stateId')
-                                // }
+                                // setFieldValue('reciversName', e.target.value)
                             }}
                         />
-
-                        <ATMSelectSearchable
-                            componentClass=""
-                            label="Pincode"
-                            size="xs"
-                            labelSize="xs"
+                        <ATMTextField
+                            label="pincode"
+                            labelSize="xxs"
+                            size="xxs"
+                            labelClass=""
+                            extraClassField="mt-0"
                             labelDirection="horizontal"
-                            selectLabel="select state"
-                            classDirection="grid grid-cols-3"
-                            name="stateId"
+                            className="mt-0 rounded"
+                            name="pincode"
+                            placeholder=""
                             value={customerDetails?.pincode}
-                            options={[
-                                {
-                                    label: customerDetails?.pincode,
-                                    value: customerDetails?.pincode,
-                                },
-                            ]}
-                            isValueWithLable
-                            isDisabled={true}
+                            readOnly
+                            disabled
                             onChange={(e) => {
-                                // setFieldValue('stateId', e?.value || '')
-                                // setFieldValue('stateLabel', e?.label || '')
-                                // if (!e.value) {
-                                //     handleRemoveAddressRelated('stateId')
-                                // }
+                                // setFieldValue('reciversName', e.target.value)
                             }}
                         />
+
                     </div>
                 </div>
             </div>

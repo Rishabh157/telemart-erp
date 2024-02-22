@@ -24,6 +24,7 @@ type Props = {
         icon: IconType
         path?: string
         name?: string
+        onClick?: () => void
     }[]
 }
 const TabScrollable: React.FC<Props> = ({

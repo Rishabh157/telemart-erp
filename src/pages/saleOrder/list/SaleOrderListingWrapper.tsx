@@ -30,7 +30,7 @@ import {
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+// import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import SaleOrderListing from './SaleOrderListing'
 
 // |-- Redux --|
@@ -173,17 +173,20 @@ const SaleOrderListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => (
-                <span
-                    className="underline text-primary-main"
-                    style={{ cursor: 'pointer' }}
-                    onClick={() =>
-                        navigate(
-                            `/dealers/${row?.documents[0]?.dealerId}/general-information`
-                        )
-                    }
-                >
-                    {row?.dealerName.replaceAll('_', ' ')}
-                </span>
+                <>
+                    {row?.documents?.[0]?.dealerId ?
+                        <span
+                            className="underline text-primary-main"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() =>
+                                navigate(
+                                    `/dealers/${row?.documents?.[0]?.dealerId}/general-information`
+                                )
+                            }
+                        >
+                            {row?.dealerName?.replaceAll('_', ' ') || '-'}
+                        </span> : "-"}
+                </>
             ),
         },
         {
@@ -192,7 +195,7 @@ const SaleOrderListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => (
-                <span> {row?.documents[0]?.warehouseStateLabel} </span>
+                <span> {row?.documents?.[0]?.warehouseStateLabel || '-'} </span>
             ),
         },
         {
@@ -233,8 +236,8 @@ const SaleOrderListingWrapper = () => {
                         {row?.dhApproved
                             ? 'Done'
                             : row?.dhApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}{' '}
+                                ? 'Pending'
+                                : 'Rejected'}{' '}
                     </span>
                 )
             },
@@ -269,8 +272,8 @@ const SaleOrderListingWrapper = () => {
                         {row?.accApproved
                             ? 'Done'
                             : row?.accApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -284,33 +287,33 @@ const SaleOrderListingWrapper = () => {
                 return <span> {row?.accApprovedActionBy} </span>
             },
         },
-        {
-            field: 'accApprovedAt',
-            headerName: 'Account Approved Date',
-            flex: 'flex-[0.5_0.5_0%]',
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> {row?.accApprovedAt} </span>
-            },
-        },
-        {
-            field: 'createdAt',
-            headerName: 'Inserted Date',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
-            },
-        },
-        {
-            field: 'updatedAt',
-            headerName: 'Updated Date',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
-            },
-        },
+        // {
+        //     field: 'accApprovedAt',
+        //     headerName: 'Account Approved Date',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     align: 'center',
+        //     renderCell: (row: SaleOrderListResponseTypes) => {
+        //         return <span> {row?.accApprovedAt} </span>
+        //     },
+        // },
+        // {
+        //     field: 'createdAt',
+        //     headerName: 'Inserted Date',
+        //     flex: 'flex-[1_1_0%]',
+        //     align: 'center',
+        //     renderCell: (row: SaleOrderListResponseTypes) => {
+        //         return <span> {formatedDateTimeIntoIst(row?.createdAt) || '-'} </span>
+        //     },
+        // },
+        // {
+        //     field: 'updatedAt',
+        //     headerName: 'Updated Date',
+        //     flex: 'flex-[1_1_0%]',
+        //     align: 'center',
+        //     renderCell: (row: SaleOrderListResponseTypes) => {
+        //         return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
+        //     },
+        // },
         {
             field: 'Approved',
             headerName: 'Approval',

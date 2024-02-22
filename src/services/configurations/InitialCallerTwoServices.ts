@@ -35,7 +35,7 @@ export const initialCallerTwoApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // get all
+        // get all initial call two by one id and call type
         getAllinitialCallerTwoById: builder.query({
             providesTags: ['initialCallerTwo'],
             query: ({ id, callType }) => ({
@@ -70,7 +70,6 @@ export const initialCallerTwoApi = apiSlice.injectEndpoints({
             providesTags: ['initialCallerTwo'],
             query: (id) => ({
                 url: `/initialcall-two/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -79,7 +78,6 @@ export const initialCallerTwoApi = apiSlice.injectEndpoints({
         exportinitialCallerTwoData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
@@ -94,7 +92,6 @@ export const initialCallerTwoApi = apiSlice.injectEndpoints({
             invalidatesTags: ['initialCallerTwo'],
             query: (id) => ({
                 url: `/initialcall-two/${id}`,
-
                 method: 'DELETE',
             }),
         }),

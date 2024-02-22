@@ -157,7 +157,7 @@ export type {
     AddWebsiteTags,
     UpdateWebsiteTags,
 } from './website/WebsiteTags.model'
-export type { OrderListResponse, SingleOrderFlowResponse } from './Order.model'
+export type { OrderListResponse } from './Order.model'
 export type { OrderLedgerResponse } from './OrderLedger.modal'
 export type { InquiryListResponse } from './Inquiry.model'
 export type {
@@ -243,5 +243,5 @@ export type {
 export type {
     CallCenterMasterListResponse,
     AddCallCenterMaster,
-    UpdateCallCenterMaster
+    UpdateCallCenterMaster,
 } from './CallCenterMaster.model'

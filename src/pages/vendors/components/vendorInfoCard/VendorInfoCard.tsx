@@ -47,7 +47,6 @@ const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
             }
         })
     }
-
     const changeStatus = () => {
         showConfirmationDialog({
             title: selectedItem?.isActive

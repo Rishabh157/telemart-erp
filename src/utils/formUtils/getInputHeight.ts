@@ -1,7 +1,9 @@
-export type Size = 'small' | 'medium' | 'large' | 'xs'
+export type Size = 'small' | 'medium' | 'large' | 'xs' | 'xxs'
 
 export const getInputHeight = (size: Size, inNumber?: boolean) => {
     switch (size) {
+        case 'xxs':
+            return inNumber ? 20 : 'h-[24px]'
         case 'xs':
             return inNumber ? 28 : 'h-[30px]'
         case 'small':
@@ -17,6 +19,8 @@ export const getInputHeight = (size: Size, inNumber?: boolean) => {
 
 export const getLabelFont = (size: Size, inNumber?: boolean) => {
     switch (size) {
+        case 'xxs':
+            return inNumber ? 20 : 'text-xs'
         case 'xs':
             return inNumber ? 28 : 'text-xs'
         case 'small':
