@@ -121,7 +121,7 @@ const ATMTextField = ({
                     }}
                     className={`${getInputHeight(
                         size
-                    )}  w-full px-2 text-slate-700 border ${disabled ? 'bg-blue-100' : ''
+                    )}  w-full px-2 text-slate-700 border text-[13px] ${disabled ? 'bg-blue-100' : ''
                         } border-slate-400 outline-blue-400   ${labelDirection === 'horizontal' ? 'col-span-8' : ''
                         } ${className}`}
                     {...rest}

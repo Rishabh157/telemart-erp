@@ -193,7 +193,8 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                 <ATMTextField
                                     label="State"
                                     placeholder="Enter State"
-                                    size="small"
+                                    size="xxs"
+                                    labelSize='xxs'
                                     name="state"
                                     value={''}
                                     onChange={(e) => {
@@ -205,7 +206,8 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                 <ATMTextField
                                     label="District"
                                     placeholder="Enter City"
-                                    size="small"
+                                    size="xxs"
+                                    labelSize='xxs'
                                     name="district"
                                     value={''}
                                     onChange={(e) => {
@@ -217,7 +219,8 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                 <ATMTextField
                                     label="Taluk/Tehsil"
                                     placeholder="Enter Taluk"
-                                    size="small"
+                                    size="xxs"
+                                    labelSize='xxs'
                                     name="taluk"
                                     value={''}
                                     onChange={(e) => {
@@ -229,7 +232,8 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                 <ATMTextField
                                     label="Area"
                                     placeholder="Enter Area"
-                                    size="small"
+                                    size="xxs"
+                                    labelSize='xxs'
                                     name="area"
                                     value={''}
                                     onChange={(e) => {
@@ -241,7 +245,8 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                 <ATMTextField
                                     label="Pincode"
                                     placeholder="Enter Pincode"
-                                    size="small"
+                                    size="xxs"
+                                    labelSize='xxs'
                                     name="pincode"
                                     value={''}
                                     onChange={(e) => {
@@ -262,12 +267,12 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                             <ATMTable
                                 columns={columns}
                                 rows={rows}
-                                // isCheckbox={true}
-                                // selectedRows={selectedRows}
-                                // onRowSelect={(selectedRows) =>
-                                //     setSelectedRows(selectedRows)
-                                // }
-                                // setShowDropdown={setShowDropdown}
+                            // isCheckbox={true}
+                            // selectedRows={selectedRows}
+                            // onRowSelect={(selectedRows) =>
+                            //     setSelectedRows(selectedRows)
+                            // }
+                            // setShowDropdown={setShowDropdown}
                             />
                         </div>
                     </div>

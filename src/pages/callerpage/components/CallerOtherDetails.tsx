@@ -57,11 +57,13 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
+                        minHeight='25px'
+                        fontSizePlaceHolder='14px'
                         isMulti
-                        labelSize="xs"
+                        labelSize="xxs"
                         componentClass="mt-2"
                         label="Order For"
-                        size="xs"
+                        size="xxs"
                         selectLabel="select order for"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
@@ -83,10 +85,10 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     {isOrderOtherFieldEnable && (
                         <ATMTextField
                             label=""
-                            labelSize="xs"
+                            labelSize="xxs"
                             labelDirection="horizontal"
                             extraClassField="mt-2"
-                            size="xs"
+                            size="xxs"
                             placeholder="Other"
                             name="orderForOther"
                             value={values.orderForOther || ''}
@@ -97,11 +99,13 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     )}
 
                     <ATMSelectSearchable
+                        minHeight='25px'
+                        fontSizePlaceHolder='14px'
                         componentClass="mt-2"
                         label="Age Group"
                         maxMenuHeight={150}
-                        size="xs"
-                        labelSize="xs"
+                        size="xxs"
+                        labelSize="xxs"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         selectLabel="select age group"
@@ -209,14 +213,16 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
+                            minHeight='25px'
+                            fontSizePlaceHolder='14px'
                             isMulti
                             isMenuOpen
-                            labelSize="xs"
+                            labelSize="xxs"
                             name="medicalIssue"
                             value={values.medicalIssue}
                             labelDirection="horizontal"
                             selectLabel="select medical issue"
-                            size="small"
+                            size="xxs"
                             options={medicalOptions || []}
                             label="Any Other Medical Issue"
                             selectClass={'-mt-4 select-margin'}
