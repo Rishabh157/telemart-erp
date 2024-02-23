@@ -57,11 +57,13 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
+                        minHeight='25px'
+                        fontSizePlaceHolder='14px'
+                        size="xxs"
+                        labelSize="xxs"
                         isMulti
-                        labelSize="xs"
                         componentClass="mt-2"
                         label="Order For"
-                        size="xs"
                         selectLabel="select order for"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
@@ -83,10 +85,10 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     {isOrderOtherFieldEnable && (
                         <ATMTextField
                             label=""
-                            labelSize="xs"
+                            labelSize="xxs"
                             labelDirection="horizontal"
                             extraClassField="mt-2"
-                            size="xs"
+                            size="xxs"
                             placeholder="Other"
                             name="orderForOther"
                             value={values.orderForOther || ''}
@@ -97,11 +99,13 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     )}
 
                     <ATMSelectSearchable
+                        minHeight='25px'
+                        fontSizePlaceHolder='14px'
                         componentClass="mt-2"
                         label="Age Group"
                         maxMenuHeight={150}
-                        size="xs"
-                        labelSize="xs"
+                        size="xxs"
+                        labelSize="xxs"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
                         selectLabel="select age group"
@@ -123,8 +127,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     <ATMTextField
                         extraClassField="mt-0"
                         label="Email-ID"
-                        size="xs"
-                        labelSize="xs"
+                        size="xxs"
+                        labelSize="xxs"
                         labelDirection="horizontal"
                         // isSubmitting
                         name="emailId"
@@ -155,7 +159,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 <div className="ml-1">
                                     <ATMTextField
                                         extraClassField="mt-2"
-                                        size="xs"
+                                        size="xxs"
                                         placeholder="Name ID"
                                         // labelDirection="horizontal"
                                         // isSubmitting
@@ -190,7 +194,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                             {isInstagramId && (
                                 <ATMTextField
                                     extraClassField="mt-2"
-                                    size="xs"
+                                    size="xxs"
                                     // labelDirection="horizontal"
                                     // classDirection="grid grid-cols-3"
                                     placeholder="Name ID"
@@ -209,9 +213,11 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
+                            minHeight='25px'
+                            fontSizePlaceHolder='14px'
                             isMulti
                             isMenuOpen
-                            labelSize="xs"
+                            labelSize="xxs"
                             name="medicalIssue"
                             value={values.medicalIssue}
                             labelDirection="horizontal"
@@ -274,8 +280,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                         <ATMTextField
                             extraClassField="mt-0"
                             label="Coupon code"
-                            size="small"
-                            labelSize="small"
+                            size="xxs"
+                            labelSize="xxs"
                             labelDirection="horizontal"
                             labelClass="mt-2"
                             name="emailId"
@@ -289,20 +295,20 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
 
                     <div className="mt-2">
                         <div className="flex gap-x-14">
-                            <span className="text-slate-700 text-sm">
+                            <span className="text-slate-700 text-xs">
                                 AVAILABLE COUPONS
                             </span>
 
                             <div className="flex gap-x-2">
                                 <button
                                     type="button"
-                                    className="text-slate-700 text-sm border-[1px] border-[#e5e1d7]"
+                                    className="text-slate-700 text-xs rounded px-1 border-[1px] border-[#e5e1d7]"
                                 >
                                     APPLY
                                 </button>
                                 <button
                                     type="button"
-                                    className="text-slate-700 text-sm border-[1px] border-[#e5e1d7]"
+                                    className="text-slate-700 text-xs rounded px-1 border-[1px] border-[#e5e1d7]"
                                 >
                                     CLEAR
                                 </button>
@@ -312,13 +318,13 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
 
                     <div className="mt-2">
                         <div className="flex gap-x-9">
-                            <span className="text-slate-700 text-sm">
+                            <span className="text-slate-700 text-xs">
                                 Available Loyalty Points
                             </span>
 
-                            <div>
+                            <div className='text-xs'>
                                 0{' '}
-                                <span className="text-[#814cd2] text-sm underline">
+                                <span className="text-[#814cd2] text-xs underline">
                                     Show Details
                                 </span>
                             </div>
@@ -326,15 +332,15 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                         <div>
                             <div className='mt-2'>
                                 <div className="flex gap-x-32">
-                                    <span className="text-slate-700 text-sm flex items-center">
+                                    <span className="text-slate-700 text-xs flex items-center">
                                         Burn Value
                                     </span>
                                     <div className="flex gap-x-4">
                                         <ATMTextField
                                             extraClassField="mt-0"
                                             label=""
-                                            size="small"
-                                            labelSize="small"
+                                            size="xxs"
+                                            labelSize="xxs"
                                             labelClass="mt-2"
                                             name="emailId"
                                             placeholder="enter burn value"
@@ -346,16 +352,16 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                                 )
                                             }}
                                         />
-                                        <div className="mt-2">
+                                        <div className="">
                                             <button
                                                 type="button"
-                                                className="text-slate-700 px-[1px] py-[1px] text-sm border-[1px] border-[#e5e1d7]"
+                                                className="text-slate-700 px-[3px] py-[1px] text-xs border-[1px] border-[#e5e1d7] rounded"
                                             >
                                                 APPLY
                                             </button>
                                             <button
                                                 type="button"
-                                                className="text-slate-700 px-[1px] py-[1px] text-sm border-[1px] border-[#e5e1d7] mx-2"
+                                                className="text-slate-700 px-[3px] py-[1px] text-xs border-[1px] border-[#e5e1d7] mx-2 rounded"
                                             >
                                                 CLEAR
                                             </button>
