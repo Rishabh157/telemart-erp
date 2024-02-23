@@ -27,7 +27,6 @@ const CustomerComplainOrderDetailsForm = ({
     setIsOpenCustomerOrderModel
 }: Props) => {
     const { values, setFieldValue } = formikProps
-    console.log(setIsOpenCustomerOrderModel, "setIsOpenCustomerOrderModel")
     const [
         isOpenCustomerComplaitDetailModel,
         setIsOpenCustomerComplaitDetailModel,

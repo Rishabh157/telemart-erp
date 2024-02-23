@@ -34,10 +34,10 @@ interface tabsProps {
     name: string
 }
 export enum statusProps {
-    fresh = 'FRESH',
     all = 'ALL',
+    fresh = 'FRESH',
     prepaid = 'PREPAID',
-    delivered = 'DELIVERD',
+    delivered = 'DELIVERED',
     doorCancelled = 'DOORCANCELLED',
     hold = 'HOLD',
     psc = 'PSC',
@@ -157,7 +157,7 @@ const ViewOrder = () => {
             path: '/orders?orderStatus=all',
         },
         {
-            label: `${activelabel}`,
+            label: `${activelabel ? activelabel : 'ALL'}`,
         },
     ]
     useEffect(() => {
@@ -172,7 +172,7 @@ const ViewOrder = () => {
         setActiveTabLabel(labelTab)
     }, [activeTab, allowedTabs])
 
-    const getStatus = (status: keyof typeof statusProps ) => {
+    const getStatus = (status: keyof typeof statusProps) => {
         return statusProps[status] || ''
     }
 
@@ -198,7 +198,9 @@ const ViewOrder = () => {
                             <OrderListing
                                 tabName={allowedTabs[activeTabIndex].name}
                                 orderStatus={activeTab as string}
-                                currentStatus={getStatus(activeTab as keyof typeof statusProps)}
+                                currentStatus={getStatus(
+                                    activeTab as keyof typeof statusProps
+                                )}
                             />
                         </div>
                     </div>

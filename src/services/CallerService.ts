@@ -35,19 +35,20 @@ export const callerPageApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // // **** Delete
-        // deleteCartonBoxBarcode: builder.mutation({
-        //     invalidatesTags: ['CartonBoxBarcode', 'attributeGroup'],
-        //     query: (id) => ({
-        //         url: `/cartonbox-barcode/${id}`,
+        // Delete
 
-        //         method: 'DELETE',
-        //     }),
-        // }),
+        getPaginationUnAuthCallerData: builder.query({
+            providesTags: ['call'],
+            query: ({ phoneNo }: { phoneNo: string }) => ({
+                url: `/order-inquiry/unauth/phoneno/${phoneNo}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
     useGetPaginationInboundCallerQuery,
     useAddCallerFormMutation,
     useUpdateCallerFormMutation,
+    useGetPaginationUnAuthCallerDataQuery,
 } = callerPageApi
