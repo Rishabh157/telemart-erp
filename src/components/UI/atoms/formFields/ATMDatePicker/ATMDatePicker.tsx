@@ -29,6 +29,7 @@ type Props = {
     dateTimeFormat?: string
     labelClass?: string
     minDate?: any | null
+    inputSize? : string
 }
 
 const ATMDatePicker = ({
@@ -43,6 +44,7 @@ const ATMDatePicker = ({
     labelClass = 'font-medium text-sm',
     dateTimeFormat = 'MM/DD/YYYY',
     minDate,
+    inputSize = '16px'
 }: Props) => {
     return (
         <div className="relative">
@@ -73,16 +75,14 @@ const ATMDatePicker = ({
                                 size="small"
                                 fullWidth
                                 className="bg-white"
-                                style={{ height: size === 'xs' ? '30px' : '' }}
-                                // InputProps={{
-                                //     style: {
-
-                                //         // height: size === 'xs' ? '30px' : '',
-                                //         borderColor: 'rgb(51 65 85)',
-                                //         // borderWidth: '0.5px',
-                                //     },
-                                // }}
-                                error={value === '' ? false : undefined}
+                                inputProps={{
+                                    style: {
+                                        height: inputSize, // Adjust the height as needed
+                                        // Add any other necessary input styles here
+                                    },
+                                    value: params?.inputProps?.value, // Preserve the value
+                                    onChange: params?.inputProps?.onChange, // Preserve the onChange event
+                                }}
                             />
                         )}
                     />
