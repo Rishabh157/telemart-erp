@@ -432,6 +432,7 @@ const CallerPageWrapper = () => {
                     ...values,
                     companyId: callerDataItem?.companyId,
                     agentId: callerDataItem?.agentId,
+                    preffered_delivery_date: values?.preffered_delivery_date ? values?.preffered_delivery_date : ''
                 },
                 id: callerDataItem?.orderID,
             }).then((res: any) => {
