@@ -35,7 +35,7 @@ export type FormInitialValues = {
     customerName: string
     preffered_delivery_start_time: string
     preffered_delivery_end_time: string
-    preffered_delivery_date: string
+    preffered_delivery_date: any
     countryId: string | null
     countryLabel: string
     stateId: string | null
@@ -262,7 +262,7 @@ const CallerPageWrapper = () => {
         reciversName: '',
         preffered_delivery_start_time: '',
         preffered_delivery_end_time: '',
-        preffered_delivery_date: '',
+        preffered_delivery_date: null,
         houseNumber: '',
         streetNumber: '',
         landmark: '',
