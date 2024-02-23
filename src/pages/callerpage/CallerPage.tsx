@@ -144,7 +144,7 @@ const CallerPage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                        singleSchemeData?.data?.deliveryCharges || 0,
+                    singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -246,12 +246,15 @@ const CallerPage: React.FC<Props> = ({
             <div className="grid grid-cols-12 items-center border-[1px] px-3 pb-1 border-grey-700 z-[5000]">
                 <div className="col-span-3 px-3">
                     <ATMSelectSearchable
+                        minHeight='25px'
+                        size="xxs"
+                        fontSizePlaceHolder='14px'
+                        labelSize='xxs'
                         required
                         labelClass="text-xs font-medium"
                         label="Disposition Level 1"
                         componentClass="mt-2"
                         selectLabel="select disposition level 1"
-                        size="xs"
                         name="dispositionLevelTwoId"
                         value={values.dispositionLevelTwoId || ''}
                         // isSubmitting
@@ -264,12 +267,15 @@ const CallerPage: React.FC<Props> = ({
                 </div>
                 <div className="col-span-3 px-3">
                     <ATMSelectSearchable
+                        minHeight='25px'
+                        size="xxs"
+                        fontSizePlaceHolder='14px'
+                        labelSize='xxs'
                         required
                         labelClass="text-xs font-medium"
                         label="Disposition Level 2"
                         componentClass="mt-2"
                         selectLabel="select disposition level 2"
-                        size="xs"
                         name="dispositionLevelThreeId"
                         value={values.dispositionLevelThreeId || ''}
                         // isSubmitting
@@ -285,7 +291,7 @@ const CallerPage: React.FC<Props> = ({
                         isLoading={isLoading}
                         text="Save"
                         type="submit"
-                        className="py-[8px]"
+                        className=""
                         onClick={() => formikProps.handleSubmit()}
                     />
                 </div>

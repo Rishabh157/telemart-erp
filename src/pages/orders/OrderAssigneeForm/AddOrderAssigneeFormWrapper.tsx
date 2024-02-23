@@ -56,7 +56,6 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder, handleClose }: Props) => {
             skip: !selectedOrder?.schemeId || !selectedOrder?.pincodeLabel,
         }
     )
-
     useEffect(() => {
         if (!isDealerOfOrderDataLoading && !isDealerOfOrderDataFetching) {
             // dealerAndCompanyWarehouse,
@@ -84,8 +83,8 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder, handleClose }: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        dealerId: '',
-        wareHouseId: '',
+        dealerId: selectedOrder?.assignDealerId || '',
+        wareHouseId: selectedOrder?.assignWarehouseId || '',
     }
 
     const validationSchema = object({

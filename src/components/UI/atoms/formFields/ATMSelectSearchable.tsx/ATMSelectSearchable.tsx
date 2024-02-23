@@ -26,7 +26,7 @@ type Props = {
     label?: string
     required?: boolean
     isSubmitting?: boolean
-    size?: 'small' | 'medium' | 'xs'
+    size?: 'small' | 'medium' | 'xs' | 'xxs'
     name: string
     isSearchable?: boolean
     selectLabel?: string
@@ -42,12 +42,14 @@ type Props = {
     labelSpan?: string
     inputSpan?: string
     componentClass?: string
-    labelSize?: 'small' | 'medium' | 'large' | 'xs'
+    labelSize?: 'small' | 'medium' | 'large' | 'xs' | 'xxs'
     isMenuOpen?: boolean
     maxMenuHeight?: number
     isValueWithLable?: boolean
     menuPosition?: 'fixed' | 'absolute'
-    isHidden?:boolean
+    isHidden?: boolean
+    minHeight?: string
+    fontSizePlaceHolder?: string
 }
 
 const ATMSelectSearchable = ({
@@ -76,9 +78,11 @@ const ATMSelectSearchable = ({
     labelSize = 'small',
     isMenuOpen = undefined,
     isValueWithLable = false,
-    maxMenuHeight = 300,
+    maxMenuHeight = 100,
     menuPosition = 'fixed',
-    isHidden=false
+    isHidden = false,
+    minHeight = '36px',
+    fontSizePlaceHolder = '16px'
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -87,8 +91,8 @@ const ATMSelectSearchable = ({
             borderColor: 'border-slate-400  ',
             borderWidth: 0,
             boxShadow: 'none',
-            // minHeight: 'unset',
-            height: size === 'xs' ? '28px' : size === 'small' ? '35px' : '',
+            minHeight: minHeight,
+            height: size === 'xxs' ? '10px' : size === 'xs' ? '28px' : size === 'small' ? '35px' : '',
             display: 'flex',
             alignItems: 'center',
             overflow: isMulti ? 'scroll' : 'unset',
@@ -103,6 +107,7 @@ const ATMSelectSearchable = ({
             alignItems: 'start',
             // overflow: isMulti ? 'scroll' : 'unset',
             maxHeight: '67px',
+            fontSize: fontSizePlaceHolder
         }),
         indicator: (provided: any) => ({
             ...provided,
@@ -193,18 +198,16 @@ const ATMSelectSearchable = ({
     return (
         <div className={`${componentClass} relative`} hidden={isHidden}>
             <div
-                className={`  ${
-                    labelDirection === 'horizontal'
-                        ? `  gap-2 w-full  ${classDirection}`
-                        : ' '
-                }`}
+                className={`  ${labelDirection === 'horizontal'
+                    ? `  gap-2 w-full  ${classDirection}`
+                    : ' '
+                    }`}
             >
                 <div
-                    className={`flex gap-1 mb-1 ${
-                        labelDirection === 'horizontal'
-                            ? `  ${labelSpan} w-full h-full flex items-center `
-                            : ' '
-                    }`}
+                    className={`flex gap-1 mb-1 ${labelDirection === 'horizontal'
+                        ? `  ${labelSpan} w-full h-full flex items-center `
+                        : ' '
+                        }`}
                 >
                     {label && (
                         <label
@@ -224,10 +227,9 @@ const ATMSelectSearchable = ({
                     menuIsOpen={isMenuOpen}
                     maxMenuHeight={isMenuOpen ? 110 : maxMenuHeight}
                     className={twMerge(
-                        `border rounded border-slate-400  ${
-                            labelDirection === 'horizontal'
-                                ? `${inputSpan}`
-                                : ''
+                        `border rounded border-slate-400  ${labelDirection === 'horizontal'
+                            ? `${inputSpan}`
+                            : ''
                         }`,
                         `${selectClass}`
                     )}
@@ -249,8 +251,8 @@ const ATMSelectSearchable = ({
                     isOptionDisabled={(options: any) => options.value === ''}
                     placeholder={`${selectLabel}`}
                     autoFocus={false}
-                    // menuPosition={menuPosition}
-                    // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
+                // menuPosition={menuPosition}
+                // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
                 />
             </div>
             {name && isSubmitting && (
