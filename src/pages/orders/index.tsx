@@ -121,13 +121,11 @@ const ViewOrder = () => {
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
     const { search, state, pathname } = useLocation()
-    console.log('search, state, pathname: ', search, state, pathname)
     const queryParams = new URLSearchParams(search)
 
     // Access specific query parameters by their names
     const activeTab: keyof typeof statusProps | string | null =
         queryParams.get('orderStatus')
-    console.log('params: ', activeTab)
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
