@@ -34,10 +34,10 @@ interface tabsProps {
     name: string
 }
 export enum statusProps {
-    fresh = 'FRESH',
     all = 'ALL',
+    fresh = 'FRESH',
     prepaid = 'PREPAID',
-    delivered = 'DELIVERD',
+    delivered = 'DELIVERED',
     doorCancelled = 'DOORCANCELLED',
     hold = 'HOLD',
     psc = 'PSC',
@@ -121,11 +121,13 @@ const ViewOrder = () => {
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
     const { search, state, pathname } = useLocation()
+    console.log('search, state, pathname: ', search, state, pathname)
     const queryParams = new URLSearchParams(search)
 
     // Access specific query parameters by their names
     const activeTab: keyof typeof statusProps | string | null =
         queryParams.get('orderStatus')
+    console.log('params: ', activeTab)
     const { checkUserAccess } = useSelector(
         (state: RootState) => state.userAccess
     )
@@ -157,7 +159,7 @@ const ViewOrder = () => {
             path: '/orders?orderStatus=all',
         },
         {
-            label: `${activelabel}`,
+            label: `${activelabel ? activelabel : 'ALL'}`,
         },
     ]
     useEffect(() => {
@@ -172,7 +174,7 @@ const ViewOrder = () => {
         setActiveTabLabel(labelTab)
     }, [activeTab, allowedTabs])
 
-    const getStatus = (status: keyof typeof statusProps ) => {
+    const getStatus = (status: keyof typeof statusProps) => {
         return statusProps[status] || ''
     }
 
@@ -198,7 +200,9 @@ const ViewOrder = () => {
                             <OrderListing
                                 tabName={allowedTabs[activeTabIndex].name}
                                 orderStatus={activeTab as string}
-                                currentStatus={getStatus(activeTab as keyof typeof statusProps)}
+                                currentStatus={getStatus(
+                                    activeTab as keyof typeof statusProps
+                                )}
                             />
                         </div>
                     </div>

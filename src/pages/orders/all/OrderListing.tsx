@@ -23,6 +23,7 @@ import {
     useGetOrderQuery,
     useGetOrderFlowQuery,
     useDispatchedOrderBarcodeMutation,
+    useApprovedOrderStatusMutation,
 } from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -51,6 +52,8 @@ import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/Ba
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
+import { Chip } from '@mui/material'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 // Types
 type BarcodeListResponseType = {
@@ -108,6 +111,73 @@ const OrderListing = ({
         (state: RootState) => state.userAccess
     )
 
+    const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
+
+    const [filterBy, setFilterBy] = useState<any>([])
+    useEffect(() => {
+        let filter: any = []
+        if (!orderStatus) {
+            filter = [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ]
+            setFilterBy(filter)
+            return
+        }
+        switch (orderStatus) {
+            case null:
+                filter = [
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId,
+                    },
+                ]
+                setFilterBy(filter)
+                return
+            case 'all':
+                filter = [
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId,
+                    },
+                ]
+                setFilterBy(filter)
+                return
+            case 'approved':
+                filter = [
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId,
+                    },
+                    {
+                        fieldName: 'approved',
+                        value: false,
+                    },
+                ]
+                setFilterBy(filter)
+                return
+            default:
+                filter = [
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId,
+                    },
+                    {
+                        fieldName: 'status',
+                        value: currentStatus,
+                    },
+                    {
+                        fieldName: 'approved',
+                        value: true,
+                    },
+                ]
+                setFilterBy(filter)
+                return
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [orderState, currentStatus])
     const {
         page,
         rowsPerPage,
@@ -116,21 +186,13 @@ const OrderListing = ({
         totalItems,
         isTableLoading,
     } = orderState
+
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
         params: ['didNo', 'mobileNo'],
         page: page,
-        filterBy: [
-            {
-                fieldName: 'approved',
-                value: orderStatus === 'approved' ? true : false,
-            },
-            {
-                fieldName: 'status',
-                value: currentStatus,
-            },
-        ],
+        filterBy: [...filterBy],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
@@ -162,13 +224,50 @@ const OrderListing = ({
         }
     }, [isOrderFlowLoading, isOrderFlowFetching, orderFlowData])
 
+    //
+    const handleDeactive = (rowId: string) => {
+        setShowDropdown(false)
+        approvedOrderStatus(rowId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Status changed successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
     const columns: columnTypes[] = [
         {
             field: 'orderNumber',
-            headerName: 'Order No',
-            flex: 'flex-[0.6_0.6_0%]',
+            headerName: 'No.',
+            flex: 'flex-[0.2_0.2_0%]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber} </span>
+                <span className="text-primary-main "># {row.orderNumber}</span>
+            ),
+        },
+        {
+            field: 'mobileNo',
+            headerName: 'Mobile No',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.mobileNo} </span>
+            ),
+        },
+        {
+            field: 'customerName',
+            headerName: 'Name',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.customerName || '-'} </span>
             ),
         },
         {
@@ -190,19 +289,10 @@ const OrderListing = ({
         {
             field: 'shcemeQuantity',
             headerName: 'Quantity',
-            flex: 'flex-[0.5_0.5_0%]',
+            flex: 'flex-[0.4_0.4_0%]',
             align: 'center',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.shcemeQuantity} </span>
-            ),
-        },
-        {
-            field: 'gender',
-            headerName: 'Gender',
-            flex: 'flex-[0.6_0.6_0%]',
-            align: 'center',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.gender} </span>
             ),
         },
         {
@@ -211,15 +301,6 @@ const OrderListing = ({
             flex: 'flex-[0.7_0.7_0%]',
             align: 'center',
             renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
-        },
-        {
-            field: 'mobileNo',
-            headerName: 'Mobile No',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.mobileNo} </span>
-            ),
         },
         {
             field: 'deliveryCharges',
@@ -233,15 +314,6 @@ const OrderListing = ({
             ),
         },
         {
-            field: 'discount',
-            headerName: 'Discount',
-            flex: 'flex-[0.6_0.6_0%]',
-            align: 'center',
-            // renderCell: (row: OrderListResponse) => (
-            //     <span className="text-primary-main "> {row?.dis} </span>
-            // ),
-        },
-        {
             field: 'total',
             headerName: 'Total',
             flex: 'flex-[0.6_0.6_0%]',
@@ -252,12 +324,82 @@ const OrderListing = ({
             ),
         },
         {
-            field: 'orderStatus',
+            field: 'assignee',
+            headerName: 'Assignee',
+            flex: 'flex-[0.6_0.6_0%]',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-slate-800">
+                    {row?.assignDealerLabel || row?.assignWarehouseLabel}
+                </span>
+            ),
+        },
+        {
+            field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-slate-800">{row?.orderStatus}</span>
+                <span className="text-slate-800">{row?.status}</span>
             ),
+        },
+        {
+            field: 'isApproved',
+            headerName: 'Approval',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => {
+                return (
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                        {row?.approved ? (
+                            <Chip
+                                // onClick={() => {
+                                //     showConfirmationDialog({
+                                //         title: 'Disapproved',
+                                //         text: `Do you want to ${
+                                //             row.isApproved
+                                //                 ? 'Disapprove this dealer'
+                                //                 : 'Approve this dealer'
+                                //         }`,
+                                //         showCancelButton: true,
+                                //         next: (res) => {
+                                //             return res.isConfirmed
+                                //                 ? handleDeactive(row?._id)
+                                //                 : setShowDropdown(false)
+                                //         },
+                                //     })
+                                // }}
+                                className="cursor-pointer"
+                                label="Approved"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Approved',
+                                        text: `Do you want to ${
+                                            row?.approved
+                                                ? 'Disapprove this order'
+                                                : 'Approval this order'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Disapproved"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
+                    </span>
+                )
+            },
         },
         {
             field: 'actions',
@@ -270,7 +412,9 @@ const OrderListing = ({
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                    isCustomBtn={true}
+                    isCustomBtn={
+                        row?.status === 'FRESH' && row?.approved === true
+                    }
                     customBtnText="Order Assignee"
                     handleCustomActionButton={() => {
                         setIsOrderAssigneeFormOpen(true)
@@ -311,54 +455,6 @@ const OrderListing = ({
             ),
             align: 'end',
         },
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: OrderListResponse) =>
-        //         row?.orderStatus !== 'NOT_DISPATCHED' ? (
-        //             ''
-        //         ) : (
-        //             <ActionPopup
-        //                 moduleName={UserModuleNameTypes.order}
-        //                 handleOnAction={() => {
-        //                     setShowDropdown(!showDropdown)
-        //                     setCurrentId(row?._id)
-        //                 }}
-        //                 children={
-        //                     <>
-        //                         <button
-        //                             onClick={() => {
-        //                                 setIsFlowDialogShow(true)
-        //                             }}
-        //                             className="w-full text-left px-4 py-2 hover:bg-gray-100 hidden"
-        //                         >
-        //                             Flow
-        //                         </button>
-        //                         <button
-        //                             onClick={() => {
-        //                                 setIsFlowDialogShow(true)
-        //                             }}
-        //                             className="w-full text-left px-4 py-2 hover:bg-gray-100 hidden"
-        //                         >
-        //                             Order Assignee
-        //                         </button>
-        //                         <button
-        //                             onClick={() => {
-        //                                 setIsShow(true)
-        //                                 setBarcodeQuantity(row?.shcemeQuantity)
-        //                                 setSelectedItemsTobeDispatch(row)
-        //                             }}
-        //                             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-        //                         >
-        //                             Dispatch
-        //                         </button>
-        //                     </>
-        //                 }
-        //             />
-        //         ),
-        //     align: 'end',
-        // },
     ]
 
     // Dispatching Methods
@@ -474,7 +570,8 @@ const OrderListing = ({
 
     useEffect(() => {
         navigate('/orders?orderStatus=all')
-    }, [navigate])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">

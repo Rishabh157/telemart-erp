@@ -16,8 +16,11 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
 import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
-import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
-import { CallerResponse } from 'src/models'
+import {
+    // useGetPaginationInboundCallerQuery,
+    useGetPaginationUnAuthCallerDataQuery,
+} from 'src/services/CallerService'
+import { OrderListResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 import { statusProps } from '../orders'
@@ -87,40 +90,54 @@ const CallerPageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
+    const dstphone = queryParams.get('dstphone')
+    console.log('dstphone: ', dstphone)
     const columns: columnTypes[] = [
         {
-            field: 'ageGroup',
+            field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => <span>{row.ageGroup} </span>,
+            renderCell: (row: OrderListResponse) => (
+                <span>{row.orderNumber} </span>
+            ),
         },
-        {
-            field: 'didNo',
-            headerName: 'Enq No.',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => <span> {row.didNo} </span>,
-        },
+        // {
+        //     field: 'enqNo',
+        //     headerName: 'Enq No.',
+        //     flex: 'flex-[3_3_0%]',
+        //     align: 'center',
+        //     extraClasses: 'text-xs',
+        //     renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
+        // },
         {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => (
+            renderCell: (row: OrderListResponse) => <span> {row.status} </span>,
+        },
+        {
+            field: 'flagStatus',
+            headerName: 'Falg Status',
+            flex: 'flex-[3_3_0%]',
+            align: 'center',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
                 <span> {row.flagStatus} </span>
             ),
         },
         {
-            field: 'name',
-            headerName: 'Name',
+            field: 'customerName',
+            headerName: 'Customer Name',
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => <span> {row.agentName} </span>,
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.customerName} </span>
+            ),
         },
         {
             field: 'city',
@@ -128,7 +145,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => (
+            renderCell: (row: OrderListResponse) => (
                 <span> {row.districtLabel} </span>
             ),
         },
@@ -138,7 +155,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => (
+            renderCell: (row: OrderListResponse) => (
                 <span> {row.pincodeLabel} </span>
             ),
         },
@@ -148,7 +165,9 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => <span> {row.mobileNo} </span>,
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.mobileNo} </span>
+            ),
         },
         {
             field: 'disposition',
@@ -156,8 +175,8 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => (
-                <span> {row.dispositionLevelThreeLabel} </span>
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.dispositionLevelThree} </span>
             ),
         },
         {
@@ -166,7 +185,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => (
+            renderCell: (row: OrderListResponse) => (
                 <span> {row.schemeName} </span>
             ),
         },
@@ -176,17 +195,9 @@ const CallerPageWrapper = () => {
             flex: 'flex-[4_4_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => (
+            renderCell: (row: OrderListResponse) => (
                 <span> {row.deliveryCharges} </span>
             ),
-        },
-        {
-            field: 'discount',
-            headerName: 'Discount',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => <span> null </span>,
         },
         {
             field: 'amount',
@@ -194,7 +205,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => (
+            renderCell: (row: OrderListResponse) => (
                 <span> {row.totalAmount} </span>
             ),
         },
@@ -204,16 +215,26 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => <span> {row.remark} </span>,
+            renderCell: (row: OrderListResponse) => <span> {row.remark} </span>,
         },
         {
-            field: 'compl',
-            headerName: 'Complaint',
+            field: 'agentName',
+            headerName: 'Agent Name',
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: CallerResponse) => <span> </span>,
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.agentName} </span>
+            ),
         },
+        // {
+        //     field: 'compl',
+        //     headerName: 'Complaint',
+        //     flex: 'flex-[3_3_0%]',
+        //     align: 'center',
+        //     extraClasses: 'text-xs',
+        //     renderCell: (row: OrderListResponse) => <span> </span>,
+        // },
     ]
 
     const inboundCallerState: any = useSelector(
@@ -221,7 +242,12 @@ const CallerPageWrapper = () => {
     )
     const navigate = useNavigate()
 
-    const { page, rowsPerPage, searchValue, items } = inboundCallerState
+    const {
+        // page,
+        // rowsPerPage,
+        // searchValue,
+        items,
+    } = inboundCallerState
 
     // Table Data with MobileNo filtered
 
@@ -338,22 +364,32 @@ const CallerPageWrapper = () => {
         data: callerListingData,
         isFetching: isCallerFetching,
         isLoading: isCallerLoading,
-    } = useGetPaginationInboundCallerQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'mobileNo',
-                value: phoneNumber,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    } = useGetPaginationUnAuthCallerDataQuery(
+        { phoneNo: phoneNumber || '' },
+        {
+            skip: !phoneNumber,
+        }
+    )
+    // const {
+    //     data: callerListingData,
+    //     isFetching: isCallerFetching,
+    //     isLoading: isCallerLoading,
+    // } = useGetPaginationUnAuthCallerDataQuery({
+    //     limit: rowsPerPage,
+    //     searchValue: searchValue,
+    //     params: ['didNo'],
+    //     page: page,
+    //     filterBy: [
+    //         {
+    //             fieldName: 'mobileNo',
+    //             value: phoneNumber,
+    //         },
+    //     ],
+    //     dateFilter: {},
+    //     orderBy: 'createdAt',
+    //     orderByValue: -1,
+    //     isPaginationRequired: true,
+    // })
 
     useEffect(() => {
         if (!isCallerFetching && !isCallerLoading) {

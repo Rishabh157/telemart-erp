@@ -11,6 +11,8 @@ export type OrderListResponse = {
     orderNumber: number
     assignDealerId: string | null
     assignWarehouseId: string | null
+    assignDealerLabel: string
+    assignWarehouseLabel: string
     agentId: string
     agentName: string
     companyId: string

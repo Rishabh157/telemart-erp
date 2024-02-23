@@ -116,11 +116,20 @@ export const OrderApi = apiSlice.injectEndpoints({
 
         //***** Dispached Order Barcode *****/
         assignOrderToDealerOrWarehouse: builder.mutation({
-            // invalidatesTags: ['order'],
+            invalidatesTags: ['order'],
             query: (body: any) => ({
                 url: '/order-inquiry/assign-order',
                 method: 'PUT',
                 body,
+            }),
+        }),
+
+        //***** Approved Order Status *****/
+        approvedOrderStatus: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (orderId: any) => ({
+                url: `/order-inquiry/approve-order/${orderId}`,
+                method: 'PUT',
             }),
         }),
     }),
@@ -136,4 +145,5 @@ export const {
     useDispatchedOrderBarcodeMutation,
     useGetDealerOfOrderQuery,
     useAssignOrderToDealerOrWarehouseMutation,
+    useApprovedOrderStatusMutation,
 } = OrderApi
