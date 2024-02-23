@@ -98,7 +98,6 @@ const CallerPage: React.FC<Props> = ({
     } = useGetAllProductGroupUnAuthQuery(companyId, {
         skip: !companyId,
     })
-
     useEffect(() => {
         if (didItems) {
             setFieldValue(
