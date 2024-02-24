@@ -1,0 +1,44 @@
+{
+  "moduleId": "NAV_CHANNEL_GROUP",
+  "moduleName": "NAV_CHANNEL_GROUP",
+  "parentGroup": [
+    "NAV_SALES_MARKETING"
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_CHANNEL_GROUP_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+      
+        {
+          "fieldId": "CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME",
+          "fieldName": "Channel Group Name",
+          "fieldValue": ""
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_CHANNEL_GROUP_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [ "LIST"],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_CHANNEL_GROUP_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [ "LIST"],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_CHANNEL_GROUP_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [ "LIST"],
+      "fields": []
+    }
+  ]
+}

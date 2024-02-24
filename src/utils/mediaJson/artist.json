@@ -1,0 +1,49 @@
+{
+  "moduleId": "NAV_ARTIST",
+  "moduleName": "NAV_ARTIST",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "NAV_ARTIST_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "ARTIST_LIST_ARTIST_NAME",
+          "fieldName": "ARTIST NAME",
+          "fieldValue": ""
+        }
+      ]
+    },
+    {
+      "actionId": "NAV_ARTIST_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "NAV_ARTIST_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "NAV_ARTIST_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

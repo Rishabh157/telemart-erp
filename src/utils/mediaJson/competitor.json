@@ -1,0 +1,80 @@
+{
+  "moduleId": "NAV_COMPETITOR",
+  "moduleName": "NAV_COMPETITOR",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "NAV_COMPETITOR_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "COMPETITOR_LIST_DATE",
+          "fieldName": "DATE",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "COMPETITOR_LIST_START_TIME",
+          "fieldName": "START TIME",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "COMPETITOR_LIST_START_END",
+          "fieldName": "START END",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "COMPETITOR_LIST_PRODUCT_NAME",
+          "fieldName": "Product Name          ",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "COMPETITOR_LIST_MOBILE_NO",
+          "fieldName": "MOBILE NO",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "COMPETITOR_LIST_PRICE_MRP",
+          "fieldName": "PRICE MRP",
+          "fieldValue": ""
+        }
+        ,
+        {
+          "fieldId": "COMPETITOR_LIST_COMPETITOR_NAME",
+          "fieldName": "COMPETITOR_NAME",
+          "fieldValue": ""
+        }
+      ]
+    },
+    {
+      "actionId": "NAV_COMPETITOR_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "NAV_COMPETITOR_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "NAV_COMPETITOR_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

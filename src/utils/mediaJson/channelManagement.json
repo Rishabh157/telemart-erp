@@ -1,0 +1,69 @@
+{
+  "moduleId": "NAV_CHANNEL_MANAGEMENT",
+  "moduleName": "NAV_CHANNEL_MANAGEMENT",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "NAV_CHANNEL_MANAGEMENT_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME",
+          "fieldName": "Channel Name",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "CHANNEL_MANAGEMENT_LIST_CHANNEL_GROUP",
+          "fieldName": "Channel GROUP",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "CHANNEL_MANAGEMENT_LIST_CONTACT_PERSON",
+          "fieldName": "CONTACT PERSON",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "CHANNEL_MANAGEMENT_LIST_MOBILE",
+          "fieldName": "MOBILE",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "CHANNEL_MANAGEMENT_LIST_EMAIL",
+          "fieldName": "EMAIL",
+          "fieldValue": ""
+        }
+      ]
+    },
+    {
+      "actionId": "NAV_CHANNEL_MANAGEMENT_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "NAV_CHANNEL_MANAGEMENT_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "NAV_CHANNEL_MANAGEMENT_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

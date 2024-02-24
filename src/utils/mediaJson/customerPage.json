@@ -1,0 +1,17 @@
+{
+  "moduleId": "NAV_CUSTOMER_PAGE",
+  "moduleName": "NAV_CUSTOMER_PAGE",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "NAV_SLOT_MANAGEMENT_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": []
+    }
+    
+  ]
+}

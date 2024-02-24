@@ -1,0 +1,64 @@
+{
+  "moduleId": "NAV_DID_MANAGEMENT",
+  "moduleName": "NAV_DID_MANAGEMENT",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "NAV_DID_MANAGEMENT_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "DID_MANAGEMENT_LIST_DID_NUMBER",
+          "fieldName": "NUMBER",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "DID_MANAGEMENT_LIST_DID_SCHEMA_NAME",
+          "fieldName": "SCHEMA_NAME",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "DID_MANAGEMENT_LIST_CHANNEL_NAME",
+          "fieldName": "CHANNEL NAME",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "DID_MANAGEMENT_LIST_SLOT_NAME",
+          "fieldName": "SLOT NAME",
+          "fieldValue": ""
+        }
+      ]
+    },
+    {
+      "actionId": "NAV_DID_MANAGEMENT_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "NAV_DID_MANAGEMENT_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "NAV_DID_MANAGEMENT_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}
