@@ -462,15 +462,14 @@ const OrderListing = ({
                             >
                                 Flow
                             </button> */}
-                            {/* <button
+                            <button
                                 onClick={() => {
-                                    // navigate(`view/${row?._id}`)
                                     navigate(`/orders/view/${row?._id}`)
                                 }}
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 View
-                            </button> */}
+                            </button>
                             <button
                                 onClick={() => {
                                     setIsShow(true)
