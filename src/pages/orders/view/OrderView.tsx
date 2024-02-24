@@ -11,8 +11,8 @@ import React from 'react'
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
-} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+} from '../../../components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import ATMPageHeading from '../../../components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
 // |-- Types --|
 type Props = {
@@ -88,10 +88,10 @@ const OrderView = ({ items }: Props) => {
                                             {' '}
                                             -{' '}
                                         </p>
-                                        <p className="text-slate-600 col-span-1 ">
-                                            {items?.inOutBound === ''
+                                        <p className="text-slate-600 col-span-1 capitalize">
+                                            {items?.callType === ''
                                                 ? 'NA'
-                                                : items?.inOutBound}
+                                                : items?.callType}
                                         </p>
                                     </div>
 
@@ -148,10 +148,25 @@ const OrderView = ({ items }: Props) => {
                                             {' '}
                                             -{' '}
                                         </p>
-                                        <p className="text-slate-600 col-span-1">
+                                        <p className="text-primary-main col-span-1">
                                             {items?.orderNumber === ''
                                                 ? 'NA'
-                                                : items?.orderNumber}
+                                                : ` # ${items?.orderNumber}`}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Whatsapp No.{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.whatsappNo === ''
+                                                ? 'NA'
+                                                : items?.whatsappNo}
                                         </p>
                                     </div>
                                 </div>
@@ -180,9 +195,9 @@ const OrderView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">Name</h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.name === ''
+                                        {items?.customerName === ''
                                             ? 'NA'
-                                            : items?.name}
+                                            : items?.customerName}
                                     </p>
 
                                     <h1 className="text-gray-800">Age </h1>
@@ -194,9 +209,10 @@ const OrderView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">Address</h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.address === ''
+                                        {items?.autoFillingShippingAddress ===
+                                        ''
                                             ? 'NA'
-                                            : items?.address}
+                                            : items?.autoFillingShippingAddress}
                                     </p>
 
                                     <h1 className="text-gray-800">Relation</h1>
@@ -210,9 +226,9 @@ const OrderView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">District </h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.agentDistrictLabel === ''
+                                        {items?.districtLabel === ''
                                             ? 'NA'
-                                            : items?.agentDistrictLabel}
+                                            : items?.districtLabel}
                                     </p>
 
                                     <h1 className="text-gray-800">Landmark </h1>
@@ -228,9 +244,9 @@ const OrderView = ({ items }: Props) => {
                                     </h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.alternateNo1 === ''
+                                        {items?.mobileNo === ''
                                             ? 'NA'
-                                            : items?.alternateNo1}
+                                            : items?.mobileNo}
                                     </p>
 
                                     <h1 className="text-gray-800">
@@ -310,9 +326,9 @@ const OrderView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">Total </h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.total === ''
+                                        {items?.totalAmount === ''
                                             ? 'NA'
-                                            : items?.total}
+                                            : items?.totalAmount}
                                     </p>
 
                                     <h1 className="text-gray-800">Country</h1>

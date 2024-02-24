@@ -54,6 +54,7 @@ import { AlertText } from 'src/pages/callerpage/components/constants'
 import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import moment from 'moment'
 
 // Types
 type BarcodeListResponseType = {
@@ -246,10 +247,41 @@ const OrderListing = ({
     const columns: columnTypes[] = [
         {
             field: 'orderNumber',
-            headerName: 'No.',
-            flex: 'flex-[0.2_0.2_0%]',
+            headerName: 'Order No.',
+            flex: 'flex-[0.4_0.4_0%]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
+            ),
+        },
+        {
+            field: 'createdAt',
+            headerName: 'Create Date',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {moment(row?.createdAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(row?.createdAt).format('hh:mm A')}
+                    </div>
+                </div>
+            ),
+        },
+        {
+            field: 'preffered_delivery_date',
+            headerName: 'Delivery Date',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {row?.preffered_delivery_date
+                            ? moment(row?.preffered_delivery_date).format(
+                                  'DD MMM YYYY'
+                              )
+                            : '-'}
+                    </div>
+                </div>
             ),
         },
         {
@@ -430,15 +462,14 @@ const OrderListing = ({
                             >
                                 Flow
                             </button> */}
-                            {/* <button
+                            <button
                                 onClick={() => {
-                                    // navigate(`view/${row?._id}`)
                                     navigate(`/orders/view/${row?._id}`)
                                 }}
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 View
-                            </button> */}
+                            </button>
                             <button
                                 onClick={() => {
                                     setIsShow(true)
