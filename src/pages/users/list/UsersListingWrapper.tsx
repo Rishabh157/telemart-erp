@@ -125,24 +125,26 @@ const UsersListingWrapper = () => {
             field: 'userRole',
             headerName: 'User Role',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => (
-                <span
-                    className="underline text-primary-main"
-                    style={{ cursor: 'pointer' }}
-                    onClick={() =>
-                        navigate(`/configurations/user-access`, {
-                            state: {
-                                dept: row?.userDepartment,
-                                userRole: row?.userRole,
-                                userId: row?._id,
-                            },
-                        })
-                    }
-                >
-                    {' '}
-                    {row.userRole.replaceAll('_', ' ')}
-                </span>
-            ),
+            renderCell: (row: any) =>
+                row?.userRole !== 'ADMIN' ? (
+                    <span
+                        className="underline text-primary-main"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() =>
+                            navigate(`/configurations/user-access`, {
+                                state: {
+                                    dept: row?.userDepartment,
+                                    userRole: row?.userRole,
+                                    userId: row?._id,
+                                },
+                            })
+                        }
+                    >
+                        {row.userRole.replaceAll('_', ' ')}
+                    </span>
+                ) : (
+                    <span>-</span>
+                ),
         },
         {
             field: 'status',

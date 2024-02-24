@@ -42,23 +42,12 @@ const AuthenticationHOC = ({
             skip: !userData?.companyId,
         }
     )
-    useEffect(() => {
-        // Check if there is an access token and redirect to dashboard if available
-        if (accessToken) {
-            navigate(
-                `${location.pathname ? location.pathname : '/dashboard'}`,
-                {
-                    state: location?.state,
-                }
-            )
-        } else {
-            navigate('/')
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [accessToken, navigate, location.pathname])
+    if (!accessToken) {
+        window.location.pathname = '/'
+    }
+
     useEffect(() => {
         if (userData?.userRole === 'ADMIN') return
-        // Update checkUserAccess when data is available
         if (!isLoading && !isFetching && data) {
             if (data?.data !== null) {
                 dispatch(setCheckUserAccess(data?.data?.module))
@@ -87,10 +76,10 @@ const AuthenticationHOC = ({
                 userData?.userRole === 'ADMIN'
                     ? true
                     : (isCheckAuthorizedModuleAction(
-                        checkUserAccess,
-                        moduleName,
-                        actionName
-                    ) as boolean)
+                          checkUserAccess,
+                          moduleName,
+                          actionName
+                      ) as boolean)
         } else {
             isAuthorized =
                 userData?.userRole === 'ADMIN'
@@ -105,20 +94,20 @@ const AuthenticationHOC = ({
             {accessToken ? (
                 getAuthorised() ? (
                     <>
-                        {/* {component} */}
+                        {component}
                         {/* Pass location.state to the component if it exists, otherwise pass null */}
-                        {React.cloneElement(component as React.ReactElement, {
+                        {/* {React.cloneElement(component as React.ReactElement, {
                             location: location.state || null,
-                        })}
+                        })} */}
                     </>
                 ) : // isRedirect we used on actioncomponent on pageroute
-                    actionName ? (
-                        isRedirect ? (
-                            <AccessDenied />
-                        ) : null
-                    ) : (
-                        navigate(`/dashboard`)
-                    )
+                actionName ? (
+                    isRedirect ? (
+                        <AccessDenied />
+                    ) : null
+                ) : (
+                    navigate(`/dashboard`)
+                )
             ) : (
                 <LoginPage pathName={location.pathname} />
             )}
