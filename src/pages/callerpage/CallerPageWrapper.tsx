@@ -458,12 +458,13 @@ const CallerPageWrapper = () => {
         const callDetails: any = localStorage.getItem('callerPageData')
         let callDataItem = JSON.parse(callDetails)
 
-        const { ...rest } = initialValues
+        const { preffered_delivery_date, ...rest } = initialValues
         // use object destructuring to remove the _id property
 
         if (!callDataItem) {
             AddCallerForm({
                 ...rest,
+                preffered_delivery_date: preffered_delivery_date || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
