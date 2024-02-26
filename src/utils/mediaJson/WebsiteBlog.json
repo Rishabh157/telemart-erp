@@ -1,0 +1,61 @@
+{
+  "moduleId": "NAV_WEBSITES_BLOG",
+  "moduleName": "NAV_WEBSITES_BLOG",
+  "parentGroup": ["NAV_ALL_WEBSITE"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_WEBSITES_BLOG_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "WEBSITES_BLOG_LIST_WEBSITES_BLOG_NAME",
+          "fieldName": "Blog Name",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "WEBSITES_BLOG_LIST_BLOG_TITLE",
+          "fieldName": "Blog Title",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "WEBSITES_BLOG_LIST_BLOG_SUBTITLE",
+          "fieldName": "Blog Subtitle",
+          "fieldValue": ""
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_WEBSITES_BLOG_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_WEBSITES_BLOG_ONE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_WEBSITES_BLOG_ONE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

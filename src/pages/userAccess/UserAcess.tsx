@@ -28,7 +28,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 // import { SelectOption } from 'src/models/FormField/FormField.model'
 // import { HiPlus } from 'react-icons/hi'
 //import { BsFillExclamationCircleFill } from 'react-icons/bs'
-import { default as modulesData } from 'src/defaultData/moduleData.json'
+// import { default as modulesData } from 'src/defaultData/moduleData.json'
+import { mergeUserModules } from './mergeJson'
 import {
     UserModuleActionTypes,
     UserModuleOrderTabsTypes,
@@ -82,7 +83,7 @@ const UserAcess = ({
     userRole,
     handleUserAccessSubmit,
 }: Props) => {
-    const { modules } = modulesData
+    const modules = [...mergeUserModules]
 
     const dispatch = useDispatch()
     const { userAccessItems } = useSelector(
@@ -176,6 +177,54 @@ const UserAcess = ({
             }
             dispatch(setUserModule(moduleValue))
         }
+        else {
+            // let addModule = [...userAccessItems?.modules]
+            // addModule.push(module) 
+            let moduleAction: moduleActionTypes[] = []
+            if (actionValue) {
+                action.parentGroup.forEach((groupName) => {
+                    let isParent = moduleAction?.find(
+                        (actionitem) => actionitem.actionName === groupName
+                    );
+                    if (!isParent) {
+                        const ActiveModule = modules?.find(
+                            (moduleitem) => moduleitem.moduleId === module.moduleId
+                        );
+                        let ViewAction = ActiveModule?.moduleAction?.find(
+                            (actionitem: moduleActionTypes) =>
+                                actionitem.actionName === groupName
+                        );
+                        if (ViewAction) {
+                            moduleAction.push(ViewAction);
+                        }
+                    }
+                });
+
+                moduleAction.push(action);
+
+            } else {
+                let isChildRemove = moduleAction?.filter(
+                    (actionitem: moduleActionTypes) => {
+                        if (
+                            !actionitem.parentGroup.includes(action.actionName) &&
+                            actionitem.actionId !== action.actionId
+                        ) {
+                            return actionitem;
+                        }
+                        return false;
+                    }
+                );
+
+                moduleAction = isChildRemove;
+            }
+            let moduleValue = [...userAccessItems?.modules];
+            let newModule = {
+                ...module,
+                moduleAction: moduleAction,
+            };
+            moduleValue.push(newModule)
+            dispatch(setUserModule(moduleValue))
+        }
     }
 
     const isCheckedModule = (module: ModulesTypes) => {
@@ -235,7 +284,7 @@ const UserAcess = ({
                 actionItem.actionId === actions.actionId
         )
 
-        if (moduleIndex >= 0) {
+        if (moduleIndex >= 0 && moduleActionIndex >= 0) {
             let moduleValue = [...clonedUserAccessItems.modules]
             let moduleActionField = [
                 ...moduleValue[moduleIndex]?.moduleAction[moduleActionIndex]
@@ -264,19 +313,21 @@ const UserAcess = ({
     const [expanded, setExpanded] = React.useState<number | false>(false)
     const handleChange =
         (panel: number) =>
-        (event: React.SyntheticEvent, isExpanded: boolean) => {
-            setExpanded(isExpanded ? panel : false)
-        }
+            (event: React.SyntheticEvent, isExpanded: boolean) => {
+                setExpanded(isExpanded ? panel : false)
+            }
 
     const [expanded0, setExpanded0] = React.useState<number | false>(false)
     const handleChange0 =
         (panel: number) =>
-        (event: React.SyntheticEvent, isExpanded0: boolean) => {
-            setExpanded0(isExpanded0 ? panel : false)
-        }
+            (event: React.SyntheticEvent, isExpanded0: boolean) => {
+                setExpanded0(isExpanded0 ? panel : false)
+            }
 
-    const getReplaceUnderScoreToSpace = (name: string) =>
-        name?.replaceAll('_', ' ')
+    const getReplaceUnderScoreToSpace = (name: string) => {
+        let navReplace = name?.replaceAll("NAV", "")
+        return navReplace?.replaceAll("_", " ");
+    }
 
     return (
         <div className="h-[calc(100vh-55px)] bg-white">
@@ -307,9 +358,8 @@ const UserAcess = ({
                                 onClick={() => {
                                     handleUserAccessSubmit()
                                 }}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Update
                             </button>
@@ -396,27 +446,27 @@ const UserAcess = ({
                                                                                     disabled={
                                                                                         actionsItems.actionName ===
                                                                                             UserModuleActionTypes.List ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderAllTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderApprovedTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderDeliveredTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderDoorCancelledTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderFreshTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderHoldTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderNonActionTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderPndTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderPscTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderUnaTab ||
-                                                                                        actionsItems.actionName ===
+                                                                                            actionsItems.actionName ===
                                                                                             UserModuleOrderTabsTypes.orderUrgentTab
                                                                                             ? true
                                                                                             : false

@@ -1,26 +1,34 @@
 {
-  "moduleId": "NAV_CHANNEL_CATEGORY",
-  "moduleName": "NAV_CHANNEL_CATEGORY",
-  "parentGroup": [
-"NAV_MEDIA"
-  ],
+  "moduleId": "NAV_ITEMS",
+  "moduleName": "NAV_ITEMS",
+  "parentGroup": ["NAV_CONFIGURATION"],
   "moduleAction": [
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_LIST",
+      "actionId": "ACTION_ITEMS_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
         {
-          "fieldId": "CATEGORY_LIST_CHANNEL_CATEGORY_NAME",
-          "fieldName": "Channel Category Name",
-          "fieldValue": "channelCategory"
+          "fieldId": "ITEMS_LIST_ITEMS_CODE",
+          "fieldName": "Item Code",
+          "fieldValue": "itemCode"
+        },
+        {
+          "fieldId": "ITEMS_LIST_ITEMS_NAME",
+          "fieldName": "Item Name",
+          "fieldValue": "itemName"
+        },
+        {
+          "fieldId": "ITEMS_LIST_WEIGHT",
+          "fieldName": "Weight (in gms.)",
+          "fieldValue": "itemWeight"
         }
       ]
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_ADD",
+      "actionId": "ACTION_ITEMS_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "compulsoryFields" : [],
@@ -30,7 +38,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_EDIT",
+      "actionId": "ACTION_ITEMS_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "compulsoryFields" : [],
@@ -40,7 +48,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_DELETE",
+      "actionId": "ACTION_ITEMS_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "compulsoryFields" : [],
