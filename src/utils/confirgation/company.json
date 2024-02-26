@@ -1,0 +1,69 @@
+{
+  "moduleId": "NAV_COMPANY",
+  "moduleName": "NAV_COMPANY",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_COMPANY_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "COMPANY_LIST_COMAPNY_NAME",
+          "fieldName": "Company Name",
+          "fieldValue": "companyName"
+        },
+        {
+          "fieldId": "COMPANY_LIST_WEBSITE_URL",
+          "fieldName": "Website Url",
+          "fieldValue": "websiteUrl"
+        },
+        {
+          "fieldId": "COMPANY_LIST_ADDRESS",
+          "fieldName": "Address",
+          "fieldValue": "address"
+        },
+        {
+          "fieldId": "COMPANY_LIST_GST_NO",
+          "fieldName": "Gst No",
+          "fieldValue": "gstNo"
+        },
+        {
+          "fieldId": "COMPANY_LIST_PHONE_NO",
+          "fieldName": "Phone No",
+          "fieldValue": "phoneNo"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_COMPANY_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_COMPANY_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_COMPANY_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

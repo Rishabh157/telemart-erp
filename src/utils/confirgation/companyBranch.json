@@ -1,0 +1,54 @@
+{
+  "moduleId": "NAV_COMPANY_BRANCH",
+  "moduleName": "NAV_COMPANY_BRANCH",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_COMPANY_BRANCH_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "COMPANY_BRANCH_LIST_COMAPNY_NAME",
+          "fieldName": "Company Name",
+          "fieldValue": "companyLabel"
+        },
+        {
+          "fieldId": "COMPANY_BRANCH_LIST_BRANCH_NAME",
+          "fieldName": "Branch Name",
+          "fieldValue": "branchName"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_COMPANY_BRANCH_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_COMPANY_BRANCH_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_COMPANY_BRANCH_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

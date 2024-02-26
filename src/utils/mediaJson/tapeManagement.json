@@ -1,0 +1,64 @@
+{
+  "moduleId": "NAV_TAPE_MANAGEMENT",
+  "moduleName": "NAV_TAPE_MANAGEMENT",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_TAPE_MANAGEMENT_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "TAPE_MANAGEMENT_LIST_TAPE_NAME",
+          "fieldName": "TAPE NAME",
+          "fieldValue": "tapeName"
+        },
+        {
+          "fieldId": "TAPE_MANAGEMENT_LIST_TAPE_TYPE",
+          "fieldName": "TAPE TYPE",
+          "fieldValue": "tapeType"
+        },
+        {
+          "fieldId": "TAPE_MANAGEMENT_LIST_SCHEME",
+          "fieldName": "SCHEME",
+          "fieldValue": "schemeLabel"
+        },
+        {
+          "fieldId": "TAPE_MANAGEMENT_LIST_LANGUAGE",
+          "fieldName": "LANGUAGE",
+          "fieldValue": "languageId"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_TAPE_MANAGEMENT_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_TAPE_MANAGEMENT_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_TAPE_MANAGEMENT_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}
