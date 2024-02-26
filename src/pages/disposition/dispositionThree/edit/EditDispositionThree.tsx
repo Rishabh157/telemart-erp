@@ -10,6 +10,13 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import {
+    smstypeOptions,
+    priorityOptions,
+    emailTypeOptions,
+    whatsappTypeOptions,
+    applicableCriteriaOptionsType,
+} from 'src/utils/constants/customeTypes'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -17,11 +24,6 @@ type Props = {
     dropdownOptions: {
         DispotionOneOptions: SelectOption[]
         DispositionTwoOptions: SelectOption[]
-        priorityOptions: SelectOption[]
-        smsTypeOptions: SelectOption[]
-        emailTypeOptions: SelectOption[]
-        whatsAppOptions: SelectOption[]
-        applicableCriteriaOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -136,7 +138,7 @@ const EditDispositionThree = ({
                                 onChange={(e) =>
                                     handleSetFieldValue('smsType', e)
                                 }
-                                options={dropdownOptions.smsTypeOptions}
+                                options={smstypeOptions()}
                                 label="SMS Type"
                             />
 
@@ -146,7 +148,7 @@ const EditDispositionThree = ({
                                 onChange={(e) =>
                                     handleSetFieldValue('emailType', e)
                                 }
-                                options={dropdownOptions.emailTypeOptions}
+                                options={emailTypeOptions()}
                                 label="Email Type"
                             />
                             <ATMSelectSearchable
@@ -155,7 +157,7 @@ const EditDispositionThree = ({
                                 onChange={(e) =>
                                     handleSetFieldValue('whatsApp', e)
                                 }
-                                options={dropdownOptions.whatsAppOptions}
+                                options={whatsappTypeOptions()}
                                 label="Whatsapp Template"
                             />
 
@@ -165,7 +167,7 @@ const EditDispositionThree = ({
                                 onChange={(e) =>
                                     handleSetFieldValue('priority', e)
                                 }
-                                options={dropdownOptions.priorityOptions}
+                                options={priorityOptions()}
                                 label="Priority"
                             />
 
@@ -176,9 +178,7 @@ const EditDispositionThree = ({
                                 onChange={(e) =>
                                     handleSetFieldValue('applicableCriteria', e)
                                 }
-                                options={
-                                    dropdownOptions.applicableCriteriaOptions
-                                }
+                                options={applicableCriteriaOptionsType()}
                                 label="Applicable Criteria"
                             />
                         </div>

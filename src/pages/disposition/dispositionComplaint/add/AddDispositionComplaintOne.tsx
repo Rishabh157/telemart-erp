@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddDispositionComplaint.tsx
 // Type: Add Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: FEB 26, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -19,8 +19,12 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import {
+    smstypeOptions,
+    emailTypeOptions,
+    priorityOptions,
+} from 'src/utils/constants/customeTypes'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -29,18 +33,9 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
-    dropdownOptions: {
-        smstypeOptions: SelectOption[]
-        emailTypeOptions: SelectOption[]
-        priorityOptions: SelectOption[]
-    }
 }
 
-const AddDispositionComplaint = ({
-    formikProps,
-    apiStatus,
-    dropdownOptions,
-}: Props) => {
+const AddDispositionComplaint = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     const breadcrumbs: BreadcrumbType[] = [
@@ -108,7 +103,7 @@ const AddDispositionComplaint = ({
                                     }
                                 />
                                 <ATMSelectSearchable
-                                    options={dropdownOptions.emailTypeOptions}
+                                    options={emailTypeOptions()}
                                     name="emailType"
                                     value={values.emailType}
                                     label="Email Type"
@@ -117,7 +112,7 @@ const AddDispositionComplaint = ({
                                     }
                                 />
                                 <ATMSelectSearchable
-                                    options={dropdownOptions.smstypeOptions}
+                                    options={smstypeOptions()}
                                     name="smsType"
                                     value={values.smsType}
                                     label="SMS Type "
@@ -126,7 +121,7 @@ const AddDispositionComplaint = ({
                                     }
                                 />
                                 <ATMSelectSearchable
-                                    options={dropdownOptions.priorityOptions}
+                                    options={priorityOptions()}
                                     name="priority"
                                     value={values.priority}
                                     label="Priority"

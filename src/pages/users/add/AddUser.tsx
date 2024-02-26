@@ -22,7 +22,7 @@ import ATMBreadCrumbs, {
 import ATMSelectSearchable, {
     SelectOption,
 } from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { userDepartmentOptions } from 'src/utils'
+import { userDepartmentTypeOptions } from 'src/utils/constants/customeTypes'
 import {
     GetHierarchByDeptProps,
     getHierarchyByDept,
@@ -36,7 +36,10 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { CompanyBranchListResponse } from 'src/models'
 import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-import { useGetFloorMangerUserByCallCenterIdQuery, useGetTeamLeadrUserByCallCenterIdQuery } from 'src/services/UserServices'
+import {
+    useGetFloorMangerUserByCallCenterIdQuery,
+    useGetTeamLeadrUserByCallCenterIdQuery,
+} from 'src/services/UserServices'
 import { RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -291,7 +294,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 onChange={(e) =>
                                     handleSetFieldValue('userDepartment', e)
                                 }
-                                options={userDepartmentOptions}
+                                options={userDepartmentTypeOptions()}
                                 label="User Department"
                             />
                             <ATMSelectSearchable

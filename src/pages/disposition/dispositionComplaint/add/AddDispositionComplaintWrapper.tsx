@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddDispositionComplaintWrapper.tsx
 // Type: Add Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: FEB 26, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -74,72 +74,9 @@ const AddDispositionComplaintWrappper = () => {
         }, 1000)
     }
 
-    const priorityOpt = () => {
-        let options: any = []
-
-        for (let i = 0; i <= 50; i++) {
-            options.push({ label: i.toString(), value: i.toString() })
-        }
-        return options
-    }
-    const priorityOptions = priorityOpt()
-
-    const smstype = [
-        //    { label:"alcobanSms" ,value:"ALCOBAN SMS"},
-        //    { label:"complaintCCA_CNC" ,value:"CUSTOMER NOT CONTACTABLE"},
-        //     { label:"alcobanSms" ,value:"ALCOBAN SMS"},
-        //     { label:"alcobanSms" ,value:"ALCOBAN SMS"},
-        //     { label:"alcobanSms" ,value:"ALCOBAN SMS"},
-        { label: 'alcobanSms', value: 'ALCOBAN SMS' },
-        { label: 'complaintCCA_CNC', value: 'CUSTOMER NOT CONTACTABLE' },
-        {
-            label: 'complaintCCA_OWEI',
-            value: 'COMPLAINT CCA-ORDERS WITH EMAIL ID',
-        },
-        {
-            label: 'complaintCCA_OWNEI',
-            value: 'COMPLAINT CCA-ORDERS WITHOUT EMAIL ID',
-        },
-        { label: 'complaintORC', value: 'CREATE ORDER REFUND-CHEQUE' },
-        { label: 'complaintORN', value: 'CREATE ORDER REFUND-NEFT' },
-        { label: 'complaintRPIM', value: 'CREATE RPI-MANUAL' },
-        { label: 'complaintRPI', value: 'CREATE RPI-TV-SHOP COURIER ASSIGNED' },
-        { label: 'complaintSCD', value: 'COMPLAINT SERVICE DETAILS' },
-        { label: 'createComplant', value: 'CREATE COMPLAINT' },
-        { label: 'dealerDelivered', value: 'DEALER DELIVERED' },
-        { label: 'dealerDeliveredBI', value: 'DEALER DELIVERED BOY INTRANSIT' },
-        { label: 'dispositionMsg', value: 'DISPOSITION MESSAGE' },
-        { label: 'hold', value: 'HOLD' },
-        { label: 'inTransitDB', value: 'IN-TRANSIT-DELIVERY-BOY' },
-        { label: 'invoiceSent', value: 'INVOICE SENT' },
-    ]
-    const EmailType = [
-        { label: 'personalEmail', value: 'PERSONAL EMAIL' },
-        { label: 'officialEmail', value: 'OFFICIAL EMAIL' },
-        { label: 'buisnessEmail', value: 'BUISNESS EMAIL' },
-    ]
-
-    const dropdownOptions = {
-        smstypeOptions: smstype?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
-
-        emailTypeOptions: EmailType?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
-        priorityOptions,
-    }
-
     return (
         <>
             <DispositionLayout>
-                {' '}
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -150,7 +87,6 @@ const AddDispositionComplaintWrappper = () => {
                             <AddDispositionComplaint
                                 apiStatus={apiStatus}
                                 formikProps={formikProps}
-                                dropdownOptions={dropdownOptions}
                             />
                         )
                     }}

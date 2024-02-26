@@ -22,6 +22,7 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { paymentTypeOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -43,7 +44,6 @@ type Props = {
         districtOptions?: SelectOption[]
         languageOption: SelectOption[]
         categoryOption: SelectOption[]
-        paymentOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -251,7 +251,7 @@ const AddChannelManagement = ({
                                 }
                             />
                             <ATMSelectSearchable
-                                options={dropdownOptions.paymentOptions}
+                                options={paymentTypeOptions()}
                                 required
                                 name="paymentType"
                                 value={values.paymentType}

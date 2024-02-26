@@ -73,7 +73,7 @@ const VendorsListingWrapper = () => {
             headerName: 'Company Type',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: VendorsListResponse) => (
-                <span> {row.companyType} </span>
+                <span> {row.companyType?.replaceAll('_', ' ')} </span>
             ),
         },
         {
