@@ -111,84 +111,12 @@ const EditInitialCallThreeWrapper = () => {
             })
         }, 1000)
     }
-    const smstype = [
-        { label: 'alcobanSms', value: 'ALCOBAN SMS' },
-        { label: 'complaintCCA_CNC', value: 'CUSTOMER NOT CONTACTABLE' },
-        {
-            label: 'complaintCCA_OWEI',
-            value: 'COMPLAINT CCA-ORDERS WITH EMAIL ID',
-        },
-        {
-            label: 'complaintCCA_OWNEI',
-            value: 'COMPLAINT CCA-ORDERS WITHOUT EMAIL ID',
-        },
-        { label: 'complaintORC', value: 'CREATE ORDER REFUND-CHEQUE' },
-        { label: 'complaintORN', value: 'CREATE ORDER REFUND-NEFT' },
-        { label: 'complaintRPIM', value: 'CREATE RPI-MANUAL' },
-        { label: 'complaintRPI', value: 'CREATE RPI-TV-SHOP COURIER ASSIGNED' },
-        { label: 'complaintSCD', value: 'COMPLAINT SERVICE DETAILS' },
-        { label: 'createComplant', value: 'CREATE COMPLAINT' },
-        { label: 'dealerDelivered', value: 'DEALER DELIVERED' },
-        { label: 'dealerDeliveredBI', value: 'DEALER DELIVERED BOY INTRANSIT' },
-        { label: 'dispositionMsg', value: 'DISPOSITION MESSAGE' },
-        { label: 'hold', value: 'HOLD' },
-        { label: 'inTransitDB', value: 'IN-TRANSIT-DELIVERY-BOY' },
-        { label: 'invoiceSent', value: 'INVOICE SENT' },
-    ]
-
-    const complainttype = [
-        {
-            label: 'Complaint',
-            value: 'COMPLAINT',
-        },
-        {
-            label: 'Inquiry',
-            value: 'INQUIRY',
-        },
-    ]
-
-    const returntype = [
-        { label: 'ESCALATE', value: 'ESCALATE' },
-        { label: 'REPLACEMENT', value: 'REPLACEMENT' },
-        { label: 'REFUND', value: 'REFUND' },
-    ]
-
-    const EmailType = [
-        { label: 'Personal Email', value: 'PERSONAL_EMAIL' },
-        { label: 'Buisness Email', value: 'BUISNESS_EMAIL' },
-        { label: 'Company Email', value: 'COMPANY_EMAIL' },
-        { label: 'Official Email', value: 'OFFICIAL_EMAIL' },
-    ]
 
     const dropdownoptions = {
         initialCallOneOptions: allItems?.map((ele: any) => {
             return {
                 label: ele.initialCallName,
                 value: ele._id,
-            }
-        }),
-        complainttypeOptions: complainttype?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
-        smstypeOptions: smstype?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
-        returntypeOptions: returntype?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
-        emailTypeOptions: EmailType?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
             }
         }),
     }
