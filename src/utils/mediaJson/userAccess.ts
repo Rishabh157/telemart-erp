@@ -833,7 +833,8 @@ export enum delearRatioUserAccessType {
 }
 
 export enum dashboardUserAccessType {
-  NAV_DASHBOARD = "NAV_DASHBOARD"
+  NAV_DASHBOARD = "NAV_DASHBOARD",
+  NAV_WELCOME = "NAV_WELCOME",
 }
 
 
