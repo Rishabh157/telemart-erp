@@ -6,7 +6,7 @@
   ],
   "moduleAction": [
     {
-      "actionId": "NAV_TAPE_MANAGEMENT_LIST",
+      "actionId": "ACTION_TAPE_MANAGEMENT_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "parentGroup": [],
@@ -14,27 +14,27 @@
         {
           "fieldId": "TAPE_MANAGEMENT_LIST_TAPE_NAME",
           "fieldName": "TAPE NAME",
-          "fieldValue": ""
+          "fieldValue": "tapeName"
         },
         {
           "fieldId": "TAPE_MANAGEMENT_LIST_TAPE_TYPE",
           "fieldName": "TAPE TYPE",
-          "fieldValue": ""
+          "fieldValue": "tapeType"
         },
         {
           "fieldId": "TAPE_MANAGEMENT_LIST_SCHEME",
           "fieldName": "SCHEME",
-          "fieldValue": ""
+          "fieldValue": "schemeLabel"
         },
         {
           "fieldId": "TAPE_MANAGEMENT_LIST_LANGUAGE",
           "fieldName": "LANGUAGE",
-          "fieldValue": ""
+          "fieldValue": "languageId"
         }
       ]
     },
     {
-      "actionId": "NAV_TAPE_MANAGEMENT_ADD",
+      "actionId": "ACTION_TAPE_MANAGEMENT_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "parentGroup": [
@@ -43,7 +43,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_TAPE_MANAGEMENT_EDIT",
+      "actionId": "ACTION_TAPE_MANAGEMENT_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "parentGroup": [
@@ -52,7 +52,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_TAPE_MANAGEMENT_DELETE",
+      "actionId": "ACTION_TAPE_MANAGEMENT_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "parentGroup": [

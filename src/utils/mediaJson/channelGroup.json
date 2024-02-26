@@ -15,7 +15,7 @@
         {
           "fieldId": "CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME",
           "fieldName": "Channel Group Name",
-          "fieldValue": ""
+          "fieldValue": "groupName"
         }
       ]
     },

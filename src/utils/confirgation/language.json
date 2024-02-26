@@ -1,25 +1,25 @@
 {
-  "moduleId": "NAV_ARTIST",
-  "moduleName": "NAV_ARTIST",
+  "moduleId": "NAV_LANGUAGE",
+  "moduleName": "NAV_LANGUAGE",
   "parentGroup": [
     ""
   ],
   "moduleAction": [
     {
-      "actionId": "ACTION_ARTIST_LIST",
+      "actionId": "ACTION_LANGUAGE_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "parentGroup": [],
       "fields": [
         {
-          "fieldId": "ARTIST_LIST_ARTIST_NAME",
-          "fieldName": "ARTIST NAME",
-          "fieldValue": "artistName"
+          "fieldId": "LANGUAGE_LIST_LANGUAGE",
+          "fieldName": "LANGUAGE",
+          "fieldValue": "languageName"
         }
       ]
     },
     {
-      "actionId": "ACTION_ARTIST_ADD",
+      "actionId": "ACTION_LANGUAGE_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "parentGroup": [
@@ -28,7 +28,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_ARTIST_EDIT",
+      "actionId": "ACTION_LANGUAGE_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "parentGroup": [
@@ -37,7 +37,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_ARTIST_DELETE",
+      "actionId": "ACTION_LANGUAGE_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "parentGroup": [

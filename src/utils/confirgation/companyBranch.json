@@ -1,25 +1,30 @@
 {
-  "moduleId": "NAV_ARTIST",
-  "moduleName": "NAV_ARTIST",
+  "moduleId": "NAV_COMPANY_BRANCH",
+  "moduleName": "NAV_COMPANY_BRANCH",
   "parentGroup": [
     ""
   ],
   "moduleAction": [
     {
-      "actionId": "ACTION_ARTIST_LIST",
+      "actionId": "ACTION_COMPANY_BRANCH_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "parentGroup": [],
       "fields": [
         {
-          "fieldId": "ARTIST_LIST_ARTIST_NAME",
-          "fieldName": "ARTIST NAME",
-          "fieldValue": "artistName"
+          "fieldId": "COMPANY_BRANCH_LIST_COMAPNY_NAME",
+          "fieldName": "Company Name",
+          "fieldValue": "companyLabel"
+        },
+        {
+          "fieldId": "COMPANY_BRANCH_LIST_BRANCH_NAME",
+          "fieldName": "Branch Name",
+          "fieldValue": "branchName"
         }
       ]
     },
     {
-      "actionId": "ACTION_ARTIST_ADD",
+      "actionId": "ACTION_COMPANY_BRANCH_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "parentGroup": [
@@ -28,7 +33,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_ARTIST_EDIT",
+      "actionId": "ACTION_COMPANY_BRANCH_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "parentGroup": [
@@ -37,7 +42,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_ARTIST_DELETE",
+      "actionId": "ACTION_COMPANY_BRANCH_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "parentGroup": [

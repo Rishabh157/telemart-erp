@@ -6,7 +6,7 @@
   ],
   "moduleAction": [
     {
-      "actionId": "NAV_SLOT_MANAGEMENT_LIST",
+      "actionId": "ACTION_SLOT_MANAGEMENT_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "parentGroup": [],
@@ -14,42 +14,42 @@
         {
           "fieldId": "SLOT_MANAGEMENT_LIST_SLOT_NAME",
           "fieldName": "SLOT NAME",
-          "fieldValue": ""
+          "fieldValue": "slotName"
         },
         {
           "fieldId": "SLOT_MANAGEMENT_LIST_CHANNEL_GROUP",
           "fieldName": "Channel GROUP",
-          "fieldValue": ""
+          "fieldValue": "groupNameLabel"
         },
         {
           "fieldId": "SLOT_MANAGEMENT_LIST_CHANNEL_NAME",
           "fieldName": "Channel NAME",
-          "fieldValue": ""
+          "fieldValue": "channelLabel"
         },
         {
           "fieldId": "SLOT_MANAGEMENT_LIST_TAPE_NAME",
           "fieldName": "TAPE NAME",
-          "fieldValue": ""
+          "fieldValue": "tapeLabel"
         },
         {
           "fieldId": "SLOT_MANAGEMENT_LIST_START_TIME",
           "fieldName": "START TIME",
-          "fieldValue": ""
+          "fieldValue": "slotStartTime"
         },
         {
           "fieldId": "SLOT_MANAGEMENT_LIST_END_TIME",
           "fieldName": "END TIME",
-          "fieldValue": ""
+          "fieldValue": "slotEndTime"
         },
         {
           "fieldId": "SLOT_MANAGEMENT_LIST_PAUSE_PLAY",
           "fieldName": "PAUSE_PLAY",
-          "fieldValue": ""
+          "fieldValue": "pausePlay"
         }
       ]
     },
     {
-      "actionId": "NAV_SLOT_MANAGEMENT_ADD",
+      "actionId": "ACTION_SLOT_MANAGEMENT_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "parentGroup": [
@@ -58,7 +58,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_SLOT_MANAGEMENT_EDIT",
+      "actionId": "ACTION_SLOT_MANAGEMENT_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "parentGroup": [
@@ -67,7 +67,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_SLOT_MANAGEMENT_DELETE",
+      "actionId": "ACTION_SLOT_MANAGEMENT_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "parentGroup": [

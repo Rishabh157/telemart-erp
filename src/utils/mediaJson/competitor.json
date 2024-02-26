@@ -6,7 +6,7 @@
   ],
   "moduleAction": [
     {
-      "actionId": "NAV_COMPETITOR_LIST",
+      "actionId": "ACTION_COMPETITOR_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "parentGroup": [],
@@ -14,43 +14,43 @@
         {
           "fieldId": "COMPETITOR_LIST_DATE",
           "fieldName": "DATE",
-          "fieldValue": ""
+          "fieldValue": "date"
         },
         {
           "fieldId": "COMPETITOR_LIST_START_TIME",
           "fieldName": "START TIME",
-          "fieldValue": ""
+          "fieldValue": "startTime"
         },
         {
           "fieldId": "COMPETITOR_LIST_START_END",
           "fieldName": "START END",
-          "fieldValue": ""
+          "fieldValue": "endTime"
         },
         {
           "fieldId": "COMPETITOR_LIST_PRODUCT_NAME",
           "fieldName": "Product Name          ",
-          "fieldValue": ""
+          "fieldValue": "productName"
         },
         {
           "fieldId": "COMPETITOR_LIST_MOBILE_NO",
           "fieldName": "MOBILE NO",
-          "fieldValue": ""
+          "fieldValue": "mobileNumber"
         },
         {
           "fieldId": "COMPETITOR_LIST_PRICE_MRP",
           "fieldName": "PRICE MRP",
-          "fieldValue": ""
+          "fieldValue": "schemePrice"
         }
         ,
         {
           "fieldId": "COMPETITOR_LIST_COMPETITOR_NAME",
           "fieldName": "COMPETITOR_NAME",
-          "fieldValue": ""
+          "fieldValue": "competitorName"
         }
       ]
     },
     {
-      "actionId": "NAV_COMPETITOR_ADD",
+      "actionId": "ACTION_COMPETITOR_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "parentGroup": [
@@ -59,7 +59,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_COMPETITOR_EDIT",
+      "actionId": "ACTION_COMPETITOR_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "parentGroup": [
@@ -68,7 +68,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_COMPETITOR_DELETE",
+      "actionId": "ACTION_COMPETITOR_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "parentGroup": [

@@ -6,7 +6,7 @@
   ],
   "moduleAction": [
     {
-      "actionId": "NAV_CHANNEL_CATEGORY_LIST",
+      "actionId": "ACTION_CHANNEL_CATEGORY_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "parentGroup": [],
@@ -14,12 +14,12 @@
         {
           "fieldId": "CATEGORY_LIST_CHANNEL_CATEGORY_NAME",
           "fieldName": "Channel Category Name",
-          "fieldValue": ""
+          "fieldValue": "channelCategory"
         }
       ]
     },
     {
-      "actionId": "NAV_CHANNEL_CATEGORY_ADD",
+      "actionId": "ACTION_CHANNEL_CATEGORY_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "parentGroup": [
@@ -28,7 +28,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_CHANNEL_CATEGORY_EDIT",
+      "actionId": "ACTION_CHANNEL_CATEGORY_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "parentGroup": [
@@ -37,7 +37,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_CHANNEL_CATEGORY_DELETE",
+      "actionId": "ACTION_CHANNEL_CATEGORY_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "parentGroup": [

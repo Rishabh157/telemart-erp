@@ -1,0 +1,69 @@
+{
+  "moduleId": "NAV_CARTON_BOX",
+  "moduleName": "NAV_CARTON_BOX",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_CARTON_BOX_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "CARTON_BOX_LIST_BOX_NAME",
+          "fieldName": "Box Name",
+          "fieldValue": "boxName"
+        },
+        {
+          "fieldId": "CARTON_BOX_LIST_INNER_ITEMS_COUNT",
+          "fieldName": "Inner Items Count",
+          "fieldValue": "innerItemCount"
+        },
+        {
+          "fieldId": "CARTON_BOX_LIST_DIMENSIONS",
+          "fieldName": "Dimensions",
+          "fieldValue": "dimension"
+        },
+        {
+          "fieldId": "CARTON_BOX_LIST_BOX_WEIGHT",
+          "fieldName": "Box Weight",
+          "fieldValue": "boxWeight"
+        },
+        {
+          "fieldId": "CARTON_BOX_LIST_PRODUCT_GROUP",
+          "fieldName": "Product Group",
+          "fieldValue": "productGroupLabel"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_CARTON_BOX_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_CARTON_BOX_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_CARTON_BOX_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

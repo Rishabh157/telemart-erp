@@ -4,14 +4,5 @@
   "parentGroup": [
     ""
   ],
-  "moduleAction": [
-    {
-      "actionId": "NAV_SLOT_MANAGEMENT_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "parentGroup": [],
-      "fields": []
-    }
-    
-  ]
+  "moduleAction": []
 }
