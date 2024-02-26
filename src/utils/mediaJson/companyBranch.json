@@ -1,26 +1,31 @@
 {
-  "moduleId": "NAV_CHANNEL_CATEGORY",
-  "moduleName": "NAV_CHANNEL_CATEGORY",
+  "moduleId": "NAV_COMPANY_BRANCH",
+  "moduleName": "NAV_COMPANY_BRANCH",
   "parentGroup": [
-"NAV_MEDIA"
+    "NAV_CONFIGURATION"
   ],
   "moduleAction": [
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_LIST",
+      "actionId": "ACTION_COMPANY_BRANCH_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
         {
-          "fieldId": "CATEGORY_LIST_CHANNEL_CATEGORY_NAME",
-          "fieldName": "Channel Category Name",
-          "fieldValue": "channelCategory"
+          "fieldId": "COMPANY_BRANCH_LIST_COMAPNY_NAME",
+          "fieldName": "Company Name",
+          "fieldValue": "companyLabel"
+        },
+        {
+          "fieldId": "COMPANY_BRANCH_LIST_BRANCH_NAME",
+          "fieldName": "Branch Name",
+          "fieldValue": "branchName"
         }
       ]
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_ADD",
+      "actionId": "ACTION_COMPANY_BRANCH_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "compulsoryFields" : [],
@@ -30,7 +35,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_EDIT",
+      "actionId": "ACTION_COMPANY_BRANCH_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "compulsoryFields" : [],
@@ -40,7 +45,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_DELETE",
+      "actionId": "ACTION_COMPANY_BRANCH_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "compulsoryFields" : [],

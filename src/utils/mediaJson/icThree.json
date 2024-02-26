@@ -1,0 +1,81 @@
+{
+  "moduleId": "NAV_IC_THREE",
+  "moduleName": "NAV_IC_THREE",
+  "parentGroup": ["NAV_DISPOSITION"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_IC_THREE_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "IC_THREE_LIST_INITIAL_CALL_THREE",
+          "fieldName": "Initial Call Three",
+          "fieldValue": "initialCallName"
+        },
+        {
+          "fieldId": "IC_THREE_LIST_CALL_TYPE",
+          "fieldName": "Call Type",
+          "fieldValue": "callType"
+        },
+        {
+          "fieldId": "IC_THREE_LIST_INITIAL_CALL_ONE",
+          "fieldName": "Initial Call One",
+          "fieldValue": "initialCallOneLabel"
+        },
+        {
+          "fieldId": "IC_THREE_LIST_INITIAL_CALL_TWO",
+          "fieldName": "Initial Call Two",
+          "fieldValue": "initialCallTwoLabel"
+        },
+        {
+          "fieldId": "IC_THREE_LIST_INITIAL_CANCEL_FLAG",
+          "fieldName": "cancel flag",
+          "fieldValue": "cancelFlag"
+        },
+        {
+          "fieldId": "IC_THREE_LIST_INITIAL_CANCEL_PND",
+          "fieldName": "PND",
+          "fieldValue": "isPnd"
+        },
+        {
+          "fieldId": "IC_THREE_LIST_STATUS",
+          "fieldName": "Status",
+          "fieldValue": "isActive"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_IC_THREE_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_IC_THREE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_IC_THREE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

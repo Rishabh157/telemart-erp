@@ -1,26 +1,34 @@
 {
-  "moduleId": "NAV_CHANNEL_CATEGORY",
-  "moduleName": "NAV_CHANNEL_CATEGORY",
-  "parentGroup": [
-"NAV_MEDIA"
-  ],
+  "moduleId": "NAV_IC_ONE",
+  "moduleName": "NAV_IC_ONE",
+  "parentGroup": ["NAV_DISPOSITION"],
   "moduleAction": [
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_LIST",
+      "actionId": "ACTION_IC_ONE_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
         {
-          "fieldId": "CATEGORY_LIST_CHANNEL_CATEGORY_NAME",
-          "fieldName": "Channel Category Name",
-          "fieldValue": "channelCategory"
+          "fieldId": "IC_ONE_LIST_INITIAL_CALL_NAME",
+          "fieldName": "initial Call Name",
+          "fieldValue": "initialCallName"
+        },
+        {
+          "fieldId": "IC_ONE_LIST_CALL_TYPE",
+          "fieldName": "Call Type",
+          "fieldValue": "callType"
+        },
+        {
+          "fieldId": "IC_ONE_LIST_STATUS",
+          "fieldName": "Status",
+          "fieldValue": "isActive"
         }
       ]
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_ADD",
+      "actionId": "ACTION_IC_ONE_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "compulsoryFields" : [],
@@ -30,7 +38,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_EDIT",
+      "actionId": "ACTION_IC_ONE_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "compulsoryFields" : [],
@@ -40,7 +48,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_DELETE",
+      "actionId": "ACTION_IC_ONE_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "compulsoryFields" : [],

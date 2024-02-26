@@ -1,0 +1,55 @@
+{
+    "moduleId": "NAV_ASR",
+    "moduleName": "NAV_ASR",
+    "parentGroup": [],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_ASR_LIST",
+            "actionUrl": "/asr",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "ASR_LIST_NAME",
+                    "fieldName": "Item Name",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "ASR_LIST_QUANTITY",
+                    "fieldName": "Quantity",
+                    "fieldValue": "quantity"
+                },
+                {
+                    "fieldId": "ASR_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "completed"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_ASR_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ASR_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ASR_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

@@ -1,26 +1,34 @@
 {
-  "moduleId": "NAV_CHANNEL_CATEGORY",
-  "moduleName": "NAV_CHANNEL_CATEGORY",
-  "parentGroup": [
-"NAV_MEDIA"
-  ],
+  "moduleId": "NAV_WEBSITES",
+  "moduleName": "NAV_WEBSITES",
+  "parentGroup": ["NAV_ALL_WEBSITE"],
   "moduleAction": [
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_LIST",
+      "actionId": "ACTION_WEBSITES_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
         {
-          "fieldId": "CATEGORY_LIST_CHANNEL_CATEGORY_NAME",
-          "fieldName": "Channel Category Name",
-          "fieldValue": "channelCategory"
+          "fieldId": "WEBSITES_LIST_WEBSITES_NAME",
+          "fieldName": "Website Name",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "WEBSITES_LIST_GA_TAG",
+          "fieldName": "GA Tag",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "WEBSITES_LIST_URL",
+          "fieldName": "URL",
+          "fieldValue": ""
         }
       ]
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_ADD",
+      "actionId": "ACTION_WEBSITES_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "compulsoryFields" : [],
@@ -30,7 +38,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_EDIT",
+      "actionId": "ACTION_WEBSITES_ONE_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "compulsoryFields" : [],
@@ -40,7 +48,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_CATEGORY_DELETE",
+      "actionId": "ACTION_WEBSITES_ONE_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "compulsoryFields" : [],

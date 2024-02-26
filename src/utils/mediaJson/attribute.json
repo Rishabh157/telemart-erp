@@ -1,45 +1,47 @@
 {
-  "moduleId": "NAV_ARTIST",
-  "moduleName": "NAV_ARTIST",
-  "parentGroup": [
-    "NAV_MEDIA"
-  ],
+  "moduleId": "NAV_ATTRIBUTE",
+  "moduleName": "NAV_ATTRIBUTE",
+  "parentGroup": ["NAV_CONFIGURATION"],
   "moduleAction": [
     {
-      "actionId": "ACTION_ARTIST_LIST",
+      "actionId": "ACTION_ATTRIBUTE_LIST",
       "actionUrl": "",
       "actionName": "LIST",
+      "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
         {
-          "fieldId": "ARTIST_LIST_ARTIST_NAME",
-          "fieldName": "ARTIST NAME",
-          "fieldValue": "artistName"
+          "fieldId": "ATTRIBUTE_LIST_ATTRIBUTE_NAME",
+          "fieldName": "Attribute Name",
+          "fieldValue": "attributeName"
         }
       ]
     },
     {
-      "actionId": "ACTION_ARTIST_ADD",
+      "actionId": "ACTION_ATTRIBUTE_ADD",
       "actionUrl": "",
       "actionName": "ADD",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],
       "fields": []
     },
     {
-      "actionId": "ACTION_ARTIST_EDIT",
+      "actionId": "ACTION_ATTRIBUTE_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],
       "fields": []
     },
     {
-      "actionId": "NAV_ARTIST_DELETE",
+      "actionId": "ACTION_ATTRIBUTE_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],

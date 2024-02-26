@@ -1,0 +1,76 @@
+{
+  "moduleId": "NAV_PRODUCT_GROUP",
+  "moduleName": "NAV_PRODUCT_GROUP",
+  "parentGroup": ["NAV_CONFIGURATION"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_PRODUCT_GROUP_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "PRODUCT_GROUP_LIST_PRODUCT_GROUP_NAME",
+          "fieldName": "Group Name",
+          "fieldValue": "groupName"
+        },
+        {
+          "fieldId": "PRODUCT_GROUP_LIST_DEALER_SALE_PRICE",
+          "fieldName": "Dealer Sale Price",
+          "fieldValue": "dealerSalePrice"
+        },
+        {
+          "fieldId": "PRODUCT_GROUP_LIST_SATE_GST",
+          "fieldName": "Sate GST",
+          "fieldValue": "sgst"
+        },
+        {
+          "fieldId": "PRODUCT_GROUP_LIST_CENTER_GST",
+          "fieldName": "Center GST",
+          "fieldValue": "cgst"
+        },
+        {
+          "fieldId": "PRODUCT_GROUP_LIST_INTEGRATED_GST",
+          "fieldName": "Integated GST",
+          "fieldValue": "igst"
+        },
+        {
+          "fieldId": "PRODUCT_GROUP_LIST_UNION_TERRITORY",
+          "fieldName": "Union Territory",
+          "fieldValue": "utgst"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_PRODUCT_GROUP_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_PRODUCT_GROUP_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_PRODUCT_GROUP_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

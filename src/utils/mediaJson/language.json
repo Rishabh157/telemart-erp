@@ -1,47 +1,52 @@
 {
-  "moduleId": "NAV_CHANNEL_GROUP",
-  "moduleName": "NAV_CHANNEL_GROUP",
+  "moduleId": "NAV_LANGUAGE",
+  "moduleName": "NAV_LANGUAGE",
   "parentGroup": [
-    "NAV_MEDIA"
+    "NAV_CONFIGURATION"
   ],
   "moduleAction": [
     {
-      "actionId": "ACTION_CHANNEL_GROUP_LIST",
+      "actionId": "ACTION_LANGUAGE_LIST",
       "actionUrl": "",
       "actionName": "LIST",
       "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
-      
         {
-          "fieldId": "CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME",
-          "fieldName": "Channel Group Name",
-          "fieldValue": "groupName"
+          "fieldId": "LANGUAGE_LIST_LANGUAGE",
+          "fieldName": "LANGUAGE",
+          "fieldValue": "languageName"
         }
       ]
     },
     {
-      "actionId": "ACTION_CHANNEL_GROUP_ADD",
+      "actionId": "ACTION_LANGUAGE_ADD",
       "actionUrl": "",
       "actionName": "ADD",
       "compulsoryFields" : [],
-      "parentGroup": [ "LIST"],
+      "parentGroup": [
+        "LIST"
+      ],
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_GROUP_EDIT",
+      "actionId": "ACTION_LANGUAGE_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "compulsoryFields" : [],
-      "parentGroup": [ "LIST"],
+      "parentGroup": [
+        "LIST"
+      ],
       "fields": []
     },
     {
-      "actionId": "ACTION_CHANNEL_GROUP_DELETE",
+      "actionId": "ACTION_LANGUAGE_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "compulsoryFields" : [],
-      "parentGroup": [ "LIST"],
+      "parentGroup": [
+        "LIST"
+      ],
       "fields": []
     }
   ]
