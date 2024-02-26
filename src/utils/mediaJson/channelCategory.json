@@ -1,0 +1,49 @@
+{
+  "moduleId": "NAV_CHANNEL_CATEGORY",
+  "moduleName": "NAV_CHANNEL_CATEGORY",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_CHANNEL_CATEGORY_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "CATEGORY_LIST_CHANNEL_CATEGORY_NAME",
+          "fieldName": "Channel Category Name",
+          "fieldValue": "channelCategory"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_CHANNEL_CATEGORY_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_CHANNEL_CATEGORY_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_CHANNEL_CATEGORY_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

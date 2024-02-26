@@ -298,15 +298,7 @@ const PageRoutes = () => {
                     {/* Page not found */}
                     <Route path="*" element={<PageNotFound />} />
                     {/* Dashboard */}
-                    <Route
-                        path="/dashboard"
-                        element={
-                            <AuthenticationHOC
-                                component={<DashboardWrappper />}
-                                moduleName={UserModuleNameTypes.dashboard}
-                            />
-                        }
-                    />
+                    <Route path="/dashboard" element={<DashboardWrappper />} />
                     {/* Profile */}
                     <Route path="/profile" element={<ProfileWrappper />} />
 

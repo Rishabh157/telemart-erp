@@ -16,7 +16,7 @@ import ViewBarcodeWrapper from './configuration/ConfigurationScreens/barcode/vie
 import AddCartonBoxWrapper from './configuration/ConfigurationScreens/cartonBox/add/AddCartonBoxWrapper'
 import CartonBoxListingWrapper from './configuration/ConfigurationScreens/cartonBox/list/CartonBoxListingWrapper'
 import AddCompanyWrapper from './configuration/ConfigurationScreens/configurationCompany/add/AddCompanyWrapper'
-import ConfigurationCompanyListingWrapper from './configuration/ConfigurationScreens/configurationCompany/list/ConfigurationCompanyListingWrapper'
+import ConfigurationCompanyListingWrapper from './configuration/ConfigurationScreens/configurationCompany/list/CompanyListingWrapper'
 import AddDealersCategoryWrapper from './configuration/ConfigurationScreens/dealersCategory/add/AddDealersCategoryWrapper'
 import DealersCategoryListingWrapper from './configuration/ConfigurationScreens/dealersCategory/list/DealersCategoryListingWrapper'
 import AddGRNWrapper from './grn/add/AddGRNWrapper'
