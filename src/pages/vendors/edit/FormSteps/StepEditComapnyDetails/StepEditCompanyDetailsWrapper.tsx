@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:StepEditCompanyDeatilsWrapper.tsx
 // Type: Edit Component
-// Last Updated: JULY 04, 2023
+// Last Updated: FEB 26, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -15,28 +15,15 @@ import { FormikProps } from 'formik'
 import { Field } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditVendorWrapper'
 import StepEditComapnyDetails from './StepEditComapnyDetails'
+import {
+    companyTypeOptions,
+    ownershipTypeOptions,
+} from 'src/utils/constants/customeTypes'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
 }
-
-const companyTypeOptions = [
-    { label: 'Private Limited Company', value: 'Private Limited Company' },
-    { label: 'Public Limited Company', value: 'Public Limited Company' },
-    { label: 'Partnerships Company', value: 'Partnerships Company' },
-    {
-        label: 'Limited Liability Partnership',
-        value: 'Limited Liability Partnership',
-    },
-    { label: 'One Person Company', value: 'One Person Company' },
-    { label: 'Sole Proprietorship', value: 'Sole Proprietorship' },
-    { label: 'Section 8 Company', value: 'Section 8 Company' },
-]
-const ownershipTypeOptions = [
-    { label: 'Partnership', value: 'partnership' },
-    { label: 'Single', value: 'single' },
-]
 
 const formFields: Field<'companyTypeOptions' | 'ownershipTypeOptions'>[] = [
     {
@@ -72,18 +59,16 @@ const formFields: Field<'companyTypeOptions' | 'ownershipTypeOptions'>[] = [
 
 const StepEditCompanyDetailsWrapper = ({ formikProps }: Props) => {
     const dropdownOptions = {
-        companyTypeOptions,
-        ownershipTypeOptions,
+        companyTypeOptions: companyTypeOptions(),
+        ownershipTypeOptions: ownershipTypeOptions(),
     }
 
     return (
-        <>
-            <StepEditComapnyDetails
-                formikProps={formikProps}
-                dropdownOptions={dropdownOptions}
-                formFields={formFields}
-            />
-        </>
+        <StepEditComapnyDetails
+            formikProps={formikProps}
+            dropdownOptions={dropdownOptions}
+            formFields={formFields}
+        />
     )
 }
 
