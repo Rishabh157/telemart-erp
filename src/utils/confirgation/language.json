@@ -1,0 +1,49 @@
+{
+  "moduleId": "NAV_LANGUAGE",
+  "moduleName": "NAV_LANGUAGE",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_LANGUAGE_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "LANGUAGE_LIST_LANGUAGE",
+          "fieldName": "LANGUAGE",
+          "fieldValue": "languageName"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_LANGUAGE_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_LANGUAGE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_LANGUAGE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

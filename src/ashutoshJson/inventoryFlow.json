@@ -1,0 +1,13 @@
+{
+    "moduleId": "NAV_INVENTORY_FLOW",
+    "moduleName": "NAV_INVENTORY_FLOW",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_INVENTORY_FLOW",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

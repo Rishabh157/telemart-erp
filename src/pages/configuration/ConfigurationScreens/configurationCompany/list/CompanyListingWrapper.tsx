@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ConfigurationCompanyListResponse } from 'src/models/ConfigurationCompany.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import ConfigurationCompanyListing from './ConfigurationCompanyListing'
+import ConfigurationCompanyListing from './CompanyListing'
 import {
     useDeleteCompanyMutation,
     useGetCompaniesQuery,
