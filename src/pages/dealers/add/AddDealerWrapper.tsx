@@ -183,7 +183,7 @@ const steps = [
         validationSchema: object({
             document: object().shape({
                 gstNumber: string()
-                .matches(validationofGst, 'gst number must be valid'),
+                    .matches(validationofGst, 'gst number must be valid'),
                 // .required('GST number is required'),
                 // gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
