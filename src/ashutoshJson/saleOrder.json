@@ -1,0 +1,85 @@
+{
+    "moduleId": "NAV_SALE_ORDER",
+    "moduleName": "NAV_SALE_ORDER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_SALE_ORDER",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "SALE_ORDER_LIST_SO_NUMBER",
+                    "fieldName": "So Number",
+                    "fieldValue": "soNumber"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_DEALER_NAME",
+                    "fieldName": "Dealer",
+                    "fieldValue": "dealerLabel"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_STATE",
+                    "fieldName": "State",
+                    "fieldValue": "warehouseStateLabel"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_ITEM_QUANTITY",
+                    "fieldName": "Item Quantity",
+                    "fieldValue": "groupName"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_DH_APPROVED_STATUS",
+                    "fieldName": "DH Approved Status",
+                    "fieldValue": "dhApproved"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_DH_APPROVED_BY",
+                    "fieldName": "DH Approved By",
+                    "fieldValue": "dhApprovedActionBy"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_DH_APPROVED_DATE",
+                    "fieldName": "DH Approved Date",
+                    "fieldValue": "dhApprovedAt"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS",
+                    "fieldName": "Acc Approved Status",
+                    "fieldValue": "accApproved"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_ACCOUNT_APPROVED_BY",
+                    "fieldName": "Acc Approved By",
+                    "fieldValue": "accApprovedActionBy"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_APPROVAL",
+                    "fieldName": "APPROVAL",
+                    "fieldValue": "accApproved"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_SALE_ORDER_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_SALE_ORDER_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_SALE_ORDER_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}
