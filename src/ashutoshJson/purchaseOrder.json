@@ -1,0 +1,87 @@
+{
+    "moduleId": "NAV_PURCHASE_ORDER",
+    "moduleName": "NAV_PURCHASE_ORDER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_PURCHASE_ORDER_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_PO_CODE",
+                    "fieldName": "PO Code",
+                    "fieldValue": "poCode"
+                },
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_ITEM_NAME",
+                    "fieldName": "Item Name",
+                    "fieldValue": "purchaseOrder"
+                },
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_QUANTITY",
+                    "fieldName": "Quantity",
+                    "fieldValue": "purchaseOrder"
+                },
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_RECIEVED_QUANTITY",
+                    "fieldName": "Recieved Quantity",
+                    "fieldValue": "purchaseOrder"
+                },
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_RATE",
+                    "fieldName": "rate",
+                    "fieldValue": "purchaseOrder"
+                },
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_VENDOR",
+                    "fieldName": "Vendor",
+                    "fieldValue": "vendorLabel"
+                },
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_WAREHOUSE",
+                    "fieldName": "ware house",
+                    "fieldValue": "warehouseLabel"
+                },
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_ESTIMATION_DELIVERY_DATE",
+                    "fieldName": "Est. Delivery Date",
+                    "fieldValue": "purchaseOrder"
+                },
+                {
+                    "fieldId": "PURCHASE_ORDER_LIST_APPROVAL_LEVEL",
+                    "fieldName": "Approval level",
+                    "fieldValue": "isConfirmed"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_PURCHASE_ORDER_VIEW",
+            "actionUrl": "",
+            "actionName": "VIEW",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_PURCHASE_ORDER_GENRATE_GRN",
+            "actionUrl": "",
+            "actionName": "GENERATE_GRN",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_PURCHASE_ORDER_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_PURCHASE_ORDER_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

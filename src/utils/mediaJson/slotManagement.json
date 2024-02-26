@@ -1,0 +1,79 @@
+{
+  "moduleId": "NAV_SLOT_MANAGEMENT",
+  "moduleName": "NAV_SLOT_MANAGEMENT",
+  "parentGroup": [
+    ""
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_SLOT_MANAGEMENT_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "SLOT_MANAGEMENT_LIST_SLOT_NAME",
+          "fieldName": "SLOT NAME",
+          "fieldValue": "slotName"
+        },
+        {
+          "fieldId": "SLOT_MANAGEMENT_LIST_CHANNEL_GROUP",
+          "fieldName": "Channel GROUP",
+          "fieldValue": "groupNameLabel"
+        },
+        {
+          "fieldId": "SLOT_MANAGEMENT_LIST_CHANNEL_NAME",
+          "fieldName": "Channel NAME",
+          "fieldValue": "channelLabel"
+        },
+        {
+          "fieldId": "SLOT_MANAGEMENT_LIST_TAPE_NAME",
+          "fieldName": "TAPE NAME",
+          "fieldValue": "tapeLabel"
+        },
+        {
+          "fieldId": "SLOT_MANAGEMENT_LIST_START_TIME",
+          "fieldName": "START TIME",
+          "fieldValue": "slotStartTime"
+        },
+        {
+          "fieldId": "SLOT_MANAGEMENT_LIST_END_TIME",
+          "fieldName": "END TIME",
+          "fieldValue": "slotEndTime"
+        },
+        {
+          "fieldId": "SLOT_MANAGEMENT_LIST_PAUSE_PLAY",
+          "fieldName": "PAUSE_PLAY",
+          "fieldValue": "pausePlay"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_SLOT_MANAGEMENT_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_SLOT_MANAGEMENT_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_SLOT_MANAGEMENT_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

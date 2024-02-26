@@ -1,0 +1,13 @@
+{
+    "moduleId": "NAV_CUSTOMER_COMPLAIN",
+    "moduleName": "NAV_CUSTOMER_COMPLAIN",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_WAREHOUSE_TRANSFER_VIEW",
+            "actionUrl": "",
+            "actionName": "VIEW",
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

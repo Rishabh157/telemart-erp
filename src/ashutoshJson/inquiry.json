@@ -1,0 +1,44 @@
+{
+    "moduleId": "NAV_INQUIRY",
+    "moduleName": "NAV_INQUIRY",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_NAV_INQUIRY_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "NAV_INQUIRY_LIST_INQUIRY_NUMBER",
+                    "fieldName": "Inquiry No",
+                    "fieldValue": "inquiryNumber"
+                },
+                {
+                    "fieldId": "NAV_INQUIRY_LIST_DID_NUMBER",
+                    "fieldName": "DID No",
+                    "fieldValue": "didNo"
+                },
+                {
+                    "fieldId": "NAV_INQUIRY_LIST_MOBILE_NUMBER",
+                    "fieldName": "Mobile No",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "NAV_INQUIRY_LIST_",
+                    "fieldName": "Delivery Charges",
+                    "fieldValue": "deliveryCharges"
+                },
+                {
+                    "fieldId": "NAV_INQUIRY_LIST_DISCOUNT",
+                    "fieldName": "Discount",
+                    "fieldValue": "discount"
+                },
+                {
+                    "fieldId": "NAV_INQUIRY_LIST_TOTAL",
+                    "fieldName": "Total",
+                    "fieldValue": "total"
+                }
+            ]
+        }
+    ]
+}

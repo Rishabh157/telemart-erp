@@ -138,7 +138,6 @@ const steps = [
                     landLine: string()
                         .max(10, 'Mobile Number must be 10 characters')
                         .min(10, 'Mobile Number must be 10 digits')
-                        .required('Landline is required'),
                 })
             ),
         }),

@@ -29,7 +29,7 @@ type Props = {
     dateTimeFormat?: string
     labelClass?: string
     minDate?: any | null
-    inputSize? : string
+    inputSize?: string
 }
 
 const ATMDatePicker = ({
@@ -44,7 +44,7 @@ const ATMDatePicker = ({
     labelClass = 'font-medium text-sm',
     dateTimeFormat = 'MM/DD/YYYY',
     minDate,
-    inputSize = '16px'
+    inputSize = '16px',
 }: Props) => {
     return (
         <div className="relative">
@@ -65,7 +65,7 @@ const ATMDatePicker = ({
                     <DesktopDatePicker
                         disabled={disabled}
                         inputFormat={dateTimeFormat}
-                        value={value}
+                        value={value ? value : null}
                         onChange={onChange}
                         minDate={minDate}
                         showDaysOutsideCurrentMonth
@@ -80,7 +80,8 @@ const ATMDatePicker = ({
                                         height: inputSize, // Adjust the height as needed
                                         // Add any other necessary input styles here
                                     },
-                                    value: params?.inputProps?.value, // Preserve the value
+                                    value: params?.inputProps?.value,
+                                    //    / Preserve the value
                                     onChange: params?.inputProps?.onChange, // Preserve the onChange event
                                 }}
                             />

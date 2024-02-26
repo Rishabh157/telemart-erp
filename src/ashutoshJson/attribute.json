@@ -1,0 +1,47 @@
+{
+  "moduleId": "NAV_ATTRIBUTE",
+  "moduleName": "NAV_ATTRIBUTE",
+  "parentGroup": [],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_ATTRIBUTE_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "ATTRIBUTE_LIST_ATTRIBUTE_NAME",
+          "fieldName": "Attribute Name",
+          "fieldValue": "attributeName"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_ATTRIBUTE_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ATTRIBUTE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ATTRIBUTE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}
