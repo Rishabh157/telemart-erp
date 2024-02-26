@@ -23,6 +23,7 @@ import {
     useDeleteDealerMutation,
     useGetDealersQuery,
     useApproveDealerStatusMutation,
+    useChangeDealerStatusMutation,
 } from 'src/services/DealerServices'
 import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
@@ -52,16 +53,35 @@ const DealersListingWrapper = () => {
     const navigate = useNavigate()
     const [deletedealer] = useDeleteDealerMutation()
     const [approveDealer] = useApproveDealerStatusMutation()
+    const [changeStatusActiveDeactive] = useChangeDealerStatusMutation()
 
     const { page, rowsPerPage, items, searchValue } = dealerState
     const dispatch = useDispatch<AppDispatch>()
 
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)
-        approveDealer(rowId).then((res: any) => {
+        changeStatusActiveDeactive(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Status changed successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
+    const handleApproval = (rowId: string) => {
+        setShowDropdown(false)
+        approveDealer(rowId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Approvaled successfully!')
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -152,7 +172,7 @@ const DealersListingWrapper = () => {
                                 //         showCancelButton: true,
                                 //         next: (res) => {
                                 //             return res.isConfirmed
-                                //                 ? handleDeactive(row?._id)
+                                //                 ? handleApproval(row?._id)
                                 //                 : setShowDropdown(false)
                                 //         },
                                 //     })
@@ -176,7 +196,7 @@ const DealersListingWrapper = () => {
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
-                                                ? handleDeactive(row?._id)
+                                                ? handleApproval(row?._id)
                                                 : setShowDropdown(false)
                                         },
                                     })
@@ -192,23 +212,64 @@ const DealersListingWrapper = () => {
                 )
             },
         },
+
         {
-            field: 'isActive',
+            field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: DealersListResponse) => {
+            renderCell: (row: any) => {
                 return (
-                    <span>
-                        {' '}
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
                         {row.isActive ? (
-                            <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive User',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Active"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
                         ) : (
-                            <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
-                        )}{' '}
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive Scheme',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Deactive"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
                     </span>
                 )
             },
         },
+
         {
             field: 'actions',
             headerName: 'Actions',
