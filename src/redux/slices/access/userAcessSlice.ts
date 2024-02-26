@@ -31,6 +31,7 @@ export interface moduleActionTypes {
 export interface ModulesTypes {
     moduleId: string
     moduleName: string
+    parentGroup:string[]
     moduleAction: moduleActionTypes[]
 }
 
