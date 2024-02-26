@@ -147,8 +147,10 @@ const steps = [
         label: 'Document',
         component: StepEditDocumentsWrapper,
         validationSchema: object({
-            gst_no: string()
-                .matches(validationofGst, 'gst number must be valid'),
+            gst_no: string().matches(
+                validationofGst,
+                'gst number must be valid'
+            ),
             gst_certificate: string()
                 // .url('GST Certificate must be valid URL')
                 .required('GST certificate is required'),

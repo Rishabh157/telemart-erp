@@ -287,33 +287,6 @@ const SaleOrderListingWrapper = () => {
                 return <span> {row?.accApprovedActionBy} </span>
             },
         },
-        // {
-        //     field: 'accApprovedAt',
-        //     headerName: 'Account Approved Date',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     align: 'center',
-        //     renderCell: (row: SaleOrderListResponseTypes) => {
-        //         return <span> {row?.accApprovedAt} </span>
-        //     },
-        // },
-        // {
-        //     field: 'createdAt',
-        //     headerName: 'Inserted Date',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     renderCell: (row: SaleOrderListResponseTypes) => {
-        //         return <span> {formatedDateTimeIntoIst(row?.createdAt) || '-'} </span>
-        //     },
-        // },
-        // {
-        //     field: 'updatedAt',
-        //     headerName: 'Updated Date',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     renderCell: (row: SaleOrderListResponseTypes) => {
-        //         return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
-        //     },
-        // },
         {
             field: 'Approved',
             headerName: 'Approval',

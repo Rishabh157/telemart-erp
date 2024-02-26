@@ -9,7 +9,12 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { RTOTypeOptions, emailTypeOptions, smstypeOptions } from '../add/AddNdrDisposition'
+import {
+    smstypeOptions,
+    emailTypeOptions,
+    rtoTypeOptions,
+    priorityOptions,
+} from 'src/utils/constants/customeTypes'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -33,19 +38,7 @@ const EditNdrDisposition = ({ formikProps, apiStatus }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
-    const priorityOptions = () => {
-        let Opoptions: any = []
-        for (let i = 1; i <= 50; i++) {
-            Opoptions = [
-                ...Opoptions,
-                {
-                    label: i.toString(),
-                    value: i.toString(),
-                },
-            ]
-        }
-        return Opoptions
-    }
+
     return (
         <>
             <div className="">
@@ -96,7 +89,7 @@ const EditNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                                         )
                                     }
                                 />
-                                 <ATMSelectSearchable
+                                <ATMSelectSearchable
                                     options={smstypeOptions()}
                                     name="smsType"
                                     value={values.smsType}
@@ -125,7 +118,7 @@ const EditNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                                     }
                                 />
                                 <ATMSelectSearchable
-                                    options={RTOTypeOptions()}
+                                    options={rtoTypeOptions()}
                                     name="rtoAttempt"
                                     value={values.rtoAttempt}
                                     label="rtoAttempt"

@@ -70,7 +70,7 @@ const VendorsListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.VENDOR_LIST_COMPANY_TYPE,
             renderCell: (row: VendorsListResponse) => (
-                <span> {row.companyType} </span>
+                <span> {row.companyType?.replaceAll('_', ' ')} </span>
             ),
         },
         {

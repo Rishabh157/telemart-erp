@@ -15,6 +15,12 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
+import {
+    smstypeOptions,
+    emailTypeOptions,
+    complaintTypeOptions,
+    returnTypeOptions,
+} from 'src/utils/constants/customeTypes'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -22,10 +28,6 @@ type Props = {
     dropdownoptions: {
         initialCallOneOptions: SelectOption[]
         initialCallTwoOptions?: SelectOption[]
-        complainttypeOptions: SelectOption[]
-        smstypeOptions: SelectOption[]
-        returntypeOptions: SelectOption[]
-        emailTypeOptions: SelectOption[]
     }
 }
 
@@ -152,9 +154,7 @@ const EditInitialCallThree = ({
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                        options={
-                                            dropdownoptions.complainttypeOptions
-                                        }
+                                        options={complaintTypeOptions()}
                                         onChange={(newValue: any) => {
                                             handleSetFieldValue(
                                                 'callType',
@@ -208,7 +208,7 @@ const EditInitialCallThree = ({
                                     }
                                 />
                                 <ATMSelectSearchable
-                                    options={dropdownoptions.returntypeOptions}
+                                    options={returnTypeOptions()}
                                     name="returnType"
                                     required
                                     value={values.returnType}
@@ -220,7 +220,7 @@ const EditInitialCallThree = ({
                                     isAllSelect
                                 />
                                 <ATMSelectSearchable
-                                    options={dropdownoptions.smstypeOptions}
+                                    options={smstypeOptions()}
                                     name="smsType"
                                     required
                                     value={values.smsType}
@@ -231,7 +231,7 @@ const EditInitialCallThree = ({
                                 />
 
                                 <ATMSelectSearchable
-                                    options={dropdownoptions.emailTypeOptions}
+                                    options={emailTypeOptions()}
                                     name="emailType"
                                     required
                                     value={values.emailType}

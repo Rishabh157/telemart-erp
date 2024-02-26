@@ -30,6 +30,7 @@ import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/AT
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import { weekDaysOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Types --|
 type Props = {
@@ -240,36 +241,7 @@ const AddSlotManagement = ({
                                         size="small"
                                         label={'Slot Days'}
                                         isMulti={true}
-                                        options={[
-                                            {
-                                                label: 'Monday',
-                                                value: 'MONDAY',
-                                            },
-                                            {
-                                                label: 'Tuesday',
-                                                value: 'TUESDAY',
-                                            },
-                                            {
-                                                label: 'Wednesday',
-                                                value: 'WEDNESDAY',
-                                            },
-                                            {
-                                                label: 'Thursday',
-                                                value: 'THURSDAY',
-                                            },
-                                            {
-                                                label: 'Friday',
-                                                value: 'FRIDAY',
-                                            },
-                                            {
-                                                label: 'Saturday',
-                                                value: 'SATURDAY',
-                                            },
-                                            {
-                                                label: 'Sunday',
-                                                value: 'SUNDAY',
-                                            },
-                                        ]}
+                                        options={weekDaysOptions()}
                                     />
                                 </div>
                                 <div>
