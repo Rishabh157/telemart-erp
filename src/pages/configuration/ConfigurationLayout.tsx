@@ -29,63 +29,63 @@ import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { ThemeContext } from 'src/App'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const configurationNavigation: NavItemType[] = [
     {
         label: 'Attributes',
         icon: TbAppsFilled,
         path: '/configurations/attributes',
-        name: UserModuleNameTypes.attribute,
+        name: UserModuleNameTypes.NAV_ATTRIBUTE,
     },
     {
         label: 'Attributes Group',
         icon: FaObjectGroup,
         path: '/configurations/attributes-group',
-        name: UserModuleNameTypes.attributeGroup,
+        name: UserModuleNameTypes.NAV_ATTRIBUTE_GROUP,
     },
     {
         label: 'Product Category',
         icon: BiCategory,
         path: '/configurations/product-category',
-        name: UserModuleNameTypes.productCategory,
+        name: UserModuleNameTypes.NAV_PRODUCT_CATEGORY,
     },
     {
         label: 'Product Sub Category',
         icon: MdOutlineCategory,
         path: '/configurations/product-sub-category',
-        name: UserModuleNameTypes.productSubCategory,
+        name: UserModuleNameTypes.NAV_PRODUCT_SUB_CATEGORY,
     },
     {
         label: 'Product Group',
         icon: BsBoxes,
         path: '/configurations/product-group',
-        name: UserModuleNameTypes.productGroup,
+        name: UserModuleNameTypes.NAV_PRODUCT_GROUP,
     },
     {
         label: 'Scheme',
         icon: TfiLayoutMediaOverlayAlt2,
         path: '/configurations/scheme',
-        name: UserModuleNameTypes.scheme,
+        name: UserModuleNameTypes.NAV_SCHEME,
     },
     {
         label: 'Item',
         icon: BiCheckboxSquare,
         path: '/configurations/item',
-        name: UserModuleNameTypes.item,
+        name: UserModuleNameTypes.NAV_ITEMS,
     },
     {
         label: 'Products',
         icon: BsBox,
         path: '/configurations/products',
-        name: UserModuleNameTypes.product,
+        name: UserModuleNameTypes.NAV_PRODUCTS,
     },
     {
         label: 'Carton Box',
         icon: BsBoxSeam,
         path: '/configurations/carton-box',
-        name: UserModuleNameTypes.cartonBox,
+        name: UserModuleNameTypes.NAV_CARTON_BOX,
     },
     // {
     //     label: 'Taxes',
@@ -96,43 +96,43 @@ const configurationNavigation: NavItemType[] = [
         label: 'Company',
         icon: CgOrganisation,
         path: '/configurations/company',
-        name: UserModuleNameTypes.company,
+        name: UserModuleNameTypes.NAV_COMPANY,
     },
     {
         label: 'Company Branch',
         icon: CgOrganisation,
         path: '/configurations/company-branch',
-        name: UserModuleNameTypes.company,
+        name: UserModuleNameTypes.NAV_COMPANY_BRANCH,
     },
     {
         label: 'Barcode',
         icon: CiBarcode,
         path: '/configurations/barcode',
-        name: UserModuleNameTypes.barcode,
+        name: UserModuleNameTypes.NAV_BARCODE,
     },
     {
         label: 'Location',
         icon: CiLocationOn,
         path: '/configurations/location',
-        name: UserModuleNameTypes.locations,
+        name: UserModuleNameTypes.NAV_LOCATION,
     },
     {
         label: 'Language',
         icon: CiFaceSmile,
         path: '/configurations/language',
-        name: UserModuleNameTypes.language,
+        name: UserModuleNameTypes.NAV_LANGUAGE,
     },
     {
         label: 'Dealers Category',
         icon: BiCategoryAlt,
         path: '/configurations/dealers-category',
-        name: UserModuleNameTypes.dealerCategory,
+        name: UserModuleNameTypes.NAV_DEALERS_CATEGORY,
     },
      {
         label: 'Call Center',
         icon: BiCategoryAlt,
         path: '/configurations/callcenter-master',
-        name: UserModuleNameTypes.callCenterMaster,
+        name: UserModuleNameTypes.NAV_CALL_CENTER,
     },
 
     {

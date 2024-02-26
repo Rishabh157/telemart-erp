@@ -30,27 +30,27 @@ import { useLocation, useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { ThemeContext } from 'src/App'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const websitesNavigation: NavItemType[] = [
     {
         label: 'Websites',
         icon: CgWebsite,
         path: '/all-websites/website',
-        name: UserModuleNameTypes.website,
+        name: UserModuleNameTypes.NAV_WEBSITES,
     },
     {
         label: 'Website Blog',
         icon: TbBrandBlogger,
         path: '/all-websites/website-blog',
-        name: UserModuleNameTypes.websiteBlog,
+        name: UserModuleNameTypes.NAV_WEBSITES_BLOG,
     },
     {
         label: 'Websites Page',
         icon: RiPagesLine,
         path: '/all-websites/website-page',
-        name: UserModuleNameTypes.websitePage,
+        name: UserModuleNameTypes.NAV_WEBSITES_PAGES,
     },
     // {
     //     label: 'Influencers Management',
@@ -62,7 +62,7 @@ const websitesNavigation: NavItemType[] = [
         label: 'Websites Tags',
         icon: RiPagesLine,
         path: '/all-websites/website-tags',
-        name: UserModuleNameTypes.websiteTags,
+        name: UserModuleNameTypes.NAV_WEBSITES_TAGS,
     },
 ]
 

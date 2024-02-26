@@ -25,11 +25,6 @@ import {
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -38,6 +33,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const DealersListingWrapper = () => {
     const navigate = useNavigate()
@@ -47,15 +44,13 @@ const DealersListingWrapper = () => {
     const wareHouseState: any = useSelector(
         (state: RootState) => state.warehouse
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
-
+   
     const columns: columnTypes[] = [
         {
             field: 'wareHouseCode',
             headerName: 'Warehouse Code',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_LIST_WAREHOUSE_CODE,
             renderCell: (row: WarehousesListResponse) => (
                 <span> {row.wareHouseCode} </span>
             ),
@@ -64,6 +59,7 @@ const DealersListingWrapper = () => {
             field: 'wareHouseName',
             headerName: 'Warehouse Name',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_LIST_WAREHOUSE_NAME,
             renderCell: (row: WarehousesListResponse) => {
                 return <span> {row.wareHouseName} </span>
             },
@@ -72,6 +68,7 @@ const DealersListingWrapper = () => {
             field: 'wareHouseCountryName',
             headerName: 'Country',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_LIST_COUNTRY,
             renderCell: (row: WarehousesListResponse) => (
                 <span> {row.wareHouseCountryName} </span>
             ),
@@ -80,6 +77,7 @@ const DealersListingWrapper = () => {
             field: 'registrationStateName',
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_LIST_STATE,
             renderCell: (row: WarehousesListResponse) => {
                 return <span> {row.registrationStateName} </span>
             },
@@ -88,6 +86,7 @@ const DealersListingWrapper = () => {
             field: 'registrationDistrictName',
             headerName: 'District',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_LIST_DISTRICT,
             renderCell: (row: WarehousesListResponse) => {
                 return <span> {row.registrationDistrictName} </span>
             },
@@ -96,6 +95,7 @@ const DealersListingWrapper = () => {
             field: 'registrationPincodeName',
             headerName: 'Pincode',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_LIST_PINCODE,
             renderCell: (row: WarehousesListResponse) => {
                 return <span> {row.registrationPincodeName} </span>
             },
@@ -106,10 +106,9 @@ const DealersListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.wareHouse}
-                    isView
-                    isEdit
-                    isDelete
+                    isView={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_VIEW)}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_DELETE)}
                     handleViewActionButton={() => {
                         navigate(
                             `/warehouse/view/${currentId}/warehouse-details`
@@ -197,12 +196,7 @@ const DealersListingWrapper = () => {
             <SideNavLayout>
                 <div className="px-4 h-[calc(100vh-55px)]">
                     <WarehouseListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.wareHouse,
-                            UserModuleActionTypes.List
-                        )}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                         AddpathName="/warehouse/add"

@@ -22,57 +22,57 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { NavItemType } from 'src/navigation'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { ThemeContext } from 'src/App'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const mediaNavigation: NavItemType[] = [
     {
         label: 'Channel Group',
         icon: MdMonitor,
         path: '/media/channel-group',
-        name: UserModuleNameTypes.channelGroup,
+        name: UserModuleNameTypes.NAV_CHANNEL_GROUP,
     },
     {
         label: 'Channel Category',
         icon: BiCategory,
         path: '/media/channel-category',
-        name: UserModuleNameTypes.channelCategory,
+        name: UserModuleNameTypes.NAV_CHANNEL_CATEGORY,
     },
     {
         label: 'Channel Management',
         icon: SiGoogletagmanager,
         path: '/media/channel',
-        name: UserModuleNameTypes.channelManagement,
+        name: UserModuleNameTypes.NAV_CHANNEL_MANAGEMENT,
     },
     {
         label: 'DID Management',
         icon: DiDart,
         path: '/media/did',
-        name: UserModuleNameTypes.didManagement,
+        name: UserModuleNameTypes.NAV_DID_MANAGEMENT,
     },
     {
         label: 'Artist',
         icon: BsPersonHeart,
         path: '/media/artist',
-        name: UserModuleNameTypes.artist,
+        name: UserModuleNameTypes.NAV_ARTIST,
     },
     {
         label: 'Tape Management',
         icon: FaTape,
         path: '/media/tape',
-        name: UserModuleNameTypes.tapeManangement,
+        name: UserModuleNameTypes.NAV_TAPE_MANAGEMENT,
     },
     {
         label: 'Competitor',
         icon: MdEmojiEvents,
         path: '/media/competitor',
-        name: UserModuleNameTypes.competitor,
+        name: UserModuleNameTypes.NAV_COMPETITOR,
     },
     {
         label: 'Slot Management',
         icon: MdViewTimeline,
         path: '/media/slot',
-        name: UserModuleNameTypes.slotManagement,
+        name: UserModuleNameTypes.NAV_SLOT_MANAGEMENT,
     },
     {
         label: 'Inbound',

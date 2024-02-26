@@ -25,11 +25,7 @@ import {
     getDepartmentLabel,
     //getUserRoleLabel,
 } from 'src/utils/GetHierarchyByDept'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
@@ -41,13 +37,12 @@ import {
 import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { items, page, rowsPerPage, searchValue, isActive } = userState
     const [showDropdown, setShowDropdown] = useState(false)
     //const [currentId, setCurrentId] = useState('')
@@ -93,12 +88,14 @@ const UsersListingWrapper = () => {
             field: 'userName',
             headerName: 'User Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.USER_LIST_USER_NAME,
             renderCell: (row: any) => <span> {row.userName}</span>,
         },
         {
             field: 'email',
             headerName: 'Email',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.USER_LIST_EMAIL,
             renderCell: (row: any) => {
                 return <span> {row.email} </span>
             },
@@ -107,16 +104,19 @@ const UsersListingWrapper = () => {
             field: 'mobile',
             headerName: 'Mobile no.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.USER_LIST_MOBILE_NUMBER,
         },
         {
             field: 'branchLabel',
             headerName: 'Branch Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.USER_LIST_BRANCH_NAME,
         },
         {
             field: 'userDepartment',
             headerName: 'User Department',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.USER_LIST_USER_DEPARTMENT,
             renderCell: (row: any) => {
                 return <span> {getDepartmentLabel(row.userDepartment)} </span>
             },
@@ -125,6 +125,7 @@ const UsersListingWrapper = () => {
             field: 'userRole',
             headerName: 'User Role',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.USER_LIST_USER_ROLE,
             renderCell: (row: any) =>
                 row?.userRole !== 'ADMIN' ? (
                     <span
@@ -150,6 +151,7 @@ const UsersListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.USER_LIST_STATUS,
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -158,9 +160,8 @@ const UsersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive User',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -180,9 +181,8 @@ const UsersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive Scheme',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -209,8 +209,7 @@ const UsersListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.user}
-                    isEdit
+                    isEdit={!UserModuleNameTypes.ACTION_USER_EDIT}
                     //isDelete
                     handleEditActionButton={() => {
                         navigate(`/users/${row?._id}`)
@@ -257,14 +256,9 @@ const UsersListingWrapper = () => {
     return (
         <SideNavLayout>
             <UsersListing
-                columns={getAllowedAuthorizedColumns(
-                    checkUserAccess,
-                    columns,
-                    UserModuleNameTypes.user,
-                    UserModuleActionTypes.List
-                )}
+                columns={columns}
                 rows={items}
-                setShowDropdown={() => {}}
+                setShowDropdown={() => { }}
             />
         </SideNavLayout>
     )

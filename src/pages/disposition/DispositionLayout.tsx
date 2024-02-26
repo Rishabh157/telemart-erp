@@ -7,57 +7,57 @@ import { BiChevronsLeft } from 'react-icons/bi'
 import { MdEmojiEvents } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CiMonitor } from 'react-icons/ci'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { ThemeContext } from 'src/App'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const dispositionNavigation: NavItemType[] = [
     {
         label: 'Disposition One',
         icon: CiMonitor,
         path: '/dispositions/disposition-one',
-        name: UserModuleNameTypes.dispositionOne,
+        name: UserModuleNameTypes.NAV_DISPOSITION_ONE,
     },
     {
         label: 'Disposition Two',
         icon: CiMonitor,
         path: '/dispositions/disposition-two',
-        name: UserModuleNameTypes.dispositionTwo,
+        name: UserModuleNameTypes.NAV_DISPOSITION_TWO,
     },
     {
         label: 'Disposition Three',
         icon: CiMonitor,
         path: '/dispositions/disposition-three',
-        name: UserModuleNameTypes.dispositionThree,
+        name: UserModuleNameTypes.NAV_DISPOSITION_THREE,
     },
     {
         label: 'IC-One',
         icon: BsPersonHeart,
         path: '/dispositions/initialcall-one',
-        name: UserModuleNameTypes.initialCallerOne,
+        name: UserModuleNameTypes.NAV_IC_ONE,
     },
     {
         label: 'IC-Two',
         icon: BsPersonHeart,
         path: '/dispositions/initialcall-two',
-        name: UserModuleNameTypes.initialCallerTwo,
+        name: UserModuleNameTypes.NAV_IC_TWO,
     },
     {
         label: 'IC-Three',
         icon: BsPersonHeart,
         path: '/dispositions/initialcall-three',
-        name: UserModuleNameTypes.initialCallerThree,
+        name: UserModuleNameTypes.NAV_IC_THREE,
     },
     {
         label: 'Disposition Complaint',
         icon: MdEmojiEvents,
         path: '/dispositions/disposition-complaint',
-        name: UserModuleNameTypes.dispositionComplaint,
+        name: UserModuleNameTypes.NAV_DISPOSITION_COMPLAINT,
     },
     {
         label: 'NDR Disposition',
         icon: CiMonitor,
         path: '/dispositions/ndr-disposition',
-        name: UserModuleNameTypes.ndrDisposition,
+        name: UserModuleNameTypes.NAV_NDR_DISPOSITION,
     },
 ]
 
