@@ -22,9 +22,6 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InquiryListResponse } from 'src/models'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
 import { useGetInquiryQuery } from 'src/services/InquiryService'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
@@ -38,6 +35,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/inquirySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const InquiryListingWrapper = () => {
     // Hooks
@@ -100,6 +99,7 @@ const InquiryListingWrapper = () => {
             field: 'inquiryNumber',
             headerName: 'Inquiry No',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_INQUIRY_NUMBER,
             renderCell: (row: InquiryListResponse) => (
                 <span className="text-primary-main ">
                     # {row.inquiryNumber}{' '}
@@ -110,6 +110,7 @@ const InquiryListingWrapper = () => {
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_DID_NUMBER,
             renderCell: (row: InquiryListResponse) => (
                 <span> {row.didNo} </span>
             ),
@@ -119,6 +120,7 @@ const InquiryListingWrapper = () => {
             field: 'mobileNo',
             headerName: 'Mobile No',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_MOBILE_NUMBER,
             renderCell: (row: InquiryListResponse) => (
                 <span> {row.mobileNo} </span>
             ),
@@ -128,6 +130,7 @@ const InquiryListingWrapper = () => {
             field: 'deliveryCharges',
             headerName: 'Delivery Charges',
             flex: 'flex-[2_2_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_,
             renderCell: (row: InquiryListResponse) => (
                 <span className="text-primary-main ">
                     {' '}
@@ -139,6 +142,7 @@ const InquiryListingWrapper = () => {
             field: 'discount',
             headerName: 'Discount',
             flex: 'flex-[2_2_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_DISCOUNT,
             renderCell: (row: InquiryListResponse) => (
                 <span className="text-primary-main "> {row.discount} </span>
             ),
@@ -147,6 +151,7 @@ const InquiryListingWrapper = () => {
             field: 'total',
             headerName: 'Total',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_TOTAL,
             renderCell: (row: InquiryListResponse) => (
                 <span className="text-slate-800"> &#8377; {row.total} </span>
             ),
@@ -157,8 +162,7 @@ const InquiryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.inquiry}
-                    isView
+                    isView={isAuthorized(UserModuleNameTypes.ACTION_NAV_INQUIRY_VIEW)}
                     handleViewActionButton={() => {
                         navigate(`/inquiry/view/${currentId}`)
                     }}
@@ -211,15 +215,15 @@ const InquiryListingWrapper = () => {
                         onSearch={(newValue) =>
                             dispatch(setSearchValue(newValue))
                         }
-                        // isFilter
-                        // isRefresh
-                        // onFilterDispatch={() => dispatch(setFilterValue([]))}
+                    // isFilter
+                    // isRefresh
+                    // onFilterDispatch={() => dispatch(setFilterValue([]))}
                     />
 
                     {/* Table */}
                     <div className="grow overflow-auto  ">
                         <ATMTable
-                             columns={columns}
+                            columns={columns}
                             rows={items}
                             // isCheckbox={true}
                             selectedRows={selectedRows}

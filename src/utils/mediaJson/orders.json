@@ -6,430 +6,89 @@
             "actionId": "ACTION_ORDER_ALL_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_ALL_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersAllActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersAllActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersAllActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersAllActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersAllActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersAllActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_FRESH_ORDER_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_FRESH_ORDER_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersFreshActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersFreshActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersFreshActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersFreshActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersFreshActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersFreshActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_APPROVAL_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_APPROVAL_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersApprovedActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersApprovedActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersApprovedActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersApprovedActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersApprovedActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersApprovedActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_DELIVERED_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_DELIVERED_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersDeliveredActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersDeliveredActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersDeliveredActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersDeliveredActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersDeliveredActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersDeliveredActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_DOOR_CANCELLED_LIST",
             "actionUrl": "",
             "actionName": "ORDER_DOOR_CANCELLED_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersDoorCancelledActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersDoorCancelledActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersDoorCancelledActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersDoorCancelledActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersDoorCancelledActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersDoorCancelledActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_HOLD_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_HOLD_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersHoldTabActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersHoldTabActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersHoldTabActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersHoldTabActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersHoldTabActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersHoldTabActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_PSC_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_PSC_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersPscTabActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersPscTabActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersPscTabActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersPscTabActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersPscTabActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersPscTabActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_UNA_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_UNA_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersUnaActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersUnaActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersUnaActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersUnaActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersUnaActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersUnaActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_PND_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_PND_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersPndActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersPndActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersPndActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersPndActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersPndActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersPndActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_URGENT_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_URGENT_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersUrgentActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersUrgentActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersUrgentActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersUrgentActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersUrgentActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersUrgentActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         },
         {
             "actionId": "ACTION_ORDER_NON_ACTION_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_NON_ACTION_TAB",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
-            "fields": [
-                {
-                    "fieldId": "ordersNonActionListId1",
-                    "fieldName": "Order No",
-                    "fieldValue": "orderNumber"
-                },
-                {
-                    "fieldId": "ordersNonActionListId2",
-                    "fieldName": "DID No",
-                    "fieldValue": "didNo"
-                },
-                {
-                    "fieldId": "ordersNonActionListId3",
-                    "fieldName": "Mobile No",
-                    "fieldValue": "mobileNo"
-                },
-                {
-                    "fieldId": "ordersNonActionListId4",
-                    "fieldName": "Delivery Charges",
-                    "fieldValue": "deliveryCharges"
-                },
-                {
-                    "fieldId": "ordersNonActionListId5",
-                    "fieldName": "Discount",
-                    "fieldValue": "discount"
-                },
-                {
-                    "fieldId": "ordersNonActionListId6",
-                    "fieldName": "Total",
-                    "fieldValue": "total"
-                }
-            ]
+            "fields": []
         }
     ]
 }

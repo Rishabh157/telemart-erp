@@ -17,9 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { AssetsRequestListResponse } from 'src/models'
 import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
-import {
     setIsTableLoading,
     setItems,
     setTotalItems,
@@ -34,6 +31,8 @@ import AsstesLayout from '../../AssetsLayout'
 import AssetsRequestListing from './AssetsRequestListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const AssetsRequestWrapper = () => {
     const navigate = useNavigate()
@@ -41,7 +40,7 @@ const AssetsRequestWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteAsset] = useDeleteAssetsRequestMutation()
- 
+
     const columns: columnTypes[] = [
         {
             field: 'assetName',
@@ -50,11 +49,13 @@ const AssetsRequestWrapper = () => {
             renderCell: (row: AssetsRequestListResponse) => (
                 <span>{row?.assetName}</span>
             ),
+            name: UserModuleNameTypes.ASSETS_REQUEST_LIST_ASSETS_REQUEST_NAME,
         },
         {
             field: 'assetcategorieLabel',
             headerName: 'Asset Category',
             flex: 'flex-[1.8_1.8_0%]',
+            name: UserModuleNameTypes.ASSETS_REQUEST_LIST_CATEGORY,
             renderCell: (row: AssetsRequestListResponse) => (
                 <span>{row?.assetcategorieLabel}</span>
             ),
@@ -63,6 +64,7 @@ const AssetsRequestWrapper = () => {
             field: 'quantity',
             headerName: 'Quantity',
             flex: 'flex-[1.8_1.8_0%]',
+            name: UserModuleNameTypes.ASSETS_REQUEST_LIST_QUANTITY,
             renderCell: (row: AssetsRequestListResponse) => (
                 <span>{row?.quantity}</span>
             ),
@@ -71,6 +73,7 @@ const AssetsRequestWrapper = () => {
             field: 'price',
             headerName: 'Price',
             flex: 'flex-[1.8_1.8_0%]',
+            name: UserModuleNameTypes.ASSETS_REQUEST_LIST_PRICE,
             renderCell: (row: AssetsRequestListResponse) => (
                 <span>{row?.price}</span>
             ),
@@ -81,9 +84,8 @@ const AssetsRequestWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.assetRequest}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_REQUEST_ONE_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_REQUEST_ONE_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

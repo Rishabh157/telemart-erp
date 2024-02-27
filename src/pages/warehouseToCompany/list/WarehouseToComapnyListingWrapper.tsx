@@ -26,9 +26,6 @@ import WarehouseToComapnyListing from './WarehouseToComapnyListing'
 
 // |-- Redux --|
 import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
-import {
     setIsTableLoading,
     setItems,
     setTotalItems,
@@ -39,6 +36,8 @@ import {
     useGetPaginationWarehouseToComapnyByGroupQuery,
     useUpdateWarehouseToComapnyApprovalMutation,
 } from 'src/services/WarehouseToComapnyService'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const WarehouseToComapnyListingWrapper = () => {
     const columns: columnTypes[] = [
@@ -46,6 +45,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'wtcNumber',
             headerName: 'WTC Number',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_WAREHOUSE_TO_COMPANY_NUMBER,
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?._id} </span>
             ),
@@ -54,6 +54,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'fromWarehouseLabel',
             headerName: 'From Warehouse',
             flex: 'flex-[0.8_0.8_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FROM_WAREHOUSE,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?.fromWarehouseLabel} </span>
@@ -63,6 +64,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'toCompanyLabel',
             headerName: 'Company Name',
             flex: 'flex-[0.8_0.8_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_COMPANY_NAME,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?.toCompanyLabel} </span>
@@ -72,6 +74,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'toWarehouseLabel',
             headerName: 'To Warehouse',
             flex: 'flex-[0.8_0.8_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_TO_WAREHOUSE,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
                 <span> {row?.toWarehouseLabel} </span>
@@ -81,6 +84,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'items',
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_ITEM_QUANTITY,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
@@ -108,6 +112,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'firstApproved',
             headerName: 'First Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
@@ -115,8 +120,8 @@ const WarehouseToComapnyListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -125,6 +130,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'firstApprovedActionBy',
             headerName: 'First Approved By',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_BY,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {row?.firstApprovedActionBy} </span>
@@ -134,6 +140,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'firstApprovedAt',
             headerName: 'First Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_DATE,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {row?.firstApprovedAt} </span>
@@ -143,6 +150,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'secondApproved',
             headerName: 'Second Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_STATUS,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
@@ -151,8 +159,8 @@ const WarehouseToComapnyListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -161,6 +169,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'secondApprovedActionBy',
             headerName: 'Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_BY,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {row?.secondApprovedActionBy} </span>
@@ -170,6 +179,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_DATE,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {row?.secondApprovedAt} </span>
@@ -179,6 +189,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_INSERTED_DATE,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
@@ -188,6 +199,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'updatedAt',
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_UPDATE_DATE,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
@@ -197,6 +209,7 @@ const WarehouseToComapnyListingWrapper = () => {
             field: 'Approved',
             headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_APPROVAL_LEVEL,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
@@ -340,11 +353,8 @@ const WarehouseToComapnyListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        moduleName={
-                            UserModuleNameTypes.warehouseToCompanyTransfer
-                        }
-                        isEdit
-                        isDelete
+                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_EDIT)}
+                        isDelete={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_DELETE)}
                         handleEditActionButton={() => {
                             navigate(`/warehouse-to-company/edit/${row?._id}`)
                         }}
@@ -494,7 +504,7 @@ const WarehouseToComapnyListingWrapper = () => {
         <>
             <SideNavLayout>
                 <WarehouseToComapnyListing
-                columns={columns}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

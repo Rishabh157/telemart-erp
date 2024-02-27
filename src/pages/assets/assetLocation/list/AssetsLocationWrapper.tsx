@@ -17,9 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { AssetsLocationListResponse } from 'src/models'
 import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
-import {
     setIsTableLoading,
     setItems,
     setTotalItems,
@@ -34,6 +31,8 @@ import AsstesLayout from '../../AssetsLayout'
 import AssetsLocationListing from './AssetsLocationListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const AssetsLocationWrapper = () => {
     const navigate = useNavigate()
@@ -41,7 +40,7 @@ const AssetsLocationWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
- 
+
     const columns: columnTypes[] = [
         {
             field: 'locationName',
@@ -50,6 +49,7 @@ const AssetsLocationWrapper = () => {
             renderCell: (row: AssetsLocationListResponse) => (
                 <span className="capitalize"> {row.locationName} </span>
             ),
+            name: UserModuleNameTypes.ASSETS_LOCATION_LIST_ASSETS_LOCATION_NAME,
         },
 
         {
@@ -58,9 +58,8 @@ const AssetsLocationWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.assetLocation}
-                    isDelete
-                    isEdit
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

@@ -27,13 +27,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/GRNSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import {
-//   setFilterValue,
-//   setIsTableLoading,
-//   setItems,
-//   setSearchValue,
-//   setTotalItems,
-// } from "src/redux/slices/GRNSlice";
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const columns: columnTypes[] = [
     {
@@ -41,11 +35,13 @@ const columns: columnTypes[] = [
         headerName: 'PO Code',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: GRNListResponse) => <span> {row.poCode} </span>,
+        name: UserModuleNameTypes.GRN_LIST_PO_CODE,
     },
     {
         field: 'itemName',
         headerName: 'Item Name',
         flex: 'flex-[1.5_1.5_0%]',
+        name: UserModuleNameTypes.GRN_LIST_ITEM_NAME,
         renderCell: (row: GRNListResponse) => {
             return <span> {row?.itemName} </span>
         },
@@ -54,6 +50,7 @@ const columns: columnTypes[] = [
         field: 'receivedQuantity',
         headerName: 'Received Qnty.',
         flex: 'flex-[1.5_1.5_0%]',
+        name: UserModuleNameTypes.GRN_LIST_RECEVIED_QUANTITY,
         renderCell: (row: GRNListResponse) => {
             return <span> {row?.receivedQuantity} </span>
         },
@@ -62,6 +59,7 @@ const columns: columnTypes[] = [
         field: 'goodQuantity',
         headerName: 'Good Qnty.',
         flex: 'flex-[1.5_1.5_0%]',
+        name: UserModuleNameTypes.GRN_LIST_GOOD_QUANTITY,
         renderCell: (row: GRNListResponse) => {
             return <span> {row.goodQuantity} </span>
         },
@@ -70,6 +68,7 @@ const columns: columnTypes[] = [
         field: 'defectiveQuantity',
         headerName: 'Defective Qnty.',
         flex: 'flex-[1.5_1.5_0%]',
+        name: UserModuleNameTypes.GRN_LIST_DEFECTIVE_QUANTITY,
         renderCell: (row: GRNListResponse) => {
             return <span> {row.defectiveQuantity} </span>
         },

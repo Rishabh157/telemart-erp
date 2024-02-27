@@ -19,9 +19,6 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { SaleOrderListResponseTypes } from 'src/models/SaleOrder.model'
 import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
-import {
     useDeleteSalesOrderMutation,
     useGetPaginationSaleOrderByGroupQuery,
     useUpdateSalesOrderApprovalMutation,
@@ -38,6 +35,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const SaleOrderListingWrapper = () => {
     const salesOrderState: any = useSelector(
@@ -51,7 +50,7 @@ const SaleOrderListingWrapper = () => {
     const [deleteSaleOrder] = useDeleteSalesOrderMutation()
     const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-  
+
 
     const { data, isFetching, isLoading } =
         useGetPaginationSaleOrderByGroupQuery({
@@ -159,6 +158,7 @@ const SaleOrderListingWrapper = () => {
             field: 'soNumber',
             headerName: 'So Number',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?._id} </span>
             ),
@@ -167,6 +167,7 @@ const SaleOrderListingWrapper = () => {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
             flex: 'flex-[0.8_0.8_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DEALER_NAME,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <>
@@ -189,6 +190,7 @@ const SaleOrderListingWrapper = () => {
             field: 'warehouseStateLabel',
             headerName: 'State',
             flex: 'flex-[0.8_0.8_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_STATE,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?.documents?.[0]?.warehouseStateLabel || '-'} </span>
@@ -198,6 +200,7 @@ const SaleOrderListingWrapper = () => {
             field: 'items',
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_ITEM_QUANTITY,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
@@ -225,6 +228,7 @@ const SaleOrderListingWrapper = () => {
             field: 'dhApprovedActionStatus',
             headerName: 'DH Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_STATUS,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
@@ -242,6 +246,7 @@ const SaleOrderListingWrapper = () => {
             field: 'dhApprovedActionBy',
             headerName: 'DH Approved By',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {row?.dhApprovedActionBy} </span>
@@ -251,6 +256,7 @@ const SaleOrderListingWrapper = () => {
             field: 'dhApprovedAt',
             headerName: 'DH Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {row?.dhApprovedAt} </span>
@@ -260,6 +266,7 @@ const SaleOrderListingWrapper = () => {
             field: 'accApprovedActionByStatus',
             headerName: 'Account Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
@@ -278,6 +285,7 @@ const SaleOrderListingWrapper = () => {
             field: 'accApprovedActionBy',
             headerName: 'Account Approved By',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_BY,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {row?.accApprovedActionBy} </span>
@@ -287,6 +295,7 @@ const SaleOrderListingWrapper = () => {
             field: 'Approved',
             headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_APPROVAL,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
@@ -474,9 +483,8 @@ const SaleOrderListingWrapper = () => {
                 row?.dhApproved === null &&
                 row?.accApproved === null && (
                     <ActionPopup
-                        moduleName={UserModuleNameTypes.saleOrder}
-                        isEdit
-                        isDelete
+                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_SALE_ORDER_EDIT)}
+                        isDelete={isAuthorized(UserModuleNameTypes.ACTION_SALE_ORDER_DELETE)}
                         isCustomBtn={false}
                         customBtnText="Invoice"
                         handleCustomActionButton={() => {

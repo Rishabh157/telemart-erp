@@ -20,10 +20,6 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import {
     useGetPurchaseOrderQuery,
     useUpdatePoLevelMutation,
 } from 'src/services/PurchaseOrderService'
@@ -32,7 +28,6 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import PurchaseOrderListing from './PurchaseOrderListing'
 
 // |-- Redux --|
-import AuthenticationHOC from 'src/AuthenticationHOC'
 import { setFilterValue } from 'src/redux/slices/GRNSlice'
 import {
     setIsTableLoading,
@@ -40,6 +35,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/PurchaseOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
@@ -131,14 +128,16 @@ const PurchaseOrderListingWrapper = () => {
             field: 'poCode',
             headerName: 'PO Code',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_PO_CODE,
             renderCell: (row: PurchaseOrderListResponse) => (
                 <span> {row.poCode} </span>
-            ),
+            )
         },
         {
             field: 'purchaseOrder',
             headerName: 'Item Name',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_ITEM_NAME,
             renderCell: (row: PurchaseOrderListResponse) => {
                 return <span> {row.purchaseOrder.itemName} </span>
             },
@@ -147,6 +146,7 @@ const PurchaseOrderListingWrapper = () => {
             field: 'purchaseOrder',
             headerName: 'Quantity',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_QUANTITY,
             renderCell: (row: PurchaseOrderListResponse) => {
                 return <span> {row.purchaseOrder.quantity} </span>
             },
@@ -155,6 +155,7 @@ const PurchaseOrderListingWrapper = () => {
             field: 'purchaseOrder',
             headerName: 'Recieved Quantity',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_RECIEVED_QUANTITY,
             renderCell: (row: PurchaseOrderListResponse) => {
                 return <span> {row.purchaseOrder.receivedQuantity} </span>
             },
@@ -163,6 +164,7 @@ const PurchaseOrderListingWrapper = () => {
             field: 'purchaseOrder',
             headerName: 'rate',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_RATE,
             renderCell: (row: PurchaseOrderListResponse) => {
                 return <span> {row.purchaseOrder.rate} </span>
             },
@@ -171,6 +173,7 @@ const PurchaseOrderListingWrapper = () => {
             field: 'vendorLabel',
             headerName: 'Vendor',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_VENDOR,
             renderCell: (row: PurchaseOrderListResponse) => {
                 return <span> {row.vendorLabel} </span>
             },
@@ -179,6 +182,7 @@ const PurchaseOrderListingWrapper = () => {
             field: 'warehouseLabel',
             headerName: 'ware house',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_WAREHOUSE,
             renderCell: (row: PurchaseOrderListResponse) => {
                 return <span> {row.warehouseLabel} </span>
             },
@@ -187,6 +191,7 @@ const PurchaseOrderListingWrapper = () => {
             field: 'purchaseOrder',
             headerName: 'Est. Delivery Date',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_ESTIMATION_DELIVERY_DATE,
             renderCell: (row: PurchaseOrderListResponse) => {
                 return (
                     <span>
@@ -203,6 +208,7 @@ const PurchaseOrderListingWrapper = () => {
             field: 'isConfirmed',
             headerName: 'Approval level',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_APPROVAL_LEVEL,
             renderCell: (row: PurchaseOrderListResponse) => {
                 const approvalLength = row?.approval?.length
                 return (
@@ -221,9 +227,9 @@ const PurchaseOrderListingWrapper = () => {
                                             next: (res) => {
                                                 return res.isConfirmed
                                                     ? handleComplete(
-                                                          row?._id,
-                                                          1
-                                                      )
+                                                        row?._id,
+                                                        1
+                                                    )
                                                     : false
                                             },
                                         })
@@ -249,9 +255,9 @@ const PurchaseOrderListingWrapper = () => {
                                             next: (res) => {
                                                 return res.isConfirmed
                                                     ? handleComplete(
-                                                          row?._id,
-                                                          2
-                                                      )
+                                                        row?._id,
+                                                        2
+                                                    )
                                                     : false
                                             },
                                         })
@@ -291,9 +297,8 @@ const PurchaseOrderListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.purchaseOrder}
-                    isView
-                    isEdit
+                    isView={isAuthorized(UserModuleNameTypes.ACTION_PURCHASE_ORDER_VIEW)}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_PURCHASE_ORDER_EDIT)}
                     handleViewActionButton={() => {
                         navigate(`/purchase-order/view/${currentId}`)
                     }}
@@ -308,61 +313,53 @@ const PurchaseOrderListingWrapper = () => {
                     }}
                 >
                     <>
-                        {row?.approval?.length > 1 && (
-                            <AuthenticationHOC
-                                moduleName={UserModuleNameTypes.purchaseOrder}
-                                actionName={UserModuleActionTypes.genrateGrn}
-                                component={
-                                    <button
-                                        onClick={() => {
-                                            navigate('/grn/add?', {
-                                                state: {
-                                                    poCode: row?.poCode,
-                                                    itemId: row?.purchaseOrder
-                                                        .itemId,
-                                                    itemName:
-                                                        row?.purchaseOrder
-                                                            .itemName,
-                                                    quantity:
-                                                        row?.purchaseOrder
-                                                            .quantity,
-                                                    receivedQuantity:
-                                                        row?.purchaseOrder
-                                                            .receivedQuantity,
-                                                    companyId: row?.companyId,
-                                                },
-                                            })
-                                        }}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                    >
-                                        Generate GRN
-                                    </button>
-                                }
-                            />
-                        )}
-                        <AuthenticationHOC
-                            moduleName={UserModuleNameTypes.grn}
-                            actionName={UserModuleActionTypes.List}
-                            component={
-                                <button
-                                    onClick={() => {
-                                        dispatch(setFilterValue([row?.poCode]))
-                                        navigate('/grn', {
-                                            state: {
-                                                poCode: row?.poCode,
-                                                // itemId: row?.purchaseOrder.itemId,
-                                                // itemName: row?.purchaseOrder.itemName,
-                                                // quantity: row?.purchaseOrder.quantity,
-                                                // companyId: row?.companyId,
-                                            },
-                                        })
-                                    }}
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                >
-                                    View GRN
-                                </button>
-                            }
-                        />
+                        {row?.approval?.length > 1 &&
+                            isAuthorized(UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN) &&
+                            <button
+                                onClick={() => {
+                                    navigate('/grn/add?', {
+                                        state: {
+                                            poCode: row?.poCode,
+                                            itemId: row?.purchaseOrder
+                                                .itemId,
+                                            itemName:
+                                                row?.purchaseOrder
+                                                    .itemName,
+                                            quantity:
+                                                row?.purchaseOrder
+                                                    .quantity,
+                                            receivedQuantity:
+                                                row?.purchaseOrder
+                                                    .receivedQuantity,
+                                            companyId: row?.companyId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Generate GRN
+                            </button>
+                        }
+                        {
+                            isAuthorized(UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN) &&
+                            <button
+                                onClick={() => {
+                                    dispatch(setFilterValue([row?.poCode]))
+                                    navigate('/grn', {
+                                        state: {
+                                            poCode: row?.poCode,
+                                            // itemId: row?.purchaseOrder.itemId,
+                                            // itemName: row?.purchaseOrder.itemName,
+                                            // quantity: row?.purchaseOrder.quantity,
+                                            // companyId: row?.companyId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View GRN
+                            </button>
+                        }
                     </>
                 </ActionPopup>
             ),
