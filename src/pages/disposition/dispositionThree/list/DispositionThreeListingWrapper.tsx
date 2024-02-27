@@ -6,9 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import {
     setIsTableLoading,
@@ -24,6 +22,8 @@ import {
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispositionThreeListing from './DispositionThreeListing'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const DispositionThreeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -68,6 +68,8 @@ const DispositionThreeListingWrapper = () => {
             field: 'dispositionName',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_NAME,
+
             renderCell: (row: DispositionThreeListResponse) => (
                 <span> {row.dispositionName} </span>
             ),
@@ -76,6 +78,8 @@ const DispositionThreeListingWrapper = () => {
             field: 'dispostionOneLabel',
             headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_ONE_NAME,
+
             renderCell: (row: DispositionThreeListResponse) => (
                 <span> {row.dispostionOneLabel} </span>
             ),
@@ -84,6 +88,8 @@ const DispositionThreeListingWrapper = () => {
             field: 'dispostionTwoLabel',
             headerName: 'Disposition Two Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_TWO_NAME,
+
             renderCell: (row: DispositionThreeListResponse) => (
                 <span> {row.dispostionTwoLabel} </span>
             ),
@@ -92,6 +98,8 @@ const DispositionThreeListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.DISPOSITION_THREE_LIST_STATUS,
+
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -151,10 +159,15 @@ const DispositionThreeListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dispositionThree}
-                    isView
-                    isEdit
-                    isDelete
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_LIST
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -236,7 +249,7 @@ const DispositionThreeListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <DispositionThreeListing
-                  columns={columns}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

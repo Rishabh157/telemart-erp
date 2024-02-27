@@ -16,9 +16,6 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
 import MediaLayout from 'src/pages/media/MediaLayout'
 import {
     useDeleteChannelCategoryMutation,
@@ -34,6 +31,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/channelCategorySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ChannelCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -87,6 +86,8 @@ const ChannelCategoryListingWrapper = () => {
             field: 'channelCategory',
             headerName: 'Channel Category Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CATEGORY_LIST_CHANNEL_CATEGORY_NAME,
+
             renderCell: (row: ChannelCategoryListResponse) => (
                 <span> {row.channelCategory} </span>
             ),
@@ -97,9 +98,9 @@ const ChannelCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.channelCategory}
-                    isEdit
-                    isDelete
+                  
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

@@ -21,16 +21,8 @@ import {
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
 import DispositionLayout from '../../DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-// import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-// import {
-//     // UserModuleActionTypes,
-//     UserModuleNameTypes,
-// } from 'src/utils/mediaJson/userAccess'
-
-// export type language ={
-//     languageId:string[];
-
-// }
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const DispositionOneListingWrapper = () => {
     const navigate = useNavigate()
@@ -41,9 +33,7 @@ const DispositionOneListingWrapper = () => {
     const dispositionOneState: any = useSelector(
         (state: RootState) => state.dispositionOne
     )
-    // const { checkUserAccess } = useSelector(
-    //     (state: RootState) => state.userAccess
-    // )
+
     const { page, rowsPerPage, searchValue, items, isActive } =
         dispositionOneState
 
@@ -85,6 +75,8 @@ const DispositionOneListingWrapper = () => {
             field: 'dispositionName',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_ONE_LIST_DISPOSITION_ONE_NAME,
+
             renderCell: (row: DispositionOneListResponse) => (
                 <span> {row.dispositionName} </span>
             ),
@@ -93,6 +85,8 @@ const DispositionOneListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.DISPOSITION_ONE_LIST_STATUS,
+
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -101,8 +95,9 @@ const DispositionOneListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -122,8 +117,9 @@ const DispositionOneListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -150,9 +146,12 @@ const DispositionOneListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    // moduleName={UserModuleNameTypes.dispositionOne}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_ONE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_ONE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

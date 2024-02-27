@@ -16,9 +16,7 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DidManagementListResponse } from 'src/models/Media.model'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+
 import {
     useDeleteDidMutation,
     useGetPaginationDidQuery,
@@ -34,6 +32,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/didManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const DidManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -46,7 +46,6 @@ const DidManagementListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = didManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-
     const dispatch = useDispatch<AppDispatch>()
 
     const columns: columnTypes[] = [
@@ -54,6 +53,8 @@ const DidManagementListingWrapper = () => {
             field: 'didNumber',
             headerName: 'DID Number',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_DID_NUMBER,
+
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.didNumber} </span>
             ),
@@ -62,6 +63,8 @@ const DidManagementListingWrapper = () => {
             field: 'schemeLabel',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_DID_SCHEMA_NAME,
+
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.schemeLabel} </span>
             ),
@@ -70,6 +73,8 @@ const DidManagementListingWrapper = () => {
             field: 'channelLabel',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_CHANNEL_NAME,
+
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.channelLabel} </span>
             ),
@@ -78,6 +83,8 @@ const DidManagementListingWrapper = () => {
             field: 'slotLabel',
             headerName: 'Slot Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_SLOT_NAME,
+
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.slotLabel} </span>
             ),
@@ -86,11 +93,15 @@ const DidManagementListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
+
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.didManagement}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DID_MANAGEMENT_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DID_MANAGEMENT_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -171,7 +182,7 @@ const DidManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <DidManagementListing
-                         columns={columns}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

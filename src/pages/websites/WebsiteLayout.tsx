@@ -52,12 +52,7 @@ const websitesNavigation: NavItemType[] = [
         path: '/all-websites/website-page',
         name: UserModuleNameTypes.NAV_WEBSITES_PAGES,
     },
-    // {
-    //     label: 'Influencers Management',
-    //     icon: RiPagesLine,
-    //     path: '/all-websites/influencers-management'
-
-    // },
+    
     {
         label: 'Websites Tags',
         icon: RiPagesLine,
@@ -80,7 +75,7 @@ const WebsitesLayout = ({ children }: Props) => {
     const navigate = useNavigate()
 
     const currentPath = `/all-websites/${location.pathname?.split('/')[2]}`
-    const { theme } = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext)
     return (
         <div
             className={`flex h-screen w-screen relative ${

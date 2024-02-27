@@ -5,9 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import {
     setIsTableLoading,
@@ -23,6 +20,8 @@ import {
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import InitialCallThreeListing from './InitialCallThreeListing'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 const InitialCallThreeListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
@@ -32,7 +31,7 @@ const InitialCallThreeListingWrapper = () => {
     const initialCallThreeState: any = useSelector(
         (state: RootState) => state.initialCallerThree
     )
-  
+
     const { page, rowsPerPage, searchValue, items, isActive } =
         initialCallThreeState
 
@@ -73,6 +72,7 @@ const InitialCallThreeListingWrapper = () => {
             field: 'initialCallName',
             headerName: 'Initial Call Three',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_THREE,
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallName} </span>
             ),
@@ -81,6 +81,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'callType',
             headerName: 'Call Type',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_CALL_TYPE,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.callType} </span>
             ),
@@ -89,6 +91,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'initialCallOneLabel',
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_ONE,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallOneLabel} </span>
             ),
@@ -97,6 +101,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'initialCallTwoLabel',
             headerName: 'Initial Call Two',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_TWO,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallTwoLabel} </span>
             ),
@@ -105,6 +111,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'cancelFlag',
             headerName: 'cancel flag',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CANCEL_FLAG,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.cancelFlag ? 'Yes' : 'No'} </span>
             ),
@@ -113,6 +121,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'isPnd',
             headerName: 'Pnd',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CANCEL_PND,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.isPnd ? 'Yes' : 'No'} </span>
             ),
@@ -121,6 +131,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_STATUS,
+
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -179,10 +191,15 @@ const InitialCallThreeListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.initialCallerThree}
-                    isView
-                    isEdit
-                    isDelete
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_THREE_LIST
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_THREE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_THREE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -252,7 +269,7 @@ const InitialCallThreeListingWrapper = () => {
         <>
             <DispositionLayout>
                 <InitialCallThreeListing
-                columns={columns}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
