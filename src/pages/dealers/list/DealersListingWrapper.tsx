@@ -25,11 +25,7 @@ import {
     useApproveDealerStatusMutation,
     useChangeDealerStatusMutation,
 } from 'src/services/DealerServices'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
@@ -40,15 +36,14 @@ import {
 } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { Chip } from '@mui/material'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const DealersListingWrapper = () => {
     const dealerState: any = useSelector((state: RootState) => state.dealer)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const navigate = useNavigate()
     const [deletedealer] = useDeleteDealerMutation()
@@ -100,6 +95,7 @@ const DealersListingWrapper = () => {
             field: 'dealerCode',
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_VENDOR_CODE,
             renderCell: (row: DealersListResponse) => (
                 <span> {row.dealerCode} </span>
             ),
@@ -108,6 +104,7 @@ const DealersListingWrapper = () => {
             field: 'firmName',
             headerName: 'Firm Name',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_FIRM_NAME,
             renderCell: (row: DealersListResponse) => {
                 return <span> {row.firmName} </span>
             },
@@ -116,6 +113,7 @@ const DealersListingWrapper = () => {
             field: 'firstName',
             headerName: 'First Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_FIRST_NAME,
             renderCell: (row: DealersListResponse) => (
                 <span> {row.firstName} </span>
             ),
@@ -124,6 +122,7 @@ const DealersListingWrapper = () => {
             field: 'lastName',
             headerName: 'Last Name',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_LAST_NAME,
             renderCell: (row: DealersListResponse) => {
                 return <span> {row.lastName} </span>
             },
@@ -132,6 +131,7 @@ const DealersListingWrapper = () => {
             field: 'billingAddress',
             headerName: 'Phone',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_PHONE,
             renderCell: (row: any) => {
                 return <span> {row.billingAddress.phone} </span>
             },
@@ -140,6 +140,7 @@ const DealersListingWrapper = () => {
             field: 'billingAddressDistrictName',
             headerName: 'District',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_DISTRICT,
             renderCell: (row: DealersListResponse) => {
                 return <span> {row.billingAddressDistrictName} </span>
             },
@@ -148,6 +149,7 @@ const DealersListingWrapper = () => {
             field: 'billingAddressStateName',
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_STATE,
             renderCell: (row: DealersListResponse) => {
                 return <span> {row.billingAddressStateName} </span>
             },
@@ -156,6 +158,7 @@ const DealersListingWrapper = () => {
             field: 'isApproved',
             headerName: 'Approval',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_APPROVAL,
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -217,6 +220,7 @@ const DealersListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_STATUS,
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -276,14 +280,14 @@ const DealersListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dealer}
+                   
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                    isDelete
-                    isEdit
-                    isView
+                    isView={isAuthorized(UserModuleNameTypes.ACTION_DEALER_LIST)}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DEALER_LIST)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DEALER_LIST)}
                     handleViewActionButton={() => {
                         navigate(`${currentId}/general-information`)
                     }}
@@ -359,12 +363,7 @@ const DealersListingWrapper = () => {
         <>
             <SideNavLayout>
                 <DealersListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.dealer,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

@@ -38,6 +38,7 @@ import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
@@ -209,7 +210,7 @@ const UsersListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={!UserModuleNameTypes.ACTION_USER_EDIT}
+                    isEdit={!isAuthorized(UserModuleNameTypes.ACTION_USER_EDIT)}
                     //isDelete
                     handleEditActionButton={() => {
                         navigate(`/users/${row?._id}`)

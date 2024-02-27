@@ -18,12 +18,13 @@ import {
 } from 'src/redux/slices/configuration/ndrDispositionSlice'
 import DispositionLayout from '../../DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+// import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+// import {
+//     UserModuleActionTypes,
+// } from 'src/models/userAccess/UserAccess.model'
 import NdrDispositionListing from './NdrDispositionListing'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 
 const NdrDispositionListingWrapper = () => {
@@ -35,9 +36,9 @@ const NdrDispositionListingWrapper = () => {
     const ndrDispositionState: any = useSelector(
         (state: RootState) => state.ndrDisposition
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+    // const { checkUserAccess } = useSelector(
+    //     (state: RootState) => state.userAccess
+    // )
     const { page, rowsPerPage, searchValue, items } = ndrDispositionState
 
     const dispatch = useDispatch<AppDispatch>()
@@ -170,9 +171,10 @@ const NdrDispositionListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.ndrDisposition}
-                    isEdit
-                    isDelete
+                    // moduleName={UserModuleNameTypes.ndrDisposition}
+
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_NDR_DISPOSITION_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -237,12 +239,7 @@ const NdrDispositionListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <NdrDispositionListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.ndrDisposition,
-                            UserModuleActionTypes.List
-                        )}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

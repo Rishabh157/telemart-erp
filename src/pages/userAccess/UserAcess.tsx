@@ -102,7 +102,7 @@ const UserAcess = ({
             let value = moduleList ? [...moduleList] : []
 
             if (moduleValue) {
-                value.push(moduleAccess)
+                value.push(moduleAccess as any)
             } else {
                 let valueRemove = userAccessItems?.modules.filter(
                     (moduleitem) => moduleitem.moduleId !== module.moduleId
@@ -380,7 +380,7 @@ const UserAcess = ({
                         <div className="grid grid-cols-1 gap-1">
                             <div className="flex flex-col gap-3">
                                 {modules?.map(
-                                    (module: ModulesTypes, ind: number) => {
+                                    (module: any, ind: number) => {
                                         return (
                                             <Accordion
                                                 key={ind}
@@ -432,7 +432,7 @@ const UserAcess = ({
                                                             {module?.moduleAction.map(
                                                                 (
                                                                     actionsItems: moduleActionTypes,
-                                                                    index
+                                                                    index:any
                                                                 ) => {
                                                                     return (
                                                                         <li

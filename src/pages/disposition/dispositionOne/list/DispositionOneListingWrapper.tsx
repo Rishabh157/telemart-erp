@@ -21,11 +21,11 @@ import {
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
 import DispositionLayout from '../../DispositionLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+// import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+// import {
+//     // UserModuleActionTypes,
+//     UserModuleNameTypes,
+// } from 'src/utils/mediaJson/userAccess'
 
 // export type language ={
 //     languageId:string[];
@@ -41,9 +41,9 @@ const DispositionOneListingWrapper = () => {
     const dispositionOneState: any = useSelector(
         (state: RootState) => state.dispositionOne
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+    // const { checkUserAccess } = useSelector(
+    //     (state: RootState) => state.userAccess
+    // )
     const { page, rowsPerPage, searchValue, items, isActive } =
         dispositionOneState
 
@@ -101,9 +101,8 @@ const DispositionOneListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -123,9 +122,8 @@ const DispositionOneListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -152,7 +150,7 @@ const DispositionOneListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dispositionOne}
+                    // moduleName={UserModuleNameTypes.dispositionOne}
                     isEdit
                     isDelete
                     handleOnAction={() => {
@@ -219,12 +217,7 @@ const DispositionOneListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <DispositionOneListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.dispositionOne,
-                            UserModuleActionTypes.List
-                        )}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

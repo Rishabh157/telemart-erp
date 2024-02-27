@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ModulesTypes, moduleActionTypes } from "src/redux/slices/access/userAcessSlice";
+import { ModulesTypes, fieldTypes, moduleActionTypes } from "src/redux/slices/access/userAcessSlice";
 import { useGetUserAccessQuery } from "src/services/useraccess/UserAccessServices";
 import { setPermissions } from "src/redux/slices/authSlice";
 // import { ModulesTypes, moduleActionTypes } from "src/redux/slices/access/userAcessSlice";
@@ -20,16 +20,22 @@ const useGetUserAccess = () => {
     refetchOnFocus: false
   });
   const getPermisssion = (result: any) => {
-    let permissions: string[] = []
+    let permissions: string[] = [];
     result?.module?.forEach((moduleitem: ModulesTypes) => {
-      permissions = [...permissions, moduleitem?.moduleName, ...moduleitem?.parentGroup]
+      permissions = [
+        ...permissions,
+        moduleitem?.moduleName,
+        ...moduleitem?.parentGroup,
+      ];
       moduleitem.moduleAction.forEach((actionItem: moduleActionTypes) => {
-        permissions = [...permissions, actionItem?.actionId]
-      })
-
-    })
-    return permissions
-  }
+        permissions = [...permissions, actionItem?.actionId];
+        actionItem.fields.forEach((fieldItem: fieldTypes) => {
+          permissions = [...permissions, fieldItem?.fieldId];
+        });
+      });
+    });
+    return Array.from(new Set(permissions));
+  };
   useEffect(() => {
     if (isLoading || isFetching) {
       setIsDataLoading(true);

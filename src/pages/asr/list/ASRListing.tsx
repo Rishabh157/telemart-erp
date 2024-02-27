@@ -79,8 +79,8 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

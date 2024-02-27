@@ -675,6 +675,7 @@ const PageRoutes = () => {
                     <Route
                         path="users"
                         element={
+                            // <UsersListingWrapper />
                             <Authorization
                                 children={<UsersListingWrapper />}
                                 permission={UserModuleNameTypes.NAV_USER}
@@ -1196,7 +1197,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ASRListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_ASR}
                             />
                         }
                     />
@@ -2220,7 +2221,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<DispositionOneListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_DISPOSITION_ONE}
                             />
                         }
                     />

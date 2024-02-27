@@ -7,6 +7,7 @@
 
 // |-- Built-in Dependencies --|
 import React from 'react'
+import AccessDenied from 'src/AccessDenied'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
@@ -67,8 +68,9 @@ const ATMTable = <T extends {}>({
     })
 
     if (!tabsRender) {
-        return <><div>ACCESS DENIED</div> </>
+        return <><div><AccessDenied /></div> </>
     }
+
     return (
         <div
             onClick={() => {

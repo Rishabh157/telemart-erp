@@ -12,7 +12,8 @@ import WelcomePage from './pages/welcome/WelcomePage'
 import { useGetLocalStorage } from './hooks/useGetLocalStorage'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetUserAccess from './hooks/useGetUserAccess'
-import { isAuthorized } from './auth'
+import { isAuthorized } from './utils/authorization'
+// import { isAuthorized } from './auth'
 type Props = {
     permission: keyof typeof UserModuleNameTypes
     children: any
@@ -48,7 +49,7 @@ const Authorization: ({ permission, children }: Props) => any = ({
             </>
         )
     }
-    if (!getAllPermission?.length && !(userData?.userType === 'SUPER_ADMIN')) {
+    if (!getAllPermission?.length && !(userData?.userRole === 'ADMIN')) {
         return (
             <SideNavLayout>
                 <AccessDenied />

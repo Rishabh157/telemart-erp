@@ -33,6 +33,7 @@ import {
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const VendorsListingWrapper = () => {
     const navigate = useNavigate()
@@ -97,11 +98,9 @@ const VendorsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-
-                    isView={!UserModuleNameTypes.ACTION_USER_EDIT}
-                    isEdit={!UserModuleNameTypes.ACTION_USER_EDIT}
-
-                    isDelete={!UserModuleNameTypes.ACTION_USER_EDIT}
+                    isView={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW)}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

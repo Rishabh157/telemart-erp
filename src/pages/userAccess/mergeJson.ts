@@ -51,9 +51,12 @@ import { default as userJson } from "../../utils/mediaJson/user.json";
 import { default as vendorJson } from "../../utils/mediaJson/vendor.json";
 import { default as warehouseJson } from "../../utils/mediaJson/warehouse.json";
 import { default as warehouseTransferJson } from "../../utils/mediaJson/warehouseTransfer.json";
+import { default as dashboardJson } from "../../utils/mediaJson/dashboard.json";
+
 
 
 export const mergeUserModules = [
+  { ...dashboardJson },
   { ...ASRJson },
   { ...NDRDispositionJson },
   { ...WebsiteBlogJson },

@@ -11,12 +11,13 @@ import React, { useEffect } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-    UserModuleOtherActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
+// import {
+//     UserModuleActionTypes,
 
+//     UserModuleOtherActionTypes,
+// } from 'src/models/userAccess/UserAccess.model'
+
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // |-- Internal Dependencies --|
 import { NavItemType } from 'src/navigation'
 import { AlertText } from 'src/pages/callerpage/components/constants'
@@ -26,14 +27,15 @@ import { setCheckUserAccess } from 'src/redux/slices/access/userAcessSlice'
 import { setDeviceId, setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 import { useGetUserAccessQuery } from 'src/services/useraccess/UserAccessServices'
-import {
-    allWebsiteModule,
-    assetModules,
-    configurationModules,
-    dispositionModule,
-    isCheckAuthorizedModule,
-    mediaModules,
-} from 'src/userAccess/getAuthorizedModules'
+// import {
+//     allWebsiteModule,
+//     assetModules,
+//     configurationModules,
+//     dispositionModule,
+//     // isCheckAuthorizedModule,
+//     mediaModules,
+// } from 'src/userAccess/getAuthorizedModules'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -80,9 +82,9 @@ const VerticalNavBar = ({
 
         // eslint-disable-next-line
     }, [data, isLoading, isFetching])
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+    // const { checkUserAccess } = useSelector(
+    //     (state: RootState) => state.userAccess
+    // )
 
     //const { userData } = useSelector((state: RootState) => state?.auth)
     // const userAccessSiedeBar =
@@ -109,62 +111,61 @@ const VerticalNavBar = ({
         return message
     }
 
-    const getDefaultRouteFunction = (name: string, path: string) => {
-        let currentModules: string[] = []
-        let userRole = userData?.userRole
+    // const getDefaultRouteFunction = (name: string, path: string) => {
+    //     let currentModules: string[] = []
+    //     let userRole = userData?.userRole
 
-        if (userRole === 'ADMIN') {
-            return path
-        }
-        switch (name) {
-            case UserModuleNameTypes.configuration:
-                currentModules = configurationModules
-                break
-            case UserModuleNameTypes.assets:
-                currentModules = assetModules
-                break
-            case UserModuleNameTypes.disposition:
-                currentModules = dispositionModule
-                break
-            case UserModuleNameTypes.allWebsite:
-                currentModules = allWebsiteModule
-                break
-            case UserModuleNameTypes.media:
-                currentModules = mediaModules
-                break
-            default:
-                break
-        }
+    //     if (userRole === 'ADMIN') {
+    //         return path
+    //     }
+    //     switch (name) {
+    //         case UserModuleNameTypes.configuration:
+    //             currentModules = configurationModules
+    //             break
+    //         case UserModuleNameTypes.assets:
+    //             currentModules = assetModules
+    //             break
+    //         case UserModuleNameTypes.disposition:
+    //             currentModules = dispositionModule
+    //             break
+    //         case UserModuleNameTypes.allWebsite:
+    //             currentModules = allWebsiteModule
+    //             break
+    //         case UserModuleNameTypes.media:
+    //             currentModules = mediaModules
+    //             break
+    //         default:
+    //             break
+    //     }
 
-        let isEditDeleteViewAccess = checkUserAccess?.modules?.filter(
-            (mod: any) => {
-                return currentModules.includes(mod?.moduleName)
-            }
-        )
-        let moduleAction: any = isEditDeleteViewAccess[0]?.moduleAction
+    //     let isEditDeleteViewAccess = checkUserAccess?.modules?.filter(
+    //         (mod: any) => {
+    //             return currentModules.includes(mod?.moduleName)
+    //         }
+    //     )
+    //     let moduleAction: any = isEditDeleteViewAccess[0]?.moduleAction
 
-        let slotRoute = moduleAction?.find(
-            (ele: any) =>
-                ele?.actionName === UserModuleOtherActionTypes.slotDefinition ||
-                ele?.actionName === UserModuleOtherActionTypes.slots
-        )?.actionUrl
-        if (slotRoute) {
-            return slotRoute
-        }
-        let paginationRoute = moduleAction?.find(
-            (ele: any) => ele?.actionName === UserModuleActionTypes.List
-        )?.actionUrl
+    //     let slotRoute = moduleAction?.find(
+    //         (ele: any) =>
+    //             ele?.actionName === UserModuleOtherActionTypes.slotDefinition ||
+    //             ele?.actionName === UserModuleOtherActionTypes.slots
+    //     )?.actionUrl
+    //     if (slotRoute) {
+    //         return slotRoute
+    //     }
+    //     let paginationRoute = moduleAction?.find(
+    //         (ele: any) => ele?.actionName === UserModuleActionTypes.List
+    //     )?.actionUrl
 
-        return paginationRoute || path
-    }
+    //     return paginationRoute || path
+    // }
     return (
         <div className="h-full  overflow-auto bg-white ">
             {/* Logo & Menu Icon */}
 
             <div
-                className={`flex px-3 py-2 items-center  bg-white sticky top-0 ${
-                    isCollapsed ? 'justify-between' : 'justify-between'
-                }`}
+                className={`flex px-3 py-2 items-center  bg-white sticky top-0 ${isCollapsed ? 'justify-between' : 'justify-between'
+                    }`}
             >
                 {/* Logo */}
                 {!isCollapsed && (
@@ -183,19 +184,17 @@ const VerticalNavBar = ({
                     className="flex flex-col gap-1 cursor-pointer p-1  "
                 >
                     <div
-                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500    ${
-                            !isCollapsed &&
+                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500    ${!isCollapsed &&
                             'origin-top-left translate-x-[1.5px]  rotate-45 -mt-3'
-                        }`}
+                            }`}
                     ></div>
                     {isCollapsed && (
                         <div className={`h-[1.5px] w-5 bg-slate-500  `}> </div>
                     )}
                     <div
-                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500  ${
-                            !isCollapsed &&
+                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500  ${!isCollapsed &&
                             'origin-top-left translate-y-2  -rotate-45 '
-                        }`}
+                            }`}
                     ></div>
                 </div>
 
@@ -208,14 +207,7 @@ const VerticalNavBar = ({
             <div className="px-3 py-5 flex flex-col gap-1">
                 {navigation
                     ?.filter((permissionRoute: NavItemType) => {
-                        return userData?.userRole === 'ADMIN' ||
-                            permissionRoute.name ===
-                                UserModuleNameTypes.dashboard
-                            ? true
-                            : isCheckAuthorizedModule(
-                                  checkUserAccess,
-                                  permissionRoute.name as string
-                              )
+                        return isAuthorized(permissionRoute?.name as keyof typeof UserModuleNameTypes);
                     })
                     .map((navItem, navIndex) => {
                         return (
@@ -227,20 +219,10 @@ const VerticalNavBar = ({
                                             window.confirm(AlertText)
                                         if (confirmValue) {
                                             dispatch(setFieldCustomized(false))
-                                            navigate(
-                                                getDefaultRouteFunction(
-                                                    navItem.name as string,
-                                                    navItem.path
-                                                )
-                                            )
+                                            navItem.path && navigate(navItem.path);
                                         }
                                     } else {
-                                        navigate(
-                                            getDefaultRouteFunction(
-                                                navItem.name as string,
-                                                navItem.path
-                                            )
-                                        )
+                                        navItem.path && navigate(navItem.path);
                                     }
                                 }}
                                 className={`
@@ -257,11 +239,10 @@ const VerticalNavBar = ({
                 duration-500
                 text-normal
                 ${isCollapsed && 'justify-center'} 
-                ${
-                    isPathEqualtoNavItem(navItem)
-                        ? 'bg-sky-50 text-sky-500 font-semibold'
-                        : 'text-slate-500'
-                } 
+                ${isPathEqualtoNavItem(navItem)
+                                        ? 'bg-sky-50 text-sky-500 font-semibold'
+                                        : 'text-slate-500'
+                                    } 
                 `}
                             >
                                 <div className="py-1">
