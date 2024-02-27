@@ -17,9 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
-import {
     useDeleteTapeMutation,
     useGetPaginationTapeQuery,
 } from 'src/services/media/TapeManagementServices'
@@ -34,6 +31,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/tapeManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // export type language ={
 //     languageId:string[];
@@ -92,6 +91,7 @@ const TapeManagementListingWrapper = () => {
             field: 'tapeName',
             headerName: 'Tape Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAPE_MANAGEMENT_LIST_TAPE_NAME,
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.tapeName} </span>
             ),
@@ -100,6 +100,7 @@ const TapeManagementListingWrapper = () => {
             field: 'tapeType',
             headerName: 'Tape Type',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAPE_MANAGEMENT_LIST_TAPE_TYPE,
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.tapeType} </span>
             ),
@@ -108,6 +109,7 @@ const TapeManagementListingWrapper = () => {
             field: 'schemeLabel',
             headerName: 'Scheme',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAPE_MANAGEMENT_LIST_SCHEME,
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.schemeLabel} </span>
             ),
@@ -116,6 +118,7 @@ const TapeManagementListingWrapper = () => {
             field: 'languageId',
             headerName: 'Language',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAPE_MANAGEMENT_LIST_LANGUAGE,
             renderCell: (row: any) => {
                 const languageLength = row.languageId.length
 
@@ -131,9 +134,8 @@ const TapeManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.tapeManangement}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

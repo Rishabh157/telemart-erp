@@ -10,9 +10,6 @@ import InitialCallTwoListing from './InitialCallTwoListing'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InitialCallerTwoListResponse } from 'src/models/configurationModel/InitialCallerTwo.model'
 import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
-import {
     setIsTableLoading,
     setItems,
     setTotalItems,
@@ -25,6 +22,8 @@ import {
 import DispositionLayout from '../../DispositionLayout'
 
 import { Chip } from '@mui/material'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const InitialCallTwoListingWrapper = () => {
     const navigate = useNavigate()
@@ -34,7 +33,7 @@ const InitialCallTwoListingWrapper = () => {
     const initialCallTwoState: any = useSelector(
         (state: RootState) => state.initialCallerTwo
     )
-   
+
     const { page, rowsPerPage, searchValue, items, isActive } =
         initialCallTwoState
 
@@ -76,6 +75,7 @@ const InitialCallTwoListingWrapper = () => {
             field: 'initialCallName',
             headerName: 'Initial Call Two',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_TWO_LIST_INITIAL_CALL_ONE,
             renderCell: (row: InitialCallerTwoListResponse) => (
                 <span> {row.initialCallName} </span>
             ),
@@ -84,6 +84,7 @@ const InitialCallTwoListingWrapper = () => {
             field: 'callType',
             headerName: 'Call Type',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_TWO_LIST_CALL_TYPE,
             renderCell: (row: InitialCallerTwoListResponse) => (
                 <span> {row.callType} </span>
             ),
@@ -92,6 +93,7 @@ const InitialCallTwoListingWrapper = () => {
             field: 'initialCallOneLabel',
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_TWO_LIST_INITIAL_CALL_ONE,
             renderCell: (row: InitialCallerTwoListResponse) => (
                 <span> {row.initialCallOneLabel} </span>
             ),
@@ -100,6 +102,7 @@ const InitialCallTwoListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.IC_TWO_LIST_STATUS,
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -158,9 +161,12 @@ const InitialCallTwoListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.initialCallerTwo}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_TWO_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_TWO_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -225,7 +231,7 @@ const InitialCallTwoListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <InitialCallTwoListing
-                            columns={columns}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

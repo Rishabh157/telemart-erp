@@ -26,15 +26,15 @@ import DispositionLayout from '../../DispositionLayout'
 import DispositionComplaintListing from './DispositionComplaintListing'
 
 // |-- Redux --|
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionComplaintSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // export type language ={
 //     languageId:string[];
@@ -88,6 +88,7 @@ const DispositionComplaintListingWrapper = () => {
             field: 'dispositionName',
             headerName: 'Disposition Complaint',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_COMPLAINT_LIST_DISPOSITION_COMPLAINT,
             renderCell: (row: DispositionComplaintListResponse) => (
                 <span> {row.dispositionName} </span>
             ),
@@ -97,11 +98,11 @@ const DispositionComplaintListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
+
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dispositionComplaint}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -150,7 +151,7 @@ const DispositionComplaintListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <DispositionComplaintListing
-                      columns={columns}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

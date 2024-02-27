@@ -11,9 +11,6 @@ import { Chip } from '@mui/material'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
 import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
-import {
     setIsTableLoading,
     setItems,
     setTotalItems,
@@ -24,10 +21,8 @@ import {
     useGetinitialCallerOneQuery,
 } from 'src/services/configurations/InitialCallerOneServices'
 import DispositionLayout from '../../DispositionLayout'
-// export type language ={
-//     languageId:string[];
-
-// }
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const InitialCallOneListingWrapper = () => {
     const navigate = useNavigate()
@@ -37,7 +32,7 @@ const InitialCallOneListingWrapper = () => {
     const initialCallOneState: any = useSelector(
         (state: RootState) => state.initialCallerOne
     )
- 
+
     const { page, rowsPerPage, searchValue, items, isActive } =
         initialCallOneState
 
@@ -79,6 +74,8 @@ const InitialCallOneListingWrapper = () => {
             field: 'initialCallName',
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_ONE_LIST_INITIAL_CALL_NAME,
+
             renderCell: (row: InitialCallerOneListResponse) => (
                 <span className="capitalize"> {row.initialCallName} </span>
             ),
@@ -87,6 +84,8 @@ const InitialCallOneListingWrapper = () => {
             field: 'callType',
             headerName: 'Call Type',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_ONE_LIST_CALL_TYPE,
+
             renderCell: (row: InitialCallerOneListResponse) => (
                 <span className="capitalize"> {row.callType} </span>
             ),
@@ -95,6 +94,8 @@ const InitialCallOneListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.IC_ONE_LIST_STATUS,
+
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -153,9 +154,12 @@ const InitialCallOneListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.initialCallerOne}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_ONE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_ONE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -220,7 +224,7 @@ const InitialCallOneListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <InitialCallOneListing
-                      columns={columns}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

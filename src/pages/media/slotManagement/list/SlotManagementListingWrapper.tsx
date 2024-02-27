@@ -30,9 +30,7 @@ import SlotManagementListing from './SlotManagementListing'
 // import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 // import SlotRunWrapper from '../update/SlotRunWrapper'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+
 // |-- Redux --|
 import { CiPause1, CiPlay1 } from 'react-icons/ci'
 import {
@@ -41,6 +39,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/slotManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -108,6 +108,7 @@ const SlotManagementListingWrapper = () => {
             field: 'slotName',
             headerName: 'Slot Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_SLOT_NAME,
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {row.slotName} </span>
             ),
@@ -116,6 +117,7 @@ const SlotManagementListingWrapper = () => {
             field: 'groupNameLabel',
             headerName: 'Channel Group',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_CHANNEL_GROUP,
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {row.groupNameLabel} </span>
             ),
@@ -124,6 +126,7 @@ const SlotManagementListingWrapper = () => {
             field: 'channelLabel',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_CHANNEL_NAME,
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {row.channelLabel} </span>
             ),
@@ -132,6 +135,7 @@ const SlotManagementListingWrapper = () => {
             field: 'tapeLabel',
             headerName: 'Tape Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_TAPE_NAME,
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {row.tapeLabel} </span>
             ),
@@ -140,6 +144,7 @@ const SlotManagementListingWrapper = () => {
             field: 'slotStartTime',
             headerName: 'Start Time',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_START_TIME,
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {moment(row.slotStartTime).format('hh:mm a')} </span>
             ),
@@ -148,6 +153,7 @@ const SlotManagementListingWrapper = () => {
             field: 'slotEndTime',
             headerName: 'End Time',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_END_TIME,
             renderCell: (row: SlotManagementListResponse) => (
                 <span> {moment(row.slotEndTime).format('hh:mm a')} </span>
             ),
@@ -156,6 +162,7 @@ const SlotManagementListingWrapper = () => {
             field: 'pausePlay',
             headerName: 'Pause / Play',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_PAUSE_PLAY,
             renderCell: (row: SlotManagementListResponse) => (
                 <span>
                     {' '}
@@ -181,89 +188,19 @@ const SlotManagementListingWrapper = () => {
                 </span>
             ),
         },
-        // {
-        //     field: 'slotRun',
-        //     headerName: 'Run Status',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: any) => (
-        //         <div className="relative">
-        //             {moment(row?.slotStartTime).format('hh:mm:ss') <
-        //                 moment(new Date()).format('hh:mm:ss') &&
-        //             moment(new Date()).format('hh:mm:ss') <
-        //                 moment(row?.slotEndTime).format('hh:mm:ss') ? (
-        //                 <button
-        //                     disabled={true}
-        //                     className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
-        //                         row.runStatus === true && row.run === true
-        //                             ? 'hover:bg-green-100'
-        //                             : row.runStatus === true &&
-        //                               row.run === false
-        //                             ? 'hover:bg-red-100'
-        //                             : 'hover:bg-orange-100'
-        //                     } p-2 rounded-full border
-        //                     ${
-        //                         row.runStatus === true && row.run === true
-        //                             ? 'border-green-500'
-        //                             : row.runStatus === true &&
-        //                               row.run === false
-        //                             ? 'border-red-500'
-        //                             : 'border-orange-500'
-        //                     }
-        //                     `}
-        //                 >
-        //                     {row.runStatus === true && row.run === true ? (
-        //                         <TiTick />
-        //                     ) : (row.runStatus === true && row.run === false) ||
-        //                       (row.runStatus === false && row.run === true) ? (
-        //                         <FaTimes />
-        //                     ) : (
-        //                         <FaExclamation />
-        //                     )}
-        //                 </button>
-        //             ) : (
-        //                 <button
-        //                     onClick={(e) => {
-        //                         setRunState(row._id)
-        //                         setIsOpenDialog(true)
-        //                     }}
-        //                     className={`text-slate-600 font-bold m-1 transition-all duration-[600ms] ${
-        //                         row.runStatus === true && row.run === true
-        //                             ? 'hover:bg-green-100'
-        //                             : row.runStatus === true &&
-        //                               row.run === false
-        //                             ? 'hover:bg-red-100'
-        //                             : 'hover:bg-orange-100'
-        //                     } p-2 rounded-full border  ${
-        //                         row.runStatus === true && row.run === true
-        //                             ? 'border-green-500'
-        //                             : row.runStatus === true &&
-        //                               row.run === false
-        //                             ? 'border-red-500'
-        //                             : 'border-orange-500'
-        //                     }`}
-        //                 >
-        //                     {row.runStatus === true && row.run === true ? (
-        //                         <TiTick />
-        //                     ) : row.runStatus === true && row.run === false ? (
-        //                         <FaTimes />
-        //                     ) : (
-        //                         <FaExclamation />
-        //                     )}
-        //                 </button>
-        //             )}
-        //         </div>
-        //     ),
-        //     align: 'end',
-        // },
+
         {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.slotManagement}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -312,23 +249,10 @@ const SlotManagementListingWrapper = () => {
             {/* <MediaLayout> */}
             <div className="h-full">
                 <SlotManagementListing
-                         columns={columns}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-                {/* <DialogLogBox
-                    isOpen={isOpenDialog}
-                    buttonClass="cursor-pointer"
-                    handleClose={() => {
-                        setIsOpenDialog(false)
-                    }}
-                    component={
-                        <SlotRunWrapper
-                            id={runState}
-                            setIsOpenDialog={setIsOpenDialog}
-                        />
-                    }
-                /> */}
             </div>
             {/* </MediaLayout> */}
         </>

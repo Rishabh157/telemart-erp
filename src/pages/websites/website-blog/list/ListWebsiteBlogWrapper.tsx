@@ -27,20 +27,18 @@ import ListWebsiteBlog from './ListWebsiteBlog'
 
 // |-- Redux --|
 import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
-import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteBlogSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ListWebsiteBlogWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    //const {state} = useLocation()
-    //const {websiteId} = state
+
     const [deleteWebsiteBlog] = useDeletegetWebsiteBlogMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
@@ -58,6 +56,8 @@ const ListWebsiteBlogWrapper = () => {
             field: 'blogName',
             headerName: 'Blog Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_WEBSITES_BLOG_NAME,
+
             renderCell: (row: WebsiteBlogListResponse) => (
                 <span> {row.blogName} </span>
             ),
@@ -66,6 +66,8 @@ const ListWebsiteBlogWrapper = () => {
             field: 'blogTitle',
             headerName: 'Blog Title',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_TITLE,
+
             renderCell: (row: WebsiteBlogListResponse) => (
                 <span> {row.blogTitle} </span>
             ),
@@ -74,6 +76,8 @@ const ListWebsiteBlogWrapper = () => {
             field: 'blogSubtitle',
             headerName: 'Blog Subtitle',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_SUBTITLE,
+
             renderCell: (row: WebsiteBlogListResponse) => (
                 <span> {row.blogSubtitle} </span>
             ),
@@ -85,10 +89,15 @@ const ListWebsiteBlogWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.websiteBlog}
-                    isEdit
-                    isView
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_DELETE
+                    )}
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

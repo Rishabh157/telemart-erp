@@ -16,9 +16,7 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ChannelGroupListResponse } from 'src/models/ChannelGroup.model'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+
 import MediaLayout from 'src/pages/media/MediaLayout'
 import {
     useDeleteChannelGroupMutation,
@@ -34,6 +32,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/channelGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ChannelGroupListingWrapper = () => {
     const navigate = useNavigate()
@@ -53,6 +53,8 @@ const ChannelGroupListingWrapper = () => {
             field: 'groupName',
             headerName: 'Channel Group Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME,
+
             renderCell: (row: ChannelGroupListResponse) => (
                 <span> {row.groupName} </span>
             ),
@@ -63,9 +65,8 @@ const ChannelGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.channelGroup}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

@@ -26,9 +26,7 @@ import WebsiteLayout from '../../WebsiteLayout'
 import WebsiteListing from './WebsitetListing'
 
 // |-- Redux --|
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/websitePageSlice'
 import {
@@ -37,6 +35,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/website/websiteSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -53,6 +53,7 @@ const WebstieListingWrapper = () => {
             field: 'productName',
             headerName: 'Website Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_WEBSITES_NAME,
             renderCell: (row: WebsiteListResponse) => (
                 <span> {row.productName} </span>
             ),
@@ -61,6 +62,7 @@ const WebstieListingWrapper = () => {
             field: 'gaTagIp',
             headerName: 'GA Tag',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_GA_TAG,
             renderCell: (row: WebsiteListResponse) => (
                 <span> {row.gaTagIp} </span>
             ),
@@ -69,6 +71,7 @@ const WebstieListingWrapper = () => {
             field: 'url',
             headerName: 'URL',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_GA_TAG,
             renderCell: (row: WebsiteListResponse) => <span> {row.url} </span>,
         },
         {
@@ -77,9 +80,12 @@ const WebstieListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.website}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_ONE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_ONE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

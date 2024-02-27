@@ -26,7 +26,6 @@ import NdrDispositionListing from './NdrDispositionListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
-
 const NdrDispositionListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteTape] = useDeleteNdrDispositionMutation()
@@ -49,8 +48,7 @@ const NdrDispositionListingWrapper = () => {
         searchValue: searchValue,
         params: ['ndrDisposition'],
         page: page,
-        filterBy: [
-        ],
+        filterBy: [],
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
@@ -74,46 +72,48 @@ const NdrDispositionListingWrapper = () => {
             field: 'ndrDisposition',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => (
-                <span> {row?.ndrDisposition} </span>
-            ),
+            name: UserModuleNameTypes.NDR_DISPOSITION_LIST_DISPOSITION_NAME,
+
+            renderCell: (row: any) => <span> {row?.ndrDisposition} </span>,
         },
         {
             field: 'emailType',
             headerName: 'Email type',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => (
-                <span> {row?.emailType} </span>
-            ),
+            name: UserModuleNameTypes.NDR_DISPOSITION_LIST_EMAIL_TYPE,
+
+            renderCell: (row: any) => <span> {row?.emailType} </span>,
         },
         {
             field: 'smsType',
             headerName: 'Sms Type',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => (
-                <span> {row?.smsType} </span>
-            ),
+            name: UserModuleNameTypes.NDR_DISPOSITION_LIST_SMS_TYPE,
+
+            renderCell: (row: any) => <span> {row?.smsType} </span>,
         },
         {
             field: 'rtoAttempt',
             headerName: 'Rto Attempt',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => (
-                <span> {row?.rtoAttempt} </span>
-            ),
+            name: UserModuleNameTypes.NDR_DISPOSITION_LIST_RTO_ATTEMPT,
+
+            renderCell: (row: any) => <span> {row?.rtoAttempt} </span>,
         },
         {
             field: 'priority',
             headerName: 'Priority',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => (
-                <span> {row?.priority} </span>
-            ),
+            name: UserModuleNameTypes.NDR_DISPOSITION_LIST_PRIORITY,
+
+            renderCell: (row: any) => <span> {row?.priority} </span>,
         },
         {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.NDR_DISPOSITION_LIST_STATUS,
+
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -122,8 +122,9 @@ const NdrDispositionListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -143,8 +144,9 @@ const NdrDispositionListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -173,8 +175,12 @@ const NdrDispositionListingWrapper = () => {
                 <ActionPopup
                     // moduleName={UserModuleNameTypes.ndrDisposition}
 
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_NDR_DISPOSITION_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_NDR_DISPOSITION_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

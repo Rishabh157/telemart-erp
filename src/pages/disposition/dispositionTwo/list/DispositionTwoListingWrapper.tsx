@@ -5,9 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+
 import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import {
     setIsTableLoading,
@@ -23,6 +21,8 @@ import {
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispositionTwoListing from './DispositionTwoListing'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const DispositionTwoListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -80,6 +80,8 @@ const DispositionTwoListingWrapper = () => {
             field: 'dispositionName',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_TWO_LIST_DISPOSITION_NAME,
+
             renderCell: (row: DispositionTwoListResponse) => (
                 <span> {row?.dispositionName} </span>
             ),
@@ -88,6 +90,8 @@ const DispositionTwoListingWrapper = () => {
             field: 'dispostionOneLabel',
             headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_TWO_LIST_DISPOSITION_ONE_NAME,
+
             renderCell: (row: DispositionTwoListResponse) => (
                 <span> {row?.dispostionOneLabel} </span>
             ),
@@ -96,6 +100,8 @@ const DispositionTwoListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.DISPOSITION_TWO_LIST_STATUS,
+
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -154,9 +160,9 @@ const DispositionTwoListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dispositionTwo}
-                    isEdit
-                    isDelete
+            
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_TWO_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_TWO_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

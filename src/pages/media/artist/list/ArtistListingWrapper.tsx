@@ -16,9 +16,7 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ArtistListResponse } from 'src/models/Artist.model'
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+
 import {
     useDeletegetArtistMutation,
     useGetPaginationArtistQuery,
@@ -34,6 +32,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/media/artist'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ArtistListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -51,6 +51,8 @@ const ArtistListingWrapper = () => {
             field: 'artistName',
             headerName: 'Artist Name',
             flex: 'flex-[1_1_0%]',
+           
+            name: UserModuleNameTypes.ARTIST_LIST_ARTIST_NAME,
             renderCell: (row: ArtistListResponse) => (
                 <span> {row.artistName} </span>
             ),
@@ -62,9 +64,8 @@ const ArtistListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.artist}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ARTIST_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ARTIST_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
