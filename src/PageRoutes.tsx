@@ -537,7 +537,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<EditDealerWarehouseWrapper />}
                                     permission={
-                                        UserModuleNameTypes.NAV_DASHBOARD
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_EDIT
                                     }
                                 />
                             }
@@ -642,7 +642,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<EditDealerSchemeWrapper />}
                                     permission={
-                                        UserModuleNameTypes.NAV_DASHBOARD
+                                        UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_EDIT
                                     }
                                 />
                             }
@@ -893,7 +893,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<InwardsTabs />}
                                     permission={
-                                        UserModuleNameTypes.NAV_DASHBOARD
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INVENTORIES
                                     }
                                 />
                             }
@@ -1156,7 +1156,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditWarehouseToComapnyWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_EDIT
+                                }
                             />
                         }
                     />
@@ -1167,7 +1169,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<WarehouseToSampleListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_WAREHOUSE_TO_SAMPLE
+                                }
                             />
                         }
                     />
@@ -1176,7 +1180,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddWarehouseToSampleWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_ADD
+                                }
                             />
                         }
                     />
@@ -1185,7 +1191,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditWarehouseToSampleWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_EDIT
+                                }
                             />
                         }
                     />
@@ -1196,7 +1204,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ASRListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_ASR}
                             />
                         }
                     />
@@ -1205,7 +1213,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddASRWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.ACTION_ASR_ADD}
                             />
                         }
                     />
@@ -1214,7 +1222,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditASRWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.ACTION_ASR_EDIT}
                             />
                         }
                     />
@@ -1225,7 +1233,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<PurchaseOrderListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_PURCHASE_ORDER
+                                }
                             />
                         }
                     />
@@ -1234,7 +1244,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddPurchaseOrderWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PURCHASE_ORDER_ADD
+                                }
                             />
                         }
                     />
@@ -1252,7 +1264,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditPurchaseOrderWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PURCHASE_ORDER_EDIT
+                                }
                             />
                         }
                     />
@@ -1263,7 +1277,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<GRNListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_GRN}
                             />
                         }
                     />
@@ -1273,7 +1287,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddGRNWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.ACTION_GRN_ADD}
                             />
                         }
                     />
@@ -1284,7 +1298,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<InquiryListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_INQUIRY}
                             />
                         }
                     />
@@ -1305,7 +1319,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<Order />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_ORDER}
                             />
                         }
                     ></Route>
@@ -1320,16 +1334,10 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<CallListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_CALL}
                             />
                         }
                     />
-
-                    {/* CONFIGURATIONS
-                    <Route
-                        path="/configurations"
-                        element={<ConfigurationLayout />}
-                    /> */}
 
                     {/* Configurations -> Attributes */}
                     <Route
@@ -1337,7 +1345,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AttributesListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_ATTRIBUTE}
                             />
                         }
                     />
@@ -1346,7 +1354,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddAttributeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ATTRIBUTE_ADD
+                                }
                             />
                         }
                     />
@@ -1355,7 +1365,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditAttributeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ATTRIBUTE_EDIT
+                                }
                             />
                         }
                     />
@@ -1365,7 +1377,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AttributesGroupListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_ATTRIBUTE_GROUP
+                                }
                             />
                         }
                     />
@@ -1375,7 +1389,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddAttributeGroupWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
+                                }
                             />
                         }
                     />
@@ -1384,7 +1400,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditAttributeGroupWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_EDIT
+                                }
                             />
                         }
                     />
@@ -1395,7 +1413,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ProductCategoryListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_PRODUCT_CATEGORY
+                                }
                             />
                         }
                     />
@@ -1404,7 +1424,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddProductCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_ADD
+                                }
                             />
                         }
                     />
@@ -1413,7 +1435,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditProductCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_EDIT
+                                }
                             />
                         }
                     />
@@ -1424,7 +1448,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ProductSubCategoryListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_PRODUCT_SUB_CATEGORY
+                                }
                             />
                         }
                     />
@@ -1433,7 +1459,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddProductSubCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_ADD
+                                }
                             />
                         }
                     />
@@ -1442,7 +1470,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditProductSubCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_EDIT
+                                }
                             />
                         }
                     />
@@ -1453,7 +1483,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ProductGroupListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_PRODUCT_GROUP
+                                }
                             />
                         }
                     />
@@ -1463,7 +1495,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddProductGroupWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCT_GROUP_ADD
+                                }
                             />
                         }
                     />
@@ -1473,7 +1507,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditProductGroupWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCT_GROUP_EDIT
+                                }
                             />
                         }
                     />
@@ -1484,7 +1520,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<SchemeListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_SCHEME}
                             />
                         }
                     />
@@ -1493,7 +1529,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddSchemeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_SCHEME_ADD
+                                }
                             />
                         }
                     />
@@ -1502,7 +1540,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditSchemeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_SCHEME_EDIT
+                                }
                             />
                         }
                     />
@@ -1513,7 +1553,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ItemListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_ITEMS}
                             />
                         }
                     />
@@ -1522,7 +1562,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddItemWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ITEMS_ADD
+                                }
                             />
                         }
                     />
@@ -1531,7 +1573,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditItemWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ITEMS_EDIT
+                                }
                             />
                         }
                     />
@@ -1542,7 +1586,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ProductsListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_PRODUCTS}
                             />
                         }
                     />
@@ -1552,7 +1596,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddProductWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCTS_ADD
+                                }
                             />
                         }
                     />
@@ -1561,7 +1607,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditProductWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCTS_EDIT
+                                }
                             />
                         }
                     />
@@ -1572,7 +1620,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<CartonBoxListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_CARTON_BOX}
                             />
                         }
                     />
@@ -1581,7 +1629,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddCartonBoxWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_CARTON_BOX_ADD
+                                }
                             />
                         }
                     />
@@ -1591,7 +1641,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditCartonBoxWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_CARTON_BOX_EDIT
+                                }
                             />
                         }
                     />
@@ -1604,7 +1656,7 @@ const PageRoutes = () => {
                                 children={
                                     <ConfigurationCompanyListingWrapper />
                                 }
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_COMPANY}
                             />
                         }
                     />
@@ -1613,7 +1665,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddCompanyWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COMPANY_ADD
+                                }
                             />
                         }
                     />
@@ -1622,7 +1676,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditCompanyWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COMPANY_EDIT
+                                }
                             />
                         }
                     />
@@ -1633,7 +1689,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<CompanyBranchListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_COMPANY_BRANCH
+                                }
                             />
                         }
                     />
@@ -1642,7 +1700,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddCompanyBranchWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COMPANY_ADD
+                                }
                             />
                         }
                     />
@@ -1651,7 +1711,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditCompanyBranchWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COMPANY_EDIT
+                                }
                             />
                         }
                     />
@@ -1662,7 +1724,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<BarcodeListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_BARCODE_LIST
+                                }
                             />
                         }
                     />
@@ -1671,7 +1735,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddBarcodeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_BARCODE_ADD
+                                }
                             />
                         }
                     />
@@ -1717,7 +1783,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<LanguageListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_LANGUAGE}
                             />
                         }
                     />
@@ -1726,7 +1792,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddLanguageWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_LANGUAGE_ADD
+                                }
                             />
                         }
                     />
@@ -1735,7 +1803,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditLanguageWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_LANGUAGE_EDIT
+                                }
                             />
                         }
                     />
@@ -1746,7 +1816,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<DealersCategoryListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_DEALERS_CATEGORY
+                                }
                             />
                         }
                     />
@@ -1755,7 +1827,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddDealersCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DEALERS_CATEGORY_ADD
+                                }
                             />
                         }
                     />
@@ -1764,7 +1838,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditDealersCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DEALERS_CATEGORY_EDIT
+                                }
                             />
                         }
                     />
@@ -1774,7 +1850,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<CallCenterMasterListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_CALL_CENTER}
                             />
                         }
                     />
@@ -1783,7 +1859,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddCallCenterMasterWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_CALL_CENTER_ADD
+                                }
                             />
                         }
                     />
@@ -1792,7 +1870,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditCallCenterMasterWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_CALL_CENTER_ONE_EDIT
+                                }
                             />
                         }
                     />
@@ -1809,7 +1889,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ChannelGroupListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_CHANNEL_GROUP
+                                }
                             />
                         }
                     />
@@ -1818,7 +1900,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddChannelGroupWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_CHANNEL_GROUP_ADD
+                                }
                             />
                         }
                     />
@@ -1827,7 +1911,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditChannelGroupWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_CHANNEL_GROUP_EDIT
+                                }
                             />
                         }
                     />
@@ -1838,7 +1924,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ChannelCategoryListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_CHANNEL_CATEGORY
+                                }
                             />
                         }
                     />
@@ -1847,7 +1935,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddChannelCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_ADD
+                                }
                             />
                         }
                     />
@@ -1856,7 +1946,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditChannelCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_EDIT
+                                }
                             />
                         }
                     />
@@ -1896,7 +1988,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<DidManagementListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_DID_MANAGEMENT
+                                }
                             />
                         }
                     />
@@ -1905,7 +1999,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddDidManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DID_MANAGEMENT_ADD
+                                }
                             />
                         }
                     />
@@ -1914,7 +2010,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditDidManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DID_MANAGEMENT_EDIT
+                                }
                             />
                         }
                     />
@@ -1925,7 +2023,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ArtistListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_ARTIST}
                             />
                         }
                     />
@@ -1934,7 +2032,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddArtistWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ARTIST_ADD
+                                }
                             />
                         }
                     />
@@ -1943,19 +2043,22 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditArtistWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ARTIST_EDIT
+                                }
                             />
                         }
                     />
 
                     {/* Media -> Tap Management */}
-
                     <Route
                         path="media/tape"
                         element={
                             <Authorization
                                 children={<TapeManagementListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_TAPE_MANAGEMENT
+                                }
                             />
                         }
                     />
@@ -1964,7 +2067,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddTapeManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_ADD
+                                }
                             />
                         }
                     />
@@ -1973,7 +2078,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditTapeManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT
+                                }
                             />
                         }
                     />
@@ -1986,7 +2093,7 @@ const PageRoutes = () => {
                                 children={
                                     <CompetitorManagementListingWrapper />
                                 }
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_COMPETITOR}
                             />
                         }
                     />
@@ -1995,7 +2102,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddCompetitorWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COMPETITOR_ADD
+                                }
                             />
                         }
                     />
@@ -2004,7 +2113,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditCompetitorWraper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COMPETITOR_EDIT
+                                }
                             />
                         }
                     />
@@ -2022,13 +2133,25 @@ const PageRoutes = () => {
                             // />
                         }
                     > */}
-                    <Route index element={<SlotManagementListingWrapper />} />
+                    <Route
+                        index
+                        element={
+                            <Authorization
+                                children={<SlotManagementListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_SLOT_MANAGEMENT
+                                }
+                            />
+                        }
+                    />
                     <Route
                         path="add"
                         element={
                             <Authorization
                                 children={<AddSlotManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_ADD
+                                }
                             />
                         }
                     />
@@ -2037,7 +2160,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditSlotManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_EDIT
+                                }
                             />
                         }
                     />
@@ -2046,36 +2171,13 @@ const PageRoutes = () => {
                         path="run-slots"
                         element={<SlotRunViewsListingWrapper />}
                     />
-                    {/* <Route
-                            path="approved-orders"
-                            element={<ApprovedOrderListing />}
-                        /> */}
-                    {/* </Route> */}
-                    {/* <Route
-                        path="media/slot"
-                        element={
-                            <Authorization
-                                children={<SlotManagementListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    /> */}
-                    {/* <Route
-                        path="media/slot/add"
-                        element={
-                            <Authorization
-                                children={<AddSlotManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                                
-                            />
-                        }
-                    /> */}
 
-                    {/* Media -> Inbound Or Caller Page */}
+                    {/* Media -> Inbound Or Caller Page & Customer Page */}
                     <Route
                         path="media/caller-page"
                         element={<CallerPageWrapper />}
                     />
+
                     <Route
                         path="media/customer-page"
                         element={<CustomerPageWrapper />}
@@ -2087,7 +2189,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AssetsRequestWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_ASSETS}
                             />
                         }
                     />
@@ -2116,7 +2218,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AssetsCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_ASSETS_CATEGORY
+                                }
                             />
                         }
                     />
@@ -2125,7 +2229,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddAssetsCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ADD
+                                }
                             />
                         }
                     />
@@ -2134,7 +2240,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditAssetsCategoryWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ONE_EDIT
+                                }
                             />
                         }
                     />
@@ -2145,7 +2253,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AssetsLocationWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_ASSETS_LOCATION
+                                }
                             />
                         }
                     />
@@ -2154,7 +2264,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddAssetsLocationWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ASSETS_LOCATION_ADD
+                                }
                             />
                         }
                     />
@@ -2163,7 +2275,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditAssetsLocatonWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_EDIT
+                                }
                             />
                         }
                     />
@@ -2174,7 +2288,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AssetsRelocationWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_ASSETS_RELOCATION
+                                }
                             />
                         }
                     />
@@ -2183,7 +2299,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddAssetsRelocationWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ASSETS_RELOCATION_ADD
+                                }
                             />
                         }
                     />
@@ -2194,7 +2312,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AssetsAllocationWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_ASSETS_ALLOCATION
+                                }
                             />
                         }
                     />
@@ -2203,7 +2323,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddAssetsAllocationWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ASSETS_ALLOCATION_ADD
+                                }
                             />
                         }
                     />
@@ -2211,7 +2333,14 @@ const PageRoutes = () => {
                     {/* Customer Complain */}
                     <Route
                         path="/customer-complain"
-                        element={<CustomerComplainWrapper />}
+                        element={
+                            <Authorization
+                                children={<CustomerComplainWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN
+                                }
+                            />
+                        }
                     />
 
                     {/* Dispositions -> Disposition One */}
@@ -2220,7 +2349,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<DispositionOneListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_DISPOSITION_ONE
+                                }
                             />
                         }
                     />
@@ -2229,7 +2360,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddDispositionOneWrappper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DISPOSITION_ONE_ADD
+                                }
                             />
                         }
                     />
@@ -2238,7 +2371,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditDispositionOneWrappper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DISPOSITION_ONE_EDIT
+                                }
                             />
                         }
                     />
@@ -2249,7 +2384,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<DispositionTwoListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_DISPOSITION_TWO
+                                }
                             />
                         }
                     />
@@ -2258,7 +2395,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddDispositionTwoWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DISPOSITION_TWO_ADD
+                                }
                             />
                         }
                     />
@@ -2267,7 +2406,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditDispositionTwoWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DISPOSITION_TWO_EDIT
+                                }
                             />
                         }
                     />
@@ -2278,7 +2419,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<DispositionThreeListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_DISPOSITION_THREE
+                                }
                             />
                         }
                     />
@@ -2287,7 +2430,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddDispositionThreeWrappper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DISPOSITION_THREE_ADD
+                                }
                             />
                         }
                     />
@@ -2296,7 +2441,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditDispositionThreeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DISPOSITION_THREE_EDIT
+                                }
                             />
                         }
                     />
@@ -2316,7 +2463,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<InitialCallOneListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_IC_ONE}
                             />
                         }
                     />
@@ -2325,7 +2472,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddInitialCallOneWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_IC_ONE_ADD
+                                }
                             />
                         }
                     />
@@ -2334,7 +2483,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditInitialCallOneWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_IC_ONE_EDIT
+                                }
                             />
                         }
                     />
@@ -2345,7 +2496,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<InitialCallTwoListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_IC_TWO}
                             />
                         }
                     />
@@ -2354,7 +2505,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddInitialCallTwoWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_IC_TWO_ADD
+                                }
                             />
                         }
                     />
@@ -2363,7 +2516,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditInitialCallTwoWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_IC_TWO_EDIT
+                                }
                             />
                         }
                     />
@@ -2374,7 +2529,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<InitialCallThreeListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_IC_THREE}
                             />
                         }
                     />
@@ -2383,7 +2538,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddInitialCallThreeWrappper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_IC_THREE_ADD
+                                }
                             />
                         }
                     />
@@ -2392,7 +2549,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditInitialCallThreeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_IC_THREE_EDIT
+                                }
                             />
                         }
                     />
@@ -2414,7 +2573,9 @@ const PageRoutes = () => {
                                 children={
                                     <DispositionComplaintListingWrapper />
                                 }
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_DISPOSITION_COMPLAINT
+                                }
                             />
                         }
                     />
@@ -2423,7 +2584,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddDispositionComplaintWrappper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_ADD
+                                }
                             />
                         }
                     />
@@ -2432,7 +2595,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditDispositionComplaintWrappper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_EDIT
+                                }
                             />
                         }
                     />
@@ -2442,7 +2607,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<NdrDispositionListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_NDR_DISPOSITION
+                                }
                             />
                         }
                     />
@@ -2454,7 +2621,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddNdrDispositionWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_NDR_DISPOSITION_ADD
+                                }
                             />
                         }
                     />
@@ -2463,7 +2632,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditNdrDispositionWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
+                                }
                             />
                         }
                     />
@@ -2474,7 +2645,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<WebstieListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_ALL_WEBSITE}
                             />
                         }
                     />
@@ -2483,7 +2654,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddWebsiteWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WEBSITES_ADD
+                                }
                             />
                         }
                     />
@@ -2492,7 +2665,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditWebsiteWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WEBSITES_ONE_EDIT
+                                }
                             />
                         }
                     />
@@ -2503,7 +2678,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ListWebstieBlogWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_BLOG
+                                }
                             />
                         }
                     />
@@ -2512,7 +2689,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddWebsiteBlogWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WEBSITES_BLOG_ADD
+                                }
                             />
                         }
                     />
@@ -2521,7 +2700,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditWebsiteBlogWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_EDIT
+                                }
                             />
                         }
                     />
@@ -2541,7 +2722,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<WebsitePageListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
                             />
                         }
                     />
@@ -2550,7 +2733,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddWebsitePageWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WEBSITES_PAGES_ADD
+                                }
                             />
                         }
                     />
@@ -2559,7 +2744,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditWebsitePageWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WEBSITES_PAGES_ONE_EDIT
+                                }
                             />
                         }
                     />
@@ -2579,7 +2766,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<WebsiteTagListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_TAGS
+                                }
                             />
                         }
                     />
@@ -2588,7 +2777,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddWebsiteTagsWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WEBSITES_TAGS_ADD
+                                }
                             />
                         }
                     />
@@ -2597,7 +2788,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditWebsiteTagWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WEBSITES_TAGS_ONE_EDIT
+                                }
                             />
                         }
                     />

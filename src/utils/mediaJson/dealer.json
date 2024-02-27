@@ -185,6 +185,14 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_DEALER_DEALER_SCHEME_EDIT",
+            "actionUrl": "",
+            "actionName": "DEALER_SCHEME_EDIT",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW", "DEALER_SCHEME"],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_DEALER_ADD",
             "actionUrl": "",
             "actionName": "ADD",
