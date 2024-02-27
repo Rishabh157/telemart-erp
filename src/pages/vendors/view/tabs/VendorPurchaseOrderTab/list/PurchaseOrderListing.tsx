@@ -11,26 +11,22 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleNameTypes,
-    UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/PurchaseOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -57,18 +53,14 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Purchase Order </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.vendor}
-                    actionName={UserModuleAddActionTypes.vendorPoAdd}
-                    component={
-                        <button
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add PO{' '}
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_PURCHASE_ORDER_ADD) &&
+                    <button
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add PO{' '}
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -84,7 +76,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

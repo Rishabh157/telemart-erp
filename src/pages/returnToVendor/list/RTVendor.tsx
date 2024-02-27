@@ -7,31 +7,27 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/returnToVendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -63,18 +59,14 @@ const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Return To Vendor </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.rtvTransfer}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
-                            onClick={() => navigate('/return-to-vendor/add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Retrun To Vendor
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_ADD) &&
+                    <button
+                        onClick={() => navigate('/return-to-vendor/add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add Retrun To Vendor
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
@@ -91,8 +83,8 @@ const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

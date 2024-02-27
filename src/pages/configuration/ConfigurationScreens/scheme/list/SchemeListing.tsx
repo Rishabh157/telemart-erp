@@ -11,17 +11,14 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Redux--|
 import {
@@ -53,10 +50,7 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.scheme}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
+                {isAuthorized(UserModuleNameTypes.ACTION_SCHEME_ADD) &&
                         <button
                             onClick={() =>
                                 navigate('/configurations/scheme/add')
@@ -66,7 +60,6 @@ const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
                             + Add Scheme
                         </button>
                     }
-                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

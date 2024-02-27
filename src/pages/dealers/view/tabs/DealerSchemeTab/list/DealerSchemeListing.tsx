@@ -11,17 +11,12 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleNameTypes,
-    UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -30,7 +25,8 @@ import {
     setSearchValue,
 } from 'src/redux/slices/dealerSchemeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -57,10 +53,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.dealer}
-                    actionName={UserModuleAddActionTypes.dealerSchemeAdd}
-                    component={
+                {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_ADD) &&
                         <button
                             onClick={() =>
                                 navigate('/dealers/' + dealerId + '/scheme/add')
@@ -71,7 +64,6 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
                             + Add Scheme{' '}
                         </button>
                     }
-                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">

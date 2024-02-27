@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -9,17 +8,15 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/configuration/ndrDispositionSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import DispositionOneListFilterFormDialogWrapper from './DispositionOneFilter/DispositionOneListFilterFormDialogWrapper'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 type Props = {
     columns: any[]
@@ -56,19 +53,15 @@ const NdrDispositionListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>NDR Disposition </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.ndrDisposition}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
-                            type="button"
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_NDR_DISPOSITION_ADD) &&
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
