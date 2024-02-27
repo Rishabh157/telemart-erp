@@ -29,12 +29,8 @@ import {
 } from 'src/redux/slices/productSubCategorySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSearchValue } from 'src/redux/slices/productSubCategorySlice'
-import AuthenticationHOC from 'src/AuthenticationHOC'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -77,10 +73,7 @@ const ProductSubCategoryListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Product Sub Categories </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.productSubCategory}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
+                {isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_ADD) &&
                         <button
                             onClick={() =>
                                 navigate(
@@ -93,7 +86,6 @@ const ProductSubCategoryListing = ({
                             + Add{' '}
                         </button>
                     }
-                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

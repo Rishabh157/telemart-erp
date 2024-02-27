@@ -11,7 +11,6 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -19,14 +18,12 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import {
     setRowsPerPage,
     setPage,
     setSearchValue,
 } from 'src/redux/slices/ASRSlice'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -53,18 +50,13 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> ASR </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.asr}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
-                            onClick={() => navigate('/asr/add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add ASR
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_ASR_ADD) &&
+                    <button onClick={() => navigate('/asr/add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add ASR
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -79,8 +71,6 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
