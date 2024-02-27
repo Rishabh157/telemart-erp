@@ -6,11 +6,11 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -22,26 +22,23 @@ import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
 //     setTotalItems,
 // } from "src/redux/slices/vendorSlice";
 // import { useGetVendorsQuery } from "src/services/VendorServices";
-import ProductSubCategoryListing from './ProductSubCategoryListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import {
     useDeleteProductSubCategoryMutation,
     useGetProductSubCategoryQuery,
 } from 'src/services/ProductSubCategoryService'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ProductSubCategoryListing from './ProductSubCategoryListing'
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productSubCategorySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ProductSubCategoryListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -53,15 +50,14 @@ const ProductSubCategoryListingWrapper = () => {
         (state: RootState) => state.productSubCategory
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const columns: columnTypes[] = [
         {
             field: 'subCategoryCode',
             headerName: 'Sub Category Code',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_CODE,
+
             renderCell: (row: ProductSubCategoryListResponse) => (
                 <span> {row.subCategoryCode} </span>
             ),
@@ -70,6 +66,7 @@ const ProductSubCategoryListingWrapper = () => {
             field: 'subCategoryName',
             headerName: 'Sub Category Name ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_NAME,
             renderCell: (row: ProductSubCategoryListResponse) => {
                 return <span> {row.subCategoryName} </span>
             },
@@ -78,6 +75,7 @@ const ProductSubCategoryListingWrapper = () => {
             field: 'parentCategoryLabel',
             headerName: 'Parent Category ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PARENT_CATEGORY,
             renderCell: (row: ProductSubCategoryListResponse) => {
                 return <span> {row.parentCategoryLabel} </span>
             },
@@ -86,6 +84,7 @@ const ProductSubCategoryListingWrapper = () => {
             field: 'hsnCode',
             headerName: 'HSN Code ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_HSN_CODE,
             renderCell: (row: ProductSubCategoryListResponse) => {
                 return <span> {row.hsnCode} </span>
             },
@@ -96,9 +95,12 @@ const ProductSubCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.productSubCategory}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -183,12 +185,7 @@ const ProductSubCategoryListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <ProductSubCategoryListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.productSubCategory,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CallCenterMasterListResponse } from 'src/models/CallCenterMaster.model'
+
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import {
-    useGetCallCenterMasterQuery,
-    useDeleteCallCenterMasterMutation,
-} from 'src/services/CallCenterMasterServices'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/CallCenterMasterSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteCallCenterMasterMutation,
+    useGetCallCenterMasterQuery,
+} from 'src/services/CallCenterMasterServices'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import CallCenterMasterListing from './CallCenterMasterListing'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 // import { setIsTableLoading } from 'src/redux/slices/CallCenterMasterSlice'
 
 const CallCenterMasterListingWrapper = () => {
@@ -49,15 +47,15 @@ const CallCenterMasterListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+ 
 
     const columns: columnTypes[] = [
         {
             field: 'callCenterName',
             headerName: 'Call Center Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_CENTER_LIST_CALL_CENTER_NAME,
+
             renderCell: (row: CallCenterMasterListResponse) => (
                 <span className="capitalize"> {row.callCenterName} </span>
             ),
@@ -69,11 +67,10 @@ const CallCenterMasterListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.callCenterMaster}
-                    isEdit
-                    isDelete
+                 
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CALL_CENTER_ONE_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CALL_CENTER_ONE_DELETE)}
                     handleOnAction={() => {
-                        // e.stopPropagation()
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
@@ -150,12 +147,7 @@ const CallCenterMasterListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <CallCenterMasterListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.attribute,
-                        UserModuleActionTypes.List
-                    )}
+               columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

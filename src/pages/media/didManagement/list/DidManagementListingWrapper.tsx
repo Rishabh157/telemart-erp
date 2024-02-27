@@ -6,36 +6,34 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
+import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DidManagementListResponse } from 'src/models/Media.model'
-import DidManagementListing from './DidManagementListing'
-import MediaLayout from '../../MediaLayout'
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     useDeleteDidMutation,
     useGetPaginationDidQuery,
 } from 'src/services/media/DidManagementServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import MediaLayout from '../../MediaLayout'
+import DidManagementListing from './DidManagementListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/didManagementSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const DidManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -47,9 +45,7 @@ const DidManagementListingWrapper = () => {
     const [deleteDid] = useDeleteDidMutation()
     const { page, rowsPerPage, searchValue, items } = didManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -175,12 +171,7 @@ const DidManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <DidManagementListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.didManagement,
-                        UserModuleActionTypes.List
-                    )}
+                         columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

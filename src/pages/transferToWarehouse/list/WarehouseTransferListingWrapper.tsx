@@ -14,24 +14,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { GroupByWarehouseTransferResponseTypes } from 'src/models/WarehouseTransfer.model'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
+    UserModuleNameTypes
 } from 'src/models/userAccess/UserAccess.model'
 import {
     useDeleteWarehouseTransferMutation,
     useGetPaginationWarehouseTransferByGroupQuery,
     useUpdateWarehouseTransferApprovalMutation,
 } from 'src/services/WarehouseTransferService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WarehouseTransferListing from './WarehouseTransferListing'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Redux --|
 import {
@@ -54,10 +52,6 @@ const WarehouseTransferListingWrapper = () => {
     const [updateWarehouseTransfer] =
         useUpdateWarehouseTransferApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
-
     const { data, isFetching, isLoading } =
         useGetPaginationWarehouseTransferByGroupQuery({
             limit: rowsPerPage,
@@ -482,12 +476,7 @@ const WarehouseTransferListingWrapper = () => {
         <>
             <SideNavLayout>
                 <WarehouseTransferListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.wtsTransfer,
-                        UserModuleActionTypes.List
-                    )}
+                 columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

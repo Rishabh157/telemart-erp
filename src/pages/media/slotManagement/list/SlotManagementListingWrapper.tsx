@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,30 +19,28 @@ import { useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SlotManagementListResponse } from 'src/models/Slot.model'
-import SlotManagementListing from './SlotManagementListing'
 import {
     useDeleteSlotMangementMutation,
     useGetPaginationSlotQuery,
     useUpdateSlotContinueStatusMutation,
 } from 'src/services/media/SlotDefinitionServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import SlotManagementListing from './SlotManagementListing'
 // import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 // import SlotRunWrapper from '../update/SlotRunWrapper'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleNameTypes,
-    UserModuleOtherActionTypes,
+    UserModuleNameTypes
 } from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import { CiPause1, CiPlay1 } from 'react-icons/ci'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/slotManagementSlice'
-import { CiPause1, CiPlay1 } from 'react-icons/ci'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const SlotManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -55,9 +53,7 @@ const SlotManagementListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const { page, rowsPerPage, searchValue, items } = slotManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const [updatePausePlay] = useUpdateSlotContinueStatusMutation()
 
     const [deleteSlotMangement] = useDeleteSlotMangementMutation()
@@ -316,12 +312,7 @@ const SlotManagementListingWrapper = () => {
             {/* <MediaLayout> */}
             <div className="h-full">
                 <SlotManagementListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.slotManagement,
-                        UserModuleOtherActionTypes.slotDefinition
-                    )}
+                         columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

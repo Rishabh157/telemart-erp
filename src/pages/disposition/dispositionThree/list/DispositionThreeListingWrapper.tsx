@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Chip } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
+import DispositionLayout from 'src/pages/disposition/DispositionLayout'
+import {
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/configuration/dispositionThreeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useDeactiveDispositionThreeMutation,
     useDeletedispositionThreeMutation,
     useGetdispositionThreeQuery,
 } from 'src/services/configurations/DispositionThreeServices'
-import {
-    setItems,
-    setIsTableLoading,
-    setTotalItems,
-} from 'src/redux/slices/configuration/dispositionThreeSlice'
-import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispositionThreeListing from './DispositionThreeListing'
-import { useNavigate } from 'react-router-dom'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import { Chip } from '@mui/material'
 
 const DispositionThreeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -33,9 +31,7 @@ const DispositionThreeListingWrapper = () => {
     const { searchValue, filterValue, items, isActive }: any = useSelector(
         (state: RootState) => state.dispositionThree
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const [deactiveDispositionThree] = useDeactiveDispositionThreeMutation()
     const [deleteDispositonThree] = useDeletedispositionThreeMutation()
 
@@ -240,12 +236,7 @@ const DispositionThreeListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <DispositionThreeListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.dispositionThree,
-                            UserModuleActionTypes.List
-                        )}
+                  columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,15 +14,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { GRNListResponse } from 'src/models/GRN.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import GRNListing from './GRNListing'
+import { GRNListResponse } from 'src/models/GRN.model'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import GRNListing from './GRNListing'
 // import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
@@ -30,9 +25,8 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-    // setFilterValue,
 } from 'src/redux/slices/GRNSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
+import { AppDispatch, RootState } from 'src/redux/store'
 // import {
 //   setFilterValue,
 //   setIsTableLoading,
@@ -105,9 +99,7 @@ const GRNListingWrapper = () => {
     const grnState: any = useSelector((state: RootState) => state.grn)
     const { page, rowsPerPage, searchValue, items, filterValue } = grnState
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+ 
     const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -152,12 +144,7 @@ const GRNListingWrapper = () => {
         <>
             <SideNavLayout>
                 <GRNListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.grn,
-                        UserModuleActionTypes.List
-                    )}
+                         columns={columns}
                     rows={items}
                 />
             </SideNavLayout>

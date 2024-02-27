@@ -6,37 +6,35 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import MediaLayout from '../../MediaLayout'
-import CompetitorManagementListing from './CompetitorManagementListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CompetitorManagementListResponse } from 'src/models/CompetitorManagement.model'
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     useDeletegetCompetitorMutation,
     useGetPaginationcompetitorQuery,
 } from 'src/services/media/CompetitorManagementServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import MediaLayout from '../../MediaLayout'
+import CompetitorManagementListing from './CompetitorManagementListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import moment from 'moment'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/competitorManagementSlice'
-import moment from 'moment'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const CompetitorManagementListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -47,9 +45,7 @@ const CompetitorManagementListingWrapper = () => {
     const competitorManagementState: any = useSelector(
         (state: RootState) => state.competitor
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items } = competitorManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
     const columns: columnTypes[] = [
@@ -227,12 +223,7 @@ const CompetitorManagementListingWrapper = () => {
         <>
             <MediaLayout>
                 <CompetitorManagementListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.competitor,
-                        UserModuleActionTypes.List
-                    )}
+                   columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

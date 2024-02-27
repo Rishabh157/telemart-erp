@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import TapeManagementListing from './TapeManagementListing'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import MediaLayout from '../../MediaLayout'
-import {
-    useGetPaginationTapeQuery,
-    useDeleteTapeMutation,
-} from 'src/services/media/TapeManagementServices'
-import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
+    UserModuleNameTypes
 } from 'src/models/userAccess/UserAccess.model'
+import {
+    useDeleteTapeMutation,
+    useGetPaginationTapeQuery,
+} from 'src/services/media/TapeManagementServices'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import MediaLayout from '../../MediaLayout'
+import TapeManagementListing from './TapeManagementListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/tapeManagementSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // export type language ={
 //     languageId:string[];
@@ -50,9 +48,7 @@ const TapeManagementListingWrapper = () => {
     const tapeManagementState: any = useSelector(
         (state: RootState) => state.tapeManagement
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items } = tapeManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -186,12 +182,7 @@ const TapeManagementListingWrapper = () => {
             <MediaLayout>
                 <div className="h-full">
                     <TapeManagementListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.tapeManangement,
-                            UserModuleActionTypes.List
-                        )}
+                            columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

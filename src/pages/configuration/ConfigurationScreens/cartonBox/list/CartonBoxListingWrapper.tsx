@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CartonBoxListResponse } from 'src/models/CartonBox.model'
+
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import CartonBoxListing from './CartonBoxListing'
-import {
-    useDeleteCartonBoxMutation,
-    useGetCartonBoxQuery,
-} from 'src/services/CartonBoxService'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/cartonBoxSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteCartonBoxMutation,
+    useGetCartonBoxQuery,
+} from 'src/services/CartonBoxService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import CartonBoxListing from './CartonBoxListing'
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const CartonBoxListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -47,15 +45,13 @@ const CartonBoxListingWrapper = () => {
     const cartonBoxState: any = useSelector(
         (state: RootState) => state.cartonBox
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const columns: columnTypes[] = [
         {
             field: 'boxName',
             headerName: 'Box Name',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.CARTON_BOX_LIST_BOX_NAME,
             renderCell: (row: CartonBoxListResponse) => {
                 return <span> {row?.boxName} </span>
             },
@@ -64,6 +60,7 @@ const CartonBoxListingWrapper = () => {
             field: 'innerItemCount',
             headerName: 'Inner Items Count',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CARTON_BOX_LIST_INNER_ITEMS_COUNT,
             renderCell: (row: CartonBoxListResponse) => (
                 <span> {row?.innerItemCount} </span>
             ),
@@ -72,6 +69,7 @@ const CartonBoxListingWrapper = () => {
             field: 'dimension',
             headerName: 'Dimensions',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.CARTON_BOX_LIST_DIMENSIONS,
             renderCell: (row: CartonBoxListResponse) => {
                 return (
                     <span>
@@ -86,6 +84,7 @@ const CartonBoxListingWrapper = () => {
             field: 'boxWeight',
             headerName: "Box Weight (in gm's)",
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.CARTON_BOX_LIST_BOX_WEIGHT,
             renderCell: (row: CartonBoxListResponse) => {
                 return <span> {row?.boxWeight} </span>
             },
@@ -97,9 +96,8 @@ const CartonBoxListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.cartonBox}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CARTON_BOX_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CARTON_BOX_DELETE)}
                     handleOnAction={() => {
                         // e.stopPropagation()
                         setShowDropdown(!showDropdown)
@@ -178,12 +176,7 @@ const CartonBoxListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <CartonBoxListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.cartonBox,
-                        UserModuleActionTypes.List
-                    )}
+           columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

@@ -6,37 +6,35 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- Internal Dependencies --|
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import WebsiteLayout from '../../WebsiteLayout'
-import ListWebsiteBlog from './ListWebsiteBlog'
 import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
 import {
     useDeletegetWebsiteBlogMutation,
     useGetPaginationWebsiteBlogQuery,
 } from 'src/services/websites/WebsiteBlogServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WebsiteLayout from '../../WebsiteLayout'
+import ListWebsiteBlog from './ListWebsiteBlog'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteBlogSlice'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const ListWebsiteBlogWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -49,9 +47,7 @@ const ListWebsiteBlogWrapper = () => {
     const WebsiteBlogState: any = useSelector(
         (state: RootState) => state.websiteBlog
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue, items, filterValue } =
@@ -175,12 +171,7 @@ const ListWebsiteBlogWrapper = () => {
         <>
             <WebsiteLayout>
                 <ListWebsiteBlog
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.websiteBlog,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

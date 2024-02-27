@@ -6,55 +6,54 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { OrderListResponse } from 'src/models'
-import {
-    useGetOrderQuery,
-    useGetOrderFlowQuery,
-    useDispatchedOrderBarcodeMutation,
-    useApprovedOrderStatusMutation,
-} from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { OrderListResponse } from 'src/models'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-// |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    setRowsPerPage,
+    useApprovedOrderStatusMutation,
+    useDispatchedOrderBarcodeMutation,
+    useGetOrderFlowQuery,
+    useGetOrderQuery,
+} from 'src/services/OrderService'
+// |-- Redux --|
+import {
+    setFilterValue,
     setIsTableLoading,
     setItems,
     setPage,
+    setRowsPerPage,
     setSearchValue,
     setTotalItems,
-    setFilterValue,
 } from 'src/redux/slices/orderSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 // import AuthenticationHOC from 'src/AuthenticationHOC'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 // Dispatching imports
-import { showToast } from 'src/utils'
+import { Chip } from '@mui/material'
+import moment from 'moment'
 import { IoRemoveCircle } from 'react-icons/io5'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { AlertText } from 'src/pages/callerpage/components/constants'
-import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
-import { Chip } from '@mui/material'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
+import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import moment from 'moment'
+import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 
 // Types
 type BarcodeListResponseType = {
@@ -108,9 +107,7 @@ const OrderListing = ({
     const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] =
         useState<boolean>(false)
     const orderState: any = useSelector((state: RootState) => state.order)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+   
 
     const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
 
@@ -630,12 +627,7 @@ const OrderListing = ({
                 {/* Table */}
                 <div className="grow overflow-auto  ">
                     <ATMTable
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.order,
-                            tabName
-                        )}
+                       columns={columns}
                         rows={items}
                         // isCheckbox={true}
                         selectedRows={selectedRows}

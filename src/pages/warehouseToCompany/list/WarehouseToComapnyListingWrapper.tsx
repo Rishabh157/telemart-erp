@@ -18,24 +18,22 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { OutwardRequestWarehouseToCompanyListResponse } from 'src/models'
 import { showToast } from 'src/utils'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WarehouseToComapnyListing from './WarehouseToComapnyListing'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-import { OutwardRequestWarehouseToCompanyListResponse } from 'src/models'
 
 // |-- Redux --|
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/WarehouseToComapnySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 import {
     useDeleteWarehouseToComapnyMutation,
     useGetPaginationWarehouseToComapnyByGroupQuery,
@@ -384,9 +382,7 @@ const WarehouseToComapnyListingWrapper = () => {
     const [updateWarehouseToComapny] =
         useUpdateWarehouseToComapnyApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
 
     const { data, isFetching, isLoading } =
         useGetPaginationWarehouseToComapnyByGroupQuery({
@@ -498,12 +494,7 @@ const WarehouseToComapnyListingWrapper = () => {
         <>
             <SideNavLayout>
                 <WarehouseToComapnyListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.warehouseToCompanyTransfer,
-                        UserModuleActionTypes.List
-                    )}
+                columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

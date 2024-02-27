@@ -87,11 +87,7 @@ const configurationNavigation: NavItemType[] = [
         path: '/configurations/carton-box',
         name: UserModuleNameTypes.NAV_CARTON_BOX,
     },
-    // {
-    //     label: 'Taxes',
-    //     icon: HiOutlineReceiptTax,
-    //     path: '/configurations/taxes',
-    // },
+ 
     {
         label: 'Company',
         icon: CgOrganisation,

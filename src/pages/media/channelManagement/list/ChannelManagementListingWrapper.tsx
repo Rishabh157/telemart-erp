@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,26 +17,24 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import ChannelManagementListing from './ChannelManagementListing'
 // import { useNavigate } from "react-router-dom";
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
+import MediaLayout from 'src/pages/media/MediaLayout'
 import {
     useDeleteChannelMutation,
     useGetPaginationchannelQuery,
 } from 'src/services/media/ChannelManagementServices'
-import MediaLayout from 'src/pages/media/MediaLayout'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelManagementSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const ChannelManagementListingWrapper = () => {
     const channelManagementState: any = useSelector(
@@ -46,9 +44,7 @@ const ChannelManagementListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const { page, rowsPerPage, searchValue, items } = channelManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+  
     const [deleteChannel] = useDeleteChannelMutation()
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -186,12 +182,7 @@ const ChannelManagementListingWrapper = () => {
             <MediaLayout>
                 <div className="h-full">
                     <ChannelManagementListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.channelManagement,
-                            UserModuleActionTypes.List
-                        )}
+                           columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

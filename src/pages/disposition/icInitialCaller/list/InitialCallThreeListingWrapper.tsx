@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import { Chip } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import InitialCallThreeListing from './InitialCallThreeListing'
+import { useNavigate } from 'react-router-dom'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
+import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/initialCallerThreeSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
+    useDeactiveInitialCallerThreeMutation,
     useDeleteInitialCallerThreeMutation,
     useGetInitialCallerThreeQuery,
-    useDeactiveInitialCallerThreeMutation,
 } from 'src/services/configurations/InitialCallerThreeServices'
-import { useNavigate } from 'react-router-dom'
-import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import { Chip } from '@mui/material'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import InitialCallThreeListing from './InitialCallThreeListing'
 const InitialCallThreeListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
@@ -34,9 +32,7 @@ const InitialCallThreeListingWrapper = () => {
     const initialCallThreeState: any = useSelector(
         (state: RootState) => state.initialCallerThree
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+  
     const { page, rowsPerPage, searchValue, items, isActive } =
         initialCallThreeState
 
@@ -256,12 +252,7 @@ const InitialCallThreeListingWrapper = () => {
         <>
             <DispositionLayout>
                 <InitialCallThreeListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.initialCallerThree,
-                        UserModuleActionTypes.List
-                    )}
+                columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

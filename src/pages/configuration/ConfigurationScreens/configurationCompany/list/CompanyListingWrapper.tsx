@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,12 +16,12 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ConfigurationCompanyListResponse } from 'src/models/ConfigurationCompany.model'
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import ConfigurationCompanyListing from './CompanyListing'
 import {
     useDeleteCompanyMutation,
     useGetCompaniesQuery,
 } from 'src/services/CompanyServices'
-
+import ConfigurationCompanyListing from './CompanyListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import {
     setIsTableLoading,
     setItems,
@@ -29,29 +29,23 @@ import {
 } from 'src/redux/slices/companySlice'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ConfigurationCompanyListingWrapper = () => {
     const navigate = useNavigate()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteCompany] = useDeleteCompanyMutation()
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const columns: columnTypes[] = [
         {
             field: 'companyName',
             headerName: 'Company Name ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.COMPANY_LIST_COMAPNY_NAME,
             renderCell: (row: ConfigurationCompanyListResponse) => {
                 return <span> {row.companyName} </span>
             },
@@ -60,6 +54,7 @@ const ConfigurationCompanyListingWrapper = () => {
             field: 'websiteUrl',
             headerName: 'Website URL ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.COMPANY_LIST_WEBSITE_URL,
             renderCell: (row: ConfigurationCompanyListResponse) => {
                 return <span> {row.websiteUrl} </span>
             },
@@ -68,6 +63,7 @@ const ConfigurationCompanyListingWrapper = () => {
             field: 'address',
             headerName: 'Address ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.COMPANY_LIST_ADDRESS,
             renderCell: (row: ConfigurationCompanyListResponse) => {
                 return <span> {row.address} </span>
             },
@@ -76,6 +72,7 @@ const ConfigurationCompanyListingWrapper = () => {
             field: 'gstNo',
             headerName: 'GST no.',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.COMPANY_LIST_GST_NO,
             renderCell: (row: ConfigurationCompanyListResponse) => {
                 return <span> {row.gstNo} </span>
             },
@@ -84,6 +81,7 @@ const ConfigurationCompanyListingWrapper = () => {
             field: 'phoneNo',
             headerName: 'Phone no.',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.COMPANY_LIST_PHONE_NO,
             renderCell: (row: ConfigurationCompanyListResponse) => {
                 return <span> {row.phoneNo} </span>
             },
@@ -94,9 +92,12 @@ const ConfigurationCompanyListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.company}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_COMPANY_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_COMPANY_DELETE
+                    )}
                     handleOnAction={() => {
                         // e.stopPropagation()
                         setShowDropdown(!showDropdown)
@@ -172,12 +173,7 @@ const ConfigurationCompanyListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <ConfigurationCompanyListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.company,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

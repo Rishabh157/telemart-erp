@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { LanguageListResponse } from 'src/models/Language.model'
+
 import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import LanguageListing from './LanguageListing'
-import {
-    useDeleteLanguageMutation,
-    useGetLanguageQuery,
-} from 'src/services/LanguageService'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/languageSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteLanguageMutation,
+    useGetLanguageQuery,
+} from 'src/services/LanguageService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import LanguageListing from './LanguageListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const LanguageListingWrapper = () => {
     const navigate = useNavigate()
@@ -45,14 +43,13 @@ const LanguageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+  
     const columns: columnTypes[] = [
         {
             field: 'languageName',
             headerName: 'Language',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.LANGUAGE_LIST_LANGUAGE,
             renderCell: (row: LanguageListResponse) => (
                 <span> {row.languageName} </span>
             ),
@@ -63,9 +60,8 @@ const LanguageListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.language}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_LANGUAGE_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_LANGUAGE_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -140,12 +136,7 @@ const LanguageListingWrapper = () => {
         <>
             <ConfigurationLayout>
                 <LanguageListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.language,
-                        UserModuleActionTypes.List
-                    )}
+              columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,29 +14,27 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import WebsiteLayout from '../../WebsiteLayout'
-import WebsiteTagListing from './WebsiteTagListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { WebsiteTagsListResponse } from 'src/models/website/WebsiteTags.model'
 import {
     useDeleteWebsiteTagsMutation,
     useGetPaginationWebsiteTagsQuery,
 } from 'src/services/websites/WebsiteTagsServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WebsiteLayout from '../../WebsiteLayout'
+import WebsiteTagListing from './WebsiteTagListing'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteTagsSlice'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const WebsiteTagListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -49,9 +47,7 @@ const WebsiteTagListingWrapper = () => {
     const WebsiteTagsState: any = useSelector(
         (state: RootState) => state.websiteTags
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue, items } = WebsiteTagsState
@@ -182,12 +178,7 @@ const WebsiteTagListingWrapper = () => {
         <>
             <WebsiteLayout>
                 <WebsiteTagListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.websiteTags,
-                        UserModuleActionTypes.List
-                    )}
+                  columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

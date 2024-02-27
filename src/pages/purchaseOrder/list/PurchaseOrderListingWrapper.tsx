@@ -6,41 +6,40 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import moment from 'moment'
 import { Chip, Stack } from '@mui/material'
+import moment from 'moment'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import PurchaseOrderListing from './PurchaseOrderListing'
-import {
-    useGetPurchaseOrderQuery,
-    useUpdatePoLevelMutation,
-} from 'src/services/PurchaseOrderService'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import {
     UserModuleActionTypes,
     UserModuleNameTypes,
 } from 'src/models/userAccess/UserAccess.model'
+import {
+    useGetPurchaseOrderQuery,
+    useUpdatePoLevelMutation,
+} from 'src/services/PurchaseOrderService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import PurchaseOrderListing from './PurchaseOrderListing'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import AuthenticationHOC from 'src/AuthenticationHOC'
 import { setFilterValue } from 'src/redux/slices/GRNSlice'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/PurchaseOrderSlice'
-import AuthenticationHOC from 'src/AuthenticationHOC'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const PurchaseOrderListingWrapper = () => {
     const navigate = useNavigate()
@@ -50,9 +49,7 @@ const PurchaseOrderListingWrapper = () => {
     const productOrderState: any = useSelector(
         (state: RootState) => state.purchaseOrder
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items } = productOrderState
     const { userData }: any = useSelector((state: RootState) => state.auth)
     const [showDropdown, setShowDropdown] = useState(false)
@@ -389,12 +386,7 @@ const PurchaseOrderListingWrapper = () => {
         <>
             <SideNavLayout>
                 <PurchaseOrderListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.purchaseOrder,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items || []}
                     setShowDropdown={setShowDropdown}
                 />

@@ -14,23 +14,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import RTVendor from './RTVendor'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
+    UserModuleNameTypes
 } from 'src/models/userAccess/UserAccess.model'
 import {
+    useDeleteReturnToVendorOrderMutation,
     useGetPaginationReturnToVendorByGroupQuery,
     useUpdateReturnToVendorApprovalMutation,
-    useDeleteReturnToVendorOrderMutation,
 } from 'src/services/ReturnToVendorService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import RTVendor from './RTVendor'
 
 // |-- Redux --|
 import {
@@ -101,9 +99,7 @@ const RTVListingWrapper = () => {
     const [deleteReturnToVendor] = useDeleteReturnToVendorOrderMutation()
     const [updateReturnToVendor] = useUpdateReturnToVendorApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
 
     const { data, isFetching, isLoading } =
         useGetPaginationReturnToVendorByGroupQuery({
@@ -523,12 +519,7 @@ const RTVListingWrapper = () => {
         <>
             <SideNavLayout>
                 <RTVendor
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.rtvTransfer,
-                        UserModuleActionTypes.List
-                    )}
+                        columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

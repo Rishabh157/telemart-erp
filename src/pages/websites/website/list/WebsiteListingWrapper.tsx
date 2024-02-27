@@ -6,39 +6,37 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import WebsiteLayout from '../../WebsiteLayout'
-import WebsiteListing from './WebsitetListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { WebsiteListResponse } from 'src/models/website/Website.model'
 import {
     useDeletegetWebsiteMutation,
     useGetPaginationWebsiteQuery,
 } from 'src/services/websites/WebsiteServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WebsiteLayout from '../../WebsiteLayout'
+import WebsiteListing from './WebsitetListing'
 
 // |-- Redux --|
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/websitePageSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteSlice'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -48,9 +46,7 @@ const WebstieListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteState: any = useSelector((state: RootState) => state.website)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items } = WebsiteState
     const columns: columnTypes[] = [
         {
@@ -218,12 +214,7 @@ const WebstieListingWrapper = () => {
         <>
             <WebsiteLayout>
                 <WebsiteListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.website,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

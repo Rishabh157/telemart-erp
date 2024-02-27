@@ -6,12 +6,12 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
-import { FaTimes } from 'react-icons/fa'
 import moment from 'moment'
+import { FaTimes } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 import { FaExclamation } from 'react-icons/fa'
 import { TiTick } from 'react-icons/ti'
@@ -29,18 +29,13 @@ import SlotManagementListing from './SlotRunViewtListing'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import SlotRunWrapper from '../update/SlotRunWrapper'
 // import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleNameTypes,
-    UserModuleOtherActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/slotManagementSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetPaginationSlotViewQuery } from 'src/services/media/SlotsViewServices'
 
 const SlotRunViewsListingWrapper = () => {
@@ -54,9 +49,7 @@ const SlotRunViewsListingWrapper = () => {
     // const [currentId, setCurrentId] = useState('')
     const { page, rowsPerPage, searchValue, items } = slotManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     // const [deleteSlotMangement] = useDeleteSlotMangementMutation()
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -187,12 +180,7 @@ const SlotRunViewsListingWrapper = () => {
             {/* <MediaLayout> */}
             <div className="h-full">
                 <SlotManagementListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.slotManagement,
-                        UserModuleOtherActionTypes.slots
-                    )}
+                          columns={columns}
                     rows={items}
                     // setShowDropdown={setShowDropdown}
                 />

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,26 +14,24 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import AsstesLayout from '../../AssetsLayout'
-import AssetsRequestListing from './AssetsRequestListing'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { AssetsRequestListResponse } from 'src/models'
 import {
-    useGetAssetsRequestQuery,
-    useDeleteAssetsRequestMutation,
-} from 'src/services/assets/AssetsRequestServcies'
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
-    setTotalItems,
     setItems,
+    setTotalItems,
 } from 'src/redux/slices/assets/assetsRequestSlice'
-import { AssetsRequestListResponse } from 'src/models'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteAssetsRequestMutation,
+    useGetAssetsRequestQuery,
+} from 'src/services/assets/AssetsRequestServcies'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import AsstesLayout from '../../AssetsLayout'
+import AssetsRequestListing from './AssetsRequestListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -43,9 +41,7 @@ const AssetsRequestWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteAsset] = useDeleteAssetsRequestMutation()
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+ 
     const columns: columnTypes[] = [
         {
             field: 'assetName',
@@ -168,12 +164,7 @@ const AssetsRequestWrapper = () => {
         <>
             <AsstesLayout>
                 <AssetsRequestListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.assetRequest,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

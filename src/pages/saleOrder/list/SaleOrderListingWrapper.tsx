@@ -14,20 +14,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 import { SaleOrderListResponseTypes } from 'src/models/SaleOrder.model'
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     useDeleteSalesOrderMutation,
     useGetPaginationSaleOrderByGroupQuery,
     useUpdateSalesOrderApprovalMutation,
 } from 'src/services/SalesOrderService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 // import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
@@ -53,9 +51,7 @@ const SaleOrderListingWrapper = () => {
     const [deleteSaleOrder] = useDeleteSalesOrderMutation()
     const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+  
 
     const { data, isFetching, isLoading } =
         useGetPaginationSaleOrderByGroupQuery({
@@ -516,12 +512,7 @@ const SaleOrderListingWrapper = () => {
     return (
         <SideNavLayout>
             <SaleOrderListing
-                columns={getAllowedAuthorizedColumns(
-                    checkUserAccess,
-                    columns,
-                    UserModuleNameTypes.saleOrder,
-                    UserModuleActionTypes.List
-                )}
+                columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
             />

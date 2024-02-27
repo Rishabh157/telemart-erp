@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import InitialCallOneListing from './InitialCallOneListing'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import InitialCallOneListing from './InitialCallOneListing'
 
+import { Chip } from '@mui/material'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
 import {
-    useGetinitialCallerOneQuery,
-    useDeleteinitialCallerOneMutation,
-    useDeactiveInitialCallerOneMutation,
-} from 'src/services/configurations/InitialCallerOneServices'
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/initialCallerOneSlice'
-import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
-import DispositionLayout from '../../DispositionLayout'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import { Chip } from '@mui/material'
+    useDeactiveInitialCallerOneMutation,
+    useDeleteinitialCallerOneMutation,
+    useGetinitialCallerOneQuery,
+} from 'src/services/configurations/InitialCallerOneServices'
+import DispositionLayout from '../../DispositionLayout'
 // export type language ={
 //     languageId:string[];
 
@@ -39,9 +37,7 @@ const InitialCallOneListingWrapper = () => {
     const initialCallOneState: any = useSelector(
         (state: RootState) => state.initialCallerOne
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+ 
     const { page, rowsPerPage, searchValue, items, isActive } =
         initialCallOneState
 
@@ -224,12 +220,7 @@ const InitialCallOneListingWrapper = () => {
             <DispositionLayout>
                 <div className="h-full">
                     <InitialCallOneListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.initialCallerOne,
-                            UserModuleActionTypes.List
-                        )}
+                      columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

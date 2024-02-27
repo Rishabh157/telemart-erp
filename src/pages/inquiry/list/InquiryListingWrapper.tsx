@@ -6,41 +6,38 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { InquiryListResponse } from 'src/models'
-import { useGetInquiryQuery } from 'src/services/InquiryService'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { InquiryListResponse } from 'src/models'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
+    UserModuleNameTypes
 } from 'src/models/userAccess/UserAccess.model'
+import { useGetInquiryQuery } from 'src/services/InquiryService'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    setRowsPerPage,
     setIsTableLoading,
     setItems,
     setPage,
+    setRowsPerPage,
     setSearchValue,
     setTotalItems,
-    //setFilterValue,
 } from 'src/redux/slices/inquirySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const InquiryListingWrapper = () => {
     // Hooks
@@ -54,9 +51,6 @@ const InquiryListingWrapper = () => {
 
     const inquiryState: any = useSelector((state: RootState) => state.inquiry)
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const {
         page,
@@ -225,12 +219,7 @@ const InquiryListingWrapper = () => {
                     {/* Table */}
                     <div className="grow overflow-auto  ">
                         <ATMTable
-                            columns={getAllowedAuthorizedColumns(
-                                checkUserAccess,
-                                columns,
-                                UserModuleNameTypes.inquiry,
-                                UserModuleActionTypes.List
-                            )}
+                             columns={columns}
                             rows={items}
                             // isCheckbox={true}
                             selectedRows={selectedRows}

@@ -14,17 +14,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { OutwardRequestWarehouseToSampleListResponse } from 'src/models'
 import { showToast } from 'src/utils'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WarehouseTransferListing from './WarehouseToSampleListing'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-import { OutwardRequestWarehouseToSampleListResponse } from 'src/models'
 
 // |-- Redux --|
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
@@ -32,13 +34,9 @@ import {
 } from 'src/redux/slices/warehouseToSampleSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import {
+    useDeleteWarehouseToSampleOrderMutation,
     useGetPaginationWarehouseToSampleByGroupQuery,
     useUpdateWarehouseToSampleApprovalMutation,
-    useDeleteWarehouseToSampleOrderMutation,
 } from 'src/services/WarehouseToSampleService'
 
 const WarehouseToSampleListingWrapper = () => {
@@ -54,9 +52,7 @@ const WarehouseToSampleListingWrapper = () => {
     const [updateWarehouseTransfer] =
         useUpdateWarehouseToSampleApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
 
     const { data, isFetching, isLoading } =
         useGetPaginationWarehouseToSampleByGroupQuery({
@@ -481,12 +477,7 @@ const WarehouseToSampleListingWrapper = () => {
         <>
             <SideNavLayout>
                 <WarehouseTransferListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.warehouseToSampleTransfer,
-                        UserModuleActionTypes.List
-                    )}
+                       columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
