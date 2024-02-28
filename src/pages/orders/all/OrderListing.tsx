@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:OrderListing.tsx
 // Type: List Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: FEB 28, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -248,15 +248,148 @@ const OrderListing = ({
         {
             field: 'orderNumber',
             headerName: 'Order No.',
-            flex: 'flex-[0.4_0.4_0%]',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
         },
         {
-            field: 'createdAt',
-            headerName: 'Create Date',
+            field: 'enqNo',
+            headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            // renderCell: (row: OrderListResponse) => <span></span>,
+        },
+        {
+            field: 'assignWarehouseLabel',
+            headerName: 'Warehouse',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignWarehouseLabel || '-'}</span>
+            ),
+        },
+        {
+            field: 'trackingNo',
+            headerName: 'Tracking No.',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => <span>-</span>,
+        },
+        {
+            field: 'tehsilLabel',
+            headerName: 'Taluk',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.tehsilLabel}</span>
+            ),
+        },
+        {
+            field: 'statusDate',
+            headerName: 'Status Date',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            // renderCell: (row: OrderListResponse) => (
+            //     <span>{row?.assignWarehouseLabel}</span>
+            // ),
+        },
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
+        },
+        {
+            field: 'shippingCharges',
+            headerName: 'Shippgig Charges',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.deliveryCharges}</span>
+            ),
+        },
+        // {
+        //     field: 'status',
+        //     headerName: 'Status',
+        //     flex: 'flex-[0.6_0.6_0%]',
+        //     extraClasses: 'text-xs',
+        //     renderCell: (row: OrderListResponse) => (
+        //         <span className="text-slate-800">{row?.status}</span>
+        //     ),
+        // },
+        {
+            field: 'schemeName',
+            headerName: 'Scheme Name',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.schemeName} </span>
+            ),
+        },
+        {
+            field: 'schemeCode',
+            headerName: 'Scheme Code',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.schemeCode} </span>
+            ),
+        },
+        {
+            field: 'shcemeQuantity',
+            headerName: 'Quantity',
+            flex: 'flex-[0.4_0.4_0%]',
+            align: 'center',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.shcemeQuantity} </span>
+            ),
+        },
+        {
+            field: 'price',
+            headerName: 'Price',
+            flex: 'flex-[0.7_0.7_0%]',
+            align: 'center',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
+        },
+        {
+            field: 'pincodeLabel',
+            headerName: 'Pincode',
+            flex: 'flex-[0.7_0.7_0%]',
+            align: 'center',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.pincodeLabel} </span>
+            ),
+        },
+        {
+            field: 'paymentMode',
+            headerName: 'Payment Mode',
+            flex: 'flex-[0.7_0.7_0%]',
+            align: 'center',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.paymentMode} </span>
+            ),
+        },
+        {
+            field: 'createdAt',
+            headerName: 'Order Date',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
                     <div className="text-[12px] text-slate-700 font-medium">
@@ -269,76 +402,191 @@ const OrderListing = ({
             ),
         },
         {
-            field: 'preffered_delivery_date',
-            headerName: 'Delivery Date',
+            field: 'onBackVerifiedDate',
+            headerName: 'ONBACK Verifie Date',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => <div>-</div>,
+        },
+        {
+            field: 'edpDate',
+            headerName: 'EDP Date',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => <div>-</div>,
+        },
+        {
+            field: 'districtLabel',
+            headerName: 'District',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.districtLabel}</div>
+            ),
+        },
+        {
+            field: 'dispositionLevelThree',
+            headerName: 'Disposition',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.dispositionLevelThree}</div>
+            ),
+        },
+        {
+            field: 'dealerStatus',
+            headerName: 'Dealer Status',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                  'DD MMM YYYY'
-                              )
-                            : '-'}
-                    </div>
+                    {/* {row?.dealerStatus === true ? 'Active' : 'DeActive'} */}
                 </div>
             ),
         },
         {
-            field: 'mobileNo',
-            headerName: 'Mobile No',
+            field: 'dealerCode',
+            headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
-            align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span> {row.mobileNo} </span>
+                <div className="py-0">{row?.dealerCode}</div>
             ),
         },
         {
             field: 'customerName',
-            headerName: 'Name',
+            headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
-            align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span> {row.customerName || '-'} </span>
+                <div className="py-0">{row?.customerName}</div>
             ),
         },
         {
-            field: 'didNo',
-            headerName: 'DID No',
+            field: 'areaLabel',
+            headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
-            align: 'center',
-            renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
-        },
-        {
-            field: 'schemeName',
-            headerName: 'Scheme Name',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span> {row?.schemeName} </span>
+                <div className="py-0">{row?.areaLabel}</div>
             ),
         },
         {
-            field: 'shcemeQuantity',
-            headerName: 'Quantity',
-            flex: 'flex-[0.4_0.4_0%]',
-            align: 'center',
+            field: 'mobileNo',
+            headerName: 'Contact No.',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span> {row?.shcemeQuantity} </span>
+                <div className="py-0">{row?.mobileNo}</div>
             ),
         },
         {
-            field: 'price',
-            headerName: 'Price',
-            flex: 'flex-[0.7_0.7_0%]',
-            align: 'center',
-            renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
+            field: 'channelName',
+            headerName: 'Channel Name',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.channelLabel?.[0]}</div>
+            ),
         },
         {
-            field: 'deliveryCharges',
+            field: 'callCenterLabel',
+            headerName: 'CC Name',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.callCenterLabel}</div>
+            ),
+        },
+        {
+            field: 'areaLabel',
+            headerName: 'Area',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.areaLabel}</div>
+            ),
+        },
+        {
+            field: 'remark',
+            headerName: 'Remark',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.remark}</div>
+            ),
+        },
+        {
+            field: 'agent',
+            headerName: 'Agent',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.agentName}</div>
+            ),
+        },
+        {
+            field: 'agentIdl',
+            headerName: 'Agent ID',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
+            // renderCell: (row: OrderListResponse) => (
+            //     <div className="py-0">{row?.agentId}</div>
+            // ),
+        },
+
+        //
+        // {
+        //     field: 'preffered_delivery_date',
+        //     headerName: 'Delivery Date',
+        //     flex: 'flex-[1_1_0%]',
+        //     extraClasses: 'text-xs',
+        //     renderCell: (row: OrderListResponse) => (
+        //         <div className="py-0">
+        //             <div className="text-[12px] text-slate-700 font-medium">
+        //                 {row?.preffered_delivery_date
+        //                     ? moment(row?.preffered_delivery_date).format(
+        //                           'DD MMM YYYY'
+        //                       )
+        //                     : '-'}
+        //             </div>
+        //         </div>
+        //     ),
+        // },
+        // {
+        //     field: 'mobileNo',
+        //     headerName: 'Mobile No',
+        //     flex: 'flex-[1_1_0%]',
+        //     align: 'center',
+        //     extraClasses: 'text-xs',
+        //     renderCell: (row: OrderListResponse) => (
+        //         <span> {row.mobileNo} </span>
+        //     ),
+        // },
+        // {
+        //     field: 'customerName',
+        //     headerName: 'Name',
+        //     flex: 'flex-[1_1_0%]',
+        //     align: 'center',
+        //     extraClasses: 'text-xs',
+        //     renderCell: (row: OrderListResponse) => (
+        //         <span> {row.customerName || '-'} </span>
+        //     ),
+        // },
+        // {
+        //     field: 'didNo',
+        //     headerName: 'DID No',
+        //     flex: 'flex-[1_1_0%]',
+        //     align: 'center',
+        //     extraClasses: 'text-xs',
+        //     renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
+        // },
+        {
+            field: 'Shipping Charges',
             headerName: 'Delivery Charges',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
+            extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main ">
                     &#8377; {row.deliveryCharges}
@@ -346,37 +594,10 @@ const OrderListing = ({
             ),
         },
         {
-            field: 'total',
-            headerName: 'Total',
-            flex: 'flex-[0.6_0.6_0%]',
-            renderCell: (row: OrderListResponse) => (
-                <span className="text-slate-800">
-                    &#8377; {row?.totalAmount}
-                </span>
-            ),
-        },
-        {
-            field: 'assignee',
-            headerName: 'Assignee',
-            flex: 'flex-[0.6_0.6_0%]',
-            renderCell: (row: OrderListResponse) => (
-                <span className="text-slate-800">
-                    {row?.assignDealerLabel || row?.assignWarehouseLabel}
-                </span>
-            ),
-        },
-        {
-            field: 'status',
-            headerName: 'Status',
-            flex: 'flex-[0.6_0.6_0%]',
-            renderCell: (row: OrderListResponse) => (
-                <span className="text-slate-800">{row?.status}</span>
-            ),
-        },
-        {
             field: 'isApproved',
             headerName: 'Approval',
             flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -628,8 +849,9 @@ const OrderListing = ({
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
+                        extraClasses="w-[400%]"
                         columns={getAllowedAuthorizedColumns(
                             checkUserAccess,
                             columns,

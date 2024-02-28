@@ -231,6 +231,7 @@ export const priorityOptions = () => {
 enum complaintType {
     complaint = 'COMPLAINT',
     inquiry = 'INQUIRY',
+    feedback = 'FEEDBACK',
 }
 
 export const complaintTypeOptions = () => {

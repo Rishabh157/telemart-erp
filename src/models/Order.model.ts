@@ -32,6 +32,7 @@ export type OrderListResponse = {
     tehsilId: string
     schemeId: string
     schemeName: string
+    schemeCode: string
     pincodeId: string
     pincodeSecondId: string | null
     areaId: string
@@ -55,6 +56,7 @@ export type OrderListResponse = {
         instagram: string
         _id: string
     }
+    channelLabel: string[]
     streetNumber: string
     typeOfAddress: string
     whatsappNo: string
@@ -82,4 +84,10 @@ export type OrderListResponse = {
     tehsilLabel: string
     pincodeLabel: string
     areaLabel: string
+    wareHouseLabel: string
+    dealerLabel: string
+    dealerCode: string
+    dealerStatus: string
+    callCenterId: string
+    callCenterLabel: string
 }

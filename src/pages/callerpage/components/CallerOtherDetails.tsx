@@ -57,8 +57,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
-                        minHeight='25px'
-                        fontSizePlaceHolder='14px'
+                        minHeight="25px"
+                        fontSizePlaceHolder="14px"
                         isMulti
                         labelSize="xxs"
                         componentClass="mt-2"
@@ -67,6 +67,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                         selectLabel="select order for"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
+                        labelClass="text-slate-700 text-xs font-medium"
                         // isSubmitting
                         maxMenuHeight={190}
                         name="orderFor"
@@ -99,14 +100,15 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     )}
 
                     <ATMSelectSearchable
-                        minHeight='25px'
-                        fontSizePlaceHolder='14px'
+                        minHeight="25px"
+                        fontSizePlaceHolder="14px"
                         componentClass="mt-2"
                         label="Age Group"
                         maxMenuHeight={150}
                         size="xxs"
                         labelSize="xxs"
                         labelDirection="horizontal"
+                        labelClass="text-slate-700 text-xs font-medium"
                         classDirection="grid grid-cols-3"
                         selectLabel="select age group"
                         // isSubmitting
@@ -141,7 +143,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
 
                     <div className="grid grid-cols-12">
                         <div className="col-span-4 pt-3">
-                            <span className="text-xs font-medium">
+                            <span className="text-slate-700 text-xs font-medium">
                                 Social Media
                             </span>
                         </div>
@@ -161,8 +163,6 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                         extraClassField="mt-2"
                                         size="xs"
                                         placeholder="Name ID"
-                                        // labelDirection="horizontal"
-                                        // isSubmitting
                                         name="socialMedia.facebook"
                                         value={
                                             values.socialMedia?.facebook || ''
@@ -195,10 +195,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 <ATMTextField
                                     extraClassField="mt-2"
                                     size="xs"
-                                    // labelDirection="horizontal"
-                                    // classDirection="grid grid-cols-3"
                                     placeholder="Name ID"
-                                    // isSubmitting
                                     name="socialMedia.instagram"
                                     value={values.socialMedia?.instagram || ''}
                                     onChange={(e) => {
@@ -213,14 +210,15 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
-                            minHeight='25px'
-                            fontSizePlaceHolder='14px'
+                            minHeight="25px"
+                            fontSizePlaceHolder="14px"
                             isMulti
                             isMenuOpen
                             labelSize="xxs"
                             name="medicalIssue"
                             value={values.medicalIssue}
                             labelDirection="horizontal"
+                            labelClass="text-slate-700 text-xs font-medium"
                             selectLabel="select medical issue"
                             size="xxs"
                             options={medicalOptions || []}
