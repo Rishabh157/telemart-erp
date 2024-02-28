@@ -117,6 +117,12 @@ const ViewOrder = () => {
             path: '?orderStatus=non-action',
             name: UserModuleOrderTabsTypes.orderNonActionTab,
         },
+        {
+            label: 'Global Order Search',
+            icon: MdOutbond,
+            path: '?orderStatus=global-search',
+            name: UserModuleOrderTabsTypes.orderNonActionTab,
+        },
     ]
     const { userData } = useSelector((state: RootState) => state?.auth)
 

@@ -24,6 +24,7 @@ import {
     useGetOrderFlowQuery,
     useDispatchedOrderBarcodeMutation,
     useApprovedOrderStatusMutation,
+    useGetAllOrderGlobalSearchQuery,
 } from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -55,6 +56,8 @@ import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFo
 import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import moment from 'moment'
+import { BiSearch } from 'react-icons/bi'
+import { handleValidNumber } from 'src/utils/methods/numberMethods'
 
 // Types
 type BarcodeListResponseType = {
@@ -100,6 +103,13 @@ const OrderListing = ({
     )
 
     // States
+
+    // global search order no. and mobile no. value
+    const [orderNumberSearchValue, setOrderNumberSearchValue] =
+        useState<string>('')
+    const [mobileNumberSearchValue, setMobileNumberSearchValue] =
+        useState<string>('')
+
     const [selectedRows, setSelectedRows] = useState([])
     const [currentId, setCurrentId] = useState<string>('')
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
@@ -188,18 +198,22 @@ const OrderListing = ({
         isTableLoading,
     } = orderState
 
-    const { data, isLoading, isFetching } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [...filterBy],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
+    const { data, isLoading, isFetching } = useGetOrderQuery(
+        {
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['didNo', 'mobileNo'],
+            page: page,
+            filterBy: [...filterBy],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        },
+        {
+            skip: orderStatus === 'global-search',
+        }
+    )
     useEffect(() => {
         if (!isFetching && !isLoading) {
             dispatch(setIsTableLoading(false))
@@ -211,6 +225,34 @@ const OrderListing = ({
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
+
+    // Global Search Api when Global Search Tab is Avtive
+    const {
+        data: globalData,
+        isLoading: globalDataIsLoading,
+        isFetching: globalDataIsFetching,
+    } = useGetAllOrderGlobalSearchQuery(
+        {
+            orderNumber: orderNumberSearchValue || '0',
+            phoneNumber: mobileNumberSearchValue,
+        },
+        {
+            skip: !(orderNumberSearchValue || mobileNumberSearchValue),
+        }
+    )
+    // {
+    //     skip: orderStatus !== 'global-search',
+    // }
+
+    useEffect(() => {
+        if (!globalDataIsFetching && !globalDataIsLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setTotalItems(0))
+            dispatch(setItems(globalData?.data || []))
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [globalData, globalDataIsLoading, globalDataIsFetching, orderStatus])
 
     // Get Order Flow
     const {
@@ -534,53 +576,6 @@ const OrderListing = ({
             //     <div className="py-0">{row?.agentId}</div>
             // ),
         },
-
-        //
-        // {
-        //     field: 'preffered_delivery_date',
-        //     headerName: 'Delivery Date',
-        //     flex: 'flex-[1_1_0%]',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <div className="py-0">
-        //             <div className="text-[12px] text-slate-700 font-medium">
-        //                 {row?.preffered_delivery_date
-        //                     ? moment(row?.preffered_delivery_date).format(
-        //                           'DD MMM YYYY'
-        //                       )
-        //                     : '-'}
-        //             </div>
-        //         </div>
-        //     ),
-        // },
-        // {
-        //     field: 'mobileNo',
-        //     headerName: 'Mobile No',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span> {row.mobileNo} </span>
-        //     ),
-        // },
-        // {
-        //     field: 'customerName',
-        //     headerName: 'Name',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span> {row.customerName || '-'} </span>
-        //     ),
-        // },
-        // {
-        //     field: 'didNo',
-        //     headerName: 'DID No',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
-        // },
         {
             field: 'Shipping Charges',
             headerName: 'Delivery Charges',
@@ -825,6 +820,13 @@ const OrderListing = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect(() => {
+        dispatch(setIsTableLoading(false))
+        dispatch(setTotalItems(0))
+        dispatch(setItems(globalData?.data || []))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [orderStatus !== 'global-search'])
+
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
             <div className="flex justify-between items-center h-[45px]">
@@ -833,40 +835,97 @@ const OrderListing = ({
 
             <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
                 {/*Table Header */}
-                <ATMTableHeader
-                    searchValue={searchValue}
-                    page={page}
-                    rowCount={totalItems}
-                    rowsPerPage={rowsPerPage}
-                    rows={items}
-                    onRowsPerPageChange={(newValue) =>
-                        dispatch(setRowsPerPage(newValue))
-                    }
-                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    isRefresh
-                    onFilterDispatch={() => dispatch(setFilterValue([]))}
-                />
+                {orderStatus !== 'global-search' ? (
+                    <ATMTableHeader
+                        searchValue={searchValue}
+                        page={page}
+                        rowCount={totalItems}
+                        rowsPerPage={rowsPerPage}
+                        rows={items}
+                        onRowsPerPageChange={(newValue) =>
+                            dispatch(setRowsPerPage(newValue))
+                        }
+                        onSearch={(newValue) =>
+                            dispatch(setSearchValue(newValue))
+                        }
+                        // isFilter
+                        isRefresh
+                        onFilterDispatch={() => dispatch(setFilterValue([]))}
+                    />
+                ) : (
+                    <div className="flex gap-x-4 py-2">
+                        <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
+                            <BiSearch className="text-slate-600 text-xl" />
+                            <input
+                                className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
+                                value={orderNumberSearchValue}
+                                placeholder="Order No..."
+                                onChange={(e) => {
+                                    handleValidNumber(e) &&
+                                        setOrderNumberSearchValue(
+                                            e.target.value
+                                        )
+                                    setMobileNumberSearchValue('')
+                                }}
+                            />
+                        </div>
+                        <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
+                            <BiSearch className="text-slate-600 text-xl" />
+                            <input
+                                className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
+                                value={mobileNumberSearchValue}
+                                placeholder="Mobile No..."
+                                onChange={(e) => {
+                                    handleValidNumber(e) &&
+                                        setMobileNumberSearchValue(
+                                            e.currentTarget.value
+                                        )
+                                    setOrderNumberSearchValue('')
+                                }}
+                            />
+                        </div>
+                    </div>
+                )}
 
                 {/* Table */}
-                <div className="grow overflow-auto">
-                    <ATMTable
-                        extraClasses="w-[400%]"
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.order,
-                            tabName
-                        )}
-                        rows={items}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        isLoading={isTableLoading}
-                    />
-                </div>
+                {orderStatus !== 'global-search' ? (
+                    <div className="grow overflow-auto">
+                        <ATMTable
+                            extraClasses="w-[300%]"
+                            columns={getAllowedAuthorizedColumns(
+                                checkUserAccess,
+                                columns,
+                                UserModuleNameTypes.order,
+                                tabName
+                            )}
+                            rows={items}
+                            // isCheckbox={true}
+                            selectedRows={selectedRows}
+                            onRowSelect={(selectedRows) =>
+                                setSelectedRows(selectedRows)
+                            }
+                            isLoading={isTableLoading}
+                        />
+                    </div>
+                ) : items?.length ? (
+                    <div className="grow overflow-auto">
+                        <ATMTable
+                            extraClasses="w-[300%]"
+                            columns={getAllowedAuthorizedColumns(
+                                checkUserAccess,
+                                columns,
+                                UserModuleNameTypes.order,
+                                tabName
+                            )}
+                            rows={items}
+                            selectedRows={selectedRows}
+                            onRowSelect={(selectedRows) =>
+                                setSelectedRows(selectedRows)
+                            }
+                            isLoading={isTableLoading}
+                        />
+                    </div>
+                ) : null}
 
                 {/* Flow */}
                 {/* <DialogLogBox
