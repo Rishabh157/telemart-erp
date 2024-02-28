@@ -2,7 +2,7 @@
 /// ==============================================
 // Filename:EditUserWrapper.tsx
 // Type: Edit Component
-// Last Updated: JANUARY 11, 2024
+// Last Updated: FEB 28, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -175,8 +175,7 @@ const EditUserWrapper = (props: Props) => {
                 userRole: values.userRole || '',
                 companyId: values.companyId || '',
                 allowedIp: newAllowedIp[0]?.length ? newAllowedIp : [],
-                isAgent: false,
-
+                isAgent: values.isAgent || false,
                 callCenterId: values.callCenterId || null,
                 floorManagerId: values.floorManagerId || null,
                 teamLeadId: values.teamLeadId || null,

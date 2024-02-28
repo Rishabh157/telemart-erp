@@ -33,7 +33,7 @@ const CallerButton = ({
             >
                 {text}
                 {isLoading && (
-                    <CircularProgress size={20} sx={{ color: '#ffffff' }} />
+                    <CircularProgress size={14} sx={{ color: '#ffffff' }} />
                 )}
             </button>
         </>

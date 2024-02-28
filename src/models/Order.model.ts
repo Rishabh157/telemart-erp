@@ -56,6 +56,7 @@ export type OrderListResponse = {
         instagram: string
         _id: string
     }
+    channelLabel: string[]
     streetNumber: string
     typeOfAddress: string
     whatsappNo: string
@@ -87,4 +88,6 @@ export type OrderListResponse = {
     dealerLabel: string
     dealerCode: string
     dealerStatus: string
+    callCenterId: string
+    callCenterLabel: string
 }

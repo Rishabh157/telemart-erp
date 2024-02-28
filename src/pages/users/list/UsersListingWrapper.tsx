@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
+import { FaCheck } from 'react-icons/fa'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -41,6 +42,7 @@ import {
 import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { UsersListResponse } from 'src/models'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
@@ -93,14 +95,16 @@ const UsersListingWrapper = () => {
             field: 'userName',
             headerName: 'User Name',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => <span> {row.userName}</span>,
+            renderCell: (row: UsersListResponse) => (
+                <span> {row?.userName}</span>
+            ),
         },
         {
             field: 'email',
             headerName: 'Email',
             flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: any) => {
-                return <span> {row.email} </span>
+            renderCell: (row: UsersListResponse) => {
+                return <span> {row?.email} </span>
             },
         },
         {
@@ -114,18 +118,26 @@ const UsersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
         },
         {
+            field: 'isAgennt',
+            headerName: 'Agent',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: UsersListResponse) => {
+                return row?.isAgent ? <FaCheck color="#438a47" /> : null
+            },
+        },
+        {
             field: 'userDepartment',
             headerName: 'User Department',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) => {
-                return <span> {getDepartmentLabel(row.userDepartment)} </span>
+            renderCell: (row: UsersListResponse) => {
+                return <span> {getDepartmentLabel(row?.userDepartment)} </span>
             },
         },
         {
             field: 'userRole',
             headerName: 'User Role',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: any) =>
+            renderCell: (row: UsersListResponse) =>
                 row?.userRole !== 'ADMIN' ? (
                     <span
                         className="underline text-primary-main"

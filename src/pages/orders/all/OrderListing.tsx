@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:OrderListing.tsx
 // Type: List Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: FEB 28, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -248,7 +248,7 @@ const OrderListing = ({
         {
             field: 'orderNumber',
             headerName: 'Order No.',
-            flex: 'flex-[0.4_0.4_0%]',
+            flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
@@ -269,7 +269,7 @@ const OrderListing = ({
             align: 'start',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span>{row?.assignWarehouseLabel}</span>
+                <span>{row?.assignWarehouseLabel || '-'}</span>
             ),
         },
         {
@@ -290,26 +290,16 @@ const OrderListing = ({
                 <span>{row?.tehsilLabel}</span>
             ),
         },
-        // {
-        //     field: 'subReasonRemark',
-        //     headerName: 'Sub Reason Remark',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'start',
-        //     extraClasses: 'text-xs',
-        //     // renderCell: (row: OrderListResponse) => (
-        //     //     <span>{row?.assignWarehouseLabel}</span>
-        //     // ),
-        // },
-        // {
-        //     field: 'statusDate',
-        //     headerName: 'Status Date',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'start',
-        //     extraClasses: 'text-xs',
-        //     // renderCell: (row: OrderListResponse) => (
-        //     //     <span>{row?.assignWarehouseLabel}</span>
-        //     // ),
-        // },
+        {
+            field: 'statusDate',
+            headerName: 'Status Date',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            // renderCell: (row: OrderListResponse) => (
+            //     <span>{row?.assignWarehouseLabel}</span>
+            // ),
+        },
         {
             field: 'status',
             headerName: 'Status',
@@ -324,8 +314,19 @@ const OrderListing = ({
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => <span>-</span>,
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.deliveryCharges}</span>
+            ),
         },
+        // {
+        //     field: 'status',
+        //     headerName: 'Status',
+        //     flex: 'flex-[0.6_0.6_0%]',
+        //     extraClasses: 'text-xs',
+        //     renderCell: (row: OrderListResponse) => (
+        //         <span className="text-slate-800">{row?.status}</span>
+        //     ),
+        // },
         {
             field: 'schemeName',
             headerName: 'Scheme Name',
@@ -344,16 +345,6 @@ const OrderListing = ({
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.schemeCode} </span>
-            ),
-        },
-        {
-            field: 'reasonRemark',
-            headerName: 'Reason Remark',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.remark} </span>
             ),
         },
         {
@@ -411,22 +402,18 @@ const OrderListing = ({
             ),
         },
         {
-            field: 'orderRemark',
-            headerName: 'Order Remark',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'text-xs',
-        },
-        {
-            field: 'orderRemark',
+            field: 'onBackVerifiedDate',
             headerName: 'ONBACK Verifie Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => <div>-</div>,
         },
         {
             field: 'edpDate',
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => <div>-</div>,
         },
         {
             field: 'districtLabel',
@@ -476,58 +463,58 @@ const OrderListing = ({
             ),
         },
         {
-            field: 'customerAddress',
-            headerName: 'Customer Name',
+            field: 'areaLabel',
+            headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <div className="py-0">{row?.customerAddress}</div>
-            // ),
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.areaLabel}</div>
+            ),
         },
         {
-            field: 'contactNo',
+            field: 'mobileNo',
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <div className="py-0">{row?.customerAddress}</div>
-            // ),
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.mobileNo}</div>
+            ),
         },
         {
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <div className="py-0">{row?.customerAddress}</div>
-            // ),
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.channelLabel?.[0]}</div>
+            ),
         },
         {
-            field: 'ccName',
+            field: 'callCenterLabel',
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <div className="py-0">{row?.customerAddress}</div>
-            // ),
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.callCenterLabel}</div>
+            ),
         },
         {
-            field: 'area',
+            field: 'areaLabel',
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <div className="py-0">{row?.customerAddress}</div>
-            // ),
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.areaLabel}</div>
+            ),
         },
         {
-            field: 'agentRemark',
-            headerName: 'Agent Remark',
+            field: 'remark',
+            headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <div className="py-0">{row?.customerAddress}</div>
-            // ),
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.remark}</div>
+            ),
         },
         {
             field: 'agent',
@@ -539,7 +526,7 @@ const OrderListing = ({
             ),
         },
         {
-            field: 'agentIdlll',
+            field: 'agentIdl',
             headerName: 'Agent ID',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs',
@@ -594,50 +581,18 @@ const OrderListing = ({
         //     extraClasses: 'text-xs',
         //     renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
         // },
-
-        // {
-        //     field: 'deliveryCharges',
-        //     headerName: 'Delivery Charges',
-        //     flex: 'flex-[0.6_0.6_0%]',
-        //     align: 'center',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span className="text-primary-main ">
-        //             &#8377; {row.deliveryCharges}
-        //         </span>
-        //     ),
-        // },
-        // {
-        //     field: 'total',
-        //     headerName: 'Total',
-        //     flex: 'flex-[0.6_0.6_0%]',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span className="text-slate-800">
-        //             &#8377; {row?.totalAmount}
-        //         </span>
-        //     ),
-        // },
-        // {
-        //     field: 'assignee',
-        //     headerName: 'Assignee',
-        //     flex: 'flex-[0.6_0.6_0%]',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span className="text-slate-800">
-        //             {row?.assignDealerLabel || row?.assignWarehouseLabel}
-        //         </span>
-        //     ),
-        // },
-        // {
-        //     field: 'status',
-        //     headerName: 'Status',
-        //     flex: 'flex-[0.6_0.6_0%]',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span className="text-slate-800">{row?.status}</span>
-        //     ),
-        // },
+        {
+            field: 'Shipping Charges',
+            headerName: 'Delivery Charges',
+            flex: 'flex-[0.6_0.6_0%]',
+            align: 'center',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-primary-main ">
+                    &#8377; {row.deliveryCharges}
+                </span>
+            ),
+        },
         {
             field: 'isApproved',
             headerName: 'Approval',
@@ -894,8 +849,9 @@ const OrderListing = ({
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
+                        extraClasses="w-[400%]"
                         columns={getAllowedAuthorizedColumns(
                             checkUserAccess,
                             columns,
