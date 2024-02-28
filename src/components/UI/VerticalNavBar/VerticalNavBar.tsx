@@ -87,7 +87,6 @@ const VerticalNavBar = ({
 
     React.useEffect(() => {
         // Check if the function has been executed before
-        console.log(userData, "configurations")
         const hasExecuted = localStorage.getItem("hasExecuted");
         if (userData?.userRole === "ADMIN") {
             return;
@@ -103,10 +102,7 @@ const VerticalNavBar = ({
                 break;
             }
         }
-        return () => {
-            console.log("herer")
-        }
-
+       
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

@@ -66,7 +66,6 @@ const UserAcess = ({
     handleUserAccessSubmit,
 }: Props) => {
     const modules = [...mergeUserModules]
-    console.log(modules, "modules")
     const dispatch = useDispatch()
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess

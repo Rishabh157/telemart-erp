@@ -44,7 +44,6 @@ const useGetUserAccess = () => {
       const permission = getPermisssion(result)
       dispatch(setPermissions(permission))
       setPermission(permission)
-console.log(permission ,"inner5 user permission")
       setIsDataLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
