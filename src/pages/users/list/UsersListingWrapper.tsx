@@ -210,7 +210,7 @@ const UsersListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={!isAuthorized(UserModuleNameTypes.ACTION_USER_EDIT)}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_USER_EDIT)}
                     //isDelete
                     handleEditActionButton={() => {
                         navigate(`/users/${row?._id}`)

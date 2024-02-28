@@ -1,13 +1,15 @@
 {
   "moduleId": "NAV_ASSETS_LOCATION",
   "moduleName": "NAV_ASSETS_LOCATION",
-  "parentGroup": ["NAV_ASSETS"],
+  "parentGroup": [
+    "NAV_ASSETS"
+  ],
   "moduleAction": [
     {
       "actionId": "ACTION_ASSETS_LOCATION_LIST",
       "actionUrl": "",
       "actionName": "LIST",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [],
       "fields": [
         {
@@ -21,7 +23,7 @@
       "actionId": "ACTION_ASSETS_LOCATION_ADD",
       "actionUrl": "",
       "actionName": "ADD",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [
         "LIST"
       ],
@@ -31,7 +33,7 @@
       "actionId": "ACTION_ASSETS_LOCATION_ONE_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [
         "LIST"
       ],
@@ -41,7 +43,7 @@
       "actionId": "ACTION_ASSETS_LOCATION_ONE_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [
         "LIST"
       ],

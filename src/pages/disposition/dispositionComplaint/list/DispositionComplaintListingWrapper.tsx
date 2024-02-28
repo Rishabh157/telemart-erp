@@ -22,7 +22,7 @@ import {
 } from 'src/services/configurations/DispositionComplaintServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import DispositionLayout from '../../DispositionLayout'
+
 import DispositionComplaintListing from './DispositionComplaintListing'
 
 // |-- Redux --|
@@ -148,7 +148,7 @@ const DispositionComplaintListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <div className="h-full">
                     <DispositionComplaintListing
                         columns={columns}
@@ -156,7 +156,7 @@ const DispositionComplaintListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </DispositionLayout>
+            </>
         </>
     )
 }

@@ -5,7 +5,7 @@ import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
-import DispositionLayout from '../../DispositionLayout'
+
 import {
     useGetinitialCallerTwoByIdQuery,
     useUpdateinitialCallerTwoMutation,
@@ -84,7 +84,7 @@ const EditInitialCallTwoWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <Formik
                     enableReinitialize
                     initialValues={initialValues}
@@ -100,7 +100,7 @@ const EditInitialCallTwoWrapper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

@@ -227,7 +227,7 @@ const DispositionTwoListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <div className="h-full">
                     <DispositionTwoListing
                    columns={columns}
@@ -235,7 +235,7 @@ const DispositionTwoListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </DispositionLayout>
+            </>
         </>
     )
 }

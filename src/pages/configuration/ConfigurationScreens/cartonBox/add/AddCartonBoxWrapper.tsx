@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import AddCartonBox from './AddCartonBox'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddCartonBoxMutation } from 'src/services/CartonBoxService'
 
 // |-- Utils --|
@@ -106,7 +106,7 @@ const AddCartonBoxWrapper = (props: Props) => {
         })
     }
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -121,7 +121,7 @@ const AddCartonBoxWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

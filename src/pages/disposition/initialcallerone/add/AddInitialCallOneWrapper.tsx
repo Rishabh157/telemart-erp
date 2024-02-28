@@ -7,7 +7,7 @@ import { Formik } from 'formik'
 import { useAddinitialCallerOneMutation } from 'src/services/configurations/InitialCallerOneServices'
 import AddInitialCallOne from './AddInitialCallOne'
 import { useNavigate } from 'react-router-dom'
-import DispositionLayout from '../../DispositionLayout'
+
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
@@ -55,7 +55,7 @@ const AddInitialCallOneWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -70,7 +70,7 @@ const AddInitialCallOneWrapper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

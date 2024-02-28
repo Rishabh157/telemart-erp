@@ -8,7 +8,8 @@
       "actionUrl": "",
       "actionName": "LIST",
       "compulsoryFields" : [],
-      "parentGroup": []
+      "parentGroup": [],
+      "fields": []
     
     },
     {

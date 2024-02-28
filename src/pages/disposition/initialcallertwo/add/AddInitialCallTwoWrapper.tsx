@@ -7,7 +7,7 @@ import { Formik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import AddInitialCallTwo from './AddInitialCallTwo'
 import { useAddinitialCallerTwoMutation } from 'src/services/configurations/InitialCallerTwoServices'
-import DispositionLayout from '../../DispositionLayout'
+
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
@@ -60,7 +60,7 @@ const AddInitialCallTwoWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -75,7 +75,7 @@ const AddInitialCallTwoWrapper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

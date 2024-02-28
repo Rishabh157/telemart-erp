@@ -285,9 +285,9 @@ const DealersListingWrapper = () => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                    isView={isAuthorized(UserModuleNameTypes.ACTION_DEALER_LIST)}
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DEALER_LIST)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DEALER_LIST)}
+                    isView={isAuthorized(UserModuleNameTypes.ACTION_DEALER_VIEW)}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DEALER_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DEALER_DELETE)}
                     handleViewActionButton={() => {
                         navigate(`${currentId}/general-information`)
                     }}

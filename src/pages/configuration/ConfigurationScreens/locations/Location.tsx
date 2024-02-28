@@ -24,7 +24,7 @@ import TehsilListingWrapper from './tehsil/list/TehsilListingWrapper'
 
 const Locations = () => {
     return (
-        <ConfigurationLayout>
+        
             <div className="w-full h-full flex gap-4  p-3 overflow-auto">
                 {/* Country */}
                 <div className=" h-full">
@@ -52,7 +52,7 @@ const Locations = () => {
                     <AreaListingWrapper />
                 </div>
             </div>
-        </ConfigurationLayout>
+       
     )
 }
 

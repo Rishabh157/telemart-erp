@@ -123,7 +123,7 @@ const EditInitialCallThreeWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <Formik
                     enableReinitialize
                     initialValues={initialValues}
@@ -140,7 +140,7 @@ const EditInitialCallThreeWrapper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

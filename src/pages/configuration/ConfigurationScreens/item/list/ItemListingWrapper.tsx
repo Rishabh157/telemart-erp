@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ItemListResponse } from 'src/models/Item.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
@@ -159,13 +159,13 @@ const ItemListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <ItemListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

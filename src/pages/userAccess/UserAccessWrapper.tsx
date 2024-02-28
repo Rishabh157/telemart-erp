@@ -9,7 +9,7 @@
 import React, { useState, useEffect } from 'react' //  { useState, useEffect } // ,
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import ConfigurationLayout from '../configuration/ConfigurationLayout'
+
 
 // |-- External Dependencies --|
 
@@ -181,14 +181,14 @@ const UserAccessWrapper = () => {
     }, [data, isLoading, isFetching])
 
     return (
-        <ConfigurationLayout>
+        
             <UserAccess
                 department={(dept as string) || ''}
                 userRole={(userRole as string) || ''}
                 handleUserAccessSubmit={handleUserAccessSubmit}
                 apiStatus={apiStatus}
             />
-        </ConfigurationLayout>
+       
     )
 }
 export default UserAccessWrapper

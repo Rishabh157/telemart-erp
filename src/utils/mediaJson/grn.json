@@ -1,64 +1,40 @@
 {
-  "moduleId": "NAV_GRN",
-  "moduleName": "NAV_GRN",
-  "moduleAction": [
-      {
-          "actionId": "ACTION_GRN_LIST",
-          "actionUrl": "",
-          "actionName": "LIST",
-          "compulsoryFields" : [],
-          "parentGroup": [],
-          "fields": [
-              {
-                  "fieldId": "GRN_LIST_PO_CODE",
-                  "fieldName": "PO Code",
-                  "fieldValue": "poCode"
-              },
-              {
-                  "fieldId": "GRN_LIST_ITEM_NAME",
-                  "fieldName": "Item Name",
-                  "fieldValue": "itemName"
-              },
-              {
-                  "fieldId": "GRN_LIST_RECEVIED_QUANTITY",
-                  "fieldName": "Received Qnty.",
-                  "fieldValue": "receivedQuantity"
-              },
-              {
-                  "fieldId": "GRN_LIST_GOOD_QUANTITY",
-                  "fieldName": "Good Qnty.",
-                  "fieldValue": "goodQuantity"
-              },
-              {
-                  "fieldId": "GRN_LIST_DEFECTIVE_QUANTITY",
-                  "fieldName": "Defective Qnty.",
-                  "fieldValue": "defectiveQuantity"
-              }
-          ]
-      },
-      {
-          "actionId": "ACTION_GRN_ADD",
-          "actionUrl": "",
-          "actionName": "ADD",
-          "compulsoryFields" : [],
-          "parentGroup": [],
-          "fields": []
-      },
-      {
-          "actionId": "ACTION_GRN_EDIT",
-          "actionUrl": "",
-          "actionName": "EDIT",
-          "compulsoryFields" : [],
-          "parentGroup": [],
-          "fields": []
-      },
-      {
-          "actionId": "ACTION_GRN_DELETE",
-          "actionUrl": "",
-          "actionName": "DELETE",
-          "compulsoryFields" : [],
-          "parentGroup": [],
-          "fields": []
-      }
-  ]
+    "moduleId": "NAV_GRN",
+    "moduleName": "NAV_GRN",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_GRN_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "GRN_LIST_PO_CODE",
+                    "fieldName": "PO Code",
+                    "fieldValue": "poCode"
+                },
+                {
+                    "fieldId": "GRN_LIST_ITEM_NAME",
+                    "fieldName": "Item Name",
+                    "fieldValue": "itemName"
+                },
+                {
+                    "fieldId": "GRN_LIST_RECEVIED_QUANTITY",
+                    "fieldName": "Received Qnty.",
+                    "fieldValue": "receivedQuantity"
+                },
+                {
+                    "fieldId": "GRN_LIST_GOOD_QUANTITY",
+                    "fieldName": "Good Qnty.",
+                    "fieldValue": "goodQuantity"
+                },
+                {
+                    "fieldId": "GRN_LIST_DEFECTIVE_QUANTITY",
+                    "fieldName": "Defective Qnty.",
+                    "fieldValue": "defectiveQuantity"
+                }
+            ]
+        }
+    ]
 }

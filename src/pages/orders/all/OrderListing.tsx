@@ -107,7 +107,7 @@ const OrderListing = ({
     const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] =
         useState<boolean>(false)
     const orderState: any = useSelector((state: RootState) => state.order)
-   
+
 
     const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
 
@@ -274,8 +274,8 @@ const OrderListing = ({
                     <div className="text-[12px] text-slate-700 font-medium">
                         {row?.preffered_delivery_date
                             ? moment(row?.preffered_delivery_date).format(
-                                  'DD MMM YYYY'
-                              )
+                                'DD MMM YYYY'
+                            )
                             : '-'}
                     </div>
                 </div>
@@ -379,22 +379,7 @@ const OrderListing = ({
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
                         {row?.approved ? (
                             <Chip
-                                // onClick={() => {
-                                //     showConfirmationDialog({
-                                //         title: 'Disapproved',
-                                //         text: `Do you want to ${
-                                //             row.isApproved
-                                //                 ? 'Disapprove this dealer'
-                                //                 : 'Approve this dealer'
-                                //         }`,
-                                //         showCancelButton: true,
-                                //         next: (res) => {
-                                //             return res.isConfirmed
-                                //                 ? handleDeactive(row?._id)
-                                //                 : setShowDropdown(false)
-                                //         },
-                                //     })
-                                // }}
+
                                 className="cursor-pointer"
                                 label="Approved"
                                 color="success"
@@ -406,11 +391,10 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${
-                                            row?.approved
-                                                ? 'Disapprove this order'
-                                                : 'Approval this order'
-                                        }`,
+                                        text: `Do you want to ${row?.approved
+                                            ? 'Disapprove this order'
+                                            : 'Approval this order'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -451,14 +435,7 @@ const OrderListing = ({
                     }}
                     children={
                         <>
-                            {/* <button
-                                onClick={() => {
-                                    setIsFlowDialogShow(true)
-                                }}
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Flow
-                            </button> */}
+
                             <button
                                 onClick={() => {
                                     navigate(`/orders/view/${row?._id}`)
@@ -627,7 +604,7 @@ const OrderListing = ({
                 {/* Table */}
                 <div className="grow overflow-auto  ">
                     <ATMTable
-                       columns={columns}
+                        columns={columns}
                         rows={items}
                         // isCheckbox={true}
                         selectedRows={selectedRows}
@@ -766,7 +743,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                        ''
+                                                    ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)

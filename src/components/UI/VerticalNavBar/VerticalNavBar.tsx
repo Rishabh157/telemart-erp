@@ -10,32 +10,19 @@ import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-// import {
-//     UserModuleActionTypes,
-
-//     UserModuleOtherActionTypes,
-// } from 'src/models/userAccess/UserAccess.model'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // |-- Internal Dependencies --|
 import { NavItemType } from 'src/navigation'
 import { AlertText } from 'src/pages/callerpage/components/constants'
-import { setCheckUserAccess } from 'src/redux/slices/access/userAcessSlice'
 
 // |-- Redux --|
 import { setDeviceId, setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
-import { useGetUserAccessQuery } from 'src/services/useraccess/UserAccessServices'
-// import {
-//     allWebsiteModule,
-//     assetModules,
-//     configurationModules,
-//     dispositionModule,
-//     // isCheckAuthorizedModule,
-//     mediaModules,
-// } from 'src/userAccess/getAuthorizedModules'
+
 import { isAuthorized } from 'src/utils/authorization'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 // |-- Types --|
 type Props = {
@@ -53,47 +40,18 @@ const VerticalNavBar = ({
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const location = useLocation();
+    let pathLocal = location?.pathname?.split("/")?.[1];
     const deviceIditem = localStorage.getItem('device-id') || ''
+    const { userData } = useGetLocalStorage();
 
     useEffect(() => {
         dispatch(setDeviceId(deviceIditem))
     }, [deviceIditem, dispatch])
-    const { customized, userData } = useSelector(
+    const { customized } = useSelector(
         (state: RootState) => state?.auth
     )
-    const { data, isLoading, isFetching } = useGetUserAccessQuery(
-        {
-            userId: userData?.userId ? (userData?.userId as string) : null,
-            userRole: userData?.userRole as string,
-        },
-        {
-            skip: !userData?.companyId,
-        }
-    )
 
-    useEffect(() => {
-        if (!isLoading && !isFetching && data) {
-            if (data?.data !== null) {
-                dispatch(setCheckUserAccess(data?.data?.module))
-            } else {
-                dispatch(setCheckUserAccess([]))
-            }
-        }
-
-        // eslint-disable-next-line
-    }, [data, isLoading, isFetching])
-    // const { checkUserAccess } = useSelector(
-    //     (state: RootState) => state.userAccess
-    // )
-
-    //const { userData } = useSelector((state: RootState) => state?.auth)
-    // const userAccessSiedeBar =
-
-    // const { customized, userData } = useSelector(
-    //     (state: RootState) => state?.auth
-    // )
-    // const AlertText =
-    //     'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
     useEffect(() => {
         if (customized) {
             window.addEventListener('beforeunload', handleBeforeUnload)
@@ -110,55 +68,60 @@ const VerticalNavBar = ({
         e.returnValue = message
         return message
     }
+    const getNavigate = (path: string) => {
+        if (pathLocal === "configurations") {
+            navigate(`/configurations/${path}`);
+            return;
+        }
+        if (pathLocal === "sales&marketing") {
+            navigate(`/sales&marketing/${path}`);
+            return;
+        }
+        if (pathLocal === "welcome") {
+            navigate(`/${pathLocal}`);
+        }
+        navigate(`${path}`);
+    };
 
-    // const getDefaultRouteFunction = (name: string, path: string) => {
-    //     let currentModules: string[] = []
-    //     let userRole = userData?.userRole
 
-    //     if (userRole === 'ADMIN') {
-    //         return path
-    //     }
-    //     switch (name) {
-    //         case UserModuleNameTypes.configuration:
-    //             currentModules = configurationModules
-    //             break
-    //         case UserModuleNameTypes.assets:
-    //             currentModules = assetModules
-    //             break
-    //         case UserModuleNameTypes.disposition:
-    //             currentModules = dispositionModule
-    //             break
-    //         case UserModuleNameTypes.allWebsite:
-    //             currentModules = allWebsiteModule
-    //             break
-    //         case UserModuleNameTypes.media:
-    //             currentModules = mediaModules
-    //             break
-    //         default:
-    //             break
-    //     }
 
-    //     let isEditDeleteViewAccess = checkUserAccess?.modules?.filter(
-    //         (mod: any) => {
-    //             return currentModules.includes(mod?.moduleName)
-    //         }
-    //     )
-    //     let moduleAction: any = isEditDeleteViewAccess[0]?.moduleAction
+    React.useEffect(() => {
+        // Check if the function has been executed before
+        console.log(userData, "configurations")
+        const hasExecuted = localStorage.getItem("hasExecuted");
+        if (userData?.userRole === "ADMIN") {
+            return;
+        }
+        if (hasExecuted) {
+            return; // Exit early if the function has been executed
+        }
+        for (const nav of navigation) {
+            const isValue = isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
+            if (isValue) {
+                getNavigate(nav.path as string);
+                localStorage.setItem("hasExecuted", "true");
+                break;
+            }
+        }
+        return () => {
+            console.log("herer")
+        }
 
-    //     let slotRoute = moduleAction?.find(
-    //         (ele: any) =>
-    //             ele?.actionName === UserModuleOtherActionTypes.slotDefinition ||
-    //             ele?.actionName === UserModuleOtherActionTypes.slots
-    //     )?.actionUrl
-    //     if (slotRoute) {
-    //         return slotRoute
-    //     }
-    //     let paginationRoute = moduleAction?.find(
-    //         (ele: any) => ele?.actionName === UserModuleActionTypes.List
-    //     )?.actionUrl
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    //     return paginationRoute || path
-    // }
+    const getCheckNavigate = (name: string) => {
+        if (
+            name === UserModuleNameTypes.NAV_CONFIGURATION
+            || name === UserModuleNameTypes.NAV_DISPOSITION ||
+            name === UserModuleNameTypes.NAV_MEDIA ||
+            name === UserModuleNameTypes.NAV_ASSETS ||
+            name === UserModuleNameTypes.NAV_ALL_WEBSITE
+        ) {
+            localStorage.removeItem("hasExecuted");
+        }
+    };
+
     return (
         <div className="h-full  overflow-auto bg-white ">
             {/* Logo & Menu Icon */}
@@ -198,9 +161,6 @@ const VerticalNavBar = ({
                     ></div>
                 </div>
 
-                {/* <div onClick={toggleCollapse} className="text-xl text-slate-500">
-            <FiMenu />
-          </div> */}
             </div>
 
             {/* Navigations */}
@@ -214,6 +174,7 @@ const VerticalNavBar = ({
                             <div
                                 key={navIndex}
                                 onClick={() => {
+                                    getCheckNavigate(navItem.name as string);
                                     if (customized) {
                                         const confirmValue: boolean =
                                             window.confirm(AlertText)

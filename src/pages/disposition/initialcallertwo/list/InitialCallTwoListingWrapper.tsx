@@ -19,7 +19,7 @@ import {
     useDeleteinitialCallerTwoMutation,
     useGetinitialCallerTwoQuery,
 } from 'src/services/configurations/InitialCallerTwoServices'
-import DispositionLayout from '../../DispositionLayout'
+
 
 import { Chip } from '@mui/material'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -228,7 +228,7 @@ const InitialCallTwoListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <div className="h-full">
                     <InitialCallTwoListing
                         columns={columns}
@@ -236,7 +236,7 @@ const InitialCallTwoListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </DispositionLayout>
+            </>
         </>
     )
 }

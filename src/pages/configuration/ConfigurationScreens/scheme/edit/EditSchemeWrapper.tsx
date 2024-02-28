@@ -18,7 +18,7 @@ import moment from 'moment'
 // |-- Internal Dependencies --|
 import StepEditSchemeDetailsWrapper from './FormSteps/StepEditSchemeDetail/StepEditSchemeDetailsWrapper'
 import StepEditFAQ from './FormSteps/StepEditFAQ/StepEditFAQ'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'
 import {
@@ -364,7 +364,7 @@ const EditSchemeWrapper = () => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize={activeStep === 0}
                 initialValues={initialValues}
@@ -389,7 +389,7 @@ const EditSchemeWrapper = () => {
                     </Form>
                 )}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

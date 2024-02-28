@@ -23,7 +23,7 @@ import {
 } from 'src/services/media/ArtistServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import MediaLayout from '../../MediaLayout'
+
 import ArtistListing from './ArtistListing'
 // |-- Redux --|
 import {
@@ -143,13 +143,13 @@ const ArtistListingWrapper = () => {
     }
     return (
         <>
-            <MediaLayout>
+            <>
                 <ArtistListing
                        columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </MediaLayout>
+            </>
         </>
     )
 }

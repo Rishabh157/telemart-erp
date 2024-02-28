@@ -9,15 +9,15 @@
 import React from 'react'
 
 // |-- Internal Dependencies --|
-import AsstesLayout from '../../AssetsLayout'
+
 import AssetsAllocationListing from './AssetsAllocationListing'
 
 const AssetsAllocationWrapper = () => {
     return (
         <div>
-            <AsstesLayout>
+            <>
                 <AssetsAllocationListing />
-            </AsstesLayout>
+            </>
         </div>
     )
 }

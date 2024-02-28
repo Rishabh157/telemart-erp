@@ -15,7 +15,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
+
 import { showToast } from 'src/utils'
 import EditChannelGroup from './EditChannelCategory'
 import {
@@ -94,7 +94,7 @@ const EditChannelCategoryWrapper = () => {
         }, 1000)
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -110,7 +110,7 @@ const EditChannelCategoryWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

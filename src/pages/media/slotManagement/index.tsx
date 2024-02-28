@@ -71,7 +71,7 @@ const ViewSlot = () => {
     }, [allowedTabs])
 
     return (
-        <MediaLayout>
+        <>
             <div className="h-[calc(100vh-55px)]">
                 <div className="w-full flex  h-[calc(100%)] bg-white">
                     {/* Right Section */}
@@ -91,7 +91,7 @@ const ViewSlot = () => {
                     </div>
                 </div>
             </div>
-        </MediaLayout>
+        </>
     )
 }
 

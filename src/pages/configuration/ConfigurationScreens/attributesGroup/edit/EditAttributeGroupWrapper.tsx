@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import EditAttributeGroup from './EditAttributeGroup'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 // import { useEditAttributeGroupMutation } from "src/services/AttributeGroup";
 import { showToast } from 'src/utils'
 import {
@@ -119,7 +119,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
         dispatch(setAllItems(attributeData?.data))
     }, [dispatch, attributeData, attrLoading, attrIsFetching])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -136,7 +136,7 @@ const EditAttributeGroupWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux'
 import AddAsstesCategory from './AddAsstesCategory'
 import { useAddAssetsCategoryMutation } from 'src/services/assets/AssetsCategoryService'
 import { showToast } from 'src/utils'
-import AsstesLayout from '../../AssetsLayout'
+
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -69,7 +69,7 @@ const AddAssetsCategoryWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <AsstesLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -84,7 +84,7 @@ const AddAssetsCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </AsstesLayout>
+        </>
     )
 }
 

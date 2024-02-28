@@ -16,7 +16,7 @@ import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
-import MediaLayout from '../../MediaLayout'
+
 import AddChannelGroup from './AddChannelCategory'
 import { useAddChannelCategoryMutation } from 'src/services/media/ChannelCategoriesServices'
 
@@ -73,7 +73,7 @@ const AddChannelCategoryWrapper = () => {
         }, 1000)
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -88,7 +88,7 @@ const AddChannelCategoryWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

@@ -246,7 +246,7 @@ const SlotManagementListingWrapper = () => {
 
     return (
         <>
-            {/* <MediaLayout> */}
+            {/* <> */}
             <div className="h-full">
                 <SlotManagementListing
                     columns={columns}
@@ -254,7 +254,7 @@ const SlotManagementListingWrapper = () => {
                     setShowDropdown={setShowDropdown}
                 />
             </div>
-            {/* </MediaLayout> */}
+            {/* </> */}
         </>
     )
 }

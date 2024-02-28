@@ -22,7 +22,7 @@ import {
 } from 'src/services/websites/WebsitePageServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import WebsitesLayout from '../../WebsiteLayout'
+
 import WebsitePageListing from './WebsitePageListing'
 
 // |-- Redux --|
@@ -41,7 +41,7 @@ const WebsitePageListingWrapper = () => {
     const navigate = useNavigate()
     const [deletePage] = useDeleteWebsitePageMutation()
     const [currentId, setCurrentId] = useState('')
-  
+
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsitePageState = useSelector(
         (state: RootState) => state.websitePage
@@ -157,15 +157,15 @@ const WebsitePageListingWrapper = () => {
         })
     }
     return (
+
         <>
-            <WebsitesLayout>
-                <WebsitePageListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </WebsitesLayout>
+            <WebsitePageListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
+
     )
 }
 

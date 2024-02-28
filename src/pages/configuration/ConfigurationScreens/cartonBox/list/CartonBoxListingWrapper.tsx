@@ -17,7 +17,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CartonBoxListResponse } from 'src/models/CartonBox.model'
 
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     setIsTableLoading,
     setItems,
@@ -174,13 +174,13 @@ const CartonBoxListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <CartonBoxListing
            columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

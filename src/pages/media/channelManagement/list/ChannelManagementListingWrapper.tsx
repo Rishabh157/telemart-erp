@@ -188,7 +188,7 @@ const ChannelManagementListingWrapper = () => {
     }
     return (
         <>
-            <MediaLayout>
+            <>
                 <div className="h-full">
                     <ChannelManagementListing
                            columns={columns}
@@ -196,7 +196,7 @@ const ChannelManagementListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </MediaLayout>
+            </>
         </>
     )
 }

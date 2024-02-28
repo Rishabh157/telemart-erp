@@ -19,7 +19,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
-import DispositionLayout from '../../DispositionLayout'
+
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
@@ -213,7 +213,7 @@ const DispositionOneListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <div className="h-full">
                     <DispositionOneListing
                         columns={columns}
@@ -221,7 +221,7 @@ const DispositionOneListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </DispositionLayout>
+            </>
         </>
     )
 }

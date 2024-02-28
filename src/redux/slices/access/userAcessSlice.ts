@@ -26,12 +26,13 @@ export interface moduleActionTypes {
     actionName: string
     parentGroup: string[]
     fields: fieldTypes[]
+    compulsoryFields: string[]
 }
 
 export interface ModulesTypes {
     moduleId: string
     moduleName: string
-    parentGroup:string[]
+    parentGroup: string[]
     moduleAction: moduleActionTypes[]
 }
 

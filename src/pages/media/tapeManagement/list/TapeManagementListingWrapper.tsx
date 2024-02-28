@@ -22,7 +22,7 @@ import {
 } from 'src/services/media/TapeManagementServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import MediaLayout from '../../MediaLayout'
+
 import TapeManagementListing from './TapeManagementListing'
 // |-- Redux --|
 import {
@@ -181,7 +181,7 @@ const TapeManagementListingWrapper = () => {
 
     return (
         <>
-            <MediaLayout>
+            <>
                 <div className="h-full">
                     <TapeManagementListing
                             columns={columns}
@@ -189,7 +189,7 @@ const TapeManagementListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </MediaLayout>
+            </>
         </>
     )
 }

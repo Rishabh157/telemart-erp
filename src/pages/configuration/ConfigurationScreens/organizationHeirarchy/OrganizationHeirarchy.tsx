@@ -80,7 +80,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const OrganisationHierarchy = () => {
     return (
-        <ConfigurationLayout>
+        
             <div className="px-4 h-full pt-3  ">
                 {/* Breadcrumbs */}
                 <div className="h-[30px]">
@@ -1416,7 +1416,7 @@ const OrganisationHierarchy = () => {
                     </Tree>
                 </div>
             </div>
-        </ConfigurationLayout>
+       
     )
 }
 

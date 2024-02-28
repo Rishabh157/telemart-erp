@@ -1,19 +1,14 @@
-// import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
-// import { PermissionType, isAuthorized } from '../../utils/authorization'
 import { useLocation, useNavigate } from 'react-router-dom'
-// import useGetUserAccess from 'src/hooks/useGetUserAccess'
 import { CircularProgress } from '@mui/material'
-// import AccessDenied from '../AccessDenied'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-// import Welcome from '../Welcome'
 import { useEffect } from 'react'
 import AccessDenied from './AccessDenied'
-import WelcomePage from './pages/welcome/WelcomePage'
 import { useGetLocalStorage } from './hooks/useGetLocalStorage'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetUserAccess from './hooks/useGetUserAccess'
 import { isAuthorized } from './utils/authorization'
-// import { isAuthorized } from './auth'
+import Welcome from './pages/welcome/Welcome'
+
 type Props = {
     permission: keyof typeof UserModuleNameTypes
     children: any
@@ -27,6 +22,7 @@ const Authorization: ({ permission, children }: Props) => any = ({
 
     const navigate = useNavigate()
     const { authToken, userData } = useGetLocalStorage()
+
     useEffect(() => {
         if (!authToken) return navigate('/login')
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,7 +32,7 @@ const Authorization: ({ permission, children }: Props) => any = ({
     const { isDataLoading, getAllPermission } = useGetUserAccess()
     if (isDataLoading) {
         return (
-            <div className="flex items-center justify-center h-[100vh] w-full">
+            <div className="flex items-center justify-center h-[100vh] w-full bg-white">
                 <CircularProgress />
             </div>
         )
@@ -44,8 +40,7 @@ const Authorization: ({ permission, children }: Props) => any = ({
     if (permission === 'NAV_WELCOME') {
         return (
             <>
-                {' '}
-                <WelcomePage />{' '}
+                <Welcome />
             </>
         )
     }
@@ -58,7 +53,7 @@ const Authorization: ({ permission, children }: Props) => any = ({
     }
     if (isAuthorized(permission)) {
         return children
-    } else if (location === 'configuration' || location === 'sales&marketing') {
+    } else if (location === 'configurations' || location === 'media' || location === 'assets' || location === 'dispositions' || location === 'all-websites') {
         return <AccessDenied />
     } else {
         return (

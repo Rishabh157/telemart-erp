@@ -121,7 +121,7 @@ export const navigation: NavItemType[] = [
         label: 'Warehouse Transfer',
         icon: TbBuildingWarehouse,
         path: '/warehouse-transfer',
-        name: UserModuleNameTypes.NAV_WAREHOUSE_TO_COMPANY_TRANSFER,
+        name: UserModuleNameTypes.NAV_WAREHOUSE_TRANSFER,
     },
     {
         label: 'Sample Transfer',

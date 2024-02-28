@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdOutbond } from 'react-icons/md'
-import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { Tabs } from 'src/models/common/paginationType'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-import { RootState } from 'src/redux/store'
-import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 type Props = {}
 
@@ -16,63 +14,57 @@ const OutwardTabs = (props: Props) => {
             label: 'Dealer',
             icon: MdOutbond,
             path: 'dealer',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER,
         },
         {
             label: 'Customer',
             icon: MdOutbond,
             path: 'customer',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER
         },
         {
             label: 'RTV',
             icon: MdOutbond,
             path: 'rtv',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_RTV,
         },
         {
             label: 'Warehouse',
             icon: MdOutbond,
             path: 'warehoue',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE,
         },
         {
             label: 'Sample',
             icon: MdOutbond,
             path: 'sample',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE,
         },
         {
             label: 'E-comm',
             icon: MdOutbond,
             path: 'ecom',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE,
         },
         // {
         //     label: 'Replacements/Repackaging',
         //     icon: MdOutbond,
         //     path: 'replacement',
-        //     name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_REPLACEMENTS',
-        // },
+        // name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER,     
+           // },
         {
             label: 'Company',
             icon: MdOutbond,
             path: 'company',
-            name: 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY,
         },
     ]
     const [activeTab, setActiveTab] = useState(0)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
-    const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const allowedTabs = showAllowedTabs(
-        checkUserAccess,
-        UserModuleNameTypes.wareHouse,
-        tabs,
-        userData?.userRole || 'ADMIN'
-    )
+    const allowedTabs = tabs?.filter((nav) => {
+        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
+    })?.map((tab) => tab)
+
     useEffect(() => {
         const activeTabIndex = window.location.pathname.split('/')[5]
         const tabindex = allowedTabs.findIndex(

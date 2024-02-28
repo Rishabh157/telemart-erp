@@ -23,7 +23,7 @@ import {
 } from 'src/services/media/DidManagementServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import MediaLayout from '../../MediaLayout'
+
 import DidManagementListing from './DidManagementListing'
 // |-- Redux --|
 import {
@@ -180,13 +180,13 @@ const DidManagementListingWrapper = () => {
 
     return (
         <>
-            <MediaLayout>
+            <>
                 <DidManagementListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </MediaLayout>
+            </>
         </>
     )
 }

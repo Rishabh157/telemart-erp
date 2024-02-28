@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
-import WebsiteLayout from '../../WebsiteLayout'
+
 import { useAddWebsitePageMutation } from 'src/services/websites/WebsitePageServices'
 import AddWebsitePage from './AddWebsitePage'
 
@@ -89,7 +89,7 @@ const AddWebsitePageWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <WebsiteLayout>
+      
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -104,7 +104,7 @@ const AddWebsitePageWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsiteLayout>
+      
     )
 }
 

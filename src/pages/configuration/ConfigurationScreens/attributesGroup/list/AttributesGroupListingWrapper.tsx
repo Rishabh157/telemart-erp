@@ -18,7 +18,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { AttributesGroupListResponse } from 'src/models/AttrbutesGroup.model'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     setIsTableLoading,
     setItems,
@@ -187,13 +187,13 @@ const AttributesGroupListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
-                <AttributesGroupListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </ConfigurationLayout>
+            {/*  */}
+            <AttributesGroupListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+            {/* */}
         </>
     )
 }

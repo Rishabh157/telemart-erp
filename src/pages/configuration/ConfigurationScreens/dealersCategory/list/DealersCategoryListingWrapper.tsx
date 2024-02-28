@@ -17,7 +17,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DealersCategoryListResponse } from 'src/models/DealersCategory.model'
 
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     setIsTableLoading,
     setItems,
@@ -175,13 +175,13 @@ const DealersCategoryListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <DealersCategoryListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

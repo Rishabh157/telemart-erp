@@ -20,7 +20,7 @@ import {
     useDeleteinitialCallerOneMutation,
     useGetinitialCallerOneQuery,
 } from 'src/services/configurations/InitialCallerOneServices'
-import DispositionLayout from '../../DispositionLayout'
+
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -221,7 +221,7 @@ const InitialCallOneListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <div className="h-full">
                     <InitialCallOneListing
                         columns={columns}
@@ -229,7 +229,7 @@ const InitialCallOneListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </DispositionLayout>
+            </>
         </>
     )
 }

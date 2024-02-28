@@ -17,7 +17,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CallCenterMasterListResponse } from 'src/models/CallCenterMaster.model'
 
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     setIsTableLoading,
     setItems,
@@ -145,13 +145,13 @@ const CallCenterMasterListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <CallCenterMasterListing
                columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

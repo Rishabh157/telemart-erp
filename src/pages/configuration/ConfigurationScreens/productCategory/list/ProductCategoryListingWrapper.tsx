@@ -17,7 +17,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ProductCategoryListResponse } from 'src/models/ProductCategory.model'
 
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     useDeleteProductCategoryMutation,
     useGetProductCategoryQuery,
@@ -149,13 +149,13 @@ const ProductCategoryListingWrapper = () => {
 
     return (
         <>
-            <ConfigurationLayout>
+            
                 <ProductCategoryListing
                 columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

@@ -161,13 +161,13 @@ const WarehouseTransferListingWrapper = () => {
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => (
                 <span> {row?._id} </span> // this is a wtNumber we have to transform in _id
             ),
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_WAREHOUSE_TO_COMPANY_NUMBER,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_WAREHOUSE_TRANSFER_NUMBER,
         },
         {
             field: 'fromWarehouseLabel',
             headerName: 'From Warehouse',
             flex: 'flex-[0.8_0.8_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FROM_WAREHOUSE,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_FROM_WAREHOUSE,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => (
                 <span> {row?.fromWarehouseLabel} </span>
@@ -177,7 +177,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'toWarehouseLabel',
             headerName: 'To Warehouse',
             flex: 'flex-[0.8_0.8_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_TO_WAREHOUSE,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_TO_WAREHOUSE,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => (
                 <span> {row?.toWarehouseLabel} </span>
@@ -187,7 +187,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'items',
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_ITEM_QUANTITY,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_ITEM_QUANTITY,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return (
@@ -215,7 +215,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'firstApproved',
             headerName: 'First Status',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_STATUS,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return (
@@ -233,7 +233,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'firstApprovedActionBy',
             headerName: 'First Approved By',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_BY,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_APPROVED_BY,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return <span> {row?.firstApprovedActionBy} </span>
@@ -243,7 +243,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'firstApprovedAt',
             headerName: 'First Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_DATE,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_APPROVED_DATE,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return <span> {row?.firstApprovedAt} </span>
@@ -253,7 +253,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'secondApproved',
             headerName: 'Second Status',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_STATUS,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_STATUS,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return (
@@ -272,7 +272,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'secondApprovedActionBy',
             headerName: 'Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_BY,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_APPROVED_BY,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return <span> {row?.secondApprovedActionBy} </span>
@@ -282,7 +282,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_DATE,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_APPROVED_DATE,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return <span> {row?.secondApprovedAt} </span>
@@ -292,7 +292,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_INSERTED_DATE,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_INSERTED_DATE,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
@@ -302,7 +302,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'updatedAt',
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_UPDATE_DATE,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_UPDATED_DATE,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
@@ -312,7 +312,7 @@ const WarehouseTransferListingWrapper = () => {
             field: 'Approved',
             headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_APPROVAL_LEVEL,
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_APPROVEL_LEVEL,
             align: 'center',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
                 return (
@@ -456,8 +456,8 @@ const WarehouseTransferListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_EDIT)}
-                        isDelete={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_DELETE)}
+                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_EDIT)}
+                        isDelete={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_DELETE)}
                         handleEditActionButton={() => {
                             navigate(`/warehouse-transfer/edit/${row?._id}`)
                         }}

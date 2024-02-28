@@ -6,7 +6,7 @@
             "actionId": "ACTION_WAREHOUSE_LIST",
             "actionUrl": "",
             "actionName": "LIST",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": [
                 {
@@ -45,7 +45,7 @@
             "actionId": "ACTION_WAREHOUSE_VIEW",
             "actionUrl": "",
             "actionName": "VIEW",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -53,31 +53,49 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_DETAILS",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_DETAILS",
-            "compulsoryFields" : [],
-            "parentGroup": ["VIEW", "TAB_WAREHOUSE_DETAILS"],
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_DETAILS"
+            ],
             "fields": []
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INVENTORIES",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INVENTORIES",
-            "compulsoryFields" : [],
-            "parentGroup": ["VIEW"],
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
             "fields": []
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_ADD",
-            "compulsoryFields" : [],
-            "parentGroup": ["VIEW", "TAB_WAREHOUSE_INVENTORIES"],
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_INVENTORIES"
+            ],
             "fields": []
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -89,7 +107,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -101,7 +119,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -113,7 +131,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_RTV",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -125,7 +143,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -137,7 +155,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -149,7 +167,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -161,7 +179,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -173,7 +191,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_DEALER",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -185,7 +203,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -197,7 +215,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -209,7 +227,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_SAMPLE",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -221,7 +239,7 @@
             "actionId": "ACTION_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -233,7 +251,7 @@
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [
                 "VIEW",
                 "TAB_WAREHOUSE_DETAILS",
@@ -245,7 +263,7 @@
             "actionId": "ACTION_WAREHOUSE_ADD",
             "actionUrl": "",
             "actionName": "ADD",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -253,7 +271,7 @@
             "actionId": "ACTION_WAREHOUSE_EDIT",
             "actionUrl": "",
             "actionName": "EDIT",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -261,7 +279,7 @@
             "actionId": "ACTION_WAREHOUSE_DELETE",
             "actionUrl": "",
             "actionName": "DELETE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         }

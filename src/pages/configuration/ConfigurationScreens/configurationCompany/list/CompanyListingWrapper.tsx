@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ConfigurationCompanyListResponse } from 'src/models/ConfigurationCompany.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     useDeleteCompanyMutation,
     useGetCompaniesQuery,
@@ -171,13 +171,13 @@ const ConfigurationCompanyListingWrapper = () => {
 
     return (
         <>
-            <ConfigurationLayout>
+            
                 <ConfigurationCompanyListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

@@ -41,38 +41,7 @@
                     "fieldValue": "channel"
                 }
             ]
-        },
-        {
-            "actionId": "ACTION_CALL_ADD",
-            "actionUrl": "",
-            "actionName": "ADD",
-            "compulsoryFields" : [],
-            "parentGroup": [],
-            "fields": []
-        },
-        {
-            "actionId": "ACTION_CALL_VIEW",
-            "actionUrl": "",
-            "actionName": "VIEW",
-            "compulsoryFields" : [],
-            "parentGroup": [],
-            "fields": []
-        },
-        {
-            "actionId": "ACTION_CALL_EDIT",
-            "actionUrl": "",
-            "actionName": "EDIT",
-            "compulsoryFields" : [],
-            "parentGroup": [],
-            "fields": []
-        },
-        {
-            "actionId": "ACTION_CALL_DELETE",
-            "actionUrl": "",
-            "actionName": "DELETE",
-            "compulsoryFields" : [],
-            "parentGroup": [],
-            "fields": []
         }
+      
     ]
 }

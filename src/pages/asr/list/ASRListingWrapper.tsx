@@ -51,6 +51,7 @@ const ASRListingWrapper = () => {
             field: 'productName',
             headerName: 'Item Name',
             flex: 'flex-[3_3_0%]',
+            name: UserModuleNameTypes.ASR_LIST_NAME,
             renderCell: (row: ASRListResponse) => (
                 <span>
                     {' '}
@@ -89,6 +90,7 @@ const ASRListingWrapper = () => {
             field: 'quantity',
             headerName: 'Quantity',
             flex: 'flex-[1.8_1.8_0%]',
+            name: UserModuleNameTypes.ASR_LIST_QUANTITY,
             renderCell: (row: ASRListResponse) => (
                 <span>
                     {' '}
@@ -126,6 +128,7 @@ const ASRListingWrapper = () => {
             field: 'completed',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASR_LIST_STATUS,
             renderCell: (row: ASRListResponse) => (
                 <span>
                     {' '}
@@ -174,7 +177,7 @@ const ASRListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                                   isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASR_EDIT)}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASR_EDIT)}
                     isDelete={isAuthorized(UserModuleNameTypes.ACTION_ASR_DELETE)}
                     handleEditActionButton={() => {
                         navigate(`/asr/${currentId}`)

@@ -443,7 +443,7 @@ const CallerPageWrapper = () => {
                     if (res?.data?.status) {
                         showToast('success', 'caller added successfully!')
                         localStorage.removeItem('callerPageData')
-                        navigate('/welcome')
+                        navigate('/success')
                     } else {
                         showToast('error', res?.data?.message)
                     }

@@ -177,7 +177,7 @@ const SlotRunViewsListingWrapper = () => {
 
     return (
         <>
-            {/* <MediaLayout> */}
+            {/* <> */}
             <div className="h-full">
                 <SlotManagementListing
                           columns={columns}
@@ -198,7 +198,7 @@ const SlotRunViewsListingWrapper = () => {
                     }
                 />
             </div>
-            {/* </MediaLayout> */}
+            {/* </> */}
         </>
     )
 }

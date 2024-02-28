@@ -23,7 +23,7 @@ import { FaObjectGroup } from 'react-icons/fa'
 import { CgOrganisation } from 'react-icons/cg'
 import { CiBarcode, CiFaceSmile, CiLocationOn } from 'react-icons/ci'
 import { TbBinaryTree2 } from 'react-icons/tb'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 
 // |-- Internal Dependencies --|
@@ -36,105 +36,105 @@ const configurationNavigation: NavItemType[] = [
     {
         label: 'Attributes',
         icon: TbAppsFilled,
-        path: '/configurations/attributes',
+        path: 'attributes',
         name: UserModuleNameTypes.NAV_ATTRIBUTE,
     },
     {
         label: 'Attributes Group',
         icon: FaObjectGroup,
-        path: '/configurations/attributes-group',
+        path: 'attributes-group',
         name: UserModuleNameTypes.NAV_ATTRIBUTE_GROUP,
     },
     {
         label: 'Product Category',
         icon: BiCategory,
-        path: '/configurations/product-category',
+        path: 'product-category',
         name: UserModuleNameTypes.NAV_PRODUCT_CATEGORY,
     },
     {
         label: 'Product Sub Category',
         icon: MdOutlineCategory,
-        path: '/configurations/product-sub-category',
+        path: 'product-sub-category',
         name: UserModuleNameTypes.NAV_PRODUCT_SUB_CATEGORY,
     },
     {
         label: 'Product Group',
         icon: BsBoxes,
-        path: '/configurations/product-group',
+        path: 'product-group',
         name: UserModuleNameTypes.NAV_PRODUCT_GROUP,
     },
     {
         label: 'Scheme',
         icon: TfiLayoutMediaOverlayAlt2,
-        path: '/configurations/scheme',
+        path: 'scheme',
         name: UserModuleNameTypes.NAV_SCHEME,
     },
     {
         label: 'Item',
         icon: BiCheckboxSquare,
-        path: '/configurations/item',
+        path: 'item',
         name: UserModuleNameTypes.NAV_ITEMS,
     },
     {
         label: 'Products',
         icon: BsBox,
-        path: '/configurations/products',
+        path: 'products',
         name: UserModuleNameTypes.NAV_PRODUCTS,
     },
     {
         label: 'Carton Box',
         icon: BsBoxSeam,
-        path: '/configurations/carton-box',
+        path: 'carton-box',
         name: UserModuleNameTypes.NAV_CARTON_BOX,
     },
- 
+
     {
         label: 'Company',
         icon: CgOrganisation,
-        path: '/configurations/company',
+        path: 'company',
         name: UserModuleNameTypes.NAV_COMPANY,
     },
     {
         label: 'Company Branch',
         icon: CgOrganisation,
-        path: '/configurations/company-branch',
+        path: 'company-branch',
         name: UserModuleNameTypes.NAV_COMPANY_BRANCH,
     },
     {
         label: 'Barcode',
         icon: CiBarcode,
-        path: '/configurations/barcode',
+        path: 'barcode',
         name: UserModuleNameTypes.NAV_BARCODE,
     },
     {
         label: 'Location',
         icon: CiLocationOn,
-        path: '/configurations/location',
+        path: 'location',
         name: UserModuleNameTypes.NAV_LOCATION,
     },
     {
         label: 'Language',
         icon: CiFaceSmile,
-        path: '/configurations/language',
+        path: 'language',
         name: UserModuleNameTypes.NAV_LANGUAGE,
     },
     {
         label: 'Dealers Category',
         icon: BiCategoryAlt,
-        path: '/configurations/dealers-category',
+        path: 'dealers-category',
         name: UserModuleNameTypes.NAV_DEALERS_CATEGORY,
     },
-     {
+    {
         label: 'Call Center',
         icon: BiCategoryAlt,
-        path: '/configurations/callcenter-master',
+        path: 'callcenter-master',
         name: UserModuleNameTypes.NAV_CALL_CENTER,
     },
 
     {
         label: 'Hierarchy (Org..*)',
         icon: TbBinaryTree2,
-        path: '/configurations/hierarchy',
+        path: 'hierarchy',
         name: 'HIERARCHY',
     },
 ]
@@ -152,24 +152,20 @@ const ConfigurationLayout = ({ children }: Props) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPath = `/configurations/${location.pathname?.split('/')[2]}`
-    // const bgColorLocal = localStorage.getItem('themeColor') as string
-    // const bgColor = JSON.parse(bgColorLocal) as string | null
+    const currentPath = `${location.pathname?.split('/')[2]}`
     const { theme } = useContext(ThemeContext);
 
     return (
         <div
-            className={`flex h-screen w-screen relative ${
-                theme === 'black' ? 'bg-invert' : ''
-            }`}
+            className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''
+                }`}
         >
             {/* Side Navigation Bar */}
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${
-                    isCollapsed
-                        ? 'min-w-[50px] w-[50px]'
-                        : 'min-w-[250px] w-[250px]'
-                }`}
+                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${isCollapsed
+                    ? 'min-w-[50px] w-[50px]'
+                    : 'min-w-[250px] w-[250px]'
+                    }`}
             >
                 <VerticalNavBar
                     toggleCollapse={toggleCollapse}
@@ -188,17 +184,16 @@ const ConfigurationLayout = ({ children }: Props) => {
                 </div>
 
                 <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50 bg-transparent-body ">
-                    {children}
+                    <Outlet/>
                 </div>
             </div>
 
             {/* BUTTON - Back to main menu */}
             <button
                 type="button"
-                onClick={() => navigate('/dashboard')}
-                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${
-                    isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
-                }`}
+                onClick={() => navigate('/welcome')}
+                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
+                    }`}
             >
                 <BiChevronsLeft className="text-2xl" />{' '}
                 {!isCollapsed && <div> BACK TO MAIN MENU </div>}

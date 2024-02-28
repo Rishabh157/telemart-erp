@@ -240,7 +240,7 @@ const AddSlotManagementWrapper = () => {
     }
     return (
         <>
-            {/* // <MediaLayout> */}
+            {/* // <> */}
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -256,7 +256,7 @@ const AddSlotManagementWrapper = () => {
                     )
                 }}
             </Formik>
-            {/* </MediaLayout> */}
+            {/* </> */}
         </>
     )
 }

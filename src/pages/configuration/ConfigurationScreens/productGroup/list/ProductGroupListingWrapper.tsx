@@ -17,7 +17,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ProductGroupListResponse } from 'src/models/ProductGroup.model'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     useDeleteProductGroupMutation,
     useGetProductGroupQuery,
@@ -192,13 +192,13 @@ const ProductGroupListingWrapper = () => {
 
     return (
         <>
-            <ConfigurationLayout>
+            
                 <ProductGroupListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

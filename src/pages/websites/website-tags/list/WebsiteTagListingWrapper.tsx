@@ -22,7 +22,7 @@ import {
 } from 'src/services/websites/WebsiteTagsServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import WebsiteLayout from '../../WebsiteLayout'
+
 import WebsiteTagListing from './WebsiteTagListing'
 
 // |-- Redux --|
@@ -176,13 +176,13 @@ const WebsiteTagListingWrapper = () => {
 
     return (
         <>
-            <WebsiteLayout>
+          
                 <WebsiteTagListing
                   columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </WebsiteLayout>
+          
         </>
     )
 }

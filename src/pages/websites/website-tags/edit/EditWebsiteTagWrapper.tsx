@@ -21,7 +21,7 @@ import {
     useGetWebsiteTagsByIdQuery,
     useUpdateWebsiteTagsMutation,
 } from 'src/services/websites/WebsiteTagsServices'
-import WebsiteLayout from '../../WebsiteLayout'
+
 import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
 import { useGetAllWebsitePageQuery } from 'src/services/websites/WebsitePageServices'
 import { setAllItems as setAllWebsites } from 'src/redux/slices/website/websiteSlice'
@@ -186,7 +186,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
     }
 
     return (
-        <WebsiteLayout>
+      
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -203,7 +203,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsiteLayout>
+      
     )
 }
 

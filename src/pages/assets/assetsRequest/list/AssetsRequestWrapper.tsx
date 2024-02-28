@@ -27,7 +27,7 @@ import {
 } from 'src/services/assets/AssetsRequestServcies'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import AsstesLayout from '../../AssetsLayout'
+
 import AssetsRequestListing from './AssetsRequestListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -164,13 +164,13 @@ const AssetsRequestWrapper = () => {
 
     return (
         <>
-            <AsstesLayout>
+            <>
                 <AssetsRequestListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </AsstesLayout>
+            </>
         </>
     )
 }

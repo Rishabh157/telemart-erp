@@ -23,7 +23,7 @@ import {
 } from 'src/services/media/CompetitorManagementServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import MediaLayout from '../../MediaLayout'
+
 import CompetitorManagementListing from './CompetitorManagementListing'
 // |-- Redux --|
 import moment from 'moment'
@@ -214,13 +214,13 @@ const CompetitorManagementListingWrapper = () => {
     }
     return (
         <>
-            <MediaLayout>
+            <>
                 <CompetitorManagementListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </MediaLayout>
+            </>
         </>
     )
 }

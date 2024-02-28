@@ -27,7 +27,7 @@ import {
 } from 'src/services/assets/AssetsLocationService'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import AsstesLayout from '../../AssetsLayout'
+
 import AssetsLocationListing from './AssetsLocationListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -140,13 +140,13 @@ const AssetsLocationWrapper = () => {
     }
     return (
         <>
-            <AsstesLayout>
+            <>
                 <AssetsLocationListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </AsstesLayout>
+            </>
         </>
     )
 }

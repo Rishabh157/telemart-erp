@@ -17,7 +17,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { LanguageListResponse } from 'src/models/Language.model'
 
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     setIsTableLoading,
     setItems,
@@ -134,13 +134,13 @@ const LanguageListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <LanguageListing
               columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

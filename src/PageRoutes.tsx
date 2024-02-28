@@ -95,6 +95,7 @@ import {
     ChannelManagementListingWrapper,
     CompetitorManagementListingWrapper,
     ConfigurationCompanyListingWrapper,
+    ConfigurationLayout,
     // AddTaxesWrapper,
     // TaxesListingWrapper,
     // ConfigurationLayout,
@@ -212,7 +213,7 @@ import {
     WebsiteBlogViewWrapper,
     WebsitePageListingWrapper,
     WebsiteTagListingWrapper,
-    WebstieListingWrapper,
+    WebstieListingWrapper
 } from './pages/index'
 import InwardsTabs from './pages/warehouses/view/inventories/inward'
 import InwardCompanyTabsListingWrapper from './pages/warehouses/view/inventories/inward/Company/InwardCompanyTabsListingWrapper'
@@ -220,13 +221,13 @@ import InwardCustomerTabsListingWrapper from './pages/warehouses/view/inventorie
 import InwardDealerTabsListingWrapper from './pages/warehouses/view/inventories/inward/Dealer/InwardDealerTabsListingWrapper'
 import InwardEcomTabsListingWrapper from './pages/warehouses/view/inventories/inward/Ecom/InwardEcomTabsListingWrapper'
 // import InwardReplacementTabsListingWrapper from './pages/warehouses/view/inventories/inward/Replacement/InwardReplacementTabsListingWrapper'
+import DispatchedInvoice from './pages/saleOrder/list/components/DispatchedInvoiceWrapper'
 import InwardSampleTabsListingWrapper from './pages/warehouses/view/inventories/inward/Sample/InwardSampleTabsListingWrapper'
 import InwardWarehouseTabsListingWrapper from './pages/warehouses/view/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
 import OutwardTabs from './pages/warehouses/view/inventories/outward'
 import OutwardWarehouseToComapnyListingWrapper from './pages/warehouses/view/inventories/outward/Company/list/OutwardWarehouseToComapnyListingWrapper'
 import OutwardCustomerTabsListingWrapper from './pages/warehouses/view/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
 import OutwardDealerTabsListingWrapper from './pages/warehouses/view/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
-import DispatchedInvoice from './pages/saleOrder/list/components/DispatchedInvoiceWrapper'
 import OutwardEcomTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
 // import OutwardReplacementTabsListingWrapper from './pages/warehouses/view/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
 import OutwardRTVTabsListingWrapper from './pages/warehouses/view/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
@@ -234,38 +235,46 @@ import OutwardSampleTabsListingWrapper from './pages/warehouses/view/inventories
 import OutwardWarehouseTransferListingWrapper from './pages/warehouses/view/inventories/outward/Warehouse/list/OutwardWarehouseTransferListingWrapper'
 import InventorisTabsLayout from './pages/warehouses/view/inventories/tabs'
 // import ViewSlot from './pages/media/slotManagement'
+import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
+import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
+import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
+import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/list/CallCenterMasterListingWrapper'
+import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/AddNdrDispositionWrapper'
+import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
+import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/list/NdrDispositionListingWrapper'
+import InventoryFlowListingWrapper from './pages/inventoryFlow/list/InventoryFlowListingWrapper'
+import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
+import ViewSlot from './pages/media/slotManagement'
 import SlotRunViewsListingWrapper from './pages/media/slotManagement/slotRunView/SlotRunViewsListingWrapper'
 import AddRTVendorWrapper from './pages/returnToVendor/add/AddRTVendorWrapper'
 import EditRTVendorWrapper from './pages/returnToVendor/edit/EditRTVendorWrapper'
 import RTVListingWrapper from './pages/returnToVendor/list/RTVListingWrapper'
+import VenderInvoice from './pages/saleOrder/VenderInvoice'
 import AddWarehouseTransferWrapper from './pages/transferToWarehouse/add/AddWarehouseTransferWrapper'
 import EditWarehouseTransferWrapper from './pages/transferToWarehouse/edit/EditWarehouseTransferWrapper'
 import WarehouseTransferListingWrapper from './pages/transferToWarehouse/list/WarehouseTransferListingWrapper'
+import VendorRtvListingWrapper from './pages/vendors/view/tabs/ReturnToVendorTab/list/VendorRtvListingWrapper'
 import AddWarehouseToComapnyTransferWrapper from './pages/warehouseToCompany/add/AddWarehouseToComapnyTransferWrapper'
 import EditWarehouseToComapnyWrapper from './pages/warehouseToCompany/edit/EditWarehouseToComapnyWrapper'
 import WarehouseToComapnyListingWrapper from './pages/warehouseToCompany/list/WarehouseToComapnyListingWrapper'
+import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
+import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
+import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/WarehouseToSampleListingWrapper'
 import {
     setAccessToken,
     setDeviceId,
     setRefreshToken,
     setUserData,
 } from './redux/slices/authSlice'
-import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/WarehouseToSampleListingWrapper'
-import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
-import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
-import VendorRtvListingWrapper from './pages/vendors/view/tabs/ReturnToVendorTab/list/VendorRtvListingWrapper'
-import InventoryFlowListingWrapper from './pages/inventoryFlow/list/InventoryFlowListingWrapper'
-import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/list/CallCenterMasterListingWrapper'
-import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
-import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
-import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
-import VenderInvoice from './pages/saleOrder/VenderInvoice'
-import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
-import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/list/NdrDispositionListingWrapper'
-import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/AddNdrDispositionWrapper'
-import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
-import WelcomePage from './pages/welcome/WelcomePage'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
+import MediaLayout from './pages/media/MediaLayout'
+import AsstesLayout from './pages/assets/AssetsLayout'
+import DispositionLayout from './pages/disposition/DispositionLayout'
+import WebsitesLayout from './pages/websites/WebsiteLayout'
+import Welcome from './pages/welcome/Welcome'
+import Successfully from './pages/welcome/Successfully'
+// import Successfully from './pages/welcome/Successfully'
+// import Welcome from './pages/welcome/Welcome'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -287,13 +296,27 @@ const PageRoutes = () => {
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/welcome" element={
+                        <Authorization
+                            children={<Welcome />}
+                            permission={UserModuleNameTypes.NAV_WELCOME}
+                        />
+                    } />
+
                     <Route path="/vender-invoice" element={<VenderInvoice />} />
                     {/* Login */}
                     <Route path="/" element={<Auth />} />
                     {/* Page not found */}
                     <Route path="*" element={<PageNotFound />} />
                     {/* Dashboard */}
-                    <Route path="/dashboard" element={<DashboardWrappper />} />
+                    <Route path="/dashboard"
+                        element={
+                            <Authorization
+                                children={<DashboardWrappper />}
+                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                            />
+                        }
+                    />
                     {/* Profile */}
                     <Route path="/profile" element={<ProfileWrappper />} />
 
@@ -1341,996 +1364,1031 @@ const PageRoutes = () => {
                     />
 
                     {/* Configurations -> Attributes */}
-                    <Route
-                        path="/configurations/attributes"
+                    <Route path="/configurations"
                         element={
                             <Authorization
-                                children={<AttributesListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_ATTRIBUTE}
+                                children={<ConfigurationLayout />}
+                                permission={UserModuleNameTypes.NAV_CONFIGURATION}
                             />
                         }
-                    />
-                    <Route
-                        path="/configurations/attributes/add"
-                        element={
-                            <Authorization
-                                children={<AddAttributeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ATTRIBUTE_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/attributes/:id"
-                        element={
-                            <Authorization
-                                children={<EditAttributeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ATTRIBUTE_EDIT
-                                }
-                            />
-                        }
-                    />
-                    {/* Configurations -> Attributes Group */}
-                    <Route
-                        path="/configurations/attributes-group"
-                        element={
-                            <Authorization
-                                children={<AttributesGroupListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_ATTRIBUTE_GROUP
-                                }
-                            />
-                        }
-                    />
+                    >
+                        <Route
+                            path="attributes"
+                            element={
+                                <Authorization
+                                    children={<AttributesListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_ATTRIBUTE}
+                                />
+                            }
+                        />
+                        <Route
+                            path="attributes/add"
+                            element={
+                                <Authorization
+                                    children={<AddAttributeWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ATTRIBUTE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="attributes/:id"
+                            element={
+                                <Authorization
+                                    children={<EditAttributeWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ATTRIBUTE_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        {/* Configurations -> Attributes Group */}
+                        <Route
+                            path="attributes-group"
+                            element={
+                                <Authorization
+                                    children={<AttributesGroupListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_ATTRIBUTE_GROUP
+                                    }
+                                />
+                            }
+                        />
 
-                    <Route
-                        path="/configurations/attributes-group/add"
-                        element={
-                            <Authorization
-                                children={<AddAttributeGroupWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/attributes-group/:id"
-                        element={
-                            <Authorization
-                                children={<EditAttributeGroupWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_EDIT
-                                }
-                            />
-                        }
-                    />
+                        <Route
+                            path="attributes-group/add"
+                            element={
+                                <Authorization
+                                    children={<AddAttributeGroupWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="attributes-group/:id"
+                            element={
+                                <Authorization
+                                    children={<EditAttributeGroupWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Product Category */}
-                    <Route
-                        path="/configurations/product-category"
-                        element={
-                            <Authorization
-                                children={<ProductCategoryListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_PRODUCT_CATEGORY
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/product-category/add"
-                        element={
-                            <Authorization
-                                children={<AddProductCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/product-category/:id"
-                        element={
-                            <Authorization
-                                children={<EditProductCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Product Category */}
+                        <Route
+                            path="product-category"
+                            element={
+                                <Authorization
+                                    children={<ProductCategoryListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_PRODUCT_CATEGORY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="product-category/add"
+                            element={
+                                <Authorization
+                                    children={<AddProductCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="product-category/:id"
+                            element={
+                                <Authorization
+                                    children={<EditProductCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Product Sub Category */}
-                    <Route
-                        path="/configurations/product-sub-category"
-                        element={
-                            <Authorization
-                                children={<ProductSubCategoryListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_PRODUCT_SUB_CATEGORY
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/product-sub-category/add"
-                        element={
-                            <Authorization
-                                children={<AddProductSubCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/product-sub-category/:id"
-                        element={
-                            <Authorization
-                                children={<EditProductSubCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Product Sub Category */}
+                        <Route
+                            path="product-sub-category"
+                            element={
+                                <Authorization
+                                    children={<ProductSubCategoryListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_PRODUCT_SUB_CATEGORY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="product-sub-category/add"
+                            element={
+                                <Authorization
+                                    children={<AddProductSubCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="product-sub-category/:id"
+                            element={
+                                <Authorization
+                                    children={<EditProductSubCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Product Group */}
-                    <Route
-                        path="/configurations/product-group"
-                        element={
-                            <Authorization
-                                children={<ProductGroupListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_PRODUCT_GROUP
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Product Group */}
+                        <Route
+                            path="product-group"
+                            element={
+                                <Authorization
+                                    children={<ProductGroupListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_PRODUCT_GROUP
+                                    }
+                                />
+                            }
+                        />
 
-                    <Route
-                        path="/configurations/product-group/add"
-                        element={
-                            <Authorization
-                                children={<AddProductGroupWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_PRODUCT_GROUP_ADD
-                                }
-                            />
-                        }
-                    />
+                        <Route
+                            path="product-group/add"
+                            element={
+                                <Authorization
+                                    children={<AddProductGroupWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_PRODUCT_GROUP_ADD
+                                    }
+                                />
+                            }
+                        />
 
-                    <Route
-                        path="/configurations/product-group/:id"
-                        element={
-                            <Authorization
-                                children={<EditProductGroupWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_PRODUCT_GROUP_EDIT
-                                }
-                            />
-                        }
-                    />
+                        <Route
+                            path="product-group/:id"
+                            element={
+                                <Authorization
+                                    children={<EditProductGroupWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_PRODUCT_GROUP_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Scheme */}
-                    <Route
-                        path="/configurations/scheme"
-                        element={
-                            <Authorization
-                                children={<SchemeListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_SCHEME}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/scheme/add"
-                        element={
-                            <Authorization
-                                children={<AddSchemeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_SCHEME_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/scheme/:id"
-                        element={
-                            <Authorization
-                                children={<EditSchemeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_SCHEME_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Scheme */}
+                        <Route
+                            path="scheme"
+                            element={
+                                <Authorization
+                                    children={<SchemeListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_SCHEME}
+                                />
+                            }
+                        />
+                        <Route
+                            path="scheme/add"
+                            element={
+                                <Authorization
+                                    children={<AddSchemeWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_SCHEME_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="scheme/:id"
+                            element={
+                                <Authorization
+                                    children={<EditSchemeWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_SCHEME_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Item */}
-                    <Route
-                        path="/configurations/item"
-                        element={
-                            <Authorization
-                                children={<ItemListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_ITEMS}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/item/add"
-                        element={
-                            <Authorization
-                                children={<AddItemWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ITEMS_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/item/:id"
-                        element={
-                            <Authorization
-                                children={<EditItemWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ITEMS_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Item */}
+                        <Route
+                            path="item"
+                            element={
+                                <Authorization
+                                    children={<ItemListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_ITEMS}
+                                />
+                            }
+                        />
+                        <Route
+                            path="item/add"
+                            element={
+                                <Authorization
+                                    children={<AddItemWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ITEMS_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="item/:id"
+                            element={
+                                <Authorization
+                                    children={<EditItemWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ITEMS_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Products */}
-                    <Route
-                        path="/configurations/products"
-                        element={
-                            <Authorization
-                                children={<ProductsListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_PRODUCTS}
-                            />
-                        }
-                    />
+                        {/* Configurations -> Products */}
+                        <Route
+                            path="products"
+                            element={
+                                <Authorization
+                                    children={<ProductsListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_PRODUCTS}
+                                />
+                            }
+                        />
 
-                    <Route
-                        path="/configurations/products/add"
-                        element={
-                            <Authorization
-                                children={<AddProductWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_PRODUCTS_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/product/:id"
-                        element={
-                            <Authorization
-                                children={<EditProductWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_PRODUCTS_EDIT
-                                }
-                            />
-                        }
-                    />
+                        <Route
+                            path="products/add"
+                            element={
+                                <Authorization
+                                    children={<AddProductWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_PRODUCTS_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="product/:id"
+                            element={
+                                <Authorization
+                                    children={<EditProductWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_PRODUCTS_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Carton Box */}
-                    <Route
-                        path="/configurations/carton-box"
-                        element={
-                            <Authorization
-                                children={<CartonBoxListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_CARTON_BOX}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/carton-box/add"
-                        element={
-                            <Authorization
-                                children={<AddCartonBoxWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_CARTON_BOX_ADD
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Carton Box */}
+                        <Route
+                            path="carton-box"
+                            element={
+                                <Authorization
+                                    children={<CartonBoxListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_CARTON_BOX}
+                                />
+                            }
+                        />
+                        <Route
+                            path="carton-box/add"
+                            element={
+                                <Authorization
+                                    children={<AddCartonBoxWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_CARTON_BOX_ADD
+                                    }
+                                />
+                            }
+                        />
 
-                    <Route
-                        path="/configurations/carton-box/:id"
-                        element={
-                            <Authorization
-                                children={<EditCartonBoxWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_CARTON_BOX_EDIT
-                                }
-                            />
-                        }
-                    />
+                        <Route
+                            path="carton-box/:id"
+                            element={
+                                <Authorization
+                                    children={<EditCartonBoxWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_CARTON_BOX_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Company */}
-                    <Route
-                        path="/configurations/company"
-                        element={
-                            <Authorization
-                                children={
-                                    <ConfigurationCompanyListingWrapper />
-                                }
-                                permission={UserModuleNameTypes.NAV_COMPANY}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/company/add"
-                        element={
-                            <Authorization
-                                children={<AddCompanyWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_COMPANY_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/company/:id"
-                        element={
-                            <Authorization
-                                children={<EditCompanyWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_COMPANY_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Company */}
+                        <Route
+                            path="company"
+                            element={
+                                <Authorization
+                                    children={
+                                        <ConfigurationCompanyListingWrapper />
+                                    }
+                                    permission={UserModuleNameTypes.NAV_COMPANY}
+                                />
+                            }
+                        />
+                        <Route
+                            path="company/add"
+                            element={
+                                <Authorization
+                                    children={<AddCompanyWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPANY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="company/:id"
+                            element={
+                                <Authorization
+                                    children={<EditCompanyWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPANY_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> CompanyBranch */}
-                    <Route
-                        path="/configurations/company-branch"
-                        element={
-                            <Authorization
-                                children={<CompanyBranchListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_COMPANY_BRANCH
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/company-branch/add"
-                        element={
-                            <Authorization
-                                children={<AddCompanyBranchWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_COMPANY_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/company-branch/:id"
-                        element={
-                            <Authorization
-                                children={<EditCompanyBranchWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_COMPANY_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> CompanyBranch */}
+                        <Route
+                            path="company-branch"
+                            element={
+                                <Authorization
+                                    children={<CompanyBranchListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_COMPANY_BRANCH
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="company-branch/add"
+                            element={
+                                <Authorization
+                                    children={<AddCompanyBranchWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPANY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="company-branch/:id"
+                            element={
+                                <Authorization
+                                    children={<EditCompanyBranchWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPANY_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Barcode */}
-                    <Route
-                        path="/configurations/barcode"
-                        element={
-                            <Authorization
-                                children={<BarcodeListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_LIST
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/barcode/add"
-                        element={
-                            <Authorization
-                                children={<AddBarcodeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/barcode/carton-box-items/:cartonboxcode"
-                        element={
-                            <Authorization
-                                children={<ViewBarcodeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
+                        {/* Configurations -> Barcode */}
+                        <Route
+                            path="barcode"
+                            element={
+                                <Authorization
+                                    children={<BarcodeListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_BARCODE_LIST
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="barcode/add"
+                            element={
+                                <Authorization
+                                    children={<AddBarcodeWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_BARCODE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="barcode/carton-box-items/:cartonboxcode"
+                            element={
+                                <Authorization
+                                    children={<ViewBarcodeWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
 
-                    <Route
-                        path="/configurations/barcode/carton-box/add"
-                        element={
-                            <Authorization
-                                children={<AddCbBarcodeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
+                        <Route
+                            path="barcode/carton-box/add"
+                            element={
+                                <Authorization
+                                    children={<AddCbBarcodeWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
 
-                    <Route
-                        path="/configurations/barcode/:barcodeId"
-                        element={
-                            <Authorization
-                                children={<ViewBarcodeWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
+                        <Route
+                            path="barcode/:barcodeId"
+                            element={
+                                <Authorization
+                                    children={<ViewBarcodeWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Location */}
-                    <Route
-                        path="/configurations/location"
-                        element={<Locations />}
-                    />
+                        {/* Configurations -> Location */}
+                        <Route
+                            path="location"
+                            element={<Locations />}
+                        />
 
-                    {/* Configurations -> Language */}
-                    <Route
-                        path="/configurations/language"
-                        element={
-                            <Authorization
-                                children={<LanguageListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_LANGUAGE}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/language/add"
-                        element={
-                            <Authorization
-                                children={<AddLanguageWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_LANGUAGE_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/language/:id"
-                        element={
-                            <Authorization
-                                children={<EditLanguageWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_LANGUAGE_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Language */}
+                        <Route
+                            path="language"
+                            element={
+                                <Authorization
+                                    children={<LanguageListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_LANGUAGE}
+                                />
+                            }
+                        />
+                        <Route
+                            path="language/add"
+                            element={
+                                <Authorization
+                                    children={<AddLanguageWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_LANGUAGE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="language/:id"
+                            element={
+                                <Authorization
+                                    children={<EditLanguageWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_LANGUAGE_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Dealers Category */}
-                    <Route
-                        path="/configurations/dealers-category"
-                        element={
-                            <Authorization
-                                children={<DealersCategoryListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_DEALERS_CATEGORY
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/dealers-category/add"
-                        element={
-                            <Authorization
-                                children={<AddDealersCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DEALERS_CATEGORY_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/dealers-category/:id"
-                        element={
-                            <Authorization
-                                children={<EditDealersCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DEALERS_CATEGORY_EDIT
-                                }
-                            />
-                        }
-                    />
-                    {/* Configurations -> call center master */}
-                    <Route
-                        path="/configurations/callcenter-master"
-                        element={
-                            <Authorization
-                                children={<CallCenterMasterListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_CALL_CENTER}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/callcenter-master/add"
-                        element={
-                            <Authorization
-                                children={<AddCallCenterMasterWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_CALL_CENTER_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/configurations/callcenter-master/:id"
-                        element={
-                            <Authorization
-                                children={<EditCallCenterMasterWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_CALL_CENTER_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Configurations -> Dealers Category */}
+                        <Route
+                            path="dealers-category"
+                            element={
+                                <Authorization
+                                    children={<DealersCategoryListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_DEALERS_CATEGORY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="dealers-category/add"
+                            element={
+                                <Authorization
+                                    children={<AddDealersCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DEALERS_CATEGORY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="dealers-category/:id"
+                            element={
+                                <Authorization
+                                    children={<EditDealersCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DEALERS_CATEGORY_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        {/* Configurations -> call center master */}
+                        <Route
+                            path="callcenter-master"
+                            element={
+                                <Authorization
+                                    children={<CallCenterMasterListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_CALL_CENTER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="callcenter-master/add"
+                            element={
+                                <Authorization
+                                    children={<AddCallCenterMasterWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_CALL_CENTER_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="callcenter-master/:id"
+                            element={
+                                <Authorization
+                                    children={<EditCallCenterMasterWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_CALL_CENTER_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Configurations -> Hierarchy */}
-                    <Route
-                        path="configurations/hierarchy"
-                        element={<OrganisationHierarchy />}
-                    />
+                        {/* Configurations -> Hierarchy */}
+                        <Route
+                            path="hierarchy"
+                            element={<OrganisationHierarchy />}
+                        />
+                        <Route
+                            path="user-access"
+                            element={<UserAccessWrapper />}
+                        />
+
+                    </Route>
 
                     {/* Media -> Channel Group */}
                     <Route
-                        path="media/channel-group"
+                        path="/media"
                         element={
                             <Authorization
-                                children={<ChannelGroupListingWrapper />}
+                                children={<MediaLayout />}
                                 permission={
-                                    UserModuleNameTypes.NAV_CHANNEL_GROUP
+                                    UserModuleNameTypes.NAV_MEDIA
                                 }
                             />
                         }
-                    />
-                    <Route
-                        path="media/channel-group/add"
-                        element={
-                            <Authorization
-                                children={<AddChannelGroupWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_CHANNEL_GROUP_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/channel-group/:id"
-                        element={
-                            <Authorization
-                                children={<EditChannelGroupWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_CHANNEL_GROUP_EDIT
-                                }
-                            />
-                        }
-                    />
-
-                    {/* Media -> Channel Category */}
-                    <Route
-                        path="media/channel-category"
-                        element={
-                            <Authorization
-                                children={<ChannelCategoryListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_CHANNEL_CATEGORY
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/channel-category/add"
-                        element={
-                            <Authorization
-                                children={<AddChannelCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/channel-category/edit/:id"
-                        element={
-                            <Authorization
-                                children={<EditChannelCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_EDIT
-                                }
-                            />
-                        }
-                    />
-
-                    {/* Media -> Channel */}
-                    <Route
-                        path="media/channel"
-                        element={
-                            <Authorization
-                                children={<ChannelManagementListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/channel/add"
-                        element={
-                            <Authorization
-                                children={<AddChannelManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/channel/:id"
-                        element={
-                            <Authorization
-                                children={<EditChannelManagementWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
-
-                    {/* Media -> Did Management */}
-                    <Route
-                        path="media/did"
-                        element={
-                            <Authorization
-                                children={<DidManagementListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_DID_MANAGEMENT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/did/add"
-                        element={
-                            <Authorization
-                                children={<AddDidManagementWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DID_MANAGEMENT_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/did/:id"
-                        element={
-                            <Authorization
-                                children={<EditDidManagementWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DID_MANAGEMENT_EDIT
-                                }
-                            />
-                        }
-                    />
-
-                    {/* Media -> Artist */}
-                    <Route
-                        path="media/artist"
-                        element={
-                            <Authorization
-                                children={<ArtistListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_ARTIST}
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/artist/add"
-                        element={
-                            <Authorization
-                                children={<AddArtistWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ARTIST_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/artist/:id"
-                        element={
-                            <Authorization
-                                children={<EditArtistWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ARTIST_EDIT
-                                }
-                            />
-                        }
-                    />
-
-                    {/* Media -> Tap Management */}
-                    <Route
-                        path="media/tape"
-                        element={
-                            <Authorization
-                                children={<TapeManagementListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_TAPE_MANAGEMENT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/tape/add"
-                        element={
-                            <Authorization
-                                children={<AddTapeManagementWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/tape/edit/:id"
-                        element={
-                            <Authorization
-                                children={<EditTapeManagementWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT
-                                }
-                            />
-                        }
-                    />
-
-                    {/* Media -> Competitor */}
-                    <Route
-                        path="media/competitor"
-                        element={
-                            <Authorization
-                                children={
-                                    <CompetitorManagementListingWrapper />
-                                }
-                                permission={UserModuleNameTypes.NAV_COMPETITOR}
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/competitor/add"
-                        element={
-                            <Authorization
-                                children={<AddCompetitorWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_COMPETITOR_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="media/competitor/:id"
-                        element={
-                            <Authorization
-                                children={<EditCompetitorWraper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_COMPETITOR_EDIT
-                                }
-                            />
-                        }
-                    />
-
-                    {/* Media -> Slot */}
-                    {/* Orders
-                    <Route
-                        path="media/slot"
-                        element={
-                            // <Authorization
-                            //     children={
-                            <ViewSlot />
+                    >
+                        <Route
+                            path="channel-group"
+                            element={
+                                <Authorization
+                                    children={<ChannelGroupListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_CHANNEL_GROUP
+                                    }
+                                />
                             }
-                            //     permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            // />
-                        }
-                    > */}
-                    <Route
-                        index
-                        element={
-                            <Authorization
-                                children={<SlotManagementListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_SLOT_MANAGEMENT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="add"
-                        element={
-                            <Authorization
-                                children={<AddSlotManagementWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="edit/:id"
-                        element={
-                            <Authorization
-                                children={<EditSlotManagementWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_EDIT
-                                }
-                            />
-                        }
-                    />
-                    <Route path="view/:id" element={<OrderViewWrapper />} />
-                    <Route
-                        path="run-slots"
-                        element={<SlotRunViewsListingWrapper />}
-                    />
+                        />
+                        <Route
+                            path="channel-group/add"
+                            element={
+                                <Authorization
+                                    children={<AddChannelGroupWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_CHANNEL_GROUP_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="channel-group/:id"
+                            element={
+                                <Authorization
+                                    children={<EditChannelGroupWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_CHANNEL_GROUP_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Media -> Inbound Or Caller Page & Customer Page */}
-                    <Route
-                        path="media/caller-page"
-                        element={<CallerPageWrapper />}
-                    />
+                        {/* Media -> Channel Category */}
+                        <Route
+                            path="channel-category"
+                            element={
+                                <Authorization
+                                    children={<ChannelCategoryListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_CHANNEL_CATEGORY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="channel-category/add"
+                            element={
+                                <Authorization
+                                    children={<AddChannelCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="channel-category/edit/:id"
+                            element={
+                                <Authorization
+                                    children={<EditChannelCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    <Route
-                        path="media/customer-page"
-                        element={<CustomerPageWrapper />}
-                    />
+                        {/* Media -> Channel */}
+                        <Route
+                            path="channel"
+                            element={
+                                <Authorization
+                                    children={<ChannelManagementListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
+                        <Route
+                            path="channel/add"
+                            element={
+                                <Authorization
+                                    children={<AddChannelManagementWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
+                        <Route
+                            path="channel/:id"
+                            element={
+                                <Authorization
+                                    children={<EditChannelManagementWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
+
+                        {/* Media -> Did Management */}
+                        <Route
+                            path="did"
+                            element={
+                                <Authorization
+                                    children={<DidManagementListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_DID_MANAGEMENT
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="did/add"
+                            element={
+                                <Authorization
+                                    children={<AddDidManagementWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DID_MANAGEMENT_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="did/:id"
+                            element={
+                                <Authorization
+                                    children={<EditDidManagementWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DID_MANAGEMENT_EDIT
+                                    }
+                                />
+                            }
+                        />
+
+                        {/* Media -> Artist */}
+                        <Route
+                            path="artist"
+                            element={
+                                <Authorization
+                                    children={<ArtistListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_ARTIST}
+                                />
+                            }
+                        />
+                        <Route
+                            path="artist/add"
+                            element={
+                                <Authorization
+                                    children={<AddArtistWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ARTIST_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="artist/:id"
+                            element={
+                                <Authorization
+                                    children={<EditArtistWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ARTIST_EDIT
+                                    }
+                                />
+                            }
+                        />
+
+                        {/* Media -> Tap Management */}
+                        <Route
+                            path="tape"
+                            element={
+                                <Authorization
+                                    children={<TapeManagementListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_TAPE_MANAGEMENT
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="tape/add"
+                            element={
+                                <Authorization
+                                    children={<AddTapeManagementWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="tape/edit/:id"
+                            element={
+                                <Authorization
+                                    children={<EditTapeManagementWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT
+                                    }
+                                />
+                            }
+                        />
+
+                        {/* Media -> Competitor */}
+                        <Route
+                            path="competitor"
+                            element={
+                                <Authorization
+                                    children={
+                                        <CompetitorManagementListingWrapper />
+                                    }
+                                    permission={UserModuleNameTypes.NAV_COMPETITOR}
+                                />
+                            }
+                        />
+                        <Route
+                            path="competitor/add"
+                            element={
+                                <Authorization
+                                    children={<AddCompetitorWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPETITOR_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="competitor/:id"
+                            element={
+                                <Authorization
+                                    children={<EditCompetitorWraper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPETITOR_EDIT
+                                    }
+                                />
+                            }
+                        />
+
+                        {/* Media -> Slot */}
+                        {/* Orders */}
+                        <Route
+                            path="slot"
+                            element={
+
+                                <ViewSlot />
+                            }
+
+
+                        >
+                            <Route
+                                index
+                                element={
+                                    <Authorization
+                                        children={<SlotManagementListingWrapper />}
+                                        permission={
+                                            UserModuleNameTypes.NAV_SLOT_MANAGEMENT
+                                        }
+                                    />
+                                }
+                            />
+                            <Route
+                                path="add"
+                                element={
+                                    <Authorization
+                                        children={<AddSlotManagementWrapper />}
+                                        permission={
+                                            UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_ADD
+                                        }
+                                    />
+                                }
+                            />
+                            <Route
+                                path="edit/:id"
+                                element={
+                                    <Authorization
+                                        children={<EditSlotManagementWrapper />}
+                                        permission={
+                                            UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_EDIT
+                                        }
+                                    />
+                                }
+                            />
+                            <Route path="view/:id" element={<OrderViewWrapper />} />
+                            <Route
+                                path="run-slots"
+                                element={<SlotRunViewsListingWrapper />}
+                            />
+                        </Route>
+                        {/* Media -> Inbound Or Caller Page & Customer Page */}
+                        <Route
+                            path="caller-page"
+                            element={<CallerPageWrapper />}
+                        />
+
+                        <Route
+                            path="customer-page"
+                            element={<CustomerPageWrapper />}
+                        />
+                    </Route>
 
                     {/* Assets -> Assets Management */}
                     <Route
-                        path="assets/assets-management"
+                        path="assets"
                         element={
                             <Authorization
-                                children={<AssetsRequestWrapper />}
-                                permission={UserModuleNameTypes.NAV_ASSETS}
+                                children={<AsstesLayout />}
+                                permission={
+                                    UserModuleNameTypes.NAV_ASSETS
+                                }
                             />
                         }
-                    />
-                    <Route
-                        path="assets/assets-management/add"
-                        element={
-                            <Authorization
-                                children={<AddAssetsRequestWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
-                    <Route
-                        path="assets/assets-management/:id"
-                        element={
-                            <Authorization
-                                children={<EditAssetsRequestwrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
+                    >
+                        <Route
+                            path="assets-management"
+                            element={
+                                <Authorization
+                                    children={<AssetsRequestWrapper />}
+                                    permission={UserModuleNameTypes.NAV_ASSETS}
+                                />
+                            }
+                        />
+                        <Route
+                            path="assets-management/add"
+                            element={
+                                <Authorization
+                                    children={<AddAssetsRequestWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
+                        <Route
+                            path="assets-management/:id"
+                            element={
+                                <Authorization
+                                    children={<EditAssetsRequestwrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
 
-                    {/* Assets -> Assets Category */}
-                    <Route
-                        path="/assets/assets-category"
-                        element={
-                            <Authorization
-                                children={<AssetsCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_ASSETS_CATEGORY
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/assets/assets-category/add"
-                        element={
-                            <Authorization
-                                children={<AddAssetsCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/assets/assets-category/:id"
-                        element={
-                            <Authorization
-                                children={<EditAssetsCategoryWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Assets -> Assets Category */}
+                        <Route
+                            path="assets-category"
+                            element={
+                                <Authorization
+                                    children={<AssetsCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_ASSETS_CATEGORY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="assets-category/add"
+                            element={
+                                <Authorization
+                                    children={<AddAssetsCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="assets-category/:id"
+                            element={
+                                <Authorization
+                                    children={<EditAssetsCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Assets -> Assets Location */}
-                    <Route
-                        path="/assets/assets-location"
-                        element={
-                            <Authorization
-                                children={<AssetsLocationWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_ASSETS_LOCATION
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/assets/assets-location/add"
-                        element={
-                            <Authorization
-                                children={<AddAssetsLocationWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ASSETS_LOCATION_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/assets/assets-location/:id"
-                        element={
-                            <Authorization
-                                children={<EditAssetsLocatonWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Assets -> Assets Location */}
+                        <Route
+                            path="assets-location"
+                            element={
+                                <Authorization
+                                    children={<AssetsLocationWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_ASSETS_LOCATION
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="assets-location/add"
+                            element={
+                                <Authorization
+                                    children={<AddAssetsLocationWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ASSETS_LOCATION_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="assets-location/:id"
+                            element={
+                                <Authorization
+                                    children={<EditAssetsLocatonWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Assets -> Assets Relocation */}
-                    <Route
-                        path="assets/assets-relocation"
-                        element={
-                            <Authorization
-                                children={<AssetsRelocationWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_ASSETS_RELOCATION
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="assets/assets-relocation/add"
-                        element={
-                            <Authorization
-                                children={<AddAssetsRelocationWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ASSETS_RELOCATION_ADD
-                                }
-                            />
-                        }
-                    />
+                        {/* Assets -> Assets Relocation */}
+                        <Route
+                            path="assets-relocation"
+                            element={
+                                <Authorization
+                                    children={<AssetsRelocationWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_ASSETS_RELOCATION
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="assets-relocation/add"
+                            element={
+                                <Authorization
+                                    children={<AddAssetsRelocationWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ASSETS_RELOCATION_ADD
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Assets -> Assets Allocation */}
-                    <Route
-                        path="assets/assets-allocation"
-                        element={
-                            <Authorization
-                                children={<AssetsAllocationWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_ASSETS_ALLOCATION
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="assets/assets-allocation/add"
-                        element={
-                            <Authorization
-                                children={<AddAssetsAllocationWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_ASSETS_ALLOCATION_ADD
-                                }
-                            />
-                        }
-                    />
-
+                        {/* Assets -> Assets Allocation */}
+                        <Route
+                            path="assets-allocation"
+                            element={
+                                <Authorization
+                                    children={<AssetsAllocationWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_ASSETS_ALLOCATION
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="assets-allocation/add"
+                            element={
+                                <Authorization
+                                    children={<AddAssetsAllocationWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_ASSETS_ALLOCATION_ADD
+                                    }
+                                />
+                            }
+                        />
+                    </Route>
                     {/* Customer Complain */}
                     <Route
                         path="/customer-complain"
@@ -2345,465 +2403,481 @@ const PageRoutes = () => {
                     />
 
                     {/* Dispositions -> Disposition One */}
-                    <Route
-                        path="dispositions/disposition-one"
+                    <Route path="/dispositions"
                         element={
                             <Authorization
-                                children={<DispositionOneListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_DISPOSITION_ONE}
+                                children={<DispositionLayout />}
+                                permission={UserModuleNameTypes.NAV_DISPOSITION}
                             />
                         }
-                    />
-                    <Route
-                        path="dispositions/disposition-one/add"
-                        element={
-                            <Authorization
-                                children={<AddDispositionOneWrappper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DISPOSITION_ONE_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/disposition-one/:id"
-                        element={
-                            <Authorization
-                                children={<EditDispositionOneWrappper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DISPOSITION_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
+                    >
+                        <Route
+                            path="disposition-one"
+                            element={
+                                <Authorization
+                                    children={<DispositionOneListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DISPOSITION_ONE}
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-one/add"
+                            element={
+                                <Authorization
+                                    children={<AddDispositionOneWrappper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DISPOSITION_ONE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-one/:id"
+                            element={
+                                <Authorization
+                                    children={<EditDispositionOneWrappper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DISPOSITION_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Dispositions -> Disposition Two */}
-                    <Route
-                        path="dispositions/disposition-two"
-                        element={
-                            <Authorization
-                                children={<DispositionTwoListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_DISPOSITION_TWO
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/disposition-two/add"
-                        element={
-                            <Authorization
-                                children={<AddDispositionTwoWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DISPOSITION_TWO_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/disposition-two/edit/:id"
-                        element={
-                            <Authorization
-                                children={<EditDispositionTwoWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DISPOSITION_TWO_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Dispositions -> Disposition Two */}
+                        <Route
+                            path="disposition-two"
+                            element={
+                                <Authorization
+                                    children={<DispositionTwoListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_DISPOSITION_TWO
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-two/add"
+                            element={
+                                <Authorization
+                                    children={<AddDispositionTwoWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DISPOSITION_TWO_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-two/edit/:id"
+                            element={
+                                <Authorization
+                                    children={<EditDispositionTwoWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DISPOSITION_TWO_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Dispositions -> Disposition Three */}
-                    <Route
-                        path="dispositions/disposition-three"
-                        element={
-                            <Authorization
-                                children={<DispositionThreeListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_DISPOSITION_THREE
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/disposition-three/add"
-                        element={
-                            <Authorization
-                                children={<AddDispositionThreeWrappper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DISPOSITION_THREE_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/disposition-three/edit/:id"
-                        element={
-                            <Authorization
-                                children={<EditDispositionThreeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DISPOSITION_THREE_EDIT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/disposition-three/:id"
-                        element={
-                            <Authorization
-                                children={<ViewDispositionThreeWrappper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
+                        {/* Dispositions -> Disposition Three */}
+                        <Route
+                            path="disposition-three"
+                            element={
+                                <Authorization
+                                    children={<DispositionThreeListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_DISPOSITION_THREE
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-three/add"
+                            element={
+                                <Authorization
+                                    children={<AddDispositionThreeWrappper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-three/edit/:id"
+                            element={
+                                <Authorization
+                                    children={<EditDispositionThreeWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-three/:id"
+                            element={
+                                <Authorization
+                                    children={<ViewDispositionThreeWrappper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
 
-                    {/* Dispositions -> Initialcall One */}
-                    <Route
-                        path="dispositions/initialcall-one"
-                        element={
-                            <Authorization
-                                children={<InitialCallOneListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_IC_ONE}
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/initialcall-one/add"
-                        element={
-                            <Authorization
-                                children={<AddInitialCallOneWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_IC_ONE_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/initialcall-one/:id"
-                        element={
-                            <Authorization
-                                children={<EditInitialCallOneWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_IC_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Dispositions -> Initialcall One */}
+                        <Route
+                            path="initialcall-one"
+                            element={
+                                <Authorization
+                                    children={<InitialCallOneListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_IC_ONE}
+                                />
+                            }
+                        />
+                        <Route
+                            path="initialcall-one/add"
+                            element={
+                                <Authorization
+                                    children={<AddInitialCallOneWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_IC_ONE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="initialcall-one/:id"
+                            element={
+                                <Authorization
+                                    children={<EditInitialCallOneWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_IC_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Dispositions -> Initialcall Two */}
-                    <Route
-                        path="dispositions/initialcall-two"
-                        element={
-                            <Authorization
-                                children={<InitialCallTwoListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_IC_TWO}
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/initialcall-two/add"
-                        element={
-                            <Authorization
-                                children={<AddInitialCallTwoWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_IC_TWO_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/initialcall-two/:id"
-                        element={
-                            <Authorization
-                                children={<EditInitialCallTwoWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_IC_TWO_EDIT
-                                }
-                            />
-                        }
-                    />
+                        {/* Dispositions -> Initialcall Two */}
+                        <Route
+                            path="initialcall-two"
+                            element={
+                                <Authorization
+                                    children={<InitialCallTwoListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_IC_TWO}
+                                />
+                            }
+                        />
+                        <Route
+                            path="initialcall-two/add"
+                            element={
+                                <Authorization
+                                    children={<AddInitialCallTwoWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_IC_TWO_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="initialcall-two/:id"
+                            element={
+                                <Authorization
+                                    children={<EditInitialCallTwoWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_IC_TWO_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Dispositions -> Initialcall Three */}
-                    <Route
-                        path="dispositions/initialcall-three"
-                        element={
-                            <Authorization
-                                children={<InitialCallThreeListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_IC_THREE}
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/initialcall-three/add"
-                        element={
-                            <Authorization
-                                children={<AddInitialCallThreeWrappper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_IC_THREE_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/initialcall-three/:id"
-                        element={
-                            <Authorization
-                                children={<EditInitialCallThreeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_IC_THREE_EDIT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/initialcall-three/view/:id"
-                        element={
-                            <Authorization
-                                children={<ViewInitialCallThreeWrappper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
+                        {/* Dispositions -> Initialcall Three */}
+                        <Route
+                            path="initialcall-three"
+                            element={
+                                <Authorization
+                                    children={<InitialCallThreeListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_IC_THREE}
+                                />
+                            }
+                        />
+                        <Route
+                            path="initialcall-three/add"
+                            element={
+                                <Authorization
+                                    children={<AddInitialCallThreeWrappper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_IC_THREE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="initialcall-three/:id"
+                            element={
+                                <Authorization
+                                    children={<EditInitialCallThreeWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_IC_THREE_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="initialcall-three/view/:id"
+                            element={
+                                <Authorization
+                                    children={<ViewInitialCallThreeWrappper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
 
-                    {/* Dispositions -> Disposition Complaint */}
-                    <Route
-                        path="dispositions/disposition-complaint"
-                        element={
-                            <Authorization
-                                children={
-                                    <DispositionComplaintListingWrapper />
-                                }
-                                permission={
-                                    UserModuleNameTypes.NAV_DISPOSITION_COMPLAINT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/disposition-complaint/add"
-                        element={
-                            <Authorization
-                                children={<AddDispositionComplaintWrappper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/disposition-complaint/:id"
-                        element={
-                            <Authorization
-                                children={<EditDispositionComplaintWrappper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_EDIT
-                                }
-                            />
-                        }
-                    />
-                    {/* Dispositions ->NDR Disposition One */}
-                    <Route
-                        path="dispositions/ndr-disposition"
-                        element={
-                            <Authorization
-                                children={<NdrDispositionListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_NDR_DISPOSITION
-                                }
-                            />
-                        }
-                    />
+                        {/* Dispositions -> Disposition Complaint */}
+                        <Route
+                            path="disposition-complaint"
+                            element={
+                                <Authorization
+                                    children={
+                                        <DispositionComplaintListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.NAV_DISPOSITION_COMPLAINT
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-complaint/add"
+                            element={
+                                <Authorization
+                                    children={<AddDispositionComplaintWrappper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="disposition-complaint/:id"
+                            element={
+                                <Authorization
+                                    children={<EditDispositionComplaintWrappper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        {/* Dispositions ->NDR Disposition One */}
+                        <Route
+                            path="ndr-disposition"
+                            element={
+                                <Authorization
+                                    children={<NdrDispositionListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_NDR_DISPOSITION
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* Dispositions ->NDR Disposition Add */}
+                        {/* Dispositions ->NDR Disposition Add */}
 
-                    <Route
-                        path="dispositions/ndr-disposition/add"
-                        element={
-                            <Authorization
-                                children={<AddNdrDispositionWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_NDR_DISPOSITION_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="dispositions/ndr-disposition/:id"
-                        element={
-                            <Authorization
-                                children={<EditNdrDispositionWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
-                                }
-                            />
-                        }
-                    />
-
+                        <Route
+                            path="ndr-disposition/add"
+                            element={
+                                <Authorization
+                                    children={<AddNdrDispositionWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_NDR_DISPOSITION_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="ndr-disposition/:id"
+                            element={
+                                <Authorization
+                                    children={<EditNdrDispositionWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
+                                    }
+                                />
+                            }
+                        />
+                    </Route>
                     {/* All Websites -> Websites */}
-                    <Route
-                        path="all-websites/website"
+                    <Route path="/all-websites"
                         element={
                             <Authorization
-                                children={<WebstieListingWrapper />}
+                                children={<WebsitesLayout />}
                                 permission={UserModuleNameTypes.NAV_ALL_WEBSITE}
                             />
                         }
-                    />
-                    <Route
-                        path="all-websites/website/add"
-                        element={
-                            <Authorization
-                                children={<AddWebsiteWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WEBSITES_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="all-websites/website/:id"
-                        element={
-                            <Authorization
-                                children={<EditWebsiteWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WEBSITES_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
+                    >
+                        <Route
+                            path="website"
+                            element={
+                                <Authorization
+                                    children={<WebstieListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_WEBSITES}
+                                />
+                            }
+                        />
+                        <Route
+                            path="website/add"
+                            element={
+                                <Authorization
+                                    children={<AddWebsiteWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WEBSITES_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website/:id"
+                            element={
+                                <Authorization
+                                    children={<EditWebsiteWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WEBSITES_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
 
-                    {/* All Websites -> Websites Blog */}
-                    <Route
-                        path="all-websites/website-blog"
-                        element={
-                            <Authorization
-                                children={<ListWebstieBlogWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_BLOG
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="all-websites/website-blog/add"
-                        element={
-                            <Authorization
-                                children={<AddWebsiteBlogWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WEBSITES_BLOG_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="all-websites/website-blog/:id"
-                        element={
-                            <Authorization
-                                children={<EditWebsiteBlogWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="all-websites/website-blog/view/:id"
-                        element={
-                            <Authorization
-                                children={<WebsiteBlogViewWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
+                        {/* All Websites -> Websites Blog */}
+                        <Route
+                            path="website-blog"
+                            element={
+                                <Authorization
+                                    children={<ListWebstieBlogWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_WEBSITES_BLOG
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-blog/add"
+                            element={
+                                <Authorization
+                                    children={<AddWebsiteBlogWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-blog/:id"
+                            element={
+                                <Authorization
+                                    children={<EditWebsiteBlogWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-blog/view/:id"
+                            element={
+                                <Authorization
+                                    children={<WebsiteBlogViewWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
 
-                    {/* All Websites -> Websites Page */}
-                    <Route
-                        path="all-websites/website-page"
-                        element={
-                            <Authorization
-                                children={<WebsitePageListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="all-websites/website-page/add"
-                        element={
-                            <Authorization
-                                children={<AddWebsitePageWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WEBSITES_PAGES_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="all-websites/website-page/:id"
-                        element={
-                            <Authorization
-                                children={<EditWebsitePageWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WEBSITES_PAGES_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="all-websites/website-page/view/:id"
-                        element={
-                            <Authorization
-                                children={<ViewWebsitePageWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
+                        {/* All Websites -> Websites Page */}
+                        <Route
+                            path="website-page"
+                            element={
+                                <Authorization
+                                    children={<WebsitePageListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-page/add"
+                            element={
+                                <Authorization
+                                    children={<AddWebsitePageWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WEBSITES_PAGES_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-page/:id"
+                            element={
+                                <Authorization
+                                    children={<EditWebsitePageWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WEBSITES_PAGES_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-page/view/:id"
+                            element={
+                                <Authorization
+                                    children={<ViewWebsitePageWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
 
-                    {/* All Websites -> Websites Tags */}
-                    <Route
-                        path="/all-websites/website-tags"
-                        element={
-                            <Authorization
-                                children={<WebsiteTagListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_TAGS
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/all-websites/website-tags/add"
-                        element={
-                            <Authorization
-                                children={<AddWebsiteTagsWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WEBSITES_TAGS_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/all-websites/website-tags/edit/:id"
-                        element={
-                            <Authorization
-                                children={<EditWebsiteTagWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WEBSITES_TAGS_ONE_EDIT
-                                }
-                            />
-                        }
-                    />
-                    <Route
-                        path="/all-websites/website-tags/:id"
-                        element={
-                            <Authorization
-                                children={<ViewWebsiteTagsWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
-                            />
-                        }
-                    />
-
-                    <Route path="/welcome" element={<WelcomePage />} />
+                        {/* All Websites -> Websites Tags */}
+                        <Route
+                            path="website-tags"
+                            element={
+                                <Authorization
+                                    children={<WebsiteTagListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_WEBSITES_TAGS
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-tags/add"
+                            element={
+                                <Authorization
+                                    children={<AddWebsiteTagsWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WEBSITES_TAGS_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-tags/edit/:id"
+                            element={
+                                <Authorization
+                                    children={<EditWebsiteTagWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WEBSITES_TAGS_ONE_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="website-tags/:id"
+                            element={
+                                <Authorization
+                                    children={<ViewWebsiteTagsWrapper />}
+                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                />
+                            }
+                        />
+                    </Route>
+                    <Route path="/success" element={<Successfully />} />
                     {/* ############# NOT FOR USE ############# */}
                     {/* <Route
                         path="/approved-orders/view/:id"
@@ -2846,27 +2920,24 @@ const PageRoutes = () => {
 
                     {/* <AddCompetitorWrapper /> */}
                     {/* <Route
-                        path="media/inbound/"
+                        path="inbound/"
                         element={<InbouundWrapper />}
                     /> */}
                     {/* start Influencer routing */}
                     <Route
-                        path="all-websites/influencers-management"
+                        path="influencers-management"
                         element={<InfluencerListingWrapper />}
                     />
                     <Route
-                        path="all-websites/influencers-management/add"
+                        path="influencers-management/add"
                         element={<AddInfluencerWrapper />}
                     />
 
-                    <Route
-                        path="configurations/user-access"
-                        element={<UserAccessWrapper />}
-                    />
+
 
                     {/* ############# NOT FOR USE ############# */}
                 </Routes>
-            </BrowserRouter>
+            </BrowserRouter >
         </>
     )
 }

@@ -267,13 +267,13 @@ const InitialCallThreeListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <InitialCallThreeListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </DispositionLayout>
+            </>
         </>
     )
 }

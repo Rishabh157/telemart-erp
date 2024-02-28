@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import AddProductSubCategory from './AddProductSubCategory'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddProductSubCategoryMutation } from 'src/services/ProductSubCategoryService'
 import { showToast } from 'src/utils'
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
@@ -121,7 +121,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -137,7 +137,7 @@ const AddProductSubCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

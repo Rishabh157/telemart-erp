@@ -16,7 +16,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/ndrDispositionSlice'
-import DispositionLayout from '../../DispositionLayout'
+
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 // import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 // import {
@@ -242,7 +242,7 @@ const NdrDispositionListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <div className="h-full">
                     <NdrDispositionListing
                         columns={columns}
@@ -250,7 +250,7 @@ const NdrDispositionListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </DispositionLayout>
+            </>
         </>
     )
 }

@@ -10,7 +10,8 @@
       "actionUrl": "",
       "actionName": "LIST",
       "compulsoryFields": [],
-      "parentGroup": []
+      "parentGroup": [],
+      "fields": []
     },
     {
       "actionId": "ACTION_ASSETS_ALLOCATION_ADD",

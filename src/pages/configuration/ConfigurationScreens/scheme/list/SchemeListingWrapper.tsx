@@ -17,7 +17,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { SchemeListResponse } from 'src/models/scheme.model'
 
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     useDeleteSchemeMutation,
     useGetAllSchemeQuery,
@@ -182,13 +182,13 @@ const SchemeListingWrapper = () => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <SchemeListing
                 columns={columns}
                 rows={items || []}
                 setShowDropdown={setShowDropdown}
             />
-        </ConfigurationLayout>
+       
     )
 }
 

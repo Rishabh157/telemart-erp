@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ProductSubCategoryListResponse } from 'src/models/ProductSubCategory.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 // import {
 //     setIsTableLoading,
 //     setItems,
@@ -183,13 +183,13 @@ const ProductSubCategoryListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <ProductSubCategoryListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

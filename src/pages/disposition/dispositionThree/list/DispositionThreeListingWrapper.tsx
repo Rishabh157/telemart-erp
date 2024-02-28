@@ -246,7 +246,7 @@ const DispositionThreeListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <div className="h-full">
                     <DispositionThreeListing
                         columns={columns}
@@ -254,7 +254,7 @@ const DispositionThreeListingWrapper = () => {
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </DispositionLayout>
+            </>
         </>
     )
 }

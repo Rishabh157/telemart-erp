@@ -17,7 +17,7 @@ import { Formik } from 'formik'
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
 import AddDispositionOne from './EditDispositionComplaint'
-import DispositionLayout from '../../DispositionLayout'
+
 import {
     useGetdispositionComplaintByIdQuery,
     useUpdatedispositionComplaintMutation,
@@ -168,7 +168,7 @@ const EditDispositionComplaintWrappper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 {' '}
                 <Formik
                     enableReinitialize
@@ -186,7 +186,7 @@ const EditDispositionComplaintWrappper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

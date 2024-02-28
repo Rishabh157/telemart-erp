@@ -18,7 +18,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import AddWebsiteTag from './AddWebsiteTag'
 import { showToast } from 'src/utils'
 import { useAddWebsiteTagsMutation } from 'src/services/websites/WebsiteTagsServices'
-import WebsiteLayout from '../../WebsiteLayout'
+
 import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
 import { useGetAllWebsitePageQuery } from 'src/services/websites/WebsitePageServices'
 import { WebsiteListResponse } from 'src/models/website/Website.model'
@@ -166,7 +166,7 @@ const AddWebsiteTagsWrapper = (props: Props) => {
     }
 
     return (
-        <WebsiteLayout>
+      
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -182,7 +182,7 @@ const AddWebsiteTagsWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsiteLayout>
+      
     )
 }
 

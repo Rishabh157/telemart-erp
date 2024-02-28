@@ -12,28 +12,14 @@ import { useDispatch, useSelector } from 'react-redux'
 // |-- External Dependencies --|
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import { MdExpandMore } from 'react-icons/md'
-// import { FormikProps } from 'formik'
-// import { MdDeleteOutline } from 'react-icons/md'
 
-// |-- Internal Dependencies --|
-//import { AccordianType } from './VendorGeneralInformationTabWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-//import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
-// import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-// import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-// import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-// import { SelectOption } from 'src/models/FormField/FormField.model'
-// import { HiPlus } from 'react-icons/hi'
-//import { BsFillExclamationCircleFill } from 'react-icons/bs'
-// import { default as modulesData } from 'src/defaultData/moduleData.json'
+
 import { mergeUserModules } from './mergeJson'
-import {
-    UserModuleActionTypes,
-    UserModuleOrderTabsTypes,
-} from 'src/models/userAccess/UserAccess.model'
+
 // import { default as user } from 'src/defaultData/user.json'
 import {
     moduleActionTypes,
@@ -47,10 +33,6 @@ import {
     getUserRoleLabel,
 } from 'src/utils/GetHierarchyByDept'
 import { showToast } from 'src/utils'
-// import { BsInfoCircle } from 'react-icons/bs'
-// import Popover from '@mui/material/Popover'
-// import Typography from '@mui/material/Typography'
-// import Button from '@mui/material/Button'
 
 // |-- Types --|
 type Props = {
@@ -84,7 +66,7 @@ const UserAcess = ({
     handleUserAccessSubmit,
 }: Props) => {
     const modules = [...mergeUserModules]
-
+    console.log(modules, "modules")
     const dispatch = useDispatch()
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
@@ -134,13 +116,12 @@ const UserAcess = ({
                         (actionitem) => actionitem.actionName === groupName
                     )
                     if (!isParent) {
-                        const ActiveModule = modules?.find(
+                        const ActiveModule:any = modules?.find(
                             (moduleitem) =>
                                 moduleitem.moduleId === module.moduleId
                         )
                         let ViewAction = ActiveModule?.moduleAction?.find(
-                            (actionitem: moduleActionTypes) =>
-                                actionitem.actionName === groupName
+                            (actionitem: moduleActionTypes) => { return actionitem.actionName === groupName }
                         )
                         if (ViewAction) {
                             moduleAction.push(ViewAction)
@@ -187,7 +168,7 @@ const UserAcess = ({
                         (actionitem) => actionitem.actionName === groupName
                     );
                     if (!isParent) {
-                        const ActiveModule = modules?.find(
+                        const ActiveModule:any = modules?.find(
                             (moduleitem) => moduleitem.moduleId === module.moduleId
                         );
                         let ViewAction = ActiveModule?.moduleAction?.find(
@@ -429,10 +410,10 @@ const UserAcess = ({
                                                 <AccordionDetails className="border-t border-slate-300 ">
                                                     <div className="py-3">
                                                         <ul className="pt-2  grid grid-cols-4 gap-1">
-                                                            {module?.moduleAction.map(
+                                                            {module?.moduleAction?.map(
                                                                 (
                                                                     actionsItems: moduleActionTypes,
-                                                                    index:any
+                                                                    index: any
                                                                 ) => {
                                                                     return (
                                                                         <li
@@ -443,34 +424,7 @@ const UserAcess = ({
                                                                         >
                                                                             <div className="gap-2 flex px-3 py-1">
                                                                                 <input
-                                                                                    disabled={
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleActionTypes.List ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderAllTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderApprovedTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderDeliveredTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderDoorCancelledTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderFreshTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderHoldTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderNonActionTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderPndTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderPscTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderUnaTab ||
-                                                                                            actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderUrgentTab
-                                                                                            ? true
-                                                                                            : false
-                                                                                    }
+
                                                                                     id={`${actionsItems?.actionId}`}
                                                                                     type={
                                                                                         'checkbox'
@@ -494,7 +448,7 @@ const UserAcess = ({
                                                                                 <div className="flex flex-cols-1 justify-around">
                                                                                     {actionsItems
                                                                                         ?.fields
-                                                                                        .length ? (
+                                                                                        ?.length ? (
                                                                                         <Accordion
                                                                                             key={
                                                                                                 index

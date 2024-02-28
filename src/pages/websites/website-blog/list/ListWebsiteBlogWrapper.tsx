@@ -22,7 +22,7 @@ import {
 } from 'src/services/websites/WebsiteBlogServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import WebsiteLayout from '../../WebsiteLayout'
+
 import ListWebsiteBlog from './ListWebsiteBlog'
 
 // |-- Redux --|
@@ -178,13 +178,13 @@ const ListWebsiteBlogWrapper = () => {
 
     return (
         <>
-            <WebsiteLayout>
-                <ListWebsiteBlog
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </WebsiteLayout>
+
+            <ListWebsiteBlog
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+
         </>
     )
 }
