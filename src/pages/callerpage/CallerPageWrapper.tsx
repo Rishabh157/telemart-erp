@@ -25,6 +25,7 @@ import { useLocation } from 'react-router-dom'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 import { statusProps } from '../orders'
 import { useNavigate } from 'react-router-dom'
+// import moment from 'moment'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -83,6 +84,7 @@ export type FormInitialValues = {
 }
 
 const CallerPageWrapper = () => {
+    const [apiStatus, setApiStatus] = React.useState(false)
     const locationUrl = useLocation()
     const queryParams = new URLSearchParams(locationUrl.search)
     const phoneNumber = queryParams.get('phone')
@@ -90,8 +92,7 @@ const CallerPageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
-    const dstphone = queryParams.get('dstphone')
-    console.log('dstphone: ', dstphone)
+    // const dstphone = queryParams.get('dstphone')
     const columns: columnTypes[] = [
         {
             field: 'orderNumber',
@@ -103,47 +104,89 @@ const CallerPageWrapper = () => {
                 <span>{row.orderNumber} </span>
             ),
         },
-        // {
-        //     field: 'enqNo',
-        //     headerName: 'Enq No.',
-        //     flex: 'flex-[3_3_0%]',
-        //     align: 'center',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => <span> {row.didNo} </span>,
-        // },
         {
-            field: 'status',
-            headerName: 'Status',
+            field: 'enqNo',
+            headerName: 'Enquiry No.',
             flex: 'flex-[3_3_0%]',
-            align: 'center',
+            align: 'start',
             extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => <span> {row.status} </span>,
+            // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
-            field: 'flagStatus',
-            headerName: 'Falg Status',
+            field: 'agentName',
+            headerName: 'Agent Name',
             flex: 'flex-[3_3_0%]',
-            align: 'center',
+            align: 'start',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span> {row.flagStatus} </span>
+                <span> {row.agentName} </span>
             ),
+        },
+        {
+            field: 'agendId',
+            headerName: 'Agent ID',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.agentName} </span>
+            ),
+        },
+        {
+            field: 'edpDate',
+            headerName: 'EDP Date',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            // renderCell: (row: OrderListResponse) => (
+            //     <span> {row.agentName} </span>
+            // ),
         },
         {
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[3_3_0%]',
-            align: 'center',
+            align: 'start',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row.customerName} </span>
             ),
         },
         {
-            field: 'city',
-            headerName: 'City',
+            field: 'scheme',
+            headerName: 'Scheme',
             flex: 'flex-[3_3_0%]',
-            align: 'center',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.schemeName} </span>
+            ),
+        },
+        {
+            field: 'shcemeQuantity',
+            headerName: 'Quantity',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.shcemeQuantity} </span>
+            ),
+        },
+        {
+            field: 'disposition',
+            headerName: 'Disposition',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row.dispositionLevelThree} </span>
+            ),
+        },
+        {
+            field: 'districtLabel',
+            headerName: 'District',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row.districtLabel} </span>
@@ -153,88 +196,80 @@ const CallerPageWrapper = () => {
             field: 'pincode',
             headerName: 'Pincode',
             flex: 'flex-[3_3_0%]',
-            align: 'center',
+            align: 'start',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row.pincodeLabel} </span>
             ),
         },
         {
-            field: 'alternateNo',
-            headerName: 'Phone',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.mobileNo} </span>
-            ),
-        },
-        {
-            field: 'disposition',
-            headerName: 'Disposition',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.dispositionLevelThree} </span>
-            ),
-        },
-        {
-            field: 'scheme',
-            headerName: 'Scheme',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.schemeName} </span>
-            ),
-        },
-        {
-            field: 'shippingCharge',
-            headerName: 'Shipping Charge',
-            flex: 'flex-[4_4_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.deliveryCharges} </span>
-            ),
-        },
-        {
-            field: 'amount',
-            headerName: 'Amount',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.totalAmount} </span>
-            ),
-        },
-        {
             field: 'remark',
-            headerName: 'Remark',
+            headerName: 'Agent Remark',
             flex: 'flex-[3_3_0%]',
-            align: 'center',
+            align: 'start',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => <span> {row.remark} </span>,
         },
         {
-            field: 'agentName',
-            headerName: 'Agent Name',
+            field: 'dealerCode',
+            headerName: 'Dealer Code',
             flex: 'flex-[3_3_0%]',
-            align: 'center',
+            align: 'start',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span> {row.agentName} </span>
+                <span> {row?.dealerCode} </span>
             ),
         },
-        // {
-        //     field: 'compl',
-        //     headerName: 'Complaint',
-        //     flex: 'flex-[3_3_0%]',
-        //     align: 'center',
-        //     extraClasses: 'text-xs',
-        //     renderCell: (row: OrderListResponse) => <span> </span>,
-        // },
+        {
+            field: 'dealerStatus',
+            headerName: 'Dealer Status',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.dealerStatus} </span>
+            ),
+        },
+        {
+            field: 'status',
+            headerName: 'Status Date',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            // renderCell: (row: OrderListResponse) => (
+            //     <span> {row?.dealerCode} </span>
+            // ),
+        },
+        {
+            field: 'ccName',
+            headerName: 'CC Name',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            // renderCell: (row: OrderListResponse) => (
+            //     <span> {row?.de} </span>
+            // ),
+        },
+        {
+            field: 'wareHouseLabel',
+            headerName: 'Warehouse',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.wareHouseLabel} </span>
+            ),
+        },
+        {
+            field: 'trackingNo',
+            headerName: 'Tracking No.',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            // renderCell: (row: OrderListResponse) => (
+            //     <span> {row?.assignWarehouseLabel} </span>
+            // ),
+        },
     ]
 
     const inboundCallerState: any = useSelector(
@@ -252,8 +287,7 @@ const CallerPageWrapper = () => {
     // Table Data with MobileNo filtered
 
     const [AddCallerForm] = useAddCallerFormMutation()
-    const [UpdateCallerForm, UpdateCallerFormInfo] =
-        useUpdateCallerFormMutation()
+    const [UpdateCallerForm] = useUpdateCallerFormMutation()
 
     const initialValues: FormInitialValues = {
         agentName: agentName,
@@ -423,6 +457,7 @@ const CallerPageWrapper = () => {
 
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
+        setApiStatus(true)
         const callerDetails: any = localStorage.getItem('callerPageData')
         let callerDataItem = JSON.parse(callerDetails)
         // setApiStatus(true)
@@ -432,24 +467,34 @@ const CallerPageWrapper = () => {
                     ...values,
                     companyId: callerDataItem?.companyId,
                     agentId: callerDataItem?.agentId,
-                    preffered_delivery_date: values?.preffered_delivery_date ? values?.preffered_delivery_date : ''
+                    preffered_delivery_date: values?.preffered_delivery_date
+                        ? values?.preffered_delivery_date
+                        : '',
                 },
                 id: callerDataItem?.orderID,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    // resetForm({ isSubmitting: false, dirty: false })
-                    if (res?.data?.status) {
-                        showToast('success', 'caller added successfully!')
-                        localStorage.removeItem('callerPageData')
-                        navigate('/welcome')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-                // setApiStatus(false)
             })
+                .then((res: any) => {
+                    if ('data' in res) {
+                        // resetForm({ isSubmitting: false, dirty: false })
+                        if (res?.data?.status) {
+                            showToast('success', 'caller added successfully!')
+                            localStorage.removeItem('callerPageData')
+                            navigate('/welcome')
+                            setApiStatus(false)
+                        } else {
+                            showToast('error', res?.data?.message)
+                            setApiStatus(false)
+                        }
+                    } else {
+                        setApiStatus(false)
+                        showToast('error', 'Something went wrong')
+                    }
+                    // setApiStatus(false)
+                })
+                .catch((err) => {
+                    setApiStatus(false)
+                    showToast('error', 'Something went wrong')
+                })
         }, 1000)
     }
 
@@ -505,11 +550,11 @@ const CallerPageWrapper = () => {
                     return (
                         <form autoComplete="off">
                             <CallerPage
-                                isLoading={UpdateCallerFormInfo.isLoading}
                                 formikProps={formikProps}
                                 didItems={didItems}
                                 column={columns}
                                 rows={items}
+                                apiStatus={apiStatus}
                             />
                         </form>
                     )

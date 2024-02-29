@@ -20,7 +20,7 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { userDepartmentOptions } from 'src/utils'
+import { userDepartmentTypeOptions } from 'src/utils/constants/customeTypes'
 import {
     GetHierarchByDeptProps,
     getHierarchyByDept,
@@ -34,7 +34,10 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
 import { CompanyBranchListResponse } from 'src/models'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-import { useGetFloorMangerUserByCallCenterIdQuery, useGetTeamLeadrUserByCallCenterIdQuery } from 'src/services/UserServices'
+import {
+    useGetFloorMangerUserByCallCenterIdQuery,
+    useGetTeamLeadrUserByCallCenterIdQuery,
+} from 'src/services/UserServices'
 import { RootState } from 'src/redux/store'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
@@ -58,7 +61,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const EditUser = ({ formikProps, apiStatus,dropDownOption }: Props) => {
+const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const { values, setFieldValue } = formikProps
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [userRole, setuserRole] = useState<any[]>([])
@@ -92,7 +95,7 @@ const EditUser = ({ formikProps, apiStatus,dropDownOption }: Props) => {
     }, [values])
 
     const dispatch = useDispatch()
-    const handleSetFieldValue = (name: string, value: string| boolean) => {
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
@@ -287,7 +290,7 @@ const EditUser = ({ formikProps, apiStatus,dropDownOption }: Props) => {
                                 onChange={(e) =>
                                     handleSetFieldValue('userDepartment', e)
                                 }
-                                options={userDepartmentOptions}
+                                options={userDepartmentTypeOptions()}
                                 label="User Department"
                             />
                             <ATMSelectSearchable
@@ -300,7 +303,7 @@ const EditUser = ({ formikProps, apiStatus,dropDownOption }: Props) => {
                                 options={userRole}
                                 label="User Role"
                             />
-                             <ATMSwitchButton
+                            <ATMSwitchButton
                                 label="isAgent"
                                 name="isAgent"
                                 value={values.isAgent}

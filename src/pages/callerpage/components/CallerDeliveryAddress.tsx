@@ -207,11 +207,15 @@ const CallerDeliveryAddress = ({
     }
 
     const handleAutoFillShippingAddress = (values: FormInitialValues) => {
-        const addressLabels = `${values.stateLabel ? values.stateLabel + '\n' : ''
-            }${values.districtLabel ? values.districtLabel + '\n' : ''}${values.tehsilLabel ? values.tehsilLabel + '\n' : ''
-            }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${values.areaLabel ? values.areaLabel + '\n' : ''
-            }${values.houseNumber ? values.houseNumber + '\n' : ''}${values.streetNumber ? values.streetNumber + '\n' : ''
-            }${values.landmark ? values.landmark + '\n' : ''}`
+        const addressLabels = `${
+            values.stateLabel ? values.stateLabel + '\n' : ''
+        }${values.districtLabel ? values.districtLabel + '\n' : ''}${
+            values.tehsilLabel ? values.tehsilLabel + '\n' : ''
+        }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${
+            values.areaLabel ? values.areaLabel + '\n' : ''
+        }${values.houseNumber ? values.houseNumber + '\n' : ''}${
+            values.streetNumber ? values.streetNumber + '\n' : ''
+        }${values.landmark ? values.landmark + '\n' : ''}`
         return addressLabels
     }
 
@@ -333,12 +337,12 @@ const CallerDeliveryAddress = ({
             </div>
 
             {/* Delivery Address Section */}
-            <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
+            <div className="grid grid-cols-12 border-[1px] border-grey-700">
                 {/* FOR SHOWING 2 INPUT FIELDS */}
                 <div className="col-span-6 pb-1  gap-x-2 border-r-[1px] px-6 border-grey-800">
                     <div className="grid grid-cols-12">
                         <div className="col-span-4 flex items-center">
-                            <span className="text-slate-700 text-xs font-medium">
+                            <span className="text-slate-700 text-xs font-medium mb-1">
                                 Pincode
                             </span>
                         </div>
@@ -346,8 +350,8 @@ const CallerDeliveryAddress = ({
                             <div className="grid grid-cols-12 gap-x-2">
                                 <div className="col-span-6">
                                     <ATMSelectSearchable
-                                        fontSizePlaceHolder='14px'
-                                        minHeight='25px'
+                                        fontSizePlaceHolder="14px"
+                                        minHeight="25px"
                                         componentClass=""
                                         size="xxs"
                                         name="pincodeId"
@@ -378,7 +382,7 @@ const CallerDeliveryAddress = ({
                                 <div className="col-span-4">
                                     <ATMTextField
                                         size="xxs"
-                                        labelSize='xxs'
+                                        labelSize="xxs"
                                         maxLength={6}
                                         minLength={6}
                                         extraClassField="mt-1"
@@ -391,11 +395,11 @@ const CallerDeliveryAddress = ({
                                         }
                                     />
                                 </div>
-                                <div className="col-span-2 mt-1">
+                                <div className="col-span-2 mt-[3px]">
                                     <CallerButton
                                         text="Search"
                                         type="button"
-                                        className="text-[13px] "
+                                        className="text-[13px]"
                                         onClick={() =>
                                             pinCodeSearch === ''
                                                 ? setIsOpenDialog(true)
@@ -412,12 +416,13 @@ const CallerDeliveryAddress = ({
                     </div>
 
                     <ATMSelectSearchable
-                        fontSizePlaceHolder='14px'
-                        minHeight='25px'
+                        fontSizePlaceHolder="14px"
+                        minHeight="25px"
                         componentClass="mt-1"
                         label="State"
                         size="xxs"
                         labelSize="xxs"
+                        labelClass="text-slate-700 text-xs font-medium mb-1"
                         labelDirection="horizontal"
                         selectLabel="select state"
                         classDirection="grid grid-cols-3"
@@ -434,12 +439,13 @@ const CallerDeliveryAddress = ({
                         }}
                     />
                     <ATMSelectSearchable
-                        fontSizePlaceHolder='14px'
-                        minHeight='25px'
+                        fontSizePlaceHolder="14px"
+                        minHeight="25px"
                         componentClass="mt-1"
                         label="District"
                         size="xxs"
                         labelSize="xxs"
+                        labelClass="text-slate-700 text-xs font-medium mb-1"
                         selectLabel="select district"
                         labelDirection="horizontal"
                         classDirection="grid grid-cols-3"
@@ -459,14 +465,15 @@ const CallerDeliveryAddress = ({
 
                 <div className="col-span-4 pb-1 px-8 border-r-[1px]">
                     <ATMSelectSearchable
-                        fontSizePlaceHolder='14px'
-                        minHeight='25px'
+                        fontSizePlaceHolder="14px"
+                        minHeight="25px"
                         componentClass="mt-1"
                         label="Tehsil/Taluka"
                         size="xxs"
                         labelSize="xxs"
                         selectLabel="select tehsil/taluka"
                         labelDirection="horizontal"
+                        labelClass="text-slate-700 text-xs font-medium"
                         classDirection="grid grid-cols-3"
                         // isSubmitting
                         name="tehsilId"
@@ -483,14 +490,15 @@ const CallerDeliveryAddress = ({
                     />
 
                     <ATMSelectSearchable
-                        fontSizePlaceHolder='14px'
-                        minHeight='25px'
+                        fontSizePlaceHolder="14px"
+                        minHeight="25px"
                         componentClass="mt-1"
                         label="Area"
                         size="xxs"
                         labelSize="xxs"
                         selectLabel="select area"
                         labelDirection="horizontal"
+                        labelClass="text-slate-700 text-xs font-medium"
                         classDirection="grid grid-cols-3"
                         name="areaId"
                         value={values.areaId || ''}
@@ -520,14 +528,15 @@ const CallerDeliveryAddress = ({
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
                 <div className="col-span-6 pb-1 gap-x-4 border-r-[1px] px-6 border-grey-800">
                     <ATMSelectSearchable
-                        fontSizePlaceHolder='14px'
-                        minHeight='25px'
+                        fontSizePlaceHolder="14px"
+                        minHeight="25px"
                         componentClass="mt-1"
                         labelDirection="horizontal"
                         labelSize="xxs"
                         label="Type of Address"
                         size="xxs"
                         selectLabel="select address"
+                        labelClass="text-slate-700 text-xs font-medium"
                         name="typeOfAddress"
                         value={values.typeOfAddress || ''}
                         options={addressOptions}
@@ -542,6 +551,7 @@ const CallerDeliveryAddress = ({
                         size="xxs"
                         extraClassField="mt-0"
                         labelDirection="horizontal"
+                        labelClass="text-slate-700 text-xs font-medium mt-2"
                         name="reciversName"
                         placeholder="enter customer name"
                         value={values.reciversName || ''}
@@ -560,8 +570,8 @@ const CallerDeliveryAddress = ({
                             <div className="grid grid-cols-12 gap-x-1">
                                 <div className="col-span-5">
                                     <ATMSelectSearchable
-                                        fontSizePlaceHolder='14px'
-                                        minHeight='25px'
+                                        fontSizePlaceHolder="14px"
+                                        minHeight="25px"
                                         componentClass="mt-1"
                                         size="xxs"
                                         selectLabel="start time"
@@ -587,8 +597,8 @@ const CallerDeliveryAddress = ({
                                 </div>
                                 <div className="col-span-5">
                                     <ATMSelectSearchable
-                                        fontSizePlaceHolder='14px'
-                                        minHeight='25px'
+                                        fontSizePlaceHolder="14px"
+                                        minHeight="25px"
                                         componentClass="mt-1"
                                         size="xxs"
                                         labelSize="xxs"
@@ -609,7 +619,7 @@ const CallerDeliveryAddress = ({
                                 </div>
                                 <div className="col-span-12 mt-2 mb-4">
                                     <ATMDatePicker
-                                    inputSize='11px'
+                                        inputSize="11px"
                                         name="preffered_delivery_date"
                                         value={values.preffered_delivery_date}
                                         size="xxs"
@@ -617,7 +627,10 @@ const CallerDeliveryAddress = ({
                                         dateTimeFormat="MM/DD/YYYY"
                                         minDate
                                         onChange={(e) => {
-                                            setFieldValue('preffered_delivery_date', e)
+                                            setFieldValue(
+                                                'preffered_delivery_date',
+                                                e
+                                            )
                                         }}
                                     />
                                 </div>
@@ -626,11 +639,12 @@ const CallerDeliveryAddress = ({
                     </div>
 
                     <ATMTextField
-                        extraClassField="-mt-1"
+                        extraClassField="-mt-4"
                         label="House/Flat/Shop/Office No."
                         size="xxs"
                         labelSize="xxs"
                         placeholder="enter house/flat/shop/office no."
+                        labelClass='text-slate-700 text-sm font-medium mt-2'
                         labelDirection="horizontal"
                         name="houseNumber"
                         value={values.houseNumber || ''}
@@ -649,6 +663,7 @@ const CallerDeliveryAddress = ({
                         labelSize="xxs"
                         labelDirection="horizontal"
                         placeholder="enter street/sector/building/appartment"
+                        labelClass='text-slate-700 text-sm font-medium mt-1'
                         name="streetNumber"
                         value={values.streetNumber || ''}
                         onChange={(e) => {
@@ -665,6 +680,7 @@ const CallerDeliveryAddress = ({
                         size="xxs"
                         labelSize="xxs"
                         placeholder="enter landmark"
+                        labelClass='text-slate-700 text-sm font-medium mt-2'
                         labelDirection="horizontal"
                         name="landmark"
                         value={values.landmark}
@@ -682,6 +698,7 @@ const CallerDeliveryAddress = ({
                         label="Alternate Mobile No"
                         labelSize="xxs"
                         placeholder="enter alternate mobile number"
+                        labelClass='text-slate-700 text-sm font-medium mt-2'
                         value={values.alternateNo}
                         maxLength={10}
                         size="xxs"
@@ -703,6 +720,7 @@ const CallerDeliveryAddress = ({
                         size="xxs"
                         labelSize="xxs"
                         labelDirection="horizontal"
+                        labelClass='text-slate-700 text-sm font-medium mt-1'
                         name="whatsappNo"
                         maxLength={10}
                         // isSubmitting
@@ -721,7 +739,7 @@ const CallerDeliveryAddress = ({
                             name="autoFillingShippingAddress"
                             value={handleAutoFillShippingAddress(values) || ''}
                             placeholder="AUTOFILL SHIPPING ADDRESS"
-                            className='placeholder:text-sm'
+                            className="placeholder:text-sm"
                             minRows={9}
                             readOnly={true}
                             onChange={(value) =>
