@@ -11,7 +11,6 @@ import React, { useState, useEffect } from 'react'
 // |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { HiDotsHorizontal } from 'react-icons/hi'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -38,6 +37,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
     const productOrderState: any = useSelector(
         (state: RootState) => state.purchaseOrder
     )
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [showDropdown, setShowDropdown] = useState(false)
 
     const { page, rowsPerPage, searchValue, items } = productOrderState
@@ -132,28 +132,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             renderCell: (row: PurchaseOrderListResponse) => {
                 return <span> {row.purchaseOrder.estReceivingDate} </span>
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <div className="relative">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setShowDropdown(!showDropdown)
-                            //   setCurrentId(row?._id);
-                        }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                    >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                    </button>
-                </div>
-            ),
-            align: 'end',
-        },
+        }
     ]
 
     return (

@@ -29,11 +29,9 @@ import {
     setFilterBy,
 } from 'src/redux/slices/VendorLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import AuthenticationHOC from 'src/AuthenticationHOC'
-import {
-    UserModuleNameTypes,
-    UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
+
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -100,40 +98,29 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    <AuthenticationHOC
-                        moduleName={UserModuleNameTypes.vendor}
-                        actionName={
-                            UserModuleAddActionTypes.vendorLedgerCreditNote
-                        }
-                        component={
-                            <button
-                                onClick={() => {
-                                    setIsOpenModel(true)
-                                    setOpenModel(NoteType.CREDIT_NOTE_CREATED)
-                                }}
-                                className="bg-primary-main text-white rounded py-1 px-3"
-                            >
-                                + Cr. Note
-                            </button>
-                        }
-                    />
-                    <AuthenticationHOC
-                        moduleName={UserModuleNameTypes.vendor}
-                        actionName={
-                            UserModuleAddActionTypes.vendorLedgerDebitNote
-                        }
-                        component={
-                            <button
-                                onClick={() => {
-                                    setIsOpenModel(true)
-                                    setOpenModel(NoteType.DEBIT_NOTE_CREATED)
-                                }}
-                                className="bg-primary-main text-white rounded py-1 px-3"
-                            >
-                                + Db. Note
-                            </button>
-                        }
-                    />
+                    {isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_LEDGER_ADD) &&
+                        <button
+                            onClick={() => {
+                                setIsOpenModel(true)
+                                setOpenModel(NoteType.CREDIT_NOTE_CREATED)
+                            }}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Cr. Note
+                        </button>
+                    }
+                    {isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_DEBIT_ADD) &&
+                        <button
+                            onClick={() => {
+                                setIsOpenModel(true)
+                                setOpenModel(NoteType.DEBIT_NOTE_CREATED)
+                            }}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Db. Note
+                        </button>
+                    }
+
                 </div>
             </div>
 
