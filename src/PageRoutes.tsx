@@ -23,7 +23,6 @@ import { v4 as uuidv4 } from 'uuid'
 import AuthenticationHOC from './AuthenticationHOC'
 // import AuthenticationHOC from './AuthenticationHOC'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
-import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
 import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
@@ -271,6 +270,7 @@ import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/lis
 import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/AddNdrDispositionWrapper'
 import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
 import WelcomePage from './pages/welcome/WelcomePage'
+import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''

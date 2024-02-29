@@ -88,7 +88,7 @@ const CallerScheme = ({
     return (
         <>
             <div className="grid grid-cols-12 px-2 pb-[1px]">
-                <div className="col-span-2 mt-3 text-xs font-semibold">
+                <div className="col-span-2 mt-3 text-[10px] font-semibold">
                     Search By Scheme
                 </div>
                 <div className="col-span-3 px-2">
@@ -145,27 +145,27 @@ const CallerScheme = ({
                     <div className="bg-[#87527C]">
                         <div className="grid grid-cols-12 py-1 px-2">
                             <div className="col-span-4">
-                                <h2 className="font-semibold text-xs text-white">
+                                <h2 className="font-semibold text-[10px] text-white">
                                     SCHEME
                                 </h2>
                             </div>
                             <div className="col-span-2">
-                                <h2 className="font-semibold text-xs text-white">
+                                <h2 className="font-semibold text-[10px] text-white">
                                     PRICE
                                 </h2>
                             </div>
                             <div className="col-span-2">
-                                <h2 className="font-semibold text-xs text-white pl-3">
+                                <h2 className="font-semibold text-[10px] text-white pl-3">
                                     QTY
                                 </h2>
                             </div>
                             <div className="col-span-2">
-                                <h2 className="font-semibold text-xs text-white">
+                                <h2 className="font-semibold text-[10px] text-white">
                                     DELIVERY CHARGES
                                 </h2>
                             </div>
                             <div className="col-span-2">
-                                <h2 className="font-semibold text-xs text-white">
+                                <h2 className="font-semibold text-[10px] text-white">
                                     TOTAL AMOUNT
                                 </h2>
                             </div>
@@ -174,12 +174,12 @@ const CallerScheme = ({
                         <div className="bg-yellow-500">
                             <div className="grid grid-cols-12 py-1 px-2">
                                 <div className="col-span-4 flex items-center">
-                                    <h2 className="font-semibold text-xs text-white">
+                                    <h2 className="font-semibold text-[10px] text-white">
                                         {schemeDetails?.schemeName}
                                     </h2>
                                 </div>
                                 <div className="col-span-2 flex items-center">
-                                    <h2 className="font-semibold text-xs text-white">
+                                    <h2 className="font-semibold text-[10px] text-white">
                                         {schemeDetails?.price}.00
                                     </h2>
                                 </div>
@@ -214,7 +214,7 @@ const CallerScheme = ({
                                                     : true
                                             }
                                             type="button"
-                                            className="w-[22px] h-[22px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full text-[15px] text-black "
+                                            className="w-[22px] h-[22px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full text-black "
                                             onClick={(e) => {
                                                 e.preventDefault()
                                                 e.stopPropagation()
@@ -226,12 +226,12 @@ const CallerScheme = ({
                                     </h2>
                                 </div>
                                 <div className="col-span-2 flex items-center">
-                                    <h2 className="text-[15px] font-semibold text-xs">
+                                    <h2 className=" font-semibold text-[10px]">
                                         {schemeDetails?.deliveryCharges}.00
                                     </h2>
                                 </div>
                                 <div className="col-span-2 flex items-center">
-                                    <h2 className="text-[15px] font-semibold text-xs">
+                                    <h2 className=" font-semibold text-[10px]">
                                         {schemeDetails?.totalAmount}.00
                                     </h2>
                                 </div>

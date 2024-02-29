@@ -48,6 +48,8 @@ const AddCustomerComplaintDetailsWrapper = ({
         remark: orderDetails?.remark || '',
     }
 
+    // console.log('orderDetails: ', orderDetails)
+
     // Form Validation Schema
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const validationSchema = object({
@@ -84,6 +86,7 @@ const AddCustomerComplaintDetailsWrapper = ({
             icThree: values.initialCallThree,
             status: values.status,
             remark: values.remark,
+            customerNumber: orderDetails?.mobileNo || '',
         }
 
         addComplaint(formatedValues)
