@@ -89,6 +89,14 @@
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
+        },
+        {
+            "actionId": "ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB",
+            "actionUrl": "",
+            "actionName": "ORDER_GLOBAL_ORDER_SEARCH_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

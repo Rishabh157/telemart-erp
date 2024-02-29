@@ -117,7 +117,7 @@ const ViewOrder = () => {
             label: 'Global Order Search',
             icon: MdOutbond,
             path: '?orderStatus=global-search',
-            name: UserModuleOrderTabsTypes.orderNonActionTab,
+            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
         },
     ]
 
