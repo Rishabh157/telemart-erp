@@ -212,7 +212,7 @@ const OrganisationHierarchy = () => {
                                                         <TreeNode
                                                             label={
                                                                 <StyledNode
-                                                                    userRole="EXECUTIVE_TRAINEE"
+                                                                    userRole="EXECUTIVE_SALES_CENTER"
                                                                     dept={
                                                                         GetHierarchByDeptProps.SALES_DEPARTMENT
                                                                     }

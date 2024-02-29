@@ -28,6 +28,10 @@
             "label": "SR. Executive, Sales Center ",
             "value": "SR_EXECUTIVE_SALES_CENTER"
         },
+        {
+            "label": "Executive, Sales Center ",
+            "value": "EXECUTIVE_SALES_CENTER"
+        },
 
         {
             "label": " Executive,Trainee  ",
@@ -242,11 +246,11 @@
             "value": "JR_WEB_DEVELOPER"
         },
         {
-            "label": "SR WebDeveloper",
+            "label": "SR Manager Digital Sales",
             "value": "SR_WEB_DEVELOPER"
         },
         {
-            "label": "SR Manager Digital Sales",
+            "label": "SR WebDeveloper",
             "value": "SR_WEB_DEVELOPER"
         },
         {
