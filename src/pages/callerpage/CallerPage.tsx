@@ -18,6 +18,8 @@ import CallerPageTopNav from './components/CallerPageTopNav'
 import CallerScheme from './components/CallerScheme'
 import CallerDeliveryAddress from './components/CallerDeliveryAddress'
 import CallerOtherDetails from './components/CallerOtherDetails'
+import { IoReorderFour } from 'react-icons/io5'
+
 export type dropdownOptions = {
     stateOptions?: SelectOption[] | []
     districtOptions?: SelectOption[] | []
@@ -28,12 +30,22 @@ export type dropdownOptions = {
     areaOptions?: SelectOption[] | []
     OutBoundOptions?: SelectOption[] | []
 }
+
+enum TabTypes {
+    history = 'history',
+    order = 'order',
+    complaint = 'complaint',
+}
+
 type Props = {
     formikProps: FormikProps<FormInitialValues>
+    activeTab: TabTypes
+    setActiveTab: (value: string) => void
     column: any[]
     rows: any[]
     didItems: any
     apiStatus: boolean
+    isTableLoading: boolean
 }
 
 type ProductGroupResponse = {
@@ -63,9 +75,12 @@ export interface SchemeDetailsPropTypes {
 const CallerPage: React.FC<Props> = ({
     formikProps,
     didItems,
+    activeTab,
+    setActiveTab,
     column,
     rows,
     apiStatus,
+    isTableLoading,
 }) => {
     const callerDetails: any = localStorage.getItem('callerPageData')
     let callerDataItem = JSON.parse(callerDetails)
@@ -297,12 +312,56 @@ const CallerPage: React.FC<Props> = ({
                 </div>
             </div>
 
+            {/* TABS */}
+            <div className="flex gap-x-4 mt-2">
+                <div
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded ${
+                        TabTypes[activeTab] === TabTypes.history
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
+                    onClick={() => setActiveTab(TabTypes.history)}
+                >
+                    <div className=" text-sm mr-2 mt-1 ">
+                        <IoReorderFour />
+                    </div>
+                    <div className="text-sm">History</div>
+                </div>
+                <div
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded ${
+                        TabTypes[activeTab] === TabTypes.order
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
+                    onClick={() => setActiveTab(TabTypes.order)}
+                >
+                    <div className=" text-sm mr-2 mt-1 ">
+                        <IoReorderFour />
+                    </div>
+                    <div className="text-sm">Order</div>
+                </div>
+                <div
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded ${
+                        TabTypes[activeTab] === TabTypes.complaint
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
+                    onClick={() => setActiveTab(TabTypes.complaint)}
+                >
+                    <div className=" text-sm mr-2 mt-1 ">
+                        <IoReorderFour />
+                    </div>
+                    <div className="text-sm">Complain</div>
+                </div>
+            </div>
+
             {/* Data Table  */}
             <div className="border-[1px] border-grey-700">
                 <ATMTable
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column}
                     rows={rows}
+                    isLoading={isTableLoading}
                 />
             </div>
         </div>

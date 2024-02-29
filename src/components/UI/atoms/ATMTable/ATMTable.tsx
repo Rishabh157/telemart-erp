@@ -18,6 +18,7 @@ export interface columnTypes {
     renderCell?: (row: any) => string | React.ReactNode
     align?: 'start' | 'center' | 'end'
     extraClasses?: string
+    hidden?: boolean
 }
 
 const idKey = '_id'
@@ -90,18 +91,22 @@ const ATMTable = <T extends {}>({
                 ) : null}
 
                 {columns.map((column, index) => {
-                    return (
-                        <div
-                            key={column.field + index}
-                            className={`${
-                                column.flex
-                            } text-sm text-black  font-semibold px-2 flex justify-${
-                                column.align || 'start'
-                            }  ${column.extraClasses}`}
-                        >
-                            {column.headerName}
-                        </div>
-                    )
+                    if (column?.hidden) {
+                        return null
+                    } else {
+                        return (
+                            <div
+                                key={column.field + index}
+                                className={`${
+                                    column.flex
+                                } text-sm text-black  font-semibold px-2 flex justify-${
+                                    column.align || 'start'
+                                }  ${column.extraClasses}`}
+                            >
+                                {column.headerName}
+                            </div>
+                        )
+                    }
                 })}
             </div>
 
@@ -168,20 +173,24 @@ const ATMTable = <T extends {}>({
                         ) : null}
 
                         {columns.map((column, index) => {
-                            return (
-                                <div
-                                    key={column.field + index}
-                                    className={`${
-                                        column.flex
-                                    } text-sm text-slate-600 px-2 flex justify-${
-                                        column.align || 'start'
-                                    } ${column.extraClasses}`}
-                                >
-                                    {column.renderCell
-                                        ? column.renderCell(row)
-                                        : row[column.field]}
-                                </div>
-                            )
+                            if (column.hidden) {
+                                return null
+                            } else {
+                                return (
+                                    <div
+                                        key={column.field + index}
+                                        className={`${
+                                            column.flex
+                                        } text-sm text-slate-600 px-2 flex justify-${
+                                            column.align || 'start'
+                                        } ${column.extraClasses}`}
+                                    >
+                                        {column.renderCell
+                                            ? column.renderCell(row)
+                                            : row[column.field]}
+                                    </div>
+                                )
+                            }
                         })}
                     </div>
                 ))

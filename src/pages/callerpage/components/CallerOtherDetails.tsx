@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
@@ -25,6 +25,17 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
     const [isInstagramId, setInstagramId] = React.useState(false)
     const [isOrderOtherFieldEnable, setIsOrderOtherFieldEnable] =
         React.useState(false)
+
+    useEffect(() => {
+        if (values?.socialMedia?.facebook) {
+            setFacebookId(true)
+        }
+        if (values?.socialMedia?.instagram) {
+            setInstagramId(true)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
         <>
             {/* Other Details */}
