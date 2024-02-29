@@ -70,5 +70,39 @@ export const getHierarchyByDept = ({
     }
 
     return defaultComponent[department] || []
-  
+
+}
+
+export const getHierarchyByDeptWithRole = ({
+    department,
+}: {
+    department: keyof typeof GetHierarchByDeptProps
+}) => {
+    const defaultComponent = {
+        [GetHierarchByDeptProps.SALES_DEPARTMENT]: Hierarchy.salesDepartment[0],
+        [GetHierarchByDeptProps.HR_DEPARTMENT]: Hierarchy.hrDepartment[0],
+        [GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT]:
+            Hierarchy.distributionDepartment[0],
+        [GetHierarchByDeptProps.FINANCE_DEPARTMENT]:
+            Hierarchy.financeDepartment[0],
+        [GetHierarchByDeptProps.MEDIA_DEPARTMENT]: Hierarchy.mediaDepartment[0],
+        [GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT]:
+            Hierarchy.mediaProductionDepartment[0],
+        [GetHierarchByDeptProps.IT_DEPARTMENT]: Hierarchy.ITDepartment[0],
+        [GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT]:
+            Hierarchy.DevelopmentDepartment[0],
+        [GetHierarchByDeptProps.WEB_DEPARTMENT]: Hierarchy.webDepartment[0],
+        [GetHierarchByDeptProps.OPERATION_DEPARTMENT]:
+            Hierarchy.operationDepartment[0],
+        [GetHierarchByDeptProps.QUALITY_DEPARTMENT]:
+            Hierarchy.qualityDepartment[0],
+        [GetHierarchByDeptProps.LOGISTIC_DEPARTMENT]:
+            Hierarchy.logisticDepartment[0],
+        [GetHierarchByDeptProps.MAPPING_AND_MIS_DEPARTMENT]:
+            Hierarchy.mapingAndMISDepartment[0],
+        [GetHierarchByDeptProps.ADMIN_DEPARTMENT]: Hierarchy.adminDepartment[0],
+    }
+
+    return defaultComponent[department] || []
+
 }

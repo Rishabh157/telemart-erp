@@ -26,6 +26,7 @@ import { userDepartmentTypeOptions } from 'src/utils/constants/customeTypes'
 import {
     GetHierarchByDeptProps,
     getHierarchyByDept,
+    // getHierarchyByDeptWithRole,
 } from 'src/utils/GetHierarchyByDept'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
@@ -38,6 +39,7 @@ import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import {
     useGetFloorMangerUserByCallCenterIdQuery,
+    useGetSeniorUsersQuery,
     useGetTeamLeadrUserByCallCenterIdQuery,
 } from 'src/services/UserServices'
 import { RootState } from 'src/redux/store'
@@ -65,6 +67,7 @@ const breadcrumbs: BreadcrumbType[] = [
 const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const { values, setFieldValue } = formikProps
     const [userRole, setuserRole] = useState<any[]>([])
+    const [userSeniorOptions, setSenoirRole] = useState<any[]>([])
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [branchOptionList, setBranchOptionList] = useState([])
@@ -153,6 +156,39 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamLeadIsFetching, teamLeadIsLoading, floorMangers])
+
+    // senior Apidata
+    const {
+        data: seniorData,
+        isFetching: seniorIsFetching,
+        isLoading: seniorIsLoading,
+    } = useGetSeniorUsersQuery(
+        {
+            userrole: values?.userRole,
+        },
+        {
+            skip: !values?.userRole,
+        }
+    )
+    React.useEffect(() => {
+        if (!seniorIsLoading && !seniorIsFetching) {
+            const senoirOptions = seniorData?.data?.map((ele: any) => {
+                return {
+                    label: ele?.userName,
+                    value: ele?._id,
+                }
+            })
+            setSenoirRole(senoirOptions)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [seniorIsLoading, seniorIsFetching, seniorData])
+
+    // useEffect(() => {
+    //     const department = getHierarchyByDeptWithRole({
+    //         department: values.userDepartment as any,
+    //     })
+    //     console.log('department', department)
+    // }, [values.userRole])
 
     return (
         <MainLayout>
@@ -306,6 +342,15 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 }
                                 options={userRole}
                                 label="User Role"
+                            />
+                            <ATMSelectSearchable
+                                name="mySenior"
+                                value={values.mySenior || ''}
+                                onChange={(e) =>
+                                    handleSetFieldValue('mySenior', e)
+                                }
+                                options={userSeniorOptions}
+                                label="senior"
                             />
                             {/* user admin  */}
                             <ATMSwitchButton

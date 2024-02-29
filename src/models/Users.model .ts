@@ -120,6 +120,7 @@ export type AddNewUser = {
     callCenterId: string | null
     floorManagerId: string | null
     teamLeadId: string | null
+    mySenior: string | null
 }
 
 export type UpdateNewUser = {
@@ -138,6 +139,7 @@ export type UpdateNewUser = {
         callCenterId: string | null
         floorManagerId: string | null
         teamLeadId: string | null
+        mySenior: string | null
     }
     id: string
 }
