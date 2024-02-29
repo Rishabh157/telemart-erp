@@ -216,7 +216,7 @@ const CallerPage: React.FC<Props> = ({
     }
 
     return (
-        <div className="bg-white px-4">
+        <div className="bg-white px-1">
             <CallerPageTopNav agentName={values.agentName as string} />
             <CallerHeader
                 CampaignName={values.campaign || ''}
@@ -242,8 +242,8 @@ const CallerPage: React.FC<Props> = ({
             <CallerOtherDetails setFieldValue={setFieldValue} values={values} />
 
             {/* Disposition Section  */}
-            <div className="grid grid-cols-12 items-center border-[1px] px-3 pb-1 border-grey-700 z-[5000]">
-                <div className="col-span-3 px-3">
+            <div className="grid grid-cols-12 items-center border-[1px] px-2 pb-1 border-grey-700 z-[5000]">
+                <div className="col-span-3 px-2">
                     <ATMSelectSearchable
                         minHeight="25px"
                         size="xxs"
@@ -298,7 +298,7 @@ const CallerPage: React.FC<Props> = ({
             </div>
 
             {/* Data Table  */}
-            <div className="border-[1px] border-grey-700">
+            <div className="border-[1px] border-grey-700 overflow-scroll">
                 <ATMTable
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column}

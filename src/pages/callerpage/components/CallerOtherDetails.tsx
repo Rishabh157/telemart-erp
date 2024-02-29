@@ -29,13 +29,13 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
         <>
             {/* Other Details */}
             <div className="bg-[#87527C] py-1 px-2">
-                <h2 className="text-[14px] font-bold text-white">
+                <h2 className="text-[10px] font-bold text-white">
                     OTHER DETAILS
                 </h2>
             </div>
 
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
-                <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-6 border-grey-800">
+                <div className="col-span-6 py-2  gap-x-4 border-r-[1px] px-2 border-grey-800">
                     <div className="grid grid-cols-12">
                         <div className="col-span-4 pt-1 text-xs font-medium flex items-center">
                             Gender
@@ -57,7 +57,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
-                        minHeight="25px"
+                        minHeight="35px"
                         fontSizePlaceHolder="14px"
                         isMulti
                         labelSize="xxs"
@@ -210,7 +210,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
-                            minHeight="25px"
+                            minHeight="35px"
                             fontSizePlaceHolder="14px"
                             isMulti
                             isMenuOpen
@@ -231,7 +231,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                 </div>
 
-                <div className="col-span-6 py-2 px-8 border-r-[1px]">
+                <div className="col-span-6 py-2 px-2 border-r-[1px]">
                     <div className="grid grid-cols-12">
                         <div className="col-span-3"></div>
                         <div className="col-span-9 bg-slate-300 px-6 border-[1px]">
