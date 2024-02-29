@@ -49,6 +49,7 @@ export type FormInitialValues = {
     callCenterId: string
     floorManagerId: string
     teamLeadId: string
+    mySenior: string | null
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -84,6 +85,7 @@ const AddUserWrapper = (props: Props) => {
         callCenterId: '',
         floorManagerId: '',
         teamLeadId: '',
+        mySenior: null,
     }
 
     // Form Validation Schema
@@ -118,14 +120,6 @@ const AddUserWrapper = (props: Props) => {
         userDepartment: string().required('User Department is required'),
         userRole: string().required('User Role is required'),
         password: string().required('Password is required'),
-        // email: string().email('Invalid Email ID'),
-        // .required('Email is required'),
-        // mobile: string()
-        //     .required('Mobile No is required')
-        //     .max(10, 'Mobile number must be 10 digits')
-        //     .min(10, 'Mobile number must be 10 digits')
-        //     .trim()
-        //     .matches(regIndiaPhone, 'Invalid Mobile Number'),
     })
 
     //    Form Submit Handler
@@ -150,6 +144,7 @@ const AddUserWrapper = (props: Props) => {
                 companyId: values.companyId || '',
                 allowedIp: newAllowedIp[0]?.length ? newAllowedIp : [],
                 isAgent: values.isAgent,
+                mySenior: values.mySenior || null,
 
                 callCenterId: values.callCenterId || null,
                 floorManagerId: values.floorManagerId || null,
@@ -193,27 +188,7 @@ const AddUserWrapper = (props: Props) => {
             }
         ),
     }
-    // console.log(ref?.current, 'ref?.callCenterId')
-    // console.log(ref?.current?.values?.callCenterId, 'ref?.callCenterId')
-    // const {
-    //     data: floorMangers,
-    //     isFetching: floorManagerIsFetching,
-    //     isLoading: floorManagerIsLoading,
-    // } = useGetFloorMangerUserByCallCenterIdQuery(
-    //     {
-    //         companyId: userData?.companyId as string,
-    //         callCenterId: ref?.current?.values?.callCenterId as any,
-    //     },
-    //     {
-    //         skip: !(userData?.companyId && ref?.current?.values?.callCenterId),
-    //     }
-    // )
-    // React.useEffect(() => {
-    //     if (!floorManagerIsFetching && !floorManagerIsLoading) {
-    //         dispatch(setItems(floorMangers?.data))
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [floorManagerIsFetching, floorManagerIsLoading])
+
     return (
         <SideNavLayout>
             <Formik

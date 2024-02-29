@@ -156,8 +156,8 @@ export const userApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-           // ****  Floor manger by call center
-           getTeamLeadrUserByCallCenterId: builder.query({
+        // ****  Floor manger by call center
+        getTeamLeadrUserByCallCenterId: builder.query({
             providesTags: ['user', 'newUser'],
             query: ({
                 companyId,
@@ -167,6 +167,19 @@ export const userApi = apiSlice.injectEndpoints({
                 callCenterId: string
             }) => ({
                 url: `/user/get-team-leads/company/${companyId}/call-center/${callCenterId}`,
+                method: 'GET',
+            }),
+        }),
+
+        // ****  get senior api
+        getSeniorUsers: builder.query({
+            providesTags: ['user', 'newUser'],
+            query: ({
+                userrole,
+            }: {
+                userrole: string
+            }) => ({
+                url: `/user/get-all-users/user-role/${userrole}`,
                 method: 'GET',
             }),
         }),
@@ -186,5 +199,6 @@ export const {
     useGetDistributionsRoleMutation,
     useDeactiveUserMutation,
     useGetFloorMangerUserByCallCenterIdQuery,
-    useGetTeamLeadrUserByCallCenterIdQuery
+    useGetTeamLeadrUserByCallCenterIdQuery,
+    useGetSeniorUsersQuery
 } = userApi

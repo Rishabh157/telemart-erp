@@ -51,6 +51,7 @@ interface UserData {
     callCenterId: string | null
     floorManagerId: string | null
     teamLeadId: string | null
+    mySenior: string | null
 }
 export type FormInitialValues = {
     firstName: string
@@ -68,6 +69,7 @@ export type FormInitialValues = {
     callCenterId: string
     floorManagerId: string
     teamLeadId: string
+    mySenior: string | null
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -112,6 +114,7 @@ const EditUserWrapper = (props: Props) => {
         callCenterId: selectedItem?.callCenterId,
         floorManagerId: selectedItem?.floorManagerId,
         teamLeadId: selectedItem?.teamLeadId,
+        mySenior: selectedItem?.mySenior
     }
 
     // Form Validation Schema
@@ -179,6 +182,7 @@ const EditUserWrapper = (props: Props) => {
                 callCenterId: values.callCenterId || null,
                 floorManagerId: values.floorManagerId || null,
                 teamLeadId: values.teamLeadId || null,
+                mySenior: values?.mySenior
             }
 
             if (values?.password) {
