@@ -29,12 +29,9 @@ import {
     setFilterBy,
 } from 'src/redux/slices/DealerLedgerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import AuthenticationHOC from 'src/AuthenticationHOC'
-import {
-    UserModuleNameTypes,
-    UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 // |-- Types --|
 type Props = {
     columns: any[]
@@ -100,59 +97,42 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    <AuthenticationHOC
-                        moduleName={UserModuleNameTypes.dealer}
-                        actionName={
-                            UserModuleAddActionTypes.dealerLedgerCreditAmout
-                        }
-                        component={
-                            <button
-                                onClick={() => {
-                                    setIsOpenModel(true)
-                                    setOpenModel(
-                                        NoteType.DEALER_AMOUNT_CREDITED
-                                    )
-                                }}
-                                className="bg-primary-main text-white rounded py-1 px-3"
-                            >
-                                + Cr. Amount
-                            </button>
-                        }
-                    />
-                    <AuthenticationHOC
-                        moduleName={UserModuleNameTypes.dealer}
-                        actionName={
-                            UserModuleAddActionTypes.dealerLedgerCreditNote
-                        }
-                        component={
-                            <button
-                                onClick={() => {
-                                    setIsOpenModel(true)
-                                    setOpenModel(NoteType.CREDIT_NOTE_CREATED)
-                                }}
-                                className="bg-primary-main text-white rounded py-1 px-3"
-                            >
-                                + Cr. Note
-                            </button>
-                        }
-                    />
-                    <AuthenticationHOC
-                        moduleName={UserModuleNameTypes.dealer}
-                        actionName={
-                            UserModuleAddActionTypes.dealerLedgerDebitNote
-                        }
-                        component={
-                            <button
-                                onClick={() => {
-                                    setIsOpenModel(true)
-                                    setOpenModel(NoteType.DEBIT_NOTE_CREATED)
-                                }}
-                                className="bg-primary-main text-white rounded py-1 px-3"
-                            >
-                                + Db. Note
-                            </button>
-                        }
-                    />
+                    {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_CREDIT_AMOUNT_ADD) &&
+                        <button
+                            onClick={() => {
+                                setIsOpenModel(true)
+                                setOpenModel(
+                                    NoteType.DEALER_AMOUNT_CREDITED
+                                )
+                            }}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Cr. Amount
+                        </button>
+                    }
+
+                    {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_CREDIT_NOTE_ADD) &&
+                        <button
+                            onClick={() => {
+                                setIsOpenModel(true)
+                                setOpenModel(NoteType.CREDIT_NOTE_CREATED)
+                            }}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Cr. Note
+                        </button>
+                    }
+                    {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_DEBIT_NOTE_ADD) &&
+                        <button
+                            onClick={() => {
+                                setIsOpenModel(true)
+                                setOpenModel(NoteType.DEBIT_NOTE_CREATED)
+                            }}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Db. Note
+                        </button>
+                    }
                 </div>
             </div>
 
