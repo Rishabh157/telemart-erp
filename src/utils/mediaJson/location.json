@@ -14,33 +14,12 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_COUNTRY_ADD",
-      "actionUrl": "",
-      "actionName": "COUNTRY_ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "COUNTRY_LIST"
-      ],
-      "fields": []
-    },
-    {
       "actionId": "ACTION_STATE_LIST",
       "actionUrl": "",
       "actionName": "STATE_LIST",
       "compulsoryFields" : [],
       "parentGroup": [
         "COUNTRY_LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_STATE_ADD",
-      "actionUrl": "",
-      "actionName": "STATE_ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "COUNTRY_LIST",
-        "STATE_LIST"
       ],
       "fields": []
     },
@@ -56,18 +35,6 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_DISTRICTS_ADD",
-      "actionUrl": "",
-      "actionName": "DISTRICTS_ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "COUNTRY_LIST",
-        "STATE_LIST",
-        "DISTRICTS_LIST"
-      ],
-      "fields": []
-    },
-    {
       "actionId": "ACTION_TEHSILS_LIST",
       "actionUrl": "",
       "actionName": "TEHSILS_LIST",
@@ -75,18 +42,6 @@
       "parentGroup": [
         "COUNTRY_LIST",
         "STATE_LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_TEHSILS_ADD",
-      "actionUrl": "",
-      "actionName": "TEHSILS_ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "COUNTRY_LIST",
-        "STATE_LIST",
-        "TEHSILS_LIST"
       ],
       "fields": []
     },
@@ -102,18 +57,6 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_PINCODES_ADD",
-      "actionUrl": "",
-      "actionName": "PINCODES_ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "COUNTRY_LIST",
-        "STATE_LIST",
-        "PINCODES_LIST"
-      ],
-      "fields": []
-    },
-    {
       "actionId": "ACTION_AREA_LIST",
       "actionUrl": "",
       "actionName": "AREA_LIST",
@@ -121,18 +64,6 @@
       "parentGroup": [
         "COUNTRY_LIST",
         "STATE_LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_AREA_ADD",
-      "actionUrl": "",
-      "actionName": "AREA_ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "COUNTRY_LIST",
-        "STATE_LIST",
-        "AREA_LIST"
       ],
       "fields": []
     }

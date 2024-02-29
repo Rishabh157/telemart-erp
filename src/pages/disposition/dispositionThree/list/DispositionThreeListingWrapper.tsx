@@ -7,7 +7,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
 
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import {
     setIsTableLoading,
     setItems,
@@ -160,7 +159,7 @@ const DispositionThreeListingWrapper = () => {
             renderCell: (row: any) => (
                 <ActionPopup
                     isView={isAuthorized(
-                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_LIST
+                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_VIEW
                     )}
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_DISPOSITION_THREE_EDIT

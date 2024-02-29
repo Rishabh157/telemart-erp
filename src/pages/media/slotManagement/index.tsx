@@ -13,17 +13,12 @@ import { IconType } from 'react-icons'
 import { MdOutbond } from 'react-icons/md'
 import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
-// import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
-// |-- Internal Dependencies --|
-// import ATMBreadCrumbs, {
-//     BreadcrumbType,
-// } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { RootState } from 'src/redux/store'
 import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
-import MediaLayout from '../MediaLayout'
+
 interface tabsProps {
     label: string
     icon: IconType

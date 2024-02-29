@@ -29,11 +29,6 @@
           "fieldId": "CARTON_BOX_LIST_BOX_WEIGHT",
           "fieldName": "Box Weight",
           "fieldValue": "boxWeight"
-        },
-        {
-          "fieldId": "CARTON_BOX_LIST_PRODUCT_GROUP",
-          "fieldName": "Product Group",
-          "fieldValue": "productGroupLabel"
         }
       ]
     },

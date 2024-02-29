@@ -19,7 +19,7 @@ import ChannelManagementListing from './ChannelManagementListing'
 // import { useNavigate } from "react-router-dom";
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
-import MediaLayout from 'src/pages/media/MediaLayout'
+
 import {
     useDeleteChannelMutation,
     useGetPaginationchannelQuery,
@@ -44,7 +44,7 @@ const ChannelManagementListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const { page, rowsPerPage, searchValue, items } = channelManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
-  
+
     const [deleteChannel] = useDeleteChannelMutation()
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -53,7 +53,7 @@ const ChannelManagementListingWrapper = () => {
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
-                     name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME,
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME,
 
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.channelName} </span>
@@ -63,7 +63,7 @@ const ChannelManagementListingWrapper = () => {
             field: 'channelGroupLabel',
             headerName: 'Channel Group',
             flex: 'flex-[1_1_0%]',
-                     name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME,
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME,
 
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.channelGroupLabel} </span>
@@ -74,7 +74,7 @@ const ChannelManagementListingWrapper = () => {
             field: 'contactPerson',
             headerName: 'Contact Person',
             flex: 'flex-[1_1_0%]',
-                     name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CONTACT_PERSON,
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CONTACT_PERSON,
 
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.contactPerson} </span>
@@ -85,7 +85,7 @@ const ChannelManagementListingWrapper = () => {
             field: 'mobile',
             headerName: 'Mobile',
             flex: 'flex-[1_1_0%]',
-                     name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_MOBILE,
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_MOBILE,
 
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.mobile} </span>
@@ -96,7 +96,7 @@ const ChannelManagementListingWrapper = () => {
             field: 'email',
             headerName: 'Email',
             flex: 'flex-[1_1_0%]',
-                     name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_EMAIL,
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_EMAIL,
 
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.email} </span>
@@ -191,7 +191,7 @@ const ChannelManagementListingWrapper = () => {
             <>
                 <div className="h-full">
                     <ChannelManagementListing
-                           columns={columns}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

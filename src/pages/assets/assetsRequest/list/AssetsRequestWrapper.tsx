@@ -91,7 +91,7 @@ const AssetsRequestWrapper = () => {
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
-                        navigate(`/assets/assets-management/${currentId}`)
+                        navigate(`/assets/assets-request/${currentId}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({

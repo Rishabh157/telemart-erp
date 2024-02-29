@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import {
     setIsTableLoading,
     setItems,

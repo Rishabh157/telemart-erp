@@ -95,7 +95,7 @@ const AddAssetsRequestWrapper = (props: Props) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Added successfully!')
-                        navigate('/assets/assets-management')
+                        navigate('/assets/assets-request')
                     } else {
                         showToast('error', res?.data?.message)
                     }

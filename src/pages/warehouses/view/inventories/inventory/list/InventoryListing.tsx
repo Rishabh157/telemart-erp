@@ -12,19 +12,15 @@ import { IconType } from 'react-icons'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleNameTypes,
-    UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
-// import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 // |-- Redux --|
 import {
     setRowsPerPage,
@@ -60,21 +56,16 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[78px]  p-1">
                     <ATMPageHeading> Inventories </ATMPageHeading>
-                    <AuthenticationHOC
-                        moduleName={UserModuleNameTypes.wareHouse}
-                        actionName={
-                            UserModuleAddActionTypes.tabWarehouseInventoryAdd
-                        }
-                        component={
-                            <button
-                                type="button"
-                                onClick={() => navigate('inward-inventory/add')}
-                                className="bg-primary-main text-white rounded py-1 px-3"
-                            >
-                                + Inward Inventory
-                            </button>
-                        }
-                    />
+
+                    {isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD) &&
+                        <button
+                            type="button"
+                            onClick={() => navigate('inward-inventory/add')}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Inward Inventory
+                        </button>
+                    }
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
@@ -91,7 +82,7 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                         onSearch={(newValue) => {
                             dispatch(setSearchValue(newValue))
                         }}
-                        //  isFilter
+                    //  isFilter
                     />
 
                     {/* Table */}

@@ -76,7 +76,8 @@
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
             "compulsoryFields": [],
             "parentGroup": [
-                "VIEW"
+                "VIEW",
+                "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER"
             ],
             "fields": []
         },

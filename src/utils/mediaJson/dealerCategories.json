@@ -43,7 +43,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_DEALERS_CATEGORY_ONE_EDIT",
+      "actionId": "ACTION_DEALERS_CATEGORY_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "compulsoryFields" : [],
@@ -53,7 +53,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_DEALERS_CATEGORY_ONE_DELETE",
+      "actionId": "ACTION_DEALERS_CATEGORY_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "compulsoryFields" : [],

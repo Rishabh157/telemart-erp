@@ -174,7 +174,7 @@ export const navigation: NavItemType[] = [
     {
         label: 'Assets',
         icon: BiBox,
-        path: '/assets/assets-management',
+        path: '/assets/assets-request',
         name: UserModuleNameTypes.NAV_ASSETS,
     },
 

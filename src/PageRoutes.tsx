@@ -1279,7 +1279,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ViewPurchaseOrderWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_PURCHASE_ORDER}
                             />
                         }
                     />
@@ -1332,7 +1332,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<InquiryViewWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.NAV_INQUIRY}
                             />
                         }
                     />
@@ -1778,7 +1778,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<ViewBarcodeWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.ACTION_BARCODE_LIST}
                                 />
                             }
                         />
@@ -1788,7 +1788,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<AddCbBarcodeWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.ACTION_BARCODE_LIST}
                                 />
                             }
                         />
@@ -1798,7 +1798,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<ViewBarcodeWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.ACTION_BARCODE_LIST}
                                 />
                             }
                         />
@@ -2008,7 +2008,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<ChannelManagementListingWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.NAV_CHANNEL_MANAGEMENT}
                                 />
                             }
                         />
@@ -2017,7 +2017,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<AddChannelManagementWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_ADD}
                                 />
                             }
                         />
@@ -2026,7 +2026,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<EditChannelManagementWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_EDIT}
                                 />
                             }
                         />
@@ -2244,7 +2244,7 @@ const PageRoutes = () => {
                         }
                     >
                         <Route
-                            path="assets-management"
+                            path="assets-request"
                             element={
                                 <Authorization
                                     children={<AssetsRequestWrapper />}
@@ -2253,20 +2253,20 @@ const PageRoutes = () => {
                             }
                         />
                         <Route
-                            path="assets-management/add"
+                            path="assets-request/add"
                             element={
                                 <Authorization
                                     children={<AddAssetsRequestWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.ACTION_ASSETS_REQUEST_ADD}
                                 />
                             }
                         />
                         <Route
-                            path="assets-management/:id"
+                            path="assets-request/:id"
                             element={
                                 <Authorization
                                     children={<EditAssetsRequestwrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.ACTION_ASSETS_REQUEST_ONE_EDIT}
                                 />
                             }
                         />
@@ -2517,7 +2517,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<ViewDispositionThreeWrappper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.NAV_DISPOSITION_THREE}
                                 />
                             }
                         />
@@ -2625,7 +2625,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<ViewInitialCallThreeWrappper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.NAV_IC_THREE}
                                 />
                             }
                         />
@@ -2784,7 +2784,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<WebsiteBlogViewWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.NAV_WEBSITES_BLOG}
                                 />
                             }
                         />
@@ -2828,7 +2828,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<ViewWebsitePageWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.NAV_WEBSITES_PAGES}
                                 />
                             }
                         />
@@ -2872,7 +2872,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<ViewWebsiteTagsWrapper />}
-                                    permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                    permission={UserModuleNameTypes.NAV_WEBSITES_TAGS}
                                 />
                             }
                         />
@@ -2883,7 +2883,7 @@ const PageRoutes = () => {
                         path="/approved-orders/view/:id"
                         element={<ApprovedOrderViewWrapper />}
                     /> */}
-                    <Route
+                    {/* <Route
                         path="/vendors/:vendorId/warehouse/add"
                         element={
                             <Authorization
@@ -2891,13 +2891,13 @@ const PageRoutes = () => {
                                 permission={UserModuleNameTypes.NAV_DASHBOARD}
                             />
                         }
-                    />
+                    /> */}
                     <Route
                         path="/dealers/:dealerId/sale-order/add-sale-order"
                         element={
                             <Authorization
                                 children={<AddSaleOrderWrapper />}
-                                permission={UserModuleNameTypes.NAV_DASHBOARD}
+                                permission={UserModuleNameTypes.ACTION_DEALER_DEALER_SALE_ORDER_ADD}
                             />
                         }
                     />

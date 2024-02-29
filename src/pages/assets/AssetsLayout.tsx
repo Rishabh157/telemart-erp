@@ -26,7 +26,7 @@ const asstesNavigation: NavItemType[] = [
     {
         label: 'Assets Request ',
         icon: MdOutlineWebAsset,
-        path: 'assets-management',
+        path: 'assets-request',
         name: UserModuleNameTypes.NAV_ASSETS_REQUEST,
     },
     {

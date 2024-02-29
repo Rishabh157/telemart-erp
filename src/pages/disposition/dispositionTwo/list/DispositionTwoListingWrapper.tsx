@@ -6,7 +6,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
 import {
     setIsTableLoading,
     setItems,

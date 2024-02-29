@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
-import MediaLayout from 'src/pages/media/MediaLayout'
+
 import {
     useDeleteChannelCategoryMutation,
     useGetPaginationChannelCategoryQuery,

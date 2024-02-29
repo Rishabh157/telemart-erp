@@ -62,5 +62,16 @@
       ],
       "fields": []
     }
+    ,
+    {
+      "actionId": "ACTION_DISPOSITION_THREE_VIEW",
+      "actionUrl": "",
+      "actionName": "VIEW",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
   ]
 }

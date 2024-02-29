@@ -115,7 +115,7 @@ const UserAcess = ({
                         (actionitem) => actionitem.actionName === groupName
                     )
                     if (!isParent) {
-                        const ActiveModule:any = modules?.find(
+                        const ActiveModule: any = modules?.find(
                             (moduleitem) =>
                                 moduleitem.moduleId === module.moduleId
                         )
@@ -167,7 +167,7 @@ const UserAcess = ({
                         (actionitem) => actionitem.actionName === groupName
                     );
                     if (!isParent) {
-                        const ActiveModule:any = modules?.find(
+                        const ActiveModule: any = modules?.find(
                             (moduleitem) => moduleitem.moduleId === module.moduleId
                         );
                         let ViewAction = ActiveModule?.moduleAction?.find(
