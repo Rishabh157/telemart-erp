@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMMenu from 'src/components/UI/atoms/ATMMenu/ATMMenu'
-import ConfigurationLayout from '../../ConfigurationLayout'
+
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -212,7 +212,7 @@ const OrganisationHierarchy = () => {
                                                         <TreeNode
                                                             label={
                                                                 <StyledNode
-                                                                    userRole="EXECUTIVE_TRAINEE"
+                                                                    userRole="EXECUTIVE_SALES_CENTER"
                                                                     dept={
                                                                         GetHierarchByDeptProps.SALES_DEPARTMENT
                                                                     }

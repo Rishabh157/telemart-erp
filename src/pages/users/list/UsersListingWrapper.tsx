@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
+import { FaCheck } from 'react-icons/fa'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -39,6 +40,7 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { UsersListResponse } from 'src/models'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
@@ -90,14 +92,14 @@ const UsersListingWrapper = () => {
             headerName: 'User Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_USER_NAME,
-            renderCell: (row: any) => <span> {row.userName}</span>,
+            renderCell: (row: UsersListResponse) => <span> {row.userName}</span>,
         },
         {
             field: 'email',
             headerName: 'Email',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.USER_LIST_EMAIL,
-            renderCell: (row: any) => {
+            renderCell: (row: UsersListResponse) => {
                 return <span> {row.email} </span>
             },
         },
@@ -114,11 +116,19 @@ const UsersListingWrapper = () => {
             name: UserModuleNameTypes.USER_LIST_BRANCH_NAME,
         },
         {
+            field: 'isAgennt',
+            headerName: 'Agent',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: UsersListResponse) => {
+                return row?.isAgent ? <FaCheck color="#438a47" /> : null
+            },
+        },
+        {
             field: 'userDepartment',
             headerName: 'User Department',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_USER_DEPARTMENT,
-            renderCell: (row: any) => {
+            renderCell: (row: UsersListResponse) => {
                 return <span> {getDepartmentLabel(row.userDepartment)} </span>
             },
         },
@@ -127,7 +137,7 @@ const UsersListingWrapper = () => {
             headerName: 'User Role',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_USER_ROLE,
-            renderCell: (row: any) =>
+            renderCell: (row: UsersListResponse) =>
                 row?.userRole !== 'ADMIN' ? (
                     <span
                         className="underline text-primary-main"

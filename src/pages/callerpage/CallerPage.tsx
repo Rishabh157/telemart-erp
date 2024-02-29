@@ -33,7 +33,7 @@ type Props = {
     column: any[]
     rows: any[]
     didItems: any
-    isLoading: boolean
+    apiStatus: boolean
 }
 
 type ProductGroupResponse = {
@@ -65,7 +65,7 @@ const CallerPage: React.FC<Props> = ({
     didItems,
     column,
     rows,
-    isLoading,
+    apiStatus,
 }) => {
     const callerDetails: any = localStorage.getItem('callerPageData')
     let callerDataItem = JSON.parse(callerDetails)
@@ -287,8 +287,8 @@ const CallerPage: React.FC<Props> = ({
                 <div className="col-span-1 px-3 pt-7">
                     <CallerButton
                         // disabled={!dirty || isSubmitting}
-                        isLoading={isLoading}
-                        disabled={isLoading}
+                        isLoading={apiStatus}
+                        disabled={apiStatus}
                         text="Save"
                         type="submit"
                         className=""

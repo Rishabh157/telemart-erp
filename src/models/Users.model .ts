@@ -1,26 +1,36 @@
 /// ==============================================
 // Filename:Users.model.ts
 // Type: Model Component
-// Last Updated: JUNE 28, 2023
+// Last Updated: FEB 28, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
 // |-- Types --|
 export type UsersListResponse = {
+    _id: string
     firstName: string
     lastName: string
+    userName: string
     mobile: string
+    maskedPhoneNo: string
     email: string
+    password: string
     userDepartment: string
     userRole: string
     userType: string
+    allowedIp: string[]
     companyId: string
-    isActive: boolean
+    branchId: string
+    callCenterId: string
+    floorManagerId: string | null
+    teamLeadId: string | null
+    isAgent: boolean
     isDeleted: boolean
+    isActive: boolean
     createdAt: string
     updatedAt: string
-    _id: string
     __v: number
+    branchLabel: string
 }
 
 export type AddUser = {

@@ -113,6 +113,12 @@ const ViewOrder = () => {
             path: '?orderStatus=non-action',
             name: UserModuleNameTypes.ACTION_ORDER_NON_ACTION_TAB_LIST,
         },
+        {
+            label: 'Global Order Search',
+            icon: MdOutbond,
+            path: '?orderStatus=global-search',
+            name: UserModuleOrderTabsTypes.orderNonActionTab,
+        },
     ]
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)

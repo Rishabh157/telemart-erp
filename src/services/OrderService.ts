@@ -31,12 +31,21 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** Global Order Search *****/
+        getAllOrderGlobalSearch: builder.query({
+            providesTags: ['order'],
+            query: (body) => ({
+                url: '/order-inquiry/global-search',
+                method: 'POST',
+                body,
+            }),
+        }),
+
         //***** Update *****/
         // updateOrder: builder.mutation({
         //     invalidatesTags: ['order'],
         //     query: ({ body, id }: UpdateOrder) => ({
         //         url: `/order-inquiry/${id}`,
-
         //         method: 'PUT',
         //         body,
         //     }),
@@ -138,6 +147,7 @@ export const {
     useGetOrderQuery,
     useUpdateOrderStatusMutation,
     useGetOrderByIdQuery,
+    useGetAllOrderGlobalSearchQuery,
     useExportOrderDataMutation,
     useDeleteOrderMutation,
     useGetOrderFlowQuery,
