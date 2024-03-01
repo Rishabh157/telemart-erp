@@ -13,22 +13,22 @@
                 {
                     "fieldId": "ASSETS_REQUEST_LIST_ASSETS_REQUEST_NAME",
                     "fieldName": "Asset name",
-                    "fieldValue": ""
+                    "fieldValue": "assetName"
                 },
                 {
                     "fieldId": "ASSETS_REQUEST_LIST_CATEGORY",
                     "fieldName": "Asset Category",
-                    "fieldValue": ""
+                    "fieldValue": "assetcategorieLabel"
                 },
                 {
                     "fieldId": "ASSETS_REQUEST_LIST_QUANTITY",
                     "fieldName": "Quantity",
-                    "fieldValue": ""
+                    "fieldValue": "quantity"
                 },
                 {
                     "fieldId": "ASSETS_REQUEST_LIST_PRICE",
                     "fieldName": "Price",
-                    "fieldValue": ""
+                    "fieldValue": "price"
                 }
             ]
         },
