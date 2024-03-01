@@ -13,7 +13,7 @@
                 {
                     "fieldId": "ASSETS_LOCATION_LIST_ASSETS_LOCATION_NAME",
                     "fieldName": "Asset Loaction Name",
-                    "fieldValue": ""
+                    "fieldValue": "locationName"
                 }
             ]
         },

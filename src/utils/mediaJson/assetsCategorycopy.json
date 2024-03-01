@@ -13,7 +13,7 @@
                 {
                     "fieldId": "ASSETS_CATEGORY_LIST_ASSETS_CATEGORY_NAME",
                     "fieldName": "Asset Category Name",
-                    "fieldValue": ""
+                    "fieldValue": "assetCategoryName"
                 }
             ]
         },
