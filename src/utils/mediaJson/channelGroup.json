@@ -2,13 +2,14 @@
   "moduleId": "NAV_CHANNEL_GROUP",
   "moduleName": "NAV_CHANNEL_GROUP",
   "parentGroup": [
-    "NAV_SALES_MARKETING"
+    "NAV_MEDIA"
   ],
   "moduleAction": [
     {
       "actionId": "ACTION_CHANNEL_GROUP_LIST",
       "actionUrl": "",
       "actionName": "LIST",
+      "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
       
@@ -23,6 +24,7 @@
       "actionId": "ACTION_CHANNEL_GROUP_ADD",
       "actionUrl": "",
       "actionName": "ADD",
+      "compulsoryFields" : [],
       "parentGroup": [ "LIST"],
       "fields": []
     },
@@ -30,6 +32,7 @@
       "actionId": "ACTION_CHANNEL_GROUP_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
+      "compulsoryFields" : [],
       "parentGroup": [ "LIST"],
       "fields": []
     },
@@ -37,6 +40,7 @@
       "actionId": "ACTION_CHANNEL_GROUP_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
+      "compulsoryFields" : [],
       "parentGroup": [ "LIST"],
       "fields": []
     }

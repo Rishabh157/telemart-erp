@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddAttribute from './AddAttribute'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddAttributesMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
 
@@ -72,7 +72,7 @@ const AddAttributeWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -87,7 +87,7 @@ const AddAttributeWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

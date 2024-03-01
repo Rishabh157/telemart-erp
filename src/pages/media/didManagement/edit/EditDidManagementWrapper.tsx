@@ -16,7 +16,7 @@ import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
+
 import { showToast } from 'src/utils'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
@@ -173,7 +173,7 @@ const EditDidManagementWrapper = () => {
         }),
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -190,7 +190,7 @@ const EditDidManagementWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

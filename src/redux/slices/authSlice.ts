@@ -19,6 +19,7 @@ export interface AuthStateType {
     userData: userData | null
     formSubmitting: boolean
     customized: boolean
+    permissions: null | string[]
 }
 
 const initialState: AuthStateType = {
@@ -28,6 +29,7 @@ const initialState: AuthStateType = {
     deviceId: '',
     userData: null,
     formSubmitting: true,
+    permissions: null
 }
 
 const authSlice: Slice<AuthStateType> = createSlice({
@@ -53,6 +55,9 @@ const authSlice: Slice<AuthStateType> = createSlice({
         setFieldCustomized: (state, action: PayloadAction<boolean>) => {
             state.customized = action.payload
         },
+        setPermissions: (state, action: PayloadAction<null | []>) => {
+            state.permissions = action.payload;
+        },
     },
 })
 
@@ -63,5 +68,6 @@ export const {
     setUserData,
     setFormSubmitting,
     setFieldCustomized,
+    setPermissions
 } = authSlice.actions
 export default authSlice.reducer

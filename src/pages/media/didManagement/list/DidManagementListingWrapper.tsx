@@ -6,36 +6,34 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
+import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DidManagementListResponse } from 'src/models/Media.model'
-import DidManagementListing from './DidManagementListing'
-import MediaLayout from '../../MediaLayout'
+
 import {
     useDeleteDidMutation,
     useGetPaginationDidQuery,
 } from 'src/services/media/DidManagementServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+import DidManagementListing from './DidManagementListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/didManagementSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const DidManagementListingWrapper = () => {
     const navigate = useNavigate()
@@ -47,9 +45,6 @@ const DidManagementListingWrapper = () => {
     const [deleteDid] = useDeleteDidMutation()
     const { page, rowsPerPage, searchValue, items } = didManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -58,6 +53,8 @@ const DidManagementListingWrapper = () => {
             field: 'didNumber',
             headerName: 'DID Number',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_DID_NUMBER,
+
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.didNumber} </span>
             ),
@@ -66,6 +63,8 @@ const DidManagementListingWrapper = () => {
             field: 'schemeLabel',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_DID_SCHEMA_NAME,
+
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.schemeLabel} </span>
             ),
@@ -74,6 +73,8 @@ const DidManagementListingWrapper = () => {
             field: 'channelLabel',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_CHANNEL_NAME,
+
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.channelLabel} </span>
             ),
@@ -82,6 +83,8 @@ const DidManagementListingWrapper = () => {
             field: 'slotLabel',
             headerName: 'Slot Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_SLOT_NAME,
+
             renderCell: (row: DidManagementListResponse) => (
                 <span> {row.slotLabel} </span>
             ),
@@ -90,11 +93,15 @@ const DidManagementListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
+
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.didManagement}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DID_MANAGEMENT_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DID_MANAGEMENT_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -173,18 +180,13 @@ const DidManagementListingWrapper = () => {
 
     return (
         <>
-            <MediaLayout>
+            <>
                 <DidManagementListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.didManagement,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </MediaLayout>
+            </>
         </>
     )
 }

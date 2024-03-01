@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddWebsiteBlog from './AddWebsiteBlog'
 import { showToast } from 'src/utils'
 import { useAddWebsiteBlogMutation } from 'src/services/websites/WebsiteBlogServices'
-import WebsiteLayout from '../../WebsiteLayout'
+
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -95,7 +95,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
     }
 
     return (
-        <WebsiteLayout>
+      
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -110,7 +110,7 @@ const AddWebsiteBlogWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsiteLayout>
+      
     )
 }
 

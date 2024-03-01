@@ -15,7 +15,7 @@ import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
+
 import { useAddDidMutation } from 'src/services/media/DidManagementServices'
 import { showToast } from 'src/utils'
 import AddDidManagements from './AddDidManagement'
@@ -150,7 +150,7 @@ const AddDidManagementWrapper = () => {
         }),
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -166,7 +166,7 @@ const AddDidManagementWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddArtist from './AddArtist'
 import { showToast } from 'src/utils'
 import { useAddArtistMutation } from 'src/services/media/ArtistServices'
-import MediaLayout from '../../MediaLayout'
+
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -72,7 +72,7 @@ const AddArtistWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -87,7 +87,7 @@ const AddArtistWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

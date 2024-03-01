@@ -16,7 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import EditDealersCategory from './EditDealersCategory'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 // import { useAddDealerCategoryMutation } from "src/services/DealerCategoryService";
 import { showToast } from 'src/utils'
 import {
@@ -101,7 +101,7 @@ const EditDealersCategoryWrapper = (props: Props) => {
         dispatch(setSelectedItem(data?.data))
     }, [dispatch, data, isLoading, isFetching])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -117,7 +117,7 @@ const EditDealersCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

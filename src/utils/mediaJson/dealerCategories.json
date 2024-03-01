@@ -1,0 +1,66 @@
+{
+  "moduleId": "NAV_DEALERS_CATEGORY",
+  "moduleName": "NAV_DEALERS_CATEGORY",
+  "parentGroup": ["NAV_CONFIGURATION"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_DEALERS_CATEGORY_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "DEALERS_CATEGORY_LIST_DEALERS_CATEGORY",
+          "fieldName": "Dealers Category",
+          "fieldValue": "dealersCategory"
+        },
+        {
+          "fieldId": "DEALERS_CATEGORY_LIST_INVEST_AMOUNT",
+          "fieldName": "Invest Amount",
+          "fieldValue": "investAmount"
+        },
+        {
+          "fieldId": "DEALERS_CATEGORY_LIST_NUMBER_OF_ORDERS",
+          "fieldName": "Number Of Orders",
+          "fieldValue": "numberOfOrders"
+        },
+        {
+          "fieldId": "DEALERS_CATEGORY_LIST_DELIVERY_PERCENTAGE",
+          "fieldName": "Delivery Percentage",
+          "fieldValue": "deliveryPercentage"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_DEALERS_CATEGORY_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_DEALERS_CATEGORY_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_DEALERS_CATEGORY_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

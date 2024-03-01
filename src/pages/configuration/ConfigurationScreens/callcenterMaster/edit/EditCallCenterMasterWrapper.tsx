@@ -16,7 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     useGetCallCenterMasterByIdQuery,
     useUpdateCallCenterMasterMutation,
@@ -92,7 +92,7 @@ const EditCallCenterMasterWrapper = (props: Props) => {
         }
     }, [dispatch, data, isLoading, isFetching])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -108,7 +108,7 @@ const EditCallCenterMasterWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

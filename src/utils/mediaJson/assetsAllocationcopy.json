@@ -1,0 +1,47 @@
+{
+  "moduleId": "NAV_ASSETS_ALLOCATION",
+  "moduleName": "NAV_ASSETS_ALLOCATION",
+  "parentGroup": [
+    "NAV_ASSETS"
+  ],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_ASSETS_ALLOCATION_LIST_ASSETS_ALLOCATION_NAME",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields": [],
+      "parentGroup": [],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ASSETS_ALLOCATION_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields": [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ASSETS_ALLOCATION_ONE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields": [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ASSETS_ALLOCATION_ONE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields": [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

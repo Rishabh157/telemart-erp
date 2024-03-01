@@ -16,7 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import EditLanguage from './EditLanguage'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 // import { useEditLanguageMutation } from "src/services/LanguageService";
 import { showToast } from 'src/utils'
 import {
@@ -88,7 +88,7 @@ const EditLanguageWrapper = (props: Props) => {
         dispatch(setSelectedItem(data?.data))
     }, [dispatch, data, isLoading, isFetching])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -104,7 +104,7 @@ const EditLanguageWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

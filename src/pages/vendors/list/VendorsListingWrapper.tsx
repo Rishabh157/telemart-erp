@@ -24,11 +24,6 @@ import VendorsListing from './VendorsListing'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
@@ -37,6 +32,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const VendorsListingWrapper = () => {
     const navigate = useNavigate()
@@ -44,9 +41,7 @@ const VendorsListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const vendorState: any = useSelector((state: RootState) => state.vendor)
     const { page, rowsPerPage, searchValue, items } = vendorState
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [currentId, setCurrentId] = useState('')
     const [deleteVendor] = useDeleteVendorMutation()
@@ -56,6 +51,7 @@ const VendorsListingWrapper = () => {
             field: 'vendorCode',
             headerName: 'Vendor Code',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.VENDOR_LIST_VENDOR_CODE,
             renderCell: (row: VendorsListResponse) => (
                 <span> {row.vendorCode} </span>
             ),
@@ -64,6 +60,7 @@ const VendorsListingWrapper = () => {
             field: 'companyName',
             headerName: 'Company Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.VENDOR_LIST_COMPANY_NAME,
             renderCell: (row: VendorsListResponse) => (
                 <span> {row.companyName} </span>
             ),
@@ -72,6 +69,7 @@ const VendorsListingWrapper = () => {
             field: 'companyType',
             headerName: 'Company Type',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.VENDOR_LIST_COMPANY_TYPE,
             renderCell: (row: VendorsListResponse) => (
                 <span> {row.companyType?.replaceAll('_', ' ')} </span>
             ),
@@ -80,6 +78,7 @@ const VendorsListingWrapper = () => {
             field: 'registrationDistrictName',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.VENDOR_LIST_DISTRICT,
             renderCell: (row: VendorsListResponse) => (
                 <span> {row?.registrationDistrictName} </span>
             ),
@@ -88,6 +87,7 @@ const VendorsListingWrapper = () => {
             field: 'registrationStateName',
             headerName: 'State',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.VENDOR_LIST_STATE,
             renderCell: (row: VendorsListResponse) => (
                 <span> {row?.registrationStateName} </span>
             ),
@@ -98,10 +98,9 @@ const VendorsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.vendor}
-                    isView
-                    isEdit
-                    isDelete
+                    isView={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW)}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -179,12 +178,7 @@ const VendorsListingWrapper = () => {
     return (
         <SideNavLayout>
             <VendorsListing
-                columns={getAllowedAuthorizedColumns(
-                    checkUserAccess,
-                    columns,
-                    UserModuleNameTypes.vendor,
-                    UserModuleActionTypes.List
-                )}
+                columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
             />

@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
-import WebsiteLayout from '../../WebsiteLayout'
+
 import {
     useGetWebsitePageByIdQuery,
     useUpdateWebsitePageMutation,
@@ -105,7 +105,7 @@ const EditWebsitePageWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <WebsiteLayout>
+      
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -121,7 +121,7 @@ const EditWebsitePageWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsiteLayout>
+      
     )
 }
 

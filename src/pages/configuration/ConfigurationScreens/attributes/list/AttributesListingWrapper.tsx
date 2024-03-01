@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { AttributesListResponse } from 'src/models/Attrbutes.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import AttributesListing from './AttributesListing'
-import {
-    useDeleteattributesMutation,
-    useGetAttributesQuery,
-} from 'src/services/AttributeService'
+
+
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/attributesSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteattributesMutation,
+    useGetAttributesQuery,
+} from 'src/services/AttributeService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import AttributesListing from './AttributesListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const AttributesListingWrapper = () => {
     const attributeState: any = useSelector(
@@ -48,15 +46,13 @@ const AttributesListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const columns: columnTypes[] = [
         {
             field: 'attributeName',
             headerName: 'Attribute Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ATTRIBUTE_LIST_ATTRIBUTE_NAME,
             renderCell: (row: AttributesListResponse) => (
                 <span className="capitalize"> {row.attributeName} </span>
             ),
@@ -68,9 +64,12 @@ const AttributesListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.attribute}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_ATTRIBUTE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_ATTRIBUTE_DELETE
+                    )}
                     handleOnAction={() => {
                         // e.stopPropagation()
                         setShowDropdown(!showDropdown)
@@ -145,18 +144,13 @@ const AttributesListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <AttributesListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.attribute,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

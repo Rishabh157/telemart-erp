@@ -15,7 +15,7 @@ import { object, string, array } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
+
 import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
 import { showToast } from 'src/utils'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
@@ -236,7 +236,7 @@ const AddTapeManagementWrapper = () => {
         ],
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -252,7 +252,7 @@ const AddTapeManagementWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

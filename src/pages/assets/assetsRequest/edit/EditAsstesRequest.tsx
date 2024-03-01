@@ -39,7 +39,7 @@ const EditAsstesRequest = ({
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Assets Request',
-            path: '/assets/assets-management',
+            path: '/assets/assets-request',
         },
         {
             label: 'Update ',

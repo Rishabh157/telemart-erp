@@ -10,7 +10,7 @@ import {
 } from 'src/services/configurations/DispositiononeServices'
 import { useNavigate, useParams } from 'react-router-dom'
 import AddDispositionOne from './EditDispositionOne'
-import DispositionLayout from '../../DispositionLayout'
+
 import { setSelectedDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
@@ -71,7 +71,7 @@ const EditDispositionOneWrappper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 {' '}
                 <Formik
                     enableReinitialize
@@ -88,7 +88,7 @@ const EditDispositionOneWrappper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

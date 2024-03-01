@@ -9,7 +9,6 @@
 import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { HiDotsHorizontal } from 'react-icons/hi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -31,6 +30,9 @@ import {
     setTotalItems,
 } from 'src/redux/slices/DealerWarehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {}
@@ -107,53 +109,35 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="relative">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                    >
-                        {' '}
-                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-                    </button>
-                    {showDropdown && currentId === row?._id && (
-                        <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                            <button
-                                onClick={() => {
-                                    navigate(
-                                        `/dealers/${dealerId}/warehouse/${currentId}`,
-                                        {
-                                            state: { params },
-                                        }
-                                    )
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Delete warehouse',
-                                        text: 'Do you want to delete',
-                                        showCancelButton: true,
-                                        next: (res: any) => {
-                                            return res.isConfirmed
-                                                ? handleDelete()
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    )}
-                </div>
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_DELETE)}
+
+                    handleEditActionButton={() => {
+                        navigate(
+                            `/dealers/${dealerId}/warehouse/${currentId}`,
+                            {
+                                state: { params },
+                            }
+                        )
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Dealer warehouse',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
             ),
             align: 'end',
         },

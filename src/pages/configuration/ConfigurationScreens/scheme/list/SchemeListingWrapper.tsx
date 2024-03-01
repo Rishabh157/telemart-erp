@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,29 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { SchemeListResponse } from 'src/models/scheme.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import SchemeListing from './SchemeListing'
-import { showToast } from 'src/utils'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+
 import {
     useDeleteSchemeMutation,
     useGetAllSchemeQuery,
 } from 'src/services/SchemeService'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import SchemeListing from './SchemeListing'
 // |-- Types --|
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/schemeSlice'
-import { AppDispatch } from 'src/redux/store'
-import { RootState } from 'src/redux/store'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const SchemeListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -45,9 +42,6 @@ const SchemeListingWrapper = () => {
     const schemeState: any = useSelector((state: RootState) => state.scheme)
     const { page, rowsPerPage, items, searchValue } = schemeState
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -76,6 +70,8 @@ const SchemeListingWrapper = () => {
             field: 'schemeCode',
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SCHEME_LIST_SCHEME_CODE,
+
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row.schemeCode} </span>
             },
@@ -84,6 +80,7 @@ const SchemeListingWrapper = () => {
             field: 'schemeName',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SCHEME_LIST_SCHEME_NAME,
             renderCell: (row: SchemeListResponse) => (
                 <span> {row.schemeName} </span>
             ),
@@ -93,6 +90,7 @@ const SchemeListingWrapper = () => {
             field: 'productCategoryLabel',
             headerName: 'Category',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SCHEME_LIST_CATEGORY,
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row.productCategoryLabel} </span>
             },
@@ -102,6 +100,7 @@ const SchemeListingWrapper = () => {
             field: 'ProductSubCategoryLabel',
             headerName: 'Sub Category',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SCHEME_LIST_SUB_CATEGORY,
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row.ProductSubCategoryLabel} </span>
             },
@@ -110,6 +109,7 @@ const SchemeListingWrapper = () => {
             field: 'schemePrice',
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SCHEME_LIST_PRICE,
             renderCell: (row: SchemeListResponse) => {
                 return <span> {row.schemePrice} </span>
             },
@@ -121,9 +121,12 @@ const SchemeListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.scheme}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_SCHEME_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_SCHEME_DELETE
+                    )}
                     handleEditActionButton={() => {
                         navigate(`/configurations/scheme/${currentId}`)
                     }}
@@ -179,18 +182,13 @@ const SchemeListingWrapper = () => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <SchemeListing
-                columns={getAllowedAuthorizedColumns(
-                    checkUserAccess,
-                    columns,
-                    UserModuleNameTypes.scheme,
-                    UserModuleActionTypes.List
-                )}
+                columns={columns}
                 rows={items || []}
                 setShowDropdown={setShowDropdown}
             />
-        </ConfigurationLayout>
+       
     )
 }
 

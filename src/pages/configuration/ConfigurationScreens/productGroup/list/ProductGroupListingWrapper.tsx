@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,21 +14,17 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import ProductGroupListing from './ProductGroupListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { ProductGroupListResponse } from 'src/models/ProductGroup.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+
 import {
     useDeleteProductGroupMutation,
     useGetProductGroupQuery,
 } from 'src/services/ProductGroupService'
-import { ProductGroupListResponse } from 'src/models/ProductGroup.model'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ProductGroupListing from './ProductGroupListing'
 // |-- Redux --|
 import {
     setIsTableLoading,
@@ -36,6 +32,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/productGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ProductGroupListingWrapper = () => {
     const productGroupState: any = useSelector(
@@ -46,9 +43,6 @@ const ProductGroupListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -58,6 +52,8 @@ const ProductGroupListingWrapper = () => {
             field: 'groupName',
             headerName: 'Group Name ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_GROUP_LIST_PRODUCT_GROUP_NAME,
+
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.groupName} </span>
             },
@@ -66,6 +62,8 @@ const ProductGroupListingWrapper = () => {
             field: 'dealerSalePrice',
             headerName: 'Dealer Sale Price ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_GROUP_LIST_DEALER_SALE_PRICE,
+
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.dealerSalePrice} </span>
             },
@@ -74,6 +72,8 @@ const ProductGroupListingWrapper = () => {
             field: 'sgst',
             headerName: 'Sate GST',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_GROUP_LIST_SATE_GST,
+
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.sgst} </span>
             },
@@ -82,6 +82,8 @@ const ProductGroupListingWrapper = () => {
             field: 'cgst',
             headerName: 'Center GST ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_GROUP_LIST_CENTER_GST,
+
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.cgst} </span>
             },
@@ -90,6 +92,8 @@ const ProductGroupListingWrapper = () => {
             field: 'igst',
             headerName: 'Integated GST ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_GROUP_LIST_INTEGRATED_GST,
+
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.igst} </span>
             },
@@ -98,6 +102,8 @@ const ProductGroupListingWrapper = () => {
             field: 'utgst',
             headerName: 'Union Territory ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_GROUP_LIST_UNION_TERRITORY,
+
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.utgst} </span>
             },
@@ -109,9 +115,12 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.productSubCategory}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_GROUP_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_GROUP_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -183,18 +192,13 @@ const ProductGroupListingWrapper = () => {
 
     return (
         <>
-            <ConfigurationLayout>
+            
                 <ProductGroupListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.productGroup,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

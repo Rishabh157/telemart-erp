@@ -25,44 +25,39 @@ import { CgWebsite } from 'react-icons/cg'
 // import { CiBarcode, CiLocationOn } from 'react-icons/ci'
 import { RiPagesLine } from 'react-icons/ri'
 import { TbBrandBlogger } from 'react-icons/tb'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { ThemeContext } from 'src/App'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const websitesNavigation: NavItemType[] = [
     {
         label: 'Websites',
         icon: CgWebsite,
-        path: '/all-websites/website',
-        name: UserModuleNameTypes.website,
+        path: 'website',
+        name: UserModuleNameTypes.NAV_WEBSITES,
     },
     {
         label: 'Website Blog',
         icon: TbBrandBlogger,
-        path: '/all-websites/website-blog',
-        name: UserModuleNameTypes.websiteBlog,
+        path: 'website-blog',
+        name: UserModuleNameTypes.NAV_WEBSITES_BLOG,
     },
     {
         label: 'Websites Page',
         icon: RiPagesLine,
-        path: '/all-websites/website-page',
-        name: UserModuleNameTypes.websitePage,
+        path: 'website-page',
+        name: UserModuleNameTypes.NAV_WEBSITES_PAGES,
     },
-    // {
-    //     label: 'Influencers Management',
-    //     icon: RiPagesLine,
-    //     path: '/all-websites/influencers-management'
 
-    // },
     {
         label: 'Websites Tags',
         icon: RiPagesLine,
-        path: '/all-websites/website-tags',
-        name: UserModuleNameTypes.websiteTags,
+        path: 'website-tags',
+        name: UserModuleNameTypes.NAV_WEBSITES_TAGS,
     },
 ]
 
@@ -79,21 +74,19 @@ const WebsitesLayout = ({ children }: Props) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPath = `/all-websites/${location.pathname?.split('/')[2]}`
-    const { theme } = React.useContext(ThemeContext);
+    const currentPath = `${location.pathname?.split('/')[2]}`
+    const { theme } = React.useContext(ThemeContext)
     return (
         <div
-            className={`flex h-screen w-screen relative ${
-                theme === 'black' ? 'bg-invert' : ''
-            }`}
+            className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''
+                }`}
         >
             {/* Side Navigation Bar */}
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${
-                    isCollapsed
+                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${isCollapsed
                         ? 'min-w-[50px] w-[50px]'
                         : 'min-w-[250px] w-[250px]'
-                }`}
+                    }`}
             >
                 <VerticalNavBar
                     toggleCollapse={toggleCollapse}
@@ -112,17 +105,16 @@ const WebsitesLayout = ({ children }: Props) => {
                 </div>
 
                 <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50 ">
-                    {children}
+                    <Outlet />
                 </div>
             </div>
 
             {/* BUTTON - Back to main menu */}
             <button
                 type="button"
-                onClick={() => navigate('/dashboard')}
-                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${
-                    isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
-                }`}
+                onClick={() => navigate('/welcome')}
+                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
+                    }`}
             >
                 <BiChevronsLeft className="text-2xl" />{' '}
                 {!isCollapsed && <div> BACK TO MAIN MENU </div>}

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,15 +14,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { GRNListResponse } from 'src/models/GRN.model'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import GRNListing from './GRNListing'
+import { GRNListResponse } from 'src/models/GRN.model'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import GRNListing from './GRNListing'
 // import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
@@ -30,16 +25,9 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-    // setFilterValue,
 } from 'src/redux/slices/GRNSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
-// import {
-//   setFilterValue,
-//   setIsTableLoading,
-//   setItems,
-//   setSearchValue,
-//   setTotalItems,
-// } from "src/redux/slices/GRNSlice";
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const columns: columnTypes[] = [
     {
@@ -47,11 +35,13 @@ const columns: columnTypes[] = [
         headerName: 'PO Code',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: GRNListResponse) => <span> {row.poCode} </span>,
+        name: UserModuleNameTypes.GRN_LIST_PO_CODE,
     },
     {
         field: 'itemName',
         headerName: 'Item Name',
         flex: 'flex-[1.5_1.5_0%]',
+        name: UserModuleNameTypes.GRN_LIST_ITEM_NAME,
         renderCell: (row: GRNListResponse) => {
             return <span> {row?.itemName} </span>
         },
@@ -60,6 +50,7 @@ const columns: columnTypes[] = [
         field: 'receivedQuantity',
         headerName: 'Received Qnty.',
         flex: 'flex-[1.5_1.5_0%]',
+        name: UserModuleNameTypes.GRN_LIST_RECEVIED_QUANTITY,
         renderCell: (row: GRNListResponse) => {
             return <span> {row?.receivedQuantity} </span>
         },
@@ -68,6 +59,7 @@ const columns: columnTypes[] = [
         field: 'goodQuantity',
         headerName: 'Good Qnty.',
         flex: 'flex-[1.5_1.5_0%]',
+        name: UserModuleNameTypes.GRN_LIST_GOOD_QUANTITY,
         renderCell: (row: GRNListResponse) => {
             return <span> {row.goodQuantity} </span>
         },
@@ -76,6 +68,7 @@ const columns: columnTypes[] = [
         field: 'defectiveQuantity',
         headerName: 'Defective Qnty.',
         flex: 'flex-[1.5_1.5_0%]',
+        name: UserModuleNameTypes.GRN_LIST_DEFECTIVE_QUANTITY,
         renderCell: (row: GRNListResponse) => {
             return <span> {row.defectiveQuantity} </span>
         },
@@ -105,9 +98,7 @@ const GRNListingWrapper = () => {
     const grnState: any = useSelector((state: RootState) => state.grn)
     const { page, rowsPerPage, searchValue, items, filterValue } = grnState
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+ 
     const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -152,12 +143,7 @@ const GRNListingWrapper = () => {
         <>
             <SideNavLayout>
                 <GRNListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.grn,
-                        UserModuleActionTypes.List
-                    )}
+                         columns={columns}
                     rows={items}
                 />
             </SideNavLayout>

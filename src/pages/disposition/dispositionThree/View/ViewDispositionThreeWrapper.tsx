@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import DispositionLayout from '../../DispositionLayout'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useParams } from 'react-router-dom'
@@ -54,7 +54,7 @@ const ViewDispositionThreeWrappper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {}
     return (
-        <DispositionLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -64,7 +64,7 @@ const ViewDispositionThreeWrappper = () => {
                     return <ViewDispositionThree formikProps={formikProps} />
                 }}
             </Formik>
-        </DispositionLayout>
+        </>
     )
 }
 

@@ -1,0 +1,61 @@
+{
+  "moduleId": "NAV_ITEMS",
+  "moduleName": "NAV_ITEMS",
+  "parentGroup": ["NAV_CONFIGURATION"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_ITEMS_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "ITEMS_LIST_ITEMS_CODE",
+          "fieldName": "Item Code",
+          "fieldValue": "itemCode"
+        },
+        {
+          "fieldId": "ITEMS_LIST_ITEMS_NAME",
+          "fieldName": "Item Name",
+          "fieldValue": "itemName"
+        },
+        {
+          "fieldId": "ITEMS_LIST_WEIGHT",
+          "fieldName": "Weight (in gms.)",
+          "fieldValue": "itemWeight"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_ITEMS_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ITEMS_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ITEMS_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

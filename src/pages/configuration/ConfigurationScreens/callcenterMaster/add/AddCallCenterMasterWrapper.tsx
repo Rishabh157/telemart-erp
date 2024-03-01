@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddCallCenterMaster from './AddCallCenterMaster'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddCallCenterMasterMutation } from 'src/services/CallCenterMasterServices'
 import { showToast } from 'src/utils'
 
@@ -72,7 +72,7 @@ const AddCallCenterMasterWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -87,7 +87,7 @@ const AddCallCenterMasterWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

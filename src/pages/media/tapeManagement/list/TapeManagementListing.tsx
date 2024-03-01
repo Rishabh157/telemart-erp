@@ -11,7 +11,6 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -21,18 +20,16 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
 // |--Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/media/tapeManagementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -69,19 +66,15 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Tape Management </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.tapeManangement}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
-                            type="button"
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_ADD) &&
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -98,7 +91,7 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
+                // isFilter
                 />
 
                 {/* Table */}

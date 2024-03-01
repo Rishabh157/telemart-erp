@@ -2,13 +2,14 @@
   "moduleId": "NAV_SLOT_MANAGEMENT",
   "moduleName": "NAV_SLOT_MANAGEMENT",
   "parentGroup": [
-    ""
+    "NAV_MEDIA"
   ],
   "moduleAction": [
     {
       "actionId": "ACTION_SLOT_MANAGEMENT_LIST",
       "actionUrl": "",
       "actionName": "LIST",
+      "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
         {
@@ -52,6 +53,7 @@
       "actionId": "ACTION_SLOT_MANAGEMENT_ADD",
       "actionUrl": "",
       "actionName": "ADD",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],
@@ -61,6 +63,7 @@
       "actionId": "ACTION_SLOT_MANAGEMENT_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],
@@ -70,6 +73,7 @@
       "actionId": "ACTION_SLOT_MANAGEMENT_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],

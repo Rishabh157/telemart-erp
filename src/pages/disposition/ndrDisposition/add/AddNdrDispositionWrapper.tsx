@@ -6,7 +6,7 @@ import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useAddNdrDispositionMutation } from 'src/services/configurations/NdrDisositionServices'
 import { useNavigate } from 'react-router-dom'
-import DispositionLayout from '../../DispositionLayout'
+
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import AddNdrDisposition from './AddNdrDisposition'
 
@@ -65,7 +65,7 @@ const AddNdrDispositionWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -80,7 +80,7 @@ const AddNdrDispositionWrapper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

@@ -11,7 +11,6 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -21,10 +20,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Redux --|
 import {
@@ -77,19 +74,16 @@ const ChannelCategoryListing = ({
             {isHeader && (
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Channel Category</ATMPageHeading>
-                    <AuthenticationHOC
-                        moduleName={UserModuleNameTypes.channelCategory}
-                        actionName={UserModuleActionTypes.Add}
-                        component={
-                            <button
-                                type="button"
-                                onClick={() => navigate('add')}
-                                className="bg-primary-main text-white rounded py-1 px-3"
-                            >
-                                + Add Channel Category
-                            </button>
-                        }
-                    />
+                    
+                    {isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_ADD) &&
+                       <button
+                       type="button"
+                       onClick={() => navigate('add')}
+                       className="bg-primary-main text-white rounded py-1 px-3"
+                   >
+                       + Add Channel Category
+                   </button>
+                    }
                 </div>
             )}
 

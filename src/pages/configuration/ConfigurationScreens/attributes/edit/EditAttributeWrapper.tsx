@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import EditAttribute from './EditAttribute'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { showToast } from 'src/utils'
 import {
     useGetattributesByIdQuery,
@@ -89,7 +89,7 @@ const EditAttributeWrapper = (props: Props) => {
         dispatch(setSelectedAttribute(data?.data))
     }, [dispatch, data, isLoading])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -105,7 +105,7 @@ const EditAttributeWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from 'react-redux'
 // |-- Internal Dependencies --|
 import WebsiteBlogView from './WebsiteBlogView'
 import { useGetWebsiteBlogByIdQuery } from 'src/services/websites/WebsiteBlogServices'
-import WebsiteLayout from '../../WebsiteLayout'
+
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -39,9 +39,9 @@ const WebsiteBlogViewWrapper = () => {
     }, [isLoading, isFetching, data, dispatch])
 
     return (
-        <WebsiteLayout>
-            <WebsiteBlogView items={selectedItem} />
-        </WebsiteLayout>
+
+        <WebsiteBlogView items={selectedItem} />
+
     )
 }
 

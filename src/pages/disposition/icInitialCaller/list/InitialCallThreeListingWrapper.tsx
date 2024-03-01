@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import { Chip } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import InitialCallThreeListing from './InitialCallThreeListing'
+import { useNavigate } from 'react-router-dom'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/initialCallerThreeSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
+    useDeactiveInitialCallerThreeMutation,
     useDeleteInitialCallerThreeMutation,
     useGetInitialCallerThreeQuery,
-    useDeactiveInitialCallerThreeMutation,
 } from 'src/services/configurations/InitialCallerThreeServices'
-import { useNavigate } from 'react-router-dom'
-import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import { Chip } from '@mui/material'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import InitialCallThreeListing from './InitialCallThreeListing'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 const InitialCallThreeListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
@@ -34,9 +30,7 @@ const InitialCallThreeListingWrapper = () => {
     const initialCallThreeState: any = useSelector(
         (state: RootState) => state.initialCallerThree
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items, isActive } =
         initialCallThreeState
 
@@ -77,6 +71,7 @@ const InitialCallThreeListingWrapper = () => {
             field: 'initialCallName',
             headerName: 'Initial Call Three',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_THREE,
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallName} </span>
             ),
@@ -85,6 +80,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'callType',
             headerName: 'Call Type',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_CALL_TYPE,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.callType} </span>
             ),
@@ -93,6 +90,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'initialCallOneLabel',
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_ONE,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallOneLabel} </span>
             ),
@@ -101,6 +100,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'initialCallTwoLabel',
             headerName: 'Initial Call Two',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_TWO,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallTwoLabel} </span>
             ),
@@ -109,6 +110,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'cancelFlag',
             headerName: 'cancel flag',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CANCEL_FLAG,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.cancelFlag ? 'Yes' : 'No'} </span>
             ),
@@ -117,6 +120,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'isPnd',
             headerName: 'Pnd',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CANCEL_PND,
+
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.isPnd ? 'Yes' : 'No'} </span>
             ),
@@ -125,6 +130,8 @@ const InitialCallThreeListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_STATUS,
+
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -183,10 +190,15 @@ const InitialCallThreeListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.initialCallerThree}
-                    isView
-                    isEdit
-                    isDelete
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_THREE_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_THREE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_THREE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -254,18 +266,13 @@ const InitialCallThreeListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <InitialCallThreeListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.initialCallerThree,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </DispositionLayout>
+            </>
         </>
     )
 }

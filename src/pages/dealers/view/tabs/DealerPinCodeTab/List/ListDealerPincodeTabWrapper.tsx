@@ -31,7 +31,8 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/dealerPincodeSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ListDealerPincodeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -86,12 +87,28 @@ const ListDealerPincodeTabWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dealer}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                     }}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_PINCODE_DELETE)}
+
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Pincode',
+                            text: 'Do you want to Delete',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDeletePincode(
+                                        row._id,
+                                        row.pincode
+                                    )
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
                 >
-                    <button
+                    {/* <button
                         onClick={() => {
                             showConfirmationDialog({
                                 title: 'Delete Pincode',
@@ -110,7 +127,7 @@ const ListDealerPincodeTabWrapper = () => {
                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                     >
                         Delete
-                    </button>
+                    </button> */}
                 </ActionPopup>
             ),
             align: 'end',

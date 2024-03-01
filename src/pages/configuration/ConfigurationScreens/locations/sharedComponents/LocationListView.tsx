@@ -10,11 +10,9 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -64,10 +62,7 @@ const LocationListView = ({
         <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
             <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
                 {listHeading}
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.locations}
-                    actionName={actionName}
-                    component={
+              
                         <button
                             type="button"
                             disabled={disabled}
@@ -79,8 +74,7 @@ const LocationListView = ({
                             {' '}
                             + Add{' '}
                         </button>
-                    }
-                />
+                   
             </div>
 
             <div className="px-2 border-b">

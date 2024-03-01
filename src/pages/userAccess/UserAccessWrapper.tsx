@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /// ==============================================
 // Filename:UserAccessWrapper.tsx
 // Type: Access Component
@@ -9,7 +10,7 @@
 import React, { useState, useEffect } from 'react' //  { useState, useEffect } // ,
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import ConfigurationLayout from '../configuration/ConfigurationLayout'
+
 
 // |-- External Dependencies --|
 
@@ -69,100 +70,99 @@ const UserAccessWrapper = () => {
     const handleUserAccessSubmit = () => {
         setApiStatus(true)
         setTimeout(() => {
-            if ((userId && isUserExists === false) || buttonValue === 'save') {
-                addUserAccess({
-                    userId: userId ? userId : null,
-                    departmentId: dept,
-                    departmentName: dept,
-                    userRoleId: userRole,
-                    userRoleName: userRole || '',
-                    module: [...userAccessItems.modules],
-                }).then((res) => {
-                    if ('data' in res) {
-                        if (res?.data?.status) {
-                            setButtonValue('update')
-                            showToast('success', 'User Access successfully!')
-                            navigate(`/configurations/user-access`, {
-                                state: {
-                                    dept: dept,
-                                    userRole: userRole,
-                                    userId: userId,
-                                },
-                            })
-                        } else {
-                            showToast('error', res?.data?.message)
-                        }
+            addUserAccess({
+                userId: userId ? userId : null,
+                departmentId: dept,
+                departmentName: dept,
+                userRoleId: userRole,
+                userRoleName: userRole || '',
+                module: [...userAccessItems.modules],
+            }).then((res) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        setButtonValue('update')
+                        showToast('success', 'User Access successfully!')
+                        navigate(`/configurations/user-access`, {
+                            state: {
+                                dept: dept,
+                                userRole: userRole,
+                                userId: userId,
+                            },
+                        })
                     } else {
-                        showToast('error', 'Something went wrong')
+                        showToast('error', res?.data?.message)
                     }
-                    setApiStatus(false)
-                })
-            } else if (userId && isUserExists === true) {
-                updateByUserId({
-                    body: {
-                        userId: userId,
-                        departmentId: dept,
-                        departmentName: dept,
-                        userRoleId: userRole,
-                        userRoleName: userRole || '',
-                        module: [...userAccessItems.modules],
-                    },
-                    id: userId,
-                }).then((res) => {
-                    if ('data' in res) {
-                        if (res?.data?.status) {
-                            showToast(
-                                'success',
-                                'User Access updated successfully!'
-                            )
-                            navigate(`/configurations/user-access`, {
-                                state: {
-                                    dept: dept,
-                                    userRole: userRole,
-                                    userId: userId,
-                                },
-                            })
-                        } else {
-                            showToast('error', res?.data?.message)
-                        }
-                    } else {
-                        showToast('error', 'Something went wrong')
-                    }
-                    setApiStatus(false)
-                })
-            } else {
-                updateUserAccess({
-                    body: {
-                        departmentId: dept,
-                        departmentName: dept,
-                        userRoleId: userRole,
-                        userRoleName: userRole || '',
-                        module: [...userAccessItems.modules],
-                    },
-                    userRole: userRole,
-                }).then((res) => {
-                    if ('data' in res) {
-                        if (res?.data?.status) {
-                            showToast(
-                                'success',
-                                'User Access updated successfully!'
-                            )
-                            navigate(`/configurations/user-access`, {
-                                state: {
-                                    dept: dept,
-                                    userRole: userRole,
-                                    userId: userId,
-                                },
-                            })
-                        } else {
-                            showToast('error', res?.data?.message)
-                        }
-                    } else {
-                        showToast('error', 'Something went wrong')
-                    }
-                    setApiStatus(false)
-                })
-            }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+                setApiStatus(false)
+            })
+            //  else if (userId && isUserExists === true) {
+            //     updateByUserId({
+            //         body: {
+            //             userId: userId,
+            //             departmentId: dept,
+            //             departmentName: dept,
+            //             userRoleId: userRole,
+            //             userRoleName: userRole || '',
+            //             module: [...userAccessItems.modules],
+            //         },
+            //         id: userId,
+            //     }).then((res) => {
+            //         if ('data' in res) {
+            //             if (res?.data?.status) {
+            //                 showToast(
+            //                     'success',
+            //                     'User Access updated successfully!'
+            //                 )
+            //                 navigate(`/configurations/user-access`, {
+            //                     state: {
+            //                         dept: dept,
+            //                         userRole: userRole,
+            //                         userId: userId,
+            //                     },
+            //                 })
+            //             } else {
+            //                 showToast('error', res?.data?.message)
+            //             }
+            //         } else {
+            //             showToast('error', 'Something went wrong')
+            //         }
+            //         setApiStatus(false)
+            //     })
+            // } else {
+            //     updateUserAccess({
+            //         body: {
+            //             departmentId: dept,
+            //             departmentName: dept,
+            //             userRoleId: userRole,
+            //             userRoleName: userRole || '',
+            //             module: [...userAccessItems.modules],
+            //         },
+            //         userRole: userRole,
+            //     }).then((res) => {
+            //         if ('data' in res) {
+            //             if (res?.data?.status) {
+            //                 showToast(
+            //                     'success',
+            //                     'User Access updated successfully!'
+            //                 )
+            //                 navigate(`/configurations/user-access`, {
+            //                     state: {
+            //                         dept: dept,
+            //                         userRole: userRole,
+            //                         userId: userId,
+            //                     },
+            //                 })
+            //             } else {
+            //                 showToast('error', res?.data?.message)
+            //             }
+            //         } else {
+            //             showToast('error', 'Something went wrong')
+            //         }
+            //         setApiStatus(false)
+            //     })
+            // }
         }, 1000)
     }
 
@@ -181,14 +181,14 @@ const UserAccessWrapper = () => {
     }, [data, isLoading, isFetching])
 
     return (
-        <ConfigurationLayout>
-            <UserAccess
-                department={(dept as string) || ''}
-                userRole={(userRole as string) || ''}
-                handleUserAccessSubmit={handleUserAccessSubmit}
-                apiStatus={apiStatus}
-            />
-        </ConfigurationLayout>
+
+        <UserAccess
+            department={(dept as string) || ''}
+            userRole={(userRole as string) || ''}
+            handleUserAccessSubmit={handleUserAccessSubmit}
+            apiStatus={apiStatus}
+        />
+
     )
 }
 export default UserAccessWrapper

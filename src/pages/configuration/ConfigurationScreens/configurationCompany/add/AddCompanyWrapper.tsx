@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddCompany from './AddCompany'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import StepAddCompanyDetailsWrapper from './FormSteps/StepAddCompanyDetails/StepAddCompanyDetailsWrapper'
 import StepAddBankDetailsWrapper from './FormSteps/StepAddBankDetails/StepAddBankDetailsWrapper'
 import { useAddCompanyMutation } from 'src/services/CompanyServices'
@@ -166,7 +166,7 @@ const AddCompanyWrapper = () => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={getValidationSchema(activeStep)}
@@ -185,7 +185,7 @@ const AddCompanyWrapper = () => {
                     </Form>
                 )}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

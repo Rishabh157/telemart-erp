@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
-import DispositionLayout from '../../DispositionLayout'
+
 import { useAdddispositionComplaintMutation } from 'src/services/configurations/DispositionComplaintServices'
 import AddDispositionComplaint from './AddDispositionComplaintOne'
 
@@ -76,7 +76,7 @@ const AddDispositionComplaintWrappper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -91,7 +91,7 @@ const AddDispositionComplaintWrappper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

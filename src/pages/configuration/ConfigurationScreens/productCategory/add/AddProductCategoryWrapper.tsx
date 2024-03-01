@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddProductCategory from './AddProductCategory'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddProductCategoryMutation } from 'src/services/ProductCategoryServices'
 import { showToast } from 'src/utils'
 
@@ -78,7 +78,7 @@ const AddProductCategoryWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -93,7 +93,7 @@ const AddProductCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

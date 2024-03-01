@@ -6,36 +6,34 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DealersCategoryListResponse } from 'src/models/DealersCategory.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import DealersCategoryListing from './DealersCategoryListing'
-import {
-    useDeleteDealerCategoryMutation,
-    useGetDealerCategoryQuery,
-} from 'src/services/DealerCategoryService'
+
+
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/dealersCategorySlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteDealerCategoryMutation,
+    useGetDealerCategoryQuery,
+} from 'src/services/DealerCategoryService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import DealersCategoryListing from './DealersCategoryListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const DealersCategoryListingWrapper = () => {
     const navigate = useNavigate()
@@ -45,15 +43,13 @@ const DealersCategoryListingWrapper = () => {
     const dealersCategoryState: any = useSelector(
         (state: RootState) => state.dealersCategory
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const columns: columnTypes[] = [
         {
             field: 'dealersCategory',
             headerName: 'Dealers Category',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_DEALERS_CATEGORY,
             renderCell: (row: DealersCategoryListResponse) => (
                 <span> {row.dealersCategory} </span>
             ),
@@ -62,6 +58,7 @@ const DealersCategoryListingWrapper = () => {
             field: 'investAmount',
             headerName: 'Invest Amount',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_INVEST_AMOUNT,
             renderCell: (row: DealersCategoryListResponse) => (
                 <span> {row.investAmount} </span>
             ),
@@ -70,6 +67,7 @@ const DealersCategoryListingWrapper = () => {
             field: 'numberOfOrders',
             headerName: 'Number Of Orders',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_NUMBER_OF_ORDERS,
             renderCell: (row: DealersCategoryListResponse) => (
                 <span> {row.numberOfOrders} </span>
             ),
@@ -78,6 +76,7 @@ const DealersCategoryListingWrapper = () => {
             field: 'deliveryPercentage',
             headerName: 'Delivery Percentage',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_DELIVERY_PERCENTAGE,
             renderCell: (row: DealersCategoryListResponse) => (
                 <span> {row.deliveryPercentage} </span>
             ),
@@ -88,11 +87,13 @@ const DealersCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dealerCategory}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALERS_CATEGORY_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALERS_CATEGORY_DELETE
+                    )}
                     handleOnAction={() => {
-                        // e.stopPropagation()
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
@@ -174,18 +175,13 @@ const DealersCategoryListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <DealersCategoryListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.dealerCategory,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ChannelGroupListResponse } from 'src/models/ChannelGroup.model'
-import ChannelGroupListing from './ChannelGroupListing'
+
+
 import {
     useDeleteChannelGroupMutation,
     useGetPaginationChannelGroupQuery,
 } from 'src/services/media/ChannelGroupServices'
-import MediaLayout from 'src/pages/media/MediaLayout'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ChannelGroupListing from './ChannelGroupListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelGroupSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ChannelGroupListingWrapper = () => {
     const navigate = useNavigate()
@@ -48,15 +46,15 @@ const ChannelGroupListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const { page, rowsPerPage, searchValue, items } = channelGroupState
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const dispatch = useDispatch<AppDispatch>()
     const columns: columnTypes[] = [
         {
             field: 'groupName',
             headerName: 'Channel Group Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME,
+
             renderCell: (row: ChannelGroupListResponse) => (
                 <span> {row.groupName} </span>
             ),
@@ -67,9 +65,8 @@ const ChannelGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.channelGroup}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -142,20 +139,15 @@ const ChannelGroupListingWrapper = () => {
     }
     return (
         <>
-            <MediaLayout>
+            <>
                 <div className="h-full">
                     <ChannelGroupListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.channelGroup,
-                            UserModuleActionTypes.List
-                        )}
+                           columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </MediaLayout>
+            </>
         </>
     )
 }

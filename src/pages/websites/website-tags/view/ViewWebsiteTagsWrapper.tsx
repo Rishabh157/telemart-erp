@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from 'react-redux'
 // |-- Internal Dependencies --|
 import WebsiteTagsView from './WebsiteTagsView'
 import { useGetWebsiteTagsByIdQuery } from 'src/services/websites/WebsiteTagsServices'
-import WebsiteLayout from '../../WebsiteLayout'
+
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
@@ -39,9 +39,9 @@ const ViewWebsiteTagsWrapper = () => {
     }, [isLoading, isFetching, data, dispatch])
 
     return (
-        <WebsiteLayout>
+      
             <WebsiteTagsView items={selectedItem} />
-        </WebsiteLayout>
+      
     )
 }
 

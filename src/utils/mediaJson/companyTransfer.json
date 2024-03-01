@@ -1,0 +1,109 @@
+{
+    "moduleId": "NAV_WAREHOUSE_TO_COMPANY_TRANSFER",
+    "moduleName": "NAV_WAREHOUSE_TO_COMPANY_TRANSFER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_WAREHOUSE_TO_COMPANY_NUMBER",
+                    "fieldName": "WTC Number",
+                    "fieldValue": "wtcNumber"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FROM_WAREHOUSE",
+                    "fieldName": "From Warehouse",
+                    "fieldValue": "fromWarehouseLabel"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_COMPANY_NAME",
+                    "fieldName": "Company Name",
+                    "fieldValue": "toCompanyLabel"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_TO_WAREHOUSE",
+                    "fieldName": "To Warehouse",
+                    "fieldValue": "toWarehouseLabel"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_ITEM_QUANTITY",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "items"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED",
+                    "fieldName": "First level Status",
+                    "fieldValue": "firstApproved"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_BY",
+                    "fieldName": "Level first Approved By",
+                    "fieldValue": "firstApprovedActionBy"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_DATE",
+                    "fieldName": "First Approved Date",
+                    "fieldValue": "firstApprovedAt"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_STATUS",
+                    "fieldName": "Second Level Status",
+                    "fieldValue": "secondApproved"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_BY",
+                    "fieldName": "Level Second Approved By",
+                    "fieldValue": "secondApprovedActionBy"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_DATE",
+                    "fieldName": "Second Approved Date",
+                    "fieldValue": "secondApprovedAt"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_UPDATE_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "WAREHOUSE_TO_COMPANY_TRANSFER_LIST_APPROVAL_LEVEL",
+                    "fieldName": "Approval Level",
+                    "fieldValue": "Approved"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

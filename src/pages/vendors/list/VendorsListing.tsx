@@ -26,11 +26,8 @@ import {
     setSearchValue,
 } from 'src/redux/slices/vendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import AuthenticationHOC from 'src/AuthenticationHOC'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -52,21 +49,17 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Vendors </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.vendor}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
-                            onClick={() => {
-                                navigate('add-vendor')
-                            }}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            {' '}
-                            + Add Vendor{' '}
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_VENDOR_ADD) &&
+                    <button
+                        onClick={() => {
+                            navigate('add-vendor')
+                        }}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        {' '}
+                        + Add Vendor{' '}
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

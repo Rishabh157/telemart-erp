@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import AddCompanyBranch from './AddCompanyBranch'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddCompanyBranchMutation } from 'src/services/CompanyBranchService'
 import { showToast } from 'src/utils'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -70,7 +70,7 @@ const AddCompanyBranchWrapper = (props: Props) => {
         })
     }
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -85,7 +85,7 @@ const AddCompanyBranchWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CompanyBranchListResponse } from 'src/models/CompanyBranch.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import CompanyBranch from './CompanyBranch'
-import {
-    useGetCompanyBranchQuery,
-    useDeleteCompanyBranchMutation,
-} from 'src/services/CompanyBranchService'
+
+
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/companyBranchSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteCompanyBranchMutation,
+    useGetCompanyBranchQuery,
+} from 'src/services/CompanyBranchService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import CompanyBranch from './CompanyBranch'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const CompanyBranchListingWrapper = () => {
     const navigate = useNavigate()
@@ -49,14 +47,13 @@ const CompanyBranchListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const columns: columnTypes[] = [
         {
             field: 'companyLabel',
             headerName: 'Company Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPANY_BRANCH_LIST_COMAPNY_NAME,
             renderCell: (row: CompanyBranchListResponse) => (
                 <span> {row.companyLabel} </span>
             ),
@@ -65,6 +62,7 @@ const CompanyBranchListingWrapper = () => {
             field: 'branchName',
             headerName: 'Branch Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPANY_BRANCH_LIST_BRANCH_NAME,
             renderCell: (row: CompanyBranchListResponse) => (
                 <span> {row.branchName} </span>
             ),
@@ -75,9 +73,12 @@ const CompanyBranchListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.companyBranch}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_COMPANY_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_COMPANY_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -151,18 +152,13 @@ const CompanyBranchListingWrapper = () => {
 
     return (
         <>
-            <ConfigurationLayout>
+            
                 <CompanyBranch
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.companyBranch,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

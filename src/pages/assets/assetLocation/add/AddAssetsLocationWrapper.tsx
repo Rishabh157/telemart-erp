@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddAsstesLocation from './AddAsstesLocation'
 import { useAddAssetsLocationMutation } from 'src/services/assets/AssetsLocationService'
 import { showToast } from 'src/utils'
-import AsstesLayout from '../../AssetsLayout'
+
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -73,7 +73,7 @@ const AddAssetsLocationWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <AsstesLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -88,7 +88,7 @@ const AddAssetsLocationWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </AsstesLayout>
+        </>
     )
 }
 

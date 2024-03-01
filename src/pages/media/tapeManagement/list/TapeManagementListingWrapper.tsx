@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,25 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import TapeManagementListing from './TapeManagementListing'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import MediaLayout from '../../MediaLayout'
-import {
-    useGetPaginationTapeQuery,
-    useDeleteTapeMutation,
-} from 'src/services/media/TapeManagementServices'
-import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
+import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteTapeMutation,
+    useGetPaginationTapeQuery,
+} from 'src/services/media/TapeManagementServices'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+import TapeManagementListing from './TapeManagementListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/tapeManagementSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // export type language ={
 //     languageId:string[];
@@ -50,9 +47,7 @@ const TapeManagementListingWrapper = () => {
     const tapeManagementState: any = useSelector(
         (state: RootState) => state.tapeManagement
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items } = tapeManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -96,6 +91,7 @@ const TapeManagementListingWrapper = () => {
             field: 'tapeName',
             headerName: 'Tape Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAPE_MANAGEMENT_LIST_TAPE_NAME,
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.tapeName} </span>
             ),
@@ -104,6 +100,7 @@ const TapeManagementListingWrapper = () => {
             field: 'tapeType',
             headerName: 'Tape Type',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAPE_MANAGEMENT_LIST_TAPE_TYPE,
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.tapeType} </span>
             ),
@@ -112,6 +109,7 @@ const TapeManagementListingWrapper = () => {
             field: 'schemeLabel',
             headerName: 'Scheme',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAPE_MANAGEMENT_LIST_SCHEME,
             renderCell: (row: TapeManagementListResponse) => (
                 <span> {row.schemeLabel} </span>
             ),
@@ -120,6 +118,7 @@ const TapeManagementListingWrapper = () => {
             field: 'languageId',
             headerName: 'Language',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAPE_MANAGEMENT_LIST_LANGUAGE,
             renderCell: (row: any) => {
                 const languageLength = row.languageId.length
 
@@ -135,9 +134,8 @@ const TapeManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.tapeManangement}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -183,20 +181,15 @@ const TapeManagementListingWrapper = () => {
 
     return (
         <>
-            <MediaLayout>
+            <>
                 <div className="h-full">
                     <TapeManagementListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.tapeManangement,
-                            UserModuleActionTypes.List
-                        )}
+                            columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </MediaLayout>
+            </>
         </>
     )
 }

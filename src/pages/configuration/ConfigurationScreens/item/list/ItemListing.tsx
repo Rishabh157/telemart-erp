@@ -11,7 +11,6 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -21,16 +20,14 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/itemSlice'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -70,19 +67,15 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Item </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.item}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
-                            onClick={() => navigate('/configurations/item/add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            {' '}
-                            + Add{' '}
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_ITEMS_ADD) &&
+                    <button
+                        onClick={() => navigate('/configurations/item/add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        {' '}
+                        + Add{' '}
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -98,7 +91,7 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

@@ -16,7 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import EditCompanyBranch from './EditCompanyBranch'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { showToast } from 'src/utils'
 import {
     useGetCompanyBranchByIdQuery,
@@ -87,7 +87,7 @@ const EditCompanyBranchWrapper = (props: Props) => {
         dispatch(setSelectedItem(data?.data[0]))
     }, [dispatch, data, isLoading, isFetching])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -103,7 +103,7 @@ const EditCompanyBranchWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

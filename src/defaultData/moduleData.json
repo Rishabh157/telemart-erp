@@ -3264,7 +3264,7 @@
             "moduleAction": [
                 {
                     "actionId": "assetsManagementActionListId",
-                    "actionUrl": "/assets/assets-management",
+                    "actionUrl": "/assets/assets-request",
                     "actionName": "LIST",
                     "parentGroup": [],
                     "fields": [

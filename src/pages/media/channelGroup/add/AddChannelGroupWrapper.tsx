@@ -15,7 +15,7 @@ import { Formik, FormikProps } from 'formik'
 import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
+
 import { useAddChannelGroupMutation } from 'src/services/media/ChannelGroupServices'
 import { showToast } from 'src/utils'
 import AddChannelGroup from './AddChannelGroup'
@@ -73,7 +73,7 @@ const AddChannelGroupWrapper = () => {
         }, 1000)
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -88,7 +88,7 @@ const AddChannelGroupWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

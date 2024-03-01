@@ -16,7 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import EditCartonBox from './EditCartonBox'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { showToast } from 'src/utils'
 import {
     useGetCartonBoxByIdQuery,
@@ -112,7 +112,7 @@ const EditCartonBoxWrapper = (props: Props) => {
         dispatch(setSelectedItem(data?.data))
     }, [dispatch, data, isLoading, isFetching])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -128,7 +128,7 @@ const EditCartonBoxWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

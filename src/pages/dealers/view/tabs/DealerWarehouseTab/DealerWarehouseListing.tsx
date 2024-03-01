@@ -7,28 +7,24 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleNameTypes,
-    UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/DealerWarehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -74,22 +70,18 @@ const DealerWarehouseListing = ({
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 {/* {isShowAddWarehouseButton && ( */}
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.dealer}
-                    actionName={UserModuleAddActionTypes.dealerWareHouseAdd}
-                    component={
-                        <button
-                            onClick={() =>
-                                navigate(`${AddpathName}`, {
-                                    state: { params },
-                                })
-                            }
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_ADD) &&
+                    <button
+                        onClick={() =>
+                            navigate(`${AddpathName}`, {
+                                state: { params },
+                            })
+                        }
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add
+                    </button>
+                }
                 {/* )} */}
             </div>
 
@@ -105,8 +97,8 @@ const DealerWarehouseListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

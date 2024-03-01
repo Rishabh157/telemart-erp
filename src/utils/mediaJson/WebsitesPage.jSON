@@ -1,0 +1,57 @@
+{
+  "moduleId": "NAV_WEBSITES_PAGES",
+  "moduleName": "NAV_WEBSITES_PAGES",
+  "parentGroup": ["NAV_ALL_WEBSITE"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_WEBSITES_PAGES_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "WEBSITES_PAGES_LIST_WEBSITES_PAGES_NAME",
+          "fieldName": "Page Name",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "WEBSITES_PAGES_LIST_PAGE_URL",
+          "fieldName": "Page Url",
+          "fieldValue": ""
+        }
+       
+      ]
+    },
+    {
+      "actionId": "ACTION_WEBSITES_PAGES_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_WEBSITES_PAGES_ONE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_WEBSITES_PAGES_ONE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}
