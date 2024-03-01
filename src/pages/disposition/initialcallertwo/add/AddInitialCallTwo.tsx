@@ -11,6 +11,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
+import { complaintTypeOptions } from 'src/utils/constants/customeTypes'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -100,16 +101,7 @@ const AddInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                        options={[
-                                            {
-                                                label: 'Complaint',
-                                                value: 'COMPLAINT',
-                                            },
-                                            {
-                                                label: 'Inquiry',
-                                                value: 'INQUIRY',
-                                            },
-                                        ]}
+                                        options={complaintTypeOptions()}
                                         onChange={(newValue: any) => {
                                             handleSetFieldValue(
                                                 'callType',
@@ -119,12 +111,13 @@ const AddInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
                                     />
                                 </div>
 
-                                {/* initialcall one */}
                                 <ATMSelectSearchable
                                     options={initicalCallOneOptions}
                                     name="initialCallOneId"
                                     value={values.initialCallOneId}
                                     label="Initial Call One"
+                                    labelClass="text-slate-700 text-sm font-medium"
+                                    componentClass="mt-4 rounded"
                                     onChange={(e) =>
                                         handleSetFieldValue(
                                             'initialCallOneId',
@@ -132,11 +125,14 @@ const AddInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
                                         )
                                     }
                                 />
+
                                 <ATMTextField
                                     name="initialCallName"
                                     value={values.initialCallName}
                                     placeholder="Name"
-                                    label="Initial Call  Name"
+                                    label="Initial Call Name"
+                                    labelClass="text-slate-700 text-sm font-medium mt-1"
+                                    className="mt-1 rounded"
                                     onChange={(e) =>
                                         handleSetFieldValue(
                                             'initialCallName',

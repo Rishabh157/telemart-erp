@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FormikProps } from 'formik'
 import { FormInitialValues } from './EditDispositionThreeWrapper'
 import ATMBreadCrumbs, {
@@ -17,13 +17,15 @@ import {
     whatsappTypeOptions,
     applicableCriteriaOptionsType,
 } from 'src/utils/constants/customeTypes'
+import { useGetDispostionTwoByOneQuery } from 'src/services/configurations/DispositionTwoServices'
+import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
         DispotionOneOptions: SelectOption[]
-        DispositionTwoOptions: SelectOption[]
+        // DispositionTwoOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -42,11 +44,38 @@ const EditDispositionThree = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+    const [dispositionTwoOptions, setDispositionTwoOptions] = useState<any[]>(
+        []
+    )
 
     dropdownOptions = {
         ...dropdownOptions,
     }
     const dispatch = useDispatch()
+
+    const {
+        isLoading: isDTLoading,
+        isFetching: isDTFetching,
+        data: DtData,
+    } = useGetDispostionTwoByOneQuery(values.dispositionOneId, {
+        skip: !values.dispositionOneId,
+    })
+
+    useEffect(() => {
+        if (!isDTLoading && !isDTFetching) {
+            const filteredDispositionTwo = DtData?.data?.map(
+                (dispositionTwo: DispositionTwoListResponse) => {
+                    return {
+                        label: dispositionTwo.dispositionName,
+                        value: dispositionTwo._id,
+                    }
+                }
+            )
+
+            setDispositionTwoOptions(filteredDispositionTwo || [])
+        }
+    }, [isDTLoading, isDTFetching, DtData])
+
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
@@ -125,9 +154,7 @@ const EditDispositionThree = ({
                                             e
                                         )
                                     }
-                                    options={
-                                        dropdownOptions.DispositionTwoOptions
-                                    }
+                                    options={dispositionTwoOptions}
                                     label="Disposition Two"
                                 />
                             </div>
