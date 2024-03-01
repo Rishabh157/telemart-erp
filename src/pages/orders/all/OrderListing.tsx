@@ -56,7 +56,6 @@ import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFo
 import moment from 'moment'
 import { BiSearch } from 'react-icons/bi'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
-
 // Types
 type BarcodeListResponseType = {
     _id: string
@@ -88,7 +87,6 @@ const OrderListing = ({
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-
     // Dispatching State
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
@@ -121,7 +119,6 @@ const OrderListing = ({
 
     const [filterBy, setFilterBy] = useState<any>([])
     useEffect(() => {
-        console.log('orderStatus', orderStatus, 'currentStatus', currentStatus)
         let filter: any = []
         if (!orderStatus) {
             filter = [
@@ -144,7 +141,6 @@ const OrderListing = ({
                 setFilterBy(filter)
                 return
             case 'inquiry':
-                console.log("herr")
                 filter = [
                     {
                         fieldName: 'companyId',
@@ -215,6 +211,7 @@ const OrderListing = ({
             params: ['didNo', 'mobileNo'],
             page: page,
             filterBy: [...filterBy],
+            isOrderOrInquiry: orderStatus === 'inquiry' ? "inquiry" : orderStatus === 'fresh' ? "order" : "" ,
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,
@@ -616,11 +613,10 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${
-                                            row?.approved
+                                        text: `Do you want to ${row?.approved
                                                 ? 'Disapprove this order'
                                                 : 'Approval this order'
-                                        }`,
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -1027,7 +1023,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                        ''
+                                                    ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)
