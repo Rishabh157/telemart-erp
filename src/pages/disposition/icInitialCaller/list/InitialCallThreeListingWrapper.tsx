@@ -191,7 +191,7 @@ const InitialCallThreeListingWrapper = () => {
             renderCell: (row: any) => (
                 <ActionPopup
                     isView={isAuthorized(
-                        UserModuleNameTypes.ACTION_IC_THREE_LIST
+                        UserModuleNameTypes.ACTION_IC_THREE_VIEW
                     )}
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_IC_THREE_EDIT

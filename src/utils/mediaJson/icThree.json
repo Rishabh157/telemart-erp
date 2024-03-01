@@ -1,13 +1,15 @@
 {
   "moduleId": "NAV_IC_THREE",
   "moduleName": "NAV_IC_THREE",
-  "parentGroup": ["NAV_DISPOSITION"],
+  "parentGroup": [
+    "NAV_DISPOSITION"
+  ],
   "moduleAction": [
     {
       "actionId": "ACTION_IC_THREE_LIST",
       "actionUrl": "",
       "actionName": "LIST",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [],
       "fields": [
         {
@@ -51,7 +53,7 @@
       "actionId": "ACTION_IC_THREE_ADD",
       "actionUrl": "",
       "actionName": "ADD",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [
         "LIST"
       ],
@@ -61,7 +63,7 @@
       "actionId": "ACTION_IC_THREE_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [
         "LIST"
       ],
@@ -71,7 +73,17 @@
       "actionId": "ACTION_IC_THREE_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_IC_THREE_VIEW",
+      "actionUrl": "",
+      "actionName": "VIEW",
+      "compulsoryFields": [],
       "parentGroup": [
         "LIST"
       ],

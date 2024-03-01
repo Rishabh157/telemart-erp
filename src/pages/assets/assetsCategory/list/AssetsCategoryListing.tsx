@@ -66,7 +66,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>Assets Location</ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_ASSETS_LOCATION_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ADD) &&
                     <button
                         onClick={() => navigate('add')}
                         className="bg-primary-main text-white rounded py-1 px-3"

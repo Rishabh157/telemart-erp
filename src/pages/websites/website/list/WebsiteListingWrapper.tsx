@@ -71,7 +71,7 @@ const WebstieListingWrapper = () => {
             field: 'url',
             headerName: 'URL',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_LIST_GA_TAG,
+            name: UserModuleNameTypes.WEBSITES_LIST_URL,
             renderCell: (row: WebsiteListResponse) => <span> {row.url} </span>,
         },
         {

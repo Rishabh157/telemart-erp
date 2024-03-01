@@ -1,13 +1,15 @@
 {
   "moduleId": "NAV_WEBSITES_BLOG",
   "moduleName": "NAV_WEBSITES_BLOG",
-  "parentGroup": ["NAV_ALL_WEBSITE"],
+  "parentGroup": [
+    "NAV_ALL_WEBSITE"
+  ],
   "moduleAction": [
     {
       "actionId": "ACTION_WEBSITES_BLOG_LIST",
       "actionUrl": "",
       "actionName": "LIST",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [],
       "fields": [
         {
@@ -28,20 +30,10 @@
       ]
     },
     {
-      "actionId": "ACTION_WEBSITES_BLOG_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
       "actionId": "ACTION_WEBSITES_BLOG_ONE_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
       "parentGroup": [
         "LIST"
       ],
@@ -51,7 +43,17 @@
       "actionId": "ACTION_WEBSITES_BLOG_ONE_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
-      "compulsoryFields" : [],
+      "compulsoryFields": [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_WEBSITES_BLOG_ONE_VIEW",
+      "actionUrl": "",
+      "actionName": "VIEW",
+      "compulsoryFields": [],
       "parentGroup": [
         "LIST"
       ],

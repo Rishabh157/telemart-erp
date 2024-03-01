@@ -55,7 +55,7 @@ const InitialCallTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Initial Call Two </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_IC_ONE_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_IC_TWO_ADD) &&
                     <button
                         type="button"
                         onClick={() => navigate('add')}

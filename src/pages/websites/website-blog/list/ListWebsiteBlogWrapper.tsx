@@ -90,10 +90,10 @@ const ListWebsiteBlogWrapper = () => {
             renderCell: (row: any) => (
                 <ActionPopup
                     isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_DELETE
+                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_EDIT
                     )}
                     isView={isAuthorized(
-                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_EDIT
+                        UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_VIEW
                     )}
                     isDelete={isAuthorized(
                         UserModuleNameTypes.ACTION_WEBSITES_BLOG_ONE_DELETE
