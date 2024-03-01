@@ -51,7 +51,7 @@ const ArtistListingWrapper = () => {
             field: 'artistName',
             headerName: 'Artist Name',
             flex: 'flex-[1_1_0%]',
-           
+
             name: UserModuleNameTypes.ARTIST_LIST_ARTIST_NAME,
             renderCell: (row: ArtistListResponse) => (
                 <span> {row.artistName} </span>
@@ -64,8 +64,12 @@ const ArtistListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ARTIST_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ARTIST_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_ARTIST_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_ARTIST_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -145,7 +149,7 @@ const ArtistListingWrapper = () => {
         <>
             <>
                 <ArtistListing
-                       columns={columns}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

@@ -178,7 +178,9 @@ const ASRListingWrapper = () => {
             renderCell: (row: any) => (
                 <ActionPopup
                     isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASR_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ASR_DELETE)}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_ASR_DELETE
+                    )}
                     handleEditActionButton={() => {
                         navigate(`/asr/${currentId}`)
                     }}

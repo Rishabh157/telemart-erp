@@ -25,7 +25,6 @@ import {
 import { showToast } from 'src/utils'
 import { setSelectedCategory } from 'src/redux/slices/assets/assetsCategorySlice'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 

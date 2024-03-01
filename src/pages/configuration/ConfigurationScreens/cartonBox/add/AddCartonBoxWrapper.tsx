@@ -106,22 +106,20 @@ const AddCartonBoxWrapper = (props: Props) => {
         })
     }
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddCartonBox
-                            formikProps={formikProps}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddCartonBox
+                        formikProps={formikProps}
+                        apiStatus={apiStatus}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

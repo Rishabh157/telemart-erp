@@ -151,10 +151,15 @@ const AddWarehouseToSampleWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        wtsNumber: string().required(
-            'warehouse to sample order number is required'
-        // eslint-disable-next-line no-useless-escape
-        ).matches(/^[a-zA-Z]+[^\/\\]*$/, 'Only alphabetical characters are allowed, except / and \\'),
+        wtsNumber: string()
+            .required(
+                'warehouse to sample order number is required'
+                // eslint-disable-next-line no-useless-escape
+            )
+            .matches(
+                /^[a-zA-Z]+[^\/\\]*$/,
+                'Only alphabetical characters are allowed, except / and \\'
+            ),
         fromWarehouseId: string().required('please select a warehouse'),
         toName: string().required('please enter receiver name'),
         productSalesOrder: array().of(

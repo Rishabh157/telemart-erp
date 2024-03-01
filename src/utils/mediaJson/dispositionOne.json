@@ -1,56 +1,50 @@
 {
-  "moduleId": "NAV_DISPOSITION_ONE",
-  "moduleName": "NAV_DISPOSITION_ONE",
-  "parentGroup": ["NAV_DISPOSITION"],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_DISPOSITION_ONE_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_DISPOSITION_ONE",
+    "moduleName": "NAV_DISPOSITION_ONE",
+    "parentGroup": ["NAV_DISPOSITION"],
+    "moduleAction": [
         {
-          "fieldId": "DISPOSITION_ONE_LIST_DISPOSITION_ONE_NAME",
-          "fieldName": "Disposition Name",
-          "fieldValue": "dispositionName"
+            "actionId": "ACTION_DISPOSITION_ONE_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "DISPOSITION_ONE_LIST_DISPOSITION_ONE_NAME",
+                    "fieldName": "Disposition Name",
+                    "fieldValue": "dispositionName"
+                },
+                {
+                    "fieldId": "DISPOSITION_ONE_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "isActive"
+                }
+            ]
         },
         {
-          "fieldId": "DISPOSITION_ONE_LIST_STATUS",
-          "fieldName": "Status",
-          "fieldValue": "isActive"
+            "actionId": "ACTION_DISPOSITION_ONE_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DISPOSITION_ONE_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DISPOSITION_ONE_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_DISPOSITION_ONE_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_DISPOSITION_ONE_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_DISPOSITION_ONE_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

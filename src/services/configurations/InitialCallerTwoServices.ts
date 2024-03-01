@@ -114,5 +114,5 @@ export const {
     useExportinitialCallerTwoDataMutation,
     useDeleteinitialCallerTwoMutation,
     useGetAllinitialCallerTwoQuery,
-    useDeactiveInitialCallerTwoMutation
+    useDeactiveInitialCallerTwoMutation,
 } = initialCallerTwoApi

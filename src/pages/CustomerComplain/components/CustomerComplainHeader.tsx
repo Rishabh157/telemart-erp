@@ -226,7 +226,7 @@ const CustomerComplainHeader = ({
                                 // setFieldValue('reciversName', e.target.value)
                             }}
                         />
-                        
+
                         <ATMTextField
                             label="Incoming No"
                             labelSize="xxs"
@@ -371,7 +371,6 @@ const CustomerComplainHeader = ({
                             }}
                         />
 
-
                         {/* Location */}
                         <ATMTextField
                             label="district"
@@ -424,7 +423,6 @@ const CustomerComplainHeader = ({
                                 // setFieldValue('reciversName', e.target.value)
                             }}
                         />
-
                     </div>
                 </div>
             </div>

@@ -139,18 +139,17 @@ body {
     transition-delay: 100ms;
     visibility: hidden;
     /* visibility: visible; */
-  
+
     background: linear-gradient(
-      to left,
-      rgba(25, 27, 60, 0) -297%,
-      rgba(0, 0, 0, 1) 181%
+        to left,
+        rgba(25, 27, 60, 0) -297%,
+        rgba(0, 0, 0, 1) 181%
     );
     opacity: 1;
     z-index: 10;
-  }
-  
-  .menu-parent:hover > .child-menu {
+}
+
+.menu-parent:hover > .child-menu {
     opacity: 1;
     visibility: visible;
-  }
-  
+}

@@ -121,23 +121,21 @@ const AddProductSubCategoryWrapper = (props: Props) => {
     }
 
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddProductSubCategory
-                            formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddProductSubCategory
+                        formikProps={formikProps}
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

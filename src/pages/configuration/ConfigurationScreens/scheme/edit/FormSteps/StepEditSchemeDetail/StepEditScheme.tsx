@@ -59,7 +59,6 @@ const StepEditScheme = ({
     return (
         <div className="py-6 px-7 flex flex-col gap-5">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
-           
                 {/* Category */}
                 <div className="-mt-2">
                     <ATMSelectSearchable

@@ -132,7 +132,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             renderCell: (row: PurchaseOrderListResponse) => {
                 return <span> {row.purchaseOrder.estReceivingDate} </span>
             },
-        }
+        },
     ]
 
     return (

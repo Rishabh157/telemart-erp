@@ -19,7 +19,6 @@ import AddAsstesCategory from './AddAsstesCategory'
 import { useAddAssetsCategoryMutation } from 'src/services/assets/AssetsCategoryService'
 import { showToast } from 'src/utils'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 

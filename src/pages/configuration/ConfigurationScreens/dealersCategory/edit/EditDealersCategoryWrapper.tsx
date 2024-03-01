@@ -101,23 +101,21 @@ const EditDealersCategoryWrapper = (props: Props) => {
         dispatch(setSelectedItem(data?.data))
     }, [dispatch, data, isLoading, isFetching])
     return (
-        
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <EditDealersCategory
-                            formikProps={formikProps}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditDealersCategory
+                        formikProps={formikProps}
+                        apiStatus={apiStatus}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

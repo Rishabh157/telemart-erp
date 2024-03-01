@@ -117,5 +117,5 @@ export const {
     useDeletedispositionThreeMutation,
     useGetAlldispositionThreeQuery,
     useGetAllUnAuthDispositionThreeQuery,
-    useDeactiveDispositionThreeMutation
+    useDeactiveDispositionThreeMutation,
 } = dispositionThreeApi

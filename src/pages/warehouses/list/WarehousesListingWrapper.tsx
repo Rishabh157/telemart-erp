@@ -44,7 +44,7 @@ const DealersListingWrapper = () => {
     const wareHouseState: any = useSelector(
         (state: RootState) => state.warehouse
     )
-   
+
     const columns: columnTypes[] = [
         {
             field: 'wareHouseCode',
@@ -106,9 +106,15 @@ const DealersListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isView={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_VIEW)}
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_DELETE)}
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_DELETE
+                    )}
                     handleViewActionButton={() => {
                         navigate(
                             `/warehouse/view/${currentId}/warehouse-details`

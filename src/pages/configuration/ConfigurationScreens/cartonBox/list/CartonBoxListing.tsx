@@ -69,7 +69,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Outer Packaging Boxes </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_CARTON_BOX_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_CARTON_BOX_ADD) && (
                     <button
                         onClick={() =>
                             navigate('/configurations/carton-box/add')
@@ -79,7 +79,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)]  rounded bg-white">
@@ -95,7 +95,7 @@ const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

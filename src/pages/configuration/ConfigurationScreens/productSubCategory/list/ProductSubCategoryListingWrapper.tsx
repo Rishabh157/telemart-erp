@@ -183,13 +183,11 @@ const ProductSubCategoryListingWrapper = () => {
     }
     return (
         <>
-            
-                <ProductSubCategoryListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <ProductSubCategoryListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

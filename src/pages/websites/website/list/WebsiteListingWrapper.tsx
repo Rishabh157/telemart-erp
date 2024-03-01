@@ -218,13 +218,11 @@ const WebstieListingWrapper = () => {
     }
     return (
         <>
-
             <WebsiteListing
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
             />
-
         </>
     )
 }

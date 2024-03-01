@@ -17,7 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { LanguageListResponse } from 'src/models/Language.model'
 
-
 import {
     setIsTableLoading,
     setItems,
@@ -43,7 +42,7 @@ const LanguageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-  
+
     const columns: columnTypes[] = [
         {
             field: 'languageName',
@@ -60,8 +59,12 @@ const LanguageListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_LANGUAGE_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_LANGUAGE_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_LANGUAGE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_LANGUAGE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -134,13 +137,11 @@ const LanguageListingWrapper = () => {
     }
     return (
         <>
-            
-                <LanguageListing
-              columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <LanguageListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

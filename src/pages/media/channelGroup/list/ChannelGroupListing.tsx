@@ -63,15 +63,15 @@ const ChannelGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Channel Group </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_ADD) &&
-                        <button
-                            type="button"
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Group Channel
-                        </button>
-                    }
+                {isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_ADD) && (
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add Group Channel
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

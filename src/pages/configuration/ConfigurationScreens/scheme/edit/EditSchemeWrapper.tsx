@@ -364,32 +364,30 @@ const EditSchemeWrapper = () => {
     }
 
     return (
-        
-            <Formik
-                enableReinitialize={activeStep === 0}
-                initialValues={initialValues}
-                validationSchema={getValidationSchema(activeStep)}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
-                        <EditScheme
-                            formikProps={formikProps}
-                            steps={steps}
-                            activeStep={activeStep}
-                            setActiveStep={setActiveStep}
-                            breadcrumbs={breadcrumbs}
-                            pageHeading={pageHeading}
-                            productCategoryoption={productCategoryoption}
-                            productSubCategoryOption={productSubCategoryOption}
-                            productGroupOptions={productGroupOptions}
-                            apiStatus={apiStatus}
-                            setSelectedCategory={setSelectedCategory}
-                        />
-                    </Form>
-                )}
-            </Formik>
-       
+        <Formik
+            enableReinitialize={activeStep === 0}
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(activeStep)}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => (
+                <Form className="">
+                    <EditScheme
+                        formikProps={formikProps}
+                        steps={steps}
+                        activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        breadcrumbs={breadcrumbs}
+                        pageHeading={pageHeading}
+                        productCategoryoption={productCategoryoption}
+                        productSubCategoryOption={productSubCategoryOption}
+                        productGroupOptions={productGroupOptions}
+                        apiStatus={apiStatus}
+                        setSelectedCategory={setSelectedCategory}
+                    />
+                </Form>
+            )}
+        </Formik>
     )
 }
 

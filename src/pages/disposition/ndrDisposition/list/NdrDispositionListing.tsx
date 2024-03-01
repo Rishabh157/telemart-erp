@@ -53,7 +53,9 @@ const NdrDispositionListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>NDR Disposition </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_NDR_DISPOSITION_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_NDR_DISPOSITION_ADD
+                ) && (
                     <button
                         type="button"
                         onClick={() => navigate('add')}
@@ -61,7 +63,7 @@ const NdrDispositionListing = ({ columns, rows, setShowDropdown }: Props) => {
                     >
                         + Add
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -78,10 +80,10 @@ const NdrDispositionListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                // isFilter
-                // onFilterClick={() => {
-                //     setIsOpenFilterFormDialog(true)
-                // }}
+                    // isFilter
+                    // onFilterClick={() => {
+                    //     setIsOpenFilterFormDialog(true)
+                    // }}
                 />
 
                 {/* {isOpenFilterFormDialog && (

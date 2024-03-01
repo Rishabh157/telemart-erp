@@ -59,7 +59,9 @@ CallerHeaderPropsTypes) => {
                 </div>
 
                 <div className="w-full">
-                    <h3 className="text-white font-semibold text-[10px]">DID NO</h3>
+                    <h3 className="text-white font-semibold text-[10px]">
+                        DID NO
+                    </h3>
                     <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] font-semibold text-[10px]">
                         {DidNumber}
                     </div>

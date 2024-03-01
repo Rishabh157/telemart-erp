@@ -55,7 +55,6 @@ export type WarehousesListResponse = {
 }
 
 export type AddWarehouse = {
- 
     wareHouseName: string
     country: string
     email: string
@@ -90,7 +89,6 @@ export type AddWarehouse = {
 
 export type UpdateWarehouse = {
     body: {
-        
         wareHouseName: string
         country: string
         email: string

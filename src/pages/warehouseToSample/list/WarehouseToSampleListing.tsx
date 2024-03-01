@@ -61,29 +61,33 @@ const WarehouseToSampleListing = ({
     }, [])
     return (
         <div
-            className={`px-4 ${path === 'dealers'
+            className={`px-4 ${
+                path === 'dealers'
                     ? 'h-[calc(100vh-185px)]'
                     : 'h-[calc(100vh-55px)]'
-                }`}
+            }`}
         >
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse To Sample Transfer </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_ADD
+                ) && (
                     <button
                         onClick={() => navigate('/warehouse-to-sample/add')}
                         className="bg-primary-main text-white round ed py-1 px-3"
                     >
                         + Add Sample
                     </button>
-                }
+                )}
             </div>
 
             <div
-                className={` border flex flex-col  rounded bg-white ${path === 'dealers'
+                className={` border flex flex-col  rounded bg-white ${
+                    path === 'dealers'
                         ? 'h-[calc(100%-50px)]'
                         : 'h-[calc(100%-75px)]'
-                    }`}
+                }`}
             >
                 {/*Table Header */}
                 <ATMTableHeader
@@ -98,8 +102,8 @@ const WarehouseToSampleListing = ({
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

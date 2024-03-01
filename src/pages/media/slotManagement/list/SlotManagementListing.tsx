@@ -65,7 +65,9 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center py-1">
                 <ATMPageHeading> Slot Management </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_ADD
+                ) && (
                     <button
                         type="button"
                         onClick={() => navigate('add')}
@@ -73,7 +75,7 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                     >
                         + Add Slot
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -88,7 +90,7 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
+                    // isFilter
                 />
 
                 {/* Table */}

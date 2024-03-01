@@ -1,76 +1,70 @@
 {
-  "moduleId": "NAV_NDR_DISPOSITION",
-  "moduleName": "NAV_NDR_DISPOSITION",
-  "parentGroup": ["NAV_DISPOSITION"],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_NDR_DISPOSITION_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_NDR_DISPOSITION",
+    "moduleName": "NAV_NDR_DISPOSITION",
+    "parentGroup": ["NAV_DISPOSITION"],
+    "moduleAction": [
         {
-          "fieldId": "NDR_DISPOSITION_LIST_DISPOSITION_NAME",
-          "fieldName": "Disposition Name",
-          "fieldValue": "ndrDisposition"
+            "actionId": "ACTION_NDR_DISPOSITION_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "NDR_DISPOSITION_LIST_DISPOSITION_NAME",
+                    "fieldName": "Disposition Name",
+                    "fieldValue": "ndrDisposition"
+                },
+                {
+                    "fieldId": "NDR_DISPOSITION_LIST_EMAIL_TYPE",
+                    "fieldName": "Email type",
+                    "fieldValue": "emailType"
+                },
+                {
+                    "fieldId": "NDR_DISPOSITION_LIST_SMS_TYPE",
+                    "fieldName": "Sms Type",
+                    "fieldValue": "smsType"
+                },
+                {
+                    "fieldId": "NDR_DISPOSITION_LIST_RTO_ATTEMPT",
+                    "fieldName": "Rto Attempt",
+                    "fieldValue": "rtoAttempt"
+                },
+                {
+                    "fieldId": "NDR_DISPOSITION_LIST_PRIORITY",
+                    "fieldName": "Priority",
+                    "fieldValue": "priority"
+                },
+                {
+                    "fieldId": "NDR_DISPOSITION_LIST_STATUS",
+                    "fieldName": "STATUS",
+                    "fieldValue": "isActive"
+                }
+            ]
         },
         {
-          "fieldId": "NDR_DISPOSITION_LIST_EMAIL_TYPE",
-          "fieldName": "Email type",
-          "fieldValue": "emailType"
+            "actionId": "ACTION_NDR_DISPOSITION_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "NDR_DISPOSITION_LIST_SMS_TYPE",
-          "fieldName": "Sms Type",
-          "fieldValue": "smsType"
+            "actionId": "ACTION_NDR_DISPOSITION_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "NDR_DISPOSITION_LIST_RTO_ATTEMPT",
-          "fieldName": "Rto Attempt",
-          "fieldValue": "rtoAttempt"
-        },
-        {
-          "fieldId": "NDR_DISPOSITION_LIST_PRIORITY",
-          "fieldName": "Priority",
-          "fieldValue": "priority"
-        },
-        {
-          "fieldId": "NDR_DISPOSITION_LIST_STATUS",
-          "fieldName": "STATUS",
-          "fieldValue": "isActive"
+            "actionId": "ACTION_NDR_DISPOSITION_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_NDR_DISPOSITION_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_NDR_DISPOSITION_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_NDR_DISPOSITION_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

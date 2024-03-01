@@ -31,7 +31,6 @@ type Props = {
 export type FieldType = Field<'countryOptions'>
 
 const formFields: FieldType[] = [
-   
     {
         name: 'warehouseName',
         label: 'Warehouse Name',

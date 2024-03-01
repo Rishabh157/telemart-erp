@@ -7,26 +7,26 @@
 
 // |-- Types --|
 export type NdrDispositionListResponse = {
-  dispositionName: string
-  dispostionOneLabel: string
-  companyId: string
-  isActive: boolean
-  isDeleted: boolean
-  createdAt: string
-  updatedAt: string
-  _id: string
-  __v: number
+    dispositionName: string
+    dispostionOneLabel: string
+    companyId: string
+    isActive: boolean
+    isDeleted: boolean
+    createdAt: string
+    updatedAt: string
+    _id: string
+    __v: number
 }
 
 export type AddNdrDisPosition = {
-  ndrDisposition: string
-  companyId: string
+    ndrDisposition: string
+    companyId: string
 }
 
 export type UpdateNdrDisposition = {
-  body: {
-    ndrDisposition: string
-    companyId: string
-  }
-  id: string
+    body: {
+        ndrDisposition: string
+        companyId: string
+    }
+    id: string
 }

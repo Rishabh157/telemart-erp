@@ -44,9 +44,11 @@ const ViewInventories = (props: Props) => {
     ]
     const [activeTab, setActiveTab] = useState<number>()
 
-    const allowedTabs = tabs?.filter((nav) => {
-        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
-    })?.map((tab) => tab)
+    const allowedTabs = tabs
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
     useEffect(() => {
         const activeTab = window.location.pathname.split('/')[4]

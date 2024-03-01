@@ -10,8 +10,6 @@
 import React, { useState, useEffect } from 'react' //  { useState, useEffect } // ,
 import { useLocation, useNavigate } from 'react-router-dom'
 
-
-
 // |-- External Dependencies --|
 
 // |-- Internal Dependencies --|
@@ -181,14 +179,12 @@ const UserAccessWrapper = () => {
     }, [data, isLoading, isFetching])
 
     return (
-
         <UserAccess
             department={(dept as string) || ''}
             userRole={(userRole as string) || ''}
             handleUserAccessSubmit={handleUserAccessSubmit}
             apiStatus={apiStatus}
         />
-
     )
 }
 export default UserAccessWrapper

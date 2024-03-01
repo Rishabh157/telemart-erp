@@ -53,19 +53,19 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Pincode</ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_PINCODE_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_DEALER_DEALER_PINCODE_ADD
+                ) && (
                     <button
                         onClick={() =>
-                            navigate(
-                                '/dealers/' + dealerId + '/pincode/add'
-                            )
+                            navigate('/dealers/' + dealerId + '/pincode/add')
                         }
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
                         {' '}
                         + Add Pincode{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">

@@ -194,7 +194,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                     label="State"
                                     placeholder="Enter State"
                                     size="xxs"
-                                    labelSize='xxs'
+                                    labelSize="xxs"
                                     name="state"
                                     value={''}
                                     onChange={(e) => {
@@ -207,7 +207,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                     label="District"
                                     placeholder="Enter City"
                                     size="xxs"
-                                    labelSize='xxs'
+                                    labelSize="xxs"
                                     name="district"
                                     value={''}
                                     onChange={(e) => {
@@ -220,7 +220,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                     label="Taluk/Tehsil"
                                     placeholder="Enter Taluk"
                                     size="xxs"
-                                    labelSize='xxs'
+                                    labelSize="xxs"
                                     name="taluk"
                                     value={''}
                                     onChange={(e) => {
@@ -233,7 +233,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                     label="Area"
                                     placeholder="Enter Area"
                                     size="xxs"
-                                    labelSize='xxs'
+                                    labelSize="xxs"
                                     name="area"
                                     value={''}
                                     onChange={(e) => {
@@ -246,7 +246,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                                     label="Pincode"
                                     placeholder="Enter Pincode"
                                     size="xxs"
-                                    labelSize='xxs'
+                                    labelSize="xxs"
                                     name="pincode"
                                     value={''}
                                     onChange={(e) => {
@@ -267,12 +267,12 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                             <ATMTable
                                 columns={columns}
                                 rows={rows}
-                            // isCheckbox={true}
-                            // selectedRows={selectedRows}
-                            // onRowSelect={(selectedRows) =>
-                            //     setSelectedRows(selectedRows)
-                            // }
-                            // setShowDropdown={setShowDropdown}
+                                // isCheckbox={true}
+                                // selectedRows={selectedRows}
+                                // onRowSelect={(selectedRows) =>
+                                //     setSelectedRows(selectedRows)
+                                // }
+                                // setShowDropdown={setShowDropdown}
                             />
                         </div>
                     </div>

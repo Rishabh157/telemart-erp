@@ -256,7 +256,7 @@ const EditSaleOrderWrapper = (props: Props) => {
                     ],
                 }
             })
-            
+
             setEditSaleOrder(product)
         }
     }, [selectedItem])

@@ -93,23 +93,21 @@ const AddAttributeGroupWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddAttributeGroup
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                            allItems={allItems}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddAttributeGroup
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        allItems={allItems}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

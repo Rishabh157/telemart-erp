@@ -19,7 +19,6 @@ import AddAsstesLocation from './AddAsstesLocation'
 import { useAddAssetsLocationMutation } from 'src/services/assets/AssetsLocationService'
 import { showToast } from 'src/utils'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

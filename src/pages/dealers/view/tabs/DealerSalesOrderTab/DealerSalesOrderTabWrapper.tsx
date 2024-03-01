@@ -19,9 +19,7 @@ import { useParams } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
 import SaleOrderListing from 'src/pages/saleOrder/list/SaleOrderListing'
-import {
-    useGetPaginationSaleOrderQuery,
-} from 'src/services/SalesOrderService'
+import { useGetPaginationSaleOrderQuery } from 'src/services/SalesOrderService'
 
 // |-- Redux --|
 import {
@@ -116,7 +114,7 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
             renderCell: (row: SaleOrderListResponse) => {
                 return <span> {row?.warehouseLabel} </span>
             },
-        }
+        },
     ]
 
     return (

@@ -99,7 +99,6 @@ const RTVListingWrapper = () => {
     const [updateReturnToVendor] = useUpdateReturnToVendorApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-
     const { data, isFetching, isLoading } =
         useGetPaginationReturnToVendorByGroupQuery({
             limit: rowsPerPage,
@@ -259,8 +258,8 @@ const RTVListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}{' '}
+                            ? 'Pending'
+                            : 'Rejected'}{' '}
                     </span>
                 )
             },
@@ -298,8 +297,8 @@ const RTVListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -492,11 +491,15 @@ const RTVListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_EDIT)}
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_EDIT
+                        )}
                         isDelete={
                             row.firstApproved === null &&
-                                row.secondApproved === null
-                                ? isAuthorized(UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE)
+                            row.secondApproved === null
+                                ? isAuthorized(
+                                      UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
+                                  )
                                 : false
                         }
                         handleEditActionButton={() => {

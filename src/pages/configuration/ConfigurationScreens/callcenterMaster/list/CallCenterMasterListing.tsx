@@ -40,7 +40,6 @@ type Props = {
 }
 
 const CallCenterMasterListing = ({ columns, rows, setShowDropdown }: Props) => {
-
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
@@ -70,7 +69,7 @@ const CallCenterMasterListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Call Center </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_CALL_CENTER_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_CALL_CENTER_ADD) && (
                     <button
                         onClick={() =>
                             navigate('/configurations/callcenter-master/add')
@@ -80,7 +79,7 @@ const CallCenterMasterListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -95,8 +94,8 @@ const CallCenterMasterListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

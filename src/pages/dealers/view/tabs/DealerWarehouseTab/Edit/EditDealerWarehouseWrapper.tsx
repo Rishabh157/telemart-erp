@@ -160,15 +160,12 @@ const EditDealerWarehouseWrapper = () => {
     const navigate = useNavigate()
     const [updateDealerWarehouse] = useUpdateDealerWarehouseMutation()
 
-   
     const { country } = useCountries()
     useEffect(() => {
         if (country) {
             dispatch(setAllCountry(country))
         }
     }, [country, dispatch])
-
-
 
     // From Initial Values
     const initialValues: FormInitialValues = {

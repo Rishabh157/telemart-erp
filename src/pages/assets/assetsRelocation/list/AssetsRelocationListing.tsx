@@ -43,7 +43,9 @@ const AssetsRelocationListing = () => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>Assets Relocation</ATMPageHeading>
-                 {isAuthorized(UserModuleNameTypes.ACTION_ASSETS_RELOCATION_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_ASSETS_RELOCATION_ADD
+                ) && (
                     <button
                         onClick={() => navigate('add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
@@ -51,7 +53,7 @@ const AssetsRelocationListing = () => {
                         {' '}
                         + Add{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

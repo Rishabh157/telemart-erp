@@ -76,17 +76,15 @@ const AddItemWrapper = (props: Props) => {
     }
 
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return <AddItem formikProps={formikProps} />
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return <AddItem formikProps={formikProps} />
+            }}
+        </Formik>
     )
 }
 

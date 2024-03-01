@@ -6,7 +6,7 @@
             "actionId": "ACTION_SALE_ORDER",
             "actionUrl": "",
             "actionName": "LIST",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": [
                 {
@@ -65,7 +65,7 @@
             "actionId": "ACTION_SALE_ORDER_ADD",
             "actionUrl": "",
             "actionName": "ADD",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -73,7 +73,7 @@
             "actionId": "ACTION_SALE_ORDER_EDIT",
             "actionUrl": "",
             "actionName": "EDIT",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -81,7 +81,7 @@
             "actionId": "ACTION_SALE_ORDER_DELETE",
             "actionUrl": "",
             "actionName": "DELETE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         }

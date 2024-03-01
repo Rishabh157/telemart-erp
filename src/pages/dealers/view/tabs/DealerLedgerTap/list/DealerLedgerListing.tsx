@@ -97,21 +97,23 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_CREDIT_AMOUNT_ADD) &&
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_CREDIT_AMOUNT_ADD
+                    ) && (
                         <button
                             onClick={() => {
                                 setIsOpenModel(true)
-                                setOpenModel(
-                                    NoteType.DEALER_AMOUNT_CREDITED
-                                )
+                                setOpenModel(NoteType.DEALER_AMOUNT_CREDITED)
                             }}
                             className="bg-primary-main text-white rounded py-1 px-3"
                         >
                             + Cr. Amount
                         </button>
-                    }
+                    )}
 
-                    {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_CREDIT_NOTE_ADD) &&
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_CREDIT_NOTE_ADD
+                    ) && (
                         <button
                             onClick={() => {
                                 setIsOpenModel(true)
@@ -121,8 +123,10 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                         >
                             + Cr. Note
                         </button>
-                    }
-                    {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_DEBIT_NOTE_ADD) &&
+                    )}
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_DEBIT_NOTE_ADD
+                    ) && (
                         <button
                             onClick={() => {
                                 setIsOpenModel(true)
@@ -132,7 +136,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                         >
                             + Db. Note
                         </button>
-                    }
+                    )}
                 </div>
             </div>
 

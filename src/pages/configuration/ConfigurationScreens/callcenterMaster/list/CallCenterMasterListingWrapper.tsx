@@ -17,7 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CallCenterMasterListResponse } from 'src/models/CallCenterMaster.model'
 
-
 import {
     setIsTableLoading,
     setItems,
@@ -47,7 +46,6 @@ const CallCenterMasterListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
- 
 
     const columns: columnTypes[] = [
         {
@@ -67,9 +65,12 @@ const CallCenterMasterListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                 
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CALL_CENTER_ONE_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CALL_CENTER_ONE_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_CALL_CENTER_ONE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_CALL_CENTER_ONE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -145,13 +146,11 @@ const CallCenterMasterListingWrapper = () => {
     }
     return (
         <>
-            
-                <CallCenterMasterListing
-               columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <CallCenterMasterListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }
