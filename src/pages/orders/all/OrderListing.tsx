@@ -123,7 +123,7 @@ const OrderListing = ({
 
     const [filterBy, setFilterBy] = useState<any>([])
     useEffect(() => {
-        console.log('orderStatus', orderStatus, 'currentStatus', currentStatus)
+        // console.log('orderStatus', orderStatus, 'currentStatus', currentStatus)
         let filter: any = []
         if (!orderStatus) {
             filter = [

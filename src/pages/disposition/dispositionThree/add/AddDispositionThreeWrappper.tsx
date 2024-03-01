@@ -7,11 +7,8 @@ import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
-import { useGetAlldispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
-import { setAllItems as setAllDispositionTwo } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
-import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 import AddDispositionThree from './AddDispositionThree'
 import { useAdddispositionThreeMutation } from 'src/services/configurations/DispositionThreeServices'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -39,24 +36,9 @@ const AddDispositionThreeWrappper = () => {
         (state: RootState) => state.dispositionOne
     )
 
-    const { allItems: dispositionTwo }: any = useSelector(
-        (state: RootState) => state?.dispositionTwo
-    )
-
     const [adddispositionThree] = useAdddispositionThreeMutation()
 
-    const {
-        isLoading: isDTLoading,
-        isFetching: isDTFetching,
-        data: DtData,
-    } = useGetAlldispositionTwoQuery('')
-
-    useEffect(() => {
-        if (!isDTLoading && !isDTFetching) {
-            dispatch(setAllDispositionTwo(DtData?.data || []))
-        }
-    }, [isDTLoading, isDTFetching, DtData, dispatch])
-
+    // Get All Disposition One
     const {
         isLoading: isDOLoading,
         isFetching: isDOFetching,
@@ -127,15 +109,6 @@ const AddDispositionThreeWrappper = () => {
                 return {
                     label: dispositionOne.dispositionName,
                     value: dispositionOne._id,
-                }
-            }
-        ),
-
-        DispositionTwoOptions: dispositionTwo?.map(
-            (dispositionTwo: DispositionTwoListResponse) => {
-                return {
-                    label: dispositionTwo.dispositionName,
-                    value: dispositionTwo._id,
                 }
             }
         ),
