@@ -40,7 +40,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import AuthenticationHOC from 'src/AuthenticationHOC'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 // Dispatching imports
@@ -118,12 +117,11 @@ const OrderListing = ({
         useState<boolean>(false)
     const orderState: any = useSelector((state: RootState) => state.order)
 
-
     const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
 
     const [filterBy, setFilterBy] = useState<any>([])
     useEffect(() => {
-        // console.log('orderStatus', orderStatus, 'currentStatus', currentStatus)
+        console.log('orderStatus', orderStatus, 'currentStatus', currentStatus)
         let filter: any = []
         if (!orderStatus) {
             filter = [
@@ -141,6 +139,20 @@ const OrderListing = ({
                     {
                         fieldName: 'companyId',
                         value: userData?.companyId,
+                    },
+                ]
+                setFilterBy(filter)
+                return
+            case 'inquiry':
+                console.log("herr")
+                filter = [
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId,
+                    },
+                    {
+                        fieldName: 'orderNumber',
+                        value: null,
                     },
                 ]
                 setFilterBy(filter)
@@ -604,10 +616,11 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${row?.approved
-                                            ? 'Disapprove this order'
-                                            : 'Approval this order'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row?.approved
+                                                ? 'Disapprove this order'
+                                                : 'Approval this order'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -647,7 +660,6 @@ const OrderListing = ({
                     }}
                     children={
                         <>
-
                             <button
                                 onClick={() => {
                                     navigate(`/orders/view/${row?._id}`)
@@ -1015,7 +1027,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                    ''
+                                                        ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)

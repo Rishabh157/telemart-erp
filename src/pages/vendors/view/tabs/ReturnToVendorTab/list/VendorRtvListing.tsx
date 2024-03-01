@@ -62,26 +62,7 @@ const VendorRtvListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             {/* <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Return To Vendor </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={
-                        isDealerPath
-                            ? UserModuleNameTypes.dealer
-                            : UserModuleNameTypes.saleOrder
-                    }
-                    actionName={
-                        isDealerPath
-                            ? UserModuleAddActionTypes.dealerSalesOrderAdd
-                            : UserModuleActionTypes.Add
-                    }
-                    component={
-                        <button
-                            onClick={() => navigate('/return-to-vendor/add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Retrun To Vendor
-                        </button>
-                    }
-                />
+               
             </div> */}
 
             <div
