@@ -171,6 +171,8 @@ const EditInitialCallThree = ({
                                     required
                                     label="Initial Call Name"
                                     placeholder="Name"
+                                    labelClass="text-slate-700 text-sm font-medium mt-1"
+                                    className="mt-1 rounded"
                                     onChange={(e) =>
                                         handleSetFieldValue(
                                             'initialCallName',
@@ -184,6 +186,8 @@ const EditInitialCallThree = ({
                                     required
                                     value={values.initialCallOneId}
                                     label="Initial Call One"
+                                    labelClass="text-slate-700 text-sm font-medium"
+                                    componentClass="mt-4 rounded"
                                     onChange={(value) => {
                                         handleSetFieldValue(
                                             'initialCallOneId',

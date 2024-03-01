@@ -9,6 +9,7 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { complaintTypeOptions } from 'src/utils/constants/customeTypes'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -31,20 +32,7 @@ const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
-    const callTypeOptions = [
-        {
-            label: 'Complaint',
-            value: 'COMPLAINT',
-        },
-        {
-            label: 'Inquiry',
-            value: 'INQUIRY',
-        },
-        {
-            label: 'feddback',
-            value: 'FEEDBACK',
-        },
-    ]
+
     return (
         <>
             <div className="">
@@ -89,7 +77,7 @@ const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                         label="Call Type"
                                         componentClass="mt-2"
                                         value={values.callType}
-                                        options={callTypeOptions}
+                                        options={complaintTypeOptions()}
                                         onChange={(newValue: any) => {
                                             handleSetFieldValue(
                                                 'callType',
@@ -103,7 +91,9 @@ const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                     name="initialCallName"
                                     value={values.initialCallName}
                                     placeholder="Name"
-                                    label="Initial Call  name"
+                                    label="Initial Call Name"
+                                    labelClass="text-slate-700 text-sm font-medium mt-1"
+                                    className="mt-1 rounded"
                                     onChange={(e) =>
                                         handleSetFieldValue(
                                             'initialCallName',

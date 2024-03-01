@@ -207,11 +207,15 @@ const CallerDeliveryAddress = ({
     }
 
     const handleAutoFillShippingAddress = (values: FormInitialValues) => {
-        const addressLabels = `${values.stateLabel ? values.stateLabel + '\n' : ''
-            }${values.districtLabel ? values.districtLabel + '\n' : ''}${values.tehsilLabel ? values.tehsilLabel + '\n' : ''
-            }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${values.areaLabel ? values.areaLabel + '\n' : ''
-            }${values.houseNumber ? values.houseNumber + '\n' : ''}${values.streetNumber ? values.streetNumber + '\n' : ''
-            }${values.landmark ? values.landmark + '\n' : ''}`
+        const addressLabels = `${
+            values.stateLabel ? values.stateLabel + '\n' : ''
+        }${values.districtLabel ? values.districtLabel + '\n' : ''}${
+            values.tehsilLabel ? values.tehsilLabel + '\n' : ''
+        }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${
+            values.areaLabel ? values.areaLabel + '\n' : ''
+        }${values.houseNumber ? values.houseNumber + '\n' : ''}${
+            values.streetNumber ? values.streetNumber + '\n' : ''
+        }${values.landmark ? values.landmark + '\n' : ''}`
         return addressLabels
     }
 
@@ -323,6 +327,10 @@ const CallerDeliveryAddress = ({
                 break
         }
     }
+
+    useEffect(() => {
+        handleEndTime(values?.preffered_delivery_start_time)
+    }, [values?.preffered_delivery_start_time])
 
     return (
         <>
@@ -640,7 +648,7 @@ const CallerDeliveryAddress = ({
                         size="xxs"
                         labelSize="xxs"
                         placeholder="enter house/flat/shop/office no."
-                        labelClass='text-slate-700 text-sm font-medium mt-2'
+                        labelClass="text-slate-700 text-sm font-medium mt-2"
                         labelDirection="horizontal"
                         name="houseNumber"
                         value={values.houseNumber || ''}
@@ -659,7 +667,7 @@ const CallerDeliveryAddress = ({
                         labelSize="xxs"
                         labelDirection="horizontal"
                         placeholder="enter street/sector/building/appartment"
-                        labelClass='text-slate-700 text-sm font-medium mt-1'
+                        labelClass="text-slate-700 text-sm font-medium mt-1"
                         name="streetNumber"
                         value={values.streetNumber || ''}
                         onChange={(e) => {
@@ -676,7 +684,7 @@ const CallerDeliveryAddress = ({
                         size="xxs"
                         labelSize="xxs"
                         placeholder="enter landmark"
-                        labelClass='text-slate-700 text-sm font-medium mt-2'
+                        labelClass="text-slate-700 text-sm font-medium mt-2"
                         labelDirection="horizontal"
                         name="landmark"
                         value={values.landmark}
@@ -694,7 +702,7 @@ const CallerDeliveryAddress = ({
                         label="Alternate Mobile No"
                         labelSize="xxs"
                         placeholder="enter alternate mobile number"
-                        labelClass='text-slate-700 text-sm font-medium mt-2'
+                        labelClass="text-slate-700 text-sm font-medium mt-2"
                         value={values.alternateNo}
                         maxLength={10}
                         size="xxs"
@@ -716,7 +724,7 @@ const CallerDeliveryAddress = ({
                         size="xxs"
                         labelSize="xxs"
                         labelDirection="horizontal"
-                        labelClass='text-slate-700 text-sm font-medium mt-1'
+                        labelClass="text-slate-700 text-sm font-medium mt-1"
                         name="whatsappNo"
                         maxLength={10}
                         // isSubmitting
