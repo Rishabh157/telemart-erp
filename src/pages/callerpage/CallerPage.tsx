@@ -269,7 +269,7 @@ const CallerPage: React.FC<Props> = ({
                         labelClass="text-xs font-medium"
                         label="Disposition Level 1"
                         componentClass="mt-2"
-                        selectLabel="select disposition level 1"
+                        selectLabel="disposition level 1"
                         name="dispositionLevelTwoId"
                         value={values.dispositionLevelTwoId || ''}
                         // isSubmitting
@@ -291,7 +291,7 @@ const CallerPage: React.FC<Props> = ({
                         labelClass="text-xs font-medium"
                         label="Disposition Level 2"
                         componentClass="mt-2"
-                        selectLabel="select disposition level 2"
+                        selectLabel="disposition level 2"
                         name="dispositionLevelThreeId"
                         value={values.dispositionLevelThreeId || ''}
                         // isSubmitting
@@ -315,7 +315,7 @@ const CallerPage: React.FC<Props> = ({
             </div>
 
             {/* TABS */}
-            <div className="flex gap-x-4 mt-2">
+            <div className="flex gap-x-4 mt-2 mb-1">
                 <div
                     className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.history
                         ? 'bg-[#87527c] text-white'
@@ -323,7 +323,7 @@ const CallerPage: React.FC<Props> = ({
                         }`}
                     onClick={() => setActiveTab(TabTypes.history)}
                 >
-                    <div className=" text-xs mr-2 mt-1 ">
+                    <div className=" text-xs mr-2">
                         <IoReorderFour />
                     </div>
                     <div className="text-xs">History</div>
@@ -335,7 +335,7 @@ const CallerPage: React.FC<Props> = ({
                         }`}
                     onClick={() => setActiveTab(TabTypes.order)}
                 >
-                    <div className=" text-xs mr-2 mt-1 ">
+                    <div className=" text-xs mr-2">
                         <IoReorderFour />
                     </div>
                     <div className="text-xs">Order</div>
@@ -347,7 +347,7 @@ const CallerPage: React.FC<Props> = ({
                         }`}
                     onClick={() => setActiveTab(TabTypes.complaint)}
                 >
-                    <div className=" text-xs mr-2 mt-1 ">
+                    <div className=" text-xs mr-2">
                         <IoReorderFour />
                     </div>
                     <div className="text-xs">Complain</div>

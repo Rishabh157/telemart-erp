@@ -165,6 +165,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 extraClasses="mt-2"
                                 required
                                 label="Facebook"
+                                inputClasses='h-3 w-3'
                                 labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
                                 checked={isFacebookId}
                                 onChange={(e) => setFacebookId(e)}
@@ -197,6 +198,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 extraClasses="mt-2"
                                 required
                                 label="Instagram"
+                                inputClasses='h-3 w-3'
                                 labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
                                 checked={isInstagramId}
                                 onChange={(e) => {
