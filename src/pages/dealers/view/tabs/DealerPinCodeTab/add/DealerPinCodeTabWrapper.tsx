@@ -53,8 +53,6 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         isFetching: districtIsFetching,
     } = useGetAllDistrictQuery('')
 
-
-
     useEffect(() => {
         if (!districtIsLoading && !districtIsFetching) {
             setAllDistricts(districtData?.data)

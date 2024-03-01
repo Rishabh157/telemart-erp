@@ -95,23 +95,21 @@ const AddCbBarcodeWrapper = (props: Props) => {
     })
 
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddCbBarcode
-                            formikProps={formikProps}
-                            apiStatus={apiStatus}
-                            cartonBoxOption={cartonBoxOption}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddCbBarcode
+                        formikProps={formikProps}
+                        apiStatus={apiStatus}
+                        cartonBoxOption={cartonBoxOption}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

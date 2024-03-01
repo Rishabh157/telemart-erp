@@ -166,23 +166,21 @@ const AddWebsiteTagsWrapper = (props: Props) => {
     }
 
     return (
-      
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddWebsiteTag
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
-                        />
-                    )
-                }}
-            </Formik>
-      
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddWebsiteTag
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        dropdownOptions={dropdownOptions}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

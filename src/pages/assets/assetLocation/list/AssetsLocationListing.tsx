@@ -65,7 +65,9 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>Assets Location</ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_ASSETS_LOCATION_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_ASSETS_LOCATION_ADD
+                ) && (
                     <button
                         onClick={() => navigate('add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
@@ -73,8 +75,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add{' '}
                     </button>
-                }
-
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -89,8 +90,8 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

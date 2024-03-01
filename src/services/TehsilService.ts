@@ -115,5 +115,5 @@ export const {
     useDeleteTehsilMutation,
     useGetAllTehsilQuery,
     useGetAllTehsilUnauthQuery,
-    useGetAllTehsilByDistrictQuery
+    useGetAllTehsilByDistrictQuery,
 } = tehsilApi

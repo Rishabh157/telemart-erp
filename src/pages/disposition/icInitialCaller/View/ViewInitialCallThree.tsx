@@ -79,7 +79,7 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
                                 <label className="w-60 font-medium text-l">
                                     Email Type:
                                 </label>
-                                <span className='capitalize'>
+                                <span className="capitalize">
                                     {values?.emailType?.replaceAll('_', ' ')}
                                 </span>
                             </div>

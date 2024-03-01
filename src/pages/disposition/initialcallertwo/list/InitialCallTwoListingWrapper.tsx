@@ -20,7 +20,6 @@ import {
     useGetinitialCallerTwoQuery,
 } from 'src/services/configurations/InitialCallerTwoServices'
 
-
 import { Chip } from '@mui/material'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'

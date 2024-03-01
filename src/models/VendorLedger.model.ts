@@ -49,4 +49,3 @@ export type UpdateVendorLedger = {
     }
     id: string
 }
-

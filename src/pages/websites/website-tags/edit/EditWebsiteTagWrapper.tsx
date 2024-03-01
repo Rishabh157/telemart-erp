@@ -186,24 +186,22 @@ const EditWebsiteTagWrapper = (props: Props) => {
     }
 
     return (
-      
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <EditWebsiteTag
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
-                        />
-                    )
-                }}
-            </Formik>
-      
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditWebsiteTag
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        dropdownOptions={dropdownOptions}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

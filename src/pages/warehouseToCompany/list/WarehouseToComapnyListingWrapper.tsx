@@ -120,8 +120,8 @@ const WarehouseToComapnyListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -159,8 +159,8 @@ const WarehouseToComapnyListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -353,8 +353,12 @@ const WarehouseToComapnyListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_EDIT)}
-                        isDelete={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_DELETE)}
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_EDIT
+                        )}
+                        isDelete={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_DELETE
+                        )}
                         handleEditActionButton={() => {
                             navigate(`/warehouse-to-company/edit/${row?._id}`)
                         }}
@@ -392,7 +396,6 @@ const WarehouseToComapnyListingWrapper = () => {
     const [updateWarehouseToComapny] =
         useUpdateWarehouseToComapnyApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-
 
     const { data, isFetching, isLoading } =
         useGetPaginationWarehouseToComapnyByGroupQuery({

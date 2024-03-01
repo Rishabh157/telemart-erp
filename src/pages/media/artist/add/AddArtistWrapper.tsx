@@ -19,7 +19,6 @@ import AddArtist from './AddArtist'
 import { showToast } from 'src/utils'
 import { useAddArtistMutation } from 'src/services/media/ArtistServices'
 
-
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'

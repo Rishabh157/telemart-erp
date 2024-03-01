@@ -16,9 +16,7 @@ import { boolean, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import {
-    useAddNewUserMutation,
-} from 'src/services/UserServices'
+import { useAddNewUserMutation } from 'src/services/UserServices'
 import { showToast } from 'src/utils'
 import AddUser from './AddUser'
 

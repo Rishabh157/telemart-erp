@@ -67,17 +67,17 @@ const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Product Groups </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_GROUP_ADD) &&
-                        <button
-                            onClick={() =>
-                                navigate('/configurations/product-group/add')
-                            }
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            {' '}
-                            + Add{' '}
-                        </button>
-                    }
+                {isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_GROUP_ADD) && (
+                    <button
+                        onClick={() =>
+                            navigate('/configurations/product-group/add')
+                        }
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        {' '}
+                        + Add{' '}
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

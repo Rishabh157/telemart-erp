@@ -98,9 +98,15 @@ const VendorsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isView={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW)}
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_VENDOR_DELETE)}
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

@@ -66,7 +66,9 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Tape Management </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_ADD
+                ) && (
                     <button
                         type="button"
                         onClick={() => navigate('add')}
@@ -74,7 +76,7 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                     >
                         + Add
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -91,7 +93,7 @@ const TapeManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                // isFilter
+                    // isFilter
                 />
 
                 {/* Table */}

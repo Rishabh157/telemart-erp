@@ -24,7 +24,7 @@ const ChangePassword = () => {
     const [errorInitiate, setErrorInitiate] = useState(false)
     const [apiError, setApiError] = useState('')
     const [changePassWord, changePasswordInfo] = useChangePasswordMutation()
-    const dispatch =useDispatch()
+    const dispatch = useDispatch()
     const handleClick = () => {
         if (currentPass && newPassword) {
             changePassWord({
@@ -35,14 +35,18 @@ const ChangePassword = () => {
                 .then((res) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
-                            showToast('success', 'Password Changed successfully')
+                            showToast(
+                                'success',
+                                'Password Changed successfully'
+                            )
                             dispatch(setAccessToken(res?.data?.data?.token))
                             dispatch(
-                                setRefreshToken(
-                                    res?.data?.data?.refreshToken
-                                )
+                                setRefreshToken(res?.data?.data?.refreshToken)
                             )
-                            localStorage.setItem('authToken', res?.data?.data.token)
+                            localStorage.setItem(
+                                'authToken',
+                                res?.data?.data.token
+                            )
                             localStorage.setItem(
                                 'refreshToken',
                                 res?.data?.data.refreshToken

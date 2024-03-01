@@ -29,7 +29,6 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
-
 const tabsData = [
     {
         label: 'General Information',
@@ -99,10 +98,11 @@ const ViewVendor = () => {
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-
-    const allowedTabs = tabsData?.filter((nav) => {
-        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
-    })?.map((tab) => tab)
+    const allowedTabs = tabsData
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
     const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
         limit: 100,

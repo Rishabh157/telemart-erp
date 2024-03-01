@@ -23,7 +23,9 @@ import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Redux --|
 import {
-    setRowsPerPage, setPage, setSearchValue,
+    setRowsPerPage,
+    setPage,
+    setSearchValue,
 } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
@@ -62,15 +64,15 @@ const WarehouseListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_ADD) &&
-                <button
-                    onClick={() => navigate(`${AddpathName}`)}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    {' '}
-                    + Add Warehouse{' '}
-                </button>
-}
+                {isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_ADD) && (
+                    <button
+                        onClick={() => navigate(`${AddpathName}`)}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        {' '}
+                        + Add Warehouse{' '}
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -85,8 +87,8 @@ const WarehouseListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -115,7 +117,6 @@ const WarehouseListing = ({
                     />
                 </div>
             </div>
-
         </div>
     )
 }

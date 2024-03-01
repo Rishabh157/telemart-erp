@@ -7,7 +7,7 @@
             "actionId": "ACTION_WAREHOUSE_TRANSFER_VIEW",
             "actionUrl": "",
             "actionName": "VIEW",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         }

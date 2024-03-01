@@ -114,9 +114,12 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_DELETE)}
-
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_DELETE
+                    )}
                     handleEditActionButton={() => {
                         navigate(
                             `/dealers/${dealerId}/warehouse/${currentId}`,

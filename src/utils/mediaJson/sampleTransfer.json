@@ -6,7 +6,7 @@
             "actionId": "ACTION_WAREHOUSE_TO_SAMPLE_LIST",
             "actionUrl": "",
             "actionName": "LIST",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": [
                 {
@@ -80,7 +80,7 @@
             "actionId": "ACTION_WAREHOUSE_TO_SAMPLE_ADD",
             "actionUrl": "",
             "actionName": "ADD",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -88,7 +88,7 @@
             "actionId": "ACTION_WAREHOUSE_TO_SAMPLE_EDIT",
             "actionUrl": "",
             "actionName": "EDIT",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -96,7 +96,7 @@
             "actionId": "ACTION_WAREHOUSE_TO_SAMPLE_DELETE",
             "actionUrl": "",
             "actionName": "DELETE",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         }

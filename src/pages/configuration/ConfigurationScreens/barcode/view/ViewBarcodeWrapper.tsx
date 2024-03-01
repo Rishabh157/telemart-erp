@@ -21,11 +21,7 @@ type Props = {}
 const ViewBarcodeWrapper = (props: Props) => {
     const params = useParams()
     const cartonBoxCode = params.cartonboxcode
-    return (
-        
-            <ViewBarcode cartonBoxCode={cartonBoxCode || ''} />
-       
-    )
+    return <ViewBarcode cartonBoxCode={cartonBoxCode || ''} />
 }
 
 export default ViewBarcodeWrapper

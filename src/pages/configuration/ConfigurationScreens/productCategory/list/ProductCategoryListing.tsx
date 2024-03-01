@@ -70,17 +70,19 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Product Categories </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_ADD) &&
-                        <button
-                            onClick={() =>
-                                navigate('/configurations/product-category/add')
-                            }
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            {' '}
-                            + Add{' '}
-                        </button>
-                    }
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_ADD
+                ) && (
+                    <button
+                        onClick={() =>
+                            navigate('/configurations/product-category/add')
+                        }
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        {' '}
+                        + Add{' '}
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

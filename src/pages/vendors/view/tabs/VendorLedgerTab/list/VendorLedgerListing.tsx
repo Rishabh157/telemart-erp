@@ -98,7 +98,9 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                     </div>
                 </div>
                 <div className="flex gap-3">
-                    {isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_LEDGER_ADD) &&
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_LEDGER_ADD
+                    ) && (
                         <button
                             onClick={() => {
                                 setIsOpenModel(true)
@@ -108,8 +110,10 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                         >
                             + Cr. Note
                         </button>
-                    }
-                    {isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_DEBIT_ADD) &&
+                    )}
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_DEBIT_ADD
+                    ) && (
                         <button
                             onClick={() => {
                                 setIsOpenModel(true)
@@ -119,8 +123,7 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                         >
                             + Db. Note
                         </button>
-                    }
-
+                    )}
                 </div>
             </div>
 

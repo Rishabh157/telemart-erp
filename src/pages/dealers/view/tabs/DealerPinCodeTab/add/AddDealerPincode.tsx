@@ -33,7 +33,7 @@ export type DropdownOptions = {
 
 const AddDealerPincode = ({
     formikProps,
-   
+
     DistrictOptions,
     apiStatus,
 }: Props) => {

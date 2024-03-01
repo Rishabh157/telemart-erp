@@ -26,9 +26,7 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsiteTagListing from './WebsiteTagListing'
 
 // |-- Redux --|
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
@@ -176,13 +174,11 @@ const WebsiteTagListingWrapper = () => {
 
     return (
         <>
-          
-                <WebsiteTagListing
-                  columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-          
+            <WebsiteTagListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

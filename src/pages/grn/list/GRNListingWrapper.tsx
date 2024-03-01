@@ -98,7 +98,7 @@ const GRNListingWrapper = () => {
     const grnState: any = useSelector((state: RootState) => state.grn)
     const { page, rowsPerPage, searchValue, items, filterValue } = grnState
     const { userData }: any = useSelector((state: RootState) => state.auth)
- 
+
     const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -142,10 +142,7 @@ const GRNListingWrapper = () => {
     return (
         <>
             <SideNavLayout>
-                <GRNListing
-                         columns={columns}
-                    rows={items}
-                />
+                <GRNListing columns={columns} rows={items} />
             </SideNavLayout>
         </>
     )

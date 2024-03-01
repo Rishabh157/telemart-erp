@@ -17,7 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { AttributesListResponse } from 'src/models/Attrbutes.model'
 
-
 import {
     setIsTableLoading,
     setItems,
@@ -144,13 +143,11 @@ const AttributesListingWrapper = () => {
     }
     return (
         <>
-            
-                <AttributesListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <AttributesListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

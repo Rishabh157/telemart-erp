@@ -16,7 +16,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import WebsiteBlogView from './WebsiteBlogView'
 import { useGetWebsiteBlogByIdQuery } from 'src/services/websites/WebsiteBlogServices'
 
-
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setSelectedWebsiteBlog } from 'src/redux/slices/website/websiteBlogSlice'
@@ -38,11 +37,7 @@ const WebsiteBlogViewWrapper = () => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-    return (
-
-        <WebsiteBlogView items={selectedItem} />
-
-    )
+    return <WebsiteBlogView items={selectedItem} />
 }
 
 export default WebsiteBlogViewWrapper

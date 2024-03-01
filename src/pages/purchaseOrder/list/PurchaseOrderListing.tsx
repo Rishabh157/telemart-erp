@@ -53,14 +53,16 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Purchase Order </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_PURCHASE_ORDER_ADD) &&
-                        <button
-                            onClick={() => navigate('/purchase-order/add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add PO{' '}
-                        </button>
-                    }
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_PURCHASE_ORDER_ADD
+                ) && (
+                    <button
+                        onClick={() => navigate('/purchase-order/add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add PO{' '}
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

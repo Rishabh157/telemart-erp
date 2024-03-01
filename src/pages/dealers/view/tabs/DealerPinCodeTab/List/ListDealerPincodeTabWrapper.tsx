@@ -90,8 +90,9 @@ const ListDealerPincodeTabWrapper = () => {
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                     }}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_PINCODE_DELETE)}
-
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_PINCODE_DELETE
+                    )}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
                             title: 'Delete Pincode',
@@ -99,10 +100,7 @@ const ListDealerPincodeTabWrapper = () => {
                             showCancelButton: true,
                             next: (res: any) => {
                                 return res.isConfirmed
-                                    ? handleDeletePincode(
-                                        row._id,
-                                        row.pincode
-                                    )
+                                    ? handleDeletePincode(row._id, row.pincode)
                                     : setShowDropdown(false)
                             },
                         })

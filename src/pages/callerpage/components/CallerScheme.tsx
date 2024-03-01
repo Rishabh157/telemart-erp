@@ -42,7 +42,7 @@ const CallerScheme = ({
                     quantity: prevSchemeDetails.quantity + 1,
                     totalAmount:
                         (prevSchemeDetails.quantity + 1) *
-                        prevSchemeDetails.price +
+                            prevSchemeDetails.price +
                         prevSchemeDetails.deliveryCharges,
                 }))
                 break
@@ -52,7 +52,7 @@ const CallerScheme = ({
                     quantity: prevSchemeDetails.quantity - 1,
                     totalAmount:
                         (prevSchemeDetails.quantity - 1) *
-                        prevSchemeDetails.price +
+                            prevSchemeDetails.price +
                         prevSchemeDetails.deliveryCharges,
                 }))
                 break
@@ -94,10 +94,10 @@ const CallerScheme = ({
                 <div className="col-span-3 px-2">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
-                            minHeight='25px'
+                            minHeight="25px"
                             size="xxs"
-                            fontSizePlaceHolder='14px'
-                            labelSize='xxs'
+                            fontSizePlaceHolder="14px"
+                            labelSize="xxs"
                             name="productGroupId"
                             selectLabel="select product"
                             value={values?.productGroupId || ''}
@@ -117,10 +117,10 @@ const CallerScheme = ({
                 <div className="col-span-3 px-2">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
-                            fontSizePlaceHolder='14px'
-                            minHeight='25px'
+                            fontSizePlaceHolder="14px"
+                            minHeight="25px"
                             size="xxs"
-                            labelSize='xxs'
+                            labelSize="xxs"
                             name="schemeId"
                             selectLabel="select scheme"
                             defaultValue=""
@@ -133,7 +133,7 @@ const CallerScheme = ({
                                     quantity: 1,
                                 }))
                             }}
-                        // isSubmitting
+                            // isSubmitting
                         />
                     </div>
                 </div>
@@ -190,10 +190,11 @@ const CallerScheme = ({
                                                     ? false
                                                     : true
                                             }
-                                            className={`w-[22px] h-[22px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full text-[15px]  ${schemeDetails.quantity > 1
-                                                ? 'text-[black]'
-                                                : 'text-[#c2c2c2]'
-                                                }`}
+                                            className={`w-[22px] h-[22px] bg-[#f9f9f9] border-[#c2c2c2] border-[1px] rounded-full text-[15px]  ${
+                                                schemeDetails.quantity > 1
+                                                    ? 'text-[black]'
+                                                    : 'text-[#c2c2c2]'
+                                            }`}
                                             type="button"
                                             onClick={(e) => {
                                                 e.preventDefault()

@@ -38,8 +38,6 @@ const CountryListingWrapper = () => {
         }
     }, [country, dispatch])
 
-
-
     return <CountryListing contries={contries} items={contries} />
 }
 

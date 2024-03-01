@@ -17,7 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CompanyBranchListResponse } from 'src/models/CompanyBranch.model'
 
-
 import {
     setIsTableLoading,
     setItems,
@@ -152,13 +151,11 @@ const CompanyBranchListingWrapper = () => {
 
     return (
         <>
-            
-                <CompanyBranch
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <CompanyBranch
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

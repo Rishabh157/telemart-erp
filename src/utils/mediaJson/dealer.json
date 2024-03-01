@@ -69,9 +69,7 @@
             "actionUrl": "",
             "actionName": "GENERAL_INFORMATION",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -79,9 +77,7 @@
             "actionUrl": "",
             "actionName": "DEALER_WAREHOUSE",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -89,10 +85,7 @@
             "actionUrl": "",
             "actionName": "DEALER_WAREHOUSE_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_WAREHOUSE"
-            ],
+            "parentGroup": ["VIEW", "DEALER_WAREHOUSE"],
             "fields": []
         },
         {
@@ -100,10 +93,7 @@
             "actionUrl": "",
             "actionName": "DEALER_WAREHOUSE_EDIT",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_WAREHOUSE"
-            ],
+            "parentGroup": ["VIEW", "DEALER_WAREHOUSE"],
             "fields": []
         },
         {
@@ -111,10 +101,7 @@
             "actionUrl": "",
             "actionName": "DEALER_WAREHOUSE_DELETE",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_WAREHOUSE"
-            ],
+            "parentGroup": ["VIEW", "DEALER_WAREHOUSE"],
             "fields": []
         },
         {
@@ -122,9 +109,7 @@
             "actionUrl": "",
             "actionName": "DEALER_SALE_ORDER",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -132,10 +117,7 @@
             "actionUrl": "",
             "actionName": "DEALER_SALE_ORDER_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_SALE_ORDER"
-            ],
+            "parentGroup": ["VIEW", "DEALER_SALE_ORDER"],
             "fields": []
         },
         {
@@ -143,9 +125,7 @@
             "actionUrl": "",
             "actionName": "DEALER_LEDGER",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -153,10 +133,7 @@
             "actionUrl": "",
             "actionName": "DEALER_LEDGER_CREDIT_AMOUNT_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_LEDGER"
-            ],
+            "parentGroup": ["VIEW", "DEALER_LEDGER"],
             "fields": []
         },
         {
@@ -164,10 +141,7 @@
             "actionUrl": "",
             "actionName": "DEALER_LEDGER_CREDIT_NOTE_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_LEDGER"
-            ],
+            "parentGroup": ["VIEW", "DEALER_LEDGER"],
             "fields": []
         },
         {
@@ -175,10 +149,7 @@
             "actionUrl": "",
             "actionName": "DEALER_LEDGER_DEBIT_NOTE_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_LEDGER"
-            ],
+            "parentGroup": ["VIEW", "DEALER_LEDGER"],
             "fields": []
         },
         {
@@ -186,9 +157,7 @@
             "actionUrl": "",
             "actionName": "DEALER_ORDER_LEDGER",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -196,9 +165,7 @@
             "actionUrl": "",
             "actionName": "DEALER_ACTIVITY",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -206,9 +173,7 @@
             "actionUrl": "",
             "actionName": "DEALER_PINCODE",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -216,10 +181,7 @@
             "actionUrl": "",
             "actionName": "DEALER_PINCODE_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_PINCODE"
-            ],
+            "parentGroup": ["VIEW", "DEALER_PINCODE"],
             "fields": []
         },
         {
@@ -227,10 +189,7 @@
             "actionUrl": "",
             "actionName": "DEALER_PINCODE_ADD_DELETE",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_PINCODE"
-            ],
+            "parentGroup": ["VIEW", "DEALER_PINCODE"],
             "fields": []
         },
         {
@@ -238,9 +197,7 @@
             "actionUrl": "",
             "actionName": "DEALER_SCHEME",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -248,10 +205,7 @@
             "actionUrl": "",
             "actionName": "DEALER_SCHEME_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_SCHEME"
-            ],
+            "parentGroup": ["VIEW", "DEALER_SCHEME"],
             "fields": []
         },
         {
@@ -259,10 +213,7 @@
             "actionUrl": "",
             "actionName": "DEALER_SCHEME_EDIT",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "DEALER_SCHEME"
-            ],
+            "parentGroup": ["VIEW", "DEALER_SCHEME"],
             "fields": []
         },
         {

@@ -1,84 +1,75 @@
 {
-  "moduleId": "NAV_COMPETITOR",
-  "moduleName": "NAV_COMPETITOR",
-  "parentGroup": [
-    "NAV_MEDIA"
-  ],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_COMPETITOR_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_COMPETITOR",
+    "moduleName": "NAV_COMPETITOR",
+    "parentGroup": ["NAV_MEDIA"],
+    "moduleAction": [
         {
-          "fieldId": "COMPETITOR_LIST_DATE",
-          "fieldName": "DATE",
-          "fieldValue": "date"
+            "actionId": "ACTION_COMPETITOR_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "COMPETITOR_LIST_DATE",
+                    "fieldName": "DATE",
+                    "fieldValue": "date"
+                },
+                {
+                    "fieldId": "COMPETITOR_LIST_START_TIME",
+                    "fieldName": "START TIME",
+                    "fieldValue": "startTime"
+                },
+                {
+                    "fieldId": "COMPETITOR_LIST_START_END",
+                    "fieldName": "START END",
+                    "fieldValue": "endTime"
+                },
+                {
+                    "fieldId": "COMPETITOR_LIST_PRODUCT_NAME",
+                    "fieldName": "Product Name          ",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "COMPETITOR_LIST_MOBILE_NO",
+                    "fieldName": "MOBILE NO",
+                    "fieldValue": "mobileNumber"
+                },
+                {
+                    "fieldId": "COMPETITOR_LIST_PRICE_MRP",
+                    "fieldName": "PRICE MRP",
+                    "fieldValue": "schemePrice"
+                },
+                {
+                    "fieldId": "COMPETITOR_LIST_COMPETITOR_NAME",
+                    "fieldName": "COMPETITOR_NAME",
+                    "fieldValue": "competitorName"
+                }
+            ]
         },
         {
-          "fieldId": "COMPETITOR_LIST_START_TIME",
-          "fieldName": "START TIME",
-          "fieldValue": "startTime"
+            "actionId": "ACTION_COMPETITOR_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "COMPETITOR_LIST_START_END",
-          "fieldName": "START END",
-          "fieldValue": "endTime"
+            "actionId": "ACTION_COMPETITOR_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "COMPETITOR_LIST_PRODUCT_NAME",
-          "fieldName": "Product Name          ",
-          "fieldValue": "productName"
-        },
-        {
-          "fieldId": "COMPETITOR_LIST_MOBILE_NO",
-          "fieldName": "MOBILE NO",
-          "fieldValue": "mobileNumber"
-        },
-        {
-          "fieldId": "COMPETITOR_LIST_PRICE_MRP",
-          "fieldName": "PRICE MRP",
-          "fieldValue": "schemePrice"
+            "actionId": "ACTION_COMPETITOR_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-        ,
-        {
-          "fieldId": "COMPETITOR_LIST_COMPETITOR_NAME",
-          "fieldName": "COMPETITOR_NAME",
-          "fieldValue": "competitorName"
-        }
-      ]
-    },
-    {
-      "actionId": "ACTION_COMPETITOR_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_COMPETITOR_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_COMPETITOR_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

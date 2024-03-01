@@ -115,7 +115,7 @@ const EditUserWrapper = (props: Props) => {
         callCenterId: selectedItem?.callCenterId,
         floorManagerId: selectedItem?.floorManagerId,
         teamLeadId: selectedItem?.teamLeadId,
-        mySenior: selectedItem?.mySenior
+        mySenior: selectedItem?.mySenior,
     }
     const ref = useRef<any>(null)
     const getSeniorValid = (userRole: any, schema: any) => {
@@ -199,7 +199,7 @@ const EditUserWrapper = (props: Props) => {
                 callCenterId: values.callCenterId || null,
                 floorManagerId: values.floorManagerId || null,
                 teamLeadId: values.teamLeadId || null,
-                mySenior: values?.mySenior
+                mySenior: values?.mySenior,
             }
 
             if (values?.password) {

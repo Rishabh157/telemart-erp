@@ -54,7 +54,9 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Disposition Three </ATMPageHeading>
-                    {isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_THREE_ADD) &&
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_ADD
+                    ) && (
                         <button
                             type="button"
                             onClick={() => navigate('add')}
@@ -62,7 +64,7 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                         >
                             + Add
                         </button>
-                    }
+                    )}
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

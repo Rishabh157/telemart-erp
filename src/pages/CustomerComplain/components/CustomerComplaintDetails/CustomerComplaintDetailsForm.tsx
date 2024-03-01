@@ -35,7 +35,8 @@ const statusOption = [
         value: 'PENDING',
     },
     {
-        label: 'Closed', value: 'CLOSED',
+        label: 'Closed',
+        value: 'CLOSED',
     },
 ]
 const CustomerComplaintDetailsForm = ({

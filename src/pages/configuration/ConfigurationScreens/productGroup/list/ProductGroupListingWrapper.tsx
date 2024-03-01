@@ -192,13 +192,11 @@ const ProductGroupListingWrapper = () => {
 
     return (
         <>
-            
-                <ProductGroupListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <ProductGroupListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

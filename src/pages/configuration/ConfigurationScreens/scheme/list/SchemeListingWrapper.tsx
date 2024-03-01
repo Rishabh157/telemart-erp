@@ -17,7 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { SchemeListResponse } from 'src/models/scheme.model'
 
-
 import {
     useDeleteSchemeMutation,
     useGetAllSchemeQuery,
@@ -182,13 +181,11 @@ const SchemeListingWrapper = () => {
     }
 
     return (
-        
-            <SchemeListing
-                columns={columns}
-                rows={items || []}
-                setShowDropdown={setShowDropdown}
-            />
-       
+        <SchemeListing
+            columns={columns}
+            rows={items || []}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 

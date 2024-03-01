@@ -57,7 +57,9 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                 <div className="flex justify-between items-center h-[78px]  p-1">
                     <ATMPageHeading> Inventories </ATMPageHeading>
 
-                    {isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD) &&
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD
+                    ) && (
                         <button
                             type="button"
                             onClick={() => navigate('inward-inventory/add')}
@@ -65,7 +67,7 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                         >
                             + Inward Inventory
                         </button>
-                    }
+                    )}
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
@@ -82,7 +84,7 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                         onSearch={(newValue) => {
                             dispatch(setSearchValue(newValue))
                         }}
-                    //  isFilter
+                        //  isFilter
                     />
 
                     {/* Table */}

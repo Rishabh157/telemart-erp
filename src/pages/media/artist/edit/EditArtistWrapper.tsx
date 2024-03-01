@@ -23,7 +23,6 @@ import {
 } from 'src/services/media/ArtistServices'
 import { setSelectedArtist } from 'src/redux/slices/media/artist'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'

@@ -6,7 +6,7 @@
             "actionId": "ACTION_INVENTORY_FLOW",
             "actionUrl": "",
             "actionName": "LIST",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         }

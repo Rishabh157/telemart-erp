@@ -29,7 +29,7 @@ const initialState: AuthStateType = {
     deviceId: '',
     userData: null,
     formSubmitting: true,
-    permissions: null
+    permissions: null,
 }
 
 const authSlice: Slice<AuthStateType> = createSlice({
@@ -56,7 +56,7 @@ const authSlice: Slice<AuthStateType> = createSlice({
             state.customized = action.payload
         },
         setPermissions: (state, action: PayloadAction<null | []>) => {
-            state.permissions = action.payload;
+            state.permissions = action.payload
         },
     },
 })
@@ -68,6 +68,6 @@ export const {
     setUserData,
     setFormSubmitting,
     setFieldCustomized,
-    setPermissions
+    setPermissions,
 } = authSlice.actions
 export default authSlice.reducer

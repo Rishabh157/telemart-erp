@@ -162,7 +162,9 @@ const InquiryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isView={isAuthorized(UserModuleNameTypes.ACTION_NAV_INQUIRY_VIEW)}
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_NAV_INQUIRY_VIEW
+                    )}
                     handleViewActionButton={() => {
                         navigate(`/inquiry/view/${currentId}`)
                     }}
@@ -215,9 +217,9 @@ const InquiryListingWrapper = () => {
                         onSearch={(newValue) =>
                             dispatch(setSearchValue(newValue))
                         }
-                    // isFilter
-                    // isRefresh
-                    // onFilterDispatch={() => dispatch(setFilterValue([]))}
+                        // isFilter
+                        // isRefresh
+                        // onFilterDispatch={() => dispatch(setFilterValue([]))}
                     />
 
                     {/* Table */}

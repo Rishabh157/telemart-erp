@@ -63,7 +63,7 @@ const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Artist Management </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_ARTIST_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_ARTIST_ADD) && (
                     <button
                         type="button"
                         onClick={() => navigate('add')}
@@ -71,7 +71,7 @@ const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
                     >
                         + Add Artist
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -86,7 +86,7 @@ const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
+                    // isFilter
                 />
 
                 {/* Table */}

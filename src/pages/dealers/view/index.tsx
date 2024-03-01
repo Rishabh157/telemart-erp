@@ -31,8 +31,6 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
-
-
 const tabsData = [
     {
         label: 'General Information',
@@ -128,9 +126,11 @@ const ViewDealer = () => {
         navigate(`/dealers/${dealerId}/${activeTab}`)
     }, [dealerId])
 
-    const allowedTabs = tabsData?.filter((nav) => {
-        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
-    })?.map((tab) => tab)
+    const allowedTabs = tabsData
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
     const dealerState: any = useSelector((state: RootState) => state.dealer)
     const { page, rowsPerPage, items } = dealerState

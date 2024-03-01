@@ -42,7 +42,7 @@ const SideNavLayout = ({ children }: Props) => {
     const location = useLocation()
     const currentPath = `/${location.pathname?.split('/')[1]}`
     // const bgColorLocal = localStorage.getItem('themeColor')
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext)
     // const bgColor = bgColorLocal ? JSON.parse(bgColorLocal) : ''
     return (
         <div

@@ -144,7 +144,7 @@ const CustomerPage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                    singleSchemeData?.data?.deliveryCharges || 0,
+                        singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -252,9 +252,9 @@ const CustomerPage: React.FC<Props> = ({
                         componentClass="mt-2"
                         selectLabel="select disposition level 1"
                         size="xxs"
-                        labelSize='xxs'
-                        fontSizePlaceHolder='14px'
-                        minHeight='25px'
+                        labelSize="xxs"
+                        fontSizePlaceHolder="14px"
+                        minHeight="25px"
                         name="dispositionLevelTwoId"
                         value={values.dispositionLevelTwoId || ''}
                         // isSubmitting
@@ -274,9 +274,9 @@ const CustomerPage: React.FC<Props> = ({
                         componentClass="mt-2"
                         selectLabel="select disposition level 2"
                         size="xxs"
-                        labelSize='xxs'
-                        fontSizePlaceHolder='14px'
-                        minHeight='25px'
+                        labelSize="xxs"
+                        fontSizePlaceHolder="14px"
+                        minHeight="25px"
                         name="dispositionLevelThreeId"
                         value={values.dispositionLevelThreeId || ''}
                         // isSubmitting
@@ -305,7 +305,7 @@ const CustomerPage: React.FC<Props> = ({
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column}
                     rows={[]}
-                // rows={rows}
+                    // rows={rows}
                 />
             </div>
         </div>

@@ -54,10 +54,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_DETAILS",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "TAB_WAREHOUSE_DETAILS"
-            ],
+            "parentGroup": ["VIEW", "TAB_WAREHOUSE_DETAILS"],
             "fields": []
         },
         {
@@ -65,9 +62,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INVENTORIES",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -75,10 +70,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER"
-            ],
+            "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER"],
             "fields": []
         },
         {
@@ -86,10 +78,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "TAB_WAREHOUSE_INVENTORIES"
-            ],
+            "parentGroup": ["VIEW", "TAB_WAREHOUSE_INVENTORIES"],
             "fields": []
         },
         {

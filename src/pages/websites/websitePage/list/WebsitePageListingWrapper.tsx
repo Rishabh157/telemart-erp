@@ -26,9 +26,7 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsitePageListing from './WebsitePageListing'
 
 // |-- Redux --|
-import {
-    UserModuleNameTypes
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
@@ -157,7 +155,6 @@ const WebsitePageListingWrapper = () => {
         })
     }
     return (
-
         <>
             <WebsitePageListing
                 columns={columns}
@@ -165,7 +162,6 @@ const WebsitePageListingWrapper = () => {
                 setShowDropdown={setShowDropdown}
             />
         </>
-
     )
 }
 
