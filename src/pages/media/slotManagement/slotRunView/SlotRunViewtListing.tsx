@@ -11,7 +11,6 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
-// import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -68,19 +67,7 @@ const SlotRunViewtListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center py-1">
                 <ATMPageHeading> Slot Management </ATMPageHeading>
-                {/* <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.slotManagement}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
-                            type="button"
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Slot
-                        </button>
-                    }
-                /> */}
+             
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

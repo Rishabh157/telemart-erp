@@ -97,6 +97,14 @@
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
+        },
+        {
+            "actionId": "ACTION_ORDER_INQUIRY_TAB",
+            "actionUrl": "",
+            "actionName": "ACTION_ORDER_INQUIRY_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

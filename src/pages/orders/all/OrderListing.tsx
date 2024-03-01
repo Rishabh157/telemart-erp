@@ -40,7 +40,6 @@ import {
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import AuthenticationHOC from 'src/AuthenticationHOC'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 // Dispatching imports
@@ -57,7 +56,6 @@ import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFo
 import moment from 'moment'
 import { BiSearch } from 'react-icons/bi'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
-
 // Types
 type BarcodeListResponseType = {
     _id: string
@@ -89,7 +87,6 @@ const OrderListing = ({
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-
     // Dispatching State
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
@@ -122,7 +119,6 @@ const OrderListing = ({
 
     const [filterBy, setFilterBy] = useState<any>([])
     useEffect(() => {
-        // console.log('orderStatus', orderStatus, 'currentStatus', currentStatus)
         let filter: any = []
         if (!orderStatus) {
             filter = [
@@ -140,6 +136,19 @@ const OrderListing = ({
                     {
                         fieldName: 'companyId',
                         value: userData?.companyId,
+                    },
+                ]
+                setFilterBy(filter)
+                return
+            case 'inquiry':
+                filter = [
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId,
+                    },
+                    {
+                        fieldName: 'orderNumber',
+                        value: null,
                     },
                 ]
                 setFilterBy(filter)
@@ -202,6 +211,7 @@ const OrderListing = ({
             params: ['didNo', 'mobileNo'],
             page: page,
             filterBy: [...filterBy],
+            isOrderOrInquiry: orderStatus === 'inquiry' ? "inquiry" : orderStatus === 'fresh' ? "order" : "" ,
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,
