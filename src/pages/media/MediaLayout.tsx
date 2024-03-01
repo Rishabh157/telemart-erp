@@ -78,13 +78,13 @@ const mediaNavigation: NavItemType[] = [
         label: 'Inbound',
         icon: MdViewTimeline,
         path: 'caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
-        name: 'INBOUND',
+        name: UserModuleNameTypes.NAV_INBOUND,
     },
     {
         label: 'Customer Page',
         icon: MdViewTimeline,
         path: 'customer-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
-        name: 'INBOUND',
+        name: UserModuleNameTypes.NAV_CUSTOMER_PAGE,
     },
 ]
 
