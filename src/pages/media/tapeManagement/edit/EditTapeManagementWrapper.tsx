@@ -15,7 +15,7 @@ import { object, string, array } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
+
 import {
     useUpdateTapeMutation,
     useGetTapeByIdQuery,
@@ -281,7 +281,7 @@ const EditTapeManagementWrapper = () => {
         ],
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -299,7 +299,7 @@ const EditTapeManagementWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

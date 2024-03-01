@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,28 +14,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import MediaLayout from '../../MediaLayout'
-import ArtistListing from './ArtistListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ArtistListResponse } from 'src/models/Artist.model'
+
 import {
     useDeletegetArtistMutation,
     useGetPaginationArtistQuery,
 } from 'src/services/media/ArtistServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+import ArtistListing from './ArtistListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/artist'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ArtistListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -44,9 +42,7 @@ const ArtistListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const ArtistState: any = useSelector((state: RootState) => state.artist)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items } = ArtistState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
@@ -55,6 +51,8 @@ const ArtistListingWrapper = () => {
             field: 'artistName',
             headerName: 'Artist Name',
             flex: 'flex-[1_1_0%]',
+           
+            name: UserModuleNameTypes.ARTIST_LIST_ARTIST_NAME,
             renderCell: (row: ArtistListResponse) => (
                 <span> {row.artistName} </span>
             ),
@@ -66,9 +64,8 @@ const ArtistListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.artist}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ARTIST_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ARTIST_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -146,18 +143,13 @@ const ArtistListingWrapper = () => {
     }
     return (
         <>
-            <MediaLayout>
+            <>
                 <ArtistListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.artist,
-                        UserModuleActionTypes.List
-                    )}
+                       columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </MediaLayout>
+            </>
         </>
     )
 }

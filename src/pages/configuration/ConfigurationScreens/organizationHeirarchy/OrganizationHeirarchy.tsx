@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMMenu from 'src/components/UI/atoms/ATMMenu/ATMMenu'
-import ConfigurationLayout from '../../ConfigurationLayout'
+
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -80,7 +80,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const OrganisationHierarchy = () => {
     return (
-        <ConfigurationLayout>
+        
             <div className="px-4 h-full pt-3  ">
                 {/* Breadcrumbs */}
                 <div className="h-[30px]">
@@ -1416,7 +1416,7 @@ const OrganisationHierarchy = () => {
                     </Tree>
                 </div>
             </div>
-        </ConfigurationLayout>
+       
     )
 }
 

@@ -16,7 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import AsstesLayout from '../../AssetsLayout'
+
 import EditAsstesRequest from './EditAsstesRequest'
 import {
     useUpdateAssetsRequestMutation,
@@ -119,7 +119,7 @@ const EditAssetsRequestwrapper = (props: Props) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Updated successfully!')
-                        navigate('/assets/assets-management')
+                        navigate('/assets/assets-request')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -142,7 +142,7 @@ const EditAssetsRequestwrapper = (props: Props) => {
         ),
     }
     return (
-        <AsstesLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -159,7 +159,7 @@ const EditAssetsRequestwrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </AsstesLayout>
+        </>
     )
 }
 

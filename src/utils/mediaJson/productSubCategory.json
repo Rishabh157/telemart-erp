@@ -1,0 +1,66 @@
+{
+  "moduleId": "NAV_PRODUCT_SUB_CATEGORY",
+  "moduleName": "NAV_PRODUCT_SUB_CATEGORY",
+  "parentGroup": ["NAV_CONFIGURATION"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_PRODUCT_SUB_CATEGORY_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_CODE",
+          "fieldName": " Sub Category Code",
+          "fieldValue": "subCategoryCode"
+        },
+        {
+          "fieldId": "PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_NAME",
+          "fieldName": "Sub Category Name",
+          "fieldValue": "subCategoryName"
+        },
+        {
+          "fieldId": "PRODUCT_SUB_CATEGORY_LIST_PARENT_CATEGORY",
+          "fieldName": "Parent Category",
+          "fieldValue": "parentCategoryLabel"
+        },
+        {
+          "fieldId": "PRODUCT_SUB_CATEGORY_LIST_HSN_CODE",
+          "fieldName": "HSN Code",
+          "fieldValue": "hsnCode"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_PRODUCT_SUB_CATEGORY_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_PRODUCT_SUB_CATEGORY_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_PRODUCT_SUB_CATEGORY_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+    "moduleId": "NAV_VENDOR",
+    "moduleName": "NAV_VENDOR",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_VENDOR_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "VENDOR_LIST_VENDOR_CODE",
+                    "fieldName": "Vendor Code",
+                    "fieldValue": "vendorCode"
+                },
+                {
+                    "fieldId": "VENDOR_LIST_COMPANY_NAME",
+                    "fieldName": "Company Name",
+                    "fieldValue": "companyName"
+                },
+                {
+                    "fieldId": "VENDOR_LIST_COMPANY_TYPE",
+                    "fieldName": "Company Type",
+                    "fieldValue": "companyType"
+                },
+                {
+                    "fieldId": "VENDOR_LIST_DISTRICT",
+                    "fieldName": "District",
+                    "fieldValue": "registrationDistrictName"
+                },
+                {
+                    "fieldId": "VENDOR_LIST_STATE",
+                    "fieldName": "State",
+                    "fieldValue": "registrationStateName"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW",
+            "actionUrl": "",
+            "actionName": "VIEW",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW_GENERAL_INFORMATION",
+            "actionUrl": "",
+            "actionName": "GENERAL_INFORMATION",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW_PURCHASE_ORDER",
+            "actionUrl": "",
+            "actionName": "PURCHASE_ORDER",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW_PURCHASE_ORDER_ADD",
+            "actionUrl": "",
+            "actionName": "PURCHASE_ORDER_ADD",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW", "PURCHASE_ORDER"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW_RETURN_TO_VENDOR",
+            "actionUrl": "",
+            "actionName": "RETURN_TO_VENDOR",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW_VENDOR_LEDGER",
+            "actionUrl": "",
+            "actionName": "VENDOR_LEDGER",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW_VENDOR_LEDGER_ADD",
+            "actionUrl": "",
+            "actionName": "VENDOR_LEDGER_CREDIT_ADD",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW", "VENDOR_LEDGER"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW_VENDOR_DEBIT_ADD",
+            "actionUrl": "",
+            "actionName": "VENDOR_LEDGER_DEBIT_ADD",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW", "VENDOR_LEDGER"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_VIEW_ACTIVITY",
+            "actionUrl": "",
+            "actionName": "VENDOR_ACTIVITY",
+            "compulsoryFields" : [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_VENDOR_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

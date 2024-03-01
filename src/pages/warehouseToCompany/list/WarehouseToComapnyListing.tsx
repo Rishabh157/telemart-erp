@@ -7,28 +7,24 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-    // UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/WarehouseToComapnySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -75,10 +71,7 @@ const WarehouseToComapnyListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse Transfer </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.warehouseToCompanyTransfer}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
+                {isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_ADD) &&
                         <button
                             onClick={() => navigate('add')}
                             className="bg-primary-main text-white rounded py-1 px-3"
@@ -86,7 +79,6 @@ const WarehouseToComapnyListing = ({
                             + warehouse-transfer
                         </button>
                     }
-                />
             </div>
 
             <div

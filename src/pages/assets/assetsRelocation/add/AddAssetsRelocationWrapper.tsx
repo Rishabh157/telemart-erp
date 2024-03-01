@@ -9,15 +9,15 @@
 import React from 'react'
 
 // |-- Internal Dependencies --|
-import AsstesLayout from '../../AssetsLayout'
+
 import AddAsstesRelocation from './AddAsstesRelocation'
 
 const AddAssetsRelocationWrapper = () => {
     return (
         <div>
-            <AsstesLayout>
+            <>
                 <AddAsstesRelocation />
-            </AsstesLayout>
+            </>
         </div>
     )
 }

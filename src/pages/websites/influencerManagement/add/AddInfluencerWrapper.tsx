@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 
 // |-- INternal Dependencies --|
 import { showToast } from 'src/utils'
-import WebsiteLayout from '../../WebsiteLayout'
+
 import AddInfluencer from './AddInfluencer'
 import { useAddInfluencerMutation } from 'src/services/websites/InfluencerServices'
 
@@ -83,7 +83,7 @@ const AddInfluencerWrapper = (props: Props) => {
     }
 
     return (
-        <WebsiteLayout>
+      
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -98,7 +98,7 @@ const AddInfluencerWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsiteLayout>
+      
     )
 }
 

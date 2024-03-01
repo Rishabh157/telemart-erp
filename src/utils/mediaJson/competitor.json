@@ -2,13 +2,14 @@
   "moduleId": "NAV_COMPETITOR",
   "moduleName": "NAV_COMPETITOR",
   "parentGroup": [
-    ""
+    "NAV_MEDIA"
   ],
   "moduleAction": [
     {
       "actionId": "ACTION_COMPETITOR_LIST",
       "actionUrl": "",
       "actionName": "LIST",
+      "compulsoryFields" : [],
       "parentGroup": [],
       "fields": [
         {
@@ -53,6 +54,7 @@
       "actionId": "ACTION_COMPETITOR_ADD",
       "actionUrl": "",
       "actionName": "ADD",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],
@@ -62,6 +64,7 @@
       "actionId": "ACTION_COMPETITOR_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],
@@ -71,6 +74,7 @@
       "actionId": "ACTION_COMPETITOR_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
+      "compulsoryFields" : [],
       "parentGroup": [
         "LIST"
       ],

@@ -6,39 +6,37 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import WebsiteLayout from '../../WebsiteLayout'
-import WebsiteListing from './WebsitetListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { WebsiteListResponse } from 'src/models/website/Website.model'
 import {
     useDeletegetWebsiteMutation,
     useGetPaginationWebsiteQuery,
 } from 'src/services/websites/WebsiteServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+import WebsiteListing from './WebsitetListing'
 
 // |-- Redux --|
+
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/websitePageSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteSlice'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const WebstieListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -48,15 +46,14 @@ const WebstieListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteState: any = useSelector((state: RootState) => state.website)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items } = WebsiteState
     const columns: columnTypes[] = [
         {
             field: 'productName',
             headerName: 'Website Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_WEBSITES_NAME,
             renderCell: (row: WebsiteListResponse) => (
                 <span> {row.productName} </span>
             ),
@@ -65,6 +62,7 @@ const WebstieListingWrapper = () => {
             field: 'gaTagIp',
             headerName: 'GA Tag',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_GA_TAG,
             renderCell: (row: WebsiteListResponse) => (
                 <span> {row.gaTagIp} </span>
             ),
@@ -73,6 +71,7 @@ const WebstieListingWrapper = () => {
             field: 'url',
             headerName: 'URL',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_URL,
             renderCell: (row: WebsiteListResponse) => <span> {row.url} </span>,
         },
         {
@@ -81,9 +80,12 @@ const WebstieListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.website}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_ONE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_ONE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -216,18 +218,13 @@ const WebstieListingWrapper = () => {
     }
     return (
         <>
-            <WebsiteLayout>
-                <WebsiteListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.website,
-                        UserModuleActionTypes.List
-                    )}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </WebsiteLayout>
+
+            <WebsiteListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+
         </>
     )
 }

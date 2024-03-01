@@ -12,27 +12,14 @@ import { useDispatch, useSelector } from 'react-redux'
 // |-- External Dependencies --|
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import { MdExpandMore } from 'react-icons/md'
-// import { FormikProps } from 'formik'
-// import { MdDeleteOutline } from 'react-icons/md'
 
-// |-- Internal Dependencies --|
-//import { AccordianType } from './VendorGeneralInformationTabWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-//import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
-// import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
-// import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-// import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-// import { SelectOption } from 'src/models/FormField/FormField.model'
-// import { HiPlus } from 'react-icons/hi'
-//import { BsFillExclamationCircleFill } from 'react-icons/bs'
-import { default as modulesData } from 'src/defaultData/moduleData.json'
-import {
-    UserModuleActionTypes,
-    UserModuleOrderTabsTypes,
-} from 'src/models/userAccess/UserAccess.model'
+
+import { mergeUserModules } from './mergeJson'
+
 // import { default as user } from 'src/defaultData/user.json'
 import {
     moduleActionTypes,
@@ -46,10 +33,6 @@ import {
     getUserRoleLabel,
 } from 'src/utils/GetHierarchyByDept'
 import { showToast } from 'src/utils'
-// import { BsInfoCircle } from 'react-icons/bs'
-// import Popover from '@mui/material/Popover'
-// import Typography from '@mui/material/Typography'
-// import Button from '@mui/material/Button'
 
 // |-- Types --|
 type Props = {
@@ -82,8 +65,7 @@ const UserAcess = ({
     userRole,
     handleUserAccessSubmit,
 }: Props) => {
-    const { modules } = modulesData
-
+    const modules = [...mergeUserModules]
     const dispatch = useDispatch()
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
@@ -101,7 +83,7 @@ const UserAcess = ({
             let value = moduleList ? [...moduleList] : []
 
             if (moduleValue) {
-                value.push(moduleAccess)
+                value.push(moduleAccess as any)
             } else {
                 let valueRemove = userAccessItems?.modules.filter(
                     (moduleitem) => moduleitem.moduleId !== module.moduleId
@@ -133,13 +115,12 @@ const UserAcess = ({
                         (actionitem) => actionitem.actionName === groupName
                     )
                     if (!isParent) {
-                        const ActiveModule = modules?.find(
+                        const ActiveModule: any = modules?.find(
                             (moduleitem) =>
                                 moduleitem.moduleId === module.moduleId
                         )
                         let ViewAction = ActiveModule?.moduleAction?.find(
-                            (actionitem: moduleActionTypes) =>
-                                actionitem.actionName === groupName
+                            (actionitem: moduleActionTypes) => { return actionitem.actionName === groupName }
                         )
                         if (ViewAction) {
                             moduleAction.push(ViewAction)
@@ -174,6 +155,54 @@ const UserAcess = ({
                 ...moduleValue[moduleIndex],
                 moduleAction: moduleAction,
             }
+            dispatch(setUserModule(moduleValue))
+        }
+        else {
+            // let addModule = [...userAccessItems?.modules]
+            // addModule.push(module) 
+            let moduleAction: moduleActionTypes[] = []
+            if (actionValue) {
+                action.parentGroup.forEach((groupName) => {
+                    let isParent = moduleAction?.find(
+                        (actionitem) => actionitem.actionName === groupName
+                    );
+                    if (!isParent) {
+                        const ActiveModule: any = modules?.find(
+                            (moduleitem) => moduleitem.moduleId === module.moduleId
+                        );
+                        let ViewAction = ActiveModule?.moduleAction?.find(
+                            (actionitem: moduleActionTypes) =>
+                                actionitem.actionName === groupName
+                        );
+                        if (ViewAction) {
+                            moduleAction.push(ViewAction);
+                        }
+                    }
+                });
+
+                moduleAction.push(action);
+
+            } else {
+                let isChildRemove = moduleAction?.filter(
+                    (actionitem: moduleActionTypes) => {
+                        if (
+                            !actionitem.parentGroup.includes(action.actionName) &&
+                            actionitem.actionId !== action.actionId
+                        ) {
+                            return actionitem;
+                        }
+                        return false;
+                    }
+                );
+
+                moduleAction = isChildRemove;
+            }
+            let moduleValue = [...userAccessItems?.modules];
+            let newModule = {
+                ...module,
+                moduleAction: moduleAction,
+            };
+            moduleValue.push(newModule)
             dispatch(setUserModule(moduleValue))
         }
     }
@@ -235,7 +264,7 @@ const UserAcess = ({
                 actionItem.actionId === actions.actionId
         )
 
-        if (moduleIndex >= 0) {
+        if (moduleIndex >= 0 && moduleActionIndex >= 0) {
             let moduleValue = [...clonedUserAccessItems.modules]
             let moduleActionField = [
                 ...moduleValue[moduleIndex]?.moduleAction[moduleActionIndex]
@@ -264,19 +293,21 @@ const UserAcess = ({
     const [expanded, setExpanded] = React.useState<number | false>(false)
     const handleChange =
         (panel: number) =>
-        (event: React.SyntheticEvent, isExpanded: boolean) => {
-            setExpanded(isExpanded ? panel : false)
-        }
+            (event: React.SyntheticEvent, isExpanded: boolean) => {
+                setExpanded(isExpanded ? panel : false)
+            }
 
     const [expanded0, setExpanded0] = React.useState<number | false>(false)
     const handleChange0 =
         (panel: number) =>
-        (event: React.SyntheticEvent, isExpanded0: boolean) => {
-            setExpanded0(isExpanded0 ? panel : false)
-        }
+            (event: React.SyntheticEvent, isExpanded0: boolean) => {
+                setExpanded0(isExpanded0 ? panel : false)
+            }
 
-    const getReplaceUnderScoreToSpace = (name: string) =>
-        name?.replaceAll('_', ' ')
+    const getReplaceUnderScoreToSpace = (name: string) => {
+        let navReplace = name?.replaceAll("NAV", "")
+        return navReplace?.replaceAll("_", " ");
+    }
 
     return (
         <div className="h-[calc(100vh-55px)] bg-white">
@@ -307,9 +338,8 @@ const UserAcess = ({
                                 onClick={() => {
                                     handleUserAccessSubmit()
                                 }}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Update
                             </button>
@@ -330,7 +360,7 @@ const UserAcess = ({
                         <div className="grid grid-cols-1 gap-1">
                             <div className="flex flex-col gap-3">
                                 {modules?.map(
-                                    (module: ModulesTypes, ind: number) => {
+                                    (module: any, ind: number) => {
                                         return (
                                             <Accordion
                                                 key={ind}
@@ -379,10 +409,10 @@ const UserAcess = ({
                                                 <AccordionDetails className="border-t border-slate-300 ">
                                                     <div className="py-3">
                                                         <ul className="pt-2  grid grid-cols-4 gap-1">
-                                                            {module?.moduleAction.map(
+                                                            {module?.moduleAction?.map(
                                                                 (
                                                                     actionsItems: moduleActionTypes,
-                                                                    index
+                                                                    index: any
                                                                 ) => {
                                                                     return (
                                                                         <li
@@ -393,34 +423,7 @@ const UserAcess = ({
                                                                         >
                                                                             <div className="gap-2 flex px-3 py-1">
                                                                                 <input
-                                                                                    disabled={
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleActionTypes.List ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderAllTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderApprovedTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderDeliveredTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderDoorCancelledTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderFreshTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderHoldTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderNonActionTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderPndTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderPscTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderUnaTab ||
-                                                                                        actionsItems.actionName ===
-                                                                                            UserModuleOrderTabsTypes.orderUrgentTab
-                                                                                            ? true
-                                                                                            : false
-                                                                                    }
+
                                                                                     id={`${actionsItems?.actionId}`}
                                                                                     type={
                                                                                         'checkbox'
@@ -444,7 +447,7 @@ const UserAcess = ({
                                                                                 <div className="flex flex-cols-1 justify-around">
                                                                                     {actionsItems
                                                                                         ?.fields
-                                                                                        .length ? (
+                                                                                        ?.length ? (
                                                                                         <Accordion
                                                                                             key={
                                                                                                 index

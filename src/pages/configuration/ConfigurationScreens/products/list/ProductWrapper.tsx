@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 // import { useDispatch, useSelector } from "react--ux";
 
 // |-- External Dependencies --|
@@ -15,28 +15,26 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ProductsListResponse } from 'src/models/Products.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import ProductsListing from './ProductsListing'
+
+
 import {
     useDeleteProductMutation,
     useGetProductQuery,
 } from 'src/services/ProductService'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ProductsListing from './ProductsListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/productSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ProductsListingWrapper = () => {
     const productState: any = useSelector((state: RootState) => state.products)
@@ -47,15 +45,13 @@ const ProductsListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteProduct] = useDeleteProductMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const columns: columnTypes[] = [
         {
             field: 'productCode',
             headerName: 'Product Code ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCTS_LIST_PRODUCT_CODE,
             renderCell: (row: ProductsListResponse) => {
                 return <span> {row.productCode} </span>
             },
@@ -64,6 +60,7 @@ const ProductsListingWrapper = () => {
             field: 'productName',
             headerName: 'Product Name ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCTS_LIST_PRODUCT_NAME,
             renderCell: (row: ProductsListResponse) => {
                 return <span> {row.productName} </span>
             },
@@ -72,6 +69,7 @@ const ProductsListingWrapper = () => {
             field: 'productCategoryLabel',
             headerName: 'Category  ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCTS_LIST_CATEGORY,
             renderCell: (row: ProductsListResponse) => {
                 return <span> {row.productCategoryLabel} </span>
             },
@@ -80,6 +78,7 @@ const ProductsListingWrapper = () => {
             field: 'productSubCategoryLabel',
             headerName: 'Sub Category  ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCTS_LIST_SUB_CATEGORY,
             renderCell: (row: ProductsListResponse) => {
                 return <span> {row.productSubCategoryLabel} </span>
             },
@@ -88,6 +87,7 @@ const ProductsListingWrapper = () => {
             field: 'productGroupLabel ',
             headerName: 'Product Group',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCTS_LIST_PRODUCT_GROUP,
             renderCell: (row: ProductsListResponse) => {
                 return <span> {row.productGroupLabel} </span>
             },
@@ -98,9 +98,12 @@ const ProductsListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.product}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCTS_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCTS_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -173,18 +176,13 @@ const ProductsListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
+            
                 <ProductsListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.product,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

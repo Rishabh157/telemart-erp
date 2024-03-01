@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,30 +22,26 @@ import {
 } from 'src/services/websites/WebsitePageServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import WebsitesLayout from '../../WebsiteLayout'
+
 import WebsitePageListing from './WebsitePageListing'
 
 // |-- Redux --|
+import {
+    UserModuleNameTypes
+} from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websitePageSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 
 const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deletePage] = useDeleteWebsitePageMutation()
     const [currentId, setCurrentId] = useState('')
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsitePageState = useSelector(
         (state: RootState) => state.websitePage
@@ -161,20 +157,15 @@ const WebsitePageListingWrapper = () => {
         })
     }
     return (
+
         <>
-            <WebsitesLayout>
-                <WebsitePageListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.websitePage,
-                        UserModuleActionTypes.List
-                    )}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </WebsitesLayout>
+            <WebsitePageListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
+
     )
 }
 

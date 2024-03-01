@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddWebsite from './AddWebsite'
 import { showToast } from 'src/utils'
 import { useAddWebsiteMutation } from 'src/services/websites/WebsiteServices'
-import WebsiteLayout from '../../WebsiteLayout'
+
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -98,7 +98,7 @@ const AddWebsiteWrapper = (props: Props) => {
     }
 
     return (
-        <WebsiteLayout>
+      
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -113,7 +113,7 @@ const AddWebsiteWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsiteLayout>
+      
     )
 }
 

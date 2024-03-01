@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import EditCompany from './EditCompany'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import StepEditCompanyDetailsWrapper from './FormSteps/StepEditCompanyDetails/StepEditCompanyDetailsWrapper'
 import StepEditBankDetailsWrapper from './FormSteps/StepEditBankDetails/StepEditBankDetailsWrapper'
 // import { useEditCompanyMutation } from "src/services/CompanyServices";
@@ -189,7 +189,7 @@ const EditCompanyWrapper = () => {
     }, [dispatch, data, isLoading])
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -210,7 +210,7 @@ const EditCompanyWrapper = () => {
                     </Form>
                 )}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

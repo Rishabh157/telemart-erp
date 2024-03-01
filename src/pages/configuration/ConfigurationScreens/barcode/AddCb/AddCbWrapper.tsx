@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { showToast } from 'src/utils'
 // import { v4 as uuidv4 } from "uuid";
 import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
@@ -95,7 +95,7 @@ const AddCbBarcodeWrapper = (props: Props) => {
     })
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -111,7 +111,7 @@ const AddCbBarcodeWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

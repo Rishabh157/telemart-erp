@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import AddLanguage from './AddLanguage'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddLanguageMutation } from 'src/services/LanguageService'
 import { showToast } from 'src/utils'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -70,7 +70,7 @@ const AddLanguageWrapper = (props: Props) => {
         })
     }
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -85,7 +85,7 @@ const AddLanguageWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

@@ -6,41 +6,37 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InquiryListResponse } from 'src/models'
 import { useGetInquiryQuery } from 'src/services/InquiryService'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    setRowsPerPage,
     setIsTableLoading,
     setItems,
     setPage,
+    setRowsPerPage,
     setSearchValue,
     setTotalItems,
-    //setFilterValue,
 } from 'src/redux/slices/inquirySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const InquiryListingWrapper = () => {
     // Hooks
@@ -54,9 +50,6 @@ const InquiryListingWrapper = () => {
 
     const inquiryState: any = useSelector((state: RootState) => state.inquiry)
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const {
         page,
@@ -106,6 +99,7 @@ const InquiryListingWrapper = () => {
             field: 'inquiryNumber',
             headerName: 'Inquiry No',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_INQUIRY_NUMBER,
             renderCell: (row: InquiryListResponse) => (
                 <span className="text-primary-main ">
                     # {row.inquiryNumber}{' '}
@@ -116,6 +110,7 @@ const InquiryListingWrapper = () => {
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_DID_NUMBER,
             renderCell: (row: InquiryListResponse) => (
                 <span> {row.didNo} </span>
             ),
@@ -125,6 +120,7 @@ const InquiryListingWrapper = () => {
             field: 'mobileNo',
             headerName: 'Mobile No',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_MOBILE_NUMBER,
             renderCell: (row: InquiryListResponse) => (
                 <span> {row.mobileNo} </span>
             ),
@@ -134,6 +130,7 @@ const InquiryListingWrapper = () => {
             field: 'deliveryCharges',
             headerName: 'Delivery Charges',
             flex: 'flex-[2_2_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_,
             renderCell: (row: InquiryListResponse) => (
                 <span className="text-primary-main ">
                     {' '}
@@ -145,6 +142,7 @@ const InquiryListingWrapper = () => {
             field: 'discount',
             headerName: 'Discount',
             flex: 'flex-[2_2_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_DISCOUNT,
             renderCell: (row: InquiryListResponse) => (
                 <span className="text-primary-main "> {row.discount} </span>
             ),
@@ -153,6 +151,7 @@ const InquiryListingWrapper = () => {
             field: 'total',
             headerName: 'Total',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.NAV_INQUIRY_LIST_TOTAL,
             renderCell: (row: InquiryListResponse) => (
                 <span className="text-slate-800"> &#8377; {row.total} </span>
             ),
@@ -163,8 +162,7 @@ const InquiryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.inquiry}
-                    isView
+                    isView={isAuthorized(UserModuleNameTypes.ACTION_NAV_INQUIRY_VIEW)}
                     handleViewActionButton={() => {
                         navigate(`/inquiry/view/${currentId}`)
                     }}
@@ -217,20 +215,15 @@ const InquiryListingWrapper = () => {
                         onSearch={(newValue) =>
                             dispatch(setSearchValue(newValue))
                         }
-                        // isFilter
-                        // isRefresh
-                        // onFilterDispatch={() => dispatch(setFilterValue([]))}
+                    // isFilter
+                    // isRefresh
+                    // onFilterDispatch={() => dispatch(setFilterValue([]))}
                     />
 
                     {/* Table */}
                     <div className="grow overflow-auto  ">
                         <ATMTable
-                            columns={getAllowedAuthorizedColumns(
-                                checkUserAccess,
-                                columns,
-                                UserModuleNameTypes.inquiry,
-                                UserModuleActionTypes.List
-                            )}
+                            columns={columns}
                             rows={items}
                             // isCheckbox={true}
                             selectedRows={selectedRows}

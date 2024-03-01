@@ -7,31 +7,28 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-    UserModuleAddActionTypes,
-} from 'src/models/userAccess/UserAccess.model'
+
 
 // |-- Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
@@ -66,26 +63,14 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Sale Orders </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={
-                        isDealerPath
-                            ? UserModuleNameTypes.dealer
-                            : UserModuleNameTypes.saleOrder
-                    }
-                    actionName={
-                        isDealerPath
-                            ? UserModuleAddActionTypes.dealerSalesOrderAdd
-                            : UserModuleActionTypes.Add
-                    }
-                    component={
-                        <button
-                            onClick={() => navigate('add-sale-order')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Sale Order
-                        </button>
-                    }
-                />
+                {isAuthorized(isDealerPath ? UserModuleNameTypes.ACTION_DEALER_DEALER_SALE_ORDER_ADD : UserModuleNameTypes.ACTION_SALE_ORDER_ADD) &&
+                    <button
+                        onClick={() => navigate('add-sale-order')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add Sale Order
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
@@ -102,8 +87,8 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

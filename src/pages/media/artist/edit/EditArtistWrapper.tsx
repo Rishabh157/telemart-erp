@@ -22,7 +22,7 @@ import {
     useUpdateArtistMutation,
 } from 'src/services/media/ArtistServices'
 import { setSelectedArtist } from 'src/redux/slices/media/artist'
-import MediaLayout from '../../MediaLayout'
+
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -89,7 +89,7 @@ const EditArtistWrapper = (props: Props) => {
         dispatch(setSelectedArtist(data?.data))
     }, [dispatch, data, isLoading, isFetching])
     return (
-        <MediaLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -107,7 +107,7 @@ const EditArtistWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

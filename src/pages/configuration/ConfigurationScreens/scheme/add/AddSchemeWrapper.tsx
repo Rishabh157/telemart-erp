@@ -20,7 +20,7 @@ import AddScheme from './AddScheme'
 import StepAddSchemeDetailsWrapper from './FormSteps/StepAddSchemeDetails/StepAddSchemeDetailsWrapper'
 import StepAddProductsWrapper from './FormSteps/StepAddProducts/StepAddProductsWrapper'
 import StepAddFAQ from './FormSteps/StepAddFAQ/StepAddFAQ'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'
 import { useAddSchemeMutation } from 'src/services/SchemeService'
@@ -265,7 +265,7 @@ const AddSchemeWrapper = () => {
         dispatch(setAllItems(data?.data))
     }, [data, dispatch, isLoading, isFetching])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={getValidationSchema(activeStep)}
@@ -287,7 +287,7 @@ const AddSchemeWrapper = () => {
                     </Form>
                 )}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

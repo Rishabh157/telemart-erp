@@ -1,0 +1,51 @@
+{
+  "moduleId": "NAV_CALL_CENTER",
+  "moduleName": "NAV_CALL_CENTER",
+  "parentGroup": ["NAV_CONFIGURATION"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_CALL_CENTER_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "CALL_CENTER_LIST_CALL_CENTER_NAME",
+          "fieldName": "Call Center Name",
+          "fieldValue": "callCenterName"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_CALL_CENTER_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_CALL_CENTER_ONE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_CALL_CENTER_ONE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

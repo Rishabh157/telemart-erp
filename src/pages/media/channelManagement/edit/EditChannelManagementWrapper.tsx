@@ -16,7 +16,7 @@ import { object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
+
 import {
     useGetChannelByIdQuery,
     useUpdateChannelMutation,
@@ -242,7 +242,7 @@ const EditChannelManagementWrapper = () => {
         ),
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -259,7 +259,7 @@ const EditChannelManagementWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

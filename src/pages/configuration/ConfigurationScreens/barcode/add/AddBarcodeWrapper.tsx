@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
 // |-- Internal Dependencies --|
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import AddBarcode from './AddBarcode'
 import { useAddBarcodeMutation } from 'src/services/BarcodeService'
 import { showToast } from 'src/utils'
@@ -133,7 +133,7 @@ const AddBarcodeWrapper = (props: Props) => {
     })
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -150,7 +150,7 @@ const AddBarcodeWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

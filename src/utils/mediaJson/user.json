@@ -1,0 +1,66 @@
+{
+    "moduleId": "NAV_USER",
+    "moduleName": "NAV_USER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_USER_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "USER_LIST_USER_NAME",
+                    "fieldName": "User Name",
+                    "fieldValue": "userName"
+                },
+                {
+                    "fieldId": "USER_LIST_EMAIL",
+                    "fieldName": "Email",
+                    "fieldValue": "email"
+                },
+                {
+                    "fieldId": "USER_LIST_MOBILE_NUMBER",
+                    "fieldName": "Mobile no.",
+                    "fieldValue": "mobile"
+                },
+                {
+                    "fieldId": "USER_LIST_BRANCH_NAME",
+                    "fieldName": "Branch Name",
+                    "fieldValue": "branchLabel"
+                },
+                {
+                    "fieldId": "USER_LIST_USER_DEPARTMENT",
+                    "fieldName": "User Department",
+                    "fieldValue": "userDepartment"
+                },
+                {
+                    "fieldId": "USER_LIST_USER_ROLE",
+                    "fieldName": "User Role",
+                    "fieldValue": "userRole"
+                },
+                {
+                    "fieldId": "USER_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "isActive"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_USER_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_USER_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields" : [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

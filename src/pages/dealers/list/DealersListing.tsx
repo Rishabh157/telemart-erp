@@ -29,11 +29,8 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { setRowsPerPage, setPage } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSearchValue } from 'src/redux/slices/dealerSlice'
-import AuthenticationHOC from 'src/AuthenticationHOC'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -57,11 +54,7 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Dealers </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.dealer}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
+                {isAuthorized(UserModuleNameTypes.ACTION_DEALER_ADD) &&                        <button
                             onClick={() => {
                                 navigate('add-dealer')
                             }}
@@ -70,7 +63,6 @@ const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
                             + Add Dealers
                         </button>
                     }
-                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

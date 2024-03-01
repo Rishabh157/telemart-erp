@@ -2,7 +2,7 @@
   "moduleId": "NAV_ARTIST",
   "moduleName": "NAV_ARTIST",
   "parentGroup": [
-    ""
+    "NAV_MEDIA"
   ],
   "moduleAction": [
     {
@@ -37,7 +37,7 @@
       "fields": []
     },
     {
-      "actionId": "NAV_ARTIST_DELETE",
+      "actionId": "ACTION_ARTIST_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
       "parentGroup": [

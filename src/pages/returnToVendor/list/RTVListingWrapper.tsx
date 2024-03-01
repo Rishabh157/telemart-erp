@@ -14,23 +14,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import RTVendor from './RTVendor'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import {
+    useDeleteReturnToVendorOrderMutation,
     useGetPaginationReturnToVendorByGroupQuery,
     useUpdateReturnToVendorApprovalMutation,
-    useDeleteReturnToVendorOrderMutation,
 } from 'src/services/ReturnToVendorService'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import { showToast } from 'src/utils'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import RTVendor from './RTVendor'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
 import {
@@ -101,9 +98,7 @@ const RTVListingWrapper = () => {
     const [deleteReturnToVendor] = useDeleteReturnToVendorOrderMutation()
     const [updateReturnToVendor] = useUpdateReturnToVendorApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
 
     const { data, isFetching, isLoading } =
         useGetPaginationReturnToVendorByGroupQuery({
@@ -219,6 +214,7 @@ const RTVListingWrapper = () => {
             field: 'rtvNo',
             headerName: 'RTV No.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_RETURN_TO_VENDOR_NUMBER,
             renderCell: (row: ReturnToVendorListResponse) => (
                 <span> {row?._id} </span>
             ),
@@ -227,6 +223,7 @@ const RTVListingWrapper = () => {
             field: 'items',
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_ITEM,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return (
@@ -254,6 +251,7 @@ const RTVListingWrapper = () => {
             field: 'firstApproved',
             headerName: 'First level Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return (
@@ -261,8 +259,8 @@ const RTVListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}{' '}
+                                ? 'Pending'
+                                : 'Rejected'}{' '}
                     </span>
                 )
             },
@@ -271,6 +269,7 @@ const RTVListingWrapper = () => {
             field: 'firstApprovedActionBy',
             headerName: 'Level first Approved By',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED_ACTION_BY,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return <span> {row?.firstApprovedActionBy} </span>
@@ -280,6 +279,7 @@ const RTVListingWrapper = () => {
             field: 'firstApprovedAt',
             headerName: 'First Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED_DATE,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return <span> {row?.firstApprovedAt} </span>
@@ -289,6 +289,7 @@ const RTVListingWrapper = () => {
             field: 'secondApproved',
             headerName: 'Second Level Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_LEVEL_STATUS,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return (
@@ -297,8 +298,8 @@ const RTVListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -307,6 +308,7 @@ const RTVListingWrapper = () => {
             field: 'secondApprovedActionBy',
             headerName: 'Level Second Approved By',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_APPROVED_ACTION_BY,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return <span> {row?.secondApprovedActionBy} </span>
@@ -316,6 +318,7 @@ const RTVListingWrapper = () => {
             field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_APPROVED_DATE,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return <span> {row?.secondApprovedAt} </span>
@@ -325,6 +328,7 @@ const RTVListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_INSERTED_DATE,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
@@ -334,6 +338,7 @@ const RTVListingWrapper = () => {
             field: 'updatedAt',
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_UPDATED_DATE,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
@@ -343,6 +348,7 @@ const RTVListingWrapper = () => {
             field: 'Approved',
             headerName: 'Approval Level',
             flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_APPROVAL_LEVEL,
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return (
@@ -486,12 +492,11 @@ const RTVListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        moduleName={UserModuleNameTypes.rtvTransfer}
-                        isEdit={true}
+                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_EDIT)}
                         isDelete={
                             row.firstApproved === null &&
-                            row.secondApproved === null
-                                ? true
+                                row.secondApproved === null
+                                ? isAuthorized(UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE)
                                 : false
                         }
                         handleEditActionButton={() => {
@@ -523,12 +528,7 @@ const RTVListingWrapper = () => {
         <>
             <SideNavLayout>
                 <RTVendor
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.rtvTransfer,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />

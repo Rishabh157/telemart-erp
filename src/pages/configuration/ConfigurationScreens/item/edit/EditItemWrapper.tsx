@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import EditItem from './EditItem'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 // import { useEditItemsMutation } from "src/services/ItemService";
 import { showToast } from 'src/utils'
 import {
@@ -95,7 +95,7 @@ const EditItemWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -111,7 +111,7 @@ const EditItemWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

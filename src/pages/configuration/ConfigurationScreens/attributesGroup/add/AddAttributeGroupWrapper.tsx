@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddAttributeGroup from './AddAttributeGroup'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddAttributeGroupMutation } from 'src/services/AttributeGroup'
 import { showToast } from 'src/utils'
 import { useGetAllAttributesQuery } from 'src/services/AttributeService'
@@ -93,7 +93,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -109,7 +109,7 @@ const AddAttributeGroupWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

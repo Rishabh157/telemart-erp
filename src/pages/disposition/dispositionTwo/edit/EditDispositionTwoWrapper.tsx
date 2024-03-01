@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import DispositionLayout from '../../DispositionLayout'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -115,7 +115,7 @@ const EditDispositionTwoWrapper = () => {
     }
 
     return (
-        <DispositionLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -132,7 +132,7 @@ const EditDispositionTwoWrapper = () => {
                     )
                 }}
             </Formik>
-        </DispositionLayout>
+        </>
     )
 }
 

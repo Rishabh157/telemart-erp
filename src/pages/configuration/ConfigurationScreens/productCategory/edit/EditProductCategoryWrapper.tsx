@@ -15,7 +15,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { showToast } from 'src/utils'
 import {
     useGetProductCategoryByIdQuery,
@@ -95,7 +95,7 @@ const EditProductCategoryWrapper = (props: Props) => {
         dispatch(setSelectedProductCategory(data?.data))
     }, [dispatch, data, isLoading])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -111,7 +111,7 @@ const EditProductCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

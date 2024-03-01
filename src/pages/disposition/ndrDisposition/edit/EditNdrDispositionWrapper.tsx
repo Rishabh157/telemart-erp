@@ -9,7 +9,7 @@ import {
     useUpdateNdrDispositionMutation,
 } from 'src/services/configurations/NdrDisositionServices'
 import { useNavigate, useParams } from 'react-router-dom'
-import DispositionLayout from '../../DispositionLayout'
+
 import { setSelectedDispositionOne } from 'src/redux/slices/configuration/ndrDispositionSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import EditNdrDisposition from './EditNdrDisposition'
@@ -85,7 +85,7 @@ const EditNdrDispositionWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 {' '}
                 <Formik
                     enableReinitialize
@@ -102,7 +102,7 @@ const EditNdrDispositionWrapper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

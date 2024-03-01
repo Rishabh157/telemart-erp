@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
 import { BsArrowRepeat } from 'react-icons/bs'
-import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import {
-    UserModuleNameTypes,
-    UserModuleWarehouseTabsTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import { RootState } from 'src/redux/store'
-import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
+
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 type Props = {}
 interface tabsProps {
@@ -25,39 +21,33 @@ const ViewInventories = (props: Props) => {
             label: 'Warehouse Details',
             icon: BsArrowRepeat,
             path: 'warehouse-details',
-            name: UserModuleWarehouseTabsTypes.warehouseDetails,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_DETAILS,
         },
         {
             label: 'Inventories',
             icon: BsArrowRepeat,
             path: 'inventories',
-            name: UserModuleWarehouseTabsTypes.inventories,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INVENTORIES,
         },
         {
             label: 'Outward Inventories',
             icon: BsArrowRepeat,
             path: 'outward-inventories/dealer',
-            name: UserModuleWarehouseTabsTypes.outwardInventories,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES,
         },
         {
             label: 'Inward Inventories',
             icon: BsArrowRepeat,
             path: 'inward-inventories/dealer',
-            name: UserModuleWarehouseTabsTypes.inwardInventories,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES,
         },
     ]
     const [activeTab, setActiveTab] = useState<number>()
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
-    const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const allowedTabs = showAllowedTabs(
-        checkUserAccess,
-        UserModuleNameTypes.wareHouse,
-        tabs,
-        userData?.userRole || 'ADMIN'
-    )
+    const allowedTabs = tabs?.filter((nav) => {
+        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
+    })?.map((tab) => tab)
+
     useEffect(() => {
         const activeTab = window.location.pathname.split('/')[4]
         let activeIndex = allowedTabs?.findIndex(

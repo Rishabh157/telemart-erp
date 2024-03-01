@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,26 +17,24 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import ChannelManagementListing from './ChannelManagementListing'
 // import { useNavigate } from "react-router-dom";
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
+
 import {
     useDeleteChannelMutation,
     useGetPaginationchannelQuery,
 } from 'src/services/media/ChannelManagementServices'
-import MediaLayout from 'src/pages/media/MediaLayout'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelManagementSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ChannelManagementListingWrapper = () => {
     const channelManagementState: any = useSelector(
@@ -46,9 +44,7 @@ const ChannelManagementListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const { page, rowsPerPage, searchValue, items } = channelManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const [deleteChannel] = useDeleteChannelMutation()
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -57,6 +53,8 @@ const ChannelManagementListingWrapper = () => {
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME,
+
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.channelName} </span>
             ),
@@ -65,6 +63,8 @@ const ChannelManagementListingWrapper = () => {
             field: 'channelGroupLabel',
             headerName: 'Channel Group',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME,
+
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.channelGroupLabel} </span>
             ),
@@ -74,6 +74,8 @@ const ChannelManagementListingWrapper = () => {
             field: 'contactPerson',
             headerName: 'Contact Person',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CONTACT_PERSON,
+
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.contactPerson} </span>
             ),
@@ -83,6 +85,8 @@ const ChannelManagementListingWrapper = () => {
             field: 'mobile',
             headerName: 'Mobile',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_MOBILE,
+
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.mobile} </span>
             ),
@@ -92,6 +96,8 @@ const ChannelManagementListingWrapper = () => {
             field: 'email',
             headerName: 'Email',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_EMAIL,
+
             renderCell: (row: ChannelManagementListResponse) => (
                 <span> {row.email} </span>
             ),
@@ -103,9 +109,8 @@ const ChannelManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.channelManagement}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -183,20 +188,15 @@ const ChannelManagementListingWrapper = () => {
     }
     return (
         <>
-            <MediaLayout>
+            <>
                 <div className="h-full">
                     <ChannelManagementListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.channelManagement,
-                            UserModuleActionTypes.List
-                        )}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </MediaLayout>
+            </>
         </>
     )
 }

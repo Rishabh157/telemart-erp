@@ -16,7 +16,7 @@ import { object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-import MediaLayout from '../../MediaLayout'
+
 // import { useEditChannelGroupMutation } from 'src/services/media/ChannelGroupServices'
 import { showToast } from 'src/utils'
 import EditChannelGroup from './EditChannelGroup'
@@ -92,7 +92,7 @@ const EditChannelGroupWrapper = () => {
         }, 1000)
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -108,7 +108,7 @@ const EditChannelGroupWrapper = () => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 
