@@ -26,7 +26,6 @@ import { userDepartmentTypeOptions } from 'src/utils/constants/customeTypes'
 import {
     GetHierarchByDeptProps,
     getHierarchyByDept,
-    // getHierarchyByDeptWithRole,
 } from 'src/utils/GetHierarchyByDept'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
@@ -183,12 +182,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [seniorIsLoading, seniorIsFetching, seniorData])
 
-    // useEffect(() => {
-    //     const department = getHierarchyByDeptWithRole({
-    //         department: values.userDepartment as any,
-    //     })
-    //     console.log('department', department)
-    // }, [values.userRole])
+
 
     return (
         <MainLayout>
