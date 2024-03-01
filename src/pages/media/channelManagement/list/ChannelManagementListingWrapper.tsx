@@ -19,7 +19,6 @@ import ChannelManagementListing from './ChannelManagementListing'
 // import { useNavigate } from "react-router-dom";
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
-
 import {
     useDeleteChannelMutation,
     useGetPaginationchannelQuery,
@@ -109,8 +108,12 @@ const ChannelManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

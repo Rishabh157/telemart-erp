@@ -613,10 +613,11 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${row?.approved
+                                        text: `Do you want to ${
+                                            row?.approved
                                                 ? 'Disapprove this order'
                                                 : 'Approval this order'
-                                            }`,
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -1023,7 +1024,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                    ''
+                                                        ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)

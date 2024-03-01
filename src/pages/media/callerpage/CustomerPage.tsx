@@ -144,7 +144,7 @@ const CustomerPage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                    singleSchemeData?.data?.deliveryCharges || 0,
+                        singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -250,10 +250,11 @@ const CustomerPage: React.FC<Props> = ({
                         labelClass="text-xs font-medium"
                         label="Disposition Level 1"
                         componentClass="mt-2"
-                        selectLabel="select disposition level 1"
+                        selectLabel="disposition level 1"
                         size="xxs"
                         labelSize='xxs'
                         fontSizePlaceHolder='14px'
+                        fontSizeOptionsClass='13px'
                         minHeight='25px'
                         name="dispositionLevelTwoId"
                         value={values.dispositionLevelTwoId || ''}
@@ -272,10 +273,11 @@ const CustomerPage: React.FC<Props> = ({
                         labelClass="text-xs font-medium"
                         label="Disposition Level 2"
                         componentClass="mt-2"
-                        selectLabel="select disposition level 2"
+                        selectLabel="disposition level 2"
                         size="xxs"
                         labelSize='xxs'
                         fontSizePlaceHolder='14px'
+                        fontSizeOptionsClass='13px'
                         minHeight='25px'
                         name="dispositionLevelThreeId"
                         value={values.dispositionLevelThreeId || ''}
@@ -305,7 +307,7 @@ const CustomerPage: React.FC<Props> = ({
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column}
                     rows={[]}
-                // rows={rows}
+                    // rows={rows}
                 />
             </div>
         </div>

@@ -6,7 +6,7 @@
             "actionId": "ACTION_PURCHASE_ORDER_LIST",
             "actionUrl": "",
             "actionName": "LIST",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": [
                 {
@@ -60,7 +60,7 @@
             "actionId": "ACTION_PURCHASE_ORDER_VIEW",
             "actionUrl": "",
             "actionName": "VIEW",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -68,7 +68,7 @@
             "actionId": "ACTION_PURCHASE_ORDER_GENRATE_GRN",
             "actionUrl": "",
             "actionName": "GENERATE_GRN",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -76,7 +76,7 @@
             "actionId": "ACTION_PURCHASE_ORDER_ADD",
             "actionUrl": "",
             "actionName": "ADD",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -84,7 +84,7 @@
             "actionId": "ACTION_PURCHASE_ORDER_EDIT",
             "actionUrl": "",
             "actionName": "EDIT",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         }

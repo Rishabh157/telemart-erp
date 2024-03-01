@@ -92,7 +92,9 @@ const UsersListingWrapper = () => {
             headerName: 'User Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_USER_NAME,
-            renderCell: (row: UsersListResponse) => <span> {row.userName}</span>,
+            renderCell: (row: UsersListResponse) => (
+                <span> {row.userName}</span>
+            ),
         },
         {
             field: 'email',
@@ -171,8 +173,9 @@ const UsersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive User',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -192,8 +195,9 @@ const UsersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive Scheme',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -269,7 +273,7 @@ const UsersListingWrapper = () => {
             <UsersListing
                 columns={columns}
                 rows={items}
-                setShowDropdown={() => { }}
+                setShowDropdown={() => {}}
             />
         </SideNavLayout>
     )

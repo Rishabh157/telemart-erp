@@ -53,7 +53,13 @@ const Authorization: ({ permission, children }: Props) => any = ({
     }
     if (isAuthorized(permission)) {
         return children
-    } else if (location === 'configurations' || location === 'media' || location === 'assets' || location === 'dispositions' || location === 'all-websites') {
+    } else if (
+        location === 'configurations' ||
+        location === 'media' ||
+        location === 'assets' ||
+        location === 'dispositions' ||
+        location === 'all-websites'
+    ) {
         return <AccessDenied />
     } else {
         return (

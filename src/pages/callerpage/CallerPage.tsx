@@ -158,7 +158,7 @@ const CallerPage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                        singleSchemeData?.data?.deliveryCharges || 0,
+                    singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -260,6 +260,7 @@ const CallerPage: React.FC<Props> = ({
             <div className="grid grid-cols-12 items-center border-[1px] px-2 pb-1 border-grey-700 z-[5000]">
                 <div className="col-span-3 px-2">
                     <ATMSelectSearchable
+                        fontSizeOptionsClass='13px'
                         minHeight="25px"
                         size="xxs"
                         fontSizePlaceHolder="14px"
@@ -268,7 +269,7 @@ const CallerPage: React.FC<Props> = ({
                         labelClass="text-xs font-medium"
                         label="Disposition Level 1"
                         componentClass="mt-2"
-                        selectLabel="select disposition level 1"
+                        selectLabel="disposition level 1"
                         name="dispositionLevelTwoId"
                         value={values.dispositionLevelTwoId || ''}
                         // isSubmitting
@@ -281,6 +282,7 @@ const CallerPage: React.FC<Props> = ({
                 </div>
                 <div className="col-span-3 px-3">
                     <ATMSelectSearchable
+                        fontSizeOptionsClass='13px'
                         minHeight="25px"
                         size="xxs"
                         fontSizePlaceHolder="14px"
@@ -289,7 +291,7 @@ const CallerPage: React.FC<Props> = ({
                         labelClass="text-xs font-medium"
                         label="Disposition Level 2"
                         componentClass="mt-2"
-                        selectLabel="select disposition level 2"
+                        selectLabel="disposition level 2"
                         name="dispositionLevelThreeId"
                         value={values.dispositionLevelThreeId || ''}
                         // isSubmitting
@@ -313,45 +315,42 @@ const CallerPage: React.FC<Props> = ({
             </div>
 
             {/* TABS */}
-            <div className="flex gap-x-4 mt-2">
+            <div className="flex gap-x-4 mt-2 mb-1">
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded ${
-                        TabTypes[activeTab] === TabTypes.history
-                            ? 'bg-[#87527c] text-white'
-                            : 'bg-slate-200'
-                    }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.history
+                        ? 'bg-[#87527c] text-white'
+                        : 'bg-slate-200'
+                        }`}
                     onClick={() => setActiveTab(TabTypes.history)}
                 >
-                    <div className=" text-sm mr-2 mt-1 ">
+                    <div className=" text-xs mr-2">
                         <IoReorderFour />
                     </div>
-                    <div className="text-sm">History</div>
+                    <div className="text-xs">History</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded ${
-                        TabTypes[activeTab] === TabTypes.order
-                            ? 'bg-[#87527c] text-white'
-                            : 'bg-slate-200'
-                    }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.order
+                        ? 'bg-[#87527c] text-white'
+                        : 'bg-slate-200'
+                        }`}
                     onClick={() => setActiveTab(TabTypes.order)}
                 >
-                    <div className=" text-sm mr-2 mt-1 ">
+                    <div className=" text-xs mr-2">
                         <IoReorderFour />
                     </div>
-                    <div className="text-sm">Order</div>
+                    <div className="text-xs">Order</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded ${
-                        TabTypes[activeTab] === TabTypes.complaint
-                            ? 'bg-[#87527c] text-white'
-                            : 'bg-slate-200'
-                    }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.complaint
+                        ? 'bg-[#87527c] text-white'
+                        : 'bg-slate-200'
+                        }`}
                     onClick={() => setActiveTab(TabTypes.complaint)}
                 >
-                    <div className=" text-sm mr-2 mt-1 ">
+                    <div className=" text-xs mr-2">
                         <IoReorderFour />
                     </div>
-                    <div className="text-sm">Complain</div>
+                    <div className="text-xs">Complain</div>
                 </div>
             </div>
 

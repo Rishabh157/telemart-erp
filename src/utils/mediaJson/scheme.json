@@ -1,71 +1,65 @@
 {
-  "moduleId": "NAV_SCHEME",
-  "moduleName": "NAV_SCHEME",
-  "parentGroup": ["NAV_CONFIGURATION"],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_SCHEME_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_SCHEME",
+    "moduleName": "NAV_SCHEME",
+    "parentGroup": ["NAV_CONFIGURATION"],
+    "moduleAction": [
         {
-          "fieldId": "SCHEME_LIST_SCHEME_CODE",
-          "fieldName": "Scheme Code",
-          "fieldValue": "schemeCode"
+            "actionId": "ACTION_SCHEME_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "SCHEME_LIST_SCHEME_CODE",
+                    "fieldName": "Scheme Code",
+                    "fieldValue": "schemeCode"
+                },
+                {
+                    "fieldId": "SCHEME_LIST_SCHEME_NAME",
+                    "fieldName": "Scheme Name",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "SCHEME_LIST_CATEGORY",
+                    "fieldName": "Category",
+                    "fieldValue": "productCategoryLabel"
+                },
+                {
+                    "fieldId": "SCHEME_LIST_SUB_CATEGORY",
+                    "fieldName": "Sub Category",
+                    "fieldValue": "ProductSubCategoryLabel"
+                },
+                {
+                    "fieldId": "SCHEME_LIST_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "schemePrice"
+                }
+            ]
         },
         {
-          "fieldId": "SCHEME_LIST_SCHEME_NAME",
-          "fieldName": "Scheme Name",
-          "fieldValue": "schemeName"
+            "actionId": "ACTION_SCHEME_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "SCHEME_LIST_CATEGORY",
-          "fieldName": "Category",
-          "fieldValue": "productCategoryLabel"
+            "actionId": "ACTION_SCHEME_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "SCHEME_LIST_SUB_CATEGORY",
-          "fieldName": "Sub Category",
-          "fieldValue": "ProductSubCategoryLabel"
-        },
-        {
-          "fieldId": "SCHEME_LIST_PRICE",
-          "fieldName": "Price",
-          "fieldValue": "schemePrice"
+            "actionId": "ACTION_SCHEME_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_SCHEME_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_SCHEME_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_SCHEME_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

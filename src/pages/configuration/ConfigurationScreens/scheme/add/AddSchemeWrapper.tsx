@@ -265,29 +265,27 @@ const AddSchemeWrapper = () => {
         dispatch(setAllItems(data?.data))
     }, [data, dispatch, isLoading, isFetching])
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={getValidationSchema(activeStep)}
-                onSubmit={onSubmitHandler}
-                touch={false}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
-                        <AddScheme
-                            formikProps={formikProps}
-                            steps={steps}
-                            activeStep={activeStep}
-                            setActiveStep={setActiveStep}
-                            breadcrumbs={breadcrumbs}
-                            pageHeading={pageHeading}
-                            productGroupOptions={productGroupOptions}
-                            apiStatus={apiStatus}
-                        />
-                    </Form>
-                )}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(activeStep)}
+            onSubmit={onSubmitHandler}
+            touch={false}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => (
+                <Form className="">
+                    <AddScheme
+                        formikProps={formikProps}
+                        steps={steps}
+                        activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        breadcrumbs={breadcrumbs}
+                        pageHeading={pageHeading}
+                        productGroupOptions={productGroupOptions}
+                        apiStatus={apiStatus}
+                    />
+                </Form>
+            )}
+        </Formik>
     )
 }
 

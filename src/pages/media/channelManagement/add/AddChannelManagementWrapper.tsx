@@ -62,7 +62,9 @@ const AddChannelManagementWrapper = () => {
     // const [countryData, setCountryData] = useState([])
     const [languageData, setlanguageData] = useState([])
     const [channelCategoryData, setChannelCategoryData] = useState([])
-    const { allCountry:countryData } = useSelector((state: RootState) => state?.country)
+    const { allCountry: countryData } = useSelector(
+        (state: RootState) => state?.country
+    )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { channelgroup }: any = useSelector(
         (state: RootState) => state?.channelGroup
@@ -78,7 +80,7 @@ const AddChannelManagementWrapper = () => {
         isFetching: isCategoryFetching,
         data: categoryDataApi,
     } = useGetAllChannelCategoryQuery(userData?.companyId)
-    
+
     const { country } = useCountries()
 
     const {
@@ -92,7 +94,7 @@ const AddChannelManagementWrapper = () => {
             dispatch(setChannelGroups(channelGroupsData?.data || []))
         }
     }, [isLoading, isFetching, channelGroupsData, dispatch])
-   
+
     useEffect(() => {
         if (country) {
             dispatch(setAllCountry(country))

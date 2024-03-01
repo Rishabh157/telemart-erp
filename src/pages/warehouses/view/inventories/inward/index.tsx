@@ -50,11 +50,12 @@ const tabs: Tabs[] = [
 ]
 const InwardsTabs = (props: Props) => {
     const [activeTab, setActiveTab] = useState(0)
- 
 
-    const allowedTabs = tabs?.filter((nav) => {
-        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
-    })?.map((tab) => tab)
+    const allowedTabs = tabs
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
     useEffect(() => {
         const activeTabIndex = window.location.pathname.split('/')[5]

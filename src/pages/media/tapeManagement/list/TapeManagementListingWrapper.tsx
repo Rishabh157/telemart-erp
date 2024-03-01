@@ -134,8 +134,12 @@ const TapeManagementListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_TAPE_MANAGEMENT_EDIT
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -184,7 +188,7 @@ const TapeManagementListingWrapper = () => {
             <>
                 <div className="h-full">
                     <TapeManagementListing
-                            columns={columns}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

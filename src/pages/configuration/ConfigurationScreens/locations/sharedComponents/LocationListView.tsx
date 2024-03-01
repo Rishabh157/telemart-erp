@@ -62,19 +62,18 @@ const LocationListView = ({
         <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
             <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
                 {listHeading}
-              
-                        <button
-                            type="button"
-                            disabled={disabled}
-                            className="flex items-center gap-2 text-primary-main  text-sm h-[33px] px-4 rounded hover:bg-slate-100"
-                            onClick={() => {
-                                onAddClick()
-                            }}
-                        >
-                            {' '}
-                            + Add{' '}
-                        </button>
-                   
+
+                <button
+                    type="button"
+                    disabled={disabled}
+                    className="flex items-center gap-2 text-primary-main  text-sm h-[33px] px-4 rounded hover:bg-slate-100"
+                    onClick={() => {
+                        onAddClick()
+                    }}
+                >
+                    {' '}
+                    + Add{' '}
+                </button>
             </div>
 
             <div className="px-2 border-b">

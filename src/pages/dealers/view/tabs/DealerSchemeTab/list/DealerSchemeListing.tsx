@@ -53,17 +53,19 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_ADD) &&
-                        <button
-                            onClick={() =>
-                                navigate('/dealers/' + dealerId + '/scheme/add')
-                            }
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            {' '}
-                            + Add Scheme{' '}
-                        </button>
-                    }
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_ADD
+                ) && (
+                    <button
+                        onClick={() =>
+                            navigate('/dealers/' + dealerId + '/scheme/add')
+                        }
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        {' '}
+                        + Add Scheme{' '}
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">

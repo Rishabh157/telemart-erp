@@ -55,7 +55,7 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Initial Call Three </ATMPageHeading>
-                    {isAuthorized(UserModuleNameTypes.ACTION_IC_THREE_ADD) &&
+                    {isAuthorized(UserModuleNameTypes.ACTION_IC_THREE_ADD) && (
                         <button
                             type="button"
                             onClick={() => navigate('add')}
@@ -63,7 +63,7 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                         >
                             + Add
                         </button>
-                    }
+                    )}
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

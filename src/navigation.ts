@@ -25,7 +25,7 @@ import { BiBox, BiPurchaseTagAlt, BiTestTube } from 'react-icons/bi'
 import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 import { TiFlowSwitch } from 'react-icons/ti'
-import { RiCustomerServiceLine } from "react-icons/ri";
+import { RiCustomerServiceLine } from 'react-icons/ri'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
 //import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 //import { BsFillCalendarCheckFill } from 'react-icons/bs'

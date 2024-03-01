@@ -43,10 +43,10 @@ const AddNdrDispositionWrapper = () => {
         setTimeout(() => {
             addDisposition({
                 ndrDisposition: values.ndrDisposition,
-                priority:  values.priority,
-                smsType:  values.smsType,
-                emailType:  values.emailType,
-                rtoAttempt:  values.rtoAttempt,
+                priority: values.priority,
+                smsType: values.smsType,
+                emailType: values.emailType,
+                rtoAttempt: values.rtoAttempt,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

@@ -142,24 +142,22 @@ const EditProductSubCategoryWrapper = (props: Props) => {
     }
 
     return (
-        
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <EditProductSubCategory
-                            formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditProductSubCategory
+                        formikProps={formikProps}
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

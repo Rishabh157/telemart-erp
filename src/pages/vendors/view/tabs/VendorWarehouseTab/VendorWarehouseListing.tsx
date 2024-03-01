@@ -66,7 +66,9 @@ const VendorWarehouseListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_ADD
+                ) && (
                     <button
                         onClick={() =>
                             navigate(`${AddpathName}`, {
@@ -78,7 +80,7 @@ const VendorWarehouseListing = ({
                         {' '}
                         Add
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -93,8 +95,8 @@ const VendorWarehouseListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

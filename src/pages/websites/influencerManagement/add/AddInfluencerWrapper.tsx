@@ -83,22 +83,20 @@ const AddInfluencerWrapper = (props: Props) => {
     }
 
     return (
-      
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddInfluencer
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-      
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddInfluencer
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

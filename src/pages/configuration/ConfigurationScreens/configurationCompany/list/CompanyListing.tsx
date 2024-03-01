@@ -69,17 +69,15 @@ const ConfigurationCompanyListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Company </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_COMPANY_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_COMPANY_ADD) && (
                     <button
-                        onClick={() =>
-                            navigate('/configurations/company/add')
-                        }
+                        onClick={() => navigate('/configurations/company/add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
                         {' '}
                         + Add Company{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -96,8 +94,8 @@ const ConfigurationCompanyListing = ({
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

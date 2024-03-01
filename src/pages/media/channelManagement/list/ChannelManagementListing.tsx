@@ -69,15 +69,17 @@ const ChannelManagementListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Channel Management </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_ADD) &&
-                        <button
-                            type="button"
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Channel
-                        </button>
-                    }
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_ADD
+                ) && (
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add Channel
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

@@ -178,13 +178,11 @@ const ListWebsiteBlogWrapper = () => {
 
     return (
         <>
-
             <ListWebsiteBlog
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
             />
-
         </>
     )
 }

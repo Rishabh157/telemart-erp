@@ -287,14 +287,19 @@ const DealersListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                   
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
-                    isView={isAuthorized(UserModuleNameTypes.ACTION_DEALER_VIEW)}
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DEALER_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DEALER_DELETE)}
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DELETE
+                    )}
                     handleViewActionButton={() => {
                         navigate(`${currentId}/general-information`)
                     }}

@@ -182,8 +182,6 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [seniorIsLoading, seniorIsFetching, seniorData])
 
-
-
     return (
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">

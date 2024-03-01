@@ -73,19 +73,19 @@ const ProductSubCategoryListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Product Sub Categories </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_ADD) &&
-                        <button
-                            onClick={() =>
-                                navigate(
-                                    '/configurations/product-sub-category/add'
-                                )
-                            }
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            {' '}
-                            + Add{' '}
-                        </button>
-                    }
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_ADD
+                ) && (
+                    <button
+                        onClick={() =>
+                            navigate('/configurations/product-sub-category/add')
+                        }
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        {' '}
+                        + Add{' '}
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

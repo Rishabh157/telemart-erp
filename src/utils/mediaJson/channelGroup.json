@@ -1,48 +1,45 @@
 {
-  "moduleId": "NAV_CHANNEL_GROUP",
-  "moduleName": "NAV_CHANNEL_GROUP",
-  "parentGroup": [
-    "NAV_MEDIA"
-  ],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_CHANNEL_GROUP_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
-      
+    "moduleId": "NAV_CHANNEL_GROUP",
+    "moduleName": "NAV_CHANNEL_GROUP",
+    "parentGroup": ["NAV_MEDIA"],
+    "moduleAction": [
         {
-          "fieldId": "CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME",
-          "fieldName": "Channel Group Name",
-          "fieldValue": "groupName"
+            "actionId": "ACTION_CHANNEL_GROUP_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME",
+                    "fieldName": "Channel Group Name",
+                    "fieldValue": "groupName"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_CHANNEL_GROUP_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_CHANNEL_GROUP_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_CHANNEL_GROUP_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_CHANNEL_GROUP_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [ "LIST"],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_CHANNEL_GROUP_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [ "LIST"],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_CHANNEL_GROUP_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [ "LIST"],
-      "fields": []
-    }
-  ]
+    ]
 }

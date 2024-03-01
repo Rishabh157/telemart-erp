@@ -204,13 +204,11 @@ const InfluencerListingWrapper = () => {
     }
     return (
         <>
-          
-                <InfluencerListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-          
+            <InfluencerListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

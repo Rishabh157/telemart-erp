@@ -348,30 +348,28 @@ const EditProductWrapper = () => {
     }
 
     return (
-        
-            <Formik
-                enableReinitialize={activeStep === 0}
-                initialValues={initialValues}
-                validationSchema={getValidationSchema(activeStep)}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
-                        <EditProduct
-                            formikProps={formikProps}
-                            steps={steps}
-                            activeStep={activeStep}
-                            setActiveStep={setActiveStep}
-                            breadcrumbs={breadcrumbs}
-                            pageHeading={pageHeading}
-                            allItems={allItems}
-                            allLanguages={allLanguages}
-                            apiStatus={apiStatus}
-                        />
-                    </Form>
-                )}
-            </Formik>
-       
+        <Formik
+            enableReinitialize={activeStep === 0}
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(activeStep)}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => (
+                <Form className="">
+                    <EditProduct
+                        formikProps={formikProps}
+                        steps={steps}
+                        activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        breadcrumbs={breadcrumbs}
+                        pageHeading={pageHeading}
+                        allItems={allItems}
+                        allLanguages={allLanguages}
+                        apiStatus={apiStatus}
+                    />
+                </Form>
+            )}
+        </Formik>
     )
 }
 

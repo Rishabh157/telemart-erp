@@ -95,23 +95,21 @@ const EditProductCategoryWrapper = (props: Props) => {
         dispatch(setSelectedProductCategory(data?.data))
     }, [dispatch, data, isLoading])
     return (
-        
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <EditProductCategoryListing
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditProductCategoryListing
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

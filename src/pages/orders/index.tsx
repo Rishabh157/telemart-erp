@@ -135,9 +135,11 @@ const ViewOrder = () => {
     // Access specific query parameters by their names
     const activeTab: keyof typeof statusProps | string | null =
         queryParams.get('orderStatus')
-    const allowedTabs = tabs?.filter((nav) => {
-        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
-    })?.map((tab) => tab)
+    const allowedTabs = tabs
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
     const breadcrumbs: BreadcrumbType[] = [
         {

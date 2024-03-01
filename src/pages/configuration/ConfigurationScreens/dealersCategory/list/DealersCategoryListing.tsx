@@ -66,7 +66,9 @@ const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Dealer Categories </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_DEALERS_CATEGORY_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_DEALERS_CATEGORY_ADD
+                ) && (
                     <button
                         onClick={() =>
                             navigate('/configurations/dealers-category/add')
@@ -76,7 +78,7 @@ const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -91,8 +93,8 @@ const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

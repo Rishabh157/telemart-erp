@@ -20,7 +20,7 @@ const OutwardTabs = (props: Props) => {
             label: 'Customer',
             icon: MdOutbond,
             path: 'customer',
-            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER,
         },
         {
             label: 'RTV',
@@ -50,8 +50,8 @@ const OutwardTabs = (props: Props) => {
         //     label: 'Replacements/Repackaging',
         //     icon: MdOutbond,
         //     path: 'replacement',
-        // name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER,     
-           // },
+        // name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER,
+        // },
         {
             label: 'Company',
             icon: MdOutbond,
@@ -61,9 +61,11 @@ const OutwardTabs = (props: Props) => {
     ]
     const [activeTab, setActiveTab] = useState(0)
 
-    const allowedTabs = tabs?.filter((nav) => {
-        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
-    })?.map((tab) => tab)
+    const allowedTabs = tabs
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
     useEffect(() => {
         const activeTabIndex = window.location.pathname.split('/')[5]

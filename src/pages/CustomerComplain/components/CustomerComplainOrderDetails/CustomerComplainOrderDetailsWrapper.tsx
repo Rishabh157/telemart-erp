@@ -25,7 +25,10 @@ export type FormInitialValues = {
     total: number
 }
 
-const CustomerComplainOrderDetailsWrapper = ({ orderId, setIsOpenCustomerOrderModel, }: Props) => {
+const CustomerComplainOrderDetailsWrapper = ({
+    orderId,
+    setIsOpenCustomerOrderModel,
+}: Props) => {
     const [orderDetails, setOrderDetails] = React.useState<OrderListResponse>()
 
     const initialValues: FormInitialValues = {
@@ -81,7 +84,9 @@ const CustomerComplainOrderDetailsWrapper = ({ orderId, setIsOpenCustomerOrderMo
                         </div>
                     )}
                     <CustomerComplainOrderDetailsForm
-                        setIsOpenCustomerOrderModel={setIsOpenCustomerOrderModel}
+                        setIsOpenCustomerOrderModel={
+                            setIsOpenCustomerOrderModel
+                        }
                         customerDetails={null}
                         // customerDetails={{customerDetails}}
                         formikProps={formikProps}

@@ -40,17 +40,15 @@ const VerticalNavBar = ({
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const location = useLocation();
-    let pathLocal = location?.pathname?.split("/")?.[1];
+    const location = useLocation()
+    let pathLocal = location?.pathname?.split('/')?.[1]
     const deviceIditem = localStorage.getItem('device-id') || ''
-    const { userData } = useGetLocalStorage();
+    const { userData } = useGetLocalStorage()
 
     useEffect(() => {
         dispatch(setDeviceId(deviceIditem))
     }, [deviceIditem, dispatch])
-    const { customized } = useSelector(
-        (state: RootState) => state?.auth
-    )
+    const { customized } = useSelector((state: RootState) => state?.auth)
 
     useEffect(() => {
         if (customized) {
@@ -69,62 +67,63 @@ const VerticalNavBar = ({
         return message
     }
     const getNavigate = (path: string) => {
-        if (pathLocal === "configurations") {
-            navigate(`/configurations/${path}`);
-            return;
+        if (pathLocal === 'configurations') {
+            navigate(`/configurations/${path}`)
+            return
         }
-        if (pathLocal === "sales&marketing") {
-            navigate(`/sales&marketing/${path}`);
-            return;
+        if (pathLocal === 'sales&marketing') {
+            navigate(`/sales&marketing/${path}`)
+            return
         }
-        if (pathLocal === "welcome") {
-            navigate(`/${pathLocal}`);
+        if (pathLocal === 'welcome') {
+            navigate(`/${pathLocal}`)
         }
-        navigate(`${path}`);
-    };
-
-
+        navigate(`${path}`)
+    }
 
     React.useEffect(() => {
         // Check if the function has been executed before
-        const hasExecuted = localStorage.getItem("hasExecuted");
-        if (userData?.userRole === "ADMIN") {
-            return;
+        const hasExecuted = localStorage.getItem('hasExecuted')
+        if (userData?.userRole === 'ADMIN') {
+            return
         }
         if (hasExecuted) {
-            return; // Exit early if the function has been executed
+            return // Exit early if the function has been executed
         }
         for (const nav of navigation) {
-            const isValue = isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
+            const isValue = isAuthorized(
+                nav?.name as keyof typeof UserModuleNameTypes
+            )
             if (isValue) {
-                getNavigate(nav.path as string);
-                localStorage.setItem("hasExecuted", "true");
-                break;
+                getNavigate(nav.path as string)
+                localStorage.setItem('hasExecuted', 'true')
+                break
             }
         }
-       
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
     const getCheckNavigate = (name: string) => {
         if (
-            name === UserModuleNameTypes.NAV_CONFIGURATION
-            || name === UserModuleNameTypes.NAV_DISPOSITION ||
+            name === UserModuleNameTypes.NAV_CONFIGURATION ||
+            name === UserModuleNameTypes.NAV_DISPOSITION ||
             name === UserModuleNameTypes.NAV_MEDIA ||
             name === UserModuleNameTypes.NAV_ASSETS ||
             name === UserModuleNameTypes.NAV_ALL_WEBSITE
         ) {
-            localStorage.removeItem("hasExecuted");
+            localStorage.removeItem('hasExecuted')
         }
-    };
+    }
 
     return (
         <div className="h-full  overflow-auto bg-white ">
             {/* Logo & Menu Icon */}
 
             <div
-                className={`flex px-3 py-2 items-center  bg-white sticky top-0 ${isCollapsed ? 'justify-between' : 'justify-between'
-                    }`}
+                className={`flex px-3 py-2 items-center  bg-white sticky top-0 ${
+                    isCollapsed ? 'justify-between' : 'justify-between'
+                }`}
             >
                 {/* Logo */}
                 {!isCollapsed && (
@@ -143,43 +142,47 @@ const VerticalNavBar = ({
                     className="flex flex-col gap-1 cursor-pointer p-1  "
                 >
                     <div
-                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500    ${!isCollapsed &&
+                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500    ${
+                            !isCollapsed &&
                             'origin-top-left translate-x-[1.5px]  rotate-45 -mt-3'
-                            }`}
+                        }`}
                     ></div>
                     {isCollapsed && (
                         <div className={`h-[1.5px] w-5 bg-slate-500  `}> </div>
                     )}
                     <div
-                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500  ${!isCollapsed &&
+                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500  ${
+                            !isCollapsed &&
                             'origin-top-left translate-y-2  -rotate-45 '
-                            }`}
+                        }`}
                     ></div>
                 </div>
-
             </div>
 
             {/* Navigations */}
             <div className="px-3 py-5 flex flex-col gap-1">
                 {navigation
                     ?.filter((permissionRoute: NavItemType) => {
-                        return isAuthorized(permissionRoute?.name as keyof typeof UserModuleNameTypes);
+                        return isAuthorized(
+                            permissionRoute?.name as keyof typeof UserModuleNameTypes
+                        )
                     })
                     .map((navItem, navIndex) => {
                         return (
                             <div
                                 key={navIndex}
                                 onClick={() => {
-                                    getCheckNavigate(navItem.name as string);
+                                    getCheckNavigate(navItem.name as string)
                                     if (customized) {
                                         const confirmValue: boolean =
                                             window.confirm(AlertText)
                                         if (confirmValue) {
                                             dispatch(setFieldCustomized(false))
-                                            navItem.path && navigate(navItem.path);
+                                            navItem.path &&
+                                                navigate(navItem.path)
                                         }
                                     } else {
-                                        navItem.path && navigate(navItem.path);
+                                        navItem.path && navigate(navItem.path)
                                     }
                                 }}
                                 className={`
@@ -196,10 +199,11 @@ const VerticalNavBar = ({
                 duration-500
                 text-normal
                 ${isCollapsed && 'justify-center'} 
-                ${isPathEqualtoNavItem(navItem)
-                                        ? 'bg-sky-50 text-sky-500 font-semibold'
-                                        : 'text-slate-500'
-                                    } 
+                ${
+                    isPathEqualtoNavItem(navItem)
+                        ? 'bg-sky-50 text-sky-500 font-semibold'
+                        : 'text-slate-500'
+                } 
                 `}
                             >
                                 <div className="py-1">

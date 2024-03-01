@@ -57,9 +57,10 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
-                        minHeight='35px'
+                        minHeight="35px"
                         labelClass="text-[12px] font-medium"
                         fontSizePlaceHolder='14px'
+                        fontSizeOptionsClass='13px'
                         size="xxs"
                         labelSize="xxs"
                         isMulti
@@ -100,9 +101,10 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     )}
 
                     <ATMSelectSearchable
-                        minHeight='25px'
+                        minHeight="25px"
                         labelClass="text-[12px] font-medium"
                         fontSizePlaceHolder='14px'
+                        fontSizeOptionsClass='13px'
                         componentClass="mt-2"
                         label="Age Group"
                         maxMenuHeight={150}
@@ -155,6 +157,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 labelClasses="text-slate-700 text-xs font-medium pt-1 mb-1 select-none"
                                 checked={isFacebookId}
                                 onChange={(e) => setFacebookId(e)}
+                                inputClasses='h-3 w-3'
                             />
 
                             {isFacebookId && (
@@ -191,6 +194,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 onChange={(e) => {
                                     setInstagramId(e)
                                 }}
+                                inputClasses='h-3 w-3'
                             />
 
                             {isInstagramId && (
@@ -215,9 +219,10 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
-                           minHeight='35px'
+                            minHeight='35px'
                             labelClass="text-[12px] font-medium"
                             fontSizePlaceHolder='14px'
+                            fontSizeOptionsClass='13px'
                             isMulti
                             isMenuOpen
                             labelSize="xxs"
@@ -325,7 +330,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 Available Loyalty Points
                             </span>
 
-                            <div className='text-xs'>
+                            <div className="text-xs">
                                 0{' '}
                                 <span className="text-[#814cd2] text-xs underline">
                                     Show Details
@@ -333,7 +338,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                             </div>
                         </div>
                         <div>
-                            <div className='mt-2'>
+                            <div className="mt-2">
                                 <div className="flex gap-x-32">
                                     <span className="text-slate-700 text-xs flex items-center">
                                         Burn Value

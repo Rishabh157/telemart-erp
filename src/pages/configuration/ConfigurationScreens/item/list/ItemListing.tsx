@@ -67,7 +67,7 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Item </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_ITEMS_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_ITEMS_ADD) && (
                     <button
                         onClick={() => navigate('/configurations/item/add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
@@ -75,7 +75,7 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -91,7 +91,7 @@ const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }
                     // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

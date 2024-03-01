@@ -58,8 +58,12 @@ const AssetsLocationWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

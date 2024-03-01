@@ -23,35 +23,33 @@ import TehsilListingWrapper from './tehsil/list/TehsilListingWrapper'
 
 const Locations = () => {
     return (
-        
-            <div className="w-full h-full flex gap-4  p-3 overflow-auto">
-                {/* Country */}
-                <div className=" h-full">
-                    <CountryListingWrapper />
-                </div>
-
-                {/* State */}
-                <div className=" h-full ">
-                    <StateListingWrapper />
-                </div>
-
-                <div className=" h-full">
-                    <DistrictListingWrapper />
-                </div>
-
-                <div className=" h-full">
-                    <TehsilListingWrapper />
-                </div>
-
-                <div className=" h-full">
-                    <PincodeListingWrapper />
-                </div>
-
-                <div className=" h-full">
-                    <AreaListingWrapper />
-                </div>
+        <div className="w-full h-full flex gap-4  p-3 overflow-auto">
+            {/* Country */}
+            <div className=" h-full">
+                <CountryListingWrapper />
             </div>
-       
+
+            {/* State */}
+            <div className=" h-full ">
+                <StateListingWrapper />
+            </div>
+
+            <div className=" h-full">
+                <DistrictListingWrapper />
+            </div>
+
+            <div className=" h-full">
+                <TehsilListingWrapper />
+            </div>
+
+            <div className=" h-full">
+                <PincodeListingWrapper />
+            </div>
+
+            <div className=" h-full">
+                <AreaListingWrapper />
+            </div>
+        </div>
     )
 }
 

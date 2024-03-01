@@ -6,7 +6,7 @@
             "actionId": "ACTION_USER_LIST",
             "actionUrl": "",
             "actionName": "LIST",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": [
                 {
@@ -50,7 +50,7 @@
             "actionId": "ACTION_USER_ADD",
             "actionUrl": "",
             "actionName": "ADD",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         },
@@ -58,7 +58,7 @@
             "actionId": "ACTION_USER_EDIT",
             "actionUrl": "",
             "actionName": "EDIT",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
         }

@@ -51,10 +51,10 @@ const AddDealerLayout = ({
                     name={`pincodeDetail[${itemIndex}].district`}
                     value={value.district}
                     onChange={(e) => {
-                    
                         if (
                             !values?.pincodeDetail?.find(
-                                (f) => f.district === e)
+                                (f) => f.district === e
+                            )
                         ) {
                             setFieldValue(
                                 `pincodeDetail[${itemIndex}].district`,

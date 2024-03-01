@@ -56,7 +56,7 @@ const BarcodeListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Barcode </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_BARCODE_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_BARCODE_ADD) && (
                     <button
                         onClick={() => {
                             navigate('add')
@@ -65,7 +65,7 @@ const BarcodeListing = ({
                     >
                         + Add Barcode
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

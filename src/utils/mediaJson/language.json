@@ -1,53 +1,45 @@
 {
-  "moduleId": "NAV_LANGUAGE",
-  "moduleName": "NAV_LANGUAGE",
-  "parentGroup": [
-    "NAV_CONFIGURATION"
-  ],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_LANGUAGE_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_LANGUAGE",
+    "moduleName": "NAV_LANGUAGE",
+    "parentGroup": ["NAV_CONFIGURATION"],
+    "moduleAction": [
         {
-          "fieldId": "LANGUAGE_LIST_LANGUAGE",
-          "fieldName": "LANGUAGE",
-          "fieldValue": "languageName"
+            "actionId": "ACTION_LANGUAGE_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "LANGUAGE_LIST_LANGUAGE",
+                    "fieldName": "LANGUAGE",
+                    "fieldValue": "languageName"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_LANGUAGE_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_LANGUAGE_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_LANGUAGE_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_LANGUAGE_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_LANGUAGE_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_LANGUAGE_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

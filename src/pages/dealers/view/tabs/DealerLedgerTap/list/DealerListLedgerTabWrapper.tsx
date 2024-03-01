@@ -84,7 +84,7 @@ const DealerListLedgerTabWrapper = () => {
                 return <span> {row.remark} </span>
             },
         },
-       
+
         {
             field: 'debitAmount',
             headerName: 'Debit Amount',

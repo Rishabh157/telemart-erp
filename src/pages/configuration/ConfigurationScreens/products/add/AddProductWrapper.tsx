@@ -313,30 +313,28 @@ const AddProductWrapper = () => {
     }
 
     return (
-        
-            <Formik
-                // enableReinitialize
-                initialValues={initialValues}
-                validationSchema={getValidationSchema(activeStep)}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
-                        <AddProduct
-                            formikProps={formikProps}
-                            steps={steps}
-                            activeStep={activeStep}
-                            setActiveStep={setActiveStep}
-                            breadcrumbs={breadcrumbs}
-                            pageHeading={pageHeading}
-                            allItems={allItems}
-                            allLanguages={allLanguages}
-                            apiStatus={apiStatus}
-                        />
-                    </Form>
-                )}
-            </Formik>
-       
+        <Formik
+            // enableReinitialize
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(activeStep)}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => (
+                <Form className="">
+                    <AddProduct
+                        formikProps={formikProps}
+                        steps={steps}
+                        activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        breadcrumbs={breadcrumbs}
+                        pageHeading={pageHeading}
+                        allItems={allItems}
+                        allLanguages={allLanguages}
+                        apiStatus={apiStatus}
+                    />
+                </Form>
+            )}
+        </Formik>
     )
 }
 

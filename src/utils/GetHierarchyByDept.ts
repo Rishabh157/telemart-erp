@@ -70,7 +70,6 @@ export const getHierarchyByDept = ({
     }
 
     return defaultComponent[department] || []
-
 }
 
 export const getHierarchyByDeptWithRole = ({
@@ -79,19 +78,22 @@ export const getHierarchyByDeptWithRole = ({
     department: keyof typeof GetHierarchByDeptProps
 }) => {
     const defaultComponent = {
-        [GetHierarchByDeptProps.SALES_DEPARTMENT]: Hierarchy.salesDepartment[0].value,
+        [GetHierarchByDeptProps.SALES_DEPARTMENT]:
+            Hierarchy.salesDepartment[0].value,
         [GetHierarchByDeptProps.HR_DEPARTMENT]: Hierarchy.hrDepartment[0].value,
         [GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT]:
             Hierarchy.distributionDepartment[0].value,
         [GetHierarchByDeptProps.FINANCE_DEPARTMENT]:
             Hierarchy.financeDepartment[0].value,
-        [GetHierarchByDeptProps.MEDIA_DEPARTMENT]: Hierarchy.mediaDepartment[0].value,
+        [GetHierarchByDeptProps.MEDIA_DEPARTMENT]:
+            Hierarchy.mediaDepartment[0].value,
         [GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT]:
             Hierarchy.mediaProductionDepartment[0].value,
         [GetHierarchByDeptProps.IT_DEPARTMENT]: Hierarchy.ITDepartment[0].value,
         [GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT]:
             Hierarchy.DevelopmentDepartment[0].value,
-        [GetHierarchByDeptProps.WEB_DEPARTMENT]: Hierarchy.webDepartment[0].value,
+        [GetHierarchByDeptProps.WEB_DEPARTMENT]:
+            Hierarchy.webDepartment[0].value,
         [GetHierarchByDeptProps.OPERATION_DEPARTMENT]:
             Hierarchy.operationDepartment[0].value,
         [GetHierarchByDeptProps.QUALITY_DEPARTMENT]:
@@ -100,9 +102,9 @@ export const getHierarchyByDeptWithRole = ({
             Hierarchy.logisticDepartment[0].value,
         [GetHierarchByDeptProps.MAPPING_AND_MIS_DEPARTMENT]:
             Hierarchy.mapingAndMISDepartment[0].value,
-        [GetHierarchByDeptProps.ADMIN_DEPARTMENT]: Hierarchy.adminDepartment[0].value,
+        [GetHierarchByDeptProps.ADMIN_DEPARTMENT]:
+            Hierarchy.adminDepartment[0].value,
     }
 
     return defaultComponent[department] || []
-
 }

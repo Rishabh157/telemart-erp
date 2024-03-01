@@ -72,7 +72,6 @@ const EditSlotManagementWrapper = () => {
         (state: RootState) => state?.slotManagement
     )
 
-
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { channelgroup }: any = useSelector(
         (state: RootState) => state?.channelGroup
@@ -115,8 +114,6 @@ const EditSlotManagementWrapper = () => {
         }
     }, [isChannelMgtLoading, isChannelMgtFetching, ChannelMgtDataApi, dispatch])
 
-
-
     const {
         isLoading,
         isFetching,
@@ -140,8 +137,6 @@ const EditSlotManagementWrapper = () => {
             dispatch(setSelectedTapManagement(TapeMgtdata?.data || []))
         }
     }, [isTapeMgtLoading, isTapeMgtFetching, TapeMgtdata, dispatch])
-
-
 
     useEffect(() => {
         if (!isCategoryLoading && !isCategoryFetching) {

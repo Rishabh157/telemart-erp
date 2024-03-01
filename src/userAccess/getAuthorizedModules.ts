@@ -1,8 +1,5 @@
 /* eslint-disable array-callback-return */
-import {
-    UserModuleActionTypes,
-   
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
 import {
     ModulesTypes,
     userAccesTypes,
@@ -85,37 +82,27 @@ export const isCheckAuthorizedModule = (
 
     // FOR CONFIGURATION
     if (UserModuleNameTypes.NAV_CONFIGURATION === moduleName) {
-        return modules?.some((ele) =>
-            configurationModules.includes(ele as any)
-        )
+        return modules?.some((ele) => configurationModules.includes(ele as any))
     }
 
     //FOR MEDIA
     if (UserModuleNameTypes.NAV_MEDIA === moduleName) {
-        return modules?.some((ele) =>
-            mediaModules.includes(ele as any)
-        )
+        return modules?.some((ele) => mediaModules.includes(ele as any))
     }
 
     //FOR ASSET
     if (UserModuleNameTypes.NAV_ASSETS === moduleName) {
-        return modules?.some((ele) =>
-            assetModules.includes(ele as any)
-        )
+        return modules?.some((ele) => assetModules.includes(ele as any))
     }
 
     //FOR DISPOSITION
     if (UserModuleNameTypes.NAV_DISPOSITION === moduleName) {
-        return modules?.some((ele) =>
-            dispositionModule.includes(ele as any)
-        )
+        return modules?.some((ele) => dispositionModule.includes(ele as any))
     }
 
     //FOR WEBSITE
     if (UserModuleNameTypes.NAV_ALL_WEBSITE === moduleName) {
-        return modules?.some((ele) =>
-            allWebsiteModule.includes(ele as any)
-        )
+        return modules?.some((ele) => allWebsiteModule.includes(ele as any))
     }
 
     return modules.includes(moduleName)

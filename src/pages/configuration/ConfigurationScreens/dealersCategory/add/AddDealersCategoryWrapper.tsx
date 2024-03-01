@@ -88,22 +88,20 @@ const AddDealersCategoryWrapper = (props: Props) => {
     }
 
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddDealersCategory
-                            formikProps={formikProps}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddDealersCategory
+                        formikProps={formikProps}
+                        apiStatus={apiStatus}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

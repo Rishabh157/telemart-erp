@@ -5,6 +5,7 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { ImCheckboxChecked } from 'react-icons/im'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -74,19 +75,28 @@ const ViewDispositionThree = ({ formikProps }: Props) => {
                                 <label className="w-60 font-medium text-l">
                                     SMS Type:
                                 </label>
-                                <span>{values?.smsType || 'NA'}</span>
+                                <span>
+                                    {values?.smsType?.replaceAll('_', ' ') ||
+                                        'NA'}
+                                </span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
                                     Email Type:
                                 </label>
-                                <span>{values?.emailType || 'NA'}</span>
+                                <span>
+                                    {values?.emailType?.replaceAll('_', ' ') ||
+                                        'NA'}
+                                </span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
                                     Whatsapp Template:
                                 </label>
-                                <span>{values?.whatsApp || 'NA'}</span>
+                                <span>
+                                    {values?.whatsApp?.replaceAll('_', ' ') ||
+                                        'NA'}
+                                </span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
@@ -103,15 +113,17 @@ const ViewDispositionThree = ({ formikProps }: Props) => {
                                         (criteria) => (
                                             <div
                                                 key={criteria}
-                                                className="flex items-center"
+                                                className="flex gap-x-4 items-center"
                                             >
-                                                <input
-                                                    type="checkbox"
-                                                    className="form-checkbox h-5 w-5 mr-2"
-                                                    checked
+                                                <ImCheckboxChecked
+                                                    size={22}
+                                                    color="#87A922"
                                                 />
                                                 <span className="gap-8">
-                                                    {criteria}
+                                                    {criteria?.replaceAll(
+                                                        '_',
+                                                        ' '
+                                                    )}
                                                 </span>
                                             </div>
                                         )

@@ -19,7 +19,6 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 
-
 // |-- Redux --|
 import {
     setPage,
@@ -63,14 +62,18 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Sale Orders </ATMPageHeading>
-                {isAuthorized(isDealerPath ? UserModuleNameTypes.ACTION_DEALER_DEALER_SALE_ORDER_ADD : UserModuleNameTypes.ACTION_SALE_ORDER_ADD) &&
+                {isAuthorized(
+                    isDealerPath
+                        ? UserModuleNameTypes.ACTION_DEALER_DEALER_SALE_ORDER_ADD
+                        : UserModuleNameTypes.ACTION_SALE_ORDER_ADD
+                ) && (
                     <button
                         onClick={() => navigate('add-sale-order')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
                         + Add Sale Order
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
@@ -87,8 +90,8 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

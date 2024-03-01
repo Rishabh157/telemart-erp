@@ -70,7 +70,9 @@ const DealerWarehouseListing = ({
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 {/* {isShowAddWarehouseButton && ( */}
-                {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_ADD
+                ) && (
                     <button
                         onClick={() =>
                             navigate(`${AddpathName}`, {
@@ -81,7 +83,7 @@ const DealerWarehouseListing = ({
                     >
                         + Add
                     </button>
-                }
+                )}
                 {/* )} */}
             </div>
 
@@ -97,8 +99,8 @@ const DealerWarehouseListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

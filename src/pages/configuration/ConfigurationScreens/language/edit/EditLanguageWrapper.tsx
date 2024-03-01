@@ -88,23 +88,21 @@ const EditLanguageWrapper = (props: Props) => {
         dispatch(setSelectedItem(data?.data))
     }, [dispatch, data, isLoading, isFetching])
     return (
-        
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <EditLanguage
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditLanguage
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

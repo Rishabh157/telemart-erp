@@ -70,7 +70,7 @@ const EditCallCenterMasterWrapper = (props: Props) => {
                     companyId: userData?.companyId || '',
                 },
                 id: Id || '',
-            }).then((res:any) => {
+            }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Updated successfully!')
@@ -92,23 +92,21 @@ const EditCallCenterMasterWrapper = (props: Props) => {
         }
     }, [dispatch, data, isLoading, isFetching])
     return (
-        
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <EditCallCenterMaster
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditCallCenterMaster
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

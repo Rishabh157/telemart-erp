@@ -7,9 +7,9 @@
 
 // |-- Internal Dependencies --|
 // import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Mutex } from "async-mutex";
-import { setAccessToken, setRefreshToken } from "src/redux/slices/authSlice";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { Mutex } from 'async-mutex'
+import { setAccessToken, setRefreshToken } from 'src/redux/slices/authSlice'
 // import { setAccessToken, setRefreshToken } from "src/redux/slices/AuthSlice";
 import { BASE_URL } from 'src/utils/constants/index'
 const tagTypes = [
@@ -57,7 +57,6 @@ const tagTypes = [
 
 // export default apiSlice
 
-
 // import {
 //   authTokenKeyName,
 //   clearLocalStorage,
@@ -66,7 +65,7 @@ const tagTypes = [
 // import { BASE_URL } from "../utils/constants/index";
 
 // const tagTypes = ["project", "ticket", "chats"];
-const mutex = new Mutex();
+const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
     baseUrl: `${BASE_URL}`,
@@ -88,37 +87,41 @@ const baseQuery = fetchBaseQuery({
 
         return headers
     },
-});
+})
 
 const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
-    await mutex.waitForUnlock();
-    let result = await baseQuery(args, api, extraOptions);
+    await mutex.waitForUnlock()
+    let result = await baseQuery(args, api, extraOptions)
     if (result?.error && result?.error?.status === 401) {
         if (!mutex?.isLocked()) {
-            const release = await mutex.acquire();
+            const release = await mutex.acquire()
             try {
                 const refreshResult: any = await baseQuery(
                     {
-                        url: "/user/refresh-token",
-                        method: "POST",
-                        body: { refreshToken: localStorage.getItem("refreshToken") },
+                        url: '/user/refresh-token',
+                        method: 'POST',
+                        body: {
+                            refreshToken: localStorage.getItem('refreshToken'),
+                        },
                     },
                     api,
                     extraOptions
-                );
+                )
                 if (refreshResult?.data) {
                     localStorage.setItem(
                         'authToken',
                         refreshResult?.data?.data?.token
-                    );
+                    )
                     localStorage.setItem(
                         'refreshToken',
                         refreshResult?.data?.data?.refreshToken
-                    );
-                    api.dispatch(setAccessToken(refreshResult?.data?.data?.token));
+                    )
+                    api.dispatch(
+                        setAccessToken(refreshResult?.data?.data?.token)
+                    )
                     api.dispatch(
                         setRefreshToken(refreshResult?.data?.data?.refreshToken)
-                    );
+                    )
                     // let userData = {
                     //     userId: userId,
                     //     fullName: firstName + lastName,
@@ -142,27 +145,27 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
                     //         userId: refreshResult?.data?.data?.userId,
                     //     })
                     // );
-                    result = await baseQuery(args, api, extraOptions);
+                    result = await baseQuery(args, api, extraOptions)
                 } else {
                     localStorage.clear()
-                    window.location.replace("/login");
+                    window.location.replace('/login')
                 }
             } finally {
-                release();
+                release()
             }
         } else {
-            await mutex.waitForUnlock();
-            result = await baseQuery(args, api, extraOptions);
+            await mutex.waitForUnlock()
+            result = await baseQuery(args, api, extraOptions)
         }
     }
-    return result;
-};
+    return result
+}
 
 export const apiSlice = createApi({
-    reducerPath: "apiSlice",
+    reducerPath: 'apiSlice',
     baseQuery: baseQueryWithReauth,
     tagTypes: tagTypes,
     endpoints: () => ({}),
-});
+})
 
-export default apiSlice;
+export default apiSlice

@@ -166,26 +166,24 @@ const AddCompanyWrapper = () => {
     }
 
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={getValidationSchema(activeStep)}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
-                        <AddCompany
-                            formikProps={formikProps}
-                            steps={steps}
-                            activeStep={activeStep}
-                            setActiveStep={setActiveStep}
-                            breadcrumbs={breadcrumbs}
-                            pageHeading={pageHeading}
-                        />
-                    </Form>
-                )}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={getValidationSchema(activeStep)}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => (
+                <Form className="">
+                    <AddCompany
+                        formikProps={formikProps}
+                        steps={steps}
+                        activeStep={activeStep}
+                        setActiveStep={setActiveStep}
+                        breadcrumbs={breadcrumbs}
+                        pageHeading={pageHeading}
+                    />
+                </Form>
+            )}
+        </Formik>
     )
 }
 

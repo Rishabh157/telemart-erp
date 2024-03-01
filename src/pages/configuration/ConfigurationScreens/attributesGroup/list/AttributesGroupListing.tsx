@@ -31,7 +31,6 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
-
 // |-- Types --|
 type Props = {
     columns: any[]
@@ -69,7 +68,9 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Attributes Group </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
+                ) && (
                     <button
                         onClick={() => {
                             navigate('/configurations/attributes-group/add')
@@ -79,8 +80,7 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add{' '}
                     </button>
-                }
-
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -95,8 +95,8 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
