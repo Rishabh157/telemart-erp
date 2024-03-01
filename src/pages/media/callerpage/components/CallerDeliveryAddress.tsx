@@ -730,6 +730,7 @@ const CallerDeliveryAddress = ({
                             name="autoFillingShippingAddress"
                             value={handleAutoFillShippingAddress(values) || ''}
                             placeholder="AUTOFILL SHIPPING ADDRESS"
+                            className="placeholder:text-xs text-xs"
                             minRows={9}
                             readOnly={true}
                             onChange={(value) =>
