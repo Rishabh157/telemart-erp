@@ -19,7 +19,7 @@ const CallerHeader = ({
 CallerHeaderPropsTypes) => {
     return (
         <div className="bg-[#87527C] py-1 px-2">
-            <div className="flex justify-between gap-x-6 ">
+            <div className="flex justify-between gap-x-2 ">
                 <div className="w-full">
                     <h3 className="text-white font-semibold text-[10px]">
                         CAMPAIGN

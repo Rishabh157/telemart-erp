@@ -36,6 +36,7 @@ import { CompanyBranchListResponse } from 'src/models'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import {
     useGetFloorMangerUserByCallCenterIdQuery,
+    useGetSeniorUsersQuery,
     useGetTeamLeadrUserByCallCenterIdQuery,
 } from 'src/services/UserServices'
 import { RootState } from 'src/redux/store'
@@ -68,7 +69,32 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const [florManagerOptionList, setFlorManagerOptionList] = useState([])
     const [teamLeadOptionList, setTeamLeadOptionList] = useState([])
     const [branchOptionList, setBranchOptionList] = useState([])
-
+    const [userSeniorOptions, setSenoirRole] = useState<any[]>([])
+    // senior Apidata
+    const {
+        data: seniorData,
+        isFetching: seniorIsFetching,
+        isLoading: seniorIsLoading,
+    } = useGetSeniorUsersQuery(
+        {
+            userrole: values?.userRole,
+        },
+        {
+            skip: !values?.userRole,
+        }
+    )
+    React.useEffect(() => {
+        if (!seniorIsLoading && !seniorIsFetching) {
+            const senoirOptions = seniorData?.data?.map((ele: any) => {
+                return {
+                    label: ele?.userName,
+                    value: ele?._id,
+                }
+            })
+            setSenoirRole(senoirOptions)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [seniorIsLoading, seniorIsFetching, seniorData])
     const { data, isFetching, isLoading } = useGetAllCompaniesBranchQuery('')
 
     useEffect(() => {
@@ -302,6 +328,16 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 }
                                 options={userRole}
                                 label="User Role"
+                            />
+                            <ATMSelectSearchable
+                                name="mySenior"
+                                // required
+                                value={values.mySenior || ''}
+                                onChange={(e) =>
+                                    handleSetFieldValue('mySenior', e)
+                                }
+                                options={userSeniorOptions}
+                                label="senior"
                             />
                             <ATMSwitchButton
                                 label="isAgent"

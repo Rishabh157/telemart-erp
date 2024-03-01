@@ -108,18 +108,22 @@ const ATMTable = <T extends {}>({
                     return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
                 })
                     ?.map((column, index) => {
-                        return (
-                            !column.hidden && (
-                                <div
-                                    key={column.field + index}
-                                    className={`${column.flex
-                                        } text-sm text-black  font-semibold px-2 flex justify-${column.align || 'start'
-                                        }  ${column.extraClasses}`}
-                                >
-                                    {column.headerName}
-                                </div>
+                        if (column?.hidden) {
+                            return null
+                        } else {
+                            return (
+                                (
+                                    <div
+                                        key={column.field + index}
+                                        className={`${column.flex
+                                            } text-sm text-black  font-semibold px-2 flex justify-${column.align || 'start'
+                                            }  ${column.extraClasses}`}
+                                    >
+                                        {column.headerName}
+                                    </div>
+                                )
                             )
-                        )
+                        }
                     })}
             </div>
 
@@ -187,20 +191,24 @@ const ATMTable = <T extends {}>({
                             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
                         })
                             ?.map((column, index) => {
-                                return (
-                                    !column.hidden && (
-                                        <div
-                                            key={column.field + index}
-                                            className={`${column.flex
-                                                } text-sm text-slate-600 px-2 flex justify-${column.align || 'start'
-                                                } ${column.extraClasses}`}
-                                        >
-                                            {column.renderCell
-                                                ? column.renderCell(row)
-                                                : row[column.field]}
-                                        </div>
+                                if (column.hidden) {
+                                    return null
+                                } else {
+                                    return (
+                                        (
+                                            <div
+                                                key={column.field + index}
+                                                className={`${column.flex
+                                                    } text-sm text-slate-600 px-2 flex justify-${column.align || 'start'
+                                                    } ${column.extraClasses}`}
+                                            >
+                                                {column.renderCell
+                                                    ? column.renderCell(row)
+                                                    : row[column.field]}
+                                            </div>
+                                        )
                                     )
-                                )
+                                }
                             })}
                     </div>
                 ))

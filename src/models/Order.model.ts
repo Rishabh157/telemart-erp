@@ -9,6 +9,7 @@
 export type OrderListResponse = {
     _id: string
     orderNumber: number
+    inquiryNumber: string
     assignDealerId: string | null
     assignWarehouseId: string | null
     assignDealerLabel: string

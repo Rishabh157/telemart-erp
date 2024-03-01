@@ -17,7 +17,6 @@ import { v4 as uuidv4 } from 'uuid'
 import Authorization from './Authorization'
 // import Authorization from './Authorization'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
-import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
 import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
@@ -70,7 +69,7 @@ import {
     AddSlotManagementWrapper,
     AddTapeManagementWrapper,
     AddUserWrapper,
-    AddVendorWarehouseWrapper,
+    // AddVendorWarehouseWrapper,
     AddVendorWrapper,
     AddWarehouseWrapper,
     AddWebsiteBlogWrapper,
@@ -273,8 +272,7 @@ import DispositionLayout from './pages/disposition/DispositionLayout'
 import WebsitesLayout from './pages/websites/WebsiteLayout'
 import Welcome from './pages/welcome/Welcome'
 import Successfully from './pages/welcome/Successfully'
-// import Successfully from './pages/welcome/Successfully'
-// import Welcome from './pages/welcome/Welcome'
+import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''

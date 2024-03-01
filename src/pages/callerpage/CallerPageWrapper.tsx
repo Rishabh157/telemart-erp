@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { number, object, string } from 'yup'
 import { showToast } from 'src/utils'
@@ -17,7 +17,7 @@ import {
 } from 'src/redux/slices/media/inboundCallerSlice'
 import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import {
-    // useGetPaginationInboundCallerQuery,
+    useGetOrderNumberUnAuthCallerDataQuery,
     useGetPaginationUnAuthCallerDataQuery,
 } from 'src/services/CallerService'
 import { OrderListResponse } from 'src/models'
@@ -83,7 +83,16 @@ export type FormInitialValues = {
     status: string
 }
 
+enum TabTypes {
+    history = 'history',
+    order = 'order',
+    complaint = 'complaint',
+}
+
 const CallerPageWrapper = () => {
+    const [orderData, setOrderData] = useState<any>({})
+    const [activeTab, setActiveTab] = useState<TabTypes>(TabTypes.history)
+
     const [apiStatus, setApiStatus] = React.useState(false)
     const locationUrl = useLocation()
     const queryParams = new URLSearchParams(locationUrl.search)
@@ -101,15 +110,16 @@ const CallerPageWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span>{row.orderNumber} </span>
+                <span>{row.orderNumber === null ? '-' : row.orderNumber}</span>
             ),
         },
         {
-            field: 'enqNo',
+            field: 'inquiryNumber',
             headerName: 'Enquiry No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
@@ -118,19 +128,19 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.agentName} </span>
             ),
         },
         {
-            field: 'agendId',
+            field: 'agendName',
             headerName: 'Agent ID',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.agentName} </span>
-            ),
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
         {
             field: 'edpDate',
@@ -138,18 +148,18 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <span> {row.agentName} </span>
-            // ),
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
         {
-            field: 'customerName',
+            field: 'reciversName',
             headerName: 'Customer Name',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
-                <span> {row.customerName} </span>
+                <span> {row.reciversName} </span>
             ),
         },
         {
@@ -168,6 +178,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.shcemeQuantity} </span>
             ),
@@ -178,6 +189,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.dispositionLevelThree} </span>
             ),
@@ -188,6 +200,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.districtLabel} </span>
             ),
@@ -198,6 +211,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.pincodeLabel} </span>
             ),
@@ -208,6 +222,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> {row.remark} </span>,
         },
         {
@@ -216,6 +231,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.dealerCode} </span>
             ),
@@ -226,9 +242,8 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.dealerStatus} </span>
-            ),
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
         {
             field: 'status',
@@ -236,6 +251,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             // renderCell: (row: OrderListResponse) => (
             //     <span> {row?.dealerCode} </span>
             // ),
@@ -246,9 +262,10 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <span> {row?.de} </span>
-            // ),
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.callCenterLabel} </span>
+            ),
         },
         {
             field: 'wareHouseLabel',
@@ -256,6 +273,7 @@ const CallerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.wareHouseLabel} </span>
             ),
@@ -264,11 +282,70 @@ const CallerPageWrapper = () => {
             field: 'trackingNo',
             headerName: 'Tracking No.',
             flex: 'flex-[3_3_0%]',
+            align: 'end',
+            extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => <span> NA </span>,
+        },
+        // For Complaint Tab Showing Fields
+        {
+            field: 'complaintNumber',
+            headerName: 'Complaint No.',
+            flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
-            // renderCell: (row: OrderListResponse) => (
-            //     <span> {row?.assignWarehouseLabel} </span>
-            // ),
+            hidden: !(activeTab === TabTypes?.complaint),
+        },
+        {
+            field: 'customerNumber',
+            headerName: 'Customer Number',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            hidden: !(activeTab === TabTypes?.complaint),
+        },
+        {
+            field: 'orderStatus',
+            headerName: 'Order Status',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.orderStatus} </span>
+            ),
+        },
+        {
+            field: 'icOneLabel',
+            headerName: 'IC One',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            hidden: !(activeTab === TabTypes?.complaint),
+        },
+        {
+            field: 'icTwoLabel',
+            headerName: 'IC Two',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            hidden: !(activeTab === TabTypes?.complaint),
+        },
+        {
+            field: 'icThreeLabel',
+            headerName: 'IC Three',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            hidden: !(activeTab === TabTypes?.complaint),
+        },
+        {
+            field: 'remark',
+            headerName: 'Remark',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs',
+            hidden: !(activeTab === TabTypes?.complaint),
         },
     ]
 
@@ -277,12 +354,7 @@ const CallerPageWrapper = () => {
     )
     const navigate = useNavigate()
 
-    const {
-        // page,
-        // rowsPerPage,
-        // searchValue,
-        items,
-    } = inboundCallerState
+    const { items, isTableLoading } = inboundCallerState
 
     // Table Data with MobileNo filtered
 
@@ -294,7 +366,7 @@ const CallerPageWrapper = () => {
         campaign: campaignId as string,
         callType: calltype as string,
         incomingCallerNo: '',
-        customerName: '',
+        customerName: orderData?.customerName || '',
         didNo: didNumber as string,
         flagStatus: '',
         productGroupId: null,
@@ -307,44 +379,44 @@ const CallerPageWrapper = () => {
         // DELEVERY ADDRESS SELECT OPTIONS
         countryId: null,
         countryLabel: '',
-        pincodeId: null,
-        pincodeLabel: '',
-        stateId: null,
-        stateLabel: '',
+        pincodeId: orderData?.pincodeId || null,
+        pincodeLabel: orderData?.pincodeLabel || '',
+        stateId: orderData?.stateId || null,
+        stateLabel: orderData?.stateLabel || '',
         // villageId: null,
-        areaId: null,
-        areaLabel: '',
-        districtId: null,
-        districtLabel: '',
-        tehsilId: null,
-        tehsilLabel: '',
+        areaId: orderData?.areaId || null,
+        areaLabel: orderData?.areaLabel || '',
+        districtId: orderData?.districtId || null,
+        districtLabel: orderData?.districtLabel || '',
+        tehsilId: orderData?.tehsilId || null,
+        tehsilLabel: orderData?.tehsilLabel || '',
         typeOfAddress: '',
-        reciversName: '',
+        reciversName: orderData?.reciversName || '',
         preffered_delivery_start_time: '',
         preffered_delivery_end_time: '',
         preffered_delivery_date: null,
-        houseNumber: '',
-        streetNumber: '',
-        landmark: '',
+        houseNumber: orderData?.houseNumber || '',
+        streetNumber: orderData?.streetNumber || '',
+        landmark: orderData?.landmark || '',
         mobileNo: phoneNumber as string,
-        whatsappNo: '',
-        autoFillingShippingAddress: '',
+        whatsappNo: orderData?.whatsappNo || '',
+        autoFillingShippingAddress: orderData?.autoFillingShippingAddress || '',
         // isRecording: false,
-        gender: 'MALE',
-        orderFor: [],
-        orderForOther: '',
-        ageGroup: '',
-        emailId: '',
+        gender: orderData?.gender || 'MALE',
+        orderFor: orderData?.orderFor || [],
+        orderForOther: orderData?.orderForOther || '',
+        ageGroup: orderData?.ageGroup || '',
+        emailId: orderData?.emailId || '',
         socialMedia: {
-            facebook: '',
-            instagram: '',
+            facebook: orderData?.socialMedia?.facebook || '',
+            instagram: orderData?.socialMedia?.instagram || '',
         },
-        medicalIssue: [],
+        medicalIssue: orderData?.medicalIssue || [],
         paymentMode: 'COD',
         remark: '',
         dispositionLevelTwoId: null,
         dispositionLevelThreeId: null,
-        alternateNo: '',
+        alternateNo: orderData?.alternateNo || '',
         status: statusProps.fresh,
     }
 
@@ -399,31 +471,23 @@ const CallerPageWrapper = () => {
         isFetching: isCallerFetching,
         isLoading: isCallerLoading,
     } = useGetPaginationUnAuthCallerDataQuery(
+        { phoneNo: phoneNumber || '', type: activeTab },
+        {
+            skip: !phoneNumber,
+        }
+    )
+
+    //
+    const {
+        data: singleCallerListingData,
+        isFetching: singleIsCallerFetching,
+        isLoading: singleIsCallerLoading,
+    } = useGetOrderNumberUnAuthCallerDataQuery(
         { phoneNo: phoneNumber || '' },
         {
             skip: !phoneNumber,
         }
     )
-    // const {
-    //     data: callerListingData,
-    //     isFetching: isCallerFetching,
-    //     isLoading: isCallerLoading,
-    // } = useGetPaginationUnAuthCallerDataQuery({
-    //     limit: rowsPerPage,
-    //     searchValue: searchValue,
-    //     params: ['didNo'],
-    //     page: page,
-    //     filterBy: [
-    //         {
-    //             fieldName: 'mobileNo',
-    //             value: phoneNumber,
-    //         },
-    //     ],
-    //     dateFilter: {},
-    //     orderBy: 'createdAt',
-    //     orderByValue: -1,
-    //     isPaginationRequired: true,
-    // })
 
     useEffect(() => {
         if (!isCallerFetching && !isCallerLoading) {
@@ -504,9 +568,9 @@ const CallerPageWrapper = () => {
         let callDataItem = JSON.parse(callDetails)
 
         const { preffered_delivery_date, ...rest } = initialValues
-        // use object destructuring to remove the _id property
 
         if (!callDataItem) {
+            // use object destructuring to remove the _id property
             AddCallerForm({
                 ...rest,
                 preffered_delivery_date: preffered_delivery_date || '',
@@ -534,33 +598,44 @@ const CallerPageWrapper = () => {
                 }
             })
         }
-        // setApiCalled(true)
+
+        return () => {
+            // Remove the localStorage item when component unmounts
+            localStorage.removeItem('callerPageData')
+        }
         // eslint-disable-next-line
-    }, [])
+    }, [orderData])
+
+    useEffect(() => {
+        if (!singleIsCallerFetching && !singleIsCallerLoading) {
+            setOrderData(singleCallerListingData?.data)
+        }
+    }, [singleCallerListingData, singleIsCallerFetching, singleIsCallerLoading])
 
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                // validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <form autoComplete="off">
-                            <CallerPage
-                                formikProps={formikProps}
-                                didItems={didItems}
-                                column={columns}
-                                rows={items}
-                                apiStatus={apiStatus}
-                            />
-                        </form>
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            // validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <form autoComplete="off">
+                        <CallerPage
+                            formikProps={formikProps}
+                            didItems={didItems}
+                            activeTab={TabTypes[activeTab]}
+                            setActiveTab={(value) => setActiveTab(value as any)}
+                            column={columns}
+                            rows={items}
+                            apiStatus={apiStatus}
+                            isTableLoading={isTableLoading}
+                        />
+                    </form>
+                )
+            }}
+        </Formik>
     )
 }
 

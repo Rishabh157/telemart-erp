@@ -7,30 +7,31 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { boolean, object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { boolean, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditUser from './EditUser'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { showToast } from 'src/utils'
 import {
     useGetUserByIdQuery,
     useUpdateNewUserMutation,
 } from 'src/services/UserServices'
+import { showToast } from 'src/utils'
+import EditUser from './EditUser'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setSelectedItem } from 'src/redux/slices/userSlice'
-import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { CallCenterMasterListResponse } from 'src/models'
 import { setItems } from 'src/redux/slices/CallCenterMasterSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { setSelectedItem } from 'src/redux/slices/userSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
+import { getHierarchyByDeptWithRole } from 'src/utils/GetHierarchyByDept'
 
 // |-- Types --|
 type Props = {}
@@ -51,6 +52,7 @@ interface UserData {
     callCenterId: string | null
     floorManagerId: string | null
     teamLeadId: string | null
+    mySenior: string | null
 }
 export type FormInitialValues = {
     firstName: string
@@ -68,6 +70,7 @@ export type FormInitialValues = {
     callCenterId: string
     floorManagerId: string
     teamLeadId: string
+    mySenior: string | null
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -112,6 +115,18 @@ const EditUserWrapper = (props: Props) => {
         callCenterId: selectedItem?.callCenterId,
         floorManagerId: selectedItem?.floorManagerId,
         teamLeadId: selectedItem?.teamLeadId,
+        mySenior: selectedItem?.mySenior
+    }
+    const ref = useRef<any>(null)
+    const getSeniorValid = (userRole: any, schema: any) => {
+        const position = getHierarchyByDeptWithRole({
+            department: ref?.current?.values?.userDepartment as any,
+        })
+
+        if (userRole[0] === position) {
+            return false
+        }
+        return true
     }
 
     // Form Validation Schema
@@ -119,11 +134,17 @@ const EditUserWrapper = (props: Props) => {
         firstName: string().required('First Name is required'),
         lastName: string().required('Last Name is required'),
         userName: string().required('User Name is required'),
+        userRole: string().required('User Role is required'),
 
         isAgent: boolean(),
         teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
             return isAgent[0]
                 ? schema.required('Team Lead ID is required')
+                : schema.notRequired()
+        }),
+        mySenior: string().when(['userRole'], (userRole, schema) => {
+            return getSeniorValid(userRole, schema)
+                ? schema.required('Senioer is required')
                 : schema.notRequired()
         }),
         floorManagerId: string().when(['isAgent'], (isAgent, schema) => {
@@ -144,7 +165,6 @@ const EditUserWrapper = (props: Props) => {
 
         branchId: string().required('branch name is required'),
         userDepartment: string().required('User Department is required'),
-        userRole: string().required('User Role is required'),
         password: string().required('Password is required'),
         // email: string().email('Invalid Email ID'),
         // .required('Email is required'),
@@ -179,6 +199,7 @@ const EditUserWrapper = (props: Props) => {
                 callCenterId: values.callCenterId || null,
                 floorManagerId: values.floorManagerId || null,
                 teamLeadId: values.teamLeadId || null,
+                mySenior: values?.mySenior
             }
 
             if (values?.password) {
@@ -235,6 +256,7 @@ const EditUserWrapper = (props: Props) => {
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
+                innerRef={ref as any}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
                     return (

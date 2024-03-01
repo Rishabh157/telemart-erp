@@ -13,7 +13,7 @@ import { IconType } from 'react-icons'
 import { MdOutbond } from 'react-icons/md'
 import {
     useLocation,
-    //  useNavigate 
+    //  useNavigate
 } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
@@ -42,7 +42,7 @@ export enum statusProps {
     una = 'UNA',
     pnd = 'PND',
     urgent = 'URGENT',
-    nonAction = 'NON_ACTION',
+    'non-action' = 'NON_ACTION',
 }
 
 const ViewOrder = () => {
@@ -123,9 +123,7 @@ const ViewOrder = () => {
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
-    const { search,
-        // state, pathname 
-    } = useLocation()
+    const { search } = useLocation()
     const queryParams = new URLSearchParams(search)
 
     // Access specific query parameters by their names
