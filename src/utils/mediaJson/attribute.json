@@ -1,51 +1,45 @@
 {
-  "moduleId": "NAV_ATTRIBUTE",
-  "moduleName": "NAV_ATTRIBUTE",
-  "parentGroup": ["NAV_CONFIGURATION"],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_ATTRIBUTE_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_ATTRIBUTE",
+    "moduleName": "NAV_ATTRIBUTE",
+    "parentGroup": ["NAV_CONFIGURATION"],
+    "moduleAction": [
         {
-          "fieldId": "ATTRIBUTE_LIST_ATTRIBUTE_NAME",
-          "fieldName": "Attribute Name",
-          "fieldValue": "attributeName"
+            "actionId": "ACTION_ATTRIBUTE_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "ATTRIBUTE_LIST_ATTRIBUTE_NAME",
+                    "fieldName": "Attribute Name",
+                    "fieldValue": "attributeName"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_ATTRIBUTE_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ATTRIBUTE_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ATTRIBUTE_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_ATTRIBUTE_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_ATTRIBUTE_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_ATTRIBUTE_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

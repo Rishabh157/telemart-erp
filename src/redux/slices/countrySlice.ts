@@ -45,7 +45,7 @@ const initialState: CountrySliceStateType = {
     filterValue: '',
 }
 
-const countrySlice:  Slice<CountrySliceStateType> = createSlice({
+const countrySlice: Slice<CountrySliceStateType> = createSlice({
     name: 'country',
     initialState,
     reducers: {

@@ -220,7 +220,13 @@ const StepAddAddress = ({
                                         )
                                     case 'select':
                                         return (
-                                            <div className={`"-mt-2" ${label === 'Pincode' && 'flex gap-x-4'}`} key={name}>
+                                            <div
+                                                className={`"-mt-2" ${
+                                                    label === 'Pincode' &&
+                                                    'flex gap-x-4'
+                                                }`}
+                                                key={name}
+                                            >
                                                 <ATMSelectSearchable
                                                     label={label}
                                                     selectLabel={label}

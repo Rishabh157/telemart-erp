@@ -1,51 +1,45 @@
 {
-  "moduleId": "NAV_ASSETS_CATEGORY",
-  "moduleName": "NAV_ASSETS_CATEGORY",
-  "parentGroup": ["NAV_ASSETS"],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_ASSETS_CATEGORY_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_ASSETS_CATEGORY",
+    "moduleName": "NAV_ASSETS_CATEGORY",
+    "parentGroup": ["NAV_ASSETS"],
+    "moduleAction": [
         {
-          "fieldId": "ASSETS_CATEGORY_LIST_ASSETS_CATEGORY_NAME",
-          "fieldName": "Asset Category Name",
-          "fieldValue": ""
+            "actionId": "ACTION_ASSETS_CATEGORY_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "ASSETS_CATEGORY_LIST_ASSETS_CATEGORY_NAME",
+                    "fieldName": "Asset Category Name",
+                    "fieldValue": ""
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_ASSETS_CATEGORY_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ASSETS_CATEGORY_ONE_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ASSETS_CATEGORY_ONE_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_ASSETS_CATEGORY_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_ASSETS_CATEGORY_ONE_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_ASSETS_CATEGORY_ONE_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

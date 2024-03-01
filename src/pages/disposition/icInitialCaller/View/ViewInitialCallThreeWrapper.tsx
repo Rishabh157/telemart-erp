@@ -17,8 +17,8 @@ export type FormInitialValues = {
     emailType: string
     smsType: string
     returnType: string[]
-    cancelFlag:boolean
-    isPnd:boolean
+    cancelFlag: boolean
+    isPnd: boolean
 }
 
 const ViewInitialCallThreeWrappper = () => {
@@ -37,8 +37,8 @@ const ViewInitialCallThreeWrappper = () => {
         emailType: selectedInitialCallerThree?.emailType || '',
         smsType: selectedInitialCallerThree?.smsType || '',
         returnType: selectedInitialCallerThree?.returnType || [''],
-        cancelFlag:selectedInitialCallerThree.cancelFlag,
-        isPnd:selectedInitialCallerThree.isPnd
+        cancelFlag: selectedInitialCallerThree?.cancelFlag,
+        isPnd: selectedInitialCallerThree?.isPnd,
     }
 
     // Form Validation Schema

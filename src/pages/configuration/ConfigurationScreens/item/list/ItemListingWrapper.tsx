@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ItemListResponse } from 'src/models/Item.model'
 
-
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 import {
@@ -159,13 +158,11 @@ const ItemListingWrapper = () => {
     }
     return (
         <>
-            
-                <ItemListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <ItemListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

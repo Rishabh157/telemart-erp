@@ -63,7 +63,9 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>Assets Request </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_ASSETS_REQUEST_ADD) &&
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_ASSETS_REQUEST_ADD
+                ) && (
                     <button
                         onClick={() => navigate('add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
@@ -71,7 +73,7 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

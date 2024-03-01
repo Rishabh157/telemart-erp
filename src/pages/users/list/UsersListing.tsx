@@ -57,7 +57,7 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Users </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_USER_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_USER_ADD) && (
                     <button
                         onClick={() => navigate('add-user')}
                         className="bg-primary-main text-white rounded py-1 px-3"
@@ -65,7 +65,7 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add User{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

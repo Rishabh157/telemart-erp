@@ -137,7 +137,7 @@ const steps = [
                         .matches(regIndiaPhone, 'Invalid Mobile Number'),
                     landLine: string()
                         .max(10, 'Mobile Number must be 10 characters')
-                        .min(10, 'Mobile Number must be 10 digits')
+                        .min(10, 'Mobile Number must be 10 digits'),
                 })
             ),
         }),

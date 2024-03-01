@@ -74,16 +74,18 @@ const ChannelCategoryListing = ({
             {isHeader && (
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Channel Category</ATMPageHeading>
-                    
-                    {isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_ADD) &&
-                       <button
-                       type="button"
-                       onClick={() => navigate('add')}
-                       className="bg-primary-main text-white rounded py-1 px-3"
-                   >
-                       + Add Channel Category
-                   </button>
-                    }
+
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_ADD
+                    ) && (
+                        <button
+                            type="button"
+                            onClick={() => navigate('add')}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Add Channel Category
+                        </button>
+                    )}
                 </div>
             )}
 

@@ -52,7 +52,6 @@ const WarehouseToSampleListingWrapper = () => {
         useUpdateWarehouseToSampleApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-
     const { data, isFetching, isLoading } =
         useGetPaginationWarehouseToSampleByGroupQuery({
             limit: rowsPerPage,
@@ -222,8 +221,8 @@ const WarehouseToSampleListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -261,8 +260,8 @@ const WarehouseToSampleListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -455,8 +454,12 @@ const WarehouseToSampleListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_EDIT)}
-                        isDelete={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_DELETE)}
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_EDIT
+                        )}
+                        isDelete={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_DELETE
+                        )}
                         handleEditActionButton={() => {
                             navigate(`/warehouse-to-sample/edit/${row?._id}`)
                         }}

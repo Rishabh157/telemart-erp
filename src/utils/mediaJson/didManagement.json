@@ -1,68 +1,60 @@
 {
-  "moduleId": "NAV_DID_MANAGEMENT",
-  "moduleName": "NAV_DID_MANAGEMENT",
-  "parentGroup": [
-    "NAV_MEDIA"
-  ],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_DID_MANAGEMENT_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_DID_MANAGEMENT",
+    "moduleName": "NAV_DID_MANAGEMENT",
+    "parentGroup": ["NAV_MEDIA"],
+    "moduleAction": [
         {
-          "fieldId": "DID_MANAGEMENT_LIST_DID_NUMBER",
-          "fieldName": "DID NUMBER",
-          "fieldValue": "didNumber"
+            "actionId": "ACTION_DID_MANAGEMENT_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "DID_MANAGEMENT_LIST_DID_NUMBER",
+                    "fieldName": "DID NUMBER",
+                    "fieldValue": "didNumber"
+                },
+                {
+                    "fieldId": "DID_MANAGEMENT_LIST_DID_SCHEMA_NAME",
+                    "fieldName": "SCHEMA_NAME",
+                    "fieldValue": "schemeLabel"
+                },
+                {
+                    "fieldId": "DID_MANAGEMENT_LIST_CHANNEL_NAME",
+                    "fieldName": "CHANNEL NAME",
+                    "fieldValue": "channelLabel"
+                },
+                {
+                    "fieldId": "DID_MANAGEMENT_LIST_SLOT_NAME",
+                    "fieldName": "SLOT NAME",
+                    "fieldValue": "slotLabel"
+                }
+            ]
         },
         {
-          "fieldId": "DID_MANAGEMENT_LIST_DID_SCHEMA_NAME",
-          "fieldName": "SCHEMA_NAME",
-          "fieldValue": "schemeLabel"
+            "actionId": "ACTION_DID_MANAGEMENT_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "DID_MANAGEMENT_LIST_CHANNEL_NAME",
-          "fieldName": "CHANNEL NAME",
-          "fieldValue": "channelLabel"
+            "actionId": "ACTION_DID_MANAGEMENT_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "DID_MANAGEMENT_LIST_SLOT_NAME",
-          "fieldName": "SLOT NAME",
-          "fieldValue": "slotLabel"
+            "actionId": "ACTION_DID_MANAGEMENT_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_DID_MANAGEMENT_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_DID_MANAGEMENT_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_DID_MANAGEMENT_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

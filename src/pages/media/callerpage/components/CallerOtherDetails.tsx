@@ -57,7 +57,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
-                        minHeight='35px'
+                        minHeight="35px"
                         labelClass="text-[12px] font-medium"
                         fontSizePlaceHolder='14px'
                         fontSizeOptionsClass='13px'
@@ -101,7 +101,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     )}
 
                     <ATMSelectSearchable
-                        minHeight='25px'
+                        minHeight="25px"
                         labelClass="text-[12px] font-medium"
                         fontSizePlaceHolder='14px'
                         fontSizeOptionsClass='13px'
@@ -330,7 +330,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 Available Loyalty Points
                             </span>
 
-                            <div className='text-xs'>
+                            <div className="text-xs">
                                 0{' '}
                                 <span className="text-[#814cd2] text-xs underline">
                                     Show Details
@@ -338,7 +338,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                             </div>
                         </div>
                         <div>
-                            <div className='mt-2'>
+                            <div className="mt-2">
                                 <div className="flex gap-x-32">
                                     <span className="text-slate-700 text-xs flex items-center">
                                         Burn Value

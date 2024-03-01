@@ -213,7 +213,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
                     <ActionPopup
                         handleOnAction={() => {}}
                         moduleName={UserModuleNameTypes.wareHouse}
-                        isCustomBtn={true}   
+                        isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
                             setIsShow(true)

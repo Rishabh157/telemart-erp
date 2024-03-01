@@ -100,17 +100,19 @@ const ComplaintListing = ({ rows }: Props) => {
                                         {ele?.orderNumber}
                                     </td>
                                     <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                        <div className='flex flex-col'>
+                                        <div className="flex flex-col">
                                             <span>
                                                 {moment(ele?.createdAt).format(
                                                     'DD-MM-YYYY'
                                                 )}
                                             </span>
-                                            <span>   {moment(ele?.createdAt).format(
-                                                'hh:mm:ss A'
-                                            )}</span>
+                                            <span>
+                                                {' '}
+                                                {moment(ele?.createdAt).format(
+                                                    'hh:mm:ss A'
+                                                )}
+                                            </span>
                                         </div>
-
                                     </td>
                                     <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
                                         {ele?.orderNumber}

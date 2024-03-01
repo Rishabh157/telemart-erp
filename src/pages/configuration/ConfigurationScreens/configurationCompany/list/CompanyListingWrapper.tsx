@@ -171,13 +171,11 @@ const ConfigurationCompanyListingWrapper = () => {
 
     return (
         <>
-            
-                <ConfigurationCompanyListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <ConfigurationCompanyListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

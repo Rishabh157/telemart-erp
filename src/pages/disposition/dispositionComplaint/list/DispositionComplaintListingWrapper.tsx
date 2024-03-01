@@ -101,8 +101,12 @@ const DispositionComplaintListingWrapper = () => {
 
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

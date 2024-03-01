@@ -24,7 +24,7 @@ type Props = {
 const CustomerComplainOrderDetailsForm = ({
     formikProps,
     customerDetails,
-    setIsOpenCustomerOrderModel
+    setIsOpenCustomerOrderModel,
 }: Props) => {
     const { values, setFieldValue } = formikProps
     const [
@@ -64,9 +64,7 @@ const CustomerComplainOrderDetailsForm = ({
 
     return (
         <div className="w-full  px-4 py-2">
-            <h1 className="text-xs font-semibold mb-2">
-                Order Details
-            </h1>
+            <h1 className="text-xs font-semibold mb-2">Order Details</h1>
             <div className="grid gap-x-16 grid-cols-2">
                 <div>
                     <div className="grid grid-cols-2 gap-x-14 border-r-[1px] border-black">
@@ -108,9 +106,9 @@ const CustomerComplainOrderDetailsForm = ({
                                     </span>
                                     {' : '}
                                     <span className="flex-1 text-end text-xs">
-                                        {moment(
-                                            values.orderDate
-                                        ).format('DD-MM-YYYY')}
+                                        {moment(values.orderDate).format(
+                                            'DD-MM-YYYY'
+                                        )}
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center">
@@ -129,9 +127,9 @@ const CustomerComplainOrderDetailsForm = ({
                                     {':'}
                                     <span className="text-xs flex-1 text-end">
                                         {/* 29-01-2024 14:47:39 */}
-                                        {moment(
-                                            values.dispatchTime
-                                        ).format('DD-MM-YYYY HH:mm:ss')}
+                                        {moment(values.dispatchTime).format(
+                                            'DD-MM-YYYY HH:mm:ss'
+                                        )}
                                     </span>
                                 </div>
                             </div>
@@ -166,8 +164,6 @@ const CustomerComplainOrderDetailsForm = ({
                             />
                         </div>
                     </div>
-
-
                 </div>
 
                 {/*  Curior Status */}
@@ -211,27 +207,22 @@ const CustomerComplainOrderDetailsForm = ({
                                 <div className="h-24">
                                     <ATMTable
                                         headerClassName="py-2 bg-[#cdddf2] text-white z-0"
-                                        columns={
-                                            columnsOfCourierStatus || []
-                                        }
+                                        columns={columnsOfCourierStatus || []}
                                         rows={[
                                             {
                                                 name: '',
                                                 date: '29-01-2024 14:47:39',
-                                                orderStatus:
-                                                    'DELIVERED',
+                                                orderStatus: 'DELIVERED',
                                             },
                                             {
                                                 name: 'Imran',
                                                 date: '29-01-2024 14:47:39',
-                                                orderStatus:
-                                                    'DELIVERED',
+                                                orderStatus: 'DELIVERED',
                                             },
                                             {
                                                 name: 'Chris',
                                                 date: '29-01-2024 14:47:39',
-                                                orderStatus:
-                                                    'DELIVERED',
+                                                orderStatus: 'DELIVERED',
                                             },
                                         ]}
                                     />
@@ -240,8 +231,6 @@ const CustomerComplainOrderDetailsForm = ({
                         </div>
                     </div>
                     {/* Create Companin Button and Send SMS button */}
-
-
                 </div>
             </div>
             <div className="mt-8">
@@ -319,9 +308,7 @@ const CustomerComplainOrderDetailsForm = ({
                                     handleValidNumber(e) &&
                                         setFieldValue(
                                             'discount',
-                                            parseInt(
-                                                e.target.value
-                                            )
+                                            parseInt(e.target.value)
                                         )
                                 }}
                             />
@@ -351,9 +338,7 @@ const CustomerComplainOrderDetailsForm = ({
                                     handleValidNumber(e) &&
                                         setFieldValue(
                                             'total',
-                                            parseInt(
-                                                e.target.value
-                                            )
+                                            parseInt(e.target.value)
                                         )
                                 }}
                             />
@@ -367,9 +352,7 @@ const CustomerComplainOrderDetailsForm = ({
                 <button
                     type="button"
                     className="bg-[#0c56aa] text-[#bfdbff] hover:text-white px-1 py-1 rounded font-semibold text-xs"
-                    onClick={() =>
-                        setIsOpenCustomerComplaitDetailModel(true)
-                    }
+                    onClick={() => setIsOpenCustomerComplaitDetailModel(true)}
                 >
                     Create Complaint
                 </button>
@@ -377,16 +360,14 @@ const CustomerComplainOrderDetailsForm = ({
                     disabled
                     type="button"
                     className="bg-[#0c56aa] text-[#bfdbff] px-1 py-1 rounded font-semibold text-xs cursor-not-allowed"
-                    onClick={() => { }}
+                    onClick={() => {}}
                 >
                     Send SMS
                 </button>
                 <button
                     type="button"
                     className="bg-[#0c56aa] text-[#bfdbff] hover:text-white px-1 py-1 rounded font-semibold text-xs"
-                    onClick={() =>
-                        setIsOpenCustomerNDRDetailModel(true)
-                    }
+                    onClick={() => setIsOpenCustomerNDRDetailModel(true)}
                 >
                     Create NDR
                 </button>
@@ -400,9 +381,7 @@ const CustomerComplainOrderDetailsForm = ({
                         <AddCustomerComplaintDetailsWrapper
                             orderId={values.orderId}
                             handleClose={() =>
-                                setIsOpenCustomerComplaitDetailModel(
-                                    false
-                                )
+                                setIsOpenCustomerComplaitDetailModel(false)
                             }
                         />
                     }
@@ -411,9 +390,7 @@ const CustomerComplainOrderDetailsForm = ({
                 <DialogLogBox
                     fullScreen
                     isOpen={isOpenCustomerNDRDetailModel}
-                    handleClose={() =>
-                        setIsOpenCustomerNDRDetailModel(false)
-                    }
+                    handleClose={() => setIsOpenCustomerNDRDetailModel(false)}
                     component={
                         <AddCustomerNDRDetailsWrapper
                             orderId={values.orderId}
@@ -425,8 +402,6 @@ const CustomerComplainOrderDetailsForm = ({
                 />
             </div>
         </div>
-
-
     )
 }
 

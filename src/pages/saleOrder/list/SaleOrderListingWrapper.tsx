@@ -51,7 +51,6 @@ const SaleOrderListingWrapper = () => {
     const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-
     const { data, isFetching, isLoading } =
         useGetPaginationSaleOrderByGroupQuery({
             limit: rowsPerPage,
@@ -171,7 +170,7 @@ const SaleOrderListingWrapper = () => {
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <>
-                    {row?.documents?.[0]?.dealerId ?
+                    {row?.documents?.[0]?.dealerId ? (
                         <span
                             className="underline text-primary-main"
                             style={{ cursor: 'pointer' }}
@@ -182,7 +181,10 @@ const SaleOrderListingWrapper = () => {
                             }
                         >
                             {row?.dealerName?.replaceAll('_', ' ') || '-'}
-                        </span> : "-"}
+                        </span>
+                    ) : (
+                        '-'
+                    )}
                 </>
             ),
         },
@@ -236,8 +238,8 @@ const SaleOrderListingWrapper = () => {
                         {row?.dhApproved
                             ? 'Done'
                             : row?.dhApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}{' '}
+                            ? 'Pending'
+                            : 'Rejected'}{' '}
                     </span>
                 )
             },
@@ -275,8 +277,8 @@ const SaleOrderListingWrapper = () => {
                         {row?.accApproved
                             ? 'Done'
                             : row?.accApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -483,8 +485,12 @@ const SaleOrderListingWrapper = () => {
                 row?.dhApproved === null &&
                 row?.accApproved === null && (
                     <ActionPopup
-                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_SALE_ORDER_EDIT)}
-                        isDelete={isAuthorized(UserModuleNameTypes.ACTION_SALE_ORDER_DELETE)}
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_SALE_ORDER_EDIT
+                        )}
+                        isDelete={isAuthorized(
+                            UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
+                        )}
                         isCustomBtn={false}
                         customBtnText="Invoice"
                         handleCustomActionButton={() => {

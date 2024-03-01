@@ -75,18 +75,20 @@ const DispositionLayout = ({ children }: Props) => {
     const navigate = useNavigate()
 
     const currentPath = `${location.pathname?.split('/')[2]}`
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext)
     return (
         <div
-            className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''
-                }`}
+            className={`flex h-screen w-screen relative ${
+                theme === 'black' ? 'bg-invert' : ''
+            }`}
         >
             {/* Side Navigation Bar */}
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${isCollapsed
+                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${
+                    isCollapsed
                         ? 'min-w-[50px] w-[50px]'
                         : 'min-w-[250px] w-[250px]'
-                    }`}
+                }`}
             >
                 {' '}
                 <VerticalNavBar
@@ -106,7 +108,7 @@ const DispositionLayout = ({ children }: Props) => {
                 </div>
 
                 <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50 bg-transparent-body ">
-                 <Outlet/>
+                    <Outlet />
                 </div>
             </div>
 
@@ -114,8 +116,9 @@ const DispositionLayout = ({ children }: Props) => {
             <button
                 type="button"
                 onClick={() => navigate('/welcome')}
-                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
-                    }`}
+                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${
+                    isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
+                }`}
             >
                 <BiChevronsLeft className="text-2xl" />{' '}
                 {!isCollapsed && <div> BACK TO MAIN MENU </div>}

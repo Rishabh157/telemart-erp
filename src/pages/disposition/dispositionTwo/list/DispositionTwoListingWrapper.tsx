@@ -159,9 +159,12 @@ const DispositionTwoListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-            
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_TWO_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_TWO_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_TWO_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_TWO_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -229,7 +232,7 @@ const DispositionTwoListingWrapper = () => {
             <>
                 <div className="h-full">
                     <DispositionTwoListing
-                   columns={columns}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

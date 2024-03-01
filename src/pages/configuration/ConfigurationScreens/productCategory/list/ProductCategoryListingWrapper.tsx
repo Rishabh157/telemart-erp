@@ -17,7 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ProductCategoryListResponse } from 'src/models/ProductCategory.model'
 
-
 import {
     useDeleteProductCategoryMutation,
     useGetProductCategoryQuery,
@@ -44,7 +43,7 @@ const ProductCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
- 
+
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const columns: columnTypes[] = [
@@ -52,7 +51,7 @@ const ProductCategoryListingWrapper = () => {
             field: 'categoryCode',
             headerName: 'Category Code',
             flex: 'flex-[1_1_0%]',
-          name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_CODE,
+            name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_CODE,
             renderCell: (row: ProductCategoryListResponse) => (
                 <span> {row.categoryCode} </span>
             ),
@@ -61,7 +60,7 @@ const ProductCategoryListingWrapper = () => {
             field: 'categoryName',
             headerName: 'Category Name ',
             flex: 'flex-[1.5_1.5_0%]',
-          name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_NAME,
+            name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_NAME,
             renderCell: (row: ProductCategoryListResponse) => {
                 return <span> {row.categoryName} </span>
             },
@@ -72,9 +71,12 @@ const ProductCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                   
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -149,13 +151,11 @@ const ProductCategoryListingWrapper = () => {
 
     return (
         <>
-            
-                <ProductCategoryListing
+            <ProductCategoryListing
                 columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

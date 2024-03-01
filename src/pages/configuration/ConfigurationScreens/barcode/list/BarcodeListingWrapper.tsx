@@ -298,69 +298,65 @@ const BarcodeListingWrapper = () => {
     )
     return (
         <>
-            
-                <div className="flex shadow rounded h-[45px] items-center gap-3 bg-white w-full overflow-auto px-3 ">
-                    {allowedTabs?.map((tab: any, tabIndex: number) => {
-                        const { label, index } = tab
-                        return (
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    dispatch(setActiveTabIndex(index))
-                                }}
-                                key={tabIndex}
-                                className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${
-                                    activeTabIndex === index
-                                        ? 'bg-slate-100 text-primary-main '
-                                        : 'text-slate-500'
-                                }`}
-                            >
-                                <div>
-                                    {' '}
-                                    <tab.icon className="text-xl" />{' '}
-                                </div>
-                                <div className="font-medium"> {label} </div>
-                                {index === 0 && groupBarcode.length ? (
-                                    <button
-                                        onClick={() => setGroupBarcode('')}
-                                        className="bg-blue-400   flex items-center rounded border"
-                                    >
-                                        <BiFilter
-                                            color="white"
-                                            className="text-2xl "
-                                        />
-                                    </button>
-                                ) : null}
-                            </button>
-                        )
-                    })}
-                </div>
-                {activeTabIndex === 0 ? (
-                    <BarcodeListing
-                        rows={items}
-                        selectedBarcodes={selectedBarcodes}
-                        onBarcodeSelect={onBarcodeSelect}
-                        onBarcodeClick={() => {}}
-                        // onBarcodeClick={(barcode: BarcodeListResponseType) =>
-                        //     navigate(`${barcode._id}`)
-                        //}
-                    />
-                ) : activeTabIndex === 1 ? (
-                    <CartonBoxBarcodeListing />
-                ) : (
-                    <ProductGroupListing
-                        rows={pgItems}
-                        selectedProductGroupcodes={selectedProductGroup}
-                        onProductGroupcodeSelect={onProductGroupSelect}
-                        onBarcodeClick={(
-                            barcode: ProductBarcodeGroupResponse
-                        ) => {
-                            setGroupBarcode(barcode._id)
-                            dispatch(setActiveTabIndex(0))
-                        }}
-                    />
-                )}
-           
+            <div className="flex shadow rounded h-[45px] items-center gap-3 bg-white w-full overflow-auto px-3 ">
+                {allowedTabs?.map((tab: any, tabIndex: number) => {
+                    const { label, index } = tab
+                    return (
+                        <button
+                            type="button"
+                            onClick={() => {
+                                dispatch(setActiveTabIndex(index))
+                            }}
+                            key={tabIndex}
+                            className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${
+                                activeTabIndex === index
+                                    ? 'bg-slate-100 text-primary-main '
+                                    : 'text-slate-500'
+                            }`}
+                        >
+                            <div>
+                                {' '}
+                                <tab.icon className="text-xl" />{' '}
+                            </div>
+                            <div className="font-medium"> {label} </div>
+                            {index === 0 && groupBarcode.length ? (
+                                <button
+                                    onClick={() => setGroupBarcode('')}
+                                    className="bg-blue-400   flex items-center rounded border"
+                                >
+                                    <BiFilter
+                                        color="white"
+                                        className="text-2xl "
+                                    />
+                                </button>
+                            ) : null}
+                        </button>
+                    )
+                })}
+            </div>
+            {activeTabIndex === 0 ? (
+                <BarcodeListing
+                    rows={items}
+                    selectedBarcodes={selectedBarcodes}
+                    onBarcodeSelect={onBarcodeSelect}
+                    onBarcodeClick={() => {}}
+                    // onBarcodeClick={(barcode: BarcodeListResponseType) =>
+                    //     navigate(`${barcode._id}`)
+                    //}
+                />
+            ) : activeTabIndex === 1 ? (
+                <CartonBoxBarcodeListing />
+            ) : (
+                <ProductGroupListing
+                    rows={pgItems}
+                    selectedProductGroupcodes={selectedProductGroup}
+                    onProductGroupcodeSelect={onProductGroupSelect}
+                    onBarcodeClick={(barcode: ProductBarcodeGroupResponse) => {
+                        setGroupBarcode(barcode._id)
+                        dispatch(setActiveTabIndex(0))
+                    }}
+                />
+            )}
         </>
     )
 }

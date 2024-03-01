@@ -87,7 +87,7 @@ const Header = () => {
                         userRole,
                         branchId,
                         token,
-                        refreshToken
+                        refreshToken,
                     } = updateCompanyInfo?.data?.data
                     let userData = {
                         userId: userId,
@@ -103,12 +103,10 @@ const Header = () => {
                         branchId: branchId,
                     }
                     localStorage.setItem('userData', JSON.stringify(userData))
-                    localStorage.setItem('authToken',token)
-                    localStorage.setItem('refreshToken',refreshToken)
+                    localStorage.setItem('authToken', token)
+                    localStorage.setItem('refreshToken', refreshToken)
                     dispatch(setUserData(userData))
-                        window.location.href = '/dashboard'
-
-
+                    window.location.href = '/dashboard'
                 }
             }
         )
@@ -127,7 +125,6 @@ const Header = () => {
                             children={
                                 <>
                                     <div
-                                    
                                         onClick={toggleTheme}
                                         className={` ${
                                             theme === 'black' &&

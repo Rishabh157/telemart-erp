@@ -144,7 +144,7 @@ const CustomerPage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                    singleSchemeData?.data?.deliveryCharges || 0,
+                        singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -307,7 +307,7 @@ const CustomerPage: React.FC<Props> = ({
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column}
                     rows={[]}
-                // rows={rows}
+                    // rows={rows}
                 />
             </div>
         </div>

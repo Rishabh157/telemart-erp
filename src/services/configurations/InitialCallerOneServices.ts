@@ -15,7 +15,6 @@ import {
 
 export const initialCallerOneApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-
         //***** GET With Pagination *****/
         getinitialCallerOne: builder.query({
             providesTags: ['initialCallerOne'],

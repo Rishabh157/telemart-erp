@@ -69,7 +69,7 @@ const CompetitorManagementListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Competitor Management </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_COMPETITOR_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_COMPETITOR_ADD) && (
                     <button
                         type="button"
                         onClick={() => navigate('add')}
@@ -77,7 +77,7 @@ const CompetitorManagementListing = ({
                     >
                         + Add
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -92,7 +92,7 @@ const CompetitorManagementListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                // isFilter
+                    // isFilter
                 />
 
                 {/* Table */}

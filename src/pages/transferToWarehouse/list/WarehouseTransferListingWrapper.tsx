@@ -223,8 +223,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -262,8 +262,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -456,8 +456,12 @@ const WarehouseTransferListingWrapper = () => {
                 row?.firstApproved === null &&
                 row?.secondApproved === null && (
                     <ActionPopup
-                        isEdit={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_EDIT)}
-                        isDelete={isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_DELETE)}
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_EDIT
+                        )}
+                        isDelete={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_DELETE
+                        )}
                         handleEditActionButton={() => {
                             navigate(`/warehouse-transfer/edit/${row?._id}`)
                         }}

@@ -102,7 +102,7 @@ const MediaLayout = ({ children }: Props) => {
     const navigate = useNavigate()
 
     const currentPath = `${location.pathname?.split('/')[2]}`
-    const { theme } = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext)
 
     return (
         <div
@@ -135,7 +135,7 @@ const MediaLayout = ({ children }: Props) => {
                 </div>
 
                 <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50  bg-transparent-body">
-                   <Outlet/>
+                    <Outlet />
                 </div>
             </div>
 

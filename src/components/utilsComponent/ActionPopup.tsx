@@ -12,9 +12,7 @@ import React, { ReactNode } from 'react'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { Popover } from '@mui/material'
 import { HiDotsHorizontal } from 'react-icons/hi'
-import {
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 interface ActionPopupProps {
     handleOnAction: () => void
@@ -71,24 +69,20 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                         >
                             <>
                                 {isView && (
-
                                     <button
                                         onClick={handleViewActionButton}
                                         className={className}
                                     >
                                         View
                                     </button>
-
                                 )}
                                 {isEdit && (
-
                                     <button
                                         onClick={handleEditActionButton}
                                         className={className}
                                     >
                                         Edit
                                     </button>
-
                                 )}
                                 {children}
                                 {isCustomBtn && (
@@ -105,16 +99,13 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
                                     </button>
                                 )}
                                 {isDelete && (
-
                                     <button
                                         onClick={popupState.close}
                                         className="block w-full text-left  hover:bg-gray-100"
                                     >
                                         <div
                                             className="block px-4 py-2"
-                                            onClick={
-                                                handleDeleteActionButton
-                                            }
+                                            onClick={handleDeleteActionButton}
                                         >
                                             Delete
                                         </div>

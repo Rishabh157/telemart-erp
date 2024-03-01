@@ -1,49 +1,41 @@
 {
-  "moduleId": "NAV_ARTIST",
-  "moduleName": "NAV_ARTIST",
-  "parentGroup": [
-    "NAV_MEDIA"
-  ],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_ARTIST_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_ARTIST",
+    "moduleName": "NAV_ARTIST",
+    "parentGroup": ["NAV_MEDIA"],
+    "moduleAction": [
         {
-          "fieldId": "ARTIST_LIST_ARTIST_NAME",
-          "fieldName": "ARTIST NAME",
-          "fieldValue": "artistName"
+            "actionId": "ACTION_ARTIST_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "ARTIST_LIST_ARTIST_NAME",
+                    "fieldName": "ARTIST NAME",
+                    "fieldValue": "artistName"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_ARTIST_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ARTIST_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ARTIST_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_ARTIST_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_ARTIST_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_ARTIST_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

@@ -71,14 +71,16 @@ const WarehouseToComapnyListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse Transfer </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_ADD) &&
-                        <button
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + warehouse-transfer
-                        </button>
-                    }
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_ADD
+                ) && (
+                    <button
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + warehouse-transfer
+                    </button>
+                )}
             </div>
 
             <div

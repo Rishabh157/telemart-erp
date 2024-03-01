@@ -1,56 +1,50 @@
 {
-  "moduleId": "NAV_PRODUCT_CATEGORY",
-  "moduleName": "NAV_PRODUCT_CATEGORY",
-  "parentGroup": ["NAV_CONFIGURATION"],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_PRODUCT_CATEGORY_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields" : [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_PRODUCT_CATEGORY",
+    "moduleName": "NAV_PRODUCT_CATEGORY",
+    "parentGroup": ["NAV_CONFIGURATION"],
+    "moduleAction": [
         {
-          "fieldId": "PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_CODE",
-          "fieldName": "Category Code",
-          "fieldValue": "categoryCode"
+            "actionId": "ACTION_PRODUCT_CATEGORY_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_CODE",
+                    "fieldName": "Category Code",
+                    "fieldValue": "categoryCode"
+                },
+                {
+                    "fieldId": "PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_NAME",
+                    "fieldName": "Category Name",
+                    "fieldValue": "categoryName"
+                }
+            ]
         },
         {
-          "fieldId": "PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_NAME",
-          "fieldName": "Category Name",
-          "fieldValue": "categoryName"
+            "actionId": "ACTION_PRODUCT_CATEGORY_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_PRODUCT_CATEGORY_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_PRODUCT_CATEGORY_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_PRODUCT_CATEGORY_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_PRODUCT_CATEGORY_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_PRODUCT_CATEGORY_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields" : [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

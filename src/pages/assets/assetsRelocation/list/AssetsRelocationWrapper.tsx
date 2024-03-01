@@ -11,7 +11,6 @@ import React from 'react'
 // |-- Internal Dependencies --|
 import AssetsMangementListing from './AssetsRelocationListing'
 
-
 const AssetsRelocationWrapper = () => {
     return (
         <div>

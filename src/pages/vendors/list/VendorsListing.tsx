@@ -49,7 +49,7 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Vendors </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_VENDOR_ADD) &&
+                {isAuthorized(UserModuleNameTypes.ACTION_VENDOR_ADD) && (
                     <button
                         onClick={() => {
                             navigate('add-vendor')
@@ -59,7 +59,7 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                         {' '}
                         + Add Vendor{' '}
                     </button>
-                }
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

@@ -133,24 +133,22 @@ const AddBarcodeWrapper = (props: Props) => {
     })
 
     return (
-        
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddBarcode
-                            formikProps={formikProps}
-                            apiStatus={apiStatus}
-                            productGroupOption={productGroupOption}
-                            wareHouseOption={wareHouseOption}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddBarcode
+                        formikProps={formikProps}
+                        apiStatus={apiStatus}
+                        productGroupOption={productGroupOption}
+                        wareHouseOption={wareHouseOption}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

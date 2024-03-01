@@ -19,7 +19,6 @@ import AddWebsiteBlog from './AddWebsiteBlog'
 import { showToast } from 'src/utils'
 import { useAddWebsiteBlogMutation } from 'src/services/websites/WebsiteBlogServices'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -95,22 +94,20 @@ const AddWebsiteBlogWrapper = (props: Props) => {
     }
 
     return (
-      
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddWebsiteBlog
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-      
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddWebsiteBlog
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

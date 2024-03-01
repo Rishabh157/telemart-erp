@@ -6,7 +6,7 @@
             "actionId": "ACTION_NAV_INQUIRY_LIST",
             "actionUrl": "",
             "actionName": "LIST",
-            "compulsoryFields" : [],
+            "compulsoryFields": [],
             "parentGroup": [],
             "fields": [
                 {

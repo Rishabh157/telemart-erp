@@ -70,15 +70,17 @@ const DispositionComplaintListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Disposition complaint </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_ADD) &&
-                        <button
-                            type="button"
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add
-                        </button>
-                    }
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_ADD
+                ) && (
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

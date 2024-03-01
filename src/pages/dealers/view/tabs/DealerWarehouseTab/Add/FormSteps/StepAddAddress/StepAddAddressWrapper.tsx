@@ -156,7 +156,6 @@ const formFields: {
                 type: 'select',
                 optionAccessKey: 'billingPincodeOptions',
             },
-           
         ],
     },
 ]

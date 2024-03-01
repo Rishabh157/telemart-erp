@@ -180,7 +180,7 @@ const SlotRunViewsListingWrapper = () => {
             {/* <> */}
             <div className="h-full">
                 <SlotManagementListing
-                          columns={columns}
+                    columns={columns}
                     rows={items}
                     // setShowDropdown={setShowDropdown}
                 />

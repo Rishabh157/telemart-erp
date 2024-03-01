@@ -111,7 +111,6 @@ const AddPurchaseOrder = ({
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* PO Code */}
-                         
 
                             {/* Vendor */}
                             <div className="-mt-2">

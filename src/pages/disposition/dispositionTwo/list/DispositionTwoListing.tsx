@@ -66,7 +66,9 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading> Disposition Two </ATMPageHeading>
 
-                    {isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_TWO_ADD) &&
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_TWO_ADD
+                    ) && (
                         <button
                             type="button"
                             onClick={() => navigate('add')}
@@ -74,7 +76,7 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                         >
                             + Add
                         </button>
-                    }
+                    )}
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

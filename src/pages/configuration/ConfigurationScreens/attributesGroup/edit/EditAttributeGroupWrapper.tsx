@@ -119,24 +119,22 @@ const EditAttributeGroupWrapper = (props: Props) => {
         dispatch(setAllItems(attributeData?.data))
     }, [dispatch, attributeData, attrLoading, attrIsFetching])
     return (
-        
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <EditAttributeGroup
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                            allItems={allItems}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditAttributeGroup
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        allItems={allItems}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

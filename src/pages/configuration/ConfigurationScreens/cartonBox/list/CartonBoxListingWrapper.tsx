@@ -17,7 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CartonBoxListResponse } from 'src/models/CartonBox.model'
 
-
 import {
     setIsTableLoading,
     setItems,
@@ -96,8 +95,12 @@ const CartonBoxListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CARTON_BOX_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CARTON_BOX_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_CARTON_BOX_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_CARTON_BOX_DELETE
+                    )}
                     handleOnAction={() => {
                         // e.stopPropagation()
                         setShowDropdown(!showDropdown)
@@ -174,13 +177,11 @@ const CartonBoxListingWrapper = () => {
     }
     return (
         <>
-            
-                <CartonBoxListing
-           columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-           
+            <CartonBoxListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
         </>
     )
 }

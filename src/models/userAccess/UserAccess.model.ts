@@ -162,16 +162,5 @@ export enum UserModuleNameTypes {
     locations = 'LOCATIONS',
     WarehouseTransfer = 'WAREHOUSETRANSFER',
     warehouseToComapny = 'WAREHOUSETOCOMPANY',
-    callCenterMaster = "CALL_CENTER_MASTER"
+    callCenterMaster = 'CALL_CENTER_MASTER',
 }
-
-
-
-
-
-
-
-
-
-
-

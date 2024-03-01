@@ -17,7 +17,6 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ChannelGroupListResponse } from 'src/models/ChannelGroup.model'
 
-
 import {
     useDeleteChannelGroupMutation,
     useGetPaginationChannelGroupQuery,
@@ -65,8 +64,12 @@ const ChannelGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_GROUP_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_GROUP_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -142,7 +145,7 @@ const ChannelGroupListingWrapper = () => {
             <>
                 <div className="h-full">
                     <ChannelGroupListing
-                           columns={columns}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />

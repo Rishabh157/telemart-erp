@@ -40,7 +40,7 @@ const ChannelCategoryListingWrapper = () => {
     const channelCategoryState: any = useSelector(
         (state: RootState) => state.channelCategory
     )
-  
+
     const { page, rowsPerPage, searchValue, items } = channelCategoryState
     const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
@@ -98,9 +98,12 @@ const ChannelCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                  
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_EDIT)}
-                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_DELETE)}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

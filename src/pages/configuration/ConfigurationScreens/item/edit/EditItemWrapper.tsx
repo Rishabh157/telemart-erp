@@ -95,23 +95,18 @@ const EditItemWrapper = (props: Props) => {
     }, [dispatch, data, isLoading, isFetching])
 
     return (
-        
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <EditItem
-                            formikProps={formikProps}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-       
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditItem formikProps={formikProps} apiStatus={apiStatus} />
+                )
+            }}
+        </Formik>
     )
 }
 

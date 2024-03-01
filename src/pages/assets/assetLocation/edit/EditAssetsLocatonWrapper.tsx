@@ -24,7 +24,6 @@ import {
 import { showToast } from 'src/utils'
 import { setSelectedLocation } from 'src/redux/slices/assets/assetsLocationSlice'
 
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
