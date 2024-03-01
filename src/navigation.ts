@@ -14,7 +14,7 @@ import { FaRegHandshake } from 'react-icons/fa'
 import { CiMemoPad, CiStickyNote } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
-    MdCallReceived,
+    // MdCallReceived,
     MdOutlineBorderColor,
     MdPermMedia,
     MdWeb,
@@ -135,12 +135,12 @@ export const navigation: NavItemType[] = [
         path: '/warehouse-to-company',
         name: UserModuleNameTypes.NAV_WAREHOUSE_TO_COMPANY_TRANSFER,
     },
-    {
-        label: 'Inquiry',
-        icon: MdCallReceived,
-        path: '/inquiry',
-        name: UserModuleNameTypes.NAV_INQUIRY,
-    },
+    // {
+    //     label: 'Inquiry',
+    //     icon: MdCallReceived,
+    //     path: '/inquiry',
+    //     name: UserModuleNameTypes.NAV_INQUIRY,
+    // },
     {
         label: 'Orders',
         icon: MdOutlineBorderColor,

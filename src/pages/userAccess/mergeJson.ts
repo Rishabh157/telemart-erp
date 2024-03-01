@@ -30,7 +30,7 @@ import { default as icOneJson } from "../../utils/mediaJson/icOne.json";
 import { default as icTwoJson } from "../../utils/mediaJson/icTwo.json";
 import { default as icThreeJson } from "../../utils/mediaJson/icThree.json";
 import { default as inboundJson } from "../../utils/mediaJson/inbound.json";
-import { default as inquiryJson } from "../../utils/mediaJson/inquiry.json";
+// import { default as inquiryJson } from "../../utils/mediaJson/inquiry.json";
 import { default as inventoryFlowJson } from "../../utils/mediaJson/inventoryFlow.json";
 import { default as itemsJson } from "../../utils/mediaJson/items.json";
 import { default as languageJson } from "../../utils/mediaJson/language.json";
@@ -51,10 +51,10 @@ import { default as userJson } from "../../utils/mediaJson/user.json";
 import { default as vendorJson } from "../../utils/mediaJson/vendor.json";
 import { default as warehouseJson } from "../../utils/mediaJson/warehouse.json";
 import { default as warehouseTransferJson } from "../../utils/mediaJson/warehouseTransfer.json";
-import { default as assetsRelocationJson } from "../../utils/mediaJson/assetsRelocation.json";
-import { default as assetsLocationJson } from "../../utils/mediaJson/assetsLocation.json";
-import { default as assetsCategoryJson } from "../../utils/mediaJson/assetsCategory.json";
-import { default as assetsAllocationJson } from "../../utils/mediaJson/assetsAllocation.json";
+import { default as assetsRelocationJson } from "../../utils/mediaJson/assetsRelocationcopy.json";
+import { default as assetsLocationJson } from "../../utils/mediaJson/assetsLocationcopy.json";
+import { default as assetsCategoryJson } from "../../utils/mediaJson/assetsCategorycopy.json";
+import { default as assetsAllocationJson } from "../../utils/mediaJson/assetsAllocationcopy.json";
 import { default as dashboardJson } from "../../utils/mediaJson/dashboard.json";
 
 export const mergeUserModules = [
@@ -73,7 +73,7 @@ export const mergeUserModules = [
   { ...warehouseTransferJson },
   { ...sampleTransferJson },
   { ...companyTransferJson },
-  { ...inquiryJson },
+  // { ...inquiryJson },
   { ...ordersJson },
   { ...callJson },
   { ...customerComplainJson },

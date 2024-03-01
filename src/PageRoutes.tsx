@@ -164,8 +164,8 @@ import {
     InitialCallOneListingWrapper,
     InitialCallThreeListingWrapper,
     InitialCallTwoListingWrapper,
-    InquiryListingWrapper,
-    InquiryViewWrapper,
+    // InquiryListingWrapper,
+    // InquiryViewWrapper,
     InventoryListingWrapper,
     // InventoryManagementListingWrapper,
     InwardInventoryWrapper,
@@ -1315,7 +1315,7 @@ const PageRoutes = () => {
                     />
 
                     {/* Inquiry */}
-                    <Route
+                    {/* <Route
                         path="/inquiry"
                         element={
                             <Authorization
@@ -1333,7 +1333,7 @@ const PageRoutes = () => {
                                 permission={UserModuleNameTypes.NAV_INQUIRY}
                             />
                         }
-                    />
+                    /> */}
 
                     {/* Orders */}
                     <Route
