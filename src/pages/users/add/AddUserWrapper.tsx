@@ -10,25 +10,25 @@ import React, { useRef, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { boolean, object, string } from 'yup'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { boolean, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddUser from './AddUser'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import {
     useAddNewUserMutation,
-    // useGetFloorMangerUserByCallCenterIdQuery,
 } from 'src/services/UserServices'
 import { showToast } from 'src/utils'
+import AddUser from './AddUser'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
-import { setItems } from 'src/redux/slices/CallCenterMasterSlice'
 import { CallCenterMasterListResponse } from 'src/models'
+import { setItems } from 'src/redux/slices/CallCenterMasterSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
+import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
+import { getHierarchyByDeptWithRole } from 'src/utils/GetHierarchyByDept'
 
 // |-- Types --|
 type Props = {}
@@ -63,7 +63,6 @@ const AddUserWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { items } = useSelector((state: RootState) => state?.callCenter)
     const ref = useRef<any>(null)
-
     const initialValues: FormInitialValues = {
         firstName: '',
         lastName: '',
@@ -88,12 +87,28 @@ const AddUserWrapper = (props: Props) => {
         mySenior: null,
     }
 
+    const getSeniorValid = (userRole: any, schema: any) => {
+        const position = getHierarchyByDeptWithRole({
+            department: ref?.current?.values?.userDepartment as any,
+        })
+
+        if (userRole[0] === position) {
+            return false
+        }
+        return true
+    }
+
     // Form Validation Schema
     const validationSchema = object({
         firstName: string().required('First Name is required'),
         lastName: string().required('Last Name is required'),
         userName: string().required('User Name is required'),
-
+        userRole: string().required('User Role is required'),
+        mySenior: string().when(['userRole'], (userRole, schema) => {
+            return getSeniorValid(userRole, schema)
+                ? schema.required('Senioer is required')
+                : schema.notRequired()
+        }),
         isAgent: boolean(),
         teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
             return isAgent[0]
@@ -118,7 +133,6 @@ const AddUserWrapper = (props: Props) => {
 
         branchId: string().required('branch name is required'),
         userDepartment: string().required('User Department is required'),
-        userRole: string().required('User Role is required'),
         password: string().required('Password is required'),
     })
 
