@@ -2247,18 +2247,17 @@ const PageRoutes = () => {
                                 element={<SlotRunViewsListingWrapper />}
                             />
                         </Route>
-                        {/* Media -> Inbound Or Caller Page & Customer Page */}
-                        <Route
-                            path="caller-page"
-                            element={<CallerPageWrapper />}
-                        />
-
-                        <Route
-                            path="customer-page"
-                            element={<CustomerPageWrapper />}
-                        />
                     </Route>
+                    {/* Media -> Inbound Or Caller Page & Customer Page */}
+                    <Route
+                        path="/media/caller-page"
+                        element={<CallerPageWrapper />}
+                    />
 
+                    <Route
+                        path="/media/customer-page"
+                        element={<CustomerPageWrapper />}
+                    />
                     {/* Assets -> Assets Management */}
                     <Route
                         path="assets"

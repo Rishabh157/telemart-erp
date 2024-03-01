@@ -96,8 +96,9 @@ const CallerScheme = ({
                         <ATMSelectSearchable
                             minHeight="25px"
                             size="xxs"
-                            fontSizePlaceHolder="14px"
-                            labelSize="xxs"
+                            fontSizePlaceHolder='14px'
+                            fontSizeOptionsClass='13px'
+                            labelSize='xxs'
                             name="productGroupId"
                             selectLabel="select product"
                             value={values?.productGroupId || ''}
@@ -117,8 +118,9 @@ const CallerScheme = ({
                 <div className="col-span-3 px-2">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
-                            fontSizePlaceHolder="14px"
-                            minHeight="25px"
+                            fontSizePlaceHolder='14px'
+                            fontSizeOptionsClass='13px'
+                            minHeight='25px'
                             size="xxs"
                             labelSize="xxs"
                             name="schemeId"
