@@ -26,45 +26,41 @@ import { useGetPaginationVendorsQuery } from 'src/services/VendorServices'
 // |-- Redux --|
 import { setAllItems } from 'src/redux/slices/vendorSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
+
 
 const tabsData = [
     {
         label: 'General Information',
         icon: BsArrowRepeat,
         path: 'general-information',
-        name: 'GENERAL_INFORMATION',
+        name: UserModuleNameTypes.ACTION_VENDOR_VIEW_GENERAL_INFORMATION,
     },
     {
         label: 'PO',
         icon: AiOutlineRise,
         path: 'purchase-order',
-        name: 'PURCHASE_ORDER',
+        name: UserModuleNameTypes.ACTION_VENDOR_VIEW_PURCHASE_ORDER,
     },
-    // {
-    //     label: 'Warehouse',
-    //     icon: MdOutlinePeopleAlt,
-    //     path: 'warehouse',
-    //     name: 'VENDOR_WAREHOUSE',
-    // },
+
     {
         label: "RTV's",
         icon: MdOutlinePeopleAlt,
         path: 'return-to-vendor',
-        name: 'RETURN_TO_VENDOR',
+        name: UserModuleNameTypes.ACTION_VENDOR_VIEW_RETURN_TO_VENDOR,
     },
     {
         label: 'Ledger',
         icon: MdOutlinePeopleAlt,
         path: 'ledger',
-        name: 'VENDOR_LEDGER',
+        name: UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_LEDGER,
     },
     {
         label: 'Activity',
         icon: MdOutlinePeopleAlt,
         path: 'activities',
-        name: 'VENDOR_ACTIVITY',
+        name: UserModuleNameTypes.ACTION_VENDOR_VIEW_ACTIVITY,
     },
 ]
 
@@ -100,17 +96,13 @@ const ViewVendor = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [searchValue, setSearchValue] = useState('')
     const { allItems }: any = useSelector((state: RootState) => state?.vendor)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const allowedTabs = showAllowedTabs(
-        checkUserAccess,
-        UserModuleNameTypes.vendor,
-        tabsData,
-        userData?.userRole || 'ADMIN'
-    )
+
+    const allowedTabs = tabsData?.filter((nav) => {
+        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
+    })?.map((tab) => tab)
 
     const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
         limit: 100,

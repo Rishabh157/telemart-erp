@@ -5,38 +5,35 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
+import { Chip, Stack } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
-import { Chip, Stack } from '@mui/material'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { AttributesGroupListResponse } from 'src/models/AttrbutesGroup.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import AttributesGroupListing from './AttributesGroupListing'
-import {
-    useDeleteattributeGroupMutation,
-    useGetAttributeGroupQuery,
-} from 'src/services/AttributeGroup'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/attributesGroupSlice'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteattributeGroupMutation,
+    useGetAttributeGroupQuery,
+} from 'src/services/AttributeGroup'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import AttributesGroupListing from './AttributesGroupListing'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
 
 const AttributesGroupListingWrapper = () => {
     const navigate = useNavigate()
@@ -44,15 +41,13 @@ const AttributesGroupListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
 
     const columns: columnTypes[] = [
         {
             field: 'groupName',
             headerName: 'Group Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ATTRIBUTE_GROUP_LIST_ATTRIBUTE_GROUP_NAME,
             renderCell: (row: AttributesGroupListResponse) => (
                 <span className="capitalize"> {row.groupName} </span>
             ),
@@ -61,6 +56,7 @@ const AttributesGroupListingWrapper = () => {
             field: 'attributes',
             headerName: 'Attributes ',
             flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.ATTRIBUTE_GROUP_LIST_ATTRIBUTES,
             renderCell: (row: AttributesGroupListResponse) => {
                 const attribute = row.attributes?.map((ele) => {
                     return ele.label
@@ -106,9 +102,8 @@ const AttributesGroupListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.attributeGroup}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_DELETE)}
                     handleOnAction={() => {
                         // e.stopPropagation()
                         setShowDropdown(!showDropdown)
@@ -192,18 +187,13 @@ const AttributesGroupListingWrapper = () => {
     }
     return (
         <>
-            <ConfigurationLayout>
-                <AttributesGroupListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.attributeGroup,
-                        UserModuleActionTypes.List
-                    )}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </ConfigurationLayout>
+            {/*  */}
+            <AttributesGroupListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+            {/* */}
         </>
     )
 }

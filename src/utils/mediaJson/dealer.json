@@ -1,0 +1,293 @@
+{
+    "moduleId": "NAV_DEALER",
+    "moduleName": "NAV_DEALER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_DEALER_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "DEALER_LIST_VENDOR_CODE",
+                    "fieldName": "Dealer Code",
+                    "fieldValue": "dealerCode"
+                },
+                {
+                    "fieldId": "DEALER_LIST_FIRM_NAME",
+                    "fieldName": "Firm Name",
+                    "fieldValue": "firmName"
+                },
+                {
+                    "fieldId": "DEALER_LIST_FIRST_NAME",
+                    "fieldName": "First Name",
+                    "fieldValue": "firstName"
+                },
+                {
+                    "fieldId": "DEALER_LIST_LAST_NAME",
+                    "fieldName": "Last Name",
+                    "fieldValue": "lastName"
+                },
+                {
+                    "fieldId": "DEALER_LIST_PHONE",
+                    "fieldName": "Phone",
+                    "fieldValue": "billingAddress"
+                },
+                {
+                    "fieldId": "DEALER_LIST_DISTRICT",
+                    "fieldName": "District",
+                    "fieldValue": "billingAddressDistrictName"
+                },
+                {
+                    "fieldId": "DEALER_LIST_STATE",
+                    "fieldName": "State",
+                    "fieldValue": "billingAddressStateName"
+                },
+                {
+                    "fieldId": "DEALER_LIST_APPROVAL",
+                    "fieldName": "Approval",
+                    "fieldValue": "isApproved"
+                },
+                {
+                    "fieldId": "DEALER_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "isActive"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_DEALER_VIEW",
+            "actionUrl": "",
+            "actionName": "VIEW",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_GENERAL_INFORMATION",
+            "actionUrl": "",
+            "actionName": "GENERAL_INFORMATION",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_WAREHOUSE",
+            "actionUrl": "",
+            "actionName": "DEALER_WAREHOUSE",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_WAREHOUSE_ADD",
+            "actionUrl": "",
+            "actionName": "DEALER_WAREHOUSE_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_WAREHOUSE"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_WAREHOUSE_EDIT",
+            "actionUrl": "",
+            "actionName": "DEALER_WAREHOUSE_EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_WAREHOUSE"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_WAREHOUSE_DELETE",
+            "actionUrl": "",
+            "actionName": "DEALER_WAREHOUSE_DELETE",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_WAREHOUSE"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_SALE_ORDER",
+            "actionUrl": "",
+            "actionName": "DEALER_SALE_ORDER",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_SALE_ORDER_ADD",
+            "actionUrl": "",
+            "actionName": "DEALER_SALE_ORDER_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_SALE_ORDER"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_LEDGER",
+            "actionUrl": "",
+            "actionName": "DEALER_LEDGER",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_LEDGER_CREDIT_AMOUNT_ADD",
+            "actionUrl": "",
+            "actionName": "DEALER_LEDGER_CREDIT_AMOUNT_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_LEDGER"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_LEDGER_CREDIT_NOTE_ADD",
+            "actionUrl": "",
+            "actionName": "DEALER_LEDGER_CREDIT_NOTE_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_LEDGER"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_LEDGER_DEBIT_NOTE_ADD",
+            "actionUrl": "",
+            "actionName": "DEALER_LEDGER_DEBIT_NOTE_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_LEDGER"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_ORDER_LEDGER",
+            "actionUrl": "",
+            "actionName": "DEALER_ORDER_LEDGER",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_ACTIVITY",
+            "actionUrl": "",
+            "actionName": "DEALER_ACTIVITY",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_PINCODE",
+            "actionUrl": "",
+            "actionName": "DEALER_PINCODE",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_PINCODE_ADD",
+            "actionUrl": "",
+            "actionName": "DEALER_PINCODE_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_PINCODE"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_PINCODE_DELETE",
+            "actionUrl": "",
+            "actionName": "DEALER_PINCODE_ADD_DELETE",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_PINCODE"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_SCHEME",
+            "actionUrl": "",
+            "actionName": "DEALER_SCHEME",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_SCHEME_ADD",
+            "actionUrl": "",
+            "actionName": "DEALER_SCHEME_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_SCHEME"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_SCHEME_EDIT",
+            "actionUrl": "",
+            "actionName": "DEALER_SCHEME_EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "DEALER_SCHEME"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

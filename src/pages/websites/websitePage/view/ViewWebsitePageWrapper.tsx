@@ -17,7 +17,7 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import ViewWebsitePage from './ViewWebsitePage'
 import { useGetWebsitePageByIdQuery } from 'src/services/websites/WebsitePageServices'
 import { setSelectedWebsite } from 'src/redux/slices/website/websitePageSlice'
-import WebsiteLayout from '../../WebsiteLayout'
+
 
 const ViewWebsitePageWrapper = () => {
     // Form Initial Values
@@ -37,9 +37,9 @@ const ViewWebsitePageWrapper = () => {
     }, [isLoading, isFetching, data, dispatch])
 
     return (
-        <WebsiteLayout>
+      
             <ViewWebsitePage items={selectedItem} />
-        </WebsiteLayout>
+      
     )
 }
 

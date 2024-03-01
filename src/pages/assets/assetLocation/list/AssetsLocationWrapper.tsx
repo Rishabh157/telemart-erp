@@ -6,36 +6,33 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import AsstesLayout from '../../AssetsLayout'
-import AssetsLocationListing from './AssetsLocationListing'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import {
-    useDeleteAssetsLocationMutation,
-    useGetAssetsLocationQuery,
-} from 'src/services/assets/AssetsLocationService'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { AssetsLocationListResponse } from 'src/models'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/assets/assetsLocationSlice'
-import { AssetsLocationListResponse } from 'src/models'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteAssetsLocationMutation,
+    useGetAssetsLocationQuery,
+} from 'src/services/assets/AssetsLocationService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+import AssetsLocationListing from './AssetsLocationListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const AssetsLocationWrapper = () => {
     const navigate = useNavigate()
@@ -43,9 +40,7 @@ const AssetsLocationWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const columns: columnTypes[] = [
         {
             field: 'locationName',
@@ -54,6 +49,7 @@ const AssetsLocationWrapper = () => {
             renderCell: (row: AssetsLocationListResponse) => (
                 <span className="capitalize"> {row.locationName} </span>
             ),
+            name: UserModuleNameTypes.ASSETS_LOCATION_LIST_ASSETS_LOCATION_NAME,
         },
 
         {
@@ -62,9 +58,8 @@ const AssetsLocationWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.assetLocation}
-                    isDelete
-                    isEdit
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_LOCATION_ONE_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -145,18 +140,13 @@ const AssetsLocationWrapper = () => {
     }
     return (
         <>
-            <AsstesLayout>
+            <>
                 <AssetsLocationListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.assetLocation,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </AsstesLayout>
+            </>
         </>
     )
 }

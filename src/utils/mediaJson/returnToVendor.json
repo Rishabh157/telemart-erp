@@ -1,0 +1,94 @@
+{
+  "moduleId": "NAV_RETURN_TO_VENDOR",
+  "moduleName": "NAV_RETURN_TO_VENDOR",
+  "moduleAction": [
+      {
+          "actionId": "ACTION_RETURN_TO_VENDOR_LIST",
+          "actionUrl": "",
+          "actionName": "LIST",
+          "compulsoryFields" : [],
+          "parentGroup": [],
+          "fields": [
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_RETURN_TO_VENDOR_NUMBER",
+                  "fieldName": "RTV No",
+                  "fieldValue": "rtvNo"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_ITEM",
+                  "fieldName": "Items / Quantity",
+                  "fieldValue": "items"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_FIRST_APPROVED",
+                  "fieldName": "First level Status",
+                  "fieldValue": "firstApproved"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_FIRST_APPROVED_ACTION_BY",
+                  "fieldName": "Level first Approved By",
+                  "fieldValue": "firstApprovedActionBy"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_FIRST_APPROVED_DATE",
+                  "fieldName": "First Approved Date",
+                  "fieldValue": "firstApprovedAt"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_SECOND_LEVEL_STATUS",
+                  "fieldName": "Second Level Status",
+                  "fieldValue": "secondApproved"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_SECOND_APPROVED_ACTION_BY",
+                  "fieldName": "Level Second Approved By",
+                  "fieldValue": "secondApprovedActionBy"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_SECOND_APPROVED_DATE",
+                  "fieldName": "Second Approved Date",
+                  "fieldValue": "secondApprovedAt"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_INSERTED_DATE",
+                  "fieldName": "Inserted Date",
+                  "fieldValue": "createdAt"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_UPDATED_DATE",
+                  "fieldName": "Updated Date",
+                  "fieldValue": "updatedAt"
+              },
+              {
+                  "fieldId": "RETURN_TO_VENDOR_LIST_APPROVAL_LEVEL",
+                  "fieldName": "Approval Level",
+                  "fieldValue": "Approved"
+              }
+          ]
+      },
+      {
+          "actionId": "ACTION_RETURN_TO_VENDOR_ADD",
+          "actionUrl": "",
+          "actionName": "ADD",
+          "compulsoryFields" : [],
+          "parentGroup": [],
+          "fields": []
+      },
+      {
+          "actionId": "ACTION_RETURN_TO_VENDOR_EDIT",
+          "actionUrl": "",
+          "actionName": "EDIT",
+          "compulsoryFields" : [],
+          "parentGroup": [],
+          "fields": []
+      },
+      {
+          "actionId": "ACTION_RETURN_TO_VENDOR_DELETE",
+          "actionUrl": "",
+          "actionName": "DELETE",
+          "compulsoryFields" : [],
+          "parentGroup": [],
+          "fields": []
+      }
+  ]
+}

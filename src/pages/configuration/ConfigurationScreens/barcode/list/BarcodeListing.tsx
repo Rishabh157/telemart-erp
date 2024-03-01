@@ -23,11 +23,8 @@ import BarcodeDetailsCard from './components/BarcodeDetailsCard/BarcodeDetailsCa
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import AuthenticationHOC from 'src/AuthenticationHOC'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -59,20 +56,16 @@ const BarcodeListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Barcode </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.barcode}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
-                        <button
-                            onClick={() => {
-                                navigate('add')
-                            }}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Barcode
-                        </button>
-                    }
-                />
+                {isAuthorized(UserModuleNameTypes.ACTION_BARCODE_ADD) &&
+                    <button
+                        onClick={() => {
+                            navigate('add')
+                        }}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add Barcode
+                    </button>
+                }
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

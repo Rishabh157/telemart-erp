@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import AddDealersCategory from './AddDealersCategory'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddDealerCategoryMutation } from 'src/services/DealerCategoryService'
 
 // |-- Utils  --|
@@ -88,7 +88,7 @@ const AddDealersCategoryWrapper = (props: Props) => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -103,7 +103,7 @@ const AddDealersCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

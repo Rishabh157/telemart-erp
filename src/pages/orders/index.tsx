@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:index.tsx
 // Type: Index Component
-// Last Updated: July 4, 2023
+// Last Updated: MARCH 1, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -11,10 +11,8 @@ import { IconType } from 'react-icons'
 
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
-import { useSelector } from 'react-redux'
 import {
     useLocation,
-    useNavigate,
     //  useNavigate
 } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -24,13 +22,9 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import {
-    UserModuleNameTypes,
-    UserModuleOrderTabsTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import { RootState } from 'src/redux/store'
-import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
 import OrderListing from './all/OrderListing'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 interface tabsProps {
     label: string
     icon: IconType
@@ -57,105 +51,88 @@ const ViewOrder = () => {
             label: 'All',
             icon: MdOutbond,
             path: '?orderStatus=all',
-            name: UserModuleOrderTabsTypes.orderAllTab,
+            name: UserModuleNameTypes.ACTION_ORDER_ALL_TAB_LIST,
         },
         {
             label: 'Fresh Order',
             icon: MdOutbond,
             path: '?orderStatus=fresh',
-            name: UserModuleOrderTabsTypes.orderFreshTab,
+            name: UserModuleNameTypes.ACTION_ORDER_FRESH_ORDER_TAB_LIST,
         },
         {
             label: 'Order Approval',
             icon: MdOutbond,
             path: '?orderStatus=approved',
-            name: UserModuleOrderTabsTypes.orderApprovedTab,
+            name: UserModuleNameTypes.ACTION_ORDER_APPROVAL_TAB_LIST,
         },
         {
             label: 'Delivered',
             icon: MdOutbond,
             path: '?orderStatus=delivered',
-            name: UserModuleOrderTabsTypes.orderDeliveredTab,
+            name: UserModuleNameTypes.ACTION_ORDER_DELIVERED_TAB_LIST,
         },
         {
             label: 'Door Cancelled',
             icon: MdOutbond,
             path: '?orderStatus=doorCancelled',
-            name: UserModuleOrderTabsTypes.orderDoorCancelledTab,
+            name: UserModuleNameTypes.ACTION_ORDER_DOOR_CANCELLED_LIST,
         },
         {
             label: 'Hold',
             icon: MdOutbond,
             path: '?orderStatus=hold',
-            name: UserModuleOrderTabsTypes.orderHoldTab,
+            name: UserModuleNameTypes.ACTION_ORDER_HOLD_TAB_LIST,
         },
         {
             label: 'PSC',
             icon: MdOutbond,
             path: '?orderStatus=psc',
-            name: UserModuleOrderTabsTypes.orderPscTab,
+            name: UserModuleNameTypes.ACTION_ORDER_PSC_TAB_LIST,
         },
         {
             label: 'UNA',
             icon: MdOutbond,
             path: '?orderStatus=una',
-            name: UserModuleOrderTabsTypes.orderUnaTab,
+            name: UserModuleNameTypes.ACTION_ORDER_UNA_TAB_LIST,
         },
         {
             label: 'PND',
             icon: MdOutbond,
             path: '?orderStatus=pnd',
-            name: UserModuleOrderTabsTypes.orderPndTab,
+            name: UserModuleNameTypes.ACTION_ORDER_PND_TAB_LIST,
         },
         {
             label: 'Urgent',
             icon: MdOutbond,
             path: '?orderStatus=urgent',
-            name: UserModuleOrderTabsTypes.orderUrgentTab,
+            name: UserModuleNameTypes.ACTION_ORDER_URGENT_TAB_LIST,
         },
         {
             label: 'Non Actions',
             icon: MdOutbond,
             path: '?orderStatus=non-action',
-            name: UserModuleOrderTabsTypes.orderNonActionTab,
+            name: UserModuleNameTypes.ACTION_ORDER_NON_ACTION_TAB_LIST,
         },
         {
             label: 'Global Order Search',
             icon: MdOutbond,
             path: '?orderStatus=global-search',
-            name: UserModuleOrderTabsTypes.orderNonActionTab,
+            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
         },
     ]
-    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
-    const { search, state, pathname } = useLocation()
+    const { search } = useLocation()
     const queryParams = new URLSearchParams(search)
 
     // Access specific query parameters by their names
     const activeTab: keyof typeof statusProps | string | null =
         queryParams.get('orderStatus')
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (!activeTab) return
+    const allowedTabs = tabs?.filter((nav) => {
+        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
+    })?.map((tab) => tab)
 
-        navigate(`${pathname}?orderStatus=${activeTab}`, {
-            state: state,
-        })
-
-        //eslint-disable-next-line
-    }, [activeTab])
-
-    const allowedTabs = showAllowedTabs(
-        checkUserAccess,
-        UserModuleNameTypes.order,
-        tabs,
-        userData?.userRole || 'ADMIN'
-    )
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Orders',
@@ -201,7 +178,7 @@ const ViewOrder = () => {
                         {/* Children */}
                         <div className="h-[calc(100vh-155px)] w-full ">
                             <OrderListing
-                                tabName={allowedTabs[activeTabIndex].name}
+                                tabName={allowedTabs[activeTabIndex]?.name}
                                 orderStatus={activeTab as string}
                                 currentStatus={getStatus(
                                     activeTab as keyof typeof statusProps

@@ -83,7 +83,7 @@ const LoginPage = ({ pathName }: any) => {
                                     res?.data?.data?.refreshToken
                                 )
                                 showToast('success', 'Login successful')
-                                navigate('/dashboard') // Navigating to "/dashboard" after setting localStorage
+                                navigate('/welcome') // Navigating to "/welcome" after setting localStorage
                             } else {
                                 setApiError(res?.data?.message)
                             }
@@ -186,11 +186,10 @@ const LoginPage = ({ pathName }: any) => {
                                 }}
                                 disabled={loginInfo?.isLoading}
                                 type="button"
-                                className={`w-full ${
-                                    loginInfo?.isLoading
+                                className={`w-full ${loginInfo?.isLoading
                                         ? 'bg-slate-400'
                                         : 'bg-primary-main'
-                                } text-white h-[50px] rounded-lg`}
+                                    } text-white h-[50px] rounded-lg`}
                             >
                                 Login
                             </button>

@@ -14,7 +14,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { showToast } from 'src/utils'
 import { setSelectedProductGroup } from 'src/redux/slices/productGroupSlice'
 import {
@@ -116,7 +116,7 @@ const EditProductGroupWrapper = (props: Props) => {
         dispatch(setSelectedProductGroup(data?.data))
     }, [dispatch, data, isLoading])
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -132,7 +132,7 @@ const EditProductGroupWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

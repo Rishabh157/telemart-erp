@@ -7,7 +7,7 @@ import { Formik } from 'formik'
 import { useAdddispositionOneMutation } from 'src/services/configurations/DispositiononeServices'
 import { useNavigate } from 'react-router-dom'
 import AddDispositionOne from './AddDispositionOne'
-import DispositionLayout from '../../DispositionLayout'
+
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
@@ -51,7 +51,7 @@ const AddDispositionOneWrappper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 {' '}
                 <Formik
                     initialValues={initialValues}
@@ -67,7 +67,7 @@ const AddDispositionOneWrappper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

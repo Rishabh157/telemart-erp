@@ -5,59 +5,59 @@ import { NavItemType } from 'src/navigation'
 import { BsPersonHeart } from 'react-icons/bs'
 import { BiChevronsLeft } from 'react-icons/bi'
 import { MdEmojiEvents } from 'react-icons/md'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { CiMonitor } from 'react-icons/ci'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { ThemeContext } from 'src/App'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const dispositionNavigation: NavItemType[] = [
     {
         label: 'Disposition One',
         icon: CiMonitor,
-        path: '/dispositions/disposition-one',
-        name: UserModuleNameTypes.dispositionOne,
+        path: 'disposition-one',
+        name: UserModuleNameTypes.NAV_DISPOSITION_ONE,
     },
     {
         label: 'Disposition Two',
         icon: CiMonitor,
-        path: '/dispositions/disposition-two',
-        name: UserModuleNameTypes.dispositionTwo,
+        path: 'disposition-two',
+        name: UserModuleNameTypes.NAV_DISPOSITION_TWO,
     },
     {
         label: 'Disposition Three',
         icon: CiMonitor,
-        path: '/dispositions/disposition-three',
-        name: UserModuleNameTypes.dispositionThree,
+        path: 'disposition-three',
+        name: UserModuleNameTypes.NAV_DISPOSITION_THREE,
     },
     {
         label: 'IC-One',
         icon: BsPersonHeart,
-        path: '/dispositions/initialcall-one',
-        name: UserModuleNameTypes.initialCallerOne,
+        path: 'initialcall-one',
+        name: UserModuleNameTypes.NAV_IC_ONE,
     },
     {
         label: 'IC-Two',
         icon: BsPersonHeart,
-        path: '/dispositions/initialcall-two',
-        name: UserModuleNameTypes.initialCallerTwo,
+        path: 'initialcall-two',
+        name: UserModuleNameTypes.NAV_IC_TWO,
     },
     {
         label: 'IC-Three',
         icon: BsPersonHeart,
-        path: '/dispositions/initialcall-three',
-        name: UserModuleNameTypes.initialCallerThree,
+        path: 'initialcall-three',
+        name: UserModuleNameTypes.NAV_IC_THREE,
     },
     {
         label: 'Disposition Complaint',
         icon: MdEmojiEvents,
-        path: '/dispositions/disposition-complaint',
-        name: UserModuleNameTypes.dispositionComplaint,
+        path: 'disposition-complaint',
+        name: UserModuleNameTypes.NAV_DISPOSITION_COMPLAINT,
     },
     {
         label: 'NDR Disposition',
         icon: CiMonitor,
-        path: '/dispositions/ndr-disposition',
-        name: UserModuleNameTypes.ndrDisposition,
+        path: 'ndr-disposition',
+        name: UserModuleNameTypes.NAV_NDR_DISPOSITION,
     },
 ]
 
@@ -74,7 +74,7 @@ const DispositionLayout = ({ children }: Props) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const currentPath = `/dispositions/${location.pathname?.split('/')[2]}`
+    const currentPath = `${location.pathname?.split('/')[2]}`
     const { theme } = useContext(ThemeContext);
     return (
         <div
@@ -106,14 +106,14 @@ const DispositionLayout = ({ children }: Props) => {
                 </div>
 
                 <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50 bg-transparent-body ">
-                    {children}
+                 <Outlet/>
                 </div>
             </div>
 
             {/* BUTTON - Back to main menu */}
             <button
                 type="button"
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/welcome')}
                 className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
                     }`}
             >

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import WebsiteLayout from '../../WebsiteLayout'
+
 import { WebsiteListResponse } from 'src/models/website/Website.model'
 import {
     useDeletegetWebsiteMutation,
@@ -204,13 +204,13 @@ const InfluencerListingWrapper = () => {
     }
     return (
         <>
-            <WebsiteLayout>
+          
                 <InfluencerListing
                     columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </WebsiteLayout>
+          
         </>
     )
 }

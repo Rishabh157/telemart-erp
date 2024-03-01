@@ -19,7 +19,7 @@ import AddCompetitor from './Addcompetitor'
 // import { useAddCompetitorsMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
 import { useAddcompetitorMutation } from 'src/services/media/CompetitorManagementServices'
-import MediaLayout from '../../MediaLayout'
+
 import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
 import { ChannelManagementListResponse } from 'src/models/Channel.model'
 
@@ -186,7 +186,7 @@ const AddCompetitorWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <MediaLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -202,7 +202,7 @@ const AddCompetitorWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </MediaLayout>
+        </>
     )
 }
 

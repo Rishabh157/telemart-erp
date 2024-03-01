@@ -14,7 +14,6 @@
 import React from 'react'
 
 // |-- External Dependencies --|
-import ConfigurationLayout from '../../ConfigurationLayout'
 import AreaListingWrapper from './area/list/AreaListingWrapper'
 import CountryListingWrapper from './country/list/CountryListingWrapper'
 import DistrictListingWrapper from './district/list/DistrictListingWrapper'
@@ -24,7 +23,7 @@ import TehsilListingWrapper from './tehsil/list/TehsilListingWrapper'
 
 const Locations = () => {
     return (
-        <ConfigurationLayout>
+        
             <div className="w-full h-full flex gap-4  p-3 overflow-auto">
                 {/* Country */}
                 <div className=" h-full">
@@ -52,7 +51,7 @@ const Locations = () => {
                     <AreaListingWrapper />
                 </div>
             </div>
-        </ConfigurationLayout>
+       
     )
 }
 

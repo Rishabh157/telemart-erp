@@ -16,7 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import EditProductSubCategory from './EditProductSubCategory'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { showToast } from 'src/utils'
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
 import {
@@ -142,7 +142,7 @@ const EditProductSubCategoryWrapper = (props: Props) => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -159,7 +159,7 @@ const EditProductSubCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

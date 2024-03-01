@@ -6,17 +6,18 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { OrderListResponse } from 'src/models'
 import {
@@ -27,34 +28,32 @@ import {
     useGetAllOrderGlobalSearchQuery,
 } from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    setRowsPerPage,
+    setFilterValue,
     setIsTableLoading,
     setItems,
     setPage,
+    setRowsPerPage,
     setSearchValue,
     setTotalItems,
-    setFilterValue,
 } from 'src/redux/slices/orderSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 // import AuthenticationHOC from 'src/AuthenticationHOC'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 // Dispatching imports
-import { showToast } from 'src/utils'
+import { Chip } from '@mui/material'
 import { IoRemoveCircle } from 'react-icons/io5'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { AlertText } from 'src/pages/callerpage/components/constants'
-import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
-import { Chip } from '@mui/material'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
+import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 import moment from 'moment'
 import { BiSearch } from 'react-icons/bi'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
@@ -118,15 +117,13 @@ const OrderListing = ({
     const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] =
         useState<boolean>(false)
     const orderState: any = useSelector((state: RootState) => state.order)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
 
     const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
 
     const [filterBy, setFilterBy] = useState<any>([])
     useEffect(() => {
-        console.log('orderStatus', orderStatus, 'currentStatus', currentStatus)
+        // console.log('orderStatus', orderStatus, 'currentStatus', currentStatus)
         let filter: any = []
         if (!orderStatus) {
             filter = [
@@ -607,11 +604,10 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${
-                                            row?.approved
-                                                ? 'Disapprove this order'
-                                                : 'Approval this order'
-                                        }`,
+                                        text: `Do you want to ${row?.approved
+                                            ? 'Disapprove this order'
+                                            : 'Approval this order'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -637,7 +633,6 @@ const OrderListing = ({
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: OrderListResponse) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.order}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -652,14 +647,7 @@ const OrderListing = ({
                     }}
                     children={
                         <>
-                            {/* <button
-                                onClick={() => {
-                                    setIsFlowDialogShow(true)
-                                }}
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Flow
-                            </button> */}
+
                             <button
                                 onClick={() => {
                                     navigate(`/orders/view/${row?._id}`)
@@ -874,12 +862,7 @@ const OrderListing = ({
                     <div className="grow overflow-auto">
                         <ATMTable
                             extraClasses="w-[200%]"
-                            columns={getAllowedAuthorizedColumns(
-                                checkUserAccess,
-                                columns,
-                                UserModuleNameTypes.order,
-                                tabName
-                            )}
+                            columns={columns}
                             rows={items}
                             // isCheckbox={true}
                             selectedRows={selectedRows}
@@ -893,12 +876,7 @@ const OrderListing = ({
                     <div className="grow overflow-auto">
                         <ATMTable
                             extraClasses="w-[200%]"
-                            columns={getAllowedAuthorizedColumns(
-                                checkUserAccess,
-                                columns,
-                                UserModuleNameTypes.order,
-                                tabName
-                            )}
+                            columns={columns}
                             rows={items}
                             selectedRows={selectedRows}
                             onRowSelect={(selectedRows) =>
@@ -1037,7 +1015,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                        ''
+                                                    ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)

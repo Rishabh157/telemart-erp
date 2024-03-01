@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,21 +14,17 @@ import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ProductCategoryListResponse } from 'src/models/ProductCategory.model'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
-import ProductCategoryListing from './ProductCategoryListing'
+
+
 import {
     useDeleteProductCategoryMutation,
     useGetProductCategoryQuery,
 } from 'src/services/ProductCategoryServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import ProductCategoryListing from './ProductCategoryListing'
 // |-- Redux --|
 import {
     setIsTableLoading,
@@ -36,6 +32,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/productCategorySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ProductCategoryListingWrapper = () => {
     const productCategoryState: any = useSelector(
@@ -46,9 +44,7 @@ const ProductCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+ 
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const columns: columnTypes[] = [
@@ -56,6 +52,7 @@ const ProductCategoryListingWrapper = () => {
             field: 'categoryCode',
             headerName: 'Category Code',
             flex: 'flex-[1_1_0%]',
+          name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_CODE,
             renderCell: (row: ProductCategoryListResponse) => (
                 <span> {row.categoryCode} </span>
             ),
@@ -64,6 +61,7 @@ const ProductCategoryListingWrapper = () => {
             field: 'categoryName',
             headerName: 'Category Name ',
             flex: 'flex-[1.5_1.5_0%]',
+          name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_NAME,
             renderCell: (row: ProductCategoryListResponse) => {
                 return <span> {row.categoryName} </span>
             },
@@ -74,9 +72,9 @@ const ProductCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.productCategory}
-                    isEdit
-                    isDelete
+                   
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_PRODUCT_CATEGORY_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -151,18 +149,13 @@ const ProductCategoryListingWrapper = () => {
 
     return (
         <>
-            <ConfigurationLayout>
+            
                 <ProductCategoryListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.productCategory,
-                        UserModuleActionTypes.List
-                    )}
+                columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </ConfigurationLayout>
+           
         </>
     )
 }

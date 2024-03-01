@@ -51,51 +51,51 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
                                     <span>Initialcall Name:</span>
                                 </label>
                                 <span className="">
-                                    {values.initialCallName}
+                                    {values?.initialCallName}
                                 </span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
                                     Initialcall One:
                                 </label>
-                                <span>{values.initialCallOneId}</span>
+                                <span>{values?.initialCallOneId}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
                                     Initialcall Two:
                                 </label>
-                                <span>{values.initialCallTwoId}</span>
+                                <span>{values?.initialCallTwoId}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
                                     Sms Type:
                                 </label>
-                                <span>{values.smsType}</span>
+                                <span>{values?.smsType}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
                                     Email Type:
                                 </label>
-                                <span>{values.emailType}</span>
+                                <span>{values?.emailType}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
-                                    Cancle Flag:
+                                    Cancel Flag:
                                 </label>
-                                <span>{values.cancelFlag ? 'Yes' : 'No'}</span>
+                                <span>{values?.cancelFlag ? 'Yes' : 'No'}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
-                                 Pnd:
+                                    Pnd:
                                 </label>
-                                <span>{values.isPnd ? 'Yes' : 'No'}</span>
+                                <span>{values?.isPnd ? 'Yes' : 'No'}</span>
                             </div>
                             <div className="flex mb-2">
                                 <label className="w-60 font-medium text-l">
-                                    Return TYpe:
+                                    Return Type:
                                 </label>
                                 <div className="flex  gap-3">
-                                    {values.returnType.map((criteria) => (
+                                    {values?.returnType?.map((criteria) => (
                                         <div
                                             key={criteria}
                                             className="flex items-center"

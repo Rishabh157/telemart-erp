@@ -392,8 +392,10 @@ const CallerPageWrapper = () => {
         tehsilLabel: orderData?.tehsilLabel || '',
         typeOfAddress: '',
         reciversName: orderData?.reciversName || '',
-        preffered_delivery_start_time: '',
-        preffered_delivery_end_time: '',
+        preffered_delivery_start_time:
+            orderData?.preffered_delivery_start_time || '',
+        preffered_delivery_end_time:
+            orderData?.preffered_delivery_end_time || '',
         preffered_delivery_date: null,
         houseNumber: orderData?.houseNumber || '',
         streetNumber: orderData?.streetNumber || '',

@@ -1,30 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import { Chip } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { useNavigate } from 'react-router-dom'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
+
 import {
-    setItems,
     setIsTableLoading,
+    setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/dispositionTwoSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useDeactiveDispositionTwoMutation,
     useDeletedispositionTwoMutation,
     useGetdispositionTwoQuery,
 } from 'src/services/configurations/DispositionTwoServices'
-import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import { useNavigate } from 'react-router-dom'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispositionTwoListing from './DispositionTwoListing'
-import DispositionLayout from 'src/pages/disposition/DispositionLayout'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import { Chip } from '@mui/material'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const DispositionTwoListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -34,9 +31,7 @@ const DispositionTwoListingWrapper = () => {
     const { items }: any = useSelector(
         (state: RootState) => state.dispositionTwo
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const [deleteDispositonTwo] = useDeletedispositionTwoMutation()
 
     const { searchValue, filterValue }: any = useSelector(
@@ -84,6 +79,8 @@ const DispositionTwoListingWrapper = () => {
             field: 'dispositionName',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_TWO_LIST_DISPOSITION_NAME,
+
             renderCell: (row: DispositionTwoListResponse) => (
                 <span> {row?.dispositionName} </span>
             ),
@@ -92,6 +89,8 @@ const DispositionTwoListingWrapper = () => {
             field: 'dispostionOneLabel',
             headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_TWO_LIST_DISPOSITION_ONE_NAME,
+
             renderCell: (row: DispositionTwoListResponse) => (
                 <span> {row?.dispostionOneLabel} </span>
             ),
@@ -100,6 +99,8 @@ const DispositionTwoListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.DISPOSITION_TWO_LIST_STATUS,
+
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -158,9 +159,9 @@ const DispositionTwoListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dispositionTwo}
-                    isEdit
-                    isDelete
+            
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_TWO_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_TWO_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -225,20 +226,15 @@ const DispositionTwoListingWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <div className="h-full">
                     <DispositionTwoListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.dispositionTwo,
-                            UserModuleActionTypes.List
-                        )}
+                   columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </DispositionLayout>
+            </>
         </>
     )
 }

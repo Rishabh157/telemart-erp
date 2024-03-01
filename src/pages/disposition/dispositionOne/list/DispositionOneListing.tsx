@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -10,15 +9,13 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import DispositionOneListFilterFormDialogWrapper from './DispositionOneFilter/DispositionOneListFilterFormDialogWrapper'
 
 type Props = {
@@ -57,10 +54,7 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Disposition One </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.dispositionOne}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
+                {isAuthorized(UserModuleNameTypes.ACTION_DISPOSITION_ONE_ADD) &&
                         <button
                             type="button"
                             onClick={() => navigate('add')}
@@ -69,7 +63,6 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
                             + Add
                         </button>
                     }
-                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

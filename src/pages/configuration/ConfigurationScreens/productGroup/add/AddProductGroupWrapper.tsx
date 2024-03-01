@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import AddProductGroup from './AddProductGroup'
 import { useAddProductGroupMutation } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'
@@ -96,7 +96,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -111,7 +111,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
                     )
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

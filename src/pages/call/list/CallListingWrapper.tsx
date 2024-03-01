@@ -25,6 +25,7 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const CallListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -43,11 +44,13 @@ const CallListingWrapper = () => {
             renderCell: (row: InbooundCallerListResponse) => (
                 <span> {row.didNo} </span>
             ),
+            name: UserModuleNameTypes.CALL_LIST_DID_NUMBER,
         },
         {
             field: 'mobileNo',
             headerName: 'Mobile Number',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_MOBILE_NUMBER,
             renderCell: (row: InbooundCallerListResponse) => (
                 <span> {row?.mobileNo} </span>
             ),
@@ -56,6 +59,7 @@ const CallListingWrapper = () => {
             field: 'dispositionTwoLabel',
             headerName: 'Disposition Two',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_DISPOSITION_LEBEL_TWO,
             renderCell: (row: InbooundCallerListResponse) => (
                 <span>
                     {' '}
@@ -67,6 +71,7 @@ const CallListingWrapper = () => {
             field: 'dispositionThreeLabel',
             headerName: 'Disposition Three Label',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_DISPOSITION_LEBEL_THREE,
             renderCell: (row: InbooundCallerListResponse) => (
                 <span>
                     {' '}
@@ -80,6 +85,7 @@ const CallListingWrapper = () => {
             field: 'schemeLabel',
             headerName: 'Scheme',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_SCHEME,
             renderCell: (row: InbooundCallerListResponse) => (
                 <span> {row.schemeLabel} </span>
             ),
@@ -88,6 +94,7 @@ const CallListingWrapper = () => {
             field: 'channelId',
             headerName: 'Channel',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_CHANNEL,
             renderCell: (row: InbooundCallerListResponse) => (
                 <span> {row.channel} </span>
             ),

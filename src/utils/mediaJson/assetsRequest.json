@@ -1,0 +1,66 @@
+{
+  "moduleId": "NAV_ASSETS_REQUEST",
+  "moduleName": "NAV_ASSETS_REQUEST",
+  "parentGroup": ["NAV_ASSETS"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_ASSETS_REQUEST_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "ASSETS_REQUEST_LIST_ASSETS_REQUEST_NAME",
+          "fieldName": "Asset name",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "ASSETS_REQUEST_LIST_CATEGORY",
+          "fieldName": "Asset Category",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "ASSETS_REQUEST_LIST_QUANTITY",
+          "fieldName": "Quantity",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "ASSETS_REQUEST_LIST_PRICE",
+          "fieldName": "Price",
+          "fieldValue": ""
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_ASSETS_REQUEST_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ASSETS_REQUEST_ONE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_ASSETS_REQUEST_ONE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

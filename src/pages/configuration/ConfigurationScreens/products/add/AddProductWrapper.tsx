@@ -19,7 +19,7 @@ import draftToHtml from 'draftjs-to-html'
 // |-- Internal Dependencies --|
 import StepAddProductDetailsWrapper from './FormSteps/StepAddProductDetails/StepAddProductDetailsWrapper'
 import AddProduct from './AddProduct'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import StepAddItemsWrapper from './FormSteps/StepAddItems/StepAddItemsWrapper'
 import StepAddFAQsWrapper from './FormSteps/StepAddFAQs/StepAddFAQsWrapper'
 import StepAddVideoWrapper from './FormSteps/StepAddVideo/StepAddVideoWrapper'
@@ -313,7 +313,7 @@ const AddProductWrapper = () => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 // enableReinitialize
                 initialValues={initialValues}
@@ -336,7 +336,7 @@ const AddProductWrapper = () => {
                     </Form>
                 )}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

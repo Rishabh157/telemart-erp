@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddItem from './AddItem'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import { useAddItemsMutation } from 'src/services/ItemService'
 import { showToast } from 'src/utils'
 
@@ -76,7 +76,7 @@ const AddItemWrapper = (props: Props) => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -86,7 +86,7 @@ const AddItemWrapper = (props: Props) => {
                     return <AddItem formikProps={formikProps} />
                 }}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

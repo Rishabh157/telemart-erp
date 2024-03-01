@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import DispositionLayout from '../../DispositionLayout'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -7,11 +7,8 @@ import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
-import { useGetAlldispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
-import { setAllItems as setAllDispositionTwo } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
-import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 import EditDispositionThree from './EditDispositionThree'
 import {
     useGetDispositionThreeByIdQuery,
@@ -46,10 +43,6 @@ const EditDispositionThreeWrappper = () => {
         (state: RootState) => state.dispositionOne
     )
 
-    const { allItems: dispositionTwo }: any = useSelector(
-        (state: RootState) => state?.dispositionTwo
-    )
-
     const { selectedDispostionThree }: any = useSelector(
         (state: RootState) => state?.dispositionThree
     )
@@ -61,18 +54,6 @@ const EditDispositionThreeWrappper = () => {
             dispatch(setSelectedDispostionThree(data?.data || []))
         }
     }, [isLoading, isFetching, data, dispatch])
-
-    const {
-        isLoading: isDTLoading,
-        isFetching: isDTFetching,
-        data: DtData,
-    } = useGetAlldispositionTwoQuery('')
-
-    useEffect(() => {
-        if (!isDTLoading && !isDTFetching) {
-            dispatch(setAllDispositionTwo(DtData?.data || []))
-        }
-    }, [isDTLoading, isDTFetching, DtData, dispatch])
 
     const {
         isLoading: isDOLoading,
@@ -150,19 +131,10 @@ const EditDispositionThreeWrappper = () => {
                 }
             }
         ),
-
-        DispositionTwoOptions: dispositionTwo?.map(
-            (dispositionTwo: DispositionTwoListResponse) => {
-                return {
-                    label: dispositionTwo.dispositionName,
-                    value: dispositionTwo._id,
-                }
-            }
-        ),
     }
 
     return (
-        <DispositionLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -179,7 +151,7 @@ const EditDispositionThreeWrappper = () => {
                     )
                 }}
             </Formik>
-        </DispositionLayout>
+        </>
     )
 }
 

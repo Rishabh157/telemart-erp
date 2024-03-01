@@ -1,0 +1,51 @@
+{
+  "moduleId": "NAV_DISPOSITION_COMPLAINT",
+  "moduleName": "NAV_DISPOSITION_COMPLAINT",
+  "parentGroup": ["NAV_DISPOSITION"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_DISPOSITION_COMPLAINT_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "DISPOSITION_COMPLAINT_LIST_DISPOSITION_COMPLAINT",
+          "fieldName": "Disposition Complaint",
+          "fieldValue": "dispositionName"
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_DISPOSITION_COMPLAINT_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_DISPOSITION_COMPLAINT_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_DISPOSITION_COMPLAINT_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

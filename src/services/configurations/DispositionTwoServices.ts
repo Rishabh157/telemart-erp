@@ -117,6 +117,15 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
                 method: 'PUT',
             }),
         }),
+
+        // Get Disposition Two by One Id
+        getDispostionTwoByOne: builder.query({
+            providesTags: ['dispositionTwo'],
+            query: (id: string) => ({
+                url: `/disposition-two/get-all/${id}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -129,5 +138,6 @@ export const {
     useGetAlldispositionTwoQuery,
     useGetAlldispositionTwounauthQuery,
     useGetAllUnAuthdispositionTwoQuery,
-    useDeactiveDispositionTwoMutation
+    useDeactiveDispositionTwoMutation,
+    useGetDispostionTwoByOneQuery,
 } = dispositionTwoApi

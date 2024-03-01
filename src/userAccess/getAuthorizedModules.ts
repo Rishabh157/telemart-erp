@@ -1,64 +1,65 @@
 /* eslint-disable array-callback-return */
 import {
     UserModuleActionTypes,
-    UserModuleNameTypes,
+   
 } from 'src/models/userAccess/UserAccess.model'
 import {
     ModulesTypes,
     userAccesTypes,
 } from 'src/redux/slices/access/userAcessSlice'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 export const configurationModules = [
-    UserModuleNameTypes.attribute,
-    UserModuleNameTypes.attributeGroup,
-    UserModuleNameTypes.productCategory,
-    UserModuleNameTypes.productSubCategory,
-    UserModuleNameTypes.productGroup,
-    UserModuleNameTypes.scheme,
-    UserModuleNameTypes.item,
-    UserModuleNameTypes.locations,
-    UserModuleNameTypes.product,
-    UserModuleNameTypes.cartonBox,
-    UserModuleNameTypes.company,
-    UserModuleNameTypes.barcode,
-    UserModuleNameTypes.dealerCategory,
+    UserModuleNameTypes.NAV_ATTRIBUTE,
+    UserModuleNameTypes.NAV_ATTRIBUTE_GROUP,
+    UserModuleNameTypes.NAV_PRODUCT_CATEGORY,
+    UserModuleNameTypes.NAV_PRODUCT_SUB_CATEGORY,
+    UserModuleNameTypes.NAV_PRODUCT_GROUP,
+    UserModuleNameTypes.NAV_SCHEME,
+    UserModuleNameTypes.NAV_ITEMS,
+    UserModuleNameTypes.NAV_LOCATION,
+    UserModuleNameTypes.NAV_PRODUCTS,
+    UserModuleNameTypes.NAV_CARTON_BOX,
+    UserModuleNameTypes.NAV_COMPANY,
+    UserModuleNameTypes.NAV_BARCODE,
+    UserModuleNameTypes.NAV_DEALERS_CATEGORY,
 ]
 
 export const mediaModules = [
-    UserModuleNameTypes.channelGroup,
-    UserModuleNameTypes.channelCategory,
-    UserModuleNameTypes.channelManagement,
-    UserModuleNameTypes.didManagement,
-    UserModuleNameTypes.artist,
-    UserModuleNameTypes.competitor,
-    UserModuleNameTypes.slotManagement,
-    UserModuleNameTypes.tapeManangement,
+    UserModuleNameTypes.NAV_CHANNEL_GROUP,
+    UserModuleNameTypes.NAV_CHANNEL_CATEGORY,
+    UserModuleNameTypes.NAV_CHANNEL_MANAGEMENT,
+    UserModuleNameTypes.NAV_DID_MANAGEMENT,
+    UserModuleNameTypes.NAV_ARTIST,
+    UserModuleNameTypes.NAV_COMPETITOR,
+    UserModuleNameTypes.NAV_SLOT_MANAGEMENT,
+    UserModuleNameTypes.NAV_TAPE_MANAGEMENT,
 ]
 
 export const assetModules = [
-    UserModuleNameTypes.assetRequest,
-    UserModuleNameTypes.assetRelocation,
-    UserModuleNameTypes.assetLocation,
-    UserModuleNameTypes.assetCategory,
-    UserModuleNameTypes.assetAllocation,
+    UserModuleNameTypes.NAV_ASSETS_REQUEST,
+    UserModuleNameTypes.NAV_ASSETS_RELOCATION,
+    UserModuleNameTypes.NAV_ASSETS_LOCATION,
+    UserModuleNameTypes.NAV_ASSETS_CATEGORY,
+    UserModuleNameTypes.NAV_ASSETS_ALLOCATION,
 ]
 
 export const dispositionModule = [
-    UserModuleNameTypes.dispositionOne,
-    UserModuleNameTypes.dispositionTwo,
-    UserModuleNameTypes.dispositionThree,
-    UserModuleNameTypes.initialCallerOne,
-    UserModuleNameTypes.initialCallerTwo,
-    UserModuleNameTypes.initialCallerThree,
-    UserModuleNameTypes.dispositionComplaint,
-    UserModuleNameTypes.ndrDisposition,
+    UserModuleNameTypes.NAV_DISPOSITION_ONE,
+    UserModuleNameTypes.NAV_DISPOSITION_TWO,
+    UserModuleNameTypes.NAV_DISPOSITION_THREE,
+    UserModuleNameTypes.NAV_IC_ONE,
+    UserModuleNameTypes.NAV_IC_TWO,
+    UserModuleNameTypes.NAV_IC_THREE,
+    UserModuleNameTypes.NAV_DISPOSITION_COMPLAINT,
+    UserModuleNameTypes.NAV_NDR_DISPOSITION,
 ]
 
 export const allWebsiteModule = [
-    UserModuleNameTypes.website,
-    UserModuleNameTypes.websiteBlog,
-    UserModuleNameTypes.websitePage,
-    UserModuleNameTypes.websiteTags,
+    UserModuleNameTypes.NAV_WEBSITES,
+    UserModuleNameTypes.NAV_WEBSITES_BLOG,
+    UserModuleNameTypes.NAV_WEBSITES_PAGES,
+    UserModuleNameTypes.NAV_WEBSITES_TAGS,
 ]
 export const isCheckAuthorizedModule = (
     checkUserAccess: userAccesTypes,
@@ -83,37 +84,37 @@ export const isCheckAuthorizedModule = (
     // }
 
     // FOR CONFIGURATION
-    if (UserModuleNameTypes.configuration === moduleName) {
+    if (UserModuleNameTypes.NAV_CONFIGURATION === moduleName) {
         return modules?.some((ele) =>
-            configurationModules.includes(ele as UserModuleNameTypes)
+            configurationModules.includes(ele as any)
         )
     }
 
     //FOR MEDIA
-    if (UserModuleNameTypes.media === moduleName) {
+    if (UserModuleNameTypes.NAV_MEDIA === moduleName) {
         return modules?.some((ele) =>
-            mediaModules.includes(ele as UserModuleNameTypes)
+            mediaModules.includes(ele as any)
         )
     }
 
     //FOR ASSET
-    if (UserModuleNameTypes.assets === moduleName) {
+    if (UserModuleNameTypes.NAV_ASSETS === moduleName) {
         return modules?.some((ele) =>
-            assetModules.includes(ele as UserModuleNameTypes)
+            assetModules.includes(ele as any)
         )
     }
 
     //FOR DISPOSITION
-    if (UserModuleNameTypes.disposition === moduleName) {
+    if (UserModuleNameTypes.NAV_DISPOSITION === moduleName) {
         return modules?.some((ele) =>
-            dispositionModule.includes(ele as UserModuleNameTypes)
+            dispositionModule.includes(ele as any)
         )
     }
 
     //FOR WEBSITE
-    if (UserModuleNameTypes.allWebsite === moduleName) {
+    if (UserModuleNameTypes.NAV_ALL_WEBSITE === moduleName) {
         return modules?.some((ele) =>
-            allWebsiteModule.includes(ele as UserModuleNameTypes)
+            allWebsiteModule.includes(ele as any)
         )
     }
 

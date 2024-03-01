@@ -24,7 +24,7 @@ import {
 } from 'src/services/assets/AssetsCategoryService'
 import { showToast } from 'src/utils'
 import { setSelectedCategory } from 'src/redux/slices/assets/assetsCategorySlice'
-import AsstesLayout from '../../AssetsLayout'
+
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -89,7 +89,7 @@ const EditAssetsCategoryWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <AsstesLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -105,7 +105,7 @@ const EditAssetsCategoryWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </AsstesLayout>
+        </>
     )
 }
 

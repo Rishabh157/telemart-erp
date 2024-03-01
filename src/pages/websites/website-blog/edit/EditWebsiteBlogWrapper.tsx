@@ -21,7 +21,7 @@ import {
     useGetWebsiteBlogByIdQuery,
     useUpdateWebsiteBlogMutation,
 } from 'src/services/websites/WebsiteBlogServices'
-import WebsitesLayout from '../../WebsiteLayout'
+
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -110,7 +110,7 @@ const EditWebsiteBlogWrapper = (props: Props) => {
     }
 
     return (
-        <WebsitesLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -128,7 +128,7 @@ const EditWebsiteBlogWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsitesLayout>
+        </>
     )
 }
 

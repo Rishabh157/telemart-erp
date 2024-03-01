@@ -1,0 +1,61 @@
+{
+  "moduleId": "NAV_WEBSITES",
+  "moduleName": "NAV_WEBSITES",
+  "parentGroup": ["NAV_ALL_WEBSITE"],
+  "moduleAction": [
+    {
+      "actionId": "ACTION_WEBSITES_LIST",
+      "actionUrl": "",
+      "actionName": "LIST",
+      "compulsoryFields" : [],
+      "parentGroup": [],
+      "fields": [
+        {
+          "fieldId": "WEBSITES_LIST_WEBSITES_NAME",
+          "fieldName": "Website Name",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "WEBSITES_LIST_GA_TAG",
+          "fieldName": "GA Tag",
+          "fieldValue": ""
+        },
+        {
+          "fieldId": "WEBSITES_LIST_URL",
+          "fieldName": "URL",
+          "fieldValue": ""
+        }
+      ]
+    },
+    {
+      "actionId": "ACTION_WEBSITES_ADD",
+      "actionUrl": "",
+      "actionName": "ADD",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_WEBSITES_ONE_EDIT",
+      "actionUrl": "",
+      "actionName": "EDIT",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_WEBSITES_ONE_DELETE",
+      "actionUrl": "",
+      "actionName": "DELETE",
+      "compulsoryFields" : [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    }
+  ]
+}

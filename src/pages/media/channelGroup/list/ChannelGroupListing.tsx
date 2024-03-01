@@ -11,7 +11,6 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import AuthenticationHOC from 'src/AuthenticationHOC'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -21,11 +20,6 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
-
 // |-- Redux --|
 import {
     setRowsPerPage,
@@ -33,6 +27,8 @@ import {
     setSearchValue,
 } from 'src/redux/slices/media/channelGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -67,10 +63,7 @@ const ChannelGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Channel Group </ATMPageHeading>
-                <AuthenticationHOC
-                    moduleName={UserModuleNameTypes.channelGroup}
-                    actionName={UserModuleActionTypes.Add}
-                    component={
+                {isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_GROUP_ADD) &&
                         <button
                             type="button"
                             onClick={() => navigate('add')}
@@ -79,7 +72,6 @@ const ChannelGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                             + Add Group Channel
                         </button>
                     }
-                />
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

@@ -6,36 +6,33 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { showToast } from 'src/utils'
-import MediaLayout from 'src/pages/media/MediaLayout'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
+
 import {
     useDeleteChannelCategoryMutation,
     useGetPaginationChannelCategoryQuery,
 } from 'src/services/media/ChannelCategoriesServices'
-import ChannelCategoryListing from './ChannelCategoryListing'
+import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import ChannelCategoryListing from './ChannelCategoryListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/channelCategorySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ChannelCategoryListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -43,9 +40,7 @@ const ChannelCategoryListingWrapper = () => {
     const channelCategoryState: any = useSelector(
         (state: RootState) => state.channelCategory
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+  
     const { page, rowsPerPage, searchValue, items } = channelCategoryState
     const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
@@ -91,6 +86,8 @@ const ChannelCategoryListingWrapper = () => {
             field: 'channelCategory',
             headerName: 'Channel Category Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CATEGORY_LIST_CHANNEL_CATEGORY_NAME,
+
             renderCell: (row: ChannelCategoryListResponse) => (
                 <span> {row.channelCategory} </span>
             ),
@@ -101,9 +98,9 @@ const ChannelCategoryListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.channelCategory}
-                    isEdit
-                    isDelete
+                  
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -153,20 +150,15 @@ const ChannelCategoryListingWrapper = () => {
 
     return (
         <>
-            <MediaLayout>
+            <>
                 <div className="h-full">
                     <ChannelCategoryListing
-                        columns={getAllowedAuthorizedColumns(
-                            checkUserAccess,
-                            columns,
-                            UserModuleNameTypes.channelCategory,
-                            UserModuleActionTypes.List
-                        )}
+                        columns={columns}
                         rows={items}
                         setShowDropdown={setShowDropdown}
                     />
                 </div>
-            </MediaLayout>
+            </>
         </>
     )
 }

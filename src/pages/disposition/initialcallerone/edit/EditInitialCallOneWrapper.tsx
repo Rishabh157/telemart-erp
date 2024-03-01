@@ -6,7 +6,7 @@ import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useUpdateinitialCallerOneMutation } from 'src/services/configurations/InitialCallerOneServices'
 import { useNavigate, useParams } from 'react-router-dom'
-import DispositionLayout from '../../DispositionLayout'
+
 import EditInitialCallOne from './EditInitialCallOne'
 import { useGetinitialCallerOneByIdQuery } from 'src/services/configurations/InitialCallerOneServices'
 import { setSelectedInitialOne } from 'src/redux/slices/configuration/initialCallerOneSlice'
@@ -77,7 +77,7 @@ const EditInitialCallOneWrapper = () => {
 
     return (
         <>
-            <DispositionLayout>
+            <>
                 <Formik
                     enableReinitialize
                     initialValues={initialValues}
@@ -93,7 +93,7 @@ const EditInitialCallOneWrapper = () => {
                         )
                     }}
                 </Formik>
-            </DispositionLayout>
+            </>
         </>
     )
 }

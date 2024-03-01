@@ -23,7 +23,7 @@ import {
 } from 'src/services/assets/AssetsLocationService'
 import { showToast } from 'src/utils'
 import { setSelectedLocation } from 'src/redux/slices/assets/assetsLocationSlice'
-import AsstesLayout from '../../AssetsLayout'
+
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -90,7 +90,7 @@ const EditAssetsLocationWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <AsstesLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -106,7 +106,7 @@ const EditAssetsLocationWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </AsstesLayout>
+        </>
     )
 }
 

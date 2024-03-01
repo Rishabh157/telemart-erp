@@ -6,46 +6,40 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import AsstesLayout from '../../AssetsLayout'
-import AssetsCategoryListing from './AssetsCategoryListing'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import {
-    useDeleteAssetsCategoryMutation,
-    useGetAssetsCategoryQuery,
-} from 'src/services/assets/AssetsCategoryService'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { AssetsCategoryListResponse } from 'src/models'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/assets/assetsCategorySlice'
-import { AssetsCategoryListResponse } from 'src/models'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+    useDeleteAssetsCategoryMutation,
+    useGetAssetsCategoryQuery,
+} from 'src/services/assets/AssetsCategoryService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+import AssetsCategoryListing from './AssetsCategoryListing'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 const AssetsCategoryWrapper = () => {
     const navigate = useNavigate()
     const [deleteAssetCategory] = useDeleteAssetsCategoryMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const columns: columnTypes[] = [
         {
             field: 'assetCategoryName',
@@ -54,6 +48,7 @@ const AssetsCategoryWrapper = () => {
             renderCell: (row: AssetsCategoryListResponse) => (
                 <span className="capitalize"> {row.assetCategoryName} </span>
             ),
+            name: UserModuleNameTypes.ASSETS_CATEGORY_LIST_ASSETS_CATEGORY_NAME,
         },
 
         {
@@ -62,9 +57,8 @@ const AssetsCategoryWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.assetCategory}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ONE_EDIT)}
+                    isDelete={isAuthorized(UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ONE_DELETE)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -145,18 +139,13 @@ const AssetsCategoryWrapper = () => {
     }
     return (
         <>
-            <AsstesLayout>
+            <>
                 <AssetsCategoryListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.assetCategory,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </AsstesLayout>
+            </>
         </>
     )
 }

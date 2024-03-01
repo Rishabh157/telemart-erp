@@ -241,6 +241,10 @@ export const complaintTypeOptions = () => {
             value: complaintType.inquiry,
             label: complaintType.inquiry,
         },
+        {
+            value: complaintType.feedback,
+            label: complaintType.feedback,
+        },
     ]
 
     return options?.map((item: any) => {

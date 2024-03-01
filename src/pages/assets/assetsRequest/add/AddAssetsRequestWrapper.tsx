@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import AsstesLayout from '../../AssetsLayout'
+
 import AddAsstesRequest from './AddAssetsRequest'
 import { useAddAssetsRequestMutation } from 'src/services/assets/AssetsRequestServcies'
 import { showToast } from 'src/utils'
@@ -95,7 +95,7 @@ const AddAssetsRequestWrapper = (props: Props) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Added successfully!')
-                        navigate('/assets/assets-management')
+                        navigate('/assets/assets-request')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -118,7 +118,7 @@ const AddAssetsRequestWrapper = (props: Props) => {
         ),
     }
     return (
-        <AsstesLayout>
+        <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -134,7 +134,7 @@ const AddAssetsRequestWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </AsstesLayout>
+        </>
     )
 }
 

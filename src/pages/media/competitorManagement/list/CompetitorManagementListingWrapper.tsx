@@ -6,37 +6,35 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import MediaLayout from '../../MediaLayout'
-import CompetitorManagementListing from './CompetitorManagementListing'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CompetitorManagementListResponse } from 'src/models/CompetitorManagement.model'
+
 import {
     useDeletegetCompetitorMutation,
     useGetPaginationcompetitorQuery,
 } from 'src/services/media/CompetitorManagementServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-import {
-    UserModuleActionTypes,
-    UserModuleNameTypes,
-} from 'src/models/userAccess/UserAccess.model'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+
+import CompetitorManagementListing from './CompetitorManagementListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import moment from 'moment'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/competitorManagementSlice'
-import moment from 'moment'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const CompetitorManagementListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -47,9 +45,7 @@ const CompetitorManagementListingWrapper = () => {
     const competitorManagementState: any = useSelector(
         (state: RootState) => state.competitor
     )
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     const { page, rowsPerPage, searchValue, items } = competitorManagementState
     const { userData } = useSelector((state: RootState) => state?.auth)
     const columns: columnTypes[] = [
@@ -57,6 +53,7 @@ const CompetitorManagementListingWrapper = () => {
             field: 'date',
             headerName: 'Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPETITOR_LIST_DATE,
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {moment(row.date).format('DD/MM/YYYY')} </span>
             ),
@@ -65,6 +62,7 @@ const CompetitorManagementListingWrapper = () => {
             field: 'startTime',
             headerName: 'Start Time',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPETITOR_LIST_START_TIME,
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {formatTimeTo12Hour(row.startTime)} </span>
@@ -74,6 +72,7 @@ const CompetitorManagementListingWrapper = () => {
             field: 'endTime',
             headerName: 'End Time',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPETITOR_LIST_START_END,
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {formatTimeTo12Hour(row.endTime)} </span>
@@ -83,6 +82,7 @@ const CompetitorManagementListingWrapper = () => {
             field: 'productName',
             headerName: 'Product Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPETITOR_LIST_PRODUCT_NAME,
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.productName} </span>
@@ -93,25 +93,18 @@ const CompetitorManagementListingWrapper = () => {
             headerName: 'Mobile No.',
             flex: 'flex-[1_1_0%]',
             align: 'center',
+            name: UserModuleNameTypes.COMPETITOR_LIST_MOBILE_NO,
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.mobileNumber} </span>
             ),
         },
-        // {
-        //     field: 'websiteLink',
-        //     headerName: 'Website link',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     renderCell: (row: CompetitorManagementListResponse) => (
-        //         <span> {row.websiteLink} </span>
-        //     ),
-        // },
 
         {
             field: 'schemePrice',
             headerName: 'Price/MRP',
             flex: 'flex-[1_1_0%]',
             align: 'center',
+            name: UserModuleNameTypes.COMPETITOR_LIST_PRICE_MRP,
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.schemePrice} </span>
             ),
@@ -121,28 +114,24 @@ const CompetitorManagementListingWrapper = () => {
             headerName: 'Competitor Name',
             flex: 'flex-[1_1_0%]',
             align: 'center',
+            name: UserModuleNameTypes.COMPETITOR_LIST_COMPETITOR_NAME,
             renderCell: (row: CompetitorManagementListResponse) => (
                 <span> {row.competitorName} </span>
             ),
         },
-        // {
-        //     field: 'channelNameId',
-        //     headerName: 'Channel Name',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'center',
-        //     renderCell: (row: CompetitorManagementListResponse) => (
-        //         <span>{/* {row.channelNameId}  */}</span>
-        //     ),
-        // },
+
         {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.competitor}
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_COMPETITOR_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_COMPETITOR_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
@@ -225,18 +214,13 @@ const CompetitorManagementListingWrapper = () => {
     }
     return (
         <>
-            <MediaLayout>
+            <>
                 <CompetitorManagementListing
-                    columns={getAllowedAuthorizedColumns(
-                        checkUserAccess,
-                        columns,
-                        UserModuleNameTypes.competitor,
-                        UserModuleActionTypes.List
-                    )}
+                    columns={columns}
                     rows={items}
                     setShowDropdown={setShowDropdown}
                 />
-            </MediaLayout>
+            </>
         </>
     )
 }

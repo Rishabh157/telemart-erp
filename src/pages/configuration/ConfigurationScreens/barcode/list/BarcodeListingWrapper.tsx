@@ -21,7 +21,7 @@ import {
     BarcodeListResponseType,
     ProductBarcodeGroupResponse,
 } from 'src/models'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import {
     setActiveTabIndex,
     setIsTableLoading,
@@ -298,7 +298,7 @@ const BarcodeListingWrapper = () => {
     )
     return (
         <>
-            <ConfigurationLayout>
+            
                 <div className="flex shadow rounded h-[45px] items-center gap-3 bg-white w-full overflow-auto px-3 ">
                     {allowedTabs?.map((tab: any, tabIndex: number) => {
                         const { label, index } = tab
@@ -360,7 +360,7 @@ const BarcodeListingWrapper = () => {
                         }}
                     />
                 )}
-            </ConfigurationLayout>
+           
         </>
     )
 }

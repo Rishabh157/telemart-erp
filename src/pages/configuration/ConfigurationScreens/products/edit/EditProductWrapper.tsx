@@ -25,7 +25,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import StepEditProductDetailsWrapper from './FormSteps/StepEditProductDetails/StepEditProductDetailsWrapper'
 import EditProduct from './EditProduct'
-import ConfigurationLayout from 'src/pages/configuration/ConfigurationLayout'
+
 import StepEditItemsWrapper from './FormSteps/StepEditItems/StepEditItemsWrapper'
 import StepEditFAQsWrapper from './FormSteps/StepEditFAQs/StepEditFAQsWrapper'
 import StepEditVideoWrapper from './FormSteps/StepEditVideo/StepEditVideoWrapper'
@@ -348,7 +348,7 @@ const EditProductWrapper = () => {
     }
 
     return (
-        <ConfigurationLayout>
+        
             <Formik
                 enableReinitialize={activeStep === 0}
                 initialValues={initialValues}
@@ -371,7 +371,7 @@ const EditProductWrapper = () => {
                     </Form>
                 )}
             </Formik>
-        </ConfigurationLayout>
+       
     )
 }
 

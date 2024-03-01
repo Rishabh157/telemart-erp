@@ -25,7 +25,7 @@ import {
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setSelectedWebsite } from 'src/redux/slices/website/websiteSlice'
-import WebsitesLayout from '../../WebsiteLayout'
+
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
@@ -115,7 +115,7 @@ const EditWebsiteWrapper = (props: Props) => {
     }
 
     return (
-        <WebsitesLayout>
+        <>
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -133,7 +133,7 @@ const EditWebsiteWrapper = (props: Props) => {
                     )
                 }}
             </Formik>
-        </WebsitesLayout>
+        </>
     )
 }
 
