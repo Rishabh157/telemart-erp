@@ -71,7 +71,7 @@ const ViewSlot = () => {
                 <div className="w-full flex  h-[calc(100%)] bg-white">
                     {/* Right Section */}
                     <div className="w-[100%] border-b border-r border-l rounded-r h-full ">
-                        <div className="h-[40px] border flex gap-x-4 items-center bg-stone-400  shadow rounded ">
+                        <div className="h-[40px] border flex gap-x-4 items-center   shadow rounded ">
                             <TabScrollable
                                 tabs={allowedTabs}
                                 active={activeTabIndex}
