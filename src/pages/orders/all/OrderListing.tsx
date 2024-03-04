@@ -235,7 +235,8 @@ const OrderListing = ({
                 return
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [orderState, currentStatus])
+    }, [orderState, currentStatus, orderMobSearchValue])
+
     const {
         page,
         rowsPerPage,
@@ -252,7 +253,12 @@ const OrderListing = ({
             params: ['didNo', 'mobileNo'],
             page: page,
             filterBy: [...filterBy],
-            isOrderOrInquiry: orderStatus === 'inquiry' ? "inquiry" : orderStatus === 'fresh' ? "order" : "" ,
+            isOrderOrInquiry:
+                orderStatus === 'inquiry'
+                    ? 'inquiry'
+                    : orderStatus === 'fresh'
+                    ? 'order'
+                    : '',
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,
@@ -290,12 +296,13 @@ const OrderListing = ({
     )
 
     useEffect(() => {
-        if (!globalDataIsFetching && !globalDataIsLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setTotalItems(0))
-            dispatch(setItems(globalData?.data || []))
+        if (orderStatus === 'global-search') {
+            if (!globalDataIsFetching && !globalDataIsLoading) {
+                dispatch(setIsTableLoading(false))
+                dispatch(setTotalItems(0))
+                dispatch(setItems(globalData?.data || []))
+            }
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [globalData, globalDataIsLoading, globalDataIsFetching, orderStatus])
 
@@ -537,7 +544,7 @@ const OrderListing = ({
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[10px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dealerCode}</div>
+                <div className="py-0">{row?.dealerCode || '-'}</div>
             ),
         },
         {
@@ -546,7 +553,7 @@ const OrderListing = ({
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[10px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.customerName}</div>
+                <div className="py-0">{row?.customerName || '-'}</div>
             ),
         },
         {
@@ -839,13 +846,6 @@ const OrderListing = ({
         navigate('/orders?orderStatus=all')
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    useEffect(() => {
-        dispatch(setIsTableLoading(false))
-        dispatch(setTotalItems(0))
-        dispatch(setItems(globalData?.data || []))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [orderStatus !== 'global-search'])
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">

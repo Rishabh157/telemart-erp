@@ -60,7 +60,7 @@ const ATMTableHeader = ({
     anotherSearchValue = 'Search...',
     anotherSearchPlaceholder = 'Search...',
     onAnotherSearch = () => {},
-}: Props) => {
+}: Props) => { 
     return (
         <div className="p-3 pb-5 border-b border-slate-300 grid grid-cols-3">
             {/* Left */}
