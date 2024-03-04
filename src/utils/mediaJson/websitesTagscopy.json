@@ -15,22 +15,22 @@
         {
           "fieldId": "WEBSITES_TAGES_LIST_WEBSITES_META_KEYWORD",
           "fieldName": "Meta Keyword",
-          "fieldValue": ""
+          "fieldValue": "metaKeyword"
         },
         {
           "fieldId": "WEBSITES_TAGES_LIST_META_OG_TYPE",
-          "fieldName": "Meta Keyword",
-          "fieldValue": ""
+          "fieldName": "Meta OG Type",
+          "fieldValue": "metaOgType"
         },
         {
           "fieldId": "WEBSITES_TAGES_LIST_META_TWITTER_TITLE",
           "fieldName": "Meta Twitter Title",
-          "fieldValue": ""
+          "fieldValue": "metaTwitterTitle"
         },
         {
           "fieldId": "WEBSITES_TAGES_LIST_META_TWITTER_CARD",
           "fieldName": "Meta Twitter Card",
-          "fieldValue": ""
+          "fieldValue": "metaTwitterCard"
         }
       ]
     },
@@ -45,7 +45,7 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_WEBSITES_TAGES_ONE_EDIT",
+      "actionId": "ACTION_WEBSITES_TAGES_EDIT",
       "actionUrl": "",
       "actionName": "EDIT",
       "compulsoryFields": [],
@@ -55,9 +55,19 @@
       "fields": []
     },
     {
-      "actionId": "ACTION_WEBSITES_TAGES_ONE_DELETE",
+      "actionId": "ACTION_WEBSITES_TAGES_DELETE",
       "actionUrl": "",
       "actionName": "DELETE",
+      "compulsoryFields": [],
+      "parentGroup": [
+        "LIST"
+      ],
+      "fields": []
+    },
+    {
+      "actionId": "ACTION_WEBSITES_TAGES_VIEW",
+      "actionUrl": "",
+      "actionName": "VIEW",
       "compulsoryFields": [],
       "parentGroup": [
         "LIST"

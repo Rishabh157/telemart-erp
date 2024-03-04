@@ -57,7 +57,6 @@ const ListWebsiteBlogWrapper = () => {
             headerName: 'Blog Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_BLOG_LIST_WEBSITES_BLOG_NAME,
-
             renderCell: (row: WebsiteBlogListResponse) => (
                 <span> {row.blogName} </span>
             ),
@@ -67,7 +66,6 @@ const ListWebsiteBlogWrapper = () => {
             headerName: 'Blog Title',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_TITLE,
-
             renderCell: (row: WebsiteBlogListResponse) => (
                 <span> {row.blogTitle} </span>
             ),
@@ -77,7 +75,6 @@ const ListWebsiteBlogWrapper = () => {
             headerName: 'Blog Subtitle',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_SUBTITLE,
-
             renderCell: (row: WebsiteBlogListResponse) => (
                 <span> {row.blogSubtitle} </span>
             ),

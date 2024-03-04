@@ -13,17 +13,17 @@
         {
           "fieldId": "WEBSITES_LIST_WEBSITES_NAME",
           "fieldName": "Website Name",
-          "fieldValue": ""
+          "fieldValue": "productName"
         },
         {
           "fieldId": "WEBSITES_LIST_GA_TAG",
           "fieldName": "GA Tag",
-          "fieldValue": ""
+          "fieldValue": "gaTagIp"
         },
         {
           "fieldId": "WEBSITES_LIST_URL",
           "fieldName": "URL",
-          "fieldValue": ""
+          "fieldValue": "url"
         }
       ]
     },

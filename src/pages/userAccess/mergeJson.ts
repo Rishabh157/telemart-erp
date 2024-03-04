@@ -1,6 +1,6 @@
 import { default as ASRJson } from '../../utils/mediaJson/asr.json'
 import { default as NDRDispositionJson } from '../../utils/mediaJson/NDRDisposition.json'
-import { default as WebsiteBlogJson } from '../../utils/mediaJson/WebsiteBlog.json'
+import { default as WebsiteBlogJson } from '../../utils/mediaJson/websiteBlog.json'
 import { default as artistJson } from '../../utils/mediaJson/artist.json'
 import { default as assetsRequestJson } from '../../utils/mediaJson/assetsRequest.json'
 import { default as attributeJson } from '../../utils/mediaJson/attribute.json'
@@ -56,6 +56,9 @@ import { default as assetsLocationJson } from '../../utils/mediaJson/assetsLocat
 import { default as assetsCategoryJson } from '../../utils/mediaJson/assetsCategorycopy.json'
 import { default as assetsAllocationJson } from '../../utils/mediaJson/assetsAllocationcopy.json'
 import { default as dashboardJson } from '../../utils/mediaJson/dashboard.json'
+import { default as websiteJson } from '../../utils/mediaJson/websitecopy.json'
+import { default as websitesPageJson } from '../../utils/mediaJson/websitesPagecopy.json'
+import { default as websitesTagsJson } from '../../utils/mediaJson/websitesTagscopy.json'
 
 export const mergeUserModules = [
     { ...dashboardJson },
@@ -116,8 +119,9 @@ export const mergeUserModules = [
     { ...icThreeJson },
     { ...dispositionComplaintJson },
     { ...NDRDispositionJson },
-    // Websites
+    { ...websiteJson },
     { ...WebsiteBlogJson },
-    // Websites Page
-    // Websites Tags
+    { ...websitesPageJson },
+    { ...websitesTagsJson },
+
 ]

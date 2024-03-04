@@ -5,7 +5,7 @@ const Welcome = () => {
     return (
         <>
             <SideNavLayout>
-                <div className="flex justify-center w-full h-[100vh] py-2">
+                <div className='flex justify-center h-[calc(100vh-55px)] py-2' >
                     Welcome to CRM
                 </div>
             </SideNavLayout>

@@ -313,12 +313,18 @@ export const whatsappTypeOptions = () => {
 
 // APPLICABLE CRITERIA
 enum applicableCriteria {
-    isOrder = 'IS_ORDER',
-    isPrepaid = 'IS_PREPAID',
-    isCallback = 'IS_CALLBACK',
-    isReplacement = 'IS_REPLACEMENT',
-    isInquiry = 'IS_INQUIRY',
-    isUrgent = 'IS_URGENT',
+    isOrder = "ISORDER",
+    isPrepaid = "ISPREPAID",
+    isCallBack = "ISCALLBACK",
+    isReplacement = "ISREPLACEMENT",
+    isInquiry = "ISINQUIRY",
+    isUrgent = "ISURGENT",
+    isSchemeApp = "ISSCHEMEAPP",
+    outOfStock = "OUTOFSTOCK",
+    isProductApp = "ISPRODUCTAPP",
+    adtApplicable = "ADTAPPLICABLE",
+    isTextboxReq = "ISTEXTBOXREQ",
+    isRemarkDateApp = "ISREMARKDATEAPP",
 }
 
 export const applicableCriteriaOptionsType = () => {
@@ -332,8 +338,8 @@ export const applicableCriteriaOptionsType = () => {
             label: applicableCriteria.isPrepaid,
         },
         {
-            value: applicableCriteria.isCallback,
-            label: applicableCriteria.isCallback,
+            value: applicableCriteria.isCallBack,
+            label: applicableCriteria.isCallBack,
         },
         {
             value: applicableCriteria.isReplacement,
@@ -347,12 +353,36 @@ export const applicableCriteriaOptionsType = () => {
             value: applicableCriteria.isUrgent,
             label: applicableCriteria.isUrgent,
         },
+        {
+            value: applicableCriteria.isSchemeApp,
+            label: applicableCriteria.isSchemeApp,
+        },
+        {
+            value: applicableCriteria.outOfStock,
+            label: applicableCriteria.outOfStock,
+        },
+        {
+            value: applicableCriteria.isProductApp,
+            label: applicableCriteria.isProductApp,
+        },
+        {
+            value: applicableCriteria.adtApplicable,
+            label: applicableCriteria.adtApplicable,
+        },
+        {
+            value: applicableCriteria.isTextboxReq,
+            label: applicableCriteria.isTextboxReq,
+        },
+        {
+            value: applicableCriteria.isRemarkDateApp,
+            label: applicableCriteria.isRemarkDateApp,
+        },
     ]
 
     return options?.map((item: any) => {
         return {
             value: item.value,
-            label: item.label?.replaceAll('_', ' '),
+            label: item.label.charAt(0).toUpperCase() + item.label.slice(1).toLowerCase(),
         }
     })
 }
@@ -393,7 +423,7 @@ export const paymentTypeOptions = () => {
     return options?.map((item: any) => {
         return {
             value: item.value,
-            label: item.label,
+            label: item.label.charAt(0).toUpperCase() + item.label.slice(1).toLowerCase(),
         }
     })
 }
@@ -444,7 +474,7 @@ export const weekDaysOptions = () => {
     return options?.map((item: any) => {
         return {
             value: item.value,
-            label: item.label,
+            label: item.label.charAt(0).toUpperCase() + item.label.slice(1).toLowerCase(),
         }
     })
 }

@@ -26,13 +26,14 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsiteTagListing from './WebsiteTagListing'
 
 // |-- Redux --|
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websiteTagsSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const WebsiteTagListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -55,6 +56,7 @@ const WebsiteTagListingWrapper = () => {
             field: 'metaKeyword',
             headerName: 'Meta Keyword',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_WEBSITES_META_KEYWORD,
             renderCell: (row: WebsiteTagsListResponse) => (
                 <span> {row.metaKeyword} </span>
             ),
@@ -63,6 +65,7 @@ const WebsiteTagListingWrapper = () => {
             field: 'metaOgType',
             headerName: 'Meta OG Type',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_OG_TYPE,
             renderCell: (row: WebsiteTagsListResponse) => (
                 <span> {row.metaOgType} </span>
             ),
@@ -71,6 +74,7 @@ const WebsiteTagListingWrapper = () => {
             field: 'metaTwitterTitle',
             headerName: 'Meta Twitter Title',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_TWITTER_TITLE,
             renderCell: (row: WebsiteTagsListResponse) => (
                 <span> {row.metaTwitterTitle} </span>
             ),
@@ -79,6 +83,7 @@ const WebsiteTagListingWrapper = () => {
             field: 'metaTwitterCard',
             headerName: 'Meta Twitter Card',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_TWITTER_CARD,
             renderCell: (row: WebsiteTagsListResponse) => (
                 <span> {row.metaTwitterCard} </span>
             ),
@@ -90,10 +95,15 @@ const WebsiteTagListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.websiteTags}
-                    isView
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_TAGS_EDIT
+                    )}
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_TAGES_VIEW
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_TAGS_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
