@@ -99,6 +99,7 @@ const OrderListing = ({
     )
 
     // States
+    const [orderMobSearchValue, setOrderMobSearchValue] = useState<string>('')
 
     // global search order no. and mobile no. value
     const [orderNumberSearchValue, setOrderNumberSearchValue] =
@@ -126,6 +127,14 @@ const OrderListing = ({
                     fieldName: 'companyId',
                     value: userData?.companyId,
                 },
+                {
+                    fieldName: 'orderNumber',
+                    value: [searchValue],
+                },
+                {
+                    fieldName: 'mobileNo',
+                    value: [orderMobSearchValue],
+                },
             ]
             setFilterBy(filter)
             return
@@ -136,6 +145,14 @@ const OrderListing = ({
                     {
                         fieldName: 'companyId',
                         value: userData?.companyId,
+                    },
+                    {
+                        fieldName: 'orderNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'mobileNo',
+                        value: [orderMobSearchValue],
                     },
                 ]
                 setFilterBy(filter)
@@ -159,6 +176,14 @@ const OrderListing = ({
                         fieldName: 'companyId',
                         value: userData?.companyId,
                     },
+                    {
+                        fieldName: 'orderNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'mobileNo',
+                        value: [orderMobSearchValue],
+                    },
                 ]
                 setFilterBy(filter)
                 return
@@ -171,6 +196,14 @@ const OrderListing = ({
                     {
                         fieldName: 'approved',
                         value: false,
+                    },
+                    {
+                        fieldName: 'orderNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'mobileNo',
+                        value: [orderMobSearchValue],
                     },
                 ]
                 setFilterBy(filter)
@@ -189,12 +222,21 @@ const OrderListing = ({
                         fieldName: 'approved',
                         value: true,
                     },
+                    {
+                        fieldName: 'orderNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'mobileNo',
+                        value: [orderMobSearchValue],
+                    },
                 ]
                 setFilterBy(filter)
                 return
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [orderState, currentStatus])
+    }, [orderState, currentStatus, orderMobSearchValue])
+
     const {
         page,
         rowsPerPage,
@@ -207,11 +249,16 @@ const OrderListing = ({
     const { data, isLoading, isFetching } = useGetOrderQuery(
         {
             limit: rowsPerPage,
-            searchValue: searchValue,
+            searchValue: '',
             params: ['didNo', 'mobileNo'],
             page: page,
             filterBy: [...filterBy],
-            isOrderOrInquiry: orderStatus === 'inquiry' ? "inquiry" : orderStatus === 'fresh' ? "order" : "" ,
+            isOrderOrInquiry:
+                orderStatus === 'inquiry'
+                    ? 'inquiry'
+                    : orderStatus === 'fresh'
+                    ? 'order'
+                    : '',
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,
@@ -249,12 +296,13 @@ const OrderListing = ({
     )
 
     useEffect(() => {
-        if (!globalDataIsFetching && !globalDataIsLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setTotalItems(0))
-            dispatch(setItems(globalData?.data || []))
+        if (orderStatus === 'global-search') {
+            if (!globalDataIsFetching && !globalDataIsLoading) {
+                dispatch(setIsTableLoading(false))
+                dispatch(setTotalItems(0))
+                dispatch(setItems(globalData?.data || []))
+            }
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [globalData, globalDataIsLoading, globalDataIsFetching, orderStatus])
 
@@ -496,7 +544,7 @@ const OrderListing = ({
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[10px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dealerCode}</div>
+                <div className="py-0">{row?.dealerCode || '-'}</div>
             ),
         },
         {
@@ -505,7 +553,7 @@ const OrderListing = ({
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[10px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.customerName}</div>
+                <div className="py-0">{row?.customerName || '-'}</div>
             ),
         },
         {
@@ -799,13 +847,6 @@ const OrderListing = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    useEffect(() => {
-        dispatch(setIsTableLoading(false))
-        dispatch(setTotalItems(0))
-        dispatch(setItems(globalData?.data || []))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [orderStatus !== 'global-search'])
-
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
             <div className="flex justify-between items-center h-[45px]">
@@ -817,6 +858,7 @@ const OrderListing = ({
                 {orderStatus !== 'global-search' ? (
                     <ATMTableHeader
                         searchValue={searchValue}
+                        placeholder="Order No..."
                         page={page}
                         rowCount={totalItems}
                         rowsPerPage={rowsPerPage}
@@ -827,12 +869,18 @@ const OrderListing = ({
                         onSearch={(newValue) =>
                             dispatch(setSearchValue(newValue))
                         }
+                        isAnotherSearch
+                        anotherSearchValue={orderMobSearchValue}
+                        anotherSearchPlaceholder="Mobile No..."
+                        onAnotherSearch={(newValue) => {
+                            setOrderMobSearchValue(newValue)
+                        }}
                         // isFilter
                         isRefresh
                         onFilterDispatch={() => dispatch(setFilterValue([]))}
                     />
                 ) : (
-                    <div className="flex gap-x-4 py-2">
+                    <div className="flex gap-x-4 py-2 px-2">
                         <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
                             <BiSearch className="text-slate-600 text-xl" />
                             <input

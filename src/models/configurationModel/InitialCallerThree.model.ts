@@ -7,21 +7,24 @@
 
 // |-- Types --|
 export type InitialCallerThreeListResponse = {
-    initialCallName: string
-    initialCallOneLabel: string
-    initialCallTwoLabel: string
+    _id: string
     callType: string
+    emailType: string
+    smsType: string
+    returnType: string[]
+    isPnd: boolean
+    cancelFlag: boolean
+    initialCallName: string
     initialCallOneId: string
     initialCallTwoId: string
     companyId: string
-    isActive: boolean
     isDeleted: boolean
+    isActive: boolean
     createdAt: string
     updatedAt: string
-    isPnd: boolean
-    cancelFlag: boolean
-    _id: string
     __v: number
+    initialCallTwoLabel: string
+    initialCallOneLabel: string
 }
 
 enum emailType {

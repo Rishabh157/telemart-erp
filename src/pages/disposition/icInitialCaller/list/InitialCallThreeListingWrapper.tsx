@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from 'react'
 import { Chip } from '@mui/material'
-import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -21,6 +21,7 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import InitialCallThreeListing from './InitialCallThreeListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+
 const InitialCallThreeListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
@@ -81,7 +82,6 @@ const InitialCallThreeListingWrapper = () => {
             headerName: 'Call Type',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_CALL_TYPE,
-
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.callType} </span>
             ),
@@ -91,7 +91,6 @@ const InitialCallThreeListingWrapper = () => {
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_ONE,
-
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallOneLabel} </span>
             ),
@@ -101,7 +100,6 @@ const InitialCallThreeListingWrapper = () => {
             headerName: 'Initial Call Two',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_TWO,
-
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.initialCallTwoLabel} </span>
             ),
@@ -111,7 +109,6 @@ const InitialCallThreeListingWrapper = () => {
             headerName: 'cancel flag',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CANCEL_FLAG,
-
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.cancelFlag ? 'Yes' : 'No'} </span>
             ),
@@ -121,9 +118,17 @@ const InitialCallThreeListingWrapper = () => {
             headerName: 'Pnd',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CANCEL_PND,
-
             renderCell: (row: InitialCallerThreeListResponse) => (
                 <span> {row.isPnd ? 'Yes' : 'No'} </span>
+            ),
+        },
+        {
+            field: 'returnType',
+            headerName: 'Return Type',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_RETURN_TYPE,
+            renderCell: (row: InitialCallerThreeListResponse) => (
+                <span>{row?.returnType?.[0]}</span>
             ),
         },
         {
@@ -131,7 +136,6 @@ const InitialCallThreeListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_STATUS,
-
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -226,6 +230,7 @@ const InitialCallThreeListingWrapper = () => {
             align: 'end',
         },
     ]
+
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)
         deactiveInitialCallerThree(rowId).then((res: any) => {
@@ -243,6 +248,7 @@ const InitialCallThreeListingWrapper = () => {
             }
         })
     }
+
     const handleDelete = () => {
         setShowDropdown(false)
         deleteIniticallthree(currentId).then((res: any) => {
@@ -265,15 +271,11 @@ const InitialCallThreeListingWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <InitialCallThreeListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </>
-        </>
+        <InitialCallThreeListing
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 
