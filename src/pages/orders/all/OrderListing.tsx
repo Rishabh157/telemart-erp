@@ -102,6 +102,7 @@ const OrderListing = ({
     )
 
     // States
+    const [orderMobSearchValue, setOrderMobSearchValue] = useState<string>('')
 
     // global search order no. and mobile no. value
     const [orderNumberSearchValue, setOrderNumberSearchValue] =
@@ -130,6 +131,14 @@ const OrderListing = ({
                     fieldName: 'companyId',
                     value: userData?.companyId,
                 },
+                {
+                    fieldName: 'orderNumber',
+                    value: [searchValue],
+                },
+                {
+                    fieldName: 'mobileNo',
+                    value: [orderMobSearchValue],
+                },
             ]
             setFilterBy(filter)
             return
@@ -141,6 +150,14 @@ const OrderListing = ({
                         fieldName: 'companyId',
                         value: userData?.companyId,
                     },
+                    {
+                        fieldName: 'orderNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'mobileNo',
+                        value: [orderMobSearchValue],
+                    },
                 ]
                 setFilterBy(filter)
                 return
@@ -149,6 +166,14 @@ const OrderListing = ({
                     {
                         fieldName: 'companyId',
                         value: userData?.companyId,
+                    },
+                    {
+                        fieldName: 'orderNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'mobileNo',
+                        value: [orderMobSearchValue],
                     },
                 ]
                 setFilterBy(filter)
@@ -162,6 +187,14 @@ const OrderListing = ({
                     {
                         fieldName: 'approved',
                         value: false,
+                    },
+                    {
+                        fieldName: 'orderNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'mobileNo',
+                        value: [orderMobSearchValue],
                     },
                 ]
                 setFilterBy(filter)
@@ -179,6 +212,14 @@ const OrderListing = ({
                     {
                         fieldName: 'approved',
                         value: true,
+                    },
+                    {
+                        fieldName: 'orderNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'mobileNo',
+                        value: [orderMobSearchValue],
                     },
                 ]
                 setFilterBy(filter)
@@ -198,7 +239,7 @@ const OrderListing = ({
     const { data, isLoading, isFetching } = useGetOrderQuery(
         {
             limit: rowsPerPage,
-            searchValue: searchValue,
+            searchValue: '',
             params: ['didNo', 'mobileNo'],
             page: page,
             filterBy: [...filterBy],
@@ -807,6 +848,7 @@ const OrderListing = ({
                 {orderStatus !== 'global-search' ? (
                     <ATMTableHeader
                         searchValue={searchValue}
+                        placeholder="Order No..."
                         page={page}
                         rowCount={totalItems}
                         rowsPerPage={rowsPerPage}
@@ -817,12 +859,18 @@ const OrderListing = ({
                         onSearch={(newValue) =>
                             dispatch(setSearchValue(newValue))
                         }
+                        isAnotherSearch
+                        anotherSearchValue={orderMobSearchValue}
+                        anotherSearchPlaceholder="Mobile No..."
+                        onAnotherSearch={(newValue) => {
+                            setOrderMobSearchValue(newValue)
+                        }}
                         // isFilter
                         isRefresh
                         onFilterDispatch={() => dispatch(setFilterValue([]))}
                     />
                 ) : (
-                    <div className="flex gap-x-4 py-2">
+                    <div className="flex gap-x-4 py-2 px-2">
                         <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
                             <BiSearch className="text-slate-600 text-xl" />
                             <input

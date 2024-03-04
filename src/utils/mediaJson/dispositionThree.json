@@ -13,7 +13,7 @@
                 {
                     "fieldId": "DISPOSITION_THREE_LIST_DISPOSITION_NAME",
                     "fieldName": "Disposition Name",
-                    "fieldValue": "dispositionName"
+                    "fieldValue": "dispositionDisplayName"
                 },
                 {
                     "fieldId": "DISPOSITION_THREE_LIST_DISPOSITION_ONE_NAME",
@@ -24,6 +24,16 @@
                     "fieldId": "DISPOSITION_THREE_LIST_DISPOSITION_TWO_NAME",
                     "fieldName": "Disposition Two Name",
                     "fieldValue": "dispostionTwoLabel"
+                },
+                {
+                    "fieldId": "DISPOSITION_THREE_LIST_APPLICABLE_CRITERIA",
+                    "fieldName": "Applicable Criteria",
+                    "fieldValue": "applicableCriteria"
+                },
+                {
+                    "fieldId": "DISPOSITION_THREE_LIST_PRIORITY",
+                    "fieldName": "Priority",
+                    "fieldValue": "priority"
                 },
                 {
                     "fieldId": "DISPOSITION_THREE_LIST_STATUS",
