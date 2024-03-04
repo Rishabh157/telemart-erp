@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { Chip } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
-
 import {
     setIsTableLoading,
     setItems,
@@ -62,15 +60,15 @@ const DispositionThreeListingWrapper = () => {
         orderBy: 'createdAt',
         orderByValue: -1,
     })
+
     const columns: columnTypes[] = [
         {
-            field: 'dispositionName',
+            field: 'dispositionDisplayName',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_NAME,
-
             renderCell: (row: DispositionThreeListResponse) => (
-                <span> {row.dispositionName} </span>
+                <span> {row?.dispositionDisplayName} </span>
             ),
         },
         {
@@ -80,7 +78,7 @@ const DispositionThreeListingWrapper = () => {
             name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_ONE_NAME,
 
             renderCell: (row: DispositionThreeListResponse) => (
-                <span> {row.dispostionOneLabel} </span>
+                <span> {row?.dispostionOneLabel} </span>
             ),
         },
         {
@@ -90,7 +88,27 @@ const DispositionThreeListingWrapper = () => {
             name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_TWO_NAME,
 
             renderCell: (row: DispositionThreeListResponse) => (
-                <span> {row.dispostionTwoLabel} </span>
+                <span> {row?.dispostionTwoLabel} </span>
+            ),
+        },
+        {
+            field: 'applicableCriteria',
+            headerName: 'Applicable Criteria',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_THREE_LIST_APPLICABLE_CRITERIA,
+            renderCell: (row: DispositionThreeListResponse) => (
+                <span>
+                    {row?.applicableCriteria?.[0]?.replaceAll('_', ' ')}
+                </span>
+            ),
+        },
+        {
+            field: 'priority',
+            headerName: 'Priority',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DISPOSITION_THREE_LIST_PRIORITY,
+            renderCell: (row: DispositionThreeListResponse) => (
+                <span>{row?.priority}</span>
             ),
         },
         {
@@ -98,11 +116,10 @@ const DispositionThreeListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.DISPOSITION_THREE_LIST_STATUS,
-
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
-                        {row.isActive ? (
+                        {row?.isActive ? (
                             <Chip
                                 onClick={() => {
                                     showConfirmationDialog({

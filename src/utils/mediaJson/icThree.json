@@ -41,6 +41,11 @@
                     "fieldValue": "isPnd"
                 },
                 {
+                    "fieldId": "IC_THREE_LIST_INITIAL_RETURN_TYPE",
+                    "fieldName": "Return Type",
+                    "fieldValue": "returnType"
+                },
+                {
                     "fieldId": "IC_THREE_LIST_STATUS",
                     "fieldName": "Status",
                     "fieldValue": "isActive"

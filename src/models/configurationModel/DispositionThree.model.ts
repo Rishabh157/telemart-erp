@@ -7,22 +7,24 @@
 
 // |-- Types --|
 export type DispositionThreeListResponse = {
+    _id: string
     dispositionName: string
-    dispostionOneLabel: string
-    dispostionTwoLabel: string
+    dispositionDisplayName: string
     dispositionOneId: string
     dispositionTwoId: string
-    whatsApp: string
+    companyId: string
+    priority: string
     smsType: string
     emailType: string
-    priority: string
-    companyId: string
-    isActive: boolean
+    whatsApp: string
+    applicableCriteria: string[]
     isDeleted: boolean
+    isActive: boolean
     createdAt: string
     updatedAt: string
-    _id: string
     __v: number
+    dispostionOneLabel: string
+    dispostionTwoLabel: string
 }
 
 export type AddDispositionThree = {
