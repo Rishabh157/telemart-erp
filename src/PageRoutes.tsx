@@ -242,7 +242,6 @@ import AddNdrDispositionWrapper from './pages/disposition/ndrDisposition/add/Add
 import EditNdrDispositionWrapper from './pages/disposition/ndrDisposition/edit/EditNdrDispositionWrapper'
 import NdrDispositionListingWrapper from './pages/disposition/ndrDisposition/list/NdrDispositionListingWrapper'
 import InventoryFlowListingWrapper from './pages/inventoryFlow/list/InventoryFlowListingWrapper'
-import CustomerPageWrapper from './pages/media/callerpage/CustomerPageWrapper'
 import ViewSlot from './pages/media/slotManagement'
 import SlotRunViewsListingWrapper from './pages/media/slotManagement/slotRunView/SlotRunViewsListingWrapper'
 import AddRTVendorWrapper from './pages/returnToVendor/add/AddRTVendorWrapper'
@@ -272,7 +271,8 @@ import DispositionLayout from './pages/disposition/DispositionLayout'
 import WebsitesLayout from './pages/websites/WebsiteLayout'
 import Welcome from './pages/welcome/Welcome'
 import Successfully from './pages/welcome/Successfully'
-import CallerPageWrapper from './pages/callerpage/CallerPageWrapper'
+import CallerPageWrapper from './pages/callerpage/salesInbound/SalesPageWrapper'
+import CustomerCarePageWrapper from './pages/callerpage/customerInbound/CustomerCarePageWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2255,8 +2255,8 @@ const PageRoutes = () => {
                     />
 
                     <Route
-                        path="/media/customer-page"
-                        element={<CustomerPageWrapper />}
+                        path="/media/customer-care"
+                        element={<CustomerCarePageWrapper />}
                     />
                     {/* Assets -> Assets Management */}
                     <Route
@@ -2915,7 +2915,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<EditWebsiteTagWrapper />}
                                     permission={
-                                        UserModuleNameTypes.ACTION_WEBSITES_TAGS_ONE_EDIT
+                                        UserModuleNameTypes.ACTION_WEBSITES_TAGS_EDIT
                                     }
                                 />
                             }

@@ -26,13 +26,14 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsitePageListing from './WebsitePageListing'
 
 // |-- Redux --|
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/website/websitePageSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const WebsitePageListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -56,6 +57,7 @@ const WebsitePageListingWrapper = () => {
             renderCell: (row: WebsitePageListResponse) => (
                 <span> {row.pageName} </span>
             ),
+            name: UserModuleNameTypes.WEBSITES_PAGES_LIST_WEBSITES_PAGES_NAME,
         },
         {
             field: 'pageUrl',
@@ -64,18 +66,23 @@ const WebsitePageListingWrapper = () => {
             renderCell: (row: WebsitePageListResponse) => (
                 <span> {row.pageUrl} </span>
             ),
+            name: UserModuleNameTypes.WEBSITES_PAGES_LIST_PAGE_URL,
         },
-
         {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.websitePage}
-                    isView
-                    isEdit
-                    isDelete
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_PAGES_ONE_EDIT
+                    )}
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_PAGES_ONE_VIEW
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_WEBSITES_PAGES_ONE_DELETE
+                    )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

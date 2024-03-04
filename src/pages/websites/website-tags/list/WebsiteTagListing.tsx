@@ -20,6 +20,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Redux --|
 import {
@@ -66,13 +68,15 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Website MetaTags Management </ATMPageHeading>
-                <button
-                    type="button"
-                    onClick={() => navigate('add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add Tags
-                </button>
+                {isAuthorized(UserModuleNameTypes.ACTION_WEBSITES_TAGS_ADD) && (
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add Tags
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

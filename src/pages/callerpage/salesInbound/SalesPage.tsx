@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import CallerButton from './components/CallerButton'
+import CallerButton from '../components/CallerButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { FormInitialValues } from './CallerPageWrapper'
+// import { FormInitialValues } from './SalesPageWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,12 +13,13 @@ import { setItems as setDispositionTwoItems } from 'src/redux/slices/configurati
 import { useGetSchemeByIdUnAuthQuery } from 'src/services/SchemeService'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
-import CallerHeader from './components/CallerHeader'
-import CallerPageTopNav from './components/CallerPageTopNav'
-import CallerScheme from './components/CallerScheme'
-import CallerDeliveryAddress from './components/CallerDeliveryAddress'
-import CallerOtherDetails from './components/CallerOtherDetails'
+import CallerHeader from '../components/CallerHeader'
+import CallerPageTopNav from '../components/CallerPageTopNav'
+import CallerScheme from '../components/CallerScheme'
+import CallerDeliveryAddress from '../components/CallerDeliveryAddress'
+import CallerOtherDetails from '../components/CallerOtherDetails'
 import { IoReorderFour } from 'react-icons/io5'
+import { FormInitialValues } from './SalesPageWrapper'
 
 export type dropdownOptions = {
     stateOptions?: SelectOption[] | []
@@ -72,7 +73,7 @@ export interface SchemeDetailsPropTypes {
     totalAmount: number
 }
 
-const CallerPage: React.FC<Props> = ({
+const SalesPage: React.FC<Props> = ({
     formikProps,
     didItems,
     activeTab,
@@ -367,4 +368,4 @@ const CallerPage: React.FC<Props> = ({
     )
 }
 
-export default CallerPage
+export default SalesPage

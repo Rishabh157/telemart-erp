@@ -83,7 +83,7 @@ const mediaNavigation: NavItemType[] = [
     {
         label: 'Customer Page',
         icon: MdViewTimeline,
-        path: 'customer-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
+        path: 'customer-care?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
         name: UserModuleNameTypes.NAV_CUSTOMER_PAGE,
     },
 ]

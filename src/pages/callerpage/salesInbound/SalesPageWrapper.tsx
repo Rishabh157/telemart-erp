@@ -5,7 +5,6 @@ import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import CallerPage from './CallerPage'
 import {
     useAddCallerFormMutation,
     useUpdateCallerFormMutation,
@@ -23,8 +22,11 @@ import {
 import { OrderListResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
-import { statusProps } from '../orders'
+import { statusProps } from '../../orders'
 import { useNavigate } from 'react-router-dom'
+import SalesPage from './SalesPage'
+import moment from 'moment'
+
 // import moment from 'moment'
 
 export type FormInitialValues = {
@@ -89,7 +91,7 @@ enum TabTypes {
     complaint = 'complaint',
 }
 
-const CallerPageWrapper = () => {
+const SalesPageWrapper = () => {
     const [orderData, setOrderData] = useState<any>({})
     const [activeTab, setActiveTab] = useState<TabTypes>(TabTypes.history)
 
@@ -108,7 +110,7 @@ const CallerPageWrapper = () => {
             headerName: 'Order No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderNumber === null ? '-' : row.orderNumber}</span>
             ),
@@ -118,7 +120,7 @@ const CallerPageWrapper = () => {
             headerName: 'Enquiry No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
@@ -127,7 +129,7 @@ const CallerPageWrapper = () => {
             headerName: 'Agent Name',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.agentName} </span>
@@ -138,7 +140,7 @@ const CallerPageWrapper = () => {
             headerName: 'Agent ID',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
@@ -147,7 +149,7 @@ const CallerPageWrapper = () => {
             headerName: 'EDP Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
@@ -156,7 +158,7 @@ const CallerPageWrapper = () => {
             headerName: 'Customer Name',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.reciversName} </span>
@@ -167,7 +169,7 @@ const CallerPageWrapper = () => {
             headerName: 'Scheme',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row.schemeName} </span>
             ),
@@ -177,7 +179,7 @@ const CallerPageWrapper = () => {
             headerName: 'Quantity',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.shcemeQuantity} </span>
@@ -188,7 +190,7 @@ const CallerPageWrapper = () => {
             headerName: 'Disposition',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.dispositionLevelThree} </span>
@@ -199,7 +201,7 @@ const CallerPageWrapper = () => {
             headerName: 'District',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.districtLabel} </span>
@@ -210,7 +212,7 @@ const CallerPageWrapper = () => {
             headerName: 'Pincode',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.pincodeLabel} </span>
@@ -221,16 +223,58 @@ const CallerPageWrapper = () => {
             headerName: 'Agent Remark',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> {row.remark} </span>,
+        },
+        {
+            field: 'preffered_delivery_date',
+            headerName: 'Preffred Delivery Date',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <>
+                        <span>
+                             {row?.preffered_delivery_date ? moment(row?.preffered_delivery_date).format(
+                                'DD-MM-YYYY'
+                            ) : '-'}
+                        </span>
+                        {/* <span>
+                            {' '}
+                            {moment(row?.preffered_delivery_date).format(
+                                'hh:mm:ss A'
+                            )}
+                        </span>, */}
+                    </>
+                )
+            }
+        },
+        {
+            field: 'preffered_delivery_date',
+            headerName: 'Preffred Delivery Time',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <>
+                        <span className='flex gap-1'>
+                            {row?.preffered_delivery_start_time} - {row?.preffered_delivery_end_time}
+                        </span>,
+                    </>
+                )
+            }
         },
         {
             field: 'dealerCode',
             headerName: 'Dealer Code',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.dealerCode} </span>
@@ -241,7 +285,7 @@ const CallerPageWrapper = () => {
             headerName: 'Dealer Status',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
@@ -250,7 +294,7 @@ const CallerPageWrapper = () => {
             headerName: 'Status Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             // renderCell: (row: OrderListResponse) => (
             //     <span> {row?.dealerCode} </span>
@@ -261,7 +305,7 @@ const CallerPageWrapper = () => {
             headerName: 'CC Name',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.callCenterLabel} </span>
@@ -272,7 +316,7 @@ const CallerPageWrapper = () => {
             headerName: 'Warehouse',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.wareHouseLabel} </span>
@@ -283,7 +327,7 @@ const CallerPageWrapper = () => {
             headerName: 'Tracking No.',
             flex: 'flex-[3_3_0%]',
             align: 'end',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
@@ -293,7 +337,7 @@ const CallerPageWrapper = () => {
             headerName: 'Complaint No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -301,7 +345,7 @@ const CallerPageWrapper = () => {
             headerName: 'Customer Number',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -309,7 +353,7 @@ const CallerPageWrapper = () => {
             headerName: 'Order Status',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.orderStatus} </span>
@@ -320,7 +364,7 @@ const CallerPageWrapper = () => {
             headerName: 'IC One',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -328,7 +372,7 @@ const CallerPageWrapper = () => {
             headerName: 'IC Two',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -336,7 +380,7 @@ const CallerPageWrapper = () => {
             headerName: 'IC Three',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -344,7 +388,7 @@ const CallerPageWrapper = () => {
             headerName: 'Remark',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs',
+            extraClasses: 'text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
     ]
@@ -624,7 +668,7 @@ const CallerPageWrapper = () => {
             {(formikProps: FormikProps<FormInitialValues>) => {
                 return (
                     <form autoComplete="off">
-                        <CallerPage
+                        <SalesPage
                             formikProps={formikProps}
                             didItems={didItems}
                             activeTab={TabTypes[activeTab]}
@@ -641,4 +685,4 @@ const CallerPageWrapper = () => {
     )
 }
 
-export default CallerPageWrapper
+export default SalesPageWrapper

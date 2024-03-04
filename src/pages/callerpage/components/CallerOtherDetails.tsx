@@ -4,13 +4,14 @@ import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/AT
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from '../CallerPageWrapper'
+import { FormInitialValues } from '../salesInbound/SalesPageWrapper'
 import {
     genderOption,
     medicalOptions,
     paymentModeOptions,
     relationOptionns,
 } from '../components/constants'
+import { useLocation } from 'react-router-dom'
 type Props = {
     values: FormInitialValues
     setFieldValue: (
@@ -23,8 +24,9 @@ type Props = {
 const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
     const [isFacebookId, setFacebookId] = React.useState(false)
     const [isInstagramId, setInstagramId] = React.useState(false)
-    const [isOrderOtherFieldEnable, setIsOrderOtherFieldEnable] =
-        React.useState(false)
+    const [isOrderOtherFieldEnable, setIsOrderOtherFieldEnable] = React.useState(false)
+    const location = useLocation()
+    const currentPath = `${location.pathname?.split('/')[2]}`
 
     useEffect(() => {
         if (values?.socialMedia?.facebook) {
@@ -68,7 +70,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
-                    fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass='13px'
                         minHeight="35px"
                         fontSizePlaceHolder="14px"
                         isMulti
@@ -112,7 +114,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     )}
 
                     <ATMSelectSearchable
-                    fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass='13px'
                         minHeight="25px"
                         fontSizePlaceHolder="14px"
                         componentClass="mt-2"
@@ -225,7 +227,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
-                        fontSizeOptionsClass='13px'
+                            fontSizeOptionsClass='13px'
                             minHeight="35px"
                             fontSizePlaceHolder="14px"
                             isMulti
@@ -248,35 +250,36 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                 </div>
 
                 <div className="col-span-6 py-2 px-2 border-r-[1px]">
-                    <div className="grid grid-cols-12">
-                        <div className="col-span-3"></div>
-                        <div className="col-span-9 bg-slate-300 px-6 border-[1px]">
-                            <div className="-mt-6 p-4">
-                                <ATMRadioButton
-                                    label="Payment Mode :"
-                                    labelCalassName="text-xs"
-                                    name="paymentMode"
-                                    value={values.paymentMode || ''}
-                                    className="mt-1"
-                                    options={paymentModeOptions}
-                                    onChange={(e) => {
-                                        setFieldValue('paymentMode', e)
-                                    }}
-                                />
-                                <div>
-                                    {values.paymentMode === 'ONLINE' ? (
-                                        <a
-                                            href={'media/caller-page'}
-                                            className="underline"
-                                        >
-                                            {' '}
-                                            Send Payment Link
-                                        </a>
-                                    ) : null}
+                    {currentPath === 'caller-page' &&
+                        <div className="grid grid-cols-12">
+                            <div className="col-span-3"></div>
+                            <div className="col-span-9 bg-slate-300 px-6 border-[1px]">
+                                <div className="-mt-6 p-4">
+                                    <ATMRadioButton
+                                        label="Payment Mode :"
+                                        labelCalassName="text-xs"
+                                        name="paymentMode"
+                                        value={values.paymentMode || ''}
+                                        className="mt-1"
+                                        options={paymentModeOptions}
+                                        onChange={(e) => {
+                                            setFieldValue('paymentMode', e)
+                                        }}
+                                    />
+                                    <div>
+                                        {values.paymentMode === 'ONLINE' ? (
+                                            <a
+                                                href={'media/caller-page'}
+                                                className="underline"
+                                            >
+                                                {' '}
+                                                Send Payment Link
+                                            </a>
+                                        ) : null}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>}
 
                     <div className="-mt-2">
                         <ATMTextArea
@@ -289,6 +292,104 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                             }}
                         />
                     </div>
+                    {currentPath === 'customer-care' &&
+                        <>
+                            <div>
+                                <ATMTextField
+                                    extraClassField="mt-0"
+                                    label="Coupon code"
+                                    size="xxs"
+                                    labelSize="xxs"
+                                    labelDirection="horizontal"
+                                    labelClass="mt-2"
+                                    name="emailId"
+                                    placeholder="enter coupon code"
+                                    value={values.emailId}
+                                    onChange={(e) => {
+                                        setFieldValue('emailId', e.target.value)
+                                    }}
+                                />
+                            </div>
+
+                            <div className="mt-2">
+                                <div className="flex gap-x-14">
+                                    <span className="text-slate-700 text-xs">
+                                        AVAILABLE COUPONS
+                                    </span>
+
+                                    <div className="flex gap-x-2">
+                                        <button
+                                            type="button"
+                                            className="text-slate-700 text-xs rounded px-1 border-[1px] border-[#e5e1d7]"
+                                        >
+                                            APPLY
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="text-slate-700 text-xs rounded px-1 border-[1px] border-[#e5e1d7]"
+                                        >
+                                            CLEAR
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-2">
+                                <div className="flex gap-x-9">
+                                    <span className="text-slate-700 text-xs">
+                                        Available Loyalty Points
+                                    </span>
+
+                                    <div className="text-xs">
+                                        0{' '}
+                                        <span className="text-[#814cd2] text-xs underline">
+                                            Show Details
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="mt-2">
+                                        <div className="flex gap-x-32">
+                                            <span className="text-slate-700 text-xs flex items-center">
+                                                Burn Value
+                                            </span>
+                                            <div className="flex gap-x-4">
+                                                <ATMTextField
+                                                    extraClassField="mt-0"
+                                                    label=""
+                                                    size="xxs"
+                                                    labelSize="xxs"
+                                                    labelClass="mt-2"
+                                                    name="emailId"
+                                                    placeholder="enter burn value"
+                                                    value={values.emailId}
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'emailId',
+                                                            e.target.value
+                                                        )
+                                                    }}
+                                                />
+                                                <div className="">
+                                                    <button
+                                                        type="button"
+                                                        className="text-slate-700 px-[3px] py-[1px] text-xs border-[1px] border-[#e5e1d7] rounded"
+                                                    >
+                                                        APPLY
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className="text-slate-700 px-[3px] py-[1px] text-xs border-[1px] border-[#e5e1d7] mx-2 rounded"
+                                                    >
+                                                        CLEAR
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </>}
                 </div>
             </div>
         </>
