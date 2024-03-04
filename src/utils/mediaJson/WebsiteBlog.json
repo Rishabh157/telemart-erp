@@ -13,17 +13,17 @@
                 {
                     "fieldId": "WEBSITES_BLOG_LIST_WEBSITES_BLOG_NAME",
                     "fieldName": "Blog Name",
-                    "fieldValue": ""
+                    "fieldValue": "blogName"
                 },
                 {
                     "fieldId": "WEBSITES_BLOG_LIST_BLOG_TITLE",
                     "fieldName": "Blog Title",
-                    "fieldValue": ""
+                    "fieldValue": "blogTitle"
                 },
                 {
                     "fieldId": "WEBSITES_BLOG_LIST_BLOG_SUBTITLE",
                     "fieldName": "Blog Subtitle",
-                    "fieldValue": ""
+                    "fieldValue": "blogSubtitle"
                 }
             ]
         },

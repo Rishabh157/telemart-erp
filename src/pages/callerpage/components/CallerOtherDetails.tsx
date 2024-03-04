@@ -68,6 +68,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
+                    fontSizeOptionsClass='13px'
                         minHeight="35px"
                         fontSizePlaceHolder="14px"
                         isMulti
@@ -111,6 +112,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     )}
 
                     <ATMSelectSearchable
+                    fontSizeOptionsClass='13px'
                         minHeight="25px"
                         fontSizePlaceHolder="14px"
                         componentClass="mt-2"
@@ -163,7 +165,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 extraClasses="mt-2"
                                 required
                                 label="Facebook"
-                                labelClasses="text-slate-700 text-xs font-medium pt-1 mb-1 select-none"
+                                inputClasses='h-3 w-3'
+                                labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
                                 checked={isFacebookId}
                                 onChange={(e) => setFacebookId(e)}
                             />
@@ -195,7 +198,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 extraClasses="mt-2"
                                 required
                                 label="Instagram"
-                                labelClasses="text-slate-700 text-xs font-medium pt-1 mb-1 select-none"
+                                inputClasses='h-3 w-3'
+                                labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
                                 checked={isInstagramId}
                                 onChange={(e) => {
                                     setInstagramId(e)
@@ -221,6 +225,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
+                        fontSizeOptionsClass='13px'
                             minHeight="35px"
                             fontSizePlaceHolder="14px"
                             isMulti

@@ -96,9 +96,10 @@ const CallerScheme = ({
                         <ATMSelectSearchable
                             // isSubmitting
                             size="xxs"
-                            labelSize="xxs"
-                            fontSizePlaceHolder="14px"
-                            minHeight="25px"
+                            labelSize='xxs'
+                            fontSizePlaceHolder='14px'
+                            fontSizeOptionsClass='13px'
+                            minHeight='25px'
                             name="productGroupId"
                             selectLabel="select product"
                             value={values?.productGroupId || ''}
@@ -119,9 +120,10 @@ const CallerScheme = ({
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
                             size="xxs"
-                            labelSize="xxs"
-                            fontSizePlaceHolder="14px"
-                            minHeight="25px"
+                            labelSize='xxs'
+                            fontSizePlaceHolder='14px'
+                            fontSizeOptionsClass='13px'
+                            minHeight='25px'
                             name="schemeId"
                             selectLabel="select scheme"
                             defaultValue=""

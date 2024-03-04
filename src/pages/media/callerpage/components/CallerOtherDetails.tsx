@@ -59,7 +59,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     <ATMSelectSearchable
                         minHeight="35px"
                         labelClass="text-[12px] font-medium"
-                        fontSizePlaceHolder="14px"
+                        fontSizePlaceHolder='14px'
+                        fontSizeOptionsClass='13px'
                         size="xxs"
                         labelSize="xxs"
                         isMulti
@@ -102,7 +103,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     <ATMSelectSearchable
                         minHeight="25px"
                         labelClass="text-[12px] font-medium"
-                        fontSizePlaceHolder="14px"
+                        fontSizePlaceHolder='14px'
+                        fontSizeOptionsClass='13px'
                         componentClass="mt-2"
                         label="Age Group"
                         maxMenuHeight={150}
@@ -155,6 +157,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 labelClasses="text-slate-700 text-xs font-medium pt-1 mb-1 select-none"
                                 checked={isFacebookId}
                                 onChange={(e) => setFacebookId(e)}
+                                inputClasses='h-3 w-3'
                             />
 
                             {isFacebookId && (
@@ -191,6 +194,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 onChange={(e) => {
                                     setInstagramId(e)
                                 }}
+                                inputClasses='h-3 w-3'
                             />
 
                             {isInstagramId && (
@@ -215,9 +219,10 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
-                            minHeight="35px"
+                            minHeight='35px'
                             labelClass="text-[12px] font-medium"
-                            fontSizePlaceHolder="14px"
+                            fontSizePlaceHolder='14px'
+                            fontSizeOptionsClass='13px'
                             isMulti
                             isMenuOpen
                             labelSize="xxs"

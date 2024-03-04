@@ -119,6 +119,12 @@ const ViewOrder = () => {
             path: '?orderStatus=global-search',
             name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
         },
+        {
+            label: 'Inquiry',
+            icon: MdOutbond,
+            path: '?orderStatus=inquiry',
+            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
+        },
     ]
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)

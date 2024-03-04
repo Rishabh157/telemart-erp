@@ -50,6 +50,7 @@ type Props = {
     isHidden?: boolean
     minHeight?: string
     fontSizePlaceHolder?: string
+    fontSizeOptionsClass?: string
 }
 
 const ATMSelectSearchable = ({
@@ -83,6 +84,7 @@ const ATMSelectSearchable = ({
     isHidden = false,
     minHeight = '36px',
     fontSizePlaceHolder = '16px',
+    fontSizeOptionsClass = '16px'
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -138,6 +140,7 @@ const ATMSelectSearchable = ({
         option: (provided: any) => ({
             ...provided,
             padding: '6px 12px',
+            fontSize: fontSizeOptionsClass, // Adjust the font size here
         }),
         menu: (provided: any) => ({
             ...provided,
