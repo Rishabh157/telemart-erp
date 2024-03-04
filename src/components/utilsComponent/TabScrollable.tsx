@@ -78,8 +78,8 @@ const TabScrollable: React.FC<Props> = ({
                 {/* generating an array to loop through it  */}
                 {tabsArray.map((item) => (
                     <Tab key={item.label} className="">
-                        <div className="flex p-0 m-0 item-center font-semibold">
-                            <div className=" text-xs mr-2 mt-1 ">
+                        <div className="flex p-0 m-0 items-center font-semibold">
+                            <div className=" text-xs mr-2 ">
                                 <item.icon />
                             </div>
                             <div className="text-xs">{item.label}</div>

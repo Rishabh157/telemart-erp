@@ -221,10 +221,9 @@ const SalesPage: React.FC<Props> = ({
 
         // eslint-disable-next-line
     }, [schemeDetails])
-
     const dropdownOptions = {
         dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
-            return { label: ele?.dispositionName, value: ele?._id }
+            return { label: ele?.dispositionDisplayName, value: ele?._id }
         }),
         dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
