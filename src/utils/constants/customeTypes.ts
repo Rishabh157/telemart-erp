@@ -559,6 +559,7 @@ export const ownershipTypeOptions = () => {
 // USER DEPARTMENT
 enum userDepartmentType {
     salesDepartment = 'SALES_DEPARTMENT',
+    customerCareDepartment='CUSTOMER_CARE_DEPARTMENT',
     hrDepartment = 'HR_DEPARTMENT',
     distributionDepartment = 'DISTRIBUTION_DEPARTMENT',
     financeDepartment = 'FINANCE_DEPARTMENT',
@@ -579,6 +580,10 @@ export const userDepartmentTypeOptions = () => {
         {
             value: userDepartmentType.salesDepartment,
             label: userDepartmentType.salesDepartment,
+        },
+        {
+            value: userDepartmentType.customerCareDepartment,
+            label: userDepartmentType.customerCareDepartment,
         },
         {
             value: userDepartmentType.hrDepartment,
