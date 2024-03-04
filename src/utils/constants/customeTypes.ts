@@ -331,58 +331,58 @@ export const applicableCriteriaOptionsType = () => {
     let options = [
         {
             value: applicableCriteria.isOrder,
-            label: applicableCriteria.isOrder,
+            label: "Is Order",
         },
         {
             value: applicableCriteria.isPrepaid,
-            label: applicableCriteria.isPrepaid,
+            label: "Is Prepaid",
         },
         {
             value: applicableCriteria.isCallBack,
-            label: applicableCriteria.isCallBack,
+            label: "Is Call Back",
         },
         {
             value: applicableCriteria.isReplacement,
-            label: applicableCriteria.isReplacement,
+            label: "Is Replacement",
         },
         {
             value: applicableCriteria.isInquiry,
-            label: applicableCriteria.isInquiry,
+            label: "Is Inquiry",
         },
         {
             value: applicableCriteria.isUrgent,
-            label: applicableCriteria.isUrgent,
+            label: "Is Urgent",
         },
         {
             value: applicableCriteria.isSchemeApp,
-            label: applicableCriteria.isSchemeApp,
+            label: "Is Scheme App",
         },
         {
             value: applicableCriteria.outOfStock,
-            label: applicableCriteria.outOfStock,
+            label: "Out Of Stock",
         },
         {
             value: applicableCriteria.isProductApp,
-            label: applicableCriteria.isProductApp,
+            label: "Is Product App",
         },
         {
             value: applicableCriteria.adtApplicable,
-            label: applicableCriteria.adtApplicable,
+            label: "Adt Applicable",
         },
         {
             value: applicableCriteria.isTextboxReq,
-            label: applicableCriteria.isTextboxReq,
+            label: "Is Text box Req",
         },
         {
             value: applicableCriteria.isRemarkDateApp,
-            label: applicableCriteria.isRemarkDateApp,
+            label: "Is Remark Date App",
         },
     ]
 
     return options?.map((item: any) => {
         return {
             value: item.value,
-            label: item.label.charAt(0).toUpperCase() + item.label.slice(1).toLowerCase(),
+            label: item.label,
         }
     })
 }

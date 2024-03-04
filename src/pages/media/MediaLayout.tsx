@@ -84,6 +84,7 @@ const mediaNavigation: NavItemType[] = [
         label: 'Customer Page',
         icon: MdViewTimeline,
         path: 'customer-care?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
+        // https://out.onetelemart.com:445/calling/default.aspx?phone={{PHONENUMBER}}\&userlogin={{USERLOGIN}}\&postalcode=111\&dstphone={{dnis}}\&campaignId={{CAMPNAME}}
         name: UserModuleNameTypes.NAV_CUSTOMER_PAGE,
     },
 ]
