@@ -26,6 +26,8 @@ import { statusProps } from '../../orders'
 import { useNavigate } from 'react-router-dom'
 import SalesPage from './SalesPage'
 import moment from 'moment'
+import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 // import moment from 'moment'
 
@@ -90,12 +92,40 @@ enum TabTypes {
     order = 'order',
     complaint = 'complaint',
 }
-
+type ProductGroupResponse = {
+    _id: string
+    groupName: string
+    dealerSalePrice: number
+    gst: number
+    cgst: number
+    sgst: number
+    igst: number
+    utgst: number
+    companyId: string
+    isDeleted: boolean
+    isActive: boolean
+    createdAt: string
+    updatedAt: string
+    __v: number
+}
+type LocalUserStorage = {
+    agentId: string
+    companyId: string
+    didNo: string
+    mobileNo: string
+    orderID: string
+}
 const SalesPageWrapper = () => {
     const [orderData, setOrderData] = useState<any>({})
     const [activeTab, setActiveTab] = useState<TabTypes>(TabTypes.history)
-
     const [apiStatus, setApiStatus] = React.useState(false)
+    const [productsGroupOptions, setProductsGroupOptions] = useState<
+        SelectOption[] | []
+    >([])
+    const [addApi, setAddApi] = useState(false)
+    const [callerLoacalStorage, setcallerLoacalStorage] =
+        useState<LocalUserStorage>()
+
     const locationUrl = useLocation()
     const queryParams = new URLSearchParams(locationUrl.search)
     const phoneNumber = queryParams.get('phone')
@@ -104,6 +134,152 @@ const SalesPageWrapper = () => {
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
     // const dstphone = queryParams.get('dstphone')
+    const inboundCallerState: any = useSelector(
+        (state: RootState) => state.inboundCaller
+    )
+    const navigate = useNavigate()
+    const { items, isTableLoading } = inboundCallerState
+    // Table Data with MobileNo filtered
+    const [AddCallerForm] = useAddCallerFormMutation()
+
+    const [UpdateCallerForm] = useUpdateCallerFormMutation()
+    const { selectedItem: didItems }: any = useSelector(
+        (state: RootState) => state.didManagement
+    )
+
+    const {
+        data: callerListingData,
+        isFetching: isCallerFetching,
+        isLoading: isCallerLoading,
+    } = useGetPaginationUnAuthCallerDataQuery(
+        { phoneNo: phoneNumber || '', type: activeTab },
+        {
+            skip: !phoneNumber,
+        }
+    )
+    const {
+        data: singleCallerListingData,
+        isFetching: singleIsCallerFetching,
+        isLoading: singleIsCallerLoading,
+    } = useGetOrderNumberUnAuthCallerDataQuery(
+        { phoneNo: phoneNumber || '' },
+        {
+            skip: !phoneNumber,
+        }
+    )
+
+    useEffect(() => {
+        if (!isCallerFetching && !isCallerLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(callerListingData?.data || []))
+            dispatch(setTotalItems(callerListingData?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isCallerLoading, isCallerFetching, callerListingData])
+    const dispatch = useDispatch<AppDispatch>()
+
+    const {
+        data: didData,
+        isLoading: didIsLoading,
+        isFetching: didIsFetching,
+    } = useGetByDidNumberQuery(didNumber, {
+        skip: !didNumber,
+    })
+    useEffect(() => {
+        if (!didIsLoading && !didIsFetching) {
+            dispatch(setDidItems(didData?.data))
+        }
+    }, [didData, didIsLoading, didIsFetching, dispatch])
+
+    //  Add Form when page loaded & set 'callerPageData' key in LocalStorage
+    useEffect(() => {
+        const callDetails: any = localStorage.getItem('callerPageData')
+        let callDataItem = JSON.parse(callDetails)
+
+        const { preffered_delivery_date, ...rest } = initialValues
+
+        if (!callDataItem && addApi) {
+            // use object destructuring to remove the _id property
+            AddCallerForm({
+                ...rest,
+                preffered_delivery_date: preffered_delivery_date || '',
+            }).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        if (res?.data?.data?._id) {
+                            let callerData = {
+                                orderID: res?.data?.data?._id,
+                                mobileNo: initialValues.mobileNo,
+                                didNo: initialValues.didNo,
+                                companyId: res?.data?.data?.companyId,
+                                agentId: res?.data?.data?.agentId,
+                            }
+                            localStorage.setItem(
+                                'callerPageData',
+                                JSON.stringify(callerData)
+                            )
+                            setcallerLoacalStorage(callerData)
+                        }
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+            })
+        }
+
+        return () => {
+            // Remove the localStorage item when component unmounts
+            localStorage.removeItem('callerPageData')
+        }
+        // eslint-disable-next-line
+    }, [addApi])
+
+    useEffect(() => {
+        if (!singleIsCallerFetching && !singleIsCallerLoading) {
+            setOrderData(singleCallerListingData?.data)
+            setAddApi(true)
+        }
+    }, [singleCallerListingData, singleIsCallerFetching, singleIsCallerLoading])
+
+    useEffect(() => {
+        return () => {
+            dispatch(setIsTableLoading(null))
+            dispatch(setItems(null))
+            dispatch(setTotalItems(null))
+
+            dispatch(setDidItems(null))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    //product data
+    const {
+        data: productGroupData,
+        isLoading: isProductGroupLoading,
+        isFetching: isProductGroupFetching,
+    } = useGetAllProductGroupUnAuthQuery(callerLoacalStorage?.companyId, {
+        skip: !callerLoacalStorage?.companyId,
+    })
+    useEffect(() => {
+        if (!isProductGroupLoading && !isProductGroupFetching) {
+            if (productGroupData?.status) {
+                const productGroupOptionsList = productGroupData?.data?.map(
+                    (products: ProductGroupResponse) => {
+                        return {
+                            label: products?.groupName,
+                            value: products?._id,
+                        }
+                    }
+                )
+                setProductsGroupOptions(productGroupOptionsList)
+            }
+        }
+    }, [productGroupData, isProductGroupLoading, isProductGroupFetching])
+
     const columns: columnTypes[] = [
         {
             field: 'orderNumber',
@@ -238,9 +414,11 @@ const SalesPageWrapper = () => {
                 return (
                     <>
                         <span>
-                            {row?.preffered_delivery_date ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            ) : '-'}
+                            {row?.preffered_delivery_date
+                                ? moment(row?.preffered_delivery_date).format(
+                                      'DD-MM-YYYY'
+                                  )
+                                : '-'}
                         </span>
                         {/* <span>
                             {' '}
@@ -250,7 +428,7 @@ const SalesPageWrapper = () => {
                         </span>, */}
                     </>
                 )
-            }
+            },
         },
         {
             field: 'preffered_delivery_date',
@@ -262,12 +440,21 @@ const SalesPageWrapper = () => {
             renderCell: (row: OrderListResponse) => {
                 return (
                     <>
-                        <span className='flex gap-1'>
-                            {(row?.preffered_delivery_start_time).replaceAll('_', ' ') || '-'} - {(row?.preffered_delivery_end_time).replaceAll('_', ' ') || '-'}
-                        </span>,
+                        <span className="flex gap-1">
+                            {(row?.preffered_delivery_start_time).replaceAll(
+                                '_',
+                                ' '
+                            ) || '-'}{' '}
+                            -{' '}
+                            {(row?.preffered_delivery_end_time).replaceAll(
+                                '_',
+                                ' '
+                            ) || '-'}
+                        </span>
+                        ,
                     </>
                 )
-            }
+            },
         },
         {
             field: 'dealerCode',
@@ -392,19 +579,6 @@ const SalesPageWrapper = () => {
             hidden: !(activeTab === TabTypes?.complaint),
         },
     ]
-
-    const inboundCallerState: any = useSelector(
-        (state: RootState) => state.inboundCaller
-    )
-    const navigate = useNavigate()
-
-    const { items, isTableLoading } = inboundCallerState
-
-    // Table Data with MobileNo filtered
-
-    const [AddCallerForm] = useAddCallerFormMutation()
-    const [UpdateCallerForm] = useUpdateCallerFormMutation()
-
     const initialValues: FormInitialValues = {
         agentName: agentName,
         campaign: campaignId as string,
@@ -413,8 +587,8 @@ const SalesPageWrapper = () => {
         customerName: orderData?.customerName || '',
         didNo: didNumber as string,
         flagStatus: '',
-        productGroupId: null,
-        schemeId: null,
+        productGroupId: didItems?.schemeProductGroup?.[0]?.productGroup || null,
+        schemeId: didItems?.schemeId || null,
         schemeName: '',
         shcemeQuantity: 1,
         price: 0,
@@ -511,60 +685,6 @@ const SalesPageWrapper = () => {
             .min(10, 'mobile number is not valid')
             .max(10, 'mobile number is not valid'),
     })
-
-    const {
-        data: callerListingData,
-        isFetching: isCallerFetching,
-        isLoading: isCallerLoading,
-    } = useGetPaginationUnAuthCallerDataQuery(
-        { phoneNo: phoneNumber || '', type: activeTab },
-        {
-            skip: !phoneNumber,
-        }
-    )
-
-    //
-    const {
-        data: singleCallerListingData,
-        isFetching: singleIsCallerFetching,
-        isLoading: singleIsCallerLoading,
-    } = useGetOrderNumberUnAuthCallerDataQuery(
-        { phoneNo: phoneNumber || '' },
-        {
-            skip: !phoneNumber,
-        }
-    )
-
-    useEffect(() => {
-        if (!isCallerFetching && !isCallerLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(callerListingData?.data || []))
-            dispatch(setTotalItems(callerListingData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isCallerLoading, isCallerFetching, callerListingData])
-    const dispatch = useDispatch<AppDispatch>()
-
-    const { selectedItem: didItems }: any = useSelector(
-        (state: RootState) => state.didManagement
-    )
-
-    // Set did Number
-    const {
-        data: didData,
-        isLoading: didIsLoading,
-        isFetching: didIsFetching,
-    } = useGetByDidNumberQuery(didNumber, {
-        skip: !didNumber,
-    })
-    useEffect(() => {
-        if (!didIsLoading && !didIsFetching) {
-            dispatch(setDidItems(didData?.data))
-        }
-    }, [didData, didIsLoading, didIsFetching, dispatch])
-
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         setApiStatus(true)
@@ -607,57 +727,6 @@ const SalesPageWrapper = () => {
                 })
         }, 1000)
     }
-
-    //  Add Form when page loaded & set 'callerPageData' key in LocalStorage
-    useEffect(() => {
-        const callDetails: any = localStorage.getItem('callerPageData')
-        let callDataItem = JSON.parse(callDetails)
-
-        const { preffered_delivery_date, ...rest } = initialValues
-
-        if (!callDataItem) {
-            // use object destructuring to remove the _id property
-            AddCallerForm({
-                ...rest,
-                preffered_delivery_date: preffered_delivery_date || '',
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        if (res?.data?.data?._id) {
-                            let callerData = {
-                                orderID: res?.data?.data?._id,
-                                mobileNo: initialValues.mobileNo,
-                                didNo: initialValues.didNo,
-                                companyId: res?.data?.data?.companyId,
-                                agentId: res?.data?.data?.agentId,
-                            }
-                            localStorage.setItem(
-                                'callerPageData',
-                                JSON.stringify(callerData)
-                            )
-                        }
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-            })
-        }
-
-        return () => {
-            // Remove the localStorage item when component unmounts
-            localStorage.removeItem('callerPageData')
-        }
-        // eslint-disable-next-line
-    }, [orderData])
-
-    useEffect(() => {
-        if (!singleIsCallerFetching && !singleIsCallerLoading) {
-            setOrderData(singleCallerListingData?.data)
-        }
-    }, [singleCallerListingData, singleIsCallerFetching, singleIsCallerLoading])
-
     return (
         <Formik
             enableReinitialize
@@ -677,6 +746,10 @@ const SalesPageWrapper = () => {
                             rows={items}
                             apiStatus={apiStatus}
                             isTableLoading={isTableLoading}
+                            productsGroupOptions={productsGroupOptions}
+                            companyId={
+                                (callerLoacalStorage?.companyId as string) || ''
+                            }
                         />
                     </form>
                 )
