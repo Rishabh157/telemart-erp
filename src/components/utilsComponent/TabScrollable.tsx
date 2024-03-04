@@ -61,26 +61,28 @@ const TabScrollable: React.FC<Props> = ({
     return (
         <>
             <Tabs
+                showTabsScroll
                 activeTab={activeTab as number}
                 onTabClick={onTabClick}
-                navBtnClassName={'text-[30px] bg-black'}
+                // navBtnContainerClassName='overflow-scroll w-[100%]'
+                // navBtnClassName={'text-[30px] bg-black w-[100%] overflow-scroll'}
                 // rightBtnIcon={<FaChevronCircleRight size={26} fill="blue" />}
                 // leftBtnIcon={<FaChevronCircleLeft size={26} fill="blue" />}
-                rightBtnIcon={<span className="select-none">&#x22D9; </span>}
-                leftBtnIcon={<span className="select-none">&#x22D8; </span>}
+                // rightBtnIcon={<span className="select-none">&#x22D9; </span>}
+                // leftBtnIcon={<span className="select-none">&#x22D8; </span>}
                 leftNavBtnClassName={
                     'bg-inherit border-0 hover:bg-white p-0 m-0  font-bold'
                 }
-                hideNavBtns={false}
+                hideNavBtns={true}
             >
                 {/* generating an array to loop through it  */}
                 {tabsArray.map((item) => (
                     <Tab key={item.label} className="">
-                        <div className="flex p-0 m-0 font-semibold">
-                            <div className=" text-sm mr-2 mt-1 ">
+                        <div className="flex p-0 m-0 item-center font-semibold">
+                            <div className=" text-xs mr-2 mt-1 ">
                                 <item.icon />
                             </div>
-                            <div className="text-sm">{item.label}</div>
+                            <div className="text-xs">{item.label}</div>
                         </div>
                     </Tab>
                 ))}

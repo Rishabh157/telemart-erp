@@ -32,10 +32,35 @@
             "label": "Executive, Sales Center ",
             "value": "EXECUTIVE_SALES_CENTER"
         },
-
         {
             "label": " Executive,Trainee  ",
             "value": "EXECUTIVE_TRAINEE"
+        }
+    ],
+    "customerCareDepartment": [
+        {
+            "label": "AVP Customer Care",
+            "value": "CUSTOMER_CARE_AVP"
+        },
+        {
+            "label": "Manager,Customer Care",
+            "value": "CUSTOMER_CARE_MANAGER"
+        },
+        {
+            "label": "AM, Customer Care",
+            "value": "CUSTOMER_CARE_AM"
+        },
+        {
+            "label": "Team Leader,Customer Care",
+            "value": "CUSTOMER_CARE_TEAM_LEADER"
+        },
+        {
+            "label": "Sr. Executive, Customer Care",
+            "value": "CUSTOMER_CARE_SR_EXECUTIVE"
+        },
+        {
+            "label": "Executive, Customer Care",
+            "value": "CUSTOMER_CARE_EXECUTIVE"
         }
     ],
     "hrDepartment": [
@@ -245,10 +270,7 @@
             "label": "JR WebDeveloper",
             "value": "JR_WEB_DEVELOPER"
         },
-        {
-            "label": "SR Manager Digital Sales",
-            "value": "SR_WEB_DEVELOPER"
-        },
+     
         {
             "label": "SR WebDeveloper",
             "value": "SR_WEB_DEVELOPER"

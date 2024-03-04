@@ -156,7 +156,7 @@ const ViewLayout = ({
                                     )
                                 })}
                             </div> */}
-                            <div className="h-[40px] border flex gap-4 items-center bg-stone-400  shadow rounded ">
+                            <div className="h-[40px] border flex gap-4 items-center  shadow rounded ">
                                 <TabScrollable tabs={tabs} active={activeTab} />
                             </div>
 
