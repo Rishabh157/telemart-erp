@@ -19,6 +19,7 @@ import DateFilterForm from 'src/components/utilsComponent/DateFilterForm'
 type Props = {
     rowsPerPage: number
     searchValue?: string
+    placeholder?: string
     page: number
     rows: any[]
     rowCount: number
@@ -32,6 +33,10 @@ type Props = {
     isDateFilter?: boolean
     onSubmitDateHandler?: (values: any) => void
     IsDaterFilterLoading?: boolean
+    isAnotherSearch?: boolean
+    anotherSearchValue?: string
+    anotherSearchPlaceholder?: string
+    onAnotherSearch?: (newValue: string) => void
 }
 
 const ATMTableHeader = ({
@@ -40,6 +45,7 @@ const ATMTableHeader = ({
     rows,
     rowsPerPage,
     searchValue,
+    placeholder = 'Search...',
     page,
     rowsPerPageOptions = [5, 10, 20, 50, 100],
     onRowsPerPageChange = () => {},
@@ -50,7 +56,11 @@ const ATMTableHeader = ({
     isDateFilter = false,
     IsDaterFilterLoading = false,
     onSubmitDateHandler,
-}: Props) => {
+    isAnotherSearch = false,
+    anotherSearchValue = 'Search...',
+    anotherSearchPlaceholder = 'Search...',
+    onAnotherSearch = () => {},
+}: Props) => { 
     return (
         <div className="p-3 pb-5 border-b border-slate-300 grid grid-cols-3">
             {/* Left */}
@@ -63,9 +73,23 @@ const ATMTableHeader = ({
                         onChange={(e) => {
                             onSearch(e.currentTarget.value)
                         }}
-                        placeholder="Search..."
+                        placeholder={placeholder}
                     />
                 </div>
+
+                {isAnotherSearch && (
+                    <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
+                        <BiSearch className="text-slate-600 text-xl" />
+                        <input
+                            className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
+                            value={anotherSearchValue}
+                            onChange={(e) => {
+                                onAnotherSearch(e.currentTarget.value)
+                            }}
+                            placeholder={anotherSearchPlaceholder}
+                        />
+                    </div>
+                )}
 
                 {isFilter && (
                     <button

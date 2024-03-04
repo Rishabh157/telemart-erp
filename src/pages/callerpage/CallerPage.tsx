@@ -19,6 +19,7 @@ import CallerScheme from './components/CallerScheme'
 import CallerDeliveryAddress from './components/CallerDeliveryAddress'
 import CallerOtherDetails from './components/CallerOtherDetails'
 import { IoReorderFour } from 'react-icons/io5'
+import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
 
 export type dropdownOptions = {
     stateOptions?: SelectOption[] | []
@@ -222,9 +223,11 @@ const CallerPage: React.FC<Props> = ({
     }, [schemeDetails])
 
     const dropdownOptions = {
-        dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
-            return { label: ele?.dispositionName, value: ele?._id }
-        }),
+        dispositionThreeOptions: allDispositionItems?.map(
+            (ele: DispositionThreeListResponse) => {
+                return { label: ele?.dispositionDisplayName, value: ele?._id }
+            }
+        ),
         dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
         }),
