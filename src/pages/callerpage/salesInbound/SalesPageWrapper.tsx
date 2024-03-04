@@ -238,7 +238,7 @@ const SalesPageWrapper = () => {
                 return (
                     <>
                         <span>
-                             {row?.preffered_delivery_date ? moment(row?.preffered_delivery_date).format(
+                            {row?.preffered_delivery_date ? moment(row?.preffered_delivery_date).format(
                                 'DD-MM-YYYY'
                             ) : '-'}
                         </span>
@@ -263,7 +263,7 @@ const SalesPageWrapper = () => {
                 return (
                     <>
                         <span className='flex gap-1'>
-                            {row?.preffered_delivery_start_time} - {row?.preffered_delivery_end_time}
+                            {(row?.preffered_delivery_start_time).replaceAll('_', ' ') || '-'} - {(row?.preffered_delivery_end_time).replaceAll('_', ' ') || '-'}
                         </span>,
                     </>
                 )

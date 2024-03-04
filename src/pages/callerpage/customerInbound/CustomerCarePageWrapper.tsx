@@ -262,7 +262,7 @@ const CustomerCarePageWrapper = () => {
                 return (
                     <>
                         <span className='flex gap-1'>
-                            {row?.preffered_delivery_start_time} - {row?.preffered_delivery_end_time}
+                            {(row?.preffered_delivery_start_time).replaceAll('_', ' ') || '-'} - {(row?.preffered_delivery_end_time).replaceAll('_', ' ') || '-'}
                         </span>,
                     </>
                 )
