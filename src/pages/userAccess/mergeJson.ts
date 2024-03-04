@@ -1,6 +1,6 @@
 import { default as ASRJson } from '../../utils/mediaJson/asr.json'
 import { default as NDRDispositionJson } from '../../utils/mediaJson/NDRDisposition.json'
-import { default as WebsiteBlogJson } from '../../utils/mediaJson/websiteBlog.json'
+import { default as WebsiteBlogJson } from '../../utils/mediaJson/websiteBlogcopy.json'
 import { default as artistJson } from '../../utils/mediaJson/artist.json'
 import { default as assetsRequestJson } from '../../utils/mediaJson/assetsRequest.json'
 import { default as attributeJson } from '../../utils/mediaJson/attribute.json'
