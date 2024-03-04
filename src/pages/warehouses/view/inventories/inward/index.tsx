@@ -71,7 +71,7 @@ const InwardsTabs = (props: Props) => {
             {/* Right Section */}
             <div className="w-[100%] border-b border-r border-l rounded-r h-full p-1  ">
                 <div className="py-1">
-                    <div className="h-[40px] border flex gap-x-4 items-center bg-orange-300    shadow rounded  ">
+                    <div className="h-[40px] border flex gap-x-4 items-center    shadow rounded  ">
                         <TabScrollable tabs={allowedTabs} active={activeTab} />
                     </div>
                 </div>
