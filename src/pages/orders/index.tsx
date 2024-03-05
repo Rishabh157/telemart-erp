@@ -42,6 +42,7 @@ export enum statusProps {
     una = 'UNA',
     pnd = 'PND',
     urgent = 'URGENT',
+    inquiry = 'INQUIRY',
     'non-action' = 'NON_ACTION',
 }
 
@@ -114,15 +115,15 @@ const ViewOrder = () => {
             name: UserModuleNameTypes.ACTION_ORDER_NON_ACTION_TAB_LIST,
         },
         {
-            label: 'Global Order Search',
-            icon: MdOutbond,
-            path: '?orderStatus=global-search',
-            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
-        },
-        {
             label: 'Inquiry',
             icon: MdOutbond,
             path: '?orderStatus=inquiry',
+            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
+        },
+        {
+            label: 'Global Order Search',
+            icon: MdOutbond,
+            path: '?orderStatus=global-search',
             name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
         },
     ]
@@ -174,11 +175,11 @@ const ViewOrder = () => {
                     <div className="w-[100%] border-b border-r border-l rounded-r h-full overflow-x-scroll">
                         {/* <div className='bg-stone-400 w-[100%]  overflow-x-scroll flex gap-x-4 items-center h-[35px]'> */}
                         {/* <div className="h-[40px] border flex gap-x-4 items-center bg-stone-400  shadow rounded w-[100%] overflow-auto"> */}
-                            <TabScrollable
-                                tabs={allowedTabs}
-                                active={activeTabIndex}
-                                navBtnContainerClassName="bg-red-500"
-                            />
+                        <TabScrollable
+                            tabs={allowedTabs}
+                            active={activeTabIndex}
+                            navBtnContainerClassName="bg-red-500"
+                        />
                         {/* </div> */}
                         <div className="py-2 px-4">
                             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
