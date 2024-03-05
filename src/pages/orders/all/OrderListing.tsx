@@ -103,9 +103,9 @@ const OrderListing = ({
 
     // global search order no. and mobile no. value
     const [orderNumberSearchValue, setOrderNumberSearchValue] =
-        useState<string>('')
+        useState<string>()
     const [mobileNumberSearchValue, setMobileNumberSearchValue] =
-        useState<string>('')
+        useState<string>()
 
     const [selectedRows, setSelectedRows] = useState([])
     const [currentId, setCurrentId] = useState<string>('')
@@ -120,45 +120,30 @@ const OrderListing = ({
 
     const [filterBy, setFilterBy] = useState<any>([])
     useEffect(() => {
-        let filter: any = []
+        let filter: any = [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
+            },
+            {
+                fieldName: 'orderNumber',
+                value: [searchValue],
+            },
+            {
+                fieldName: 'mobileNo',
+                value: [orderMobSearchValue],
+            },
+        ]
         if (!orderStatus) {
-            filter = [
-                {
-                    fieldName: 'companyId',
-                    value: userData?.companyId,
-                },
-                {
-                    fieldName: 'orderNumber',
-                    value: [searchValue],
-                },
-                {
-                    fieldName: 'mobileNo',
-                    value: [orderMobSearchValue],
-                },
-            ]
             setFilterBy(filter)
             return
         }
         switch (orderStatus) {
             case null:
-                filter = [
-                    {
-                        fieldName: 'companyId',
-                        value: userData?.companyId,
-                    },
-                    {
-                        fieldName: 'orderNumber',
-                        value: [searchValue],
-                    },
-                    {
-                        fieldName: 'mobileNo',
-                        value: [orderMobSearchValue],
-                    },
-                ]
                 setFilterBy(filter)
                 return
             case 'inquiry':
-                filter = [
+                let filterInquiry = [
                     {
                         fieldName: 'companyId',
                         value: userData?.companyId,
@@ -167,53 +152,37 @@ const OrderListing = ({
                         fieldName: 'orderNumber',
                         value: null,
                     },
-                ]
-                setFilterBy(filter)
-                return
-            case 'all':
-                filter = [
-                    {
-                        fieldName: 'companyId',
-                        value: userData?.companyId,
-                    },
-                    {
-                        fieldName: 'orderNumber',
-                        value: [searchValue],
-                    },
                     {
                         fieldName: 'mobileNo',
                         value: [orderMobSearchValue],
                     },
+                    {
+                        fieldName: 'inquiryNumber',
+                        value: [searchValue],
+                    },
+                    {
+                        fieldName: 'status',
+                        value: currentStatus,
+                    },
                 ]
+                setFilterBy(filterInquiry)
+                return
+            case 'all':
                 setFilterBy(filter)
                 return
             case 'approved':
-                filter = [
-                    {
-                        fieldName: 'companyId',
-                        value: userData?.companyId,
-                    },
+                let filterApproval = [
+                    ...filter,
                     {
                         fieldName: 'approved',
                         value: false,
                     },
-                    {
-                        fieldName: 'orderNumber',
-                        value: [searchValue],
-                    },
-                    {
-                        fieldName: 'mobileNo',
-                        value: [orderMobSearchValue],
-                    },
                 ]
-                setFilterBy(filter)
+                setFilterBy(filterApproval)
                 return
             default:
-                filter = [
-                    {
-                        fieldName: 'companyId',
-                        value: userData?.companyId,
-                    },
+                let filterdefault = [
+                    ...filter,
                     {
                         fieldName: 'status',
                         value: currentStatus,
@@ -222,18 +191,12 @@ const OrderListing = ({
                         fieldName: 'approved',
                         value: true,
                     },
-                    {
-                        fieldName: 'orderNumber',
-                        value: [searchValue],
-                    },
-                    {
-                        fieldName: 'mobileNo',
-                        value: [orderMobSearchValue],
-                    },
                 ]
-                setFilterBy(filter)
+
+                setFilterBy(filterdefault)
                 return
         }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderState, currentStatus, orderMobSearchValue])
 
@@ -253,12 +216,6 @@ const OrderListing = ({
             params: ['didNo', 'mobileNo'],
             page: page,
             filterBy: [...filterBy],
-            isOrderOrInquiry:
-                orderStatus === 'inquiry'
-                    ? 'inquiry'
-                    : orderStatus === 'fresh'
-                    ? 'order'
-                    : '',
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,
@@ -858,7 +815,11 @@ const OrderListing = ({
                 {orderStatus !== 'global-search' ? (
                     <ATMTableHeader
                         searchValue={searchValue}
-                        placeholder="Order No..."
+                        placeholder={
+                            orderStatus !== 'inquiry'
+                                ? 'Order No...'
+                                : 'Inquiry No...'
+                        }
                         page={page}
                         rowCount={totalItems}
                         rowsPerPage={rowsPerPage}
