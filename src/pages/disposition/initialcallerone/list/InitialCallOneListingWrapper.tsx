@@ -157,9 +157,9 @@ const InitialCallOneListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_IC_ONE_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_IC_ONE_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_IC_ONE_DELETE
+                    // )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

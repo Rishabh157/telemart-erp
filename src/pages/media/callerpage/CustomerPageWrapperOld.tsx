@@ -5,7 +5,7 @@ import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import CustomerPage from './CustomerPage'
+import CustomerPage from './CustomerPageOld'
 import {
     useAddCallerFormMutation,
     useUpdateCallerFormMutation,

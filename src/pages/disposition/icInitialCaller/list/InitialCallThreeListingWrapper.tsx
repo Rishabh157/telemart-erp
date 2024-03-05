@@ -128,7 +128,7 @@ const InitialCallThreeListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_RETURN_TYPE,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span>{row?.returnType?.[0]}</span>
+                <span>{row?.returnType?.join(' , ')}</span>
             ),
         },
         {
@@ -200,9 +200,9 @@ const InitialCallThreeListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_IC_THREE_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_IC_THREE_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_IC_THREE_DELETE
+                    // )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

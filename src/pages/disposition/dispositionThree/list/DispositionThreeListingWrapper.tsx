@@ -181,9 +181,9 @@ const DispositionThreeListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_DISPOSITION_THREE_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_DISPOSITION_THREE_DELETE
+                    // )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
