@@ -9,17 +9,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
 import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
+import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
 import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import { useGetSchemeByIdUnAuthQuery } from 'src/services/SchemeService'
-import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
-import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
 import CallerHeader from '../components/CallerHeader'
 import CallerPageTopNav from '../components/CallerPageTopNav'
 import CallerScheme from '../components/CallerScheme'
 import CallerDeliveryAddress from '../components/CallerDeliveryAddress'
 import CallerOtherDetails from '../components/CallerOtherDetails'
 import { IoReorderFour } from 'react-icons/io5'
-import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
 
 export type dropdownOptions = {
     stateOptions?: SelectOption[] | []
@@ -47,24 +45,10 @@ type Props = {
     didItems: any
     apiStatus: boolean
     isTableLoading: boolean
+    productsGroupOptions: SelectOption[]
+    companyId: string
 }
 
-type ProductGroupResponse = {
-    _id: string
-    groupName: string
-    dealerSalePrice: number
-    gst: number
-    cgst: number
-    sgst: number
-    igst: number
-    utgst: number
-    companyId: string
-    isDeleted: boolean
-    isActive: boolean
-    createdAt: string
-    updatedAt: string
-    __v: number
-}
 export interface SchemeDetailsPropTypes {
     schemeName: string
     price: number
@@ -82,11 +66,9 @@ const CustomerCarePage: React.FC<Props> = ({
     rows,
     apiStatus,
     isTableLoading,
+    productsGroupOptions,
+    companyId,
 }) => {
-    const callerDetails: any = localStorage.getItem('callerPageData')
-    let callerDataItem = JSON.parse(callerDetails)
-    const companyId = callerDataItem?.companyId || ''
-
     const [schemeDetails, setSchemeDetails] = useState<SchemeDetailsPropTypes>({
         schemeName: '',
         price: 0,
@@ -94,51 +76,14 @@ const CustomerCarePage: React.FC<Props> = ({
         deliveryCharges: 0,
         totalAmount: 0,
     })
-    const [productsGroupOptions, setProductsGroupOptions] = useState<
-        SelectOption[] | []
-    >([])
 
     const { values, setFieldValue } = formikProps
+
     const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate()
 
     const { allItems: allDispositionItems }: any = useSelector(
         (state: RootState) => state.dispositionThree
     )
-
-    // Get Product Group Data
-    const {
-        data: productGroupData,
-        isLoading: isProductGroupLoading,
-        isFetching: isProductGroupFetching,
-    } = useGetAllProductGroupUnAuthQuery(companyId, {
-        skip: !companyId,
-    })
-    useEffect(() => {
-        if (didItems) {
-            setFieldValue(
-                'productGroupId',
-                didItems?.schemeProductGroup?.[0]?.productGroup || ''
-            )
-            setFieldValue('schemeId', didItems?.schemeId)
-        }
-        //eslint-disable-next-line
-    }, [didItems])
-    useEffect(() => {
-        if (!isProductGroupLoading && !isProductGroupFetching) {
-            if (productGroupData?.status) {
-                const productGroupOptionsList = productGroupData?.data?.map(
-                    (products: ProductGroupResponse) => {
-                        return {
-                            label: products?.groupName,
-                            value: products?._id,
-                        }
-                    }
-                )
-                setProductsGroupOptions(productGroupOptionsList)
-            }
-        }
-    }, [productGroupData, isProductGroupLoading, isProductGroupFetching])
 
     // GET SINGLE SCHEME BY ID
     const {
@@ -159,7 +104,7 @@ const CustomerCarePage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                    singleSchemeData?.data?.deliveryCharges || 0,
+                        singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -223,11 +168,9 @@ const CustomerCarePage: React.FC<Props> = ({
     }, [schemeDetails])
 
     const dropdownOptions = {
-        dispositionThreeOptions: allDispositionItems?.map(
-            (ele: DispositionThreeListResponse) => {
-                return { label: ele?.dispositionDisplayName, value: ele?._id }
-            }
-        ),
+        dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
+            return { label: ele?.dispositionDisplayName, value: ele?._id }
+        }),
         dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
             return { label: ele?.dispositionName, value: ele?._id }
         }),
@@ -257,13 +200,13 @@ const CustomerCarePage: React.FC<Props> = ({
                 values={values}
             />
 
-            <CallerOtherDetails setFieldValue={setFieldValue} values={values} />
+            <CallerOtherDetails setFieldValue={setFieldValue} values={values} isCaller />
 
             {/* Disposition Section  */}
             <div className="grid grid-cols-12 items-center border-[1px] px-2 pb-1 border-grey-700 z-[5000]">
                 <div className="col-span-3 px-2">
                     <ATMSelectSearchable
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="25px"
                         size="xxs"
                         fontSizePlaceHolder="14px"
@@ -285,7 +228,7 @@ const CustomerCarePage: React.FC<Props> = ({
                 </div>
                 <div className="col-span-3 px-3">
                     <ATMSelectSearchable
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="25px"
                         size="xxs"
                         fontSizePlaceHolder="14px"
@@ -320,10 +263,11 @@ const CustomerCarePage: React.FC<Props> = ({
             {/* TABS */}
             <div className="flex gap-x-4 mt-2 mb-1">
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.history
-                        ? 'bg-[#87527c] text-white'
-                        : 'bg-slate-200'
-                        }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
+                        TabTypes[activeTab] === TabTypes.history
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
                     onClick={() => setActiveTab(TabTypes.history)}
                 >
                     <div className=" text-xs mr-2">
@@ -332,10 +276,11 @@ const CustomerCarePage: React.FC<Props> = ({
                     <div className="text-xs">History</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.order
-                        ? 'bg-[#87527c] text-white'
-                        : 'bg-slate-200'
-                        }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
+                        TabTypes[activeTab] === TabTypes.order
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
                     onClick={() => setActiveTab(TabTypes.order)}
                 >
                     <div className=" text-xs mr-2">
@@ -344,10 +289,11 @@ const CustomerCarePage: React.FC<Props> = ({
                     <div className="text-xs">Order</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.complaint
-                        ? 'bg-[#87527c] text-white'
-                        : 'bg-slate-200'
-                        }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
+                        TabTypes[activeTab] === TabTypes.complaint
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
                     onClick={() => setActiveTab(TabTypes.complaint)}
                 >
                     <div className=" text-xs mr-2">
@@ -361,8 +307,8 @@ const CustomerCarePage: React.FC<Props> = ({
             <div className="border-[1px] border-grey-700 overflow-scroll">
                 <ATMTable
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
-                    columns={column}
-                    rows={rows}
+                    columns={column || []}
+                    rows={rows || []}
                     isLoading={isTableLoading}
                 />
             </div>

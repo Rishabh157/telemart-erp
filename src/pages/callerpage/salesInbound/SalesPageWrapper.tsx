@@ -29,8 +29,6 @@ import moment from 'moment'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
-// import moment from 'moment'
-
 export type FormInitialValues = {
     agentName: string | null
     didNo: string

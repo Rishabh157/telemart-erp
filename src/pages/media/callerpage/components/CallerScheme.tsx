@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetAllSchemeListByPgiQuery } from 'src/services/SchemeService'
-import { SchemeDetailsPropTypes } from '../CustomerPage'
-import { FormInitialValues } from '../CustomerPageWrapper'
+import { SchemeDetailsPropTypes } from '../CustomerPageOld'
+import { FormInitialValues } from '../CustomerPageWrapperOld'
 
 type Props = {
     values: FormInitialValues

@@ -89,6 +89,15 @@ export const dispositionComplaintApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        // **** Delete
+        deactivatedispositionComplaint: builder.mutation({
+            invalidatesTags: ['dispositionComplaint'],
+            query: (id: string) => ({
+                url: `/complaint-disposition/status-change/${id}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 export const {
@@ -99,4 +108,5 @@ export const {
     useExportdispositionComplaintDataMutation,
     useDeletedispositionComplaintMutation,
     useGetAlldispositionComplaintQuery,
+    useDeactivatedispositionComplaintMutation,
 } = dispositionComplaintApi

@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:DispositionComplaintListingWrapper.tsx
 // Type: List Component
-// Last Updated: JUNE 27, 2023
+// Last Updated: MARCH 5, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -19,14 +19,13 @@ import { DispositionComplaintListResponse } from 'src/models/configurationModel/
 import {
     useDeletedispositionComplaintMutation,
     useGetdispositionComplaintQuery,
+    useDeactivatedispositionComplaintMutation,
 } from 'src/services/configurations/DispositionComplaintServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-
 import DispositionComplaintListing from './DispositionComplaintListing'
 
 // |-- Redux --|
-
 import {
     setIsTableLoading,
     setItems,
@@ -35,11 +34,7 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
-
-// export type language ={
-//     languageId:string[];
-
-// }
+import { Chip } from '@mui/material'
 
 const DispositionComplaintListingWrapper = () => {
     const navigate = useNavigate()
@@ -51,6 +46,8 @@ const DispositionComplaintListingWrapper = () => {
     )
 
     const { page, rowsPerPage, searchValue, items } = dispositionComplaintState
+    const [deactiveDispositionComplaint] =
+        useDeactivatedispositionComplaintMutation()
 
     const dispatch = useDispatch<AppDispatch>()
     // const navigate = useNavigate();
@@ -83,6 +80,24 @@ const DispositionComplaintListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
+    const handleDeactive = (rowId: string) => {
+        setShowDropdown(false)
+        deactiveDispositionComplaint(rowId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Status changed successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
     const columns: columnTypes[] = [
         {
             field: 'dispositionName',
@@ -93,20 +108,76 @@ const DispositionComplaintListingWrapper = () => {
                 <span> {row.dispositionName} </span>
             ),
         },
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.NDR_DISPOSITION_LIST_STATUS,
 
+            renderCell: (row: any) => {
+                return (
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                        {row.isActive ? (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive ',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Active"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : (
+                            <Chip
+                                onClick={() => {
+                                    showConfirmationDialog({
+                                        title: 'Deactive ',
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
+                                        showCancelButton: true,
+                                        next: (res) => {
+                                            return res.isConfirmed
+                                                ? handleDeactive(row?._id)
+                                                : setShowDropdown(false)
+                                        },
+                                    })
+                                }}
+                                className="cursor-pointer"
+                                label="Deactive"
+                                color="error"
+                                variant="outlined"
+                                size="small"
+                            />
+                        )}
+                    </span>
+                )
+            },
+        },
         {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-
             renderCell: (row: any) => (
                 <ActionPopup
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_DISPOSITION_COMPLAINT_DELETE
+                    // )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

@@ -113,7 +113,6 @@ const NdrDispositionListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_STATUS,
-
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -166,7 +165,6 @@ const NdrDispositionListingWrapper = () => {
                 )
             },
         },
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -178,9 +176,9 @@ const NdrDispositionListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_NDR_DISPOSITION_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_NDR_DISPOSITION_DELETE
+                    // )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

@@ -162,9 +162,9 @@ const DispositionTwoListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_DISPOSITION_TWO_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DISPOSITION_TWO_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_DISPOSITION_TWO_DELETE
+                    // )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

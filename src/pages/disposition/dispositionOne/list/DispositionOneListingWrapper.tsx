@@ -149,9 +149,9 @@ const DispositionOneListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_DISPOSITION_ONE_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DISPOSITION_ONE_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_DISPOSITION_ONE_DELETE
+                    // )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)

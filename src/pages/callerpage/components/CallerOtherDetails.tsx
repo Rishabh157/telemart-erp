@@ -11,7 +11,7 @@ import {
     paymentModeOptions,
     relationOptionns,
 } from '../components/constants'
-import { useLocation } from 'react-router-dom'
+
 type Props = {
     values: FormInitialValues
     setFieldValue: (
@@ -19,14 +19,14 @@ type Props = {
         value: any,
         shouldValidate?: boolean | undefined
     ) => void
+    isCaller?: boolean
 }
 
-const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
+const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
     const [isFacebookId, setFacebookId] = React.useState(false)
     const [isInstagramId, setInstagramId] = React.useState(false)
-    const [isOrderOtherFieldEnable, setIsOrderOtherFieldEnable] = React.useState(false)
-    const location = useLocation()
-    const currentPath = `${location.pathname?.split('/')[2]}`
+    const [isOrderOtherFieldEnable, setIsOrderOtherFieldEnable] =
+        React.useState(false)
 
     useEffect(() => {
         if (values?.socialMedia?.facebook) {
@@ -70,7 +70,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="35px"
                         fontSizePlaceHolder="14px"
                         isMulti
@@ -114,7 +114,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     )}
 
                     <ATMSelectSearchable
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="25px"
                         fontSizePlaceHolder="14px"
                         componentClass="mt-2"
@@ -167,7 +167,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 extraClasses="mt-2"
                                 required
                                 label="Facebook"
-                                inputClasses='h-3 w-3'
+                                inputClasses="h-3 w-3"
                                 labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
                                 checked={isFacebookId}
                                 onChange={(e) => setFacebookId(e)}
@@ -200,7 +200,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                 extraClasses="mt-2"
                                 required
                                 label="Instagram"
-                                inputClasses='h-3 w-3'
+                                inputClasses="h-3 w-3"
                                 labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
                                 checked={isInstagramId}
                                 onChange={(e) => {
@@ -227,7 +227,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
-                            fontSizeOptionsClass='13px'
+                            fontSizeOptionsClass="13px"
                             minHeight="35px"
                             fontSizePlaceHolder="14px"
                             isMulti
@@ -250,7 +250,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                 </div>
 
                 <div className="col-span-6 py-2 px-2 border-r-[1px]">
-                    {currentPath === 'caller-page' &&
+                    {!isCaller && (
                         <div className="grid grid-cols-12">
                             <div className="col-span-3"></div>
                             <div className="col-span-9 bg-slate-300 px-6 border-[1px]">
@@ -279,7 +279,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>}
+                        </div>
+                    )}
 
                     <div className="-mt-2">
                         <ATMTextArea
@@ -292,7 +293,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                             }}
                         />
                     </div>
-                    {currentPath === 'customer-care' &&
+                    {isCaller && (
                         <>
                             <div>
                                 <ATMTextField
@@ -304,7 +305,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                     labelClass="mt-2"
                                     name="emailId"
                                     placeholder="enter coupon code"
-                                    value={values.emailId}
+                                    value={''}
                                     onChange={(e) => {
                                         setFieldValue('emailId', e.target.value)
                                     }}
@@ -362,7 +363,7 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                                     labelClass="mt-2"
                                                     name="emailId"
                                                     placeholder="enter burn value"
-                                                    value={values.emailId}
+                                                    value={''}
                                                     onChange={(e) => {
                                                         setFieldValue(
                                                             'emailId',
@@ -389,7 +390,8 @@ const CallerOtherDetails = ({ values, setFieldValue }: Props) => {
                                     </div>
                                 </div>
                             </div>
-                        </>}
+                        </>
+                    )}
                 </div>
             </div>
         </>

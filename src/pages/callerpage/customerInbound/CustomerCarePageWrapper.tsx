@@ -26,7 +26,9 @@ import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices
 import { statusProps } from '../../orders'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
-// import moment from 'moment'
+import { ProductGroupListResponse } from 'src/models/ProductGroup.model'
+import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -89,12 +91,24 @@ enum TabTypes {
     order = 'order',
     complaint = 'complaint',
 }
+type LocalUserStorage = {
+    agentId: string
+    companyId: string
+    didNo: string
+    mobileNo: string
+    orderID: string
+}
 
 const CustomerCarePageWrapper = () => {
     const [orderData, setOrderData] = useState<any>({})
     const [activeTab, setActiveTab] = useState<TabTypes>(TabTypes.history)
-
     const [apiStatus, setApiStatus] = React.useState(false)
+    const [productsGroupOptions, setProductsGroupOptions] = useState<
+        SelectOption[] | []
+    >([])
+    const [callerLoacalStorage, setcallerLoacalStorage] =
+        useState<LocalUserStorage>()
+
     const locationUrl = useLocation()
     const queryParams = new URLSearchParams(locationUrl.search)
     const phoneNumber = queryParams.get('phone')
@@ -102,6 +116,31 @@ const CustomerCarePageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
+
+    //product data
+    const {
+        data: productGroupData,
+        isLoading: isProductGroupLoading,
+        isFetching: isProductGroupFetching,
+    } = useGetAllProductGroupUnAuthQuery(callerLoacalStorage?.companyId, {
+        skip: !callerLoacalStorage?.companyId,
+    })
+    useEffect(() => {
+        if (!isProductGroupLoading && !isProductGroupFetching) {
+            if (productGroupData?.status) {
+                const productGroupOptionsList = productGroupData?.data?.map(
+                    (products: ProductGroupListResponse) => {
+                        return {
+                            label: products?.groupName,
+                            value: products?._id,
+                        }
+                    }
+                )
+                setProductsGroupOptions(productGroupOptionsList)
+            }
+        }
+    }, [productGroupData, isProductGroupLoading, isProductGroupFetching])
+
     // const dstphone = queryParams.get('dstphone')
     const columns: columnTypes[] = [
         {
@@ -237,9 +276,11 @@ const CustomerCarePageWrapper = () => {
                 return (
                     <>
                         <span>
-                            {row?.preffered_delivery_date ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            ) : '-'}
+                            {row?.preffered_delivery_date
+                                ? moment(row?.preffered_delivery_date).format(
+                                      'DD-MM-YYYY'
+                                  )
+                                : '-'}
                         </span>
                         {/* <span>
                             {' '}
@@ -249,7 +290,7 @@ const CustomerCarePageWrapper = () => {
                         </span>, */}
                     </>
                 )
-            }
+            },
         },
         {
             field: 'preffered_delivery_date',
@@ -261,12 +302,21 @@ const CustomerCarePageWrapper = () => {
             renderCell: (row: OrderListResponse) => {
                 return (
                     <>
-                        <span className='flex gap-1'>
-                            {(row?.preffered_delivery_start_time).replaceAll('_', ' ') || '-'} - {(row?.preffered_delivery_end_time).replaceAll('_', ' ') || '-'}
-                        </span>,
+                        <span className="flex gap-1">
+                            {(row?.preffered_delivery_start_time).replaceAll(
+                                '_',
+                                ' '
+                            ) || '-'}{' '}
+                            -{' '}
+                            {(row?.preffered_delivery_end_time).replaceAll(
+                                '_',
+                                ' '
+                            ) || '-'}
+                        </span>
+                        ,
                     </>
                 )
-            }
+            },
         },
         {
             field: 'dealerCode',
@@ -404,6 +454,110 @@ const CustomerCarePageWrapper = () => {
     const [AddCallerForm] = useAddCallerFormMutation()
     const [UpdateCallerForm] = useUpdateCallerFormMutation()
 
+    const {
+        data: callerListingData,
+        isFetching: isCallerFetching,
+        isLoading: isCallerLoading,
+    } = useGetPaginationUnAuthCallerDataQuery(
+        { phoneNo: phoneNumber || '', type: activeTab },
+        {
+            skip: !phoneNumber,
+        }
+    )
+
+    //
+    const {
+        data: singleCallerListingData,
+        isFetching: singleIsCallerFetching,
+        isLoading: singleIsCallerLoading,
+    } = useGetOrderNumberUnAuthCallerDataQuery(
+        { phoneNo: phoneNumber || '' },
+        {
+            skip: !phoneNumber,
+        }
+    )
+
+    useEffect(() => {
+        if (!isCallerFetching && !isCallerLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(callerListingData?.data || []))
+            dispatch(setTotalItems(callerListingData?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isCallerLoading, isCallerFetching, callerListingData])
+    const dispatch = useDispatch<AppDispatch>()
+
+    const { selectedItem: didItems }: any = useSelector(
+        (state: RootState) => state.didManagement
+    )
+
+    // Set did Number
+    const {
+        data: didData,
+        isLoading: didIsLoading,
+        isFetching: didIsFetching,
+    } = useGetByDidNumberQuery(didNumber, {
+        skip: !didNumber,
+    })
+    useEffect(() => {
+        if (!didIsLoading && !didIsFetching) {
+            dispatch(setDidItems(didData?.data))
+        }
+    }, [didData, didIsLoading, didIsFetching, dispatch])
+
+    //  Add Form when page loaded & set 'callerPageData' key in LocalStorage
+    useEffect(() => {
+        const callDetails: any = localStorage.getItem('callerPageData')
+        let callDataItem = JSON.parse(callDetails)
+
+        const { preffered_delivery_date, ...rest } = initialValues
+
+        if (!callDataItem) {
+            // use object destructuring to remove the _id property
+            AddCallerForm({
+                ...rest,
+                preffered_delivery_date: preffered_delivery_date || '',
+            }).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        if (res?.data?.data?._id) {
+                            let callerData = {
+                                orderID: res?.data?.data?._id,
+                                mobileNo: initialValues.mobileNo,
+                                didNo: initialValues.didNo,
+                                companyId: res?.data?.data?.companyId,
+                                agentId: res?.data?.data?.agentId,
+                            }
+                            localStorage.setItem(
+                                'callerPageData',
+                                JSON.stringify(callerData)
+                            )
+                            setcallerLoacalStorage(callerData)
+                        }
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+            })
+        }
+
+        return () => {
+            // Remove the localStorage item when component unmounts
+            localStorage.removeItem('callerPageData')
+        }
+        // eslint-disable-next-line
+    }, [orderData])
+
+    useEffect(() => {
+        if (!singleIsCallerFetching && !singleIsCallerLoading) {
+            setOrderData(singleCallerListingData?.data)
+        }
+    }, [singleCallerListingData, singleIsCallerFetching, singleIsCallerLoading])
+
     const initialValues: FormInitialValues = {
         agentName: agentName,
         campaign: campaignId as string,
@@ -412,8 +566,8 @@ const CustomerCarePageWrapper = () => {
         customerName: orderData?.customerName || '',
         didNo: didNumber as string,
         flagStatus: '',
-        productGroupId: null,
-        schemeId: null,
+        productGroupId: didItems?.schemeProductGroup?.[0]?.productGroup || null,
+        schemeId: didItems?.schemeId || null,
         schemeName: '',
         shcemeQuantity: 1,
         price: 0,
@@ -511,59 +665,6 @@ const CustomerCarePageWrapper = () => {
             .max(10, 'mobile number is not valid'),
     })
 
-    const {
-        data: callerListingData,
-        isFetching: isCallerFetching,
-        isLoading: isCallerLoading,
-    } = useGetPaginationUnAuthCallerDataQuery(
-        { phoneNo: phoneNumber || '', type: activeTab },
-        {
-            skip: !phoneNumber,
-        }
-    )
-
-    //
-    const {
-        data: singleCallerListingData,
-        isFetching: singleIsCallerFetching,
-        isLoading: singleIsCallerLoading,
-    } = useGetOrderNumberUnAuthCallerDataQuery(
-        { phoneNo: phoneNumber || '' },
-        {
-            skip: !phoneNumber,
-        }
-    )
-
-    useEffect(() => {
-        if (!isCallerFetching && !isCallerLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(callerListingData?.data || []))
-            dispatch(setTotalItems(callerListingData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isCallerLoading, isCallerFetching, callerListingData])
-    const dispatch = useDispatch<AppDispatch>()
-
-    const { selectedItem: didItems }: any = useSelector(
-        (state: RootState) => state.didManagement
-    )
-
-    // Set did Number
-    const {
-        data: didData,
-        isLoading: didIsLoading,
-        isFetching: didIsFetching,
-    } = useGetByDidNumberQuery(didNumber, {
-        skip: !didNumber,
-    })
-    useEffect(() => {
-        if (!didIsLoading && !didIsFetching) {
-            dispatch(setDidItems(didData?.data))
-        }
-    }, [didData, didIsLoading, didIsFetching, dispatch])
-
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         setApiStatus(true)
@@ -607,56 +708,6 @@ const CustomerCarePageWrapper = () => {
         }, 1000)
     }
 
-    //  Add Form when page loaded & set 'callerPageData' key in LocalStorage
-    useEffect(() => {
-        const callDetails: any = localStorage.getItem('callerPageData')
-        let callDataItem = JSON.parse(callDetails)
-
-        const { preffered_delivery_date, ...rest } = initialValues
-
-        if (!callDataItem) {
-            // use object destructuring to remove the _id property
-            AddCallerForm({
-                ...rest,
-                preffered_delivery_date: preffered_delivery_date || '',
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        if (res?.data?.data?._id) {
-                            let callerData = {
-                                orderID: res?.data?.data?._id,
-                                mobileNo: initialValues.mobileNo,
-                                didNo: initialValues.didNo,
-                                companyId: res?.data?.data?.companyId,
-                                agentId: res?.data?.data?.agentId,
-                            }
-                            localStorage.setItem(
-                                'callerPageData',
-                                JSON.stringify(callerData)
-                            )
-                        }
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-            })
-        }
-
-        return () => {
-            // Remove the localStorage item when component unmounts
-            localStorage.removeItem('callerPageData')
-        }
-        // eslint-disable-next-line
-    }, [orderData])
-
-    useEffect(() => {
-        if (!singleIsCallerFetching && !singleIsCallerLoading) {
-            setOrderData(singleCallerListingData?.data)
-        }
-    }, [singleCallerListingData, singleIsCallerFetching, singleIsCallerLoading])
-
     return (
         <Formik
             enableReinitialize
@@ -676,6 +727,10 @@ const CustomerCarePageWrapper = () => {
                             rows={items}
                             apiStatus={apiStatus}
                             isTableLoading={isTableLoading}
+                            productsGroupOptions={productsGroupOptions}
+                            companyId={
+                                (callerLoacalStorage?.companyId as string) || ''
+                            }
                         />
                     </form>
                 )
