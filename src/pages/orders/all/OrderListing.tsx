@@ -300,7 +300,7 @@ const OrderListing = ({
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
@@ -310,7 +310,7 @@ const OrderListing = ({
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
@@ -318,7 +318,7 @@ const OrderListing = ({
             headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.assignWarehouseLabel || '-'}</span>
             ),
@@ -328,7 +328,7 @@ const OrderListing = ({
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>-</span>,
         },
         {
@@ -336,7 +336,7 @@ const OrderListing = ({
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.tehsilLabel}</span>
             ),
@@ -346,7 +346,7 @@ const OrderListing = ({
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => (
             //     <span>{row?.assignWarehouseLabel}</span>
             // ),
@@ -356,7 +356,7 @@ const OrderListing = ({
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
         },
         {
@@ -364,7 +364,7 @@ const OrderListing = ({
             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.deliveryCharges}</span>
             ),
@@ -383,7 +383,7 @@ const OrderListing = ({
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.schemeName} </span>
             ),
@@ -393,7 +393,7 @@ const OrderListing = ({
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.schemeCode} </span>
             ),
@@ -403,7 +403,7 @@ const OrderListing = ({
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.shcemeQuantity} </span>
             ),
@@ -413,7 +413,7 @@ const OrderListing = ({
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
         },
         {
@@ -421,7 +421,7 @@ const OrderListing = ({
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.pincodeLabel} </span>
             ),
@@ -431,7 +431,7 @@ const OrderListing = ({
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.paymentMode} </span>
             ),
@@ -440,7 +440,7 @@ const OrderListing = ({
             field: 'createdAt',
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
                     <div className="text-[12px] text-slate-700 font-medium">
@@ -456,21 +456,21 @@ const OrderListing = ({
             field: 'onBackVerifiedDate',
             headerName: 'ONBACK Verifie Date',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <div>-</div>,
         },
         {
             field: 'edpDate',
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <div>-</div>,
         },
         {
             field: 'districtLabel',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.districtLabel}</div>
             ),
@@ -479,7 +479,7 @@ const OrderListing = ({
             field: 'dispositionLevelThree',
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dispositionLevelThree}</div>
             ),
@@ -488,7 +488,7 @@ const OrderListing = ({
             field: 'dealerStatus',
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
                     {/* {row?.dealerStatus === true ? 'Active' : 'DeActive'} */}
@@ -499,7 +499,7 @@ const OrderListing = ({
             field: 'dealerCode',
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dealerCode || '-'}</div>
             ),
@@ -508,7 +508,7 @@ const OrderListing = ({
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.customerName || '-'}</div>
             ),
@@ -526,7 +526,7 @@ const OrderListing = ({
             field: 'mobileNo',
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.mobileNo}</div>
             ),
@@ -535,7 +535,7 @@ const OrderListing = ({
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.channelLabel?.[0]}</div>
             ),
@@ -544,7 +544,7 @@ const OrderListing = ({
             field: 'callCenterLabel',
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.callCenterLabel}</div>
             ),
@@ -553,7 +553,7 @@ const OrderListing = ({
             field: 'areaLabel',
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
             ),
@@ -562,7 +562,7 @@ const OrderListing = ({
             field: 'remark',
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.remark}</div>
             ),
@@ -571,7 +571,7 @@ const OrderListing = ({
             field: 'agent',
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.agentName}</div>
             ),
@@ -580,7 +580,7 @@ const OrderListing = ({
             field: 'agentIdl',
             headerName: 'Agent ID',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => (
             //     <div className="py-0">{row?.agentId}</div>
             // ),
@@ -590,7 +590,7 @@ const OrderListing = ({
             headerName: 'Delivery Charges',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main ">
                     &#8377; {row.deliveryCharges}
@@ -601,7 +601,7 @@ const OrderListing = ({
             field: 'isApproved',
             headerName: 'Approval',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[10px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -618,11 +618,10 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${
-                                            row?.approved
-                                                ? 'Disapprove this order'
-                                                : 'Approval this order'
-                                        }`,
+                                        text: `Do you want to ${row?.approved
+                                            ? 'Disapprove this order'
+                                            : 'Approval this order'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -641,6 +640,47 @@ const OrderListing = ({
                     </span>
                 )
             },
+        },
+        {
+            field: 'preffered_delivery_date',
+            headerName: 'Preffred Delivery Date',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            // hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <>
+                        <span>
+                            {row?.preffered_delivery_date ? moment(row?.preffered_delivery_date).format(
+                                'DD-MM-YYYY'
+                            ) : '-'}
+                        </span>
+                        {/* <span>
+                            {' '}
+                            {moment(row?.preffered_delivery_date).format(
+                                'hh:mm:ss A'
+                            )}
+                        </span>, */}
+                    </>
+                )
+            }
+        },
+        {
+            field: 'preffered_delivery_date',
+            headerName: 'Preffred Delivery Time',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <>
+                        <span className='flex gap-1'>
+                            {(row?.preffered_delivery_start_time).replaceAll('_', ' ') || '-'} - {(row?.preffered_delivery_end_time).replaceAll('_', ' ') || '-'}
+                        </span>,
+                    </>
+                )
+            }
         },
         {
             field: 'actions',
@@ -1033,7 +1073,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                        ''
+                                                    ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)
