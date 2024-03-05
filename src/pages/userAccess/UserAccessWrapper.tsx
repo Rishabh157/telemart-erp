@@ -25,6 +25,7 @@ import {
 import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
 import { setUserAccess } from 'src/redux/slices/access/userAcessSlice'
+
 const UserAccessWrapper = () => {
     const [apiStatus, setApiStatus] = useState(false)
     const { state } = useLocation()
@@ -95,72 +96,6 @@ const UserAccessWrapper = () => {
                 }
                 setApiStatus(false)
             })
-            //  else if (userId && isUserExists === true) {
-            //     updateByUserId({
-            //         body: {
-            //             userId: userId,
-            //             departmentId: dept,
-            //             departmentName: dept,
-            //             userRoleId: userRole,
-            //             userRoleName: userRole || '',
-            //             module: [...userAccessItems.modules],
-            //         },
-            //         id: userId,
-            //     }).then((res) => {
-            //         if ('data' in res) {
-            //             if (res?.data?.status) {
-            //                 showToast(
-            //                     'success',
-            //                     'User Access updated successfully!'
-            //                 )
-            //                 navigate(`/configurations/user-access`, {
-            //                     state: {
-            //                         dept: dept,
-            //                         userRole: userRole,
-            //                         userId: userId,
-            //                     },
-            //                 })
-            //             } else {
-            //                 showToast('error', res?.data?.message)
-            //             }
-            //         } else {
-            //             showToast('error', 'Something went wrong')
-            //         }
-            //         setApiStatus(false)
-            //     })
-            // } else {
-            //     updateUserAccess({
-            //         body: {
-            //             departmentId: dept,
-            //             departmentName: dept,
-            //             userRoleId: userRole,
-            //             userRoleName: userRole || '',
-            //             module: [...userAccessItems.modules],
-            //         },
-            //         userRole: userRole,
-            //     }).then((res) => {
-            //         if ('data' in res) {
-            //             if (res?.data?.status) {
-            //                 showToast(
-            //                     'success',
-            //                     'User Access updated successfully!'
-            //                 )
-            //                 navigate(`/configurations/user-access`, {
-            //                     state: {
-            //                         dept: dept,
-            //                         userRole: userRole,
-            //                         userId: userId,
-            //                     },
-            //                 })
-            //             } else {
-            //                 showToast('error', res?.data?.message)
-            //             }
-            //         } else {
-            //             showToast('error', 'Something went wrong')
-            //         }
-            //         setApiStatus(false)
-            //     })
-            // }
         }, 1000)
     }
 
