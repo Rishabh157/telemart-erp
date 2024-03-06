@@ -1,7 +1,5 @@
 import { FormikProps } from 'formik'
 import React from 'react'
-// import { CiBoxList } from 'react-icons/ci'
-// import { MdOutlineFormatListNumbered } from 'react-icons/md'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import {
     CustomerDetailsPropsTypes,
@@ -9,22 +7,27 @@ import {
 } from './CustomerComplainWrapper'
 import ComplaintListingWrapper from './components/ComplaintListing/ComplaintListingWrapper'
 import CustomerComplainHeader from './components/CustomerComplainHeader'
-// import CustomerComplainOrderDetailsWrapper from './components/CustomerComplainOrderDetails/CustomerComplainOrderDetailsWrapper'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import CustomerComplainOrderDetailsWrapper from './components/CustomerComplainOrderDetails/CustomerComplainOrderDetailsWrapper'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import { CircularProgress } from '@mui/material'
+import AddCustomerComplaintDetailsWrapper from './components/CustomerComplaintDetails/AddCustomerComplaintDetailsWrapper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     customerDetails: CustomerDetailsPropsTypes
     column?: any[]
     rows?: any[]
+    apiStatus: boolean
+    contactNumber: string
 }
 
 const CustomerComplain: React.FC<Props> = ({
     formikProps,
     customerDetails,
     column,
+    apiStatus,
+    contactNumber,
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
     const [selectedOrderId, setSelectedOrderId] = React.useState<string>('')
@@ -34,11 +37,20 @@ const CustomerComplain: React.FC<Props> = ({
         setIsOpenCustomerComplaitDetailModel,
     ] = React.useState<boolean>(false)
 
+    // Show Create Complain Modal
+    const [isOpenCreateComplaitModel, setIsOpenCreateComplaitModel] =
+        React.useState<boolean>(false)
+
     return (
         <SideNavLayout>
             <div className="bg-white px-2 h-[calc(100vh-55px)]">
                 {/* <CallerPageTopNav agentName={values.agentName as string} /> */}
-                <div className="h-[40vh]">
+                <div>
+                    {apiStatus && (
+                        <div className="absolute w-[100%] h-[100%] flex justify-center items-center z-[500000] bg-slate-100 opacity-50">
+                            <CircularProgress size={26} />
+                        </div>
+                    )}
                     <CustomerComplainHeader
                         values={values}
                         setFieldValue={setFieldValue}
@@ -47,33 +59,49 @@ const CustomerComplain: React.FC<Props> = ({
                     />
                 </div>
 
-                <div className="w-full h-[calc(60%)] mt-4 ">
-                    <h1 className="text-sm font-semibold mb-2 px-2 ">Orders</h1>
-                    <div className="border-[1px] border-grey-700 h-[calc(90%)]  overflow-y-scroll ">
-                        {/* {selectedOrderId !== '' ? ( */}
-                        {/* <div className='-mt-4'> */}
-                        <DialogLogBox
-                            isOpen={isOpenCustomerComplaitDetailModel}
-                            handleClose={() =>
-                                setIsOpenCustomerComplaitDetailModel(false)
-                            }
-                            component={
-                                <CustomerComplainOrderDetailsWrapper
-                                    orderId={selectedOrderId}
-                                    setIsOpenCustomerOrderModel={
-                                        setIsOpenCustomerComplaitDetailModel
-                                    }
-                                />
-                            }
-                        />
-                        {/* <CustomerComplainOrderDetailsWrapper
-                                    orderId={selectedOrderId}
-                                    
-                                /> */}
-                        {/* </div> */}
-                        {/* ) : */}
+                <div className="w-full mt-2">
+                    <h1 className="text-sm font-semibold px-2">Orders</h1>
+                    {/* Showing Order Details Form After Clicking The Order */}
+                    <DialogLogBox
+                        isOpen={isOpenCustomerComplaitDetailModel}
+                        handleClose={() =>
+                            setIsOpenCustomerComplaitDetailModel(false)
+                        }
+                        component={
+                            <CustomerComplainOrderDetailsWrapper
+                                orderId={selectedOrderId}
+                                // setIsOpenCustomerOrderModel={
+                                //     setIsOpenCustomerComplaitDetailModel
+                                // }
+                                setIsOpenCustomerOrderModel={() =>
+                                    setIsOpenCreateComplaitModel(true)
+                                }
+                                handleClose={() =>
+                                    setIsOpenCustomerComplaitDetailModel(false)
+                                }
+                            />
+                        }
+                    />
+
+                    {/* Create Complain Modal From */}
+                    <DialogLogBox
+                        isOpen={isOpenCreateComplaitModel}
+                        handleClose={() =>
+                            setIsOpenCreateComplaitModel(false)  // cross button close modal
+                        }
+                        component={
+                            <AddCustomerComplaintDetailsWrapper
+                                orderId={selectedOrderId}
+                                handleClose={() => 
+                                    setIsOpenCreateComplaitModel(false) // api calling close modal
+                                }
+                            />
+                        }
+                    />
+
+                    <div className="border-[1px] border-grey-700 max-h-[350px] overflow-y-scroll ">
                         <ATMTable
-                            // headerClassName="bg-[#cdddf2] py-2 text-white z-0   "
+                            // headerClassName="bg-[#cdddf2] py-2 text-white z-0"
                             columns={column || []}
                             rows={customerDetails?.orderListing}
                             onRowClick={(row) => {
@@ -81,16 +109,18 @@ const CustomerComplain: React.FC<Props> = ({
                                 setSelectedOrderId(row?._id)
                             }}
                         />
-                        {/* } */}
                     </div>
                 </div>
 
-                <div className="w-full h-[calc(60%)] mb-4 ">
+                {/* Complaints History Table */}
+                <div className="w-full my-4">
                     <h1 className="text-sm font-semibold my-1 px-2 ">
                         Complaints History
                     </h1>
-                    <div className=" h-[calc(94%)] overflow-y-scroll ">
-                        <ComplaintListingWrapper />
+                    <div className="h-[calc(94%)] overflow-y-scroll ">
+                        <ComplaintListingWrapper
+                            contactNumber={contactNumber}
+                        />
                     </div>
                 </div>
             </div>

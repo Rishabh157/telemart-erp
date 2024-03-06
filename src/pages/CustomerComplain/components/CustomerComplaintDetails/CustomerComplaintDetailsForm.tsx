@@ -8,6 +8,7 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 import { useGetAllInitialByCallType } from 'src/hooks/useGetAllInitialByCallType'
 import { useGetAllInitialCallTwoByCallTypeAndOneId } from 'src/hooks/useGetAllInitialCallTwoByCallTypeAndOneId'
 import { useGetAllInitialCallThreeByCallTypeAndTwoId } from 'src/hooks/useGetAllInitialCallThreeByCallTypeAndTwoId'
+import { complaintTypeOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Types --|
 type Props = {
@@ -15,16 +16,7 @@ type Props = {
     apiStatus: boolean
     formType: 'ADD' | 'EDIT'
 }
-const callTypeOption = [
-    {
-        label: 'Complaint',
-        value: 'COMPLAINT',
-    },
-    {
-        label: 'Inquiry',
-        value: 'INQUIRY',
-    },
-]
+
 const statusOption = [
     {
         label: 'Open',
@@ -39,6 +31,7 @@ const statusOption = [
         value: 'CLOSED',
     },
 ]
+
 const CustomerComplaintDetailsForm = ({
     formikProps,
     apiStatus,
@@ -140,7 +133,7 @@ const CustomerComplaintDetailsForm = ({
                             classDirection="grid grid-cols-3"
                             name="callType"
                             value={values.callType || ''}
-                            options={callTypeOption}
+                            options={complaintTypeOptions()}
                             onChange={(e) => {
                                 setFieldValue('callType', e)
                                 if (e === 'COMPLAINT') {

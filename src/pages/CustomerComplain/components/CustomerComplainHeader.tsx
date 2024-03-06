@@ -2,6 +2,7 @@ import React from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../CustomerComplainWrapper'
 import { CustomerDetailsPropsTypes } from '../CustomerComplainWrapper'
+import { handleValidNumber } from 'src/utils/methods/numberMethods'
 
 type Props = {
     values: FormInitialValues
@@ -26,7 +27,8 @@ const CustomerComplainHeader = ({
                 {/* Search Header */}
                 <div className="w-full shadow border rounded bg-white p-2">
                     <div className="grid gap-x-4 gap-y-3 grid-cols-4 py-1">
-                        <ATMTextField
+                        {/* <ATMTextField
+                        hidden
                             name=""
                             label="Incoming No."
                             labelSize="xxs"
@@ -40,7 +42,7 @@ const CustomerComplainHeader = ({
                             onChange={(e) => {
                                 setFieldValue('incomingNumber', e.target.value)
                             }}
-                        />
+                        /> */}
 
                         <ATMTextField
                             label="Contact No."
@@ -54,7 +56,11 @@ const CustomerComplainHeader = ({
                             placeholder="Contact No."
                             value={values.contactNumber || ''}
                             onChange={(e) => {
-                                setFieldValue('contactNumber', e.target.value)
+                                handleValidNumber(e) &&
+                                    setFieldValue(
+                                        'contactNumber',
+                                        e.target.value
+                                    )
                             }}
                         />
 
@@ -70,7 +76,11 @@ const CustomerComplainHeader = ({
                             placeholder="Order No."
                             value={values.orderNumber || ''}
                             onChange={(e) => {
-                                setFieldValue('orderNumber', e.target.value)
+                                handleValidNumber(e) &&
+                                    setFieldValue(
+                                        'orderNumber',
+                                        e.target.value ? e.target.value : 0
+                                    )
                             }}
                         />
 
@@ -107,6 +117,7 @@ const CustomerComplainHeader = ({
                         />
 
                         <ATMTextField
+                            disabled
                             label="Ref Order No."
                             labelSize="xxs"
                             size="xxs"
@@ -167,7 +178,7 @@ const CustomerComplainHeader = ({
                 </div>
 
                 {/* Customer Details Section */}
-                <div className="w-full mt-4 shadow border rounded bg-white p-2 my-2">
+                <div className="w-full mt-2 shadow border rounded bg-white p-2 my-1">
                     <h1 className="text-sm font-semibold mb-2">
                         Customer Details
                     </h1>
@@ -181,13 +192,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.name}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -199,13 +210,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.emailOfDetails}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -217,13 +228,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.gender}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -235,13 +246,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.incomingNumberOfDetails}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -253,13 +264,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.mobileNumber}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -271,13 +282,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.alternateNo1}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -289,13 +300,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.alternateNo2}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -313,7 +324,7 @@ const CustomerComplainHeader = ({
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -325,13 +336,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.address2}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -343,13 +354,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.address3}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -361,13 +372,13 @@ const CustomerComplainHeader = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="reciversName"
+                            name="customerName"
                             placeholder=""
                             value={customerDetails?.address4}
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
 
@@ -386,7 +397,7 @@ const CustomerComplainHeader = ({
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
                         <ATMTextField
@@ -403,7 +414,7 @@ const CustomerComplainHeader = ({
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
                         <ATMTextField
@@ -420,7 +431,7 @@ const CustomerComplainHeader = ({
                             readOnly
                             disabled
                             onChange={(e) => {
-                                // setFieldValue('reciversName', e.target.value)
+                                // setFieldValue('customerName', e.target.value)
                             }}
                         />
                     </div>

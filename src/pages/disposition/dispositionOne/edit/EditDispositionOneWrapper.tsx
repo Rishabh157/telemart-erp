@@ -70,26 +70,21 @@ const EditDispositionOneWrappper = () => {
     }
 
     return (
-        <>
-            <>
-                {' '}
-                <Formik
-                    enableReinitialize
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps) => {
-                        return (
-                            <AddDispositionOne
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddDispositionOne
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

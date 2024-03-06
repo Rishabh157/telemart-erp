@@ -1,24 +1,20 @@
 import React from 'react'
 import ComplaintListing from './ComplaintListing'
-import { useGetComplaintQuery } from 'src/services/CustomerComplainServices'
-// import { useNavigate } from 'react-router-dom'
+import { useGetComplaintByMobileNoQuery } from 'src/services/CustomerComplainServices'
 
-const ComplaintListingWrapper = () => {
+type Props = {
+    contactNumber: string
+}
+
+const ComplaintListingWrapper = ({ contactNumber }: Props) => {
     const [complaintListing, setComplaintListing] = React.useState<any[]>([])
-    // const navigate = useNavigate()
 
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetComplaintQuery<any>({
-        limit: 100,
-        searchValue: '',
-        params: ['callType'],
-        page: 1,
-        filterBy: [],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { data, isFetching, isLoading } = useGetComplaintByMobileNoQuery<any>(
+        contactNumber,
+        {
+            skip: !contactNumber || contactNumber.length !== 10,
+        }
+    )
 
     React.useEffect(() => {
         if (!isFetching && !isLoading) {

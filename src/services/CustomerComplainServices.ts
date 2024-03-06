@@ -21,6 +21,15 @@ export const customerComplainApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET Complaint By Mobile No *****/
+        getComplaintByMobileNo: builder.query({
+            providesTags: ['complaint'],
+            query: (mobileNo: string) => ({
+                url: `/complaint/get-by-number/${mobileNo}`,
+                method: 'GET',
+            }),
+        }),
+
         //***** Search Complaint *****/
         getCustomerComplainDetailsBySearch: builder.mutation({
             // providesTags: ['complaint'],
@@ -41,7 +50,7 @@ export const customerComplainApi = apiSlice.injectEndpoints({
 
         //***** Add Complain *****/
         addCustomerComplain: builder.mutation({
-            providesTags: ['complaint'],
+            invalidatesTags: ['complaint'],
             query: (body: any) => ({
                 url: '/complaint/add',
                 method: 'POST',
@@ -51,7 +60,7 @@ export const customerComplainApi = apiSlice.injectEndpoints({
 
         //***** Update Complain *****/
         updateCustomerComplain: builder.mutation({
-            providesTags: ['complaint'],
+            invalidatesTags: ['complaint'],
             query: ({ id, body }: any) => ({
                 url: `/complaint/${id}`,
                 method: 'PUT',
@@ -60,8 +69,10 @@ export const customerComplainApi = apiSlice.injectEndpoints({
         }),
     }),
 })
+
 export const {
     useGetComplaintQuery,
+    useGetComplaintByMobileNoQuery,
     useGetCustomerComplainDetailsBySearchMutation,
     useGetComplaintByIdQuery,
     useAddCustomerComplainMutation,

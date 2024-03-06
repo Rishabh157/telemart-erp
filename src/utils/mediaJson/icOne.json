@@ -13,7 +13,7 @@
                 {
                     "fieldId": "IC_ONE_LIST_INITIAL_CALL_NAME",
                     "fieldName": "initial Call Name",
-                    "fieldValue": "initialCallName"
+                    "fieldValue": "initialCallDisplayName"
                 },
                 {
                     "fieldId": "IC_ONE_LIST_CALL_TYPE",

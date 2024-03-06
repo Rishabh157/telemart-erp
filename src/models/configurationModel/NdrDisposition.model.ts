@@ -6,15 +6,17 @@
 // ==============================================
 
 // |-- Types --|
-export type NdrDispositionListResponse = {
-    dispositionName: string
-    dispostionOneLabel: string
-    companyId: string
-    isActive: boolean
+export type NdrDispositionListResponseType = {
+    _id: string
+    ndrDisposition: string
+    priority: string
+    smsType: string
+    emailType: string
+    rtoAttempt: string
     isDeleted: boolean
+    isActive: boolean
     createdAt: string
     updatedAt: string
-    _id: string
     __v: number
 }
 

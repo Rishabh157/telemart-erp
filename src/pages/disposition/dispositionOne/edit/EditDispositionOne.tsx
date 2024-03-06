@@ -68,8 +68,10 @@ const EditDispositionOne = ({ formikProps, apiStatus }: Props) => {
                         {/* Form */}
                         <div className="grow py-8 px-3 ">
                             <div className="grid grid-cols-3 gap-4">
-                                {/* languageName */}
+                                {/* Disposition Name */}
                                 <ATMTextField
+                                    readOnly
+                                    disabled
                                     name="dispositionName"
                                     value={values.dispositionName}
                                     label="Disposition Name"

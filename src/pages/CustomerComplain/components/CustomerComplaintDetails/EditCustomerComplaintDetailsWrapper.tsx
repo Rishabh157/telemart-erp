@@ -95,6 +95,7 @@ const EditCustomerComplaintDetailsWrapper = ({
             icThree: values.initialCallThree,
             status: values.status,
             remark: values.remark,
+            customerNumber: complaintOrderDetails?.customerNumber || '',
         }
 
         updateComplaint({ id: complaintId, body: formatedValues }).then(

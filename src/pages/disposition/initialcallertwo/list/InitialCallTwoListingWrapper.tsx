@@ -71,12 +71,13 @@ const InitialCallTwoListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'initialCallName',
+            field: 'initialCallDisplayName',
             headerName: 'Initial Call Two',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_TWO_LIST_INITIAL_CALL_ONE,
             renderCell: (row: InitialCallerTwoListResponse) => (
-                <span> {row.initialCallName} </span>
+                <span> {row.initialCallDisplayName} </span>
             ),
         },
         {
@@ -89,12 +90,13 @@ const InitialCallTwoListingWrapper = () => {
             ),
         },
         {
-            field: 'initialCallOneLabel',
+            field: 'initialCallOneDisplayLabel',
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_TWO_LIST_INITIAL_CALL_ONE,
             renderCell: (row: InitialCallerTwoListResponse) => (
-                <span> {row.initialCallOneLabel} </span>
+                <span> {row.initialCallOneDisplayLabel} </span>
             ),
         },
         {

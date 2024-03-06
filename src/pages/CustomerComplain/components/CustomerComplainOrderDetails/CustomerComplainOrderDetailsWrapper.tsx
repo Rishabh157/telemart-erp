@@ -10,6 +10,7 @@ import { CircularProgress } from '@mui/material'
 type Props = {
     orderId: string
     setIsOpenCustomerOrderModel: any
+    handleClose: () => void
 }
 
 export type FormInitialValues = {
@@ -28,6 +29,7 @@ export type FormInitialValues = {
 const CustomerComplainOrderDetailsWrapper = ({
     orderId,
     setIsOpenCustomerOrderModel,
+    handleClose,
 }: Props) => {
     const [orderDetails, setOrderDetails] = React.useState<OrderListResponse>()
 
@@ -84,12 +86,13 @@ const CustomerComplainOrderDetailsWrapper = ({
                         </div>
                     )}
                     <CustomerComplainOrderDetailsForm
-                        setIsOpenCustomerOrderModel={
+                        setIsOpenCreateComplainModel={
                             setIsOpenCustomerOrderModel
                         }
                         customerDetails={null}
                         // customerDetails={{customerDetails}}
                         formikProps={formikProps}
+                        handleClose={() => handleClose()}
                     />
                 </Form>
             )}

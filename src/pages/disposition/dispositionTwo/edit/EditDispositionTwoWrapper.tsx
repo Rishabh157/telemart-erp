@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -115,24 +114,22 @@ const EditDispositionTwoWrapper = () => {
     }
 
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <EditDispositionTwo
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <EditDispositionTwo
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

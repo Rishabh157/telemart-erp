@@ -49,6 +49,7 @@ type Props = {
     isTableLoading: boolean
     productsGroupOptions: SelectOption[]
     companyId: string
+    customerReputationType: string
 }
 
 export interface SchemeDetailsPropTypes {
@@ -70,6 +71,7 @@ const SalesPage: React.FC<Props> = ({
     isTableLoading,
     productsGroupOptions = [],
     companyId = '',
+    customerReputationType,
 }) => {
     const [schemeDetails, setSchemeDetails] = useState<SchemeDetailsPropTypes>({
         schemeName: '',
@@ -187,6 +189,7 @@ const SalesPage: React.FC<Props> = ({
                 IncomingNo={values.mobileNo}
                 CustomerName={'' || ''}
                 DidNumber={values.didNo}
+                customerReputationType={customerReputationType}
             />
             <CallerScheme
                 values={values}

@@ -30,6 +30,7 @@ export type FormInitialValues = {
     emailType: string
     smsType: string
 }
+
 const AddDispositionComplaintWrappper = () => {
     const navigate = useNavigate()
     const [addDispositionCompalint] = useAdddispositionComplaintMutation()
@@ -42,11 +43,12 @@ const AddDispositionComplaintWrappper = () => {
         emailType: '',
         smsType: '',
     }
+
     const validationSchema = object({
-        dispositionName: string().required('Required'),
-        priority: string().required('Required'),
-        emailType: string().required('Required'),
-        smsType: string().required('Required'),
+        dispositionName: string().required('Disposition Name is required'),
+        priority: string().required('Priority is required'),
+        emailType: string().required('Email Type is required'),
+        smsType: string().required('SMS Type is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -75,24 +77,20 @@ const AddDispositionComplaintWrappper = () => {
     }
 
     return (
-        <>
-            <>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps) => {
-                        return (
-                            <AddDispositionComplaint
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddDispositionComplaint
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

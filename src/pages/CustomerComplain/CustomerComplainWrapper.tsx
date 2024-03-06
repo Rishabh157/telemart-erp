@@ -6,7 +6,7 @@ import { showToast } from 'src/utils'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 
 export type FormInitialValues = {
-    incomingNumber: string
+    // incomingNumber: string
     contactNumber: string
     orderNumber: number
     complaintNumber: number
@@ -34,6 +34,9 @@ export interface CustomerDetailsPropsTypes {
 }
 
 const CustomerComplainWrapper = () => {
+    const [apiStatus, setApiStatus] = React.useState<boolean>(false)
+    const [complaintContactNo, setComplaintContactNo] = React.useState<string>()
+
     const [customerDetails, setCustomerDetails] =
         React.useState<CustomerDetailsPropsTypes>({
             name: '',
@@ -61,15 +64,17 @@ const CustomerComplainWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs',
-            renderCell: (row: any) => <span>{row.orderNumber} </span>,
+            renderCell: (row: any) => (
+                <span className="text-primary-main "># {row.orderNumber}</span>
+            ),
         },
         {
-            field: 'didNo',
+            field: 'inquiryNumber',
             headerName: 'Enq No.',
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: any) => <span> {row.didNo} </span>,
+            renderCell: (row: any) => <span> {row.inquiryNumber} </span>,
         },
         {
             field: 'status',
@@ -77,7 +82,7 @@ const CustomerComplainWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: any) => <span> {row.flagStatus} </span>,
+            renderCell: (row: any) => <span> - </span>,
         },
         {
             field: 'name',
@@ -104,7 +109,7 @@ const CustomerComplainWrapper = () => {
             renderCell: (row: any) => <span> {row.pincodeLabel} </span>,
         },
         {
-            field: 'alternateNo',
+            field: 'mobileNo',
             headerName: 'Phone',
             flex: 'flex-[3_3_0%]',
             align: 'center',
@@ -118,7 +123,7 @@ const CustomerComplainWrapper = () => {
             align: 'center',
             extraClasses: 'text-xs',
             renderCell: (row: any) => (
-                <span> {row.dispositionLevelThreeLabel} </span>
+                <span> - </span>
             ),
         },
         {
@@ -143,16 +148,17 @@ const CustomerComplainWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: any) => <span> null </span>,
+            renderCell: (row: any) => <span> - </span>,
         },
-        {
-            field: 'amount',
-            headerName: 'Amount',
-            flex: 'flex-[3_3_0%]',
-            align: 'center',
-            extraClasses: 'text-xs',
-            renderCell: (row: any) => <span> {row.totalAmount} </span>,
-        },
+        // {
+        //     field: 'amount',
+        //     headerName: 'Amount',
+        //     flex: 'flex-[3_3_0%]',
+        //     align: 'center',
+        //     extraClasses: 'text-xs',
+        //     hidden: true,
+        //     renderCell: (row: any) => <span> {row.totalAmount} </span>,
+        // },
         {
             field: 'remark',
             headerName: 'Remark',
@@ -167,7 +173,7 @@ const CustomerComplainWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: any) => <span> </span>,
+            renderCell: (row: any) => <span> - </span>,
         },
     ]
 
@@ -177,7 +183,7 @@ const CustomerComplainWrapper = () => {
         useGetCustomerComplainDetailsBySearchMutation()
 
     const initialValues: FormInitialValues = {
-        incomingNumber: '',
+        // incomingNumber: '',
         contactNumber: '',
         orderNumber: 0,
         complaintNumber: 0,
@@ -188,7 +194,9 @@ const CustomerComplainWrapper = () => {
 
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
+        setApiStatus(true)
         const { refOrderNumber, ...rest } = values
+        setComplaintContactNo(values?.contactNumber) // set contact number for complaint data api
         setTimeout(() => {
             getOrderDetailsBySearch(rest).then((res: any) => {
                 if ('data' in res) {
@@ -198,7 +206,7 @@ const CustomerComplainWrapper = () => {
                             customerName,
                             emailId,
                             gender,
-                            incomingCallerNo,
+                            // incomingCallerNo,
                             mobileNo,
                             alternateNo,
                             whatsappNo,
@@ -217,55 +225,55 @@ const CustomerComplainWrapper = () => {
                             name: customerName || '',
                             emailOfDetails: emailId || '',
                             gender: gender || '',
-                            incomingNumberOfDetails: incomingCallerNo || '',
+                            incomingNumberOfDetails: mobileNo || '',
                             mobileNumber: mobileNo || '',
                             alternateNo1: alternateNo || '',
-                            alternateNo2: whatsappNo || '', // Assuming alternateNo2 is not available in the API data
+                            alternateNo2: whatsappNo || '',
                             address1: houseNumber || '',
-                            address2: streetNumber || '', // Assuming address2 is not available in the API data
+                            address2: streetNumber || '',
                             address3: landmark || '',
-                            address4: '', // Assuming address4 is not available in the API data
+                            address4: '',
                             district: districtLabel || '',
                             state: stateLabel || '',
                             pincode: pincodeLabel || '',
                             orderListing: allOrderData || [],
                         })
-
-                        // setCustomerDetails()
-                        // showToast('success', 'caller added successfully!')
                         // resetForm({ isSubmitting: false, dirty: false })
+                        setApiStatus(false)
                     } else {
                         showToast('error', res?.data?.message)
+                        setApiStatus(false)
                     }
                 } else {
                     showToast('error', 'Something went wrong')
+                    setApiStatus(false)
                 }
-                // setApiStatus(false)
+                setApiStatus(false)
             })
         }, 1000)
     }
 
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                // validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <form autoComplete="off">
-                            <CustomerComplain
-                                formikProps={formikProps}
-                                customerDetails={customerDetails}
-                                column={columns || []}
-                            />
-                        </form>
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            // validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <form autoComplete="off">
+                        <CustomerComplain
+                            formikProps={formikProps}
+                            customerDetails={customerDetails}
+                            column={columns || []}
+                            apiStatus={apiStatus}
+                            contactNumber={complaintContactNo || ''}
+                        />
+                    </form>
+                )
+            }}
+        </Formik>
     )
 }
 

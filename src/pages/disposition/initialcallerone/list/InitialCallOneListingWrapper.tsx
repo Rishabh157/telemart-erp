@@ -71,13 +71,12 @@ const InitialCallOneListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'initialCallName',
+            field: 'initialCallDisplayName',
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_ONE_LIST_INITIAL_CALL_NAME,
-
             renderCell: (row: InitialCallerOneListResponse) => (
-                <span className="capitalize"> {row.initialCallName} </span>
+                <span className="capitalize">{row.initialCallDisplayName}</span>
             ),
         },
         {

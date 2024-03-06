@@ -16,15 +16,11 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/configuration/ndrDispositionSlice'
-
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-// import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
-// import {
-//     UserModuleActionTypes,
-// } from 'src/models/userAccess/UserAccess.model'
 import NdrDispositionListing from './NdrDispositionListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { NdrDispositionListResponseType } from 'src/models/configurationModel/NdrDisposition.model'
 
 const NdrDispositionListingWrapper = () => {
     const navigate = useNavigate()
@@ -35,9 +31,7 @@ const NdrDispositionListingWrapper = () => {
     const ndrDispositionState: any = useSelector(
         (state: RootState) => state.ndrDisposition
     )
-    // const { checkUserAccess } = useSelector(
-    //     (state: RootState) => state.userAccess
-    // )
+
     const { page, rowsPerPage, searchValue, items } = ndrDispositionState
 
     const dispatch = useDispatch<AppDispatch>()
@@ -73,47 +67,52 @@ const NdrDispositionListingWrapper = () => {
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_DISPOSITION_NAME,
-
-            renderCell: (row: any) => <span> {row?.ndrDisposition} </span>,
+            renderCell: (row: NdrDispositionListResponseType) => (
+                <span> {row?.ndrDisposition} </span>
+            ),
         },
         {
             field: 'emailType',
             headerName: 'Email type',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_EMAIL_TYPE,
-
-            renderCell: (row: any) => <span> {row?.emailType} </span>,
+            renderCell: (row: NdrDispositionListResponseType) => (
+                <span> {row?.emailType?.replaceAll('_', ' ')}</span>
+            ),
         },
         {
             field: 'smsType',
             headerName: 'Sms Type',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_SMS_TYPE,
-
-            renderCell: (row: any) => <span> {row?.smsType} </span>,
+            renderCell: (row: NdrDispositionListResponseType) => (
+                <span> {row?.smsType?.replaceAll('_', ' ')} </span>
+            ),
         },
         {
             field: 'rtoAttempt',
             headerName: 'Rto Attempt',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_RTO_ATTEMPT,
-
-            renderCell: (row: any) => <span> {row?.rtoAttempt} </span>,
+            renderCell: (row: NdrDispositionListResponseType) => (
+                <span> {row?.rtoAttempt?.replaceAll('_', ' ')} </span>
+            ),
         },
         {
             field: 'priority',
             headerName: 'Priority',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_PRIORITY,
-
-            renderCell: (row: any) => <span> {row?.priority} </span>,
+            renderCell: (row: NdrDispositionListResponseType) => (
+                <span> {row?.priority} </span>
+            ),
         },
         {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_STATUS,
-            renderCell: (row: any) => {
+            renderCell: (row: NdrDispositionListResponseType) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
                         {row.isActive ? (
@@ -169,10 +168,9 @@ const NdrDispositionListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
+            renderCell: (row: NdrDispositionListResponseType) => (
                 <ActionPopup
                     // moduleName={UserModuleNameTypes.ndrDisposition}
-
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
                     )}
@@ -203,6 +201,7 @@ const NdrDispositionListingWrapper = () => {
             align: 'end',
         },
     ]
+
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)
         deactiveDispositionOne(rowId).then((res: any) => {
@@ -220,6 +219,7 @@ const NdrDispositionListingWrapper = () => {
             }
         })
     }
+
     const handleDelete = () => {
         setShowDropdown(false)
         deleteTape(currentId).then((res: any) => {
@@ -239,17 +239,13 @@ const NdrDispositionListingWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <div className="h-full">
-                    <NdrDispositionListing
-                        columns={columns}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                </div>
-            </>
-        </>
+        <div className="h-full">
+            <NdrDispositionListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </div>
     )
 }
 

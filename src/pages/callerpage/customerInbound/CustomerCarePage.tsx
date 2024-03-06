@@ -47,6 +47,7 @@ type Props = {
     isTableLoading: boolean
     productsGroupOptions: SelectOption[]
     companyId: string
+    customerReputationType: string
 }
 
 export interface SchemeDetailsPropTypes {
@@ -68,6 +69,7 @@ const CustomerCarePage: React.FC<Props> = ({
     isTableLoading,
     productsGroupOptions,
     companyId,
+    customerReputationType,
 }) => {
     const [schemeDetails, setSchemeDetails] = useState<SchemeDetailsPropTypes>({
         schemeName: '',
@@ -185,6 +187,7 @@ const CustomerCarePage: React.FC<Props> = ({
                 IncomingNo={values.mobileNo}
                 CustomerName={'' || ''}
                 DidNumber={values.didNo}
+                customerReputationType={customerReputationType}
             />
             <CallerScheme
                 values={values}
@@ -200,7 +203,11 @@ const CustomerCarePage: React.FC<Props> = ({
                 values={values}
             />
 
-            <CallerOtherDetails setFieldValue={setFieldValue} values={values} isCaller />
+            <CallerOtherDetails
+                setFieldValue={setFieldValue}
+                values={values}
+                isCaller
+            />
 
             {/* Disposition Section  */}
             <div className="grid grid-cols-12 items-center border-[1px] px-2 pb-1 border-grey-700 z-[5000]">

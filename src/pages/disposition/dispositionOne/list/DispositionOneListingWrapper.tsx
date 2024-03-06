@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import { Chip } from '@mui/material'
-
 import {
     useGetdispositionOneQuery,
     useDeletedispositionOneMutation,
@@ -76,7 +75,7 @@ const DispositionOneListingWrapper = () => {
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_ONE_LIST_DISPOSITION_ONE_NAME,
-
+            extraClasses: 'capitalize',
             renderCell: (row: DispositionOneListResponse) => (
                 <span> {row.dispositionName} </span>
             ),
@@ -212,17 +211,13 @@ const DispositionOneListingWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <div className="h-full">
-                    <DispositionOneListing
-                        columns={columns}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                </div>
-            </>
-        </>
+        <div className="h-full">
+            <DispositionOneListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </div>
     )
 }
 

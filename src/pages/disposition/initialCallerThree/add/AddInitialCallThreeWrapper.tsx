@@ -84,12 +84,6 @@ const AddInitialCallThreeWrappper = () => {
         }, 1000)
     }
 
-    const returntype = [
-        { label: 'ESCALATE', value: 'ESCALATE' },
-        { label: 'REPLACEMENT', value: 'REPLACEMENT' },
-        { label: 'REFUND', value: 'REFUND' },
-    ]
-
     const dropdownoptions = {
         initialCallOneOptions: allItems?.map((ele: any) => {
             return {
@@ -97,35 +91,24 @@ const AddInitialCallThreeWrappper = () => {
                 value: ele._id,
             }
         }),
-
-        returntypeOptions: returntype?.map((ele: any) => {
-            return {
-                label: ele.label,
-                value: ele.value,
-            }
-        }),
     }
 
     return (
-        <>
-            <>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps) => {
-                        return (
-                            <AddInitialCallThree
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                                dropdownoptions={dropdownoptions}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddInitialCallThree
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        dropdownoptions={dropdownoptions}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

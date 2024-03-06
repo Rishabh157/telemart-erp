@@ -561,11 +561,11 @@ const CallerDeliveryAddress = ({
                         labelSize="xxs"
                         extraClassField="mt-0"
                         labelDirection="horizontal"
-                        name="reciversName"
+                        name="customerName"
                         placeholder=" customer name"
-                        value={values.reciversName || ''}
+                        value={values.customerName || ''}
                         onChange={(e) => {
-                            setFieldValue('reciversName', e.target.value)
+                            setFieldValue('customerName', e.target.value)
                         }}
                     />
 

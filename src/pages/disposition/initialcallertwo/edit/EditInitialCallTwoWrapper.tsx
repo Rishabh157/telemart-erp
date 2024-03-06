@@ -18,6 +18,7 @@ export type FormInitialValues = {
     initialCallName: string
     callType: string
     initialCallOneId: string
+    initialCallDisplayName: string
 }
 const EditInitialCallTwoWrapper = () => {
     const navigate = useNavigate()
@@ -49,11 +50,15 @@ const EditInitialCallTwoWrapper = () => {
         initialCallName: selectedInitialCallerTwo?.initialCallName || '',
         callType: selectedInitialCallerTwo?.callType || '',
         initialCallOneId: selectedInitialCallerTwo?.initialCallOneId || '',
+        initialCallDisplayName:
+            selectedInitialCallerTwo?.initialCallDisplayName || '',
     }
+    
     const validationSchema = object({
         initialCallName: string().required('Name is required'),
         initialCallOneId: string().required('Required'),
     })
+
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))

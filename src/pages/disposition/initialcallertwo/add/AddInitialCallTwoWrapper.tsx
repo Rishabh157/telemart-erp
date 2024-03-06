@@ -59,24 +59,20 @@ const AddInitialCallTwoWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps: any) => {
-                        return (
-                            <AddInitialCallTwo
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: any) => {
+                return (
+                    <AddInitialCallTwo
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

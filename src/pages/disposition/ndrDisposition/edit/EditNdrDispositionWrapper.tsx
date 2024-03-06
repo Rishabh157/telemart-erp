@@ -9,7 +9,6 @@ import {
     useUpdateNdrDispositionMutation,
 } from 'src/services/configurations/NdrDisositionServices'
 import { useNavigate, useParams } from 'react-router-dom'
-
 import { setSelectedDispositionOne } from 'src/redux/slices/configuration/ndrDispositionSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import EditNdrDisposition from './EditNdrDisposition'
@@ -21,6 +20,7 @@ export type FormInitialValues = {
     emailType: string
     rtoAttempt: string
 }
+
 const EditNdrDispositionWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -48,12 +48,13 @@ const EditNdrDispositionWrapper = () => {
     }, [data, dispatch, isFetching, isLoading])
 
     const validationSchema = object({
-        dispositionName: string().required('Required'),
-        priority: string().required('Required'),
-        smsType: string().required('Required'),
-        emailType: string().required('Required'),
-        rtoAttempt: string().required('Required'),
+        dispositionName: string().required('NDR Disposition is required'),
+        priority: string().required('Priority is required'),
+        smsType: string().required('SMS Type is required'),
+        emailType: string().required('Email Type is required'),
+        rtoAttempt: string().required('RTO Attempt is required'),
     })
+
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
@@ -84,26 +85,21 @@ const EditNdrDispositionWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                {' '}
-                <Formik
-                    enableReinitialize
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps) => {
-                        return (
-                            <EditNdrDisposition
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditNdrDisposition
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

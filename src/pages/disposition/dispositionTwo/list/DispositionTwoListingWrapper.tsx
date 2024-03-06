@@ -80,7 +80,7 @@ const DispositionTwoListingWrapper = () => {
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_TWO_LIST_DISPOSITION_NAME,
-
+            extraClasses: 'capitalize',
             renderCell: (row: DispositionTwoListResponse) => (
                 <span> {row?.dispositionName} </span>
             ),
@@ -90,7 +90,7 @@ const DispositionTwoListingWrapper = () => {
             headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_TWO_LIST_DISPOSITION_ONE_NAME,
-
+            extraClasses: 'capitalize',
             renderCell: (row: DispositionTwoListResponse) => (
                 <span> {row?.dispostionOneLabel} </span>
             ),
@@ -228,17 +228,13 @@ const DispositionTwoListingWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <div className="h-full">
-                    <DispositionTwoListing
-                        columns={columns}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                </div>
-            </>
-        </>
+        <div className="h-full">
+            <DispositionTwoListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </div>
     )
 }
 
