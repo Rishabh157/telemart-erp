@@ -38,7 +38,6 @@ export type CallerResponse = {
     orderFor: string
     paymentMode: string
     productGroupId: string
-    reciversName: string
     remark: string
     shcemeQuantity: number
     socialMedia: {
@@ -95,7 +94,6 @@ export type CallerFormBody = {
     paymentMode: string
     productGroupId: string
     isRecording?: boolean
-    reciversName: string
     remark: string
     shcemeQuantity: number
     socialMedia: {
@@ -144,7 +142,6 @@ export type UpdateCallerForm = {
         paymentMode: string
         productGroupId: string
         isRecording?: boolean
-        reciversName: string
         remark: string
         shcemeQuantity: number
         socialMedia: {

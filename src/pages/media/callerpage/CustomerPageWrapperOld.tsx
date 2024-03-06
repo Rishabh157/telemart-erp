@@ -60,7 +60,6 @@ export type FormInitialValues = {
     orderForOther?: string | null
     paymentMode: string
     productGroupId: string | null
-    reciversName: string
     remark: string
     shcemeQuantity: number
     socialMedia: {
@@ -257,7 +256,6 @@ const CustomerPageWrapper = () => {
         tehsilId: null,
         tehsilLabel: '',
         typeOfAddress: '',
-        reciversName: '',
         preffered_delivery_start_time: '',
         preffered_delivery_end_time: '',
         preffered_delivery_date: null,
@@ -292,9 +290,7 @@ const CustomerPageWrapper = () => {
         productGroupId: string().required('product group id is required'),
         // DELEVERY ADDRESS SELECT OPTIONS
         countryId: string(),
-
         typeOfAddress: string(),
-        reciversName: string(),
         deliveryTimeAndDate: string(),
         houseNumber: string(),
         streetNumber: string(),

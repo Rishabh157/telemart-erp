@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DispositiononeServices.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import {
     AddDisPositionOne,
@@ -31,17 +24,6 @@ export const dispositionOneApi = apiSlice.injectEndpoints({
             query: () => ({
                 url: `/disposition-one`,
                 method: 'GET',
-                // body,
-            }),
-        }),
-        getAlldispositionOneunauth: builder.query({
-            providesTags: ['dispositionOne'],
-
-            query: () => ({
-                url: '/disposition-one/unauth/get-all',
-                method: 'GET',
-                extra: 'true,"dsfdsf',
-                // body,
             }),
         }),
 
@@ -60,7 +42,6 @@ export const dispositionOneApi = apiSlice.injectEndpoints({
             invalidatesTags: ['dispositionOne'],
             query: ({ body, id }: UpdateDispositionOne) => ({
                 url: `/disposition-one/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -76,29 +57,16 @@ export const dispositionOneApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportdispositionOneData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
         // **** Delete
         deletedispositionOne: builder.mutation({
             invalidatesTags: ['dispositionOne'],
             query: (id) => ({
                 url: `/disposition-one/${id}`,
-
                 method: 'DELETE',
             }),
         }),
+
+        // **** Active
         deactiveDispositionOne: builder.mutation({
             invalidatesTags: ['dispositionOne'],
             query: (id: string) => ({
@@ -113,9 +81,7 @@ export const {
     useAdddispositionOneMutation,
     useUpdatedispositionOneMutation,
     useGetdispositionOneByIdQuery,
-    useExportdispositionOneDataMutation,
     useDeletedispositionOneMutation,
     useGetAlldispositionOneQuery,
-    useGetAlldispositionOneunauthQuery,
     useDeactiveDispositionOneMutation,
 } = dispositionOneApi

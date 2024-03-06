@@ -69,12 +69,13 @@ const InitialCallThreeListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'initialCallName',
+            field: 'initialCallDisplayName',
             headerName: 'Initial Call Three',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_THREE,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallName} </span>
+                <span> {row.initialCallDisplayName} </span>
             ),
         },
         {
@@ -87,21 +88,23 @@ const InitialCallThreeListingWrapper = () => {
             ),
         },
         {
-            field: 'initialCallOneLabel',
+            field: 'initialCallOneDisplayLabel',
             headerName: 'Initial Call One',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_ONE,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallOneLabel} </span>
+                <span> {row.initialCallOneDisplayLabel} </span>
             ),
         },
         {
-            field: 'initialCallTwoLabel',
+            field: 'initialCallTwoDisplayLabel',
             headerName: 'Initial Call Two',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_TWO,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallTwoLabel} </span>
+                <span> {row.initialCallTwoDisplayLabel} </span>
             ),
         },
         {

@@ -50,25 +50,20 @@ const AddDispositionOneWrappper = () => {
     }
 
     return (
-        <>
-            <>
-                {' '}
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps) => {
-                        return (
-                            <AddDispositionOne
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddDispositionOne
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

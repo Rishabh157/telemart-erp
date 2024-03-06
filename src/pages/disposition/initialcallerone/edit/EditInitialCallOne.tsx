@@ -88,8 +88,10 @@ const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                                 </div>
                                 {/* initialCallName */}
                                 <ATMTextField
+                                    readOnly
+                                    disabled
                                     name="initialCallName"
-                                    value={values.initialCallName}
+                                    value={values.initialCallDisplayName}
                                     placeholder="Name"
                                     label="Initial Call Name"
                                     labelClass="text-slate-700 text-sm font-medium mt-1"

@@ -354,7 +354,7 @@ const CallerDeliveryAddress = ({
                             <div className="grid grid-cols-12 gap-x-2">
                                 <div className="col-span-6">
                                     <ATMSelectSearchable
-                                        fontSizeOptionsClass='13px'
+                                        fontSizeOptionsClass="13px"
                                         fontSizePlaceHolder="14px"
                                         minHeight="25px"
                                         componentClass=""
@@ -422,7 +422,7 @@ const CallerDeliveryAddress = ({
 
                     <ATMSelectSearchable
                         fontSizePlaceHolder="14px"
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="25px"
                         componentClass="mt-1"
                         label="State"
@@ -446,7 +446,7 @@ const CallerDeliveryAddress = ({
                     />
                     <ATMSelectSearchable
                         fontSizePlaceHolder="14px"
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="25px"
                         componentClass="mt-1"
                         label="District"
@@ -473,7 +473,7 @@ const CallerDeliveryAddress = ({
                 <div className="col-span-4 pb-1 px-2 border-r-[1px]">
                     <ATMSelectSearchable
                         fontSizePlaceHolder="14px"
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="25px"
                         componentClass="mt-1"
                         label="Tehsil/Taluka"
@@ -499,7 +499,7 @@ const CallerDeliveryAddress = ({
 
                     <ATMSelectSearchable
                         fontSizePlaceHolder="14px"
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="25px"
                         componentClass="mt-1"
                         label="Area"
@@ -538,7 +538,7 @@ const CallerDeliveryAddress = ({
                 <div className="col-span-6 pb-1 gap-x-4 border-r-[1px] px-2 border-grey-800">
                     <ATMSelectSearchable
                         fontSizePlaceHolder="14px"
-                        fontSizeOptionsClass='13px'
+                        fontSizeOptionsClass="13px"
                         minHeight="25px"
                         componentClass="mt-1"
                         labelDirection="horizontal"
@@ -562,11 +562,11 @@ const CallerDeliveryAddress = ({
                         extraClassField="mt-0"
                         labelDirection="horizontal"
                         labelClass="text-slate-700 text-xs font-medium mt-2"
-                        name="reciversName"
+                        name="customerName"
                         placeholder="enter customer name"
-                        value={values.reciversName || ''}
+                        value={values.customerName || ''}
                         onChange={(e) => {
-                            setFieldValue('reciversName', e.target.value)
+                            setFieldValue('customerName', e.target.value)
                         }}
                     />
 
@@ -581,7 +581,7 @@ const CallerDeliveryAddress = ({
                                 <div className="col-span-5">
                                     <ATMSelectSearchable
                                         fontSizePlaceHolder="14px"
-                                        fontSizeOptionsClass='13px'
+                                        fontSizeOptionsClass="13px"
                                         minHeight="25px"
                                         componentClass="mt-1"
                                         size="xxs"
@@ -608,7 +608,7 @@ const CallerDeliveryAddress = ({
                                 </div>
                                 <div className="col-span-5">
                                     <ATMSelectSearchable
-                                        fontSizeOptionsClass='13px'
+                                        fontSizeOptionsClass="13px"
                                         fontSizePlaceHolder="14px"
                                         minHeight="25px"
                                         componentClass="mt-1"

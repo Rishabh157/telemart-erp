@@ -618,10 +618,11 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${row?.approved
-                                            ? 'Disapprove this order'
-                                            : 'Approval this order'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row?.approved
+                                                ? 'Disapprove this order'
+                                                : 'Approval this order'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -643,7 +644,7 @@ const OrderListing = ({
         },
         {
             field: 'preffered_delivery_date',
-            headerName: 'Preffred Delivery Date',
+            headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
@@ -652,9 +653,11 @@ const OrderListing = ({
                 return (
                     <>
                         <span>
-                            {row?.preffered_delivery_date ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            ) : '-'}
+                            {row?.preffered_delivery_date
+                                ? moment(row?.preffered_delivery_date).format(
+                                      'DD-MM-YYYY'
+                                  )
+                                : '-'}
                         </span>
                         {/* <span>
                             {' '}
@@ -664,7 +667,7 @@ const OrderListing = ({
                         </span>, */}
                     </>
                 )
-            }
+            },
         },
         {
             field: 'preffered_delivery_date',
@@ -673,14 +676,23 @@ const OrderListing = ({
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
-                return (
-                    <>
-                        <span className='flex gap-1'>
-                            {(row?.preffered_delivery_start_time).replaceAll('_', ' ') || '-'} - {(row?.preffered_delivery_end_time).replaceAll('_', ' ') || '-'}
-                        </span>,
-                    </>
+                return row?.preffered_delivery_start_time &&
+                    row?.preffered_delivery_end_time ? (
+                    <span className="flex gap-1">
+                        {(row?.preffered_delivery_start_time).replaceAll(
+                            '_',
+                            ' '
+                        ) || '-'}{' '}
+                        -{' '}
+                        {(row?.preffered_delivery_end_time).replaceAll(
+                            '_',
+                            ' '
+                        ) || '-'}
+                    </span>
+                ) : (
+                    '-'
                 )
-            }
+            },
         },
         {
             field: 'actions',
@@ -1073,7 +1085,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                    ''
+                                                        ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)

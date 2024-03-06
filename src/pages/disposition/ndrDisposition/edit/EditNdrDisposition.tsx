@@ -40,98 +40,92 @@ const EditNdrDisposition = ({ formikProps, apiStatus }: Props) => {
     }
 
     return (
-        <>
+        <div className="p-4 flex flex-col gap-2  ">
+            {/* Breadcrumbs */}
             <div className="">
-                <div className="p-4 flex flex-col gap-2  ">
-                    {/* Breadcrumbs */}
-                    <div className="">
-                        <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+            </div>
+
+            {/* Page Heading */}
+            <div className="pt-1">
+                <ATMPageHeading>Edit </ATMPageHeading>
+            </div>
+
+            <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
+                    {/* Form Heading */}
+                    <div className="text-xl font-medium"> Details </div>
+
+                    {/* BUTTON - Add Button */}
+                    <div>
+                        <button
+                            type="button"
+                            disabled={apiStatus}
+                            onClick={() => formikProps.handleSubmit()}
+                            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                apiStatus ? 'opacity-50' : ''
+                            }`}
+                        >
+                            Update
+                        </button>
                     </div>
+                </div>
 
-                    {/* Page Heading */}
-                    <div className="pt-1">
-                        <ATMPageHeading>Edit </ATMPageHeading>
-                    </div>
+                {/* Form */}
+                <div className="grow py-8 px-3 ">
+                    <div className="grid grid-cols-3 gap-4">
+                        {/* languageName */}
+                        <ATMTextField
+                            readOnly
+                            disabled
+                            name="dispositionName"
+                            value={values.dispositionName}
+                            label="Disposition Name"
+                            placeholder="Name"
+                            onChange={(e) =>
+                                handleSetFieldValue(
+                                    'dispositionName',
+                                    e.target.value
+                                )
+                            }
+                        />
+                        <ATMSelectSearchable
+                            options={smstypeOptions()}
+                            name="smsType"
+                            value={values.smsType}
+                            label="Sms Type"
+                            onChange={(e) => handleSetFieldValue('smsType', e)}
+                        />
 
-                    <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
-                        <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
-                            {/* Form Heading */}
-                            <div className="text-xl font-medium"> Details </div>
-
-                            {/* BUTTON - Add Button */}
-                            <div>
-                                <button
-                                    type="button"
-                                    disabled={apiStatus}
-                                    onClick={() => formikProps.handleSubmit()}
-                                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                        apiStatus ? 'opacity-50' : ''
-                                    }`}
-                                >
-                                    Update
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Form */}
-                        <div className="grow py-8 px-3 ">
-                            <div className="grid grid-cols-3 gap-4">
-                                {/* languageName */}
-                                <ATMTextField
-                                    name="dispositionName"
-                                    value={values.dispositionName}
-                                    label="Disposition Name"
-                                    placeholder="Name"
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'dispositionName',
-                                            e.target.value
-                                        )
-                                    }
-                                />
-                                <ATMSelectSearchable
-                                    options={smstypeOptions()}
-                                    name="smsType"
-                                    value={values.smsType}
-                                    label="Sms type"
-                                    onChange={(e) =>
-                                        handleSetFieldValue('smsType', e)
-                                    }
-                                />
-
-                                <ATMSelectSearchable
-                                    options={emailTypeOptions()}
-                                    name="emailType"
-                                    value={values.emailType}
-                                    label="emailType"
-                                    onChange={(e) =>
-                                        handleSetFieldValue('emailType', e)
-                                    }
-                                />
-                                <ATMSelectSearchable
-                                    name="priority"
-                                    value={values.priority}
-                                    label="priority"
-                                    options={priorityOptions()}
-                                    onChange={(e) =>
-                                        handleSetFieldValue('priority', e)
-                                    }
-                                />
-                                <ATMSelectSearchable
-                                    options={rtoTypeOptions()}
-                                    name="rtoAttempt"
-                                    value={values.rtoAttempt}
-                                    label="rtoAttempt"
-                                    onChange={(e) =>
-                                        handleSetFieldValue('rtoAttempt', e)
-                                    }
-                                />
-                            </div>
-                        </div>
+                        <ATMSelectSearchable
+                            options={emailTypeOptions()}
+                            name="emailType"
+                            value={values.emailType}
+                            label="Email Type"
+                            onChange={(e) =>
+                                handleSetFieldValue('emailType', e)
+                            }
+                        />
+                        <ATMSelectSearchable
+                            name="priority"
+                            value={values.priority}
+                            label="Priority"
+                            options={priorityOptions()}
+                            onChange={(e) => handleSetFieldValue('priority', e)}
+                        />
+                        <ATMSelectSearchable
+                            options={rtoTypeOptions()}
+                            name="rtoAttempt"
+                            value={values.rtoAttempt}
+                            label="Rto Attempt"
+                            onChange={(e) =>
+                                handleSetFieldValue('rtoAttempt', e)
+                            }
+                        />
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

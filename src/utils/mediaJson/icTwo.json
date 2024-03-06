@@ -13,7 +13,7 @@
                 {
                     "fieldId": "IC_TWO_LIST_INITIAL_CALL_TWO",
                     "fieldName": "Initial Call Two",
-                    "fieldValue": "initialCallName"
+                    "fieldValue": "initialCallDisplayName"
                 },
                 {
                     "fieldId": "IC_TWO_LIST_CALL_TYPE",
@@ -23,7 +23,7 @@
                 {
                     "fieldId": "IC_TWO_LIST_INITIAL_CALL_ONE",
                     "fieldName": "Initial Call One",
-                    "fieldValue": "initialCallOneLabel"
+                    "fieldValue": "initialCallOneDisplayLabel"
                 },
                 {
                     "fieldId": "IC_TWO_LIST_STATUS",

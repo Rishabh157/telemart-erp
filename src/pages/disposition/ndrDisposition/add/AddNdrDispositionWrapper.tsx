@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-
 import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useAddNdrDispositionMutation } from 'src/services/configurations/NdrDisositionServices'
 import { useNavigate } from 'react-router-dom'
-
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import AddNdrDisposition from './AddNdrDisposition'
 
@@ -17,6 +15,7 @@ export type FormInitialValues = {
     emailType: string
     rtoAttempt: string
 }
+
 const AddNdrDispositionWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -30,13 +29,15 @@ const AddNdrDispositionWrapper = () => {
         emailType: '',
         rtoAttempt: '',
     }
+
     const validationSchema = object({
-        ndrDisposition: string().required('Required'),
-        priority: string().required('Required'),
-        smsType: string().required('Required'),
-        emailType: string().required('Required'),
-        rtoAttempt: string().required('Required'),
+        ndrDisposition: string().required('NDR Disposition is required'),
+        priority: string().required('Priority is required'),
+        smsType: string().required('SMS Type is required'),
+        emailType: string().required('Email Type is required'),
+        rtoAttempt: string().required('RTO Attempt is required'),
     })
+
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
@@ -64,24 +65,20 @@ const AddNdrDispositionWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps) => {
-                        return (
-                            <AddNdrDisposition
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddNdrDisposition
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

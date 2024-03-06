@@ -31,7 +31,6 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
             query: () => ({
                 url: `/disposition-two`,
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -86,20 +85,6 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportdispositionTwoData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
         // **** Delete
         deletedispositionTwo: builder.mutation({
             invalidatesTags: ['dispositionTwo'],
@@ -130,12 +115,11 @@ export const dispositionTwoApi = apiSlice.injectEndpoints({
 })
 export const {
     useGetdispositionTwoQuery,
+    useGetAlldispositionTwoQuery,
     useAdddispositionTwoMutation,
     useUpdatedispositionTwoMutation,
     useGetdispositionTwoByIdQuery,
-    useExportdispositionTwoDataMutation,
     useDeletedispositionTwoMutation,
-    useGetAlldispositionTwoQuery,
     useGetAlldispositionTwounauthQuery,
     useGetAllUnAuthdispositionTwoQuery,
     useDeactiveDispositionTwoMutation,

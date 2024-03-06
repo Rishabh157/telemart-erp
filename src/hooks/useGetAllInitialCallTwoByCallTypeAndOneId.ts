@@ -25,7 +25,7 @@ export const useGetAllInitialCallTwoByCallTypeAndOneId = (
         if (!isLoading && !isFetching) {
             const filterOption = data?.data?.map((ele: any) => {
                 return {
-                    label: ele?.initialCallName,
+                    label: ele?.initialCallDisplayName,
                     value: ele?._id,
                 }
             })

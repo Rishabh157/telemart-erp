@@ -17,6 +17,9 @@ export type InitialCallerThreeListResponse = {
     initialCallName: string
     initialCallOneId: string
     initialCallTwoId: string
+    initialCallDisplayName: string
+    initialCallTwoDisplayLabel: string
+    initialCallOneDisplayLabel: string
     companyId: string
     isDeleted: boolean
     isActive: boolean

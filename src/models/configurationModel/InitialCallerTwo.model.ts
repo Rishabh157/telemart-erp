@@ -10,6 +10,8 @@ export type InitialCallerTwoListResponse = {
     initialCallName: string
     initailCallNameLabel: string
     initialCallOneLabel: string
+    initialCallDisplayName: string
+    initialCallOneDisplayLabel: string
     callType: string
     companyId: string
     isActive: boolean

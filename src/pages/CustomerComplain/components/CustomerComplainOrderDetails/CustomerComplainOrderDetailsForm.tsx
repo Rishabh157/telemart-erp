@@ -10,27 +10,30 @@ import ATMTable, {
 import moment from 'moment'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddCustomerComplaintDetailsWrapper from '../CustomerComplaintDetails/AddCustomerComplaintDetailsWrapper'
+// import AddCustomerComplaintDetailsWrapper from '../CustomerComplaintDetails/AddCustomerComplaintDetailsWrapper'
 import AddCustomerNDRDetailsWrapper from '../CustomerNdr/AddCustomerNDRDetailsWrapper'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus?: boolean
     customerDetails: CustomerDetailsPropsTypes | null
-    setIsOpenCustomerOrderModel: any
+    setIsOpenCreateComplainModel: any
+    handleClose: () => void
 }
 
 const CustomerComplainOrderDetailsForm = ({
     formikProps,
     customerDetails,
-    setIsOpenCustomerOrderModel,
+    setIsOpenCreateComplainModel,
+    handleClose,
 }: Props) => {
     const { values, setFieldValue } = formikProps
-    const [
-        isOpenCustomerComplaitDetailModel,
-        setIsOpenCustomerComplaitDetailModel,
-    ] = React.useState<boolean>(false)
+    // const [
+    //     isOpenCustomerComplaitDetailModel,
+    //     setIsOpenCustomerComplaitDetailModel,
+    // ] = React.useState<boolean>(false)
 
     const [isOpenCustomerNDRDetailModel, setIsOpenCustomerNDRDetailModel] =
         React.useState<boolean>(false)
@@ -271,7 +274,7 @@ const CustomerComplainOrderDetailsForm = ({
                                 extraClassField="mt-0"
                                 labelDirection="horizontal"
                                 className="mt-0 rounded"
-                                name="reciversName"
+                                name="customerName"
                                 placeholder=""
                                 // value={values.discount}
                                 value={0.0}
@@ -329,7 +332,7 @@ const CustomerComplainOrderDetailsForm = ({
                                 extraClassField="mt-0"
                                 labelDirection="horizontal"
                                 className="mt-0 rounded"
-                                name="reciversName"
+                                name="customerName"
                                 placeholder=""
                                 value={values.total}
                                 // readOnly
@@ -349,10 +352,23 @@ const CustomerComplainOrderDetailsForm = ({
             {/* Create Companin Button and Send SMS button */}
 
             <div className="flex justify-end items-center gap-x-4 mt-2">
+                <ATMCheckbox
+                    disabled
+                    extraClasses="mt-2"
+                    required
+                    label="Sms"
+                    inputClasses="h-3 w-3"
+                    labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
+                    checked={false}
+                    onChange={(e) => {}}
+                />
                 <button
                     type="button"
                     className="bg-[#0c56aa] text-[#bfdbff] hover:text-white px-1 py-1 rounded font-semibold text-xs"
-                    onClick={() => setIsOpenCustomerComplaitDetailModel(true)}
+                    onClick={() => {
+                        setIsOpenCreateComplainModel()
+                        handleClose()
+                    }}
                 >
                     Create Complaint
                 </button>
@@ -371,8 +387,7 @@ const CustomerComplainOrderDetailsForm = ({
                 >
                     Create NDR
                 </button>
-                {/* Create Complain Form */}
-                <DialogLogBox
+                {/* <DialogLogBox
                     isOpen={isOpenCustomerComplaitDetailModel}
                     handleClose={() =>
                         setIsOpenCustomerComplaitDetailModel(false)
@@ -385,7 +400,7 @@ const CustomerComplainOrderDetailsForm = ({
                             }
                         />
                     }
-                />
+                /> */}
                 {/* Create NDR Form */}
                 <DialogLogBox
                     fullScreen

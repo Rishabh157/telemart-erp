@@ -13,7 +13,7 @@
                 {
                     "fieldId": "IC_THREE_LIST_INITIAL_CALL_THREE",
                     "fieldName": "Initial Call Three",
-                    "fieldValue": "initialCallName"
+                    "fieldValue": "initialCallDisplayName"
                 },
                 {
                     "fieldId": "IC_THREE_LIST_CALL_TYPE",
@@ -23,12 +23,12 @@
                 {
                     "fieldId": "IC_THREE_LIST_INITIAL_CALL_ONE",
                     "fieldName": "Initial Call One",
-                    "fieldValue": "initialCallOneLabel"
+                    "fieldValue": "initialCallOneDisplayLabel"
                 },
                 {
                     "fieldId": "IC_THREE_LIST_INITIAL_CALL_TWO",
                     "fieldName": "Initial Call Two",
-                    "fieldValue": "initialCallTwoLabel"
+                    "fieldValue": "initialCallTwoDisplayLabel"
                 },
                 {
                     "fieldId": "IC_THREE_LIST_INITIAL_CANCEL_FLAG",

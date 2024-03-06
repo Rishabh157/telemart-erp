@@ -9,6 +9,7 @@
 export type InitialCallerOneListResponse = {
     initialCallName: string
     initailCallNameLabel: string
+    initialCallDisplayName: string
     callType: string
     companyId: string
     isActive: boolean

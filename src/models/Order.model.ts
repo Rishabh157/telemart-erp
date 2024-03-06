@@ -49,7 +49,6 @@ export type OrderListResponse = {
     orderStatus: string
     paymentMode: string
     productGroupId: string
-    reciversName: string
     remark: string
     shcemeQuantity: number
     socialMedia: {

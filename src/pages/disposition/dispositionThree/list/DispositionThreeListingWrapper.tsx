@@ -67,6 +67,7 @@ const DispositionThreeListingWrapper = () => {
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_NAME,
+            extraClasses: 'capitalize',
             renderCell: (row: DispositionThreeListResponse) => (
                 <span> {row?.dispositionDisplayName} </span>
             ),
@@ -76,7 +77,7 @@ const DispositionThreeListingWrapper = () => {
             headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_ONE_NAME,
-
+            extraClasses: 'capitalize',
             renderCell: (row: DispositionThreeListResponse) => (
                 <span> {row?.dispostionOneLabel} </span>
             ),
@@ -86,7 +87,7 @@ const DispositionThreeListingWrapper = () => {
             headerName: 'Disposition Two Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_THREE_LIST_DISPOSITION_TWO_NAME,
-
+            extraClasses: 'capitalize',
             renderCell: (row: DispositionThreeListResponse) => (
                 <span> {row?.dispostionTwoLabel} </span>
             ),

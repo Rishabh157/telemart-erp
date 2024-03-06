@@ -68,7 +68,6 @@ export type FormInitialValues = {
     orderForOther?: string | null
     paymentMode: string
     productGroupId: string | null
-    reciversName: string
     remark: string
     shcemeQuantity: number
     socialMedia: {
@@ -101,6 +100,8 @@ type LocalUserStorage = {
 
 const CustomerCarePageWrapper = () => {
     const [orderData, setOrderData] = useState<any>({})
+    const [customerReputationType, setCustomerReputationType] =
+        useState<string>()
     const [activeTab, setActiveTab] = useState<TabTypes>(TabTypes.history)
     const [apiStatus, setApiStatus] = React.useState(false)
     const [productsGroupOptions, setProductsGroupOptions] = useState<
@@ -192,14 +193,14 @@ const CustomerCarePageWrapper = () => {
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
         {
-            field: 'reciversName',
+            field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs  min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
-                <span> {row.reciversName} </span>
+                <span> {row.customerName} </span>
             ),
         },
         {
@@ -555,6 +556,9 @@ const CustomerCarePageWrapper = () => {
     useEffect(() => {
         if (!singleIsCallerFetching && !singleIsCallerLoading) {
             setOrderData(singleCallerListingData?.data)
+            setCustomerReputationType(
+                singleCallerListingData?.customerReputation
+            )
         }
     }, [singleCallerListingData, singleIsCallerFetching, singleIsCallerLoading])
 
@@ -588,7 +592,6 @@ const CustomerCarePageWrapper = () => {
         tehsilId: orderData?.tehsilId || null,
         tehsilLabel: orderData?.tehsilLabel || '',
         typeOfAddress: '',
-        reciversName: orderData?.reciversName || '',
         preffered_delivery_start_time:
             orderData?.preffered_delivery_start_time || '',
         preffered_delivery_end_time:
@@ -631,7 +634,6 @@ const CustomerCarePageWrapper = () => {
         // districtId: string(),
         // tehsilId: string(),
         typeOfAddress: string(),
-        reciversName: string(),
         deliveryTimeAndDate: string(),
         houseNumber: string(),
         streetNumber: string(),
@@ -721,6 +723,9 @@ const CustomerCarePageWrapper = () => {
                         <CallerPage
                             formikProps={formikProps}
                             didItems={didItems}
+                            customerReputationType={
+                                customerReputationType || ''
+                            }
                             activeTab={TabTypes[activeTab]}
                             setActiveTab={(value) => setActiveTab(value as any)}
                             column={columns}
