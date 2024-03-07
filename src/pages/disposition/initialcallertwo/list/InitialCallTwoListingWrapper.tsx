@@ -228,17 +228,13 @@ const InitialCallTwoListingWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <div className="h-full">
-                    <InitialCallTwoListing
-                        columns={columns}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                </div>
-            </>
-        </>
+        <div className="h-full">
+            <InitialCallTwoListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </div>
     )
 }
 

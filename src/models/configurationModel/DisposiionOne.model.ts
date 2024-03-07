@@ -9,6 +9,7 @@
 export type DispositionOneListResponse = {
     dispositionName: string
     dispostionOneLabel: string
+    dispositionDisplayName : string
     companyId: string
     isActive: boolean
     isDeleted: boolean

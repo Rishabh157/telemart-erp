@@ -51,8 +51,8 @@ const AddDispositionTwoWrapper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
-        dispositionName: string().required('Required'),
-        dispositionOneId: string().required('Required'),
+        dispositionName: string().required('Disposition two name is required'),
+        dispositionOneId: string().required('Please select disposition one name'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -81,7 +81,7 @@ const AddDispositionTwoWrapper = () => {
         DispotionOneOptions: dispositionOne?.map(
             (dispositionOne: DispositionOneListResponse) => {
                 return {
-                    label: dispositionOne.dispositionName,
+                    label: dispositionOne.dispositionDisplayName,
                     value: dispositionOne._id,
                 }
             }

@@ -76,23 +76,23 @@ const DispositionTwoListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'dispositionName',
+            field: 'dispositionDisplayName',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_TWO_LIST_DISPOSITION_NAME,
             extraClasses: 'capitalize',
             renderCell: (row: DispositionTwoListResponse) => (
-                <span> {row?.dispositionName} </span>
+                <span> {row?.dispositionDisplayName} </span>
             ),
         },
         {
-            field: 'dispostionOneLabel',
+            field: 'dispostionOneDisplayLabel',
             headerName: 'Disposition One Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_TWO_LIST_DISPOSITION_ONE_NAME,
             extraClasses: 'capitalize',
             renderCell: (row: DispositionTwoListResponse) => (
-                <span> {row?.dispostionOneLabel} </span>
+                <span> {row?.dispostionOneDisplayLabel} </span>
             ),
         },
         {
@@ -100,7 +100,6 @@ const DispositionTwoListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.DISPOSITION_TWO_LIST_STATUS,
-
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">

@@ -16,6 +16,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     dispositionName: string
+    dispositionDisplayName: string
 }
 const EditDispositionOneWrappper = () => {
     const navigate = useNavigate()
@@ -33,6 +34,8 @@ const EditDispositionOneWrappper = () => {
     const { data, isLoading, isFetching } = useGetdispositionOneByIdQuery(Id)
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispositionOne?.dispositionName || '',
+        dispositionDisplayName:
+            selectedDispositionOne?.dispositionDisplayName || '',
     }
 
     useEffect(() => {
@@ -41,7 +44,7 @@ const EditDispositionOneWrappper = () => {
     }, [data, dispatch, isFetching, isLoading])
 
     const validationSchema = object({
-        dispositionName: string().required('Required'),
+        dispositionName: string().required('Disposition one name is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)

@@ -71,13 +71,13 @@ const DispositionOneListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'dispositionName',
+            field: 'dispositionDisplayName',
             headerName: 'Disposition Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_ONE_LIST_DISPOSITION_ONE_NAME,
             extraClasses: 'capitalize',
             renderCell: (row: DispositionOneListResponse) => (
-                <span> {row.dispositionName} </span>
+                <span> {row.dispositionDisplayName} </span>
             ),
         },
         {

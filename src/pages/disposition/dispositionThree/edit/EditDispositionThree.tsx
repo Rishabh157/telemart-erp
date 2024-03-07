@@ -66,7 +66,7 @@ const EditDispositionThree = ({
             const filteredDispositionTwo = DtData?.data?.map(
                 (dispositionTwo: DispositionTwoListResponse) => {
                     return {
-                        label: dispositionTwo.dispositionName,
+                        label: dispositionTwo.dispositionDisplayName,
                         value: dispositionTwo._id,
                     }
                 }
@@ -122,7 +122,7 @@ const EditDispositionThree = ({
                             readOnly
                             disabled
                             name="dispositionName"
-                            value={values.dispositionName}
+                            value={values.dispositionDisplayName}
                             label="Disposition Name"
                             required
                             placeholder="Disposition Name"

@@ -20,6 +20,7 @@ export type FormInitialValues = {
     dispositionName: string
     dispositionOneId: string
     dispositionTwoId: string
+    dispositionDisplayName: string
     smsType: string
     emailType: string
     whatsApp: string
@@ -71,6 +72,8 @@ const EditDispositionThreeWrappper = () => {
         dispositionName: selectedDispostionThree?.dispositionName || '',
         dispositionOneId: selectedDispostionThree?.dispositionOneId || '',
         dispositionTwoId: selectedDispostionThree?.dispositionTwoId || '',
+        dispositionDisplayName:
+            selectedDispostionThree?.dispositionDisplayName || '',
         smsType: selectedDispostionThree?.smsType || '',
         emailType: selectedDispostionThree?.emailType || '',
         whatsApp: selectedDispostionThree?.whatsApp || '',
@@ -82,10 +85,18 @@ const EditDispositionThreeWrappper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
-        dispositionName: string().required('Required'),
-        dispositionOneId: string().required('Required'),
-        dispositionTwoId: string().required('Required'),
-        applicableCriteria: string().required('Required'),
+        dispositionName: string().required(
+            'Disposition three name is required'
+        ),
+        dispositionOneId: string().required(
+            'Please select disposition one name'
+        ),
+        dispositionTwoId: string().required(
+            'Please select disposition two name'
+        ),
+        applicableCriteria: string().required(
+            'Please select applicable criteria'
+        ),
         smsType: string(),
         emailType: string(),
         whatsApp: string(),
@@ -126,7 +137,7 @@ const EditDispositionThreeWrappper = () => {
         DispotionOneOptions: dispositionOne?.map(
             (dispositionOne: DispositionOneListResponse) => {
                 return {
-                    label: dispositionOne.dispositionName,
+                    label: dispositionOne.dispositionDisplayName,
                     value: dispositionOne._id,
                 }
             }
@@ -134,24 +145,22 @@ const EditDispositionThreeWrappper = () => {
     }
 
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <EditDispositionThree
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <EditDispositionThree
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

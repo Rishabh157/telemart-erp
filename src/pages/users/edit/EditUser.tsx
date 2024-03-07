@@ -340,7 +340,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 label="senior"
                             />
                             <ATMSwitchButton
-                                label="isAgent"
+                                label="Agent"
                                 name="isAgent"
                                 value={values.isAgent}
                                 onChange={(e) =>

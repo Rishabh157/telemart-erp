@@ -153,7 +153,7 @@ const ATMTable = <T extends {}>({
                         )
                     })
             ) : rows.length ? (
-                rows.map((row: any, rowIndex) => (
+                rows?.map((row: any, rowIndex) => (
                     <div
                         onClick={() => onRowClick && onRowClick(row)}
                         key={row[idKey] || rowIndex}

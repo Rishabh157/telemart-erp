@@ -18,6 +18,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     dispositionName: string
+    dispositionDisplayName: string
     dispositionOneId: string
     companyId: string
 }
@@ -64,14 +65,15 @@ const EditDispositionTwoWrapper = () => {
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispostion?.dispositionName || '',
         dispositionOneId: selectedDispostion?.dispositionOneId || '',
-
+        dispositionDisplayName:
+            selectedDispostion?.dispositionDisplayName || '',
         companyId: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        dispositionName: string().required('Required'),
-        dispositionOneId: string().required('Required'),
+        dispositionName: string().required('Disposition two name is required'),
+        dispositionOneId: string().required('Please select disposition one name'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -106,8 +108,8 @@ const EditDispositionTwoWrapper = () => {
         DispotionOneOptions: dispositionOne?.map(
             (dispositionOne: DispositionOneListResponse) => {
                 return {
-                    label: dispositionOne.dispositionName,
-                    value: dispositionOne._id,
+                    label: dispositionOne?.dispositionDisplayName,
+                    value: dispositionOne?._id,
                 }
             }
         ),

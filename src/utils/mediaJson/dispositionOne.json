@@ -13,7 +13,7 @@
                 {
                     "fieldId": "DISPOSITION_ONE_LIST_DISPOSITION_ONE_NAME",
                     "fieldName": "Disposition Name",
-                    "fieldValue": "dispositionName"
+                    "fieldValue": "dispositionDisplayName"
                 },
                 {
                     "fieldId": "DISPOSITION_ONE_LIST_STATUS",

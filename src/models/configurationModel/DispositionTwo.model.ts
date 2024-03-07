@@ -9,6 +9,8 @@
 export type DispositionTwoListResponse = {
     dispositionName: string
     dispostionOneLabel: string
+    dispositionDisplayName: string
+    dispostionOneDisplayLabel: string
     dispositionOneId: string
     companyId: string
     isActive: boolean
