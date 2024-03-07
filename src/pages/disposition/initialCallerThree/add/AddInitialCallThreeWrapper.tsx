@@ -43,13 +43,13 @@ const AddInitialCallThreeWrappper = () => {
         cancelFlag: false,
     }
     const validationSchema = object({
-        initialCallName: string().required('Required'),
-        initialCallOneId: string().required('Required'),
-        callType: string().required('Required'),
-        initialCallTwoId: string().required('Required'),
-        emailType: string().required('Required'),
-        smsType: string().required('Required'),
-        returnType: array().of(string().required('Required')),
+        initialCallName: string().required('Initial Call Name is required'),
+        initialCallOneId: string().required('Initial Call One is required'),
+        callType: string().required('Call Type is required'),
+        initialCallTwoId: string().required('Initial Call Two is required'),
+        emailType: string().required('Email Type is required'),
+        smsType: string().required('SMS Type is required'),
+        returnType: array().of(string().required('Return Type is required')),
         isPnd: boolean(),
         cancelFlag: boolean(),
     })
@@ -87,7 +87,7 @@ const AddInitialCallThreeWrappper = () => {
     const dropdownoptions = {
         initialCallOneOptions: allItems?.map((ele: any) => {
             return {
-                label: ele.initialCallName,
+                label: ele.initialCallDisplayName,
                 value: ele._id,
             }
         }),

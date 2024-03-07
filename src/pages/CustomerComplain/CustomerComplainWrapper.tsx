@@ -4,6 +4,7 @@ import CustomerComplain from './CustomerComplain'
 import { useGetCustomerComplainDetailsBySearchMutation } from 'src/services/CustomerComplainServices'
 import { showToast } from 'src/utils'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 export type FormInitialValues = {
     // incomingNumber: string
@@ -122,9 +123,7 @@ const CustomerComplainWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'center',
             extraClasses: 'text-xs',
-            renderCell: (row: any) => (
-                <span> - </span>
-            ),
+            renderCell: (row: any) => <span> - </span>,
         },
         {
             field: 'scheme',
@@ -195,7 +194,7 @@ const CustomerComplainWrapper = () => {
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         setApiStatus(true)
-        const { refOrderNumber, ...rest } = values
+        const { refOrderNumber, complaintNumber, ...rest } = values
         setComplaintContactNo(values?.contactNumber) // set contact number for complaint data api
         setTimeout(() => {
             getOrderDetailsBySearch(rest).then((res: any) => {
@@ -254,15 +253,15 @@ const CustomerComplainWrapper = () => {
     }
 
     return (
-        <Formik
-            enableReinitialize
-            initialValues={initialValues}
-            // validationSchema={validationSchema}
-            onSubmit={onSubmitHandler}
-        >
-            {(formikProps: FormikProps<FormInitialValues>) => {
-                return (
-                    <form autoComplete="off">
+        <SideNavLayout>
+            <Formik
+                enableReinitialize
+                initialValues={initialValues}
+                // validationSchema={validationSchema}
+                onSubmit={onSubmitHandler}
+            >
+                {(formikProps: FormikProps<FormInitialValues>) => {
+                    return (
                         <CustomerComplain
                             formikProps={formikProps}
                             customerDetails={customerDetails}
@@ -270,10 +269,10 @@ const CustomerComplainWrapper = () => {
                             apiStatus={apiStatus}
                             contactNumber={complaintContactNo || ''}
                         />
-                    </form>
-                )
-            }}
-        </Formik>
+                    )
+                }}
+            </Formik>
+        </SideNavLayout>
     )
 }
 

@@ -240,7 +240,7 @@ const SalesPageWrapper = () => {
 
     useEffect(() => {
         if (!singleIsCallerFetching && !singleIsCallerLoading) {
-            setOrderData(singleCallerListingData)
+            setOrderData(singleCallerListingData?.data)
             setCustomerReputationType(
                 singleCallerListingData?.customerReputation
             )

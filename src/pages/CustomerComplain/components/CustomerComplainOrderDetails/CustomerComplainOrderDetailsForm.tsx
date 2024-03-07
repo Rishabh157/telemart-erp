@@ -372,35 +372,16 @@ const CustomerComplainOrderDetailsForm = ({
                 >
                     Create Complaint
                 </button>
+
                 <button
                     disabled
                     type="button"
-                    className="bg-[#0c56aa] text-[#bfdbff] px-1 py-1 rounded font-semibold text-xs cursor-not-allowed"
-                    onClick={() => {}}
-                >
-                    Send SMS
-                </button>
-                <button
-                    type="button"
-                    className="bg-[#0c56aa] text-[#bfdbff] hover:text-white px-1 py-1 rounded font-semibold text-xs"
+                    className="bg-[#0c56aa] text-[#bfdbff] hover:text-white px-1 py-1 rounded font-semibold text-xs cursor-not-allowed"
                     onClick={() => setIsOpenCustomerNDRDetailModel(true)}
                 >
                     Create NDR
                 </button>
-                {/* <DialogLogBox
-                    isOpen={isOpenCustomerComplaitDetailModel}
-                    handleClose={() =>
-                        setIsOpenCustomerComplaitDetailModel(false)
-                    }
-                    component={
-                        <AddCustomerComplaintDetailsWrapper
-                            orderId={values.orderId}
-                            handleClose={() =>
-                                setIsOpenCustomerComplaitDetailModel(false)
-                            }
-                        />
-                    }
-                /> */}
+
                 {/* Create NDR Form */}
                 <DialogLogBox
                     fullScreen
