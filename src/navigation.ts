@@ -148,13 +148,19 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_ORDER,
     },
     {
+        label: 'Complaint',
+        icon: MdOutlineBorderColor,
+        path: '/complain',
+        name: UserModuleNameTypes.NAV_ORDER,
+    },
+    {
         label: 'Call',
         icon: IoCallOutline,
         path: '/call',
         name: UserModuleNameTypes.NAV_CALL,
     },
     {
-        label: 'Customer Complain',
+        label: 'Customer Complaint',
         icon: RiCustomerServiceLine,
         path: '/customer-complain',
         name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
