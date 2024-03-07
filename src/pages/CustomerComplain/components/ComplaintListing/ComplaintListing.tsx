@@ -16,6 +16,8 @@ const ComplaintListing = ({ rows }: Props) => {
         setIsOpenCustomerComplaitDetailModel,
     ] = React.useState<boolean>(false)
 
+    console.log('rows', rows)
+
     return (
         <div className="mt-1 w-full">
             <DialogLogBox
@@ -80,18 +82,22 @@ const ComplaintListing = ({ rows }: Props) => {
                         return (
                             <tr className="bg-#cdddf2" key={ind}>
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                    <div className="flex justify-center items-center">
-                                        <CiEdit
-                                            onClick={() => {
-                                                setSelectedComplaintId(ele?._id)
-                                                setIsOpenCustomerComplaitDetailModel(
-                                                    true
-                                                )
-                                            }}
-                                            className="cursor-pointer"
-                                            size={18}
-                                        />
-                                    </div>
+                                    {ele?.status !== 'CLOSED' && (
+                                        <div className="flex justify-center items-center">
+                                            <CiEdit
+                                                onClick={() => {
+                                                    setSelectedComplaintId(
+                                                        ele?._id
+                                                    )
+                                                    setIsOpenCustomerComplaitDetailModel(
+                                                        true
+                                                    )
+                                                }}
+                                                className="cursor-pointer"
+                                                size={18}
+                                            />
+                                        </div>
+                                    )}
                                 </td>
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
                                     {ele?.orderNumber}

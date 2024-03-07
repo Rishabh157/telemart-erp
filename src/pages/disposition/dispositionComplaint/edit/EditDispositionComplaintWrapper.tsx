@@ -58,10 +58,10 @@ const EditDispositionComplaintWrappper = () => {
     }
 
     const validationSchema = object({
-        dispositionName: string().required('Required'),
-        priority: string().required('Required'),
-        emailType: string().required('Required'),
-        smsType: string().required('Required'),
+        dispositionName: string().required('Disposition Name is required'),
+        priority: string().required('Priority is required'),
+        emailType: string().required('Email Type is required'),
+        smsType: string().required('SMS Type is required'),
     })
     useEffect(() => {
         if (!isLoading && !isFetching)

@@ -176,7 +176,7 @@ const SalesPage: React.FC<Props> = ({
             return { label: ele?.dispositionDisplayName, value: ele?._id }
         }),
         dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
-            return { label: ele?.dispositionName, value: ele?._id }
+            return { label: ele?.dispositionDisplayName, value: ele?._id }
         }),
     }
 

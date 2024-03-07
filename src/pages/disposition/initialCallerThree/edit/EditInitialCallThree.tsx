@@ -111,7 +111,7 @@ const EditInitialCallThree = ({
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="p-4 flex flex-col gap-2  ">
+        <div className="p-4 flex flex-col gap-2">
             {/* Breadcrumbs */}
             <div className="">
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -164,7 +164,7 @@ const EditInitialCallThree = ({
                             readOnly
                             disabled
                             name="initialCallName"
-                            value={values.initialCallName}
+                            value={values.initialCallDisplayName}
                             required
                             label="Initial Call Name"
                             placeholder="Name"

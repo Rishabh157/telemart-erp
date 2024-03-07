@@ -21,6 +21,13 @@ const CustomerComplainHeader = ({
     handleSubmit,
     customerDetails,
 }: Props) => {
+    const handleEnterKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleSubmit()
+        }
+    }
+    console.log('values', values)
+
     return (
         <div className="py-1">
             <div>
@@ -39,6 +46,7 @@ const CustomerComplainHeader = ({
                             className="mt-0 rounded"
                             placeholder="Incoming No."
                             value={values.incomingNumber || ''}
+                            onKeyDown={handleEnterKeyPress}
                             onChange={(e) => {
                                 setFieldValue('incomingNumber', e.target.value)
                             }}
@@ -55,6 +63,7 @@ const CustomerComplainHeader = ({
                             name=""
                             placeholder="Contact No."
                             value={values.contactNumber || ''}
+                            onKeyDown={handleEnterKeyPress}
                             onChange={(e) => {
                                 handleValidNumber(e) &&
                                     setFieldValue(
@@ -75,6 +84,7 @@ const CustomerComplainHeader = ({
                             name=""
                             placeholder="Order No."
                             value={values.orderNumber || ''}
+                            onKeyDown={handleEnterKeyPress}
                             onChange={(e) => {
                                 handleValidNumber(e) &&
                                     setFieldValue(
@@ -85,6 +95,8 @@ const CustomerComplainHeader = ({
                         />
 
                         <ATMTextField
+                            readOnly
+                            disabled
                             label="Complaint No."
                             labelSize="xxs"
                             size="xxs"
@@ -95,6 +107,7 @@ const CustomerComplainHeader = ({
                             name=""
                             placeholder="Complaint No."
                             value={values.complaintNumber || ''}
+                            onKeyDown={handleEnterKeyPress}
                             onChange={(e) => {
                                 setFieldValue('complaintNumber', e.target.value)
                             }}
@@ -111,6 +124,7 @@ const CustomerComplainHeader = ({
                             name=""
                             placeholder="Email"
                             value={values.email || ''}
+                            onKeyDown={handleEnterKeyPress}
                             onChange={(e) => {
                                 setFieldValue('email', e.target.value)
                             }}
@@ -128,6 +142,7 @@ const CustomerComplainHeader = ({
                             name=""
                             placeholder="Ref Order No."
                             value={values.refOrderNumber || ''}
+                            onKeyDown={handleEnterKeyPress}
                             onChange={(e) => {
                                 setFieldValue('refOrderNumber', e.target.value)
                             }}
@@ -144,6 +159,7 @@ const CustomerComplainHeader = ({
                             name=""
                             placeholder="Barcode No."
                             value={values.barcode || ''}
+                            onKeyDown={handleEnterKeyPress}
                             onChange={(e) => {
                                 setFieldValue('barcode', e.target.value)
                             }}
@@ -153,7 +169,7 @@ const CustomerComplainHeader = ({
                         <div className="flex justify-end items-end gap-x-6">
                             <button
                                 onClick={handleSubmit}
-                                type="button"
+                                type="submit"
                                 className="bg-slate-300 px-2 py-1 rounded text-black text-xs"
                             >
                                 Search
@@ -163,12 +179,13 @@ const CustomerComplainHeader = ({
                                 type="button"
                                 className="bg-slate-300 px-2 py-1 rounded text-black text-xs"
                                 onClick={() => {
-                                    setFieldValue('incomingNumber', '')
+                                    // setFieldValue('incomingNumber', '')
                                     setFieldValue('contactNumber', '')
-                                    setFieldValue('orderNumber', '')
-                                    setFieldValue('complaintNumber', '')
+                                    setFieldValue('orderNumber', 0)
+                                    setFieldValue('complaintNumber', 0)
                                     setFieldValue('email', '')
-                                    setFieldValue('refOrderNumber', '')
+                                    setFieldValue('refOrderNumber', 0)
+                                    setFieldValue('barcode', '')
                                 }}
                             >
                                 Reset
