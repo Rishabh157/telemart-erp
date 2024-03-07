@@ -42,7 +42,7 @@ const InitialCallTwoListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetinitialCallerTwoQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['tapeName', 'schemeLabel'],
+        params: ['initialCallName', 'initialCallDisplayName'],
         page: page,
         filterBy: [
             {

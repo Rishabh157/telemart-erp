@@ -46,86 +46,82 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
     ]
 
     return (
-        <>
-            <div className="px-4 h-full overflow-auto pt-3 ">
-                <div className="h-[30px]">
-                    <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                </div>
-                {/* Page Header */}
-                <div className="flex justify-between items-center h-[45px]">
-                    <ATMPageHeading> Disposition Three </ATMPageHeading>
-                    {isAuthorized(
-                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_ADD
-                    ) && (
-                        <button
-                            type="button"
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add
-                        </button>
-                    )}
+        <div className="px-4 h-full overflow-auto pt-3 ">
+            <div className="h-[30px]">
+                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+            </div>
+            {/* Page Header */}
+            <div className="flex justify-between items-center h-[45px]">
+                <ATMPageHeading> Disposition Three </ATMPageHeading>
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_DISPOSITION_THREE_ADD
+                ) && (
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add
+                    </button>
+                )}
+            </div>
+
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
+                {/*Table Header */}
+                <ATMTableHeader
+                    searchValue={searchValue}
+                    page={page}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={rows}
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    onSearch={(newValue) => {
+                        dispatch(setSearchValue(newValue))
+                    }}
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
+                />
+
+                {isOpenFilterFormDialog && (
+                    <DispositionThreeListFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
+
+                {/* Table */}
+                <div className="grow overflow-auto  ">
+                    <ATMTable
+                        columns={columns}
+                        rows={rows}
+                        // isCheckbox={true}
+                        selectedRows={selectedRows}
+                        onRowSelect={(selectedRows) =>
+                            setSelectedRows(selectedRows)
+                        }
+                        setShowDropdown={setShowDropdown}
+                        extraClasses="h-full overflow-auto"
+                        isLoading={isTableLoading}
+                    />
                 </div>
 
-                <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
-                    {/*Table Header */}
-                    <ATMTableHeader
-                        searchValue={searchValue}
+                {/* Pagination */}
+
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
+                    <ATMPagination
                         page={page}
                         rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
                         rows={rows}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        onSearch={(newValue) => {
-                            dispatch(setSearchValue(newValue))
-                        }}
-                        isFilter
-                        onFilterClick={() => {
-                            setIsOpenFilterFormDialog(true)
-                        }}
+                        rowsPerPage={rowsPerPage}
+                        onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />
-
-                    {isOpenFilterFormDialog && (
-                        <DispositionThreeListFilterFormDialogWrapper
-                            open
-                            onClose={() => setIsOpenFilterFormDialog(false)}
-                        />
-                    )}
-
-                    {/* Table */}
-                    <div className="grow overflow-auto  ">
-                        <ATMTable
-                            columns={columns}
-                            rows={rows}
-                            // isCheckbox={true}
-                            selectedRows={selectedRows}
-                            onRowSelect={(selectedRows) =>
-                                setSelectedRows(selectedRows)
-                            }
-                            setShowDropdown={setShowDropdown}
-                            extraClasses="h-full overflow-auto"
-                            isLoading={isTableLoading}
-                        />
-                    </div>
-
-                    {/* Pagination */}
-
-                    <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
-                        <ATMPagination
-                            page={page}
-                            rowCount={totalItems}
-                            rows={rows}
-                            rowsPerPage={rowsPerPage}
-                            onPageChange={(newPage) =>
-                                dispatch(setPage(newPage))
-                            }
-                        />
-                    </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

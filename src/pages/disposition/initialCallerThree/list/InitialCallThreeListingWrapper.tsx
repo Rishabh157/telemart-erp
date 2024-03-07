@@ -40,7 +40,7 @@ const InitialCallThreeListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetInitialCallerThreeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['initailCallName'],
+        params: ['initailCallName', 'initialCallDisplayName'],
         page: page,
         filterBy: [
             {

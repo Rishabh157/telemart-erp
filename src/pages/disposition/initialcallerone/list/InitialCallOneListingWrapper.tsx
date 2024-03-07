@@ -42,7 +42,7 @@ const InitialCallOneListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetinitialCallerOneQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['initialCallName'],
+        params: ['initialCallName', 'initialCallDisplayName'],
         page: page,
         filterBy: [
             {

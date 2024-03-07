@@ -81,134 +81,123 @@ const AddDispositionThree = ({
     }
 
     return (
-        <div className="">
-            <div className="p-4 flex flex-col gap-2  ">
-                {/* Breadcrumbs */}
-                <div className="">
-                    <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                </div>
+        <div className="p-4 flex flex-col gap-2  ">
+            {/* Breadcrumbs */}
+            <div className="">
+                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+            </div>
 
-                {/* Page Heading */}
-                <div className="pt-1">
-                    <ATMPageHeading> Add </ATMPageHeading>
-                </div>
+            {/* Page Heading */}
+            <div className="pt-1">
+                <ATMPageHeading> Add </ATMPageHeading>
+            </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
-                    <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
-                        {/* Form Heading */}
-                        <div className="text-xl font-medium">Details</div>
+            <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
+                    {/* Form Heading */}
+                    <div className="text-xl font-medium">Details</div>
 
-                        {/* BUTTON - Add Button */}
-                        <div>
-                            <button
-                                type="button"
-                                disabled={apiStatus}
-                                onClick={() => {
-                                    formikProps.handleSubmit()
-                                }}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
-                            >
-                                Submit
-                            </button>
-                        </div>
+                    {/* BUTTON - Add Button */}
+                    <div>
+                        <button
+                            type="button"
+                            disabled={apiStatus}
+                            onClick={() => {
+                                formikProps.handleSubmit()
+                            }}
+                            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                apiStatus ? 'opacity-50' : ''
+                            }`}
+                        >
+                            Submit
+                        </button>
                     </div>
+                </div>
 
-                    {/* Form */}
-                    <div className="grow py-8 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
-                            {/* FirstName */}
-                            <ATMTextField
-                                name="dispositionName"
-                                value={values.dispositionName}
-                                label="Disposition Name"
+                {/* Form */}
+                <div className="grow py-8 px-3 ">
+                    <div className="grid grid-cols-3 gap-4">
+                        {/* FirstName */}
+                        <ATMTextField
+                            name="dispositionName"
+                            value={values.dispositionName}
+                            label="Disposition Name"
+                            required
+                            placeholder="Disposition Name"
+                            onChange={(e) => {
+                                handleSetFieldValue(
+                                    'dispositionName',
+                                    e.target.value
+                                )
+                            }}
+                        />
+                        <ATMSelectSearchable
+                            name="dispositionOneId"
+                            required
+                            value={values.dispositionOneId}
+                            onChange={(e) =>
+                                handleSetFieldValue('dispositionOneId', e)
+                            }
+                            options={dropdownOptions.DispotionOneOptions}
+                            label="Disposition One"
+                        />
+
+                        <div>
+                            <ATMSelectSearchable
+                                name="dispositionTwoId"
                                 required
-                                placeholder="Disposition Name"
-                                onChange={(e) => {
-                                    handleSetFieldValue(
-                                        'dispositionName',
-                                        e.target.value
-                                    )
-                                }}
-                            />
-                            <ATMSelectSearchable
-                                name="dispositionOneId"
-                                required
-                                value={values.dispositionOneId}
+                                value={values.dispositionTwoId}
                                 onChange={(e) =>
-                                    handleSetFieldValue('dispositionOneId', e)
+                                    handleSetFieldValue('dispositionTwoId', e)
                                 }
-                                options={dropdownOptions.DispotionOneOptions}
-                                label="Disposition One"
-                            />
-
-                            <div>
-                                <ATMSelectSearchable
-                                    name="dispositionTwoId"
-                                    required
-                                    value={values.dispositionTwoId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'dispositionTwoId',
-                                            e
-                                        )
-                                    }
-                                    options={dispositionTwoOptions}
-                                    label="Disposition Two"
-                                />
-                            </div>
-
-                            <ATMSelectSearchable
-                                name="smsType"
-                                value={values.smsType}
-                                onChange={(e) =>
-                                    handleSetFieldValue('smsType', e)
-                                }
-                                options={smstypeOptions()}
-                                label="SMS Type"
-                            />
-
-                            <ATMSelectSearchable
-                                name="emailType"
-                                value={values.emailType}
-                                onChange={(e) =>
-                                    handleSetFieldValue('emailType', e)
-                                }
-                                options={emailTypeOptions()}
-                                label="Email Type"
-                            />
-                            <ATMSelectSearchable
-                                name="whatsApp"
-                                value={values.whatsApp}
-                                onChange={(e) =>
-                                    handleSetFieldValue('whatsApp', e)
-                                }
-                                options={whatsappTypeOptions()}
-                                label="Whatsapp Template"
-                            />
-
-                            <ATMSelectSearchable
-                                name="priority"
-                                value={values.priority}
-                                onChange={(e) =>
-                                    handleSetFieldValue('priority', e)
-                                }
-                                options={priorityOptions()}
-                                label="Priority"
-                            />
-
-                            <ATMSelectSearchable
-                                name="applicableCriteria"
-                                required
-                                value={values.applicableCriteria}
-                                onChange={(e) => {
-                                    handleSetFieldValue('applicableCriteria', e)
-                                }}
-                                options={applicableCriteriaOptionsType()}
-                                label="Applicable Criteria"
+                                options={dispositionTwoOptions}
+                                label="Disposition Two"
                             />
                         </div>
+
+                        <ATMSelectSearchable
+                            name="smsType"
+                            value={values.smsType}
+                            onChange={(e) => handleSetFieldValue('smsType', e)}
+                            options={smstypeOptions()}
+                            label="SMS Type"
+                        />
+
+                        <ATMSelectSearchable
+                            name="emailType"
+                            value={values.emailType}
+                            onChange={(e) =>
+                                handleSetFieldValue('emailType', e)
+                            }
+                            options={emailTypeOptions()}
+                            label="Email Type"
+                        />
+                        <ATMSelectSearchable
+                            name="whatsApp"
+                            value={values.whatsApp}
+                            onChange={(e) => handleSetFieldValue('whatsApp', e)}
+                            options={whatsappTypeOptions()}
+                            label="Whatsapp Template"
+                        />
+
+                        <ATMSelectSearchable
+                            name="priority"
+                            value={values.priority}
+                            onChange={(e) => handleSetFieldValue('priority', e)}
+                            options={priorityOptions()}
+                            label="Priority"
+                        />
+
+                        <ATMSelectSearchable
+                            name="applicableCriteria"
+                            required
+                            value={values.applicableCriteria}
+                            onChange={(e) => {
+                                handleSetFieldValue('applicableCriteria', e)
+                            }}
+                            options={applicableCriteriaOptionsType()}
+                            label="Applicable Criteria"
+                        />
                     </div>
                 </div>
             </div>
