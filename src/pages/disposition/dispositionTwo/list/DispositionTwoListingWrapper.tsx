@@ -46,7 +46,11 @@ const DispositionTwoListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetdispositionTwoQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['dispositionName', 'dispositionOneId'],
+        params: [
+            'dispositionName',
+            'dispositionOneId',
+            'dispositionDisplayName',
+        ],
         page: page,
         filterBy: [
             {

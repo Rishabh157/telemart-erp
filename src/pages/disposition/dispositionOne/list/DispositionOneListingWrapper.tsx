@@ -42,7 +42,7 @@ const DispositionOneListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetdispositionOneQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['dispositionName'],
+        params: ['dispositionName', 'dispositionDisplayName'],
         page: page,
         filterBy: [
             {

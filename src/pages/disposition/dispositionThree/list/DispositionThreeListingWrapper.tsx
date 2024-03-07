@@ -43,7 +43,11 @@ const DispositionThreeListingWrapper = () => {
     const { data, isFetching, isLoading } = useGetdispositionThreeQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: ['dispositionName', 'dispositionTwoId'],
+        params: [
+            'dispositionName',
+            'dispositionTwoId',
+            'dispositionDisplayName',
+        ],
         page: page,
         filterBy: [
             {
@@ -262,17 +266,13 @@ const DispositionThreeListingWrapper = () => {
     }, [dispatch, data, isFetching, isLoading])
 
     return (
-        <>
-            <>
-                <div className="h-full">
-                    <DispositionThreeListing
-                        columns={columns}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                </div>
-            </>
-        </>
+        <div className="h-full">
+            <DispositionThreeListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </div>
     )
 }
 
