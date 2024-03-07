@@ -2996,7 +2996,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<ComplainListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_COMPLAIN
+                                    UserModuleNameTypes.NAV_COMPLAINT
                                 }
                             />
                         }
