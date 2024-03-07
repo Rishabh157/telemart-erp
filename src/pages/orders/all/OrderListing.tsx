@@ -22,12 +22,17 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import { OrderListResponse } from 'src/models'
 import {
     useGetOrderQuery,
-    useGetOrderFlowQuery,
+    // useGetOrderFlowQuery,
     useDispatchedOrderBarcodeMutation,
     useApprovedOrderStatusMutation,
     useGetAllOrderGlobalSearchQuery,
 } from 'src/services/OrderService'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import {
+
+    setOrderNumberSearch,
+    setComplaintNumberSearch
+} from 'src/redux/slices/ComplainSlice'
 
 // |-- Redux --|
 import {
@@ -56,6 +61,8 @@ import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFo
 import moment from 'moment'
 import { BiSearch } from 'react-icons/bi'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
+import { useGetPaginationComplaintQuery } from 'src/services/CallerService'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // Types
 type BarcodeListResponseType = {
     _id: string
@@ -97,7 +104,11 @@ const OrderListing = ({
     const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
-
+    // Complaint Redux State
+    const complainState: any = useSelector(
+        (state: RootState) => state.complain
+    )
+    const { orderNumberSearch, complaintNumberSearch } = complainState
     // States
     const [orderMobSearchValue, setOrderMobSearchValue] = useState<string>('')
 
@@ -108,7 +119,7 @@ const OrderListing = ({
         useState<string>()
 
     const [selectedRows, setSelectedRows] = useState([])
-    const [currentId, setCurrentId] = useState<string>('')
+    // const [currentId, setCurrentId] = useState<string>('')
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
     // const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
     const [selectedOrder, setSelectedOrder] = useState<any>(null)
@@ -170,6 +181,24 @@ const OrderListing = ({
             case 'all':
                 setFilterBy(filter)
                 return
+
+            case 'complaint':
+                let filtrComplaint = [
+                    // {
+                    //     fieldName: 'companyId',
+                    //     value: userData?.companyId,
+                    // },
+                    {
+                        fieldName: 'orderNumber',
+                        value: orderNumberSearch,
+                    },
+                    {
+                        fieldName: 'complaintNumber',
+                        value: complaintNumberSearch,
+                    },
+                ]
+                setFilterBy(filtrComplaint)
+                return
             case 'approved':
                 let filterApproval = [
                     ...filter,
@@ -178,7 +207,7 @@ const OrderListing = ({
                         value: false,
                     },
                 ]
-                setFilterBy(filterApproval)
+                setFilterBy([...filterApproval])
                 return
             default:
                 let filterdefault = [
@@ -198,7 +227,7 @@ const OrderListing = ({
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [orderState, currentStatus, orderMobSearchValue])
+    }, [orderState, currentStatus, orderMobSearchValue, orderNumberSearch, complaintNumberSearch])
 
     const {
         page,
@@ -208,6 +237,8 @@ const OrderListing = ({
         totalItems,
         isTableLoading,
     } = orderState
+
+
 
     const { data, isLoading, isFetching } = useGetOrderQuery(
         {
@@ -222,7 +253,7 @@ const OrderListing = ({
             isPaginationRequired: true,
         },
         {
-            skip: orderStatus === 'global-search',
+            skip: orderStatus === 'global-search' || orderStatus === 'complaint',
         }
     )
     useEffect(() => {
@@ -263,18 +294,48 @@ const OrderListing = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [globalData, globalDataIsLoading, globalDataIsFetching, orderStatus])
 
-    // Get Order Flow
-    const {
-        data: orderFlowData,
-        isLoading: isOrderFlowLoading,
-        isFetching: isOrderFlowFetching,
-    } = useGetOrderFlowQuery(currentId, { skip: !currentId })
 
+
+    const { data: complaintData, isFetching: isComlaintFecthing, isLoading: isComplaintLoading, refetch } = useGetPaginationComplaintQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: [
+            "customerNumber",
+        ],
+        page: page,
+        filterBy: [...filterBy],
+
+
+        dateFilter: {},
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    },
+        {
+            // refetchOnFocus: true,
+            skip: orderStatus !== 'complaint' ? true : false,
+        })
     useEffect(() => {
-        if (!isOrderFlowFetching && !isOrderFlowLoading) {
-            // console.log('orderFlowData: ', orderFlowData)
+        if (orderStatus === 'complaint') {
+            refetch()
+
         }
-    }, [isOrderFlowLoading, isOrderFlowFetching, orderFlowData])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [orderStatus])
+    useEffect(() => {
+        // if (orderStatus === 'complaint') {
+        if (!isComplaintLoading && !isComlaintFecthing) {
+            dispatch(setIsTableLoading(false))
+
+            dispatch(setItems(complaintData?.data || []))
+            dispatch(setTotalItems(complaintData?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+        // }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isComplaintLoading, isComlaintFecthing, complaintData])
 
     //
     const handleDeactive = (rowId: string) => {
@@ -618,11 +679,10 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${
-                                            row?.approved
-                                                ? 'Disapprove this order'
-                                                : 'Approval this order'
-                                        }`,
+                                        text: `Do you want to ${row?.approved
+                                            ? 'Disapprove this order'
+                                            : 'Approval this order'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -655,8 +715,8 @@ const OrderListing = ({
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -702,7 +762,7 @@ const OrderListing = ({
                 <ActionPopup
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
+                        // setCurrentId(row?._id)
                     }}
                     isCustomBtn={
                         row?.status === 'FRESH' && row?.approved === true
@@ -740,6 +800,84 @@ const OrderListing = ({
         },
     ]
 
+
+    const columnsComplaint: columnTypes[] = [
+        {
+            field: 'orderNumber',
+            headerName: 'Order No',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: any) => (
+                <span> {row.orderNumber} </span>
+            ),
+            name: UserModuleNameTypes.COMPLAIN_LIST_ORDER_NO,
+        },
+        {
+            field: 'complaintNumber',
+            headerName: 'Complaint Number',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.COMPLAIN_LIST_COMPAINT,
+            renderCell: (row: any) => (
+                <span> {row?.complaintNumber} </span>
+            ),
+        },
+        {
+            field: 'complaintbyLabel',
+            headerName: 'Complaint Label',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.COMPLAIN_LIST_COMPLAINT_LABEL,
+            renderCell: (row: any) => (
+                <span>
+                    {' '}
+                    {row.complaintbyLabel ? row.complaintbyLabel : 'NA'}
+                </span>
+            ),
+        },
+
+        {
+            field: 'schemeName',
+            headerName: 'Scheme',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.COMPLAIN_LIST_SCHEME,
+            renderCell: (row: any) => (
+                <span> {row.schemeName} </span>
+            ),
+        },
+        {
+            field: 'initialCallOneLabel',
+            headerName: 'Initial Call One Label',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[250px]',
+            name: UserModuleNameTypes.COMPLAIN_LIST_INITIAL_CALL_ONE_LABEL,
+            renderCell: (row: any) => (
+                <span> {row.initialCallOneLabel} </span>
+            ),
+        },
+        {
+            field: 'initialCallTwoLabel',
+            headerName: 'Initial Call Two Label',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[250px]',
+            name: UserModuleNameTypes.COMPLAIN_LIST_INITIAL_CALL_TWO_LABEL,
+            renderCell: (row: any) => (
+                <span> {row.initialCallTwoLabel} </span>
+            ),
+        },
+        {
+            field: 'initialCallThreeLabel',
+            headerName: 'Initial Call Three Label',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[250px]',
+            name: UserModuleNameTypes.COMPLAIN_LIST_INITIAL_CALL_THEREE_LABEL,
+            renderCell: (row: any) => (
+                <span> {row.initialCallThreeLabel} </span>
+            ),
+        },
+
+    ]
     // Dispatching Methods
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
@@ -864,71 +1002,115 @@ const OrderListing = ({
 
             <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
                 {/*Table Header */}
-                {orderStatus !== 'global-search' ? (
-                    <ATMTableHeader
-                        searchValue={searchValue}
-                        placeholder={
-                            orderStatus !== 'inquiry'
-                                ? 'Order No...'
-                                : 'Inquiry No...'
-                        }
-                        page={page}
-                        rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
-                        rows={items}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        onSearch={(newValue) =>
-                            dispatch(setSearchValue(newValue))
-                        }
-                        isAnotherSearch
-                        anotherSearchValue={orderMobSearchValue}
-                        anotherSearchPlaceholder="Mobile No..."
-                        onAnotherSearch={(newValue) => {
-                            setOrderMobSearchValue(newValue)
-                        }}
+                {orderStatus === 'global-search' ?
+                    (
+                        <div className="flex gap-x-4 py-2 px-2">
+                            <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
+                                <BiSearch className="text-slate-600 text-xl" />
+                                <input
+                                    className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
+                                    value={orderNumberSearchValue}
+                                    placeholder="Order No..."
+                                    onChange={(e) => {
+                                        handleValidNumber(e) &&
+                                            setOrderNumberSearchValue(
+                                                e.target.value
+                                            )
+                                        setMobileNumberSearchValue('')
+                                    }}
+                                />
+                            </div>
+                            <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
+                                <BiSearch className="text-slate-600 text-xl" />
+                                <input
+                                    className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
+                                    value={mobileNumberSearchValue}
+                                    placeholder="Mobile No..."
+                                    onChange={(e) => {
+                                        handleValidNumber(e) &&
+                                            setMobileNumberSearchValue(
+                                                e.currentTarget.value
+                                            )
+                                        setOrderNumberSearchValue('')
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    )
+                    : orderStatus === 'complaint' ?
+                        <ATMTableHeader
+                            page={page}
+                            searchValue={searchValue}
+                            isAnotherSearch
+                            anotherSearchValue={orderNumberSearch}
+                            anotherSearchPlaceholder="Order No..."
+                            onAnotherSearch={(newValue) => {
+                                dispatch(setOrderNumberSearch(newValue))
+                            }}
+                            isAnotherSearchTwo
+                            anotherSearchTwoValue={complaintNumberSearch}
+                            anotherSearchTwoPlaceholder="Complaint No..."
+                            onAnotherSearchTwo={(newValue) => {
+                                dispatch(setComplaintNumberSearch(newValue))
+                            }}
+                            rowCount={totalItems}
+                            rowsPerPage={rowsPerPage}
+                            rows={items}
+                            onRowsPerPageChange={(newValue) =>
+                                dispatch(setRowsPerPage(newValue))
+                            }
+                            onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                        // onFilterClick={() => {
+                        //     setIsOpenFilterFormDialog(true)
+                        // }}
                         // isFilter
-                        isRefresh
-                        onFilterDispatch={() => dispatch(setFilterValue([]))}
+                        // isFilter
+                        /> :
+                        (
+                            <ATMTableHeader
+                                searchValue={searchValue}
+                                placeholder={
+                                    orderStatus !== 'inquiry'
+                                        ? 'Order No...'
+                                        : 'Inquiry No...'
+                                }
+                                page={page}
+                                rowCount={totalItems}
+                                rowsPerPage={rowsPerPage}
+                                rows={items}
+                                onRowsPerPageChange={(newValue) =>
+                                    dispatch(setRowsPerPage(newValue))
+                                }
+                                onSearch={(newValue) =>
+                                    dispatch(setSearchValue(newValue))
+                                }
+                                isAnotherSearch
+                                anotherSearchValue={orderMobSearchValue}
+                                anotherSearchPlaceholder="Mobile No..."
+                                onAnotherSearch={(newValue) => {
+                                    setOrderMobSearchValue(newValue)
+                                }}
+                                // isFilter
+                                isRefresh
+                                onFilterDispatch={() => dispatch(setFilterValue([]))}
+                            />
+                        )
+                }
+                <div className="grow overflow-auto">
+                    <ATMTable
+                        extraClasses="w-[200%]"
+                        columns={orderStatus === 'complaint' ? columnsComplaint : columns}
+                        rows={items}
+                        // isCheckbox={true}
+                        selectedRows={selectedRows}
+                        onRowSelect={(selectedRows) =>
+                            setSelectedRows(selectedRows)
+                        }
+                        isLoading={isTableLoading}
                     />
-                ) : (
-                    <div className="flex gap-x-4 py-2 px-2">
-                        <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
-                            <BiSearch className="text-slate-600 text-xl" />
-                            <input
-                                className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
-                                value={orderNumberSearchValue}
-                                placeholder="Order No..."
-                                onChange={(e) => {
-                                    handleValidNumber(e) &&
-                                        setOrderNumberSearchValue(
-                                            e.target.value
-                                        )
-                                    setMobileNumberSearchValue('')
-                                }}
-                            />
-                        </div>
-                        <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
-                            <BiSearch className="text-slate-600 text-xl" />
-                            <input
-                                className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
-                                value={mobileNumberSearchValue}
-                                placeholder="Mobile No..."
-                                onChange={(e) => {
-                                    handleValidNumber(e) &&
-                                        setMobileNumberSearchValue(
-                                            e.currentTarget.value
-                                        )
-                                    setOrderNumberSearchValue('')
-                                }}
-                            />
-                        </div>
-                    </div>
-                )}
-
+                </div>
                 {/* Table */}
-                {orderStatus !== 'global-search' ? (
+                {/* {orderStatus !== 'global-search' ? (
                     <div className="grow overflow-auto">
                         <ATMTable
                             extraClasses="w-[200%]"
@@ -955,7 +1137,7 @@ const OrderListing = ({
                             isLoading={isTableLoading}
                         />
                     </div>
-                ) : null}
+                ) : null} */}
 
                 {/* Flow */}
                 {/* <DialogLogBox
@@ -1085,7 +1267,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                        ''
+                                                    ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)

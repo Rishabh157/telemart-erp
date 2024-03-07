@@ -273,6 +273,7 @@ import Welcome from './pages/welcome/Welcome'
 import Successfully from './pages/welcome/Successfully'
 import CallerPageWrapper from './pages/callerpage/salesInbound/SalesPageWrapper'
 import CustomerCarePageWrapper from './pages/callerpage/customerInbound/CustomerCarePageWrapper'
+import ComplainListingWrapper from './pages/Complain/List/ComplainListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2989,7 +2990,17 @@ const PageRoutes = () => {
                         path="influencers-management/add"
                         element={<AddInfluencerWrapper />}
                     />
-
+                    <Route
+                        path="/complain"
+                        element={
+                            <Authorization
+                                children={<ComplainListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_COMPLAIN
+                                }
+                            />
+                        }
+                    />
                     {/* ############# NOT FOR USE ############# */}
                 </Routes>
             </BrowserRouter>
