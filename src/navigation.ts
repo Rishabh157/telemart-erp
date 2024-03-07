@@ -151,7 +151,7 @@ export const navigation: NavItemType[] = [
         label: 'Complaint',
         icon: MdOutlineBorderColor,
         path: '/complain',
-        name: UserModuleNameTypes.NAV_ORDER,
+        name: UserModuleNameTypes.NAV_COMPLAINT,
     },
     {
         label: 'Call',

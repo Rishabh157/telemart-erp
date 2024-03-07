@@ -130,7 +130,7 @@ const ViewOrder = () => {
             label: 'Complaint',
             icon: MdOutbond,
             path: '?orderStatus=complaint',
-            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
+            name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_TAB,
         },
     ]
 

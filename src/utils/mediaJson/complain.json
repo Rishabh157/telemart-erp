@@ -1,6 +1,6 @@
 {
-    "moduleId": "NAV_COMPLAIN",
-    "moduleName": "NAV_COMPLAIN",
+    "moduleId": "NAV_COMPLAINT",
+    "moduleName": "NAV_COMPLAINT",
     "parentGroup": [],
     "moduleAction": [
         {

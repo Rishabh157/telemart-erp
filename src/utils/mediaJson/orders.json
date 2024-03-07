@@ -105,6 +105,14 @@
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
+        },
+        {
+            "actionId": "ACTION_ORDER_COMPAINT_TAB",
+            "actionUrl": "",
+            "actionName": "ACTION_ORDER_COMPAINT_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }
