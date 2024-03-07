@@ -18,12 +18,12 @@
                 {
                     "fieldId": "DISPOSITION_THREE_LIST_DISPOSITION_ONE_NAME",
                     "fieldName": "Disposition One Name",
-                    "fieldValue": "dispostionOneLabel"
+                    "fieldValue": "dispostionOneDisplayLabel"
                 },
                 {
                     "fieldId": "DISPOSITION_THREE_LIST_DISPOSITION_TWO_NAME",
                     "fieldName": "Disposition Two Name",
-                    "fieldValue": "dispostionTwoLabel"
+                    "fieldValue": "dispostionTwoDisplayLabel"
                 },
                 {
                     "fieldId": "DISPOSITION_THREE_LIST_APPLICABLE_CRITERIA",

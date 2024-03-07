@@ -121,26 +121,22 @@ const EditInitialCallThreeWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <Formik
-                    enableReinitialize
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps: any) => {
-                        return (
-                            <EditInitialCallOne
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                                dropdownoptions={dropdownoptions}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: any) => {
+                return (
+                    <EditInitialCallOne
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        dropdownoptions={dropdownoptions}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

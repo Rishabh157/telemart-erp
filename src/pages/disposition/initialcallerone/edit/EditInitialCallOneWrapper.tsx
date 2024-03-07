@@ -79,25 +79,21 @@ const EditInitialCallOneWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <Formik
-                    enableReinitialize
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps: any) => {
-                        return (
-                            <EditInitialCallOne
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: any) => {
+                return (
+                    <EditInitialCallOne
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

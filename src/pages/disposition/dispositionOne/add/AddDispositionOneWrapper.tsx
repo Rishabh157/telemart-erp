@@ -24,7 +24,7 @@ const AddDispositionOneWrappper = () => {
         dispositionName: '',
     }
     const validationSchema = object({
-        dispositionName: string().required('Required'),
+        dispositionName: string().required('Disposition one name is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)

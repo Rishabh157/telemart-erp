@@ -346,7 +346,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
                             {/* user admin  */}
                             <ATMSwitchButton
-                                label="isAgent"
+                                label="Agent"
                                 name="isAgent"
                                 value={values.isAgent}
                                 onChange={(e) =>

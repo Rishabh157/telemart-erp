@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:AddUserWrapper.tsx
 // Type: Add Component
-// Last Updated: JULY 04, 2023
+// Last Updated: MARCH 07, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -98,24 +98,24 @@ const AddUserWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        firstName: string().required('First Name is required'),
-        lastName: string().required('Last Name is required'),
-        userName: string().required('User Name is required'),
-        userRole: string().required('User Role is required'),
+        firstName: string().required('First name is required'),
+        lastName: string().required('Last name is required'),
+        userName: string().required('User name is required'),
+        userRole: string().required('User role is required'),
         mySenior: string().when(['userRole'], (userRole, schema) => {
             return getSeniorValid(userRole, schema)
-                ? schema.required('Senioer is required')
+                ? schema.required('Senior is required')
                 : schema.notRequired()
         }),
         isAgent: boolean(),
         teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
             return isAgent[0]
-                ? schema.required('Team Lead ID is required')
+                ? schema.required('Team lead is required')
                 : schema.notRequired()
         }),
         floorManagerId: string().when(['isAgent'], (isAgent, schema) => {
             return isAgent[0]
-                ? schema.required('Floor Manager is required')
+                ? schema.required('Floor manager is required')
                 : schema.notRequired()
         }),
         callCenterId: string().when(
@@ -123,14 +123,14 @@ const AddUserWrapper = (props: Props) => {
             (userDepartment: any, schema: any) => {
                 return userDepartment.includes('SALES_DEPARTMENT')
                     ? schema.required(
-                          'Call Center ID is required for Sales department'
+                          'Call center is required for Sales department'
                       )
                     : schema.notRequired()
             }
         ),
 
-        branchId: string().required('branch name is required'),
-        userDepartment: string().required('User Department is required'),
+        branchId: string().required('Branch name is required'),
+        userDepartment: string().required('User department is required'),
         password: string().required('Password is required'),
     })
 

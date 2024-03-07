@@ -13,12 +13,12 @@
                 {
                     "fieldId": "DISPOSITION_TWO_LIST_DISPOSITION_NAME",
                     "fieldName": "Disposition Name",
-                    "fieldValue": "dispositionName"
+                    "fieldValue": "dispositionDisplayName"
                 },
                 {
                     "fieldId": "DISPOSITION_TWO_LIST_DISPOSITION_ONE_NAME",
                     "fieldName": "Disposition One Name",
-                    "fieldValue": "dispostionOneLabel"
+                    "fieldValue": "dispostionOneDisplayLabel"
                 },
                 {
                     "fieldId": "DISPOSITION_TWO_LIST_STATUS",

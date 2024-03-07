@@ -67,18 +67,16 @@ const ViewInitialCallThreeWrappper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {}
 
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return <ViewInitialCallThree formikProps={formikProps} />
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return <ViewInitialCallThree formikProps={formikProps} />
+            }}
+        </Formik>
     )
 }
 

@@ -86,7 +86,7 @@ const EditDispositionTwo = ({
                             readOnly
                             disabled
                             name="dispositionName"
-                            value={values.dispositionName}
+                            value={values.dispositionDisplayName}
                             label="Disposition Name"
                             required
                             placeholder="Name"

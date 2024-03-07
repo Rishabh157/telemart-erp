@@ -66,12 +66,11 @@ const AddDispositionThree = ({
             const filteredDispositionTwo = DtData?.data?.map(
                 (dispositionTwo: DispositionTwoListResponse) => {
                     return {
-                        label: dispositionTwo.dispositionName,
-                        value: dispositionTwo._id,
+                        label: dispositionTwo?.dispositionDisplayName,
+                        value: dispositionTwo?._id,
                     }
                 }
             )
-
             setDispositionTwoOptions(filteredDispositionTwo || [])
         }
     }, [isDTLoading, isDTFetching, DtData])

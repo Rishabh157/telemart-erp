@@ -53,7 +53,7 @@ const EditInitialCallTwoWrapper = () => {
         initialCallDisplayName:
             selectedInitialCallerTwo?.initialCallDisplayName || '',
     }
-    
+
     const validationSchema = object({
         initialCallName: string().required('Name is required'),
         initialCallOneId: string().required('Required'),
@@ -88,25 +88,21 @@ const EditInitialCallTwoWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <Formik
-                    enableReinitialize
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmitHandler}
-                >
-                    {(formikProps: any) => {
-                        return (
-                            <EditInitialCallTwo
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        )
-                    }}
-                </Formik>
-            </>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: any) => {
+                return (
+                    <EditInitialCallTwo
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 
