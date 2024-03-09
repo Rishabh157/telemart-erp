@@ -1,12 +1,30 @@
 {
     "moduleId": "NAV_BARCODE",
     "moduleName": "NAV_BARCODE",
-    "parentGroup": ["NAV_CONFIGURATION"],
+    "parentGroup": [
+        "NAV_CONFIGURATION"
+    ],
     "moduleAction": [
         {
-            "actionId": "ACTION_BARCODE_LIST",
+            "actionId": "ACTION_BARCODE_LIST_TAB",
             "actionUrl": "",
-            "actionName": "LIST",
+            "actionName": "BARCODE_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_REPRINT_BARCODE_OUTERBOX_TAB",
+            "actionUrl": "",
+            "actionName": "REPRINT_BARCODE_OUTERBOX",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_BARCODE_GROUP_TAB",
+            "actionUrl": "",
+            "actionName": "BARCODE_GROUP",
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
@@ -16,7 +34,9 @@
             "actionUrl": "",
             "actionName": "ADD",
             "compulsoryFields": [],
-            "parentGroup": ["LIST"],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         }
     ]

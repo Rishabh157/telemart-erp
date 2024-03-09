@@ -1773,7 +1773,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<BarcodeListingWrapper />}
                                     permission={
-                                        UserModuleNameTypes.ACTION_BARCODE_LIST
+                                        UserModuleNameTypes.NAV_BARCODE
                                     }
                                 />
                             }
@@ -1795,7 +1795,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<ViewBarcodeWrapper />}
                                     permission={
-                                        UserModuleNameTypes.ACTION_BARCODE_LIST
+                                        UserModuleNameTypes.NAV_BARCODE
                                     }
                                 />
                             }
@@ -1807,7 +1807,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<AddCbBarcodeWrapper />}
                                     permission={
-                                        UserModuleNameTypes.ACTION_BARCODE_LIST
+                                        UserModuleNameTypes.NAV_BARCODE
                                     }
                                 />
                             }
@@ -1819,7 +1819,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<ViewBarcodeWrapper />}
                                     permission={
-                                        UserModuleNameTypes.ACTION_BARCODE_LIST
+                                        UserModuleNameTypes.NAV_BARCODE
                                     }
                                 />
                             }
