@@ -44,7 +44,7 @@ const AddChannelCategoryWrapper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
-        channelCategory: string().required('Group Name is required'),
+        channelCategory: string().required('Category Name is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -73,22 +73,20 @@ const AddChannelCategoryWrapper = () => {
         }, 1000)
     }
     return (
-        <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <AddChannelGroup
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <AddChannelGroup
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

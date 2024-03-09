@@ -146,15 +146,11 @@ const ArtistListingWrapper = () => {
         })
     }
     return (
-        <>
-            <>
-                <ArtistListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </>
-        </>
+        <ArtistListing
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 

@@ -44,7 +44,7 @@ const AddArtistWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        artistName: string().required('artist Name is required'),
+        artistName: string().required('Artist Name is required'),
     })
 
     //    Form Submit Handler
@@ -71,22 +71,20 @@ const AddArtistWrapper = (props: Props) => {
         }, 1000)
     }
     return (
-        <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddArtist
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddArtist
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

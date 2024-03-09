@@ -161,8 +161,6 @@ import EditInitialCallThreeWrapper from './disposition/initialCallerThree/edit/E
 import AddInitialCallThreeWrappper from './disposition/initialCallerThree/add/AddInitialCallThreeWrapper'
 import ViewDispositionThreeWrappper from './disposition/dispositionThree/View/ViewDispositionThreeWrapper'
 import OrderViewWrapper from './orders/view/OrderViewWrapper'
-import InquiryViewWrapper from './inquiry/view/InquiryViewWrapper'
-import InquiryListingWrapper from './inquiry/list/InquiryListingWrapper'
 import InfluencerListingWrapper from './websites/influencerManagement/list/InfluencerListingWrapper'
 import AddAssetsRequestWrapper from './assets/assetsRequest/add/AddAssetsRequestWrapper'
 import AddAssetsRelocationWrapper from './assets/assetsRelocation/add/AddAssetsRelocationWrapper'
@@ -176,19 +174,12 @@ import WebsiteTagListingWrapper from './websites/website-tags/list/WebsiteTagLis
 import AddWebsiteTagsWrapper from './websites/website-tags/add/AddWebsiteTagsWrapper'
 import EditWebsiteTagWrapper from './websites/website-tags/edit/EditWebsiteTagWrapper'
 import ViewWebsiteTagsWrapper from './websites/website-tags/view/ViewWebsiteTagsWrapper'
-import ListDealerSupervisorTabWrapper from './dealers/view/tabs/DealerSupervisorTab/list/ListDealerSupervisorTabWrapper'
-import DealerSupervisorTabWrapper from './dealers/view/tabs/DealerSupervisorTab/add/DealerSupervisorTabWrapper'
 import UserAccessWrapper from './userAccess/UserAccessWrapper'
-import ApprovedOrderListing from './orders/approvedorders/ApprovedOrderListing'
-import ApprovedOrderViewWrapper from './orders/approvedorders/view/ApprovedOrderViewWrapper'
 import EditDealerSchemeWrapper from './dealers/view/tabs/DealerSchemeTab/edit/EditDealerSchemeWrapper'
 import DealerListLedgerTabWrapper from './dealers/view/tabs/DealerLedgerTap/list/DealerListLedgerTabWrapper'
 import AddVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Add/AddVendorWarehouseWrapper'
 import EditVendorWarehouseWrapper from './vendors/view/tabs/VendorWarehouseTab/Edit/EditVendorWarehouseWrapper'
 import VendorListLedgerTabWrapper from './vendors/view/tabs/VendorLedgerTab/list/VendorListLedgerTabWrapper'
-import AddInventoryManagementWrapper from './inventoryManagement/add/AddInventoryManagementWrapper'
-import EditInventoryManagementWrapper from './inventoryManagement/edit/EditInventoryManagementWrapper'
-import InventoryManagementListingWrapper from './inventoryManagement/list/InventoryManagementListingWrapper'
 
 // import asr
 import { ASRListingWrapper, EditASRWrapper, AddASRWrapper } from './asr'
@@ -233,8 +224,6 @@ export {
     PurchaseOrderListingWrapper,
     AddSchemeWrapper,
     SchemeListingWrapper,
-    // AddTaxesWrapper,
-    // TaxesListingWrapper,
     ConfigurationLayout,
     DashboardWrappper,
     AddDealerWrapper,
@@ -366,8 +355,6 @@ export {
     ViewInitialCallThreeWrappper,
     OrderViewWrapper,
     Order,
-    InquiryViewWrapper,
-    InquiryListingWrapper,
     InfluencerListingWrapper,
     AddAssetsRequestWrapper,
     AddAssetsRelocationWrapper,
@@ -381,17 +368,10 @@ export {
     AddWebsiteTagsWrapper,
     EditWebsiteTagWrapper,
     ViewWebsiteTagsWrapper,
-    ListDealerSupervisorTabWrapper,
-    DealerSupervisorTabWrapper,
     UserAccessWrapper,
-    ApprovedOrderListing,
-    ApprovedOrderViewWrapper,
     EditDealerSchemeWrapper,
     DealerListLedgerTabWrapper,
     AddVendorWarehouseWrapper,
     EditVendorWarehouseWrapper,
     VendorListLedgerTabWrapper,
-    AddInventoryManagementWrapper,
-    EditInventoryManagementWrapper,
-    InventoryManagementListingWrapper,
 }

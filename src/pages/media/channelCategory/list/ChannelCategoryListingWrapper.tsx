@@ -152,17 +152,13 @@ const ChannelCategoryListingWrapper = () => {
     }
 
     return (
-        <>
-            <>
-                <div className="h-full">
-                    <ChannelCategoryListing
-                        columns={columns}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                </div>
-            </>
-        </>
+        <div className="h-full">
+            <ChannelCategoryListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </div>
     )
 }
 

@@ -138,6 +138,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
         {
             companyId: userData?.companyId as string,
             callCenterId: values?.callCenterId as any,
+            departmentId: values?.userDepartment as any,
         },
         {
             skip: !values?.callCenterId,
@@ -323,6 +324,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                     handleSetFieldValue('userDepartment', e)
                                 }
                                 options={userDepartmentTypeOptions()}
+                                fontSizePlaceHolder="14px"
                                 label="User Department"
                             />
                             <ATMSelectSearchable
@@ -333,6 +335,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                     handleSetFieldValue('userRole', e)
                                 }
                                 options={userRole}
+                                fontSizePlaceHolder="14px"
                                 label="User Role"
                             />
                             <ATMSelectSearchable
@@ -344,8 +347,17 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 options={userSeniorOptions}
                                 label="senior"
                             />
+
                             {/* user admin  */}
                             <ATMSwitchButton
+                                hidden={
+                                    !(
+                                        values.userDepartment ===
+                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
+                                        values.userDepartment ===
+                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+                                    )
+                                }
                                 label="Agent"
                                 name="isAgent"
                                 value={values.isAgent}
@@ -353,6 +365,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                     handleSetFieldValue('isAgent', e)
                                 }
                             />
+
                             <ATMSelectSearchable
                                 required
                                 name="callCenterId"

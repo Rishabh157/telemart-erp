@@ -107,214 +107,199 @@ const EditChannelManagement = ({
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="">
-            <div className="p-4 flex flex-col gap-2  ">
-                {/* Breadcrumbs */}
-                <div className="">
-                    <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                </div>
+        <div className="p-4 flex flex-col gap-2  ">
+            {/* Breadcrumbs */}
+            <div className="">
+                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+            </div>
 
-                {/* Page Heading */}
-                <div className="pt-1">
-                    <ATMPageHeading> Update Channel</ATMPageHeading>
-                </div>
+            {/* Page Heading */}
+            <div className="pt-1">
+                <ATMPageHeading> Update Channel</ATMPageHeading>
+            </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
-                    <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
-                        {/* Form Heading */}
-                        <div className="text-xl font-medium">
-                            Channel Details
-                        </div>
+            <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
+                    {/* Form Heading */}
+                    <div className="text-xl font-medium">Channel Details</div>
 
-                        {/* BUTTON - Add Button */}
-                        <div>
-                            <button
-                                type="button"
-                                disabled={apiStatus}
-                                onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
-                            >
-                                Update
-                            </button>
-                        </div>
+                    {/* BUTTON - Add Button */}
+                    <div>
+                        <button
+                            type="button"
+                            disabled={apiStatus}
+                            onClick={() => formikProps.handleSubmit()}
+                            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                apiStatus ? 'opacity-50' : ''
+                            }`}
+                        >
+                            Update
+                        </button>
                     </div>
+                </div>
 
-                    {/* Form */}
-                    <div className="grow py-2 pb-9 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
-                            {/* FirstName */}
-                            <ATMTextField
-                                name="channelName"
-                                value={values.channelName}
-                                label="Channel Name"
-                                required
-                                placeholder="Channel Name"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'channelName',
-                                        e.target.value
-                                    )
-                                }
-                            />
-                            <ATMSelectSearchable
-                                name="channelGroupId"
-                                required
-                                value={values.channelGroupId}
-                                onChange={(e) =>
-                                    handleSetFieldValue('channelGroupId', e)
-                                }
-                                options={dropdownOptions.channelGroupOptions}
-                                label="Channel Group"
-                            />
-                            <ATMSelectSearchable
-                                options={dropdownOptions.categoryOption}
-                                required
-                                name="channelCategory"
-                                value={values.channelCategory}
-                                label="Channel Category "
-                                onChange={(value) =>
-                                    handleSetFieldValue(
-                                        'channelCategory',
-                                        value
-                                    )
-                                }
-                            />{' '}
-                            {/* <ATMTextArea
+                {/* Form */}
+                <div className="grow py-2 pb-9 px-3 ">
+                    <div className="grid grid-cols-3 gap-4">
+                        {/* FirstName */}
+                        <ATMTextField
+                            name="channelName"
+                            value={values.channelName}
+                            label="Channel Name"
+                            required
+                            placeholder="Channel Name"
+                            onChange={(e) =>
+                                handleSetFieldValue(
+                                    'channelName',
+                                    e.target.value
+                                )
+                            }
+                        />
+                        <ATMSelectSearchable
+                            name="channelGroupId"
+                            required
+                            value={values.channelGroupId}
+                            onChange={(e) =>
+                                handleSetFieldValue('channelGroupId', e)
+                            }
+                            options={dropdownOptions.channelGroupOptions}
+                            label="Channel Group"
+                        />
+                        <ATMSelectSearchable
+                            options={dropdownOptions.categoryOption}
+                            required
+                            name="channelCategory"
+                            value={values.channelCategory}
+                            label="Channel Category "
+                            onChange={(value) =>
+                                handleSetFieldValue('channelCategory', value)
+                            }
+                        />{' '}
+                        {/* <ATMTextArea
                                 name="address"
                                 value={values.address}
                                 label="Address Name"
                                 placeholder="Address Name"
                                 onChange={(e) => handleSetFieldValue('address', e)}
                             /> */}
-                            <ATMTextField
-                                name="contactPerson"
-                                value={values.contactPerson}
-                                label="Contact Person"
-                                placeholder="Contact Person"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'contactPerson',
-                                        e.target.value
-                                    )
-                                }
-                            />
-                            <ATMTextField
-                                name="designation"
-                                required
-                                value={values.designation}
-                                label="Designation"
-                                placeholder="Designation"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'designation',
-                                        e.target.value
-                                    )
-                                }
-                            />
-                            <ATMTextField
-                                name="email"
-                                value={values.email}
-                                label="Email Id"
-                                placeholder="Email Id"
-                                onChange={(e) =>
-                                    handleSetFieldValue('email', e.target.value)
-                                }
-                            />
-                            <ATMSelectSearchable
-                                options={dropdownOptions.countryOption}
-                                name="country"
-                                required
-                                value={values.country}
-                                label="Country "
-                                // placeholder="Country"
-                                onChange={(value) => {
-                                    handleSetFieldValue('country', value)
-                                }}
-                            />
-                            <ATMSelectSearchable
-                                options={dropdownOptions.stateOption || []}
-                                name="state"
-                                required
-                                value={values.state}
-                                label="State"
-                                onChange={(value) =>
-                                    handleSetFieldValue('state', value)
-                                }
-                            />
-                            <ATMSelectSearchable
-                                options={dropdownOptions.districtOptions || []}
-                                name="district"
-                                required
-                                value={values.district}
-                                label="District"
-                                onChange={(value) =>
-                                    handleSetFieldValue('district', value)
-                                }
-                            />
-                            <ATMSelectSearchable
-                                options={dropdownOptions.languageOption}
-                                name="language"
-                                value={values.language}
-                                label="Language"
-                                onChange={(value) =>
-                                    handleSetFieldValue('language', value)
-                                }
-                            />
-                            <ATMSelectSearchable
-                                options={paymentTypeOptions()}
-                                required
-                                name="paymentType"
-                                value={values.paymentType}
-                                label="Payment Type"
-                                onChange={(value) =>
-                                    handleSetFieldValue('paymentType', value)
-                                }
-                            />
-                            <ATMTextField
-                                name="phone"
-                                value={values.phone}
-                                label="Phone"
-                                placeholder="Phone"
-                                onChange={(e) =>
-                                    handleSetFieldValue('phone', e.target.value)
-                                }
-                            />
-                            <ATMTextField
-                                name="mobile"
-                                value={values.mobile}
-                                label="Mobile   "
-                                placeholder="Mobile "
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'mobile',
-                                        e.target.value
-                                    )
-                                }
-                            />
-                            <ATMTextField
-                                name="website"
-                                value={values.website}
-                                label="Website "
-                                placeholder="Website "
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'website',
-                                        e.target.value
-                                    )
-                                }
-                            />
-                            <ATMTextArea
-                                name="address"
-                                value={values.address}
-                                label="Address Name"
-                                placeholder="Address Name"
-                                onChange={(e) =>
-                                    handleSetFieldValue('address', e)
-                                }
-                            />
-                        </div>
+                        <ATMTextField
+                            name="contactPerson"
+                            value={values.contactPerson}
+                            label="Contact Person"
+                            placeholder="Contact Person"
+                            onChange={(e) =>
+                                handleSetFieldValue(
+                                    'contactPerson',
+                                    e.target.value
+                                )
+                            }
+                        />
+                        <ATMTextField
+                            name="designation"
+                            required
+                            value={values.designation}
+                            label="Designation"
+                            placeholder="Designation"
+                            onChange={(e) =>
+                                handleSetFieldValue(
+                                    'designation',
+                                    e.target.value
+                                )
+                            }
+                        />
+                        <ATMTextField
+                            name="email"
+                            value={values.email}
+                            label="Email Id"
+                            placeholder="Email Id"
+                            onChange={(e) =>
+                                handleSetFieldValue('email', e.target.value)
+                            }
+                        />
+                        <ATMSelectSearchable
+                            options={dropdownOptions.countryOption}
+                            name="country"
+                            required
+                            value={values.country}
+                            label="Country "
+                            // placeholder="Country"
+                            onChange={(value) => {
+                                handleSetFieldValue('country', value)
+                            }}
+                        />
+                        <ATMSelectSearchable
+                            options={dropdownOptions.stateOption || []}
+                            name="state"
+                            required
+                            value={values.state}
+                            label="State"
+                            onChange={(value) =>
+                                handleSetFieldValue('state', value)
+                            }
+                        />
+                        <ATMSelectSearchable
+                            options={dropdownOptions.districtOptions || []}
+                            name="district"
+                            required
+                            value={values.district}
+                            label="District"
+                            onChange={(value) =>
+                                handleSetFieldValue('district', value)
+                            }
+                        />
+                        <ATMSelectSearchable
+                            options={dropdownOptions.languageOption}
+                            name="language"
+                            value={values.language}
+                            label="Language"
+                            onChange={(value) =>
+                                handleSetFieldValue('language', value)
+                            }
+                        />
+                        <ATMSelectSearchable
+                            options={paymentTypeOptions()}
+                            required
+                            name="paymentType"
+                            value={values.paymentType}
+                            label="Payment Type"
+                            onChange={(value) =>
+                                handleSetFieldValue('paymentType', value)
+                            }
+                        />
+                        <ATMTextField
+                            name="phone"
+                            value={values.phone}
+                            label="Phone"
+                            placeholder="Phone"
+                            onChange={(e) =>
+                                handleSetFieldValue('phone', e.target.value)
+                            }
+                        />
+                        <ATMTextField
+                            name="mobile"
+                            value={values.mobile}
+                            label="Mobile   "
+                            placeholder="Mobile "
+                            onChange={(e) =>
+                                handleSetFieldValue('mobile', e.target.value)
+                            }
+                        />
+                        <ATMTextField
+                            name="website"
+                            value={values.website}
+                            label="Website "
+                            placeholder="Website "
+                            onChange={(e) =>
+                                handleSetFieldValue('website', e.target.value)
+                            }
+                        />
+                        <ATMTextArea
+                            name="address"
+                            value={values.address}
+                            label="Address Name"
+                            placeholder="Address Name"
+                            onChange={(e) => handleSetFieldValue('address', e)}
+                        />
                     </div>
                 </div>
             </div>

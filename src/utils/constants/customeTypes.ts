@@ -1,3 +1,5 @@
+import { GetHierarchByDeptProps } from '../GetHierarchyByDept'
+
 // SMS TYPE
 enum smsType {
     alcobanSms = 'ALCOBAN_SMS',
@@ -313,69 +315,69 @@ export const whatsappTypeOptions = () => {
 
 // APPLICABLE CRITERIA
 enum applicableCriteria {
-    isOrder = "ISORDER",
-    isPrepaid = "ISPREPAID",
-    isCallBack = "ISCALLBACK",
-    isReplacement = "ISREPLACEMENT",
-    isInquiry = "ISINQUIRY",
-    isUrgent = "ISURGENT",
-    isSchemeApp = "ISSCHEMEAPP",
-    outOfStock = "OUTOFSTOCK",
-    isProductApp = "ISPRODUCTAPP",
-    adtApplicable = "ADTAPPLICABLE",
-    isTextboxReq = "ISTEXTBOXREQ",
-    isRemarkDateApp = "ISREMARKDATEAPP",
+    isOrder = 'ISORDER',
+    isPrepaid = 'ISPREPAID',
+    isCallBack = 'ISCALLBACK',
+    isReplacement = 'ISREPLACEMENT',
+    isInquiry = 'ISINQUIRY',
+    isUrgent = 'ISURGENT',
+    isSchemeApp = 'ISSCHEMEAPP',
+    outOfStock = 'OUTOFSTOCK',
+    isProductApp = 'ISPRODUCTAPP',
+    adtApplicable = 'ADTAPPLICABLE',
+    isTextboxReq = 'ISTEXTBOXREQ',
+    isRemarkDateApp = 'ISREMARKDATEAPP',
 }
 
 export const applicableCriteriaOptionsType = () => {
     let options = [
         {
             value: applicableCriteria.isOrder,
-            label: "Is Order",
+            label: 'Is Order',
         },
         {
             value: applicableCriteria.isPrepaid,
-            label: "Is Prepaid",
+            label: 'Is Prepaid',
         },
         {
             value: applicableCriteria.isCallBack,
-            label: "Is Call Back",
+            label: 'Is Call Back',
         },
         {
             value: applicableCriteria.isReplacement,
-            label: "Is Replacement",
+            label: 'Is Replacement',
         },
         {
             value: applicableCriteria.isInquiry,
-            label: "Is Inquiry",
+            label: 'Is Inquiry',
         },
         {
             value: applicableCriteria.isUrgent,
-            label: "Is Urgent",
+            label: 'Is Urgent',
         },
         {
             value: applicableCriteria.isSchemeApp,
-            label: "Is Scheme App",
+            label: 'Is Scheme App',
         },
         {
             value: applicableCriteria.outOfStock,
-            label: "Out Of Stock",
+            label: 'Out Of Stock',
         },
         {
             value: applicableCriteria.isProductApp,
-            label: "Is Product App",
+            label: 'Is Product App',
         },
         {
             value: applicableCriteria.adtApplicable,
-            label: "Adt Applicable",
+            label: 'Adt Applicable',
         },
         {
             value: applicableCriteria.isTextboxReq,
-            label: "Is Text box Req",
+            label: 'Is Text box Req',
         },
         {
             value: applicableCriteria.isRemarkDateApp,
-            label: "Is Remark Date App",
+            label: 'Is Remark Date App',
         },
     ]
 
@@ -423,7 +425,9 @@ export const paymentTypeOptions = () => {
     return options?.map((item: any) => {
         return {
             value: item.value,
-            label: item.label.charAt(0).toUpperCase() + item.label.slice(1).toLowerCase(),
+            label:
+                item.label.charAt(0).toUpperCase() +
+                item.label.slice(1).toLowerCase(),
         }
     })
 }
@@ -474,7 +478,9 @@ export const weekDaysOptions = () => {
     return options?.map((item: any) => {
         return {
             value: item.value,
-            label: item.label.charAt(0).toUpperCase() + item.label.slice(1).toLowerCase(),
+            label:
+                item.label.charAt(0).toUpperCase() +
+                item.label.slice(1).toLowerCase(),
         }
     })
 }
@@ -556,86 +562,67 @@ export const ownershipTypeOptions = () => {
     })
 }
 
-// USER DEPARTMENT
-enum userDepartmentType {
-    salesDepartment = 'SALES_DEPARTMENT',
-    customerCareDepartment='CUSTOMER_CARE_DEPARTMENT',
-    hrDepartment = 'HR_DEPARTMENT',
-    distributionDepartment = 'DISTRIBUTION_DEPARTMENT',
-    financeDepartment = 'FINANCE_DEPARTMENT',
-    mediaDepartment = 'MEDIA_DEPARTMENT',
-    mediaProductionDepartment = 'MEDIA_PRODUCTION_DEPARTMENT',
-    itDepartment = 'IT_DEPARTMENT',
-    developmentDepartment = 'DEVELOPMENT_DEPARTMENT',
-    webDepartment = 'WEB_DEPARTMENT',
-    operationDepartment = 'OPERATION_DEPARTMENT',
-    qualityDepartment = 'QUALITY_DEPARTMENT',
-    logisticDepartment = 'LOGISTIC_DEPARTMENT',
-    mappingAndMisDepartment = 'MAPPING_AND_MIS_DEPARTMENT',
-    adminDepartment = 'ADMIN_DEPARTMENT',
-}
-
 export const userDepartmentTypeOptions = () => {
     let options = [
         {
-            value: userDepartmentType.salesDepartment,
-            label: userDepartmentType.salesDepartment,
+            value: GetHierarchByDeptProps.SALES_DEPARTMENT,
+            label: GetHierarchByDeptProps.SALES_DEPARTMENT,
         },
         {
-            value: userDepartmentType.customerCareDepartment,
-            label: userDepartmentType.customerCareDepartment,
+            value: GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT,
+            label: GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT,
         },
         {
-            value: userDepartmentType.hrDepartment,
-            label: userDepartmentType.hrDepartment,
+            value: GetHierarchByDeptProps.HR_DEPARTMENT,
+            label: GetHierarchByDeptProps.HR_DEPARTMENT,
         },
         {
-            value: userDepartmentType.distributionDepartment,
-            label: userDepartmentType.distributionDepartment,
+            value: GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT,
+            label: GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT,
         },
         {
-            value: userDepartmentType.financeDepartment,
-            label: userDepartmentType.financeDepartment,
+            value: GetHierarchByDeptProps.FINANCE_DEPARTMENT,
+            label: GetHierarchByDeptProps.FINANCE_DEPARTMENT,
         },
         {
-            value: userDepartmentType.mediaDepartment,
-            label: userDepartmentType.mediaDepartment,
+            value: GetHierarchByDeptProps.MEDIA_DEPARTMENT,
+            label: GetHierarchByDeptProps.MEDIA_DEPARTMENT,
         },
         {
-            value: userDepartmentType.mediaProductionDepartment,
-            label: userDepartmentType.mediaProductionDepartment,
+            value: GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT,
+            label: GetHierarchByDeptProps.MEDIA_PRODUCTION_DEPARTMENT,
         },
         {
-            value: userDepartmentType.itDepartment,
-            label: userDepartmentType.itDepartment,
+            value: GetHierarchByDeptProps.IT_DEPARTMENT,
+            label: GetHierarchByDeptProps.IT_DEPARTMENT,
         },
         {
-            value: userDepartmentType.developmentDepartment,
-            label: userDepartmentType.developmentDepartment,
+            value: GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT,
+            label: GetHierarchByDeptProps.DEVELOPMENT_DEPARTMENT,
         },
         {
-            value: userDepartmentType.webDepartment,
-            label: userDepartmentType.webDepartment,
+            value: GetHierarchByDeptProps.WEB_DEPARTMENT,
+            label: GetHierarchByDeptProps.WEB_DEPARTMENT,
         },
         {
-            value: userDepartmentType.operationDepartment,
-            label: userDepartmentType.operationDepartment,
+            value: GetHierarchByDeptProps.OPERATION_DEPARTMENT,
+            label: GetHierarchByDeptProps.OPERATION_DEPARTMENT,
         },
         {
-            value: userDepartmentType.qualityDepartment,
-            label: userDepartmentType.qualityDepartment,
+            value: GetHierarchByDeptProps.QUALITY_DEPARTMENT,
+            label: GetHierarchByDeptProps.QUALITY_DEPARTMENT,
         },
         {
-            value: userDepartmentType.logisticDepartment,
-            label: userDepartmentType.logisticDepartment,
+            value: GetHierarchByDeptProps.LOGISTIC_DEPARTMENT,
+            label: GetHierarchByDeptProps.LOGISTIC_DEPARTMENT,
         },
         {
-            value: userDepartmentType.mappingAndMisDepartment,
-            label: userDepartmentType.mappingAndMisDepartment,
+            value: GetHierarchByDeptProps.MAPPING_AND_MIS_DEPARTMENT,
+            label: GetHierarchByDeptProps.MAPPING_AND_MIS_DEPARTMENT,
         },
         {
-            value: userDepartmentType.adminDepartment,
-            label: userDepartmentType.adminDepartment,
+            value: GetHierarchByDeptProps.ADMIN_DEPARTMENT,
+            label: GetHierarchByDeptProps.ADMIN_DEPARTMENT,
         },
     ]
 

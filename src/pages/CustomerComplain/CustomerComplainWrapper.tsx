@@ -195,7 +195,6 @@ const CustomerComplainWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         setApiStatus(true)
         const { refOrderNumber, complaintNumber, ...rest } = values
-        setComplaintContactNo(values?.contactNumber) // set contact number for complaint data api
         setTimeout(() => {
             getOrderDetailsBySearch(rest).then((res: any) => {
                 if ('data' in res) {
@@ -219,6 +218,7 @@ const CustomerComplainWrapper = () => {
 
                         const { allOrderData } = res?.data
 
+                        setComplaintContactNo(mobileNo) // set contact number for complaint data api
                         // Update the state with the API data
                         setCustomerDetails({
                             name: customerName || '',
