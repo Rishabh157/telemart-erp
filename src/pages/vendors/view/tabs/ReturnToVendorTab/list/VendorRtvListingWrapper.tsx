@@ -24,7 +24,6 @@ import {
     useGetPaginationReturnToVendorByGroupQuery,
     // useGetVendorRTVByBarcodeStatusQuery,
 } from 'src/services/ReturnToVendorService'
-// import { getAllowedAuthorizedColumns } from 'src/userAccess/getAuthorizedModules'
 
 // |-- Redux --|
 import {
