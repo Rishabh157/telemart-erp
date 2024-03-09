@@ -12,7 +12,7 @@ import { IconType } from 'react-icons'
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
 import {
-    useLocation,
+    useLocation, useNavigate,
     //  useNavigate
 } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -126,13 +126,19 @@ const ViewOrder = () => {
             path: '?orderStatus=global-search',
             name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
         },
+        {
+            label: 'Complaint',
+            icon: MdOutbond,
+            path: '?orderStatus=complaint',
+            name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_TAB,
+        },
     ]
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
-    const { search } = useLocation()
+    const { search,pathname } = useLocation()
     const queryParams = new URLSearchParams(search)
-
+    const navigate = useNavigate()
     // Access specific query parameters by their names
     const activeTab: keyof typeof statusProps | string | null =
         queryParams.get('orderStatus')
@@ -141,6 +147,16 @@ const ViewOrder = () => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
         })
         ?.map((tab) => tab)
+    useEffect(() => {
+        if (!activeTab) return
+        // const navigate = useNavigate()
+        // useEffect(() => {
+        //     if (!activeTab) return
+
+        navigate(`${pathname}?orderStatus=${activeTab}`)
+     
+        //eslint-disable-next-line
+    }, [activeTab])
 
     const breadcrumbs: BreadcrumbType[] = [
         {

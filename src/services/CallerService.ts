@@ -52,6 +52,14 @@ export const callerPageApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        getPaginationComplaint: builder.query({
+            providesTags: ['call'],
+            query: (body: PaginationType) => ({
+                url: '/complaint',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -60,4 +68,5 @@ export const {
     useUpdateCallerFormMutation,
     useGetOrderNumberUnAuthCallerDataQuery,
     useGetPaginationUnAuthCallerDataQuery,
+    useGetPaginationComplaintQuery
 } = callerPageApi

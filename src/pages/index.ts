@@ -224,8 +224,6 @@ export {
     PurchaseOrderListingWrapper,
     AddSchemeWrapper,
     SchemeListingWrapper,
-    // AddTaxesWrapper,
-    // TaxesListingWrapper,
     ConfigurationLayout,
     DashboardWrappper,
     AddDealerWrapper,

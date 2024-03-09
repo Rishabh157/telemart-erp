@@ -54,7 +54,6 @@ import {
     AddInitialCallOneWrapper,
     AddInitialCallThreeWrappper,
     AddInitialCallTwoWrapper,
-    // AddInventoryManagementWrapper,
     AddItemWrapper,
     AddLanguageWrapper,
     AddProductCategoryWrapper,
@@ -63,7 +62,6 @@ import {
     AddProductWrapper,
     AddPurchaseOrderTabWrapper,
     AddPurchaseOrderWrapper,
-    // OrderListing,
     AddSaleOrderWrapper,
     AddSchemeWrapper,
     AddSlotManagementWrapper,
@@ -95,9 +93,6 @@ import {
     CompetitorManagementListingWrapper,
     ConfigurationCompanyListingWrapper,
     ConfigurationLayout,
-    // AddTaxesWrapper,
-    // TaxesListingWrapper,
-    // ConfigurationLayout,
     DashboardWrappper,
     DealerActivityTabWrapper,
     DealerGeneralInformationTabWrapper,
@@ -161,9 +156,7 @@ import {
     InitialCallOneListingWrapper,
     InitialCallThreeListingWrapper,
     InitialCallTwoListingWrapper,
-    // InquiryViewWrapper,
     InventoryListingWrapper,
-    // InventoryManagementListingWrapper,
     InwardInventoryWrapper,
     ItemListingWrapper,
     LanguageListingWrapper,
@@ -185,8 +178,6 @@ import {
     SchemeListingWrapper,
     SlotManagementListingWrapper,
     TapeManagementListingWrapper,
-    // ListDealerSupervisorTabWrapper,
-    // DealerSupervisorTabWrapper,
     UserAccessWrapper,
     UsersListingWrapper,
     VendorActivityTabWrapper,
@@ -215,7 +206,6 @@ import InwardCompanyTabsListingWrapper from './pages/warehouses/view/inventories
 import InwardCustomerTabsListingWrapper from './pages/warehouses/view/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
 import InwardDealerTabsListingWrapper from './pages/warehouses/view/inventories/inward/Dealer/InwardDealerTabsListingWrapper'
 import InwardEcomTabsListingWrapper from './pages/warehouses/view/inventories/inward/Ecom/InwardEcomTabsListingWrapper'
-// import InwardReplacementTabsListingWrapper from './pages/warehouses/view/inventories/inward/Replacement/InwardReplacementTabsListingWrapper'
 import DispatchedInvoice from './pages/saleOrder/list/components/DispatchedInvoiceWrapper'
 import InwardSampleTabsListingWrapper from './pages/warehouses/view/inventories/inward/Sample/InwardSampleTabsListingWrapper'
 import InwardWarehouseTabsListingWrapper from './pages/warehouses/view/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
@@ -224,12 +214,10 @@ import OutwardWarehouseToComapnyListingWrapper from './pages/warehouses/view/inv
 import OutwardCustomerTabsListingWrapper from './pages/warehouses/view/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
 import OutwardDealerTabsListingWrapper from './pages/warehouses/view/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
 import OutwardEcomTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
-// import OutwardReplacementTabsListingWrapper from './pages/warehouses/view/inventories/outward/Replacement/OutwardReplacementTabsListingWrapper'
 import OutwardRTVTabsListingWrapper from './pages/warehouses/view/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
 import OutwardSampleTabsListingWrapper from './pages/warehouses/view/inventories/outward/Sample/OutwardSampleTabsListingWrapper'
 import OutwardWarehouseTransferListingWrapper from './pages/warehouses/view/inventories/outward/Warehouse/list/OutwardWarehouseTransferListingWrapper'
 import InventorisTabsLayout from './pages/warehouses/view/inventories/tabs'
-// import ViewSlot from './pages/media/slotManagement'
 import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
 import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
@@ -269,6 +257,7 @@ import Welcome from './pages/welcome/Welcome'
 import Successfully from './pages/welcome/Successfully'
 import CallerPageWrapper from './pages/callerpage/salesInbound/SalesPageWrapper'
 import CustomerCarePageWrapper from './pages/callerpage/customerInbound/CustomerCarePageWrapper'
+import ComplainListingWrapper from './pages/Complain/List/ComplainListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -908,20 +897,7 @@ const PageRoutes = () => {
                                 />
                             }
                         />
-                        {/* <Route
-                                path="replacement"
-                                element={
-                                    <Authorization
-                                    children={
-                                            <InwardReplacementTabsListingWrapper />
-}
-                                        permission={
-                                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE
-                                        }
-                                      
-                                    />
-                                }
-                            /> */}
+
                         <Route
                             path="company"
                             element={
@@ -2792,7 +2768,6 @@ const PageRoutes = () => {
 
                 <Route path="/barcodes" element={<BarcodeGenerator />} />
 
-                {/* start Influencer routing */}
                 <Route
                     path="influencers-management"
                     element={<InfluencerListingWrapper />}

@@ -1,0 +1,51 @@
+{
+    "moduleId": "NAV_COMPLAINT",
+    "moduleName": "NAV_COMPLAINT",
+    "parentGroup": [],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_COMPLAIN_LIST",
+            "actionUrl": "/complain",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "COMPLAIN_LIST_ORDER_NO",
+                    "fieldName": "Order No",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "COMPLAIN_LIST_COMPAINT",
+                    "fieldName": "Complaint Number",
+                    "fieldValue": "complaintNumber"
+                },
+                {
+                    "fieldId": "COMPLAIN_LIST_COMPLAINT_LABEL",
+                    "fieldName": "Scheme",
+                    "fieldValue": "complaintbyLabel"
+                },
+                {
+                    "fieldId": "COMPLAIN_LIST_SCHEME",
+                    "fieldName": "Scheme",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "COMPLAIN_LIST_INITIAL_CALL_ONE_LABEL",
+                    "fieldName": "Initial Call One Label",
+                    "fieldValue": "initialCallOneLabel"
+                },
+                {
+                    "fieldId": "COMPLAIN_LIST_INITIAL_CALL_TWO_LABEL",
+                    "fieldName": "Initial Call Two Label",
+                    "fieldValue": "initialCallTwoLabel"
+                },
+                {
+                    "fieldId": "COMPLAIN_LIST_INITIAL_CALL_THEREE_LABEL",
+                    "fieldName": "Initial Call Theree Label",
+                    "fieldValue": "initialCallThereeLabel"
+                }
+            ]
+        }
+    ]
+}

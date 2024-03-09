@@ -37,6 +37,10 @@ type Props = {
     anotherSearchValue?: string
     anotherSearchPlaceholder?: string
     onAnotherSearch?: (newValue: string) => void
+    isAnotherSearchTwo?: boolean
+    anotherSearchTwoValue?: string
+    anotherSearchTwoPlaceholder?: string
+    onAnotherSearchTwo?: (newValue: string) => void
 }
 
 const ATMTableHeader = ({
@@ -48,19 +52,23 @@ const ATMTableHeader = ({
     placeholder = 'Search...',
     page,
     rowsPerPageOptions = [5, 10, 20, 50, 100],
-    onRowsPerPageChange = () => {},
+    onRowsPerPageChange = () => { },
     isFilter = false,
-    onFilterClick = () => {},
-    onFilterDispatch = () => {},
-    onSearch = () => {},
+    onFilterClick = () => { },
+    onFilterDispatch = () => { },
+    onSearch = () => { },
     isDateFilter = false,
     IsDaterFilterLoading = false,
     onSubmitDateHandler,
     isAnotherSearch = false,
     anotherSearchValue = 'Search...',
     anotherSearchPlaceholder = 'Search...',
-    onAnotherSearch = () => {},
-}: Props) => { 
+    onAnotherSearch = () => { },
+    isAnotherSearchTwo = false,
+    anotherSearchTwoValue = 'Search...',
+    anotherSearchTwoPlaceholder = 'Search...',
+    onAnotherSearchTwo = () => { },
+}: Props) => {
     return (
         <div className="p-3 pb-5 border-b border-slate-300 grid grid-cols-3">
             {/* Left */}
@@ -87,6 +95,20 @@ const ATMTableHeader = ({
                                 onAnotherSearch(e.currentTarget.value)
                             }}
                             placeholder={anotherSearchPlaceholder}
+                        />
+                    </div>
+                )}
+
+                {isAnotherSearchTwo && (
+                    <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
+                        <BiSearch className="text-slate-600 text-xl" />
+                        <input
+                            className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
+                            value={anotherSearchTwoValue}
+                            onChange={(e) => {
+                                onAnotherSearchTwo(e.currentTarget.value)
+                            }}
+                            placeholder={anotherSearchTwoPlaceholder}
                         />
                     </div>
                 )}
