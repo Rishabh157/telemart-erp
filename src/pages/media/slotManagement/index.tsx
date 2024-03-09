@@ -11,13 +11,11 @@ import { IconType } from 'react-icons'
 
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
-import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-import { RootState } from 'src/redux/store'
-import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 interface tabsProps {
     label: string
@@ -32,29 +30,23 @@ const ViewSlot = () => {
             label: 'Slot Definition',
             icon: MdOutbond,
             path: '/media/slot',
-            name: 'SLOT_DEFINITION',
+            name: UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_DEFINATION_LIST,
         },
         {
             label: 'Slots',
             icon: MdOutbond,
             path: '/media/slot/run-slots',
-            name: 'SLOTS',
+            name: UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_SLOTS_RUN_LIST,
         },
     ]
-    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [activeTabIndex, setActiveTab] = useState<number>()
 
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
-
-    const allowedTabs = showAllowedTabs(
-        checkUserAccess,
-        UserModuleNameTypes.slotManagement,
-        tabs,
-        userData?.userRole || 'ADMIN'
-    )
+    const allowedTabs = tabs
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
     useEffect(() => {
         const activeTabIndex = window.location.pathname.split('/')[3]

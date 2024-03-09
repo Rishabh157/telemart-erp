@@ -210,7 +210,7 @@ import DispatchedInvoice from './pages/saleOrder/list/components/DispatchedInvoi
 import InwardSampleTabsListingWrapper from './pages/warehouses/view/inventories/inward/Sample/InwardSampleTabsListingWrapper'
 import InwardWarehouseTabsListingWrapper from './pages/warehouses/view/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
 import OutwardTabs from './pages/warehouses/view/inventories/outward'
-import OutwardWarehouseToComapnyListingWrapper from './pages/warehouses/view/inventories/outward/Company/list/OutwardWarehouseToComapnyListingWrapper'
+// import OutwardWarehouseToComapnyListingWrapper from './pages/warehouses/view/inventories/outward/Company/list/OutwardWarehouseToComapnyListingWrapper'
 import OutwardCustomerTabsListingWrapper from './pages/warehouses/view/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
 import OutwardDealerTabsListingWrapper from './pages/warehouses/view/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
 import OutwardEcomTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
@@ -770,7 +770,7 @@ const PageRoutes = () => {
                             }
                         ></Route>
 
-                        <Route
+                         <Route
                             path="warehoue"
                             element={
                                 <Authorization
@@ -813,7 +813,200 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={
-                                        <OutwardWarehouseToComapnyListingWrapper />
+                                        <ConfigurationCompanyListingWrapper />
+                                    }
+                                    permission={UserModuleNameTypes.NAV_COMPANY}
+                                />
+                            }
+                        />
+                        <Route
+                            path="company/add"
+                            element={
+                                <Authorization
+                                    children={<AddCompanyWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPANY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="company/:id"
+                            element={
+                                <Authorization
+                                    children={<EditCompanyWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPANY_EDIT
+                                    }
+                                />
+                            }
+                        />
+
+                        {/* Configurations -> CompanyBranch */}
+                        <Route
+                            path="company-branch"
+                            element={
+                                <Authorization
+                                    children={<CompanyBranchListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_COMPANY_BRANCH
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="company-branch/add"
+                            element={
+                                <Authorization
+                                    children={<AddCompanyBranchWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPANY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="company-branch/:id"
+                            element={
+                                <Authorization
+                                    children={<EditCompanyBranchWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_COMPANY_EDIT
+                                    }
+                                />
+                            }
+                        />
+
+                        {/* Configurations -> Barcode */}
+                        <Route
+                            path="barcode"
+                            element={
+                                <Authorization
+                                    children={<BarcodeListingWrapper />}
+                                    permission={UserModuleNameTypes.NAV_BARCODE}
+                                />
+                            }
+                        />
+                        <Route
+                            path="barcode/add"
+                            element={
+                                <Authorization
+                                    children={<AddBarcodeWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_BARCODE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="barcode/carton-box-items/:cartonboxcode"
+                            element={
+                                <Authorization
+                                    children={<ViewBarcodeWrapper />}
+                                    permission={UserModuleNameTypes.NAV_BARCODE}
+                                />
+                            }
+                        />
+
+                        <Route
+                            path="barcode/carton-box/add"
+                            element={
+                                <Authorization
+                                    children={<AddCbBarcodeWrapper />}
+                                    permission={UserModuleNameTypes.NAV_BARCODE}
+                                />
+                            }
+                        />
+
+                        <Route
+                            path="barcode/:barcodeId"
+                            element={
+                                <Authorization
+                                    children={<ViewBarcodeWrapper />}
+                                    permission={UserModuleNameTypes.NAV_BARCODE}
+                                />
+                            }
+                        />
+
+                        {/* Configurations -> Location */}
+                        <Route path="location" element={<Locations />} />
+
+                        {/* Configurations -> Language */}
+                        <Route
+                            path="language"
+                            element={
+                                <Authorization
+                                    children={<LanguageListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_LANGUAGE
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="language/add"
+                            element={
+                                <Authorization
+                                    children={<AddLanguageWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_LANGUAGE_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="language/:id"
+                            element={
+                                <Authorization
+                                    children={<EditLanguageWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_LANGUAGE_EDIT
+                                    }
+                                />
+                            }
+                        />
+
+                        {/* Configurations -> Dealers Category */}
+                        <Route
+                            path="dealers-category"
+                            element={
+                                <Authorization
+                                    children={<DealersCategoryListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.NAV_DEALERS_CATEGORY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="dealers-category/add"
+                            element={
+                                <Authorization
+                                    children={<AddDealersCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DEALERS_CATEGORY_ADD
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="dealers-category/:id"
+                            element={
+                                <Authorization
+                                    children={<EditDealersCategoryWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_DEALERS_CATEGORY_EDIT
+                                    }
+                                />
+                            }
+                        />
+                        {/* Configurations -> call center master */}
+                        <Route
+                            path="callcenter-master"
+                            element={
+                                <Authorization
+                                    children={
+                                        <CallCenterMasterListingWrapper />
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY
@@ -1617,14 +1810,14 @@ const PageRoutes = () => {
                         }
                     />
 
-                    {/* Configurations -> Barcode */}
+                     {/* Configurations -> Barcode */}
                     <Route
                         path="barcode"
                         element={
                             <Authorization
                                 children={<BarcodeListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_LIST
+                                    UserModuleNameTypes.ACTION_BARCODE_LIST_TAB
                                 }
                             />
                         }
@@ -1634,9 +1827,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AddBarcodeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_ADD
-                                }
+                                permission={UserModuleNameTypes.NAV_BARCODE}
                             />
                         }
                     />
@@ -1645,33 +1836,27 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ViewBarcodeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_LIST
-                                }
+                                permission={UserModuleNameTypes.NAV_BARCODE}
                             />
                         }
                     />
 
-                    <Route
+                     <Route
                         path="barcode/carton-box/add"
                         element={
                             <Authorization
                                 children={<AddCbBarcodeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_LIST
-                                }
+                                permission={UserModuleNameTypes.NAV_BARCODE}
                             />
                         }
                     />
 
-                    <Route
+                     <Route
                         path="barcode/:barcodeId"
                         element={
                             <Authorization
                                 children={<ViewBarcodeWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_LIST
-                                }
+                                permission={UserModuleNameTypes.NAV_BARCODE}
                             />
                         }
                     />
@@ -2706,7 +2891,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                    {/* All Websites -> Websites Tags */}
+                     {/* All Websites -> Websites Tags */}
                     <Route
                         path="website-tags"
                         element={
@@ -2762,6 +2947,15 @@ const PageRoutes = () => {
                             permission={
                                 UserModuleNameTypes.ACTION_DEALER_DEALER_SALE_ORDER_ADD
                             }
+                        />
+                    }
+                />
+                <Route
+                    path="/complain"
+                    element={
+                        <Authorization
+                            children={<ComplainListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_COMPLAINT}
                         />
                     }
                 />

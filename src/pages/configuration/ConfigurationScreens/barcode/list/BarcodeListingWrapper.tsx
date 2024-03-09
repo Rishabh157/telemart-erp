@@ -49,8 +49,8 @@ import ProductGroupListing from './components/BarcodeGroup/ProductGroupBarcodeLi
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { showAllowedTabs } from 'src/userAccess/getAuthorizedModules'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -74,9 +74,7 @@ const BarcodeListingWrapper = () => {
         barcodeState
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { checkUserAccess } = useSelector(
-        (state: RootState) => state.userAccess
-    )
+
     // const navigate = useNavigate()
 
     const { data, isFetching, isLoading } = useGetBarcodeQuery({
@@ -206,27 +204,6 @@ const BarcodeListingWrapper = () => {
         BarcodeListResponseType[]
     >([])
 
-    // const [selectedCartonBoxBarcodes, setSelectedCartonBoxBarcodes] =
-    //     React.useState<barcodecardType[]>([])
-
-    // const onCartonBoxBarcodeSelect = (
-    //     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    //     barcode: barcodecardType,
-    //     isBarcodeSeleted: boolean
-    // ) => {
-    //     e.stopPropagation()
-    //     let newValue = []
-    //     if (isBarcodeSeleted) {
-    //         newValue = selectedCartonBoxBarcodes.filter(
-    //             (seleted: barcodecardType) => seleted._id !== barcode._id
-    //         )
-    //     } else {
-    //         newValue = [...selectedCartonBoxBarcodes, barcode]
-    //     }
-
-    //     setSelectedCartonBoxBarcodes(newValue)
-    // }
-
     const [selectedProductGroup, setSelectedProductGroup] = React.useState<
         ProductBarcodeGroupResponse[]
     >([])
@@ -274,28 +251,27 @@ const BarcodeListingWrapper = () => {
             index: 0,
             label: 'Product Barcode',
             icon: MdOutbond,
-            name: 'PRODUCT_BARCODE',
+            name: UserModuleNameTypes.ACTION_BARCODE_LIST_TAB,
         },
         {
             label: 'Reprint Barcode / Outerbox',
             icon: MdOutbond,
             index: 1,
-            name: 'REPRINT_BARCODE_OUTERBOX',
+            name: UserModuleNameTypes.ACTION_REPRINT_BARCODE_OUTERBOX_TAB,
         },
         {
             label: 'Barcode Group',
             icon: MdOutbond,
             index: 2,
-            name: 'BARCODE_GROUP',
+            name: UserModuleNameTypes.ACTION_BARCODE_GROUP_TAB,
         },
     ]
+    const allowedTabs = tabs
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
-    const allowedTabs = showAllowedTabs(
-        checkUserAccess,
-        UserModuleNameTypes.barcode,
-        tabs,
-        userData?.userRole || 'ADMIN'
-    )
     return (
         <>
             <div className="flex shadow rounded h-[45px] items-center gap-3 bg-white w-full overflow-auto px-3 ">
