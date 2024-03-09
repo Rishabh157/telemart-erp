@@ -6,7 +6,7 @@
 
 // |-- Internal Dependencies --|
 import { default as Hierarchy } from 'src/defaultData/Hierarchy.json'
-import { userDepartmentOptions } from '.'
+import { userDepartmentTypeOptions } from './constants/customeTypes'
 
 export enum GetHierarchByDeptProps {
     SALES_DEPARTMENT = 'SALES_DEPARTMENT',
@@ -113,10 +113,11 @@ export enum getRoleUser {
     SR_EXECUTIVE_ADMIN = 'SR_EXECUTIVE_ADMIN',
     EXECUTIVE_ADMIN = 'EXECUTIVE_ADMIN',
 }
+
 export const getDepartmentLabel = (departmentName: string) => {
     return (
-        userDepartmentOptions.find((f) => f.value === departmentName)?.label ||
-        ''
+        userDepartmentTypeOptions()?.find((f) => f.value === departmentName)
+            ?.label || ''
     )
 }
 
@@ -134,7 +135,8 @@ export const getHierarchyByDept = ({
 }) => {
     const defaultComponent = {
         [GetHierarchByDeptProps.SALES_DEPARTMENT]: Hierarchy.salesDepartment,
-        [GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT]: Hierarchy.customerCareDepartment,
+        [GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT]:
+            Hierarchy.customerCareDepartment,
         [GetHierarchByDeptProps.HR_DEPARTMENT]: Hierarchy.hrDepartment,
         [GetHierarchByDeptProps.DISTRIBUTION_DEPARTMENT]:
             Hierarchy.distributionDepartment,

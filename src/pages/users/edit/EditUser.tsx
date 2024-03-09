@@ -159,6 +159,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
         {
             companyId: userData?.companyId as string,
             callCenterId: values?.callCenterId as any,
+            departmentId: values?.userDepartment as any,
         },
         {
             skip: !values?.callCenterId,
@@ -340,6 +341,14 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 label="senior"
                             />
                             <ATMSwitchButton
+                                hidden={
+                                    !(
+                                        values.userDepartment ===
+                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
+                                        values.userDepartment ===
+                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+                                    )
+                                }
                                 label="Agent"
                                 name="isAgent"
                                 value={values.isAgent}

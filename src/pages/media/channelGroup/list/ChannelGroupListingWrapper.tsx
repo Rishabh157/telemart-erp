@@ -141,17 +141,13 @@ const ChannelGroupListingWrapper = () => {
         })
     }
     return (
-        <>
-            <>
-                <div className="h-full">
-                    <ChannelGroupListing
-                        columns={columns}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                </div>
-            </>
-        </>
+        <div className="h-full">
+            <ChannelGroupListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </div>
     )
 }
 

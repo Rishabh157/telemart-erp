@@ -190,17 +190,13 @@ const ChannelManagementListingWrapper = () => {
         })
     }
     return (
-        <>
-            <>
-                <div className="h-full">
-                    <ChannelManagementListing
-                        columns={columns}
-                        rows={items}
-                        setShowDropdown={setShowDropdown}
-                    />
-                </div>
-            </>
-        </>
+        <div className="h-full">
+            <ChannelManagementListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </div>
     )
 }
 

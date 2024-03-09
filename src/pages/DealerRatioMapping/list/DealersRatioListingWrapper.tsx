@@ -1,5 +1,5 @@
 /// ==============================================
-// Filename:InquiryListingWrapper.tsx
+// Filename:DealersRatioListingWrapper.tsx
 // Type: List Component
 // Last Updated: JUNE 10, 2023
 // Project: TELIMART - Front End

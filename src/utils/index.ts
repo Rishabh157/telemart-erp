@@ -54,29 +54,6 @@ export const deleteKeyFromArrayObjects = (
     return array
 }
 
-export const userDepartmentOptions = [
-    { label: 'Sales Department', value: 'SALES_DEPARTMENT' },
-    { label: 'HR Department', value: 'HR_DEPARTMENT' },
-    { label: 'Distribution Department', value: 'DISTRIBUTION_DEPARTMENT' },
-    { label: 'Finance Department', value: 'FINANCE_DEPARTMENT' },
-    { label: 'Media Department', value: 'MEDIA_DEPARTMENT' },
-    {
-        label: 'Media Production Department',
-        value: 'MEDIA_PRODUCTION_DEPARTMENT',
-    },
-    { label: 'IT Department', value: 'IT_DEPARTMENT' },
-    { label: 'Development Department', value: 'DEVELOPMENT_DEPARTMENT' },
-    { label: 'Web Department', value: 'WEB_DEPARTMENT' },
-    { label: 'Operation Department', value: 'OPERATION_DEPARTMENT' },
-    { label: 'Quality Department', value: 'QUALITY_DEPARTMENT' },
-    { label: 'Logistic Department', value: 'LOGISTIC_DEPARTMENT' },
-    {
-        label: 'Mapping And MIS Department',
-        value: 'MAPPING_AND_MIS_DEPARTMENT',
-    },
-    { label: 'Admin Department', value: 'ADMIN_DEPARTMENT' },
-]
-
 export const authMiddleware = (store: any) => (next: any) => (action: any) => {
     const result = next(action)
     const token = localStorage.getItem('authToken')

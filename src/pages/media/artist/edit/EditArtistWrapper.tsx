@@ -88,25 +88,21 @@ const EditArtistWrapper = (props: Props) => {
         dispatch(setSelectedArtist(data?.data))
     }, [dispatch, data, isLoading, isFetching])
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <>
-                            <EditArtist
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        </>
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditArtist
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 
