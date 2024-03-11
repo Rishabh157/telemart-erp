@@ -21,7 +21,7 @@ import {
     useAddDealerSchemeMutation,
     useGetAllDealerSchemeByDealerIdQuery,
 } from 'src/services/DealerSchemeService'
-import { useGetAllPincodeByDealerQuery } from 'src/services/DealerPincodeService'
+import { useGetAllPincodeDealerQuery } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
 import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
 
@@ -73,8 +73,8 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         data: pinCodeList,
         isLoading: pinCodeIsLoading,
         isFetching: pinCodeIsFetching,
-    } = useGetAllPincodeByDealerQuery({
-        companyId: companyId,
+    } = useGetAllPincodeDealerQuery({
+        tehsilid: '',
         dealerId: dealerId,
     })
 

@@ -7,31 +7,29 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { array, number, object, string } from 'yup'
 import { useNavigate, useParams } from 'react-router-dom'
+import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddDealerPincode from './AddDealerPincode'
 import { useAddDealerPincodeMutation } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
+import AddDealerPincode from './AddDealerPincode'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
 import { useGetAllDistrictQuery } from 'src/services/DistricService'
-import { useSelector } from 'react-redux'
 
 // |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
-    companyId: string
     dealerId: string
     pincodeDetail: {
         district: string
+        tehsilId : string
         pincode: string[]
         estTime: number | 0
     }[]
@@ -41,8 +39,6 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const companyId: any = userData?.companyId
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [allDistricts, setAllDistricts] = useState([])
     const [addDealerPincode] = useAddDealerPincodeMutation()
@@ -67,11 +63,11 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     })
 
     const initialValues: FormInitialValues = {
-        companyId: companyId,
         dealerId: dealerId,
         pincodeDetail: [
             {
                 district: '',
+                tehsilId : '',
                 pincode: [],
                 estTime: 0,
             },
@@ -102,7 +98,6 @@ const DealerPinCodeTabWrapper = (props: Props) => {
             addDealerPincode({
                 dealerId: values.dealerId || '',
                 pincodeDetail: newPincodeDetail,
-                companyId: values.companyId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

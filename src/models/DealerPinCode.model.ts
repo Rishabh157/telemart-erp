@@ -26,7 +26,6 @@ export type pincodeDetail = {
 export type DealersPincodeAdd = {
     dealerId: string
     pincodeDetail: pincodeDetail[]
-    companyId: string
 }
 
 export type UpdateDealersPincode = {
@@ -38,6 +37,6 @@ export type UpdateDealersPincode = {
     id: string
 }
 export type GetDealerPincode = {
-    companyId: string
+    tehsilid: string
     dealerId: string
 }
