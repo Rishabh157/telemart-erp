@@ -97,6 +97,16 @@ const UsersListingWrapper = () => {
             ),
         },
         {
+            field: 'firstName',
+            headerName: 'Name',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'capitalize',
+            name: UserModuleNameTypes.USER_LIST_NAME,
+            renderCell: (row: UsersListResponse) => (
+                <span> {row.firstName?.concat(' ', row?.lastName)}</span>
+            ),
+        },
+        {
             field: 'email',
             headerName: 'Email',
             flex: 'flex-[1.5_1.5_0%]',

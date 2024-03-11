@@ -26,7 +26,6 @@ const CustomerComplainHeader = ({
             handleSubmit()
         }
     }
-    console.log('values', values)
 
     return (
         <div className="py-1">

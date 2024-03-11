@@ -55,11 +55,6 @@ const formFields: {
                 placeholder: 'Phone',
             },
             {
-                name: 'registrationAddress.address',
-                label: 'Address',
-                placeholder: 'Address',
-            },
-            {
                 name: 'registrationAddress.countryId',
                 label: 'Country',
                 placeholder: 'Country',
@@ -79,6 +74,12 @@ const formFields: {
                 placeholder: 'District',
                 type: 'select',
                 optionAccessKey: 'districtOptions',
+            },
+            {
+                name: 'registrationAddress.address',
+                label: 'Address',
+                type: 'textarea',
+                placeholder: 'Address',
             },
             {
                 name: 'registrationAddress.pincodeId',
@@ -109,11 +110,6 @@ const formFields: {
                 placeholder: 'Phone',
             },
             {
-                name: 'billingAddress.address',
-                label: 'Address',
-                placeholder: 'Address',
-            },
-            {
                 name: 'billingAddress.countryId',
                 label: 'Country',
                 placeholder: 'Country',
@@ -133,6 +129,12 @@ const formFields: {
                 placeholder: 'District',
                 type: 'select',
                 optionAccessKey: 'billingDistrictOptions',
+            },
+            {
+                name: 'billingAddress.address',
+                label: 'Address',
+                type: 'textarea',
+                placeholder: 'Address',
             },
             {
                 name: 'billingAddress.pincodeId',
