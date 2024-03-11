@@ -133,6 +133,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
         {
             companyId: userData?.companyId as string,
             callCenterId: values?.callCenterId as any,
+            departmentId: values?.userDepartment as any,
         },
         {
             skip: !values?.callCenterId,

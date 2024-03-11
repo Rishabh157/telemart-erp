@@ -148,11 +148,13 @@ export const userApi = apiSlice.injectEndpoints({
             query: ({
                 companyId,
                 callCenterId,
+                departmentId
             }: {
                 companyId: string
                 callCenterId: string
+                departmentId: string
             }) => ({
-                url: `/user/get-floor-managers/company/${companyId}/call-center/${callCenterId}`,
+                url: `/user/get-floor-managers/company/${companyId}/call-center/${callCenterId}/department/${departmentId}`,
                 method: 'GET',
             }),
         }),
