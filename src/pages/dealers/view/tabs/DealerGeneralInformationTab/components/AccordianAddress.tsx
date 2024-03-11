@@ -7,6 +7,7 @@
 
 // |-- Built-in Dependencies --|
 import React from 'react'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -28,16 +29,6 @@ const AccordianAddress = (data: any) => {
                         onChange={(e) => {}}
                         label={'Phone'}
                         placeholder={'Phone'}
-                        className="shadow bg-white rounded"
-                        disabled={true}
-                    />
-
-                    <ATMTextField
-                        name=""
-                        value={data?.data?.registrationAddress?.address}
-                        onChange={(e) => {}}
-                        label={'Address'}
-                        placeholder={'Address'}
                         className="shadow bg-white rounded"
                         disabled={true}
                     />
@@ -80,6 +71,19 @@ const AccordianAddress = (data: any) => {
                         className="shadow bg-white rounded"
                         disabled={true}
                     />
+
+                    <div className="-mt-3">
+                        <ATMTextArea
+                            readOnly
+                            name=""
+                            minRows={5}
+                            value={data?.data?.registrationAddress?.address}
+                            onChange={(e) => {}}
+                            label={'Address'}
+                            placeholder={'Address'}
+                            className="shadow bg-white rounded"
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -95,16 +99,6 @@ const AccordianAddress = (data: any) => {
                         onChange={(e) => {}}
                         label={'Phone'}
                         placeholder={'Phone'}
-                        className="shadow bg-white rounded"
-                        disabled={true}
-                    />
-
-                    <ATMTextField
-                        name=""
-                        value={data?.data?.billingAddress?.address}
-                        onChange={(e) => {}}
-                        label={'Address'}
-                        placeholder={'Address'}
                         className="shadow bg-white rounded"
                         disabled={true}
                     />
@@ -147,6 +141,18 @@ const AccordianAddress = (data: any) => {
                         className="shadow bg-white rounded"
                         disabled={true}
                     />
+                    <div className="-mt-3">
+                        <ATMTextArea
+                            readOnly
+                            name=""
+                            value={data?.data?.billingAddress?.address}
+                            onChange={(e) => {}}
+                            minRows={5}
+                            label={'Address'}
+                            placeholder={'Address'}
+                            className="shadow bg-white rounded"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

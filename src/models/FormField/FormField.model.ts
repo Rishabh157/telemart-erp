@@ -70,6 +70,17 @@ export type Checkbox = {
     offset?: number
 }
 
+export type TextArea = {
+    name: string
+    label: string
+    // checked?: boolean
+    type?: 'textarea'
+    value?: string
+    placeholder?: string
+    optionAccessKey?: never
+    offset?: number
+}
+
 export type Field<OptionAccessKey> =
     | TextFieldType
     | PasswordFieldType
@@ -78,6 +89,7 @@ export type Field<OptionAccessKey> =
     | NumberFieldType
     | SwitchButton
     | Checkbox
+    | TextArea
 
 export type SelectOption = {
     label: string

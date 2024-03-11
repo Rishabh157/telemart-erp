@@ -25,6 +25,7 @@ import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -254,6 +255,40 @@ const StepEditAddress = ({
                                                     }
                                                 }}
                                             />
+                                        )
+                                    case 'textarea':
+                                        return (
+                                            <div className="-mt-4">
+                                                <ATMTextArea
+                                                    key={name}
+                                                    name={name}
+                                                    minRows={5}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
+                                                    onChange={(e) => {
+                                                        console.log('e: ', e)
+                                                        handleSetFieldValue(
+                                                            name,
+                                                            e
+                                                        )
+                                                    }}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    className="shadow bg-white rounded"
+                                                    isSubmitting={isSubmitting}
+                                                />
+                                            </div>
                                         )
                                     default:
                                         return null

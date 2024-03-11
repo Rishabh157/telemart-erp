@@ -99,6 +99,12 @@ export const navigation: NavItemType[] = [
         path: '/inventory-flow',
         name: UserModuleNameTypes.NAV_INVENTORY_FLOW,
     },
+    // {
+    //     label: 'Mapping',
+    //     icon: TiFlowSwitch,
+    //     path: '/inventory-flow',
+    //     name: UserModuleNameTypes.NAV_INVENTORY_FLOW,
+    // },
     {
         label: 'Sale Order',
         icon: CgNotes,

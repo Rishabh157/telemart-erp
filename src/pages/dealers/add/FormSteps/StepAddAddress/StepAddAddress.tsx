@@ -24,6 +24,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { RootState } from 'src/redux/store'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -347,6 +348,40 @@ const StepAddAddress = ({
                                                     checked={Boolean(
                                                         values[name]
                                                     )}
+                                                />
+                                            </div>
+                                        )
+                                    case 'textarea':
+                                        return (
+                                            <div className="-mt-4">
+                                                <ATMTextArea
+                                                    key={name}
+                                                    name={name}
+                                                    minRows={5}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
+                                                    onChange={(e) => {
+                                                        console.log('e: ', e)
+                                                        setFieldValue(
+                                                            name,
+                                                            e
+                                                        )
+                                                    }}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    className="shadow bg-white rounded"
+                                                    isSubmitting={isSubmitting}
                                                 />
                                             </div>
                                         )

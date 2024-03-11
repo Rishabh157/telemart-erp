@@ -15,6 +15,11 @@
                     "fieldValue": "userName"
                 },
                 {
+                    "fieldId": "USER_LIST_NAME",
+                    "fieldName": "Name",
+                    "fieldValue": "firstName"
+                },
+                {
                     "fieldId": "USER_LIST_EMAIL",
                     "fieldName": "Email",
                     "fieldValue": "email"
