@@ -44,6 +44,7 @@ const ChangePasswordDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                         <div className="">
                             <ATMInputAdormant
                                 name="newPassword"
+                                required
                                 type={isShowPassword ? 'text' : 'password'}
                                 value={values?.newPassword}
                                 onChange={(e) => {
