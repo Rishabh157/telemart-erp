@@ -372,7 +372,6 @@ const StepAddAddress = ({
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
-                                                        console.log('e: ', e)
                                                         setFieldValue(
                                                             name,
                                                             e

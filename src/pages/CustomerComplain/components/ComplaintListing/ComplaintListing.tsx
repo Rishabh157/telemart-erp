@@ -16,7 +16,6 @@ const ComplaintListing = ({ rows }: Props) => {
         setIsOpenCustomerComplaitDetailModel,
     ] = React.useState<boolean>(false)
 
-    console.log('rows', rows)
 
     return (
         <div className="mt-1 w-full">

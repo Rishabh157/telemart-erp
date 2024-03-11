@@ -277,7 +277,6 @@ const StepEditAddress = ({
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
-                                                        console.log('e: ', e)
                                                         handleSetFieldValue(
                                                             name,
                                                             e
