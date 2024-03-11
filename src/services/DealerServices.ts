@@ -94,6 +94,16 @@ export const dealerApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
+        //***** CHANGES PASSWORD *****/
+        changePasswordDealer: builder.mutation({
+            invalidatesTags: ['dealer'],
+            query: (body: any) => ({
+                url: '/dealer/change-dealer-password',
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 
@@ -106,4 +116,5 @@ export const {
     useDeleteDealerMutation,
     useChangeDealerStatusMutation,
     useApproveDealerStatusMutation,
+    useChangePasswordDealerMutation
 } = dealerApi

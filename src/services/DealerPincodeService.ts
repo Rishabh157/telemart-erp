@@ -62,11 +62,23 @@ export const dealerPincodeApi = apiSlice.injectEndpoints({
         // **** Get all pincode of a dealer ****/
         getAllPincodeByDealer: builder.query({
             providesTags: ['dealerPincode'],
-            query: ({ companyId, dealerId }: GetDealerPincode) => ({
-                url: `/dealer-pincode/dealer/${dealerId}/company/${companyId}`,
+            query: ({ tehsilid, dealerId }: GetDealerPincode) => ({
+                url: `/dealer-pincode/dealer/${dealerId}/tehsil/${tehsilid}`,
                 method: 'GET',
             }),
         }),
+        // **** Get all pincode of a dealer ****/
+
+        getAllPincodeDealer: builder.query({
+            providesTags: ['dealerPincode'],
+            query: ({ body, dealerId }: any) => ({
+                url: `/dealer-pincode/dealer/${dealerId}/get-scheme-pincode`,
+                method: 'POST',
+
+                body,
+            }),
+        }),
+
         //****Delete dealer pincode ****/
         deleteDealerPincode: builder.mutation({
             invalidatesTags: ['dealerPincode', 'dealerScheme'],
@@ -86,4 +98,5 @@ export const {
     useGetAllPincodeByDealerQuery,
     useDeleteDealerPincodeMutation,
     useGetPincodesByDistrictQuery,
+    useGetAllPincodeDealerQuery
 } = dealerPincodeApi
