@@ -22,7 +22,6 @@ import {
 } from 'src/services/DealerSchemeService'
 import { showToast } from 'src/utils'
 import EditDealerScheme from './EditDealerScheme'
-import { useGetAllPincodeByDealerQuery } from 'src/services/DealerPincodeService'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import {
     UpdateDealerSchemeInitialValues,
@@ -32,6 +31,7 @@ import {
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
+import { useGetAllPincodeDealerQuery } from 'src/services/DealerPincodeService'
 
 const EditDealerSchemeWrapper = () => {
     const params = useParams()
@@ -53,8 +53,8 @@ const EditDealerSchemeWrapper = () => {
         data: pinCodeList,
         isLoading: pinCodeIsLoading,
         isFetching: pinCodeIsFetching,
-    } = useGetAllPincodeByDealerQuery({
-        companyId: companyId || '',
+    } = useGetAllPincodeDealerQuery({
+        tehsilid:  '',
         dealerId: dealerId || '',
     })
     const {

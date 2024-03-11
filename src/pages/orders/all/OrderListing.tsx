@@ -357,6 +357,52 @@ const OrderListing = ({
     }
 
     const columns: columnTypes[] = [
+
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'mr-4',
+            renderCell: (row: OrderListResponse) => (
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        // setCurrentId(row?._id)
+                    }}
+                    isCustomBtn={
+                        row?.status === 'FRESH' && row?.approved === true
+                    }
+                    customBtnText="Order Assignee"
+                    handleCustomActionButton={() => {
+                        setIsOrderAssigneeFormOpen(true)
+                        setSelectedOrder(row)
+                    }}
+                    children={
+                        <>
+                            <button
+                                onClick={() => {
+                                    navigate(`/orders/view/${row?._id}`)
+                                }}
+                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setIsShow(true)
+                                    setBarcodeQuantity(row?.shcemeQuantity)
+                                    setSelectedItemsTobeDispatch(row)
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                Dispatch
+                            </button>
+                        </>
+                    }
+                />
+            ),
+            align: 'end',
+        },
         {
             field: 'orderNumber',
             headerName: 'Order No.',
@@ -753,50 +799,6 @@ const OrderListing = ({
                     '-'
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: OrderListResponse) => (
-                <ActionPopup
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        // setCurrentId(row?._id)
-                    }}
-                    isCustomBtn={
-                        row?.status === 'FRESH' && row?.approved === true
-                    }
-                    customBtnText="Order Assignee"
-                    handleCustomActionButton={() => {
-                        setIsOrderAssigneeFormOpen(true)
-                        setSelectedOrder(row)
-                    }}
-                    children={
-                        <>
-                            <button
-                                onClick={() => {
-                                    navigate(`/orders/view/${row?._id}`)
-                                }}
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                View
-                            </button>
-                            <button
-                                onClick={() => {
-                                    setIsShow(true)
-                                    setBarcodeQuantity(row?.shcemeQuantity)
-                                    setSelectedItemsTobeDispatch(row)
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Dispatch
-                            </button>
-                        </>
-                    }
-                />
-            ),
-            align: 'end',
         },
     ]
 
