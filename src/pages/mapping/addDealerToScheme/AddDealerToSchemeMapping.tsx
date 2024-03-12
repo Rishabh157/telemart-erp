@@ -107,7 +107,7 @@ const AddDealerToSchemeMapping = ({
                         </div>
 
                         <div className="h-[500px] mt-8">
-                            {allOptions?.length  ? (
+                            {allOptions ? (
                                 <ATMTransferList {...transferListProps} />
                             ) : null}
                         </div>
