@@ -104,6 +104,35 @@ export const dealerApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** Get Dealer By Scheme Id *****/
+        getAllDealerBySchemeId: builder.query({
+            providesTags: ['dealer'],
+            query: (schemeId: string) => ({
+                url: `dealer/scheme-wise-dealer/${schemeId}`,
+                method: 'GET',
+            }),
+        }),
+
+        //***** Submit the multiple Dealer to scheme *****/
+        saveMultipleDealerToSingleScheme: builder.mutation({
+            invalidatesTags: ['dealer'],
+            query: (body) => ({
+                url: 'dealer-scheme/scheme-to-dealer-mapping',
+                method: 'POST',
+                body,
+            }),
+        }),
+
+        //***** Submit the multiple Dealer to scheme *****/
+        saveMultipleSchemeToSingleDealer: builder.mutation({
+            invalidatesTags: ['dealer'],
+            query: (body) => ({
+                url: 'dealer-scheme/dealer-to-scheme-mapping',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
@@ -116,5 +145,8 @@ export const {
     useDeleteDealerMutation,
     useChangeDealerStatusMutation,
     useApproveDealerStatusMutation,
-    useChangePasswordDealerMutation
+    useChangePasswordDealerMutation,
+    useGetAllDealerBySchemeIdQuery,
+    useSaveMultipleDealerToSingleSchemeMutation,
+    useSaveMultipleSchemeToSingleDealerMutation,
 } = dealerApi

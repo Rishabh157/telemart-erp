@@ -39,6 +39,7 @@ import { Chip } from '@mui/material'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import ChangePasswordWrapper from '../ChangePassword/ChangePasswordWrapper'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 const DealersListingWrapper = () => {
     const dealerState: any = useSelector((state: RootState) => state.dealer)
@@ -47,7 +48,8 @@ const DealersListingWrapper = () => {
     const [dealerCode, setDealerCode] = useState('')
 
     const [showDropdown, setShowDropdown] = useState(false)
-    const [changePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false)
+    const [changePasswordDialogOpen, setChangePasswordDialogOpen] =
+        useState(false)
     const navigate = useNavigate()
     const [deletedealer] = useDeleteDealerMutation()
     const [approveDealer] = useApproveDealerStatusMutation()
@@ -201,10 +203,11 @@ const DealersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${row.isApproved
-                                            ? 'Disapprove this dealer'
-                                            : 'Approval this dealer'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isApproved
+                                                ? 'Disapprove this dealer'
+                                                : 'Approval this dealer'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -238,8 +241,9 @@ const DealersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive User',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -259,8 +263,9 @@ const DealersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive Scheme',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -302,8 +307,7 @@ const DealersListingWrapper = () => {
                         UserModuleNameTypes.ACTION_DEALER_DELETE
                     )}
                     isCustomBtn
-                    customBtnText='Change Password'
-
+                    customBtnText="Change Password"
                     handleCustomActionButton={() => {
                         setChangePasswordDialogOpen(true)
                     }}
@@ -379,17 +383,27 @@ const DealersListingWrapper = () => {
     }
 
     return (
-        <>
-            <SideNavLayout>
-                <DealersListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-                {changePasswordDialogOpen && <ChangePasswordWrapper dealerId={dealerCode} onClose={() => setChangePasswordDialogOpen(false)} 
-                 />}
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <DealersListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+
+            <DialogLogBox
+                maxWidth="sm"
+                isOpen={changePasswordDialogOpen}
+                handleClose={() => {
+                    setChangePasswordDialogOpen(false)
+                }}
+                component={
+                    <ChangePasswordWrapper
+                        dealerId={dealerCode}
+                        onClose={() => setChangePasswordDialogOpen(false)}
+                    />
+                }
+            />
+        </SideNavLayout>
     )
 }
 

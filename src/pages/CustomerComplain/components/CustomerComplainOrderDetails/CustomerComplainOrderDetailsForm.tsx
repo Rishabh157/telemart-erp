@@ -261,7 +261,6 @@ const CustomerComplainOrderDetailsForm = ({
                             isValueWithLable
                             isDisabled={true}
                             onChange={(e) => {
-                                // console.log(e)
                                 // setFieldValue(e)
                             }}
                         />

@@ -10,15 +10,10 @@ import { RxDashboard } from 'react-icons/rx'
 import { FiUsers } from 'react-icons/fi'
 import { TbBuildingWarehouse } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
-import { FaRegHandshake } from 'react-icons/fa'
+import { FaRegHandshake, FaSitemap } from 'react-icons/fa'
 import { CiMemoPad, CiStickyNote } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
-import {
-    // MdCallReceived,
-    MdOutlineBorderColor,
-    MdPermMedia,
-    MdWeb,
-} from 'react-icons/md'
+import { MdOutlineBorderColor, MdPermMedia, MdWeb } from 'react-icons/md'
 import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt, BiTestTube } from 'react-icons/bi'
@@ -27,8 +22,6 @@ import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 import { TiFlowSwitch } from 'react-icons/ti'
 import { RiCustomerServiceLine } from 'react-icons/ri'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
-//import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
-//import { BsFillCalendarCheckFill } from 'react-icons/bs'
 
 // |-- Types --|
 export type NavItemType = {
@@ -99,12 +92,12 @@ export const navigation: NavItemType[] = [
         path: '/inventory-flow',
         name: UserModuleNameTypes.NAV_INVENTORY_FLOW,
     },
-    // {
-    //     label: 'Mapping',
-    //     icon: TiFlowSwitch,
-    //     path: '/inventory-flow',
-    //     name: UserModuleNameTypes.NAV_INVENTORY_FLOW,
-    // },
+    {
+        label: 'Mapping',
+        icon: FaSitemap,
+        path: '/mapping/scheme-to-dealer',
+        name: UserModuleNameTypes.NAV_MULTI_MAPPING,
+    },
     {
         label: 'Sale Order',
         icon: CgNotes,
@@ -117,12 +110,6 @@ export const navigation: NavItemType[] = [
         path: '/return-to-vendor',
         name: UserModuleNameTypes.NAV_RETURN_TO_VENDOR, // check
     },
-    // {
-    //     label: 'Inventory Management',
-    //     icon: TfiLayoutMediaOverlayAlt2,
-    //     path: '/inventory-management',
-    //     name: 'InventoryManagement',
-    // },
     {
         label: 'Warehouse Transfer',
         icon: TbBuildingWarehouse,
@@ -141,12 +128,6 @@ export const navigation: NavItemType[] = [
         path: '/warehouse-to-company',
         name: UserModuleNameTypes.NAV_WAREHOUSE_TO_COMPANY_TRANSFER,
     },
-    // {
-    //     label: 'Inquiry',
-    //     icon: MdCallReceived,
-    //     path: '/inquiry',
-    //     name: UserModuleNameTypes.NAV_INQUIRY,
-    // },
     {
         label: 'Orders',
         icon: MdOutlineBorderColor,

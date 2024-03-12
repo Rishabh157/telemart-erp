@@ -1,0 +1,22 @@
+{
+    "moduleId": "NAV_MULTI_MAPPING",
+    "moduleName": "NAV_MULTI_MAPPING",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_SCHEME_TO_DEALER_MAPPING_TAB",
+            "actionUrl": "",
+            "actionName": "SCHEME TO DEALER",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_TO_SCHEME_MAPPING_TAB",
+            "actionUrl": "",
+            "actionName": "DEALER TO SCHEME",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

@@ -1,16 +1,9 @@
-/// ==============================================
-// Filename:AddAreaWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { object, string, ref } from 'yup'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
@@ -21,12 +14,13 @@ import ChangePasswordDialog from './ChangePasswordDialog'
 
 // |-- Types --|
 type Props = {
-    onClose: () => void,
+    onClose: () => void
     dealerId: string
 }
 
 export type FormInitialValues = {
     newPassword: string
+    confirmPassword: string
 }
 
 const ChangePasswordWrapper = ({ onClose, dealerId }: Props) => {
@@ -35,10 +29,21 @@ const ChangePasswordWrapper = ({ onClose, dealerId }: Props) => {
 
     const initialValues: FormInitialValues = {
         newPassword: '',
+        confirmPassword: '',
     }
+
     const validationSchema = object({
-        newPassword: string().required('Required'),
+        newPassword: string()
+            .required('New Password is required')
+            .min(4, 'New Password must be at least 4 characters long'),
+        confirmPassword: string()
+            .required('Confirm Password is required')
+            .oneOf(
+                [ref('newPassword'), null as any],
+                'Confirm Passwords must match to the New Password'
+            ),
     })
+
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
@@ -62,23 +67,21 @@ const ChangePasswordWrapper = ({ onClose, dealerId }: Props) => {
     }
 
     return (
-        <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <ChangePasswordDialog
-                            onClose={onClose}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <ChangePasswordDialog
+                        onClose={onClose}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

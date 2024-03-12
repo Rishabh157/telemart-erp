@@ -106,17 +106,17 @@ const ATMTransferList = ({
                 <div className="flex flex-col ">
                     <div className="text-lg font-medium">{title}</div>
                     <div>{`${numberOfChecked(items)}/${
-                        items.length
+                        items?.length
                     } selected`}</div>
                 </div>
-                {items.length ? (
+                {items?.length ? (
                     <button
                         onClick={() => {
                             if (listType === 'left') {
-                                setRight(right.concat(left))
+                                setRight(right?.concat(left))
                                 setLeft([])
                             } else {
-                                setLeft(left.concat(right))
+                                setLeft(left?.concat(right))
                                 setRight([])
                             }
                             setChecked([])
@@ -139,21 +139,21 @@ const ATMTransferList = ({
                 component="div"
                 role="list"
             >
-                {items.map((item: { label: string; value: string }) => {
-                    const labelId = `transfer-list-all-item-${item.value}-label`
-
+                {items?.map((item: { label: string; value: string , flag?: boolean }) => {
+                    const labelId = `transfer-list-all-item-${item?.value}-label`
                     return (
                         <ListItem
-                            key={item.value}
+                            key={item?.value}
                             role="listitem"
                             onClick={handleToggle(item)}
+                            disabled={item?.flag}
                             button
                         >
                             <ListItemIcon>
                                 <Checkbox
                                     checked={
                                         checked.findIndex(
-                                            (ele) => ele.value === item.value
+                                            (ele) => ele?.value === item?.value
                                         ) !== -1
                                     }
                                     tabIndex={-1}
@@ -163,7 +163,7 @@ const ATMTransferList = ({
                                     }}
                                 />
                             </ListItemIcon>
-                            <ListItemText id={labelId} primary={item.label} />
+                            <ListItemText id={labelId} primary={item?.label} />
                         </ListItem>
                     )
                 })}
