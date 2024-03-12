@@ -64,7 +64,7 @@ const AddDealerToSchemeMapping = ({
 
     return (
         <div className="h-[calc(100%-55px)]">
-            <div className="p-4 h-[calc(100%-55px)] flex flex-col gap-2">
+            <div className="py-0.5 h-[calc(100%-55px)] flex flex-col gap-2">
                 {/* <div className="pt-1">
                     <ATMPageHeading> Attributes Group </ATMPageHeading>
                 </div> */}
@@ -107,7 +107,7 @@ const AddDealerToSchemeMapping = ({
                         </div>
 
                         <div className="h-[500px] mt-8">
-                            {allOptions ? (
+                            {allOptions?.length  ? (
                                 <ATMTransferList {...transferListProps} />
                             ) : null}
                         </div>
