@@ -97,6 +97,15 @@ export const schemeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** Get Schemes By Dealer Id *****/
+        getAllSchemeByDealerId: builder.query({
+            providesTags: ['dealer'],
+            query: (dealerId: string) => ({
+                url: `scheme/dealer-wise-scheme/${dealerId}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -109,4 +118,5 @@ export const {
     useGetAllSchemeQuery,
     useDeleteSchemeMutation,
     useInboundSchemeQuery,
+    useGetAllSchemeByDealerIdQuery,
 } = schemeApi

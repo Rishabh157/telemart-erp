@@ -258,6 +258,9 @@ import Successfully from './pages/welcome/Successfully'
 import CallerPageWrapper from './pages/callerpage/salesInbound/SalesPageWrapper'
 import CustomerCarePageWrapper from './pages/callerpage/customerInbound/CustomerCarePageWrapper'
 import ComplainListingWrapper from './pages/Complain/List/ComplainListingWrapper'
+import MappingTabsLayout from './pages/mapping/MappingTabsLayout'
+import AddSchemeToDealerMappingWrapper from './pages/mapping/addSchemeToDealer/AddSchemeToDealerMappingWrapper'
+import AddDealerToSchemeMappingWrapper from './pages/mapping/addDealerToScheme/AddDealerToSchemeMappingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -770,7 +773,7 @@ const PageRoutes = () => {
                             }
                         ></Route>
 
-                         <Route
+                        <Route
                             path="warehoue"
                             element={
                                 <Authorization
@@ -1129,6 +1132,47 @@ const PageRoutes = () => {
                         />
                     }
                 />
+
+                {/* Mapping Module */}
+                <Route
+                    path="/mapping"
+                    element={
+                        <MappingTabsLayout />
+                        // <Authorization
+                        //     children={<AddAttributeGroupWrapper />}
+                        //     permission={
+                        //         UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
+                        //     }
+                        // />
+                    }
+                >
+                    <Route
+                        index
+                        path="scheme-to-dealer"
+                        element={
+                            <AddSchemeToDealerMappingWrapper />
+                            // <Authorization
+                            //     children={<AddAttributeGroupWrapper />}
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
+                            //     }
+                            // />
+                        }
+                    />
+                    <Route
+                        index
+                        path="dealer-to-scheme"
+                        element={
+                            <AddDealerToSchemeMappingWrapper />
+                            // <Authorization
+                            //     children={<AddAttributeGroupWrapper />}
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
+                            //     }
+                            // />
+                        }
+                    />
+                </Route>
 
                 {/* Sale Order */}
                 <Route
@@ -1810,7 +1854,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                     {/* Configurations -> Barcode */}
+                    {/* Configurations -> Barcode */}
                     <Route
                         path="barcode"
                         element={
@@ -1841,7 +1885,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                     <Route
+                    <Route
                         path="barcode/carton-box/add"
                         element={
                             <Authorization
@@ -1851,7 +1895,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                     <Route
+                    <Route
                         path="barcode/:barcodeId"
                         element={
                             <Authorization
@@ -2891,7 +2935,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                     {/* All Websites -> Websites Tags */}
+                    {/* All Websites -> Websites Tags */}
                     <Route
                         path="website-tags"
                         element={

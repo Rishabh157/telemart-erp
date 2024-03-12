@@ -53,7 +53,14 @@ const VendorsListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.VENDOR_LIST_VENDOR_CODE,
             renderCell: (row: VendorsListResponse) => (
-                <span> {row.vendorCode} </span>
+                <span
+                    className="text-primary-main cursor-pointer"
+                    onClick={() => {
+                        navigate(`${row?._id}/general-information`)
+                    }}
+                >
+                    <span> {row.vendorCode} </span>
+                </span>
             ),
         },
         {
