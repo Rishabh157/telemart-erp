@@ -45,6 +45,8 @@ const CountryListing = ({ contries, items }: Props) => {
     )
 
     function handleCountryClick(newValue: any) {
+    console.log('newValue: ', newValue)
+
         if (selectedLocationCountries?.value === newValue.value) {
             dispatch(setSelectedLocationCountry(null))
             dispatch(setSelctedLocationState(null))

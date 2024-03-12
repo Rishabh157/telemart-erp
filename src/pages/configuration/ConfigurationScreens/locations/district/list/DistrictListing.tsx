@@ -44,10 +44,12 @@ const DistrictListing = ({ districts }: Props) => {
     )
     const { selectedLocationState }: any = useSelector(
         (state: RootState) => state.states
-    )
-    const { selectedLocationDistrict }: any = useSelector(
-        (state: RootState) => state.district
-    )
+        )
+        const { selectedLocationDistrict }: any = useSelector(
+            (state: RootState) => state.district
+            )
+            console.log('selectedLocationState: ', selectedLocationState)
+            console.log('selectedLocationDistrict: ', selectedLocationDistrict)
 
     function handleCountryClick(newValue: any) {
         if (selectedLocationDistrict?.value === newValue.value) {
