@@ -46,7 +46,11 @@ const StateListingWrapper = () => {
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
-    })
+    },
+        {
+            skip: !filterValue || filterValue?.length === 0,
+        }
+    )
 
     useEffect(() => {
         dispatch(setItems(data?.data))

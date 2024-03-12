@@ -44,6 +44,9 @@ const PincodeListingWrapper = () => {
         dateFilter: {},
         orderBy: 'createdAt',
         orderByValue: -1,
+    },
+    {
+        skip: !filterValue || filterValue?.length === 0,
     })
 
     useEffect(() => {
