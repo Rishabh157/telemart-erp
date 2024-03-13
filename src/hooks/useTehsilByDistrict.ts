@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useGetAllTehsilByDistrictQuery } from 'src/services/TehsilService'
 
-const useStateDistrictWiseTehsil = (districtId?: string) => {
+const useTehsilByDistrict = (districtId?: string) => {
     const [tehsilBydistrict, setTehsilByDistrict] = useState<any[]>([])
 
     const { data, isLoading, isFetching } = useGetAllTehsilByDistrictQuery(
@@ -18,4 +18,4 @@ const useStateDistrictWiseTehsil = (districtId?: string) => {
     return { tehsilBydistrict, isDataLoading: isLoading }
 }
 
-export default useStateDistrictWiseTehsil
+export default useTehsilByDistrict
