@@ -25,24 +25,28 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import ComplainListing from './ComplainListing'
+// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 const ComplainListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const [, setShowDropdown] = useState(false)
-    const complainState: any = useSelector(
-        (state: RootState) => state.complain
-    )
+    const complainState: any = useSelector((state: RootState) => state.complain)
 
-    const { page, rowsPerPage, searchValue, items, dateFilter, orderNumberSearch, complaintNumberSearch } = complainState
-
+    const {
+        page,
+        rowsPerPage,
+        searchValue,
+        items,
+        dateFilter,
+        orderNumberSearch,
+        complaintNumberSearch,
+    } = complainState
 
     const { data, isFetching, isLoading } = useGetPaginationComplaintQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
-        params: [
-            "customerNumber",
-        ],
+        params: ['customerNumber'],
         page: page,
         filterBy: [
             {
@@ -78,9 +82,7 @@ const ComplainListingWrapper = () => {
             headerName: 'Order No',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] capitalize',
-            renderCell: (row: any) => (
-                <span> {row.orderNumber} </span>
-            ),
+            renderCell: (row: any) => <span> {row.orderNumber} </span>,
             name: UserModuleNameTypes.COMPLAIN_LIST_ORDER_NO,
         },
         {
@@ -89,9 +91,7 @@ const ComplainListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] capi',
             name: UserModuleNameTypes.COMPLAIN_LIST_COMPAINT,
-            renderCell: (row: any) => (
-                <span> {row?.complaintNumber} </span>
-            ),
+            renderCell: (row: any) => <span> {row?.complaintNumber} </span>,
         },
         {
             field: 'complaintbyLabel',
@@ -113,9 +113,7 @@ const ComplainListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] capitalize',
             name: UserModuleNameTypes.COMPLAIN_LIST_SCHEME,
-            renderCell: (row: any) => (
-                <span> {row.schemeName} </span>
-            ),
+            renderCell: (row: any) => <span> {row.schemeName} </span>,
         },
         {
             field: 'initialCallOneLabel',
@@ -123,9 +121,7 @@ const ComplainListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px] capitalize',
             name: UserModuleNameTypes.COMPLAIN_LIST_INITIAL_CALL_ONE_LABEL,
-            renderCell: (row: any) => (
-                <span> {row.initialCallOneLabel} </span>
-            ),
+            renderCell: (row: any) => <span> {row.initialCallOneLabel} </span>,
         },
         {
             field: 'initialCallTwoLabel',
@@ -133,9 +129,7 @@ const ComplainListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px] capitalize',
             name: UserModuleNameTypes.COMPLAIN_LIST_INITIAL_CALL_TWO_LABEL,
-            renderCell: (row: any) => (
-                <span> {row.initialCallTwoLabel} </span>
-            ),
+            renderCell: (row: any) => <span> {row.initialCallTwoLabel} </span>,
         },
         {
             field: 'initialCallThreeLabel',
@@ -147,21 +141,47 @@ const ComplainListingWrapper = () => {
                 <span> {row.initialCallThreeLabel} </span>
             ),
         },
-
+        // {
+        //     field: 'actions',
+        //     headerName: 'Actions',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: any) =>
+        //         row?.firstApproved === null &&
+        //         row?.secondApproved === null && (
+        //             <ActionPopup
+        //                 handleEditActionButton={() => {
+        //                     navigate(`/warehouse-transfer/edit/${row?._id}`)
+        //                 }}
+        //                 handleDeleteActionButton={() => {
+        //                     showConfirmationDialog({
+        //                         title: 'Delete WarehouseTransfer',
+        //                         text: 'Do you want to delete WarehouseTransfer?',
+        //                         showCancelButton: true,
+        //                         next: (res: any) => {
+        //                             return res.isConfirmed
+        //                                 ? handleDelete()
+        //                                 : setShowDropdown(false)
+        //                         },
+        //                     })
+        //                 }}
+        //                 handleOnAction={() => {
+        //                     setShowDropdown(!showDropdown)
+        //                     setCurrentId(row?._id)
+        //                 }}
+        //             />
+        //         ),
+        //     align: 'end',
+        // },
     ]
 
     return (
-        <>
-            <SideNavLayout>
-                <ComplainListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-
-            </SideNavLayout>
-
-        </>
+        <SideNavLayout>
+            <ComplainListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </SideNavLayout>
     )
 }
 

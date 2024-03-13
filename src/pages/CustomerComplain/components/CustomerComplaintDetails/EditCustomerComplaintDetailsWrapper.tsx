@@ -8,6 +8,7 @@ import { CircularProgress } from '@mui/material'
 import {
     useGetComplaintByIdQuery,
     useUpdateCustomerComplainMutation,
+    useGetComplaintLogsByIdQuery,
 } from 'src/services/CustomerComplainServices'
 import { showToast } from 'src/utils'
 
@@ -17,6 +18,7 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    complaintNumber: number
     orderNo: number
     schemeName: string
     schemeCode: string
@@ -36,16 +38,37 @@ const EditCustomerComplaintDetailsWrapper = ({
 }: Props) => {
     const [complaintOrderDetails, setComplaintOrderDetails] =
         React.useState<any>()
+    const [complaintLogs, setComplaintLogs] = React.useState<any[]>([])
+
+    // get single complaint details
     const { isLoading, isFetching, data } = useGetComplaintByIdQuery<any>(
         complaintId,
         {
             skip: !complaintId,
         }
     )
+
+    // update the selected complaint
     const [updateComplaint, updateComplaintInfo] =
         useUpdateCustomerComplainMutation()
 
+    // get complaint logs by id
+    const {
+        isLoading: isComplaintLogsLoading,
+        isFetching: isComplaintLogsFetching,
+        data: complaintLogsData,
+    } = useGetComplaintLogsByIdQuery<any>(complaintId, {
+        skip: !complaintId,
+    })
+
+    React.useEffect(() => {
+        if (!isComplaintLogsLoading && !isComplaintLogsFetching) {
+            setComplaintLogs(complaintLogsData?.data)
+        }
+    }, [complaintLogsData, isComplaintLogsLoading, isComplaintLogsFetching])
+
     const initialValues: FormInitialValues = {
+        complaintNumber: complaintOrderDetails?.complaintNumber,
         orderNo: complaintOrderDetails?.orderNumber || 0,
         schemeName: complaintOrderDetails?.schemeName || '',
         schemeCode: complaintOrderDetails?.schemeName || '',
@@ -69,10 +92,6 @@ const EditCustomerComplaintDetailsWrapper = ({
         status: string().required('status is required'),
         remark: string().required('remark is required'),
     })
-
-    // const { data, isLoading, isFetching } = useGetOrderByIdQuery(orderId, {
-    //     skip: !orderId,
-    // })
 
     React.useEffect(() => {
         if (!isLoading && !isFetching) {
@@ -132,6 +151,7 @@ const EditCustomerComplaintDetailsWrapper = ({
                         formType="EDIT"
                         formikProps={formikProps}
                         apiStatus={updateComplaintInfo?.isLoading}
+                        complaintLogs={complaintLogs || []}
                     />
                 </Form>
             )}

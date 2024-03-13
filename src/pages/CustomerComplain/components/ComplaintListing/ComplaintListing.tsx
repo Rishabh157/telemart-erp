@@ -3,6 +3,9 @@ import moment from 'moment'
 import { CiEdit } from 'react-icons/ci'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import EditCustomerComplaintDetailsWrapper from '../CustomerComplaintDetails/EditCustomerComplaintDetailsWrapper'
+import { FaEye } from 'react-icons/fa'
+import 'rsuite/dist/rsuite-no-reset.min.css'
+import SingleComplaintListingLogsWrapper from './SingleComplaintLogs/SingleComplaintListingLogsWrapper'
 
 type Props = {
     rows?: any[]
@@ -15,10 +18,12 @@ const ComplaintListing = ({ rows }: Props) => {
         isOpenCustomerComplaitDetailModel,
         setIsOpenCustomerComplaitDetailModel,
     ] = React.useState<boolean>(false)
-
+    const [isFlowDialogShow, setIsFlowDialogShow] =
+        React.useState<boolean>(false)
 
     return (
         <div className="mt-1 w-full">
+            {/* Edit Complaint Form */}
             <DialogLogBox
                 isOpen={isOpenCustomerComplaitDetailModel}
                 handleClose={() => {
@@ -35,6 +40,23 @@ const ComplaintListing = ({ rows }: Props) => {
                     />
                 }
             />
+
+            {/* Closed Complaint Flow */}
+            <DialogLogBox
+                isOpen={isFlowDialogShow}
+                handleClose={() => {
+                    setIsFlowDialogShow(false)
+                    // setSelectedFlowItem([])
+                }}
+                component={
+                    <div className="py-4 px-4">
+                        <SingleComplaintListingLogsWrapper
+                            complaintId={selectedComplaintId}
+                        />
+                    </div>
+                }
+            />
+
             <table className="border border-gray-400 w-full">
                 <thead>
                     <tr className="bg-#cdddf2">
@@ -81,7 +103,7 @@ const ComplaintListing = ({ rows }: Props) => {
                         return (
                             <tr className="bg-#cdddf2" key={ind}>
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                    {ele?.status !== 'CLOSED' && (
+                                    {ele?.status !== 'CLOSED' ? (
                                         <div className="flex justify-center items-center">
                                             <CiEdit
                                                 onClick={() => {
@@ -96,10 +118,23 @@ const ComplaintListing = ({ rows }: Props) => {
                                                 size={18}
                                             />
                                         </div>
+                                    ) : (
+                                        <div className="flex justify-center items-center">
+                                            <FaEye
+                                                className="cursor-pointer"
+                                                size={18}
+                                                onClick={() => {
+                                                    setIsFlowDialogShow(true)
+                                                    setSelectedComplaintId(
+                                                        ele?._id
+                                                    )
+                                                }}
+                                            />
+                                        </div>
                                     )}
                                 </td>
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                    {ele?.orderNumber}
+                                    {ele?.complaintNumber}
                                 </td>
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
                                     <div className="flex flex-col">

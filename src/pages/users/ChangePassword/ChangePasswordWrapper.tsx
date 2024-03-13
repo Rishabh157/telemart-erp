@@ -9,13 +9,13 @@ import { object, string, ref } from 'yup'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { useChangePasswordDealerMutation } from 'src/services/DealerServices'
+import { useChangeUserPasswordMutation } from 'src/services/UserServices'
 import ChangePasswordDialog from './ChangePasswordDialog'
 
 // |-- Types --|
 type Props = {
     onClose: () => void
-    dealerId: string
+    userId: string
 }
 
 export type FormInitialValues = {
@@ -23,8 +23,8 @@ export type FormInitialValues = {
     confirmPassword: string
 }
 
-const ChangePasswordWrapper = ({ onClose, dealerId }: Props) => {
-    const [changePassword] = useChangePasswordDealerMutation()
+const ChangePasswordWrapper = ({ onClose, userId }: Props) => {
+    const [changePassword] = useChangeUserPasswordMutation()
     const [apiStatus, setApiStatus] = useState(false)
 
     const initialValues: FormInitialValues = {
@@ -48,8 +48,8 @@ const ChangePasswordWrapper = ({ onClose, dealerId }: Props) => {
         setApiStatus(true)
         setTimeout(() => {
             changePassword({
+                userId: userId || '',
                 newPassword: values.newPassword,
-                dealerCode: dealerId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

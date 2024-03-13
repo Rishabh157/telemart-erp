@@ -14,6 +14,7 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    complaintNumber: number
     orderNo: number
     schemeName: string
     schemeCode: string
@@ -35,6 +36,7 @@ const AddCustomerComplaintDetailsWrapper = ({
     const [addComplaint, addComplaintInfo] = useAddCustomerComplainMutation()
 
     const initialValues: FormInitialValues = {
+        complaintNumber: 0,
         orderNo: orderDetails?.orderNumber || 0,
         schemeName: orderDetails?.schemeName || '',
         schemeCode: orderDetails?.schemeName || '',

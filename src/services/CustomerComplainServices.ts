@@ -67,6 +67,15 @@ export const customerComplainApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** View Single Complain Logs *****/
+        getComplaintLogsById: builder.query({
+            providesTags: ['complaint'],
+            query: (id: string) => ({
+                url: `/complaint-logs/get/${id}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -77,4 +86,5 @@ export const {
     useGetComplaintByIdQuery,
     useAddCustomerComplainMutation,
     useUpdateCustomerComplainMutation,
+    useGetComplaintLogsByIdQuery,
 } = customerComplainApi

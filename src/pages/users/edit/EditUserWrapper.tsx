@@ -102,7 +102,6 @@ const EditUserWrapper = (props: Props) => {
         firstName: selectedItem?.firstName || '',
         lastName: selectedItem?.lastName || '',
         userName: selectedItem?.userName || '',
-
         mobile: selectedItem?.mobile || '',
         email: selectedItem?.email || '',
         branchId: selectedItem?.branchId || '',
@@ -165,7 +164,7 @@ const EditUserWrapper = (props: Props) => {
 
         branchId: string().required('branch name is required'),
         userDepartment: string().required('User Department is required'),
-        password: string().required('Password is required'),
+        // password: string().required('Password is required'),
         // email: string().email('Invalid Email ID'),
         // .required('Email is required'),
         // mobile: string()
