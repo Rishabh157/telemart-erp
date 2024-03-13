@@ -14,49 +14,44 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import StateListing from './StateListing'
-import { useGetStateQuery } from 'src/services/StateService'
+// import { useGetStateQuery } from 'src/services/StateService'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setItems } from 'src/redux/slices/statesSlice'
+import { setItems, setSelctedLocationState } from 'src/redux/slices/statesSlice'
+import useStatesByCountry from 'src/hooks/useStatesByCountry'
 
 const StateListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.states)
-
-    const { searchValue: searchValueState, filterValue }: any = useSelector(
+    const { selectedLocationCountries }: any = useSelector(
+        (state: RootState) => state.country
+    )
+    const { stateByCountry } = useStatesByCountry(selectedLocationCountries)
+    const { searchValue: searchValueState }: any = useSelector(
         (state: RootState) => state.states
     )
-
     const states = items?.map((ele: any) => {
         return { label: ele.stateName, value: ele._id }
     })
-
-    const { data, isLoading, isFetching } = useGetStateQuery({
-        limit: 100,
-        searchValue: searchValueState,
-        params: ['stateName', 'countryId'],
-        page: 0,
-        filterBy: [
-            {
-                fieldName: 'countryId',
-                value: filterValue ? filterValue : [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-    },
-        {
-            skip: !filterValue || filterValue?.length === 0,
-        }
-    )
-
     useEffect(() => {
-        dispatch(setItems(data?.data))
-    }, [data, isLoading, isFetching])
+        if (stateByCountry?.length && selectedLocationCountries) {
+            dispatch(setItems(stateByCountry))
+        } else {
+            dispatch(setItems(null))
+        }
+        dispatch(setSelctedLocationState(null))
+    }, [stateByCountry, selectedLocationCountries])
 
-    return <StateListing states={states} />
+    return (
+        <StateListing
+            states={states?.filter((stateItem: any) =>
+                stateItem?.label
+                    ?.toLocaleLowerCase()
+                    ?.includes(searchValueState?.toLocaleLowerCase())
+            )}
+        />
+    )
 }
 
 export default StateListingWrapper

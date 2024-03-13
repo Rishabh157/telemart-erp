@@ -22,7 +22,6 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Types --|
 type Props = {
@@ -41,17 +40,16 @@ const AreaListing = ({ areas }: Props) => {
     )
 
     function handleCountryClick(newValue: any) {
-        if (selectedLocationArea?.value === newValue.value) {
+        if (selectedLocationArea === newValue.value) {
             dispatch(setSelectedLocationArea(null))
         } else {
-            dispatch(setSelectedLocationArea(newValue))
+            dispatch(setSelectedLocationArea(newValue?.value))
         }
     }
 
     return (
         <>
             <LocationListView
-                actionName={UserModuleNameTypes.area}
                 listHeading="Area"
                 searchValue={searchValue}
                 OnSearchChange={(newValue) => {

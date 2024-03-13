@@ -22,16 +22,14 @@ import {
     setSearchValue,
     setSelctedLocationState,
 } from 'src/redux/slices/statesSlice'
-import {
-    setFilterValue,
-    setSelectedLocationDistrict,
-} from 'src/redux/slices/districtSlice'
-import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
-import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
-import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
-import { setFilterValue as setPincodeFilterValue } from 'src/redux/slices/pincodeSlice'
-import { setFilterValue as setTehsilFilterValue } from 'src/redux/slices/tehsilSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import // setFilterValue,
+// setSelectedLocationDistrict,
+'src/redux/slices/districtSlice'
+// import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
+// import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
+// import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
+// import { setFilterValue as setPincodeFilterValue } from 'src/redux/slices/pincodeSlice'
+// import { setFilterValue as setTehsilFilterValue } from 'src/redux/slices/tehsilSlice'
 
 // |-- Types --|
 type Props = {
@@ -50,25 +48,16 @@ const StateListing = ({ states }: Props) => {
     )
 
     function handleCountryClick(newValue: any) {
-        if (selectedLocationState?.value === newValue.value) {
+        if (selectedLocationState === newValue.value) {
             dispatch(setSelctedLocationState(null))
-            dispatch(setSelectedLocationDistrict(null))
-            dispatch(setSelectedLocationTehsil(null))
-            dispatch(setSelectedLocationPincode(null))
-            dispatch(setFilterValue(''))
-            dispatch(setAreaFilterValue(''))
-            dispatch(setPincodeFilterValue(''))
-            dispatch(setTehsilFilterValue(''))
         } else {
-            dispatch(setSelctedLocationState(newValue))
-            dispatch(setFilterValue(newValue.value))
+            dispatch(setSelctedLocationState(newValue.value))
         }
     }
 
     return (
         <>
             <LocationListView
-                actionName={UserModuleNameTypes.state}
                 searchValue={searchValue}
                 OnSearchChange={(newValue) =>
                     dispatch(setSearchValue(newValue))

@@ -6,24 +6,22 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
 import LocationListView from '../../sharedComponents/LocationListView'
 import AddPincodeWrapper from '../add/AddPincodeWrapper'
-import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setFilterValue } from 'src/redux/slices/areaSlice'
 import {
     setSearchValue,
     setSelectedLocationPincode,
 } from 'src/redux/slices/pincodeSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {
@@ -44,19 +42,16 @@ const PincodeListing = ({ pincodes }: Props) => {
     )
 
     function handleCountryClick(newValue: any) {
-        if (selectedLocationPincode?.value === newValue.value) {
+        if (selectedLocationPincode === newValue.value) {
             dispatch(setSelectedLocationPincode(null))
-            dispatch(setFilterValue(''))
         } else {
-            dispatch(setSelectedLocationPincode(newValue))
-            dispatch(setFilterValue(newValue.value))
+            dispatch(setSelectedLocationPincode(newValue.value))
         }
     }
 
     return (
         <>
             <LocationListView
-                actionName={UserModuleNameTypes.pincode}
                 listHeading="Pincodes"
                 OnSearchChange={(newValue) =>
                     dispatch(setSearchValue(newValue))
