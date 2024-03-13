@@ -40,6 +40,15 @@ export const areaApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        getAllAreaByPincode: builder.query({
+            providesTags: ['Area'],
+            query: (id) => ({
+                url: `area/get-area-by-pincode/${id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
         //***** ADD *****/
         addArea: builder.mutation({
             invalidatesTags: ['Area'],
@@ -106,4 +115,5 @@ export const {
     useDeleteAreaMutation,
     useGetAllAreaQuery,
     useGetAllAreaUnauthQuery,
+    useGetAllAreaByPincodeQuery
 } = areaApi

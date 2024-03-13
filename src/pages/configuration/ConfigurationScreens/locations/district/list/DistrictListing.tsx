@@ -22,14 +22,7 @@ import {
     setSearchValue,
     setSelectedLocationDistrict,
 } from 'src/redux/slices/districtSlice'
-import {
-    setFilterValue,
-    setSelectedLocationTehsil,
-} from 'src/redux/slices/tehsilSlice'
-import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
-import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
-import { setFilterValue as setPincodeFilterValue } from 'src/redux/slices/pincodeSlice'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+
 
 // |-- Types --|
 type Props = {
@@ -44,31 +37,22 @@ const DistrictListing = ({ districts }: Props) => {
     )
     const { selectedLocationState }: any = useSelector(
         (state: RootState) => state.states
-        )
-        const { selectedLocationDistrict }: any = useSelector(
-            (state: RootState) => state.district
-            )
-            console.log('selectedLocationState: ', selectedLocationState)
-            console.log('selectedLocationDistrict: ', selectedLocationDistrict)
+    )
+    const { selectedLocationDistrict }: any = useSelector(
+        (state: RootState) => state.district
+    )
 
     function handleCountryClick(newValue: any) {
-        if (selectedLocationDistrict?.value === newValue.value) {
+        if (selectedLocationDistrict === newValue.value) {
             dispatch(setSelectedLocationDistrict(null))
-            dispatch(setSelectedLocationTehsil(null))
-            dispatch(setSelectedLocationPincode(null))
-            dispatch(setFilterValue(''))
-            dispatch(setAreaFilterValue(''))
-            dispatch(setPincodeFilterValue(''))
         } else {
-            dispatch(setSelectedLocationDistrict(newValue))
-            dispatch(setFilterValue(newValue.value))
+            dispatch(setSelectedLocationDistrict(newValue.value))
         }
     }
 
     return (
         <>
             <LocationListView
-                actionName={UserModuleNameTypes.district}
                 listHeading="Districts"
                 searchValue={searchValue}
                 OnSearchChange={(newValue) =>

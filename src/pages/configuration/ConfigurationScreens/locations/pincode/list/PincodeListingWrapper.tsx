@@ -14,46 +14,46 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import PincodeListing from './PincodeListing'
-import { useGetPincodeQuery } from 'src/services/PinCodeService'
+// import { useGetPincodeQuery } from 'src/services/PinCodeService'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setItems } from 'src/redux/slices/pincodeSlice'
+import { setItems, setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
+import usePincodesByTehsil from 'src/hooks/usePincodesByTehsil'
 
 const PincodeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.pincode)
-    const { searchValue, filterValue }: any = useSelector(
+    const { searchValue }: any = useSelector(
         (state: RootState) => state.pincode
     )
     const pincodes = items?.map((ele: any) => {
         return { label: ele.pincode, value: ele._id }
     })
-
-    const { data, isLoading, isFetching } = useGetPincodeQuery({
-        limit: 100,
-        searchValue: searchValue,
-        params: ['pincode', 'tehsilId'],
-        page: 0,
-        filterBy: [
-            {
-                fieldName: 'tehsilId',
-                value: filterValue ? filterValue : [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-    },
-    {
-        skip: !filterValue || filterValue?.length === 0,
-    })
-
+    const { selectedLocationTehsil }: any = useSelector(
+        (state: RootState) => state.tehsils
+    )
+    const { pincodesByTehsil } = usePincodesByTehsil(selectedLocationTehsil)
     useEffect(() => {
-        dispatch(setItems(data?.data))
-    }, [data, isLoading, isFetching])
+        if (pincodesByTehsil?.length && selectedLocationTehsil) {
+            dispatch(setItems(pincodesByTehsil))
+        } else {
+            dispatch(setItems(null))
+            
+        }
+        dispatch(setSelectedLocationPincode(null))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pincodesByTehsil, selectedLocationTehsil])
 
-    return <PincodeListing pincodes={pincodes} />
+    return (
+        <PincodeListing
+            pincodes={pincodes?.filter((districtItem: any) =>
+                districtItem?.label
+                    ?.toLocaleLowerCase()
+                    ?.includes(searchValue?.toLocaleLowerCase())
+            )}
+        />
+    )
 }
 
 export default PincodeListingWrapper

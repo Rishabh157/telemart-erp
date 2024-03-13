@@ -13,48 +13,46 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import DistrictListing from './DistrictListing'
-import { useGetDistictQuery } from 'src/services/DistricService'
-import { setItems } from 'src/redux/slices/districtSlice'
+import { setItems, setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import useStateDistricts from 'src/hooks/useDistrictsByState'
 
 const DistrictListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.district)
-    const { searchValue: searchValueDistrict, filterValue }: any = useSelector(
+    const { searchValue: searchValueDistrict }: any = useSelector(
         (state: RootState) => state.district
+    )
+    const { selectedLocationState }: any = useSelector(
+        (state: RootState) => state.states
     )
 
     const districts = items?.map((ele: any) => {
         return { label: ele.districtName, value: ele._id }
     })
 
-    const { data, isLoading, isFetching } = useGetDistictQuery({
-        limit: 100,
-        searchValue: searchValueDistrict,
-        params: ['districtName', 'stateId'],
-        page: 0,
-        filterBy: [
-            {
-                fieldName: 'stateId',
-                value: filterValue ? filterValue : [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-    },
-    {
-        skip: !filterValue || filterValue?.length === 0,
-    }
-    )
-
+    const { stateDistricts } = useStateDistricts(selectedLocationState)
     useEffect(() => {
-        dispatch(setItems(data?.data))
-    }, [data, isLoading, isFetching, dispatch])
+        if (stateDistricts?.length && selectedLocationState) {
+            dispatch(setItems(stateDistricts))
+        } else {
+            dispatch(setItems(null))
+        }
+        dispatch(setSelectedLocationDistrict(null))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stateDistricts, selectedLocationState])
 
-    return <DistrictListing districts={districts} />
+    return (
+        <DistrictListing
+            districts={districts?.filter((districtItem: any) =>
+                districtItem?.label
+                    ?.toLocaleLowerCase()
+                    ?.includes(searchValueDistrict?.toLocaleLowerCase())
+            )}
+        />
+    )
 }
 
 export default DistrictListingWrapper

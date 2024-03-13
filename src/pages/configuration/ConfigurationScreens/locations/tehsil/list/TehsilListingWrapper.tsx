@@ -16,44 +16,45 @@ import TehsilListing from './TehsilListing'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useGetTehsilQuery } from 'src/services/TehsilService'
-import { setItems } from 'src/redux/slices/tehsilSlice'
+import useTehsilByDistrict from 'src/hooks/useTehsilByDistrict'
+
+import {
+    setItems,
+    setSelectedLocationTehsil,
+} from 'src/redux/slices/tehsilSlice'
 
 const TehsilListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { items }: any = useSelector((state: RootState) => state.tehsils)
-    const { searchValue: searchValueTehsil, filterValue }: any = useSelector(
+    const { searchValue: searchValueTehsil }: any = useSelector(
         (state: RootState) => state.tehsils
     )
-
+    const { selectedLocationDistrict }: any = useSelector(
+        (state: RootState) => state.district
+    )
     const tehsil = items?.map((ele: any) => {
         return { label: ele.tehsilName, value: ele._id }
     })
-
-    const { data, isLoading, isFetching } = useGetTehsilQuery({
-        limit: 100,
-        searchValue: searchValueTehsil,
-        params: ['tehsilName', 'districtId'],
-        page: 0,
-        filterBy: [
-            {
-                fieldName: 'districtId',
-                value: filterValue ? filterValue : [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-    },
-        {
-            skip: !filterValue || filterValue?.length === 0,
-        })
-
+    const { tehsilBydistrict } = useTehsilByDistrict(selectedLocationDistrict)
     useEffect(() => {
-        dispatch(setItems(data?.data))
-    }, [data, isLoading, isFetching, dispatch])
+        if (tehsilBydistrict?.length && selectedLocationDistrict) {
+            dispatch(setItems(tehsilBydistrict))
+        } else {
+            dispatch(setItems(null))
+        }
+        dispatch(setSelectedLocationTehsil(null))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [tehsilBydistrict, selectedLocationDistrict])
 
-    return <TehsilListing tehsils={tehsil} />
+    return (
+        <TehsilListing
+            tehsils={tehsil?.filter((districtItem: any) =>
+                districtItem?.label
+                    ?.toLocaleLowerCase()
+                    ?.includes(searchValueTehsil?.toLocaleLowerCase())
+            )}
+        />
+    )
 }
 
 export default TehsilListingWrapper

@@ -26,7 +26,6 @@ type Props = {
     OnSearchChange?: (newValue: string) => void
     onListItemClick?: (item: any) => void
     disabled: boolean
-    actionName?: string
 }
 
 const LocationListView = ({
@@ -37,7 +36,7 @@ const LocationListView = ({
     OnSearchChange = (newValue: string) => {},
     onListItemClick = (item: any) => {},
     disabled = false,
-    actionName = '',
+    
 }: Props) => {
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state.country
@@ -98,18 +97,14 @@ const LocationListView = ({
                             }}
                             className={`border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm ${
                                 listItem.value !== undefined &&
-                                (selectedLocationCountries?.value ===
-                                    listItem.value ||
-                                    selectedLocationState?.value ===
+                                (selectedLocationCountries === listItem.value ||
+                                    selectedLocationState === listItem.value ||
+                                    selectedLocationDistrict ===
                                         listItem.value ||
-                                    selectedLocationDistrict?.value ===
+                                    selectedLocationTehsil === listItem.value ||
+                                    selectedLocationPincode ===
                                         listItem.value ||
-                                    selectedLocationTehsil?.value ===
-                                        listItem.value ||
-                                    selectedLocationPincode?.value ===
-                                        listItem.value ||
-                                    selectedLocationArea?.value ===
-                                        listItem.value)
+                                    selectedLocationArea === listItem.value)
                                     ? 'bg-gray-300'
                                     : ''
                             }`}
