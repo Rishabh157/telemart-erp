@@ -9,12 +9,14 @@ import { useGetAllInitialByCallType } from 'src/hooks/useGetAllInitialByCallType
 import { useGetAllInitialCallTwoByCallTypeAndOneId } from 'src/hooks/useGetAllInitialCallTwoByCallTypeAndOneId'
 import { useGetAllInitialCallThreeByCallTypeAndTwoId } from 'src/hooks/useGetAllInitialCallThreeByCallTypeAndTwoId'
 import { complaintTypeOptions } from 'src/utils/constants/customeTypes'
+import moment from 'moment'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     formType: 'ADD' | 'EDIT'
+    complaintLogs?: any[]
 }
 
 const statusOption = [
@@ -36,6 +38,7 @@ const CustomerComplaintDetailsForm = ({
     formikProps,
     apiStatus,
     formType,
+    complaintLogs,
 }: Props) => {
     const { values, setFieldValue, handleSubmit } = formikProps
 
@@ -70,13 +73,24 @@ const CustomerComplaintDetailsForm = ({
                 <div className="w-full mt-1 pt-2 pb-4 bg-[#e9f1fb] border-[1px] border-slate-300">
                     <div className="p-2">
                         <div className="grid gap-x-16 grid-cols-3">
+                            {formType === 'EDIT' && (
+                                <div className="flex items-center gap-x-3">
+                                    <span className="text-sm text-[#406698] font-semibold flex-1">
+                                        Complaint No
+                                    </span>
+                                    {' : '}
+                                    <span className="text-sm text-black font-semibold flex-1 text-end">
+                                        {values?.complaintNumber}
+                                    </span>
+                                </div>
+                            )}
                             <div className="flex items-center gap-x-3">
                                 <span className="text-sm text-[#406698] font-semibold flex-1">
                                     Order No
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-end">
-                                    {values?.orderNo || 12423523}
+                                    {values?.orderNo}
                                 </span>
                             </div>
                             <div className="flex items-center gap-x-4">
@@ -85,27 +99,40 @@ const CustomerComplaintDetailsForm = ({
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-end">
-                                    {values?.schemeName || 12423523}
+                                    {values?.schemeName}
                                 </span>
                             </div>
-                            <div className="flex items-center gap-x-4">
-                                <span className="text-sm text-[#406698] font-semibold flex-1">
-                                    Scheme Code
-                                </span>
-                                {' : '}
-                                <span className="text-sm text-black font-semibold flex-1 text-end">
-                                    {values?.schemeCode || 12423523}
-                                </span>
-                            </div>
+                            {formType === 'ADD' && (
+                                <div className="flex items-center gap-x-4">
+                                    <span className="text-sm text-[#406698] font-semibold flex-1">
+                                        Scheme Code
+                                    </span>
+                                    {' : '}
+                                    <span className="text-sm text-black font-semibold flex-1 text-end">
+                                        {values?.schemeCode}
+                                    </span>
+                                </div>
+                            )}
                         </div>
                         <div className="grid gap-x-16 grid-cols-3">
+                            {formType === 'EDIT' && (
+                                <div className="flex items-center gap-x-4">
+                                    <span className="text-sm text-[#406698] font-semibold flex-1">
+                                        Scheme Code
+                                    </span>
+                                    {' : '}
+                                    <span className="text-sm text-black font-semibold flex-1 text-end">
+                                        {values?.schemeCode}
+                                    </span>
+                                </div>
+                            )}
                             <div className="flex items-center gap-x-4">
                                 <span className="text-sm text-[#406698] font-semibold flex-1">
                                     Order Status
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-end">
-                                    {values?.orderStatus || 12423523}
+                                    {values?.orderStatus}
                                 </span>
                             </div>
                             <div className="flex items-center gap-x-4">
@@ -114,7 +141,7 @@ const CustomerComplaintDetailsForm = ({
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-end">
-                                    {values?.courierStatus || 12423523}
+                                    {values?.courierStatus}
                                 </span>
                             </div>
                         </div>
@@ -213,12 +240,12 @@ const CustomerComplaintDetailsForm = ({
                         />
                     </div>
 
-                    <div className="flex items-center p-2 gap-x-4">
+                    <div className="flex items-center gap-x-4">
                         <label className="text-slate-700">
                             Remarks
                             <span className="text-red-500">*</span>
                         </label>
-                        <div className="flex-1">
+                        <div className="flex-1 -mt-4">
                             <ATMTextArea
                                 required
                                 label=""
@@ -238,11 +265,115 @@ const CustomerComplaintDetailsForm = ({
                             className="w-24"
                             onClick={handleSubmit as any}
                             isLoading={apiStatus}
+                            loadingText="Saving..."
                         >
                             Save
                         </ATMLoadingButton>
                     </div>
                 </div>
+
+                {formType === 'EDIT' && (
+                    <div className="mt-4  w-[100%] overflow-x-auto">
+                        <h1 className="text-primary-main">Complaint History</h1>
+                        <table className="border border-gray-400">
+                            <thead>
+                                <tr className="bg-#cdddf2">
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Date
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Order No.
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Call Type
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Issue Category (IC1:IC2:IC3)
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Status (Return Type)
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Stage
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Last Remark
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Last Updated By
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Last Updated Date
+                                    </th>
+                                    <th className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                        Total Calls
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {complaintLogs?.map((ele, ind) => {
+                                    return (
+                                        <tr className="bg-#cdddf2" key={ind}>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                <div className="flex flex-col">
+                                                    <span>
+                                                        {moment(
+                                                            ele?.createdAt
+                                                        ).format('DD-MM-YYYY')}
+                                                    </span>
+                                                    <span>
+                                                        {' '}
+                                                        {moment(
+                                                            ele?.createdAt
+                                                        ).format('hh:mm:ss A')}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                {ele?.orderNumber}
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                {ele?.callType}
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                {ele?.initialCallOneLabel}
+                                                {':'}
+                                                <br />
+                                                {ele?.initialCallTwoLabel}
+                                                {':'}
+                                                <br />
+                                                {ele?.initialCallThreeLabel}
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                {ele?.status}
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                -
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                {ele?.remark}
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                -
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                {moment(ele?.updatedAt).format(
+                                                    'DD-MM-YYYY'
+                                                )}
+                                                {moment(ele?.updatedAt).format(
+                                                    'hh:mm:ss A'
+                                                )}
+                                            </td>
+                                            <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
+                                                -
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         </div>
     )

@@ -148,7 +148,7 @@ export const userApi = apiSlice.injectEndpoints({
             query: ({
                 companyId,
                 callCenterId,
-                departmentId
+                departmentId,
             }: {
                 companyId: string
                 callCenterId: string
@@ -184,6 +184,16 @@ export const userApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
+        // ****  get senior api
+        changeUserPassword: builder.mutation({
+            invalidatesTags: ['user', 'newUser'],
+            query: (body) => ({
+                url: 'user/change-password/by-admin',
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -202,4 +212,5 @@ export const {
     useGetFloorMangerUserByCallCenterIdQuery,
     useGetTeamLeadrUserByCallCenterIdQuery,
     useGetSeniorUsersQuery,
+    useChangeUserPasswordMutation,
 } = userApi

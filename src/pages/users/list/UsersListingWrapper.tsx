@@ -41,6 +41,8 @@ import { showToast } from 'src/utils'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 import { UsersListResponse } from 'src/models'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import ChangePasswordWrapper from '../ChangePassword/ChangePasswordWrapper'
 
 const UsersListingWrapper = () => {
     const userState: any = useSelector((state: RootState) => state.newUser)
@@ -48,7 +50,9 @@ const UsersListingWrapper = () => {
 
     const { items, page, rowsPerPage, searchValue, isActive } = userState
     const [showDropdown, setShowDropdown] = useState(false)
-    //const [currentId, setCurrentId] = useState('')
+    const [changePasswordDialogOpen, setChangePasswordDialogOpen] =
+        useState<boolean>(false)
+    const [currentId, setCurrentId] = useState('')
     const navigate = useNavigate()
     const [deactiveUser] = useDeactiveUserMutation()
     const dispatch = useDispatch<AppDispatch>()
@@ -239,6 +243,12 @@ const UsersListingWrapper = () => {
                     handleEditActionButton={() => {
                         navigate(`/users/${row?._id}`)
                     }}
+                    isCustomBtn
+                    customBtnText="Change Password"
+                    handleCustomActionButton={() => {
+                        setChangePasswordDialogOpen(true)
+                        setCurrentId(row?._id)
+                    }}
                     // handleDeleteActionButton={() => {
                     //     showConfirmationDialog({
                     //         title: 'Delete User',
@@ -253,7 +263,7 @@ const UsersListingWrapper = () => {
                     // }}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
-                        //setCurrentId(row?._id)
+                        setCurrentId(row?._id)
                     }}
                 />
             ),
@@ -284,6 +294,21 @@ const UsersListingWrapper = () => {
                 columns={columns}
                 rows={items}
                 setShowDropdown={() => {}}
+            />
+
+            {/* Usre Change Password */}
+            <DialogLogBox
+                maxWidth="sm"
+                isOpen={changePasswordDialogOpen}
+                handleClose={() => {
+                    setChangePasswordDialogOpen(false)
+                }}
+                component={
+                    <ChangePasswordWrapper
+                        userId={currentId}
+                        onClose={() => setChangePasswordDialogOpen(false)}
+                    />
+                }
             />
         </SideNavLayout>
     )

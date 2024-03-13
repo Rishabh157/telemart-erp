@@ -280,7 +280,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 label="Branch Name"
                             />
 
-                            <ATMTextField
+                            {/* <ATMTextField
                                 name="password"
                                 type="password"
                                 value={values.password}
@@ -293,7 +293,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                         e.target.value
                                     )
                                 }
-                            />
+                            /> */}
 
                             {/* Mobile */}
                             <ATMTextField
