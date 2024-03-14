@@ -65,7 +65,7 @@ const CustomerComplaintDetailsForm = ({
     )
 
     return (
-        <div className="p-4 h-[50vh]">
+        <div className="p-4 h-[70vh]">
             <div>
                 <h1 className="text-xl font-semibold mb-2">
                     {formType === 'ADD' ? 'Create' : 'Update'} Complaint
