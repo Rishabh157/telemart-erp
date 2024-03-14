@@ -18,8 +18,16 @@ import PincodeListing from './PincodeListing'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setItems, setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
+import {
+    setItems,
+    setSelectedLocationPincode,
+} from 'src/redux/slices/pincodeSlice'
 import usePincodesByTehsil from 'src/hooks/usePincodesByTehsil'
+import useAllInfoByPincode from 'src/hooks/useAllInfoByPincode'
+import { setSelectedLocationCountry } from 'src/redux/slices/countrySlice'
+import { setSelctedLocationState } from 'src/redux/slices/statesSlice'
+import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
+import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 
 const PincodeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -34,16 +42,25 @@ const PincodeListingWrapper = () => {
         (state: RootState) => state.tehsils
     )
     const { pincodesByTehsil } = usePincodesByTehsil(selectedLocationTehsil)
+    const { pincodeData } = useAllInfoByPincode(searchValue)
     useEffect(() => {
         if (pincodesByTehsil?.length && selectedLocationTehsil) {
             dispatch(setItems(pincodesByTehsil))
         } else {
             dispatch(setItems(null))
-            
         }
-        dispatch(setSelectedLocationPincode(null))
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pincodesByTehsil, selectedLocationTehsil])
+    useEffect(() => {
+        if (pincodeData) {
+            dispatch(setSelectedLocationPincode(pincodeData?._id))
+            dispatch(setSelectedLocationCountry(pincodeData?.countryId))
+            dispatch(setSelctedLocationState(pincodeData?.stateId))
+            dispatch(setSelectedLocationDistrict(pincodeData?.districtId))
+            dispatch(setSelectedLocationTehsil(pincodeData?.tehsilId))
+        }
+    }, [pincodeData])
 
     return (
         <PincodeListing

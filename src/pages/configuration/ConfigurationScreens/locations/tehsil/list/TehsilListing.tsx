@@ -22,6 +22,8 @@ import {
     setSelectedLocationTehsil,
 } from 'src/redux/slices/tehsilSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
+import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 // import {
 //     setFilterValue,
 //     setSelectedLocationPincode,
@@ -53,6 +55,8 @@ const TehsilListing = ({ tehsils }: Props) => {
         } else {
             dispatch(setSelectedLocationTehsil(newValue?.value))
         }
+        dispatch(setSelectedLocationPincode(null))
+        dispatch(setSelectedLocationArea(null))
     }
 
     return (

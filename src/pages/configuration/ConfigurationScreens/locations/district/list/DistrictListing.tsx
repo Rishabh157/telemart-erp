@@ -22,6 +22,9 @@ import {
     setSearchValue,
     setSelectedLocationDistrict,
 } from 'src/redux/slices/districtSlice'
+import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
+import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
+import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 
 
 // |-- Types --|
@@ -48,6 +51,9 @@ const DistrictListing = ({ districts }: Props) => {
         } else {
             dispatch(setSelectedLocationDistrict(newValue.value))
         }
+        dispatch(setSelectedLocationTehsil(null))
+        dispatch(setSelectedLocationPincode(null))
+        dispatch(setSelectedLocationArea(null))
     }
 
     return (

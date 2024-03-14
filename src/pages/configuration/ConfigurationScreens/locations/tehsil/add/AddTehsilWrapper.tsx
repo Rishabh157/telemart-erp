@@ -54,9 +54,9 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
         setTimeout(() => {
             AddTehsil({
                 tehsilName: values.tehsilName,
-                countryId: selectedLocationCountries?.value || '',
-                stateId: selectedLocationState?.value || '',
-                districtId: selectedLocationDistrict?.value || '',
+                countryId: selectedLocationCountries || '',
+                stateId: selectedLocationState || '',
+                districtId: selectedLocationDistrict || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

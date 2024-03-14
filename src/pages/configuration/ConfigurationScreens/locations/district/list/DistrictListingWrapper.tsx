@@ -6,18 +6,18 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
+import { setItems } from 'src/redux/slices/districtSlice'
 import DistrictListing from './DistrictListing'
-import { setItems, setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import useStateDistricts from 'src/hooks/useDistrictsByState'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const DistrictListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -40,7 +40,6 @@ const DistrictListingWrapper = () => {
         } else {
             dispatch(setItems(null))
         }
-        dispatch(setSelectedLocationDistrict(null))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stateDistricts, selectedLocationState])
 
