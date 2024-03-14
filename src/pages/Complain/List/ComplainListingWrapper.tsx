@@ -25,12 +25,17 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import ComplainListing from './ComplainListing'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import SingleComplaintListingLogsWrapper from 'src/pages/CustomerComplain/components/ComplaintListing/SingleComplaintLogs/SingleComplaintListingLogsWrapper'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 const ComplainListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const [, setShowDropdown] = useState(false)
+    const [currentId, setCurrentId] = useState('')
+    const [isFlowDialogShow, setIsFlowDialogShow] =
+        React.useState<boolean>(false)
+    const [showDropdown, setShowDropdown] = useState<boolean>(false)
     const complainState: any = useSelector((state: RootState) => state.complain)
 
     const {
@@ -141,37 +146,25 @@ const ComplainListingWrapper = () => {
                 <span> {row.initialCallThreeLabel} </span>
             ),
         },
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: any) =>
-        //         row?.firstApproved === null &&
-        //         row?.secondApproved === null && (
-        //             <ActionPopup
-        //                 handleEditActionButton={() => {
-        //                     navigate(`/warehouse-transfer/edit/${row?._id}`)
-        //                 }}
-        //                 handleDeleteActionButton={() => {
-        //                     showConfirmationDialog({
-        //                         title: 'Delete WarehouseTransfer',
-        //                         text: 'Do you want to delete WarehouseTransfer?',
-        //                         showCancelButton: true,
-        //                         next: (res: any) => {
-        //                             return res.isConfirmed
-        //                                 ? handleDelete()
-        //                                 : setShowDropdown(false)
-        //                         },
-        //                     })
-        //                 }}
-        //                 handleOnAction={() => {
-        //                     setShowDropdown(!showDropdown)
-        //                     setCurrentId(row?._id)
-        //                 }}
-        //             />
-        //         ),
-        //     align: 'end',
-        // },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isCustomBtn
+                    customBtnText="Flow"
+                    handleCustomActionButton={() => {
+                        setIsFlowDialogShow(true)
+                    }}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                />
+            ),
+            align: 'end',
+        },
     ]
 
     return (
@@ -180,6 +173,20 @@ const ComplainListingWrapper = () => {
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
+            />
+            {/* Closed Complaint Flow */}
+            <DialogLogBox
+                isOpen={isFlowDialogShow}
+                handleClose={() => {
+                    setIsFlowDialogShow(false)
+                }}
+                component={
+                    <div className="py-4 px-4">
+                        <SingleComplaintListingLogsWrapper
+                            complaintId={currentId}
+                        />
+                    </div>
+                }
             />
         </SideNavLayout>
     )

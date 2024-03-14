@@ -58,7 +58,6 @@ const CallCenterMasterListingWrapper = () => {
                 <span className="capitalize"> {row.callCenterName} </span>
             ),
         },
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -145,13 +144,11 @@ const CallCenterMasterListingWrapper = () => {
         })
     }
     return (
-        <>
-            <CallCenterMasterListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </>
+        <CallCenterMasterListing
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 

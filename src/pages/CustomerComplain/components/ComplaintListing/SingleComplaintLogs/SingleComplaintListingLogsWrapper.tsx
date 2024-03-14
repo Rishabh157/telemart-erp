@@ -10,6 +10,7 @@ type Props = {
 
 const SingleComplaintListingLogsWrapper = ({ complaintId }: Props) => {
     const [complaintListing, setComplaintListing] = React.useState<any[]>([])
+    const [apiStatus, setapiStatus] = React.useState<boolean>(false)
 
     const columns: columnTypes[] = [
         {
@@ -68,7 +69,14 @@ const SingleComplaintListingLogsWrapper = ({ complaintId }: Props) => {
             renderCell: (row: any) => <span>{row?.complaintbyLabel}</span>,
         },
         {
-            field: '',
+            field: 'remark',
+            headerName: 'Last Remark',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'capitalize',
+            renderCell: (row: any) => <span>{row?.remark}</span>,
+        },
+        {
+            field: 'updatedAt',
             headerName: 'Last Updated Date',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => (
@@ -79,7 +87,7 @@ const SingleComplaintListingLogsWrapper = ({ complaintId }: Props) => {
             ),
         },
         {
-            field: '',
+            field: 'totalCalls',
             headerName: 'Total Calls',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => <span>-</span>,
@@ -96,14 +104,19 @@ const SingleComplaintListingLogsWrapper = ({ complaintId }: Props) => {
     })
 
     React.useEffect(() => {
+        setapiStatus(true)
         if (!isComplaintLogsLoading && !isComplaintLogsFetching) {
-            console.log('component complaint logs Data', complaintLogsData)
             setComplaintListing(complaintLogsData?.data)
+            setapiStatus(false)
         }
     }, [complaintLogsData, isComplaintLogsLoading, isComplaintLogsFetching])
 
     return (
-        <SingleComplaintListingLogs columns={columns} rows={complaintListing} />
+        <SingleComplaintListingLogs
+            columns={columns}
+            rows={complaintListing}
+            isTableLoading={apiStatus}
+        />
     )
 }
 
