@@ -50,7 +50,7 @@ type Props = {
 const ATMTransferList = ({
     leftSideTitle,
     rightSideTitle,
-    options,
+    options = [],
     name,
     right,
     setRight,
@@ -82,7 +82,7 @@ const ATMTransferList = ({
     }
 
     const numberOfChecked = (items: { label: string; value: string }[]) =>
-        intersection(checked, items).length
+        intersection(checked, items)?.length
 
     const handleCheckedRight = () => {
         setRight(right.concat(leftChecked))
@@ -139,34 +139,44 @@ const ATMTransferList = ({
                 component="div"
                 role="list"
             >
-                {items?.map((item: { label: string; value: string , flag?: boolean }) => {
-                    const labelId = `transfer-list-all-item-${item?.value}-label`
-                    return (
-                        <ListItem
-                            key={item?.value}
-                            role="listitem"
-                            onClick={handleToggle(item)}
-                            disabled={item?.flag}
-                            button
-                        >
-                            <ListItemIcon>
-                                <Checkbox
-                                    checked={
-                                        checked.findIndex(
-                                            (ele) => ele?.value === item?.value
-                                        ) !== -1
-                                    }
-                                    tabIndex={-1}
-                                    disableRipple
-                                    inputProps={{
-                                        'aria-labelledby': labelId,
-                                    }}
+                {items?.map(
+                    (item: {
+                        label: string
+                        value: string
+                        flag?: boolean
+                    }) => {
+                        const labelId = `transfer-list-all-item-${item?.value}-label`
+                        return (
+                            <ListItem
+                                key={item?.value}
+                                role="listitem"
+                                onClick={handleToggle(item)}
+                                disabled={item?.flag}
+                                button
+                            >
+                                <ListItemIcon>
+                                    <Checkbox
+                                        checked={
+                                            checked.findIndex(
+                                                (ele) =>
+                                                    ele?.value === item?.value
+                                            ) !== -1
+                                        }
+                                        tabIndex={-1}
+                                        disableRipple
+                                        inputProps={{
+                                            'aria-labelledby': labelId,
+                                        }}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText
+                                    id={labelId}
+                                    primary={item?.label}
                                 />
-                            </ListItemIcon>
-                            <ListItemText id={labelId} primary={item?.label} />
-                        </ListItem>
-                    )
-                })}
+                            </ListItem>
+                        )
+                    }
+                )}
             </List>
         </Card>
     )
