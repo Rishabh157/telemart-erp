@@ -3,8 +3,6 @@
 // Filename:PicodeListingWrapper.tsx
 // Type: List Component
 // Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
