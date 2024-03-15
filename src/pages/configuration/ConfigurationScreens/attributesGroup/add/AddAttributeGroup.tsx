@@ -61,7 +61,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
         right: values.attributes,
         setRight: (newValue: { label: string; value: string }[]) =>
             setFieldValue('attributes', newValue),
-        leftSideTitle: 'All Atrributes',
+        leftSideTitle: 'All Attributes',
         rightSideTitle: 'Attributes to add',
     }
 

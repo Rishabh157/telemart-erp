@@ -71,7 +71,7 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
         right: values.attributes,
         setRight: (newValue: { label: string; value: string }[]) =>
             setFieldValue('attributes', newValue),
-        leftSideTitle: 'All Atrributes',
+        leftSideTitle: 'All Attributes',
         rightSideTitle: 'Attributes to add',
     }
     const dispatch = useDispatch()
