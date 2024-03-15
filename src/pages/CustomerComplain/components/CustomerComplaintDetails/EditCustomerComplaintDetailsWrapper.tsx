@@ -30,6 +30,9 @@ export type FormInitialValues = {
     initialCallThree: string
     status: string
     remark: string
+    icOneLabel: string
+    icTwoLabel: string
+    icThreeLabel: string
 }
 
 const EditCustomerComplaintDetailsWrapper = ({
@@ -80,6 +83,9 @@ const EditCustomerComplaintDetailsWrapper = ({
         initialCallThree: complaintOrderDetails?.icThree,
         status: complaintOrderDetails?.status,
         remark: complaintOrderDetails?.remark || '',
+        icOneLabel: complaintOrderDetails?.icOneLabel || '',
+        icTwoLabel: complaintOrderDetails?.icTwoLabel || '',
+        icThreeLabel: complaintOrderDetails?.icThreeLabel || '',
     }
 
     // Form Validation Schema
@@ -115,7 +121,12 @@ const EditCustomerComplaintDetailsWrapper = ({
             status: values.status,
             remark: values.remark,
             customerNumber: complaintOrderDetails?.customerNumber || '',
+            icOneLabel: values?.icOneLabel,
+            icTwoLabel: values?.icTwoLabel,
+            icThreeLabel: values?.icThreeLabel,
         }
+
+        console.log('formatedValues', formatedValues)
 
         updateComplaint({ id: complaintId, body: formatedValues }).then(
             (res: any) => {

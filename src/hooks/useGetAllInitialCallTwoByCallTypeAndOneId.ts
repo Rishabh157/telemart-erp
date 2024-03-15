@@ -27,6 +27,7 @@ export const useGetAllInitialCallTwoByCallTypeAndOneId = (
                 return {
                     label: ele?.initialCallDisplayName,
                     value: ele?._id,
+                    originalLabel: ele?.initialCallName,
                 }
             })
             setInitialCallTwoByCallTypeAndOneId(filterOption)

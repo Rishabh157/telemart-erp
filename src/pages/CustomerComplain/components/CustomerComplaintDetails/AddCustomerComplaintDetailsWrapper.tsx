@@ -26,6 +26,9 @@ export type FormInitialValues = {
     initialCallThree: string
     status: string
     remark: string
+    icOneLabel: string
+    icTwoLabel: string
+    icThreeLabel: string
 }
 
 const AddCustomerComplaintDetailsWrapper = ({
@@ -48,6 +51,9 @@ const AddCustomerComplaintDetailsWrapper = ({
         initialCallThree: '',
         status: '',
         remark: orderDetails?.remark || '',
+        icOneLabel: '',
+        icTwoLabel: '',
+        icThreeLabel: '',
     }
 
     // Form Validation Schema
@@ -87,6 +93,9 @@ const AddCustomerComplaintDetailsWrapper = ({
             status: values.status,
             remark: values.remark,
             customerNumber: orderDetails?.mobileNo || '',
+            icOneLabel: values.icOneLabel,
+            icTwoLabel: values.icTwoLabel,
+            icThreeLabel: values.icThreeLabel,
         }
 
         addComplaint(formatedValues)
