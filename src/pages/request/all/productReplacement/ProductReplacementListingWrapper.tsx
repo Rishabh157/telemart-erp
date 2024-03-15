@@ -493,7 +493,7 @@ const ProductReplacementListingWrapper = () => {
             renderCell: (row: MoneybackListResponse) => {
                 return (
                     <div className="z-0">
-                        {row?.ccApproval === true ? (
+                        {row?.managerSecondApproval === true ? (
                             <Stack direction="row" spacing={1}>
                                 {row?.accountApproval === null ? (
                                     <button
