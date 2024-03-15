@@ -52,7 +52,7 @@ const AddStateWrapper = ({ onClose }: Props) => {
             AddState({
                 stateName: values.stateName,
                 isUnion: values.isUnion,
-                countryId: selectedLocationCountries?.value || '',
+                countryId: selectedLocationCountries || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

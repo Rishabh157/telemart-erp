@@ -24,7 +24,7 @@ const CountryListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const { country } = useCountries()
-    const { selectedLocationCountries }: any = useSelector(
+    const { searchValue }: any = useSelector(
         (state: RootState) => state.country
     )
     const { items }: any = useSelector((state: RootState) => state.country)
@@ -47,7 +47,7 @@ const CountryListingWrapper = () => {
             items={contries.filter((countryItems: any) =>
                 countryItems?.label
                     ?.toLocaleLowerCase()
-                    ?.includes(selectedLocationCountries?.toLocaleLowerCase())
+                    ?.includes(searchValue?.toLocaleLowerCase())
             )}
         />
     )

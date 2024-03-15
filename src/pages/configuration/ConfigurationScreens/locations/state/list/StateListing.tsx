@@ -25,6 +25,10 @@ import {
 import // setFilterValue,
 // setSelectedLocationDistrict,
 'src/redux/slices/districtSlice'
+import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
+import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
+import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
+import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 // import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 // import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 // import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
@@ -53,6 +57,10 @@ const StateListing = ({ states }: Props) => {
         } else {
             dispatch(setSelctedLocationState(newValue.value))
         }
+        dispatch(setSelectedLocationDistrict(null))
+        dispatch(setSelectedLocationTehsil(null))
+        dispatch(setSelectedLocationPincode(null))
+        dispatch(setSelectedLocationArea(null))
     }
 
     return (

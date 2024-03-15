@@ -70,8 +70,7 @@ const LocationListView = ({
                         onAddClick()
                     }}
                 >
-                    {' '}
-                    + Add{' '}
+                    + Add
                 </button>
             </div>
 

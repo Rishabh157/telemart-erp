@@ -61,11 +61,11 @@ const AddAreaWrapper = ({ onClose }: Props) => {
         setTimeout(() => {
             AddArea({
                 area: values.area,
-                pincodeId: selectedLocationPincode?.value || '',
-                tehsilId: selectedLocationTehsil?.value || '',
-                districtId: selectedLocationDistrict?.value || '',
-                stateId: selectedLocationState?.value || '',
-                countryId: selectedLocationCountries?.value || '',
+                pincodeId: selectedLocationPincode || '',
+                tehsilId: selectedLocationTehsil || '',
+                districtId: selectedLocationDistrict || '',
+                stateId: selectedLocationState || '',
+                countryId: selectedLocationCountries || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

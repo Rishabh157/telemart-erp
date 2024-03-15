@@ -22,6 +22,7 @@ import {
     setSelectedLocationPincode,
 } from 'src/redux/slices/pincodeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 
 // |-- Types --|
 type Props = {
@@ -47,6 +48,7 @@ const PincodeListing = ({ pincodes }: Props) => {
         } else {
             dispatch(setSelectedLocationPincode(newValue.value))
         }
+        dispatch(setSelectedLocationArea(null))
     }
 
     return (

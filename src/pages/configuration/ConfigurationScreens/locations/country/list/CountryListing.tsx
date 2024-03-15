@@ -16,9 +16,17 @@ import LocationListView from '../../sharedComponents/LocationListView'
 import AddCountryWrapper from '../add/AddCountryWrapper'
 
 // |-- Redux --|
-import { setSelectedLocationCountry } from 'src/redux/slices/countrySlice'
+import {
+    setSelectedLocationCountry,
+    setSearchValue,
+} from 'src/redux/slices/countrySlice'
 
 import { AppDispatch, RootState } from 'src/redux/store'
+import { setSelctedLocationState } from 'src/redux/slices/statesSlice'
+import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
+import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
+import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
+import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 
 // |-- Types --|
 type Props = {
@@ -29,7 +37,7 @@ type Props = {
 const CountryListing = ({ contries, items }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
-    const { selectedLocationCountries }: any = useSelector(
+    const { selectedLocationCountries, searchValue }: any = useSelector(
         (state: RootState) => state.country
     )
 
@@ -39,6 +47,11 @@ const CountryListing = ({ contries, items }: Props) => {
         } else {
             dispatch(setSelectedLocationCountry(newValue.value))
         }
+        dispatch(setSelctedLocationState(null))
+        dispatch(setSelectedLocationDistrict(null))
+        dispatch(setSelectedLocationTehsil(null))
+        dispatch(setSelectedLocationPincode(null))
+        dispatch(setSelectedLocationArea(null))
     }
 
     return (
@@ -46,6 +59,10 @@ const CountryListing = ({ contries, items }: Props) => {
             <LocationListView
                 listHeading="Country"
                 listData={contries}
+                searchValue={searchValue}
+                OnSearchChange={(newValue) => {
+                    dispatch(setSearchValue(newValue))
+                }}
                 onAddClick={() => {
                     setisOpenAddForm(true)
                 }}
