@@ -261,6 +261,8 @@ import ComplainListingWrapper from './pages/Complain/List/ComplainListingWrapper
 import MappingTabsLayout from './pages/mapping/MappingTabsLayout'
 import AddSchemeToDealerMappingWrapper from './pages/mapping/addSchemeToDealer/AddSchemeToDealerMappingWrapper'
 import AddDealerToSchemeMappingWrapper from './pages/mapping/addDealerToScheme/AddDealerToSchemeMappingWrapper'
+import ViewRequest from './pages/request'
+import MoneybackListingWrapper from './pages/request/all/moneybackTab/MoneybackListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2493,6 +2495,34 @@ const PageRoutes = () => {
                         />
                     }
                 />
+
+                {/* Request Tabs */}
+                <Route
+                    path="/request"
+                    element={
+                        <ViewRequest />
+                        // <Authorization
+                        //     children={<ViewDealer />}
+                        //     permission={UserModuleNameTypes.ACTION_DEALER_VIEW}
+                        // />
+                    }
+                >
+                    <Route
+                        index
+                        path="moneyback"
+                        element={
+                            <MoneybackListingWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+                </Route>
 
                 {/* Dispositions -> Disposition One */}
                 <Route

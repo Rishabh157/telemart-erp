@@ -21,6 +21,9 @@ import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 import { TiFlowSwitch } from 'react-icons/ti'
 import { RiCustomerServiceLine } from 'react-icons/ri'
+import { GrCompliance } from 'react-icons/gr'
+import { GiRadarCrossSection } from 'react-icons/gi'
+import { IoIosGitPullRequest } from 'react-icons/io'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
 
 // |-- Types --|
@@ -136,7 +139,7 @@ export const navigation: NavItemType[] = [
     },
     {
         label: 'Complaint',
-        icon: MdOutlineBorderColor,
+        icon: GrCompliance,
         path: '/complain',
         name: UserModuleNameTypes.NAV_COMPLAINT,
     },
@@ -150,6 +153,12 @@ export const navigation: NavItemType[] = [
         label: 'Customer Complaint',
         icon: RiCustomerServiceLine,
         path: '/customer-complain',
+        name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
+    },
+    {
+        label: 'Request',
+        icon: IoIosGitPullRequest,
+        path: '/request/moneyback',
         name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
     },
     {
@@ -173,7 +182,7 @@ export const navigation: NavItemType[] = [
 
     {
         label: 'Dispositions',
-        icon: AiOutlineSetting,
+        icon: GiRadarCrossSection,
         path: '/dispositions/disposition-one',
         name: UserModuleNameTypes.NAV_DISPOSITION,
     },
