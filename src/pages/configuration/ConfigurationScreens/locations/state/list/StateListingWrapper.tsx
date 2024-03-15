@@ -7,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,9 +17,9 @@ import StateListing from './StateListing'
 // import { useGetStateQuery } from 'src/services/StateService'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import { setItems, setSelctedLocationState } from 'src/redux/slices/statesSlice'
 import useStatesByCountry from 'src/hooks/useStatesByCountry'
+import { setItems } from 'src/redux/slices/statesSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const StateListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -40,7 +40,6 @@ const StateListingWrapper = () => {
         } else {
             dispatch(setItems(null))
         }
-        dispatch(setSelctedLocationState(null))
     }, [stateByCountry, selectedLocationCountries])
 
     return (

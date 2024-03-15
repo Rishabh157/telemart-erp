@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,12 +15,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import TehsilListing from './TehsilListing'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
 import useTehsilByDistrict from 'src/hooks/useTehsilByDistrict'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 import {
-    setItems,
-    setSelectedLocationTehsil,
+    setItems
 } from 'src/redux/slices/tehsilSlice'
 
 const TehsilListingWrapper = () => {
@@ -42,7 +41,6 @@ const TehsilListingWrapper = () => {
         } else {
             dispatch(setItems(null))
         }
-        dispatch(setSelectedLocationTehsil(null))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tehsilBydistrict, selectedLocationDistrict])
 

@@ -53,8 +53,8 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
         setTimeout(() => {
             AddDistrict({
                 districtName: values.districtName,
-                stateId: selectedLocationState?.value || '',
-                countryId: selectedLocationCountries?.value || '',
+                stateId: selectedLocationState || '',
+                countryId: selectedLocationCountries || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

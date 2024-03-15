@@ -57,10 +57,10 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
         setTimeout(() => {
             AddPincode({
                 pincode: values.pincode,
-                stateId: selectedLocationState?.value || '',
-                tehsilId: selectedLocationTehsil?.value || '',
-                districtId: selectedLocationDistrict?.value || '',
-                countryId: selectedLocationCountries?.value || '',
+                stateId: selectedLocationState || '',
+                tehsilId: selectedLocationTehsil || '',
+                districtId: selectedLocationDistrict || '',
+                countryId: selectedLocationCountries || '',
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

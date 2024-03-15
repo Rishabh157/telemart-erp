@@ -145,10 +145,8 @@ const steps = [
 
 const AddDealerWarehouseWrapper = () => {
     const state = useParams()
-
     const dealerId = state?.dealerId
     const { userData } = useSelector((state: RootState) => state?.auth)
-
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addDealerWarehouse] = useAddDealerWarehouseMutation()
