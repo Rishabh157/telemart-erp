@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 import { IconType } from 'react-icons'
