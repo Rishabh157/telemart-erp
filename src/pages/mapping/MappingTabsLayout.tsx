@@ -1,78 +1,112 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react'
 import { IconType } from 'react-icons'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+
 import { FaUser } from 'react-icons/fa'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+
 import { MdOutlineSchema } from 'react-icons/md'
-// import { isAuthorized } from 'src/utils/authorization'
-// import AccessDenied from 'src/utils/AccessDenied'
-// import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
-// import { FaTicketSimple } from 'react-icons/fa6'
-// import { useGetChangeRequestByIdQuery } from 'src/services/ChangeRequestServices'
-// import { UserModuleNameTypes } from 'src/models/UserAccess/UserAccess.model'
 
-type Props = {}
+import React, { useState, useEffect } from 'react'
 
-export const inquiriesEditTabs: {
+import {
+    useLocation,
+    Outlet,
+    useNavigate,
+    // useNavigate,
+} from 'react-router-dom'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+
+// |-- Internal Dependencies --|
+import ATMBreadCrumbs, {
+    BreadcrumbType,
+} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import TabScrollable from 'src/components/utilsComponent/TabScrollable'
+
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
+interface tabsProps {
     label: string
     icon: IconType
     path: string
-    moduleName?: string
-    actionName?: string
-}[] = [
+    name: string
+}
+
+const MappingTabsLayout = () => {
+    const [activeTabIndex, setActiveTab] = useState<number>(0)
+    const [activelabel, setActiveTabLabel] = useState<string>()
+    const { pathname } = useLocation()
+
+    const navigate = useNavigate()
+    // Access specific query parameters by their names
+    const activeTab = window.location.pathname.split('/')[2]
+    const tabs: tabsProps[] = [
         {
             label: 'SCHEME TO DEALER',
             icon: FaUser,
             path: 'scheme-to-dealer',
-            moduleName: UserModuleNameTypes.ACTION_SCHEME_TO_DEALER_MAPPING_TAB,
+            name: UserModuleNameTypes.ACTION_SCHEME_TO_DEALER_MAPPING_TAB,
         },
         {
             label: 'DEALER TO SCHEME',
             icon: MdOutlineSchema,
             path: 'dealer-to-scheme',
-            moduleName: UserModuleNameTypes.ACTION_DEALER_TO_SCHEME_MAPPING_TAB,
+            name: UserModuleNameTypes.ACTION_DEALER_TO_SCHEME_MAPPING_TAB,
+        },
+    ]
+    const breadcrumbs: BreadcrumbType[] = [
+        {
+            label: 'Mapping',
+            path: '',
+        },
+        {
+            label: `${activelabel}`,
         },
     ]
 
-const MappingTabsLayout = (props: Props) => {
-    const location = useLocation()
+    const allowedTabs = tabs
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
+    useEffect(() => {
+        if (!activeTab) return
 
-    const navigate = useNavigate()
+        navigate(`${pathname}`)
 
-    const currentPath = location.pathname.split('/')[2]
+        //eslint-disable-next-line
+    }, [activeTab])
+
+    useEffect(() => {
+        if (!activeTab) return
+
+        let activeIndex = allowedTabs?.findIndex(
+            (tab: tabsProps) => tab.path === activeTab
+        )
+        activeIndex = activeIndex < 0 ? 0 : activeIndex
+
+        setActiveTab(activeIndex)
+        const labelTab: string = allowedTabs[activeIndex]?.label || ''
+        setActiveTabLabel(labelTab)
+    }, [activeTab, allowedTabs])
 
     return (
         <SideNavLayout>
-            <div className="flex flex-col gap-2 h-full">
-                {inquiriesEditTabs?.length && (
-                    <div className="flex gap-3 items-center border-b border-slate-400 bg-white">
-                        {inquiriesEditTabs?.map((tab: any, index: any) => {
-                            return (
-                                <div key={index}>
-                                    <button
-                                        type="button"
-                                        onClick={() => navigate(tab.path)}
-                                        className={`h-full px-5 pb-2 py-2 flex gap-2 border-b-[3px]  items-center hover:text-primary-main font-medium text-sm transition-all
-        ${currentPath === tab.path?.split('/')[0]
-                                                ? 'text-primary-main   border-primary-main'
-                                                : 'text-gray-700 border-white'
-                                            }
-         `}
-                                    >
-                                        <div className=" text-lg  ">
-                                            <tab.icon />
-                                        </div>
-                                        {tab.label}
-                                    </button>
-                                </div>
-                            )
-                        })}
+            <div className="h-[calc(100vh-55px)]">
+                <div className="w-full flex  h-[calc(100%)] bg-white">
+                    {/* Right Section */}
+                    <div className="w-[100%] border-b border-r border-l rounded-r h-full overflow-x-scroll">
+                        <TabScrollable
+                            tabs={allowedTabs}
+                            active={activeTabIndex}
+                            navBtnContainerClassName="bg-red-500"
+                        />
+
+                        <div className="py-2 px-4">
+                            <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+                        </div>
+
+                        <div className="h-[calc(100vh-135px)] w-full ">
+                            <Outlet />
+                        </div>
                     </div>
-                )}
-                <div className="grow overflow-auto ">
-                    <Outlet />
                 </div>
             </div>
         </SideNavLayout>
