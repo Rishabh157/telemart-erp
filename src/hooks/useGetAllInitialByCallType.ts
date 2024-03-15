@@ -18,6 +18,7 @@ export const useGetAllInitialByCallType = (callType: string) => {
                 return {
                     label: ele?.initialCallDisplayName,
                     value: ele?._id,
+                    originalLabel: ele?.initialCallName,
                 }
             })
             setInitialCallOneByCallType(filterOption)

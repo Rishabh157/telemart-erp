@@ -98,6 +98,7 @@ import InwardDealerSlice from './slices/InwardDealerSlice'
 import CallCenterMasterSlice from './slices/CallCenterMasterSlice'
 import ndrDispositionSlice from './slices/configuration/ndrDispositionSlice'
 import ComplainSlice from './slices/ComplainSlice'
+import MoneybackSlice from './slices/MoneybackSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -193,7 +194,8 @@ const store = configureStore({
         inventoryFlow: InventoryFlowSlice,
         inwardDealer: InwardDealerSlice,
         callCenter: CallCenterMasterSlice,
-        complain : ComplainSlice,
+        complain: ComplainSlice,
+        moneyback: MoneybackSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

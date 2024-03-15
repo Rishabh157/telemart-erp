@@ -20,6 +20,8 @@ type Props = {
     denyButtonText?: string
     reverseButtons?: boolean
     next?: (result: SweetAlertResult<any>) => void
+    input?: any
+    inputPlaceholder?: string
 }
 
 export const showConfirmationDialog = ({
@@ -34,11 +36,15 @@ export const showConfirmationDialog = ({
     confirmButtonText = 'Yes',
     reverseButtons = true,
     next = () => {},
+    input,
+    inputPlaceholder = 'Enter your reason',
 }: Props) => {
     return Swal.fire({
         title,
         text,
         icon,
+        input,
+        inputPlaceholder,
         showCancelButton,
         confirmButtonColor,
         cancelButtonColor,

@@ -183,8 +183,21 @@ const CustomerComplaintDetailsForm = ({
                             value={values.initialCallOne || ''}
                             options={initialCallOneByCallType}
                             isLoading={isDataLoading}
+                            // isValueWithLable
                             onChange={(e) => {
                                 setFieldValue('initialCallOne', e)
+
+                                let obj = initialCallOneByCallType?.find(
+                                    (ele) => ele?.value === e
+                                )
+                                if (obj) {
+                                    setFieldValue(
+                                        'icOneLabel',
+                                        obj?.originalLabel
+                                    )
+                                } else {
+                                    setFieldValue('icOneLabel', '')
+                                }
                             }}
                         />
                         <ATMSelectSearchable
@@ -202,6 +215,18 @@ const CustomerComplaintDetailsForm = ({
                             isLoading={isInitialCallTwoDataLoaading}
                             onChange={(e) => {
                                 setFieldValue('initialCallTwo', e || '')
+                                let obj =
+                                    initialCallTwoByCallTypeAndOneId?.find(
+                                        (ele) => ele?.value === e
+                                    )
+                                if (obj) {
+                                    setFieldValue(
+                                        'icTwoLabel',
+                                        obj?.originalLabel
+                                    )
+                                } else {
+                                    setFieldValue('icTwoLabel', '')
+                                }
                             }}
                         />
                         <ATMSelectSearchable
@@ -219,6 +244,18 @@ const CustomerComplaintDetailsForm = ({
                             isLoading={isInitialCallThreeDataLoaading}
                             onChange={(e) => {
                                 setFieldValue('initialCallThree', e)
+                                let obj =
+                                    initialCallThreeByCallTypeAndTwoId?.find(
+                                        (ele) => ele?.value === e
+                                    )
+                                if (obj) {
+                                    setFieldValue(
+                                        'icThreeLabel',
+                                        obj?.originalLabel
+                                    )
+                                } else {
+                                    setFieldValue('icThreeLabel', '')
+                                }
                             }}
                         />
                         <ATMSelectSearchable
