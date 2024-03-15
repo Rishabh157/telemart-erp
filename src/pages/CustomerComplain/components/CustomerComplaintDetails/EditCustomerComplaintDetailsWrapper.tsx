@@ -126,8 +126,6 @@ const EditCustomerComplaintDetailsWrapper = ({
             icThreeLabel: values?.icThreeLabel,
         }
 
-        console.log('formatedValues', formatedValues)
-
         updateComplaint({ id: complaintId, body: formatedValues }).then(
             (res: any) => {
                 if ('data' in res) {

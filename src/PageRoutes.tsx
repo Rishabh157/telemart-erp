@@ -264,6 +264,7 @@ import AddDealerToSchemeMappingWrapper from './pages/mapping/addDealerToScheme/A
 import ViewRequest from './pages/request'
 import MoneybackListingWrapper from './pages/request/all/moneybackTab/MoneybackListingWrapper'
 import MoneybackLogsListingWrapper from './pages/request/all/moneybackTab/view/MoneybackLogsListingWrapper'
+import ProductReplacementListingWrapper from './pages/request/all/productReplacement/ProductReplacementListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2508,6 +2509,7 @@ const PageRoutes = () => {
                         // />
                     }
                 >
+                    {/* Moneyback Requets */}
                     <Route
                         index
                         path="moneyback"
@@ -2528,6 +2530,23 @@ const PageRoutes = () => {
                         path="moneyback/:id/view"
                         element={
                             <MoneybackLogsListingWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+
+                    {/* Product Replacement Requets */}
+                    <Route
+                        index
+                        path="product-replacement"
+                        element={
+                            <ProductReplacementListingWrapper />
                             // <Authorization
                             //     children={
                             //         <DealerGeneralInformationTabWrapper />

@@ -31,7 +31,7 @@ type MoneybackLogsListResponseType = {
 const MoneybackLogsListingWrapper = () => {
     const params = useParams()
     const id: any = params.id
-    console.log('id: ', id)
+
     const [moneybackLogs, setMoneybackLogs] = useState<any[]>([])
     const [apiStatus, setapiStatus] = React.useState<boolean>(false)
 
