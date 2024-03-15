@@ -99,6 +99,7 @@ import CallCenterMasterSlice from './slices/CallCenterMasterSlice'
 import ndrDispositionSlice from './slices/configuration/ndrDispositionSlice'
 import ComplainSlice from './slices/ComplainSlice'
 import MoneybackSlice from './slices/MoneybackSlice'
+import ProductReplacementSlice from './slices/ProductReplacementSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -196,6 +197,7 @@ const store = configureStore({
         callCenter: CallCenterMasterSlice,
         complain: ComplainSlice,
         moneyback: MoneybackSlice,
+        productReplacement: ProductReplacementSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

@@ -75,6 +75,7 @@ const AddAccountApprovedForm = ({ formikProps, apiStatus }: Props) => {
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-2 gap-4">
                             <ATMTextField
+                                required
                                 name="settledAmount"
                                 value={values?.settledAmount}
                                 label="Settled Amount"
@@ -99,6 +100,9 @@ const AddAccountApprovedForm = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMTextField
+                                readOnly
+                                disabled
+                                required
                                 name="amountInWords"
                                 value={values?.amountInWords}
                                 label="Enter Amount In Words"
@@ -114,6 +118,7 @@ const AddAccountApprovedForm = ({ formikProps, apiStatus }: Props) => {
 
                             <div className="-mt-3">
                                 <ATMTextArea
+                                    required
                                     minRows={4}
                                     name="accountRemark"
                                     value={values?.accountRemark}
