@@ -56,23 +56,21 @@ const AddAccountApprovedFormWrapper = ({
             amountInWords: values.amountInWords,
         }
 
-        console.log('formatedValues', formatedValues)
-
-        // setTimeout(() => {
-        //     addAccountApprovalInfo(formatedValues).then((res: any) => {
-        //         if ('data' in res) {
-        //             if (res?.data?.status) {
-        //                 showToast('success', 'Added successfully!')
-        //                 handleClose()
-        //             } else {
-        //                 showToast('error', res?.data?.message)
-        //             }
-        //         } else {
-        //             showToast('error', 'Something went wrong')
-        //         }
-        //         setApiStatus(false)
-        //     })
-        // }, 1000)
+        setTimeout(() => {
+            addAccountApprovalInfo(formatedValues).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'Added successfully!')
+                        handleClose()
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+                setApiStatus(false)
+            })
+        }, 1000)
     }
 
     return (

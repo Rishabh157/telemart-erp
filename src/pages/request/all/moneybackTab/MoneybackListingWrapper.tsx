@@ -431,7 +431,7 @@ const MoneybackListingWrapper = () => {
                                             clickable={true}
                                         />
                                     </button>
-                                ) : (
+                                ) : row?.accountApproval === false ? (
                                     <button
                                         id="btn"
                                         disabled={true}
@@ -440,6 +440,20 @@ const MoneybackListingWrapper = () => {
                                         <Chip
                                             label="Account Rejected"
                                             color="error"
+                                            variant="outlined"
+                                            size="small"
+                                            clickable={false}
+                                        />
+                                    </button>
+                                ) : (
+                                    <button
+                                        id="btn"
+                                        disabled={true}
+                                        className="cursor-pointer"
+                                    >
+                                        <Chip
+                                            label="Account Approved"
+                                            color="success"
                                             variant="outlined"
                                             size="small"
                                             clickable={false}
@@ -475,9 +489,7 @@ const MoneybackListingWrapper = () => {
             renderCell: (row: MoneybackListResponse) => (
                 <ActionPopup
                     isView
-                    handleViewActionButton={() =>
-                        navigate(`/moneyback/view/${row?._id}`)
-                    }
+                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                     }}

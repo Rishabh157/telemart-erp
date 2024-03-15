@@ -14,6 +14,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
+import { NumberToWordsConverter } from 'src/utils/numberToEnglishWord'
 
 // |-- Types --|
 type Props = {
@@ -79,13 +80,22 @@ const AddAccountApprovedForm = ({ formikProps, apiStatus }: Props) => {
                                 label="Settled Amount"
                                 placeholder="Enter settled amount"
                                 className="mt-0 rounded"
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     handleValidNumber(e) &&
-                                    handleSetFieldValue(
-                                        'settledAmount',
-                                        e.target.value
-                                    )
-                                }
+                                        handleSetFieldValue(
+                                            'settledAmount',
+                                            e.target.value
+                                        )
+                                    handleValidNumber(e) &&
+                                        handleSetFieldValue(
+                                            'amountInWords',
+                                            e.target.value
+                                                ? NumberToWordsConverter.convert(
+                                                      parseInt(e.target.value)
+                                                  )
+                                                : ''
+                                        )
+                                }}
                             />
 
                             <ATMTextField
