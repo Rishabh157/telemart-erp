@@ -28,6 +28,7 @@ type Props = {}
 export type FormInitialValues = {
     schemeId: string
     dealers: { label: string; value: string }[]
+    dealersToRemove : { label: string; value: string }[]
 }
 
 const AddSchemeToDealerMappingWrapper = (props: Props) => {
@@ -46,6 +47,7 @@ const AddSchemeToDealerMappingWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         schemeId: '',
         dealers: [],
+        dealersToRemove: [],
     }
 
     // Form Validation Schema
@@ -91,9 +93,8 @@ const AddSchemeToDealerMappingWrapper = (props: Props) => {
         setTimeout(() => {
             saveMultipleDealerToSingleScheme({
                 schemeId: values.schemeId,
-                dealers: values.dealers
-                    ?.filter((ele: any) => ele?.flag === false)
-                    ?.map((ele) => ele?.value),
+                dealers: values.dealers?.map((ele) => ele?.value),
+                dealersToRemove: values.dealersToRemove?.map((ele) => ele?.value),
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

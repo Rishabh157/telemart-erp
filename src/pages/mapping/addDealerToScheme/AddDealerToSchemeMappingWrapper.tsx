@@ -90,9 +90,8 @@ const AddDealerToSchemeMappingWrapper = (props: Props) => {
         setTimeout(() => {
             saveMultipleSchemeToSingleDealer({
                 dealerId: values.dealerId,
-                schemes: values.schemes
-                    ?.filter((ele: any) => ele?.flag === false)
-                    ?.map((ele) => ele?.value),
+                schemes: values.schemes?.map((ele) => ele?.value),
+                schemesToRemove: values.schemeToRemove?.map((ele) => ele?.value),
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
