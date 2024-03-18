@@ -37,6 +37,7 @@ const AddSchemeToDealerMapping = ({
         //     setFieldValue('dealers', newValue),
         leftSideTitle: 'All Dealers',
         rightSideTitle: 'Dealers to add',
+        setLeftSideData: (newValue: { label: string; value: string }[]) =>  setFieldValue('dealersToRemove', newValue),
     }
 
     // GET SCHEME LIST BY Company Id
@@ -56,6 +57,9 @@ const AddSchemeToDealerMapping = ({
 
             // already having dealers
             setFieldValue('dealers', dealerListData?.alreadyHaveScheme)
+          
+            // already having dealers
+            setFieldValue('dealersToRemove', dealerListData?.notAssignedScheme)
         }
     }, [
         dealerListData,
