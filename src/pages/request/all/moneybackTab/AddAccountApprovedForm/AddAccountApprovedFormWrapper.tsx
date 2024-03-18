@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object } from 'yup'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import AddAccountApprovedForm from './AddAccountApprovedForm'
@@ -46,7 +47,11 @@ const AddAccountApprovedFormWrapper = ({
         complaintNumber: complaintNumber,
     }
 
-    const validationSchema = object({})
+    const validationSchema = object({
+        // settledAmount: string().required('Please enter settled amount'),
+        // amountInWords: string().required('Please enter amount in words'),
+        // accountRemark: string().required('Please enter remark'),
+    })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
