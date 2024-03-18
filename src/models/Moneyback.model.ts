@@ -58,4 +58,6 @@ export type MoneybackListResponse = {
     StateLable: string
     DistrictLable: string
     tehsilLable: string
+    requestCreatedById: string
+    requestCreatedByLabel: string
 }

@@ -1,11 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/// ==============================================
-// Filename:MoneybackListingWrapper.tsx
-// Type: List Component
-// Last Updated: March 14, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -121,12 +113,14 @@ const ProductReplacementListingWrapper = () => {
     const handleAccountApproval = (
         _id: string,
         approve: boolean,
-        remark: string
+        remark: string,
+        orderReferenceNumber: number
     ) => {
         accountApproval({
             id: _id,
             accountApproval: approve,
             accountRemark: remark,
+            orderReferenceNumber,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -545,14 +539,20 @@ const ProductReplacementListingWrapper = () => {
                                                     return handleAccountApproval(
                                                         row?._id,
                                                         res?.isConfirmed,
-                                                        res?.value
+                                                        res?.value,
+                                                        parseInt(
+                                                            row?.orderNumber
+                                                        )
                                                     )
                                                 }
                                                 if (res.isDenied) {
                                                     return handleAccountApproval(
                                                         row?._id,
                                                         res?.isConfirmed,
-                                                        res?.value
+                                                        res?.value,
+                                                        parseInt(
+                                                            row?.orderNumber
+                                                        )
                                                     )
                                                 }
                                             })
@@ -603,22 +603,27 @@ const ProductReplacementListingWrapper = () => {
                 )
             },
         },
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     extraClasses: 'mr-4',
-        //     renderCell: (row: MoneybackListResponse) => (
-        //         <ActionPopup
-        //             isView
-        //             handleViewActionButton={() => navigate(`${row?._id}/view`)}
-        //             handleOnAction={() => {
-        //                 setShowDropdown(!showDropdown)
-        //             }}
-        //         />
-        //     ),
-        //     align: 'end',
-        // },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'mr-4',
+            renderCell: (row: MoneybackListResponse) => (
+                <ActionPopup
+                    isView
+                    isCustomBtn
+                    customBtnText="Logs"
+                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                    }}
+                    handleCustomActionButton={() =>
+                        navigate(`${row?._id}/logs`)
+                    }
+                />
+            ),
+            align: 'end',
+        },
     ]
 
     return (
