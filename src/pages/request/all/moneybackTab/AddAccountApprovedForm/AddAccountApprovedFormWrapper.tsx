@@ -16,7 +16,7 @@ import { useAddAccountApprovalMutation } from 'src/services/MoneybackServices'
 // |-- Types --|
 type Props = {
     moneybackRequestId: any
-    complaintNumber:string
+    complaintNumber: string
     handleClose: () => void
 }
 
@@ -50,7 +50,7 @@ const AddAccountApprovedFormWrapper = ({
     const validationSchema = object({
         // settledAmount: string().required('Please enter settled amount'),
         // amountInWords: string().required('Please enter amount in words'),
-        // accountRemark: string().required('Please enter remark'),
+        accountRemark: string().required('Please enter remark'),
     })
 
     //    Form Submit Handler

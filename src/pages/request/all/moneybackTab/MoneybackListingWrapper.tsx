@@ -50,6 +50,7 @@ const MoneybackListingWrapper = () => {
     // Dispatching State
 
     const [currentId, setCurrentId] = useState<string>()
+    const [customerNumber, setCustomerNumber] = useState<string>()
     const [complaintNumber, setComplaintNumber] = useState<string>()
     const [isShowCustomerInfoForm, setIsShowCustomerInfoForm] =
         useState<boolean>(false)
@@ -126,6 +127,25 @@ const MoneybackListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: MoneybackListResponse) => (
+                <ActionPopup
+                    isView
+                    isCustomBtn
+                    customBtnText="Logs"
+                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                    }}
+                    handleCustomActionButton={() =>
+                        navigate(`${row?._id}/logs`)
+                    }
+                />
+            ),
+        },
         {
             field: 'orderNumber',
             headerName: 'Order No.',
@@ -274,6 +294,7 @@ const MoneybackListingWrapper = () => {
                         className="bg-primary-main px-3 py-1 rounded text-white"
                         onClick={() => {
                             setIsShowCustomerInfoForm(true)
+                            setCustomerNumber(row?.customerNumber)
                             setCurrentId(row?._id)
                             setComplaintNumber(row?.complaintNumber)
                         }}
@@ -334,27 +355,6 @@ const MoneybackListingWrapper = () => {
                 )
             },
         },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            extraClasses: 'mr-4',
-            renderCell: (row: MoneybackListResponse) => (
-                <ActionPopup
-                    isView
-                    isCustomBtn
-                    customBtnText="Logs"
-                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                    }}
-                    handleCustomActionButton={() =>
-                        navigate(`${row?._id}/logs`)
-                    }
-                />
-            ),
-            align: 'end',
-        },
     ]
 
     return (
@@ -373,6 +373,7 @@ const MoneybackListingWrapper = () => {
                 component={
                     <AddCustomerInfoFormWrapper
                         moneybackRequestId={currentId}
+                        customerNumber={customerNumber || ''}
                         handleClose={() => setIsShowCustomerInfoForm(false)}
                     />
                 }

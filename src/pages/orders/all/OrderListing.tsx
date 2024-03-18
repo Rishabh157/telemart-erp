@@ -415,6 +415,15 @@ const OrderListing = ({
             ),
         },
         {
+            field: 'orderReferenceNumber',
+            headerName: 'Order Ref No.',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row.orderReferenceNumber || '-'}</span>
+            ),
+        },
+        {
             field: 'inquiryNumber',
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
