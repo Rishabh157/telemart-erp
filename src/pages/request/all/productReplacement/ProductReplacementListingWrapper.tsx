@@ -139,6 +139,26 @@ const ProductReplacementListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'mr-4',
+            renderCell: (row: MoneybackListResponse) => (
+                <ActionPopup
+                    isView
+                    isCustomBtn
+                    customBtnText="Logs"
+                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                    }}
+                    handleCustomActionButton={() =>
+                        navigate(`${row?._id}/logs`)
+                    }
+                />
+            ),
+        },
+        {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
@@ -602,27 +622,6 @@ const ProductReplacementListingWrapper = () => {
                     </div>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            extraClasses: 'mr-4',
-            renderCell: (row: MoneybackListResponse) => (
-                <ActionPopup
-                    isView
-                    isCustomBtn
-                    customBtnText="Logs"
-                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                    }}
-                    handleCustomActionButton={() =>
-                        navigate(`${row?._id}/logs`)
-                    }
-                />
-            ),
-            align: 'end',
         },
     ]
 

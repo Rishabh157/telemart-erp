@@ -58,6 +58,7 @@ const AddCustomerInfoForm = ({ formikProps, apiStatus }: Props) => {
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             <ATMTextField
+                                required
                                 name="customerNumber"
                                 value={values?.customerNumber}
                                 label="Customer Number"
@@ -73,6 +74,7 @@ const AddCustomerInfoForm = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMTextField
+                                required
                                 name="alternateNumber"
                                 value={values?.alternateNumber}
                                 label="Alternate Number"
@@ -88,6 +90,7 @@ const AddCustomerInfoForm = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMTextField
+                                required
                                 name="bankName"
                                 value={values?.bankName}
                                 label="Bank Name"
@@ -102,6 +105,7 @@ const AddCustomerInfoForm = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMTextField
+                                required
                                 name="accountNumber"
                                 value={values?.accountNumber}
                                 label="Account Number"
@@ -117,6 +121,7 @@ const AddCustomerInfoForm = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMTextField
+                                required
                                 name="ifscCode"
                                 value={values?.ifscCode}
                                 label="IFSE Code"
@@ -132,6 +137,7 @@ const AddCustomerInfoForm = ({ formikProps, apiStatus }: Props) => {
 
                             <div className="-mt-3">
                                 <ATMTextArea
+                                    required
                                     minRows={4}
                                     name="ccRemark"
                                     value={values?.ccRemark}

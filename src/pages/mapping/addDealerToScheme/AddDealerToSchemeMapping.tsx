@@ -34,7 +34,8 @@ const AddDealerToSchemeMapping = ({
             setFieldValue('schemes', newValue),
         leftSideTitle: 'All Schemes',
         rightSideTitle: 'Schemes to add',
-        setLeftSideData: (newValue: { label: string; value: string }[]) =>  setFieldValue('schemeToRemove', newValue),
+        setLeftSideData: (newValue: { label: string; value: string }[]) =>
+            setFieldValue('schemeToRemove', newValue),
         // setFieldValue('schemes', newValue),
     }
 
@@ -62,7 +63,6 @@ const AddDealerToSchemeMapping = ({
         isSchemeListLoading,
         setFieldValue,
     ])
-console.log("values",values)
     return (
         <div className="py-0.5 h-[calc(100%)] flex flex-col gap-2">
             {/* <div className="pt-1">
