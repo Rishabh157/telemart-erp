@@ -16,6 +16,7 @@ import { useAddAccountApprovalMutation } from 'src/services/MoneybackServices'
 // |-- Types --|
 type Props = {
     moneybackRequestId: any
+    complaintNumber:string
     handleClose: () => void
 }
 
@@ -25,10 +26,12 @@ export type FormInitialValues = {
     accountApproval: boolean
     settledAmount: string
     amountInWords: string
+    complaintNumber: string
 }
 
 const AddAccountApprovedFormWrapper = ({
     moneybackRequestId,
+    complaintNumber,
     handleClose,
 }: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -41,6 +44,7 @@ const AddAccountApprovedFormWrapper = ({
         settledAmount: '',
         accountRemark: '',
         amountInWords: '',
+        complaintNumber: complaintNumber,
     }
 
     const validationSchema = object({
@@ -55,10 +59,11 @@ const AddAccountApprovedFormWrapper = ({
 
         const formatedValues = {
             id: moneybackRequestId || '',
-            accountApproval: values.accountApproval,
-            settledAmount: values.settledAmount,
-            accountRemark: values.accountRemark,
-            amountInWords: values.amountInWords,
+            accountApproval: values?.accountApproval,
+            settledAmount: values?.settledAmount,
+            accountRemark: values?.accountRemark,
+            amountInWords: values?.amountInWords,
+            complaintNumber: values?.complaintNumber,
         }
 
         setTimeout(() => {

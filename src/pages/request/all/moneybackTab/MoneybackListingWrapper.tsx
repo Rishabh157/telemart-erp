@@ -37,10 +37,11 @@ import { showToast } from 'src/utils'
 // import moment from 'moment'
 import MoneybackListing from './MoneybackListing'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddCustomerInfoFormWrapper from './AddCustomerInfoForm/AddCustomerInfoFormWrapper'
 import AddAccountApprovedFormWrapper from './AddAccountApprovedForm/AddAccountApprovedFormWrapper'
+import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 
 const MoneybackListingWrapper = () => {
     // Hooks
@@ -49,6 +50,7 @@ const MoneybackListingWrapper = () => {
     // Dispatching State
 
     const [currentId, setCurrentId] = useState<string>()
+    const [complaintNumber, setComplaintNumber] = useState<string>()
     const [isShowCustomerInfoForm, setIsShowCustomerInfoForm] =
         useState<boolean>(false)
     const [isShowAccountApprovalForm, setIsShowAccountApprovalForm] =
@@ -98,13 +100,15 @@ const MoneybackListingWrapper = () => {
         _id: string,
         level: 'FIRST' | 'SECOND',
         approve: boolean,
-        remark: string
+        remark: string,
+        complaintNumber: string
     ) => {
         managerLevelApproval({
             id: _id,
             level,
             approve,
             remark,
+            complaintNumber: parseInt(complaintNumber),
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -177,206 +181,71 @@ const MoneybackListingWrapper = () => {
             renderCell: (row: MoneybackListResponse) => {
                 return (
                     <div className="z-0">
-                        {!row?.managerFirstApproval ? (
-                            <Stack direction="row" spacing={1}>
-                                {row?.managerFirstApproval === null ? (
-                                    <button
-                                        id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
-                                        onClick={() => {
-                                            Swal.fire({
-                                                icon: 'warning',
-                                                confirmButtonColor: '#3085d6',
-                                                cancelButtonColor: '#dc3741',
-                                                confirmButtonText: 'Yes',
-                                                title: 'First Approval',
-                                                text: 'Do you want to Approve ?',
-                                                input: 'text', // Add input field
-                                                inputPlaceholder:
-                                                    'Enter remark', // Placeholder for the input field
-                                                showCancelButton: true,
-
-                                                showDenyButton: true,
-                                                denyButtonText: 'Reject',
-                                                reverseButtons: true,
-                                                showLoaderOnConfirm: true,
-                                                // Show loader when confirming
-                                                preDeny: (res) => {
-                                                    Swal.showValidationMessage(
-                                                        'Please enter a remark'
-                                                    )
-
-                                                    if (
-                                                        !Swal.getInput()?.value
-                                                    ) {
-                                                        return res
-                                                    } else {
-                                                        return Swal.getInput()
-                                                            ?.value
-                                                    }
-                                                },
-
-                                                preConfirm: (reason: any) => {
-                                                    // Handle the confirmation and input value
-                                                    if (!reason) {
-                                                        Swal.showValidationMessage(
-                                                            'Please enter a remark'
-                                                        )
-                                                    }
-                                                },
-                                                allowOutsideClick: () =>
-                                                    !Swal.isLoading(), // Allow clicking outside when not loading
-                                            }).then((res: any) => {
-                                                if (res.isConfirmed) {
-                                                    return handleManagerFirstLevelApprovalComplete(
-                                                        row?._id,
-                                                        'FIRST',
-                                                        res?.isConfirmed,
-                                                        res?.value
-                                                    )
-                                                }
-                                                if (res.isDenied) {
-                                                    return handleManagerFirstLevelApprovalComplete(
-                                                        row?._id,
-                                                        'FIRST',
-                                                        res?.isConfirmed,
-                                                        res?.value
-                                                    )
-                                                }
-                                            })
-                                        }}
-                                    >
-                                        <Chip
-                                            label="First Pending"
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="First Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={false}
-                                        />
-                                    </button>
-                                )}
-                            </Stack>
-                        ) : (
-                            <Stack direction="row" spacing={1}>
-                                {row?.managerSecondApproval === null ? (
-                                    <button
-                                        id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
-                                        onClick={() => {
-                                            Swal.fire({
-                                                icon: 'warning',
-                                                confirmButtonColor: '#3085d6',
-                                                cancelButtonColor: '#dc3741',
-                                                confirmButtonText: 'Yes',
-                                                title: 'Second Approval',
-                                                text: 'Do you want to Approve ?',
-                                                input: 'text', // Add input field
-                                                inputPlaceholder:
-                                                    'Enter remark', // Placeholder for the input field
-                                                showCancelButton: true,
-                                                showDenyButton: true,
-                                                denyButtonText: 'Reject',
-                                                reverseButtons: true,
-                                                showLoaderOnConfirm: true, // Show loader when confirming
-                                                // Show loader when confirming
-                                                preDeny: (res) => {
-                                                    Swal.showValidationMessage(
-                                                        'Please enter a remark'
-                                                    )
-
-                                                    if (
-                                                        !Swal.getInput()?.value
-                                                    ) {
-                                                        return res
-                                                    } else {
-                                                        return Swal.getInput()
-                                                            ?.value
-                                                    }
-                                                },
-                                                preConfirm: (reason: any) => {
-                                                    // Handle the confirmation and input value
-                                                    if (!reason) {
-                                                        Swal.showValidationMessage(
-                                                            'Please enter a remark'
-                                                        )
-                                                    }
-                                                },
-                                                allowOutsideClick: () =>
-                                                    !Swal.isLoading(), // Allow clicking outside when not loading
-                                            }).then((res: any) => {
-                                                if (res.isConfirmed) {
-                                                    return handleManagerFirstLevelApprovalComplete(
-                                                        row?._id,
-                                                        'SECOND',
-                                                        res?.isConfirmed,
-                                                        res?.value
-                                                    )
-                                                }
-                                                if (res.isDenied) {
-                                                    return handleManagerFirstLevelApprovalComplete(
-                                                        row?._id,
-                                                        'SECOND',
-                                                        res?.isConfirmed,
-                                                        res?.value
-                                                    )
-                                                }
-                                            })
-                                        }}
-                                    >
-                                        <Chip
-                                            className="z-0"
-                                            label="Second Pending "
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : row?.managerSecondApproval ? (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="Second Approved"
-                                            color="success"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="Second Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                )}
-                            </Stack>
-                        )}
+                        <SwtAlertChipConfirm
+                            title="Approval"
+                            text="Do you want to Approve ?"
+                            color={
+                                row?.managerFirstApproval === null
+                                    ? 'warning'
+                                    : row?.managerFirstApproval === false
+                                    ? 'error'
+                                    : row?.managerSecondApproval
+                                    ? 'success'
+                                    : row?.managerSecondApproval === null
+                                    ? 'warning'
+                                    : 'error'
+                            }
+                            chipLabel={
+                                row?.managerFirstApproval === null
+                                    ? 'First Pending'
+                                    : row?.managerFirstApproval === false
+                                    ? 'First Rejected'
+                                    : row?.managerSecondApproval
+                                    ? 'Second Approved'
+                                    : row?.managerSecondApproval === null
+                                    ? 'Second Pending'
+                                    : 'Second Rejected'
+                            }
+                            disabled={
+                                row?.managerFirstApproval === null
+                                    ? false
+                                    : row?.managerFirstApproval === false
+                                    ? true
+                                    : row?.ccApproval === false
+                                    ? true
+                                    : row?.managerSecondApproval === null
+                                    ? false
+                                    : true
+                            }
+                            input={'text'}
+                            inputPlaceholder="remark"
+                            showCancelButton
+                            showDenyButton
+                            icon="warning"
+                            confirmButtonColor="#3085d6"
+                            cancelButtonColor="#dc3741"
+                            confirmButtonText="Yes"
+                            next={(res) => {
+                                if (!row?.managerFirstApproval) {
+                                    return handleManagerFirstLevelApprovalComplete(
+                                        row?._id,
+                                        'FIRST',
+                                        res?.isConfirmed,
+                                        res?.value,
+                                        row?.complaintNumber
+                                    )
+                                }
+                                if (row?.managerSecondApproval === null) {
+                                    return handleManagerFirstLevelApprovalComplete(
+                                        row?._id,
+                                        'SECOND',
+                                        res?.isConfirmed,
+                                        res?.value,
+                                        row?.complaintNumber
+                                    )
+                                }
+                            }}
+                        />
                     </div>
                 )
             },
@@ -396,6 +265,7 @@ const MoneybackListingWrapper = () => {
                         onClick={() => {
                             setIsShowCustomerInfoForm(true)
                             setCurrentId(row?._id)
+                            setComplaintNumber(row?.complaintNumber)
                         }}
                     >
                         Add
@@ -412,70 +282,42 @@ const MoneybackListingWrapper = () => {
                 return (
                     //
                     <div className="z-0">
-                        {row?.managerSecondApproval ? (
+                        {row?.managerSecondApproval && (
                             <Stack direction="row" spacing={1}>
-                                {row?.accountApproval === null ? (
-                                    <button
-                                        id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
-                                        onClick={() => {
-                                            setIsShowAccountApprovalForm(true)
-                                            setCurrentId(row?._id)
-                                        }}
-                                    >
-                                        <Chip
-                                            label="Account Pending"
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : row?.accountApproval === false ? (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="Account Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={false}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="Account Approved"
-                                            color="success"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={false}
-                                        />
-                                    </button>
-                                )}
+                                <button
+                                    id="btn"
+                                    className="overflow-hidden cursor-pointer z-0"
+                                    disabled={
+                                        row?.accountApproval === null
+                                            ? false
+                                            : true
+                                    }
+                                    onClick={() => {
+                                        setIsShowAccountApprovalForm(true)
+                                        setCurrentId(row?._id)
+                                    }}
+                                >
+                                    <Chip
+                                        label={
+                                            row?.accountApproval === null
+                                                ? 'Account Pending'
+                                                : row?.accountApproval
+                                                ? 'Account Approved'
+                                                : 'Account Rejected'
+                                        }
+                                        color={
+                                            row?.accountApproval === null
+                                                ? 'warning'
+                                                : row?.accountApproval
+                                                ? 'success'
+                                                : 'error'
+                                        }
+                                        variant="outlined"
+                                        size="small"
+                                        clickable={true}
+                                    />
+                                </button>
                             </Stack>
-                        ) : (
-                            <></>
-                            // <button
-                            //     id="btn"
-                            //     disabled={true}
-                            //     className="cursor-pointer"
-                            // >
-                            //     <Chip
-                            //         label="Account Approved"
-                            //         color="success"
-                            //         variant="outlined"
-                            //         size="small"
-                            //         clickable={false}
-                            //     />
-                            // </button>
                         )}
                     </div>
                 )
@@ -530,6 +372,7 @@ const MoneybackListingWrapper = () => {
                 component={
                     <AddAccountApprovedFormWrapper
                         moneybackRequestId={currentId}
+                        complaintNumber={complaintNumber as string}
                         handleClose={() => setIsShowAccountApprovalForm(false)}
                     />
                 }
