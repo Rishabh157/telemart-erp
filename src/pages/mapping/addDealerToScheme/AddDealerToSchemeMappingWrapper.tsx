@@ -25,6 +25,7 @@ type Props = {}
 export type FormInitialValues = {
     dealerId: string
     schemes: { label: string; value: string }[]
+    schemeToRemove: { label: string; value: string }[]
 }
 
 const AddDealerToSchemeMappingWrapper = (props: Props) => {
@@ -43,6 +44,7 @@ const AddDealerToSchemeMappingWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         dealerId: '',
         schemes: [],
+        schemeToRemove: [],
     }
 
     // Form Validation Schema
