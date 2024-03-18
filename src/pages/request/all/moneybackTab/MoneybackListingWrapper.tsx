@@ -164,6 +164,16 @@ const MoneybackListingWrapper = () => {
             ),
         },
         {
+            field: 'requestCreatedByLabel',
+            headerName: 'Request Created By',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: MoneybackListResponse) => (
+                <span>{row?.requestCreatedByLabel || '-'}</span>
+            ),
+        },
+        {
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
@@ -295,6 +305,7 @@ const MoneybackListingWrapper = () => {
                                     onClick={() => {
                                         setIsShowAccountApprovalForm(true)
                                         setCurrentId(row?._id)
+                                        setComplaintNumber(row?.complaintNumber)
                                     }}
                                 >
                                     <Chip
@@ -331,10 +342,15 @@ const MoneybackListingWrapper = () => {
             renderCell: (row: MoneybackListResponse) => (
                 <ActionPopup
                     isView
+                    isCustomBtn
+                    customBtnText="Logs"
                     handleViewActionButton={() => navigate(`${row?._id}/view`)}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                     }}
+                    handleCustomActionButton={() =>
+                        navigate(`${row?._id}/logs`)
+                    }
                 />
             ),
             align: 'end',

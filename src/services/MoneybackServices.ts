@@ -32,6 +32,16 @@ export const moneybackApi = apiSlice.injectEndpoints({
         }),
 
         //***** GET *****/
+        getMoneybackOrderById: builder.query({
+            providesTags: ['moneyback'],
+            query: (id:string) => ({
+                url: `/money-back/${id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET *****/
         getAllMoneybackLogsById: builder.query({
             // providesTags: ['moneyback'],
             query: (moneybackId: string) => ({
@@ -77,6 +87,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
 export const {
     useGetMoneybackOrderQuery,
     useGetAllMoneybackOrderQuery,
+    useGetMoneybackOrderByIdQuery,
     useGetAllMoneybackLogsByIdQuery,
     useMangerFirstApprovalMutation,
     useAddCustomerInfoMutation,

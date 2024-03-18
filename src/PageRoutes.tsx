@@ -263,8 +263,11 @@ import AddSchemeToDealerMappingWrapper from './pages/mapping/addSchemeToDealer/A
 import AddDealerToSchemeMappingWrapper from './pages/mapping/addDealerToScheme/AddDealerToSchemeMappingWrapper'
 import ViewRequest from './pages/request'
 import MoneybackListingWrapper from './pages/request/all/moneybackTab/MoneybackListingWrapper'
-import MoneybackLogsListingWrapper from './pages/request/all/moneybackTab/view/MoneybackLogsListingWrapper'
+import MoneybackLogsListingWrapper from './pages/request/all/moneybackTab/logs/MoneybackLogsListingWrapper'
 import ProductReplacementListingWrapper from './pages/request/all/productReplacement/ProductReplacementListingWrapper'
+import MoneyViewWrapper from './pages/request/all/moneybackTab/view/MoneyViewWrapper'
+import ProductReplacementViewWrapper from './pages/request/all/productReplacement/view/ProductReplacementViewWrapper'
+import ProductReplacementLogsListingWrapper from './pages/request/all/productReplacement/logs/ProductReplacementLogsListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2525,9 +2528,26 @@ const PageRoutes = () => {
                             // />
                         }
                     />
+
                     <Route
                         index
                         path="moneyback/:id/view"
+                        element={
+                            <MoneyViewWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+
+                    <Route
+                        index
+                        path="moneyback/:id/logs"
                         element={
                             <MoneybackLogsListingWrapper />
                             // <Authorization
@@ -2547,6 +2567,36 @@ const PageRoutes = () => {
                         path="product-replacement"
                         element={
                             <ProductReplacementListingWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+                    <Route
+                        index
+                        path="product-replacement/:id/view"
+                        element={
+                            <ProductReplacementViewWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+                    <Route
+                        index
+                        path="product-replacement/:id/logs"
+                        element={
+                            <ProductReplacementLogsListingWrapper />
                             // <Authorization
                             //     children={
                             //         <DealerGeneralInformationTabWrapper />
