@@ -97,12 +97,14 @@ const StepEditAddress = ({
                                     name,
                                     label,
                                     placeholder,
+                                    required,
                                 } = field
 
                                 switch (type) {
                                     case 'text':
                                         return (
                                             <ATMTextField
+                                                required={required}
                                                 key={name}
                                                 name={name}
                                                 value={
@@ -150,6 +152,7 @@ const StepEditAddress = ({
                                         return (
                                             <div className="-mt-4" key={name}>
                                                 <ATMSelectSearchable
+                                                    required={required}
                                                     label={label}
                                                     name={name}
                                                     value={
@@ -184,6 +187,7 @@ const StepEditAddress = ({
                                     case 'checkbox':
                                         return (
                                             <ATMCheckbox
+                                                required={required}
                                                 key={name}
                                                 name={name}
                                                 label={label}
@@ -260,6 +264,7 @@ const StepEditAddress = ({
                                         return (
                                             <div className="-mt-4">
                                                 <ATMTextArea
+                                                    required={required}
                                                     key={name}
                                                     name={name}
                                                     minRows={5}

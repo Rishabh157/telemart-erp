@@ -36,6 +36,7 @@ const formFields: FieldType[] = [
         name: 'dealerCode',
         label: 'Dealer Code',
         placeholder: 'Dealer Code',
+        required: true,
     },
     {
         name: 'dealerCategoryId',
@@ -43,11 +44,13 @@ const formFields: FieldType[] = [
         placeholder: 'Dealer Category',
         type: 'select',
         optionAccessKey: 'dealerCategoryOptions',
+        required: true,
     },
     {
         name: 'firmName',
         label: 'Firm Name',
         placeholder: 'Firm Name',
+        required: true,
     },
 
     {
@@ -55,18 +58,21 @@ const formFields: FieldType[] = [
         label: 'Credit Limit',
         placeholder: 'Credit Limit',
         type: 'number',
+        required: true,
     },
     {
         name: 'openingBalance',
         label: 'Opening Balance',
         placeholder: 'Opening  Balance',
         type: 'number',
+        required: true,
     },
     {
         name: 'quantityQuotient',
         label: 'Quantity Quotient',
         placeholder: 'Quantity Quotient',
         type: 'number',
+        required: true,
     },
     // {
     //     name: 'autoMapping',
@@ -78,16 +84,19 @@ const formFields: FieldType[] = [
         name: 'firmName',
         label: 'Party(firm) Name',
         placeholder: 'Party Name',
+        required: true,
     },
     {
         name: 'lastName',
         label: 'Last Name',
         placeholder: 'Last Name',
+        required: true,
     },
     {
         name: 'email',
         label: 'Email',
         placeholder: 'Email',
+        required: true,
     },
 ]
 

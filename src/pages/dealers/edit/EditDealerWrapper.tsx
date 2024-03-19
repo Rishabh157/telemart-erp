@@ -108,7 +108,8 @@ const steps = [
             autoMapping: boolean(),
             quantityQuotient: number()
                 .moreThan(0, 'Quantity quotient must be greater than 0')
-                .required('Firm Name is required'),
+                .required('Quantity quotient is required'),
+
             firstName: string().required('First Name is required'),
             lastName: string().required('Last Name is required'),
             dealerCategoryId: string().required(

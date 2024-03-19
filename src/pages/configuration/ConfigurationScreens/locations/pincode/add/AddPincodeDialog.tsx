@@ -42,6 +42,7 @@ const AddPincodeDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                     <div>
                         <div>
                             <ATMTextField
+                                required
                                 name="pincode"
                                 value={values.pincode}
                                 onChange={(e) => {

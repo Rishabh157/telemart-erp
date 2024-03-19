@@ -96,6 +96,7 @@ const AddBarcode = ({
                     <div className="grow py-8 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             <ATMTextField
+                                required
                                 name="lotNumber"
                                 value={values.lotNumber}
                                 label="Batch Number"
@@ -122,6 +123,7 @@ const AddBarcode = ({
                             /> */}
                             {/* Product Group  */}
                             <ATMSelectSearchable
+                                required
                                 name="productGroup"
                                 value={values.productGroup}
                                 label="Product Group"
@@ -133,6 +135,7 @@ const AddBarcode = ({
 
                             {/* Quantity  */}
                             <ATMTextField
+                                required
                                 name="quantity"
                                 value={values.quantity}
                                 label="Quantity"

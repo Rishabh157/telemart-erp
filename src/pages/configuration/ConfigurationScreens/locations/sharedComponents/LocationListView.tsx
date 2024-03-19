@@ -36,7 +36,6 @@ const LocationListView = ({
     OnSearchChange = (newValue: string) => {},
     onListItemClick = (item: any) => {},
     disabled = false,
-    
 }: Props) => {
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state.country
@@ -58,7 +57,7 @@ const LocationListView = ({
     )
 
     return (
-        <div className="border h-full w-full flex flex-col gap-1 rounded bg-white shadow-lg ">
+        <div className="flex flex-col w-full h-full gap-1 bg-white border rounded shadow-lg ">
             <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
                 {listHeading}
 

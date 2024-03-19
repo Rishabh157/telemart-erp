@@ -42,6 +42,7 @@ const AddDistrictDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                     <div>
                         <div>
                             <ATMTextField
+                                required
                                 name="districtName"
                                 value={values.districtName}
                                 onChange={(e) => {

@@ -186,9 +186,9 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
     return (
         <MainLayout>
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div className=" text-black font-bold">
+                <div className="font-bold text-black ">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -197,7 +197,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                     <ATMPageHeading> Add New User </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium"> User Details</div>
@@ -218,10 +218,11 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="px-3 py-8 grow ">
                         <div className="grid grid-cols-3 gap-4 pb-3">
                             {/* FirstName */}
                             <ATMTextField
+                                required
                                 name="firstName"
                                 isInfo
                                 InfoTitle="please Enter full name "
@@ -238,6 +239,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
                             {/* Last Name */}
                             <ATMTextField
+                                required
                                 name="lastName"
                                 value={values.lastName}
                                 label="Last Name"
@@ -251,6 +253,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
                             {/* User Name */}
                             <ATMTextField
+                                required
                                 name="userName"
                                 value={values.userName}
                                 label="User Name"
@@ -265,6 +268,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
                             {/* Email */}
                             <ATMTextField
+                                required
                                 name="email"
                                 value={values.email}
                                 label="Email"
@@ -288,12 +292,13 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
                             {/* Password */}
                             <ATMTextField
+                                required
                                 name="password"
                                 type="password"
                                 value={values.password}
                                 label="Password"
                                 placeholder="Password"
-                                className="rounded mt-2"
+                                className="mt-2 rounded"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'password',
@@ -303,6 +308,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
                             {/* Mobile */}
                             <ATMTextField
+                                required
                                 name="mobile"
                                 value={values.mobile}
                                 label="Mobile Number"
@@ -318,8 +324,8 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 }}
                             />
                             <ATMSelectSearchable
-                                name="userDepartment"
                                 required
+                                name="userDepartment"
                                 value={values.userDepartment}
                                 onChange={(e) =>
                                     handleSetFieldValue('userDepartment', e)
@@ -329,8 +335,8 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 label="User Department"
                             />
                             <ATMSelectSearchable
-                                name="userRole"
                                 required
+                                name="userRole"
                                 value={values.userRole}
                                 onChange={(e) =>
                                     handleSetFieldValue('userRole', e)
@@ -340,6 +346,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 label="User Role"
                             />
                             <ATMSelectSearchable
+                                required
                                 name="mySenior"
                                 value={values.mySenior || ''}
                                 onChange={(e) =>
@@ -351,6 +358,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
                             {/* user admin  */}
                             <ATMSwitchButton
+                                required
                                 hidden={
                                     !(
                                         values.userDepartment ===
@@ -407,7 +415,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             {({ push, remove }) => {
                                 return (
                                     <>
-                                        <div className="grid grid-cols-3 gap-9 ">
+                                        <div className="grid grid-cols-3 gap-4">
                                             {values?.allowedIps?.map(
                                                 (item: any, itemIndex: any) => {
                                                     let { allowedIp } = item
@@ -415,10 +423,10 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                     return (
                                                         <div
                                                             key={itemIndex}
-                                                            className="flex "
+                                                            className="flex"
                                                         >
                                                             {/* Phone */}
-                                                            <div className="flex">
+                                                            <div className="flex flex-1">
                                                                 <ATMTextField
                                                                     type="text"
                                                                     required
@@ -452,9 +460,9 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                                                 itemIndex
                                                                             )
                                                                         }}
-                                                                        className="p-2 bg-red-500 text-white rounded my-[48px] mx-[10px]"
+                                                                        className="p-1.5 bg-red-500 text-white rounded mt-[44px] ml-[10px] "
                                                                     >
-                                                                        <MdDeleteOutline className="text-2xl" />
+                                                                        <MdDeleteOutline className="text-2xl " />
                                                                     </button>
                                                                 )}
                                                             </div>
@@ -473,7 +481,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                         allowedIp: '',
                                                     })
                                                 }
-                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                                className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                                             >
                                                 <HiPlus size="20" /> Add More
                                             </button>

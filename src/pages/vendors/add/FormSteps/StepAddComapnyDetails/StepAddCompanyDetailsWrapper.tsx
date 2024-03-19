@@ -30,6 +30,7 @@ const formFields: Field<'companyTypeOptions' | 'ownershipTypeOptions'>[] = [
         name: 'company_name',
         label: 'Company Name',
         placeholder: 'Company Name',
+        required: true,
     },
     {
         name: 'company_type',
@@ -37,6 +38,7 @@ const formFields: Field<'companyTypeOptions' | 'ownershipTypeOptions'>[] = [
         placeholder: 'Company Type',
         type: 'select',
         optionAccessKey: 'companyTypeOptions',
+        required: true,
     },
     {
         name: 'ownership_type',
@@ -44,16 +46,19 @@ const formFields: Field<'companyTypeOptions' | 'ownershipTypeOptions'>[] = [
         placeholder: 'Ownership Type',
         type: 'select',
         optionAccessKey: 'ownershipTypeOptions',
+        required: true,
     },
     {
         name: 'website_address',
         label: 'Website Address',
         placeholder: 'Website Address',
+        required: false,
     },
     {
         name: 'vendor_code',
         label: 'Vendor Code',
         placeholder: 'Vendor Code',
+        required: true,
     },
 ]
 

@@ -85,6 +85,7 @@ const AddAsstesLocation = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
+                                required
                                 name="locationName"
                                 value={values.locationName}
                                 label="Asset Location"

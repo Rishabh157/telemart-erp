@@ -68,6 +68,7 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
                     <div className="grid grid-cols-3 gap-4">
                         {/* languageName */}
                         <ATMTextField
+                            required
                             name="dispositionName"
                             value={values.dispositionName}
                             label="Disposition Name"

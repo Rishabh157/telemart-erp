@@ -55,12 +55,19 @@ const StepEditComapnyDetails = ({
         <div className="py-9 px-7">
             <div className="grid grid-cols-4 gap-4 gap-y-5">
                 {formFields?.map((field: FieldType) => {
-                    const { type = 'text', name, label, placeholder } = field
+                    const {
+                        type = 'text',
+                        name,
+                        label,
+                        placeholder,
+                        required,
+                    } = field
                     switch (type) {
                         case 'text':
                             return (
                                 <React.Fragment key={name}>
                                     <ATMTextField
+                                        required={required}
                                         name={name}
                                         value={values[name]}
                                         onChange={(e) => {
@@ -71,7 +78,7 @@ const StepEditComapnyDetails = ({
                                         }}
                                         label={label}
                                         placeholder={placeholder}
-                                        className="shadow bg-white rounded"
+                                        className="bg-white rounded shadow"
                                         isSubmitting={isSubmitting}
                                     />
                                 </React.Fragment>
@@ -82,6 +89,7 @@ const StepEditComapnyDetails = ({
                                 <div className="mt-0" key={name}>
                                     <ATMSelect
                                         name={name}
+                                        required={required}
                                         value={values[name]}
                                         onChange={(e) => {
                                             handleSetFieldValue(

@@ -81,6 +81,7 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
                                     <div className="grid grid-cols-4 gap-4 gap-y-5">
                                         {/* Item Name */}
                                         <ATMSelectSearchable
+                                            required
                                             name={`items[${itemIndex}].itemId`}
                                             value={itemId}
                                             onChange={(e) => {
@@ -99,6 +100,7 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
 
                                         {/* Item Quantity */}
                                         <ATMTextField
+                                            required
                                             name={`items[${itemIndex}].itemQuantity`}
                                             value={
                                                 itemQuantity === 0

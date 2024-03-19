@@ -96,6 +96,7 @@ const EditInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
                     <div className="grid grid-cols-3 gap-4">
                         <div className="mt-2">
                             <ATMSelectSearchable
+                                required
                                 name="callType"
                                 labelSpan="mb-2"
                                 label="Call Type"
@@ -109,6 +110,7 @@ const EditInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
                         </div>
 
                         <ATMSelectSearchable
+                            required
                             options={initicalCallOneOptions}
                             name="initialCallOneId"
                             value={values.initialCallOneId}
@@ -121,6 +123,7 @@ const EditInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
                         />
 
                         <ATMTextField
+                            required
                             readOnly
                             disabled
                             name="initialCallName"

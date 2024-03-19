@@ -146,7 +146,7 @@ const AddWarehouseToComapnyTransfer = ({
     }
     return (
         <div className=" h-[calc(100vh-55px)] overflow-auto">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -157,7 +157,7 @@ const AddWarehouseToComapnyTransfer = ({
                     <ATMPageHeading> warehouse transfer </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium">
@@ -180,10 +180,11 @@ const AddWarehouseToComapnyTransfer = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-9 px-3 ">
+                    <div className="px-3 grow py-9 ">
                         <div className="grid grid-cols-4 gap-4">
                             {/* SO Number */}
                             <ATMTextField
+                                required
                                 name="wtcNumber"
                                 value={values.wtcNumber}
                                 label="Warehouse transfer No."
@@ -199,6 +200,7 @@ const AddWarehouseToComapnyTransfer = ({
 
                             {/* from Warehouse */}
                             <ATMSelectSearchable
+                                required
                                 name="fromWarehouseId"
                                 value={values.fromWarehouseId}
                                 onChange={(e) => {
@@ -216,6 +218,7 @@ const AddWarehouseToComapnyTransfer = ({
                                 selectLabel="Select Warehouse"
                             />
                             <ATMSelectSearchable
+                                required
                                 name="toCompanyId"
                                 value={values.toCompanyId}
                                 onChange={(e) => {
@@ -227,6 +230,7 @@ const AddWarehouseToComapnyTransfer = ({
                             />
                             {/* to Warehouse */}
                             <ATMSelectSearchable
+                                required
                                 name="toWarehouseId"
                                 value={values?.toWarehouseId}
                                 onChange={(e) => {
@@ -278,7 +282,7 @@ const AddWarehouseToComapnyTransfer = ({
 
                 {/*  Sales Order  */}
                 <div className="px-3">
-                    <div className=" text-lg pb-2 font-medium text-primary-main">
+                    <div className="pb-2 text-lg font-medium text-primary-main">
                         Add ProductGroup to Warehouse company
                     </div>
 
@@ -297,11 +301,12 @@ const AddWarehouseToComapnyTransfer = ({
                                                 return (
                                                     <div
                                                         key={index}
-                                                        className="flex gap-3 items-end "
+                                                        className="flex items-end gap-3 "
                                                     >
                                                         {/* Product Name */}
                                                         <div className="flex-1 ">
                                                             <ATMSelectSearchable
+                                                                required
                                                                 name={`productSalesOrder[${index}].productGroupId`}
                                                                 value={
                                                                     productGroupId
@@ -346,6 +351,7 @@ const AddWarehouseToComapnyTransfer = ({
                                                         {/* Rate */}
                                                         <div className="flex-1">
                                                             <ATMTextField
+                                                                required
                                                                 type="number"
                                                                 disabled={true}
                                                                 name={`productSalesOrder[${index}].rate`}
@@ -362,6 +368,7 @@ const AddWarehouseToComapnyTransfer = ({
                                                         {/* Quantity */}
                                                         <div className="flex-1">
                                                             <ATMTextField
+                                                                required
                                                                 type="number"
                                                                 min={0}
                                                                 name={`productSalesOrder[${index}].quantity`}
@@ -398,7 +405,7 @@ const AddWarehouseToComapnyTransfer = ({
                                                                             index
                                                                         )
                                                                     }}
-                                                                    className="p-2 bg-red-500 text-white rounded"
+                                                                    className="p-2 text-white bg-red-500 rounded"
                                                                 >
                                                                     <MdDeleteOutline className="text-2xl" />
                                                                 </button>
@@ -421,7 +428,7 @@ const AddWarehouseToComapnyTransfer = ({
                                                     quantity: null,
                                                 })
                                             }
-                                            className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                            className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                                         >
                                             <HiPlus size="20" /> Add More
                                         </button>

@@ -31,26 +31,31 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
                 name: 'name',
                 label: 'Name',
                 placeholder: 'Name',
+                required: true,
             },
             {
                 name: 'department',
                 label: 'Department',
                 placeholder: 'Department',
+                required: true,
             },
             {
                 name: 'designation',
                 label: 'Designation',
                 placeholder: 'Designation',
+                required: true,
             },
             {
                 name: 'email',
                 label: 'Email',
                 placeholder: 'Email',
+                required: true,
             },
             {
                 name: 'mobileNumber',
                 label: 'Mobile Number',
                 placeholder: 'Mobile Number',
+                required: true,
             },
             {
                 name: 'landLine',

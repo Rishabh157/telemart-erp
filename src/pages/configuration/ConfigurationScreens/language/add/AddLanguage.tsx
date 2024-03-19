@@ -84,6 +84,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
                         <div className="grid grid-cols-3 gap-4">
                             {/* languageName */}
                             <ATMTextField
+                                required
                                 name="languageName"
                                 value={values.languageName}
                                 label="Language Name"

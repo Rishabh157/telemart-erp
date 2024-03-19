@@ -101,6 +101,7 @@ const AddUserWrapper = (props: Props) => {
         firstName: string().required('First name is required'),
         lastName: string().required('Last name is required'),
         userName: string().required('User name is required'),
+        email: string().email(),
         userRole: string().required('User role is required'),
         mySenior: string().when(['userRole'], (userRole, schema) => {
             return getSeniorValid(userRole, schema)

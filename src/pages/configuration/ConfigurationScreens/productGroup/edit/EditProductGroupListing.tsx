@@ -85,6 +85,7 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                         <div className="grid grid-cols-2 gap-4">
                             {/* Product Group Name  */}
                             <ATMTextField
+                                required
                                 name="groupName"
                                 value={values.groupName}
                                 label="Group Name"

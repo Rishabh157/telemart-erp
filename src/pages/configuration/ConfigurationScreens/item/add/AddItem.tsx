@@ -79,6 +79,7 @@ const AddItem = ({ formikProps }: Props) => {
                         <div className="grid grid-cols-3 gap-4">
                             {/* itemCode */}
                             <ATMTextField
+                                required
                                 name="itemCode"
                                 value={values.itemCode}
                                 label="Item Code"
@@ -92,6 +93,7 @@ const AddItem = ({ formikProps }: Props) => {
                             />
                             {/* itemName */}
                             <ATMTextField
+                                required
                                 name="itemName"
                                 value={values.itemName}
                                 label="Item Name"
@@ -105,6 +107,7 @@ const AddItem = ({ formikProps }: Props) => {
                             />
                             {/* itemWeight */}
                             <ATMTextField
+                                required
                                 name="itemWeight"
                                 value={values.itemWeight}
                                 label="Item Weight (in gms)"

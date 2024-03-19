@@ -45,6 +45,7 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
                 label: 'Aadhar No.',
                 placeholder: 'Aadhar No.',
                 type: 'text',
+                required: true,
             },
             {
                 name: 'document.adharCard',
@@ -52,6 +53,7 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
                 placeholder: 'Aadhar Card',
                 type: 'file-picker',
                 offset: 1,
+                required: true,
             },
         ],
     },

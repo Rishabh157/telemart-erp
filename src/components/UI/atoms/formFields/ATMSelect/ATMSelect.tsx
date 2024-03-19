@@ -40,7 +40,7 @@ const ATMSelect = ({
         <>
             <div className="relative mt-3">
                 {label && (
-                    <label className="text-slate-700 text-sm font-medium ">
+                    <label className="text-sm font-medium capitalize text-slate-700 ">
                         {label}{' '}
                         {required && <span className="text-red-500"> * </span>}
                     </label>
@@ -56,7 +56,7 @@ const ATMSelect = ({
                         displayEmpty
                     >
                         <MenuItem value="">
-                            <span className="text-slate-400">
+                            <span className="capitalize text-slate-400">
                                 Select {label}
                             </span>
                         </MenuItem>
@@ -71,7 +71,7 @@ const ATMSelect = ({
                 {name && isSubmitting && (
                     <ErrorMessage name={name}>
                         {(errMsg) => (
-                            <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <p className="font-poppins capitalize absolute text-[14px] text-start mt-0 text-red-500">
                                 {errMsg}
                             </p>
                         )}

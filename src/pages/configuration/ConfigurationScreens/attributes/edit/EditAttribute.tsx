@@ -49,7 +49,7 @@ const EditAttribute = ({ formikProps, apiStatus }: Props) => {
     }
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -60,7 +60,7 @@ const EditAttribute = ({ formikProps, apiStatus }: Props) => {
                     <ATMPageHeading>Edit</ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium"> Details</div>
@@ -81,12 +81,13 @@ const EditAttribute = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow pb-9 pt-2 px-3 ">
+                    <div className="px-3 pt-2 grow pb-9 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
 
                             {/* Field 3 */}
                             <ATMTextField
+                                required
                                 name="attributeName"
                                 value={values.attributeName}
                                 label="Attribute Name"
