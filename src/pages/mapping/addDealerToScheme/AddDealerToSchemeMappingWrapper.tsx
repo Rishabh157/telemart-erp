@@ -50,14 +50,18 @@ const AddDealerToSchemeMappingWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         dealerId: string().required('Required'),
-        schemes: array()
-            .of(
-                object().shape({
-                    label: string().required(),
-                    value: string().required(),
-                })
-            )
-            .min(1, 'Please select atleast 1 scheme'),
+        schemes: array().of(
+            object().shape({
+                label: string().required(),
+                value: string().required(),
+            })
+        ),
+        schemeToRemove: array().of(
+            object().shape({
+                label: string().required(),
+                value: string().required(),
+            })
+        ),
     })
 
     // GET SCHEME LIST BY companyId
@@ -91,7 +95,9 @@ const AddDealerToSchemeMappingWrapper = (props: Props) => {
             saveMultipleSchemeToSingleDealer({
                 dealerId: values.dealerId,
                 schemes: values.schemes?.map((ele) => ele?.value),
-                schemesToRemove: values.schemeToRemove?.map((ele) => ele?.value),
+                schemesToRemove: values.schemeToRemove?.map(
+                    (ele) => ele?.value
+                ),
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

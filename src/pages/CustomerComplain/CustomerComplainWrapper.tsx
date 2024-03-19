@@ -217,7 +217,7 @@ const CustomerComplainWrapper = () => {
                         } = res?.data?.data
 
                         const { allOrderData } = res?.data
-
+console.log("herer",mobileNo)
                         setComplaintContactNo(mobileNo) // set contact number for complaint data api
                         // Update the state with the API data
                         setCustomerDetails({
