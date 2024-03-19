@@ -36,12 +36,12 @@ const ViewRequest = () => {
             path: 'product-replacement',
             // name: UserModuleNameTypes.ACTION_ORDER_FRESH_ORDER_TAB_LIST,
         },
-        // {
-        //     label: 'House Arrest',
-        //     icon: MdOutbond,
-        //     path: 'house-arrest',
-        //     // name: UserModuleNameTypes.ACTION_ORDER_APPROVAL_TAB_LIST,
-        // },
+        {
+            label: 'House Arrest',
+            icon: MdOutbond,
+            path: 'house-arrest',
+            // name: UserModuleNameTypes.ACTION_ORDER_APPROVAL_TAB_LIST,
+        },
     ]
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)
@@ -56,6 +56,8 @@ const ViewRequest = () => {
                 return setActiveTab(0)
             case statusProps.productReplacement:
                 return setActiveTab(1)
+            case statusProps.houseArrest:
+                return setActiveTab(2)
             default:
                 return
         }

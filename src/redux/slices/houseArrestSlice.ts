@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 // |-- Internal Dependencies --|
 
-export interface ProductReplacementStateType {
+export interface HouseArrestSliceStateType {
     items: any[] | []
     allItems: any[] | []
     selectedItem: any | null
@@ -17,7 +17,7 @@ export interface ProductReplacementStateType {
     selectedId: string
 }
 
-const initialState: ProductReplacementStateType = {
+const initialState: HouseArrestSliceStateType = {
     items: [],
     allItems: [],
     selectedItem: null,
@@ -30,8 +30,8 @@ const initialState: ProductReplacementStateType = {
     selectedId: '',
 }
 
-const productReplacementSlice: any = createSlice({
-    name: 'productReplacement',
+const houseArrestSlice: any = createSlice({
+    name: 'houseArrest',
     initialState,
     reducers: {
         setItems: (state, action: PayloadAction<any[] | []>) => {
@@ -86,6 +86,6 @@ export const {
     setSelectedId,
     setAllItems,
     setSelectedItem,
-} = productReplacementSlice.actions
+} = houseArrestSlice.actions
 
-export default productReplacementSlice.reducer
+export default houseArrestSlice.reducer
