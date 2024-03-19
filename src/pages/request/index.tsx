@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 import { IconType } from 'react-icons'
 
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import { isAuthorized } from 'src/utils/authorization'
+// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+// import { isAuthorized } from 'src/utils/authorization'
 interface tabsProps {
     label: string
     icon: IconType
@@ -18,18 +17,9 @@ interface tabsProps {
 }
 
 export enum statusProps {
-    all = 'ALL',
-    fresh = 'FRESH',
-    prepaid = 'PREPAID',
-    delivered = 'DELIVERED',
-    doorCancelled = 'DOORCANCELLED',
-    hold = 'HOLD',
-    psc = 'PSC',
-    una = 'UNA',
-    pnd = 'PND',
-    urgent = 'URGENT',
-    inquiry = 'INQUIRY',
-    'non-action' = 'NON_ACTION',
+    moneyback = 'MONEYBACK',
+    productReplacement = 'PRODUCT-REPLACEMENT',
+    houseArrest = 'HOUSE-ARREST',
 }
 
 const ViewRequest = () => {
@@ -55,36 +45,50 @@ const ViewRequest = () => {
     ]
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [activelabel, setActiveTabLabel] = useState<string>()
-    const { search, pathname } = useLocation()
-    const queryParams = new URLSearchParams(search)
-    const navigate = useNavigate()
+    const { pathname } = useLocation()
+
     // Access specific query parameters by their names
-    const activeTab: keyof typeof statusProps | string | null =
-        queryParams.get('orderStatus')
-    const allowedTabs = tabs
-        ?.filter((nav) => {
-            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
-        })
-        ?.map((tab) => tab)
+    const activeTab = pathname?.split('/')?.[2]
+
+    const getActiveTab = (activeTab: string) => {
+        switch (activeTab?.toUpperCase()) {
+            case statusProps.moneyback:
+                return setActiveTab(0)
+            case statusProps.productReplacement:
+                return setActiveTab(1)
+            default:
+                return
+        }
+    }
 
     useEffect(() => {
-        if (!activeTab) return
-        // const navigate = useNavigate()
+        getActiveTab(activeTab)
     }, [activeTab])
+    
+    // const allowedTabs = tabs
+    //     ?.filter((nav) => {
+    //         return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+    //     })
+    //     ?.map((tab) => tab)
 
-    useEffect(() => {
-        if (!activeTab) return
+    // useEffect(() => {
+    //     if (!activeTab) return
+    //     // const navigate = useNavigate()
+    // }, [activeTab])
 
-        let activeIndex = allowedTabs?.findIndex(
-            (tab: tabsProps) => tab.path.split('=')[1] === activeTab
-        )
-        activeIndex = activeIndex < 0 ? 0 : activeIndex
-        setActiveTab(activeIndex)
-        const labelTab: string = allowedTabs[activeIndex]?.label || ''
-        setActiveTabLabel(labelTab)
-    }, [activeTab, allowedTabs])
+    // useEffect(() => {
+    //     if (!activeTab) return
+
+    //     let activeIndex = allowedTabs?.findIndex(
+    //         (tab: tabsProps) => tab.path.split('=')[1] === activeTab
+    //     )
+
+    //     activeIndex = activeIndex < 0 ? 0 : activeIndex
+    //     setActiveTab(activeIndex)
+
+    //     const labelTab: string = allowedTabs[activeIndex]?.label || ''
+
+    // }, [activeTab, allowedTabs])
 
     // const getStatus = (status: keyof typeof statusProps) => {
     //     return statusProps[status] || ''
@@ -97,13 +101,13 @@ const ViewRequest = () => {
                     {/* Right Section */}
                     <div className="w-[100%] border-b border-r border-l rounded-r h-full overflow-x-scroll">
                         <TabScrollable
-                            tabs={allowedTabs}
+                            tabs={tabs}
                             active={activeTabIndex}
                             navBtnContainerClassName="bg-red-500"
                         />
 
                         {/* Children */}
-                        <div className="h-[calc(100%-155px)] pt-4">
+                        <div className="h-[calc(100%-30px)] pt-4">
                             <div className="h-full overflow-auto">
                                 <Outlet />
                             </div>

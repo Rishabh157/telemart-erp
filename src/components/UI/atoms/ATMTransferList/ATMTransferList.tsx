@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /// ==============================================
 // Filename:ATMCheckbox.tsx
 // Type: UI Component
@@ -45,6 +46,7 @@ type Props = {
     options: { label: string; value: string }[]
     right: { label: string; value: string }[]
     setRight: (newValue: { label: string; value: string }[]) => void
+    setLeftSideData?: (newValue: { label: string; value: string }[]) => void
 }
 
 const ATMTransferList = ({
@@ -54,6 +56,7 @@ const ATMTransferList = ({
     name,
     right,
     setRight,
+    setLeftSideData,
 }: Props) => {
     const [checked, setChecked] = React.useState<
         { label: string; value: string }[] | []
@@ -65,6 +68,11 @@ const ATMTransferList = ({
     useEffect(() => {
         setLeft(options)
     }, [options])
+    useEffect(() => {
+        if (setLeftSideData !== undefined) {
+            setLeftSideData(left)
+        }
+    }, [left])
 
     const handleToggle = (value: { label: string; value: string }) => () => {
         const currentIndex = checked.findIndex(
@@ -139,44 +147,33 @@ const ATMTransferList = ({
                 component="div"
                 role="list"
             >
-                {items?.map(
-                    (item: {
-                        label: string
-                        value: string
-                        flag?: boolean
-                    }) => {
-                        const labelId = `transfer-list-all-item-${item?.value}-label`
-                        return (
-                            <ListItem
-                                key={item?.value}
-                                role="listitem"
-                                onClick={handleToggle(item)}
-                                disabled={item?.flag}
-                                button
-                            >
-                                <ListItemIcon>
-                                    <Checkbox
-                                        checked={
-                                            checked.findIndex(
-                                                (ele) =>
-                                                    ele?.value === item?.value
-                                            ) !== -1
-                                        }
-                                        tabIndex={-1}
-                                        disableRipple
-                                        inputProps={{
-                                            'aria-labelledby': labelId,
-                                        }}
-                                    />
-                                </ListItemIcon>
-                                <ListItemText
-                                    id={labelId}
-                                    primary={item?.label}
+                {items?.map((item: { label: string; value: string }) => {
+                    const labelId = `transfer-list-all-item-${item?.value}-label`
+                    return (
+                        <ListItem
+                            key={item?.value}
+                            role="listitem"
+                            onClick={handleToggle(item)}
+                            button
+                        >
+                            <ListItemIcon>
+                                <Checkbox
+                                    checked={
+                                        checked.findIndex(
+                                            (ele) => ele?.value === item?.value
+                                        ) !== -1
+                                    }
+                                    tabIndex={-1}
+                                    disableRipple
+                                    inputProps={{
+                                        'aria-labelledby': labelId,
+                                    }}
                                 />
-                            </ListItem>
-                        )
-                    }
-                )}
+                            </ListItemIcon>
+                            <ListItemText id={labelId} primary={item?.label} />
+                        </ListItem>
+                    )
+                })}
             </List>
         </Card>
     )

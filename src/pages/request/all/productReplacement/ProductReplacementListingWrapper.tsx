@@ -1,11 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/// ==============================================
-// Filename:MoneybackListingWrapper.tsx
-// Type: List Component
-// Last Updated: March 14, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -36,6 +28,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import Swal from 'sweetalert2'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddProductReplacementCustomerInfoFormWrapper from './AddCustomerInfoForm/AddProductReplacementCustomerInfoFormWrapper'
+import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 
 const ProductReplacementListingWrapper = () => {
     // Hooks
@@ -94,13 +87,15 @@ const ProductReplacementListingWrapper = () => {
         _id: string,
         level: 'FIRST' | 'SECOND',
         approve: boolean,
-        remark: string
+        remark: string,
+        complaintNumber:string
     ) => {
         managerLevelApproval({
             id: _id,
             level,
             approve,
             remark,
+            complaintNumber
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -121,12 +116,14 @@ const ProductReplacementListingWrapper = () => {
     const handleAccountApproval = (
         _id: string,
         approve: boolean,
-        remark: string
+        remark: string,
+        orderReferenceNumber: number
     ) => {
         accountApproval({
             id: _id,
             accountApproval: approve,
             accountRemark: remark,
+            orderReferenceNumber,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -144,6 +141,26 @@ const ProductReplacementListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'mr-4',
+            renderCell: (row: MoneybackListResponse) => (
+                <ActionPopup
+                    isView
+                    isCustomBtn
+                    customBtnText="Logs"
+                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                    }}
+                    handleCustomActionButton={() =>
+                        navigate(`${row?._id}/logs`)
+                    }
+                />
+            ),
+        },
         {
             field: 'orderNumber',
             headerName: 'Order No.',
@@ -199,7 +216,7 @@ const ProductReplacementListingWrapper = () => {
             renderCell: (row: MoneybackListResponse) => {
                 return (
                     <div className="z-0">
-                        {!row?.managerFirstApproval ? (
+                        {/* {!row?.managerFirstApproval ? (
                             <Stack direction="row" spacing={1}>
                                 {row?.managerFirstApproval === null ? (
                                     <button
@@ -458,7 +475,74 @@ const ProductReplacementListingWrapper = () => {
                                     </button>
                                 )}
                             </Stack>
-                        )}
+                        )} */}
+                        <SwtAlertChipConfirm
+                            title="Approval"
+                            text="Do you want to Approve ?"
+                            color={
+                                row?.managerFirstApproval === null
+                                    ? 'warning'
+                                    : row?.managerFirstApproval === false
+                                    ? 'error'
+                                    : row?.managerSecondApproval
+                                    ? 'success'
+                                    : row?.managerSecondApproval === null
+                                    ? 'warning'
+                                    : 'error'
+                            }
+                            chipLabel={
+                                row?.managerFirstApproval === null
+                                    ? 'First Pending'
+                                    : row?.managerFirstApproval === false
+                                    ? 'First Rejected'
+                                    : row?.managerSecondApproval
+                                    ? 'Second Approved'
+                                    : row?.managerSecondApproval === null
+                                    ? 'Second Pending'
+                                    : 'Second Rejected'
+                            }
+                            disabled={
+                                row?.managerFirstApproval === null
+                                    ? false
+                                    : row?.managerFirstApproval === false
+                                    ? true
+                                    : row?.ccApproval === false
+                                    ? true
+                                    : row?.managerSecondApproval === null
+                                    ? false
+                                    : true
+                            }
+                            input={'text'}
+                            inputPlaceholder="remark"
+                            showCancelButton
+                            showDenyButton
+                            icon="warning"
+                            confirmButtonColor="#3085d6"
+                            cancelButtonColor="#dc3741"
+                            confirmButtonText="Yes"
+                            next={(res) => {
+                                if (res.isConfirmed || res?.isDenied) {
+                                    if (!row?.managerFirstApproval) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'FIRST',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
+                                    if (row?.managerSecondApproval === null) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'SECOND',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
+                                }
+                            }}
+                        />
                     </div>
                 )
             },
@@ -545,14 +629,20 @@ const ProductReplacementListingWrapper = () => {
                                                     return handleAccountApproval(
                                                         row?._id,
                                                         res?.isConfirmed,
-                                                        res?.value
+                                                        res?.value,
+                                                        parseInt(
+                                                            row?.orderNumber
+                                                        )
                                                     )
                                                 }
                                                 if (res.isDenied) {
                                                     return handleAccountApproval(
                                                         row?._id,
                                                         res?.isConfirmed,
-                                                        res?.value
+                                                        res?.value,
+                                                        parseInt(
+                                                            row?.orderNumber
+                                                        )
                                                     )
                                                 }
                                             })
@@ -603,22 +693,6 @@ const ProductReplacementListingWrapper = () => {
                 )
             },
         },
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     extraClasses: 'mr-4',
-        //     renderCell: (row: MoneybackListResponse) => (
-        //         <ActionPopup
-        //             isView
-        //             handleViewActionButton={() => navigate(`${row?._id}/view`)}
-        //             handleOnAction={() => {
-        //                 setShowDropdown(!showDropdown)
-        //             }}
-        //         />
-        //     ),
-        //     align: 'end',
-        // },
     ]
 
     return (

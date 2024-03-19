@@ -1,11 +1,3 @@
-/// ==============================================
-// Filename:MoneybackListing.tsx
-// Type: List Component
-// Last Updated: MARCH 14, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
@@ -24,9 +16,6 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ProductReplacementSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import { isAuthorized } from 'src/utils/authorization'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
 type Props = {

@@ -32,6 +32,16 @@ export const moneybackApi = apiSlice.injectEndpoints({
         }),
 
         //***** GET *****/
+        getMoneybackOrderById: builder.query({
+            providesTags: ['moneyback'],
+            query: (id:string) => ({
+                url: `/money-back/${id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET *****/
         getAllMoneybackLogsById: builder.query({
             // providesTags: ['moneyback'],
             query: (moneybackId: string) => ({
@@ -42,7 +52,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
 
         // **** Manger First approval
         mangerFirstApproval: builder.mutation({
-            invalidatesTags: ['moneyback'],
+            invalidatesTags: ['moneyback','complaint'],
             query: (body) => ({
                 url: '/money-back/update-manager',
                 method: 'PUT',
@@ -52,7 +62,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
 
         // **** Customer info
         addCustomerInfo: builder.mutation({
-            invalidatesTags: ['moneyback'],
+            invalidatesTags: ['moneyback','complaint'],
             query: (body) => ({
                 url: '/money-back/cc-update-details',
                 method: 'PUT',
@@ -62,7 +72,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
 
         // **** Account approval
         addAccountApproval: builder.mutation({
-            invalidatesTags: ['moneyback'],
+            invalidatesTags: ['moneyback','complaint'],
             query: (body) => ({
                 url: '/money-back/account-approval',
                 method: 'PUT',
@@ -77,6 +87,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
 export const {
     useGetMoneybackOrderQuery,
     useGetAllMoneybackOrderQuery,
+    useGetMoneybackOrderByIdQuery,
     useGetAllMoneybackLogsByIdQuery,
     useMangerFirstApprovalMutation,
     useAddCustomerInfoMutation,

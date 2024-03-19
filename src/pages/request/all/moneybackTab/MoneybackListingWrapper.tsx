@@ -50,6 +50,7 @@ const MoneybackListingWrapper = () => {
     // Dispatching State
 
     const [currentId, setCurrentId] = useState<string>()
+    const [customerNumber, setCustomerNumber] = useState<string>()
     const [complaintNumber, setComplaintNumber] = useState<string>()
     const [isShowCustomerInfoForm, setIsShowCustomerInfoForm] =
         useState<boolean>(false)
@@ -127,6 +128,25 @@ const MoneybackListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: MoneybackListResponse) => (
+                <ActionPopup
+                    isView
+                    isCustomBtn
+                    customBtnText="Logs"
+                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                    }}
+                    handleCustomActionButton={() =>
+                        navigate(`${row?._id}/logs`)
+                    }
+                />
+            ),
+        },
+        {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
@@ -161,6 +181,16 @@ const MoneybackListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.schemePrice || '-'}</span>
+            ),
+        },
+        {
+            field: 'requestCreatedByLabel',
+            headerName: 'Request Created By',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: MoneybackListResponse) => (
+                <span>{row?.requestCreatedByLabel || '-'}</span>
             ),
         },
         {
@@ -226,23 +256,25 @@ const MoneybackListingWrapper = () => {
                             cancelButtonColor="#dc3741"
                             confirmButtonText="Yes"
                             next={(res) => {
-                                if (!row?.managerFirstApproval) {
-                                    return handleManagerFirstLevelApprovalComplete(
-                                        row?._id,
-                                        'FIRST',
-                                        res?.isConfirmed,
-                                        res?.value,
-                                        row?.complaintNumber
-                                    )
-                                }
-                                if (row?.managerSecondApproval === null) {
-                                    return handleManagerFirstLevelApprovalComplete(
-                                        row?._id,
-                                        'SECOND',
-                                        res?.isConfirmed,
-                                        res?.value,
-                                        row?.complaintNumber
-                                    )
+                                if (res.isConfirmed || res?.isDenied) {
+                                    if (!row?.managerFirstApproval) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'FIRST',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
+                                    if (row?.managerSecondApproval === null) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'SECOND',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
                                 }
                             }}
                         />
@@ -264,6 +296,7 @@ const MoneybackListingWrapper = () => {
                         className="bg-primary-main px-3 py-1 rounded text-white"
                         onClick={() => {
                             setIsShowCustomerInfoForm(true)
+                            setCustomerNumber(row?.customerNumber)
                             setCurrentId(row?._id)
                             setComplaintNumber(row?.complaintNumber)
                         }}
@@ -295,6 +328,7 @@ const MoneybackListingWrapper = () => {
                                     onClick={() => {
                                         setIsShowAccountApprovalForm(true)
                                         setCurrentId(row?._id)
+                                        setComplaintNumber(row?.complaintNumber)
                                     }}
                                 >
                                     <Chip
@@ -323,22 +357,6 @@ const MoneybackListingWrapper = () => {
                 )
             },
         },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            extraClasses: 'mr-4',
-            renderCell: (row: MoneybackListResponse) => (
-                <ActionPopup
-                    isView
-                    handleViewActionButton={() => navigate(`${row?._id}/view`)}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                    }}
-                />
-            ),
-            align: 'end',
-        },
     ]
 
     return (
@@ -357,6 +375,7 @@ const MoneybackListingWrapper = () => {
                 component={
                     <AddCustomerInfoFormWrapper
                         moneybackRequestId={currentId}
+                        customerNumber={customerNumber || ''}
                         handleClose={() => setIsShowCustomerInfoForm(false)}
                     />
                 }

@@ -23,7 +23,6 @@ const AddDealerToSchemeMapping = ({
     apiStatus,
     schemeListOption,
 }: Props) => {
-    // const [flag, setFlag] = useState(true)
     const { values, setFieldValue } = formikProps
     const [allOptions, setAllOtions] = useState([])
 
@@ -35,6 +34,9 @@ const AddDealerToSchemeMapping = ({
             setFieldValue('schemes', newValue),
         leftSideTitle: 'All Schemes',
         rightSideTitle: 'Schemes to add',
+        setLeftSideData: (newValue: { label: string; value: string }[]) =>
+            setFieldValue('schemeToRemove', newValue),
+        // setFieldValue('schemes', newValue),
     }
 
     // GET Dealer List BY Scheme Id
@@ -53,6 +55,7 @@ const AddDealerToSchemeMapping = ({
             setAllOtions(schemeListData?.notAssignedScheme)
             // already having scheme
             setFieldValue('schemes', schemeListData?.alreadyHaveScheme)
+            setFieldValue('schemeToRemove', schemeListData?.notAssignedScheme)
         }
     }, [
         schemeListData,
@@ -60,7 +63,6 @@ const AddDealerToSchemeMapping = ({
         isSchemeListLoading,
         setFieldValue,
     ])
-
     return (
         <div className="py-0.5 h-[calc(100%)] flex flex-col gap-2">
             {/* <div className="pt-1">
@@ -105,9 +107,7 @@ const AddDealerToSchemeMapping = ({
                     </div>
 
                     <div className="h-[680px] mt-8">
-                        {/* {allOptions?.length ? ( */}
                         <ATMTransferList {...transferListProps} />
-                        {/* ) : null} */}
                     </div>
                 </div>
             </div>

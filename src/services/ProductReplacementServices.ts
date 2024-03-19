@@ -32,17 +32,27 @@ export const productReplacementApi = apiSlice.injectEndpoints({
         }),
 
         //***** GET *****/
-        getAllMoneybackLogsById: builder.query({
+        getProductReplacementById: builder.query({
+            providesTags: ['moneyback'],
+            query: (id: string) => ({
+                url: `/product-replacement/${id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** GET *****/
+        getAllProductReplacementLogsById: builder.query({
             // providesTags: ['product-replacement'],
             query: (moneybackId: string) => ({
-                url: `product-replacement/get-logs/${moneybackId}`,
+                url: `product-replacement-logs/get-logs/${moneybackId}`,
                 method: 'GET',
             }),
         }),
 
         // **** Manger First approval
         productReplacementMangerFirstApproval: builder.mutation({
-            invalidatesTags: ['product-replacement'],
+            invalidatesTags: ['product-replacement','complaint'],
             query: (body) => ({
                 url: '/product-replacement/update-manager',
                 method: 'PUT',
@@ -62,7 +72,7 @@ export const productReplacementApi = apiSlice.injectEndpoints({
 
         // **** Account approval
         addProductReplacementAccountApproval: builder.mutation({
-            invalidatesTags: ['product-replacement'],
+            invalidatesTags: ['product-replacement','complaint'],
             query: (body) => ({
                 url: '/product-replacement/account-approval',
                 method: 'PUT',
@@ -77,7 +87,8 @@ export const productReplacementApi = apiSlice.injectEndpoints({
 export const {
     useGetProductReplacementOrderQuery,
     useGetAllMoneybackOrderQuery,
-    useGetAllMoneybackLogsByIdQuery,
+    useGetProductReplacementByIdQuery,
+    useGetAllProductReplacementLogsByIdQuery,
     useProductReplacementMangerFirstApprovalMutation,
     useAddProductReplacementCustomerInfoMutation,
     useAddProductReplacementAccountApprovalMutation,
