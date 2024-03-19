@@ -55,7 +55,7 @@ const StepAddSchemeDetails = ({
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="py-6 px-7 flex flex-col gap-5">
+        <div className="flex flex-col gap-5 py-6 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
                 {/* Scheme Code */}
                 {/* <ATMTextField
@@ -66,11 +66,12 @@ const StepAddSchemeDetails = ({
                     }}
                     label="Scheme Code"
                     placeholder="Scheme Code"
-                    className="shadow bg-white rounded"
+                    className="bg-white rounded shadow"
                 /> */}
                 {/* Category */}
                 <div className="-mt-2">
                     <ATMSelectSearchable
+                        required
                         name={'category'}
                         value={values.category}
                         onChange={(e) => {
@@ -84,6 +85,7 @@ const StepAddSchemeDetails = ({
                 <div className="-mt-2">
                     {/* Sub Category */}
                     <ATMSelectSearchable
+                        required
                         name={'subCategory'}
                         value={values.subCategory}
                         onChange={(e) => {
@@ -96,6 +98,7 @@ const StepAddSchemeDetails = ({
                 </div>
                 {/* Scheme Name */}
                 <ATMTextField
+                    required
                     name={'schemeName'}
                     value={values.schemeName}
                     onChange={(e) => {
@@ -103,10 +106,11 @@ const StepAddSchemeDetails = ({
                     }}
                     label="Scheme Name"
                     placeholder="Scheme Name"
-                    className="shadow bg-white rounded"
+                    className="bg-white rounded shadow"
                 />
                 {/* Scheme Price */}
                 <ATMTextField
+                    required
                     name={'schemePrice'}
                     value={values.schemePrice}
                     onChange={(e) => {
@@ -120,10 +124,11 @@ const StepAddSchemeDetails = ({
                     }}
                     label="Scheme Price"
                     placeholder="Scheme Price"
-                    className="shadow bg-white rounded"
+                    className="bg-white rounded shadow"
                 />
                 {/* Commission */}
                 <ATMTextField
+                    required
                     name={'commission'}
                     value={values.commission}
                     onChange={(e) => {
@@ -137,17 +142,21 @@ const StepAddSchemeDetails = ({
                     }}
                     label="Dealer Commission"
                     placeholder=" Dealer Commission"
-                    className="shadow bg-white rounded"
+                    className="bg-white rounded shadow"
                 />
                 {/* Dimensions */}
                 <div className="mt-2">
-                    <label className="text-slate-700 font-medium">
+                    <label className="font-medium text-slate-700">
                         {' '}
-                        Dimensions{' '}
+                        Dimensions
+                        <span className="ml-1 text-sm text-red-500">
+                            *
+                        </span>{' '}
                     </label>
                     <div className="flex gap-2 ">
                         {/* Height */}
                         <ATMTextField
+                            required
                             name="dimension.height"
                             value={values.dimension.height}
                             onChange={(e) => {
@@ -160,10 +169,11 @@ const StepAddSchemeDetails = ({
                                 }
                             }}
                             placeholder="H"
-                            className="shadow bg-white rounded -mt-6"
+                            className="-mt-6 bg-white rounded shadow"
                         />
                         {/* Weight */}
                         <ATMTextField
+                            required
                             name="dimension.width"
                             value={values.dimension.width}
                             onChange={(e) => {
@@ -176,10 +186,11 @@ const StepAddSchemeDetails = ({
                                 }
                             }}
                             placeholder="W"
-                            className="shadow bg-white rounded -mt-6"
+                            className="-mt-6 bg-white rounded shadow"
                         />
                         {/* Depth */}
                         <ATMTextField
+                            required
                             name="dimension.depth"
                             value={values.dimension.depth}
                             onChange={(e) => {
@@ -192,12 +203,13 @@ const StepAddSchemeDetails = ({
                                 }
                             }}
                             placeholder="D"
-                            className="shadow bg-white rounded -mt-6"
+                            className="-mt-6 bg-white rounded shadow"
                         />
                     </div>
                 </div>
                 {/* Weight */}
                 <ATMTextField
+                    required
                     name={'weight'}
                     value={values.weight}
                     onChange={(e) => {
@@ -208,10 +220,11 @@ const StepAddSchemeDetails = ({
                     }}
                     label="Weight"
                     placeholder="Weight"
-                    className="shadow bg-white rounded"
+                    className="bg-white rounded shadow"
                 />
                 {/* Delivery Charges */}
                 <ATMTextField
+                    required
                     name={'deliveryCharges'}
                     value={values.deliveryCharges}
                     onChange={(e) => {
@@ -225,7 +238,7 @@ const StepAddSchemeDetails = ({
                     }}
                     label="Delivery Charges"
                     placeholder="Delivery Charges"
-                    className="shadow bg-white rounded"
+                    className="bg-white rounded shadow"
                 />
                 {/* Combo Packaging */}
                 <div className="mt-0">
@@ -260,6 +273,7 @@ const StepAddSchemeDetails = ({
             {/* Scheme Description */}
             <div>
                 <ATMTextArea
+                    required
                     name={'schemeDescription'}
                     value={values.schemeDescription}
                     onChange={(newValue) => {
@@ -267,7 +281,7 @@ const StepAddSchemeDetails = ({
                     }}
                     label="Scheme Description"
                     placeholder="Scheme Description"
-                    className="shadow bg-white rounded"
+                    className="bg-white rounded shadow"
                 />
             </div>
         </div>

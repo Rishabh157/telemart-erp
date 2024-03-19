@@ -60,8 +60,8 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                     1 && 'border-b'
                                         }  border-slate-300 `}
                                     >
-                                        <div className="flex justify-between items-center">
-                                            <div className="text-primary-main text-lg pb-2 font-medium ">
+                                        <div className="flex items-center justify-between">
+                                            <div className="pb-2 text-lg font-medium text-primary-main ">
                                                 Product Information{' '}
                                                 {productIndex + 1}
                                             </div>
@@ -73,7 +73,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                     onClick={() =>
                                                         remove(productIndex)
                                                     }
-                                                    className="p-1 bg-red-500 text-white rounded"
+                                                    className="p-1 text-white bg-red-500 rounded"
                                                 >
                                                     <MdDeleteOutline className="text-2xl" />
                                                 </button>
@@ -84,6 +84,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                             {/* Product Group */}
                                             <div className="col-span-2 -mt-2">
                                                 <ATMSelectSearchable
+                                                    required
                                                     name={`productInformation[${productIndex}].productGroup`}
                                                     value={productGroup}
                                                     onChange={(e) => {
@@ -103,6 +104,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                             {/* Product Quantity */}
 
                                             <ATMTextField
+                                                required
                                                 name={`productInformation[${productIndex}].productQuantity`}
                                                 value={
                                                     productQuantity.toString() ===
@@ -126,13 +128,14 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                 }}
                                                 label="Product Quantity"
                                                 placeholder="Product Quantity"
-                                                className="shadow bg-white rounded"
+                                                className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
 
                                             {/* MRP */}
 
                                             <ATMTextField
+                                                required
                                                 name={`productInformation[${productIndex}].mrp`}
                                                 value={
                                                     mrp.toString() === '0'
@@ -155,13 +158,14 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                 }}
                                                 label="MRP"
                                                 placeholder="MRP"
-                                                className="shadow bg-white rounded"
+                                                className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
 
                                             {/* POP  */}
 
                                             <ATMTextField
+                                                required
                                                 name={`productInformation[${productIndex}].pop`}
                                                 value={
                                                     pop.toString() === '0'
@@ -184,7 +188,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                 }}
                                                 label="POP"
                                                 placeholder="Product Offer Price"
-                                                className="shadow bg-white rounded"
+                                                className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
                                         </div>
@@ -193,7 +197,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                             }
                         )}
 
-                        <div className="flex justify-self-start p-5">
+                        <div className="flex p-5 justify-self-start">
                             <button
                                 type="button"
                                 onClick={() =>
@@ -204,7 +208,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                         pop: 0,
                                     })
                                 }
-                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                             >
                                 <HiPlus size="20" /> Add More
                             </button>

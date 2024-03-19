@@ -84,6 +84,7 @@ const AddChannelCategory = ({ formikProps, apiStatus }: Props) => {
                     <div className="grid grid-cols-3 gap-4">
                         {/* FirstName */}
                         <ATMTextField
+                            required
                             name="channelCategory"
                             value={values.channelCategory}
                             label="Category Name"

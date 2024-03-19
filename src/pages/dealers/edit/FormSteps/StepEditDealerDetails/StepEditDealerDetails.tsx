@@ -50,11 +50,18 @@ const StepEditDealerDetails = ({
         <div className="py-9 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
                 {formFields?.map((field: FieldType) => {
-                    const { type = 'text', name, label, placeholder } = field
+                    const {
+                        type = 'text',
+                        name,
+                        label,
+                        placeholder,
+                        required,
+                    } = field
                     switch (type) {
                         case 'text':
                             return (
                                 <ATMTextField
+                                    required={required}
                                     key={name}
                                     name={name}
                                     value={values[name]}
@@ -66,7 +73,7 @@ const StepEditDealerDetails = ({
                                     }}
                                     label={label}
                                     placeholder={placeholder}
-                                    className="shadow bg-white rounded"
+                                    className="bg-white rounded shadow"
                                     isSubmitting={isSubmitting}
                                 />
                             )
@@ -74,6 +81,7 @@ const StepEditDealerDetails = ({
                             return (
                                 <div key={name}>
                                     <ATMTextField
+                                        required={required}
                                         disabled={
                                             name === 'openingBalance'
                                                 ? true
@@ -89,7 +97,7 @@ const StepEditDealerDetails = ({
                                         }}
                                         label={label}
                                         placeholder={placeholder}
-                                        className="shadow bg-white rounded"
+                                        className="bg-white rounded shadow"
                                         isSubmitting={isSubmitting}
                                     />
                                 </div>
@@ -98,6 +106,7 @@ const StepEditDealerDetails = ({
                             return (
                                 <div key={name}>
                                     <ATMSwitchButton
+                                        required={required}
                                         name={name}
                                         value={values[name]}
                                         label={label}
@@ -112,13 +121,13 @@ const StepEditDealerDetails = ({
                             return (
                                 <div key={name} className="relative -mt-2">
                                     <ATMSelectSearchable
+                                        required={required}
                                         options={
                                             dropdownOptions[
                                                 'dealerCategoryOptions'
                                             ]
                                         }
                                         name={name}
-                                        required
                                         value={values?.dealerCategoryId}
                                         selectLabel={`Select Dealer Category`}
                                         label="Dealer Category"

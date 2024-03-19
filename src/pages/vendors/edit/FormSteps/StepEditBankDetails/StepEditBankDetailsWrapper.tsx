@@ -32,26 +32,31 @@ const formFields: {
                 name: 'bankName',
                 label: 'Bank Name',
                 placeholder: 'Bank Name',
+                required: true,
             },
             {
                 name: 'bankBranchName',
                 label: 'Branch Name',
                 placeholder: 'Branch Name',
+                required: true,
             },
             {
                 name: 'accountHolderName',
                 label: 'Account Holder Name',
                 placeholder: 'Account Holder Name',
+                required: true,
             },
             {
                 name: 'accountNumber',
                 label: 'Account Number',
                 placeholder: 'Account Number',
+                required: true,
             },
             {
                 name: 'ifscNumber',
                 label: 'IFSC No.',
                 placeholder: 'IFSC No.',
+                required: true,
             },
             {
                 name: 'accountType',
@@ -59,6 +64,7 @@ const formFields: {
                 placeholder: 'Account Type',
                 type: 'select',
                 optionAccessKey: 'accountTypeOptions',
+                required: true,
             },
             {
                 name: 'cancelledCheque',

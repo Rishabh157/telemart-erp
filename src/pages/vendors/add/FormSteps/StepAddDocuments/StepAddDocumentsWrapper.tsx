@@ -41,6 +41,7 @@ const formFields: { sectionName: string; fields: Field<''>[] }[] = [
                 label: 'GST Certificate',
                 placeholder: 'GST Certificate',
                 type: 'file-picker',
+                required: false,
             },
         ],
     },

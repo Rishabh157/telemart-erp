@@ -85,6 +85,7 @@ const AddCallCenterMaster = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
+                                required
                                 name="callCenterName"
                                 value={values.callCenterName}
                                 label="Call Center Name"

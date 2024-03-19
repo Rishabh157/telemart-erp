@@ -82,6 +82,7 @@ const AddChannelGroup = ({ formikProps, apiStatus }: Props) => {
                     <div className="grid grid-cols-3 gap-4">
                         {/* FirstName */}
                         <ATMTextField
+                            required
                             name="groupName"
                             value={values.groupName}
                             label="Group Name"

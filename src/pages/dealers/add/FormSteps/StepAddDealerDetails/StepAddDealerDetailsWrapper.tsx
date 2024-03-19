@@ -36,6 +36,7 @@ const formFields: FieldType[] = [
         name: 'dealerCode',
         label: 'Dealer Code',
         placeholder: 'Dealer Code',
+        required: true,
     },
     {
         name: 'dealerCategory',
@@ -43,11 +44,13 @@ const formFields: FieldType[] = [
         placeholder: 'Dealer Category',
         type: 'select',
         optionAccessKey: 'dealerCategoryOptions',
+        required: true,
     },
     {
         name: 'firmName',
         label: 'Party(firm) Name',
         placeholder: 'Party Name',
+        required: true,
     },
     {
         name: 'creditLimit',
@@ -71,22 +74,26 @@ const formFields: FieldType[] = [
         name: 'firstName',
         label: 'First Name',
         placeholder: 'First Name',
+        required: true,
     },
     {
         name: 'lastName',
         label: 'Last Name',
         placeholder: 'Last Name',
+        required: true,
     },
     {
         name: 'email',
         label: 'Email',
         placeholder: 'Email',
+        required: true,
     },
     {
         name: 'password',
         label: 'Password',
         placeholder: 'Password',
         type: 'password',
+        required: true,
     },
 ]
 

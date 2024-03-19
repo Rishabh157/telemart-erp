@@ -70,6 +70,7 @@ const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                     <div className="grid grid-cols-3 gap-4">
                         <div className="mt-2">
                             <ATMSelectSearchable
+                                required
                                 name="callType"
                                 labelSpan="mb-2"
                                 label="Call Type"
@@ -83,6 +84,7 @@ const EditInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                         </div>
                         {/* initialCallName */}
                         <ATMTextField
+                            required
                             readOnly
                             disabled
                             name="initialCallName"

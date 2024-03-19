@@ -109,6 +109,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                         <div className="grid grid-cols-3 gap-4">
                             {/* Field1 */}
                             <ATMTextField
+                                required
                                 name="group_name"
                                 value={values.group_name}
                                 label="Group Name"
