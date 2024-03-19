@@ -21,6 +21,12 @@ const ComplaintListing = ({ rows }: Props) => {
     const [isFlowDialogShow, setIsFlowDialogShow] =
         React.useState<boolean>(false)
 
+    const isDisableEdit = [
+        'MONEYBACK',
+        'PRODUCTREPLACEMENT',
+        'DELIVERYBOYHOUSEARRESTCASE',
+    ]
+
     return (
         <div className="mt-1 w-full">
             {/* Edit Complaint Form */}
@@ -103,7 +109,10 @@ const ComplaintListing = ({ rows }: Props) => {
                         return (
                             <tr className="bg-#cdddf2" key={ind}>
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
-                                    {ele?.status !== 'CLOSED' ? (
+                                    {ele?.status !== 'CLOSED' &&
+                                    !isDisableEdit?.includes(
+                                        ele?.icOneLabel
+                                    ) ? (
                                         <div className="flex justify-center items-center">
                                             <CiEdit
                                                 onClick={() => {

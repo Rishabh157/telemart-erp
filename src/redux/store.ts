@@ -100,6 +100,7 @@ import ndrDispositionSlice from './slices/configuration/ndrDispositionSlice'
 import ComplainSlice from './slices/ComplainSlice'
 import MoneybackSlice from './slices/MoneybackSlice'
 import ProductReplacementSlice from './slices/ProductReplacementSlice'
+import houseArrestSlice from './slices/houseArrestSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -198,6 +199,7 @@ const store = configureStore({
         complain: ComplainSlice,
         moneyback: MoneybackSlice,
         productReplacement: ProductReplacementSlice,
+        houseArrest: houseArrestSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
