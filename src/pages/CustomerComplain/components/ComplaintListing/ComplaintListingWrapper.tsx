@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import ComplaintListing from './ComplaintListing'
 import { useGetComplaintByMobileNoQuery } from 'src/services/CustomerComplainServices'
@@ -8,7 +9,7 @@ type Props = {
 
 const ComplaintListingWrapper = ({ contactNumber }: Props) => {
     const [complaintListing, setComplaintListing] = React.useState<any[]>([])
-
+    console.log('contactNumber', contactNumber)
     const { data, isFetching, isLoading } = useGetComplaintByMobileNoQuery<any>(
         contactNumber,
         {

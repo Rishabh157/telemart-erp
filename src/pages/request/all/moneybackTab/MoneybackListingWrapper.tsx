@@ -256,23 +256,25 @@ const MoneybackListingWrapper = () => {
                             cancelButtonColor="#dc3741"
                             confirmButtonText="Yes"
                             next={(res) => {
-                                if (!row?.managerFirstApproval) {
-                                    return handleManagerFirstLevelApprovalComplete(
-                                        row?._id,
-                                        'FIRST',
-                                        res?.isConfirmed,
-                                        res?.value,
-                                        row?.complaintNumber
-                                    )
-                                }
-                                if (row?.managerSecondApproval === null) {
-                                    return handleManagerFirstLevelApprovalComplete(
-                                        row?._id,
-                                        'SECOND',
-                                        res?.isConfirmed,
-                                        res?.value,
-                                        row?.complaintNumber
-                                    )
+                                if (res.isConfirmed || res?.isDenied) {
+                                    if (!row?.managerFirstApproval) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'FIRST',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
+                                    if (row?.managerSecondApproval === null) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'SECOND',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
                                 }
                             }}
                         />

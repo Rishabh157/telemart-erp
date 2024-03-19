@@ -28,6 +28,7 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import Swal from 'sweetalert2'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddProductReplacementCustomerInfoFormWrapper from './AddCustomerInfoForm/AddProductReplacementCustomerInfoFormWrapper'
+import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 
 const ProductReplacementListingWrapper = () => {
     // Hooks
@@ -86,13 +87,15 @@ const ProductReplacementListingWrapper = () => {
         _id: string,
         level: 'FIRST' | 'SECOND',
         approve: boolean,
-        remark: string
+        remark: string,
+        complaintNumber:string
     ) => {
         managerLevelApproval({
             id: _id,
             level,
             approve,
             remark,
+            complaintNumber
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -213,7 +216,7 @@ const ProductReplacementListingWrapper = () => {
             renderCell: (row: MoneybackListResponse) => {
                 return (
                     <div className="z-0">
-                        {!row?.managerFirstApproval ? (
+                        {/* {!row?.managerFirstApproval ? (
                             <Stack direction="row" spacing={1}>
                                 {row?.managerFirstApproval === null ? (
                                     <button
@@ -472,7 +475,74 @@ const ProductReplacementListingWrapper = () => {
                                     </button>
                                 )}
                             </Stack>
-                        )}
+                        )} */}
+                        <SwtAlertChipConfirm
+                            title="Approval"
+                            text="Do you want to Approve ?"
+                            color={
+                                row?.managerFirstApproval === null
+                                    ? 'warning'
+                                    : row?.managerFirstApproval === false
+                                    ? 'error'
+                                    : row?.managerSecondApproval
+                                    ? 'success'
+                                    : row?.managerSecondApproval === null
+                                    ? 'warning'
+                                    : 'error'
+                            }
+                            chipLabel={
+                                row?.managerFirstApproval === null
+                                    ? 'First Pending'
+                                    : row?.managerFirstApproval === false
+                                    ? 'First Rejected'
+                                    : row?.managerSecondApproval
+                                    ? 'Second Approved'
+                                    : row?.managerSecondApproval === null
+                                    ? 'Second Pending'
+                                    : 'Second Rejected'
+                            }
+                            disabled={
+                                row?.managerFirstApproval === null
+                                    ? false
+                                    : row?.managerFirstApproval === false
+                                    ? true
+                                    : row?.ccApproval === false
+                                    ? true
+                                    : row?.managerSecondApproval === null
+                                    ? false
+                                    : true
+                            }
+                            input={'text'}
+                            inputPlaceholder="remark"
+                            showCancelButton
+                            showDenyButton
+                            icon="warning"
+                            confirmButtonColor="#3085d6"
+                            cancelButtonColor="#dc3741"
+                            confirmButtonText="Yes"
+                            next={(res) => {
+                                if (res.isConfirmed || res?.isDenied) {
+                                    if (!row?.managerFirstApproval) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'FIRST',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
+                                    if (row?.managerSecondApproval === null) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'SECOND',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
+                                }
+                            }}
+                        />
                     </div>
                 )
             },

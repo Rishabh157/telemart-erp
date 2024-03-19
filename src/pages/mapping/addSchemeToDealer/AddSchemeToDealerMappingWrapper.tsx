@@ -28,7 +28,7 @@ type Props = {}
 export type FormInitialValues = {
     schemeId: string
     dealers: { label: string; value: string }[]
-    dealersToRemove : { label: string; value: string }[]
+    dealersToRemove: { label: string; value: string }[]
 }
 
 const AddSchemeToDealerMappingWrapper = (props: Props) => {
@@ -53,14 +53,18 @@ const AddSchemeToDealerMappingWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         schemeId: string().required('Required'),
-        dealers: array()
-            .of(
-                object().shape({
-                    label: string().required(),
-                    value: string().required(),
-                })
-            )
-            .min(1, 'Please select atleast 1 dealer'),
+        dealers: array().of(
+            object().shape({
+                label: string().required(),
+                value: string().required(),
+            })
+        ),
+        dealersToRemove: array().of(
+            object().shape({
+                label: string().required(),
+                value: string().required(),
+            })
+        ),
     })
 
     // GET SCHEME LIST BY companyId
@@ -94,7 +98,9 @@ const AddSchemeToDealerMappingWrapper = (props: Props) => {
             saveMultipleDealerToSingleScheme({
                 schemeId: values.schemeId,
                 dealers: values.dealers?.map((ele) => ele?.value),
-                dealersToRemove: values.dealersToRemove?.map((ele) => ele?.value),
+                dealersToRemove: values.dealersToRemove?.map(
+                    (ele) => ele?.value
+                ),
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
