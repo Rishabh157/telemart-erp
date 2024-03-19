@@ -48,7 +48,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
     }
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -59,7 +59,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                     <ATMPageHeading> Update </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium">
@@ -83,10 +83,11 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="px-3 py-8 grow ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* boxName */}
                             <ATMTextField
+                                required
                                 name="boxName"
                                 value={values.boxName}
                                 label="Box Name"
@@ -101,6 +102,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Inner Items Count */}
                             <ATMTextField
+                                required
                                 name="innerItemsCount"
                                 value={
                                     values.innerItemsCount === 0
@@ -120,13 +122,17 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                 }}
                             />
                             <div className="mt-4">
-                                <label className="text-slate-700 font-medium">
+                                <label className="font-medium text-slate-700">
                                     {' '}
                                     Dimensions (in cm){' '}
+                                    <span className="ml-1 text-sm text-red-500">
+                                        *
+                                    </span>{' '}
                                 </label>
                                 <div className="flex gap-2 -mt-1">
                                     {/* Height */}
                                     <ATMTextField
+                                        required
                                         name="dimensions.height"
                                         value={
                                             values.dimensions.height === 0
@@ -143,11 +149,12 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                             }
                                         }}
                                         placeholder="H"
-                                        className="shadow bg-white rounded -mt-2"
+                                        className="-mt-2 bg-white rounded shadow"
                                     />
 
                                     {/* Weight */}
                                     <ATMTextField
+                                        required
                                         name="dimensions.width"
                                         value={
                                             values.dimensions.width === 0
@@ -164,11 +171,12 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                             }
                                         }}
                                         placeholder="W"
-                                        className="shadow bg-white rounded -mt-2"
+                                        className="-mt-2 bg-white rounded shadow"
                                     />
 
                                     {/* Depth */}
                                     <ATMTextField
+                                        required
                                         name="dimensions.depth"
                                         value={
                                             values.dimensions.depth === 0
@@ -185,13 +193,14 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                             }
                                         }}
                                         placeholder="D"
-                                        className="shadow bg-white rounded -mt-2"
+                                        className="-mt-2 bg-white rounded shadow"
                                     />
                                 </div>
                             </div>
 
                             {/* Box Weight */}
                             <ATMTextField
+                                required
                                 name="boxWeight"
                                 value={
                                     values.boxWeight === 0

@@ -89,6 +89,7 @@ const AddDispositionComplaint = ({ formikProps, apiStatus }: Props) => {
                     <div className="grid grid-cols-3 gap-4">
                         {/* languageName */}
                         <ATMTextField
+                            required
                             name="dispositionName"
                             value={values.dispositionName}
                             label="Disposition Name"
@@ -101,6 +102,7 @@ const AddDispositionComplaint = ({ formikProps, apiStatus }: Props) => {
                             }
                         />
                         <ATMSelectSearchable
+                            required
                             options={emailTypeOptions()}
                             name="emailType"
                             value={values.emailType}
@@ -110,6 +112,7 @@ const AddDispositionComplaint = ({ formikProps, apiStatus }: Props) => {
                             }
                         />
                         <ATMSelectSearchable
+                            required
                             options={smstypeOptions()}
                             name="smsType"
                             value={values.smsType}
@@ -117,6 +120,7 @@ const AddDispositionComplaint = ({ formikProps, apiStatus }: Props) => {
                             onChange={(e) => handleSetFieldValue('smsType', e)}
                         />
                         <ATMSelectSearchable
+                            required
                             options={priorityOptions()}
                             name="priority"
                             value={values.priority}

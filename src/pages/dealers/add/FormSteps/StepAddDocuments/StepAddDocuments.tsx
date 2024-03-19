@@ -51,7 +51,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                         key={index}
                         className={`py-9 px-7 border-b border-slate-400`}
                     >
-                        <div className="text-primary-main text-lg pb-2 font-medium ">
+                        <div className="pb-2 text-lg font-medium text-primary-main ">
                             {sectionName}
                         </div>
 
@@ -62,12 +62,14 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                     name,
                                     label,
                                     placeholder,
+                                    required,
                                 } = field
                                 switch (type) {
                                     case 'text':
                                         return (
                                             <React.Fragment key={name || index}>
                                                 <ATMTextField
+                                                    required={required}
                                                     name={name}
                                                     value={
                                                         name.includes('.')
@@ -135,7 +137,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     }}
                                                     label={label}
                                                     placeholder={placeholder}
-                                                    className="shadow bg-white rounded"
+                                                    className="bg-white rounded shadow"
                                                     isSubmitting={isSubmitting}
                                                 />
                                             </React.Fragment>
@@ -148,6 +150,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                 key={name || index}
                                             >
                                                 <ATMFilePickerWrapper
+                                                    required={required}
                                                     name={name}
                                                     label={label}
                                                     placeholder={placeholder}
@@ -195,7 +198,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                 />
                                                 {loaderState === name &&
                                                 imageApiStatus ? (
-                                                    <div className=" mt-3">
+                                                    <div className="mt-3 ">
                                                         <CircularProgress />
                                                     </div>
                                                 ) : null}
@@ -224,7 +227,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                             key={otherDocumentIndex}
                                             className={`py-9 px-7 border-b border-slate-400`}
                                         >
-                                            <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center ">
+                                            <div className="flex items-center justify-between pb-2 text-lg font-medium text-primary-main ">
                                                 Other Documents #
                                                 {otherDocumentIndex + 1}
                                                 {/* Delete Button */}
@@ -237,7 +240,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                                 otherDocumentIndex
                                                             )
                                                         }
-                                                        className="p-1 bg-red-500 text-white rounded"
+                                                        className="p-1 text-white bg-red-500 rounded"
                                                     >
                                                         <MdDeleteOutline className="text-2xl" />
                                                     </button>
@@ -261,7 +264,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                         'Document Name'
                                                     }
                                                     isSubmitting={isSubmitting}
-                                                    className="shadow bg-white rounded"
+                                                    className="bg-white rounded shadow"
                                                 />
 
                                                 <ATMTextField
@@ -280,7 +283,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                         )
                                                     }
                                                     isSubmitting={isSubmitting}
-                                                    className="shadow bg-white rounded mt-0"
+                                                    className="mt-0 bg-white rounded shadow"
                                                     // selectedFile={otherDocument.documentFile}
                                                 />
 
@@ -291,7 +294,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                 }
                             )}
 
-                            <div className="flex justify-self-start px-6 py-9">
+                            <div className="flex px-6 justify-self-start py-9">
                                 <button
                                     type="button"
                                     onClick={() =>
@@ -300,7 +303,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                             documentFile: '',
                                         })
                                     }
-                                    className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                    className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                                 >
                                     <HiPlus size="20" /> Add More
                                 </button>

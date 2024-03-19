@@ -48,7 +48,7 @@ const ATMTextField = ({
     value,
     onChange,
     label,
-    className = `shadow bg-white rounded ${label && 'mt-2'} `,
+    className = `shadow bg-white capitalize rounded ${label && 'mt-2'} `,
     required,
     onBlur,
     autoFocus = false,
@@ -93,7 +93,7 @@ const ATMTextField = ({
                 >
                     {label && (
                         <label
-                            className={`text-slate-700 ${getLabelFont(
+                            className={`text-slate-700 capitalize ${getLabelFont(
                                 labelSize
                             )} ${labelClass}`}
                         >
@@ -157,7 +157,7 @@ const ATMTextField = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500 py-1 mb-1">
+                        <p className=" capitalize  font-poppins absolute text-[14px] text-start mt-0 text-red-500 py-1 mb-1">
                             {errMsg}
                         </p>
                     )}

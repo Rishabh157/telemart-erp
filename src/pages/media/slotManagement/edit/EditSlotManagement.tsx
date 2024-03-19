@@ -80,7 +80,7 @@ const EditSlotManagement = ({
     }
     return (
         <div className="">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -91,7 +91,7 @@ const EditSlotManagement = ({
                     <ATMPageHeading> Update Slot</ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium">Slot Details</div>
@@ -114,7 +114,7 @@ const EditSlotManagement = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="px-3 py-8 grow ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* FirstName */}
                             <ATMTextField
@@ -131,6 +131,7 @@ const EditSlotManagement = ({
                                 }}
                             />
                             <ATMSelectSearchable
+                                required
                                 name="channelGroupId"
                                 value={values.channelGroupId}
                                 onChange={(e) =>
@@ -196,11 +197,11 @@ const EditSlotManagement = ({
                             />{' '}
                         </div>
                         <div className="px-3 pt-5">
-                            <div className=" text-lg pb-2 font-medium text-primary-main">
+                            <div className="pb-2 text-lg font-medium  text-primary-main">
                                 Add Slot Details
                             </div>
 
-                            <div className="grid grid-cols-4 gap-2 items-end  pb-5">
+                            <div className="grid items-end grid-cols-4 gap-2 pb-5">
                                 <div className="mt-0">
                                     <ATMSelectSearchable
                                         isAllSelect

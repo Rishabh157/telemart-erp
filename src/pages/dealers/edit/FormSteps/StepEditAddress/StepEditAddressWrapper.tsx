@@ -53,6 +53,7 @@ const formFields: {
                 name: 'registrationAddress.phone',
                 label: 'Phone',
                 placeholder: 'Phone',
+                required: true,
             },
             {
                 name: 'registrationAddress.countryId',
@@ -80,6 +81,7 @@ const formFields: {
                 label: 'Address',
                 type: 'textarea',
                 placeholder: 'Address',
+                required: true,
             },
             {
                 name: 'registrationAddress.pincodeId',
@@ -108,6 +110,7 @@ const formFields: {
                 name: 'billingAddress.phone',
                 label: 'Phone',
                 placeholder: 'Phone',
+                required: true,
             },
             {
                 name: 'billingAddress.countryId',
@@ -135,6 +138,7 @@ const formFields: {
                 label: 'Address',
                 type: 'textarea',
                 placeholder: 'Address',
+                required: true,
             },
             {
                 name: 'billingAddress.pincodeId',

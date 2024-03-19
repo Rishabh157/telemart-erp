@@ -92,7 +92,7 @@ const StepAddAddress = ({
                             index !== formFields?.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >
-                        <div className="text-primary-main text-lg pb-2 font-medium">
+                        <div className="pb-2 text-lg font-medium text-primary-main">
                             {sectionName}
                         </div>
 
@@ -103,12 +103,14 @@ const StepAddAddress = ({
                                     name,
                                     label,
                                     placeholder,
+                                    required,
                                 } = field
 
                                 switch (type) {
                                     case 'text':
                                         return (
                                             <ATMTextField
+                                                required={required}
                                                 key={name}
                                                 maxLength={
                                                     name ===
@@ -158,7 +160,7 @@ const StepAddAddress = ({
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
-                                                className="shadow bg-white rounded"
+                                                className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
@@ -212,7 +214,7 @@ const StepAddAddress = ({
                                                     disabled={false}
                                                 />
                                                 {imageApiStatus ? (
-                                                    <div className=" mt-3 flex justify-center  items-center w-full h-full">
+                                                    <div className="flex items-center justify-center w-full h-full mt-3 ">
                                                         <CircularProgress />
                                                     </div>
                                                 ) : null}
@@ -259,7 +261,7 @@ const StepAddAddress = ({
                                                 {label === 'Pincode' && (
                                                     <>
                                                         <div
-                                                            className="flex justify-center items-center bg-slate-400 w-8 h-9 rounded mt-11 cursor-pointer"
+                                                            className="flex items-center justify-center w-8 rounded cursor-pointer bg-slate-400 h-9 mt-11"
                                                             onClick={() => {
                                                                 setIsOpenSearchPincode(
                                                                     (
@@ -300,6 +302,9 @@ const StepAddAddress = ({
                                                             component={
                                                                 <div className="px-4 py-2">
                                                                     <ATMTextField
+                                                                        required={
+                                                                            required
+                                                                        }
                                                                         name=""
                                                                         value={
                                                                             name ===
@@ -321,7 +326,7 @@ const StepAddAddress = ({
                                                                         }}
                                                                         label="Search Pincode"
                                                                         placeholder="Enter Pincode"
-                                                                        className="shadow bg-white rounded"
+                                                                        className="bg-white rounded shadow"
                                                                     />
                                                                 </div>
                                                             }

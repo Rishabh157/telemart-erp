@@ -77,6 +77,7 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                     <div className="grid grid-cols-3 gap-4">
                         {/* languageName */}
                         <ATMTextField
+                            required
                             name="ndrDisposition"
                             value={values.ndrDisposition}
                             label="Disposition Name"
@@ -89,6 +90,7 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                             }
                         />
                         <ATMSelectSearchable
+                            required
                             options={smstypeOptions()}
                             name="smsType"
                             value={values.smsType}
@@ -97,6 +99,7 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                         />
 
                         <ATMSelectSearchable
+                            required
                             options={emailTypeOptions()}
                             name="emailType"
                             value={values.emailType}
@@ -106,6 +109,7 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                             }
                         />
                         <ATMSelectSearchable
+                            required
                             name="priority"
                             value={values.priority}
                             label="Priority"
@@ -113,6 +117,7 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                             onChange={(e) => handleSetFieldValue('priority', e)}
                         />
                         <ATMSelectSearchable
+                            required
                             options={rtoTypeOptions()}
                             name="rtoAttempt"
                             value={values.rtoAttempt}

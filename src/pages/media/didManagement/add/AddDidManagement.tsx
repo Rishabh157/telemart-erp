@@ -95,6 +95,7 @@ const AddDidManagements = ({
                             {/* FirstName */}
 
                             <ATMTextField
+                                required
                                 name="didNumber"
                                 value={values.didNumber}
                                 label="Did Number"
@@ -107,6 +108,7 @@ const AddDidManagements = ({
                                 }
                             />
                             <ATMSelectSearchable
+                                required
                                 name="schemeId"
                                 value={values.schemeId}
                                 onChange={(value) =>
@@ -116,6 +118,7 @@ const AddDidManagements = ({
                                 label="Scheme Name"
                             />
                             <ATMSelectSearchable
+                                required
                                 name="channelId"
                                 value={values.channelId}
                                 onChange={(value) =>
@@ -125,6 +128,7 @@ const AddDidManagements = ({
                                 label="Channel Name"
                             />
                             <ATMSelectSearchable
+                                required
                                 name="slotId"
                                 value={values.slotId}
                                 onChange={(value) =>

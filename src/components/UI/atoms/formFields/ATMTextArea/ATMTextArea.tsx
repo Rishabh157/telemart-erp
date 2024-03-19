@@ -42,7 +42,7 @@ const ATMTextArea = ({
     isDisable = false,
 }: Props) => {
     return (
-        <div className="mt-4">
+        <div className="mt-3">
             {label && (
                 <label className={`text-slate-700 ${labelClass}`}>
                     {label}{' '}

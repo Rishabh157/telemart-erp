@@ -58,7 +58,7 @@ const EditDidManagements = ({
     }
     return (
         <div className="">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -69,7 +69,7 @@ const EditDidManagements = ({
                     <ATMPageHeading> Edit DID </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium"> DID Details</div>
@@ -90,10 +90,11 @@ const EditDidManagements = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-8 px-3 ">
+                    <div className="px-3 py-8 grow ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* FirstName */}
                             <ATMTextField
+                                required
                                 name="didNumber"
                                 value={values.didNumber}
                                 label="Did Number"
@@ -107,6 +108,7 @@ const EditDidManagements = ({
                             />
 
                             <ATMSelectSearchable
+                                required
                                 name="schemeId"
                                 value={values.schemeId}
                                 onChange={(value) =>
@@ -117,6 +119,7 @@ const EditDidManagements = ({
                             />
 
                             <ATMSelectSearchable
+                                required
                                 name="channelId"
                                 value={values.channelId}
                                 onChange={(value) =>
@@ -126,6 +129,7 @@ const EditDidManagements = ({
                                 label="Channel Name"
                             />
                             <ATMSelectSearchable
+                                required
                                 name="slotId"
                                 value={values.slotId}
                                 onChange={(value) =>

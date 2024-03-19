@@ -54,11 +54,13 @@ const formFields: {
                 name: 'regd_address.phone',
                 label: 'Phone',
                 placeholder: 'Phone',
+                required: true,
             },
             {
                 name: 'regd_address.address',
                 label: 'Address',
                 placeholder: 'Address',
+                required: true,
             },
             {
                 name: 'regd_address.country',
@@ -66,6 +68,7 @@ const formFields: {
                 placeholder: 'Country',
                 type: 'select',
                 optionAccessKey: 'counrtyOptions',
+                required: true,
             },
             {
                 name: 'regd_address.state',
@@ -73,6 +76,7 @@ const formFields: {
                 placeholder: 'State',
                 type: 'select',
                 optionAccessKey: 'stateOptions',
+                required: true,
             },
             {
                 name: 'regd_address.district',
@@ -80,6 +84,7 @@ const formFields: {
                 placeholder: 'District',
                 type: 'select',
                 optionAccessKey: 'districtOptions',
+                required: true,
             },
             {
                 name: 'regd_address.pincode',
@@ -87,6 +92,7 @@ const formFields: {
                 placeholder: 'Pincode',
                 type: 'select',
                 optionAccessKey: 'pincodeOptions',
+                required: true,
             },
         ],
     },
@@ -108,11 +114,13 @@ const formFields: {
                 name: 'billing_address.phone',
                 label: 'Phone',
                 placeholder: 'Phone',
+                required: true,
             },
             {
                 name: 'billing_address.address',
                 label: 'Address',
                 placeholder: 'Address',
+                required: true,
             },
             {
                 name: 'billing_address.country',
@@ -120,6 +128,7 @@ const formFields: {
                 placeholder: 'Country',
                 type: 'select',
                 optionAccessKey: 'billingCounrtyOptions',
+                required: true,
             },
             {
                 name: 'billing_address.state',
@@ -127,6 +136,7 @@ const formFields: {
                 placeholder: 'State',
                 type: 'select',
                 optionAccessKey: 'billingStateOptions',
+                required: true,
             },
             {
                 name: 'billing_address.district',
@@ -134,6 +144,7 @@ const formFields: {
                 placeholder: 'District',
                 type: 'select',
                 optionAccessKey: 'billingDistrictOptions',
+                required: true,
             },
             {
                 name: 'billing_address.pincode',
@@ -141,6 +152,7 @@ const formFields: {
                 placeholder: 'Pincode',
                 type: 'select',
                 optionAccessKey: 'billingPincodeOptions',
+                required: true,
             },
         ],
     },

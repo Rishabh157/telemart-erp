@@ -77,6 +77,7 @@ const AddAsstesCategory = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
+                                required
                                 name="categoryName"
                                 value={values.categoryName}
                                 label="Asset Category"

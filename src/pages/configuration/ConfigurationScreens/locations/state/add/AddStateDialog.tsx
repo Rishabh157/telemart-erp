@@ -39,6 +39,7 @@ const AddStateDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                 <div>
                     <div>
                         <ATMTextField
+                            required
                             name="stateName"
                             value={values.stateName}
                             onChange={(e) => {
@@ -65,7 +66,7 @@ const AddStateDialog = ({ onClose, formikProps, apiStatus }: Props) => {
 
             <DialogActions>
                 <button
-                    className="border border-primary-main text-primary-main px-3 py-2 rounded"
+                    className="px-3 py-2 border rounded border-primary-main text-primary-main"
                     type="button"
                     onClick={() => onClose()}
                 >

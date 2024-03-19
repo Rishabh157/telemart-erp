@@ -42,6 +42,7 @@ const AddTehsilDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                     <div>
                         <div>
                             <ATMTextField
+                                required
                                 name="tehsilName"
                                 value={values.tehsilName}
                                 onChange={(e) => {
@@ -58,7 +59,7 @@ const AddTehsilDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                     <button
                         type="button"
                         onClick={() => onClose()}
-                        className="border border-primary-main text-primary-main px-3 py-2 rounded"
+                        className="px-3 py-2 border rounded border-primary-main text-primary-main"
                     >
                         {' '}
                         Cancel

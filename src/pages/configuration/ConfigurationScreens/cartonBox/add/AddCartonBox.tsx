@@ -83,6 +83,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                         <div className="grid grid-cols-3 gap-4">
                             {/* boxName */}
                             <ATMTextField
+                                required
                                 name="boxName"
                                 value={values.boxName}
                                 label="Box Name"
@@ -97,6 +98,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Inner Items Count */}
                             <ATMTextField
+                                required
                                 name="innerItemsCount"
                                 value={
                                     values.innerItemsCount === 0
@@ -119,10 +121,14 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                 <label className="text-slate-700 font-medium">
                                     {' '}
                                     Dimensions (in cm){' '}
+                                    <span className="ml-1 text-sm text-red-500">
+                                        *
+                                    </span>{' '}
                                 </label>
                                 <div className="flex gap-2 -mt-1">
                                     {/* Height */}
                                     <ATMTextField
+                                        required
                                         name="dimensions.height"
                                         value={
                                             values.dimensions.height === 0
@@ -144,6 +150,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
 
                                     {/* Weight */}
                                     <ATMTextField
+                                        required
                                         name="dimensions.width"
                                         value={
                                             values.dimensions.width === 0
@@ -165,6 +172,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
 
                                     {/* Depth */}
                                     <ATMTextField
+                                        required
                                         name="dimensions.depth"
                                         value={
                                             values.dimensions.depth === 0
@@ -188,6 +196,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Box Weight */}
                             <ATMTextField
+                                required
                                 name="boxWeight"
                                 value={
                                     values.boxWeight === 0

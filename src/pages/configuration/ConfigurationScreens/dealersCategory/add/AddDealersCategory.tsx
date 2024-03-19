@@ -84,6 +84,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                         <div className="grid grid-cols-3 gap-4">
                             {/* dealersCategory */}
                             <ATMTextField
+                                required
                                 name="dealersCategory"
                                 value={values.dealersCategory}
                                 label="Dealers Category"
@@ -98,6 +99,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Invest Amount */}
                             <ATMTextField
+                                required
                                 name="investAmount"
                                 value={
                                     values.investAmount === 0
@@ -119,6 +121,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Number of Orders */}
                             <ATMTextField
+                                required
                                 name="numberOfOrders"
                                 value={
                                     values.numberOfOrders === 0
@@ -139,6 +142,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                             />
                             {/* Delivery Percentage */}
                             <ATMTextField
+                                required
                                 name="deliveryPercentage"
                                 value={
                                     values.deliveryPercentage === 0
