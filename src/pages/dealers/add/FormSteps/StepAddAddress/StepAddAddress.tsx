@@ -101,12 +101,14 @@ const StepAddAddress = ({
                                     name,
                                     label,
                                     placeholder,
+                                    required,
                                 } = field
 
                                 switch (type) {
                                     case 'text':
                                         return (
                                             <ATMTextField
+                                                required={required}
                                                 key={name || index}
                                                 name={name}
                                                 value={
@@ -158,6 +160,7 @@ const StepAddAddress = ({
                                                     key={name || index}
                                                 >
                                                     <ATMSelectSearchable
+                                                        required={required}
                                                         label={label}
                                                         name={name}
                                                         value={
@@ -237,6 +240,9 @@ const StepAddAddress = ({
                                                             component={
                                                                 <div className="px-4 py-2">
                                                                     <ATMTextField
+                                                                        required={
+                                                                            required
+                                                                        }
                                                                         name=""
                                                                         value={
                                                                             name ===
@@ -355,6 +361,7 @@ const StepAddAddress = ({
                                         return (
                                             <div className="-mt-4">
                                                 <ATMTextArea
+                                                    required={required}
                                                     key={name}
                                                     name={name}
                                                     minRows={5}
@@ -372,10 +379,7 @@ const StepAddAddress = ({
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
-                                                        setFieldValue(
-                                                            name,
-                                                            e
-                                                        )
+                                                        setFieldValue(name, e)
                                                     }}
                                                     label={label}
                                                     placeholder={placeholder}

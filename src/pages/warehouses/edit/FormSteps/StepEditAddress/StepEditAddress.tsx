@@ -84,7 +84,7 @@ const StepEditAddress = ({
                             index !== formFields?.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >
-                        <div className="text-primary-main text-lg pb-2 font-medium">
+                        <div className="pb-2 text-lg font-medium text-primary-main">
                             {sectionName}
                         </div>
 
@@ -95,12 +95,14 @@ const StepEditAddress = ({
                                     name,
                                     label,
                                     placeholder,
+                                    required,
                                 } = field
 
                                 switch (type) {
                                     case 'text':
                                         return (
                                             <ATMTextField
+                                                required={required}
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
@@ -150,7 +152,7 @@ const StepEditAddress = ({
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
-                                                className="shadow bg-white rounded"
+                                                className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
@@ -158,6 +160,7 @@ const StepEditAddress = ({
                                         return (
                                             <div className="mt-4">
                                                 <ATMFilePickerWrapper
+                                                    required={required}
                                                     name={name}
                                                     label={label}
                                                     placeholder={placeholder}
@@ -203,7 +206,7 @@ const StepEditAddress = ({
                                                     disabled={false}
                                                 />
                                                 {imageApiStatus ? (
-                                                    <div className=" mt-3 flex justify-center  items-center w-full h-full">
+                                                    <div className="flex items-center justify-center w-full h-full mt-3 ">
                                                         <CircularProgress />
                                                     </div>
                                                 ) : null}
@@ -214,6 +217,7 @@ const StepEditAddress = ({
                                         return (
                                             <div className="-mt-2">
                                                 <ATMSelectSearchable
+                                                    required={required}
                                                     label={label}
                                                     selectLabel={label}
                                                     name={name}

@@ -76,7 +76,7 @@ const AddPurchaseOrder = ({
     }
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -87,7 +87,7 @@ const AddPurchaseOrder = ({
                     <ATMPageHeading> Purchase Order </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium"> PO Details </div>
@@ -108,13 +108,14 @@ const AddPurchaseOrder = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-9 px-3 ">
+                    <div className="px-3 grow py-9 ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* PO Code */}
 
                             {/* Vendor */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
+                                    required
                                     name="vendorId"
                                     value={values.vendorId}
                                     onChange={(e) =>
@@ -128,6 +129,7 @@ const AddPurchaseOrder = ({
                             {/* Warehouse */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
+                                    required
                                     name="wareHouseId"
                                     value={values.wareHouseId}
                                     onChange={(e) =>
@@ -142,7 +144,7 @@ const AddPurchaseOrder = ({
 
                     {/*  Items  */}
                     <div className="px-3">
-                        <div className=" text-lg pb-2 font-medium text-primary-main">
+                        <div className="pb-2 text-lg font-medium text-primary-main">
                             Add item to purchase order
                         </div>
 
@@ -163,11 +165,12 @@ const AddPurchaseOrder = ({
                                                     return (
                                                         <div
                                                             key={itemIndex}
-                                                            className="flex gap-3 items-end  "
+                                                            className="flex items-end gap-3 "
                                                         >
                                                             {/* Item Name */}
                                                             <div className="flex-[3_3_0%] -mt-4">
                                                                 <ATMSelectSearchable
+                                                                    required
                                                                     name={`purchaseOrder[${itemIndex}].itemId`}
                                                                     value={
                                                                         itemId
@@ -205,6 +208,7 @@ const AddPurchaseOrder = ({
                                                             {/* Rate */}
                                                             <div className="flex-[2_2_0%] ">
                                                                 <ATMTextField
+                                                                    required
                                                                     type="number"
                                                                     min={0}
                                                                     name={`purchaseOrder[${itemIndex}].rate`}
@@ -233,6 +237,7 @@ const AddPurchaseOrder = ({
                                                             {/* Quantity */}
                                                             <div className="flex-[2_2_0%]">
                                                                 <ATMTextField
+                                                                    required
                                                                     type="number"
                                                                     min={0}
                                                                     name={`purchaseOrder[${itemIndex}].quantity`}
@@ -261,6 +266,7 @@ const AddPurchaseOrder = ({
                                                             {/* Est. Receiving Date */}
                                                             <div className="flex-[3_3_0%]">
                                                                 <ATMDatePicker
+                                                                    required
                                                                     name={`purchaseOrder[${itemIndex}].estReceivingDate`}
                                                                     value={
                                                                         estReceivingDate
@@ -290,7 +296,7 @@ const AddPurchaseOrder = ({
                                                                                 itemIndex
                                                                             )
                                                                         }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
+                                                                        className="p-2 text-white bg-red-500 rounded"
                                                                     >
                                                                         <MdDeleteOutline className="text-2xl" />
                                                                     </button>
@@ -314,7 +320,7 @@ const AddPurchaseOrder = ({
                                                         estReceivingDate: '',
                                                     })
                                                 }
-                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                                className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                                             >
                                                 <HiPlus size="20" /> Add More
                                             </button>

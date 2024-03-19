@@ -13,6 +13,7 @@ export type TextFieldType = {
     type?: 'text'
     optionAccessKey?: never
     offset?: number
+    required?: boolean
 }
 
 export type NumberFieldType = {
@@ -22,6 +23,7 @@ export type NumberFieldType = {
     type?: 'number'
     optionAccessKey?: never
     offset?: number
+    required?: boolean
 }
 
 export type PasswordFieldType = {
@@ -31,6 +33,7 @@ export type PasswordFieldType = {
     type?: 'password'
     optionAccessKey?: never
     offset?: number
+    required?: boolean
 }
 
 export type SelectFieldType<OptionAccessKey> = {
@@ -40,6 +43,7 @@ export type SelectFieldType<OptionAccessKey> = {
     type?: 'select'
     optionAccessKey: OptionAccessKey
     offset?: number
+    required?: boolean
 }
 
 export type FilePickerFieldType = {
@@ -49,6 +53,7 @@ export type FilePickerFieldType = {
     type?: 'file-picker'
     optionAccessKey?: never
     offset?: number
+    required?: boolean
 }
 export type SwitchButton = {
     name: string
@@ -57,6 +62,7 @@ export type SwitchButton = {
     type?: 'switch-button'
     optionAccessKey?: never
     offset?: number
+    required?: boolean
 }
 
 export type Checkbox = {
@@ -68,6 +74,7 @@ export type Checkbox = {
     placeholder?: string
     optionAccessKey?: never
     offset?: number
+    required?: boolean
 }
 
 export type TextArea = {
@@ -79,6 +86,7 @@ export type TextArea = {
     placeholder?: string
     optionAccessKey?: never
     offset?: number
+    required?: boolean
 }
 
 export type Field<OptionAccessKey> =

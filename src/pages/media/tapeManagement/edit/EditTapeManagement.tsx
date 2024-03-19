@@ -78,7 +78,7 @@ const EditTapeManagement = ({
     }
     return (
         <div className="">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -89,7 +89,7 @@ const EditTapeManagement = ({
                     <ATMPageHeading> Update Tape </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium">Tape Details</div>
@@ -133,7 +133,7 @@ const EditTapeManagement = ({
                     </div>
 
                     {/* Form */}
-                    <div className="grow py-2 px-3 ">
+                    <div className="px-3 py-2 grow ">
                         <div className="grid grid-cols-3 gap-4">
                             {/* FirstName */}
                             <ATMTextField
@@ -224,14 +224,14 @@ const EditTapeManagement = ({
                             />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4  mt-2">
+                        <div className="grid grid-cols-2 gap-4 mt-2">
                             <div className="grid grid-rows-2 ">
-                                <div className=" row-sapn-1 text-slate-700 text-center justify-start flex -mt-4 p-0 m-0 items-center   font-medium ">
+                                <div className="flex items-center justify-start p-0 m-0 -mt-4 font-medium text-center  row-sapn-1 text-slate-700">
                                     Duration
                                 </div>
 
-                                <div className=" row-sapn-1 grid grid-cols-3 gap-x-2 -mt-9 ">
-                                    <div className=" ">
+                                <div className="grid grid-cols-3  row-sapn-1 gap-x-2 -mt-9">
+                                    <div className="">
                                         <ATMTextField
                                             name="hour"
                                             required
@@ -251,7 +251,7 @@ const EditTapeManagement = ({
                                             }}
                                         />
                                     </div>
-                                    <div className=" ">
+                                    <div className="">
                                         <ATMSelectSearchable
                                             name="minute"
                                             required
@@ -270,7 +270,7 @@ const EditTapeManagement = ({
                                             }}
                                         />
                                     </div>
-                                    <div className=" ">
+                                    <div className="">
                                         <ATMSelectSearchable
                                             defaultValue="00"
                                             label="Second"
@@ -312,7 +312,7 @@ const EditTapeManagement = ({
                         </div>
 
                         <div className="px-3 py-8">
-                            <div className=" text-lg pb-2 font-medium text-primary-main">
+                            <div className="pb-2 text-lg font-medium  text-primary-main">
                                 Add Phone Number
                             </div>
 
@@ -336,6 +336,7 @@ const EditTapeManagement = ({
                                                                 {/* Phone */}
                                                                 <div className="flex">
                                                                     <ATMTextField
+                                                                        required
                                                                         type="text"
                                                                         name={`phone[${itemIndex}].phoneNo`}
                                                                         value={
@@ -388,7 +389,7 @@ const EditTapeManagement = ({
                                                             phoneNo: '',
                                                         })
                                                     }}
-                                                    className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                                    className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                                                 >
                                                     <HiPlus size="20" /> Add
                                                     More

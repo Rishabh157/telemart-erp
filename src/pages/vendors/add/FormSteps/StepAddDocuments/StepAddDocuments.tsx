@@ -55,7 +55,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                 const { sectionName, fields } = formField
                 return (
                     <div key={index} className={`py-9 px-7`}>
-                        <div className="text-primary-main text-lg pb-2 font-medium ">
+                        <div className="pb-2 text-lg font-medium text-primary-main ">
                             {sectionName}
                         </div>
 
@@ -66,6 +66,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                     name,
                                     label,
                                     placeholder,
+                                    required,
                                 } = field
 
                                 switch (type) {
@@ -83,7 +84,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
-                                                className="shadow bg-white rounded"
+                                                className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
@@ -92,6 +93,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                         return (
                                             <div className="mt-3">
                                                 <ATMFilePickerWrapper
+                                                    required={required}
                                                     name={name}
                                                     label={label}
                                                     placeholder={placeholder}

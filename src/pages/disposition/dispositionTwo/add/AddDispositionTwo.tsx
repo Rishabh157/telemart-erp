@@ -95,6 +95,7 @@ const AddDispositionTwo = ({
                             }}
                         />
                         <ATMSelectSearchable
+                            required
                             name="dispositionOneId"
                             value={values.dispositionOneId}
                             onChange={(e) =>

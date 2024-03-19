@@ -60,7 +60,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
     }
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
-            <div className="p-4 flex flex-col gap-2  ">
+            <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
@@ -71,7 +71,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                     <ATMPageHeading> Update ASR </ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
+                <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium"> ASR Details </div>
@@ -109,7 +109,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                     <div
                                                         className={`py-9 px-7`}
                                                     >
-                                                        <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
+                                                        <div className="flex items-center justify-between pb-2 text-lg font-medium text-primary-main">
                                                             Product{' '}
                                                             {asrIndex + 1}
                                                             {/* Delete Button */}
@@ -123,7 +123,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                                             asrIndex
                                                                         )
                                                                     }
-                                                                    className="p-1 bg-red-500 text-white rounded"
+                                                                    className="p-1 text-white bg-red-500 rounded"
                                                                 >
                                                                     <MdDeleteOutline className="text-2xl" />
                                                                 </button>
@@ -134,6 +134,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                             {/* Product Name */}
                                                             {/* <div className="flex-1"> */}
                                                             <ATMSelect
+                                                                required
                                                                 name={`asrDetails[${asrIndex}].productName`}
                                                                 value={
                                                                     productName
@@ -169,6 +170,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                             {/* Quantity */}
                                                             {/* <div className="flex-1"> */}
                                                             <ATMTextField
+                                                                required
                                                                 name={`asrDetails[${asrIndex}].quantity`}
                                                                 value={
                                                                     quantity ===
@@ -196,7 +198,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                     )}
 
                                     {/*BUTTON - Add New */}
-                                    <div className="flex justify-self-start p-5">
+                                    <div className="flex p-5 justify-self-start">
                                         <button
                                             type="button"
                                             onClick={() =>
@@ -206,7 +208,7 @@ const EditASR = ({ formikProps, apiStatus }: Props) => {
                                                     quantity: '',
                                                 })
                                             }
-                                            className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                            className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                                         >
                                             <HiPlus size="20" /> Add More
                                         </button>

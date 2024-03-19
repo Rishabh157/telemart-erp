@@ -86,7 +86,7 @@ const StepAddBankDetails = ({
                                                             key={index}
                                                             className={`py-6 px-7`}
                                                         >
-                                                            <div className="text-primary-main text-lg pb-2 font-medium flex justify-between items-center">
+                                                            <div className="flex items-center justify-between pb-2 text-lg font-medium text-primary-main">
                                                                 {sectionName} #
                                                                 {bankInformationIndex +
                                                                     1}
@@ -102,7 +102,7 @@ const StepAddBankDetails = ({
                                                                                 bankInformationIndex
                                                                             )
                                                                         }
-                                                                        className="p-1 bg-red-500 text-white rounded"
+                                                                        className="p-1 text-white bg-red-500 rounded"
                                                                     >
                                                                         <MdDeleteOutline className="text-2xl" />
                                                                     </button>
@@ -119,6 +119,7 @@ const StepAddBankDetails = ({
                                                                             name,
                                                                             label,
                                                                             placeholder,
+                                                                            required,
                                                                         } = field
 
                                                                         switch (
@@ -127,6 +128,9 @@ const StepAddBankDetails = ({
                                                                             case 'text':
                                                                                 return (
                                                                                     <ATMTextField
+                                                                                        required={
+                                                                                            required
+                                                                                        }
                                                                                         key={
                                                                                             name
                                                                                         }
@@ -152,7 +156,7 @@ const StepAddBankDetails = ({
                                                                                         placeholder={
                                                                                             placeholder
                                                                                         }
-                                                                                        className="shadow bg-white rounded"
+                                                                                        className="bg-white rounded shadow"
                                                                                         isSubmitting={
                                                                                             isSubmitting
                                                                                         }
@@ -168,6 +172,9 @@ const StepAddBankDetails = ({
                                                                                         }
                                                                                     >
                                                                                         <ATMSelect
+                                                                                            required={
+                                                                                                required
+                                                                                            }
                                                                                             name={`bank_informations[${bankInformationIndex}].${name}`}
                                                                                             value={
                                                                                                 bankInformation[
@@ -306,7 +313,7 @@ const StepAddBankDetails = ({
                             )}
 
                             {/*BUTTON - Add New */}
-                            <div className="flex justify-self-start p-5">
+                            <div className="flex p-5 justify-self-start">
                                 <button
                                     type="button"
                                     onClick={() =>
@@ -320,7 +327,7 @@ const StepAddBankDetails = ({
                                             cancelled_cheque: '',
                                         })
                                     }
-                                    className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                    className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                                 >
                                     <HiPlus size="20" /> Add More
                                 </button>

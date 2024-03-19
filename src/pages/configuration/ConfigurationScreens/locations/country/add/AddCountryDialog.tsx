@@ -42,6 +42,7 @@ const AddCountryDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                     <div>
                         <div>
                             <ATMTextField
+                                required
                                 name="countryName"
                                 value={values.countryName}
                                 placeholder="Name"

@@ -84,7 +84,7 @@ const StepAddAddress = ({
                             index !== formFields.length - 1 && 'border-b'
                         }  border-slate-300`}
                     >
-                        <div className="text-primary-main text-lg pb-2 font-medium">
+                        <div className="pb-2 text-lg font-medium text-primary-main">
                             {sectionName}
                         </div>
 
@@ -95,12 +95,14 @@ const StepAddAddress = ({
                                     name,
                                     label,
                                     placeholder,
+                                    required,
                                 } = field
 
                                 switch (type) {
                                     case 'text':
                                         return (
                                             <ATMTextField
+                                                required={required}
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
@@ -150,7 +152,7 @@ const StepAddAddress = ({
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
-                                                className="shadow bg-white rounded"
+                                                className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
@@ -159,6 +161,7 @@ const StepAddAddress = ({
                                         return (
                                             <div key={name} className="-mt-2">
                                                 <ATMSelectSearchable
+                                                    required={required}
                                                     label={label}
                                                     name={name}
                                                     value={

@@ -86,6 +86,7 @@ const AddArtist = ({ formikProps, apiStatus }: Props) => {
 
                         {/* Field 3 */}
                         <ATMTextField
+                            required
                             name="artistName"
                             value={values.artistName}
                             label="Artist Name"

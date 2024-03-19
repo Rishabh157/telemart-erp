@@ -71,6 +71,7 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                     <div className="grid grid-cols-3 gap-4">
                         <div className="mt-2">
                             <ATMSelectSearchable
+                                required
                                 name="callType"
                                 labelSpan="mb-2"
                                 label="Call Type"
@@ -85,6 +86,7 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
 
                         {/* initial Call Name */}
                         <ATMTextField
+                            required
                             name="initialCallName"
                             value={values.initialCallName}
                             placeholder="Name"

@@ -49,13 +49,20 @@ const StepAddDealerDetails = ({
         <div className="py-9 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
                 {formFields?.map((field: FieldType) => {
-                    const { type = 'text', name, label, placeholder } = field
+                    const {
+                        type = 'text',
+                        name,
+                        label,
+                        placeholder,
+                        required,
+                    } = field
 
                     switch (type) {
                         case 'text':
                             return (
                                 <div key={name}>
                                     <ATMTextField
+                                        required={required}
                                         key={name}
                                         name={name}
                                         value={values[name]}
@@ -67,7 +74,7 @@ const StepAddDealerDetails = ({
                                         }}
                                         label={label}
                                         placeholder={placeholder}
-                                        className="shadow bg-white rounded"
+                                        className="bg-white rounded shadow"
                                         isSubmitting={isSubmitting}
                                     />
                                 </div>
@@ -76,6 +83,7 @@ const StepAddDealerDetails = ({
                             return (
                                 <div key={name}>
                                     <ATMTextField
+                                        required={required}
                                         key={name}
                                         name={name}
                                         value={values[name]}
@@ -91,7 +99,7 @@ const StepAddDealerDetails = ({
                                         }}
                                         label={label}
                                         placeholder={placeholder}
-                                        className="shadow bg-white rounded"
+                                        className="bg-white rounded shadow"
                                         isSubmitting={isSubmitting}
                                     />
                                 </div>
@@ -100,6 +108,7 @@ const StepAddDealerDetails = ({
                             return (
                                 <div key={name}>
                                     <ATMSwitchButton
+                                        required={required}
                                         name={name}
                                         value={values[name]}
                                         label={label}
@@ -114,6 +123,7 @@ const StepAddDealerDetails = ({
                             return (
                                 <div key={name}>
                                     <ATMTextField
+                                        required={required}
                                         type="password"
                                         key={name}
                                         name={name}
@@ -126,7 +136,7 @@ const StepAddDealerDetails = ({
                                         }}
                                         label={label}
                                         placeholder={placeholder}
-                                        className="shadow bg-white rounded mt-2"
+                                        className="mt-2 bg-white rounded shadow"
                                         isSubmitting={isSubmitting}
                                     />
                                 </div>
@@ -136,6 +146,7 @@ const StepAddDealerDetails = ({
                             return (
                                 <div key={name} className="-mt-2">
                                     <ATMSelectSearchable
+                                        required={required}
                                         label={label}
                                         selectLabel={`Select ${label}`}
                                         name={name}

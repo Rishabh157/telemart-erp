@@ -59,8 +59,8 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                         'border-b'
                                     }  border-slate-300 `}
                                 >
-                                    <div className="flex justify-between items-center">
-                                        <div className="text-primary-main text-lg pb-2 font-medium ">
+                                    <div className="flex items-center justify-between">
+                                        <div className="pb-2 text-lg font-medium text-primary-main ">
                                             Item #{itemIndex + 1}
                                         </div>
                                         {/* Delete Button */}
@@ -70,7 +70,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                                 onClick={() =>
                                                     remove(itemIndex)
                                                 }
-                                                className="p-1 bg-red-500 text-white rounded"
+                                                className="p-1 text-white bg-red-500 rounded"
                                             >
                                                 <MdDeleteOutline className="text-2xl" />
                                             </button>
@@ -80,6 +80,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                     <div className="grid grid-cols-4 gap-4 gap-y-5">
                                         {/* Item Name */}
                                         <ATMSelectSearchable
+                                            required
                                             name={`items[${itemIndex}].itemId`}
                                             value={itemId}
                                             onChange={(e) => {
@@ -98,6 +99,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
 
                                         {/* Item Quantity */}
                                         <ATMTextField
+                                            required
                                             name={`items[${itemIndex}].itemQuantity`}
                                             value={itemQuantity}
                                             onChange={(e) => {
@@ -114,7 +116,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                             }}
                                             label="Item Quantity"
                                             placeholder="Item Quantity"
-                                            className="shadow bg-white rounded mt-2"
+                                            className="mt-2 bg-white rounded shadow"
                                             isSubmitting={isSubmitting}
                                         />
                                     </div>
@@ -122,7 +124,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                             )
                         })}
 
-                        <div className="flex justify-self-start p-5">
+                        <div className="flex p-5 justify-self-start">
                             <button
                                 type="button"
                                 onClick={() =>
@@ -131,7 +133,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                         itemQuantity: '',
                                     })
                                 }
-                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
+                                className="flex items-center px-2 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-full "
                             >
                                 <HiPlus size="20" /> Add More
                             </button>

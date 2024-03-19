@@ -85,6 +85,7 @@ const AddAttribute = ({ formikProps, apiStatus }: Props) => {
 
                             {/* Field 3 */}
                             <ATMTextField
+                                required
                                 name="attributeName"
                                 value={values.attributeName}
                                 label="Attribute Name"

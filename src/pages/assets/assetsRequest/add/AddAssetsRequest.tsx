@@ -134,6 +134,7 @@ const AddAsstesRequest = ({
                                 }
                             />
                             <ATMTextArea
+                                required
                                 name="assetDetails"
                                 value={values.assetDetails}
                                 label="Asset Details (, seperated values)"

@@ -42,6 +42,7 @@ const AddAreaDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                     <div>
                         <div>
                             <ATMTextField
+                                required
                                 name="area"
                                 value={values.area}
                                 onChange={(e) => {
@@ -58,14 +59,14 @@ const AddAreaDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                     <button
                         type="button"
                         onClick={() => onClose()}
-                        className="border border-primary-main text-primary-main px-3 py-2 rounded"
+                        className="px-3 py-2 border rounded border-primary-main text-primary-main"
                     >
                         {' '}
                         Cancel
                     </button>
                     <button
                         type="button"
-                        className="bg-primary-main text-white px-3 py-2 rounded"
+                        className="px-3 py-2 text-white rounded bg-primary-main"
                         onClick={() => formikProps.handleSubmit()}
                     >
                         {' '}

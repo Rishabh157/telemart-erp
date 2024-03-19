@@ -35,6 +35,7 @@ const formFields: FieldType[] = [
         name: 'warehouseName',
         label: 'Warehouse Name',
         placeholder: 'Warehouse Name',
+        required: true,
     },
     {
         name: 'country',
@@ -42,12 +43,14 @@ const formFields: FieldType[] = [
         placeholder: 'Country',
         type: 'select',
         optionAccessKey: 'countryOptions',
+        required: true,
     },
 
     {
         name: 'email',
         label: 'Email',
         placeholder: 'Email',
+        required: true,
     },
 ]
 

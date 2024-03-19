@@ -56,11 +56,13 @@ const formFields: {
                 name: 'regd_address.phone',
                 label: 'Phone',
                 placeholder: 'Phone',
+                required: true,
             },
             {
                 name: 'regd_address.address',
                 label: 'Address',
                 placeholder: 'Address',
+                required: true,
             },
             {
                 name: 'regd_address.country',
@@ -121,11 +123,13 @@ const formFields: {
                 name: 'billing_address.phone',
                 label: 'Phone',
                 placeholder: 'Phone',
+                required: true,
             },
             {
                 name: 'billing_address.address',
                 label: 'Address',
                 placeholder: 'Address',
+                required: true,
             },
             {
                 name: 'billing_address.country',
