@@ -157,8 +157,11 @@ const ATMTextField = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                        <p className=" capitalize  font-poppins absolute text-[14px] text-start mt-0 text-red-500 py-1 mb-1">
-                            {errMsg}
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span style={{ textTransform: 'capitalize' }}>
+                                {errMsg.charAt(0)}
+                            </span>
+                            {errMsg.slice(1)}
                         </p>
                     )}
                 </ErrorMessage>

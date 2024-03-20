@@ -113,7 +113,7 @@ const steps = [
             firstName: string().required('First Name is required'),
             lastName: string().required('Last Name is required'),
             dealerCategoryId: string().required(
-                'please choose dealer category'
+                'please select dealer category'
             ),
             email: string()
                 .email('Invalid Email')
@@ -131,10 +131,10 @@ const steps = [
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
-                countryId: string().required('Please choose a country'),
-                stateId: string().required('Please choose a state'),
-                districtId: string().required('Please choose a district'),
-                pincodeId: string().required('Please choose a pincode'),
+                countryId: string().required('Please select a country'),
+                stateId: string().required('Please select a state'),
+                districtId: string().required('Please select a district'),
+                pincodeId: string().required('Please select a pincode'),
             }),
             billingAddress: object().shape({
                 phone: string()
@@ -143,10 +143,10 @@ const steps = [
                     .min(10, 'minimum 10 digits')
                     .required('Phone number is required'),
                 address: string().required('Address is required'),
-                countryId: string().required('Please choose a country'),
-                stateId: string().required('Please choose a state'),
-                districtId: string().required('Please choose a district'),
-                pincodeId: string().required('Please choose a pincode'),
+                countryId: string().required('Please select a country'),
+                stateId: string().required('Please select a state'),
+                districtId: string().required('Please select a district'),
+                pincodeId: string().required('Please select a pincode'),
             }),
         }),
     },
