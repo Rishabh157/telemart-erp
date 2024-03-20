@@ -113,13 +113,17 @@ const HouseArrestListingWrapper = () => {
         _id: string,
         approve: boolean,
         remark: string,
-        complaintNumber: number
+        complaintNumber: number,
+        dealerId: string,
+        settledAmount: string
     ) => {
         accountApproval({
             id: _id,
             accountApproval: approve,
             accountRemark: remark,
             complaintNumber,
+            dealerId,
+            creditAmount: settledAmount,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -207,7 +211,7 @@ const HouseArrestListingWrapper = () => {
             renderCell: (row: HouseArrestListResponseType) => (
                 <div className="z-0">
                     <Stack direction="row" spacing={1}>
-                        {row?.ccApproval === null ? (
+                        {row?.ccApproval === false ? (
                             <button
                                 id="btn"
                                 className=" overflow-hidden cursor-pointer z-0"
@@ -222,20 +226,6 @@ const HouseArrestListingWrapper = () => {
                                     variant="outlined"
                                     size="small"
                                     clickable={true}
-                                />
-                            </button>
-                        ) : row?.ccApproval === false ? (
-                            <button
-                                id="btn"
-                                disabled={true}
-                                className="cursor-pointer"
-                            >
-                                <Chip
-                                    label="CC Rejected"
-                                    color="error"
-                                    variant="outlined"
-                                    size="small"
-                                    clickable={false}
                                 />
                             </button>
                         ) : (
@@ -269,6 +259,7 @@ const HouseArrestListingWrapper = () => {
                             title="Approval"
                             text="Do you want to Approve ?"
                             color={
+                                row?.ccApproval &&
                                 row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
@@ -280,7 +271,9 @@ const HouseArrestListingWrapper = () => {
                                     : 'error'
                             }
                             chipLabel={
-                                row?.managerFirstApproval === null
+                                row?.ccApproval === false
+                                    ? 'First Pending'
+                                    : row?.managerFirstApproval === null
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === false
                                     ? 'First Rejected'
@@ -291,11 +284,12 @@ const HouseArrestListingWrapper = () => {
                                     : 'Second Rejected'
                             }
                             disabled={
+                                row?.ccApproval === true &&
                                 row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
                                     ? true
-                                    : row?.ccApproval === false
+                                    : row?.dealerApproval === false
                                     ? true
                                     : row?.managerSecondApproval === null
                                     ? false
@@ -377,7 +371,7 @@ const HouseArrestListingWrapper = () => {
                           row?.accountApproval === null ? (
                             <button
                                 id="btn"
-                                className=" overflow-hidden cursor-pointer z-0"
+                                className="overflow-hidden cursor-pointer z-0"
                                 onClick={() => {
                                     Swal.fire({
                                         icon: 'warning',
@@ -421,7 +415,9 @@ const HouseArrestListingWrapper = () => {
                                                 row?._id,
                                                 res?.isConfirmed,
                                                 res?.value,
-                                                row?.complaintNumber
+                                                row?.complaintNumber,
+                                                row?.dealerId,
+                                                row?.settledAmount
                                             )
                                         }
                                         if (res.isDenied) {
@@ -429,7 +425,9 @@ const HouseArrestListingWrapper = () => {
                                                 row?._id,
                                                 res?.isConfirmed,
                                                 res?.value,
-                                                row?.complaintNumber
+                                                row?.complaintNumber,
+                                                row?.dealerId,
+                                                row?.settledAmount
                                             )
                                         }
                                     })
@@ -451,7 +449,7 @@ const HouseArrestListingWrapper = () => {
                             >
                                 <Chip
                                     label="Account Rejected"
-                                    color="success"
+                                    color="error"
                                     variant="outlined"
                                     size="small"
                                     clickable={false}
