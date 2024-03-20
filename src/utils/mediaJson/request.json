@@ -1,0 +1,44 @@
+{
+    "moduleId": "NAV_REQUEST",
+    "moduleName": "NAV_REQUEST",
+    "parentGroup": [],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_REQUEST_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_MONEY_BACK_TAB",
+            "actionUrl": "",
+            "actionName": "MONEY_BACK_TAB",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_PRODUCT_REPLACMENT_TAB",
+            "actionUrl": "",
+            "actionName": "PRODUCT_REPLACMENT_TAB",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_HOUSE_ARREST_TAB",
+            "actionUrl": "",
+            "actionName": "HOUSE_ARREST_TAB",
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_HOUSE_ARREST_ADD",
+            "actionUrl": "",
+            "actionName": "HOUSE_ARREST_ADD",
+            "parentGroup": [
+                "HOUSE_ARREST_TAB"
+            ],
+            "fields": []
+        }
+    ]
+}

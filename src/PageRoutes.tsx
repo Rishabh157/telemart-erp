@@ -2523,32 +2523,30 @@ const PageRoutes = () => {
                 <Route
                     path="/request"
                     element={
-                        <ViewRequest />
-                        // <Authorization
-                        //     children={<ViewDealer />}
-                        //     permission={UserModuleNameTypes.ACTION_DEALER_VIEW}
-                        // />
+                        <Authorization
+                            children={<ViewRequest />}
+                            permission={UserModuleNameTypes.NAV_REQUEST}
+                        />
                     }
                 >
                     {/* Moneyback Requets */}
                     <Route
-                        index
+
                         path="moneyback"
                         element={
-                            <MoneybackListingWrapper />
-                            // <Authorization
-                            //     children={
-                            //         <DealerGeneralInformationTabWrapper />
-                            //     }
-                            //     permission={
-                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
-                            //     }
-                            // />
+                            <Authorization
+                                children={
+                                    <MoneybackListingWrapper />
+                                }
+                                permission={
+                                    UserModuleNameTypes.ACTION_MONEY_BACK_TAB
+                                }
+                            />
                         }
                     />
 
                     <Route
-                        index
+
                         path="moneyback/:id/view"
                         element={
                             <MoneyViewWrapper />
@@ -2581,18 +2579,17 @@ const PageRoutes = () => {
 
                     {/* Product Replacement Requets */}
                     <Route
-                        index
+
                         path="product-replacement"
                         element={
-                            <ProductReplacementListingWrapper />
-                            // <Authorization
-                            //     children={
-                            //         <DealerGeneralInformationTabWrapper />
-                            //     }
-                            //     permission={
-                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
-                            //     }
-                            // />
+                            <Authorization
+                                children={
+                                    <ProductReplacementListingWrapper />
+                                }
+                                permission={
+                                    UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_TAB
+                                }
+                            />
                         }
                     />
                     <Route
@@ -2631,15 +2628,14 @@ const PageRoutes = () => {
                         index
                         path="house-arrest"
                         element={
-                            <HouseArrestListingWrapper />
-                            // <Authorization
-                            //     children={
-                            //         <DealerGeneralInformationTabWrapper />
-                            //     }
-                            //     permission={
-                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
-                            //     }
-                            // />
+                            <Authorization
+                                children={
+                                    <HouseArrestListingWrapper />
+                                }
+                                permission={
+                                    UserModuleNameTypes.ACTION_HOUSE_ARREST_TAB
+                                }
+                            />
                         }
                     />
                     <Route

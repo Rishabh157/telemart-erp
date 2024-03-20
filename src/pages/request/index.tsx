@@ -4,9 +4,11 @@ import { IconType } from 'react-icons'
 
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // import { isAuthorized } from 'src/utils/authorization'
 interface tabsProps {
@@ -16,11 +18,11 @@ interface tabsProps {
     name?: string
 }
 
-export enum statusProps {
-    moneyback = 'MONEYBACK',
-    productReplacement = 'PRODUCT-REPLACEMENT',
-    houseArrest = 'HOUSE-ARREST',
-}
+// export enum statusProps {
+//     moneyback = 'MONEYBACK',
+//     productReplacement = 'PRODUCT-REPLACEMENT',
+//     houseArrest = 'HOUSE-ARREST',
+// }
 
 const ViewRequest = () => {
     const tabs: tabsProps[] = [
@@ -28,73 +30,64 @@ const ViewRequest = () => {
             label: 'Moneyback',
             icon: MdOutbond,
             path: 'moneyback',
-            // name: UserModuleNameTypes.ACTION_ORDER_ALL_TAB_LIST,
+            name: UserModuleNameTypes.ACTION_MONEY_BACK_TAB,
         },
         {
             label: 'Product Replacement',
             icon: MdOutbond,
             path: 'product-replacement',
-            // name: UserModuleNameTypes.ACTION_ORDER_FRESH_ORDER_TAB_LIST,
+            name: UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_TAB,
         },
         {
             label: 'House Arrest',
             icon: MdOutbond,
             path: 'house-arrest',
-            // name: UserModuleNameTypes.ACTION_ORDER_APPROVAL_TAB_LIST,
+            name: UserModuleNameTypes.ACTION_HOUSE_ARREST_TAB,
         },
     ]
-
     const [activeTabIndex, setActiveTab] = useState<number>(0)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [activelabel, setActiveTabLabel] = useState<string>()
     const { pathname } = useLocation()
 
+    const navigate = useNavigate()
     // Access specific query parameters by their names
-    const activeTab = pathname?.split('/')?.[2]
+    const activeTab = window.location.pathname.split('/')[2]
 
-    const getActiveTab = (activeTab: string) => {
-        switch (activeTab?.toUpperCase()) {
-            case statusProps.moneyback:
-                return setActiveTab(0)
-            case statusProps.productReplacement:
-                return setActiveTab(1)
-            case statusProps.houseArrest:
-                return setActiveTab(2)
-            default:
-                return
-        }
-    }
+    const allowedTabs = tabs
+        ?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        ?.map((tab) => tab)
 
     useEffect(() => {
-        getActiveTab(activeTab)
+        const allowedTabs = tabs?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        navigate(`${allowedTabs[0]?.path}`)
+        //eslint-disable-next-line
+    }, [])
+    useEffect(() => {
+        if (!activeTab) return
+
+        navigate(`${pathname}`)
+
+        //eslint-disable-next-line
     }, [activeTab])
-    
-    // const allowedTabs = tabs
-    //     ?.filter((nav) => {
-    //         return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
-    //     })
-    //     ?.map((tab) => tab)
 
-    // useEffect(() => {
-    //     if (!activeTab) return
-    //     // const navigate = useNavigate()
-    // }, [activeTab])
+    useEffect(() => {
+        if (!activeTab) return
 
-    // useEffect(() => {
-    //     if (!activeTab) return
+        let activeIndex = allowedTabs?.findIndex(
+            (tab: tabsProps) => tab.path === activeTab
+        )
+        activeIndex = activeIndex < 0 ? 0 : activeIndex
 
-    //     let activeIndex = allowedTabs?.findIndex(
-    //         (tab: tabsProps) => tab.path.split('=')[1] === activeTab
-    //     )
+        setActiveTab(activeIndex)
+        const labelTab: string = allowedTabs[activeIndex]?.label || ''
+        setActiveTabLabel(labelTab)
+    }, [activeTab, allowedTabs])
 
-    //     activeIndex = activeIndex < 0 ? 0 : activeIndex
-    //     setActiveTab(activeIndex)
-
-    //     const labelTab: string = allowedTabs[activeIndex]?.label || ''
-
-    // }, [activeTab, allowedTabs])
-
-    // const getStatus = (status: keyof typeof statusProps) => {
-    //     return statusProps[status] || ''
-    // }
 
     return (
         <SideNavLayout>
@@ -103,11 +96,13 @@ const ViewRequest = () => {
                     {/* Right Section */}
                     <div className="w-[100%] border-b border-r border-l rounded-r h-full overflow-x-scroll">
                         <TabScrollable
-                            tabs={tabs}
+                            tabs={allowedTabs}
                             active={activeTabIndex}
                             navBtnContainerClassName="bg-red-500"
                         />
-
+   {/* <div className="py-2 px-4">
+                            <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+                        </div> */}
                         {/* Children */}
                         <div className="h-[calc(100%-30px)] pt-4">
                             <div className="h-full overflow-auto">
