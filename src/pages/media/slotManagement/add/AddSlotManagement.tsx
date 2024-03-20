@@ -46,7 +46,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: ' Slot Management',
-        path: '/media/slot',
+        path: '/media/slot/defination',
     },
     {
         label: 'Add Slot',

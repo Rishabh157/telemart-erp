@@ -1148,39 +1148,36 @@ const PageRoutes = () => {
                 <Route
                     path="/mapping"
                     element={
-                        <MappingTabsLayout />
-                        // <Authorization
-                        //     children={<AddAttributeGroupWrapper />}
-                        //     permission={
-                        //         UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
-                        //     }
-                        // />
+                        <Authorization
+                            children={<MappingTabsLayout />}
+                            permission={UserModuleNameTypes.NAV_MULTI_MAPPING}
+                        />
                     }
                 >
                     <Route
                         index
                         path="scheme-to-dealer"
                         element={
-                            <AddSchemeToDealerMappingWrapper />
-                            // <Authorization
-                            //     children={<AddAttributeGroupWrapper />}
-                            //     permission={
-                            //         UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
-                            //     }
-                            // />
+                            // <AddSchemeToDealerMappingWrapper />
+                            <Authorization
+                                children={<AddSchemeToDealerMappingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_SCHEME_TO_DEALER_MAPPING_TAB
+                                }
+                            />
                         }
                     />
                     <Route
                         index
                         path="dealer-to-scheme"
                         element={
-                            <AddDealerToSchemeMappingWrapper />
-                            // <Authorization
-                            //     children={<AddAttributeGroupWrapper />}
-                            //     permission={
-                            //         UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_ADD
-                            //     }
-                            // />
+                            // <AddDealerToSchemeMappingWrapper />
+                            <Authorization
+                                children={<AddDealerToSchemeMappingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DEALER_TO_SCHEME_MAPPING_TAB
+                                }
+                            />
                         }
                     />
                 </Route>
@@ -2283,7 +2280,7 @@ const PageRoutes = () => {
                     {/* Orders */}
                     <Route path="slot" element={<ViewSlot />}>
                         <Route
-                            index
+                            path="defination"
                             element={
                                 <Authorization
                                     children={<SlotManagementListingWrapper />}
@@ -2315,10 +2312,27 @@ const PageRoutes = () => {
                                 />
                             }
                         />
-                        <Route path="view/:id" element={<OrderViewWrapper />} />
+                        <Route
+                            path="view/:id"
+                            element={
+                                <Authorization
+                                    children={<OrderViewWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_VIEW
+                                    }
+                                />
+                            }
+                        />
                         <Route
                             path="run-slots"
-                            element={<SlotRunViewsListingWrapper />}
+                            element={
+                                <Authorization
+                                    children={<SlotRunViewsListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_SLOTS_RUN_LIST
+                                    }
+                                />
+                            }
                         />
                     </Route>
                 </Route>

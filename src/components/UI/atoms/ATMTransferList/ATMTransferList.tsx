@@ -66,7 +66,9 @@ const ATMTransferList = ({
     const rightChecked = intersection(checked, right)
 
     useEffect(() => {
-        setLeft(options)
+        if (options.length) {
+            setLeft(options)
+        }
     }, [options])
     useEffect(() => {
         if (setLeftSideData !== undefined) {

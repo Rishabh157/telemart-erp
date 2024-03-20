@@ -64,6 +64,14 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_SLOT_MANAGEMENT_VIEW",
+            "actionUrl": "",
+            "actionName": "VIEW",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_SLOT_MANAGEMENT_DELETE",
             "actionUrl": "",
             "actionName": "DELETE",

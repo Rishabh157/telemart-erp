@@ -183,7 +183,7 @@ const AddSlotManagementWrapper = () => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Slot Added successfully!')
-                    navigate('/media/slot')
+                    navigate('/media/slot/defination')
                 } else {
                     showToast('error', res?.data?.message)
                 }
