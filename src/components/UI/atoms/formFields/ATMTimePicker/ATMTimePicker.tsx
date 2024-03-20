@@ -51,7 +51,7 @@ const ATMTimePicker = ({
             )}
 
             <div
-                className={`${label && 'mt-0'} ${getInputHeight(
+                className={`${label && 'mt-1'} ${getInputHeight(
                     size
                 )} flex items-center`}
             >
@@ -78,8 +78,9 @@ const ATMTimePicker = ({
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                            {' '}
-                            {errMsg}{' '}
+                            <span style={{ textTransform: 'capitalize' }}>
+                                {errMsg}
+                            </span>
                         </p>
                     )}
                 </ErrorMessage>

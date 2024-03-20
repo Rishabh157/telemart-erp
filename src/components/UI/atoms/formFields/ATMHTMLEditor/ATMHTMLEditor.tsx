@@ -78,9 +78,10 @@ const ATMHTMLEditor = ({ name, value, onChange }: Props) => {
                     {(errMsg) => {
                         return (
                             <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                                {' '}
-                                {errMsg}{' '}
-                            </p>
+                            <span style={{ textTransform: 'capitalize' }}>
+                                {errMsg}
+                            </span>
+                        </p>
                         )
                     }}
                 </ErrorMessage>

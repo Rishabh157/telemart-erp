@@ -421,8 +421,8 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                                     value={
                                                                         allowedIp
                                                                     }
-                                                                    label="Allowed Ips"
-                                                                    placeholder="Allowed Ips"
+                                                                    label="Allowed IPS"
+                                                                    placeholder="Allowed IPS"
                                                                     onChange={(
                                                                         e
                                                                     ) => {
