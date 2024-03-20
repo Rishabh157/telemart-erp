@@ -83,8 +83,8 @@ const ATMSelectSearchable = ({
     menuPosition = 'fixed',
     isHidden = false,
     minHeight = '36px',
-    fontSizePlaceHolder = '16px',
-    fontSizeOptionsClass = '16px'
+    fontSizePlaceHolder = '13px',
+    fontSizeOptionsClass = '16px',
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -105,16 +105,13 @@ const ATMSelectSearchable = ({
             display: 'flex',
             alignItems: 'center',
             overflow: isMulti ? 'scroll' : 'unset',
-
-            // paddingTop:
-            //     size === 'xs' ? '1px' : size === 'small' ? '1.5px' : '2px',
         }),
         valueContainer: (provided: any) => ({
             ...provided,
-            // paddingLeft: '5px',
-            // paddingTop: '3px',
+
+            padding: size === 'xxs' ? '2px' : '9px',
             alignItems: 'start',
-            // overflow: isMulti ? 'scroll' : 'unset',
+
             maxHeight: '67px',
             fontSize: fontSizePlaceHolder,
         }),
@@ -130,7 +127,7 @@ const ATMSelectSearchable = ({
             ...provided,
             textColor: 'rgb(51 65 85,0)',
             paddingLeft: '4px',
-            paddingTop: '-4px',
+            paddingTop: '-5px',
         }),
 
         indicatorSeparator: (provided: any) => ({
@@ -272,10 +269,10 @@ const ATMSelectSearchable = ({
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span style={{ textTransform: 'capitalize' }}>{errMsg.charAt(0)}</span>
-                        {errMsg.slice(1)}
-                      </p>
-                      
+                            <span style={{ textTransform: 'capitalize' }}>
+                                {errMsg}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}

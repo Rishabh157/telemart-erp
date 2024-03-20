@@ -330,28 +330,7 @@ const EditSlotManagement = ({
                                         }
                                     />
                                 </div>
-                                {/* <button
-                                    type="button"
-                                    disabled={
-                                        !slotStartDate ||
-                                        !slotEndDate ||
-                                        !slotStartTime ||
-                                        !slotEndTime
-                                    }
-                                    onClick={() => {
-                                        handleConfirm()
-                                    }}
-                                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                        !slotStartDate ||
-                                        !slotEndDate ||
-                                        !slotStartTime ||
-                                        !slotEndTime
-                                            ? 'opacity-50'
-                                            : ''
-                                    }`}
-                                >
-                                    Confirm
-                                </button> */}
+                               
                             </div>
                         </div>
                     </div>

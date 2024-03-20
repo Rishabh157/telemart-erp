@@ -281,31 +281,25 @@ const HouseArrestView = ({ items }: Props) => {
 
                                 <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-1">
                                     <h1 className="text-gray-800">
-                                        Barcode Id
+                                        Original Barcode
                                     </h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.bankName === ''
-                                            ? 'NA'
-                                            : items?.bankName}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Barcode</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.accountNumber === ''
-                                            ? 'NA'
-                                            : items?.accountNumber}
+                                        {items?.orignalBarcode?.length
+                                            ? items?.orignalBarcode?.join(' , ')
+                                            : 'NA'}
                                     </p>
 
                                     <h1 className="text-gray-800">
-                                        Barcode Number
+                                        Dealer Return Barcode
                                     </h1>
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
-                                        {items?.ifscCode === ''
-                                            ? 'NA'
-                                            : items?.ifscCode}
+                                        {items?.returnItemBarcode?.length
+                                            ? items?.returnItemBarcode?.join(
+                                                  ' , '
+                                              )
+                                            : 'NA'}
                                     </p>
                                 </div>
                             </div>
@@ -351,6 +345,13 @@ const HouseArrestView = ({ items }: Props) => {
                                 {items?.accountRemark === ''
                                     ? 'NA'
                                     : items?.accountRemark}
+                            </p>
+                            <h1 className="text-gray-800">Dealer Approval </h1>
+                            <p className="">-</p>
+                            <p className="text-slate-600">
+                                {items?.dealerRemark === ''
+                                    ? 'NA'
+                                    : items?.dealerRemark}
                             </p>
                         </div>
                     </div>
