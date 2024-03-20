@@ -98,7 +98,7 @@ export const navigation: NavItemType[] = [
     {
         label: 'Mapping',
         icon: FaSitemap,
-        path: '/mapping/scheme-to-dealer',
+        path: '/mapping',
         name: UserModuleNameTypes.NAV_MULTI_MAPPING,
     },
     {

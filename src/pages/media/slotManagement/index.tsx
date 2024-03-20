@@ -11,7 +11,7 @@ import { IconType } from 'react-icons'
 
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { isAuthorized } from 'src/utils/authorization'
@@ -29,7 +29,7 @@ const ViewSlot = () => {
         {
             label: 'Slot Definition',
             icon: MdOutbond,
-            path: '/media/slot',
+            path: '/media/slot/defination',
             name: UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_DEFINATION_LIST,
         },
         {
@@ -41,13 +41,19 @@ const ViewSlot = () => {
     ]
 
     const [activeTabIndex, setActiveTab] = useState<number>()
-
+    const navigate = useNavigate()
     const allowedTabs = tabs
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
         })
         ?.map((tab) => tab)
-
+    useEffect(() => {
+        const allowedTabs = tabs?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        navigate(`${allowedTabs[0]?.path}`)
+        //eslint-disable-next-line
+    }, [])
     useEffect(() => {
         const activeTabIndex = window.location.pathname.split('/')[3]
         let activeIndex = allowedTabs?.findIndex(
