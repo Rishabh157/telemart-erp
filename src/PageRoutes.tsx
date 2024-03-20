@@ -268,6 +268,10 @@ import ProductReplacementListingWrapper from './pages/request/all/productReplace
 import MoneyViewWrapper from './pages/request/all/moneybackTab/view/MoneyViewWrapper'
 import ProductReplacementViewWrapper from './pages/request/all/productReplacement/view/ProductReplacementViewWrapper'
 import ProductReplacementLogsListingWrapper from './pages/request/all/productReplacement/logs/ProductReplacementLogsListingWrapper'
+import HouseArrestListingWrapper from './pages/request/all/houseArrest/HouseArrestListingWrapper'
+import AddHouseArrestFormWrapper from './pages/request/all/houseArrest/add/AddHouseArrestFormWrapper'
+import HouseArrestViewWrapper from './pages/request/all/houseArrest/view/HouseArrestViewWrapper'
+import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/HouseArrestLogsListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2597,6 +2601,68 @@ const PageRoutes = () => {
                         path="product-replacement/:id/logs"
                         element={
                             <ProductReplacementLogsListingWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+
+                    {/* House Arrest */}
+                    <Route
+                        index
+                        path="house-arrest"
+                        element={
+                            <HouseArrestListingWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+                    <Route
+                        index
+                        path="house-arrest/add"
+                        element={
+                            <AddHouseArrestFormWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+                    <Route
+                        index
+                        path="house-arrest/:id/view"
+                        element={
+                            <HouseArrestViewWrapper />
+                            // <Authorization
+                            //     children={
+                            //         <DealerGeneralInformationTabWrapper />
+                            //     }
+                            //     permission={
+                            //         UserModuleNameTypes.ACTION_DEALER_GENERAL_INFORMATION
+                            //     }
+                            // />
+                        }
+                    />
+                    <Route
+                        index
+                        path="house-arrest/:id/logs"
+                        element={
+                            <HouseArrestLogsListingWrapper />
                             // <Authorization
                             //     children={
                             //         <DealerGeneralInformationTabWrapper />
