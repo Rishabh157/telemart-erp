@@ -107,10 +107,10 @@ const steps = [
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Required!'),
                 address: string().required('Address is required'),
-                country: string().required('Please choose a country'),
-                state: string().required('Please choose a state'),
-                district: string().required('Please choose a district'),
-                pincode: string().required('Please choose a pincode'),
+                country: string().required('Please select a country'),
+                state: string().required('Please select a state'),
+                district: string().required('Please select a district'),
+                pincode: string().required('Please select a pincode'),
             }),
             billing_address: object().shape({
                 phone: string()
@@ -120,10 +120,10 @@ const steps = [
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
                     .required('Required!'),
                 address: string().required('Address is required'),
-                country: string().required('Please choose a country'),
-                state: string().required('Please choose a state'),
-                district: string().required('Please choose a district'),
-                pincode: string().required('Please choose a pincode'),
+                country: string().required('Please select a country'),
+                state: string().required('Please select a state'),
+                district: string().required('Please select a district'),
+                pincode: string().required('Please select a pincode'),
             }),
         }),
     },

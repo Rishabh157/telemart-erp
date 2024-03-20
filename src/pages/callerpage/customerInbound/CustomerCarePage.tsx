@@ -18,6 +18,7 @@ import CallerScheme from '../components/CallerScheme'
 import CallerDeliveryAddress from '../components/CallerDeliveryAddress'
 import CallerOtherDetails from '../components/CallerOtherDetails'
 import { IoReorderFour } from 'react-icons/io5'
+import { Link } from 'react-router-dom'
 
 export type dropdownOptions = {
     stateOptions?: SelectOption[] | []
@@ -264,6 +265,16 @@ const CustomerCarePage: React.FC<Props> = ({
                         className=""
                         onClick={() => formikProps.handleSubmit()}
                     />
+                </div>
+                <div className=" pt-7">
+                    <Link
+                        to="/customer-complain"
+                        className="underline text-primary-main"
+                        target="_blank"
+                    >
+                        {' '}
+                        create complaint
+                    </Link>
                 </div>
             </div>
 
