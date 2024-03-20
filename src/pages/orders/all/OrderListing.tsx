@@ -803,6 +803,13 @@ const OrderListing = ({
                 )
             },
         },
+        {
+            field: 'orderMBKNumber',
+            headerName: 'MBK Number',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[250px]',
+            renderCell: (row: any) => <span> {row.orderMBKNumber || '-'} </span>,
+        },
     ]
 
     const columnsComplaint: columnTypes[] = [
