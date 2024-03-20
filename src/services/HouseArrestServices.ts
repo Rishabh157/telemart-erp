@@ -53,31 +53,31 @@ export const houseArrestApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // **** Manger First approval
-        mangerFirstApproval: builder.mutation({
+        // **** CC First Approval
+        customerCareFirstApproval: builder.mutation({
             invalidatesTags: ['house-arrest'],
             query: (body) => ({
-                url: '/house-arrest/update-manager',
+                url: '/house-arrest/cc-info-update',
                 method: 'PUT',
                 body,
             }),
         }),
 
-        // **** Customer info
-        addCustomerInfo: builder.mutation({
+        // **** House Arrest Manager Level Approval
+        houseArrestManagerApproval: builder.mutation({
             invalidatesTags: ['house-arrest'],
             query: (body) => ({
-                url: '/money-back/cc-update-details',
+                url: '/house-arrest/manager-approval',
                 method: 'PUT',
                 body,
             }),
         }),
 
         // **** Account approval
-        addAccountApproval: builder.mutation({
+        houesArrestAccountApproval: builder.mutation({
             invalidatesTags: ['house-arrest'],
             query: (body) => ({
-                url: '/money-back/account-approval',
+                url: '/house-arrest/account-approval',
                 method: 'PUT',
                 body,
             }),
@@ -93,8 +93,7 @@ export const {
     useAddHouseArrestMutation,
     useGetHouseArrestByIdQuery,
     useGetAllHouseArrestLogsByIdQuery,
-    useMangerFirstApprovalMutation,
-    useAddCustomerInfoMutation,
-    useAddAccountApprovalMutation,
-    // useDeleteOrderMutation,
+    useCustomerCareFirstApprovalMutation,
+    useHouseArrestManagerApprovalMutation,
+    useHouesArrestAccountApprovalMutation,
 } = houseArrestApi

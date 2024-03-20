@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -9,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { Chip, Stack } from '@mui/material'
-import { MoneybackListResponse } from 'src/models/Moneyback.model'
+import { HouseArrestListResponseType } from 'src/models/HouseArrest.modal'
 
 // |-- Redux --|
 import {
@@ -19,17 +18,18 @@ import {
 } from 'src/redux/slices/houseArrestSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useProductReplacementMangerFirstApprovalMutation,
-    useAddProductReplacementAccountApprovalMutation,
-} from 'src/services/ProductReplacementServices'
-import { useGetHouseArrestQuery } from 'src/services/HouseArrestServices'
+    useGetHouseArrestQuery,
+    useHouseArrestManagerApprovalMutation,
+    useHouesArrestAccountApprovalMutation,
+} from 'src/services/HouseArrestServices'
 import { showToast } from 'src/utils'
 import HouseArrestListing from './HouseArrestListing'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import Swal from 'sweetalert2'
-// import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-// import AddProductReplacementCustomerInfoFormWrapper from './AddCustomerInfoForm/AddProductReplacementCustomerInfoFormWrapper'
+// import Swal from 'sweetalert2'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import AddCustomerCareApprovedFormWrapper from './AddCustomerCareApprovedForm/AddCustomerCareApprovedFormWrapper'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
+import Swal from 'sweetalert2'
 
 const HouseArrestListingWrapper = () => {
     // Hooks
@@ -38,7 +38,6 @@ const HouseArrestListingWrapper = () => {
     // Dispatching State
 
     const [currentId, setCurrentId] = useState<string>()
-    const [customerMobNumber, setCustomerMobNumber] = useState<string>()
     const [isShowCustomerInfoForm, setIsShowCustomerInfoForm] =
         useState<boolean>(false)
 
@@ -48,9 +47,8 @@ const HouseArrestListingWrapper = () => {
         (state: RootState) => state.houseArrest
     )
 
-    const [managerLevelApproval] =
-        useProductReplacementMangerFirstApprovalMutation()
-    const [accountApproval] = useAddProductReplacementAccountApprovalMutation()
+    const [managerLevelApproval] = useHouseArrestManagerApprovalMutation()
+    const [accountApproval] = useHouesArrestAccountApprovalMutation()
 
     const {
         page,
@@ -83,7 +81,7 @@ const HouseArrestListingWrapper = () => {
         }
     }, [isLoading, isFetching, data, dispatch])
 
-    // Manager First Level Approval
+    // Manager Level Approval
     const handleManagerFirstLevelApprovalComplete = (
         _id: string,
         level: 'FIRST' | 'SECOND',
@@ -100,10 +98,7 @@ const HouseArrestListingWrapper = () => {
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        `First Level Approved is successfully!`
-                    )
+                    showToast('success', `Approved is successfully!`)
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -118,13 +113,13 @@ const HouseArrestListingWrapper = () => {
         _id: string,
         approve: boolean,
         remark: string,
-        orderReferenceNumber: number
+        complaintNumber: number
     ) => {
         accountApproval({
             id: _id,
             accountApproval: approve,
             accountRemark: remark,
-            orderReferenceNumber,
+            complaintNumber,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -147,7 +142,7 @@ const HouseArrestListingWrapper = () => {
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             extraClasses: 'mr-4',
-            renderCell: (row: MoneybackListResponse) => (
+            renderCell: (row: HouseArrestListResponseType) => (
                 <ActionPopup
                     isView
                     isCustomBtn
@@ -167,7 +162,7 @@ const HouseArrestListingWrapper = () => {
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: MoneybackListResponse) => (
+            renderCell: (row: HouseArrestListResponseType) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
         },
@@ -187,26 +182,6 @@ const HouseArrestListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: MoneybackListResponse) => <span></span>,
         },
-        // {
-        //     field: 'schemeLabel',
-        //     headerName: 'Scheme Name',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'start',
-        //     extraClasses: 'min-w-[150px]',
-        //     renderCell: (row: MoneybackListResponse) => (
-        //         <span>{row?.schemeLabel || '-'}</span>
-        //     ),
-        // },
-        // {
-        //     field: 'schemePrice',
-        //     headerName: 'Scheme Price',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'start',
-        //     extraClasses: 'min-w-[150px]',
-        //     renderCell: (row: MoneybackListResponse) => (
-        //         <span>{row?.schemePrice || '-'}</span>
-        //     ),
-        // },
         {
             field: 'requestCreatedByLabel',
             headerName: 'Request Created By',
@@ -219,235 +194,290 @@ const HouseArrestListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: MoneybackListResponse) => (
+            renderCell: (row: HouseArrestListResponseType) => (
                 <span>{row?.customerName}</span>
             ),
         },
-        // {
-        //     field: 'Approved',
-        //     headerName: 'Manager Approval',
-        //     flex: 'flex-[1.0_1.0_0%]',
-        //     align: 'center',
-        //     renderCell: (row: MoneybackListResponse) => {
-        //         return (
-        //             <div className="z-0">
-        //                 <SwtAlertChipConfirm
-        //                     title="Approval"
-        //                     text="Do you want to Approve ?"
-        //                     color={
-        //                         row?.managerFirstApproval === null
-        //                             ? 'warning'
-        //                             : row?.managerFirstApproval === false
-        //                             ? 'error'
-        //                             : row?.managerSecondApproval
-        //                             ? 'success'
-        //                             : row?.managerSecondApproval === null
-        //                             ? 'warning'
-        //                             : 'error'
-        //                     }
-        //                     chipLabel={
-        //                         row?.managerFirstApproval === null
-        //                             ? 'First Pending'
-        //                             : row?.managerFirstApproval === false
-        //                             ? 'First Rejected'
-        //                             : row?.managerSecondApproval
-        //                             ? 'Second Approved'
-        //                             : row?.managerSecondApproval === null
-        //                             ? 'Second Pending'
-        //                             : 'Second Rejected'
-        //                     }
-        //                     disabled={
-        //                         row?.managerFirstApproval === null
-        //                             ? false
-        //                             : row?.managerFirstApproval === false
-        //                             ? true
-        //                             : row?.ccApproval === false
-        //                             ? true
-        //                             : row?.managerSecondApproval === null
-        //                             ? false
-        //                             : true
-        //                     }
-        //                     input={'text'}
-        //                     inputPlaceholder="remark"
-        //                     showCancelButton
-        //                     showDenyButton
-        //                     icon="warning"
-        //                     confirmButtonColor="#3085d6"
-        //                     cancelButtonColor="#dc3741"
-        //                     confirmButtonText="Yes"
-        //                     next={(res) => {
-        //                         if (res.isConfirmed || res?.isDenied) {
-        //                             if (!row?.managerFirstApproval) {
-        //                                 return handleManagerFirstLevelApprovalComplete(
-        //                                     row?._id,
-        //                                     'FIRST',
-        //                                     res?.isConfirmed,
-        //                                     res?.value,
-        //                                     row?.complaintNumber
-        //                                 )
-        //                             }
-        //                             if (row?.managerSecondApproval === null) {
-        //                                 return handleManagerFirstLevelApprovalComplete(
-        //                                     row?._id,
-        //                                     'SECOND',
-        //                                     res?.isConfirmed,
-        //                                     res?.value,
-        //                                     row?.complaintNumber
-        //                                 )
-        //                             }
-        //                         }
-        //                     }}
-        //                 />
-        //             </div>
-        //         )
-        //     },
-        // },
-        // {
-        //     field: 'Addccinfo',
-        //     headerName: 'CC Information',
-        //     flex: 'flex-[1_1_0%]',
-        //     align: 'start',
-        //     extraClasses: 'min-w-[150px]',
-        //     renderCell: (row: MoneybackListResponse) =>
-        //         row?.managerFirstApproval && row?.ccApproval === null ? (
-        //             <button
-        //                 className="bg-primary-main px-3 py-1 rounded text-white"
-        //                 onClick={() => {
-        //                     setCustomerMobNumber(row?.customerNumber)
-        //                     setIsShowCustomerInfoForm(true)
-        //                     setCurrentId(row?._id)
-        //                 }}
-        //             >
-        //                 Add
-        //             </button>
-        //         ) : (
-        //             '-'
-        //         ),
-        // },
-        // {
-        //     field: 'accountApproval',
-        //     headerName: 'Account Approval',
-        //     flex: 'flex-[1_1_0%]',
-        //     extraClasses: 'min-w-[150px]',
-        //     renderCell: (row: MoneybackListResponse) => {
-        //         return (
-        //             <div className="z-0">
-        //                 {row?.managerSecondApproval === true ? (
-        //                     <Stack direction="row" spacing={1}>
-        //                         {row?.accountApproval === null ? (
-        //                             <button
-        //                                 id="btn"
-        //                                 className="overflow-hidden cursor-pointer z-0"
-        //                                 onClick={() => {
-        //                                     Swal.fire({
-        //                                         icon: 'warning',
-        //                                         confirmButtonColor: '#3085d6',
-        //                                         cancelButtonColor: '#dc3741',
-        //                                         confirmButtonText: 'Yes',
-        //                                         title: 'Account Approval',
-        //                                         text: 'Do you want to Approve ?',
-        //                                         input: 'text', // Add input field
-        //                                         inputPlaceholder:
-        //                                             'Enter remark', // Placeholder for the input field
-        //                                         showCancelButton: true,
-        //                                         showDenyButton: true,
-        //                                         denyButtonText: 'Reject',
-        //                                         reverseButtons: true,
-        //                                         showLoaderOnConfirm: true, // Show loader when confirming
-        //                                         // Show loader when confirming
-        //                                         preDeny: (res) => {
-        //                                             Swal.showValidationMessage(
-        //                                                 'Please enter a remark'
-        //                                             )
+        {
+            field: 'ccApproval',
+            headerName: 'CC Approval',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: HouseArrestListResponseType) => (
+                <div className="z-0">
+                    <Stack direction="row" spacing={1}>
+                        {row?.ccApproval === null ? (
+                            <button
+                                id="btn"
+                                className=" overflow-hidden cursor-pointer z-0"
+                                onClick={() => {
+                                    setIsShowCustomerInfoForm(true)
+                                    setCurrentId(row?._id)
+                                }}
+                            >
+                                <Chip
+                                    label="CC Pending"
+                                    color="warning"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={true}
+                                />
+                            </button>
+                        ) : row?.ccApproval === false ? (
+                            <button
+                                id="btn"
+                                disabled={true}
+                                className="cursor-pointer"
+                            >
+                                <Chip
+                                    label="CC Rejected"
+                                    color="error"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={false}
+                                />
+                            </button>
+                        ) : (
+                            <button
+                                id="btn"
+                                disabled={true}
+                                className="cursor-pointer"
+                            >
+                                <Chip
+                                    label="CC Approved"
+                                    color="success"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={false}
+                                />
+                            </button>
+                        )}
+                    </Stack>
+                </div>
+            ),
+        },
+        {
+            field: 'managerFirstApproval',
+            headerName: 'Manager Approval',
+            flex: 'flex-[1.0_1.0_0%]',
+            align: 'center',
+            renderCell: (row: HouseArrestListResponseType) => {
+                return (
+                    <div className="z-0">
+                        <SwtAlertChipConfirm
+                            title="Approval"
+                            text="Do you want to Approve ?"
+                            color={
+                                row?.managerFirstApproval === null
+                                    ? 'warning'
+                                    : row?.managerFirstApproval === false
+                                    ? 'error'
+                                    : row?.managerSecondApproval
+                                    ? 'success'
+                                    : row?.managerSecondApproval === null
+                                    ? 'warning'
+                                    : 'error'
+                            }
+                            chipLabel={
+                                row?.managerFirstApproval === null
+                                    ? 'First Pending'
+                                    : row?.managerFirstApproval === false
+                                    ? 'First Rejected'
+                                    : row?.managerSecondApproval
+                                    ? 'Second Approved'
+                                    : row?.managerSecondApproval === null
+                                    ? 'Second Pending'
+                                    : 'Second Rejected'
+                            }
+                            disabled={
+                                row?.managerFirstApproval === null
+                                    ? false
+                                    : row?.managerFirstApproval === false
+                                    ? true
+                                    : row?.ccApproval === false
+                                    ? true
+                                    : row?.managerSecondApproval === null
+                                    ? false
+                                    : true
+                            }
+                            input={'text'}
+                            inputPlaceholder="remark"
+                            showCancelButton
+                            showDenyButton
+                            icon="warning"
+                            confirmButtonColor="#3085d6"
+                            cancelButtonColor="#dc3741"
+                            confirmButtonText="Yes"
+                            next={(res) => {
+                                if (res.isConfirmed || res?.isDenied) {
+                                    if (!row?.managerFirstApproval) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'FIRST',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
+                                    if (row?.managerSecondApproval === null) {
+                                        return handleManagerFirstLevelApprovalComplete(
+                                            row?._id,
+                                            'SECOND',
+                                            res?.isConfirmed,
+                                            res?.value,
+                                            row?.complaintNumber
+                                        )
+                                    }
+                                }
+                            }}
+                        />
+                    </div>
+                )
+            },
+        },
+        {
+            field: 'accApproval',
+            headerName: 'Account Approval',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: HouseArrestListResponseType) => (
+                <div className="z-0">
+                    <Stack direction="row" spacing={1}>
+                        {row?.managerSecondApproval === null ? (
+                            <button
+                                id="btn"
+                                disabled={true}
+                                className="cursor-pointer"
+                            >
+                                <Chip
+                                    label="Manager Second Pending"
+                                    color="warning"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={false}
+                                />
+                            </button>
+                        ) : row?.managerSecondApproval === false ? (
+                            <button
+                                id="btn"
+                                disabled={true}
+                                className="cursor-pointer"
+                            >
+                                <Chip
+                                    label="Manager Second Reject"
+                                    color="error"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={false}
+                                />
+                            </button>
+                        ) : row?.managerSecondApproval === true &&
+                          row?.accountApproval === null ? (
+                            <button
+                                id="btn"
+                                className=" overflow-hidden cursor-pointer z-0"
+                                onClick={() => {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#dc3741',
+                                        confirmButtonText: 'Yes',
+                                        title: 'Second Approval',
+                                        text: 'Do you want to Approve ?',
+                                        input: 'text', // Add input field
+                                        inputPlaceholder: 'Enter remark', // Placeholder for the input field
+                                        showCancelButton: true,
+                                        showDenyButton: true,
+                                        denyButtonText: 'Reject',
+                                        reverseButtons: true,
+                                        showLoaderOnConfirm: true, // Show loader when confirming
+                                        // Show loader when confirming
+                                        preDeny: (res) => {
+                                            Swal.showValidationMessage(
+                                                'Please enter a remark'
+                                            )
 
-        //                                             if (
-        //                                                 !Swal.getInput()?.value
-        //                                             ) {
-        //                                                 return res
-        //                                             } else {
-        //                                                 return Swal.getInput()
-        //                                                     ?.value
-        //                                             }
-        //                                         },
-        //                                         preConfirm: (reason: any) => {
-        //                                             // Handle the confirmation and input value
-        //                                             if (!reason) {
-        //                                                 Swal.showValidationMessage(
-        //                                                     'Please enter a remark'
-        //                                                 )
-        //                                             }
-        //                                         },
-        //                                         allowOutsideClick: () =>
-        //                                             !Swal.isLoading(), // Allow clicking outside when not loading
-        //                                     }).then((res: any) => {
-        //                                         if (res.isConfirmed) {
-        //                                             return handleAccountApproval(
-        //                                                 row?._id,
-        //                                                 res?.isConfirmed,
-        //                                                 res?.value,
-        //                                                 parseInt(
-        //                                                     row?.orderNumber
-        //                                                 )
-        //                                             )
-        //                                         }
-        //                                         if (res.isDenied) {
-        //                                             return handleAccountApproval(
-        //                                                 row?._id,
-        //                                                 res?.isConfirmed,
-        //                                                 res?.value,
-        //                                                 parseInt(
-        //                                                     row?.orderNumber
-        //                                                 )
-        //                                             )
-        //                                         }
-        //                                     })
-        //                                 }}
-        //                             >
-        //                                 <Chip
-        //                                     label="Account Pending"
-        //                                     color="warning"
-        //                                     variant="outlined"
-        //                                     size="small"
-        //                                     clickable={true}
-        //                                 />
-        //                             </button>
-        //                         ) : row?.accountApproval === true ? (
-        //                             <button
-        //                                 id="btn"
-        //                                 disabled={true}
-        //                                 className="cursor-pointer"
-        //                             >
-        //                                 <Chip
-        //                                     label="Account Approved"
-        //                                     color="success"
-        //                                     variant="outlined"
-        //                                     size="small"
-        //                                     clickable={false}
-        //                                 />
-        //                             </button>
-        //                         ) : (
-        //                             <button
-        //                                 id="btn"
-        //                                 disabled={true}
-        //                                 className="cursor-pointer"
-        //                             >
-        //                                 <Chip
-        //                                     label="Account Rejected"
-        //                                     color="error"
-        //                                     variant="outlined"
-        //                                     size="small"
-        //                                     clickable={false}
-        //                                 />
-        //                             </button>
-        //                         )}
-        //                     </Stack>
-        //                 ) : (
-        //                     ''
-        //                 )}
-        //             </div>
-        //         )
-        //     },
-        // },
+                                            if (!Swal.getInput()?.value) {
+                                                return res
+                                            } else {
+                                                return Swal.getInput()?.value
+                                            }
+                                        },
+                                        preConfirm: (reason: any) => {
+                                            // Handle the confirmation and input value
+                                            if (!reason) {
+                                                Swal.showValidationMessage(
+                                                    'Please enter a remark'
+                                                )
+                                            }
+                                        },
+                                        allowOutsideClick: () =>
+                                            !Swal.isLoading(), // Allow clicking outside when not loading
+                                    }).then((res: any) => {
+                                        if (res.isConfirmed) {
+                                            return handleAccountApproval(
+                                                row?._id,
+                                                res?.isConfirmed,
+                                                res?.value,
+                                                row?.complaintNumber
+                                            )
+                                        }
+                                        if (res.isDenied) {
+                                            return handleAccountApproval(
+                                                row?._id,
+                                                res?.isConfirmed,
+                                                res?.value,
+                                                row?.complaintNumber
+                                            )
+                                        }
+                                    })
+                                }}
+                            >
+                                <Chip
+                                    label="Account Pending"
+                                    color="warning"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={true}
+                                />
+                            </button>
+                        ) : row?.accountApproval === false ? (
+                            <button
+                                id="btn"
+                                disabled={true}
+                                className="cursor-pointer"
+                            >
+                                <Chip
+                                    label="Account Rejected"
+                                    color="success"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={false}
+                                />
+                            </button>
+                        ) : (
+                            row?.accountApproval === true && (
+                                <button
+                                    id="btn"
+                                    disabled={true}
+                                    className="cursor-pointer"
+                                >
+                                    <Chip
+                                        label="Account Approved"
+                                        color="success"
+                                        variant="outlined"
+                                        size="small"
+                                        clickable={false}
+                                    />
+                                </button>
+                            )
+                        )}
+                    </Stack>
+                </div>
+            ),
+        },
     ]
 
     return (
@@ -458,19 +488,19 @@ const HouseArrestListingWrapper = () => {
                 setShowDropdown={setShowDropdown}
             />
             {/* Add Customer Information Form */}
-            {/* <DialogLogBox
+            <DialogLogBox
+                maxWidth="sm"
                 isOpen={isShowCustomerInfoForm}
                 handleClose={() => {
                     setIsShowCustomerInfoForm(false)
                 }}
                 component={
-                    <AddProductReplacementCustomerInfoFormWrapper
-                        moneybackRequestId={currentId}
-                        customerMobileNum={customerMobNumber || ''}
+                    <AddCustomerCareApprovedFormWrapper
+                        complainId={currentId || ''}
                         handleClose={() => setIsShowCustomerInfoForm(false)}
                     />
                 }
-            /> */}
+            />
         </>
     )
 }
