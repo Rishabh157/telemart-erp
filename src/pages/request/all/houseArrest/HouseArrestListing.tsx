@@ -17,6 +17,8 @@ import {
     setSearchValue,
 } from 'src/redux/slices/houseArrestSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -42,12 +44,15 @@ const HouseArrestListing = ({ columns, rows, setShowDropdown }: Props) => {
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>House Arrest</ATMPageHeading>
 
-                <button
-                    onClick={() => navigate('add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add
-                </button>
+                {isAuthorized(UserModuleNameTypes.ACTION_HOUSE_ARREST_ADD) && (
+                    <button
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+             
+                        + Add
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
@@ -64,8 +69,8 @@ const HouseArrestListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

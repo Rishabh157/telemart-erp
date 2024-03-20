@@ -158,8 +158,8 @@ export const navigation: NavItemType[] = [
     {
         label: 'Request',
         icon: IoIosGitPullRequest,
-        path: '/request/moneyback',
-        name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
+        path: '/request',
+        name: UserModuleNameTypes.NAV_REQUEST,
     },
     {
         label: 'Configurations',

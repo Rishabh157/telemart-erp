@@ -61,6 +61,7 @@ import { default as websitesPageJson } from '../../utils/mediaJson/websitesPagec
 import { default as websitesTagsJson } from '../../utils/mediaJson/websitesTagscopy.json'
 import { default as complainJson } from '../../utils/mediaJson/complain.json'
 import { default as multiMappingJson } from '../../utils/mediaJson/multiMapping.json'
+import { default as requestJson } from '../../utils/mediaJson/request.json'
 
 export const mergeUserModules = [
     { ...dashboardJson },
@@ -108,6 +109,7 @@ export const mergeUserModules = [
     { ...competitorJson },
     { ...slotManagementJson },
     { ...inboundJson },
+    { ...requestJson },
     { ...customerPageJson },
     { ...assetsRequestJson },
     { ...assetsRelocationJson },
