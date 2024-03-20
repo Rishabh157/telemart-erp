@@ -209,7 +209,7 @@ const EditSlotManagementWrapper = () => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Slot Updated successfully!')
-                        navigate('/media/slot')
+                        navigate('/media/slo/definationt')
                     } else {
                         showToast('error', res?.data?.message)
                     }

@@ -66,6 +66,14 @@ const MappingTabsLayout = () => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
         })
         ?.map((tab) => tab)
+
+    useEffect(() => {
+        const allowedTabs = tabs?.filter((nav) => {
+            return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
+        })
+        navigate(`${allowedTabs[0]?.path}`)
+        //eslint-disable-next-line
+    }, [])
     useEffect(() => {
         if (!activeTab) return
 

@@ -96,7 +96,7 @@ const SlotManagementListingWrapper = () => {
         updatePausePlay(id).then((res: any) => {
             if (res?.data?.status) {
                 showToast('success', 'Slot Updated successfully!')
-                navigate('/media/slot')
+                navigate('/media/slot/defination')
             } else {
                 showToast('error', res?.data?.message)
             }
