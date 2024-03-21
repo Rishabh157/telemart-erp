@@ -42,6 +42,8 @@ import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddCustomerInfoFormWrapper from './AddCustomerInfoForm/AddCustomerInfoFormWrapper'
 import AddAccountApprovedFormWrapper from './AddAccountApprovedForm/AddAccountApprovedFormWrapper'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const MoneybackListingWrapper = () => {
     // Hooks
@@ -133,8 +135,12 @@ const MoneybackListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: MoneybackListResponse) => (
                 <ActionPopup
-                    isView
-                    isCustomBtn
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_MONEY_BACK_LIST_VIEW
+                    )}
+                    isCustomBtn={isAuthorized(
+                        UserModuleNameTypes.ACTION_MONEY_BACK_LIST_LOGS
+                    )}
                     customBtnText="Logs"
                     handleViewActionButton={() => navigate(`${row?._id}/view`)}
                     handleOnAction={() => {
@@ -151,6 +157,7 @@ const MoneybackListingWrapper = () => {
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_ORDER_NUMBER,
             renderCell: (row: MoneybackListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
@@ -161,6 +168,7 @@ const MoneybackListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_COMPLAIN_NUMBER,
             // renderCell: (row: MoneybackListResponse) => <span></span>,
         },
         {
@@ -169,6 +177,7 @@ const MoneybackListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_SCHEME_NAME,
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.schemeLabel || '-'}</span>
             ),
@@ -179,6 +188,7 @@ const MoneybackListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_SCHEME_PRICE,
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.schemePrice || '-'}</span>
             ),
@@ -189,6 +199,7 @@ const MoneybackListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_REQUEST_CREATED_BY,
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.requestCreatedByLabel || '-'}</span>
             ),
@@ -199,6 +210,7 @@ const MoneybackListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_CUSTOMER_NAME,
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.customerName}</span>
             ),
@@ -207,6 +219,7 @@ const MoneybackListingWrapper = () => {
             field: 'Approved',
             headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_APPROVAL,
             align: 'center',
             renderCell: (row: MoneybackListResponse) => {
                 return (
@@ -218,34 +231,34 @@ const MoneybackListingWrapper = () => {
                                 row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
-                                    ? 'error'
-                                    : row?.managerSecondApproval
-                                    ? 'success'
-                                    : row?.managerSecondApproval === null
-                                    ? 'warning'
-                                    : 'error'
+                                        ? 'error'
+                                        : row?.managerSecondApproval
+                                            ? 'success'
+                                            : row?.managerSecondApproval === null
+                                                ? 'warning'
+                                                : 'error'
                             }
                             chipLabel={
                                 row?.managerFirstApproval === null
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === false
-                                    ? 'First Rejected'
-                                    : row?.managerSecondApproval
-                                    ? 'Second Approved'
-                                    : row?.managerSecondApproval === null
-                                    ? 'Second Pending'
-                                    : 'Second Rejected'
+                                        ? 'First Rejected'
+                                        : row?.managerSecondApproval
+                                            ? 'Second Approved'
+                                            : row?.managerSecondApproval === null
+                                                ? 'Second Pending'
+                                                : 'Second Rejected'
                             }
                             disabled={
                                 row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
-                                    ? true
-                                    : row?.ccApproval === false
-                                    ? true
-                                    : row?.managerSecondApproval === null
-                                    ? false
-                                    : true
+                                        ? true
+                                        : row?.ccApproval === false
+                                            ? true
+                                            : row?.managerSecondApproval === null
+                                                ? false
+                                                : true
                             }
                             input={'text'}
                             inputPlaceholder="remark"
@@ -288,6 +301,7 @@ const MoneybackListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_CC_INFO,
             hidden: false,
             renderCell: (row: MoneybackListResponse) =>
                 row?.managerFirstApproval &&
@@ -311,6 +325,7 @@ const MoneybackListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_ACCOUNT_APPROVAL,
             renderCell: (row: MoneybackListResponse) => {
                 return (
                     //
@@ -336,15 +351,15 @@ const MoneybackListingWrapper = () => {
                                             row?.accountApproval === null
                                                 ? 'Account Pending'
                                                 : row?.accountApproval
-                                                ? 'Account Approved'
-                                                : 'Account Rejected'
+                                                    ? 'Account Approved'
+                                                    : 'Account Rejected'
                                         }
                                         color={
                                             row?.accountApproval === null
                                                 ? 'warning'
                                                 : row?.accountApproval
-                                                ? 'success'
-                                                : 'error'
+                                                    ? 'success'
+                                                    : 'error'
                                         }
                                         variant="outlined"
                                         size="small"

@@ -30,6 +30,8 @@ import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddCustomerCareApprovedFormWrapper from './AddCustomerCareApprovedForm/AddCustomerCareApprovedFormWrapper'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 import Swal from 'sweetalert2'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const HouseArrestListingWrapper = () => {
     // Hooks
@@ -148,8 +150,12 @@ const HouseArrestListingWrapper = () => {
             extraClasses: 'mr-4',
             renderCell: (row: HouseArrestListResponseType) => (
                 <ActionPopup
-                    isView
-                    isCustomBtn
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_HOUSE_ARREST_LIST_VIEW
+                    )}
+                    isCustomBtn={isAuthorized(
+                        UserModuleNameTypes.ACTION_HOUSE_ARREST_LIST_LOGS
+                    )}
                     customBtnText="Logs"
                     handleViewActionButton={() => navigate(`${row?._id}/view`)}
                     handleOnAction={() => {
@@ -166,6 +172,7 @@ const HouseArrestListingWrapper = () => {
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_ORDER_NUMBER,
             renderCell: (row: HouseArrestListResponseType) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
@@ -176,6 +183,7 @@ const HouseArrestListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_COMPLAIN_NUMBER,
             // renderCell: (row: MoneybackListResponse) => <span></span>,
         },
         {
@@ -184,6 +192,7 @@ const HouseArrestListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_MBK_NUMBER,
             // renderCell: (row: MoneybackListResponse) => <span></span>,
         },
         {
@@ -191,6 +200,7 @@ const HouseArrestListingWrapper = () => {
             headerName: 'Request Created By',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_REQUEST_CREATED_BY,
         },
         {
             field: 'customerName',
@@ -198,6 +208,7 @@ const HouseArrestListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_CUSTOMER_NAME,
             renderCell: (row: HouseArrestListResponseType) => (
                 <span>{row?.customerName}</span>
             ),
@@ -208,6 +219,7 @@ const HouseArrestListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_CC_APPROVAL,
             renderCell: (row: HouseArrestListResponseType) => (
                 <div className="z-0">
                     <Stack direction="row" spacing={1}>
@@ -252,6 +264,7 @@ const HouseArrestListingWrapper = () => {
             headerName: 'Manager Approval',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_MANAGER_APPROVAL,
             renderCell: (row: HouseArrestListResponseType) => {
                 return (
                     <div className="z-0">
@@ -260,40 +273,40 @@ const HouseArrestListingWrapper = () => {
                             text="Do you want to Approve ?"
                             color={
                                 row?.ccApproval &&
-                                row?.managerFirstApproval === null
+                                    row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
-                                    ? 'error'
-                                    : row?.managerSecondApproval
-                                    ? 'success'
-                                    : row?.managerSecondApproval === null
-                                    ? 'warning'
-                                    : 'error'
+                                        ? 'error'
+                                        : row?.managerSecondApproval
+                                            ? 'success'
+                                            : row?.managerSecondApproval === null
+                                                ? 'warning'
+                                                : 'error'
                             }
                             chipLabel={
                                 row?.ccApproval === false
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === null
-                                    ? 'First Pending'
-                                    : row?.managerFirstApproval === false
-                                    ? 'First Rejected'
-                                    : row?.managerSecondApproval
-                                    ? 'Second Approved'
-                                    : row?.managerSecondApproval === null
-                                    ? 'Second Pending'
-                                    : 'Second Rejected'
+                                        ? 'First Pending'
+                                        : row?.managerFirstApproval === false
+                                            ? 'First Rejected'
+                                            : row?.managerSecondApproval
+                                                ? 'Second Approved'
+                                                : row?.managerSecondApproval === null
+                                                    ? 'Second Pending'
+                                                    : 'Second Rejected'
                             }
                             disabled={
                                 row?.ccApproval === true &&
-                                row?.managerFirstApproval === null
+                                    row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
-                                    ? true
-                                    : row?.dealerApproval === false
-                                    ? true
-                                    : row?.managerSecondApproval === null
-                                    ? false
-                                    : true
+                                        ? true
+                                        : row?.dealerApproval === false
+                                            ? true
+                                            : row?.managerSecondApproval === null
+                                                ? false
+                                                : true
                             }
                             input={'text'}
                             inputPlaceholder="remark"
@@ -336,6 +349,7 @@ const HouseArrestListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_ACCOUNT_APPROVAL,
             renderCell: (row: HouseArrestListResponseType) => (
                 <div className="z-0">
                     <Stack direction="row" spacing={1}>
@@ -368,7 +382,7 @@ const HouseArrestListingWrapper = () => {
                                 />
                             </button>
                         ) : row?.managerSecondApproval === true &&
-                          row?.accountApproval === null ? (
+                            row?.accountApproval === null ? (
                             <button
                                 id="btn"
                                 className="overflow-hidden cursor-pointer z-0"
