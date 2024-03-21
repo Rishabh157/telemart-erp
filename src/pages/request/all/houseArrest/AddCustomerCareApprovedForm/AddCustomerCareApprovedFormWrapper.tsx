@@ -20,6 +20,7 @@ import { showToast } from 'src/utils'
 // |-- Types --|
 type Props = {
     complainId: string
+    newOrderDetails?: any
     handleClose: () => void
 }
 
@@ -27,10 +28,12 @@ export type FormInitialValues = {
     id: string
     settledAmount: string
     ccRemark: string
+    oldOrderNumber: string | null
 }
 
 const AddCustomerCareApprovedFormWrapper = ({
     complainId,
+    newOrderDetails,
     handleClose,
 }: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -41,6 +44,7 @@ const AddCustomerCareApprovedFormWrapper = ({
         id: complainId || '',
         settledAmount: '',
         ccRemark: '',
+        oldOrderNumber: '',
     }
 
     const validationSchema = object({
@@ -56,6 +60,7 @@ const AddCustomerCareApprovedFormWrapper = ({
             id: complainId || '',
             settledAmount: values?.settledAmount || 0,
             ccRemark: values?.ccRemark,
+            oldOrderNumber: values.oldOrderNumber || null,
         }
 
         setTimeout(() => {
@@ -85,6 +90,7 @@ const AddCustomerCareApprovedFormWrapper = ({
                 return (
                     <AddCustomerCareApprovedForm
                         formikProps={formikProps}
+                        newOrderDetails={newOrderDetails}
                         apiStatus={apiStatus}
                     />
                 )

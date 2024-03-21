@@ -22,8 +22,9 @@ type Props = {
     next?: (result: SweetAlertResult<any>) => void
     input?: any
     inputPlaceholder?: string
-    preConfirm?: (result: SweetAlertResult<any>) => void,
-    preDeny?: (result: SweetAlertResult<any>) => void,
+    preConfirm?: (result: SweetAlertResult<any>) => void
+    preDeny?: (result: SweetAlertResult<any>) => void
+    html?: any
 }
 
 export const showConfirmationDialog = ({
@@ -37,11 +38,12 @@ export const showConfirmationDialog = ({
     cancelButtonColor = '#dc3741',
     confirmButtonText = 'Yes',
     reverseButtons = true,
-    next = () => { },
+    next = () => {},
     input,
     inputPlaceholder = 'Enter your reason',
     preConfirm,
     preDeny,
+    html,
 }: Props) => {
     return Swal.fire({
         title,
@@ -59,6 +61,7 @@ export const showConfirmationDialog = ({
         showLoaderOnConfirm: true,
         preConfirm,
         preDeny,
-        allowOutsideClick: () =>!Swal.isLoading()
+        html,
+        allowOutsideClick: () => !Swal.isLoading(),
     }).then(next)
 }

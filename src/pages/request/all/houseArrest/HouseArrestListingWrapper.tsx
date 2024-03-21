@@ -37,6 +37,7 @@ const HouseArrestListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     // Dispatching State
 
+    const [newOrderDetails, setNewOrderDetails] = useState<any>()
     const [currentId, setCurrentId] = useState<string>()
     const [isShowCustomerInfoForm, setIsShowCustomerInfoForm] =
         useState<boolean>(false)
@@ -140,6 +141,83 @@ const HouseArrestListingWrapper = () => {
         })
     }
 
+    const sweetAlertContent = `
+    <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border">
+            <thead>
+                <tr class="bg-gray-200 border">
+                    <th class="px-4 py-2 border font-bold text-base w-4/12">Order Details</th>
+                    <th class="px-4 py-2 border font-bold text-base w-4/12">New Order Details</th>
+                    <th class="px-4 py-2 border font-bold text-base w-4/12">Old Order Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border">
+                    <td class="px-4 py-2 border text-sm font-bold">Order Number</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.orderNumber || '-'
+                    }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.oldOrderNumber || '-'
+                    }</td>
+                </tr>
+                <tr class="border">
+                    <td class="px-4 py-2 border text-sm font-bold">Customer Name</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.customerName || '-'
+                    }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.oldCustomerName || '-'
+                    }</td>
+                </tr>
+                <tr class="border">
+                    <td class="px-4 py-2 border text-sm font-bold">Customer Number</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.customerNumber || '-'
+                    }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.oldCustomerNumber || '-'
+                    }</td>
+                </tr>
+                <tr class="border">
+                    <td class="px-4 py-2 border text-sm font-bold">Address</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.address || '-'
+                    }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.oldCustomerAddress || '-'
+                    }</td>
+                </tr>
+                 
+            </tbody>
+        </table>
+    </div>
+
+    <div class="overflow-x-auto mt-2">
+    <table class="table-auto w-full border-collapse border">
+        <thead>
+            <tr class="bg-gray-200 border">
+                <th class="px-4 py-2 border font-bold text-base w-4/12">Barcode</th>
+                <th class="px-4 py-2 border font-bold text-base w-4/12">Original Barcode</th>
+                <th class="px-4 py-2 border font-bold text-base w-4/12">New Barcode</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border">
+                <td class="px-4 py-2 border text-sm font-bold">Order Number</td>
+                <td class="px-4 py-2 border text-sm">${
+                    newOrderDetails?.orignalBarcode?.join(' , ') || '-'
+                }</td>
+                <td class="px-4 py-2 border text-sm">${
+                    newOrderDetails?.returnItemBarcode?.join(' , ') || '-'
+                }</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    `
+
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -218,6 +296,13 @@ const HouseArrestListingWrapper = () => {
                                 onClick={() => {
                                     setIsShowCustomerInfoForm(true)
                                     setCurrentId(row?._id)
+                                    setNewOrderDetails({
+                                        orderNumber: row?.orderNumber,
+                                        mobileNo: row?.customerNumber,
+                                        autoFillingShippingAddress:
+                                            row?.address,
+                                        customerName: row?.customerName,
+                                    })
                                 }}
                             >
                                 <Chip
@@ -254,10 +339,14 @@ const HouseArrestListingWrapper = () => {
             align: 'center',
             renderCell: (row: HouseArrestListResponseType) => {
                 return (
-                    <div className="z-0">
+                    <div
+                        onClick={() => setNewOrderDetails(row)}
+                        className="z-0"
+                    >
                         <SwtAlertChipConfirm
                             title="Approval"
                             text="Do you want to Approve ?"
+                            html={sweetAlertContent}
                             color={
                                 row?.ccApproval &&
                                 row?.managerFirstApproval === null
@@ -337,7 +426,7 @@ const HouseArrestListingWrapper = () => {
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: HouseArrestListResponseType) => (
-                <div className="z-0">
+                <div className="z-0" onClick={() => setNewOrderDetails(row)}>
                     <Stack direction="row" spacing={1}>
                         {row?.managerSecondApproval === null ? (
                             <button
@@ -386,6 +475,7 @@ const HouseArrestListingWrapper = () => {
                                         showDenyButton: true,
                                         denyButtonText: 'Reject',
                                         reverseButtons: true,
+                                        html: sweetAlertContent,
                                         showLoaderOnConfirm: true, // Show loader when confirming
                                         // Show loader when confirming
                                         preDeny: (res) => {
@@ -487,7 +577,7 @@ const HouseArrestListingWrapper = () => {
             />
             {/* Add Customer Information Form */}
             <DialogLogBox
-                maxWidth="sm"
+                maxWidth="md"
                 isOpen={isShowCustomerInfoForm}
                 handleClose={() => {
                     setIsShowCustomerInfoForm(false)
@@ -495,6 +585,7 @@ const HouseArrestListingWrapper = () => {
                 component={
                     <AddCustomerCareApprovedFormWrapper
                         complainId={currentId || ''}
+                        newOrderDetails={newOrderDetails}
                         handleClose={() => setIsShowCustomerInfoForm(false)}
                     />
                 }

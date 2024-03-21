@@ -561,13 +561,13 @@ const OrderListing = ({
                 </div>
             ),
         },
-        {
-            field: 'onBackVerifiedDate',
-            headerName: 'ONBACK Verifie Date',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <div>-</div>,
-        },
+        // {
+        //     field: 'onBackVerifiedDate',
+        //     headerName: 'ONBACK Verifie Date',
+        //     flex: 'flex-[1_1_0%]',
+        //     extraClasses: 'min-w-[150px]',
+        //     renderCell: (row: OrderListResponse) => <div>-</div>,
+        // },
         {
             field: 'edpDate',
             headerName: 'EDP Date',
@@ -685,15 +685,15 @@ const OrderListing = ({
                 <div className="py-0">{row?.agentName}</div>
             ),
         },
-        {
-            field: 'agentIdl',
-            headerName: 'Agent ID',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            // renderCell: (row: OrderListResponse) => (
-            //     <div className="py-0">{row?.agentId}</div>
-            // ),
-        },
+        // {
+        //     field: 'agentIdl',
+        //     headerName: 'Agent ID',
+        //     flex: 'flex-[1_1_0%]',
+        //     extraClasses: 'min-w-[150px]',
+        //    renderCell: (row: OrderListResponse) => (
+        //         <div className="py-0">{row?.agentId}</div>
+        //     ), 
+        // },
         {
             field: 'Shipping Charges',
             headerName: 'Delivery Charges',

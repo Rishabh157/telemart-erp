@@ -28,6 +28,7 @@ type PropsChips = {
     preConfirm?: (result: SweetAlertResult<any>) => void
     preDeny?: (result: SweetAlertResult<any>) => void
     disabled?: boolean
+    html?:any
 }
 const SwtAlertChipConfirm = ({
     color = 'default',
@@ -48,6 +49,7 @@ const SwtAlertChipConfirm = ({
     preConfirm,
     preDeny,
     disabled = false,
+    html
 }: PropsChips) => {
     return (
         <div>
@@ -70,7 +72,7 @@ const SwtAlertChipConfirm = ({
                         next,
                         input,
                         inputPlaceholder,
-                     
+                        html,
                         preConfirm: (inputValue) => {
                             if (!inputValue) {
                                 Swal.showValidationMessage(
@@ -92,7 +94,6 @@ const SwtAlertChipConfirm = ({
             >
                 <Chip
                     className="z-0"
-                   
                     label={chipLabel}
                     color={color}
                     variant="outlined"
