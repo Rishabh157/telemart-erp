@@ -29,6 +29,8 @@ import Swal from 'sweetalert2'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddProductReplacementCustomerInfoFormWrapper from './AddCustomerInfoForm/AddProductReplacementCustomerInfoFormWrapper'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const ProductReplacementListingWrapper = () => {
     // Hooks
@@ -88,7 +90,7 @@ const ProductReplacementListingWrapper = () => {
         level: 'FIRST' | 'SECOND',
         approve: boolean,
         remark: string,
-        complaintNumber:string
+        complaintNumber: string
     ) => {
         managerLevelApproval({
             id: _id,
@@ -148,8 +150,12 @@ const ProductReplacementListingWrapper = () => {
             extraClasses: 'mr-4',
             renderCell: (row: MoneybackListResponse) => (
                 <ActionPopup
-                    isView
-                    isCustomBtn
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_LIST_VIEW
+                    )}
+                    isCustomBtn={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_LIST_LOGS
+                    )}
                     customBtnText="Logs"
                     handleViewActionButton={() => navigate(`${row?._id}/view`)}
                     handleOnAction={() => {
@@ -165,15 +171,17 @@ const ProductReplacementListingWrapper = () => {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_ORDER_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
-            ),
+            )
         },
         {
             field: 'complaintNumber',
             headerName: 'Complain No.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_COMPLAIN_NUMBER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: MoneybackListResponse) => <span></span>,
@@ -182,6 +190,7 @@ const ProductReplacementListingWrapper = () => {
             field: 'schemeLabel',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_SCHEME_NUMBER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) => (
@@ -192,6 +201,7 @@ const ProductReplacementListingWrapper = () => {
             field: 'schemePrice',
             headerName: 'Scheme Price',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_SCHEME_PRICE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) => (
@@ -202,6 +212,7 @@ const ProductReplacementListingWrapper = () => {
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_CUSTOMER_NAME,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) => (
@@ -213,6 +224,7 @@ const ProductReplacementListingWrapper = () => {
             headerName: 'Manager Approval',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_MANAGER_APPROVAL,
             renderCell: (row: MoneybackListResponse) => {
                 return (
                     <div className="z-0">
@@ -483,34 +495,34 @@ const ProductReplacementListingWrapper = () => {
                                 row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
-                                    ? 'error'
-                                    : row?.managerSecondApproval
-                                    ? 'success'
-                                    : row?.managerSecondApproval === null
-                                    ? 'warning'
-                                    : 'error'
+                                        ? 'error'
+                                        : row?.managerSecondApproval
+                                            ? 'success'
+                                            : row?.managerSecondApproval === null
+                                                ? 'warning'
+                                                : 'error'
                             }
                             chipLabel={
                                 row?.managerFirstApproval === null
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === false
-                                    ? 'First Rejected'
-                                    : row?.managerSecondApproval
-                                    ? 'Second Approved'
-                                    : row?.managerSecondApproval === null
-                                    ? 'Second Pending'
-                                    : 'Second Rejected'
+                                        ? 'First Rejected'
+                                        : row?.managerSecondApproval
+                                            ? 'Second Approved'
+                                            : row?.managerSecondApproval === null
+                                                ? 'Second Pending'
+                                                : 'Second Rejected'
                             }
                             disabled={
                                 row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
-                                    ? true
-                                    : row?.ccApproval === false
-                                    ? true
-                                    : row?.managerSecondApproval === null
-                                    ? false
-                                    : true
+                                        ? true
+                                        : row?.ccApproval === false
+                                            ? true
+                                            : row?.managerSecondApproval === null
+                                                ? false
+                                                : true
                             }
                             input={'text'}
                             inputPlaceholder="remark"
@@ -551,6 +563,7 @@ const ProductReplacementListingWrapper = () => {
             field: 'Addccinfo',
             headerName: 'CC Information',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_CC_INFO,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) =>
@@ -573,6 +586,7 @@ const ProductReplacementListingWrapper = () => {
             field: 'accountApproval',
             headerName: 'Account Approval',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_ACCOUNT_APPROVAL,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) => {
                 return (

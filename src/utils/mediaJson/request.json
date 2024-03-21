@@ -15,6 +15,70 @@
             "actionUrl": "",
             "actionName": "MONEY_BACK_TAB",
             "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "MONEY_BACK_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "MONEY_BACK_LIST_COMPLAIN_NUMBER",
+                    "fieldName": "Complain No.",
+                    "fieldValue": "complaintNumber"
+                },
+                {
+                    "fieldId": "MONEY_BACK_LIST_SCHEME_NAME",
+                    "fieldName": "Scheme Name",
+                    "fieldValue": "schemeLabel"
+                },
+                {
+                    "fieldId": "MONEY_BACK_LIST_SCHEME_PRICE",
+                    "fieldName": "Scheme Price",
+                    "fieldValue": "schemePrice"
+                },
+                {
+                    "fieldId": "MONEY_BACK_LIST_REQUEST_CREATED_BY",
+                    "fieldName": "Request Created By",
+                    "fieldValue": "requestCreatedByLabel"
+                },
+                {
+                    "fieldId": "MONEY_BACK_LIST_CUSTOMER_NAME",
+                    "fieldName": "Customer Name",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "MONEY_BACK_LIST_APPROVAL",
+                    "fieldName": "Approval",
+                    "fieldValue": "Approved"
+                },
+                {
+                    "fieldId": "MONEY_BACK_LIST_CC_INFO",
+                    "fieldName": "CC Info",
+                    "fieldValue": "ccApproval"
+                },
+                {
+                    "fieldId": "MONEY_BACK_LIST_ACCOUNT_APPROVAL",
+                    "fieldName": "Account Approval",
+                    "fieldValue": "accountApproval"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_MONEY_BACK_LIST_VIEW",
+            "actionUrl": "",
+            "actionName": "MONEY BACK LIST VIEW",
+            "parentGroup": [
+                "MONEY_BACK_TAB"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_MONEY_BACK_LIST_LOGS",
+            "actionUrl": "",
+            "actionName": "MONEY BACK LIST LOGS",
+            "parentGroup": [
+                "MONEY_BACK_TAB"
+            ],
             "fields": []
         },
         {
@@ -22,6 +86,65 @@
             "actionUrl": "",
             "actionName": "PRODUCT_REPLACMENT_TAB",
             "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "PRODUCT_REPLACMENT_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "PRODUCT_REPLACMENT_LIST_COMPLAIN_NUMBER",
+                    "fieldName": "Complain No.",
+                    "fieldValue": "complaintNumber"
+                },
+                {
+                    "fieldId": "PRODUCT_REPLACMENT_LIST_SCHEME_NUMBER",
+                    "fieldName": "Scheme Name",
+                    "fieldValue": "schemeLabel"
+                },
+                {
+                    "fieldId": "PRODUCT_REPLACMENT_LIST_SCHEME_PRICE",
+                    "fieldName": "Scheme Price",
+                    "fieldValue": "schemePrice"
+                },
+                {
+                    "fieldId": "PRODUCT_REPLACMENT_LIST_CUSTOMER_NAME",
+                    "fieldName": "Customer Name",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "PRODUCT_REPLACMENT_LIST_MANAGER_APPROVAL",
+                    "fieldName": "Manager Approval",
+                    "fieldValue": "Approved"
+                },
+                {
+                    "fieldId": "PRODUCT_REPLACMENT_LIST_CC_INFO",
+                    "fieldName": "CC Information",
+                    "fieldValue": "Addccinfo"
+                },
+                {
+                    "fieldId": "PRODUCT_REPLACMENT_LIST_ACCOUNT_APPROVAL",
+                    "fieldName": "Account Approval",
+                    "fieldValue": "accountApproval"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_PRODUCT_REPLACMENT_LIST_VIEW",
+            "actionUrl": "",
+            "actionName": "PRODUCT REPLACEMENT LIST VIEW",
+            "parentGroup": [
+                "PRODUCT_REPLACMENT_TAB"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_PRODUCT_REPLACMENT_LIST_LOGS",
+            "actionUrl": "",
+            "actionName": "PRODUCT REPLACEMENT LIST LOGS",
+            "parentGroup": [
+                "PRODUCT_REPLACMENT_TAB"
+            ],
             "fields": []
         },
         {
@@ -29,12 +152,76 @@
             "actionUrl": "",
             "actionName": "HOUSE_ARREST_TAB",
             "parentGroup": [],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_COMPLAIN_NUMBER",
+                    "fieldName": "Complain No.",
+                    "fieldValue": "complaintNumber"
+                },
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_MBK_NUMBER",
+                    "fieldName": "MBK No.",
+                    "fieldValue": "mbkNumber"
+                },
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_REQUEST_CREATED_BY",
+                    "fieldName": "Request Created By",
+                    "fieldValue": "requestCreatedByLabel"
+                },
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_CUSTOMER_NAME",
+                    "fieldName": "Customer Name",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_CC_APPROVAL",
+                    "fieldName": "CC Approval",
+                    "fieldValue": "ccApproval"
+                },
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_CC_INFO",
+                    "fieldName": "CC Info",
+                    "fieldValue": "ccApproval"
+                },
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_MANAGER_APPROVAL",
+                    "fieldName": "Manager Approval",
+                    "fieldValue": "managerFirstApproval"
+                },
+                {
+                    "fieldId": "HOUSE_ARREST_LIST_ACCOUNT_APPROVAL",
+                    "fieldName": "Account Approval",
+                    "fieldValue": "accApproval"
+                }
+            ]
         },
         {
             "actionId": "ACTION_HOUSE_ARREST_ADD",
             "actionUrl": "",
             "actionName": "HOUSE_ARREST_ADD",
+            "parentGroup": [
+                "HOUSE_ARREST_TAB"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_HOUSE_ARREST_LIST_VIEW",
+            "actionUrl": "",
+            "actionName": "HOUSE ARREST LIST VIEW",
+            "parentGroup": [
+                "HOUSE_ARREST_TAB"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_HOUSE_ARREST_LIST_LOGS",
+            "actionUrl": "",
+            "actionName": "HOUSE ARREST LIST LOGS",
             "parentGroup": [
                 "HOUSE_ARREST_TAB"
             ],
