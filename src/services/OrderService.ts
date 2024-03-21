@@ -141,6 +141,15 @@ export const OrderApi = apiSlice.injectEndpoints({
                 method: 'PUT',
             }),
         }),
+
+        //***** Get Old Order By Order Number *****/
+        getOldOrderDetailsByOrderNumber: builder.query({
+            // providesTags: ['order'],
+            query: (orderNumber: any) => ({
+                url: `/order-inquiry/get-by-order-number/${orderNumber}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -156,4 +165,5 @@ export const {
     useGetDealerOfOrderQuery,
     useAssignOrderToDealerOrWarehouseMutation,
     useApprovedOrderStatusMutation,
+    useGetOldOrderDetailsByOrderNumberQuery,
 } = OrderApi

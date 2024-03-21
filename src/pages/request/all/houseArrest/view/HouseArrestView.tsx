@@ -279,7 +279,111 @@ const HouseArrestView = ({ items }: Props) => {
                                     Barcode
                                 </div>
 
-                                <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-1">
+                                <div className="overflow-x-auto">
+                                    <table className="table-auto w-full border-collapse border">
+                                        <thead>
+                                            <tr className="bg-gray-200 border">
+                                                <th className="px-4 py-2 border font-bold text-base w-4/12">
+                                                    Order Details
+                                                </th>
+                                                <th className="px-4 py-2 border font-bold text-base w-4/12">
+                                                    New Order Details
+                                                </th>
+                                                <th className="px-4 py-2 border font-bold text-base w-4/12">
+                                                    Old Order Details
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr className="border">
+                                                <td className="px-4 py-2 border text-sm font-bold">
+                                                    Order Number
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.orderNumber || '-'}
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.oldOrderNumber ||
+                                                        '-'}
+                                                </td>
+                                            </tr>
+                                            <tr className="border">
+                                                <td className="px-4 py-2 border text-sm font-bold">
+                                                    Customer Name
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.customerName || '-'}
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.oldCustomerName ||
+                                                        '-'}
+                                                </td>
+                                            </tr>
+                                            <tr className="border">
+                                                <td className="px-4 py-2 border text-sm font-bold">
+                                                    Customer Number
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.customerNumber ||
+                                                        '-'}
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.oldCustomerNumber ||
+                                                        '-'}
+                                                </td>
+                                            </tr>
+                                            <tr className="border">
+                                                <td className="px-4 py-2 border text-sm font-bold">
+                                                    Address
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.address || '-'}
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.oldCustomerAddress ||
+                                                        '-'}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div className="overflow-x-auto mt-4">
+                                    <table className="table-auto w-full border-collapse border">
+                                        <thead>
+                                            <tr className="bg-gray-200 border">
+                                                <th className="px-4 py-2 border font-bold text-base w-4/12">
+                                                    Barcode
+                                                </th>
+                                                <th className="px-4 py-2 border font-bold text-base w-4/12">
+                                                    Original Barcode
+                                                </th>
+                                                <th className="px-4 py-2 border font-bold text-base w-4/12">
+                                                    New Barcode
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr className="border">
+                                                <td className="px-4 py-2 border text-sm font-bold">
+                                                    Order Number
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.orignalBarcode?.join(
+                                                        ' , '
+                                                    ) || '-'}
+                                                </td>
+                                                <td className="px-4 py-2 border text-sm">
+                                                    {items?.returnItemBarcode?.join(
+                                                        ' , '
+                                                    ) || '-'}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                {/* <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-1">
                                     <h1 className="text-gray-800">
                                         Original Barcode
                                     </h1>
@@ -301,7 +405,7 @@ const HouseArrestView = ({ items }: Props) => {
                                               )
                                             : 'NA'}
                                     </p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
