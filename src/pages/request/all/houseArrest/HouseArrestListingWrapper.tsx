@@ -212,7 +212,24 @@ const HouseArrestListingWrapper = () => {
 </div>
 
     `
+    const getCurrentStatus = (row: any) => {
+        return row?.ccApproval === false
+            ? 'Cc Pending' : row?.managerFirstApproval === null
+                ? 'Mang. First Pending'
+                : row?.managerFirstApproval === false
+                    ? 'Mang. First Rejected'
+                    : row?.dealerApproval === false
+                        ? 'Dealer Pending'
+                        : row?.managerSecondApproval === null
+                            ? 'Mang. Second Pending'
+                            : row?.managerSecondApproval === false
+                                ? 'Mang. Second Rejected'
+                                : row?.accountApproval === null
+                                    ? 'Account Pending'
+                                    : row?.accountApproval === false
+                                        ? 'Account Rejected' : "Account Aaproved"
 
+    }
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -584,7 +601,7 @@ const HouseArrestListingWrapper = () => {
                 <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => {
                     setHouseArrestData(row)
                     setShowStatusDialog(true)
-                }}>View</span>
+                }}>{getCurrentStatus(row)}</span>
             ),
         },
     ]
