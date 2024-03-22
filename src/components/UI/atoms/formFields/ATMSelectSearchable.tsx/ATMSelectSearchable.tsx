@@ -93,8 +93,7 @@ const ATMSelectSearchable = ({
             borderColor: 'border-slate-400  ',
             borderWidth: 0,
             boxShadow: 'none',
-            minHeight: minHeight,
-            height:
+            minHeight:
                 size === 'xxs'
                     ? '10px'
                     : size === 'xs'
@@ -102,22 +101,35 @@ const ATMSelectSearchable = ({
                     : size === 'small'
                     ? '35px'
                     : '',
+
+            // height:
+            //     size === 'xxs'
+            //         ? '10px'
+            //         : size === 'xs'
+            //         ? '28px'
+            //         : size === 'small'
+            //         ? '35px'
+            //         : '',
+            maxHeight: '67px',
             display: 'flex',
             alignItems: 'center',
-            overflow: isMulti ? 'scroll' : 'unset',
+            // overflow: isMulti ? 'scroll' : 'unset',
         }),
+
         valueContainer: (provided: any) => ({
             ...provided,
 
-            padding: size === 'xxs' ? '2px' : '9px',
+            paddingBottom: size === 'xxs' ? '0px' : '0px',
+            paddingTop: size === 'xxs' ? '4px' : '7px',
             alignItems: 'start',
-
+            minHeight: minHeight,
             maxHeight: '67px',
+            overflow: isMulti ? 'scroll' : 'unset',
             fontSize: fontSizePlaceHolder,
         }),
         indicator: (provided: any) => ({
             ...provided,
-            padding: '4px',
+            padding: '2px',
         }),
         singleValue: (provided: any) => ({
             ...provided,
@@ -132,6 +144,7 @@ const ATMSelectSearchable = ({
 
         indicatorSeparator: (provided: any) => ({
             ...provided,
+            padding: '1px',
             display: 'none',
         }),
         option: (provided: any) => ({
