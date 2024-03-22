@@ -32,6 +32,7 @@ import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 import Swal from 'sweetalert2'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import StatusDialog from './HouseArrestStatusDialog/StatusDialog'
 
 const HouseArrestListingWrapper = () => {
     // Hooks
@@ -45,6 +46,8 @@ const HouseArrestListingWrapper = () => {
         useState<boolean>(false)
 
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
+    const [showStatusDialog, setShowStatusDialog] = useState<boolean>(false)
+    const [houseArrestData, setHouseArrestData] = useState<any>([])
 
     const houseArrestState: any = useSelector(
         (state: RootState) => state.houseArrest
@@ -156,39 +159,31 @@ const HouseArrestListingWrapper = () => {
             <tbody>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Order Number</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.orderNumber || '-'
-                    }</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.oldOrderNumber || '-'
-                    }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.orderNumber || '-'
+        }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldOrderNumber || '-'
+        }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Customer Name</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.customerName || '-'
-                    }</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.oldCustomerName || '-'
-                    }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.customerName || '-'
+        }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerName || '-'
+        }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Customer Number</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.customerNumber || '-'
-                    }</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.oldCustomerNumber || '-'
-                    }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.customerNumber || '-'
+        }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerNumber || '-'
+        }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Address</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.address || '-'
-                    }</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.oldCustomerAddress || '-'
-                    }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.address || '-'
+        }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerAddress || '-'
+        }</td>
                 </tr>
                  
             </tbody>
@@ -207,12 +202,10 @@ const HouseArrestListingWrapper = () => {
         <tbody>
             <tr class="border">
                 <td class="px-4 py-2 border text-sm font-bold">Order Number</td>
-                <td class="px-4 py-2 border text-sm">${
-                    newOrderDetails?.orignalBarcode?.join(' , ') || '-'
-                }</td>
-                <td class="px-4 py-2 border text-sm">${
-                    newOrderDetails?.returnItemBarcode?.join(' , ') || '-'
-                }</td>
+                <td class="px-4 py-2 border text-sm">${newOrderDetails?.orignalBarcode?.join(' , ') || '-'
+        }</td>
+                <td class="px-4 py-2 border text-sm">${newOrderDetails?.returnItemBarcode?.join(' , ') || '-'
+        }</td>
             </tr>
         </tbody>
     </table>
@@ -437,7 +430,7 @@ const HouseArrestListingWrapper = () => {
             headerName: 'Account Approval',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[250px]',
             name: UserModuleNameTypes.HOUSE_ARREST_LIST_ACCOUNT_APPROVAL,
             renderCell: (row: HouseArrestListResponseType) => (
                 <div className="z-0" onClick={() => setNewOrderDetails(row)}>
@@ -580,6 +573,20 @@ const HouseArrestListingWrapper = () => {
                 </div>
             ),
         },
+        {
+            field: 'customerName',
+            headerName: 'Current Status',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[200px]',
+            name: UserModuleNameTypes.HOUSE_ARREST_LIST_CURRENT_STATUS,
+            renderCell: (row: any) => (
+                <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => {
+                    setHouseArrestData(row)
+                    setShowStatusDialog(true)
+                }}>View</span>
+            ),
+        },
     ]
 
     return (
@@ -604,6 +611,10 @@ const HouseArrestListingWrapper = () => {
                     />
                 }
             />
+            {/* status Dialog  */}
+            {showStatusDialog &&
+                <StatusDialog houseArrestData={houseArrestData} isShow={showStatusDialog} onClose={() => { setShowStatusDialog(false) }} />
+            }
         </>
     )
 }

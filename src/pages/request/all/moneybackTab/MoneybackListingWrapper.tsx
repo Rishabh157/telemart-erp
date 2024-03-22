@@ -44,6 +44,7 @@ import AddAccountApprovedFormWrapper from './AddAccountApprovedForm/AddAccountAp
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import StatusDialog from './MoneyBackStatusDialog/statusDialog'
 
 const MoneybackListingWrapper = () => {
     // Hooks
@@ -60,6 +61,8 @@ const MoneybackListingWrapper = () => {
         useState<boolean>(false)
 
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
+    const [showStatusDialog, setShowStatusDialog] = useState<boolean>(false)
+    const [moneyBackData, setMoneyBackData] = useState<any>([])
 
     const moneybackState: any = useSelector(
         (state: RootState) => state.moneyback
@@ -215,6 +218,7 @@ const MoneybackListingWrapper = () => {
                 <span>{row?.customerName}</span>
             ),
         },
+
         {
             field: 'Approved',
             headerName: 'Approval',
@@ -372,6 +376,19 @@ const MoneybackListingWrapper = () => {
                 )
             },
         },
+        {
+            field: 'currentStatus',
+            headerName: 'Current Status',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.MONEY_BACK_LIST_CURRENT_STATUS,
+            renderCell: (row: MoneybackListResponse) => (
+                <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => { 
+                    setMoneyBackData(row)
+                    setShowStatusDialog(true) }}>View</span>
+            ),
+        },
     ]
 
     return (
@@ -411,6 +428,10 @@ const MoneybackListingWrapper = () => {
                     />
                 }
             />
+            {/* status Dialog  */}
+            {showStatusDialog &&
+                <StatusDialog moneyBackData={moneyBackData} isShow={showStatusDialog} onClose={() => { setShowStatusDialog(false) }} />
+            }
         </>
     )
 }
