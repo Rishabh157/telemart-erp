@@ -101,6 +101,7 @@ import ComplainSlice from './slices/ComplainSlice'
 import MoneybackSlice from './slices/MoneybackSlice'
 import ProductReplacementSlice from './slices/ProductReplacementSlice'
 import houseArrestSlice from './slices/houseArrestSlice'
+import CreateBatchOrderSlice from './slices/CreateBatchOrderSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -200,6 +201,7 @@ const store = configureStore({
         moneyback: MoneybackSlice,
         productReplacement: ProductReplacementSlice,
         houseArrest: houseArrestSlice,
+        createBatch: CreateBatchOrderSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

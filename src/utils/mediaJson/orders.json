@@ -19,6 +19,14 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_ORDER_ASSIGN_ORDER_TAB_LIST",
+            "actionUrl": "",
+            "actionName": "ORDER_FRESH_ORDER_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_ORDER_APPROVAL_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_APPROVAL_TAB",
