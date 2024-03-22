@@ -130,7 +130,23 @@ const MoneybackListingWrapper = () => {
             }
         })
     }
+    const getCurrentStatus = (row: any) => {
+        return row?.managerFirstApproval === null
+            ? 'Mang. First Pending'
+            : row?.managerFirstApproval === false
+                ? 'Mang. First Rejected' :
+                row?.ccApproval === false
+                    ? 'Cc Pending'
+                    : row?.managerSecondApproval === null
+                        ? 'Mang. Second Pending'
+                        : row?.managerSecondApproval === false
+                            ? 'Mang. Second Rejected'
+                            : row?.accountApproval === null
+                                ? 'Account Pending'
+                                : row?.accountApproval === false
+                                    ? 'Account Rejected' : "Account Aaproved"
 
+    }
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -384,9 +400,10 @@ const MoneybackListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_CURRENT_STATUS,
             renderCell: (row: MoneybackListResponse) => (
-                <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => { 
+                <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => {
                     setMoneyBackData(row)
-                    setShowStatusDialog(true) }}>View</span>
+                    setShowStatusDialog(true)
+                }}>{getCurrentStatus(row)}</span>
             ),
         },
     ]
