@@ -196,6 +196,16 @@ const OrderListing = ({
                 ]
                 setFilterBy(filtrComplaint)
                 return
+            case 'assign':
+                let filterAssignedOrders = [
+                    ...filter,
+                    {
+                        fieldName: 'isOrderAssigned',
+                        value: true,
+                    },
+                ]
+                setFilterBy([...filterAssignedOrders])
+                return
             case 'approved':
                 let filterApproval = [
                     ...filter,
@@ -217,8 +227,11 @@ const OrderListing = ({
                         fieldName: 'approved',
                         value: true,
                     },
+                    {
+                        fieldName: 'isOrderAssigned',
+                        value: false,
+                    },
                 ]
-
                 setFilterBy(filterdefault)
                 return
         }
@@ -692,7 +705,7 @@ const OrderListing = ({
         //     extraClasses: 'min-w-[150px]',
         //    renderCell: (row: OrderListResponse) => (
         //         <div className="py-0">{row?.agentId}</div>
-        //     ), 
+        //     ),
         // },
         {
             field: 'Shipping Charges',
@@ -808,7 +821,9 @@ const OrderListing = ({
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px]',
-            renderCell: (row: any) => <span> {row.orderMBKNumber || '-'} </span>,
+            renderCell: (row: any) => (
+                <span> {row.orderMBKNumber || '-'} </span>
+            ),
         },
     ]
 
@@ -1106,49 +1121,12 @@ const OrderListing = ({
                         rows={items}
                         // isCheckbox={true}
                         selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
+                        onRowSelect={(selectedRows) => {
                             setSelectedRows(selectedRows)
-                        }
+                        }}
                         isLoading={isTableLoading}
                     />
                 </div>
-                {/* Table */}
-                {/* {orderStatus !== 'global-search' ? (
-                    <div className="grow overflow-auto">
-                        <ATMTable
-                            extraClasses="w-[200%]"
-                            columns={columns}
-                            rows={items}
-                            // isCheckbox={true}
-                            selectedRows={selectedRows}
-                            onRowSelect={(selectedRows) =>
-                                setSelectedRows(selectedRows)
-                            }
-                            isLoading={isTableLoading}
-                        />
-                    </div>
-                ) : items?.length ? (
-                    <div className="grow overflow-auto">
-                        <ATMTable
-                            extraClasses="w-[200%]"
-                            columns={columns}
-                            rows={items}
-                            selectedRows={selectedRows}
-                            onRowSelect={(selectedRows) =>
-                                setSelectedRows(selectedRows)
-                            }
-                            isLoading={isTableLoading}
-                        />
-                    </div>
-                ) : null} */}
-
-                {/* Flow */}
-                {/* <DialogLogBox
-                    maxWidth="sm"
-                    handleClose={() => setIsFlowDialogShow(false)}
-                    isOpen={isFlowDialogShow}
-                    component={<div className="py-4 flex justify-center"></div>}
-                /> */}
 
                 <DialogLogBox
                     maxWidth="md"

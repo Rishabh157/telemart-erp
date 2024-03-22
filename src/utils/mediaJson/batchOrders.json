@@ -1,0 +1,22 @@
+{
+    "moduleId": "NAV_BATCH_ORDER",
+    "moduleName": "NAV_BATCH_ORDER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_BATCH_ORDER_CREATE_BATCH",
+            "actionUrl": "",
+            "actionName": "BATCH_ORDER_CREATE_BATCH",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_BATCH_ORDER_ASSIGN_BATCHES",
+            "actionUrl": "",
+            "actionName": "BATCH_ORDER_ASSIGN_BATCHES",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

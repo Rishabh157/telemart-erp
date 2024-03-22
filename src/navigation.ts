@@ -13,7 +13,12 @@ import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake, FaSitemap } from 'react-icons/fa'
 import { CiMemoPad, CiStickyNote } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
-import { MdOutlineBorderColor, MdPermMedia, MdWeb } from 'react-icons/md'
+import {
+    MdOutlineBorderColor,
+    MdPermMedia,
+    MdWeb,
+    MdOutlineBatchPrediction,
+} from 'react-icons/md'
 import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiBox, BiPurchaseTagAlt, BiTestTube } from 'react-icons/bi'
@@ -135,6 +140,12 @@ export const navigation: NavItemType[] = [
         label: 'Orders',
         icon: MdOutlineBorderColor,
         path: '/orders',
+        name: UserModuleNameTypes.NAV_ORDER,
+    },
+    {
+        label: 'Batch',
+        icon: MdOutlineBatchPrediction,
+        path: '/batch',
         name: UserModuleNameTypes.NAV_ORDER,
     },
     {
