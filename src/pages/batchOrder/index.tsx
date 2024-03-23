@@ -33,7 +33,7 @@ const BatchOrderView = () => {
             name: UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH,
         },
         {
-            label: 'View Batch',
+            label: 'Batches',
             icon: MdOutbond,
             path: 'assign-batches',
             name: UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCHES,
