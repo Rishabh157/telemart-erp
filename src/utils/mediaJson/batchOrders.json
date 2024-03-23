@@ -10,7 +10,7 @@
             "parentGroup": [],
             "fields": [
                 {
-                    "fieldId": "BATCH_ORDER_LIST_ORDER_NAME",
+                    "fieldId": "BATCH_ORDER_LIST_ORDER_NUMBER",
                     "fieldName": "Order No.",
                     "fieldValue": "orderNumber"
                 },
@@ -181,7 +181,7 @@
             "actionUrl": "",
             "actionName": "BATCH_ORDER_CREATE_BATCH_CREATE_BATCH",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": ["BATCH_ORDER_CREATE_BATCH_TAB"],
             "fields": []
         },
         {
@@ -192,9 +192,14 @@
             "parentGroup": [],
             "fields": [
                 {
-                    "fieldId": "ASSIGN_BATCH_LIST_ORDER_NAME",
+                    "fieldId": "ASSIGN_BATCH_LIST_ORDER_NUMBER",
                     "fieldName": "Order No.",
                     "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_ASSIGNED_DEALER",
+                    "fieldName": "Assigned Dealer.",
+                    "fieldValue": "assignDealerLabel"
                 },
                 {
                     "fieldId": "ASSIGN_BATCH_LIST_ORDER_REF_NUMBER",
@@ -357,6 +362,14 @@
                     "fieldValue": "orderMBKNumber"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_ASSIGN_BATCH_LIST_ASSIGN",
+            "actionUrl": "",
+            "actionName": "ASSIGN_BATCH_LIST_ASSIGN",
+            "compulsoryFields": [],
+            "parentGroup": ["BATCH_ORDER_ASSIGN_BATCH_TAB"],
+            "fields": []
         }
     ]
 }

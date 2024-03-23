@@ -18,12 +18,6 @@ interface tabsProps {
     name?: string
 }
 
-// export enum statusProps {
-//     moneyback = 'MONEYBACK',
-//     productReplacement = 'PRODUCT-REPLACEMENT',
-//     houseArrest = 'HOUSE-ARREST',
-// }
-
 const ViewRequest = () => {
     const tabs: tabsProps[] = [
         {
@@ -73,7 +67,7 @@ const ViewRequest = () => {
         navigate(`${pathname}`)
 
         //eslint-disable-next-line
-    }, [activeTab])
+}, [activeTab])
 
     useEffect(() => {
         if (!activeTab) return
