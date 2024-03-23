@@ -64,6 +64,7 @@ const AddBatchesFormWrapper = ({ selectedRows, handleClose }: Props) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Batch Created successfully!')
+                        handleClose()
                     } else {
                         showToast('error', res?.data?.message)
                     }

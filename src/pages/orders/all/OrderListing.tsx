@@ -96,6 +96,7 @@ const OrderListing = ({
     // Dispatching State
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
@@ -402,7 +403,7 @@ const OrderListing = ({
                             >
                                 View
                             </button>
-                            <button
+                            {/* <button
                                 onClick={() => {
                                     setIsShow(true)
                                     setBarcodeQuantity(row?.shcemeQuantity)
@@ -411,7 +412,7 @@ const OrderListing = ({
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Dispatch
-                            </button>
+                            </button> */}
                         </>
                     }
                 />
