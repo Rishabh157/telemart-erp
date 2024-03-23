@@ -13,7 +13,7 @@ export const OrderApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET *****/
         getOrder: builder.query({
-            providesTags: ['order'],
+            providesTags: ['order', 'batch-order'],
             query: (body: PaginationType) => ({
                 url: '/order-inquiry',
                 method: 'POST',
