@@ -1484,7 +1484,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<CreateBatchOrderListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_TAB
                                 }
                             />
                         }
@@ -1495,7 +1495,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<AssigneBatchesListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCHES
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB
                                 }
                             />
                         }

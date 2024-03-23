@@ -19,6 +19,8 @@ import {
     setSearchValue,
 } from 'src/redux/slices/CreateBatchOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -55,16 +57,16 @@ const CreateBatchOrderListing = ({
         <div className="px-4 h-[calc(100vh-150px)]">
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Create Batches </ATMPageHeading>
-                {/* {isAuthorized(UserModuleNameTypes.ACTION_HOUSE_ARREST_ADD) && ( */}
-                <ATMLoadingButton
-                    disabled={!selectedRows.length}
-                    loadingText="Saving..."
-                    onClick={onClick}
-                    className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-60"
-                >
-                    Create Selected Order Batch
-                </ATMLoadingButton>
-                {/* )} */}
+                {isAuthorized(UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_CREATE_BATCH) && (
+                    <ATMLoadingButton
+                        disabled={!selectedRows.length}
+                        loadingText="Saving..."
+                        onClick={onClick}
+                        className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-60"
+                    >
+                        Create Selected Order Batch
+                    </ATMLoadingButton>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
