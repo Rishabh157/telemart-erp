@@ -275,6 +275,7 @@ import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/
 import BatchOrderView from './pages/batchOrder'
 import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
 import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
+import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1498,6 +1499,11 @@ const PageRoutes = () => {
                                 }
                             />
                         }
+                    />
+                    {/* view assign batches */}
+                    <Route
+                        path="assign-batches/:id"
+                        element={<AssigneBatchesViewListingWrapper />}
                     />
                 </Route>
 

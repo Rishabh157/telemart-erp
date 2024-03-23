@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
+import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import AddOrderAssigneeFormWrapper from 'src/pages/orders/OrderAssigneeForm/AddOrderAssigneeFormWrapper'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { OrderListResponse } from 'src/models'
-import { useGetOrderQuery } from 'src/services/OrderService'
 
 // |-- Redux --|
 import {
@@ -15,58 +18,47 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/CreateBatchOrderSlice'
+import { useGetSingleBatchesOrdersQuery } from 'src/services/BatchesServices'
 import { AppDispatch, RootState } from 'src/redux/store'
-import moment from 'moment'
-import CreateBatchOrderListing from './CreateBatchOrderListing'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddBatchesFormWrapper from './AddBatchesForm/AddBatchesFormWrapper'
+import AssignBatchesViewListing from './AssignBatchesViewListing'
+// import { showToast } from 'src/utils'
+import { OrderListResponse } from 'src/models'
 
-const CreateBatchOrderListingWrapper = () => {
+const AssigneBatchesViewListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const [isShowCreateBatchModel, setIsShowCreateBatchModel] =
-        useState<boolean>(false)
+    const params = useParams()
     const [selectedRows, setSelectedRows] = useState([])
+    // const [apiStatus, setApiStatus] = useState<boolean>(false)
+
+    const [selectedOrder, setSelectedOrder] = useState<any>(null)
+    const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] =
+        useState<boolean>(false)
 
     // const [currentId, setCurrentId] = useState<string>('')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
-    // const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
+    // const [addBatch] = useAddBatchesMutation()
 
     const createBatchOrderState: any = useSelector(
         (state: RootState) => state.createBatch
     )
+    const batchId = params?.id
 
-    const { page, rowsPerPage, searchValue, items } = createBatchOrderState
+    const {
+        // page,
+        // rowsPerPage,
+        // searchValue,
+        items,
+        // totalItems,
+        // isTableLoading,
+    } = createBatchOrderState
 
-    const { data, isLoading, isFetching } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: '',
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'orderNumber',
-                value: [searchValue],
-            },
-            {
-                fieldName: 'status',
-                value: 'FRESH',
-            },
-            {
-                fieldName: 'approved',
-                value: true,
-            },
-            {
-                fieldName: 'isOrderAssigned',
-                value: false,
-            },
-        ],
-        getBatchData: true,
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { data, isLoading, isFetching } = useGetSingleBatchesOrdersQuery(
+        batchId,
+        {
+            skip: !batchId,
+        }
+    )
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -80,61 +72,79 @@ const CreateBatchOrderListingWrapper = () => {
     }, [isLoading, isFetching, data, dispatch])
 
     const columns: columnTypes[] = [
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     extraClasses: 'mr-4',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <ActionPopup
-        //             handleOnAction={() => {
-        //                 setShowDropdown(!showDropdown)
-        //                 // setCurrentId(row?._id)
-        //             }}
-        //             isCustomBtn={
-        //                 row?.status === 'FRESH' && row?.approved === true
-        //             }
-        //             customBtnText="Order Assignee"
-        //             handleCustomActionButton={() => {
-        //                 setIsOrderAssigneeFormOpen(true)
-        //                 setSelectedOrder(row)
-        //             }}
-        //             children={
-        //                 <>
-        //                     <button
-        //                         onClick={() => {
-        //                             navigate(`/orders/view/${row?._id}`)
-        //                         }}
-        //                         className="w-full text-left px-4 py-2 hover:bg-gray-100"
-        //                     >
-        //                         View
-        //                     </button>
-        //                     <button
-        //                         onClick={() => {
-        //                             setIsShow(true)
-        //                             setBarcodeQuantity(row?.shcemeQuantity)
-        //                             setSelectedItemsTobeDispatch(row)
-        //                         }}
-        //                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-        //                     >
-        //                         Dispatch
-        //                     </button>
-        //                 </>
-        //             }
-        //         />
-        //     ),
-        //     align: 'end',
-        // },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'mr-4',
+            renderCell: (row: OrderListResponse) => (
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        // setCurrentId(row?._id)
+                    }}
+                    isCustomBtn
+                    customBtnText="Assign"
+                    handleCustomActionButton={() => {
+                        setIsOrderAssigneeFormOpen(true)
+                        setSelectedOrder(row)
+                    }}
+                    // children={
+                    //     <>
+                    //         <button
+                    //             onClick={() => {
+                    //                 navigate(`/orders/view/${row?._id}`)
+                    //             }}
+                    //             className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    //         >
+                    //             View
+                    //         </button>
+                    //         <button
+                    //             onClick={() => {
+                    //                 setIsShow(true)
+                    //                 setBarcodeQuantity(row?.shcemeQuantity)
+                    //                 setSelectedItemsTobeDispatch(row)
+                    //             }}
+                    //             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                    //         >
+                    //             Dispatch
+                    //         </button>
+                    //     </>
+                    // }
+                />
+            ),
+            align: 'end',
+        },
         {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
-            align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
         },
+        {
+            field: 'assignDealerLabel',
+            headerName: 'Assigned Dealer',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignDealerLabel || '-'}</span>
+            ),
+        },
+        {
+            field: 'assignWarehouseLabel',
+            headerName: 'Assigned Warehouse',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignWarehouseLabel || '-'}</span>
+            ),
+        },
+     
         {
             field: 'orderReferenceNumber',
             headerName: 'Order Ref No.',
@@ -151,16 +161,6 @@ const CreateBatchOrderListingWrapper = () => {
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
-        },
-        {
-            field: 'assignWarehouseLabel',
-            headerName: 'Warehouse',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.assignWarehouseLabel || '-'}</span>
-            ),
         },
         {
             field: 'trackingNo',
@@ -427,51 +427,7 @@ const CreateBatchOrderListingWrapper = () => {
                 </span>
             ),
         },
-        // {
-        //     field: 'isApproved',
-        //     headerName: 'Approval',
-        //     flex: 'flex-[1_1_0%]',
-        //     extraClasses: 'min-w-[150px]',
-        //     renderCell: (row: any) => {
-        //         return (
-        //             <span className="block w-full text-left px-2 py-1 cursor-pointer">
-        //                 {row?.approved ? (
-        //                     <Chip
-        //                         className="cursor-pointer"
-        //                         label="Approved"
-        //                         color="success"
-        //                         variant="outlined"
-        //                         size="small"
-        //                     />
-        //                 ) : (
-        //                     <Chip
-        //                         onClick={() => {
-        //                             showConfirmationDialog({
-        //                                 title: 'Approved',
-        //                                 text: `Do you want to ${
-        //                                     row?.approved
-        //                                         ? 'Disapprove this order'
-        //                                         : 'Approval this order'
-        //                                 }`,
-        //                                 showCancelButton: true,
-        //                                 next: (res) => {
-        //                                     return res.isConfirmed
-        //                                         ? handleDeactive(row?._id)
-        //                                         : setShowDropdown(false)
-        //                                 },
-        //                             })
-        //                         }}
-        //                         className="cursor-pointer"
-        //                         label="Disapproved"
-        //                         color="error"
-        //                         variant="outlined"
-        //                         size="small"
-        //                     />
-        //                 )}
-        //             </span>
-        //         )
-        //     },
-        // },
+
         {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Date Time',
@@ -535,26 +491,52 @@ const CreateBatchOrderListingWrapper = () => {
         },
     ]
 
+    // const handleBatchSubmit = () => {
+    //     setApiStatus(true)
+
+    //     setTimeout(() => {
+    //         addBatch({
+    //             orders: selectedRows?.map((ele: any) => ele?._id),
+    //         }).then((res: any) => {
+    //             if ('data' in res) {
+    //                 if (res?.data?.status) {
+    //                     showToast('success', 'Added successfully!')
+    //                 } else {
+    //                     showToast('error', res?.data?.message)
+    //                 }
+    //             } else {
+    //                 showToast('error', 'Something went wrong')
+    //             }
+    //             setApiStatus(false)
+    //         })
+    //     }, 1000)
+    // }
+
     return (
         <>
-            <CreateBatchOrderListing
+            <AssignBatchesViewListing
                 columns={columns}
                 rows={items}
+                // apiStatus={apiStatus}
+                setShowDropdown={setShowDropdown}
                 selectedRows={selectedRows}
                 setSelectedRows={(ele) => setSelectedRows(ele)}
-                onClick={() => setIsShowCreateBatchModel(true)}
+                // handleSubmit={() => handleBatchSubmit()}
             />
-            {/* Create Batches Form */}
             <DialogLogBox
-                maxWidth="sm"
-                isOpen={isShowCreateBatchModel}
+                maxWidth="md"
                 handleClose={() => {
-                    setIsShowCreateBatchModel(false)
+                    setIsOrderAssigneeFormOpen(false)
+                    setSelectedOrder(null)
                 }}
+                isOpen={isOrderAssigneeFormOpen}
                 component={
-                    <AddBatchesFormWrapper
-                        selectedRows={selectedRows}
-                        handleClose={() => setIsShowCreateBatchModel(false)}
+                    <AddOrderAssigneeFormWrapper
+                        selectedOrder={selectedOrder}
+                        handleClose={() => {
+                            setIsOrderAssigneeFormOpen(false)
+                            setSelectedOrder(null)
+                        }}
                     />
                 }
             />
@@ -562,4 +544,4 @@ const CreateBatchOrderListingWrapper = () => {
     )
 }
 
-export default CreateBatchOrderListingWrapper
+export default AssigneBatchesViewListingWrapper

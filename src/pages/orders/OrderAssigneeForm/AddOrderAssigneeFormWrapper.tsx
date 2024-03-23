@@ -56,9 +56,9 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder, handleClose }: Props) => {
             skip: !selectedOrder?.schemeId || !selectedOrder?.pincodeLabel,
         }
     )
+
     useEffect(() => {
         if (!isDealerOfOrderDataLoading && !isDealerOfOrderDataFetching) {
-            // dealerAndCompanyWarehouse,
             setCompanyWarehouse(dealerOfOrderData?.companyWarehouse)
             setDealer(dealerOfOrderData?.dealerData)
         }
