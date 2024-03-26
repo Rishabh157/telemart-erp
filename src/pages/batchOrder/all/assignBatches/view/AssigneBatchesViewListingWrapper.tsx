@@ -23,6 +23,8 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import AssignBatchesViewListing from './AssignBatchesViewListing'
 // import { showToast } from 'src/utils'
 import { OrderListResponse } from 'src/models'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 const AssigneBatchesViewListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -84,7 +86,9 @@ const AssigneBatchesViewListingWrapper = () => {
                             setShowDropdown(!showDropdown)
                             // setCurrentId(row?._id)
                         }}
-                        isCustomBtn
+                        isCustomBtn={isAuthorized(
+                            UserModuleNameTypes.ACTION_ASSIGN_BATCH_LIST_ASSIGN
+                        )}
                         customBtnText="Assign"
                         handleCustomActionButton={() => {
                             setIsOrderAssigneeFormOpen(true)
@@ -100,16 +104,6 @@ const AssigneBatchesViewListingWrapper = () => {
                         //         >
                         //             View
                         //         </button>
-                        //         <button
-                        //             onClick={() => {
-                        //                 setIsShow(true)
-                        //                 setBarcodeQuantity(row?.shcemeQuantity)
-                        //                 setSelectedItemsTobeDispatch(row)
-                        //             }}
-                        //             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                        //         >
-                        //             Dispatch
-                        //         </button>
                         //     </>
                         // }
                     />
@@ -120,6 +114,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ORDER_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
@@ -129,6 +124,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'assignDealerLabel',
             headerName: 'Assigned Dealer',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ASSIGNED_DEALER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -139,6 +135,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'assignWarehouseLabel',
             headerName: 'Assigned Warehouse',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_WAREHOUSE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -149,6 +146,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'orderReferenceNumber',
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ORDER_REF_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderReferenceNumber || '-'}</span>
@@ -158,6 +156,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'inquiryNumber',
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_INQUIRY_NUMBER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
@@ -166,6 +165,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'trackingNo',
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_TRACKING_NUMBER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>-</span>,
@@ -174,6 +174,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'tehsilLabel',
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_TALUK,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -184,6 +185,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'statusDate',
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_STATUS_DATE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => (
@@ -194,6 +196,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_STATUS,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
@@ -202,6 +205,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'shippingCharges',
             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_SHIPPING_CHARGES,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -212,6 +216,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'schemeName',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_SCHEME_NAME,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -222,6 +227,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'schemeCode',
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_SCHEME_CODE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -232,6 +238,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'shcemeQuantity',
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_QUANTITY,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -242,6 +249,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'price',
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PRICE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
@@ -250,6 +258,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'pincodeLabel',
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PINCODE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -260,6 +269,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'paymentMode',
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PAYMENT_MODE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -270,6 +280,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ORDER_DATE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
@@ -282,17 +293,11 @@ const AssigneBatchesViewListingWrapper = () => {
                 </div>
             ),
         },
-        // {
-        //     field: 'onBackVerifiedDate',
-        //     headerName: 'ONBACK Verifie Date',
-        //     flex: 'flex-[1_1_0%]',
-        //     extraClasses: 'min-w-[150px]',
-        //     renderCell: (row: OrderListResponse) => <div>-</div>,
-        // },
         {
             field: 'edpDate',
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_EDP_DATE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <div>-</div>,
         },
@@ -300,6 +305,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'districtLabel',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DISTRICT,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.districtLabel}</div>
@@ -309,6 +315,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'dispositionLevelThree',
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DISPOSITION,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dispositionLevelThree}</div>
@@ -318,6 +325,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'dealerStatus',
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DEALER_STATUS,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
@@ -329,6 +337,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'dealerCode',
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DEALER_CODE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dealerCode || '-'}</div>
@@ -338,6 +347,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CUSTOMER_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.customerName || '-'}</div>
@@ -347,6 +357,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CUSTOMER_ADDRESS,
             extraClasses: 'min-w-[30px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
@@ -356,6 +367,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'mobileNo',
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CONTACT_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.mobileNo}</div>
@@ -365,6 +377,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CHANNEL_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.channelLabel?.[0]}</div>
@@ -374,6 +387,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'callCenterLabel',
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CC_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.callCenterLabel}</div>
@@ -383,6 +397,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_AREA,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
@@ -392,6 +407,7 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'remark',
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_REMARK,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.remark}</div>
@@ -401,24 +417,18 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'agent',
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_AGENT,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.agentName}</div>
             ),
         },
-        // {
-        //     field: 'agentIdl',
-        //     headerName: 'Agent ID',
-        //     flex: 'flex-[1_1_0%]',
-        //     extraClasses: 'min-w-[150px]',
-        //    renderCell: (row: OrderListResponse) => (
-        //         <div className="py-0">{row?.agentId}</div>
-        //     ),
-        // },
+
         {
             field: 'Shipping Charges',
             headerName: 'Delivery Charges',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DELIVERY_CHARGES,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -434,6 +444,7 @@ const AssigneBatchesViewListingWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_DATE,
             // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -461,6 +472,7 @@ const AssigneBatchesViewListingWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_TIME,
             renderCell: (row: OrderListResponse) => {
                 return row?.preffered_delivery_start_time &&
                     row?.preffered_delivery_end_time ? (
@@ -484,33 +496,13 @@ const AssigneBatchesViewListingWrapper = () => {
             field: 'orderMBKNumber',
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_MBK_NUMBER,
             extraClasses: 'min-w-[250px]',
             renderCell: (row: any) => (
                 <span> {row.orderMBKNumber || '-'} </span>
             ),
         },
     ]
-
-    // const handleBatchSubmit = () => {
-    //     setApiStatus(true)
-
-    //     setTimeout(() => {
-    //         addBatch({
-    //             orders: selectedRows?.map((ele: any) => ele?._id),
-    //         }).then((res: any) => {
-    //             if ('data' in res) {
-    //                 if (res?.data?.status) {
-    //                     showToast('success', 'Added successfully!')
-    //                 } else {
-    //                     showToast('error', res?.data?.message)
-    //                 }
-    //             } else {
-    //                 showToast('error', 'Something went wrong')
-    //             }
-    //             setApiStatus(false)
-    //         })
-    //     }, 1000)
-    // }
 
     return (
         <>

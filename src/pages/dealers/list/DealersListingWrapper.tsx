@@ -203,11 +203,10 @@ const DealersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${
-                                            row.isApproved
+                                        text: `Do you want to ${row.isApproved
                                                 ? 'Disapprove this dealer'
                                                 : 'Approval this dealer'
-                                        }`,
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -241,9 +240,8 @@ const DealersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive User',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -263,9 +261,8 @@ const DealersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive Scheme',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -306,7 +303,9 @@ const DealersListingWrapper = () => {
                     isDelete={isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_DELETE
                     )}
-                    isCustomBtn
+                    isCustomBtn={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_CHANGE_PASSWORD
+                    )}
                     customBtnText="Change Password"
                     handleCustomActionButton={() => {
                         setChangePasswordDialogOpen(true)

@@ -239,6 +239,14 @@
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_CHANGE_PASSWORD",
+            "actionUrl": "",
+            "actionName": "CHANGE PASSWORD",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }
