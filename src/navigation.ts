@@ -146,7 +146,7 @@ export const navigation: NavItemType[] = [
         label: 'Batch',
         icon: MdOutlineBatchPrediction,
         path: '/batch',
-        name: UserModuleNameTypes.NAV_ORDER,
+        name: UserModuleNameTypes.NAV_BATCH_ORDER,
     },
     {
         label: 'Complaint',

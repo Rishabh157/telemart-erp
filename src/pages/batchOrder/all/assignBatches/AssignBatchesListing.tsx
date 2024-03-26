@@ -46,7 +46,7 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
     } = createBatchState
 
     return (
-        <div className="px-4 h-[calc(100vh-150px)]">
+        <div className="px-4 h-[calc(100vh-110px)]">
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Batches </ATMPageHeading>
             </div>
@@ -71,9 +71,9 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
                 />
 
                 {/* Table */}
-                <div className="h-[calc(100%-75px)]">
+                <div className="h-[calc(100%-110px)] overflow-auto ">
                     {!isTableLoading ? (
-                        <div className="grid grid-cols-3 gap-4 overflow-auto p-4  ">
+                        <div className="grid grid-cols-3 gap-4 p-4">
                             {items?.map(
                                 (
                                     batch: BatchesListResponseTypes,
