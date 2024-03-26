@@ -385,9 +385,8 @@ const OrderListing = ({
                         setShowDropdown(!showDropdown)
                         // setCurrentId(row?._id)
                     }}
-                    isCustomBtn={
-                        row?.status === 'FRESH' && row?.approved === true
-                    }
+                    isCustomBtn={!row?.isOrderAssigned}
+                    // row?.status === 'FRESH' && row?.approved === true
                     customBtnText="Order Assignee"
                     handleCustomActionButton={() => {
                         setIsOrderAssigneeFormOpen(true)
@@ -426,6 +425,26 @@ const OrderListing = ({
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
+            ),
+        },
+        {
+            field: 'assignDealerLabel',
+            headerName: 'Assigned Dealer',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignDealerLabel || '-'}</span>
+            ),
+        },
+        {
+            field: 'assignWarehouseLabel',
+            headerName: 'Assigned Warehouse',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignWarehouseLabel || '-'}</span>
             ),
         },
         {
