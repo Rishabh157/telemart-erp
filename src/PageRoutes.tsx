@@ -275,6 +275,7 @@ import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/
 import BatchOrderView from './pages/batchOrder'
 import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
 import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
+import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1483,7 +1484,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<CreateBatchOrderListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_TAB
                                 }
                             />
                         }
@@ -1494,10 +1495,15 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<AssigneBatchesListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCHES
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB
                                 }
                             />
                         }
+                    />
+                    {/* view assign batches */}
+                    <Route
+                        path="assign-batches/:id"
+                        element={<AssigneBatchesViewListingWrapper />}
                     />
                 </Route>
 

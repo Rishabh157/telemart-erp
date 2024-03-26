@@ -9,8 +9,7 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { isAuthorized } from 'src/utils/authorization'
+
 interface tabsProps {
     label: string
     icon: IconType
@@ -18,25 +17,19 @@ interface tabsProps {
     name?: string
 }
 
-// export enum statusProps {
-//     moneyback = 'MONEYBACK',
-//     productReplacement = 'PRODUCT-REPLACEMENT',
-//     houseArrest = 'HOUSE-ARREST',
-// }
-
 const BatchOrderView = () => {
     const tabs: tabsProps[] = [
         {
             label: 'Create Batch',
             icon: MdOutbond,
             path: 'create-batch',
-            name: UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH,
+            name: UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_TAB,
         },
         {
-            label: 'View Batch',
+            label: 'Batches',
             icon: MdOutbond,
             path: 'assign-batches',
-            name: UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCHES,
+            name: UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB,
         },
     ]
     const [activeTabIndex, setActiveTab] = useState<number>(0)

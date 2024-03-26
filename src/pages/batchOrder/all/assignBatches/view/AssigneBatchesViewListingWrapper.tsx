@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
+import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import AddOrderAssigneeFormWrapper from 'src/pages/orders/OrderAssigneeForm/AddOrderAssigneeFormWrapper'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { OrderListResponse } from 'src/models'
-import { useGetOrderQuery } from 'src/services/OrderService'
 
 // |-- Redux --|
 import {
@@ -15,59 +18,49 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/CreateBatchOrderSlice'
+import { useGetSingleBatchesOrdersQuery } from 'src/services/BatchesServices'
 import { AppDispatch, RootState } from 'src/redux/store'
-import moment from 'moment'
-import CreateBatchOrderListing from './CreateBatchOrderListing'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddBatchesFormWrapper from './AddBatchesForm/AddBatchesFormWrapper'
+import AssignBatchesViewListing from './AssignBatchesViewListing'
+// import { showToast } from 'src/utils'
+import { OrderListResponse } from 'src/models'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
-const CreateBatchOrderListingWrapper = () => {
+const AssigneBatchesViewListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const [isShowCreateBatchModel, setIsShowCreateBatchModel] =
-        useState<boolean>(false)
+    const params = useParams()
     const [selectedRows, setSelectedRows] = useState([])
+    // const [apiStatus, setApiStatus] = useState<boolean>(false)
+
+    const [selectedOrder, setSelectedOrder] = useState<any>(null)
+    const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] =
+        useState<boolean>(false)
 
     // const [currentId, setCurrentId] = useState<string>('')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
-    // const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
+    // const [addBatch] = useAddBatchesMutation()
 
     const createBatchOrderState: any = useSelector(
         (state: RootState) => state.createBatch
     )
+    const batchId = params?.id
 
-    const { page, rowsPerPage, searchValue, items } = createBatchOrderState
+    const {
+        // page,
+        // rowsPerPage,
+        // searchValue,
+        items,
+        // totalItems,
+        // isTableLoading,
+    } = createBatchOrderState
 
-    const { data, isLoading, isFetching } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: '',
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'orderNumber',
-                value: [searchValue],
-            },
-            {
-                fieldName: 'status',
-                value: 'FRESH',
-            },
-            {
-                fieldName: 'approved',
-                value: true,
-            },
-            {
-                fieldName: 'isOrderAssigned',
-                value: false,
-            },
-        ],
-        getBatchData: true,
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { data, isLoading, isFetching } = useGetSingleBatchesOrdersQuery(
+        batchId,
+        {
+            skip: !batchId,
+        }
+    )
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -81,23 +74,87 @@ const CreateBatchOrderListingWrapper = () => {
     }, [isLoading, isFetching, data, dispatch])
 
     const columns: columnTypes[] = [
-       
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'mr-4',
+            renderCell: (row: OrderListResponse) => (
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        // setCurrentId(row?._id)
+                    }}
+                    isCustomBtn={isAuthorized(UserModuleNameTypes.ACTION_ASSIGN_BATCH_LIST_ASSIGN)}
+                    customBtnText="Assign"
+                    handleCustomActionButton={() => {
+                        setIsOrderAssigneeFormOpen(true)
+                        setSelectedOrder(row)
+                    }}
+                // children={
+                //     <>
+                //         <button
+                //             onClick={() => {
+                //                 navigate(`/orders/view/${row?._id}`)
+                //             }}
+                //             className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                //         >
+                //             View
+                //         </button>
+                //         <button
+                //             onClick={() => {
+                //                 setIsShow(true)
+                //                 setBarcodeQuantity(row?.shcemeQuantity)
+                //                 setSelectedItemsTobeDispatch(row)
+                //             }}
+                //             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                //         >
+                //             Dispatch
+                //         </button>
+                //     </>
+                // }
+                />
+            ),
+            align: 'end',
+        },
         {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
-            align: 'center',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ORDER_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_ORDER_NUMBER,
         },
+        {
+            field: 'assignDealerLabel',
+            headerName: 'Assigned Dealer',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ASSIGNED_DEALER,
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignDealerLabel || '-'}</span>
+            ),
+        },
+        {
+            field: 'assignWarehouseLabel',
+            headerName: 'Assigned Warehouse',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_WAREHOUSE,
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignWarehouseLabel || '-'}</span>
+            ),
+        },
+
         {
             field: 'orderReferenceNumber',
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_ORDER_REF_NUMBER,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ORDER_REF_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderReferenceNumber || '-'}</span>
@@ -107,27 +164,16 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'inquiryNumber',
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_INQUIRY_NUMBER,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_INQUIRY_NUMBER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
-            field: 'assignWarehouseLabel',
-            headerName: 'Warehouse',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_WAREHOUSE,
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.assignWarehouseLabel || '-'}</span>
-            ),
-        },
-        {
             field: 'trackingNo',
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_TRACKING_NUMBER,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_TRACKING_NUMBER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>-</span>,
@@ -136,7 +182,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'tehsilLabel',
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_TALUK,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_TALUK,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -147,7 +193,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'statusDate',
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_STATUS_DATE,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_STATUS_DATE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => (
@@ -158,7 +204,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_STATUS,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_STATUS,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
@@ -167,7 +213,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'shippingCharges',
             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_SHIPPING_CHARGES,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_SHIPPING_CHARGES,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -178,7 +224,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'schemeName',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_SCHEME_NAME,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_SCHEME_NAME,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -189,7 +235,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'schemeCode',
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_SCHEME_CODE,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_SCHEME_CODE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -200,7 +246,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'shcemeQuantity',
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_QUANTITY,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_QUANTITY,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -211,7 +257,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'price',
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_PRICE,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PRICE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
@@ -220,7 +266,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'pincodeLabel',
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_PINCODE,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PINCODE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -231,7 +277,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'paymentMode',
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_PAYMENT_MODE,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PAYMENT_MODE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -242,7 +288,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_ORDER_DATE,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ORDER_DATE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
@@ -259,7 +305,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'edpDate',
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_EDP_DATE,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_EDP_DATE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <div>-</div>,
         },
@@ -267,7 +313,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'districtLabel',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_DISTRICT,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DISTRICT,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.districtLabel}</div>
@@ -277,7 +323,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'dispositionLevelThree',
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_DISPOSITION,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DISPOSITION,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dispositionLevelThree}</div>
@@ -287,7 +333,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'dealerStatus',
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_DEALER_STATUS,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DEALER_STATUS,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
@@ -299,7 +345,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'dealerCode',
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_DEALER_CODE,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DEALER_CODE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dealerCode || '-'}</div>
@@ -309,7 +355,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_CUSTOMER_NAME,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CUSTOMER_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.customerName || '-'}</div>
@@ -319,7 +365,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_CUSTOMER_ADDRESS,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CUSTOMER_ADDRESS,
             extraClasses: 'min-w-[30px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
@@ -329,7 +375,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'mobileNo',
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_CONTACT_NUMBER,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CONTACT_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.mobileNo}</div>
@@ -339,7 +385,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_CHANNEL_NAME,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CHANNEL_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.channelLabel?.[0]}</div>
@@ -349,7 +395,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'callCenterLabel',
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_CC_NAME,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_CC_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.callCenterLabel}</div>
@@ -359,7 +405,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_AREA,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_AREA,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
@@ -369,7 +415,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'remark',
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_REMARK,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_REMARK,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.remark}</div>
@@ -379,18 +425,18 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'agent',
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_AGENT,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_AGENT,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.agentName}</div>
             ),
         },
-      
+
         {
             field: 'Shipping Charges',
             headerName: 'Delivery Charges',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_DELIVERY_CHARGES,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DELIVERY_CHARGES,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -399,14 +445,14 @@ const CreateBatchOrderListingWrapper = () => {
                 </span>
             ),
         },
-      
+
         {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_PREFFRED_DELIVERY_DATE,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_DATE,
             // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -414,11 +460,16 @@ const CreateBatchOrderListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
-                       
+                        {/* <span>
+                            {' '}
+                            {moment(row?.preffered_delivery_date).format(
+                                'hh:mm:ss A'
+                            )}
+                        </span>, */}
                     </>
                 )
             },
@@ -427,9 +478,9 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_PREFFRED_DELIVERY_TIME,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_TIME,
             renderCell: (row: OrderListResponse) => {
                 return row?.preffered_delivery_start_time &&
                     row?.preffered_delivery_end_time ? (
@@ -453,7 +504,7 @@ const CreateBatchOrderListingWrapper = () => {
             field: 'orderMBKNumber',
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.BATCH_ORDER_LIST_MBK_NUMBER,
+            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_MBK_NUMBER,
             extraClasses: 'min-w-[250px]',
             renderCell: (row: any) => (
                 <span> {row.orderMBKNumber || '-'} </span>
@@ -463,24 +514,29 @@ const CreateBatchOrderListingWrapper = () => {
 
     return (
         <>
-            <CreateBatchOrderListing
+            <AssignBatchesViewListing
                 columns={columns}
                 rows={items}
+                // apiStatus={apiStatus}
+                setShowDropdown={setShowDropdown}
                 selectedRows={selectedRows}
                 setSelectedRows={(ele) => setSelectedRows(ele)}
-                onClick={() => setIsShowCreateBatchModel(true)}
+            // handleSubmit={() => handleBatchSubmit()}
             />
-            {/* Create Batches Form */}
             <DialogLogBox
-                maxWidth="sm"
-                isOpen={isShowCreateBatchModel}
+                maxWidth="md"
                 handleClose={() => {
-                    setIsShowCreateBatchModel(false)
+                    setIsOrderAssigneeFormOpen(false)
+                    setSelectedOrder(null)
                 }}
+                isOpen={isOrderAssigneeFormOpen}
                 component={
-                    <AddBatchesFormWrapper
-                        selectedRows={selectedRows}
-                        handleClose={() => setIsShowCreateBatchModel(false)}
+                    <AddOrderAssigneeFormWrapper
+                        selectedOrder={selectedOrder}
+                        handleClose={() => {
+                            setIsOrderAssigneeFormOpen(false)
+                            setSelectedOrder(null)
+                        }}
                     />
                 }
             />
@@ -488,4 +544,4 @@ const CreateBatchOrderListingWrapper = () => {
     )
 }
 
-export default CreateBatchOrderListingWrapper
+export default AssigneBatchesViewListingWrapper
