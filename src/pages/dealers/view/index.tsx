@@ -7,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { AiOutlineRise } from 'react-icons/ai'
@@ -30,6 +30,7 @@ import { setItems, setSearchValue } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import AccessDenied from 'src/AccessDenied'
 
 const tabsData = [
     {
@@ -132,6 +133,31 @@ const ViewDealer = () => {
         })
         ?.map((tab) => tab)
 
+    React.useEffect(() => {
+        localStorage.removeItem("hasExecuted");
+        if (userData?.userRole === "SUPER_ADMIN") {
+            // navigate("open");
+            return;
+        }
+        const hasExecuted = localStorage.getItem("hasExecuted");
+
+        if (hasExecuted) {
+            return; // Exit early if the function has been executed
+        }
+
+        for (const nav of tabsData) {
+            const isValue = isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
+            localStorage.setItem("hasExecuted", "true");
+            if (isValue) {
+                navigate(nav.path);
+                break;
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    const tabsRender = tabsData?.some((nav: any) => {
+        return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes);
+    })
     const dealerState: any = useSelector((state: RootState) => state.dealer)
     const { page, rowsPerPage, items } = dealerState
     const { searchValue }: any = useSelector((state: RootState) => state.dealer)
@@ -165,26 +191,30 @@ const ViewDealer = () => {
     })
 
     return (
-        <ViewLayout
-            infoCard={
-                <DealerInfoCard
-                    dealerData={{
-                        isActive: true,
-                        vendorName: '',
-                        mobile: '',
-                    }}
-                    actionIcons={actionIcons}
+        <>
+            {tabsRender ?
+                <ViewLayout
+                    infoCard={
+                        <DealerInfoCard
+                            dealerData={{
+                                isActive: true,
+                                vendorName: '',
+                                mobile: '',
+                            }}
+                            actionIcons={actionIcons}
+                        />
+                    }
+                    listData={listData}
+                    tabs={allowedTabs}
+                    renderListItem={(item: any) => (
+                        <ListItemCard item={item} key={item._id} />
+                    )}
+                    searchValue={searchValue}
+                    onSearch={(newValue: any) => dispatch(setSearchValue(newValue))}
+                    breadcrumbs={breadcrumbs}
                 />
-            }
-            listData={listData}
-            tabs={allowedTabs}
-            renderListItem={(item: any) => (
-                <ListItemCard item={item} key={item._id} />
-            )}
-            searchValue={searchValue}
-            onSearch={(newValue: any) => dispatch(setSearchValue(newValue))}
-            breadcrumbs={breadcrumbs}
-        />
+                : <AccessDenied />}
+        </>
     )
 }
 
