@@ -9,8 +9,7 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { isAuthorized } from 'src/utils/authorization'
+
 interface tabsProps {
     label: string
     icon: IconType
@@ -18,25 +17,19 @@ interface tabsProps {
     name?: string
 }
 
-const ViewRequest = () => {
+const BatchOrderView = () => {
     const tabs: tabsProps[] = [
         {
-            label: 'Moneyback',
+            label: 'Create Batch',
             icon: MdOutbond,
-            path: 'moneyback',
-            name: UserModuleNameTypes.ACTION_MONEY_BACK_TAB,
+            path: 'create-batch',
+            name: UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_TAB,
         },
         {
-            label: 'Product Replacement',
+            label: 'Batches',
             icon: MdOutbond,
-            path: 'product-replacement',
-            name: UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_TAB,
-        },
-        {
-            label: 'House Arrest',
-            icon: MdOutbond,
-            path: 'house-arrest',
-            name: UserModuleNameTypes.ACTION_HOUSE_ARREST_TAB,
+            path: 'assign-batches',
+            name: UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB,
         },
     ]
     const [activeTabIndex, setActiveTab] = useState<number>(0)
@@ -67,7 +60,7 @@ const ViewRequest = () => {
         navigate(`${pathname}`)
 
         //eslint-disable-next-line
-}, [activeTab])
+    }, [activeTab])
 
     useEffect(() => {
         if (!activeTab) return
@@ -82,7 +75,6 @@ const ViewRequest = () => {
         setActiveTabLabel(labelTab)
     }, [activeTab, allowedTabs])
 
-
     return (
         <SideNavLayout>
             <div className="h-[calc(100vh-55px)]">
@@ -94,7 +86,7 @@ const ViewRequest = () => {
                             active={activeTabIndex}
                             navBtnContainerClassName="bg-red-500"
                         />
-   {/* <div className="py-2 px-4">
+                        {/* <div className="py-2 px-4">
                             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                         </div> */}
                         {/* Children */}
@@ -110,4 +102,4 @@ const ViewRequest = () => {
     )
 }
 
-export default ViewRequest
+export default BatchOrderView

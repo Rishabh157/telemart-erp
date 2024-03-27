@@ -272,6 +272,10 @@ import HouseArrestListingWrapper from './pages/request/all/houseArrest/HouseArre
 import AddHouseArrestFormWrapper from './pages/request/all/houseArrest/add/AddHouseArrestFormWrapper'
 import HouseArrestViewWrapper from './pages/request/all/houseArrest/view/HouseArrestViewWrapper'
 import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/HouseArrestLogsListingWrapper'
+import BatchOrderView from './pages/batchOrder'
+import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
+import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
+import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1463,6 +1467,46 @@ const PageRoutes = () => {
                 ></Route>
                 <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
 
+                {/* Batch */}
+                <Route
+                    path="/batch"
+                    element={
+                        <Authorization
+                            children={<BatchOrderView />}
+                            permission={UserModuleNameTypes.NAV_BATCH_ORDER}
+                        />
+                    }
+                >
+                    {/* Create Batch */}
+                    <Route
+                        path="create-batch"
+                        element={
+                            <Authorization
+                                children={<CreateBatchOrderListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_TAB
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="assign-batches"
+                        element={
+                            <Authorization
+                                children={<AssigneBatchesListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB
+                                }
+                            />
+                        }
+                    />
+                    {/* view assign batches */}
+                    <Route
+                        path="assign-batches/:id"
+                        element={<AssigneBatchesViewListingWrapper />}
+                    />
+                </Route>
+
                 {/* Call */}
                 <Route
                     path="/call"
@@ -2531,13 +2575,10 @@ const PageRoutes = () => {
                 >
                     {/* Moneyback Requets */}
                     <Route
-
                         path="moneyback"
                         element={
                             <Authorization
-                                children={
-                                    <MoneybackListingWrapper />
-                                }
+                                children={<MoneybackListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_MONEY_BACK_TAB
                                 }
@@ -2546,7 +2587,6 @@ const PageRoutes = () => {
                     />
 
                     <Route
-
                         path="moneyback/:id/view"
                         element={
                             <MoneyViewWrapper />
@@ -2579,13 +2619,10 @@ const PageRoutes = () => {
 
                     {/* Product Replacement Requets */}
                     <Route
-
                         path="product-replacement"
                         element={
                             <Authorization
-                                children={
-                                    <ProductReplacementListingWrapper />
-                                }
+                                children={<ProductReplacementListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_TAB
                                 }
@@ -2629,9 +2666,7 @@ const PageRoutes = () => {
                         path="house-arrest"
                         element={
                             <Authorization
-                                children={
-                                    <HouseArrestListingWrapper />
-                                }
+                                children={<HouseArrestListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_HOUSE_ARREST_TAB
                                 }

@@ -26,6 +26,7 @@ export type PaginationType = {
     orderByValue: number
     isPaginationRequired?: boolean
     isOrderOrInquiry?: any
+    getBatchData?: boolean
 }
 
 // |-- Types --|

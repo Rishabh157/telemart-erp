@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /// ==============================================
 // Filename:ListDealerSchemeTabWrapper.tsx
 // Type: List Component
@@ -34,7 +35,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/dealerSchemeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const ListDealerSchemeTabWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
@@ -131,9 +133,8 @@ const ListDealerSchemeTabWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive Scheme',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -153,9 +154,8 @@ const ListDealerSchemeTabWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive Scheme',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -182,24 +182,25 @@ const ListDealerSchemeTabWrapper = () => {
             flex: 'flex-[0.25_0.25_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    moduleName={UserModuleNameTypes.dealer}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                 >
                     <>
-                        <button
-                            onClick={() => {
-                                navigate(
-                                    `/dealers/${dealerId}/scheme/edit/${row?._id}`
-                                )
-                            }}
-                            className="block w-full text-left px-2 py-1  hover:bg-gray-100"
-                        >
-                            Edit
-                        </button>
-                        <button
+                        {/* ACTION_DEALER_DEALER_SCHEME_EDIT */}
+                        {isAuthorized(UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_EDIT) &&
+                            <button
+                                onClick={() => {
+                                    navigate(
+                                        `/dealers/${dealerId}/scheme/edit/${row?._id}`
+                                    )
+                                }}
+                                className="block w-full text-left px-2 py-1  hover:bg-gray-100"
+                            >
+                                Edit
+                            </button>}
+                        {/* <button
                             onClick={() => {
                                 showConfirmationDialog({
                                     title: 'Delete Scheme',
@@ -215,7 +216,7 @@ const ListDealerSchemeTabWrapper = () => {
                             className="block w-full text-left px-2 py-1  hover:bg-gray-100"
                         >
                             Delete
-                        </button>
+                        </button> */}
                     </>
                 </ActionPopup>
             ),
@@ -237,23 +238,23 @@ const ListDealerSchemeTabWrapper = () => {
     const [deleteDealerSchemeCall] = useDeleteDealerSchemeMutation()
     const [deactiveDealerScheme] = useDeactiveDealerSchemeMutation()
 
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteDealerSchemeCall(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Scheme deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
+    // const handleDelete = () => {
+    //     setShowDropdown(false)
+    //     deleteDealerSchemeCall(currentId).then((res: any) => {
+    //         if ('data' in res) {
+    //             if (res?.data?.status) {
+    //                 showToast('success', 'Scheme deleted successfully!')
+    //             } else {
+    //                 showToast('error', res?.data?.message)
+    //             }
+    //         } else {
+    //             showToast(
+    //                 'error',
+    //                 'Something went wrong, Please try again later'
+    //             )
+    //         }
+    //     })
+    // }
 
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)

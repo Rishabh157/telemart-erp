@@ -1,0 +1,375 @@
+{
+    "moduleId": "NAV_BATCH_ORDER",
+    "moduleName": "NAV_BATCH_ORDER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_BATCH_ORDER_CREATE_BATCH_TAB",
+            "actionUrl": "",
+            "actionName": "BATCH_ORDER_CREATE_BATCH_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "BATCH_ORDER_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_ORDER_REF_NUMBER",
+                    "fieldName": "Order Ref No.",
+                    "fieldValue": "orderReferenceNumber"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_INQUIRY_NUMBER",
+                    "fieldName": "Inquiry Number",
+                    "fieldValue": "inquiryNumber"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_WAREHOUSE",
+                    "fieldName": "Warehouse",
+                    "fieldValue": "assignWarehouseLabel"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_TRACKING_NUMBER",
+                    "fieldName": "Tracking No.",
+                    "fieldValue": "trackingNo"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_TALUK",
+                    "fieldName": "Taluk",
+                    "fieldValue": "tehsilLabel"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_STATUS_DATE",
+                    "fieldName": "Status Date",
+                    "fieldValue": "statusDate"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_SHIPPING_CHARGES",
+                    "fieldName": "Shipping Charges",
+                    "fieldValue": "shippingCharges"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_SCHEME_NAME",
+                    "fieldName": "Scheme Name",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_SCHEME_CODE",
+                    "fieldName": "Scheme Code",
+                    "fieldValue": "schemeCode"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_QUANTITY",
+                    "fieldName": "Quantity",
+                    "fieldValue": "shcemeQuantity"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_PINCODE",
+                    "fieldName": "Pincode",
+                    "fieldValue": "pincodeLabel"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_PAYMENT_MODE",
+                    "fieldName": "Payment Mode",
+                    "fieldValue": "paymentMode"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_ORDER_DATE",
+                    "fieldName": "Order Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_EDP_DATE",
+                    "fieldName": "EDP Date",
+                    "fieldValue": "edpDate"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_DISTRICT",
+                    "fieldName": "District",
+                    "fieldValue": "districtLabel"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_DISPOSITION",
+                    "fieldName": "Disposition",
+                    "fieldValue": "dispositionLevelThree"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_DEALER_STATUS",
+                    "fieldName": "Dealer Status",
+                    "fieldValue": "dealerStatus"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_DEALER_CODE",
+                    "fieldName": "Dealer Code",
+                    "fieldValue": "dealerCode"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_CUSTOMER_NAME",
+                    "fieldName": "Customer Name",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_CUSTOMER_ADDRESS",
+                    "fieldName": "Customer Address",
+                    "fieldValue": "areaLabel"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_CONTACT_NUMBER",
+                    "fieldName": "Contact No.",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_CHANNEL_NAME",
+                    "fieldName": "Channel Name",
+                    "fieldValue": "channelName"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_CC_NAME",
+                    "fieldName": "CC Name",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_AREA",
+                    "fieldName": "Area",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_REMARK",
+                    "fieldName": "Remark",
+                    "fieldValue": "remark"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_AGENT",
+                    "fieldName": "Agent",
+                    "fieldValue": "agent"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_DELIVERY_CHARGES",
+                    "fieldName": "Delivery Charges",
+                    "fieldValue": "deliveryCharges"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_PREFFRED_DELIVERY_DATE",
+                    "fieldName": "Preffred Delivery Date",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_PREFFRED_DELIVERY_TIME",
+                    "fieldName": "Preffred Delivery Time",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "BATCH_ORDER_LIST_MBK_NUMBER",
+                    "fieldName": "MBK Number",
+                    "fieldValue": "orderMBKNumber"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_BATCH_ORDER_CREATE_BATCH_CREATE_BATCH",
+            "actionUrl": "",
+            "actionName": "BATCH_ORDER_CREATE_BATCH_CREATE_BATCH",
+            "compulsoryFields": [],
+            "parentGroup": ["BATCH_ORDER_CREATE_BATCH_TAB"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB",
+            "actionUrl": "",
+            "actionName": "BATCH_ORDER_ASSIGN_BATCH_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_ASSIGNED_DEALER",
+                    "fieldName": "Assigned Dealer.",
+                    "fieldValue": "assignDealerLabel"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_ORDER_REF_NUMBER",
+                    "fieldName": "Order Ref No.",
+                    "fieldValue": "orderReferenceNumber"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_INQUIRY_NUMBER",
+                    "fieldName": "Inquiry Number",
+                    "fieldValue": "inquiryNumber"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_WAREHOUSE",
+                    "fieldName": "Warehouse",
+                    "fieldValue": "assignWarehouseLabel"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_TRACKING_NUMBER",
+                    "fieldName": "Tracking No.",
+                    "fieldValue": "trackingNo"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_TALUK",
+                    "fieldName": "Taluk",
+                    "fieldValue": "tehsilLabel"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_STATUS_DATE",
+                    "fieldName": "Status Date",
+                    "fieldValue": "statusDate"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_SHIPPING_CHARGES",
+                    "fieldName": "Shipping Charges",
+                    "fieldValue": "shippingCharges"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_SCHEME_NAME",
+                    "fieldName": "Scheme Name",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_SCHEME_CODE",
+                    "fieldName": "Scheme Code",
+                    "fieldValue": "schemeCode"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_QUANTITY",
+                    "fieldName": "Quantity",
+                    "fieldValue": "shcemeQuantity"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_PINCODE",
+                    "fieldName": "Pincode",
+                    "fieldValue": "pincodeLabel"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_PAYMENT_MODE",
+                    "fieldName": "Payment Mode",
+                    "fieldValue": "paymentMode"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_ORDER_DATE",
+                    "fieldName": "Order Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_EDP_DATE",
+                    "fieldName": "EDP Date",
+                    "fieldValue": "edpDate"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_DISTRICT",
+                    "fieldName": "District",
+                    "fieldValue": "districtLabel"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_DISPOSITION",
+                    "fieldName": "Disposition",
+                    "fieldValue": "dispositionLevelThree"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_DEALER_STATUS",
+                    "fieldName": "Dealer Status",
+                    "fieldValue": "dealerStatus"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_DEALER_CODE",
+                    "fieldName": "Dealer Code",
+                    "fieldValue": "dealerCode"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_CUSTOMER_NAME",
+                    "fieldName": "Customer Name",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_CUSTOMER_ADDRESS",
+                    "fieldName": "Customer Address",
+                    "fieldValue": "areaLabel"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_CONTACT_NUMBER",
+                    "fieldName": "Contact No.",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_CHANNEL_NAME",
+                    "fieldName": "Channel Name",
+                    "fieldValue": "channelName"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_CC_NAME",
+                    "fieldName": "CC Name",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_AREA",
+                    "fieldName": "Area",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_REMARK",
+                    "fieldName": "Remark",
+                    "fieldValue": "remark"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_AGENT",
+                    "fieldName": "Agent",
+                    "fieldValue": "agent"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_DELIVERY_CHARGES",
+                    "fieldName": "Delivery Charges",
+                    "fieldValue": "deliveryCharges"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_DATE",
+                    "fieldName": "Preffred Delivery Date",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_TIME",
+                    "fieldName": "Preffred Delivery Time",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "ASSIGN_BATCH_LIST_MBK_NUMBER",
+                    "fieldName": "MBK Number",
+                    "fieldValue": "orderMBKNumber"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_ASSIGN_BATCH_LIST_ASSIGN",
+            "actionUrl": "",
+            "actionName": "ASSIGN_BATCH_LIST_ASSIGN",
+            "compulsoryFields": [],
+            "parentGroup": ["BATCH_ORDER_ASSIGN_BATCH_TAB"],
+            "fields": []
+        }
+    ]
+}
