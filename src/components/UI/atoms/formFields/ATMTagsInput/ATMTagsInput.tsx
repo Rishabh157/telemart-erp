@@ -9,7 +9,7 @@
 import React, { useState } from 'react'
 
 // |-- Internal Dependencies --|
-import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
+import { getInputHeight, getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
 
 export interface ATMTagsInputPropTypes {
     tags: any[]
@@ -21,6 +21,7 @@ export interface ATMTagsInputPropTypes {
     disabled?: boolean
     readonly?: boolean
     size?: 'small' | 'medium' | 'large'
+    textTransform?: textTransform
 }
 
 const ATMTagsInput = ({
@@ -32,6 +33,7 @@ const ATMTagsInput = ({
     required = false,
     disabled = false,
     readonly = false,
+    textTransform = 'firstLetterCapitalonly',
     size = 'small',
 }: ATMTagsInputPropTypes) => {
     const [currentTagText, setCurrentTagText] = useState('')
@@ -62,8 +64,7 @@ const ATMTagsInput = ({
         <>
             {label && (
                 <label className="text-slate-500">
-                    {' '}
-                    {label}{' '}
+                       {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>
             )}

@@ -70,7 +70,7 @@ const StepAddAddress = ({
     isOpenSearchPincode,
     setIsOpenSearchPincode,
 }: Props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
 
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
@@ -243,7 +243,7 @@ const StepAddAddress = ({
                                                                         required={
                                                                             required
                                                                         }
-                                                                        name=""
+                                                                        name="name"
                                                                         value={
                                                                             name ===
                                                                             'billingAddress.pincode'

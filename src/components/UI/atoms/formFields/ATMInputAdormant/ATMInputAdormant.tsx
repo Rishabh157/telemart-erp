@@ -13,7 +13,7 @@ import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
 
 // |-- Internal Dependencies --|
-import { getInputHeight } from 'src/utils/formUtils/getInputHeight'
+import { getInputHeight, getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
 
 export interface ATMInputAdormantPropTypes {
     name: string
@@ -32,6 +32,7 @@ export interface ATMInputAdormantPropTypes {
     required?: boolean
     disabled?: boolean
     readonly?: boolean
+    textTransform?: textTransform
     size?: 'small' | 'medium' | 'large'
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
@@ -48,6 +49,7 @@ const ATMInputAdormant = ({
     disabled = false,
     readonly = false,
     adormant,
+    textTransform = 'firstLetterCapitalonly',
     adormantProps = {
         position: 'start',
     },
@@ -60,8 +62,7 @@ const ATMInputAdormant = ({
         <div className="">
             {label && (
                 <label className="text-slate-500">
-                    {' '}
-                    {label}{' '}
+                        {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>
             )}
@@ -127,9 +128,9 @@ const ATMInputAdormant = ({
             {name && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span style={{ textTransform: 'capitalize' }}>
-                            {errMsg}
+                              <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                        <span >
+                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
                         </span>
                     </p>
                     )}
