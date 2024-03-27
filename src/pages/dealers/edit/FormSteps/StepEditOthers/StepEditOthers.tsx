@@ -25,8 +25,9 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropDownOption: {
-        executiveOption: SelectOption[]
         managerOption: SelectOption[]
+        executiveOption: SelectOption[]
+        jrExecutiveOption: SelectOption[]
     }
 }
 
@@ -61,6 +62,18 @@ const StepEditOthers = ({ formikProps, dropDownOption }: Props) => {
                             label="Zonal Executive"
                             onChange={(e) => {
                                 handleSetFieldValue('zonalExecutiveId', e)
+                            }}
+                        />
+                    </div>
+                    <div className="col-span-4">
+                        <ATMSelectSearchable
+                            name="zonalExecutiveId"
+                            value={values?.zonalExecutiveAreaId}
+                            options={dropDownOption.jrExecutiveOption || []}
+                            label="Zonal Executive (JR)"
+                            isMulti
+                            onChange={(e) => {
+                                setFieldValue('zonalExecutiveAreaId', e)
                             }}
                         />
                     </div>

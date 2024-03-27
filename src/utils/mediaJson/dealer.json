@@ -198,6 +198,35 @@
             "actionName": "DEALER_SCHEME",
             "compulsoryFields": [],
             "parentGroup": ["VIEW"],
+            "fields": [
+                {
+                    "fieldId": "DEALER_SCHEME_LIST_SCHEME_NAME",
+                    "fieldName": "Scheme Name",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "DEALER_SCHEME_LIST_SCHEME_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "DEALER_SCHEME_LIST_AVAILABLE_PINCODE",
+                    "fieldName": "Available Pincode",
+                    "fieldValue": "details"
+                },
+                {
+                    "fieldId": "DEALER_SCHEME_LIST_SCHEME_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_SCHEME_STATUS_ACTIVE_DEACTIVE",
+            "actionUrl": "",
+            "actionName": "Dealer Scheme Active Deactive",
+            "compulsoryFields": [],
+            "parentGroup": [],
             "fields": []
         },
         {
@@ -244,6 +273,22 @@
             "actionId": "ACTION_DEALER_CHANGE_PASSWORD",
             "actionUrl": "",
             "actionName": "CHANGE PASSWORD",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_ACTIVATE_DEACTIVATE",
+            "actionUrl": "",
+            "actionName": "Activate Dealer",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_APPROVAL",
+            "actionUrl": "",
+            "actionName": "Dealer Approval",
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": []

@@ -89,6 +89,7 @@ export type FormInitialValues = {
     }[]
     zonalManagerId: string | null
     zonalExecutiveId: string | null
+    zonalExecutiveAreaId: string[]
 }
 
 // Form Steps
@@ -269,6 +270,7 @@ const EditDealerWrapper = () => {
         otherDocument: selectedItem?.otherDocument || '',
         zonalManagerId: selectedItem?.zonalManagerId,
         zonalExecutiveId: selectedItem?.zonalExecutiveId,
+        zonalExecutiveAreaId: selectedItem?.zonalExecutiveAreaId || [],
     }
     const getValidationSchema = (activeStep: number) => {
         return steps.find((_, stepIndex) => stepIndex === activeStep)
@@ -353,6 +355,7 @@ const EditDealerWrapper = () => {
                         companyId: userData?.companyId || '',
                         zonalManagerId: values.zonalManagerId || null,
                         zonalExecutiveId: values.zonalExecutiveId || null,
+                        zonalExecutiveAreaId: values.zonalExecutiveAreaId || [],
                     },
                     id: Id || '',
                 }).then((res) => {

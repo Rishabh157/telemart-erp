@@ -174,50 +174,47 @@ const DealersListingWrapper = () => {
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
-                        {row.isApproved ? (
-                            <Chip
-                                // onClick={() => {
-                                //     showConfirmationDialog({
-                                //         title: 'Disapproved',
-                                //         text: `Do you want to ${
-                                //             row.isApproved
-                                //                 ? 'Disapprove this dealer'
-                                //                 : 'Approve this dealer'
-                                //         }`,
-                                //         showCancelButton: true,
-                                //         next: (res) => {
-                                //             return res.isConfirmed
-                                //                 ? handleApproval(row?._id)
-                                //                 : setShowDropdown(false)
-                                //         },
-                                //     })
-                                // }}
-                                className="cursor-pointer"
-                                label="Approved"
-                                color="success"
-                                variant="outlined"
-                                size="small"
-                            />
+                        {isAuthorized(
+                            UserModuleNameTypes.ACTION_DEALER_APPROVAL
+                        ) ? (
+                            row.isApproved ? (
+                                <Chip
+                                    className="cursor-pointer"
+                                    label="Approved"
+                                    color="success"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            ) : (
+                                <Chip
+                                    onClick={() => {
+                                        showConfirmationDialog({
+                                            title: 'Approved',
+                                            text: `Do you want to ${
+                                                row.isApproved
+                                                    ? 'Pending this dealer'
+                                                    : 'Approval this dealer'
+                                            }`,
+                                            showCancelButton: true,
+                                            next: (res) => {
+                                                return res.isConfirmed
+                                                    ? handleApproval(row?._id)
+                                                    : setShowDropdown(false)
+                                            },
+                                        })
+                                    }}
+                                    className="cursor-pointer"
+                                    label="Pending"
+                                    color="error"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            )
                         ) : (
                             <Chip
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Approved',
-                                        text: `Do you want to ${row.isApproved
-                                                ? 'Disapprove this dealer'
-                                                : 'Approval this dealer'
-                                            }`,
-                                        showCancelButton: true,
-                                        next: (res) => {
-                                            return res.isConfirmed
-                                                ? handleApproval(row?._id)
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
                                 className="cursor-pointer"
-                                label="Disapproved"
-                                color="error"
+                                label={row.isActive ? 'Approved' : 'Pending'}
+                                color={row.isActive ? 'success' : 'error'}
                                 variant="outlined"
                                 size="small"
                             />
@@ -226,7 +223,6 @@ const DealersListingWrapper = () => {
                 )
             },
         },
-
         {
             field: 'status',
             headerName: 'Status',
@@ -235,45 +231,63 @@ const DealersListingWrapper = () => {
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
-                        {row.isActive ? (
-                            <Chip
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Deactive User',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                        {isAuthorized(
+                            UserModuleNameTypes.ACTION_DEALER_ACTIVATE_DEACTIVATE
+                        ) ? (
+                            row.isActive ? (
+                                <Chip
+                                    onClick={() => {
+                                        showConfirmationDialog({
+                                            title: 'Deactive User',
+                                            text: `Do you want to ${
+                                                row.isActive
+                                                    ? 'Deactive'
+                                                    : 'Active'
                                             }`,
-                                        showCancelButton: true,
-                                        next: (res) => {
-                                            return res.isConfirmed
-                                                ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
-                                className="cursor-pointer"
-                                label="Active"
-                                color="success"
-                                variant="outlined"
-                                size="small"
-                            />
+                                            showCancelButton: true,
+                                            next: (res) => {
+                                                return res.isConfirmed
+                                                    ? handleDeactive(row?._id)
+                                                    : setShowDropdown(false)
+                                            },
+                                        })
+                                    }}
+                                    className="cursor-pointer"
+                                    label="Active"
+                                    color="success"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            ) : (
+                                <Chip
+                                    onClick={() => {
+                                        showConfirmationDialog({
+                                            title: 'Deactive Scheme',
+                                            text: `Do you want to ${
+                                                row.isActive
+                                                    ? 'Deactive'
+                                                    : 'Active'
+                                            }`,
+                                            showCancelButton: true,
+                                            next: (res) => {
+                                                return res.isConfirmed
+                                                    ? handleDeactive(row?._id)
+                                                    : setShowDropdown(false)
+                                            },
+                                        })
+                                    }}
+                                    className="cursor-pointer"
+                                    label="Deactive"
+                                    color="error"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            )
                         ) : (
                             <Chip
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Deactive Scheme',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
-                                        showCancelButton: true,
-                                        next: (res) => {
-                                            return res.isConfirmed
-                                                ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
                                 className="cursor-pointer"
-                                label="Deactive"
-                                color="error"
+                                label={row.isActive ? 'Active' : 'Deactive'}
+                                color={row.isActive ? 'success' : 'error'}
                                 variant="outlined"
                                 size="small"
                             />

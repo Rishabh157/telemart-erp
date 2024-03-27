@@ -20,6 +20,9 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -169,7 +172,11 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
           );
         })} */}
                 <span
-                    onClick={changeStatus}
+                    onClick={() =>
+                        isAuthorized(
+                            UserModuleNameTypes.ACTION_DEALER_ACTIVATE_DEACTIVATE
+                        ) && changeStatus()
+                    }
                     className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 cursor-pointer ${
                         !selectedItem?.isActive
                             ? 'bg-green-100 text-green-500'
