@@ -13,7 +13,7 @@ import ATMFileUploader from './ATMFileUploader'
 import { ErrorMessage } from 'formik'
 
 // |-- Internal Dependencies --|
-import { Size } from 'src/utils/formUtils/getInputHeight'
+import { Size, getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 type Props = {
@@ -27,6 +27,7 @@ type Props = {
     name: string
     accept?: string
     disabled?: boolean
+    textTransform?: textTransform
     isVideo?: boolean
 }
 
@@ -41,15 +42,16 @@ const ATMFilePickerWrapper = ({
     isSubmitting = true,
     accept = 'image/*, video/*',
     disabled,
+    textTransform = 'firstLetterCapitalonly',
     isVideo = false,
 }: Props) => {
     return (
         <div className="relative">
             <ATMFileUploader
                 size={size}
-                label={label}
+                label=  {getLabelTextTransform(label, textTransform)}
                 required={required}
-                placeholder={placeholder}
+                placeholder={getLabelTextTransform(placeholder, textTransform)}
                 onSelect={onSelect}
                 selectedFile={selectedFile}
                 accept={accept}
@@ -60,9 +62,9 @@ const ATMFilePickerWrapper = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span style={{ textTransform: 'capitalize' }}>
-                            {errMsg}
+                              <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                        <span >
+                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
                         </span>
                     </p>
                     )}

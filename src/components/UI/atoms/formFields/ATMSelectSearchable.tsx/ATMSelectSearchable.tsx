@@ -12,7 +12,11 @@ import React from 'react'
 import Select from 'react-select'
 import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
-import { getLabelFont } from 'src/utils/formUtils/getInputHeight'
+import {
+    getLabelFont,
+    getLabelTextTransform,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 
 export type SelectOption = {
     label: string
@@ -51,6 +55,7 @@ type Props = {
     minHeight?: string
     fontSizePlaceHolder?: string
     fontSizeOptionsClass?: string
+    textTransform?: textTransform
 }
 
 const ATMSelectSearchable = ({
@@ -66,6 +71,7 @@ const ATMSelectSearchable = ({
     name,
     isMulti = false,
     isSubmitting = true,
+    textTransform = 'firstLetterCapitalonly',
     labelClass = 'text-sm font-medium',
     isAllSelect = false,
     isLoading = false,
@@ -215,6 +221,7 @@ const ATMSelectSearchable = ({
             return selectOptions?.find((option) => option.value === value) || ''
         }
     }
+    console.log(name,"name")
     return (
         <div className={`${componentClass} relative`} hidden={isHidden}>
             <div
@@ -238,7 +245,7 @@ const ATMSelectSearchable = ({
                                 `${labelClass}`
                             )}
                         >
-                            {label}
+                            {getLabelTextTransform(label, textTransform)}
                             {required && (
                                 <span className="text-red-500"> * </span>
                             )}
@@ -272,18 +279,23 @@ const ATMSelectSearchable = ({
                     isClearable
                     isLoading={isLoading}
                     isOptionDisabled={(options: any) => options.value === ''}
-                    placeholder={`${selectLabel}`}
+                    placeholder={getLabelTextTransform(
+                        selectLabel,
+                        textTransform
+                    )}
                     autoFocus={false}
                     // menuPosition={menuPosition}
                     // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
                 />
             </div>
+            {}
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                            <span style={{ textTransform: 'capitalize' }}>
-                                {errMsg}
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
                             </span>
                         </p>
                     )}

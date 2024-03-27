@@ -268,7 +268,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
                             {/* Email */}
                             <ATMTextField
-                                required
+                                required={false}
                                 name="email"
                                 value={values.email}
                                 label="Email"
@@ -308,7 +308,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
                             {/* Mobile */}
                             <ATMTextField
-                                required
+                                required={false}
                                 name="mobile"
                                 value={values.mobile}
                                 label="Mobile Number"
@@ -376,7 +376,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
 
                             <ATMSelectSearchable
-                                required
+                                required={false}
                                 name="callCenterId"
                                 value={values.callCenterId}
                                 onChange={(e) =>
@@ -429,11 +429,12 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                             <div className="flex flex-1">
                                                                 <ATMTextField
                                                                     type="text"
-                                                                    required
+                                                                    required={false}
                                                                     name={`allowedIps[${itemIndex}].allowedIp`}
                                                                     value={
                                                                         allowedIp
                                                                     }
+                                                                    textTransform=''
                                                                     label="Allowed IPS"
                                                                     placeholder="Allowed IPS"
                                                                     onChange={(

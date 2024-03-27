@@ -11,6 +11,10 @@ import React from 'react'
 // |-- External Dependencies --|
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { ErrorMessage } from 'formik'
+import {
+    getLabelTextTransform,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 type Props = {
@@ -23,16 +27,18 @@ type Props = {
     size?: 'small' | 'medium'
     name: string
     isSubmitting?: boolean
+    textTransform?: textTransform
 }
 
 const ATMSelect = ({
     options,
-    label,
+    label = '',
     required = false,
     isDisabled = false,
     value,
     onChange,
     size = 'small',
+    textTransform = 'firstLetterCapitalonly',
     name,
     isSubmitting = true,
 }: Props) => {
@@ -41,7 +47,7 @@ const ATMSelect = ({
             <div className="relative mt-3">
                 {label && (
                     <label className="text-sm font-medium capitalize text-slate-700 ">
-                        {label}{' '}
+                        {getLabelTextTransform(label, textTransform)}
                         {required && <span className="text-red-500"> * </span>}
                     </label>
                 )}
@@ -56,13 +62,18 @@ const ATMSelect = ({
                         displayEmpty
                     >
                         <MenuItem value="">
-                            <span className="capitalize text-slate-400">
-                                Select {label}
+                            <span className=" text-slate-400">
+                                Select{` `}
+                                {getLabelTextTransform(
+                                    label,
+                                    textTransform
+                                )?.toLocaleLowerCase()}
                             </span>
                         </MenuItem>
                         {options?.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
-                                {option.label}
+                                {option?.label.charAt(0).toUpperCase() +
+                                    option?.label.slice(1).toLowerCase()}
                             </MenuItem>
                         ))}
                     </Select>
@@ -72,10 +83,11 @@ const ATMSelect = ({
                     <ErrorMessage name={name}>
                         {(errMsg) => (
                             <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                            <span style={{ textTransform: 'capitalize' }}>
-                                {errMsg}
-                            </span>
-                        </p>
+                                <span>
+                                    {errMsg.charAt(0).toUpperCase() +
+                                        errMsg.slice(1).toLowerCase()}
+                                </span>
+                            </p>
                         )}
                     </ErrorMessage>
                 )}

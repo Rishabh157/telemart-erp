@@ -11,6 +11,7 @@ import React from 'react'
 // |-- External Dependencies --|
 import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
+import { getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 type Props = {
@@ -23,7 +24,8 @@ type Props = {
     required?: boolean
     extraClasses?: string
     inputClasses?: string
-    labelClasses?: string
+    labelClasses?: string 
+    textTransform?: textTransform
 }
 
 const ATMCheckbox = ({
@@ -36,6 +38,7 @@ const ATMCheckbox = ({
     required = false,
     extraClasses = '',
     inputClasses = '',
+    textTransform = 'firstLetterCapitalonly',
     labelClasses = '',
 }: Props) => {
     return (
@@ -58,7 +61,9 @@ const ATMCheckbox = ({
                             `${labelClasses}`
                         )}
                     >
-                        {label}
+                        {/* {label} */}
+                          {getLabelTextTransform(label, textTransform)}
+                          {required && <span className="text-red-500"> * </span>}{' '}
                     </span>
                 )}
             </label>
@@ -66,11 +71,11 @@ const ATMCheckbox = ({
             {name && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                          <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                          <span style={{ textTransform: 'capitalize' }}>
-                              {errMsg}
-                          </span>
-                      </p>
+                                 <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                        <span >
+                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
+                        </span>
+                    </p>
                     )}
                 </ErrorMessage>
             )}

@@ -14,6 +14,10 @@ import { MdArrowDropDown } from 'react-icons/md'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import { ClickAwayListener } from '@mui/material'
 import { ErrorMessage } from 'formik'
+import {
+    getLabelTextTransform,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 type Props = {
@@ -37,6 +41,7 @@ type Props = {
     ) => void
     isOptionEqualToValue?: (option: any, value: any) => boolean
     isSubmitting?: boolean
+    textTransform?: textTransform
 }
 
 const ATMMultiSelect = ({
@@ -52,8 +57,9 @@ const ATMMultiSelect = ({
     extraClasses = '',
     options,
     filterOptions,
-    placeholder,
+    placeholder='',
     renderOption,
+    textTransform = 'firstLetterCapitalonly',
     renderInputValue,
     isOptionEqualToValue,
     isSubmitting = true,
@@ -63,8 +69,7 @@ const ATMMultiSelect = ({
         <div>
             {label ? (
                 <label className="text-slate-700 mb-1 block ">
-                    {' '}
-                    {label}{' '}
+                    {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-400"> * </span>}{' '}
                 </label>
             ) : null}
@@ -100,7 +105,7 @@ const ATMMultiSelect = ({
                                     X{' '}
                                 </span>{' '}
                             </div>
-                        )) || placeholder}
+                        )) || getLabelTextTransform(placeholder, textTransform)}
                     </div>
 
                     <div className="h-full flex items-center">
@@ -220,11 +225,12 @@ const ATMMultiSelect = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                          <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                          <span style={{ textTransform: 'capitalize' }}>
-                              {errMsg}
-                          </span>
-                      </p>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}
