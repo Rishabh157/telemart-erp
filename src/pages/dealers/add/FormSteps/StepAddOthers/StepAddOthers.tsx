@@ -23,6 +23,7 @@ type Props = {
     dropDownOption: {
         executiveOption: SelectOption[]
         managerOption: SelectOption[]
+        jrExecutiveOption: SelectOption[]
     }
 }
 
@@ -53,6 +54,18 @@ const StepAddOthers = ({ formikProps, dropDownOption }: Props) => {
                             label="Zonal Executive"
                             onChange={(e) => {
                                 setFieldValue('zonalExecutiveId', e)
+                            }}
+                        />
+                    </div>
+                    <div className="col-span-4">
+                        <ATMSelectSearchable
+                            name="zonalExecutiveId"
+                            value={values?.zonalExecutiveAreaId}
+                            options={dropDownOption.jrExecutiveOption || []}
+                            label="Zonal Executive (JR)"
+                            isMulti
+                            onChange={(e) => {
+                                setFieldValue('zonalExecutiveAreaId', e)
                             }}
                         />
                     </div>

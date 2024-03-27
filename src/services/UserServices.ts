@@ -189,11 +189,30 @@ export const userApi = apiSlice.injectEndpoints({
         changeUserPassword: builder.mutation({
             invalidatesTags: ['user', 'newUser'],
             query: (body) => ({
-                url: 'user/change-password/by-admin',
+                url: '/user/change-password/by-admin',
                 method: 'PUT',
                 body,
             }),
         }),
+
+        // ****  get senior by zonal manger id
+        getSeniorExicutivesByZmId: builder.query({
+            providesTags: ['user', 'newUser'],
+            query: (zmId) => ({
+                url: `/user/get-sr-exicutive/${zmId}`,
+                method: 'GET',
+            }),
+        }),
+
+        // ****  get junior by senior manger id
+        getJuniorExicutivesByZeId: builder.query({
+            providesTags: ['user', 'newUser'],
+            query: (zeId) => ({
+                url: `/user/get-jr-exicutive/${zeId}`,
+                method: 'GET',
+            }),
+        }),
+ 
     }),
 })
 export const {
@@ -213,4 +232,6 @@ export const {
     useGetTeamLeadrUserByCallCenterIdQuery,
     useGetSeniorUsersQuery,
     useChangeUserPasswordMutation,
+    useGetSeniorExicutivesByZmIdQuery,
+    useGetJuniorExicutivesByZeIdQuery
 } = userApi
