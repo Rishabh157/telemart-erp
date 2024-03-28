@@ -26,6 +26,11 @@ import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 
+export enum FirstCallApprovalStatus {
+    'APPROVED' = 'APPROVED',
+    'CANCEL' = 'CANCEL',
+}
+
 const WarehouseAssignedOrderListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
@@ -57,21 +62,51 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                 variant="outlined"
                                 size="small"
                             />
+                        ) : row.firstCallState ===
+                          FirstCallApprovalStatus.CANCEL ? (
+                            <Chip
+                                className="cursor-pointer"
+                                label="Cancled"
+                                color="warning"
+                                variant="outlined"
+                                size="small"
+                            />
                         ) : (
                             <Chip
                                 onClick={() => {
                                     showConfirmationDialog({
-                                        title: 'Approved',
+                                        title: 'Approval',
                                         text: `Do you want to ${
                                             row.firstCallApproval
-                                                ? 'Disapprove thtis first call'
-                                                : 'Approval this first call'
+                                                ? 'Disapprove '
+                                                : 'Approval '
                                         }`,
                                         showCancelButton: true,
+                                        showDenyButton: true,
+                                        confirmButtonText: 'Order approval',
+                                        denyButtonText: 'Order cancled',
+                                        confirmButtonColor: '#239B56',
+                                        denyButtonColor: '#F1948A',
+
                                         next: (res) => {
-                                            return res.isConfirmed
-                                                ? handleApproval(row?._id)
-                                                : setShowDropdown(false)
+                                            console.log("res.isDenied",res)
+
+                                            if (res.isConfirmed) {
+                                                return res.isConfirmed
+                                                    ? handleApproval(
+                                                          row?._id,
+                                                          FirstCallApprovalStatus.APPROVED
+                                                      )
+                                                    : setShowDropdown(false)
+                                            }
+                                            if (res.isDenied) {
+                                                return res.isDenied
+                                                    ? handleApproval(
+                                                          row?._id,
+                                                          FirstCallApprovalStatus.CANCEL
+                                                      )
+                                                    : setShowDropdown(false)
+                                            }
                                         },
                                     })
                                 }}
@@ -113,6 +148,36 @@ const WarehouseAssignedOrderListingWrapper = () => {
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
+            field: 'firstCallRemark',
+            headerName: '1st call remark',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallRemark || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallState',
+            headerName: 'first Call State',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallState || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallCallBackDate',
+            headerName: 'call back date',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallCallBackDate || '-'}</span>
+            ),
+        },
+        {
             field: 'assignWarehouseLabel',
             headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
@@ -146,7 +211,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
-           
         },
         {
             field: 'status',
@@ -435,22 +499,27 @@ const WarehouseAssignedOrderListingWrapper = () => {
         },
     ]
 
-    const handleApproval = (rowId: string) => {
+    const handleApproval = (rowId: string, status: string) => {
         setShowDropdown(false)
-        warehousefirstCallApproval(rowId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Approvaled successfully!')
+        let body = {
+            status,
+        }
+        warehousefirstCallApproval({ body: body, id: rowId }).then(
+            (res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'Approvaled successfully!')
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
                 } else {
-                    showToast('error', res?.data?.message)
+                    showToast(
+                        'error',
+                        'Something went wrong, Please try again later'
+                    )
                 }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
             }
-        })
+        )
     }
     const { userData }: any = useSelector((state: RootState) => state?.auth)
     const { data, isFetching, isLoading } = useGetOrderQuery({
@@ -462,7 +531,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
             { fieldName: 'assignWarehouseId', value: warehouseId },
             { fieldName: 'companyId', value: userData?.companyId },
             { fieldName: 'firstCallApproval', value: false },
-
         ],
         dateFilter: {},
         orderBy: 'createdAt',
