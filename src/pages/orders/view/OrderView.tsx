@@ -67,6 +67,21 @@ const OrderView = ({ items }: Props) => {
                                 <div className="grid grid-cols-2 gap-3 pl-6 py-6 border border-l-2">
                                     <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
+                                            Order Number{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-primary-main col-span-1">
+                                            {items?.orderNumber === ''
+                                                ? 'NA'
+                                                : ` # ${items?.orderNumber}`}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
                                             DID Number{' '}
                                         </h1>
                                         <p className=" col-span-1 text-center">
@@ -142,21 +157,6 @@ const OrderView = ({ items }: Props) => {
 
                                     <div className="grid grid-cols-3">
                                         <h1 className="text-gray-800 col-span-1">
-                                            Order Number{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-primary-main col-span-1">
-                                            {items?.orderNumber === ''
-                                                ? 'NA'
-                                                : ` # ${items?.orderNumber}`}
-                                        </p>
-                                    </div>
-
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
                                             Whatsapp No.{' '}
                                         </h1>
                                         <p className=" col-span-1 text-center">
@@ -167,6 +167,23 @@ const OrderView = ({ items }: Props) => {
                                             {items?.whatsappNo === ''
                                                 ? 'NA'
                                                 : items?.whatsappNo}
+                                        </p>
+                                    </div>
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Assigned To{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.assignWarehouseId !==
+                                                null ||
+                                            items?.assignDealerId !== null
+                                                ? items?.assignDealerLabel ||
+                                                  items?.assignWarehouseLabel
+                                                : 'NA'}
                                         </p>
                                     </div>
                                 </div>

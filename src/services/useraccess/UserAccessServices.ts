@@ -7,7 +7,7 @@ export const callerPageApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** ADD *****/
         addUserAccess: builder.mutation({
-            // invalidatesTags: ['callerForm'],
+            invalidatesTags: ['callerForm'],
             query: (body: any) => ({
                 url: 'user-access/add',
                 method: 'POST',
@@ -18,6 +18,7 @@ export const callerPageApi = apiSlice.injectEndpoints({
         //***** get *****/
         getUserAccess: builder.query({
             // invalidatesTags: ['callerForm'],
+            providesTags: ['callerForm'],
             query: ({
                 userId,
                 userRole,
@@ -41,7 +42,7 @@ export const callerPageApi = apiSlice.injectEndpoints({
 
         //***** Update *****/
         updateUserAccess: builder.mutation({
-            // invalidatesTags: ['callerForm'],
+            invalidatesTags: ['callerForm'],
             query: ({ body, userRole }: { body: any; userRole: string }) => ({
                 url: `user-access/user-role/${userRole}`,
                 method: 'PUT',
@@ -51,7 +52,7 @@ export const callerPageApi = apiSlice.injectEndpoints({
 
         //***** Update by userId *****/
         updateUserAccessByUserId: builder.mutation({
-            // invalidatesTags: ['callerForm'],
+            invalidatesTags: ['callerForm'],
             query: ({ id, body }) => ({
                 url: `user-access/${id}`,
                 method: 'PUT',
@@ -61,7 +62,7 @@ export const callerPageApi = apiSlice.injectEndpoints({
 
         //***** user access already added *****/
         isUserExists: builder.query({
-            // invalidatesTags: ['callerForm'],
+            providesTags: ['callerForm'],
             query: (id) => ({
                 url: `user-access/user-exists/${id}`,
                 method: 'GET',

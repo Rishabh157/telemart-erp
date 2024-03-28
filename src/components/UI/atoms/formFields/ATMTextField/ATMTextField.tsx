@@ -19,6 +19,8 @@ import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 import {
     getInputHeight,
     getLabelFont,
+    getLabelTextTransform,
+    textTransform,
 } from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
@@ -40,7 +42,9 @@ export type ATMTextFieldPropTypes = {
     isPassWordVisible?: boolean
     labelDirection?: 'horizontal' | 'vertical'
     classDirection?: string
+    textTransform?: textTransform
     labelSize?: 'small' | 'medium' | 'large' | 'xs' | 'xxs'
+    placeholder?: string
 } & Omit<React.ComponentProps<'input'>, 'size'>
 
 const ATMTextField = ({
@@ -48,7 +52,7 @@ const ATMTextField = ({
     value,
     onChange,
     label,
-    className = `shadow bg-white capitalize rounded ${label && 'mt-2'} `,
+    className = `shadow bg-white  rounded ${label && 'mt-2'} `,
     required,
     onBlur,
     autoFocus = false,
@@ -65,6 +69,8 @@ const ATMTextField = ({
     labelDirection = 'vertical',
     classDirection = 'grid grid-cols-12',
     labelSize = 'small',
+    placeholder = '',
+    textTransform = 'firstLetterCapitalonly',
     ...rest
 }: ATMTextFieldPropTypes) => {
     const [visibility, setVisibility] = useState(type)
@@ -93,11 +99,11 @@ const ATMTextField = ({
                 >
                     {label && (
                         <label
-                            className={`text-slate-700 capitalize ${getLabelFont(
+                            className={`text-slate-700  ${getLabelFont(
                                 labelSize
                             )} ${labelClass}`}
                         >
-                            {label}{' '}
+                            {getLabelTextTransform(label, textTransform)}
                             {required && (
                                 <span className="text-red-500"> * </span>
                             )}{' '}
@@ -117,6 +123,10 @@ const ATMTextField = ({
                     type={visibility}
                     value={value}
                     disabled={disabled}
+                    placeholder={getLabelTextTransform(
+                        placeholder,
+                        textTransform
+                    )}
                     onChange={(e) => {
                         preventSlash(e)
                         onChange(e)
@@ -157,11 +167,12 @@ const ATMTextField = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                         <span style={{ textTransform: 'capitalize' }}>
-                             {errMsg}
-                         </span>
-                     </p>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}

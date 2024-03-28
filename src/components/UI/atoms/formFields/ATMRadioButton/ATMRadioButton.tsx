@@ -13,6 +13,7 @@ import { ErrorMessage } from 'formik'
 
 // |-- Internal Dependencies --|
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 export type Props = {
@@ -25,6 +26,7 @@ export type Props = {
     onChange: (e: string) => void
     isSubmitting?: boolean
     labelCalassName?: string
+    textTransform?: textTransform
 }
 
 const ATMRadioButton = ({
@@ -35,6 +37,7 @@ const ATMRadioButton = ({
     label,
     className = 'mt-2',
     onChange,
+    textTransform = 'firstLetterCapitalonly',
     isSubmitting = true,
     labelCalassName,
 }: Props) => {
@@ -47,7 +50,7 @@ const ATMRadioButton = ({
                         `${labelCalassName}`
                     )}
                 >
-                    {label}
+                  {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}
                 </label>
             )}
@@ -82,7 +85,8 @@ const ATMRadioButton = ({
                                     : 'text-xs'
                             }`}
                         >
-                            {option.label}
+                              {option.label.charAt(0).toUpperCase() + option.label.slice(1).toLowerCase()}
+                            
                         </label>
                     </div>
                 ))}
@@ -90,11 +94,11 @@ const ATMRadioButton = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                         <span style={{ textTransform: 'capitalize' }}>
-                             {errMsg}
-                         </span>
-                     </p>
+                               <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                        <span >
+                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
+                        </span>
+                    </p>
                     )}
                 </ErrorMessage>
             )}

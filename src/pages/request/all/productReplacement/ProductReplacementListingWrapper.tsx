@@ -31,6 +31,7 @@ import AddProductReplacementCustomerInfoFormWrapper from './AddCustomerInfoForm/
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import StatusDialog from './ProductReplacementStatusDialog/StatusDialog'
 
 const ProductReplacementListingWrapper = () => {
     // Hooks
@@ -44,6 +45,8 @@ const ProductReplacementListingWrapper = () => {
         useState<boolean>(false)
 
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
+    const [showStatusDialog, setShowStatusDialog] = useState<boolean>(false)
+    const [productReplacementData, setProductReplacementData] = useState<any>([])
 
     const productReplacementState: any = useSelector(
         (state: RootState) => state.productReplacement
@@ -141,7 +144,23 @@ const ProductReplacementListingWrapper = () => {
             }
         })
     }
+    const getCurrentStatus = (row: any) => {
+        return row?.managerFirstApproval === null
+            ? 'Mang. First Pending'
+            : row?.managerFirstApproval === false
+                ? 'Mang. First Rejected' :
+                row?.ccApproval === false
+                    ? 'Cc Pending'
+                    : row?.managerSecondApproval === null
+                        ? 'Mang. Second Pending'
+                        : row?.managerSecondApproval === false
+                            ? 'Mang. Second Rejected'
+                            : row?.accountApproval === null
+                                ? 'Account Pending'
+                                : row?.accountApproval === false
+                                    ? 'Account Rejected' : "Account Aaproved"
 
+    }
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -567,7 +586,7 @@ const ProductReplacementListingWrapper = () => {
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) =>
-                row?.managerFirstApproval && row?.ccApproval === null ? (
+                row?.managerFirstApproval && row?.ccApproval === false ? (
                     <button
                         className="bg-primary-main px-3 py-1 rounded text-white"
                         onClick={() => {
@@ -707,6 +726,19 @@ const ProductReplacementListingWrapper = () => {
                 )
             },
         },
+        {
+            field: 'customerName',
+            headerName: 'Current Status',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.PRODUCT_REPLACMENT_CURRENT_STATUS,
+            renderCell: (row: MoneybackListResponse) => (
+                <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => { 
+                    setProductReplacementData(row)
+                    setShowStatusDialog(true) }}>{getCurrentStatus(row)}</span>
+            ),
+        },
     ]
 
     return (
@@ -730,6 +762,10 @@ const ProductReplacementListingWrapper = () => {
                     />
                 }
             />
+             {/* status Dialog  */}
+             {showStatusDialog &&
+                <StatusDialog productReplacementData={productReplacementData} isShow={showStatusDialog} onClose={() => { setShowStatusDialog(false) }} />
+            }
         </>
     )
 }

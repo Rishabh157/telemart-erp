@@ -275,6 +275,10 @@ import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/
 import WarehouseOrdersTab from './pages/warehouses/view/warehouse-orders'
 import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
 import WarehouseConfirmedOrderWrapper from './pages/warehouses/view/warehouse-orders/confirmOrders/list/WarehouseConfirmedOrderWrapper'
+import BatchOrderView from './pages/batchOrder'
+import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
+import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
+import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1295,6 +1299,46 @@ const PageRoutes = () => {
                     }
                 ></Route>
                 <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
+
+                {/* Batch */}
+                <Route
+                    path="/batch"
+                    element={
+                        <Authorization
+                            children={<BatchOrderView />}
+                            permission={UserModuleNameTypes.NAV_BATCH_ORDER}
+                        />
+                    }
+                >
+                    {/* Create Batch */}
+                    <Route
+                        path="create-batch"
+                        element={
+                            <Authorization
+                                children={<CreateBatchOrderListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_TAB
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="assign-batches"
+                        element={
+                            <Authorization
+                                children={<AssigneBatchesListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB
+                                }
+                            />
+                        }
+                    />
+                    {/* view assign batches */}
+                    <Route
+                        path="assign-batches/:id"
+                        element={<AssigneBatchesViewListingWrapper />}
+                    />
+                </Route>
 
                 {/* Call */}
                 <Route

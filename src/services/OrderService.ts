@@ -1,7 +1,7 @@
 /// ==============================================
 // Filename:OrderService.tsx
 // Type: Service Component
-// Last Updated: JULY 04, 2023
+// Last Updated: JULY 30, 2024
 // Project: TELIMART - Front End
 // ==============================================
 
@@ -13,7 +13,7 @@ export const OrderApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET *****/
         getOrder: builder.query({
-            providesTags: ['order'],
+            providesTags: ['order', 'batch-order'],
             query: (body: PaginationType) => ({
                 url: '/order-inquiry',
                 method: 'POST',
@@ -64,7 +64,6 @@ export const OrderApi = apiSlice.injectEndpoints({
         exportOrderData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
@@ -123,9 +122,9 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Dispached Order Barcode *****/
+        //***** Assign Order *****/
         assignOrderToDealerOrWarehouse: builder.mutation({
-            invalidatesTags: ['order'],
+            invalidatesTags: ['order', 'batch-order'],
             query: (body: any) => ({
                 url: '/order-inquiry/assign-order',
                 method: 'PUT',

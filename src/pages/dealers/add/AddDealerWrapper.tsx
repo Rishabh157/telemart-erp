@@ -89,6 +89,7 @@ export type FormInitialValues = {
     }[]
     zonalManagerId: string | null
     zonalExecutiveId: string | null
+    zonalExecutiveAreaId: string[]
 }
 export const gstNumberRegex = RegExp(
     /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/
@@ -280,6 +281,7 @@ const AddDealerWrapper = () => {
         ],
         zonalManagerId: null,
         zonalExecutiveId: null,
+        zonalExecutiveAreaId: [],
     }
 
     const getValidationSchema = (activeStep: number) => {
@@ -356,6 +358,7 @@ const AddDealerWrapper = () => {
                     companyId: userData?.companyId || '',
                     zonalManagerId: values.zonalManagerId || null,
                     zonalExecutiveId: values.zonalExecutiveId || null,
+                    zonalExecutiveAreaId: values.zonalExecutiveAreaId || [],
                 }).then((res) => {
                     if ('data' in res) {
                         if (res?.data?.status) {

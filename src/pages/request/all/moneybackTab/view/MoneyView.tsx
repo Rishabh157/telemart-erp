@@ -310,53 +310,255 @@ const MoneyView = ({ items }: Props) => {
                         </div>
                     </div>
 
+                    {/* Remarks */}
+                    <div className="grow px-3 ">
+                        <div className="grid grid-cols-1">
+                            <div className="grow py-8 px-3">
+                                <div className=" flex col-span-2 text-lg pb-2 font-medium text-primary-main pl-2">
+                                    Remarks
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-3 pl-6 py-6 border border-l-2">
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Manager First Level Approval
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600  col-span-1">
+                                            {items?.schemeLabel === ''
+                                                ? 'NA'
+                                                : items?.schemeLabel}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Manager First Approved By
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1 capitalize">
+                                            {items?.schemePrice === ''
+                                                ? 'NA'
+                                                : items?.schemePrice}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Order No{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600">
+                                            {items?.orderNumber === ''
+                                                ? 'NA'
+                                                : items?.orderNumber}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Date Of Delivery{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.dateOfDelivery === ''
+                                                ? 'NA'
+                                                : items?.dateOfDelivery}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Dealer Code{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.dealerCode === ''
+                                                ? 'NA'
+                                                : items?.dealerCode}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Dealer Firm Name{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.dealerFirmName === ''
+                                                ? 'NA'
+                                                : items?.dealerFirmName}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Resolve Date{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.requestResolveDate === ''
+                                                ? 'NA'
+                                                : items?.requestResolveDate}
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Settled Amount{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.settledAmount === ''
+                                                ? 'NA'
+                                                : items?.settledAmount}
+                                        </p>
+                                    </div>
+                                    <div className="grid grid-cols-3">
+                                        <h1 className="text-gray-800 col-span-1">
+                                            Settled Amount In Words{' '}
+                                        </h1>
+                                        <p className=" col-span-1 text-center">
+                                            {' '}
+                                            -{' '}
+                                        </p>
+                                        <p className="text-slate-600 col-span-1">
+                                            {items?.amountInWords === ''
+                                                ? 'NA'
+                                                : items?.amountInWords}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {/*  Other Information  */}
                     <div className="grow px-3 py-8">
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             Remarks
                         </div>
-                        <div className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2">
-                            <h1 className="text-gray-800">
-                                Manager First Level Approval{' '}
-                            </h1>
-                            <p className="">-</p>
-                            <p className="text-slate-600">
-                                {items?.managerFirstRemark === ''
-                                    ? 'NA'
-                                    : items?.managerFirstRemark}
-                            </p>
-                            <h1 className="text-gray-800">Customer Care </h1>
-                            <p className="">-</p>
-                            <p className="text-slate-600">
-                                {items?.ccRemark === ''
-                                    ? 'NA'
-                                    : items?.ccRemark}
-                            </p>
-                            <h1 className="text-gray-800">
-                                Manager Second Level Approval{' '}
-                            </h1>
-                            <p className="">-</p>
-                            <p className="text-slate-600">
-                                {items?.managerSecondRemark === ''
-                                    ? 'NA'
-                                    : items?.managerSecondRemark}
-                            </p>
-                            <h1 className="text-gray-800">
-                                Account Level Approval{' '}
-                            </h1>
-                            <p className="">-</p>
-                            <p className="text-slate-600">
-                                {items?.accountRemark === ''
-                                    ? 'NA'
-                                    : items?.accountRemark}
-                            </p>
+
+                        {/*  */}
+                        <div className="grid grid-cols-2 gap-3 pl-6 py-6 border border-l-2">
+                            <div className="grid grid-cols-3">
+                                <h1 className="text-gray-800 col-span-1">
+                                    Manager First Approved By
+                                </h1>
+                                <p className=" col-span-1 text-center"> - </p>
+                                <p className="text-slate-600  col-span-1">
+                                    {items?.managerFirstLabel === ''
+                                        ? 'NA'
+                                        : items?.managerFirstLabel}
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-3">
+                                <h1 className="text-gray-800 col-span-1">
+                                    Manager First Remark
+                                </h1>
+                                <p className=" col-span-1 text-center"> - </p>
+                                <p className="text-slate-600  col-span-1">
+                                    {items?.managerFirstRemark === ''
+                                        ? 'NA'
+                                        : items?.managerFirstRemark}
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-3">
+                                <h1 className="text-gray-800 col-span-1">
+                                    Customer Care Approved By
+                                </h1>
+                                <p className=" col-span-1 text-center"> - </p>
+                                <p className="text-slate-600  col-span-1">
+                                    {items?.ccUserLabel === ''
+                                        ? 'NA'
+                                        : items?.ccUserLabel}
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-3">
+                                <h1 className="text-gray-800 col-span-1">
+                                    Customer Care Remark
+                                </h1>
+                                <p className=" col-span-1 text-center"> - </p>
+                                <p className="text-slate-600  col-span-1">
+                                    {items?.ccRemark === ''
+                                        ? 'NA'
+                                        : items?.ccRemark}
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-3">
+                                <h1 className="text-gray-800 col-span-1">
+                                    Manager Second Approved By
+                                </h1>
+                                <p className=" col-span-1 text-center"> - </p>
+                                <p className="text-slate-600  col-span-1">
+                                    {items?.managerSecondUser === ''
+                                        ? 'NA'
+                                        : items?.managerSecondUser}
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-3">
+                                <h1 className="text-gray-800 col-span-1">
+                                    Manager Second Remark
+                                </h1>
+                                <p className=" col-span-1 text-center"> - </p>
+                                <p className="text-slate-600  col-span-1">
+                                    {items?.managerSecondRemark === ''
+                                        ? 'NA'
+                                        : items?.managerSecondRemark}
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-3">
+                                <h1 className="text-gray-800 col-span-1">
+                                    Account Approved By
+                                </h1>
+                                <p className=" col-span-1 text-center"> - </p>
+                                <p className="text-slate-600  col-span-1">
+                                    {items?.accountUserLabel === null
+                                        ? 'NA'
+                                        : items?.accountUserLabel}
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-3">
+                                <h1 className="text-gray-800 col-span-1">
+                                    Account Remark
+                                </h1>
+                                <p className=" col-span-1 text-center"> - </p>
+                                <p className="text-slate-600  col-span-1">
+                                    {items?.accountRemark === ''
+                                        ? 'NA'
+                                        : items?.accountRemark}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        // {items?.contactInformation  }
     )
 }
 

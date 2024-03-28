@@ -105,6 +105,7 @@ export type AddDealer = {
     companyId: string
     zonalManagerId: string | null
     zonalExecutiveId: string | null
+    zonalExecutiveAreaId: string[] | []
 }
 
 export type UpdateDealer = {
@@ -129,6 +130,7 @@ export type UpdateDealer = {
         companyId: string
         zonalManagerId: string | null
         zonalExecutiveId: string | null
+        zonalExecutiveAreaId: string[] | []
     }
     id: string
 }

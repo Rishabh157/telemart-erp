@@ -12,7 +12,7 @@ import React from 'react'
 import { ErrorMessage } from 'formik'
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
 import { TextField } from '@mui/material'
-import { getInputHeight, Size } from 'src/utils/formUtils/getInputHeight'
+import { getInputHeight, getLabelTextTransform, Size, textTransform } from 'src/utils/formUtils/getInputHeight'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 
@@ -30,6 +30,7 @@ type Props = {
     labelClass?: string
     minDate?: any | null
     inputSize?: string
+    textTransform?: textTransform
 }
 
 const ATMDatePicker = ({
@@ -44,14 +45,14 @@ const ATMDatePicker = ({
     labelClass = 'font-medium text-sm',
     dateTimeFormat = 'MM/DD/YYYY',
     minDate,
+    textTransform = 'firstLetterCapitalonly',
     inputSize = '16px',
 }: Props) => {
     return (
         <div className="relative">
             {label && (
                 <label className={`text-slate-700 ${labelClass}`}>
-                    {' '}
-                    {label}{' '}
+                       {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>
             )}
@@ -93,11 +94,11 @@ const ATMDatePicker = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                         <span style={{ textTransform: 'capitalize' }}>
-                             {errMsg}
-                         </span>
-                     </p>
+                               <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                        <span >
+                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
+                        </span>
+                    </p>
                     )}
                 </ErrorMessage>
             )}

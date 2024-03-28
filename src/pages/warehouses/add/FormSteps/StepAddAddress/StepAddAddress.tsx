@@ -26,6 +26,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { RootState } from 'src/redux/store'
 import { CiSearch } from 'react-icons/ci'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -78,6 +79,7 @@ const StepAddAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    console.log("formikProps",formikProps)
     const [imageApiStatus, setImageApiStatus] = useState(false)
     const [fileUploader] = useFileUploaderMutation()
 
@@ -230,8 +232,8 @@ const StepAddAddress = ({
                                                 key={name}
                                             >
                                                 <ATMSelectSearchable
+                                                    required={required}
                                                     label={label}
-                                                    selectLabel={label}
                                                     name={name}
                                                     value={
                                                         name.includes('.')
@@ -246,6 +248,7 @@ const StepAddAddress = ({
                                                               ]
                                                             : values[name]
                                                     }
+                                                    selectLabel={label}
                                                     onChange={(e: any) => {
                                                         setFieldValue(name, e)
                                                     }}
@@ -305,7 +308,7 @@ const StepAddAddress = ({
                                                                         required={
                                                                             required
                                                                         }
-                                                                        name=""
+                                                                        name="pincodeSearch"
                                                                         value={
                                                                             name ===
                                                                             'billing_address.pincode'
@@ -410,6 +413,37 @@ const StepAddAddress = ({
                                                     checked={Boolean(
                                                         values[name]
                                                     )}
+                                                />
+                                            </div>
+                                        )
+                                    case 'textarea':
+                                        return (
+                                            <div className="-mt-4">
+                                                <ATMTextArea
+                                                    required={required}
+                                                    key={name}
+                                                    name={name}
+                                                    minRows={2}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    className="shadow bg-white rounded"
+                                                    isSubmitting={isSubmitting}
                                                 />
                                             </div>
                                         )

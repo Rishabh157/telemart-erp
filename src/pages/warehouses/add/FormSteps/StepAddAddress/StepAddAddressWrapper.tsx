@@ -62,6 +62,7 @@ const formFields: {
                 name: 'regd_address.address',
                 label: 'Address',
                 placeholder: 'Address',
+                type:'textarea',
                 required: true,
             },
             {
@@ -129,6 +130,7 @@ const formFields: {
                 name: 'billing_address.address',
                 label: 'Address',
                 placeholder: 'Address',
+                type:'textarea',
                 required: true,
             },
             {

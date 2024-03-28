@@ -61,6 +61,12 @@ const ViewOrder = () => {
             name: UserModuleNameTypes.ACTION_ORDER_FRESH_ORDER_TAB_LIST,
         },
         {
+            label: 'Assign Order',
+            icon: MdOutbond,
+            path: '?orderStatus=assign',
+            name: UserModuleNameTypes.ACTION_ORDER_ASSIGN_ORDER_TAB_LIST,
+        },
+        {
             label: 'Order Approval',
             icon: MdOutbond,
             path: '?orderStatus=approved',

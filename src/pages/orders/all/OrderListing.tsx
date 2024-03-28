@@ -96,6 +96,7 @@ const OrderListing = ({
     // Dispatching State
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
@@ -196,6 +197,16 @@ const OrderListing = ({
                 ]
                 setFilterBy(filtrComplaint)
                 return
+            case 'assign':
+                let filterAssignedOrders = [
+                    ...filter,
+                    {
+                        fieldName: 'isOrderAssigned',
+                        value: true,
+                    },
+                ]
+                setFilterBy([...filterAssignedOrders])
+                return
             case 'approved':
                 let filterApproval = [
                     ...filter,
@@ -217,8 +228,11 @@ const OrderListing = ({
                         fieldName: 'approved',
                         value: true,
                     },
+                    {
+                        fieldName: 'isOrderAssigned',
+                        value: false,
+                    },
                 ]
-
                 setFilterBy(filterdefault)
                 return
         }
@@ -371,9 +385,8 @@ const OrderListing = ({
                         setShowDropdown(!showDropdown)
                         // setCurrentId(row?._id)
                     }}
-                    isCustomBtn={
-                        row?.status === 'FRESH' && row?.approved === true
-                    }
+                    isCustomBtn={!row?.isOrderAssigned}
+                    // row?.status === 'FRESH' && row?.approved === true
                     customBtnText="Order Assignee"
                     handleCustomActionButton={() => {
                         setIsOrderAssigneeFormOpen(true)
@@ -389,7 +402,7 @@ const OrderListing = ({
                             >
                                 View
                             </button>
-                            <button
+                            {/* <button
                                 onClick={() => {
                                     setIsShow(true)
                                     setBarcodeQuantity(row?.shcemeQuantity)
@@ -398,7 +411,7 @@ const OrderListing = ({
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                             >
                                 Dispatch
-                            </button>
+                            </button> */}
                         </>
                     }
                 />
@@ -412,6 +425,26 @@ const OrderListing = ({
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
+            ),
+        },
+        {
+            field: 'assignDealerLabel',
+            headerName: 'Assigned Dealer',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignDealerLabel || '-'}</span>
+            ),
+        },
+        {
+            field: 'assignWarehouseLabel',
+            headerName: 'Assigned Warehouse',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignWarehouseLabel || '-'}</span>
             ),
         },
         {
@@ -692,7 +725,7 @@ const OrderListing = ({
         //     extraClasses: 'min-w-[150px]',
         //    renderCell: (row: OrderListResponse) => (
         //         <div className="py-0">{row?.agentId}</div>
-        //     ), 
+        //     ),
         // },
         {
             field: 'Shipping Charges',
@@ -808,7 +841,9 @@ const OrderListing = ({
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px]',
-            renderCell: (row: any) => <span> {row.orderMBKNumber || '-'} </span>,
+            renderCell: (row: any) => (
+                <span> {row.orderMBKNumber || '-'} </span>
+            ),
         },
     ]
 
@@ -1106,49 +1141,12 @@ const OrderListing = ({
                         rows={items}
                         // isCheckbox={true}
                         selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
+                        onRowSelect={(selectedRows) => {
                             setSelectedRows(selectedRows)
-                        }
+                        }}
                         isLoading={isTableLoading}
                     />
                 </div>
-                {/* Table */}
-                {/* {orderStatus !== 'global-search' ? (
-                    <div className="grow overflow-auto">
-                        <ATMTable
-                            extraClasses="w-[200%]"
-                            columns={columns}
-                            rows={items}
-                            // isCheckbox={true}
-                            selectedRows={selectedRows}
-                            onRowSelect={(selectedRows) =>
-                                setSelectedRows(selectedRows)
-                            }
-                            isLoading={isTableLoading}
-                        />
-                    </div>
-                ) : items?.length ? (
-                    <div className="grow overflow-auto">
-                        <ATMTable
-                            extraClasses="w-[200%]"
-                            columns={columns}
-                            rows={items}
-                            selectedRows={selectedRows}
-                            onRowSelect={(selectedRows) =>
-                                setSelectedRows(selectedRows)
-                            }
-                            isLoading={isTableLoading}
-                        />
-                    </div>
-                ) : null} */}
-
-                {/* Flow */}
-                {/* <DialogLogBox
-                    maxWidth="sm"
-                    handleClose={() => setIsFlowDialogShow(false)}
-                    isOpen={isFlowDialogShow}
-                    component={<div className="py-4 flex justify-center"></div>}
-                /> */}
 
                 <DialogLogBox
                     maxWidth="md"

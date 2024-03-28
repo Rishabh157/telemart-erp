@@ -34,6 +34,7 @@ export type OrderListResponse = {
     schemeId: string
     schemeName: string
     schemeCode: string
+    isOrderAssigned: boolean
     pincodeId: string
     pincodeSecondId: string | null
     areaId: string
