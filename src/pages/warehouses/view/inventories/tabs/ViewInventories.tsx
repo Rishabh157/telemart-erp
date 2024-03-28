@@ -45,7 +45,7 @@ const ViewInventories = (props: Props) => {
             label: 'orders',
             icon: BsArrowRepeat,
             path: 'warehouse-orders/assigned-order',
-            name: '',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS,
         },
     ]
     const [activeTab, setActiveTab] = useState<number>()

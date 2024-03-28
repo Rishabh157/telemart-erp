@@ -13,13 +13,13 @@ const tabs: Tabs[] = [
         label: 'Assigned Order',
         icon: MdOutbond,
         path: 'assigned-order',
-        name: '',
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS_ASSIGNED_ORDERS,
     },
     {
         label: 'Confirmed Order',
         icon: MdOutbond,
         path: 'confirmed-order',
-        name: '',
+        name:UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS_CONFIRMED_ORDERS,
     },
 ]
 const WarehouseOrdersTab = (props: Props) => {

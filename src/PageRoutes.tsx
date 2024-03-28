@@ -834,7 +834,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<WarehouseOrdersTab />}
-                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER}
+                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS}
                             />
                         }
                     >
@@ -846,7 +846,7 @@ const PageRoutes = () => {
                                         <WarehouseAssignedOrderListingWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS_ASSIGNED_ORDERS
                                     }
                                 />
                             }
@@ -859,7 +859,7 @@ const PageRoutes = () => {
                                         <WarehouseConfirmedOrderWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS_CONFIRMED_ORDERS
                                     }
                                 />
                             }
