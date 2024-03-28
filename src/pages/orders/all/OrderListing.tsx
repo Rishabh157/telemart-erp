@@ -62,6 +62,7 @@ import { BiSearch } from 'react-icons/bi'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
 import { useGetPaginationComplaintQuery } from 'src/services/CallerService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { FirstCallApprovalStatus } from 'src/pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
 // Types
 type BarcodeListResponseType = {
     _id: string
@@ -435,6 +436,114 @@ const OrderListing = ({
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.assignDealerLabel || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallApproval',
+            headerName: '1st Call Approval',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                        {row?.assignWarehouseId ? (
+                            row?.firstCallApproval ? (
+                                <Chip
+                                    className="cursor-pointer"
+                                    label="Approved"
+                                    color="success"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            ) : row?.firstCallState ===
+                              FirstCallApprovalStatus.CANCEL ? (
+                                <Chip
+                                    className="cursor-pointer"
+                                    label="Cancled"
+                                    color="warning"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            ) : (
+                                <Chip
+                                    // onClick={() => {
+                                    //     showConfirmationDialog({
+                                    //         title: 'Approval',
+                                    //         text: `Do you want to ${
+                                    //             row.firstCallApproval
+                                    //                 ? 'Disapprove '
+                                    //                 : 'Approval '
+                                    //         }`,
+                                    //         showCancelButton: true,
+                                    //         showDenyButton: true,
+                                    //         confirmButtonText: 'Order approval',
+                                    //         denyButtonText: 'Order cancled',
+                                    //         confirmButtonColor: '#239B56',
+                                    //         denyButtonColor: '#F1948A',
+
+                                    //         next: (res) => {
+                                    //             console.log("res.isDenied",res)
+
+                                    //             if (res.isConfirmed) {
+                                    //                 return res.isConfirmed
+                                    //                     ? handleApproval(
+                                    //                           row?._id,
+                                    //                           FirstCallApprovalStatus.APPROVED
+                                    //                       )
+                                    //                     : setShowDropdown(false)
+                                    //             }
+                                    //             if (res.isDenied) {
+                                    //                 return res.isDenied
+                                    //                     ? handleApproval(
+                                    //                           row?._id,
+                                    //                           FirstCallApprovalStatus.CANCEL
+                                    //                       )
+                                    //                     : setShowDropdown(false)
+                                    //             }
+                                    //         },
+                                    //     })
+                                    // }}
+                                    className="cursor-pointer"
+                                    label="Pending"
+                                    color="error"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            )
+                        ) : null}
+                    </span>
+                )
+            },
+        },
+        {
+            field: 'firstCallRemark',
+            headerName: '1st call remark',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallRemark || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallState',
+            headerName: 'first Call State',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallState || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallCallBackDate',
+            headerName: 'call back date',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallCallBackDate || '-'}</span>
             ),
         },
         {

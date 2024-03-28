@@ -151,12 +151,13 @@ export const OrderApi = apiSlice.injectEndpoints({
         }),
         approvedWHFirstCallApproval: builder.mutation({
             invalidatesTags: ['order'],
-            query: (orderId: any) => ({
-                url: `/order-inquiry/approve-first-call/${orderId}`,
+            query: ({ body, id }: { body: any, id: string }) => ({
+                url: `/order-inquiry/approve-first-call/${id}`,
                 method: 'PUT',
+                body,
             }),
         }),
-        
+
     }),
 })
 export const {
