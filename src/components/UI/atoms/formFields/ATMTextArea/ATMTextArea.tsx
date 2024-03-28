@@ -7,6 +7,7 @@
 
 // |-- Built-in Dependencies --|
 import React from 'react'
+import { twMerge } from 'tailwind-merge'
 
 // |-- External Dependencies --|
 import { ErrorMessage } from 'formik'
@@ -56,9 +57,12 @@ const ATMTextArea = ({
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 rows={minRows}
-                className={`w-full p-2 bg-white text-slate-700 border border-slate-400 outline-blue-400  ${
-                    label && 'mt-2'
-                }  ${className}`}
+                className={twMerge(
+                    `w-full p-2 bg-white text-slate-700 border border-slate-400 outline-blue-400  ${
+                        label && 'mt-2'
+                    }`,
+                    `${className}`
+                )}
                 placeholder={placeholder}
             />
 

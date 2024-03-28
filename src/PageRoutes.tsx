@@ -276,6 +276,7 @@ import BatchOrderView from './pages/batchOrder'
 import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
 import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
 import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
+import WarehouseFirstCallPageWrapper from './pages/warehouseFirstCall/WarehouseFirstCallPageWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2556,6 +2557,17 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<CustomerComplainWrapper />}
+                            permission={
+                                UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN
+                            }
+                        />
+                    }
+                />
+                <Route
+                    path="/warehouse-first-call"
+                    element={
+                        <Authorization
+                            children={<WarehouseFirstCallPageWrapper />}
                             permission={
                                 UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN
                             }
