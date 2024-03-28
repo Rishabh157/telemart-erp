@@ -150,6 +150,14 @@ export const OrderApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        approvedWHFirstCallApproval: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (orderId: any) => ({
+                url: `/order-inquiry/approve-first-call/${orderId}`,
+                method: 'PUT',
+            }),
+        }),
+        
     }),
 })
 export const {
@@ -166,4 +174,5 @@ export const {
     useAssignOrderToDealerOrWarehouseMutation,
     useApprovedOrderStatusMutation,
     useGetOldOrderDetailsByOrderNumberQuery,
+    useApprovedWHFirstCallApprovalMutation
 } = OrderApi

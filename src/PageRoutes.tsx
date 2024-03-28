@@ -272,6 +272,9 @@ import HouseArrestListingWrapper from './pages/request/all/houseArrest/HouseArre
 import AddHouseArrestFormWrapper from './pages/request/all/houseArrest/add/AddHouseArrestFormWrapper'
 import HouseArrestViewWrapper from './pages/request/all/houseArrest/view/HouseArrestViewWrapper'
 import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/HouseArrestLogsListingWrapper'
+import WarehouseOrdersTab from './pages/warehouses/view/warehouse-orders'
+import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
+import WarehouseConfirmedOrderWrapper from './pages/warehouses/view/warehouse-orders/confirmOrders/list/WarehouseConfirmedOrderWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -821,214 +824,44 @@ const PageRoutes = () => {
                                 />
                             }
                         />
-
+                    </Route>
+                    <Route
+                        path="warehouse-orders"
+                        element={
+                            <Authorization
+                                children={<WarehouseOrdersTab />}
+                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER}
+                            />
+                        }
+                    >
                         <Route
-                            path="company"
+                            path="assigned-order"
                             element={
                                 <Authorization
                                     children={
-                                        <ConfigurationCompanyListingWrapper />
+                                        <WarehouseAssignedOrderListingWrapper />
                                     }
-                                    permission={UserModuleNameTypes.NAV_COMPANY}
-                                />
-                            }
-                        />
-                        <Route
-                            path="company/add"
-                            element={
-                                <Authorization
-                                    children={<AddCompanyWrapper />}
                                     permission={
-                                        UserModuleNameTypes.ACTION_COMPANY_ADD
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
                                     }
                                 />
                             }
                         />
-                        <Route
-                            path="company/:id"
-                            element={
-                                <Authorization
-                                    children={<EditCompanyWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.ACTION_COMPANY_EDIT
-                                    }
-                                />
-                            }
-                        />
-
-                        {/* Configurations -> CompanyBranch */}
-                        <Route
-                            path="company-branch"
-                            element={
-                                <Authorization
-                                    children={<CompanyBranchListingWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.NAV_COMPANY_BRANCH
-                                    }
-                                />
-                            }
-                        />
-                        <Route
-                            path="company-branch/add"
-                            element={
-                                <Authorization
-                                    children={<AddCompanyBranchWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.ACTION_COMPANY_ADD
-                                    }
-                                />
-                            }
-                        />
-                        <Route
-                            path="company-branch/:id"
-                            element={
-                                <Authorization
-                                    children={<EditCompanyBranchWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.ACTION_COMPANY_EDIT
-                                    }
-                                />
-                            }
-                        />
-
-                        {/* Configurations -> Barcode */}
-                        <Route
-                            path="barcode"
-                            element={
-                                <Authorization
-                                    children={<BarcodeListingWrapper />}
-                                    permission={UserModuleNameTypes.NAV_BARCODE}
-                                />
-                            }
-                        />
-                        <Route
-                            path="barcode/add"
-                            element={
-                                <Authorization
-                                    children={<AddBarcodeWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.ACTION_BARCODE_ADD
-                                    }
-                                />
-                            }
-                        />
-                        <Route
-                            path="barcode/carton-box-items/:cartonboxcode"
-                            element={
-                                <Authorization
-                                    children={<ViewBarcodeWrapper />}
-                                    permission={UserModuleNameTypes.NAV_BARCODE}
-                                />
-                            }
-                        />
-
-                        <Route
-                            path="barcode/carton-box/add"
-                            element={
-                                <Authorization
-                                    children={<AddCbBarcodeWrapper />}
-                                    permission={UserModuleNameTypes.NAV_BARCODE}
-                                />
-                            }
-                        />
-
-                        <Route
-                            path="barcode/:barcodeId"
-                            element={
-                                <Authorization
-                                    children={<ViewBarcodeWrapper />}
-                                    permission={UserModuleNameTypes.NAV_BARCODE}
-                                />
-                            }
-                        />
-
-                        {/* Configurations -> Location */}
-                        <Route path="location" element={<Locations />} />
-
-                        {/* Configurations -> Language */}
-                        <Route
-                            path="language"
-                            element={
-                                <Authorization
-                                    children={<LanguageListingWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.NAV_LANGUAGE
-                                    }
-                                />
-                            }
-                        />
-                        <Route
-                            path="language/add"
-                            element={
-                                <Authorization
-                                    children={<AddLanguageWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.ACTION_LANGUAGE_ADD
-                                    }
-                                />
-                            }
-                        />
-                        <Route
-                            path="language/:id"
-                            element={
-                                <Authorization
-                                    children={<EditLanguageWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.ACTION_LANGUAGE_EDIT
-                                    }
-                                />
-                            }
-                        />
-
-                        {/* Configurations -> Dealers Category */}
-                        <Route
-                            path="dealers-category"
-                            element={
-                                <Authorization
-                                    children={<DealersCategoryListingWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.NAV_DEALERS_CATEGORY
-                                    }
-                                />
-                            }
-                        />
-                        <Route
-                            path="dealers-category/add"
-                            element={
-                                <Authorization
-                                    children={<AddDealersCategoryWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.ACTION_DEALERS_CATEGORY_ADD
-                                    }
-                                />
-                            }
-                        />
-                        <Route
-                            path="dealers-category/:id"
-                            element={
-                                <Authorization
-                                    children={<EditDealersCategoryWrapper />}
-                                    permission={
-                                        UserModuleNameTypes.ACTION_DEALERS_CATEGORY_EDIT
-                                    }
-                                />
-                            }
-                        />
-                        {/* Configurations -> call center master */}
-                        <Route
-                            path="callcenter-master"
+                         <Route
+                            path="confirmed-order"
                             element={
                                 <Authorization
                                     children={
-                                        <CallCenterMasterListingWrapper />
+                                        <WarehouseConfirmedOrderWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
                                     }
                                 />
                             }
                         />
                     </Route>
+
                     <Route
                         path="inward-inventories"
                         element={
@@ -2531,13 +2364,10 @@ const PageRoutes = () => {
                 >
                     {/* Moneyback Requets */}
                     <Route
-
                         path="moneyback"
                         element={
                             <Authorization
-                                children={
-                                    <MoneybackListingWrapper />
-                                }
+                                children={<MoneybackListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_MONEY_BACK_TAB
                                 }
@@ -2546,7 +2376,6 @@ const PageRoutes = () => {
                     />
 
                     <Route
-
                         path="moneyback/:id/view"
                         element={
                             <MoneyViewWrapper />
@@ -2579,13 +2408,10 @@ const PageRoutes = () => {
 
                     {/* Product Replacement Requets */}
                     <Route
-
                         path="product-replacement"
                         element={
                             <Authorization
-                                children={
-                                    <ProductReplacementListingWrapper />
-                                }
+                                children={<ProductReplacementListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_TAB
                                 }
@@ -2629,9 +2455,7 @@ const PageRoutes = () => {
                         path="house-arrest"
                         element={
                             <Authorization
-                                children={
-                                    <HouseArrestListingWrapper />
-                                }
+                                children={<HouseArrestListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_HOUSE_ARREST_TAB
                                 }
