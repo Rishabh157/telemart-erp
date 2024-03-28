@@ -483,7 +483,6 @@ const OrderListing = ({
                                     //         denyButtonColor: '#F1948A',
 
                                     //         next: (res) => {
-                                    //             console.log("res.isDenied",res)
 
                                     //             if (res.isConfirmed) {
                                     //                 return res.isConfirmed

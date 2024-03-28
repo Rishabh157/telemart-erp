@@ -279,6 +279,8 @@ import BatchOrderView from './pages/batchOrder'
 import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
 import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
 import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
+import WarehouseFirstCallPageWrapper from './pages/warehouseFirstCall/WarehouseFirstCallPageWrapper'
+import WarehouseFirstCallDialerPageWrapper from './pages/warehouseFirstCallDialerPage/WarehouseFirstCallDialerPageWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -834,7 +836,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<WarehouseOrdersTab />}
-                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
+                                }
                             />
                         }
                     >
@@ -851,7 +855,7 @@ const PageRoutes = () => {
                                 />
                             }
                         />
-                         <Route
+                        <Route
                             path="confirmed-order"
                             element={
                                 <Authorization
@@ -2394,6 +2398,23 @@ const PageRoutes = () => {
                             }
                         />
                     }
+                />
+                <Route
+                    path="/warehouse-first-call/:id"
+                    element={
+                        <Authorization
+                            children={<WarehouseFirstCallPageWrapper />}
+                            permission={
+                                UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN
+                            }
+                        />
+                    }
+                />
+
+                {/* Dialer page */}
+                <Route
+                    path="/calling-outcall"
+                    element={<WarehouseFirstCallDialerPageWrapper />}
                 />
 
                 {/* Request Tabs */}

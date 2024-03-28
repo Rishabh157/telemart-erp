@@ -79,7 +79,6 @@ const StepAddAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-    console.log("formikProps",formikProps)
     const [imageApiStatus, setImageApiStatus] = useState(false)
     const [fileUploader] = useFileUploaderMutation()
 
