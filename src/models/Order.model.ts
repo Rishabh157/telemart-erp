@@ -53,6 +53,9 @@ export type OrderListResponse = {
     remark: string
     shcemeQuantity: number
     firstCallApproval:null| boolean
+    firstCallRemark:string
+    firstCallState:string
+    firstCallCallBackDate:string
     socialMedia: {
         facebook: string
         instagram: string
