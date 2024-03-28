@@ -3,7 +3,7 @@ import { FormikProps } from 'formik'
 import {
     FormInitialValues,
     OrderDetailsPropsTypes,
-} from './WarehouseFirstCallPageWrapper'
+} from './WarehouseFirstCallDialerPageWrapper'
 import { CircularProgress } from '@mui/material'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -21,7 +21,7 @@ type Props = {
     apiStatus: boolean
 }
 
-const WarehouseFirstCallPage: React.FC<Props> = ({
+const WarehouseFirstCallDialerPage: React.FC<Props> = ({
     formikProps,
     orderDetails,
     column,
@@ -271,7 +271,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             }}
                         />
 
-                        <div className="flex gap-x-20">
+                        <div className="flex gap-x-28">
                             <span className="text-slate-700 capitalize text-xs">
                                 Address
                             </span>
@@ -503,4 +503,4 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
     )
 }
 
-export default WarehouseFirstCallPage
+export default WarehouseFirstCallDialerPage

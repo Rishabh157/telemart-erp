@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { Formik, FormikProps } from 'formik'
 import { object, string } from 'yup'
-import WarehouseFirstCallPage from './WarehouseFirstCallPage'
+import WarehouseFirstCallDialerPage from './WarehouseFirstCallDialerPage'
 import {
-    useGetOrderByIdQuery,
-    useUpdateWarehouseFirstCallMutation,
+    useGetWHFirstCallOrderDetailsQuery,
+    useUpdateWHFirstCallUnauthOrderMutation,
 } from 'src/services/OrderService'
 import { showToast } from 'src/utils'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { useNavigate } from 'react-router-dom'
 import { OrderListResponse } from 'src/models'
-import { useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 export type FormInitialValues = {
     address: string
     remark: string
     callbackDate: string
     status: string
+    approvedBy: string
 }
 
 export interface OrderDetailsPropsTypes {
@@ -43,10 +44,15 @@ export interface OrderDetailsPropsTypes {
     discount?: number
 }
 
-const WarehouseFirstCallPageWrapper = () => {
+const WarehouseFirstCallDialerPageWrapper = () => {
+    const [orderId, setOrderId] = useState<string>()
     const [apiStatus, setApiStatus] = React.useState<boolean>(false)
-    const params = useParams()
-    const orderId = params?.id
+    const location = useLocation()
+    const searchParams = new URLSearchParams(location.search)
+    const phoneNumber = searchParams.get('phone') || ''
+    const userName = searchParams.get('userid') || ''
+    const navigate = useNavigate()
+
     //  showing initial order details
     const [orderDetails, setOrderDetails] = useState<OrderDetailsPropsTypes>({
         orderNumber: '',
@@ -73,15 +79,19 @@ const WarehouseFirstCallPageWrapper = () => {
     })
 
     // get the order details
-    const { isLoading, isFetching, data } = useGetOrderByIdQuery(orderId, {
-        skip: !orderId,
-    })
+    const { isLoading, isFetching, data } = useGetWHFirstCallOrderDetailsQuery(
+        phoneNumber,
+        {
+            skip: !phoneNumber,
+        }
+    )
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
             const orderData: OrderListResponse = data?.data
+            setOrderId(data?.data?._id)
             setOrderDetails({
-                orderNumber: orderData.orderNumber + '',
+                orderNumber: orderData?.orderNumber + '',
                 assignDealerLabel: orderData?.assignDealerLabel,
                 name: orderData?.customerName,
                 price: orderData?.price + '',
@@ -160,13 +170,14 @@ const WarehouseFirstCallPageWrapper = () => {
     ]
 
     // Table Data with MobileNo filtered
-    const [updateWarehouseFirstCall] = useUpdateWarehouseFirstCallMutation()
+    const [updateWarehouseFirstCall] = useUpdateWHFirstCallUnauthOrderMutation()
 
     const initialValues: FormInitialValues = {
         address: orderDetails?.address,
         remark: '',
         callbackDate: '',
         status: '',
+        approvedBy: userName,
     }
 
     const validationSchema = object({
@@ -191,7 +202,7 @@ const WarehouseFirstCallPageWrapper = () => {
                     if (res?.data?.status) {
                         showToast('success', res?.data?.message)
                         setApiStatus(false)
-                        window.history.back()
+                        navigate(`/success`)
                     } else {
                         showToast('error', res?.data?.message)
                         setApiStatus(false)
@@ -206,26 +217,24 @@ const WarehouseFirstCallPageWrapper = () => {
     }
 
     return (
-        <SideNavLayout>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <WarehouseFirstCallPage
-                            formikProps={formikProps}
-                            orderDetails={orderDetails}
-                            column={columns}
-                            apiStatus={apiStatus}
-                        />
-                    )
-                }}
-            </Formik>
-        </SideNavLayout>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <WarehouseFirstCallDialerPage
+                        formikProps={formikProps}
+                        orderDetails={orderDetails}
+                        column={columns}
+                        apiStatus={apiStatus}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 
-export default WarehouseFirstCallPageWrapper
+export default WarehouseFirstCallDialerPageWrapper

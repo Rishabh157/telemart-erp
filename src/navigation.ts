@@ -7,7 +7,7 @@
 
 // |-- External Dependencies --|
 import { RxDashboard } from 'react-icons/rx'
-import { FiUsers , FiPhoneCall } from 'react-icons/fi'
+import { FiUsers, FiPhoneCall } from 'react-icons/fi'
 import { TbBuildingWarehouse } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake, FaSitemap } from 'react-icons/fa'
@@ -169,7 +169,7 @@ export const navigation: NavItemType[] = [
     {
         label: 'WH First Call',
         icon: FiPhoneCall,
-        path: '/warehouse-first-call',
+        path: '/calling-outcall?phone=9009648665&userid=rishabh.gour',
         name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
     },
     {

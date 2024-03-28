@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -89,7 +90,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                         denyButtonColor: '#F1948A',
 
                                         next: (res) => {
-                                            console.log("res.isDenied",res)
 
                                             if (res.isConfirmed) {
                                                 return res.isConfirmed
@@ -127,7 +127,8 @@ const WarehouseAssignedOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber}</span>
+                <Link to={`/warehouse-first-call/${row?._id}`}> 
+                <span className="text-primary-main"># {row.orderNumber}</span> </Link>
             ),
         },
         {
