@@ -109,7 +109,7 @@ const steps = [
                         .min(1, 'Please enter quantity')
                         .required('Quantity is required'),
                     mrp: number()
-                        .min(1, 'MRP must be postive')
+                        .min(1, 'MRP must be positive')
                         .required('MRP is required'),
                     pop: number()
                         .min(1, 'Offer price must be positive')

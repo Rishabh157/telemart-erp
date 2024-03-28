@@ -149,7 +149,7 @@ export const OrderApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-
+  
         //***** Get unauth order details by id *****/
         getUnauthOrderDetailsById: builder.query({
             // providesTags: ['order'],
@@ -168,6 +168,16 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** approved warehouse first call *****/
+        approvedWHFirstCallApproval: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (orderId: any) => ({
+                url: `/order-inquiry/approve-first-call/${orderId}`,
+                method: 'PUT',
+            }),
+        }),
+        
     }),
 })
 export const {
@@ -184,6 +194,7 @@ export const {
     useAssignOrderToDealerOrWarehouseMutation,
     useApprovedOrderStatusMutation,
     useGetOldOrderDetailsByOrderNumberQuery,
-    useGetUnauthOrderDetailsByIdQuery,
-    useUpdateWarehouseFirstCallMutation
+     useGetUnauthOrderDetailsByIdQuery,
+    useUpdateWarehouseFirstCallMutation,
+    useApprovedWHFirstCallApprovalMutation
 } = OrderApi

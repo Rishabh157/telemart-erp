@@ -46,7 +46,8 @@ const ATMTextArea = ({
         <div className="mt-3">
             {label && (
                 <label className={`text-slate-700 ${labelClass}`}>
-                    {label}{' '}
+                    {label.charAt(0).toUpperCase() +
+                        label.slice(1).toLowerCase()}
                     {required && <span className="text-red-500"> * </span>}
                 </label>
             )}
@@ -70,8 +71,9 @@ const ATMTextArea = ({
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                            <span style={{ textTransform: 'capitalize' }}>
-                                {errMsg}
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
                             </span>
                         </p>
                     )}

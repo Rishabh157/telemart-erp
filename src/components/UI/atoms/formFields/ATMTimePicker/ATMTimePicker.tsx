@@ -11,7 +11,7 @@ import React from 'react'
 // |-- External Dependencies --|
 import { ErrorMessage } from 'formik'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
-import { getInputHeight, Size } from 'src/utils/formUtils/getInputHeight'
+import { getInputHeight, getLabelTextTransform, Size, textTransform } from 'src/utils/formUtils/getInputHeight'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { TextField } from '@mui/material'
@@ -27,6 +27,7 @@ type Props = {
     disabled?: boolean
     isSubmitting?: boolean
     error?: boolean
+    textTransform?: textTransform
 }
 
 const ATMTimePicker = ({
@@ -38,14 +39,14 @@ const ATMTimePicker = ({
     size = 'small',
     disabled = false,
     isSubmitting = true,
+    textTransform = 'firstLetterCapitalonly',
     error,
 }: Props) => {
     return (
         <div className="relative mt-4">
             {label && (
                 <label className="text-slate-700 font-medium">
-                    {' '}
-                    {label}{' '}
+                    {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>
             )}
@@ -78,8 +79,9 @@ const ATMTimePicker = ({
                 <ErrorMessage name={name}>
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                            <span style={{ textTransform: 'capitalize' }}>
-                                {errMsg}
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
                             </span>
                         </p>
                     )}
