@@ -101,6 +101,7 @@ import ComplainSlice from './slices/ComplainSlice'
 import MoneybackSlice from './slices/MoneybackSlice'
 import ProductReplacementSlice from './slices/ProductReplacementSlice'
 import houseArrestSlice from './slices/houseArrestSlice'
+import warehouseAssignedOrderSlice from './slices/warehouseOrders/warehouseAssignedOrderSlice'
 import CreateBatchOrderSlice from './slices/CreateBatchOrderSlice'
 
 // Middleware for handling 401 Error
@@ -201,6 +202,7 @@ const store = configureStore({
         moneyback: MoneybackSlice,
         productReplacement: ProductReplacementSlice,
         houseArrest: houseArrestSlice,
+        warehouseOrdersAssigned: warehouseAssignedOrderSlice,
         createBatch: CreateBatchOrderSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
