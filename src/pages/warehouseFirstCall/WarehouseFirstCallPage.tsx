@@ -11,6 +11,7 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { format } from 'date-fns'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -18,8 +19,6 @@ type Props = {
     column?: any[]
     rows?: any[]
     apiStatus: boolean
-    getBtnStatus: string
-    setGetBtnStatus: (value: string) => string
 }
 
 const WarehouseFirstCallPage: React.FC<Props> = ({
@@ -27,11 +26,10 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
     orderDetails,
     column,
     apiStatus,
-    getBtnStatus,
-    setGetBtnStatus,
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
-    console.log('values: ', values)
+    // console.log('values: ', values)
+    console.log('orderDetails: ', orderDetails)
 
     const {
         orderNumber,
@@ -49,6 +47,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
         area,
         address,
         // Listing
+        schemeCode,
         schemeName,
         shcemeQuantity,
         totalAmount,
@@ -73,7 +72,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     </h1>
 
                     <div className="grid grid-cols-4 gap-x-4 gap-y-2">
-                        <div className="flex gap-x-16 ">
+                        <div className="flex gap-x-24">
                             <span className="text-slate-700 capitalize text-xs">
                                 Order No.
                             </span>
@@ -335,25 +334,68 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                 <h1 className="text-sm font-semibold px-2">
                     Product Group Details :{' '}
                 </h1>
-                <div className="border-[1px] border-grey-700 max-h-[150px] overflow-y-scroll">
-                    <table className="border-collapse border border-gray-600 m-4">
+                <div className="border-[1px] border-grey-700">
+                    <table className="border-collapse border border-gray-600 m-4 w-full">
                         <thead>
                             <tr>
-                                <th className="border border-gray-600 px-4 py-2">
+                                <th className="border border-gray-600 px-4 py-2 w-1/2">
                                     Product Group
                                 </th>
-                                <th className="border border-gray-600 px-4 py-2">
+                                <th className="border border-gray-600 px-4 py-2 w-1/2">
                                     Attributes
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td className="border border-gray-600 px-4 py-2">
-                                    Product A
+                                <td className="border border-gray-600 px-4 py-2 w-1/2">
+                                    <div className="flex gap-x-6">
+                                        <span className="text-primary-main text-sm">
+                                            Scheme Code :
+                                        </span>
+                                        <span>{schemeCode}</span>
+                                    </div>
+                                    <div className="flex gap-x-6 mt-1">
+                                        <span className="text-primary-main text-sm">
+                                            Quantity :
+                                        </span>
+                                        <span>{shcemeQuantity}</span>
+                                    </div>
+                                    <div className="flex gap-x-6 mt-1">
+                                        <span className="text-primary-main underline text-sm">
+                                            Product :
+                                        </span>
+                                        <span>{shcemeQuantity}</span>
+                                    </div>
                                 </td>
-                                <td className="border border-gray-600 px-4 py-2">
-                                    Description of Product A
+                                <td className="border border-gray-600 px-4 py-2 w-1/2">
+                                    <div className="flex">
+                                        <ATMSelectSearchable
+                                            isDisabled
+                                            fontSizePlaceHolder="14px"
+                                            fontSizeOptionsClass="13px"
+                                            minHeight="25px"
+                                            componentClass="mt-1"
+                                            label="Default"
+                                            size="xxs"
+                                            labelSize="xxs"
+                                            labelClass="text-slate-700 text-xs font-medium mb-1"
+                                            labelDirection="horizontal"
+                                            selectLabel="Default"
+                                            classDirection="grid grid-cols-3"
+                                            name="stateId"
+                                            value={''}
+                                            options={[]}
+                                            isValueWithLable
+                                            onChange={(e) => {
+                                                // setFieldValue('stateId', e?.value || '')
+                                                // setFieldValue('stateLabel', e?.label || '')
+                                                // if (!e.value) {
+                                                //     handleRemoveAddressRelated('stateId')
+                                                // }
+                                            }}
+                                        />
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -367,7 +409,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     <span className="text-slate-700 capitalize">Remark</span>
                     <div className="-mt-2">
                         <ATMTextArea
-                            name="Address"
+                            name="remark"
                             value={values.remark}
                             label=""
                             minRows={6}
@@ -387,7 +429,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             name="callbackDate"
                             size="xs"
                             value={values.callbackDate}
-                            dateTimeFormat="DD/MM/YY "
+                            dateTimeFormat="DD/MM/YY"
                             onChange={(e) => {
                                 setFieldValue(
                                     'callbackDate',
@@ -401,53 +443,48 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
 
             {/* Buttons */}
             <div className="mt-5 flex gap-x-8">
+                {/* Callback */}
                 <ATMLoadingButton
                     disabled={false}
                     loadingText="Saving..."
                     type="button"
                     onClick={() => {
-                        setGetBtnStatus('CALLBACK')
+                        setFieldValue('status', 'CALLBACK')
                     }}
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        getBtnStatus === 'CALLBACK'
+                        values.status === 'CALLBACK'
                             ? 'bg-primary-main'
                             : 'bg-slate-400 opacity-30'
                     }`}
                 >
                     CallBack
                 </ATMLoadingButton>
-                {/* <ATMLoadingButton
-                    disabled={false}
-                    type="button"
-                    loadingText="Saving..."
-                    onClick={() => {
-                        setGetBtnStatus('APPROVED')
-                    }}
-                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        getBtnStatus === 'APPROVED'
-                            ? 'bg-primary-main'
-                            : 'bg-slate-400 opacity-30'
-                    }`}
-                >
-                    Approved
-                </ATMLoadingButton> */}
-                <button
-                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        getBtnStatus === 'APPROVED'
-                            ? 'bg-primary-main'
-                            : 'bg-slate-400 opacity-30'
-                    }`}
-                >
-                    Approved
-                </button>
 
+                {/* Approved */}
                 <ATMLoadingButton
                     disabled={false}
                     type="button"
                     loadingText="Saving..."
-                    onClick={() => setGetBtnStatus('LANGUAGEBARRIER')}
+                    onClick={() => {
+                        setFieldValue('status', 'APPROVED')
+                    }}
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        getBtnStatus === 'LANGUAGEBARRIER'
+                        values.status === 'APPROVED'
+                            ? 'bg-primary-main'
+                            : 'bg-slate-400 opacity-30'
+                    }`}
+                >
+                    Approved
+                </ATMLoadingButton>
+
+                {/* Langugate Barrier */}
+                <ATMLoadingButton
+                    disabled={false}
+                    type="button"
+                    loadingText="Saving..."
+                    onClick={() => setFieldValue('status', 'LANGUAGEBARRIER')}
+                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${
+                        values.status === 'LANGUAGEBARRIER'
                             ? 'bg-primary-main'
                             : 'bg-slate-400 opacity-30'
                     }`}
@@ -459,22 +496,23 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     disabled={false}
                     type="button"
                     loadingText="Cancel"
-                    onClick={() => setGetBtnStatus('CANCEL')}
+                    onClick={() => setFieldValue('status', 'CANCEL')}
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        getBtnStatus === 'CANCEL'
+                        values.status === 'CANCEL'
                             ? 'bg-primary-main'
                             : 'bg-slate-400 opacity-30'
                     }`}
                 >
                     Cancel
                 </ATMLoadingButton>
-
+            </div>
+            <div className="flex justify-end">
                 {/* BACK */}
                 <ATMLoadingButton
-                    disabled={false}
+                    disabled={values.status ? false : true}
                     loadingText="Back"
                     onClick={handleSubmit as any}
-                    className="text-white flex items-center py-1 px-2 rounded w-50 bg-primary-main"
+                    className="text-white flex items-center py-1 px-2 rounded w-40 bg-primary-main"
                 >
                     Save
                 </ATMLoadingButton>

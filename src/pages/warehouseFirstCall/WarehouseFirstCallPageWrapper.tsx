@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Formik, FormikProps } from 'formik'
+import { object, string } from 'yup'
 import WarehouseFirstCallPage from './WarehouseFirstCallPage'
 import {
-    useGetUnauthOrderDetailsByIdQuery,
+    useGetOrderByIdQuery,
     useUpdateWarehouseFirstCallMutation,
 } from 'src/services/OrderService'
 import { showToast } from 'src/utils'
@@ -33,19 +34,18 @@ export interface OrderDetailsPropsTypes {
     area: string
     address: string
 
+    schemeCode: string
     schemeName: string
     shcemeQuantity: number
     totalAmount: number
     deliveryCharges: number
     discount?: number
-
     remark: string
 }
 
 const WarehouseFirstCallPageWrapper = () => {
     const [apiStatus, setApiStatus] = React.useState<boolean>(false)
-    const [getBtnStatus, setGetBtnStatus] = React.useState<string>('')
-    console.log('getBtnStatus: ', getBtnStatus)
+    const ORDER_ID = '65febb7970e3ea8ef928c50a'
     //  showing initial order details
     const [orderDetails, setOrderDetails] = useState<OrderDetailsPropsTypes>({
         orderNumber: '',
@@ -63,19 +63,19 @@ const WarehouseFirstCallPageWrapper = () => {
         area: '',
         address: '',
 
+        schemeCode: '',
         schemeName: '',
         shcemeQuantity: 0,
         totalAmount: 0,
         deliveryCharges: 0,
         discount: 0,
-
         remark: '',
     })
 
     // get the order details
-    const { isLoading, isFetching, data } = useGetUnauthOrderDetailsByIdQuery(
-        '65febb7970e3ea8ef928c50a'
-    )
+    const { isLoading, isFetching, data } = useGetOrderByIdQuery(ORDER_ID, {
+        skip: !ORDER_ID,
+    })
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
@@ -95,6 +95,7 @@ const WarehouseFirstCallPageWrapper = () => {
                 pincode: orderData?.pincodeLabel,
                 area: orderData?.areaLabel,
                 address: orderData?.autoFillingShippingAddress,
+                schemeCode: orderData?.schemeCode,
                 schemeName: orderData?.schemeName,
                 shcemeQuantity: orderData?.shcemeQuantity,
                 totalAmount: orderData?.totalAmount,
@@ -166,22 +167,34 @@ const WarehouseFirstCallPageWrapper = () => {
         address: orderDetails?.address,
         remark: orderDetails?.remark,
         callbackDate: '',
-        status: getBtnStatus,
+        status: '',
     }
+
+    const validationSchema = object({
+        remark: string().required('remark is required'),
+        callbackDate: string().when(['status'], (status, schema) => {
+            return status[0] === 'CALLBACK'
+                ? schema.required('Callback data is required')
+                : schema.notRequired()
+        }),
+    })
 
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         setApiStatus(true)
 
-        const formatedValues = {
-            address: values?.address,
-            remark: values?.remark,
-            callbackDate: values?.callbackDate,
-            status: getBtnStatus,
-        }
+        // const formatedValues = {
+        //     address: values?.address,
+        //     remark: values?.remark,
+        //     callbackDate: values?.callbackDate,
+        //     status: values.status,
+        // }
 
         setTimeout(() => {
-            updateWarehouseFirstCall(formatedValues).then((res: any) => {
+            updateWarehouseFirstCall({
+                id: ORDER_ID,
+                body: values,
+            }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', res?.data?.message)
@@ -204,7 +217,7 @@ const WarehouseFirstCallPageWrapper = () => {
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
-                // validationSchema={validationSchema}
+                validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => {
@@ -214,8 +227,6 @@ const WarehouseFirstCallPageWrapper = () => {
                             orderDetails={orderDetails}
                             column={columns}
                             apiStatus={apiStatus}
-                            getBtnStatus={getBtnStatus}
-                            setGetBtnStatus={setGetBtnStatus as any}
                         />
                     )
                 }}

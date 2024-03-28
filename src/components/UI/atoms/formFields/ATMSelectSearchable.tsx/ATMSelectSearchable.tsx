@@ -221,7 +221,6 @@ const ATMSelectSearchable = ({
             return selectOptions?.find((option) => option.value === value) || ''
         }
     }
-    console.log(name,"name")
     return (
         <div className={`${componentClass} relative`} hidden={isHidden}>
             <div
