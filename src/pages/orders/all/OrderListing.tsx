@@ -63,6 +63,7 @@ import { handleValidNumber } from 'src/utils/methods/numberMethods'
 import { useGetPaginationComplaintQuery } from 'src/services/CallerService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FirstCallApprovalStatus } from 'src/pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
+import { statusProps } from '..'
 // Types
 type BarcodeListResponseType = {
     _id: string
@@ -229,10 +230,10 @@ const OrderListing = ({
                         fieldName: 'approved',
                         value: true,
                     },
-                    {
-                        fieldName: 'isOrderAssigned',
-                        value: false,
-                    },
+                    // {
+                    //     fieldName: 'isOrderAssigned',
+                    //     value: false,
+                    // },
                 ]
                 setFilterBy(filterdefault)
                 return
@@ -1128,6 +1129,21 @@ const OrderListing = ({
             })
     }
 
+    const getBackGroundColorByStatus = (status: string) => {
+        switch (status) {
+            case statusProps.fresh:
+                return 'bg-green-200'
+            case statusProps.pnd:
+                return 'bg-amber-200'
+
+            case statusProps.urgent:
+                return 'bg-rose-300'
+
+            default:
+                break
+        }
+    }
+
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.length
     }
@@ -1252,6 +1268,9 @@ const OrderListing = ({
                         onRowSelect={(selectedRows) => {
                             setSelectedRows(selectedRows)
                         }}
+                        rowExtraClasses={(row) =>
+                            getBackGroundColorByStatus(row?.status)
+                        }
                         isLoading={isTableLoading}
                     />
                 </div>
