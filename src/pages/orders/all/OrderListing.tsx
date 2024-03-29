@@ -62,7 +62,12 @@ import { BiSearch } from 'react-icons/bi'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
 import { useGetPaginationComplaintQuery } from 'src/services/CallerService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import { FirstCallApprovalStatus } from 'src/pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
+
+enum FirstCallApprovalStatus {
+    'APPROVED' = 'APPROVED',
+    'CANCEL' = 'CANCEL',
+}
+
 // Types
 type BarcodeListResponseType = {
     _id: string

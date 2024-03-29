@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -6,7 +5,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
@@ -18,6 +17,7 @@ import {
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import AssignedOrderListFilterFormDialogWrapper from './assignedOrderFilter/AssignedOrderListFilterFormDialogWrapper'
 
 // |-- Types --|
 type Props = {
@@ -26,8 +26,14 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Props) => {
+const WarehouseAssignedOrdersListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
     const warehouseAssignedOrdersState: any = useSelector(
         (state: RootState) => state.warehouseOrdersAssigned
     )
@@ -40,7 +46,7 @@ const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Prop
         <div className="px-4 h-[calc(100vh-55px)] bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                {/* <ATMPageHeading> Call Management </ATMPageHeading> */}
+                <ATMPageHeading> Warehouse First Call Orders </ATMPageHeading>
                 {/* <button
                     type="button"
                     onClick={() => navigate('add')}
@@ -62,8 +68,18 @@ const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Prop
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <AssignedOrderListFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto h-full ">

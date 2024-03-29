@@ -26,6 +26,7 @@ import { useParams } from 'react-router-dom'
 import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 export enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -43,8 +44,22 @@ const WarehouseAssignedOrderListingWrapper = () => {
     )
     const [warehousefirstCallApproval] =
         useApprovedWHFirstCallApprovalMutation()
-    const { page, rowsPerPage, items, searchValue } =
-        warehouseAssignedOrdersState
+    const {
+        page,
+        rowsPerPage,
+        items,
+        searchValue,
+        // filter value
+        schemeValueFilter,
+        // orderTypeValueFilter,
+        stateValueFilter,
+        districtValueFilter,
+        langBarrierValueFilter,
+        pndOrderValueFilter,
+        dateFilter,
+        callbackDateFilter,
+    } = warehouseAssignedOrdersState
+
     const columns: columnTypes[] = [
         {
             field: 'firstCallApproval',
@@ -90,7 +105,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                         denyButtonColor: '#F1948A',
 
                                         next: (res) => {
-
                                             if (res.isConfirmed) {
                                                 return res.isConfirmed
                                                     ? handleApproval(
@@ -127,8 +141,11 @@ const WarehouseAssignedOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <Link to={`/warehouse-first-call/${row?._id}`}> 
-                <span className="text-primary-main"># {row.orderNumber}</span> </Link>
+                <Link to={`/warehouse-first-call/${row?._id}`}>
+                    <span className="text-primary-main">
+                        # {row.orderNumber}
+                    </span>{' '}
+                </Link>
             ),
         },
         {
@@ -523,6 +540,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
         )
     }
     const { userData }: any = useSelector((state: RootState) => state?.auth)
+
     const { data, isFetching, isLoading } = useGetOrderQuery({
         limit: rowsPerPage,
         searchValue: searchValue,
@@ -532,8 +550,18 @@ const WarehouseAssignedOrderListingWrapper = () => {
             { fieldName: 'assignWarehouseId', value: warehouseId },
             { fieldName: 'companyId', value: userData?.companyId },
             { fieldName: 'firstCallApproval', value: false },
+            { fieldName: 'schemeId', value: schemeValueFilter },
+            // { fieldName: 'orderType', value: orderTypeValueFilter },
+            { fieldName: 'stateId', value: stateValueFilter },
+            { fieldName: 'districtId', value: districtValueFilter },
+            {
+                fieldName: 'languageBarrier',
+                value: langBarrierValueFilter ? 'LANGUAGEBARRIER' : '',
+            },
+            { fieldName: 'status', value: pndOrderValueFilter ? 'PND' : '' },
         ],
-        dateFilter: {},
+        dateFilter: dateFilter || {},
+        callbackDateFilter: callbackDateFilter || {},
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
@@ -552,13 +580,13 @@ const WarehouseAssignedOrderListingWrapper = () => {
     }, [isLoading, isFetching, data])
 
     return (
-        <>
+        <SideNavLayout>
             <WarehouseAssignedOrdersListing
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
             />
-        </>
+        </SideNavLayout>
     )
 }
 
