@@ -309,14 +309,9 @@ const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
                     'regd_address.pincode',
                     pincodeData?._id
                 )
-            } else {
-                setIsOpenSearchPincode((prev: any) => {
-                    return {
-                        ...prev,
-                        'regd_address.pincode': true,
-                    }
-                })
-            }
+                formikProps.setTouched({});
+
+            } 
         }
     }, [pincodeData, isDataLoading])
 
@@ -351,14 +346,9 @@ const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
                     'billing_address.pincode',
                     pincodeDataBilling?._id
                 )
-            } else {
-                setIsOpenSearchPincode((prev: any) => {
-                    return {
-                        ...prev,
-                        'billing_address.pincode': true,
-                    }
-                })
-            }
+                formikProps.setTouched({});
+
+            } 
         }
     }, [pincodeDataBilling, isLoadingPincodeDataBilling])
 

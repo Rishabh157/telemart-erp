@@ -167,7 +167,7 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
     )
     //billing state
     const { stateByCountry: StateDataB } = useStatesByCountry(
-        formikProps.values.billingAddress.country
+        formikProps.values?.billingAddress?.country
     )
     //registraion
     const { stateDistricts } = useStateDistricts(
@@ -310,13 +310,7 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
                     'registrationAddress.pincode',
                     pincodeData?._id
                 )
-            } else {
-                setIsOpenSearchPincode((prev: any) => {
-                    return {
-                        ...prev,
-                        'registrationAddress.pincode': true,
-                    }
-                })
+                formikProps.setTouched({})
             }
         }
     }, [pincodeData, isDataLoading])
@@ -352,13 +346,7 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
                     'billingAddress.pincode',
                     pincodeDataBilling?._id
                 )
-            } else {
-                setIsOpenSearchPincode((prev: any) => {
-                    return {
-                        ...prev,
-                        'billingAddress.pincode': true,
-                    }
-                })
+                formikProps.setTouched({})
             }
         }
     }, [pincodeDataBilling, isLoadingPincodeDataBilling])
