@@ -19,7 +19,7 @@ type Props = {
 
 export type FormInitialValues = {
     complaintNumber: number
-    orderNo: number
+    orderNo: number | string
     schemeName: string
     schemeCode: string
     orderStatus: string

@@ -8,7 +8,7 @@
 // |-- Types --|
 export type OrderListResponse = {
     _id: string
-    orderNumber: number
+    orderNumber: number | string
     inquiryNumber: string
     assignDealerId: string | null
     assignWarehouseId: string | null

@@ -68,12 +68,12 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                     </h1>
 
                     <div className="grid grid-cols-4 gap-x-4 gap-y-2">
-                        <div className="flex gap-x-24">
+                        <div className="flex gap-x-28">
                             <span className="text-slate-700 capitalize text-xs">
                                 Order No.
                             </span>
                             <span className="text-slate-700 capitalize text-xs">
-                                {orderNumber}
+                                {orderNumber || '-'}
                             </span>
                         </div>
 
@@ -97,7 +97,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                             </span>
                         </div>
 
-                        <div className="flex gap-x-16 mb-2">
+                        <div className="flex gap-x-32 mb-2">
                             <span className="text-slate-700 capitalize text-xs">
                                 Price
                             </span>
@@ -271,7 +271,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                             }}
                         />
 
-                        <div className="flex gap-x-28">
+                        <div className="flex gap-x-[6.7rem]">
                             <span className="text-slate-700 capitalize text-xs">
                                 Address
                             </span>
@@ -282,6 +282,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                                     label=""
                                     placeholder="address"
                                     className="rounded w-[150%]"
+                                    minRows={4}
                                     onChange={(newValue) =>
                                         setFieldValue('address', newValue)
                                     }
@@ -424,7 +425,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
             </div>
 
             {/* Buttons */}
-            <div className="mt-5 flex gap-x-8">
+            <div className="mt-5 flex gap-x-6">
                 {/* Callback */}
                 <ATMLoadingButton
                     disabled={false}
@@ -436,7 +437,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'CALLBACK'
                             ? 'bg-primary-main'
-                            : 'bg-gray-600 text-black opacity-80'
+                            : 'bg-gray-600 text-white opacity-80'
                     }`}
                 >
                     CallBack
@@ -453,7 +454,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'APPROVED'
                             ? 'bg-primary-main'
-                            : 'bg-gray-600 text-black opacity-80'
+                            : 'bg-gray-600 text-white opacity-80'
                     }`}
                 >
                     Approved
@@ -468,7 +469,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'LANGUAGEBARRIER'
                             ? 'bg-primary-main'
-                            : 'bg-gray-600 text-black opacity-80'
+                            : 'bg-gray-600 text-white opacity-80'
                     }`}
                 >
                     Language Barrier
@@ -482,7 +483,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'CANCEL'
                             ? 'bg-primary-main'
-                            : 'bg-gray-600 text-black opacity-80'
+                            : 'bg-gray-600 text-white opacity-80'
                     }`}
                 >
                     Cancel
