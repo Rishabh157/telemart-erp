@@ -555,10 +555,10 @@ const WarehouseAssignedOrderListingWrapper = () => {
             { fieldName: 'stateId', value: stateValueFilter },
             { fieldName: 'districtId', value: districtValueFilter },
             {
-                fieldName: 'languageBarrier',
-                value: langBarrierValueFilter ? 'LANGUAGEBARRIER' : '',
+                fieldName: 'firstCallState',
+                value: langBarrierValueFilter ? ['LANGUAGEBARRIER'] : '',
             },
-            { fieldName: 'status', value: pndOrderValueFilter ? 'PND' : '' },
+            { fieldName: 'status', value: pndOrderValueFilter ? ['PND'] : '' },
         ],
         dateFilter: dateFilter || {},
         callbackDateFilter: callbackDateFilter || {},
