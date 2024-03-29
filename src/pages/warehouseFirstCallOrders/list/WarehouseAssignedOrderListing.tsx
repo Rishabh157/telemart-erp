@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -6,7 +5,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
@@ -18,6 +17,9 @@ import {
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import AssignedOrderListFilterFormDialogWrapper from './assignedOrderFilter/AssignedOrderListFilterFormDialogWrapper'
+import { statusProps } from 'src/pages/orders'
+import { OrderListResponse } from 'src/models'
 
 // |-- Types --|
 type Props = {
@@ -26,8 +28,14 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Props) => {
+const WarehouseAssignedOrdersListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
     const warehouseAssignedOrdersState: any = useSelector(
         (state: RootState) => state.warehouseOrdersAssigned
     )
@@ -35,12 +43,33 @@ const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Prop
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         warehouseAssignedOrdersState
 
+    const getBackGroundColorByStatus = (status: string) => {
+        // if (status?.firstCallState === 'LANGUAGEBARRIER') {
+        //     return 'bg-green-200'
+        // }
+        console.log('status: ', status)
+        switch (status) {
+            // case statusProps.fresh:
+            //     return 'bg-green-200'
+            // console.log('here pnd')
+            case statusProps.pnd:
+                console.log('here pnd')
+                return 'bg-amber-200'
+            case statusProps.urgent:
+                console.log('here urgent')
+                return 'bg-rose-300'
+            default:
+                console.log('here default')
+                break
+        }
+    }
+
     return (
         // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
         <div className="px-4 h-[calc(100vh-55px)] bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                {/* <ATMPageHeading> Call Management </ATMPageHeading> */}
+                <ATMPageHeading> Warehouse First Call Orders </ATMPageHeading>
                 {/* <button
                     type="button"
                     onClick={() => navigate('add')}
@@ -62,8 +91,18 @@ const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Prop
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <AssignedOrderListFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto h-full ">
@@ -78,6 +117,9 @@ const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Prop
                         setShowDropdown={setShowDropdown}
                         // extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
+                        rowExtraClasses={(row: OrderListResponse) => {
+                            getBackGroundColorByStatus(row?.status)
+                        }}
                     />
                 </div>
 

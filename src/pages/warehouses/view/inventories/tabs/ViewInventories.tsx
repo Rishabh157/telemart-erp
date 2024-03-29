@@ -44,7 +44,7 @@ const ViewInventories = (props: Props) => {
         {
             label: 'orders',
             icon: BsArrowRepeat,
-            path: 'warehouse-orders/assigned-order',
+            path: 'warehouse-orders/confirmed-order',
             name: '',
         },
     ]

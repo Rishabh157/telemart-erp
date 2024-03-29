@@ -25,7 +25,11 @@ import { useParams } from 'react-router-dom'
 import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import { FirstCallApprovalStatus } from '../../assignedOrders/list/WarehouseAssignedOrderWrapper'
+
+enum FirstCallApprovalStatus {
+    'APPROVED' = 'APPROVED',
+    'CANCEL' = 'CANCEL',
+}
 
 const WarehouseConfirmedOrderWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -83,7 +87,6 @@ const WarehouseConfirmedOrderWrapper = () => {
                                         denyButtonText: 'Order cancled',
                                         confirmButtonColor: '#239B56',
                                         denyButtonColor: '#F1948A',
-
                                         next: (res) => {
                                             if (res.isConfirmed) {
                                                 return res.isConfirmed

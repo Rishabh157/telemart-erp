@@ -169,7 +169,7 @@ export const navigation: NavItemType[] = [
     {
         label: 'WH First Call',
         icon: FiPhoneCall,
-        path: '/calling-outcall?phone=9009648665&userid=rishabh.gour',
+        path: '/warehouse-first-call-orders',
         name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
     },
     {

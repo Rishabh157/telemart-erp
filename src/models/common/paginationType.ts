@@ -27,6 +27,11 @@ export type PaginationType = {
     isPaginationRequired?: boolean
     isOrderOrInquiry?: any
     getBatchData?: boolean
+    callbackDateFilter?: {
+        start_date?: string
+        end_date?: string
+        dateFilterKey?: string
+    }
 }
 
 // |-- Types --|
