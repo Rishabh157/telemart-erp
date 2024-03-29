@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useGetAllInfoByPincodeAuthMutation } from 'src/services/PinCodeService'
 
 const useAllInfoByPincode = (pincode?: string) => {
-    const [pincodeData, setPincodeData] = useState<any>([])
+    const [pincodeData, setPincodeData] = useState<any>(null)
 
     const [getAllInfoByPincode, getAllInfoByPincodeInfo] =
         useGetAllInfoByPincodeAuthMutation()
