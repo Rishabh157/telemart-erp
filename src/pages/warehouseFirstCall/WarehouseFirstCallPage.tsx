@@ -73,7 +73,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                                 Order No.
                             </span>
                             <span className="text-slate-700 capitalize text-xs">
-                                {orderNumber}
+                                {orderNumber || '-'}
                             </span>
                         </div>
 
@@ -97,7 +97,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             </span>
                         </div>
 
-                        <div className="flex gap-x-16 mb-2">
+                        <div className="flex gap-x-28 mb-2">
                             <span className="text-slate-700 capitalize text-xs">
                                 Price
                             </span>
@@ -271,7 +271,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             }}
                         />
 
-                        <div className="flex gap-x-20">
+                        <div className="flex gap-x-[5.4rem]">
                             <span className="text-slate-700 capitalize text-xs">
                                 Address
                             </span>
@@ -281,6 +281,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                                     value={values.address}
                                     label=""
                                     placeholder="address"
+                                    minRows={4}
                                     className="rounded w-[150%]"
                                     onChange={(newValue) =>
                                         setFieldValue('address', newValue)
@@ -436,7 +437,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'CALLBACK'
                             ? 'bg-primary-main'
-                            : 'bg-gray-600 text-black opacity-80'
+                            : 'bg-gray-600 text-white opacity-80'
                     }`}
                 >
                     CallBack
@@ -453,7 +454,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'APPROVED'
                             ? 'bg-primary-main'
-                            : 'bg-gray-600 text-black opacity-80'
+                            : 'bg-gray-600 text-white opacity-80'
                     }`}
                 >
                     Approved
@@ -468,7 +469,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'LANGUAGEBARRIER'
                             ? 'bg-primary-main'
-                            : 'bg-gray-600 text-black opacity-80'
+                            : 'bg-gray-600 text-white opacity-80'
                     }`}
                 >
                     Language Barrier
@@ -482,7 +483,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'CANCEL'
                             ? 'bg-primary-main'
-                            : 'bg-gray-600 text-black opacity-80'
+                            : 'bg-gray-600 text-white opacity-80'
                     }`}
                 >
                     Cancel

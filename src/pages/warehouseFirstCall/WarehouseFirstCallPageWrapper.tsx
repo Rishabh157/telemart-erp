@@ -20,10 +20,10 @@ export type FormInitialValues = {
 }
 
 export interface OrderDetailsPropsTypes {
-    orderNumber: string
+    orderNumber: string | number
     assignDealerLabel: string
     name: string
-    price: string
+    price: number
     contactNumber: string
     mobileNumber: string
     alternateNumber: string
@@ -34,7 +34,6 @@ export interface OrderDetailsPropsTypes {
     pincode: string
     area: string
     address: string
-
     schemeCode: string
     schemeName: string
     shcemeQuantity: number
@@ -52,7 +51,7 @@ const WarehouseFirstCallPageWrapper = () => {
         orderNumber: '',
         assignDealerLabel: '',
         name: '',
-        price: '',
+        price: 0,
         contactNumber: '',
         mobileNumber: '',
         alternateNumber: '',
@@ -63,7 +62,6 @@ const WarehouseFirstCallPageWrapper = () => {
         pincode: '',
         area: '',
         address: '',
-
         schemeCode: '',
         schemeName: '',
         shcemeQuantity: 0,
@@ -81,10 +79,10 @@ const WarehouseFirstCallPageWrapper = () => {
         if (!isLoading && !isFetching) {
             const orderData: OrderListResponse = data?.data
             setOrderDetails({
-                orderNumber: orderData.orderNumber + '',
+                orderNumber: orderData.orderNumber,
                 assignDealerLabel: orderData?.assignDealerLabel,
                 name: orderData?.customerName,
-                price: orderData?.price + '',
+                price: orderData?.price || 0,
                 contactNumber: orderData?.mobileNo,
                 mobileNumber: orderData?.mobileNo,
                 alternateNumber: orderData?.alternateNo,
@@ -97,9 +95,9 @@ const WarehouseFirstCallPageWrapper = () => {
                 address: orderData?.autoFillingShippingAddress,
                 schemeCode: orderData?.schemeCode,
                 schemeName: orderData?.schemeName,
-                shcemeQuantity: orderData?.shcemeQuantity,
-                totalAmount: orderData?.totalAmount,
-                deliveryCharges: orderData?.deliveryCharges,
+                shcemeQuantity: orderData?.shcemeQuantity || 0,
+                totalAmount: orderData?.totalAmount || 0,
+                deliveryCharges: orderData?.deliveryCharges || 0,
                 discount: orderData?.deliveryCharges || 0,
             })
         }

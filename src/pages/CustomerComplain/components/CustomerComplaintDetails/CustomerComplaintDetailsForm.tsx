@@ -90,7 +90,7 @@ const CustomerComplaintDetailsForm = ({
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-end">
-                                    {values?.orderNo}
+                                    {values?.orderNo || '-'}
                                 </span>
                             </div>
                             <div className="flex items-center gap-x-4">

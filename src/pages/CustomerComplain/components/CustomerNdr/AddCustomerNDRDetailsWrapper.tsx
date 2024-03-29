@@ -18,7 +18,7 @@ export type FormInitialValues = {
     mobileNumber: string
     alternateNumber1: string
     alternateNumber2: string
-    orderNo: number
+    orderNo: number | string
     orderStatus: string
     schemeName: string
     schemeCode: string
