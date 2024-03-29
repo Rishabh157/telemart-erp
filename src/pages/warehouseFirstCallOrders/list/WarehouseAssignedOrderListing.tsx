@@ -43,24 +43,16 @@ const WarehouseAssignedOrdersListing = ({
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         warehouseAssignedOrdersState
 
-    const getBackGroundColorByStatus = (status: string) => {
-        // if (status?.firstCallState === 'LANGUAGEBARRIER') {
-        //     return 'bg-green-200'
-        // }
-        console.log('status: ', status)
-        switch (status) {
-            // case statusProps.fresh:
-            //     return 'bg-green-200'
-            // console.log('here pnd')
+    const getBackGroundColorByStatus = (row: OrderListResponse) => {
+        if (row?.firstCallState === 'LANGUAGEBARRIER') {
+            return 'bg-green-200'
+        }
+        switch (row?.status) {
             case statusProps.pnd:
-                console.log('here pnd')
                 return 'bg-amber-200'
             case statusProps.urgent:
-                console.log('here urgent')
                 return 'bg-rose-300'
             default:
-                console.log('here default')
-                break
         }
     }
 
@@ -80,6 +72,16 @@ const WarehouseAssignedOrdersListing = ({
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+                <div className="flex p-4 gap-x-3 ">
+                    <span>language Barrier</span>
+                    <span className=" rounded h-[20px] w-[20px] bg-green-200"></span>
+
+                    <span>PND</span>
+                    <span className=" rounded h-[20px] w-[20px] bg-amber-300"></span>
+
+                    <span>Urjent</span>
+                    <span className=" rounded h-[20px] w-[20px] bg-rose-300"></span>
+                </div>
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
@@ -114,11 +116,12 @@ const WarehouseAssignedOrdersListing = ({
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        rowClassName="px-2  py-2"
                         setShowDropdown={setShowDropdown}
                         // extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                         rowExtraClasses={(row: OrderListResponse) => {
-                            getBackGroundColorByStatus(row?.status)
+                            return getBackGroundColorByStatus(row)
                         }}
                     />
                 </div>
