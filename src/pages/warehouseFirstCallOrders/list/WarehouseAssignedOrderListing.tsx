@@ -18,6 +18,8 @@ import {
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import AssignedOrderListFilterFormDialogWrapper from './assignedOrderFilter/AssignedOrderListFilterFormDialogWrapper'
+import { statusProps } from 'src/pages/orders'
+import { OrderListResponse } from 'src/models'
 
 // |-- Types --|
 type Props = {
@@ -40,6 +42,27 @@ const WarehouseAssignedOrdersListing = ({
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         warehouseAssignedOrdersState
+
+    const getBackGroundColorByStatus = (status: string) => {
+        // if (status?.firstCallState === 'LANGUAGEBARRIER') {
+        //     return 'bg-green-200'
+        // }
+        console.log('status: ', status)
+        switch (status) {
+            // case statusProps.fresh:
+            //     return 'bg-green-200'
+            // console.log('here pnd')
+            case statusProps.pnd:
+                console.log('here pnd')
+                return 'bg-amber-200'
+            case statusProps.urgent:
+                console.log('here urgent')
+                return 'bg-rose-300'
+            default:
+                console.log('here default')
+                break
+        }
+    }
 
     return (
         // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
@@ -94,6 +117,9 @@ const WarehouseAssignedOrdersListing = ({
                         setShowDropdown={setShowDropdown}
                         // extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
+                        rowExtraClasses={(row: OrderListResponse) => {
+                            getBackGroundColorByStatus(row?.status)
+                        }}
                     />
                 </div>
 

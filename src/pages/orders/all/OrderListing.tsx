@@ -1134,20 +1134,18 @@ const OrderListing = ({
             })
     }
 
-    const getBackGroundColorByStatus = (status: string) => {
-        switch (status) {
-            case statusProps.fresh:
-                return 'bg-green-200'
-            case statusProps.pnd:
-                return 'bg-amber-200'
-
-            case statusProps.urgent:
-                return 'bg-rose-300'
-
-            default:
-                break
-        }
-    }
+    // const getBackGroundColorByStatus = (status: string) => {
+    //     switch (status) {
+    //         case statusProps.fresh:
+    //             return 'bg-green-200'
+    //         case statusProps.pnd:
+    //             return 'bg-amber-200'
+    //         case statusProps.urgent:
+    //             return 'bg-rose-300'
+    //         default:
+    //             break
+    //     }
+    // }
 
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.length
@@ -1273,9 +1271,9 @@ const OrderListing = ({
                         onRowSelect={(selectedRows) => {
                             setSelectedRows(selectedRows)
                         }}
-                        rowExtraClasses={(row) =>
-                            getBackGroundColorByStatus(row?.status)
-                        }
+                        // rowExtraClasses={(row) =>
+                        //     getBackGroundColorByStatus(row?.status)
+                        // }
                         isLoading={isTableLoading}
                     />
                 </div>
