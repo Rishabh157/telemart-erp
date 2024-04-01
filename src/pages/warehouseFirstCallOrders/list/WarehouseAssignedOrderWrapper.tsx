@@ -18,7 +18,7 @@ import { OrderListResponse } from 'src/models/Order.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useGetOrderQuery,
+    useGetWHFristCallAssignedOrderQuery,
     useApprovedWHFirstCallApprovalMutation,
 } from 'src/services/OrderService'
 import moment from 'moment'
@@ -547,32 +547,37 @@ const WarehouseAssignedOrderListingWrapper = () => {
     }
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
-    const { data, isFetching, isLoading } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            { fieldName: 'assignWarehouseId', value: warehouseId },
-            { fieldName: 'companyId', value: userData?.companyId },
-            { fieldName: 'firstCallApproval', value: false },
-            { fieldName: 'schemeId', value: schemeValueFilter },
-            // { fieldName: 'orderType', value: orderTypeValueFilter },
-            { fieldName: 'stateId', value: stateValueFilter },
-            { fieldName: 'districtId', value: districtValueFilter },
-            {
-                fieldName: 'firstCallState',
-                value: langBarrierValueFilter ? ['LANGUAGEBARRIER'] : '',
-            },
-            { fieldName: 'status', value: pndOrderValueFilter ? ['PND'] : '' },
-        ],
-        dateFilter: dateFilter || {},
-        callbackDateFilter: callbackDateFilter || {},
-        callCenterId: callCenterManagerValueFilter || null,
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { data, isFetching, isLoading } = useGetWHFristCallAssignedOrderQuery(
+        {
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['didNo', 'mobileNo'],
+            page: page,
+            filterBy: [
+                { fieldName: 'assignWarehouseId', value: warehouseId },
+                { fieldName: 'companyId', value: userData?.companyId },
+                { fieldName: 'firstCallApproval', value: false },
+                { fieldName: 'schemeId', value: schemeValueFilter },
+                // { fieldName: 'orderType', value: orderTypeValueFilter },
+                { fieldName: 'stateId', value: stateValueFilter },
+                { fieldName: 'districtId', value: districtValueFilter },
+                {
+                    fieldName: 'firstCallState',
+                    value: langBarrierValueFilter ? ['LANGUAGEBARRIER'] : '',
+                },
+                {
+                    fieldName: 'status',
+                    value: pndOrderValueFilter ? ['PND'] : '',
+                },
+            ],
+            dateFilter: dateFilter || {},
+            callbackDateFilter: callbackDateFilter || {},
+            callCenterId: callCenterManagerValueFilter || null,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }
+    )
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
