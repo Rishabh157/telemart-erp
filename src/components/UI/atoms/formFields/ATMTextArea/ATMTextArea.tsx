@@ -33,7 +33,7 @@ const ATMTextArea = ({
     required = false,
     value,
     onChange,
-    className,
+    className='mt-2',
     placeholder,
     minRows = 2,
     labelClass = ' font-medium',

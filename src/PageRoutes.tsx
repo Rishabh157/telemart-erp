@@ -282,6 +282,7 @@ import WarehouseFirstCallPageWrapper from './pages/warehouseFirstCallOrders/ware
 import WarehouseFirstCallDialerPageWrapper from './pages/warehouseFirstCallDialerPage/WarehouseFirstCallDialerPageWrapper'
 // import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
 import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
+import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerNDRDetailsWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2397,6 +2398,16 @@ const PageRoutes = () => {
                             permission={
                                 UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN
                             }
+                        />
+                    }
+                />
+                {/* TODO */}
+                <Route
+                    path="media/dealer-ndrcalling"
+                    element={
+                        <Authorization
+                            children={<AddDealerNDRDetailsWrapper />}
+                            permission={UserModuleNameTypes.NAV_DEALER_NDR}
                         />
                     }
                 />

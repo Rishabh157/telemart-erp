@@ -773,6 +773,9 @@ export enum customerPageUserAccessType {
 export enum inboundUserAccessType {
     NAV_INBOUND = 'NAV_INBOUND',
 }
+export enum dealerNDRUserAccessType {
+    NAV_DEALER_NDR = 'NAV_DEALER_NDR',
+}
 export enum assetsUserAccessType {
     NAV_ASSETS = 'NAV_ASSETS',
 }
@@ -1052,6 +1055,7 @@ export const UserModuleNameTypes = {
     ...competitorUserAccessType,
     ...customerPageUserAccessType,
     ...inboundUserAccessType,
+    ...dealerNDRUserAccessType,
     ...didManagementUserAccessType,
     ...slotManagementUserAccessType,
     ...tapeManagementUserAccessType,
