@@ -216,6 +216,30 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+
+
+
+
+        //Dealer Ndr gett data in 
+        // /v1/order-inquiry/get-dealer-ndr/:phno
+        getOrderByNumberUsingForNdrDealer: builder.query({
+            // providesTags: ['order'],
+            query: (phoneNumber: string | null) => ({
+                url: `/order-inquiry/get-dealer-ndr/${phoneNumber}`,
+                method: 'GET',
+            }),
+        }),
+        updateNdrDealerDialer: builder.mutation({
+            invalidatesTags: ['order'],
+            query: ({ id, body }) => ({
+                url: `order-inquiry/update-dealer-ndr/${id}`,
+                method: 'PUT',
+                body,
+            }),
+        }),
+
+        // /v1/order-inquiry/update-dealer-ndr/:id
     }),
 })
 export const {
@@ -239,4 +263,6 @@ export const {
     useGetWHFirstCallOrderDetailsQuery,
     useUpdateWHFirstCallUnauthOrderMutation,
     useGetWHFristCallAssignedOrderQuery,
+    useGetOrderByNumberUsingForNdrDealerQuery,
+    useUpdateNdrDealerDialerMutation
 } = OrderApi

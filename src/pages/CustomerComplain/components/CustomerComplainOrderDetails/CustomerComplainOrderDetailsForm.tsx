@@ -371,15 +371,15 @@ const CustomerComplainOrderDetailsForm = ({
                 >
                     Create Complaint
                 </button>
-
+                {/* 
                 <button
-                    disabled
+                disabled
                     type="button"
                     className="bg-[#0c56aa] text-[#bfdbff] hover:text-white px-1 py-1 rounded font-semibold text-xs cursor-not-allowed"
                     onClick={() => setIsOpenCustomerNDRDetailModel(true)}
                 >
                     Create NDR
-                </button>
+                </button> */}
 
                 {/* Create NDR Form */}
                 <DialogLogBox

@@ -75,6 +75,13 @@ const mediaNavigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_SLOT_MANAGEMENT,
     },
     {
+        label: 'Dealer Ndr',
+        icon: MdViewTimeline,
+        path: 'dealer-ndrcalling?phone=9009648665&user=rishabh.gour',
+        // ?phone={{PHONENUMBER}}&user={{USERLOGIN}}&postalcode={{postalcode}}&verve=111&dstphone={{dnis}}&campaignId={{CAMPNAME}}
+        name: UserModuleNameTypes.NAV_DEALER_NDR,
+    },
+    {
         label: 'Inbound',
         icon: MdViewTimeline,
         path: 'caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
