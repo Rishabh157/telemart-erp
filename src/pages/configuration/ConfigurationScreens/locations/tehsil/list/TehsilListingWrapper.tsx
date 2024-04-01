@@ -18,9 +18,7 @@ import TehsilListing from './TehsilListing'
 import useTehsilByDistrict from 'src/hooks/useTehsilByDistrict'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-import {
-    setItems
-} from 'src/redux/slices/tehsilSlice'
+import { setItems } from 'src/redux/slices/tehsilSlice'
 
 const TehsilListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()

@@ -26,6 +26,7 @@ type Props = {
     OnSearchChange?: (newValue: string) => void
     onListItemClick?: (item: any) => void
     disabled: boolean
+    isAddButton: boolean
 }
 
 const LocationListView = ({
@@ -36,6 +37,7 @@ const LocationListView = ({
     OnSearchChange = (newValue: string) => {},
     onListItemClick = (item: any) => {},
     disabled = false,
+    isAddButton = true,
 }: Props) => {
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state.country
@@ -61,16 +63,18 @@ const LocationListView = ({
             <div className="border-b  text-slate-600 px-2 text-lg h-[50px] flex items-center justify-between ">
                 {listHeading}
 
-                <button
-                    type="button"
-                    disabled={disabled}
-                    className="flex items-center gap-2 text-primary-main  text-sm h-[33px] px-4 rounded hover:bg-slate-100"
-                    onClick={() => {
-                        onAddClick()
-                    }}
-                >
-                    + Add
-                </button>
+                {isAddButton && (
+                    <button
+                        type="button"
+                        disabled={disabled}
+                        className="flex items-center gap-2 text-primary-main  text-sm h-[33px] px-4 rounded hover:bg-slate-100"
+                        onClick={() => {
+                            onAddClick()
+                        }}
+                    >
+                        + Add
+                    </button>
+                )}
             </div>
 
             <div className="px-2 border-b">

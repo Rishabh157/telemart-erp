@@ -67,7 +67,7 @@ const ViewRequest = () => {
         navigate(`${pathname}`)
 
         //eslint-disable-next-line
-}, [activeTab])
+    }, [activeTab])
 
     useEffect(() => {
         if (!activeTab) return
@@ -82,7 +82,6 @@ const ViewRequest = () => {
         setActiveTabLabel(labelTab)
     }, [activeTab, allowedTabs])
 
-
     return (
         <SideNavLayout>
             <div className="h-[calc(100vh-55px)]">
@@ -94,7 +93,7 @@ const ViewRequest = () => {
                             active={activeTabIndex}
                             navBtnContainerClassName="bg-red-500"
                         />
-   {/* <div className="py-2 px-4">
+                        {/* <div className="py-2 px-4">
                             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                         </div> */}
                         {/* Children */}

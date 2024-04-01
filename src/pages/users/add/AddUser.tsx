@@ -429,12 +429,14 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                             <div className="flex flex-1">
                                                                 <ATMTextField
                                                                     type="text"
-                                                                    required={false}
+                                                                    required={
+                                                                        false
+                                                                    }
                                                                     name={`allowedIps[${itemIndex}].allowedIp`}
                                                                     value={
                                                                         allowedIp
                                                                     }
-                                                                    textTransform=''
+                                                                    textTransform=""
                                                                     label="Allowed IPS"
                                                                     placeholder="Allowed IPS"
                                                                     onChange={(

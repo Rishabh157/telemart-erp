@@ -52,7 +52,7 @@ export const productReplacementApi = apiSlice.injectEndpoints({
 
         // **** Manger First approval
         productReplacementMangerFirstApproval: builder.mutation({
-            invalidatesTags: ['product-replacement','complaint'],
+            invalidatesTags: ['product-replacement', 'complaint'],
             query: (body) => ({
                 url: '/product-replacement/update-manager',
                 method: 'PUT',
@@ -72,7 +72,7 @@ export const productReplacementApi = apiSlice.injectEndpoints({
 
         // **** Account approval
         addProductReplacementAccountApproval: builder.mutation({
-            invalidatesTags: ['product-replacement','complaint'],
+            invalidatesTags: ['product-replacement', 'complaint'],
             query: (body) => ({
                 url: '/product-replacement/account-approval',
                 method: 'PUT',

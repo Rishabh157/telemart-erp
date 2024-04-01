@@ -24,6 +24,8 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 // import {
 //     setFilterValue,
 //     setSelectedLocationPincode,
@@ -51,7 +53,6 @@ const TehsilListing = ({ tehsils }: Props) => {
     function handleCountryClick(newValue: any) {
         if (selectedLocationTehsil === newValue?.value) {
             dispatch(setSelectedLocationTehsil(null))
-        
         } else {
             dispatch(setSelectedLocationTehsil(newValue?.value))
         }
@@ -81,6 +82,7 @@ const TehsilListing = ({ tehsils }: Props) => {
                     }
                 }}
                 disabled={false}
+                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_TEHSILS_ADD) as boolean}
             />
             {isOpenAddForm && (
                 <AddTehsilWrapper onClose={() => setisOpenAddForm(false)} />

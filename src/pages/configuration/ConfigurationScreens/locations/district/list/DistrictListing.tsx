@@ -25,7 +25,8 @@ import {
 import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
-
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -78,6 +79,7 @@ const DistrictListing = ({ districts }: Props) => {
                     }
                 }}
                 disabled={false}
+                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_DISTRICTS_ADD) as boolean}
             />
 
             {isOpenAddForm && (

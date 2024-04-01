@@ -57,7 +57,7 @@ const ATMMultiSelect = ({
     extraClasses = '',
     options,
     filterOptions,
-    placeholder='',
+    placeholder = '',
     renderOption,
     textTransform = 'firstLetterCapitalonly',
     renderInputValue,

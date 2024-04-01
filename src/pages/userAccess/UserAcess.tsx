@@ -424,7 +424,7 @@ const UserAcess = ({
                                                                     )
                                                                 }
                                                             />
-                                                            
+
                                                             <label
                                                                 className="select-none"
                                                                 htmlFor={`${module?.moduleId}`}

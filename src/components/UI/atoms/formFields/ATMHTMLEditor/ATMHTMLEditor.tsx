@@ -77,11 +77,12 @@ const ATMHTMLEditor = ({ name, value, onChange }: Props) => {
                 <ErrorMessage name={name}>
                     {(errMsg) => {
                         return (
-                               <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span >
-                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
-                        </span>
-                    </p>
+                            <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                                <span>
+                                    {errMsg.charAt(0).toUpperCase() +
+                                        errMsg.slice(1).toLowerCase()}
+                                </span>
+                            </p>
                         )
                     }}
                 </ErrorMessage>

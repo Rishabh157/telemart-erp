@@ -22,6 +22,8 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -69,6 +71,7 @@ const AreaListing = ({ areas }: Props) => {
                     }
                 }}
                 disabled={false}
+                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_AREA_ADD) as boolean}
             />
 
             {isOpenAddForm && (

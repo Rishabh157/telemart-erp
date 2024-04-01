@@ -33,8 +33,8 @@ export const createBatchApi = apiSlice.injectEndpoints({
             }),
         }),
 
-         //***** Get Single Batch *****/
-         getUsersByDistributeDepartment: builder.query({
+        //***** Get Single Batch *****/
+        getUsersByDistributeDepartment: builder.query({
             providesTags: ['batch-order'],
             query: () => ({
                 url: '/user/get-batch-assignes',
@@ -49,5 +49,5 @@ export const {
     useGetBatchesOrderQuery,
     useAddBatchesMutation,
     useGetSingleBatchesOrdersQuery,
-    useGetUsersByDistributeDepartmentQuery
+    useGetUsersByDistributeDepartmentQuery,
 } = createBatchApi

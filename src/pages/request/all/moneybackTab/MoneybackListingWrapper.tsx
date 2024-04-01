@@ -134,18 +134,18 @@ const MoneybackListingWrapper = () => {
         return row?.managerFirstApproval === null
             ? 'Mang. First Pending'
             : row?.managerFirstApproval === false
-                ? 'Mang. First Rejected' :
-                row?.ccApproval === false
-                    ? 'Cc Pending'
-                    : row?.managerSecondApproval === null
-                        ? 'Mang. Second Pending'
-                        : row?.managerSecondApproval === false
-                            ? 'Mang. Second Rejected'
-                            : row?.accountApproval === null
-                                ? 'Account Pending'
-                                : row?.accountApproval === false
-                                    ? 'Account Rejected' : "Account Aaproved"
-
+            ? 'Mang. First Rejected'
+            : row?.ccApproval === false
+            ? 'Cc Pending'
+            : row?.managerSecondApproval === null
+            ? 'Mang. Second Pending'
+            : row?.managerSecondApproval === false
+            ? 'Mang. Second Rejected'
+            : row?.accountApproval === null
+            ? 'Account Pending'
+            : row?.accountApproval === false
+            ? 'Account Rejected'
+            : 'Account Aaproved'
     }
     const columns: columnTypes[] = [
         {
@@ -251,34 +251,34 @@ const MoneybackListingWrapper = () => {
                                 row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
-                                        ? 'error'
-                                        : row?.managerSecondApproval
-                                            ? 'success'
-                                            : row?.managerSecondApproval === null
-                                                ? 'warning'
-                                                : 'error'
+                                    ? 'error'
+                                    : row?.managerSecondApproval
+                                    ? 'success'
+                                    : row?.managerSecondApproval === null
+                                    ? 'warning'
+                                    : 'error'
                             }
                             chipLabel={
                                 row?.managerFirstApproval === null
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === false
-                                        ? 'First Rejected'
-                                        : row?.managerSecondApproval
-                                            ? 'Second Approved'
-                                            : row?.managerSecondApproval === null
-                                                ? 'Second Pending'
-                                                : 'Second Rejected'
+                                    ? 'First Rejected'
+                                    : row?.managerSecondApproval
+                                    ? 'Second Approved'
+                                    : row?.managerSecondApproval === null
+                                    ? 'Second Pending'
+                                    : 'Second Rejected'
                             }
                             disabled={
                                 row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
-                                        ? true
-                                        : row?.ccApproval === false
-                                            ? true
-                                            : row?.managerSecondApproval === null
-                                                ? false
-                                                : true
+                                    ? true
+                                    : row?.ccApproval === false
+                                    ? true
+                                    : row?.managerSecondApproval === null
+                                    ? false
+                                    : true
                             }
                             input={'text'}
                             inputPlaceholder="remark"
@@ -371,15 +371,15 @@ const MoneybackListingWrapper = () => {
                                             row?.accountApproval === null
                                                 ? 'Account Pending'
                                                 : row?.accountApproval
-                                                    ? 'Account Approved'
-                                                    : 'Account Rejected'
+                                                ? 'Account Approved'
+                                                : 'Account Rejected'
                                         }
                                         color={
                                             row?.accountApproval === null
                                                 ? 'warning'
                                                 : row?.accountApproval
-                                                    ? 'success'
-                                                    : 'error'
+                                                ? 'success'
+                                                : 'error'
                                         }
                                         variant="outlined"
                                         size="small"
@@ -400,10 +400,15 @@ const MoneybackListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_CURRENT_STATUS,
             renderCell: (row: MoneybackListResponse) => (
-                <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => {
-                    setMoneyBackData(row)
-                    setShowStatusDialog(true)
-                }}>{getCurrentStatus(row)}</span>
+                <span
+                    className="cursor-pointer bg-slate-50 p-1.5 rounded-md"
+                    onClick={() => {
+                        setMoneyBackData(row)
+                        setShowStatusDialog(true)
+                    }}
+                >
+                    {getCurrentStatus(row)}
+                </span>
             ),
         },
     ]
@@ -446,9 +451,15 @@ const MoneybackListingWrapper = () => {
                 }
             />
             {/* status Dialog  */}
-            {showStatusDialog &&
-                <StatusDialog moneyBackData={moneyBackData} isShow={showStatusDialog} onClose={() => { setShowStatusDialog(false) }} />
-            }
+            {showStatusDialog && (
+                <StatusDialog
+                    moneyBackData={moneyBackData}
+                    isShow={showStatusDialog}
+                    onClose={() => {
+                        setShowStatusDialog(false)
+                    }}
+                />
+            )}
         </>
     )
 }

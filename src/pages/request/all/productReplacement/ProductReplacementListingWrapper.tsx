@@ -46,7 +46,9 @@ const ProductReplacementListingWrapper = () => {
 
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
     const [showStatusDialog, setShowStatusDialog] = useState<boolean>(false)
-    const [productReplacementData, setProductReplacementData] = useState<any>([])
+    const [productReplacementData, setProductReplacementData] = useState<any>(
+        []
+    )
 
     const productReplacementState: any = useSelector(
         (state: RootState) => state.productReplacement
@@ -100,7 +102,7 @@ const ProductReplacementListingWrapper = () => {
             level,
             approve,
             remark,
-            complaintNumber
+            complaintNumber,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -148,18 +150,18 @@ const ProductReplacementListingWrapper = () => {
         return row?.managerFirstApproval === null
             ? 'Mang. First Pending'
             : row?.managerFirstApproval === false
-                ? 'Mang. First Rejected' :
-                row?.ccApproval === false
-                    ? 'Cc Pending'
-                    : row?.managerSecondApproval === null
-                        ? 'Mang. Second Pending'
-                        : row?.managerSecondApproval === false
-                            ? 'Mang. Second Rejected'
-                            : row?.accountApproval === null
-                                ? 'Account Pending'
-                                : row?.accountApproval === false
-                                    ? 'Account Rejected' : "Account Aaproved"
-
+            ? 'Mang. First Rejected'
+            : row?.ccApproval === false
+            ? 'Cc Pending'
+            : row?.managerSecondApproval === null
+            ? 'Mang. Second Pending'
+            : row?.managerSecondApproval === false
+            ? 'Mang. Second Rejected'
+            : row?.accountApproval === null
+            ? 'Account Pending'
+            : row?.accountApproval === false
+            ? 'Account Rejected'
+            : 'Account Aaproved'
     }
     const columns: columnTypes[] = [
         {
@@ -194,7 +196,7 @@ const ProductReplacementListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             renderCell: (row: MoneybackListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
-            )
+            ),
         },
         {
             field: 'complaintNumber',
@@ -514,34 +516,34 @@ const ProductReplacementListingWrapper = () => {
                                 row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
-                                        ? 'error'
-                                        : row?.managerSecondApproval
-                                            ? 'success'
-                                            : row?.managerSecondApproval === null
-                                                ? 'warning'
-                                                : 'error'
+                                    ? 'error'
+                                    : row?.managerSecondApproval
+                                    ? 'success'
+                                    : row?.managerSecondApproval === null
+                                    ? 'warning'
+                                    : 'error'
                             }
                             chipLabel={
                                 row?.managerFirstApproval === null
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === false
-                                        ? 'First Rejected'
-                                        : row?.managerSecondApproval
-                                            ? 'Second Approved'
-                                            : row?.managerSecondApproval === null
-                                                ? 'Second Pending'
-                                                : 'Second Rejected'
+                                    ? 'First Rejected'
+                                    : row?.managerSecondApproval
+                                    ? 'Second Approved'
+                                    : row?.managerSecondApproval === null
+                                    ? 'Second Pending'
+                                    : 'Second Rejected'
                             }
                             disabled={
                                 row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
-                                        ? true
-                                        : row?.ccApproval === false
-                                            ? true
-                                            : row?.managerSecondApproval === null
-                                                ? false
-                                                : true
+                                    ? true
+                                    : row?.ccApproval === false
+                                    ? true
+                                    : row?.managerSecondApproval === null
+                                    ? false
+                                    : true
                             }
                             input={'text'}
                             inputPlaceholder="remark"
@@ -734,9 +736,15 @@ const ProductReplacementListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.PRODUCT_REPLACMENT_CURRENT_STATUS,
             renderCell: (row: MoneybackListResponse) => (
-                <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => { 
-                    setProductReplacementData(row)
-                    setShowStatusDialog(true) }}>{getCurrentStatus(row)}</span>
+                <span
+                    className="cursor-pointer bg-slate-50 p-1.5 rounded-md"
+                    onClick={() => {
+                        setProductReplacementData(row)
+                        setShowStatusDialog(true)
+                    }}
+                >
+                    {getCurrentStatus(row)}
+                </span>
             ),
         },
     ]
@@ -762,10 +770,16 @@ const ProductReplacementListingWrapper = () => {
                     />
                 }
             />
-             {/* status Dialog  */}
-             {showStatusDialog &&
-                <StatusDialog productReplacementData={productReplacementData} isShow={showStatusDialog} onClose={() => { setShowStatusDialog(false) }} />
-            }
+            {/* status Dialog  */}
+            {showStatusDialog && (
+                <StatusDialog
+                    productReplacementData={productReplacementData}
+                    isShow={showStatusDialog}
+                    onClose={() => {
+                        setShowStatusDialog(false)
+                    }}
+                />
+            )}
         </>
     )
 }

@@ -60,8 +60,9 @@ const AddDealerScheme = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()} //handleSubmit
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
-                                    }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                    true ? 'disabled:opacity-25' : ''
+                                }`}
                             >
                                 Add Scheme
                             </button>
@@ -74,7 +75,7 @@ const AddDealerScheme = ({
                                 <>
                                     <div className="flex flex-col gap-y-5 px-3">
                                         {values.details?.map((item, index) => {
-                                            const { schemeId, pincodes  } = item
+                                            const { schemeId, pincodes } = item
                                             return (
                                                 <div
                                                     key={index}
@@ -165,20 +166,20 @@ const AddDealerScheme = ({
                                                     {/* BUTTON - Delete */}
                                                     {values.details?.length >
                                                         1 && (
-                                                            <div>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => {
-                                                                        remove(
-                                                                            index
-                                                                        )
-                                                                    }}
-                                                                    className="p-2 bg-red-500 text-white rounded"
-                                                                >
-                                                                    <MdDeleteOutline className="text-2xl" />
-                                                                </button>
-                                                            </div>
-                                                        )}
+                                                        <div>
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => {
+                                                                    remove(
+                                                                        index
+                                                                    )
+                                                                }}
+                                                                className="p-2 bg-red-500 text-white rounded"
+                                                            >
+                                                                <MdDeleteOutline className="text-2xl" />
+                                                            </button>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )
                                         })}

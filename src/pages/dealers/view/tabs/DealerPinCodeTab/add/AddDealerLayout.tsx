@@ -31,7 +31,9 @@ const AddDealerLayout = ({
         []
     )
     const [tehsilOptions, setTehsilOptions] = useState([])
-    const { pincodesByTehsil } = usePincodesByTehsil(values.pincodeDetail[itemIndex].tehsilId || '')
+    const { pincodesByTehsil } = usePincodesByTehsil(
+        values.pincodeDetail[itemIndex].tehsilId || ''
+    )
 
     React.useEffect(() => {
         if (pincodesByTehsil) {
@@ -50,9 +52,12 @@ const AddDealerLayout = ({
         data: tehsilData,
         isFetching: tehsilIsFetching,
         isLoading: tehsilIsLoading,
-    } = useGetAllTehsilUnauthQuery(values.pincodeDetail[itemIndex].district || '', {
-        skip: !values.pincodeDetail[itemIndex].district,
-    })
+    } = useGetAllTehsilUnauthQuery(
+        values.pincodeDetail[itemIndex].district || '',
+        {
+            skip: !values.pincodeDetail[itemIndex].district,
+        }
+    )
     React.useEffect(() => {
         if (!tehsilIsFetching && !tehsilIsLoading) {
             const tehsilOption = tehsilData?.data?.map((tehsil: any) => {
@@ -79,7 +84,7 @@ const AddDealerLayout = ({
                 />
             </div>
             {/* TEHSIL */}
-            <div className='flex-[1_1_0%]'>
+            <div className="flex-[1_1_0%]">
                 <ATMSelectSearchable
                     fontSizePlaceHolder="14px"
                     fontSizeOptionsClass="13px"
@@ -91,7 +96,9 @@ const AddDealerLayout = ({
                     options={tehsilOptions || []}
                     onChange={(e) => {
                         if (
-                            !values?.pincodeDetail?.find((f) => f.tehsilId === e)
+                            !values?.pincodeDetail?.find(
+                                (f) => f.tehsilId === e
+                            )
                         ) {
                             setFieldValue(
                                 `pincodeDetail[${itemIndex}].tehsilId`,
@@ -102,7 +109,6 @@ const AddDealerLayout = ({
                         }
                     }}
                 />
-
             </div>
             {/* Item Name */}
             <div className="flex-[3_3_0%]">

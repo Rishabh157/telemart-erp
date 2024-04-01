@@ -88,7 +88,7 @@ const mediaNavigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_CUSTOMER_PAGE,
     },
     {
-        label: 'Courier Ndr',
+        label: 'Courier NDR',
         icon: MdViewTimeline,
         path: 'courier-ndr?phone=9009648665&userlogin=rishabh.gour&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR',
         name: UserModuleNameTypes.NAV_INBOUND,

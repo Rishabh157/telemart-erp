@@ -52,10 +52,10 @@ export type OrderListResponse = {
     productGroupId: string
     remark: string
     shcemeQuantity: number
-    firstCallApproval:null| boolean
-    firstCallRemark:string
-    firstCallState:string
-    firstCallCallBackDate:string
+    firstCallApproval: null | boolean
+    firstCallRemark: string
+    firstCallState: string
+    firstCallCallBackDate: string
     socialMedia: {
         facebook: string
         instagram: string

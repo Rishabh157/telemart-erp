@@ -25,8 +25,7 @@ type Props = {
     preConfirm?: (result: SweetAlertResult<any>) => void
     preDeny?: (result: SweetAlertResult<any>) => void
     html?: any
-    denyButtonColor?: string,
-
+    denyButtonColor?: string
 }
 
 export const showConfirmationDialog = ({
@@ -35,13 +34,13 @@ export const showConfirmationDialog = ({
     icon = 'warning',
     showCancelButton = false,
     confirmButtonColor = '#3085d6',
-    denyButtonColor = "#dc3741",
+    denyButtonColor = '#dc3741',
     showDenyButton = false,
     denyButtonText = `Reject`,
     cancelButtonColor = '#dc3741',
     confirmButtonText = 'Yes',
     reverseButtons = true,
-    next = () => { },
+    next = () => {},
     input,
     inputPlaceholder = 'Enter your reason',
     preConfirm,

@@ -18,21 +18,17 @@ export type FormInitialValues = {
     endDate: string
 }
 
-const ComplainListFilterFormDialogWrapper = ({
-    open,
-    onClose,
-}: Props) => {
+const ComplainListFilterFormDialogWrapper = ({ open, onClose }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const complain: any = useSelector((state: RootState) => state.complain);
-    const { dateFilter } = complain;
+    const complain: any = useSelector((state: RootState) => state.complain)
+    const { dateFilter } = complain
 
     const initialValues: FormInitialValues = {
         startDate: dateFilter.startDate,
         endDate: dateFilter.endDate,
-    };
+    }
 
-    const validationSchema: any = object({
-    })
+    const validationSchema: any = object({})
 
     // Submit Handler
     const handleSubmit = async (
@@ -45,13 +41,13 @@ const ComplainListFilterFormDialogWrapper = ({
         dispatch(
             setDateFilter({
                 startDate: values?.startDate
-                    ? moment(values.startDate)?.format("yyyy-MM-DD")
-                    : "",
+                    ? moment(values.startDate)?.format('yyyy-MM-DD')
+                    : '',
                 endDate: values?.endDate
-                    ? moment(values.endDate)?.format("yyyy-MM-DD")
-                    : "",
+                    ? moment(values.endDate)?.format('yyyy-MM-DD')
+                    : '',
             })
-        );
+        )
         onClose()
     }
 
@@ -59,10 +55,10 @@ const ComplainListFilterFormDialogWrapper = ({
     const handleReset = async (formikProps: FormikProps<FormInitialValues>) => {
         await dispatch(
             setDateFilter({
-                startDate: "",
-                endDate: "",
+                startDate: '',
+                endDate: '',
             })
-        );
+        )
         // reset formik props
         formikProps.resetForm()
     }

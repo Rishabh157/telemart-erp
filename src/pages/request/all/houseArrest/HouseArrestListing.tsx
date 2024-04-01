@@ -49,7 +49,6 @@ const HouseArrestListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onClick={() => navigate('add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
-             
                         + Add
                     </button>
                 )}
@@ -69,8 +68,8 @@ const HouseArrestListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
