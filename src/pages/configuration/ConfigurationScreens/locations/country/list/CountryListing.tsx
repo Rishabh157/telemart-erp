@@ -27,6 +27,8 @@ import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
 import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -64,12 +66,14 @@ const CountryListing = ({ contries, items }: Props) => {
                     dispatch(setSearchValue(newValue))
                 }}
                 onAddClick={() => {
-                    setisOpenAddForm(true)
+                     
+                        setisOpenAddForm(true)
                 }}
                 onListItemClick={(newValue) => {
                     handleCountryClick(newValue)
                 }}
                 disabled={false}
+                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_COUNTRY_ADD) as boolean}
             />
             {isOpenAddForm && (
                 <AddCountryWrapper onClose={() => setisOpenAddForm(false)} />

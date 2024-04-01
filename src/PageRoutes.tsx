@@ -1796,7 +1796,15 @@ const PageRoutes = () => {
                     />
 
                     {/* Configurations -> Location */}
-                    <Route path="location" element={<Locations />} />
+                    <Route
+                        path="location"
+                        element={
+                            <Authorization
+                                children={<Locations />}
+                                permission={UserModuleNameTypes.NAV_LOCATION}
+                            />
+                        }
+                    />
 
                     {/* Configurations -> Language */}
                     <Route
