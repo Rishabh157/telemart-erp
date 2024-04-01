@@ -24,14 +24,13 @@ export type InitialStateType = {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedDealerId: string
-    filterBy: any,
+    filterBy: any
     dateFilter: {
-        startDate: string | null;
-        endDate: string | null;
-    };
+        startDate: string | null
+        endDate: string | null
+    }
     orderNumberSearch: any
     complaintNumberSearch: any
-
 }
 const initialState: InitialStateType = {
     items: [],
@@ -47,11 +46,11 @@ const initialState: InitialStateType = {
     filterBy: {},
     selectedDealerId: '',
     dateFilter: {
-        startDate: "",
-        endDate: "",
+        startDate: '',
+        endDate: '',
     },
     orderNumberSearch: '',
-    complaintNumberSearch: ''
+    complaintNumberSearch: '',
 }
 
 const complainSlice: any = createSlice({
@@ -112,13 +111,13 @@ const complainSlice: any = createSlice({
             state.filterBy = action.payload
         },
         setDateFilter: (state, action: PayloadAction<any>) => {
-            state.dateFilter = action.payload;
+            state.dateFilter = action.payload
         },
         setOrderNumberSearch: (state, action: PayloadAction<any>) => {
-            state.orderNumberSearch = action.payload;
+            state.orderNumberSearch = action.payload
         },
         setComplaintNumberSearch: (state, action: PayloadAction<any>) => {
-            state.complaintNumberSearch = action.payload;
+            state.complaintNumberSearch = action.payload
         },
     },
 })
@@ -138,6 +137,6 @@ export const {
     setFilterBy,
     setDateFilter,
     setOrderNumberSearch,
-    setComplaintNumberSearch
+    setComplaintNumberSearch,
 } = complainSlice.actions
 export default complainSlice.reducer

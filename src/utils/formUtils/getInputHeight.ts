@@ -1,8 +1,10 @@
 export type Size = 'small' | 'medium' | 'large' | 'xs' | 'xxs'
-export type textTransform = 'uppercase' |
-    'lowercase' |
-    'capitalize' |
-    'firstLetterCapitalonly' | ''
+export type textTransform =
+    | 'uppercase'
+    | 'lowercase'
+    | 'capitalize'
+    | 'firstLetterCapitalonly'
+    | ''
 
 export const getInputHeight = (size: Size, inNumber?: boolean) => {
     switch (size) {
@@ -36,20 +38,28 @@ export const getLabelFont = (size: Size, inNumber?: boolean) => {
         default:
             return inNumber ? 40 : 'text-sm'
     }
-
-
 }
 
-export const getLabelTextTransform = (label: string, textTransform: textTransform) => {
+export const getLabelTextTransform = (
+    label: string,
+    textTransform: textTransform
+) => {
     switch (textTransform) {
         case 'uppercase':
-            return label.toUpperCase();
+            return label.toUpperCase()
         case 'lowercase':
-            return label.toLowerCase();
+            return label.toLowerCase()
         case 'capitalize':
-            return label.split(' ').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+            return label
+                .split(' ')
+                .map(
+                    (word: string) =>
+                        word.charAt(0).toUpperCase() +
+                        word.slice(1).toLowerCase()
+                )
+                .join(' ')
         case 'firstLetterCapitalonly':
-            return label.charAt(0).toUpperCase() + label.slice(1).toLowerCase();
+            return label.charAt(0).toUpperCase() + label.slice(1).toLowerCase()
         default:
             return label
     }

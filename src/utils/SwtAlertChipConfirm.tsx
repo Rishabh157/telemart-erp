@@ -28,7 +28,7 @@ type PropsChips = {
     preConfirm?: (result: SweetAlertResult<any>) => void
     preDeny?: (result: SweetAlertResult<any>) => void
     disabled?: boolean
-    html?:any
+    html?: any
 }
 const SwtAlertChipConfirm = ({
     color = 'default',
@@ -49,7 +49,7 @@ const SwtAlertChipConfirm = ({
     preConfirm,
     preDeny,
     disabled = false,
-    html
+    html,
 }: PropsChips) => {
     return (
         <div>

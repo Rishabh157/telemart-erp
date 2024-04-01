@@ -330,7 +330,6 @@ const EditSlotManagement = ({
                                         }
                                     />
                                 </div>
-                               
                             </div>
                         </div>
                     </div>

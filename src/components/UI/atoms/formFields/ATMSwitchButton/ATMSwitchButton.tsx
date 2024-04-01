@@ -10,7 +10,10 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { ErrorMessage } from 'formik'
-import { getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
+import {
+    getLabelTextTransform,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 type Props = {
@@ -36,13 +39,13 @@ const ATMSwitchButton = ({
     title1 = 'Yes',
     title2 = 'No',
     hidden = false,
-    textTransform = 'firstLetterCapitalonly'
+    textTransform = 'firstLetterCapitalonly',
 }: Props) => {
     return (
         <div hidden={hidden} className="relative mt-4 ml-1">
             {label && (
                 <label className="text-slate-700 font-medium text-xs">
-                        {getLabelTextTransform(label, textTransform)}
+                    {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>
             )}
@@ -78,11 +81,12 @@ const ATMSwitchButton = ({
             {name && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                              <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span >
-                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
-                        </span>
-                    </p>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}

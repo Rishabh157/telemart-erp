@@ -1,9 +1,7 @@
 {
     "moduleId": "NAV_BARCODE",
     "moduleName": "NAV_BARCODE",
-    "parentGroup": [
-        "NAV_CONFIGURATION"
-    ],
+    "parentGroup": ["NAV_CONFIGURATION"],
     "moduleAction": [
         {
             "actionId": "ACTION_BARCODE_LIST_TAB",
@@ -34,9 +32,7 @@
             "actionUrl": "",
             "actionName": "ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         }
     ]

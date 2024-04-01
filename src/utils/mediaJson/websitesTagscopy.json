@@ -1,78 +1,68 @@
 {
-  "moduleId": "NAV_WEBSITES_TAGES",
-  "moduleName": "NAV_WEBSITES_TAGES",
-  "parentGroup": [
-    "NAV_ALL_WEBSITE"
-  ],
-  "moduleAction": [
-    {
-      "actionId": "ACTION_WEBSITES_TAGES_LIST",
-      "actionUrl": "",
-      "actionName": "LIST",
-      "compulsoryFields": [],
-      "parentGroup": [],
-      "fields": [
+    "moduleId": "NAV_WEBSITES_TAGES",
+    "moduleName": "NAV_WEBSITES_TAGES",
+    "parentGroup": ["NAV_ALL_WEBSITE"],
+    "moduleAction": [
         {
-          "fieldId": "WEBSITES_TAGES_LIST_WEBSITES_META_KEYWORD",
-          "fieldName": "Meta Keyword",
-          "fieldValue": "metaKeyword"
+            "actionId": "ACTION_WEBSITES_TAGES_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "WEBSITES_TAGES_LIST_WEBSITES_META_KEYWORD",
+                    "fieldName": "Meta Keyword",
+                    "fieldValue": "metaKeyword"
+                },
+                {
+                    "fieldId": "WEBSITES_TAGES_LIST_META_OG_TYPE",
+                    "fieldName": "Meta OG Type",
+                    "fieldValue": "metaOgType"
+                },
+                {
+                    "fieldId": "WEBSITES_TAGES_LIST_META_TWITTER_TITLE",
+                    "fieldName": "Meta Twitter Title",
+                    "fieldValue": "metaTwitterTitle"
+                },
+                {
+                    "fieldId": "WEBSITES_TAGES_LIST_META_TWITTER_CARD",
+                    "fieldName": "Meta Twitter Card",
+                    "fieldValue": "metaTwitterCard"
+                }
+            ]
         },
         {
-          "fieldId": "WEBSITES_TAGES_LIST_META_OG_TYPE",
-          "fieldName": "Meta OG Type",
-          "fieldValue": "metaOgType"
+            "actionId": "ACTION_WEBSITES_TAGES_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "WEBSITES_TAGES_LIST_META_TWITTER_TITLE",
-          "fieldName": "Meta Twitter Title",
-          "fieldValue": "metaTwitterTitle"
+            "actionId": "ACTION_WEBSITES_TAGES_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
-          "fieldId": "WEBSITES_TAGES_LIST_META_TWITTER_CARD",
-          "fieldName": "Meta Twitter Card",
-          "fieldValue": "metaTwitterCard"
+            "actionId": "ACTION_WEBSITES_TAGES_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WEBSITES_TAGES_VIEW",
+            "actionUrl": "",
+            "actionName": "VIEW",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         }
-      ]
-    },
-    {
-      "actionId": "ACTION_WEBSITES_TAGES_ADD",
-      "actionUrl": "",
-      "actionName": "ADD",
-      "compulsoryFields": [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_WEBSITES_TAGES_EDIT",
-      "actionUrl": "",
-      "actionName": "EDIT",
-      "compulsoryFields": [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_WEBSITES_TAGES_DELETE",
-      "actionUrl": "",
-      "actionName": "DELETE",
-      "compulsoryFields": [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_WEBSITES_TAGES_VIEW",
-      "actionUrl": "",
-      "actionName": "VIEW",
-      "compulsoryFields": [],
-      "parentGroup": [
-        "LIST"
-      ],
-      "fields": []
-    }
-  ]
+    ]
 }

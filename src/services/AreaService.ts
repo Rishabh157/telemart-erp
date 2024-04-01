@@ -115,5 +115,5 @@ export const {
     useDeleteAreaMutation,
     useGetAllAreaQuery,
     useGetAllAreaUnauthQuery,
-    useGetAllAreaByPincodeQuery
+    useGetAllAreaByPincodeQuery,
 } = areaApi

@@ -21,7 +21,7 @@ import {
     setRowsPerPage,
     setSearchValue,
     setOrderNumberSearch,
-    setComplaintNumberSearch
+    setComplaintNumberSearch,
 } from 'src/redux/slices/ComplainSlice'
 
 // |-- Redux --|
@@ -37,16 +37,19 @@ type Props = {
 
 const ComplainListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const complainState: any = useSelector(
-        (state: RootState) => state.complain
-    )
+    const complainState: any = useSelector((state: RootState) => state.complain)
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue, isTableLoading, orderNumberSearch,
-        complaintNumberSearch } =
-        complainState
+    const {
+        page,
+        rowsPerPage,
+        totalItems,
+        searchValue,
+        isTableLoading,
+        orderNumberSearch,
+        complaintNumberSearch,
+    } = complainState
     const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
         useState<boolean>(false)
-
 
     return (
         // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
@@ -91,7 +94,7 @@ const ComplainListing = ({ columns, rows, setShowDropdown }: Props) => {
                         setIsOpenFilterFormDialog(true)
                     }}
                     isFilter
-                // isFilter
+                    // isFilter
                 />
                 {isOpenFilterFormDialog && (
                     <ComplainListFilterFormDialogWrapper

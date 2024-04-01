@@ -38,9 +38,10 @@ const ComplainListFilterFormDialog = ({
                         label="From"
                         name="startDate"
                         dateTimeFormat="DD/MM/YY"
-
                         value={values.startDate}
-                        onChange={(newValue) => setFieldValue("startDate", newValue)}
+                        onChange={(newValue) =>
+                            setFieldValue('startDate', newValue)
+                        }
                     />
                 </div>
 
@@ -52,7 +53,9 @@ const ComplainListFilterFormDialog = ({
                         dateTimeFormat="DD/MM/YY"
                         value={values.endDate}
                         minDate={values?.startDate || undefined}
-                        onChange={(newValue) => setFieldValue("endDate", newValue)}
+                        onChange={(newValue) =>
+                            setFieldValue('endDate', newValue)
+                        }
                     />
                 </div>
             </div>

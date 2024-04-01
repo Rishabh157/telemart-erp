@@ -212,7 +212,6 @@ export const userApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
- 
     }),
 })
 export const {
@@ -233,5 +232,5 @@ export const {
     useGetSeniorUsersQuery,
     useChangeUserPasswordMutation,
     useGetSeniorExicutivesByZmIdQuery,
-    useGetJuniorExicutivesByZeIdQuery
+    useGetJuniorExicutivesByZeIdQuery,
 } = userApi

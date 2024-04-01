@@ -13,7 +13,10 @@ import { ErrorMessage } from 'formik'
 
 // |-- Internal Dependencies --|
 import { SelectOption } from 'src/models/FormField/FormField.model'
-import { getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
+import {
+    getLabelTextTransform,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 export type Props = {
@@ -50,7 +53,7 @@ const ATMRadioButton = ({
                         `${labelCalassName}`
                     )}
                 >
-                  {getLabelTextTransform(label, textTransform)}
+                    {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}
                 </label>
             )}
@@ -85,8 +88,8 @@ const ATMRadioButton = ({
                                     : 'text-xs'
                             }`}
                         >
-                              {option.label.charAt(0).toUpperCase() + option.label.slice(1).toLowerCase()}
-                            
+                            {option.label.charAt(0).toUpperCase() +
+                                option.label.slice(1).toLowerCase()}
                         </label>
                     </div>
                 ))}
@@ -94,11 +97,12 @@ const ATMRadioButton = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                               <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span >
-                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
-                        </span>
-                    </p>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}

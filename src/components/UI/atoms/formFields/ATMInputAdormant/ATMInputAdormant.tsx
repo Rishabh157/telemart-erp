@@ -13,7 +13,11 @@ import { ErrorMessage } from 'formik'
 import { twMerge } from 'tailwind-merge'
 
 // |-- Internal Dependencies --|
-import { getInputHeight, getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
+import {
+    getInputHeight,
+    getLabelTextTransform,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 
 export interface ATMInputAdormantPropTypes {
     name: string
@@ -62,7 +66,7 @@ const ATMInputAdormant = ({
         <div className="">
             {label && (
                 <label className="text-slate-500">
-                        {getLabelTextTransform(label, textTransform)}
+                    {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>
             )}
@@ -128,11 +132,12 @@ const ATMInputAdormant = ({
             {name && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                              <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span >
-                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
-                        </span>
-                    </p>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}

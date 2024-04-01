@@ -62,7 +62,7 @@ const formFields: {
                 name: 'regd_address.address',
                 label: 'Address',
                 placeholder: 'Address',
-                type:'textarea',
+                type: 'textarea',
                 required: true,
             },
             {
@@ -130,7 +130,7 @@ const formFields: {
                 name: 'billing_address.address',
                 label: 'Address',
                 placeholder: 'Address',
-                type:'textarea',
+                type: 'textarea',
                 required: true,
             },
             {
@@ -309,9 +309,8 @@ const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
                     'regd_address.pincode',
                     pincodeData?._id
                 )
-                formikProps.setTouched({});
-
-            } 
+                formikProps.setTouched({})
+            }
         }
     }, [pincodeData, isDataLoading])
 
@@ -346,9 +345,8 @@ const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
                     'billing_address.pincode',
                     pincodeDataBilling?._id
                 )
-                formikProps.setTouched({});
-
-            } 
+                formikProps.setTouched({})
+            }
         }
     }, [pincodeDataBilling, isLoadingPincodeDataBilling])
 

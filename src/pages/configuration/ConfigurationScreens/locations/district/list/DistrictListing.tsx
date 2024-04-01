@@ -26,7 +26,6 @@ import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 
-
 // |-- Types --|
 type Props = {
     districts: any[]

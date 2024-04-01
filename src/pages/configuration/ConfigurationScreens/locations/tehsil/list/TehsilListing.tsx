@@ -51,7 +51,6 @@ const TehsilListing = ({ tehsils }: Props) => {
     function handleCountryClick(newValue: any) {
         if (selectedLocationTehsil === newValue?.value) {
             dispatch(setSelectedLocationTehsil(null))
-        
         } else {
             dispatch(setSelectedLocationTehsil(newValue?.value))
         }

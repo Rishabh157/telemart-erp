@@ -57,7 +57,9 @@ const CreateBatchOrderListing = ({
         <div className="px-4 h-[calc(100vh-150px)]">
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Create Batches </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_CREATE_BATCH) && (
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_CREATE_BATCH
+                ) && (
                     <ATMLoadingButton
                         disabled={!selectedRows.length}
                         loadingText="Saving..."

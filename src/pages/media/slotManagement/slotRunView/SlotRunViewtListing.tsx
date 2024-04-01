@@ -67,7 +67,6 @@ const SlotRunViewtListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center py-1">
                 <ATMPageHeading> Slot Management </ATMPageHeading>
-             
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
