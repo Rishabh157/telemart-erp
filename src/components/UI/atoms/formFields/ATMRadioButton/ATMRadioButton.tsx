@@ -30,6 +30,7 @@ export type Props = {
     isSubmitting?: boolean
     labelCalassName?: string
     textTransform?: textTransform
+    isDisable?: boolean
 }
 
 const ATMRadioButton = ({
@@ -43,6 +44,7 @@ const ATMRadioButton = ({
     textTransform = 'firstLetterCapitalonly',
     isSubmitting = true,
     labelCalassName,
+    isDisable,
 }: Props) => {
     return (
         <div className="relative mt-4  w-full">
@@ -72,6 +74,7 @@ const ATMRadioButton = ({
                         } lg:flex ms:flex  xl:flex sm:text-sm lg:text-lg text-base  `}
                     >
                         <input
+                            disabled={isDisable}
                             type="radio"
                             name={name}
                             value={value}

@@ -70,7 +70,7 @@ const WarehouseAssignedOrdersListing = ({
                     <span>PND</span>
                     <span className=" rounded h-[20px] w-[20px] bg-amber-300"></span>
 
-                    <span>Urjent</span>
+                    <span>Urgent</span>
                     <span className=" rounded h-[20px] w-[20px] bg-rose-300"></span>
                 </div>
                 {/* <button

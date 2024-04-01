@@ -29,6 +29,8 @@ import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
 import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 // import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 // import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
@@ -85,6 +87,8 @@ const StateListing = ({ states }: Props) => {
                     }
                 }}
                 disabled={false}
+                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_STATE_ADD) as boolean}
+
             />
 
             {isOpenAddForm && (

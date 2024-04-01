@@ -283,6 +283,7 @@ import WarehouseFirstCallDialerPageWrapper from './pages/warehouseFirstCallDiale
 // import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
 import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
 import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerNDRDetailsWrapper'
+import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1797,7 +1798,15 @@ const PageRoutes = () => {
                     />
 
                     {/* Configurations -> Location */}
-                    <Route path="location" element={<Locations />} />
+                    <Route
+                        path="location"
+                        element={
+                            <Authorization
+                                children={<Locations />}
+                                permission={UserModuleNameTypes.NAV_LOCATION}
+                            />
+                        }
+                    />
 
                     {/* Configurations -> Language */}
                     <Route
@@ -2219,6 +2228,7 @@ const PageRoutes = () => {
                         />
                     </Route>
                 </Route>
+
                 {/* Media -> Inbound Or Caller Page & Customer Page */}
                 <Route
                     path="/media/caller-page"
@@ -2229,6 +2239,12 @@ const PageRoutes = () => {
                     path="/media/customer-care"
                     element={<CustomerCarePageWrapper />}
                 />
+
+                <Route
+                    path="/media/courier-ndr"
+                    element={<CourierNdrDialerPageWrapper />}
+                />
+
                 {/* Assets -> Assets Management */}
                 <Route
                     path="assets"

@@ -94,6 +94,12 @@ const mediaNavigation: NavItemType[] = [
         // https://out.onetelemart.com:445/calling/default.aspx?phone={{PHONENUMBER}}\&userlogin={{USERLOGIN}}\&postalcode=111\&dstphone={{dnis}}\&campaignId={{CAMPNAME}}
         name: UserModuleNameTypes.NAV_CUSTOMER_PAGE,
     },
+    {
+        label: 'Courier NDR',
+        icon: MdViewTimeline,
+        path: 'courier-ndr?phone=9009648665&userlogin=rishabh.gour&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR',
+        name: UserModuleNameTypes.NAV_INBOUND,
+    },
 ]
 
 type Props = {
