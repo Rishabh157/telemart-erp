@@ -65,8 +65,6 @@ import { default as requestJson } from '../../utils/mediaJson/request.json'
 import { default as batchOrdersJson } from '../../utils/mediaJson/batchOrders.json'
 import { default as warehouseFirstCallOrdersjson } from '../../utils/mediaJson/warehouseFirstCallOrders.json'
 
-
-
 export const mergeUserModules = [
     { ...dashboardJson },
     { ...vendorJson },

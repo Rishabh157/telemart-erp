@@ -29,7 +29,7 @@ export type FormInitialValues = {
     dealerId: string
     pincodeDetail: {
         district: string
-        tehsilId : string
+        tehsilId: string
         pincode: string[]
         estTime: number | 0
     }[]
@@ -67,7 +67,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
         pincodeDetail: [
             {
                 district: '',
-                tehsilId : '',
+                tehsilId: '',
                 pincode: [],
                 estTime: 0,
             },

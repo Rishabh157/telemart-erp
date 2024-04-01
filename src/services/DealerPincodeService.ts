@@ -98,5 +98,5 @@ export const {
     useGetAllPincodeByDealerQuery,
     useDeleteDealerPincodeMutation,
     useGetPincodesByDistrictQuery,
-    useGetAllPincodeDealerQuery
+    useGetAllPincodeDealerQuery,
 } = dealerPincodeApi

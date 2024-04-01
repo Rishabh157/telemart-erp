@@ -11,7 +11,12 @@ import React from 'react'
 // |-- External Dependencies --|
 import { ErrorMessage } from 'formik'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
-import { getInputHeight, getLabelTextTransform, Size, textTransform } from 'src/utils/formUtils/getInputHeight'
+import {
+    getInputHeight,
+    getLabelTextTransform,
+    Size,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { TextField } from '@mui/material'

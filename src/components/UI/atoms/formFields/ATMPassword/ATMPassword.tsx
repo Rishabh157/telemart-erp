@@ -14,7 +14,11 @@ import { twMerge } from 'tailwind-merge'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 // |-- Internal Dependencies --|
-import { getInputHeight, getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
+import {
+    getInputHeight,
+    getLabelTextTransform,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 type Props = {
@@ -48,8 +52,10 @@ const ATMPassword = ({
         <div className="relative">
             {label ? (
                 <label className="text-slate-700 block mb-1">
-                      {getLabelTextTransform(label, textTransform)}
-                    {rest.required && <span className="text-red-400"> * </span>}{' '}
+                    {getLabelTextTransform(label, textTransform)}
+                    {rest.required && (
+                        <span className="text-red-400"> * </span>
+                    )}{' '}
                 </label>
             ) : null}
 
@@ -86,11 +92,12 @@ const ATMPassword = ({
             {name && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                           <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span >
-                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
-                        </span>
-                    </p>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}

@@ -34,7 +34,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getMoneybackOrderById: builder.query({
             providesTags: ['moneyback'],
-            query: (id:string) => ({
+            query: (id: string) => ({
                 url: `/money-back/${id}`,
                 method: 'GET',
                 // body,
@@ -52,7 +52,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
 
         // **** Manger First approval
         mangerFirstApproval: builder.mutation({
-            invalidatesTags: ['moneyback','complaint'],
+            invalidatesTags: ['moneyback', 'complaint'],
             query: (body) => ({
                 url: '/money-back/update-manager',
                 method: 'PUT',
@@ -62,7 +62,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
 
         // **** Customer info
         addCustomerInfo: builder.mutation({
-            invalidatesTags: ['moneyback','complaint'],
+            invalidatesTags: ['moneyback', 'complaint'],
             query: (body) => ({
                 url: '/money-back/cc-update-details',
                 method: 'PUT',
@@ -72,7 +72,7 @@ export const moneybackApi = apiSlice.injectEndpoints({
 
         // **** Account approval
         addAccountApproval: builder.mutation({
-            invalidatesTags: ['moneyback','complaint'],
+            invalidatesTags: ['moneyback', 'complaint'],
             query: (body) => ({
                 url: '/money-back/account-approval',
                 method: 'PUT',

@@ -628,7 +628,6 @@ export enum warehouseFirstCallOrdersType {
     ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL = 'ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL',
 }
 
-
 export enum configurationUserAccessType {
     NAV_CONFIGURATION = 'NAV_CONFIGURATION',
 }

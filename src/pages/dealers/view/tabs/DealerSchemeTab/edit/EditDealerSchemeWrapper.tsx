@@ -54,7 +54,7 @@ const EditDealerSchemeWrapper = () => {
         isLoading: pinCodeIsLoading,
         isFetching: pinCodeIsFetching,
     } = useGetAllPincodeDealerQuery({
-        tehsilid:  '',
+        tehsilid: '',
         dealerId: dealerId || '',
     })
     const {

@@ -72,18 +72,14 @@
             "actionId": "ACTION_MONEY_BACK_LIST_VIEW",
             "actionUrl": "",
             "actionName": "MONEY BACK LIST VIEW",
-            "parentGroup": [
-                "MONEY_BACK_TAB"
-            ],
+            "parentGroup": ["MONEY_BACK_TAB"],
             "fields": []
         },
         {
             "actionId": "ACTION_MONEY_BACK_LIST_LOGS",
             "actionUrl": "",
             "actionName": "MONEY BACK LIST LOGS",
-            "parentGroup": [
-                "MONEY_BACK_TAB"
-            ],
+            "parentGroup": ["MONEY_BACK_TAB"],
             "fields": []
         },
         {
@@ -143,18 +139,14 @@
             "actionId": "ACTION_PRODUCT_REPLACMENT_LIST_VIEW",
             "actionUrl": "",
             "actionName": "PRODUCT REPLACEMENT LIST VIEW",
-            "parentGroup": [
-                "PRODUCT_REPLACMENT_TAB"
-            ],
+            "parentGroup": ["PRODUCT_REPLACMENT_TAB"],
             "fields": []
         },
         {
             "actionId": "ACTION_PRODUCT_REPLACMENT_LIST_LOGS",
             "actionUrl": "",
             "actionName": "PRODUCT REPLACEMENT LIST LOGS",
-            "parentGroup": [
-                "PRODUCT_REPLACMENT_TAB"
-            ],
+            "parentGroup": ["PRODUCT_REPLACMENT_TAB"],
             "fields": []
         },
         {
@@ -219,27 +211,21 @@
             "actionId": "ACTION_HOUSE_ARREST_ADD",
             "actionUrl": "",
             "actionName": "HOUSE_ARREST_ADD",
-            "parentGroup": [
-                "HOUSE_ARREST_TAB"
-            ],
+            "parentGroup": ["HOUSE_ARREST_TAB"],
             "fields": []
         },
         {
             "actionId": "ACTION_HOUSE_ARREST_LIST_VIEW",
             "actionUrl": "",
             "actionName": "HOUSE ARREST LIST VIEW",
-            "parentGroup": [
-                "HOUSE_ARREST_TAB"
-            ],
+            "parentGroup": ["HOUSE_ARREST_TAB"],
             "fields": []
         },
         {
             "actionId": "ACTION_HOUSE_ARREST_LIST_LOGS",
             "actionUrl": "",
             "actionName": "HOUSE ARREST LIST LOGS",
-            "parentGroup": [
-                "HOUSE_ARREST_TAB"
-            ],
+            "parentGroup": ["HOUSE_ARREST_TAB"],
             "fields": []
         }
     ]

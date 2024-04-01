@@ -1,22 +1,22 @@
 {
-  "moduleId": "NAV_WAREHOUSE_FIRST_CALL_ORDERS",
-  "moduleName": "NAV_WAREHOUSE_FIRST_CALL_ORDERS",
-  "moduleAction": [
-    {
-      "actionId": "ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST",
-      "actionUrl": "",
-      "actionName": "WH_FIRST_CALL",
-      "compulsoryFields": [],
-      "parentGroup": [],
-      "fields": []
-    },
-    {
-      "actionId": "ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL",
-      "actionUrl": "",
-      "actionName": "WH_FIRST_CALL_APPROVAL",
-      "compulsoryFields": [],
-      "parentGroup": [],
-      "fields": []
-    }
-  ]
+    "moduleId": "NAV_WAREHOUSE_FIRST_CALL_ORDERS",
+    "moduleName": "NAV_WAREHOUSE_FIRST_CALL_ORDERS",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST",
+            "actionUrl": "",
+            "actionName": "WH_FIRST_CALL",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL",
+            "actionUrl": "",
+            "actionName": "WH_FIRST_CALL_APPROVAL",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
 }

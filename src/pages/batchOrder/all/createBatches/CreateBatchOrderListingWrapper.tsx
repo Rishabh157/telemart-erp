@@ -81,7 +81,6 @@ const CreateBatchOrderListingWrapper = () => {
     }, [isLoading, isFetching, data, dispatch])
 
     const columns: columnTypes[] = [
-       
         {
             field: 'orderNumber',
             headerName: 'Order No.',
@@ -385,7 +384,7 @@ const CreateBatchOrderListingWrapper = () => {
                 <div className="py-0">{row?.agentName}</div>
             ),
         },
-      
+
         {
             field: 'Shipping Charges',
             headerName: 'Delivery Charges',
@@ -399,7 +398,7 @@ const CreateBatchOrderListingWrapper = () => {
                 </span>
             ),
         },
-      
+
         {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Date Time',
@@ -418,7 +417,6 @@ const CreateBatchOrderListingWrapper = () => {
                                   )
                                 : '-'}
                         </span>
-                       
                     </>
                 )
             },

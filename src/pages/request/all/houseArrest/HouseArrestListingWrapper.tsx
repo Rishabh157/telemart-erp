@@ -159,31 +159,39 @@ const HouseArrestListingWrapper = () => {
             <tbody>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Order Number</td>
-                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.orderNumber || '-'
-        }</td>
-                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldOrderNumber || '-'
-        }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.orderNumber || '-'
+                    }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.oldOrderNumber || '-'
+                    }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Customer Name</td>
-                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.customerName || '-'
-        }</td>
-                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerName || '-'
-        }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.customerName || '-'
+                    }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.oldCustomerName || '-'
+                    }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Customer Number</td>
-                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.customerNumber || '-'
-        }</td>
-                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerNumber || '-'
-        }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.customerNumber || '-'
+                    }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.oldCustomerNumber || '-'
+                    }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Address</td>
-                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.address || '-'
-        }</td>
-                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerAddress || '-'
-        }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.address || '-'
+                    }</td>
+                    <td class="px-4 py-2 border text-sm">${
+                        newOrderDetails?.oldCustomerAddress || '-'
+                    }</td>
                 </tr>
                  
             </tbody>
@@ -202,10 +210,12 @@ const HouseArrestListingWrapper = () => {
         <tbody>
             <tr class="border">
                 <td class="px-4 py-2 border text-sm font-bold">Order Number</td>
-                <td class="px-4 py-2 border text-sm">${newOrderDetails?.orignalBarcode?.join(' , ') || '-'
-        }</td>
-                <td class="px-4 py-2 border text-sm">${newOrderDetails?.returnItemBarcode?.join(' , ') || '-'
-        }</td>
+                <td class="px-4 py-2 border text-sm">${
+                    newOrderDetails?.orignalBarcode?.join(' , ') || '-'
+                }</td>
+                <td class="px-4 py-2 border text-sm">${
+                    newOrderDetails?.returnItemBarcode?.join(' , ') || '-'
+                }</td>
             </tr>
         </tbody>
     </table>
@@ -214,21 +224,22 @@ const HouseArrestListingWrapper = () => {
     `
     const getCurrentStatus = (row: any) => {
         return row?.ccApproval === false
-            ? 'Cc Pending' : row?.managerFirstApproval === null
-                ? 'Mang. First Pending'
-                : row?.managerFirstApproval === false
-                    ? 'Mang. First Rejected'
-                    : row?.dealerApproval === false
-                        ? 'Dealer Pending'
-                        : row?.managerSecondApproval === null
-                            ? 'Mang. Second Pending'
-                            : row?.managerSecondApproval === false
-                                ? 'Mang. Second Rejected'
-                                : row?.accountApproval === null
-                                    ? 'Account Pending'
-                                    : row?.accountApproval === false
-                                        ? 'Account Rejected' : "Account Aaproved"
-
+            ? 'Cc Pending'
+            : row?.managerFirstApproval === null
+            ? 'Mang. First Pending'
+            : row?.managerFirstApproval === false
+            ? 'Mang. First Rejected'
+            : row?.dealerApproval === false
+            ? 'Dealer Pending'
+            : row?.managerSecondApproval === null
+            ? 'Mang. Second Pending'
+            : row?.managerSecondApproval === false
+            ? 'Mang. Second Rejected'
+            : row?.accountApproval === null
+            ? 'Account Pending'
+            : row?.accountApproval === false
+            ? 'Account Rejected'
+            : 'Account Aaproved'
     }
     const columns: columnTypes[] = [
         {
@@ -372,40 +383,40 @@ const HouseArrestListingWrapper = () => {
                             html={sweetAlertContent}
                             color={
                                 row?.ccApproval &&
-                                    row?.managerFirstApproval === null
+                                row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
-                                        ? 'error'
-                                        : row?.managerSecondApproval
-                                            ? 'success'
-                                            : row?.managerSecondApproval === null
-                                                ? 'warning'
-                                                : 'error'
+                                    ? 'error'
+                                    : row?.managerSecondApproval
+                                    ? 'success'
+                                    : row?.managerSecondApproval === null
+                                    ? 'warning'
+                                    : 'error'
                             }
                             chipLabel={
                                 row?.ccApproval === false
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === null
-                                        ? 'First Pending'
-                                        : row?.managerFirstApproval === false
-                                            ? 'First Rejected'
-                                            : row?.managerSecondApproval
-                                                ? 'Second Approved'
-                                                : row?.managerSecondApproval === null
-                                                    ? 'Second Pending'
-                                                    : 'Second Rejected'
+                                    ? 'First Pending'
+                                    : row?.managerFirstApproval === false
+                                    ? 'First Rejected'
+                                    : row?.managerSecondApproval
+                                    ? 'Second Approved'
+                                    : row?.managerSecondApproval === null
+                                    ? 'Second Pending'
+                                    : 'Second Rejected'
                             }
                             disabled={
                                 row?.ccApproval === true &&
-                                    row?.managerFirstApproval === null
+                                row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
-                                        ? true
-                                        : row?.dealerApproval === false
-                                            ? true
-                                            : row?.managerSecondApproval === null
-                                                ? false
-                                                : true
+                                    ? true
+                                    : row?.dealerApproval === false
+                                    ? true
+                                    : row?.managerSecondApproval === null
+                                    ? false
+                                    : true
                             }
                             input={'text'}
                             inputPlaceholder="remark"
@@ -481,7 +492,7 @@ const HouseArrestListingWrapper = () => {
                                 />
                             </button>
                         ) : row?.managerSecondApproval === true &&
-                            row?.accountApproval === null ? (
+                          row?.accountApproval === null ? (
                             <button
                                 id="btn"
                                 className="overflow-hidden cursor-pointer z-0"
@@ -598,10 +609,15 @@ const HouseArrestListingWrapper = () => {
             extraClasses: 'min-w-[200px]',
             name: UserModuleNameTypes.HOUSE_ARREST_LIST_CURRENT_STATUS,
             renderCell: (row: any) => (
-                <span className='cursor-pointer bg-slate-50 p-1.5 rounded-md' onClick={() => {
-                    setHouseArrestData(row)
-                    setShowStatusDialog(true)
-                }}>{getCurrentStatus(row)}</span>
+                <span
+                    className="cursor-pointer bg-slate-50 p-1.5 rounded-md"
+                    onClick={() => {
+                        setHouseArrestData(row)
+                        setShowStatusDialog(true)
+                    }}
+                >
+                    {getCurrentStatus(row)}
+                </span>
             ),
         },
     ]
@@ -629,9 +645,15 @@ const HouseArrestListingWrapper = () => {
                 }
             />
             {/* status Dialog  */}
-            {showStatusDialog &&
-                <StatusDialog houseArrestData={houseArrestData} isShow={showStatusDialog} onClose={() => { setShowStatusDialog(false) }} />
-            }
+            {showStatusDialog && (
+                <StatusDialog
+                    houseArrestData={houseArrestData}
+                    isShow={showStatusDialog}
+                    onClose={() => {
+                        setShowStatusDialog(false)
+                    }}
+                />
+            )}
         </>
     )
 }

@@ -13,7 +13,11 @@ import ATMFileUploader from './ATMFileUploader'
 import { ErrorMessage } from 'formik'
 
 // |-- Internal Dependencies --|
-import { Size, getLabelTextTransform, textTransform } from 'src/utils/formUtils/getInputHeight'
+import {
+    Size,
+    getLabelTextTransform,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 
 // |-- Types --|
 type Props = {
@@ -49,7 +53,7 @@ const ATMFilePickerWrapper = ({
         <div className="relative">
             <ATMFileUploader
                 size={size}
-                label=  {getLabelTextTransform(label, textTransform)}
+                label={getLabelTextTransform(label, textTransform)}
                 required={required}
                 placeholder={getLabelTextTransform(placeholder, textTransform)}
                 onSelect={onSelect}
@@ -62,11 +66,12 @@ const ATMFilePickerWrapper = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                              <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span >
-                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
-                        </span>
-                    </p>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}

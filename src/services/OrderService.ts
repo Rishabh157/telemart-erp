@@ -217,5 +217,5 @@ export const {
     useApprovedWHFirstCallApprovalMutation,
     useGetWHFirstCallOrderDetailsQuery,
     useUpdateWHFirstCallUnauthOrderMutation,
-    useGetWHFristCallAssignedOrderQuery
+    useGetWHFristCallAssignedOrderQuery,
 } = OrderApi
