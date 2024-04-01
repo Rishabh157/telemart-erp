@@ -223,6 +223,16 @@ const OrderListing = ({
                 ]
                 setFilterBy([...filterApproval])
                 return
+            case 'reattempt':
+                let filterReattempt = [
+                    ...filter,
+                    {
+                        fieldName: 'status',
+                        value: currentStatus,
+                    },
+                ]
+                setFilterBy([...filterReattempt])
+                return
             default:
                 let filterdefault = [
                     ...filter,
@@ -1132,19 +1142,6 @@ const OrderListing = ({
                 console.error(err)
             })
     }
-
-    // const getBackGroundColorByStatus = (status: string) => {
-    //     switch (status) {
-    //         case statusProps.fresh:
-    //             return 'bg-green-200'
-    //         case statusProps.pnd:
-    //             return 'bg-amber-200'
-    //         case statusProps.urgent:
-    //             return 'bg-rose-300'
-    //         default:
-    //             break
-    //     }
-    // }
 
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.length

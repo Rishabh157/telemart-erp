@@ -44,6 +44,7 @@ export enum statusProps {
     urgent = 'URGENT',
     inquiry = 'INQUIRY',
     'non-action' = 'NON_ACTION',
+    reattempt = 'REATTEMPT',
 }
 
 const ViewOrder = () => {
@@ -137,6 +138,12 @@ const ViewOrder = () => {
             icon: MdOutbond,
             path: '?orderStatus=complaint',
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_TAB,
+        },
+        {
+            label: 'Reattempt',
+            icon: MdOutbond,
+            path: '?orderStatus=reattempt',
+            name: UserModuleNameTypes.ACTION_ORDER_REATTEMPT_TAB,
         },
     ]
 

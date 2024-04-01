@@ -282,6 +282,7 @@ import WarehouseFirstCallPageWrapper from './pages/warehouseFirstCallOrders/ware
 import WarehouseFirstCallDialerPageWrapper from './pages/warehouseFirstCallDialerPage/WarehouseFirstCallDialerPageWrapper'
 // import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
 import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
+import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2226,6 +2227,7 @@ const PageRoutes = () => {
                         />
                     </Route>
                 </Route>
+
                 {/* Media -> Inbound Or Caller Page & Customer Page */}
                 <Route
                     path="/media/caller-page"
@@ -2236,6 +2238,12 @@ const PageRoutes = () => {
                     path="/media/customer-care"
                     element={<CustomerCarePageWrapper />}
                 />
+
+                <Route
+                    path="/media/courier-ndr"
+                    element={<CourierNdrDialerPageWrapper />}
+                />
+
                 {/* Assets -> Assets Management */}
                 <Route
                     path="assets"

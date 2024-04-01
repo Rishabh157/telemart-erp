@@ -11,6 +11,7 @@ import {
     paymentModeOptions,
     relationOptionns,
 } from '../components/constants'
+import { DisabledFieldsPropsTypes } from '../courierNdrDialer/CourierNdrDialerPage'
 
 type Props = {
     values: FormInitialValues
@@ -20,9 +21,15 @@ type Props = {
         shouldValidate?: boolean | undefined
     ) => void
     isCaller?: boolean
+    isDisabled?: DisabledFieldsPropsTypes
 }
 
-const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
+const CallerOtherDetails = ({
+    values,
+    setFieldValue,
+    isCaller,
+    isDisabled,
+}: Props) => {
     const [isFacebookId, setFacebookId] = React.useState(false)
     const [isInstagramId, setInstagramId] = React.useState(false)
     const [isOrderOtherFieldEnable, setIsOrderOtherFieldEnable] =
@@ -57,6 +64,7 @@ const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
                         <div className="col-span-4">
                             <div className="-mt-5">
                                 <ATMRadioButton
+                                    isDisable={isDisabled?.isGender}
                                     labelCalassName="text-xs"
                                     name="gender"
                                     value={values.gender}
@@ -70,6 +78,7 @@ const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
                     </div>
 
                     <ATMSelectSearchable
+                        isDisabled={isDisabled?.isOrderFor}
                         fontSizeOptionsClass="13px"
                         minHeight="35px"
                         fontSizePlaceHolder="14px"
@@ -114,6 +123,7 @@ const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
                     )}
 
                     <ATMSelectSearchable
+                        isDisabled={isDisabled?.isAgeGroup}
                         fontSizeOptionsClass="13px"
                         minHeight="25px"
                         fontSizePlaceHolder="14px"
@@ -142,6 +152,7 @@ const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
                     />
 
                     <ATMTextField
+                        disabled={isDisabled?.isEmailId}
                         extraClassField="mt-0"
                         label="Email-ID"
                         size="xs"
@@ -164,6 +175,7 @@ const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
                         </div>
                         <div className="col-span-8 flex gap-x-4 px-1 items-center">
                             <ATMCheckbox
+                                disabled={isDisabled?.isSocialMediaFacebook}
                                 extraClasses="mt-2"
                                 required
                                 label="Facebook"
@@ -197,6 +209,7 @@ const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
                         <div className="col-span-4"></div>
                         <div className="col-span-8 flex gap-x-4 px-1 items-center">
                             <ATMCheckbox
+                                disabled={isDisabled?.isSocialMediaInstagram}
                                 extraClasses="mt-2"
                                 required
                                 label="Instagram"
@@ -227,6 +240,7 @@ const CallerOtherDetails = ({ values, setFieldValue, isCaller }: Props) => {
                     </div>
                     <div className="h-[145px]">
                         <ATMSelectSearchable
+                            isDisabled={isDisabled?.isMedicalIssue}
                             fontSizeOptionsClass="13px"
                             minHeight="35px"
                             fontSizePlaceHolder="14px"
