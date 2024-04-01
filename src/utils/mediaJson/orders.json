@@ -121,6 +121,14 @@
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
+        },
+        {
+            "actionId": "ACTION_ORDER_REATTEMPT_TAB",
+            "actionUrl": "",
+            "actionName": "ACTION_ORDER_REATTEMPT_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

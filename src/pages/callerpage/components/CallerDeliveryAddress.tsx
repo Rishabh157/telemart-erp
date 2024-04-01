@@ -11,11 +11,7 @@ import { endTimesOptions, startTimesOptions } from './constants'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import AddressDialog from './AddressDialog'
 import { useDispatch, useSelector } from 'react-redux'
-
-//  Country
-// import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
-// import { CountryListResponse } from 'src/models/Country.model'
-// import { setAllCountry } from 'src/redux/slices/countrySlice'
+import { DisabledFieldsPropsTypes } from '../courierNdrDialer/CourierNdrDialerPage'
 
 //  State
 import { useGetByAllStateUnauthQuery } from 'src/services/StateService'
@@ -54,6 +50,7 @@ type Props = {
         value: any,
         shouldValidate?: boolean | undefined
     ) => void
+    isDisabled?: DisabledFieldsPropsTypes
 }
 
 const addressOptions = [
@@ -66,6 +63,7 @@ const CallerDeliveryAddress = ({
     // dropdownOptions,
     setFieldValue,
     values,
+    isDisabled,
 }: Props) => {
     const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false)
     const [pinCodeSearch, setPinCodeSearch] = React.useState<string>('')
@@ -354,6 +352,7 @@ const CallerDeliveryAddress = ({
                             <div className="grid grid-cols-12 gap-x-2">
                                 <div className="col-span-6">
                                     <ATMSelectSearchable
+                                        isDisabled={isDisabled?.isPincode}
                                         fontSizeOptionsClass="13px"
                                         fontSizePlaceHolder="14px"
                                         minHeight="25px"
@@ -386,6 +385,7 @@ const CallerDeliveryAddress = ({
                                 </div>
                                 <div className="col-span-4">
                                     <ATMTextField
+                                        disabled={isDisabled?.isPincodeSearch}
                                         size="xxs"
                                         labelSize="xxs"
                                         maxLength={6}
@@ -402,6 +402,9 @@ const CallerDeliveryAddress = ({
                                 </div>
                                 <div className="col-span-2 mt-[3px]">
                                     <CallerButton
+                                        disabled={
+                                            isDisabled?.isPincodeSearchBtn
+                                        }
                                         text="Search"
                                         type="button"
                                         className="text-[13px]"
@@ -421,6 +424,7 @@ const CallerDeliveryAddress = ({
                     </div>
 
                     <ATMSelectSearchable
+                        isDisabled={isDisabled?.isState}
                         fontSizePlaceHolder="14px"
                         fontSizeOptionsClass="13px"
                         minHeight="25px"
@@ -445,6 +449,7 @@ const CallerDeliveryAddress = ({
                         }}
                     />
                     <ATMSelectSearchable
+                        isDisabled={isDisabled?.isDistrict}
                         fontSizePlaceHolder="14px"
                         fontSizeOptionsClass="13px"
                         minHeight="25px"
@@ -472,6 +477,7 @@ const CallerDeliveryAddress = ({
 
                 <div className="col-span-4 pb-1 px-2 border-r-[1px]">
                     <ATMSelectSearchable
+                        isDisabled={isDisabled?.isTehsil}
                         fontSizePlaceHolder="14px"
                         fontSizeOptionsClass="13px"
                         minHeight="25px"
@@ -498,6 +504,7 @@ const CallerDeliveryAddress = ({
                     />
 
                     <ATMSelectSearchable
+                        isDisabled={isDisabled?.isArea}
                         fontSizePlaceHolder="14px"
                         fontSizeOptionsClass="13px"
                         minHeight="25px"
@@ -537,6 +544,7 @@ const CallerDeliveryAddress = ({
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
                 <div className="col-span-6 pb-1 gap-x-4 border-r-[1px] px-2 border-grey-800">
                     <ATMSelectSearchable
+                        isDisabled={isDisabled?.isTypeOfAddress}
                         fontSizePlaceHolder="14px"
                         fontSizeOptionsClass="13px"
                         minHeight="25px"
@@ -556,6 +564,7 @@ const CallerDeliveryAddress = ({
                     />
 
                     <ATMTextField
+                        disabled={isDisabled?.isCustomerName}
                         label="Customer Name"
                         labelSize="xxs"
                         size="xxs"
@@ -580,6 +589,9 @@ const CallerDeliveryAddress = ({
                             <div className="grid grid-cols-12 gap-x-1">
                                 <div className="col-span-5">
                                     <ATMSelectSearchable
+                                        isDisabled={
+                                            isDisabled?.isPrefferedDelDateStartTime
+                                        }
                                         fontSizePlaceHolder="14px"
                                         fontSizeOptionsClass="13px"
                                         minHeight="25px"
@@ -608,6 +620,9 @@ const CallerDeliveryAddress = ({
                                 </div>
                                 <div className="col-span-5">
                                     <ATMSelectSearchable
+                                        isDisabled={
+                                            isDisabled?.isPrefferedDelDateEndTime
+                                        }
                                         fontSizeOptionsClass="13px"
                                         fontSizePlaceHolder="14px"
                                         minHeight="25px"
@@ -631,6 +646,9 @@ const CallerDeliveryAddress = ({
                                 </div>
                                 <div className="col-span-12 mt-2 mb-4">
                                     <ATMDatePicker
+                                        disabled={
+                                            isDisabled?.isPrefferedDelDateTime
+                                        }
                                         inputSize="11px"
                                         name="preffered_delivery_date"
                                         value={values.preffered_delivery_date}
@@ -651,6 +669,7 @@ const CallerDeliveryAddress = ({
                     </div>
 
                     <ATMTextField
+                        disabled={isDisabled?.isHouseFlat}
                         extraClassField="-mt-4"
                         label="House/Flat/Shop/Office No."
                         size="xxs"
@@ -669,6 +688,7 @@ const CallerDeliveryAddress = ({
                         }}
                     />
                     <ATMTextField
+                        disabled={isDisabled?.isStreetSector}
                         extraClassField="mt-0"
                         label="Street/Sector/Building/ Appartment"
                         size="xxs"
@@ -687,6 +707,7 @@ const CallerDeliveryAddress = ({
                         }}
                     />
                     <ATMTextField
+                        disabled={isDisabled?.isLandmark}
                         extraClassField="mt-0"
                         label="Landmark"
                         size="xxs"
@@ -725,6 +746,7 @@ const CallerDeliveryAddress = ({
                     />
 
                     <ATMTextField
+                        disabled={isDisabled?.isWhatsappNumber}
                         extraClassField="mt-0"
                         label="WhatsApp Number"
                         placeholder="enter whatsapp number"

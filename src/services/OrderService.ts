@@ -40,6 +40,25 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** Get order details by phone number using courier ndr page *****/
+        getWarehouseNdrOrderByPhoneNumber: builder.query({
+            providesTags: ['order'],
+            query: (phoneNo: string) => ({
+                url: `/order-inquiry/get-warehouse-ndr/${phoneNo}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        //***** Get order details by phone number using courier ndr page *****/
+        updateCourierOrderData: builder.mutation({
+            query: ({ id, body }) => ({
+                url: `/order-inquiry/update-courier-ndr/${id}`,
+                method: 'PUT',
+                body,
+            }),
+        }),
+
         //***** Global Order Search *****/
         getAllOrderGlobalSearch: builder.query({
             providesTags: ['order'],
@@ -203,6 +222,8 @@ export const {
     useGetOrderQuery,
     useUpdateOrderStatusMutation,
     useGetOrderByIdQuery,
+    useGetWarehouseNdrOrderByPhoneNumberQuery,
+    useUpdateCourierOrderDataMutation,
     useGetAllOrderGlobalSearchQuery,
     useExportOrderDataMutation,
     useDeleteOrderMutation,
@@ -217,5 +238,5 @@ export const {
     useApprovedWHFirstCallApprovalMutation,
     useGetWHFirstCallOrderDetailsQuery,
     useUpdateWHFirstCallUnauthOrderMutation,
-    useGetWHFristCallAssignedOrderQuery
+    useGetWHFristCallAssignedOrderQuery,
 } = OrderApi

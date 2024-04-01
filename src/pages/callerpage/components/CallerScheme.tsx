@@ -4,6 +4,7 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetAllSchemeListByPgiQuery } from 'src/services/SchemeService'
 import { SchemeDetailsPropTypes } from '../salesInbound/SalesPage'
 import { FormInitialValues } from '../salesInbound/SalesPageWrapper'
+import { DisabledFieldsPropsTypes } from '../courierNdrDialer/CourierNdrDialerPage'
 
 type Props = {
     values: FormInitialValues
@@ -19,6 +20,7 @@ type Props = {
     >
     schemeDetails: SchemeDetailsPropTypes
     companyId: string
+    isDisabled?: DisabledFieldsPropsTypes
 }
 
 const CallerScheme = ({
@@ -29,6 +31,7 @@ const CallerScheme = ({
     setSchemeDetails,
     schemeDetails,
     companyId,
+    isDisabled,
 }: Props) => {
     const [schemeListOptions, setSchemeListOptions] = React.useState<
         SelectOption[] | []
@@ -94,11 +97,12 @@ const CallerScheme = ({
                 <div className="col-span-3 px-2">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
+                            isDisabled={isDisabled?.isProduct}
                             minHeight="25px"
                             size="xxs"
-                            fontSizePlaceHolder='14px'
-                            fontSizeOptionsClass='13px'
-                            labelSize='xxs'
+                            fontSizePlaceHolder="14px"
+                            fontSizeOptionsClass="13px"
+                            labelSize="xxs"
                             name="productGroupId"
                             selectLabel="select product"
                             value={values?.productGroupId || ''}
@@ -118,9 +122,10 @@ const CallerScheme = ({
                 <div className="col-span-3 px-2">
                     <div className="mr-2 -mt-4">
                         <ATMSelectSearchable
-                            fontSizePlaceHolder='14px'
-                            fontSizeOptionsClass='13px'
-                            minHeight='25px'
+                            isDisabled={isDisabled?.isScheme}
+                            fontSizePlaceHolder="14px"
+                            fontSizeOptionsClass="13px"
+                            minHeight="25px"
                             size="xxs"
                             labelSize="xxs"
                             name="schemeId"
@@ -212,7 +217,8 @@ const CallerScheme = ({
                                         <button
                                             disabled={
                                                 schemeDetails.quantity < 9
-                                                    ? false
+                                                    ? isDisabled?.isAdditionBtn ||
+                                                      false
                                                     : true
                                             }
                                             type="button"
