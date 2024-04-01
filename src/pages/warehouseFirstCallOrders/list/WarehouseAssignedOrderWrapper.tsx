@@ -56,6 +56,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
         // orderTypeValueFilter,
         stateValueFilter,
         districtValueFilter,
+        callCenterManagerValueFilter,
         langBarrierValueFilter,
         pndOrderValueFilter,
         dateFilter,
@@ -567,6 +568,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
         ],
         dateFilter: dateFilter || {},
         callbackDateFilter: callbackDateFilter || {},
+        callCenterId: callCenterManagerValueFilter || null,
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
@@ -580,7 +582,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
         } else {
             dispatch(setIsTableLoading(true))
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 

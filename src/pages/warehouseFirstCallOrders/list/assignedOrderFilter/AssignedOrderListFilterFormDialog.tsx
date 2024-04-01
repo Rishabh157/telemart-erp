@@ -17,6 +17,8 @@ import { StateListResponse } from 'src/models/State.model'
 import { DistrictListResponse } from 'src/models/District.model'
 import { SchemeListResponse } from 'src/models/scheme.model'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
+import { CallCenterMasterListResponse } from 'src/models'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -37,6 +39,7 @@ const AssignedOrderListFilterFormDialog = ({
     const [allSchemes, setAllSchemes] = useState<SelectOption[]>([])
     const [allState, setAllState] = useState<SelectOption[]>([])
     const [allDistrict, setAllDistrict] = useState<SelectOption[]>([])
+    const [allCallCenter, setAllCallCenter] = useState<SelectOption[]>([])
 
     // Hooks
     const {
@@ -48,6 +51,30 @@ const AssignedOrderListFilterFormDialog = ({
     })
     const { state, isLoading } = useGetAllState()
     const { stateDistricts, isDataLoading } = useStateDistricts(values?.stateId)
+
+    const {
+        isLoading: isCallCenterLoading,
+        isFetching: isCallCenterFetching,
+        data: callCenterData,
+    } = useGetAllCallCenterMasterQuery(userData?.companyId, {
+        skip: !userData?.companyId,
+    })
+
+    // set call center managers
+    useEffect(() => {
+        if (!isCallCenterLoading && !isCallCenterFetching) {
+            const allCallCenterListOption: SelectOption[] =
+                callCenterData?.data?.map(
+                    (ele: CallCenterMasterListResponse) => {
+                        return {
+                            label: ele?.callCenterName,
+                            value: ele?._id,
+                        }
+                    }
+                )
+            setAllCallCenter(allCallCenterListOption)
+        }
+    }, [isCallCenterLoading, isCallCenterFetching, callCenterData])
 
     // set schemes
     useEffect(() => {
@@ -123,8 +150,8 @@ const AssignedOrderListFilterFormDialog = ({
 
                 {/* Order Type */}
                 <ATMSelectSearchable
-                    isDisabled
                     label="Order Type"
+                    isDisabled
                     selectLabel="Select order type"
                     name="orderType"
                     value={values.orderType}
@@ -226,6 +253,20 @@ const AssignedOrderListFilterFormDialog = ({
                         }
                     />
                 </div>
+
+                {/* Order Type */}
+                <ATMSelectSearchable
+                    label="Call Center Manager"
+                    selectLabel="Select Call Center Manager"
+                    name="callCenterManagerId"
+                    textTransform="capitalize"
+                    value={values.callCenterManagerId}
+                    isLoading={isCallCenterLoading}
+                    options={allCallCenter}
+                    onChange={(e) => {
+                        setFieldValue('callCenterManagerId', e || '')
+                    }}
+                />
 
                 <div className="flex gap-x-8">
                     <ATMSwitchButton

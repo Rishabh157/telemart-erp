@@ -62,16 +62,7 @@ const WarehouseAssignedOrdersListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse First Call Orders </ATMPageHeading>
-                {/* <button
-                    type="button"
-                    onClick={() => navigate('add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add 
-                </button> */}
-            </div>
-
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+                {/* Legends */}
                 <div className="flex p-4 gap-x-3 ">
                     <span>language Barrier</span>
                     <span className=" rounded h-[20px] w-[20px] bg-green-200"></span>
@@ -82,6 +73,16 @@ const WarehouseAssignedOrdersListing = ({
                     <span>Urjent</span>
                     <span className=" rounded h-[20px] w-[20px] bg-rose-300"></span>
                 </div>
+                {/* <button
+                    type="button"
+                    onClick={() => navigate('add')}
+                    className="bg-primary-main text-white rounded py-1 px-3"
+                >
+                    + Add 
+                </button> */}
+            </div>
+
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
