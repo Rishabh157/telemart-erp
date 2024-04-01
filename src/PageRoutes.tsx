@@ -851,7 +851,7 @@ const PageRoutes = () => {
                                         <WarehouseConfirmedOrderWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS_CONFIRMED_ORDERS
                                     }
                                 />
                             }
