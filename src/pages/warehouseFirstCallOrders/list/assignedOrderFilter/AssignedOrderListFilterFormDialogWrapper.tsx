@@ -13,6 +13,7 @@ import {
     setOrderTypeFilterValue,
     setStateFilterValue,
     setDistrictFilterValue,
+    setCallCenterManagerFilterValue,
     setLanguageBarrierFilterValue,
     setPndOrderFilterValue,
 } from 'src/redux/slices/warehouseOrders/warehouseAssignedOrderSlice'
@@ -31,6 +32,7 @@ export type FormInitialValues = {
     endDate: string
     callBackFrom: string
     callBackTo: string
+    callCenterManagerId: string
     languageBarrier: boolean
     isPnd: boolean
 }
@@ -45,6 +47,7 @@ const AssignedOrderListFilterFormDialogWrapper = ({ open, onClose }: Props) => {
         orderTypeValueFilter,
         stateValueFilter,
         districtValueFilter,
+        callCenterManagerValueFilter,
         langBarrierValueFilter,
         pndOrderValueFilter,
         dateFilter,
@@ -60,6 +63,7 @@ const AssignedOrderListFilterFormDialogWrapper = ({ open, onClose }: Props) => {
         endDate: dateFilter?.endDate,
         callBackFrom: callbackDateFilter?.startDate || '',
         callBackTo: callbackDateFilter?.endDate || '',
+        callCenterManagerId: callCenterManagerValueFilter,
         languageBarrier: langBarrierValueFilter || false,
         isPnd: pndOrderValueFilter || false,
         // isActive: isActive,
@@ -86,6 +90,8 @@ const AssignedOrderListFilterFormDialogWrapper = ({ open, onClose }: Props) => {
         dispatch(setStateFilterValue(values.stateId))
         // district
         dispatch(setDistrictFilterValue(values.districtId))
+        // call center manager
+        dispatch(setCallCenterManagerFilterValue(values.callCenterManagerId))
         // language
         dispatch(setLanguageBarrierFilterValue(values.languageBarrier))
         // pnd
@@ -130,6 +136,8 @@ const AssignedOrderListFilterFormDialogWrapper = ({ open, onClose }: Props) => {
         dispatch(setStateFilterValue(''))
         // district
         dispatch(setDistrictFilterValue(''))
+        // call center manager
+        dispatch(setCallCenterManagerFilterValue(''))
         // language
         dispatch(setLanguageBarrierFilterValue(false))
         // pnd

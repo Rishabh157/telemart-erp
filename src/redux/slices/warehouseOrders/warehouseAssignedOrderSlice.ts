@@ -29,6 +29,7 @@ export type InitialStateType = {
     orderTypeValueFilter: string
     stateValueFilter: string
     districtValueFilter: string
+    callCenterManagerValueFilter: string
     langBarrierValueFilter: boolean
     pndOrderValueFilter: boolean
     dateFilter: {
@@ -58,6 +59,7 @@ const initialState: InitialStateType = {
     orderTypeValueFilter: '',
     stateValueFilter: '',
     districtValueFilter: '',
+    callCenterManagerValueFilter : '',
     langBarrierValueFilter: false,
     pndOrderValueFilter: false,
     dateFilter: {
@@ -134,6 +136,9 @@ const warehouseAssignedOrderSlice: Slice<InitialStateType> = createSlice({
         setDistrictFilterValue: (state, action: PayloadAction<string>) => {
             state.districtValueFilter = action.payload
         },
+        setCallCenterManagerFilterValue: (state, action: PayloadAction<string>) => {
+            state.callCenterManagerValueFilter = action.payload
+        },
         setLanguageBarrierFilterValue: (
             state,
             action: PayloadAction<boolean>
@@ -169,6 +174,7 @@ export const {
     setOrderTypeFilterValue,
     setStateFilterValue,
     setDistrictFilterValue,
+    setCallCenterManagerFilterValue,
     setLanguageBarrierFilterValue,
     setPndOrderFilterValue,
     setDateFilter,
