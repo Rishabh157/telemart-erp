@@ -27,6 +27,7 @@ export type PaginationType = {
     isPaginationRequired?: boolean
     isOrderOrInquiry?: any
     getBatchData?: boolean
+    callCenterId?: string
     callbackDateFilter?: {
         start_date?: string
         end_date?: string

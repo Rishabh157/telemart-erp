@@ -91,10 +91,10 @@ export const CallCenterMasterApi = apiSlice.injectEndpoints({
 })
 export const {
     useGetCallCenterMasterQuery,
+    useGetAllCallCenterMasterQuery,
     useAddCallCenterMasterMutation,
     useUpdateCallCenterMasterMutation,
     useGetCallCenterMasterByIdQuery,
     useExportCallCenterMasterDataMutation,
     useDeleteCallCenterMasterMutation,
-    useGetAllCallCenterMasterQuery,
 } = CallCenterMasterApi
