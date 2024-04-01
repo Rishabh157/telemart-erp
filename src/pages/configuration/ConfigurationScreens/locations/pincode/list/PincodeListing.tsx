@@ -23,6 +23,8 @@ import {
 } from 'src/redux/slices/pincodeSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -73,6 +75,11 @@ const PincodeListing = ({ pincodes }: Props) => {
                     }
                 }}
                 disabled={false}
+                isAddButton={
+                    isAuthorized(
+                        UserModuleNameTypes.ACTION_PINCODES_ADD
+                    ) as boolean
+                }
             />
             {isOpenAddForm && (
                 <AddPincodeWrapper onClose={() => setisOpenAddForm(false)} />
