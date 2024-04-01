@@ -170,7 +170,7 @@ export const navigation: NavItemType[] = [
         label: 'WH First Call',
         icon: FiPhoneCall,
         path: '/warehouse-first-call-orders',
-        name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST,
     },
     {
         label: 'Request',
@@ -196,7 +196,6 @@ export const navigation: NavItemType[] = [
         path: '/assets/assets-request',
         name: UserModuleNameTypes.NAV_ASSETS,
     },
-
     {
         label: 'Dispositions',
         icon: GiRadarCrossSection,

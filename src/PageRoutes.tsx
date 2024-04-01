@@ -278,7 +278,7 @@ import BatchOrderView from './pages/batchOrder'
 import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
 import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
 import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
-import WarehouseFirstCallPageWrapper from './pages/warehouseFirstCall/WarehouseFirstCallPageWrapper'
+import WarehouseFirstCallPageWrapper from './pages/warehouseFirstCallOrders/warehouseFirstCall/WarehouseFirstCallPageWrapper'
 import WarehouseFirstCallDialerPageWrapper from './pages/warehouseFirstCallDialerPage/WarehouseFirstCallDialerPageWrapper'
 // import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
 import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
@@ -1018,7 +1018,7 @@ const PageRoutes = () => {
                         <Authorization
                             children={<WarehouseAssignedOrderListingWrapper />}
                             permission={
-                                UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
+                                UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST
                             }
                         />
                     }

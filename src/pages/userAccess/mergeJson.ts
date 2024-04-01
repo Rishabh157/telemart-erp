@@ -63,6 +63,9 @@ import { default as complainJson } from '../../utils/mediaJson/complain.json'
 import { default as multiMappingJson } from '../../utils/mediaJson/multiMapping.json'
 import { default as requestJson } from '../../utils/mediaJson/request.json'
 import { default as batchOrdersJson } from '../../utils/mediaJson/batchOrders.json'
+import { default as warehouseFirstCallOrdersjson } from '../../utils/mediaJson/warehouseFirstCallOrders.json'
+
+
 
 export const mergeUserModules = [
     { ...dashboardJson },
@@ -80,9 +83,10 @@ export const mergeUserModules = [
     { ...warehouseTransferJson },
     { ...sampleTransferJson },
     { ...companyTransferJson },
+    { ...warehouseFirstCallOrdersjson },
     // { ...inquiryJson },
     { ...ordersJson },
-    {...batchOrdersJson},
+    { ...batchOrdersJson },
     { ...complainJson },
     { ...callJson },
     { ...customerComplainJson },

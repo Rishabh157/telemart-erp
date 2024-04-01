@@ -27,6 +27,8 @@ import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 export enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -90,39 +92,42 @@ const WarehouseAssignedOrderListingWrapper = () => {
                         ) : (
                             <Chip
                                 onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Approval',
-                                        text: `Do you want to ${
-                                            row.firstCallApproval
-                                                ? 'Disapprove '
-                                                : 'Approval '
-                                        }`,
-                                        showCancelButton: true,
-                                        showDenyButton: true,
-                                        confirmButtonText: 'Order approval',
-                                        denyButtonText: 'Order cancled',
-                                        confirmButtonColor: '#239B56',
-                                        denyButtonColor: '#F1948A',
+                                    isAuthorized(
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL
+                                    ) &&
+                                        showConfirmationDialog({
+                                            title: 'Approval',
+                                            text: `Do you want to ${
+                                                row.firstCallApproval
+                                                    ? 'Disapprove '
+                                                    : 'Approval '
+                                            }`,
+                                            showCancelButton: true,
+                                            showDenyButton: true,
+                                            confirmButtonText: 'Order approval',
+                                            denyButtonText: 'Order cancled',
+                                            confirmButtonColor: '#239B56',
+                                            denyButtonColor: '#F1948A',
 
-                                        next: (res) => {
-                                            if (res.isConfirmed) {
-                                                return res.isConfirmed
-                                                    ? handleApproval(
-                                                          row?._id,
-                                                          FirstCallApprovalStatus.APPROVED
-                                                      )
-                                                    : setShowDropdown(false)
-                                            }
-                                            if (res.isDenied) {
-                                                return res.isDenied
-                                                    ? handleApproval(
-                                                          row?._id,
-                                                          FirstCallApprovalStatus.CANCEL
-                                                      )
-                                                    : setShowDropdown(false)
-                                            }
-                                        },
-                                    })
+                                            next: (res) => {
+                                                if (res.isConfirmed) {
+                                                    return res.isConfirmed
+                                                        ? handleApproval(
+                                                              row?._id,
+                                                              FirstCallApprovalStatus.APPROVED
+                                                          )
+                                                        : setShowDropdown(false)
+                                                }
+                                                if (res.isDenied) {
+                                                    return res.isDenied
+                                                        ? handleApproval(
+                                                              row?._id,
+                                                              FirstCallApprovalStatus.CANCEL
+                                                          )
+                                                        : setShowDropdown(false)
+                                                }
+                                            },
+                                        })
                                 }}
                                 className="cursor-pointer"
                                 label="Pending"
