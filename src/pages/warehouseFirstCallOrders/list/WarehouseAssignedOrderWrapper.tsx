@@ -18,7 +18,7 @@ import { OrderListResponse } from 'src/models/Order.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useGetOrderQuery,
+    useGetWHFristCallAssignedOrderQuery,
     useApprovedWHFirstCallApprovalMutation,
 } from 'src/services/OrderService'
 import moment from 'moment'
@@ -27,6 +27,8 @@ import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 export enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -91,39 +93,42 @@ const WarehouseAssignedOrderListingWrapper = () => {
                         ) : (
                             <Chip
                                 onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Approval',
-                                        text: `Do you want to ${
-                                            row.firstCallApproval
-                                                ? 'Disapprove '
-                                                : 'Approval '
-                                        }`,
-                                        showCancelButton: true,
-                                        showDenyButton: true,
-                                        confirmButtonText: 'Order approval',
-                                        denyButtonText: 'Order cancled',
-                                        confirmButtonColor: '#239B56',
-                                        denyButtonColor: '#F1948A',
+                                    isAuthorized(
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL
+                                    ) &&
+                                        showConfirmationDialog({
+                                            title: 'Approval',
+                                            text: `Do you want to ${
+                                                row.firstCallApproval
+                                                    ? 'Disapprove '
+                                                    : 'Approval '
+                                            }`,
+                                            showCancelButton: true,
+                                            showDenyButton: true,
+                                            confirmButtonText: 'Order approval',
+                                            denyButtonText: 'Order cancled',
+                                            confirmButtonColor: '#239B56',
+                                            denyButtonColor: '#F1948A',
 
-                                        next: (res) => {
-                                            if (res.isConfirmed) {
-                                                return res.isConfirmed
-                                                    ? handleApproval(
-                                                          row?._id,
-                                                          FirstCallApprovalStatus.APPROVED
-                                                      )
-                                                    : setShowDropdown(false)
-                                            }
-                                            if (res.isDenied) {
-                                                return res.isDenied
-                                                    ? handleApproval(
-                                                          row?._id,
-                                                          FirstCallApprovalStatus.CANCEL
-                                                      )
-                                                    : setShowDropdown(false)
-                                            }
-                                        },
-                                    })
+                                            next: (res) => {
+                                                if (res.isConfirmed) {
+                                                    return res.isConfirmed
+                                                        ? handleApproval(
+                                                              row?._id,
+                                                              FirstCallApprovalStatus.APPROVED
+                                                          )
+                                                        : setShowDropdown(false)
+                                                }
+                                                if (res.isDenied) {
+                                                    return res.isDenied
+                                                        ? handleApproval(
+                                                              row?._id,
+                                                              FirstCallApprovalStatus.CANCEL
+                                                          )
+                                                        : setShowDropdown(false)
+                                                }
+                                            },
+                                        })
                                 }}
                                 className="cursor-pointer"
                                 label="Pending"
@@ -542,32 +547,37 @@ const WarehouseAssignedOrderListingWrapper = () => {
     }
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
-    const { data, isFetching, isLoading } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            { fieldName: 'assignWarehouseId', value: warehouseId },
-            { fieldName: 'companyId', value: userData?.companyId },
-            { fieldName: 'firstCallApproval', value: false },
-            { fieldName: 'schemeId', value: schemeValueFilter },
-            // { fieldName: 'orderType', value: orderTypeValueFilter },
-            { fieldName: 'stateId', value: stateValueFilter },
-            { fieldName: 'districtId', value: districtValueFilter },
-            {
-                fieldName: 'firstCallState',
-                value: langBarrierValueFilter ? ['LANGUAGEBARRIER'] : '',
-            },
-            { fieldName: 'status', value: pndOrderValueFilter ? ['PND'] : '' },
-        ],
-        dateFilter: dateFilter || {},
-        callbackDateFilter: callbackDateFilter || {},
-        callCenterId: callCenterManagerValueFilter || null,
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { data, isFetching, isLoading } = useGetWHFristCallAssignedOrderQuery(
+        {
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['didNo', 'mobileNo'],
+            page: page,
+            filterBy: [
+                { fieldName: 'assignWarehouseId', value: warehouseId },
+                { fieldName: 'companyId', value: userData?.companyId },
+                { fieldName: 'firstCallApproval', value: false },
+                { fieldName: 'schemeId', value: schemeValueFilter },
+                // { fieldName: 'orderType', value: orderTypeValueFilter },
+                { fieldName: 'stateId', value: stateValueFilter },
+                { fieldName: 'districtId', value: districtValueFilter },
+                {
+                    fieldName: 'firstCallState',
+                    value: langBarrierValueFilter ? ['LANGUAGEBARRIER'] : '',
+                },
+                {
+                    fieldName: 'status',
+                    value: pndOrderValueFilter ? ['PND'] : '',
+                },
+            ],
+            dateFilter: dateFilter || {},
+            callbackDateFilter: callbackDateFilter || {},
+            callCenterId: callCenterManagerValueFilter || null,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }
+    )
 
     useEffect(() => {
         if (!isFetching && !isLoading) {

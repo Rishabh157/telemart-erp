@@ -20,6 +20,15 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        // for warehouse first call
+        getWHFristCallAssignedOrder: builder.query({
+            providesTags: ['order', 'batch-order'],
+            query: (body: PaginationType) => ({
+                url: '/order-inquiry/warehouse-first-call',
+                method: 'POST',
+                body,
+            }),
+        }),
 
         //***** GET *****/
         getAllOrder: builder.query({
@@ -208,4 +217,5 @@ export const {
     useApprovedWHFirstCallApprovalMutation,
     useGetWHFirstCallOrderDetailsQuery,
     useUpdateWHFirstCallUnauthOrderMutation,
+    useGetWHFristCallAssignedOrderQuery
 } = OrderApi
