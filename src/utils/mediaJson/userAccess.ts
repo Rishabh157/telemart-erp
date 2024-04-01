@@ -622,6 +622,13 @@ export enum barcodeUserAccessType {
     ACTION_BARCODE_GROUP_TAB = 'ACTION_BARCODE_GROUP_TAB',
     ACTION_BARCODE_ADD = 'ACTION_BARCODE_ADD',
 }
+export enum warehouseFirstCallOrdersType {
+    NAV_WAREHOUSE_FIRST_CALL_ORDERS = 'NAV_WAREHOUSE_FIRST_CALL_ORDERS',
+    ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST = 'ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST',
+    ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL = 'ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL',
+}
+
+
 export enum configurationUserAccessType {
     NAV_CONFIGURATION = 'NAV_CONFIGURATION',
 }
@@ -1013,6 +1020,7 @@ export const UserModuleNameTypes = {
     ...sampleTransferUserAccessTypes,
     ...wtcTransferUserAccessTypes,
     ...wtoWarehouseTransferUserAccessTypes,
+    ...warehouseFirstCallOrdersType,
     ...InquiryUserAccessTypes,
     ...ordersUserAccessTypes,
     ...callUserAccessTypes,

@@ -7,7 +7,7 @@
 
 // |-- External Dependencies --|
 import { RxDashboard } from 'react-icons/rx'
-import { FiUsers } from 'react-icons/fi'
+import { FiUsers, FiPhoneCall } from 'react-icons/fi'
 import { TbBuildingWarehouse } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake, FaSitemap } from 'react-icons/fa'
@@ -167,6 +167,12 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
     },
     {
+        label: 'WH First Call',
+        icon: FiPhoneCall,
+        path: '/warehouse-first-call-orders',
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST,
+    },
+    {
         label: 'Request',
         icon: IoIosGitPullRequest,
         path: '/request',
@@ -190,7 +196,6 @@ export const navigation: NavItemType[] = [
         path: '/assets/assets-request',
         name: UserModuleNameTypes.NAV_ASSETS,
     },
-
     {
         label: 'Dispositions',
         icon: GiRadarCrossSection,

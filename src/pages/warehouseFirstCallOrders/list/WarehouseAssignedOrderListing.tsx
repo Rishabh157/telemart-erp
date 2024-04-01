@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -6,7 +5,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
@@ -18,6 +17,9 @@ import {
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import AssignedOrderListFilterFormDialogWrapper from './assignedOrderFilter/AssignedOrderListFilterFormDialogWrapper'
+import { statusProps } from 'src/pages/orders'
+import { OrderListResponse } from 'src/models'
 
 // |-- Types --|
 type Props = {
@@ -26,8 +28,14 @@ type Props = {
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Props) => {
+const WarehouseAssignedOrdersListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
     const warehouseAssignedOrdersState: any = useSelector(
         (state: RootState) => state.warehouseOrdersAssigned
     )
@@ -35,12 +43,36 @@ const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Prop
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         warehouseAssignedOrdersState
 
+    const getBackGroundColorByStatus = (row: OrderListResponse) => {
+        if (row?.firstCallState === 'LANGUAGEBARRIER') {
+            return 'bg-green-200'
+        }
+        switch (row?.status) {
+            case statusProps.pnd:
+                return 'bg-amber-200'
+            case statusProps.urgent:
+                return 'bg-rose-300'
+            default:
+        }
+    }
+
     return (
         // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
         <div className="px-4 h-[calc(100vh-55px)] bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                {/* <ATMPageHeading> Call Management </ATMPageHeading> */}
+                <ATMPageHeading> Warehouse First Call Orders </ATMPageHeading>
+                {/* Legends */}
+                <div className="flex p-4 gap-x-3 ">
+                    <span>language Barrier</span>
+                    <span className=" rounded h-[20px] w-[20px] bg-green-200"></span>
+
+                    <span>PND</span>
+                    <span className=" rounded h-[20px] w-[20px] bg-amber-300"></span>
+
+                    <span>Urjent</span>
+                    <span className=" rounded h-[20px] w-[20px] bg-rose-300"></span>
+                </div>
                 {/* <button
                     type="button"
                     onClick={() => navigate('add')}
@@ -62,8 +94,18 @@ const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Prop
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <AssignedOrderListFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto h-full ">
@@ -75,9 +117,13 @@ const WarehouseAssignedOrdersListing = ({ columns, rows, setShowDropdown }: Prop
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
+                        rowClassName="px-2  py-2"
                         setShowDropdown={setShowDropdown}
                         // extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
+                        rowExtraClasses={(row: OrderListResponse) => {
+                            return getBackGroundColorByStatus(row)
+                        }}
                     />
                 </div>
 

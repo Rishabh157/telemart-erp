@@ -273,12 +273,15 @@ import AddHouseArrestFormWrapper from './pages/request/all/houseArrest/add/AddHo
 import HouseArrestViewWrapper from './pages/request/all/houseArrest/view/HouseArrestViewWrapper'
 import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/HouseArrestLogsListingWrapper'
 import WarehouseOrdersTab from './pages/warehouses/view/warehouse-orders'
-import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
 import WarehouseConfirmedOrderWrapper from './pages/warehouses/view/warehouse-orders/confirmOrders/list/WarehouseConfirmedOrderWrapper'
 import BatchOrderView from './pages/batchOrder'
 import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
 import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
 import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
+import WarehouseFirstCallPageWrapper from './pages/warehouseFirstCallOrders/warehouseFirstCall/WarehouseFirstCallPageWrapper'
+import WarehouseFirstCallDialerPageWrapper from './pages/warehouseFirstCallDialerPage/WarehouseFirstCallDialerPageWrapper'
+// import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
+import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -834,24 +837,13 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<WarehouseOrdersTab />}
-                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
+                                }
                             />
                         }
                     >
                         <Route
-                            path="assigned-order"
-                            element={
-                                <Authorization
-                                    children={
-                                        <WarehouseAssignedOrderListingWrapper />
-                                    }
-                                    permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS_ASSIGNED_ORDERS
-                                    }
-                                />
-                            }
-                        />
-                         <Route
                             path="confirmed-order"
                             element={
                                 <Authorization
@@ -1018,6 +1010,19 @@ const PageRoutes = () => {
                         }
                     />
                 </Route>
+
+                {/* Warehouse First Call */}
+                <Route
+                    path="/warehouse-first-call-orders"
+                    element={
+                        <Authorization
+                            children={<WarehouseAssignedOrderListingWrapper />}
+                            permission={
+                                UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST
+                            }
+                        />
+                    }
+                />
 
                 {/* Sale Order */}
                 <Route
@@ -2394,6 +2399,23 @@ const PageRoutes = () => {
                             }
                         />
                     }
+                />
+                <Route
+                    path="/warehouse-first-call/:id"
+                    element={
+                        <Authorization
+                            children={<WarehouseFirstCallPageWrapper />}
+                            permission={
+                                UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN
+                            }
+                        />
+                    }
+                />
+
+                {/* Dialer page */}
+                <Route
+                    path="/calling-outcall"
+                    element={<WarehouseFirstCallDialerPageWrapper />}
                 />
 
                 {/* Request Tabs */}

@@ -15,7 +15,7 @@ type Props = {
 
 export type FormInitialValues = {
     orderId: string
-    orderNo: number
+    orderNo: number | string
     orderDate: string
     disposition: string
     orderStatus: string
@@ -41,8 +41,8 @@ const CustomerComplainOrderDetailsWrapper = ({
         orderStatus: orderDetails?.status || '',
         invoice: '',
         dispatchTime: orderDetails?.updatedAt || '',
-        shippingCharges: orderDetails?.orderNumber || 0,
-        discount: orderDetails?.orderNumber || 0,
+        shippingCharges: orderDetails?.deliveryCharges || 0,
+        discount: orderDetails?.deliveryCharges || 0,
         total: orderDetails?.totalAmount || 0,
     }
 

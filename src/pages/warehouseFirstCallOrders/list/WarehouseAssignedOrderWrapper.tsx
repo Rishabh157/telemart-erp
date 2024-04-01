@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -17,7 +18,7 @@ import { OrderListResponse } from 'src/models/Order.model'
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useGetOrderQuery,
+    useGetWHFristCallAssignedOrderQuery,
     useApprovedWHFirstCallApprovalMutation,
 } from 'src/services/OrderService'
 import moment from 'moment'
@@ -25,6 +26,14 @@ import { useParams } from 'react-router-dom'
 import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+
+export enum FirstCallApprovalStatus {
+    'APPROVED' = 'APPROVED',
+    'CANCEL' = 'CANCEL',
+}
 
 const WarehouseAssignedOrderListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -37,8 +46,23 @@ const WarehouseAssignedOrderListingWrapper = () => {
     )
     const [warehousefirstCallApproval] =
         useApprovedWHFirstCallApprovalMutation()
-    const { page, rowsPerPage, items, searchValue } =
-        warehouseAssignedOrdersState
+    const {
+        page,
+        rowsPerPage,
+        items,
+        searchValue,
+        // filter value
+        schemeValueFilter,
+        // orderTypeValueFilter,
+        stateValueFilter,
+        districtValueFilter,
+        callCenterManagerValueFilter,
+        langBarrierValueFilter,
+        pndOrderValueFilter,
+        dateFilter,
+        callbackDateFilter,
+    } = warehouseAssignedOrdersState
+
     const columns: columnTypes[] = [
         {
             field: 'firstCallApproval',
@@ -57,23 +81,54 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                 variant="outlined"
                                 size="small"
                             />
+                        ) : row.firstCallState ===
+                          FirstCallApprovalStatus.CANCEL ? (
+                            <Chip
+                                className="cursor-pointer"
+                                label="Cancled"
+                                color="warning"
+                                variant="outlined"
+                                size="small"
+                            />
                         ) : (
                             <Chip
                                 onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Approved',
-                                        text: `Do you want to ${
-                                            row.firstCallApproval
-                                                ? 'Disapprove thtis first call'
-                                                : 'Approval this first call'
-                                        }`,
-                                        showCancelButton: true,
-                                        next: (res) => {
-                                            return res.isConfirmed
-                                                ? handleApproval(row?._id)
-                                                : setShowDropdown(false)
-                                        },
-                                    })
+                                    isAuthorized(
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL
+                                    ) &&
+                                        showConfirmationDialog({
+                                            title: 'Approval',
+                                            text: `Do you want to ${
+                                                row.firstCallApproval
+                                                    ? 'Disapprove '
+                                                    : 'Approval '
+                                            }`,
+                                            showCancelButton: true,
+                                            showDenyButton: true,
+                                            confirmButtonText: 'Order approval',
+                                            denyButtonText: 'Order cancled',
+                                            confirmButtonColor: '#239B56',
+                                            denyButtonColor: '#F1948A',
+
+                                            next: (res) => {
+                                                if (res.isConfirmed) {
+                                                    return res.isConfirmed
+                                                        ? handleApproval(
+                                                              row?._id,
+                                                              FirstCallApprovalStatus.APPROVED
+                                                          )
+                                                        : setShowDropdown(false)
+                                                }
+                                                if (res.isDenied) {
+                                                    return res.isDenied
+                                                        ? handleApproval(
+                                                              row?._id,
+                                                              FirstCallApprovalStatus.CANCEL
+                                                          )
+                                                        : setShowDropdown(false)
+                                                }
+                                            },
+                                        })
                                 }}
                                 className="cursor-pointer"
                                 label="Pending"
@@ -92,7 +147,11 @@ const WarehouseAssignedOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber}</span>
+                <Link to={`/warehouse-first-call/${row?._id}`}>
+                    <span className="text-primary-main">
+                        # {row.orderNumber}
+                    </span>{' '}
+                </Link>
             ),
         },
         {
@@ -111,6 +170,36 @@ const WarehouseAssignedOrderListingWrapper = () => {
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
+        },
+        {
+            field: 'firstCallRemark',
+            headerName: '1st call remark',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallRemark || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallState',
+            headerName: 'first Call State',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallState || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallCallBackDate',
+            headerName: 'call back date',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallCallBackDate || '-'}</span>
+            ),
         },
         {
             field: 'assignWarehouseLabel',
@@ -146,7 +235,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
-           
         },
         {
             field: 'status',
@@ -435,40 +523,61 @@ const WarehouseAssignedOrderListingWrapper = () => {
         },
     ]
 
-    const handleApproval = (rowId: string) => {
+    const handleApproval = (rowId: string, status: string) => {
         setShowDropdown(false)
-        warehousefirstCallApproval(rowId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Approvaled successfully!')
+        let body = {
+            status,
+        }
+        warehousefirstCallApproval({ body: body, id: rowId }).then(
+            (res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'Approvaled successfully!')
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
                 } else {
-                    showToast('error', res?.data?.message)
+                    showToast(
+                        'error',
+                        'Something went wrong, Please try again later'
+                    )
                 }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
             }
-        })
+        )
     }
     const { userData }: any = useSelector((state: RootState) => state?.auth)
-    const { data, isFetching, isLoading } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            { fieldName: 'assignWarehouseId', value: warehouseId },
-            { fieldName: 'companyId', value: userData?.companyId },
-            { fieldName: 'firstCallApproval', value: false },
 
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { data, isFetching, isLoading } = useGetWHFristCallAssignedOrderQuery(
+        {
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['didNo', 'mobileNo'],
+            page: page,
+            filterBy: [
+                { fieldName: 'assignWarehouseId', value: warehouseId },
+                { fieldName: 'companyId', value: userData?.companyId },
+                { fieldName: 'firstCallApproval', value: false },
+                { fieldName: 'schemeId', value: schemeValueFilter },
+                // { fieldName: 'orderType', value: orderTypeValueFilter },
+                { fieldName: 'stateId', value: stateValueFilter },
+                { fieldName: 'districtId', value: districtValueFilter },
+                {
+                    fieldName: 'firstCallState',
+                    value: langBarrierValueFilter ? ['LANGUAGEBARRIER'] : '',
+                },
+                {
+                    fieldName: 'status',
+                    value: pndOrderValueFilter ? ['PND'] : '',
+                },
+            ],
+            dateFilter: dateFilter || {},
+            callbackDateFilter: callbackDateFilter || {},
+            callCenterId: callCenterManagerValueFilter || null,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }
+    )
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -478,18 +587,17 @@ const WarehouseAssignedOrderListingWrapper = () => {
         } else {
             dispatch(setIsTableLoading(true))
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
     return (
-        <>
+        <SideNavLayout>
             <WarehouseAssignedOrdersListing
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
             />
-        </>
+        </SideNavLayout>
     )
 }
 

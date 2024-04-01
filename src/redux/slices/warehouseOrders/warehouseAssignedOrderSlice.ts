@@ -25,6 +25,22 @@ export type InitialStateType = {
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedDealerId: string
     filterValue: string
+    schemeValueFilter: string
+    orderTypeValueFilter: string
+    stateValueFilter: string
+    districtValueFilter: string
+    callCenterManagerValueFilter: string
+    langBarrierValueFilter: boolean
+    pndOrderValueFilter: boolean
+    dateFilter: {
+        startDate: string
+        endDate: string
+    }
+    callbackDateFilter: {
+        startDate: string
+        endDate: string
+        dateFilterKey?: string
+    }
 }
 
 const initialState: InitialStateType = {
@@ -39,6 +55,22 @@ const initialState: InitialStateType = {
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedDealerId: '',
     filterValue: '',
+    schemeValueFilter: '',
+    orderTypeValueFilter: '',
+    stateValueFilter: '',
+    districtValueFilter: '',
+    callCenterManagerValueFilter : '',
+    langBarrierValueFilter: false,
+    pndOrderValueFilter: false,
+    dateFilter: {
+        startDate: '',
+        endDate: '',
+    },
+    callbackDateFilter: {
+        startDate: '',
+        endDate: '',
+        dateFilterKey: 'firstCallCallBackDate',
+    },
 }
 
 const warehouseAssignedOrderSlice: Slice<InitialStateType> = createSlice({
@@ -92,6 +124,36 @@ const warehouseAssignedOrderSlice: Slice<InitialStateType> = createSlice({
         setFilterValue: (state, action: PayloadAction<string>) => {
             state.filterValue = action.payload
         },
+        setSchemeFilterValue: (state, action: PayloadAction<string>) => {
+            state.schemeValueFilter = action.payload
+        },
+        setOrderTypeFilterValue: (state, action: PayloadAction<string>) => {
+            state.orderTypeValueFilter = action.payload
+        },
+        setStateFilterValue: (state, action: PayloadAction<string>) => {
+            state.stateValueFilter = action.payload
+        },
+        setDistrictFilterValue: (state, action: PayloadAction<string>) => {
+            state.districtValueFilter = action.payload
+        },
+        setCallCenterManagerFilterValue: (state, action: PayloadAction<string>) => {
+            state.callCenterManagerValueFilter = action.payload
+        },
+        setLanguageBarrierFilterValue: (
+            state,
+            action: PayloadAction<boolean>
+        ) => {
+            state.langBarrierValueFilter = action.payload
+        },
+        setPndOrderFilterValue: (state, action: PayloadAction<boolean>) => {
+            state.pndOrderValueFilter = action.payload
+        },
+        setDateFilter: (state, action: PayloadAction<any>) => {
+            state.dateFilter = action.payload
+        },
+        setCallbackDateFilter: (state, action: PayloadAction<any>) => {
+            state.callbackDateFilter = action.payload
+        },
     },
 })
 
@@ -107,5 +169,15 @@ export const {
     setSelectedItem,
     setAllItems,
     setFilterValue,
+    // filter value
+    setSchemeFilterValue,
+    setOrderTypeFilterValue,
+    setStateFilterValue,
+    setDistrictFilterValue,
+    setCallCenterManagerFilterValue,
+    setLanguageBarrierFilterValue,
+    setPndOrderFilterValue,
+    setDateFilter,
+    setCallbackDateFilter,
 } = warehouseAssignedOrderSlice.actions
 export default warehouseAssignedOrderSlice.reducer

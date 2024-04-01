@@ -12,9 +12,15 @@ import React from 'react'
 import { ErrorMessage } from 'formik'
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
 import { TextField } from '@mui/material'
-import { getInputHeight, getLabelTextTransform, Size, textTransform } from 'src/utils/formUtils/getInputHeight'
+import {
+    getInputHeight,
+    getLabelTextTransform,
+    Size,
+    textTransform,
+} from 'src/utils/formUtils/getInputHeight'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { twMerge } from 'tailwind-merge'
 
 // |-- Types --|
 type Props = {
@@ -31,6 +37,8 @@ type Props = {
     minDate?: any | null
     inputSize?: string
     textTransform?: textTransform
+    placeholder?: string
+    className?: string
 }
 
 const ATMDatePicker = ({
@@ -47,20 +55,25 @@ const ATMDatePicker = ({
     minDate,
     textTransform = 'firstLetterCapitalonly',
     inputSize = '16px',
+    placeholder,
+    className,
 }: Props) => {
     return (
         <div className="relative">
             {label && (
                 <label className={`text-slate-700 ${labelClass}`}>
-                       {getLabelTextTransform(label, textTransform)}
+                    {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>
             )}
 
             <div
-                className={`${label && 'mt-2'} ${getInputHeight(
-                    size
-                )} flex items-center `}
+                className={twMerge(
+                    `${label && 'mt-2'} ${getInputHeight(
+                        size
+                    )} flex items-center `,
+                    `${className}`
+                )}
             >
                 <LocalizationProvider dateAdapter={AdapterMoment}>
                     <DesktopDatePicker
@@ -74,6 +87,7 @@ const ATMDatePicker = ({
                             <TextField
                                 {...params}
                                 size="small"
+                                placeholder={placeholder}
                                 fullWidth
                                 className="bg-white"
                                 inputProps={{
@@ -94,11 +108,12 @@ const ATMDatePicker = ({
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (
-                               <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
-                        <span >
-                            {errMsg.charAt(0).toUpperCase() + errMsg.slice(1).toLowerCase()}
-                        </span>
-                    </p>
+                        <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
+                            <span>
+                                {errMsg.charAt(0).toUpperCase() +
+                                    errMsg.slice(1).toLowerCase()}
+                            </span>
+                        </p>
                     )}
                 </ErrorMessage>
             )}

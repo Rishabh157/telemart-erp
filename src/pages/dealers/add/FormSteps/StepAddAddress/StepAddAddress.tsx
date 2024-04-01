@@ -223,7 +223,7 @@ const StepAddAddress = ({
                                                             isOpen={
                                                                 isOpenSearchPincode[
                                                                     name
-                                                                ]
+                                                                ] || false
                                                             }
                                                             handleClose={() =>
                                                                 setIsOpenSearchPincode(
