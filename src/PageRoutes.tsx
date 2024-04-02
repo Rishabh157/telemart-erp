@@ -284,6 +284,7 @@ import WarehouseFirstCallDialerPageWrapper from './pages/warehouseFirstCallDiale
 import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
 import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerNDRDetailsWrapper'
 import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
+import OfferAppliedNdrListingWrapper from './pages/offerAppliedNdr/list/OfferAppliedNdrListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -3107,6 +3108,16 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<ComplainListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_COMPLAINT}
+                        />
+                    }
+                />
+
+                <Route
+                    path="/offer-apply-ndr"
+                    element={
+                        <Authorization
+                            children={<OfferAppliedNdrListingWrapper />}
                             permission={UserModuleNameTypes.NAV_COMPLAINT}
                         />
                     }

@@ -288,6 +288,23 @@ const CourierNdrDialerPageWrapper = () => {
             ),
         },
         {
+            field: 'createdAt',
+            headerName: 'Order Creation Date',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {moment(row?.createdAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(row?.createdAt).format('hh:mm A')}
+                    </div>
+                </div>
+            ),
+        },
+        {
             field: 'inquiryNumber',
             headerName: 'Enquiry No.',
             flex: 'flex-[3_3_0%]',

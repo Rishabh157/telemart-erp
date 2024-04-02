@@ -180,29 +180,89 @@ export const emailTypeOptions = () => {
 
 // RTO ATTEMPT
 enum RtoAttemptType {
-    customerWillConnect = 'CUSTOMER_WILL_CONNECT',
-    attempt = 'ATTEMPT',
-    rto = 'RTO',
-    hold = 'HOLD',
     cancel = 'CANCEL',
+    adtm = 'ADTM',
+    adoth = 'ADOTH',
+    notReachable = 'NOTREACHABLE',
+    numberBusy = 'NUMBERBUSY',
+    ringingNoResponse = 'RINGINGNORESPONSE',
+    switchOff = 'SWITCHOFF',
+    notConnected = 'NOTCONNECTED',
+    notInterested = 'NOTINTERESTED',
+    callBack = 'CALLBACK',
+    other = 'OTHER',
+    dnc = 'DNC',
+    dcFOR = 'DCFOR',
+    dcUCR = 'DCUCR',
+    schemeOffered = 'SCHEMEOFFERED',
+    webReattempt = 'WEBREATTEMPT',
 }
 export const rtoTypeOptions = () => {
     let options = [
         {
-            value: RtoAttemptType.customerWillConnect,
-            label: RtoAttemptType.customerWillConnect,
+            value: RtoAttemptType.cancel,
+            label: 'Cancel',
         },
         {
-            value: RtoAttemptType.attempt,
-            label: RtoAttemptType.attempt,
+            value: RtoAttemptType.adtm,
+            label: RtoAttemptType.adtm,
         },
         {
-            value: RtoAttemptType.rto,
-            label: RtoAttemptType.rto,
+            value: RtoAttemptType.adoth,
+            label: RtoAttemptType.adoth,
         },
         {
-            value: RtoAttemptType.hold,
-            label: RtoAttemptType.hold,
+            value: RtoAttemptType.notReachable,
+            label: 'Not Reachable',
+        },
+        {
+            value: RtoAttemptType.numberBusy,
+            label: 'Number Busy',
+        },
+        {
+            value: RtoAttemptType.ringingNoResponse,
+            label: 'Ringing No Response',
+        },
+        {
+            value: RtoAttemptType.switchOff,
+            label: 'Switch Off',
+        },
+        {
+            value: RtoAttemptType.notConnected,
+            label: 'Not Connected',
+        },
+        {
+            value: RtoAttemptType.notInterested,
+            label: 'Not Interested',
+        },
+        //
+        {
+            value: RtoAttemptType.callBack,
+            label: 'Call Back',
+        },
+        {
+            value: RtoAttemptType.other,
+            label: 'Other',
+        },
+        {
+            value: RtoAttemptType.dnc,
+            label: RtoAttemptType.dnc,
+        },
+        {
+            value: RtoAttemptType.dcFOR,
+            label: RtoAttemptType.dcFOR,
+        },
+        {
+            value: RtoAttemptType.dcUCR,
+            label: RtoAttemptType.dcUCR,
+        },
+        {
+            value: RtoAttemptType.schemeOffered,
+            label: 'Scheme Offered',
+        },
+        {
+            value: RtoAttemptType.webReattempt,
+            label: 'Web Reattempt',
         },
     ]
 
