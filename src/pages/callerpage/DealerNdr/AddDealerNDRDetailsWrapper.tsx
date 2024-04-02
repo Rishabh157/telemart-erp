@@ -8,81 +8,83 @@ import {
     useUpdateNdrDealerDialerMutation,
 } from 'src/services/OrderService'
 import { object, string } from 'yup'
-import CustomerNDRDetailsForm from './DealerNDRDetailsForm'
+import DealerNDRDetailsForm from './DealerNDRDetailsForm'
 import { showToast } from 'src/utils'
+import { useGetAllNdrDispositionQuery } from 'src/services/configurations/NdrDisositionServices'
+import { NdrDispositionListResponseType } from 'src/models/configurationModel/NdrDisposition.model'
 
 export type FormInitialValues = {
     customerName: string
     mobileNumber: string
-    alternateNumber1: string
-    // alternateNumber2: string
+    alternateNumber: string
     orderNo: number | string
-    orderStatus: string
+    dalerCode: string
     schemeName: string
     schemeCode: string
     courier: string
-    courierStatus: string
-    courierRemark: string
-    remarkTimestamp: string
+    status: string
+    // remarkTimestamp: string
     address1: string
-    address2: string
     pincode: string
     district: string
     state: string
-    callDisposition: string
-    // rtoReattemptReason: string
-    validateCourierRemark: string
+    ndrCallDisposition: string
+    ndrRtoReattemptReason: string
+    dealerName: string
     reAttemptDate: string
-    reAttemeptReason: string
     remark: string
     ndrDiscountApplicable: boolean
+    ndrRemark: string
+    dealerValidRemark: string
 }
 
 const AddDealerNDRDetailsWrapper = () => {
     const [orderDetails, setOrderDetails] = React.useState<OrderListResponse>()
+    const [ndrDispositions, setNdrDispositions] =
+        React.useState<NdrDispositionListResponseType[]>()
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [updateOrderNdrDealer, updateOrderNdrDealerInfo] =
         useUpdateNdrDealerDialerMutation()
     const locationUrl = useLocation()
     const queryParams = new URLSearchParams(locationUrl.search)
     const phoneNumber = queryParams.get('phone')
-    // const userName = queryParams.get('user')
+    const userName = queryParams.get('user')
 
     const initialValues: FormInitialValues = {
         customerName: orderDetails?.customerName || '',
         mobileNumber: orderDetails?.mobileNo || '',
-        alternateNumber1: orderDetails?.alternateNo || '',
+        alternateNumber: orderDetails?.alternateNo || '',
         orderNo: orderDetails?.orderNumber || 0,
-        orderStatus: orderDetails?.status || '',
         schemeName: orderDetails?.schemeName || '',
-        schemeCode: orderDetails?.schemeName || '',
-        courier: '',
-        courierStatus: orderDetails?.status || '',
-        courierRemark: '',
-        remarkTimestamp: '',
+        schemeCode: orderDetails?.schemeCode || '',
+        status: orderDetails?.status || '',
         address1: orderDetails?.autoFillingShippingAddress || '',
-        address2: '',
         pincode: orderDetails?.pincodeLabel || '',
         district: orderDetails?.districtLabel || '',
         state: orderDetails?.stateLabel || '',
-        callDisposition: '',
-        // rtoReattemptReason: '',
-        validateCourierRemark: '',
-        reAttemptDate: '',
-        reAttemeptReason: '' || '',
         remark: orderDetails?.remark || '',
+        dealerName: orderDetails?.dealerLabel || '',
+        dalerCode: orderDetails?.dealerCode || '',
+        //editable
         ndrDiscountApplicable: false,
+        ndrRemark: '',
+        ndrCallDisposition: '',
+        ndrRtoReattemptReason: '',
+        courier: '',
+        dealerValidRemark: '',
+        reAttemptDate: '',
     }
 
     // Form Validation Schema
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const validationSchema = object({
-        callType: string().required('call type is required'),
-        initialCallOne: string().required('ic1 is required'),
-        initialCallTwo: string().required('ic2 required'),
-        initialCallThree: string().required('ic3 required'),
-        status: string().required('status is required'),
-        remark: string().required('remark is required'),
+        callDisposition: string(),
+        dealerValidRemark: string().required('Required'),
+        ndrRtoReattemptReason: string(),
+        reAttemptDate: string(),
+        ndrDiscountApplicable: string().required('Required'),
+        ndrRemark: string().required('Required'),
     })
 
     const { data, isLoading, isFetching } =
@@ -95,12 +97,34 @@ const AddDealerNDRDetailsWrapper = () => {
             setOrderDetails(data?.data)
         }
     }, [data, isLoading, isFetching])
+
+    //NDR Disposition
+
+    const {
+        data: NdrDisposition,
+        isLoading: ndrIsLoading,
+        isFetching: ndrIsFetching,
+    } = useGetAllNdrDispositionQuery('')
+
+    React.useEffect(() => {
+        if (!ndrIsLoading && !ndrIsFetching) {
+            setNdrDispositions(NdrDisposition?.data)
+        }
+    }, [NdrDisposition, ndrIsLoading, ndrIsFetching])
     const onSubmitHandler = (values: FormInitialValues) => {
+        if (!orderDetails?._id) {
+            alert('Please Select order')
+            return
+        }
         const formatedValues = {
-            reAttemptDate: values.reAttemptDate,
-            ndrRemark: values.remark || '',
+            reAttemptDate: values?.reAttemptDate,
+            ndrRemark: values?.ndrRemark || '',
             ndrDiscountApplicable: values?.ndrDiscountApplicable,
-            alternateNumber: values.alternateNumber1,
+            alternateNumber: values?.alternateNumber,
+            dealerValidRemark: values?.dealerValidRemark || '',
+            ndrApprovedBy: userName || '',
+            ndrCallDisposition: values?.ndrCallDisposition || '',
+            ndrRtoReattemptReason: values?.ndrRtoReattemptReason || '',
         }
         updateOrderNdrDealer({
             id: orderDetails?._id,
@@ -122,7 +146,7 @@ const AddDealerNDRDetailsWrapper = () => {
         <Formik
             enableReinitialize
             initialValues={initialValues}
-            // validationSchema={validationSchema}
+            validationSchema={validationSchema}
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
@@ -132,9 +156,10 @@ const AddDealerNDRDetailsWrapper = () => {
                             <CircularProgress />
                         </div>
                     )}
-                    <CustomerNDRDetailsForm
+                    <DealerNDRDetailsForm
                         formType="ADD"
                         formikProps={formikProps}
+                        ndrDispositions={ndrDispositions || []}
                         apiStatus={updateOrderNdrDealerInfo?.isLoading}
                     />
                 </Form>
