@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import { useAddNdrDispositionMutation } from 'src/services/configurations/NdrDisositionServices'
@@ -13,7 +13,7 @@ export type FormInitialValues = {
     priority: string
     smsType: string
     emailType: string
-    rtoAttempt: string
+    rtoAttempt: string[]
 }
 
 const AddNdrDispositionWrapper = () => {
@@ -27,7 +27,7 @@ const AddNdrDispositionWrapper = () => {
         priority: '',
         smsType: '',
         emailType: '',
-        rtoAttempt: '',
+        rtoAttempt: [],
     }
 
     const validationSchema = object({
@@ -35,7 +35,17 @@ const AddNdrDispositionWrapper = () => {
         priority: string().required('Priority is required'),
         smsType: string().required('SMS Type is required'),
         emailType: string().required('Email Type is required'),
-        rtoAttempt: string().required('RTO Attempt is required'),
+        rtoAttempt: array()
+            .of(string())
+            .test(
+                'at-least-one-selected',
+                'At least one value must be selected',
+                function (value: any) {
+                    return value.length > 0
+                }
+            )
+            .nullable()
+            .default([]),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {

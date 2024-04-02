@@ -18,6 +18,7 @@ import {
     MdPermMedia,
     MdWeb,
     MdOutlineBatchPrediction,
+    MdOutlineLocalOffer,
 } from 'react-icons/md'
 import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
@@ -147,6 +148,12 @@ export const navigation: NavItemType[] = [
         icon: MdOutlineBatchPrediction,
         path: '/batch',
         name: UserModuleNameTypes.NAV_BATCH_ORDER,
+    },
+    {
+        label: 'Offer Apply NDR',
+        icon: MdOutlineLocalOffer,
+        path: '/offer-apply-ndr',
+        name: UserModuleNameTypes.NAV_COMPLAINT,
     },
     {
         label: 'Complaint',
