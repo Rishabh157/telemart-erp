@@ -285,35 +285,7 @@ const CustomerNDRDetailsForm = ({
                                 setFieldValue('callDisposition', e)
                             }}
                         />
-                        {/* <ATMSelectSearchable
-                            required
-                            componentClass="mt-1"
-                            label="Status"
-                            size="xs"
-                            labelSize="xs"
-                            labelDirection="horizontal"
-                            selectLabel="select status"
-                            classDirection="grid grid-cols-3"
-                            name="status"
-                            value={values.status || ''}
-                            options={[
-                                {
-                                    label: 'Open',
-                                    value: 'OPEN',
-                                },
-                                {
-                                    label: 'Pending',
-                                    value: 'PENDING',
-                                },
-                                {
-                                    label: 'Closed',
-                                    value: 'CLOSED',
-                                },
-                            ]}
-                            onChange={(e) => {
-                                setFieldValue('status', e)
-                            }}
-                        /> */}
+                       
                     </div>
 
                     <div className="flex items-center p-2 gap-x-4">

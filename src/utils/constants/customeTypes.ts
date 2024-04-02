@@ -633,3 +633,34 @@ export const userDepartmentTypeOptions = () => {
         }
     })
 }
+
+enum DealerValidReamrkTypes {
+    correct = "CORRECT",
+    incorrect = "INCORRECT",
+    notapplicable = "NOTAPPLICABLE",
+}
+
+export const dealerValidReamrkType = () => {
+    let options = [
+        {
+            value: DealerValidReamrkTypes.correct,
+            label: DealerValidReamrkTypes.correct,
+        },
+        {
+            value: DealerValidReamrkTypes.incorrect,
+            label: DealerValidReamrkTypes.incorrect,
+        },
+        {
+            value: DealerValidReamrkTypes.notapplicable,
+            label: DealerValidReamrkTypes.notapplicable,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+
+}

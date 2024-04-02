@@ -1,13 +1,18 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddDealerNDRDetailsWrapper'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMSelectSearchable, {
+    SelectOption,
+} from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { Divider } from '@mui/material'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
+import { dealerValidReamrkType } from 'src/utils/constants/customeTypes'
+import moment from 'moment'
+import { NdrDispositionListResponseType } from 'src/models/configurationModel/NdrDisposition.model'
 // import { useGetAllInitialByCallType } from 'src/hooks/useGetAllInitialByCallType'
 // import { useGetAllInitialCallTwoByCallTypeAndOneId } from 'src/hooks/useGetAllInitialCallTwoByCallTypeAndOneId'
 // import { useGetAllInitialCallThreeByCallTypeAndTwoId } from 'src/hooks/useGetAllInitialCallThreeByCallTypeAndTwoId'
@@ -17,9 +22,15 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     formType: 'ADD' | 'EDIT'
+    ndrDispositions?: NdrDispositionListResponseType[] | []
 }
 
-const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
+const DealerNDRDetailsForm = ({
+    formikProps,
+    apiStatus,
+    formType,
+    ndrDispositions = [],
+}: Props) => {
     const { values, setFieldValue, handleSubmit } = formikProps
 
     // Get IC1 Option By Only Call Type
@@ -43,6 +54,26 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
     //     values.initialCallTwo,
     //     values.callType
     // )
+    const NdrDispositionsOptions = ndrDispositions?.map(
+        (items: NdrDispositionListResponseType) => {
+            return {
+                label: items?.ndrDisposition,
+                value: items?._id,
+            }
+        }
+    )
+
+    const getNDRReasonsOptions: any = (id: string) => {
+        let NDrDisposition = ndrDispositions.find(
+            (ele: NdrDispositionListResponseType) => ele?._id === id
+        )
+        return NDrDisposition?.rtoAttempt?.map((ele: string) => {
+            return {
+                label: ele,
+                value: ele,
+            }
+        })
+    }
 
     return (
         <div className="px-4 pb-4">
@@ -86,16 +117,6 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                                     {values?.mobileNumber}
                                 </span>
                             </div>
-                            {/* <div className="flex items-center gap-x-3"> */}
-
-                            {/* <span className="text-sm text-[#406698] font-semibold flex-1">
-                                    Alternate No 1.
-                                </span>
-                                {' : '}
-                                <span className="text-sm text-black font-semibold flex-1 text-center">
-                                    {values?.alternateNumber1}
-                                </span> */}
-                            {/* </div> */}
 
                             <div className="flex items-center gap-x-3">
                                 <span className="text-sm text-[#406698] font-semibold flex-1">
@@ -108,11 +129,11 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             </div>
                             <div className="flex items-center gap-x-4">
                                 <span className="text-sm text-[#406698] font-semibold flex-1">
-                                    Order Status
+                                    Status
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-center">
-                                    {values?.orderStatus}
+                                    {values?.status}
                                 </span>
                             </div>
                             <div className="flex items-center gap-x-4">
@@ -135,29 +156,29 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             </div>
                             <div className="flex items-center gap-x-4">
                                 <span className="text-sm text-[#406698] font-semibold flex-1">
-                                    Courier
+                                    Dealer
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-center">
-                                    {values?.courierStatus}
+                                    {values?.dealerName}
                                 </span>
                             </div>
                             <div className="flex items-center gap-x-4">
                                 <span className="text-sm text-[#406698] font-semibold flex-1">
-                                    Courier Status
+                                    Dealer Status
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-center">
-                                    {values?.courierStatus}
+                                    {values?.status}
                                 </span>
                             </div>
                             <div className="flex items-center gap-x-4">
                                 <span className="text-sm text-[#406698] font-semibold flex-1">
-                                    Courier Remark
+                                    Dealer Remark
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-center">
-                                    {values?.courierStatus}
+                                    {values?.remark}
                                 </span>
                             </div>
                         </div>
@@ -165,7 +186,7 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                     </div>
                     <Divider />
 
-                    <div className="grid grid-cols-3 gap-x-8 gap-y-1 p-2">
+                    <div className="grid grid-cols-3 gap-x-8 gap-y-3 p-2">
                         <ATMTextField
                             required
                             disabled
@@ -175,7 +196,7 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             name="state"
                             value={values.state}
                             onChange={(e) => {
-                                setFieldValue('state', e)
+                                setFieldValue('state', e.target.value)
                             }}
                         />
                         <ATMTextField
@@ -187,7 +208,7 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             name="district"
                             value={values.district}
                             onChange={(e) => {
-                                setFieldValue('district', e)
+                                setFieldValue('district', e.target.value)
                             }}
                         />
                         <ATMTextField
@@ -199,11 +220,13 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             name="pincode"
                             value={values.pincode || ''}
                             onChange={(e) => {
-                                setFieldValue('pincode', e)
+                                setFieldValue('pincode', e.target.value)
                             }}
                         />
                         <ATMTextArea
                             required
+                            readOnly
+                            isDisable
                             label="Address"
                             minRows={3}
                             name="address1"
@@ -218,10 +241,10 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             label="Alternate No "
                             size="xs"
                             labelClass="mt-0"
-                            name="alternateNumber1"
-                            value={values.alternateNumber1 || ''}
+                            name="alternateNumber"
+                            value={values.alternateNumber || ''}
                             onChange={(e) => {
-                                setFieldValue('alternateNumber1', e)
+                                setFieldValue('alternateNumber', e.target.value)
                             }}
                         />
                         <ATMSelectSearchable
@@ -234,16 +257,16 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             labelDirection="vertical"
                             selectLabel="select disposition"
                             classDirection="grid grid-cols-3"
-                            name="callDisposition"
-                            value={values.callDisposition}
-                            options={[]}
+                            name="ndrCallDisposition"
+                            value={values.ndrCallDisposition}
+                            options={NdrDispositionsOptions}
                             isLoading={false}
                             onChange={(e) => {
-                                setFieldValue('callDisposition', e)
+                                setFieldValue('ndrCallDisposition', e)
                             }}
                         />
                         <ATMSelectSearchable
-                            required
+                            // required
                             componentClass="mt-1"
                             label="RTO/(Re-attempt Reason)"
                             size="xxs"
@@ -252,11 +275,15 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             labelDirection="vertical"
                             selectLabel="select "
                             classDirection="grid grid-cols-3"
-                            name="reAttemeptReason"
-                            value={values?.reAttemeptReason || ''}
-                            options={[]}
+                            name="ndrRtoReattemptReason"
+                            value={values?.ndrRtoReattemptReason || ''}
+                            options={
+                                getNDRReasonsOptions(
+                                    values.ndrCallDisposition
+                                ) as SelectOption[]
+                            }
                             onChange={(e) => {
-                                setFieldValue('reAttemeptReason', e)
+                                setFieldValue('ndrRtoReattemptReason', e)
                             }}
                         />
                         <ATMDatePicker
@@ -268,9 +295,11 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                             placeholder="Re-Attempt Date"
                             labelClass="font-medium"
                             label="Re-Attempt Date"
-                            dateTimeFormat="MM/DD/YYYY"
-                            minDate
+                            dateTimeFormat="DD/MM/YYYY"
+                            // minDate={moment().subtract(0, 'days')}
+                            maxDate={moment().add(15, 'days')}
                             onChange={(e) => {
+                                console.log(e, 'ehehe')
                                 setFieldValue('reAttemptDate', e)
                             }}
                         />
@@ -284,19 +313,36 @@ const DealerNDRDetailsForm = ({ formikProps, apiStatus, formType }: Props) => {
                                 setFieldValue('ndrDiscountApplicable', e)
                             }
                         />
+                        <ATMSelectSearchable
+                            required
+                            componentClass="mt-1"
+                            label="Valid Dealer Remarks"
+                            size="xxs"
+                            labelSize="xxs"
+                            minHeight="10px"
+                            labelDirection="vertical"
+                            selectLabel="select "
+                            classDirection="grid grid-cols-3"
+                            name="dealerValidRemark"
+                            value={values?.dealerValidRemark || ''}
+                            options={dealerValidReamrkType()}
+                            onChange={(e) => {
+                                setFieldValue('dealerValidRemark', e)
+                            }}
+                        />
                     </div>
 
                     <div className=" items-center p-2">
                         <ATMTextArea
                             required
-                            label="Remarks"
+                            label="NDR Remark"
                             minRows={2}
-                            name="remark"
-                            value={values.remark}
-                            placeholder="remark"
+                            name="ndrRemark"
+                            value={values.ndrRemark}
+                            placeholder="Remark"
                             className="rounded"
                             onChange={(newValue: string) =>
-                                setFieldValue('remark', newValue)
+                                setFieldValue('ndrRemark', newValue)
                             }
                         />
                     </div>
