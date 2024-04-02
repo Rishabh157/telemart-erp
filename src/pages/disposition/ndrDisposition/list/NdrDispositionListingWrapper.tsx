@@ -95,7 +95,7 @@ const NdrDispositionListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_RTO_ATTEMPT,
             renderCell: (row: NdrDispositionListResponseType) => (
-                <span> {row?.rtoAttempt?.replaceAll('_', ' ')} </span>
+                <span> {row?.rtoAttempt?.join(' , ')} </span>
             ),
         },
         {

@@ -12,7 +12,7 @@ export type NdrDispositionListResponseType = {
     priority: string
     smsType: string
     emailType: string
-    rtoAttempt: string
+    rtoAttempt: string[]
     isDeleted: boolean
     isActive: boolean
     createdAt: string

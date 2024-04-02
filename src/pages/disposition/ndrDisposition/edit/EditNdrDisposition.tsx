@@ -119,6 +119,7 @@ const EditNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                         />
                         <ATMSelectSearchable
                             required
+                            isMulti
                             options={rtoTypeOptions()}
                             name="rtoAttempt"
                             value={values.rtoAttempt}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik } from 'formik'
 import {
@@ -18,7 +18,7 @@ export type FormInitialValues = {
     priority: string
     smsType: string
     emailType: string
-    rtoAttempt: string
+    rtoAttempt: string[]
 }
 
 const EditNdrDispositionWrapper = () => {
@@ -39,7 +39,7 @@ const EditNdrDispositionWrapper = () => {
         priority: selectedDispositionOne?.priority,
         smsType: selectedDispositionOne?.smsType,
         emailType: selectedDispositionOne?.emailType,
-        rtoAttempt: selectedDispositionOne?.rtoAttempt,
+        rtoAttempt: selectedDispositionOne?.rtoAttempt || [],
     }
 
     useEffect(() => {
@@ -52,7 +52,17 @@ const EditNdrDispositionWrapper = () => {
         priority: string().required('Priority is required'),
         smsType: string().required('SMS Type is required'),
         emailType: string().required('Email Type is required'),
-        rtoAttempt: string().required('RTO Attempt is required'),
+        rtoAttempt: array()
+            .of(string())
+            .test(
+                'at-least-one-selected',
+                'At least one value must be selected',
+                function (value: any) {
+                    return value.length > 0
+                }
+            )
+            .nullable()
+            .default([]),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
