@@ -217,10 +217,6 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
-
-
-
-
         //Dealer Ndr gett data in 
         // /v1/order-inquiry/get-dealer-ndr/:phno
         getOrderByNumberUsingForNdrDealer: builder.query({

@@ -39,6 +39,7 @@ type Props = {
     textTransform?: textTransform
     placeholder?: string
     className?: string
+    maxDate?: any | null
 }
 
 const ATMDatePicker = ({
@@ -57,6 +58,7 @@ const ATMDatePicker = ({
     inputSize = '16px',
     placeholder,
     className,
+    maxDate,
 }: Props) => {
     return (
         <div className="relative">
@@ -82,6 +84,7 @@ const ATMDatePicker = ({
                         value={value ? value : null}
                         onChange={onChange}
                         minDate={minDate}
+                        maxDate={maxDate}
                         showDaysOutsideCurrentMonth
                         renderInput={(params) => (
                             <TextField
