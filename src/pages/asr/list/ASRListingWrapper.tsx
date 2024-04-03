@@ -48,6 +48,40 @@ const ASRListingWrapper = () => {
     const [isDisabled, setIsDisabled] = useState(false)
     const columns: columnTypes[] = [
         {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASR_EDIT)}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_ASR_DELETE
+                    )}
+                    handleEditActionButton={() => {
+                        navigate(`/asr/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete ARS',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                    handleOnAction={() => {
+                        // e.stopPropagation()
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                />
+            ),
+            align: 'end',
+        },
+        {
             field: 'productName',
             headerName: 'Item Name',
             flex: 'flex-[3_3_0%]',
@@ -170,41 +204,7 @@ const ASRListingWrapper = () => {
                     </Stack>{' '}
                 </span>
             ),
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_ASR_EDIT)}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_ASR_DELETE
-                    )}
-                    handleEditActionButton={() => {
-                        navigate(`/asr/${currentId}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete ARS',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                    handleOnAction={() => {
-                        // e.stopPropagation()
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                />
-            ),
-            align: 'end',
-        },
+        }
     ]
     const { page, rowsPerPage, searchValue, items } = AsrState
     const { userData } = useSelector((state: RootState) => state?.auth)

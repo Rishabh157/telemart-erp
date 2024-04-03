@@ -48,16 +48,7 @@ const CallCenterMasterListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
-        {
-            field: 'callCenterName',
-            headerName: 'Call Center Name',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.CALL_CENTER_LIST_CALL_CENTER_NAME,
-
-            renderCell: (row: CallCenterMasterListResponse) => (
-                <span className="capitalize"> {row.callCenterName} </span>
-            ),
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -94,6 +85,16 @@ const CallCenterMasterListingWrapper = () => {
                 />
             ),
             align: 'end',
+        },
+        {
+            field: 'callCenterName',
+            headerName: 'Call Center Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_CENTER_LIST_CALL_CENTER_NAME,
+
+            renderCell: (row: CallCenterMasterListResponse) => (
+                <span className="capitalize"> {row.callCenterName} </span>
+            ),
         },
     ]
     // const navigate = useNavigate();

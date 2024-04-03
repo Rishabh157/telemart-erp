@@ -48,24 +48,7 @@ const CompanyBranchListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
 
     const columns: columnTypes[] = [
-        {
-            field: 'companyLabel',
-            headerName: 'Company Name',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.COMPANY_BRANCH_LIST_COMAPNY_NAME,
-            renderCell: (row: CompanyBranchListResponse) => (
-                <span> {row.companyLabel} </span>
-            ),
-        },
-        {
-            field: 'branchName',
-            headerName: 'Branch Name',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.COMPANY_BRANCH_LIST_BRANCH_NAME,
-            renderCell: (row: CompanyBranchListResponse) => (
-                <span> {row.branchName} </span>
-            ),
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -100,6 +83,24 @@ const CompanyBranchListingWrapper = () => {
                 />
             ),
             align: 'end',
+        },
+        {
+            field: 'companyLabel',
+            headerName: 'Company Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPANY_BRANCH_LIST_COMAPNY_NAME,
+            renderCell: (row: CompanyBranchListResponse) => (
+                <span> {row.companyLabel} </span>
+            ),
+        },
+        {
+            field: 'branchName',
+            headerName: 'Branch Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPANY_BRANCH_LIST_BRANCH_NAME,
+            renderCell: (row: CompanyBranchListResponse) => (
+                <span> {row.branchName} </span>
+            ),
         },
     ]
     const { data, isFetching, isLoading } = useGetCompanyBranchQuery({

@@ -209,6 +209,49 @@ const RTVListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: ReturnToVendorListResponse) =>
+                row?.firstApproved === null &&
+                row?.secondApproved === null && (
+                    <ActionPopup
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_EDIT
+                        )}
+                        isDelete={
+                            row.firstApproved === null &&
+                            row.secondApproved === null
+                                ? isAuthorized(
+                                      UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
+                                  )
+                                : false
+                        }
+                        handleEditActionButton={() => {
+                            navigate(`/return-to-vendor/edit/${row?._id}`)
+                        }}
+                        handleDeleteActionButton={() => {
+                            showConfirmationDialog({
+                                title: 'Delete RTV',
+                                text: 'Do you want to delete Return To Vendor?',
+                                showCancelButton: true,
+                                next: (res: any) => {
+                                    return res.isConfirmed
+                                        ? handleDelete()
+                                        : setShowDropdown(false)
+                                },
+                            })
+                        }}
+                        handleOnAction={() => {
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
+                        }}
+                    />
+                ),
+            align: 'end',
+        },
         {
             field: 'rtvNo',
             headerName: 'RTV No.',
@@ -482,48 +525,6 @@ const RTVListingWrapper = () => {
                     </div>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: ReturnToVendorListResponse) =>
-                row?.firstApproved === null &&
-                row?.secondApproved === null && (
-                    <ActionPopup
-                        isEdit={isAuthorized(
-                            UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_EDIT
-                        )}
-                        isDelete={
-                            row.firstApproved === null &&
-                            row.secondApproved === null
-                                ? isAuthorized(
-                                      UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
-                                  )
-                                : false
-                        }
-                        handleEditActionButton={() => {
-                            navigate(`/return-to-vendor/edit/${row?._id}`)
-                        }}
-                        handleDeleteActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Delete RTV',
-                                text: 'Do you want to delete Return To Vendor?',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDelete()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                    />
-                ),
-            align: 'end',
         },
     ]
 

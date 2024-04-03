@@ -46,35 +46,7 @@ const ItemListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
-        {
-            field: 'itemCode',
-            headerName: 'Item Code',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.ITEMS_LIST_ITEMS_CODE,
-            renderCell: (row: ItemListResponse) => {
-                return <span> {row.itemCode} </span>
-            },
-        },
-        {
-            field: 'itemName',
-            headerName: 'Item Name',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.ITEMS_LIST_ITEMS_NAME,
-            renderCell: (row: ItemListResponse) => {
-                return <span className="capitalize"> {row.itemName} </span>
-            },
-        },
-
-        {
-            field: 'itemWeight',
-            headerName: 'Weight (in gms.)',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.ITEMS_LIST_WEIGHT,
-            renderCell: (row: ItemListResponse) => {
-                return <span> {row.itemWeight} </span>
-            },
-        },
-
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -108,6 +80,35 @@ const ItemListingWrapper = () => {
             ),
             align: 'end',
         },
+        {
+            field: 'itemCode',
+            headerName: 'Item Code',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.ITEMS_LIST_ITEMS_CODE,
+            renderCell: (row: ItemListResponse) => {
+                return <span> {row.itemCode} </span>
+            },
+        },
+        {
+            field: 'itemName',
+            headerName: 'Item Name',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.ITEMS_LIST_ITEMS_NAME,
+            renderCell: (row: ItemListResponse) => {
+                return <span className="capitalize"> {row.itemName} </span>
+            },
+        },
+
+        {
+            field: 'itemWeight',
+            headerName: 'Weight (in gms.)',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.ITEMS_LIST_WEIGHT,
+            renderCell: (row: ItemListResponse) => {
+                return <span> {row.itemWeight} </span>
+            },
+        },
+
     ]
 
     const { data, isFetching, isLoading } = useGetItemsQuery({

@@ -44,15 +44,7 @@ const LanguageListingWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
 
     const columns: columnTypes[] = [
-        {
-            field: 'languageName',
-            headerName: 'Language',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.LANGUAGE_LIST_LANGUAGE,
-            renderCell: (row: LanguageListResponse) => (
-                <span> {row.languageName} </span>
-            ),
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -87,6 +79,15 @@ const LanguageListingWrapper = () => {
                 />
             ),
             align: 'end',
+        },
+        {
+            field: 'languageName',
+            headerName: 'Language',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.LANGUAGE_LIST_LANGUAGE,
+            renderCell: (row: LanguageListResponse) => (
+                <span> {row.languageName} </span>
+            ),
         },
     ]
     const { data, isFetching, isLoading } = useGetLanguageQuery({

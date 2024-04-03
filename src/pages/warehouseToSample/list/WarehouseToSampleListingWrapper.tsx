@@ -155,6 +155,44 @@ const WarehouseToSampleListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) =>
+                row?.firstApproved === null &&
+                row?.secondApproved === null && (
+                    <ActionPopup
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_EDIT
+                        )}
+                        isDelete={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_DELETE
+                        )}
+                        handleEditActionButton={() => {
+                            navigate(`/warehouse-to-sample/edit/${row?._id}`)
+                        }}
+                        handleDeleteActionButton={() => {
+                            showConfirmationDialog({
+                                title: 'Delete Sample',
+                                text: 'Do you want to delete this sample order ?',
+                                showCancelButton: true,
+                                next: (res: any) => {
+                                    return res.isConfirmed
+                                        ? handleDelete()
+                                        : setShowDropdown(false)
+                                },
+                            })
+                        }}
+                        handleOnAction={() => {
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
+                        }}
+                    />
+                ),
+            align: 'end',
+        },
         {
             field: 'wtsNumber',
             headerName: 'WTS Number',
@@ -445,43 +483,6 @@ const WarehouseToSampleListingWrapper = () => {
                     </div>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: OutwardRequestWarehouseToSampleListResponse) =>
-                row?.firstApproved === null &&
-                row?.secondApproved === null && (
-                    <ActionPopup
-                        isEdit={isAuthorized(
-                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_EDIT
-                        )}
-                        isDelete={isAuthorized(
-                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_SAMPLE_DELETE
-                        )}
-                        handleEditActionButton={() => {
-                            navigate(`/warehouse-to-sample/edit/${row?._id}`)
-                        }}
-                        handleDeleteActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Delete Sample',
-                                text: 'Do you want to delete this sample order ?',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDelete()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                    />
-                ),
-            align: 'end',
         },
     ]
 

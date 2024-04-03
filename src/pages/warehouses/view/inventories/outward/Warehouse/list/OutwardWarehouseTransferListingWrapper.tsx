@@ -120,6 +120,38 @@ const OutwardWarehouseTransferListingWrapper = () => {
         useDispatchWarehouseToWarehouseBarcodeMutation()
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Dispatch',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: OutwardRequestWarehouseListResponse) =>
+                row?.documents[0].status === SaleOrderStatus.complete ? (
+                    'Dispatched'
+                ) : row?.documents[0].status === SaleOrderStatus.dispatched ? (
+                    ''
+                ) : (
+                    <ActionPopup
+                        handleOnAction={() => {}}
+                        moduleName={UserModuleNameTypes.wareHouse}
+                        isCustomBtn={true}
+                        customBtnText="Dispatch"
+                        handleCustomActionButton={() => {
+                            setIsShow(true)
+                            const totalQuantity = row?.documents?.reduce(
+                                (sum, ele) => {
+                                    return (sum +=
+                                        ele?.productSalesOrder?.quantity)
+                                },
+                                0
+                            )
+                            setBarcodeQuantity(totalQuantity)
+                            setSelectedItemsTobeDispatch(row)
+                        }}
+                    />
+                ),
+            align: 'end',
+        },
         {
             field: 'wtNumber',
             headerName: 'WT Number',
@@ -199,37 +231,6 @@ const OutwardWarehouseTransferListingWrapper = () => {
             renderCell: (row: OutwardRequestWarehouseListResponse) => (
                 <span>{row?.documents[0]?.status}</span>
             ),
-        },
-        {
-            field: 'actions',
-            headerName: 'Dispatch',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: OutwardRequestWarehouseListResponse) =>
-                row?.documents[0].status === SaleOrderStatus.complete ? (
-                    'Dispatched'
-                ) : row?.documents[0].status === SaleOrderStatus.dispatched ? (
-                    ''
-                ) : (
-                    <ActionPopup
-                        handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.wareHouse}
-                        isCustomBtn={true}
-                        customBtnText="Dispatch"
-                        handleCustomActionButton={() => {
-                            setIsShow(true)
-                            const totalQuantity = row?.documents?.reduce(
-                                (sum, ele) => {
-                                    return (sum +=
-                                        ele?.productSalesOrder?.quantity)
-                                },
-                                0
-                            )
-                            setBarcodeQuantity(totalQuantity)
-                            setSelectedItemsTobeDispatch(row)
-                        }}
-                    />
-                ),
-            align: 'end',
         },
     ]
 

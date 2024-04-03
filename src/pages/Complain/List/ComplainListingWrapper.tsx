@@ -83,6 +83,25 @@ const ComplainListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isCustomBtn
+                    customBtnText="Flow"
+                    handleCustomActionButton={() => {
+                        setIsFlowDialogShow(true)
+                    }}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                />
+            ),
+            align: 'end',
+        },
+        {
             field: 'orderNumber',
             headerName: 'Order No',
             flex: 'flex-[1_1_0%]',
@@ -145,25 +164,6 @@ const ComplainListingWrapper = () => {
             renderCell: (row: any) => (
                 <span> {row.initialCallThreeLabel} </span>
             ),
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isCustomBtn
-                    customBtnText="Flow"
-                    handleCustomActionButton={() => {
-                        setIsFlowDialogShow(true)
-                    }}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                />
-            ),
-            align: 'end',
         },
     ]
 

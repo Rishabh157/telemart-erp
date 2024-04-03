@@ -65,23 +65,6 @@ const ListDealerPincodeTabWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'Pincode',
-            headerName: 'Pincode',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: DealersPincodeListResponse) => (
-                <span> {row.pincode} </span>
-            ),
-        },
-
-        {
-            field: 'estTime',
-            headerName: 'Estimated Time (in Min.)',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: DealersPincodeListResponse) => {
-                return <span> {row.estTime} </span>
-            },
-        },
-        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
@@ -129,6 +112,23 @@ const ListDealerPincodeTabWrapper = () => {
                 </ActionPopup>
             ),
             align: 'end',
+        },
+        {
+            field: 'Pincode',
+            headerName: 'Pincode',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: DealersPincodeListResponse) => (
+                <span> {row.pincode} </span>
+            ),
+        },
+
+        {
+            field: 'estTime',
+            headerName: 'Estimated Time (in Min.)',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: DealersPincodeListResponse) => {
+                return <span> {row.estTime} </span>
+            },
         },
     ]
 
