@@ -117,7 +117,7 @@ const ListDealerSchemeTabWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-            align: 'end',
+            
         },
         {
             field: 'schemeName',

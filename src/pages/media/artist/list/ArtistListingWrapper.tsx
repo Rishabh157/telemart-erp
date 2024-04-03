@@ -81,7 +81,7 @@ const ArtistListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'artistName',

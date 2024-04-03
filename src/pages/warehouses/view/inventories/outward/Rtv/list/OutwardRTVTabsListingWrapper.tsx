@@ -149,7 +149,7 @@ const OutwardRTVTabsListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'rtvNumber',

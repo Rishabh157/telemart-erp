@@ -171,7 +171,7 @@ const SlotRunViewsListingWrapper = () => {
                     {/* )} */}
                 </div>
             ),
-            align: 'end',
+            
         },
     ]
 

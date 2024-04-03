@@ -84,7 +84,7 @@ const CallCenterMasterListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'callCenterName',

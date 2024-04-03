@@ -77,7 +77,7 @@ const WarehouseToComapnyListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'wtcNumber',

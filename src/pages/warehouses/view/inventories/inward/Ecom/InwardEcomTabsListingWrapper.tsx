@@ -47,7 +47,7 @@ const columns: columnTypes[] = [
                 <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
             </button>
         ),
-        align: 'end',
+        
     },
     {
         field: 'ecomName',

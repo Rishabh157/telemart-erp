@@ -138,7 +138,7 @@ const SlotManagementListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'slotName',

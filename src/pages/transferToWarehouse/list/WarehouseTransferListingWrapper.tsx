@@ -189,7 +189,7 @@ const WarehouseTransferListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'wtsNumber',

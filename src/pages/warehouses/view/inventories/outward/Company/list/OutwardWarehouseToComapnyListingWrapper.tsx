@@ -148,7 +148,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'wtcNumber',

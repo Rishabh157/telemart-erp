@@ -145,7 +145,7 @@ const InfluencerListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-            align: 'end',
+            
         },
         {
             field: 'productName',

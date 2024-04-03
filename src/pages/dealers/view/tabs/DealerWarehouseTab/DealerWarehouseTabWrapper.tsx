@@ -91,7 +91,7 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'warehouseCode',

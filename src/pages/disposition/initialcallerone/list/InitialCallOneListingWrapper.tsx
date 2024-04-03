@@ -104,7 +104,7 @@ const InitialCallOneListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'initialCallDisplayName',

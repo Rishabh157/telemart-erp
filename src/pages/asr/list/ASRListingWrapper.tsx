@@ -79,7 +79,6 @@ const ASRListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
         },
         {
             field: 'productName',

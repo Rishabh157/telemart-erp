@@ -432,7 +432,7 @@ const OrderListing = ({
                     }
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'orderNumber',

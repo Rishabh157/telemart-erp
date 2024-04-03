@@ -76,7 +76,7 @@ const ConfigurationCompanyListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'companyName',

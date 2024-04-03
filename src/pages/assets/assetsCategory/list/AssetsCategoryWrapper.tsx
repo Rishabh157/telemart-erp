@@ -74,7 +74,6 @@ const AssetsCategoryWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
         },
         {
             field: 'assetCategoryName',

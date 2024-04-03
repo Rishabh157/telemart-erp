@@ -144,7 +144,7 @@ const DealersListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'dealerCode',

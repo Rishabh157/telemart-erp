@@ -191,7 +191,7 @@ const WarehouseToSampleListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'wtsNumber',

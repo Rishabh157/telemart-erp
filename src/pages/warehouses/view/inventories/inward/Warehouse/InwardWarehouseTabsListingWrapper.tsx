@@ -151,7 +151,7 @@ const InwardWarehouseTabsListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'wtNumber',

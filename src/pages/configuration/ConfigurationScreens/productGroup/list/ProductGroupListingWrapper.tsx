@@ -82,7 +82,7 @@ const ProductGroupListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'groupName',

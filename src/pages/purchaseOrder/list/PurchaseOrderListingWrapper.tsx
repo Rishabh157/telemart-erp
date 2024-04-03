@@ -202,7 +202,7 @@ const PurchaseOrderListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-            align: 'end',
+            
         },
         {
             field: 'poCode',

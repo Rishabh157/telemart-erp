@@ -81,7 +81,7 @@ const CartonBoxListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'boxName',

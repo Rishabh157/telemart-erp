@@ -99,7 +99,7 @@ const SchemeListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'schemeCode',

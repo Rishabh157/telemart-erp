@@ -150,7 +150,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'wtNumber',
