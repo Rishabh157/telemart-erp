@@ -19,7 +19,6 @@ import {
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-// import ComplainListFilterFormDialogWrapper from './ComplainFilter/ComplainListFilterFormDialogWrapper'
 
 // |-- Types --|
 type Props = {
@@ -91,19 +90,16 @@ const OfferAppliedNdrListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
-                        // extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>
 
                 {/* Pagination */}
-
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}

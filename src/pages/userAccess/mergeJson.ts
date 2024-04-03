@@ -64,6 +64,7 @@ import { default as multiMappingJson } from '../../utils/mediaJson/multiMapping.
 import { default as requestJson } from '../../utils/mediaJson/request.json'
 import { default as batchOrdersJson } from '../../utils/mediaJson/batchOrders.json'
 import { default as warehouseFirstCallOrdersjson } from '../../utils/mediaJson/warehouseFirstCallOrders.json'
+import { default as offerAppliedNdrJson } from '../../utils/mediaJson/offerAppliedNdr.json'
 
 export const mergeUserModules = [
     { ...dashboardJson },
@@ -85,6 +86,7 @@ export const mergeUserModules = [
     // { ...inquiryJson },
     { ...ordersJson },
     { ...batchOrdersJson },
+    { ...offerAppliedNdrJson },
     { ...complainJson },
     { ...callJson },
     { ...customerComplainJson },

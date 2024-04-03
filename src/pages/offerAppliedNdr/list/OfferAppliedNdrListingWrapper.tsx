@@ -21,9 +21,10 @@ import { useGetOrderQuery } from 'src/services/OrderService'
 import { OrderListResponse } from 'src/models'
 import { Chip } from '@mui/material'
 import moment from 'moment'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import UpdateOfferAppliedNdrFormWrapper from './UpdateOrder/UpdateOfferAppliedNdrFormWrapper'
+import { isAuthorized } from 'src/utils/authorization'
 
 enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -95,7 +96,9 @@ const OfferAppliedNdrListingWrapper = () => {
                         setShowDropdown(!showDropdown)
                         setOrderId(row?._id)
                     }}
-                    isEdit
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_OFFER_APPLIED_NDR_EDIT
+                    )}
                     handleEditActionButton={() => {
                         setIsUpdateOrderFormOpen(true)
                         setOrderId(row?._id)

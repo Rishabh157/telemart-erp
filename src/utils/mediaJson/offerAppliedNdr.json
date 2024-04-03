@@ -1,0 +1,23 @@
+{
+    "moduleId": "NAV_OFFER_APPLIED_NDR",
+    "moduleName": "NAV_OFFER_APPLIED_NDR",
+    "parentGroup": [],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_OFFER_APPLIED_NDR_LIST",
+            "actionUrl": "/offer-apply-ndr",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_OFFER_APPLIED_NDR_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        }
+    ]
+}
