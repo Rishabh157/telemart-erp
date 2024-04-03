@@ -101,7 +101,7 @@ const ATMSelectSearchable = ({
             boxShadow: 'none',
             minHeight:
                 size === 'xxs'
-                    ? '10px'
+                    ? ''
                     : size === 'xs'
                     ? '28px'
                     : size === 'small'
@@ -126,7 +126,7 @@ const ATMSelectSearchable = ({
             ...provided,
 
             paddingBottom: size === 'xxs' ? '0px' : '0px',
-            paddingTop: size === 'xxs' ? '4px' : '7px',
+            paddingTop: size === 'xxs' ? '2px' : '7px',
             alignItems: 'start',
             minHeight: minHeight,
             maxHeight: '67px',
@@ -146,6 +146,7 @@ const ATMSelectSearchable = ({
             textColor: 'rgb(51 65 85,0)',
             paddingLeft: '4px',
             paddingTop: '-5px',
+            margin:'0px'
         }),
 
         indicatorSeparator: (provided: any) => ({

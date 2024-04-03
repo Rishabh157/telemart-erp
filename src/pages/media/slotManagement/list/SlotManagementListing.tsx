@@ -70,7 +70,7 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                 ) && (
                     <button
                         type="button"
-                        onClick={() => navigate('add')}
+                        onClick={() => navigate('/media/slot/add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
                         + Add Slot
