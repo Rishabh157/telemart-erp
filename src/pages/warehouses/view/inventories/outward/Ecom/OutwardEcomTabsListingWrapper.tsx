@@ -37,6 +37,19 @@ export type Tabs = {
 }
 
 const columns: columnTypes[] = [
+    
+    {
+        field: 'actions',
+        headerName: 'Actions',
+        flex: 'flex-[0.5_0.5_0%]',
+        renderCell: (row: any) => (
+            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
+                {' '}
+                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+            </button>
+        ),
+        align: 'end',
+    },
     {
         field: 'ecomName',
         headerName: 'Ecommerce Name',
@@ -76,18 +89,6 @@ const columns: columnTypes[] = [
         renderCell: (row: OutwardRequestEcomListResponse) => {
             return <span> {row.creationDate} </span>
         },
-    },
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
-            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                {' '}
-                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-            </button>
-        ),
-        align: 'end',
     },
 ]
 

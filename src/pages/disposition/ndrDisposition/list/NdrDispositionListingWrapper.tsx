@@ -62,6 +62,43 @@ const NdrDispositionListingWrapper = () => {
     }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: NdrDispositionListResponseType) => (
+                <ActionPopup
+                    // moduleName={UserModuleNameTypes.ndrDisposition}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
+                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_NDR_DISPOSITION_DELETE
+                    // )}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`${row?._id}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete NDR Disposition',
+                            text: 'Do you want to delete NDR Disposition?',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            align: 'end',
+        },
         {
             field: 'ndrDisposition',
             headerName: 'Disposition Name',
@@ -163,42 +200,6 @@ const NdrDispositionListingWrapper = () => {
                     </span>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: NdrDispositionListResponseType) => (
-                <ActionPopup
-                    // moduleName={UserModuleNameTypes.ndrDisposition}
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
-                    )}
-                    // isDelete={isAuthorized(
-                    //     UserModuleNameTypes.ACTION_NDR_DISPOSITION_DELETE
-                    // )}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`${row?._id}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete NDR Disposition',
-                            text: 'Do you want to delete NDR Disposition?',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
         },
     ]
 

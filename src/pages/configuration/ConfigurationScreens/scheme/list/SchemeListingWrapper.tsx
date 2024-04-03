@@ -65,6 +65,42 @@ const SchemeListingWrapper = () => {
         isPaginationRequired: true,
     })
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_SCHEME_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_SCHEME_DELETE
+                    )}
+                    handleEditActionButton={() => {
+                        navigate(`/configurations/scheme/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Scheme',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                />
+            ),
+            align: 'end',
+        },
         {
             field: 'schemeCode',
             headerName: 'Scheme Code',
@@ -114,41 +150,6 @@ const SchemeListingWrapper = () => {
             },
         },
 
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_SCHEME_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_SCHEME_DELETE
-                    )}
-                    handleEditActionButton={() => {
-                        navigate(`/configurations/scheme/${currentId}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete Scheme',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                />
-            ),
-            align: 'end',
-        },
     ]
 
     useEffect(() => {

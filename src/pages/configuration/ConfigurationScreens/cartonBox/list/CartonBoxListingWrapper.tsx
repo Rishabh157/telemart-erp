@@ -46,6 +46,43 @@ const CartonBoxListingWrapper = () => {
     )
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_CARTON_BOX_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_CARTON_BOX_DELETE
+                    )}
+                    handleOnAction={() => {
+                        // e.stopPropagation()
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/configurations/carton-box/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete carton box',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            align: 'end',
+        },
         {
             field: 'boxName',
             headerName: 'Box Name',
@@ -89,42 +126,6 @@ const CartonBoxListingWrapper = () => {
             },
         },
 
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_CARTON_BOX_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_CARTON_BOX_DELETE
-                    )}
-                    handleOnAction={() => {
-                        // e.stopPropagation()
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`/configurations/carton-box/${currentId}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete carton box',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
-        },
     ]
     const { page, rowsPerPage, items, searchValue } = cartonBoxState
     // const dispatch = useDispatch<AppDispatch>();

@@ -116,6 +116,39 @@ const InwardDealerTabsListingWrapper = () => {
     ])
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Inward',
+            flex: 'flex-[1_0.1_0%]',
+            align: 'center',
+            renderCell: (row: InwardDealerRequstListResponse) => {
+                return row?.documents[0].status !== 'DISPATCHED' ? (
+                    ''
+                ) : (
+                    <>
+                        <ActionPopup
+                            moduleName={UserModuleNameTypes.dealer}
+                            isCustomBtn={true}
+                            customBtnText="Inward"
+                            handleOnAction={() => {}}
+                            handleCustomActionButton={() => {
+                                setIsShow(true)
+                                const totalQuantity = row?.documents?.reduce(
+                                    (sum, ele) => {
+                                        return (sum +=
+                                            ele?.productSalesOrder?.quantity)
+                                    },
+                                    0
+                                )
+                                setBarcodeQuantity(totalQuantity)
+                                setSelectedItemsTobeDispatch(row)
+                            }}
+                        />
+                    </>
+                )
+            },
+        },
         {
             field: 'dtwNumber',
             headerName: 'DTW Number',
@@ -363,38 +396,6 @@ const InwardDealerTabsListingWrapper = () => {
                             </Stack>
                         )}
                     </div>
-                )
-            },
-        },
-        {
-            field: 'actions',
-            headerName: 'Inward',
-            flex: 'flex-[1_0.1_0%]',
-            align: 'center',
-            renderCell: (row: InwardDealerRequstListResponse) => {
-                return row?.documents[0].status !== 'DISPATCHED' ? (
-                    ''
-                ) : (
-                    <>
-                        <ActionPopup
-                            moduleName={UserModuleNameTypes.dealer}
-                            isCustomBtn={true}
-                            customBtnText="Inward"
-                            handleOnAction={() => {}}
-                            handleCustomActionButton={() => {
-                                setIsShow(true)
-                                const totalQuantity = row?.documents?.reduce(
-                                    (sum, ele) => {
-                                        return (sum +=
-                                            ele?.productSalesOrder?.quantity)
-                                    },
-                                    0
-                                )
-                                setBarcodeQuantity(totalQuantity)
-                                setSelectedItemsTobeDispatch(row)
-                            }}
-                        />
-                    </>
                 )
             },
         },

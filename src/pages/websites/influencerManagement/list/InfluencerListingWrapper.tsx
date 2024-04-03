@@ -45,14 +45,7 @@ const InfluencerListingWrapper = () => {
 
     const { page, rowsPerPage, searchValue, items } = WebsiteState
     const columns: columnTypes[] = [
-        {
-            field: 'productName',
-            headerName: 'Website Name',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsiteListResponse) => (
-                <span> {row.productName} </span>
-            ),
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -153,6 +146,14 @@ const InfluencerListingWrapper = () => {
                 </ActionPopup>
             ),
             align: 'end',
+        },
+        {
+            field: 'productName',
+            headerName: 'Website Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsiteListResponse) => (
+                <span> {row.productName} </span>
+            ),
         },
     ]
 

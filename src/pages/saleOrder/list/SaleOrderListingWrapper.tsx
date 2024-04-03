@@ -153,6 +153,51 @@ const SaleOrderListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: SaleOrderListResponseTypes) =>
+                row?.dhApproved === null &&
+                row?.accApproved === null && (
+                    <ActionPopup
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_SALE_ORDER_EDIT
+                        )}
+                        isDelete={isAuthorized(
+                            UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
+                        )}
+                        isCustomBtn={false}
+                        customBtnText="Invoice"
+                        handleCustomActionButton={() => {
+                            navigate(
+                                `/sale-order/${row?.documents?.[0]?._id}/invoice`
+                            )
+                        }}
+                        handleEditActionButton={() => {
+                            navigate(`/sale-order/edit-sale-order/${row?._id}`)
+                        }}
+                        handleDeleteActionButton={() => {
+                            showConfirmationDialog({
+                                title: 'Delete SaleOrder',
+                                text: 'Do you want to delete SaleOrder?',
+                                showCancelButton: true,
+                                next: (res: any) => {
+                                    return res.isConfirmed
+                                        ? handleDelete()
+                                        : setShowDropdown(false)
+                                },
+                            })
+                        }}
+                        handleOnAction={() => {
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
+                        }}
+                    />
+                ),
+            align: 'end',
+        },
         {
             field: 'soNumber',
             headerName: 'So Number',
@@ -433,50 +478,6 @@ const SaleOrderListingWrapper = () => {
                     </div>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: SaleOrderListResponseTypes) =>
-                row?.dhApproved === null &&
-                row?.accApproved === null && (
-                    <ActionPopup
-                        isEdit={isAuthorized(
-                            UserModuleNameTypes.ACTION_SALE_ORDER_EDIT
-                        )}
-                        isDelete={isAuthorized(
-                            UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
-                        )}
-                        isCustomBtn={false}
-                        customBtnText="Invoice"
-                        handleCustomActionButton={() => {
-                            navigate(
-                                `/sale-order/${row?.documents?.[0]?._id}/invoice`
-                            )
-                        }}
-                        handleEditActionButton={() => {
-                            navigate(`/sale-order/edit-sale-order/${row?._id}`)
-                        }}
-                        handleDeleteActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Delete SaleOrder',
-                                text: 'Do you want to delete SaleOrder?',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDelete()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                    />
-                ),
-            align: 'end',
         },
     ]
 

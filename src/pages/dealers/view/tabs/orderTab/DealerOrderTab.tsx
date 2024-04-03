@@ -23,6 +23,24 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const columns: columnTypes[] = [
+    
+    {
+        field: 'actions',
+        headerName: 'Actions',
+        flex: 'flex-[0.5_0.5_0%]',
+        renderCell: (row: any) => (
+            <ActionPopup
+                moduleName={UserModuleNameTypes.dealer}
+                handleOnAction={() => {
+                    // setShowDropdown(!showDropdown)
+                    // setCurrentId(row?._id)
+                }}
+            >
+                <></>
+            </ActionPopup>
+        ),
+        align: 'end',
+    },
     {
         field: 'order_no',
         headerName: 'Order',
@@ -65,23 +83,6 @@ const columns: columnTypes[] = [
         renderCell: (row: any) => (
             <span className="text-slate-800"> &#8377; {row.total} </span>
         ),
-    },
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
-            <ActionPopup
-                moduleName={UserModuleNameTypes.dealer}
-                handleOnAction={() => {
-                    // setShowDropdown(!showDropdown)
-                    // setCurrentId(row?._id)
-                }}
-            >
-                <></>
-            </ActionPopup>
-        ),
-        align: 'end',
     },
 ]
 

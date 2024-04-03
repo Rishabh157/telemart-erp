@@ -92,6 +92,43 @@ const UsersListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.8_0.8_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_USER_EDIT)}
+                    //isDelete
+                    handleEditActionButton={() => {
+                        navigate(`/users/${row?._id}`)
+                    }}
+                    isCustomBtn
+                    customBtnText="Change Password"
+                    handleCustomActionButton={() => {
+                        setChangePasswordDialogOpen(true)
+                        setCurrentId(row?._id)
+                    }}
+                    // handleDeleteActionButton={() => {
+                    //     showConfirmationDialog({
+                    //         title: 'Delete User',
+                    //         text: 'Do you want to delete User?',
+                    //         showCancelButton: true,
+                    //         next: (res: any) => {
+                    //             return res.isConfirmed
+                    //                 ? handleDelete()
+                    //                 : setShowDropdown(false)
+                    //         },
+                    //     })
+                    // }}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                />
+            ),
+            align: 'end',
+        },
+        {
             field: 'userName',
             headerName: 'User Name',
             flex: 'flex-[1_1_0%]',
@@ -187,9 +224,8 @@ const UsersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive User',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -209,9 +245,8 @@ const UsersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive Scheme',
-                                        text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
-                                        }`,
+                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
+                                            }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -232,43 +267,6 @@ const UsersListingWrapper = () => {
             },
         },
 
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.8_0.8_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(UserModuleNameTypes.ACTION_USER_EDIT)}
-                    //isDelete
-                    handleEditActionButton={() => {
-                        navigate(`/users/${row?._id}`)
-                    }}
-                    isCustomBtn
-                    customBtnText="Change Password"
-                    handleCustomActionButton={() => {
-                        setChangePasswordDialogOpen(true)
-                        setCurrentId(row?._id)
-                    }}
-                    // handleDeleteActionButton={() => {
-                    //     showConfirmationDialog({
-                    //         title: 'Delete User',
-                    //         text: 'Do you want to delete User?',
-                    //         showCancelButton: true,
-                    //         next: (res: any) => {
-                    //             return res.isConfirmed
-                    //                 ? handleDelete()
-                    //                 : setShowDropdown(false)
-                    //         },
-                    //     })
-                    // }}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                />
-            ),
-            align: 'end',
-        },
     ]
 
     const handleDeactive = (rowId: string) => {
@@ -293,7 +291,7 @@ const UsersListingWrapper = () => {
             <UsersListing
                 columns={columns}
                 rows={items}
-                setShowDropdown={() => {}}
+                setShowDropdown={() => { }}
             />
 
             {/* Usre Change Password */}

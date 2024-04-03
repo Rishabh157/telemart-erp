@@ -70,6 +70,42 @@ const InitialCallOneListingWrapper = () => {
     }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_IC_ONE_EDIT
+                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_IC_ONE_DELETE
+                    // )}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`${row?._id}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Initial Call One',
+                            text: 'Do you want to delete Initial Call One?',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            align: 'end',
+        },
         {
             field: 'initialCallDisplayName',
             headerName: 'Initial Call One',
@@ -146,41 +182,6 @@ const InitialCallOneListingWrapper = () => {
                     </span>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_IC_ONE_EDIT
-                    )}
-                    // isDelete={isAuthorized(
-                    //     UserModuleNameTypes.ACTION_IC_ONE_DELETE
-                    // )}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`${row?._id}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete Initial Call One',
-                            text: 'Do you want to delete Initial Call One?',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
         },
     ]
     const handleDeactive = (rowId: string) => {
