@@ -272,8 +272,6 @@ import HouseArrestListingWrapper from './pages/request/all/houseArrest/HouseArre
 import AddHouseArrestFormWrapper from './pages/request/all/houseArrest/add/AddHouseArrestFormWrapper'
 import HouseArrestViewWrapper from './pages/request/all/houseArrest/view/HouseArrestViewWrapper'
 import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/HouseArrestLogsListingWrapper'
-import WarehouseOrdersTab from './pages/warehouses/view/warehouse-orders'
-import WarehouseConfirmedOrderWrapper from './pages/warehouses/view/warehouse-orders/confirmOrders/list/WarehouseConfirmedOrderWrapper'
 import BatchOrderView from './pages/batchOrder'
 import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
 import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
@@ -830,31 +828,6 @@ const PageRoutes = () => {
                                     children={<OutwardEcomTabsListingWrapper />}
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE
-                                    }
-                                />
-                            }
-                        />
-                    </Route>
-                    <Route
-                        path="warehouse-orders"
-                        element={
-                            <Authorization
-                                children={<WarehouseOrdersTab />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
-                                }
-                            />
-                        }
-                    >
-                        <Route
-                            path="confirmed-order"
-                            element={
-                                <Authorization
-                                    children={
-                                        <WarehouseConfirmedOrderWrapper />
-                                    }
-                                    permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS_CONFIRMED_ORDERS
                                     }
                                 />
                             }
@@ -2245,7 +2218,7 @@ const PageRoutes = () => {
                 {/* Dealer NDR Page */}
                 <Route
                     path="media/dealer-ndrcalling"
-                    element={<AddDealerNDRDetailsWrapper /> }
+                    element={<AddDealerNDRDetailsWrapper />}
                 />
 
                 <Route
