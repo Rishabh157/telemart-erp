@@ -12,8 +12,9 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import {
     smstypeOptions,
     emailTypeOptions,
-    rtoTypeOptions,
     priorityOptions,
+    ndrSubDispositionsTypeOptions,
+    rtoAttemptTypeOptions,
 } from 'src/utils/constants/customeTypes'
 
 type Props = {
@@ -120,7 +121,18 @@ const EditNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                         <ATMSelectSearchable
                             required
                             isMulti
-                            options={rtoTypeOptions()}
+                            options={ndrSubDispositionsTypeOptions()}
+                            name="subDispositions"
+                            value={values.subDispositions}
+                            label="Sub Disposition"
+                            onChange={(e) =>
+                                handleSetFieldValue('subDispositions', e)
+                            }
+                        />
+
+                        <ATMSelectSearchable
+                            required
+                            options={rtoAttemptTypeOptions()}
                             name="rtoAttempt"
                             value={values.rtoAttempt}
                             label="Rto Attempt"

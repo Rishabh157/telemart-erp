@@ -71,15 +71,15 @@ const TabScrollable: React.FC<Props> = ({
                 // rightBtnIcon={<span className="select-none">&#x22D9; </span>}
                 // leftBtnIcon={<span className="select-none">&#x22D8; </span>}
                 leftNavBtnClassName={
-                    'bg-inherit border-0 hover:bg-white p-0 m-0  font-bold'
+                    'bg-inherit border-0 hover:bg-white p-0 m-0 font-bold'
                 }
-                hideNavBtns={true}
+                hideNavBtns={false}
             >
                 {/* generating an array to loop through it  */}
                 {tabsArray.map((item) => (
                     <Tab key={item.label} className="">
                         <div className="flex p-0 m-0 items-center font-semibold">
-                            <div className=" text-xs mr-2 ">
+                            <div className=" text-xs mr-2 mt-1">
                                 <item.icon />
                             </div>
                             <div className="text-xs">{item.label}</div>
