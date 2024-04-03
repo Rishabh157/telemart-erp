@@ -29,7 +29,7 @@ export const ndrDispositionApi = apiSlice.injectEndpoints({
         getAllUnauthNdrDisposition: builder.query({
             providesTags: ['ndr-disposition'],
             query: () => ({
-                url: `/unauth/ndr-disposition`,
+                url: `/ndr-disposition/unauth`,
                 method: 'GET',
                 // body,
             }),
