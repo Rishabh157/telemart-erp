@@ -151,7 +151,7 @@ const OutwardDealerTabsListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'soNumber',

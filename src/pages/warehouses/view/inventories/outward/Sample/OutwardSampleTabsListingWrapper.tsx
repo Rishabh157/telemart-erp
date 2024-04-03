@@ -153,7 +153,7 @@ const OutwardSampleTabsListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'wtsNumber',

@@ -82,7 +82,7 @@ const AttributesListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'attributeName',

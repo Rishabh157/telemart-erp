@@ -138,7 +138,7 @@ const WebstieListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-            align: 'end',
+            
         },
         {
             field: 'productName',

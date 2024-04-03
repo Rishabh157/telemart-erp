@@ -97,7 +97,7 @@ const NdrDispositionListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'ndrDisposition',

@@ -80,7 +80,7 @@ const DealersCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'dealersCategory',

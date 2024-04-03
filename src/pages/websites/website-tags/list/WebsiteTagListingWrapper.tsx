@@ -92,7 +92,7 @@ const WebsiteTagListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'metaKeyword',

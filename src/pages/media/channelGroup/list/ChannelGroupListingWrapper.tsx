@@ -82,7 +82,7 @@ const ChannelGroupListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'groupName',

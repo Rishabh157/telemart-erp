@@ -82,7 +82,7 @@ const ProductCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'categoryCode',

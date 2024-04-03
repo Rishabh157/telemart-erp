@@ -88,7 +88,7 @@ const DealersListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'wareHouseCode',

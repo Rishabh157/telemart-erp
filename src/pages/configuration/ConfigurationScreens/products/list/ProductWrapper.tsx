@@ -80,7 +80,7 @@ const ProductsListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'productCode',

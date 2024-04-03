@@ -82,7 +82,7 @@ const CompanyBranchListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'companyLabel',

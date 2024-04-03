@@ -111,7 +111,7 @@ const ListDealerPincodeTabWrapper = () => {
                     </button> */}
                 </ActionPopup>
             ),
-            align: 'end',
+            
         },
         {
             field: 'Pincode',

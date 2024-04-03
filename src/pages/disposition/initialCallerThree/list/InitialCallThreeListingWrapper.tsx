@@ -108,7 +108,7 @@ const InitialCallThreeListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'initialCallDisplayName',

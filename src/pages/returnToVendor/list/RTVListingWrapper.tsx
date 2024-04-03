@@ -250,7 +250,7 @@ const RTVListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'rtvNo',

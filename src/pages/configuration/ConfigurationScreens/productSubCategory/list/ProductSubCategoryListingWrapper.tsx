@@ -88,7 +88,7 @@ const ProductSubCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'subCategoryCode',

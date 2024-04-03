@@ -108,7 +108,7 @@ const AssigneBatchesViewListingWrapper = () => {
                         // }
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'orderNumber',

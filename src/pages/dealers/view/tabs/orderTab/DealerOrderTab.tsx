@@ -39,7 +39,7 @@ const columns: columnTypes[] = [
                 <></>
             </ActionPopup>
         ),
-        align: 'end',
+        
     },
     {
         field: 'order_no',

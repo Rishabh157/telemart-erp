@@ -106,7 +106,7 @@ const DispositionThreeListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'dispositionDisplayName',

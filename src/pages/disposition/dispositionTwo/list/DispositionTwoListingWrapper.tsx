@@ -113,7 +113,7 @@ const DispositionTwoListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'dispositionDisplayName',

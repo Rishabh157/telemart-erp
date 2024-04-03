@@ -116,7 +116,7 @@ const ChannelCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'channelCategory',

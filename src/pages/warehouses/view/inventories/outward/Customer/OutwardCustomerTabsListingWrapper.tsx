@@ -30,7 +30,7 @@ export type Tabs = {
     icon: IconType
     path?: string
 }
-
+ 
 // const columns: columnTypes[] = [
 //     {
 //         field: 'actions',
@@ -84,7 +84,7 @@ export type Tabs = {
 //             return <span> {row.address} </span>
 //         },
 //     },
-// ]
+// ] 
 
 enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',

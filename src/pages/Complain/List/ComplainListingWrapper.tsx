@@ -99,7 +99,7 @@ const ComplainListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'orderNumber',
