@@ -48,24 +48,6 @@ const ProductCategoryListingWrapper = () => {
     const navigate = useNavigate()
     const columns: columnTypes[] = [
         {
-            field: 'categoryCode',
-            headerName: 'Category Code',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_CODE,
-            renderCell: (row: ProductCategoryListResponse) => (
-                <span> {row.categoryCode} </span>
-            ),
-        },
-        {
-            field: 'categoryName',
-            headerName: 'Category Name ',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_NAME,
-            renderCell: (row: ProductCategoryListResponse) => {
-                return <span> {row.categoryName} </span>
-            },
-        },
-        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
@@ -100,7 +82,25 @@ const ProductCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
+        },
+        {
+            field: 'categoryCode',
+            headerName: 'Category Code',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_CODE,
+            renderCell: (row: ProductCategoryListResponse) => (
+                <span> {row.categoryCode} </span>
+            ),
+        },
+        {
+            field: 'categoryName',
+            headerName: 'Category Name ',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_CATEGORY_LIST_PRODUCT_CATEGORY_NAME,
+            renderCell: (row: ProductCategoryListResponse) => {
+                return <span> {row.categoryName} </span>
+            },
         },
     ]
     const { data, isFetching, isLoading } = useGetProductCategoryQuery({

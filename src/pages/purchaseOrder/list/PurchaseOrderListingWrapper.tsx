@@ -124,6 +124,86 @@ const PurchaseOrderListingWrapper = () => {
         }
     }
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.8_0.8_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_PURCHASE_ORDER_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_PURCHASE_ORDER_EDIT
+                    )}
+                    handleViewActionButton={() => {
+                        navigate(`/purchase-order/view/${currentId}`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/purchase-order/edit/${currentId}`, {
+                            state: { poCode: row?.poCode },
+                        })
+                    }}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                >
+                    <>
+                        {row?.approval?.length > 1 &&
+                            isAuthorized(
+                                UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN
+                            ) && (
+                                <button
+                                    onClick={() => {
+                                        navigate('/grn/add?', {
+                                            state: {
+                                                poCode: row?.poCode,
+                                                itemId: row?.purchaseOrder
+                                                    .itemId,
+                                                itemName:
+                                                    row?.purchaseOrder.itemName,
+                                                quantity:
+                                                    row?.purchaseOrder.quantity,
+                                                receivedQuantity:
+                                                    row?.purchaseOrder
+                                                        .receivedQuantity,
+                                                companyId: row?.companyId,
+                                            },
+                                        })
+                                    }}
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                >
+                                    Generate GRN
+                                </button>
+                            )}
+                        {isAuthorized(
+                            UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN
+                        ) && (
+                            <button
+                                onClick={() => {
+                                    dispatch(setFilterValue([row?.poCode]))
+                                    navigate('/grn', {
+                                        state: {
+                                            poCode: row?.poCode,
+                                            // itemId: row?.purchaseOrder.itemId,
+                                            // itemName: row?.purchaseOrder.itemName,
+                                            // quantity: row?.purchaseOrder.quantity,
+                                            // companyId: row?.companyId,
+                                        },
+                                    })
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                                View GRN
+                            </button>
+                        )}
+                    </>
+                </ActionPopup>
+            ),
+            
+        },
         {
             field: 'poCode',
             headerName: 'PO Code',
@@ -290,85 +370,6 @@ const PurchaseOrderListingWrapper = () => {
                     </span>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.8_0.8_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isView={isAuthorized(
-                        UserModuleNameTypes.ACTION_PURCHASE_ORDER_VIEW
-                    )}
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_PURCHASE_ORDER_EDIT
-                    )}
-                    handleViewActionButton={() => {
-                        navigate(`/purchase-order/view/${currentId}`)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`/purchase-order/edit/${currentId}`, {
-                            state: { poCode: row?.poCode },
-                        })
-                    }}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                >
-                    <>
-                        {row?.approval?.length > 1 &&
-                            isAuthorized(
-                                UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN
-                            ) && (
-                                <button
-                                    onClick={() => {
-                                        navigate('/grn/add?', {
-                                            state: {
-                                                poCode: row?.poCode,
-                                                itemId: row?.purchaseOrder
-                                                    .itemId,
-                                                itemName:
-                                                    row?.purchaseOrder.itemName,
-                                                quantity:
-                                                    row?.purchaseOrder.quantity,
-                                                receivedQuantity:
-                                                    row?.purchaseOrder
-                                                        .receivedQuantity,
-                                                companyId: row?.companyId,
-                                            },
-                                        })
-                                    }}
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                >
-                                    Generate GRN
-                                </button>
-                            )}
-                        {isAuthorized(
-                            UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN
-                        ) && (
-                            <button
-                                onClick={() => {
-                                    dispatch(setFilterValue([row?.poCode]))
-                                    navigate('/grn', {
-                                        state: {
-                                            poCode: row?.poCode,
-                                            // itemId: row?.purchaseOrder.itemId,
-                                            // itemName: row?.purchaseOrder.itemName,
-                                            // quantity: row?.purchaseOrder.quantity,
-                                            // companyId: row?.companyId,
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                View GRN
-                            </button>
-                        )}
-                    </>
-                </ActionPopup>
-            ),
-            align: 'end',
         },
     ]
 

@@ -44,42 +44,7 @@ const DealersCategoryListingWrapper = () => {
     )
 
     const columns: columnTypes[] = [
-        {
-            field: 'dealersCategory',
-            headerName: 'Dealers Category',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_DEALERS_CATEGORY,
-            renderCell: (row: DealersCategoryListResponse) => (
-                <span> {row.dealersCategory} </span>
-            ),
-        },
-        {
-            field: 'investAmount',
-            headerName: 'Invest Amount',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_INVEST_AMOUNT,
-            renderCell: (row: DealersCategoryListResponse) => (
-                <span> {row.investAmount} </span>
-            ),
-        },
-        {
-            field: 'numberOfOrders',
-            headerName: 'Number Of Orders',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_NUMBER_OF_ORDERS,
-            renderCell: (row: DealersCategoryListResponse) => (
-                <span> {row.numberOfOrders} </span>
-            ),
-        },
-        {
-            field: 'deliveryPercentage',
-            headerName: 'Delivery Percentage',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_DELIVERY_PERCENTAGE,
-            renderCell: (row: DealersCategoryListResponse) => (
-                <span> {row.deliveryPercentage} </span>
-            ),
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -115,7 +80,43 @@ const DealersCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
+        },
+        {
+            field: 'dealersCategory',
+            headerName: 'Dealers Category',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_DEALERS_CATEGORY,
+            renderCell: (row: DealersCategoryListResponse) => (
+                <span> {row.dealersCategory} </span>
+            ),
+        },
+        {
+            field: 'investAmount',
+            headerName: 'Invest Amount',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_INVEST_AMOUNT,
+            renderCell: (row: DealersCategoryListResponse) => (
+                <span> {row.investAmount} </span>
+            ),
+        },
+        {
+            field: 'numberOfOrders',
+            headerName: 'Number Of Orders',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_NUMBER_OF_ORDERS,
+            renderCell: (row: DealersCategoryListResponse) => (
+                <span> {row.numberOfOrders} </span>
+            ),
+        },
+        {
+            field: 'deliveryPercentage',
+            headerName: 'Delivery Percentage',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALERS_CATEGORY_LIST_DELIVERY_PERCENTAGE,
+            renderCell: (row: DealersCategoryListResponse) => (
+                <span> {row.deliveryPercentage} </span>
+            ),
         },
     ]
     const { page, rowsPerPage, searchValue, items } = dealersCategoryState

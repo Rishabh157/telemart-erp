@@ -178,8 +178,8 @@ export const emailTypeOptions = () => {
     })
 }
 
-// RTO ATTEMPT
-enum RtoAttemptType {
+// NDR  Sub Disposition
+enum NDRSubDispositions {
     cancel = 'CANCEL',
     adtm = 'ADTM',
     adoth = 'ADOTH',
@@ -197,71 +197,72 @@ enum RtoAttemptType {
     schemeOffered = 'SCHEMEOFFERED',
     webReattempt = 'WEBREATTEMPT',
 }
-export const rtoTypeOptions = () => {
+
+export const ndrSubDispositionsTypeOptions = () => {
     let options = [
         {
-            value: RtoAttemptType.cancel,
+            value: NDRSubDispositions.cancel,
             label: 'Cancel',
         },
         {
-            value: RtoAttemptType.adtm,
-            label: RtoAttemptType.adtm,
+            value: NDRSubDispositions.adtm,
+            label: NDRSubDispositions.adtm,
         },
         {
-            value: RtoAttemptType.adoth,
-            label: RtoAttemptType.adoth,
+            value: NDRSubDispositions.adoth,
+            label: NDRSubDispositions.adoth,
         },
         {
-            value: RtoAttemptType.notReachable,
+            value: NDRSubDispositions.notReachable,
             label: 'Not Reachable',
         },
         {
-            value: RtoAttemptType.numberBusy,
+            value: NDRSubDispositions.numberBusy,
             label: 'Number Busy',
         },
         {
-            value: RtoAttemptType.ringingNoResponse,
+            value: NDRSubDispositions.ringingNoResponse,
             label: 'Ringing No Response',
         },
         {
-            value: RtoAttemptType.switchOff,
+            value: NDRSubDispositions.switchOff,
             label: 'Switch Off',
         },
         {
-            value: RtoAttemptType.notConnected,
+            value: NDRSubDispositions.notConnected,
             label: 'Not Connected',
         },
         {
-            value: RtoAttemptType.notInterested,
+            value: NDRSubDispositions.notInterested,
             label: 'Not Interested',
         },
         //
         {
-            value: RtoAttemptType.callBack,
+            value: NDRSubDispositions.callBack,
             label: 'Call Back',
         },
         {
-            value: RtoAttemptType.other,
+            value: NDRSubDispositions.other,
             label: 'Other',
         },
         {
-            value: RtoAttemptType.dnc,
-            label: RtoAttemptType.dnc,
+            value: NDRSubDispositions.dnc,
+            label: NDRSubDispositions.dnc,
         },
         {
-            value: RtoAttemptType.dcFOR,
-            label: RtoAttemptType.dcFOR,
+            value: NDRSubDispositions.dcFOR,
+            label: NDRSubDispositions.dcFOR,
         },
         {
-            value: RtoAttemptType.dcUCR,
-            label: RtoAttemptType.dcUCR,
+            value: NDRSubDispositions.dcUCR,
+            label: NDRSubDispositions.dcUCR,
         },
         {
-            value: RtoAttemptType.schemeOffered,
+            value: NDRSubDispositions.schemeOffered,
             label: 'Scheme Offered',
         },
         {
-            value: RtoAttemptType.webReattempt,
+            value: NDRSubDispositions.webReattempt,
             label: 'Web Reattempt',
         },
     ]
@@ -273,6 +274,49 @@ export const rtoTypeOptions = () => {
         }
     })
 }
+
+// NDR  Sub Disposition
+enum RtoAttemptTypes {
+    cancel = 'CANCEL',
+    attempt = 'ATTEMPT',
+    rto = 'RTO',
+    hold = 'HOLD',
+    customerWillConnect = 'CUSTOMERWILLCONNECT',
+}
+
+export const rtoAttemptTypeOptions = () => {
+    let options = [
+        {
+            value: RtoAttemptTypes.cancel,
+            label: 'Cancel',
+        },
+        {
+            value: RtoAttemptTypes.attempt,
+            label: RtoAttemptTypes.attempt,
+        },
+        {
+            value: RtoAttemptTypes.rto,
+            label: RtoAttemptTypes.rto,
+        },
+        {
+            value: RtoAttemptTypes.hold,
+            label: RtoAttemptTypes.hold,
+        },
+        {
+            value: RtoAttemptTypes.customerWillConnect,
+            label: 'Customer Will Connect',
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label?.replaceAll('_', ' '),
+        }
+    })
+}
+
+// RTO ATTEMPT
 
 // PRIORITY
 export const priorityOptions = () => {
@@ -695,9 +739,9 @@ export const userDepartmentTypeOptions = () => {
 }
 
 enum DealerValidReamrkTypes {
-    correct = "CORRECT",
-    incorrect = "INCORRECT",
-    notapplicable = "NOTAPPLICABLE",
+    correct = 'CORRECT',
+    incorrect = 'INCORRECT',
+    notapplicable = 'NOTAPPLICABLE',
 }
 
 export const dealerValidReamrkType = () => {
@@ -722,5 +766,4 @@ export const dealerValidReamrkType = () => {
             label: item.label,
         }
     })
-
 }

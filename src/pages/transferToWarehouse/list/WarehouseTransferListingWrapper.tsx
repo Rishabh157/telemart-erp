@@ -155,6 +155,43 @@ const WarehouseTransferListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: GroupByWarehouseTransferResponseTypes) =>
+                row?.firstApproved === null &&
+                row?.secondApproved === null && (
+                    <ActionPopup
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_EDIT
+                        )}
+                        isDelete={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_DELETE
+                        )}
+                        handleEditActionButton={() => {
+                            navigate(`/warehouse-transfer/edit/${row?._id}`)
+                        }}
+                        handleDeleteActionButton={() => {
+                            showConfirmationDialog({
+                                title: 'Delete WarehouseTransfer',
+                                text: 'Do you want to delete WarehouseTransfer?',
+                                showCancelButton: true,
+                                next: (res: any) => {
+                                    return res.isConfirmed
+                                        ? handleDelete()
+                                        : setShowDropdown(false)
+                                },
+                            })
+                        }}
+                        handleOnAction={() => {
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
+                        }}
+                    />
+                ),
+            
+        },
+        {
             field: 'wtsNumber',
             headerName: 'wt Number',
             flex: 'flex-[1_1_0%]',
@@ -223,8 +260,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -262,8 +299,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -447,43 +484,6 @@ const WarehouseTransferListingWrapper = () => {
                     </div>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: GroupByWarehouseTransferResponseTypes) =>
-                row?.firstApproved === null &&
-                row?.secondApproved === null && (
-                    <ActionPopup
-                        isEdit={isAuthorized(
-                            UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_EDIT
-                        )}
-                        isDelete={isAuthorized(
-                            UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_DELETE
-                        )}
-                        handleEditActionButton={() => {
-                            navigate(`/warehouse-transfer/edit/${row?._id}`)
-                        }}
-                        handleDeleteActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Delete WarehouseTransfer',
-                                text: 'Do you want to delete WarehouseTransfer?',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDelete()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                    />
-                ),
-            align: 'end',
         },
     ]
 

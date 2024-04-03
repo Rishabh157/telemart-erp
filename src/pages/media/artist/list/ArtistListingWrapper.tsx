@@ -47,17 +47,7 @@ const ArtistListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
-        {
-            field: 'artistName',
-            headerName: 'Artist Name',
-            flex: 'flex-[1_1_0%]',
-
-            name: UserModuleNameTypes.ARTIST_LIST_ARTIST_NAME,
-            renderCell: (row: ArtistListResponse) => (
-                <span> {row.artistName} </span>
-            ),
-        },
-
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -91,8 +81,19 @@ const ArtistListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
+        {
+            field: 'artistName',
+            headerName: 'Artist Name',
+            flex: 'flex-[1_1_0%]',
+
+            name: UserModuleNameTypes.ARTIST_LIST_ARTIST_NAME,
+            renderCell: (row: ArtistListResponse) => (
+                <span> {row.artistName} </span>
+            ),
+        },
+
     ]
 
     const { data, isFetching, isLoading } = useGetPaginationArtistQuery({

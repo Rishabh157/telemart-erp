@@ -96,6 +96,56 @@ const DealersListingWrapper = () => {
 
     // const navigate = useNavigate();
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                        setDealerCode(row?.dealerCode)
+                    }}
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DELETE
+                    )}
+                    isCustomBtn={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_CHANGE_PASSWORD
+                    )}
+                    customBtnText="Change Password"
+                    handleCustomActionButton={() => {
+                        setChangePasswordDialogOpen(true)
+                    }}
+                    handleViewActionButton={() => {
+                        navigate(`${currentId}/general-information`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/dealers/edit-dealer/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Attribute',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            
+        },
         {
             field: 'dealerCode',
             headerName: 'Dealer Code',
@@ -297,55 +347,6 @@ const DealersListingWrapper = () => {
             },
         },
 
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                        setDealerCode(row?.dealerCode)
-                    }}
-                    isView={isAuthorized(
-                        UserModuleNameTypes.ACTION_DEALER_VIEW
-                    )}
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_DEALER_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DEALER_DELETE
-                    )}
-                    isCustomBtn={isAuthorized(
-                        UserModuleNameTypes.ACTION_DEALER_CHANGE_PASSWORD
-                    )}
-                    customBtnText="Change Password"
-                    handleCustomActionButton={() => {
-                        setChangePasswordDialogOpen(true)
-                    }}
-                    handleViewActionButton={() => {
-                        navigate(`${currentId}/general-information`)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`/dealers/edit-dealer/${currentId}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete Attribute',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
-        },
     ]
 
     const { data, isFetching, isLoading } = useGetDealersQuery({

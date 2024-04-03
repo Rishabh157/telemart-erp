@@ -104,6 +104,7 @@ import houseArrestSlice from './slices/houseArrestSlice'
 import warehouseAssignedOrderSlice from './slices/warehouseOrders/warehouseAssignedOrderSlice'
 import CreateBatchOrderSlice from './slices/CreateBatchOrderSlice'
 import OfferAppliedNdrSlice from './slices/OfferAppliedNdrSlice'
+import outwardCustomerSlice from './slices/outwardCustomerSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -206,6 +207,7 @@ const store = configureStore({
         warehouseOrdersAssigned: warehouseAssignedOrderSlice,
         createBatch: CreateBatchOrderSlice,
         offerAppliedNdr: OfferAppliedNdrSlice,
+        outwardCustomer: outwardCustomerSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

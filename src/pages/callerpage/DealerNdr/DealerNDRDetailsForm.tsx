@@ -13,9 +13,6 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { dealerValidReamrkType } from 'src/utils/constants/customeTypes'
 import moment from 'moment'
 import { NdrDispositionListResponseType } from 'src/models/configurationModel/NdrDisposition.model'
-// import { useGetAllInitialByCallType } from 'src/hooks/useGetAllInitialByCallType'
-// import { useGetAllInitialCallTwoByCallTypeAndOneId } from 'src/hooks/useGetAllInitialCallTwoByCallTypeAndOneId'
-// import { useGetAllInitialCallThreeByCallTypeAndTwoId } from 'src/hooks/useGetAllInitialCallThreeByCallTypeAndTwoId'
 
 // |-- Types --|
 type Props = {
@@ -33,27 +30,6 @@ const DealerNDRDetailsForm = ({
 }: Props) => {
     const { values, setFieldValue, handleSubmit } = formikProps
 
-    // Get IC1 Option By Only Call Type
-    // const { initialCallOneByCallType, isDataLoading } =
-    //     useGetAllInitialByCallType(values?.callType)
-
-    // // Get IC2 Option By Call Type And IC1 _id
-    // const {
-    //     initialCallTwoByCallTypeAndOneId,
-    //     isDataLoading: isInitialCallTwoDataLoaading,
-    // } = useGetAllInitialCallTwoByCallTypeAndOneId(
-    //     values.initialCallOne,
-    //     values.callType
-    // )
-
-    // // Get IC3 Option By Call Type And IC2 _id
-    // const {
-    //     initialCallThreeByCallTypeAndTwoId,
-    //     isDataLoading: isInitialCallThreeDataLoaading,
-    // } = useGetAllInitialCallThreeByCallTypeAndTwoId(
-    //     values.initialCallTwo,
-    //     values.callType
-    // )
     const NdrDispositionsOptions = ndrDispositions?.map(
         (items: NdrDispositionListResponseType) => {
             return {
@@ -67,7 +43,7 @@ const DealerNDRDetailsForm = ({
         let NDrDisposition = ndrDispositions.find(
             (ele: NdrDispositionListResponseType) => ele?._id === id
         )
-        return NDrDisposition?.rtoAttempt?.map((ele: string) => {
+        return NDrDisposition?.subDispositions?.map((ele: string) => {
             return {
                 label: ele,
                 value: ele,
@@ -299,7 +275,7 @@ const DealerNDRDetailsForm = ({
                             // minDate={moment().subtract(0, 'days')}
                             maxDate={moment().add(15, 'days')}
                             onChange={(e) => {
-                                console.log(e, 'ehehe')
+                                // console.log(e, 'ehehe')
                                 setFieldValue('reAttemptDate', e)
                             }}
                         />

@@ -69,6 +69,56 @@ const ListDealerSchemeTabWrapper = () => {
     })
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.25_0.25_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                >
+                    <>
+                        {/* ACTION_DEALER_DEALER_SCHEME_EDIT */}
+                        {isAuthorized(
+                            UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_EDIT
+                        ) && (
+                            <button
+                                onClick={() => {
+                                    navigate(
+                                        `/dealers/${dealerId}/scheme/edit/${row?._id}`
+                                    )
+                                }}
+                                className="block w-full text-left px-2 py-1  hover:bg-gray-100"
+                            >
+                                Edit
+                            </button>
+                        )}
+                        {/* <button
+                            onClick={() => {
+                                showConfirmationDialog({
+                                    title: 'Delete Scheme',
+                                    text: 'Do you want to delete',
+                                    showCancelButton: true,
+                                    next: (res) => {
+                                        return res.isConfirmed
+                                            ? handleDelete()
+                                            : setShowDropdown(false)
+                                    },
+                                })
+                            }}
+                            className="block w-full text-left px-2 py-1  hover:bg-gray-100"
+                        >
+                            Delete
+                        </button> */}
+                    </>
+                </ActionPopup>
+            ),
+            
+        },
         {
             field: 'schemeName',
             headerName: 'Scheme Name',
@@ -198,55 +248,6 @@ const ListDealerSchemeTabWrapper = () => {
             },
         },
 
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.25_0.25_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                >
-                    <>
-                        {/* ACTION_DEALER_DEALER_SCHEME_EDIT */}
-                        {isAuthorized(
-                            UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_EDIT
-                        ) && (
-                            <button
-                                onClick={() => {
-                                    navigate(
-                                        `/dealers/${dealerId}/scheme/edit/${row?._id}`
-                                    )
-                                }}
-                                className="block w-full text-left px-2 py-1  hover:bg-gray-100"
-                            >
-                                Edit
-                            </button>
-                        )}
-                        {/* <button
-                            onClick={() => {
-                                showConfirmationDialog({
-                                    title: 'Delete Scheme',
-                                    text: 'Do you want to delete',
-                                    showCancelButton: true,
-                                    next: (res) => {
-                                        return res.isConfirmed
-                                            ? handleDelete()
-                                            : setShowDropdown(false)
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-2 py-1  hover:bg-gray-100"
-                        >
-                            Delete
-                        </button> */}
-                    </>
-                </ActionPopup>
-            ),
-            align: 'end',
-        },
     ]
 
     useEffect(() => {

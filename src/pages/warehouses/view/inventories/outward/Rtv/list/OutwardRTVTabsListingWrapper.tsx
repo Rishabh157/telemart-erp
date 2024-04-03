@@ -121,6 +121,36 @@ const OutwardRTVTabsListingWrapper = () => {
     }, [soIsLoading, soIsFetching, soData, dispatch])
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Dispatch',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: OutwardRequestRTVListResponse) =>
+                row?.documents[0].status === 'DISPATCHED' ? (
+                    ''
+                ) : (
+                    <ActionPopup
+                        handleOnAction={() => {}}
+                        moduleName={UserModuleNameTypes.saleOrder}
+                        isCustomBtn={true}
+                        customBtnText="Dispatch"
+                        handleCustomActionButton={() => {
+                            setIsShow(true)
+                            const totalQuantity = row?.documents?.reduce(
+                                (sum, ele) => {
+                                    return (sum +=
+                                        ele?.productSalesOrder?.quantity)
+                                },
+                                0
+                            )
+                            setBarcodeQuantity(totalQuantity)
+                            setSelectedItemsTobeDispatch(row)
+                        }}
+                    />
+                ),
+            
+        },
         {
             field: 'rtvNumber',
             headerName: 'RTV Number',
@@ -191,35 +221,6 @@ const OutwardRTVTabsListingWrapper = () => {
             renderCell: (row: OutwardRequestRTVListResponse) => (
                 <span>{row?.documents[0]?.status}</span>
             ),
-        },
-        {
-            field: 'actions',
-            headerName: 'Dispatch',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: OutwardRequestRTVListResponse) =>
-                row?.documents[0].status === 'DISPATCHED' ? (
-                    ''
-                ) : (
-                    <ActionPopup
-                        handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.saleOrder}
-                        isCustomBtn={true}
-                        customBtnText="Dispatch"
-                        handleCustomActionButton={() => {
-                            setIsShow(true)
-                            const totalQuantity = row?.documents?.reduce(
-                                (sum, ele) => {
-                                    return (sum +=
-                                        ele?.productSalesOrder?.quantity)
-                                },
-                                0
-                            )
-                            setBarcodeQuantity(totalQuantity)
-                            setSelectedItemsTobeDispatch(row)
-                        }}
-                    />
-                ),
-            align: 'end',
         },
     ]
 

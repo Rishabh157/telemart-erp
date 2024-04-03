@@ -52,34 +52,7 @@ const ListWebsiteBlogWrapper = () => {
         WebsiteBlogState
 
     const columns: columnTypes[] = [
-        {
-            field: 'blogName',
-            headerName: 'Blog Name',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_WEBSITES_BLOG_NAME,
-            renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogName} </span>
-            ),
-        },
-        {
-            field: 'blogTitle',
-            headerName: 'Blog Title',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_TITLE,
-            renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogTitle} </span>
-            ),
-        },
-        {
-            field: 'blogSubtitle',
-            headerName: 'Blog Subtitle',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_SUBTITLE,
-            renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogSubtitle} </span>
-            ),
-        },
-
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -119,8 +92,36 @@ const ListWebsiteBlogWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
+        {
+            field: 'blogName',
+            headerName: 'Blog Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_WEBSITES_BLOG_NAME,
+            renderCell: (row: WebsiteBlogListResponse) => (
+                <span> {row.blogName} </span>
+            ),
+        },
+        {
+            field: 'blogTitle',
+            headerName: 'Blog Title',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_TITLE,
+            renderCell: (row: WebsiteBlogListResponse) => (
+                <span> {row.blogTitle} </span>
+            ),
+        },
+        {
+            field: 'blogSubtitle',
+            headerName: 'Blog Subtitle',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_SUBTITLE,
+            renderCell: (row: WebsiteBlogListResponse) => (
+                <span> {row.blogSubtitle} </span>
+            ),
+        },
+
     ]
     const { data, isFetching, isLoading } = useGetPaginationWebsiteBlogQuery({
         limit: rowsPerPage,

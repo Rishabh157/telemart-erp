@@ -42,16 +42,7 @@ const AssetsLocationWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
-        {
-            field: 'locationName',
-            headerName: 'Location Name',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: AssetsLocationListResponse) => (
-                <span className="capitalize"> {row.locationName} </span>
-            ),
-            name: UserModuleNameTypes.ASSETS_LOCATION_LIST_ASSETS_LOCATION_NAME,
-        },
-
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -85,7 +76,15 @@ const AssetsLocationWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+        },
+        {
+            field: 'locationName',
+            headerName: 'Location Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: AssetsLocationListResponse) => (
+                <span className="capitalize"> {row.locationName} </span>
+            ),
+            name: UserModuleNameTypes.ASSETS_LOCATION_LIST_ASSETS_LOCATION_NAME,
         },
     ]
     const assetLocationState: any = useSelector(

@@ -48,54 +48,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
-        {
-            field: 'warehouseCode',
-            headerName: 'Warehouse Code',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: VendorWarehousesListResponse) => (
-                <span> {row.wareHouseCode} </span>
-            ),
-        },
-        {
-            field: 'warehouseName',
-            headerName: 'Warehouse Name',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: VendorWarehousesListResponse) => {
-                return <span>{row.wareHouseName}</span>
-            },
-        },
-        {
-            field: 'country',
-            headerName: 'Country',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: VendorWarehousesListResponse) => (
-                <span> {row.wareHouseCountryName} </span>
-            ),
-        },
-        {
-            field: 'state',
-            headerName: 'State',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: VendorWarehousesListResponse) => {
-                return <span> {row.registrationStateName} </span>
-            },
-        },
-        {
-            field: 'district',
-            headerName: 'District',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: VendorWarehousesListResponse) => {
-                return <span> {row.registrationDistrictName} </span>
-            },
-        },
-        {
-            field: 'pincode',
-            headerName: 'Pincode',
-            flex: 'flex-[1.5_1.5_0%]',
-            renderCell: (row: VendorWarehousesListResponse) => {
-                return <span> {row.registrationPincodeName} </span>
-            },
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -146,7 +99,55 @@ const VendorWarehouseTabWrapper = (props: Props) => {
                     )}
                 </div>
             ),
-            align: 'end',
+            
+        },
+        {
+            field: 'warehouseCode',
+            headerName: 'Warehouse Code',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: VendorWarehousesListResponse) => (
+                <span> {row.wareHouseCode} </span>
+            ),
+        },
+        {
+            field: 'warehouseName',
+            headerName: 'Warehouse Name',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: VendorWarehousesListResponse) => {
+                return <span>{row.wareHouseName}</span>
+            },
+        },
+        {
+            field: 'country',
+            headerName: 'Country',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: VendorWarehousesListResponse) => (
+                <span> {row.wareHouseCountryName} </span>
+            ),
+        },
+        {
+            field: 'state',
+            headerName: 'State',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: VendorWarehousesListResponse) => {
+                return <span> {row.registrationStateName} </span>
+            },
+        },
+        {
+            field: 'district',
+            headerName: 'District',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: VendorWarehousesListResponse) => {
+                return <span> {row.registrationDistrictName} </span>
+            },
+        },
+        {
+            field: 'pincode',
+            headerName: 'Pincode',
+            flex: 'flex-[1.5_1.5_0%]',
+            renderCell: (row: VendorWarehousesListResponse) => {
+                return <span> {row.registrationPincodeName} </span>
+            },
         },
     ]
 

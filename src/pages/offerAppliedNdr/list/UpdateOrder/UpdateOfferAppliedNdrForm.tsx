@@ -6,7 +6,6 @@ import { FormikProps } from 'formik'
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
-// import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './UpdateOfferAppliedNdrFormWrapper'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
@@ -16,6 +15,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { useGetAllSchemeListByPgiQuery } from 'src/services/SchemeService'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import { SchemeListResponse } from 'src/models/scheme.model'
 
 // |-- Types --|
 type Props = {
@@ -62,12 +62,14 @@ const UpdateOfferAppliedNdrForm = ({
     )
     useEffect(() => {
         if (!isSchemeListFetching && !isSchemeListLoading) {
-            const schemeList = schemeListData?.data?.map((products: any) => {
-                return {
-                    label: products?.schemeName,
-                    value: products?._id,
+            const schemeList = schemeListData?.data?.map(
+                (scheme: SchemeListResponse) => {
+                    return {
+                        label: scheme?.schemeName,
+                        value: scheme?._id,
+                    }
                 }
-            })
+            )
             setSchemeListOptions(schemeList)
         }
     }, [schemeListData, isSchemeListFetching, isSchemeListLoading])

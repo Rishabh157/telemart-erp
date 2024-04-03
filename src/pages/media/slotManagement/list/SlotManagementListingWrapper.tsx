@@ -104,6 +104,42 @@ const SlotManagementListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_DELETE
+                    )}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`edit/${row?._id}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Slot ',
+                            text: 'Do you want to delete Slot ?',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            
+        },
         {
             field: 'slotName',
             headerName: 'Slot Name',
@@ -189,41 +225,6 @@ const SlotManagementListingWrapper = () => {
             ),
         },
 
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_DELETE
-                    )}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`/media/slot/edit/${row?._id}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete Slot ',
-                            text: 'Do you want to delete Slot ?',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
-        },
     ]
     const handleDelete = () => {
         setShowDropdown(false)

@@ -52,43 +52,7 @@ const WebsiteTagListingWrapper = () => {
     const { page, rowsPerPage, searchValue, items } = WebsiteTagsState
 
     const columns: columnTypes[] = [
-        {
-            field: 'metaKeyword',
-            headerName: 'Meta Keyword',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_WEBSITES_META_KEYWORD,
-            renderCell: (row: WebsiteTagsListResponse) => (
-                <span> {row.metaKeyword} </span>
-            ),
-        },
-        {
-            field: 'metaOgType',
-            headerName: 'Meta OG Type',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_OG_TYPE,
-            renderCell: (row: WebsiteTagsListResponse) => (
-                <span> {row.metaOgType} </span>
-            ),
-        },
-        {
-            field: 'metaTwitterTitle',
-            headerName: 'Meta Twitter Title',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_TWITTER_TITLE,
-            renderCell: (row: WebsiteTagsListResponse) => (
-                <span> {row.metaTwitterTitle} </span>
-            ),
-        },
-        {
-            field: 'metaTwitterCard',
-            headerName: 'Meta Twitter Card',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_TWITTER_CARD,
-            renderCell: (row: WebsiteTagsListResponse) => (
-                <span> {row.metaTwitterCard} </span>
-            ),
-        },
-
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -128,8 +92,45 @@ const WebsiteTagListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
+        {
+            field: 'metaKeyword',
+            headerName: 'Meta Keyword',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_WEBSITES_META_KEYWORD,
+            renderCell: (row: WebsiteTagsListResponse) => (
+                <span> {row.metaKeyword} </span>
+            ),
+        },
+        {
+            field: 'metaOgType',
+            headerName: 'Meta OG Type',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_OG_TYPE,
+            renderCell: (row: WebsiteTagsListResponse) => (
+                <span> {row.metaOgType} </span>
+            ),
+        },
+        {
+            field: 'metaTwitterTitle',
+            headerName: 'Meta Twitter Title',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_TWITTER_TITLE,
+            renderCell: (row: WebsiteTagsListResponse) => (
+                <span> {row.metaTwitterTitle} </span>
+            ),
+        },
+        {
+            field: 'metaTwitterCard',
+            headerName: 'Meta Twitter Card',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_TWITTER_CARD,
+            renderCell: (row: WebsiteTagsListResponse) => (
+                <span> {row.metaTwitterCard} </span>
+            ),
+        },
+
     ]
     const { data, isFetching, isLoading } = useGetPaginationWebsiteTagsQuery({
         limit: rowsPerPage,

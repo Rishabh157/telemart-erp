@@ -43,6 +43,45 @@ const AttributesGroupListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_DELETE
+                    )}
+                    handleOnAction={() => {
+                        // e.stopPropagation()
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(
+                            `/configurations/attributes-group/${currentId}`
+                        )
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Attribute',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            
+        },
         {
             field: 'groupName',
             headerName: 'Group Name',
@@ -95,44 +134,6 @@ const AttributesGroupListingWrapper = () => {
                     </span>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_DELETE
-                    )}
-                    handleOnAction={() => {
-                        // e.stopPropagation()
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(
-                            `/configurations/attributes-group/${currentId}`
-                        )
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete Attribute',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
         },
     ]
     const attributeGroupState: any = useSelector(

@@ -23,6 +23,18 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 
 const columns: columnTypes[] = [
     {
+        field: 'actions',
+        headerName: 'Actions',
+        flex: 'flex-[0.5_0.5_0%]',
+        renderCell: (row: any) => (
+            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
+                {' '}
+                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+            </button>
+        ),
+        
+    },
+    {
         field: 'order_no',
         headerName: 'Order',
         flex: 'flex-[1_1_0%]',
@@ -65,18 +77,7 @@ const columns: columnTypes[] = [
             <span className="text-slate-800"> &#8377; {row.total} </span>
         ),
     },
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
-            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                {' '}
-                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-            </button>
-        ),
-        align: 'end',
-    },
+    
 ]
 
 const rows = [

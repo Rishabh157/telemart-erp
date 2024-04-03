@@ -48,6 +48,42 @@ const ChannelManagementListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_DELETE
+                    )}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/media/channel/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Channel',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            
+        },
         {
             field: 'channelName',
             headerName: 'Channel Name',
@@ -102,41 +138,6 @@ const ChannelManagementListingWrapper = () => {
             ),
         },
 
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_DELETE
-                    )}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`/media/channel/${currentId}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete Channel',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
-        },
     ]
 
     const { data, isFetching, isLoading } = useGetPaginationchannelQuery({

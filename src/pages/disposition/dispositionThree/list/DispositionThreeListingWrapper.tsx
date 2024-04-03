@@ -66,6 +66,48 @@ const DispositionThreeListingWrapper = () => {
     })
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_EDIT
+                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_DISPOSITION_THREE_DELETE
+                    // )}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleViewActionButton={() => {
+                        navigate(`${row?._id}`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`edit/${row?._id}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Disposition Three',
+                            text: 'Do you want to delete Disposition-Three?',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            
+        },
         {
             field: 'dispositionDisplayName',
             headerName: 'Disposition Name',
@@ -174,47 +216,6 @@ const DispositionThreeListingWrapper = () => {
             },
         },
 
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isView={isAuthorized(
-                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_VIEW
-                    )}
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_DISPOSITION_THREE_EDIT
-                    )}
-                    // isDelete={isAuthorized(
-                    //     UserModuleNameTypes.ACTION_DISPOSITION_THREE_DELETE
-                    // )}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleViewActionButton={() => {
-                        navigate(`${row?._id}`)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`edit/${row?._id}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete Disposition Three',
-                            text: 'Do you want to delete Disposition-Three?',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
-        },
     ]
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)

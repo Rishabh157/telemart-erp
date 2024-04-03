@@ -82,16 +82,7 @@ const ChannelCategoryListingWrapper = () => {
     }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
-        {
-            field: 'channelCategory',
-            headerName: 'Channel Category Name',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.CATEGORY_LIST_CHANNEL_CATEGORY_NAME,
-
-            renderCell: (row: ChannelCategoryListResponse) => (
-                <span> {row.channelCategory} </span>
-            ),
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -125,7 +116,17 @@ const ChannelCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
+        },
+        {
+            field: 'channelCategory',
+            headerName: 'Channel Category Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CATEGORY_LIST_CHANNEL_CATEGORY_NAME,
+
+            renderCell: (row: ChannelCategoryListResponse) => (
+                <span> {row.channelCategory} </span>
+            ),
         },
     ]
 

@@ -52,6 +52,47 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     const companyId = userData?.companyId
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_DELETE
+                    )}
+                    handleEditActionButton={() => {
+                        navigate(
+                            `/dealers/${dealerId}/warehouse/${currentId}`,
+                            {
+                                state: { params },
+                            }
+                        )
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete Dealer warehouse',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            
+        },
         {
             field: 'warehouseCode',
             headerName: 'Warehouse Code',
@@ -103,46 +144,6 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                     <span className=" "> {row.registrationPincodeName} </span>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_DELETE
-                    )}
-                    handleEditActionButton={() => {
-                        navigate(
-                            `/dealers/${dealerId}/warehouse/${currentId}`,
-                            {
-                                state: { params },
-                            }
-                        )
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete Dealer warehouse',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
         },
     ]
 

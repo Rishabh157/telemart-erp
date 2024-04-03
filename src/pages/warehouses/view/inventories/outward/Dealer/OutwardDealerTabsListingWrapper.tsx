@@ -121,6 +121,38 @@ const OutwardDealerTabsListingWrapper = () => {
     }, [soIsLoading, soIsFetching, soData, dispatch])
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Dispatch',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: OutwardRequestDealerListResponse) =>
+                row?.documents[0]?.status === SaleOrderStatus.complete ? (
+                    'Dispatched'
+                ) : row?.documents[0]?.status === SaleOrderStatus.dispatched ? (
+                    ''
+                ) : (
+                    <ActionPopup
+                        handleOnAction={() => {}}
+                        moduleName={UserModuleNameTypes.saleOrder}
+                        isCustomBtn={true}
+                        customBtnText="Dispatch"
+                        handleCustomActionButton={() => {
+                            setIsShow(true)
+                            const totalQuantity = row?.documents?.reduce(
+                                (sum, ele) => {
+                                    return (sum +=
+                                        ele?.productSalesOrder?.quantity)
+                                },
+                                0
+                            )
+                            setBarcodeQuantity(totalQuantity)
+                            setSelectedItemsTobeDispatch(row)
+                        }}
+                    />
+                ),
+            
+        },
         {
             field: 'soNumber',
             headerName: 'So Number',
@@ -198,37 +230,6 @@ const OutwardDealerTabsListingWrapper = () => {
             renderCell: (row: OutwardRequestDealerListResponse) => (
                 <span>{row?.documents[0]?.status}</span>
             ),
-        },
-        {
-            field: 'actions',
-            headerName: 'Dispatch',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: OutwardRequestDealerListResponse) =>
-                row?.documents[0]?.status === SaleOrderStatus.complete ? (
-                    'Dispatched'
-                ) : row?.documents[0]?.status === SaleOrderStatus.dispatched ? (
-                    ''
-                ) : (
-                    <ActionPopup
-                        handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.saleOrder}
-                        isCustomBtn={true}
-                        customBtnText="Dispatch"
-                        handleCustomActionButton={() => {
-                            setIsShow(true)
-                            const totalQuantity = row?.documents?.reduce(
-                                (sum, ele) => {
-                                    return (sum +=
-                                        ele?.productSalesOrder?.quantity)
-                                },
-                                0
-                            )
-                            setBarcodeQuantity(totalQuantity)
-                            setSelectedItemsTobeDispatch(row)
-                        }}
-                    />
-                ),
-            align: 'end',
         },
     ]
 

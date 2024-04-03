@@ -49,31 +49,7 @@ const WebstieListingWrapper = () => {
 
     const { page, rowsPerPage, searchValue, items } = WebsiteState
     const columns: columnTypes[] = [
-        {
-            field: 'productName',
-            headerName: 'Website Name',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_LIST_WEBSITES_NAME,
-            renderCell: (row: WebsiteListResponse) => (
-                <span> {row.productName} </span>
-            ),
-        },
-        {
-            field: 'gaTagIp',
-            headerName: 'GA Tag',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_LIST_GA_TAG,
-            renderCell: (row: WebsiteListResponse) => (
-                <span> {row.gaTagIp} </span>
-            ),
-        },
-        {
-            field: 'url',
-            headerName: 'URL',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WEBSITES_LIST_URL,
-            renderCell: (row: WebsiteListResponse) => <span> {row.url} </span>,
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -162,7 +138,32 @@ const WebstieListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-            align: 'end',
+            
+        },
+        {
+            field: 'productName',
+            headerName: 'Website Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_WEBSITES_NAME,
+            renderCell: (row: WebsiteListResponse) => (
+                <span> {row.productName} </span>
+            ),
+        },
+        {
+            field: 'gaTagIp',
+            headerName: 'GA Tag',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_GA_TAG,
+            renderCell: (row: WebsiteListResponse) => (
+                <span> {row.gaTagIp} </span>
+            ),
+        },
+        {
+            field: 'url',
+            headerName: 'URL',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_URL,
+            renderCell: (row: WebsiteListResponse) => <span> {row.url} </span>,
         },
     ]
 

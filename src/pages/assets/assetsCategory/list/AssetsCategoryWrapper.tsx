@@ -42,16 +42,6 @@ const AssetsCategoryWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'assetCategoryName',
-            headerName: 'Category Name',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: AssetsCategoryListResponse) => (
-                <span className="capitalize"> {row.assetCategoryName} </span>
-            ),
-            name: UserModuleNameTypes.ASSETS_CATEGORY_LIST_ASSETS_CATEGORY_NAME,
-        },
-
-        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
@@ -84,7 +74,15 @@ const AssetsCategoryWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+        },
+        {
+            field: 'assetCategoryName',
+            headerName: 'Category Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: AssetsCategoryListResponse) => (
+                <span className="capitalize"> {row.assetCategoryName} </span>
+            ),
+            name: UserModuleNameTypes.ASSETS_CATEGORY_LIST_ASSETS_CATEGORY_NAME,
         },
     ]
     const assetCategoryState: any = useSelector(

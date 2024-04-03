@@ -52,6 +52,44 @@ const ProductSubCategoryListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_DELETE
+                    )}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(
+                            `/configurations/product-sub-category/${currentId}`
+                        )
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete product sub category',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            
+        },
         {
             field: 'subCategoryCode',
             headerName: 'Sub Category Code',
@@ -88,43 +126,6 @@ const ProductSubCategoryListingWrapper = () => {
             renderCell: (row: ProductSubCategoryListResponse) => {
                 return <span> {row.hsnCode} </span>
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_DELETE
-                    )}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(
-                            `/configurations/product-sub-category/${currentId}`
-                        )
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete product sub category',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
         },
     ]
     const { page, rowsPerPage, searchValue, items } = productSubCategoryState

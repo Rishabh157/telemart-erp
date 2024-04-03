@@ -41,6 +41,44 @@ import { isAuthorized } from 'src/utils/authorization'
 
 const WarehouseToComapnyListingWrapper = () => {
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) =>
+                row?.firstApproved === null &&
+                row?.secondApproved === null && (
+                    <ActionPopup
+                        isEdit={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_EDIT
+                        )}
+                        isDelete={isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_DELETE
+                        )}
+                        handleEditActionButton={() => {
+                            navigate(`/warehouse-to-company/edit/${row?._id}`)
+                        }}
+                        handleDeleteActionButton={() => {
+                            showConfirmationDialog({
+                                title: 'Delete WarehouseToComapny',
+                                text: 'Do you want to delete WarehouseToComapny?',
+                                showCancelButton: true,
+                                next: (res: any) => {
+                                    return res.isConfirmed
+                                        ? handleDelete()
+                                        : setShowDropdown(false)
+                                },
+                            })
+                        }}
+                        handleOnAction={() => {
+                            setShowDropdown(!showDropdown)
+                            setCurrentId(row?._id)
+                        }}
+                    />
+                ),
+            
+        },
         {
             field: 'wtcNumber',
             headerName: 'WTC Number',
@@ -344,43 +382,6 @@ const WarehouseToComapnyListingWrapper = () => {
                     </div>
                 )
             },
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) =>
-                row?.firstApproved === null &&
-                row?.secondApproved === null && (
-                    <ActionPopup
-                        isEdit={isAuthorized(
-                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_EDIT
-                        )}
-                        isDelete={isAuthorized(
-                            UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_DELETE
-                        )}
-                        handleEditActionButton={() => {
-                            navigate(`/warehouse-to-company/edit/${row?._id}`)
-                        }}
-                        handleDeleteActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Delete WarehouseToComapny',
-                                text: 'Do you want to delete WarehouseToComapny?',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDelete()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                    />
-                ),
-            align: 'end',
         },
     ]
 

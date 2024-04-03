@@ -10,7 +10,7 @@ import {
 import { object, string } from 'yup'
 import DealerNDRDetailsForm from './DealerNDRDetailsForm'
 import { showToast } from 'src/utils'
-import { useGetAllNdrDispositionQuery } from 'src/services/configurations/NdrDisositionServices'
+import { useGetAllUnauthNdrDispositionQuery } from 'src/services/configurations/NdrDisositionServices'
 import { NdrDispositionListResponseType } from 'src/models/configurationModel/NdrDisposition.model'
 
 export type FormInitialValues = {
@@ -104,7 +104,7 @@ const AddDealerNDRDetailsWrapper = () => {
         data: NdrDisposition,
         isLoading: ndrIsLoading,
         isFetching: ndrIsFetching,
-    } = useGetAllNdrDispositionQuery('')
+    } = useGetAllUnauthNdrDispositionQuery('')
 
     React.useEffect(() => {
         if (!ndrIsLoading && !ndrIsFetching) {

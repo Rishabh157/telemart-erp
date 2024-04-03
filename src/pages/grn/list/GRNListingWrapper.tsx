@@ -88,7 +88,7 @@ const columns: columnTypes[] = [
     //             }}
     //         />
     //     ),
-    //     align: 'end',
+    //     
     // },
 ]
 

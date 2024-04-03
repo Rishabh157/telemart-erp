@@ -48,16 +48,7 @@ const ChannelGroupListingWrapper = () => {
 
     const dispatch = useDispatch<AppDispatch>()
     const columns: columnTypes[] = [
-        {
-            field: 'groupName',
-            headerName: 'Channel Group Name',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME,
-
-            renderCell: (row: ChannelGroupListResponse) => (
-                <span> {row.groupName} </span>
-            ),
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -91,7 +82,17 @@ const ChannelGroupListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
+        },
+        {
+            field: 'groupName',
+            headerName: 'Channel Group Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME,
+
+            renderCell: (row: ChannelGroupListResponse) => (
+                <span> {row.groupName} </span>
+            ),
         },
     ]
     const { data, isFetching, isLoading } = useGetPaginationChannelGroupQuery({
