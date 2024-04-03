@@ -11,8 +11,9 @@ import { FormInitialValues } from './AddNdrDispositionWrapper'
 import {
     smstypeOptions,
     emailTypeOptions,
-    rtoTypeOptions,
     priorityOptions,
+    ndrSubDispositionsTypeOptions,
+    rtoAttemptTypeOptions,
 } from 'src/utils/constants/customeTypes'
 
 type Props = {
@@ -116,10 +117,22 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                             options={priorityOptions()}
                             onChange={(e) => handleSetFieldValue('priority', e)}
                         />
+
                         <ATMSelectSearchable
                             required
                             isMulti
-                            options={rtoTypeOptions()}
+                            options={ndrSubDispositionsTypeOptions()}
+                            name="subDispositions"
+                            value={values.subDispositions}
+                            label="Sub Disposition"
+                            onChange={(e) =>
+                                handleSetFieldValue('subDispositions', e)
+                            }
+                        />
+
+                        <ATMSelectSearchable
+                            required
+                            options={rtoAttemptTypeOptions()}
                             name="rtoAttempt"
                             value={values.rtoAttempt}
                             label="Rto Attempt"

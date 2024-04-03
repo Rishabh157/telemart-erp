@@ -31,6 +31,11 @@
                     "fieldValue": "rtoAttempt"
                 },
                 {
+                    "fieldId": "NDR_DISPOSITION_LIST_SUB_DISPOSITION",
+                    "fieldName": "Rto Attempt",
+                    "fieldValue": "rtoAttempt"
+                },
+                {
                     "fieldId": "NDR_DISPOSITION_LIST_PRIORITY",
                     "fieldName": "Priority",
                     "fieldValue": "priority"

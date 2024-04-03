@@ -132,7 +132,16 @@ const NdrDispositionListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_RTO_ATTEMPT,
             renderCell: (row: NdrDispositionListResponseType) => (
-                <span> {row?.rtoAttempt?.join(' , ')} </span>
+                <span> {row?.rtoAttempt} </span>
+            ),
+        },
+        {
+            field: 'subDispositions',
+            headerName: 'Sub Disposition',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.NDR_DISPOSITION_LIST_SUB_DISPOSITION,
+            renderCell: (row: NdrDispositionListResponseType) => (
+                <span> {row?.subDispositions?.join(' , ')} </span>
             ),
         },
         {
