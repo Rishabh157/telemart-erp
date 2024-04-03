@@ -992,8 +992,13 @@ export enum batchUserAccessType {
     ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_DATE = 'ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_DATE',
     ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_TIME = 'ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_TIME',
     ASSIGN_BATCH_LIST_MBK_NUMBER = 'ASSIGN_BATCH_LIST_MBK_NUMBER',
-
     ACTION_ASSIGN_BATCH_LIST_ASSIGN = 'ACTION_ASSIGN_BATCH_LIST_ASSIGN',
+}
+
+export enum offerAppliedNdrUserAccessType {
+    NAV_OFFER_APPLIED_NDR = 'NAV_OFFER_APPLIED_NDR',
+    ACTION_OFFER_APPLIED_NDR_LIST = 'ACTION_OFFER_APPLIED_NDR_LIST',
+    ACTION_OFFER_APPLIED_NDR_EDIT = 'ACTION_OFFER_APPLIED_NDR_EDIT',
 }
 
 export const UserModuleNameTypes = {
@@ -1072,4 +1077,5 @@ export const UserModuleNameTypes = {
     ...MultiMappingUserAccessTypes,
     ...requestUserAccessType,
     ...batchUserAccessType,
+    ...offerAppliedNdrUserAccessType,
 } as const

@@ -3103,6 +3103,7 @@ const PageRoutes = () => {
                         />
                     }
                 />
+
                 <Route
                     path="/complain"
                     element={
@@ -3118,7 +3119,9 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<OfferAppliedNdrListingWrapper />}
-                            permission={UserModuleNameTypes.NAV_COMPLAINT}
+                            permission={
+                                UserModuleNameTypes.NAV_OFFER_APPLIED_NDR
+                            }
                         />
                     }
                 />

@@ -153,7 +153,7 @@ export const navigation: NavItemType[] = [
         label: 'Offer Apply NDR',
         icon: MdOutlineLocalOffer,
         path: '/offer-apply-ndr',
-        name: UserModuleNameTypes.NAV_COMPLAINT,
+        name: UserModuleNameTypes.NAV_OFFER_APPLIED_NDR,
     },
     {
         label: 'Complaint',

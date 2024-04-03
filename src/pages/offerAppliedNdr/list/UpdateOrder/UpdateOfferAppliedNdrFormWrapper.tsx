@@ -3,14 +3,12 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { Formik } from 'formik'
 import { object, string } from 'yup'
-// import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import UpdateOfferAppliedNdrForm from './UpdateOfferAppliedNdrForm'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
-// import { RootState } from 'src/redux/store'
 import {
     useGetOrderByIdQuery,
     useUpdateOfferAppliedNdrOrderMutation,
@@ -45,13 +43,6 @@ const UpdateOfferAppliedNdrFormWrapper = ({ orderId, handleClose }: Props) => {
         }
     }, [data, isLoading, isFetching])
 
-    // const dealerOptions = dealer?.map((ele: any) => {
-    //     return {
-    //         label: ele?.dealerName,
-    //         value: ele?.dealerId,
-    //     }
-    // })
-
     // Form Initial Values
     const initialValues: FormInitialValues = {
         productGroupId: orderDetails?.productGroupId,
@@ -72,6 +63,7 @@ const UpdateOfferAppliedNdrFormWrapper = ({ orderId, handleClose }: Props) => {
             schemeId: values.schemeId,
             ndrRemark: values.ndrRemark,
         }
+
         setTimeout(() => {
             updateOfferApplied({
                 id: orderId,
