@@ -7,16 +7,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import OutwardCustomerTabListFilterFormDialog from './OutwardCustomerTabListFilterFormDialog'
 import moment from 'moment'
 import {
+    setCourierFilterValue,
+    setOrderStatusFilterValue,
     setDateFilter,
-    setCallbackDateFilter,
-    setSchemeFilterValue,
-    setOrderTypeFilterValue,
-    setStateFilterValue,
-    setDistrictFilterValue,
-    setCallCenterManagerFilterValue,
-    setLanguageBarrierFilterValue,
-    setPndOrderFilterValue,
-} from 'src/redux/slices/warehouseOrders/warehouseAssignedOrderSlice'
+} from 'src/redux/slices/outwardCustomerSlice'
 
 type Props = {
     open: boolean
@@ -24,17 +18,11 @@ type Props = {
 }
 
 export type FormInitialValues = {
-    schemeId: string
-    orderType: string
-    stateId: string
-    districtId: string
+    courierId: string
+    dateRange: string // TODO
     startDate: string
     endDate: string
-    callBackFrom: string
-    callBackTo: string
-    callCenterManagerId: string
-    languageBarrier: boolean
-    isPnd: boolean
+    orderStatus: string
 }
 
 const OutwardCustomerTabListFilterFormDialogWrapper = ({
@@ -42,40 +30,24 @@ const OutwardCustomerTabListFilterFormDialogWrapper = ({
     onClose,
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const userState: any = useSelector(
-        (state: RootState) => state.warehouseOrdersAssigned
+    const outwardCustomerState: any = useSelector(
+        (state: RootState) => state.outwardCustomer
     )
-    const {
-        schemeValueFilter,
-        orderTypeValueFilter,
-        stateValueFilter,
-        districtValueFilter,
-        callCenterManagerValueFilter,
-        langBarrierValueFilter,
-        pndOrderValueFilter,
-        dateFilter,
-        callbackDateFilter,
-    } = userState
+    const { courierValue, orderStatus, dateFilter } = outwardCustomerState
 
     const initialValues: FormInitialValues = {
-        schemeId: schemeValueFilter || '',
-        orderType: orderTypeValueFilter || '',
-        stateId: stateValueFilter || '',
-        districtId: districtValueFilter || '',
+        courierId: courierValue || '',
+        dateRange: '', // TODO
         startDate: dateFilter?.startDate || '',
         endDate: dateFilter?.endDate,
-        callBackFrom: callbackDateFilter?.startDate || '',
-        callBackTo: callbackDateFilter?.endDate || '',
-        callCenterManagerId: callCenterManagerValueFilter,
-        languageBarrier: langBarrierValueFilter || false,
-        isPnd: pndOrderValueFilter || false,
-        // isActive: isActive,
+        orderStatus: orderStatus || '',
     }
 
     const validationSchema: any = object({
-        stateId: string(),
-        districtId: string(),
-        isActive: string(),
+        courierId: string(),
+        startDate: string(),
+        endDate: string(),
+        orderStatus: string(),
     })
 
     // Submit Handler
@@ -85,20 +57,10 @@ const OutwardCustomerTabListFilterFormDialogWrapper = ({
     ) => {
         setSubmitting(false)
 
-        // scheme
-        dispatch(setSchemeFilterValue(values.schemeId))
-        // order type
-        dispatch(setOrderTypeFilterValue(values.orderType))
-        // state
-        dispatch(setStateFilterValue(values.stateId))
-        // district
-        dispatch(setDistrictFilterValue(values.districtId))
-        // call center manager
-        dispatch(setCallCenterManagerFilterValue(values.callCenterManagerId))
-        // language
-        dispatch(setLanguageBarrierFilterValue(values.languageBarrier))
-        // pnd
-        dispatch(setPndOrderFilterValue(values.isPnd))
+        // courirt
+        dispatch(setCourierFilterValue(values.courierId))
+        // order status
+        dispatch(setOrderStatusFilterValue(values.orderStatus))
 
         // date FROM to TO
         dispatch(
@@ -112,51 +74,20 @@ const OutwardCustomerTabListFilterFormDialogWrapper = ({
             })
         )
 
-        // callback date FROM to TO
-        dispatch(
-            setCallbackDateFilter({
-                startDate: values?.callBackFrom
-                    ? moment(values.callBackFrom)?.format('yyyy-MM-DD')
-                    : '',
-                endDate: values?.callBackTo
-                    ? moment(values.callBackTo)?.format('yyyy-MM-DD')
-                    : '',
-                dateFilterKey: 'firstCallCallBackDate',
-            })
-        )
-
         // dispatch(setIsActivateUser(values.isActive))
         onClose()
     }
 
     // Reset Handler
     const handleReset = async (formikProps: FormikProps<FormInitialValues>) => {
-        // scheme
-        dispatch(setSchemeFilterValue(''))
-        // order type
-        dispatch(setOrderTypeFilterValue(''))
-        // state
-        dispatch(setStateFilterValue(''))
-        // district
-        dispatch(setDistrictFilterValue(''))
-        // call center manager
-        dispatch(setCallCenterManagerFilterValue(''))
-        // language
-        dispatch(setLanguageBarrierFilterValue(false))
-        // pnd
-        dispatch(setPndOrderFilterValue(false))
+        // courier
+        dispatch(setCourierFilterValue(''))
+        // order status
+        dispatch(setOrderStatusFilterValue(''))
 
         // date FROM to TO
         await dispatch(
             setDateFilter({
-                startDate: '',
-                endDate: '',
-            })
-        )
-
-        // callback date FROM to TO
-        await dispatch(
-            setCallbackDateFilter({
                 startDate: '',
                 endDate: '',
             })
