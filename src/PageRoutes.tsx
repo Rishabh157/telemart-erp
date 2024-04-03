@@ -2242,6 +2242,12 @@ const PageRoutes = () => {
                     element={<WarehouseFirstCallDialerPageWrapper />}
                 />
 
+                {/* Dealer NDR Page */}
+                <Route
+                    path="media/dealer-ndrcalling"
+                    element={<AddDealerNDRDetailsWrapper /> }
+                />
+
                 <Route
                     path="/media/customer-care"
                     element={<CustomerCarePageWrapper />}
@@ -2424,16 +2430,7 @@ const PageRoutes = () => {
                         />
                     }
                 />
-                {/* TODO */}
-                <Route
-                    path="media/dealer-ndrcalling"
-                    element={
-                        <Authorization
-                            children={<AddDealerNDRDetailsWrapper />}
-                            permission={UserModuleNameTypes.NAV_DEALER_NDR}
-                        />
-                    }
-                />
+
                 <Route
                     path="/warehouse-first-call/:id"
                     element={
