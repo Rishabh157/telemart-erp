@@ -2157,14 +2157,24 @@ const PageRoutes = () => {
 
                     {/* Media -> Slot */}
                     {/* Orders */}
-                    <Route path="slot" element={<ViewSlot />}>
+                    <Route
+                        path="slot"
+                        element={
+                            <Authorization
+                                children={<ViewSlot />}
+                                permission={
+                                    UserModuleNameTypes.NAV_SLOT_MANAGEMENT
+                                }
+                            />
+                        }
+                    >
                         <Route
                             path="defination"
                             element={
                                 <Authorization
                                     children={<SlotManagementListingWrapper />}
                                     permission={
-                                        UserModuleNameTypes.NAV_SLOT_MANAGEMENT
+                                        UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_DEFINATION_LIST
                                     }
                                 />
                             }
