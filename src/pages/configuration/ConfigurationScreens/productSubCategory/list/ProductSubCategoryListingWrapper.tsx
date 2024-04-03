@@ -52,43 +52,7 @@ const ProductSubCategoryListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
-        {
-            field: 'subCategoryCode',
-            headerName: 'Sub Category Code',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_CODE,
-
-            renderCell: (row: ProductSubCategoryListResponse) => (
-                <span> {row.subCategoryCode} </span>
-            ),
-        },
-        {
-            field: 'subCategoryName',
-            headerName: 'Sub Category Name ',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_NAME,
-            renderCell: (row: ProductSubCategoryListResponse) => {
-                return <span> {row.subCategoryName} </span>
-            },
-        },
-        {
-            field: 'parentCategoryLabel',
-            headerName: 'Parent Category ',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PARENT_CATEGORY,
-            renderCell: (row: ProductSubCategoryListResponse) => {
-                return <span> {row.parentCategoryLabel} </span>
-            },
-        },
-        {
-            field: 'hsnCode',
-            headerName: 'HSN Code ',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_HSN_CODE,
-            renderCell: (row: ProductSubCategoryListResponse) => {
-                return <span> {row.hsnCode} </span>
-            },
-        },
+        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -125,6 +89,43 @@ const ProductSubCategoryListingWrapper = () => {
                 />
             ),
             align: 'end',
+        },
+        {
+            field: 'subCategoryCode',
+            headerName: 'Sub Category Code',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_CODE,
+
+            renderCell: (row: ProductSubCategoryListResponse) => (
+                <span> {row.subCategoryCode} </span>
+            ),
+        },
+        {
+            field: 'subCategoryName',
+            headerName: 'Sub Category Name ',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_NAME,
+            renderCell: (row: ProductSubCategoryListResponse) => {
+                return <span> {row.subCategoryName} </span>
+            },
+        },
+        {
+            field: 'parentCategoryLabel',
+            headerName: 'Parent Category ',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PARENT_CATEGORY,
+            renderCell: (row: ProductSubCategoryListResponse) => {
+                return <span> {row.parentCategoryLabel} </span>
+            },
+        },
+        {
+            field: 'hsnCode',
+            headerName: 'HSN Code ',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_HSN_CODE,
+            renderCell: (row: ProductSubCategoryListResponse) => {
+                return <span> {row.hsnCode} </span>
+            },
         },
     ]
     const { page, rowsPerPage, searchValue, items } = productSubCategoryState

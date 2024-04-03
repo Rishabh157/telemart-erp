@@ -51,24 +51,6 @@ const WebsitePageListingWrapper = () => {
         WebsitePageState
     const columns: columnTypes[] = [
         {
-            field: 'pageName',
-            headerName: 'Page Name',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsitePageListResponse) => (
-                <span> {row.pageName} </span>
-            ),
-            name: UserModuleNameTypes.WEBSITES_PAGES_LIST_WEBSITES_PAGES_NAME,
-        },
-        {
-            field: 'pageUrl',
-            headerName: 'Page Url',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: WebsitePageListResponse) => (
-                <span> {row.pageUrl} </span>
-            ),
-            name: UserModuleNameTypes.WEBSITES_PAGES_LIST_PAGE_URL,
-        },
-        {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
@@ -108,6 +90,24 @@ const WebsitePageListingWrapper = () => {
                 />
             ),
             align: 'end',
+        },
+        {
+            field: 'pageName',
+            headerName: 'Page Name',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsitePageListResponse) => (
+                <span> {row.pageName} </span>
+            ),
+            name: UserModuleNameTypes.WEBSITES_PAGES_LIST_WEBSITES_PAGES_NAME,
+        },
+        {
+            field: 'pageUrl',
+            headerName: 'Page Url',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: WebsitePageListResponse) => (
+                <span> {row.pageUrl} </span>
+            ),
+            name: UserModuleNameTypes.WEBSITES_PAGES_LIST_PAGE_URL,
         },
     ]
 

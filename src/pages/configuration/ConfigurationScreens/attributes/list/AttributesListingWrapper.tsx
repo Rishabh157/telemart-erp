@@ -47,15 +47,6 @@ const AttributesListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
-        {
-            field: 'attributeName',
-            headerName: 'Attribute Name',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ATTRIBUTE_LIST_ATTRIBUTE_NAME,
-            renderCell: (row: AttributesListResponse) => (
-                <span className="capitalize"> {row.attributeName} </span>
-            ),
-        },
 
         {
             field: 'actions',
@@ -93,6 +84,16 @@ const AttributesListingWrapper = () => {
             ),
             align: 'end',
         },
+        {
+            field: 'attributeName',
+            headerName: 'Attribute Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ATTRIBUTE_LIST_ATTRIBUTE_NAME,
+            renderCell: (row: AttributesListResponse) => (
+                <span className="capitalize"> {row.attributeName} </span>
+            ),
+        },
+
     ]
     // const navigate = useNavigate();
     const { data, isFetching, isLoading } = useGetAttributesQuery({

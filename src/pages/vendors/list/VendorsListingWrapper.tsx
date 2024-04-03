@@ -47,6 +47,48 @@ const VendorsListingWrapper = () => {
     const [deleteVendor] = useDeleteVendorMutation()
 
     const columns: columnTypes[] = [
+        
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_EDIT
+                    )}
+                    isDelete={isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_DELETE
+                    )}
+                    handleOnAction={() => {
+                        setShowDropdown(!showDropdown)
+                        setCurrentId(row?._id)
+                    }}
+                    handleViewActionButton={() => {
+                        navigate(`${currentId}/general-information`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/vendors/edit-vendor/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete vendor',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDelete()
+                                    : setShowDropdown(false)
+                            },
+                        })
+                    }}
+                />
+            ),
+            align: 'end',
+        },
         {
             field: 'vendorCode',
             headerName: 'Vendor Code',
@@ -98,47 +140,6 @@ const VendorsListingWrapper = () => {
             renderCell: (row: VendorsListResponse) => (
                 <span> {row?.registrationStateName} </span>
             ),
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: any) => (
-                <ActionPopup
-                    isView={isAuthorized(
-                        UserModuleNameTypes.ACTION_VENDOR_VIEW
-                    )}
-                    isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_VENDOR_EDIT
-                    )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_VENDOR_DELETE
-                    )}
-                    handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
-                    }}
-                    handleViewActionButton={() => {
-                        navigate(`${currentId}/general-information`)
-                    }}
-                    handleEditActionButton={() => {
-                        navigate(`/vendors/edit-vendor/${currentId}`)
-                    }}
-                    handleDeleteActionButton={() => {
-                        showConfirmationDialog({
-                            title: 'Delete vendor',
-                            text: 'Do you want to delete',
-                            showCancelButton: true,
-                            next: (res) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
-                            },
-                        })
-                    }}
-                />
-            ),
-            align: 'end',
         },
     ]
     const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
