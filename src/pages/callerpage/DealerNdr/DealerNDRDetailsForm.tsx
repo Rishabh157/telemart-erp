@@ -67,7 +67,7 @@ const DealerNDRDetailsForm = ({
         let NDrDisposition = ndrDispositions.find(
             (ele: NdrDispositionListResponseType) => ele?._id === id
         )
-        return NDrDisposition?.rtoAttempt?.map((ele: string) => {
+        return NDrDisposition?.subDispositions?.map((ele: string) => {
             return {
                 label: ele,
                 value: ele,
