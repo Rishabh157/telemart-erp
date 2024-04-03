@@ -26,10 +26,10 @@ export const ndrDispositionApi = apiSlice.injectEndpoints({
         }),
 
         //***** GET *****/
-        getAllNdrDisposition: builder.query({
+        getAllUnauthNdrDisposition: builder.query({
             providesTags: ['ndr-disposition'],
             query: () => ({
-                url: `/ndr-disposition`,
+                url: `/unauth/ndr-disposition`,
                 method: 'GET',
                 // body,
             }),
@@ -84,7 +84,7 @@ export const ndrDispositionApi = apiSlice.injectEndpoints({
     }),
 })
 export const {
-    useGetAllNdrDispositionQuery,
+    useGetAllUnauthNdrDispositionQuery,
     useAddNdrDispositionMutation,
     useUpdateNdrDispositionMutation,
     useGetNdrdispositionByIdQuery,

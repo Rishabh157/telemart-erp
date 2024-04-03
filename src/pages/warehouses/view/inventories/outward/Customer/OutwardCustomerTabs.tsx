@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:OutwardDealerTabs.tsx
-// Type: List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -12,10 +5,10 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import OutwardCustomerTabListFilterFormDialogWrapper from './outwardCustomerTabFilter/OutwardCustomerTabListFilterFormDialogWrapper'
 
 // |-- Redux --|
 import {
@@ -33,6 +26,10 @@ type Props = {
 
 const OutwardCustomerTabs = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
+
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.outwardCustomer
     )
@@ -56,9 +53,16 @@ const OutwardCustomerTabs = ({ columns, rows }: Props) => {
                     }
                     searchValue={searchValue}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                    isFilter
+                    onFilterClick={() => setIsOpenFilterFormDialog(true)}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <OutwardCustomerTabListFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">
