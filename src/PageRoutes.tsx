@@ -2236,6 +2236,12 @@ const PageRoutes = () => {
                     element={<CallerPageWrapper />}
                 />
 
+                {/* Calling outcall Dialer page */}
+                <Route
+                    path="/calling-outcall"
+                    element={<WarehouseFirstCallDialerPageWrapper />}
+                />
+
                 <Route
                     path="/media/customer-care"
                     element={<CustomerCarePageWrapper />}
@@ -2438,12 +2444,6 @@ const PageRoutes = () => {
                             }
                         />
                     }
-                />
-
-                {/* Dialer page */}
-                <Route
-                    path="/calling-outcall"
-                    element={<WarehouseFirstCallDialerPageWrapper />}
                 />
 
                 {/* Request Tabs */}
