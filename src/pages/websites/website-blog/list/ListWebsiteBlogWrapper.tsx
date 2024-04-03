@@ -92,7 +92,7 @@ const ListWebsiteBlogWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'blogName',

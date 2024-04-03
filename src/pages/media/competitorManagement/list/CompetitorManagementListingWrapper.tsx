@@ -83,7 +83,7 @@ const CompetitorManagementListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'date',

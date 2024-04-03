@@ -87,7 +87,7 @@ const VendorsListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'vendorCode',

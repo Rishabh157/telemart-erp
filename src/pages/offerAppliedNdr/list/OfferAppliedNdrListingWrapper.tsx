@@ -105,7 +105,7 @@ const OfferAppliedNdrListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'orderNumber',

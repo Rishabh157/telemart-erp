@@ -80,7 +80,7 @@ const AttributesGroupListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'groupName',

@@ -82,7 +82,7 @@ const ChannelManagementListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'channelName',

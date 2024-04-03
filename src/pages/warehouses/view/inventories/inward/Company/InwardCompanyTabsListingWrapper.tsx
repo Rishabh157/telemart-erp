@@ -147,7 +147,7 @@ const InwardCompanyTabsListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'wtNumber',

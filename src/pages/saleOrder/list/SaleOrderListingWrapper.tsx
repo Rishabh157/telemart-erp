@@ -196,7 +196,7 @@ const SaleOrderListingWrapper = () => {
                         }}
                     />
                 ),
-            align: 'end',
+            
         },
         {
             field: 'soNumber',

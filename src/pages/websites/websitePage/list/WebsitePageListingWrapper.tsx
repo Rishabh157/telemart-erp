@@ -89,8 +89,7 @@ const WebsitePageListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
-        },
+                    },
         {
             field: 'pageName',
             headerName: 'Page Name',

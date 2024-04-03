@@ -78,7 +78,7 @@ const LanguageListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'languageName',

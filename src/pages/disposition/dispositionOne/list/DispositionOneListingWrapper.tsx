@@ -104,7 +104,7 @@ const DispositionOneListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'dispositionDisplayName',

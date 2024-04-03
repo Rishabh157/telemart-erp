@@ -126,7 +126,7 @@ const UsersListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'userName',

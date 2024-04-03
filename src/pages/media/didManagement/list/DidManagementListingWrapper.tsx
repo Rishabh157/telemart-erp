@@ -84,7 +84,7 @@ const DidManagementListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'didNumber',

@@ -78,7 +78,7 @@ const ItemListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'itemCode',

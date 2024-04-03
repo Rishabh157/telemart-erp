@@ -99,7 +99,7 @@ const VendorWarehouseTabWrapper = (props: Props) => {
                     )}
                 </div>
             ),
-            align: 'end',
+            
         },
         {
             field: 'warehouseCode',

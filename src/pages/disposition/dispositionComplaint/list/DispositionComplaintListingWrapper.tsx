@@ -133,7 +133,7 @@ const DispositionComplaintListingWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
+            
         },
         {
             field: 'dispositionName',

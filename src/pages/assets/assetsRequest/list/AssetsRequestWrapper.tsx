@@ -76,7 +76,6 @@ const AssetsRequestWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
         },
         {
             field: 'assetName',

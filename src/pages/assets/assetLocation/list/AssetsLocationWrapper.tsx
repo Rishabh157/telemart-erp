@@ -76,7 +76,6 @@ const AssetsLocationWrapper = () => {
                     }}
                 />
             ),
-            align: 'end',
         },
         {
             field: 'locationName',
