@@ -206,7 +206,7 @@ const SlotManagementListingWrapper = () => {
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
-                        navigate(`edit/${row?._id}`)
+                        navigate(`/media/slot/edit/${row?._id}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
