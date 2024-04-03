@@ -14,6 +14,12 @@ export interface OutwardCustomerSliceStateType {
     searchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
+    courierValue: string
+    orderStatus: string
+    dateFilter: {
+        startDate: string
+        endDate: string
+    }
 }
 
 const initialState: OutwardCustomerSliceStateType = {
@@ -25,6 +31,12 @@ const initialState: OutwardCustomerSliceStateType = {
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',
+    courierValue: '',
+    orderStatus: '',
+    dateFilter: {
+        startDate: '',
+        endDate: '',
+    },
 }
 
 const outwardCustomerSlice: any = createSlice({
@@ -66,6 +78,15 @@ const outwardCustomerSlice: any = createSlice({
         setSelectedId: (state, action: PayloadAction<string>) => {
             state.selectedId = action.payload
         },
+        setCourierFilterValue: (state, action: PayloadAction<string>) => {
+            state.courierValue = action.payload
+        },
+        setOrderStatusFilterValue: (state, action: PayloadAction<string>) => {
+            state.orderStatus = action.payload
+        },
+        setDateFilter: (state, action: PayloadAction<any>) => {
+            state.dateFilter = action.payload
+        },
     },
 })
 
@@ -78,6 +99,9 @@ export const {
     setTotalItems,
     setIsTableLoading,
     setSelectedId,
+    setCourierFilterValue,
+    setOrderStatusFilterValue,
+    setDateFilter,
 } = outwardCustomerSlice.actions
 
 export default outwardCustomerSlice.reducer

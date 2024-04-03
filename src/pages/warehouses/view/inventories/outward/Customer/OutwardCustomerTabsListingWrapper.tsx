@@ -30,7 +30,7 @@ export type Tabs = {
     icon: IconType
     path?: string
 }
- 
+
 // const columns: columnTypes[] = [
 //     {
 //         field: 'actions',
@@ -84,7 +84,7 @@ export type Tabs = {
 //             return <span> {row.address} </span>
 //         },
 //     },
-// ] 
+// ]
 
 enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -102,7 +102,15 @@ const OutwardCustomerTabsListingWrapper = () => {
         (state: RootState) => state.outwardCustomer
     )
 
-    const { page, rowsPerPage, items, searchValue } = outwardCustomerState
+    const {
+        page,
+        rowsPerPage,
+        items,
+        searchValue,
+        // courierValue,
+        orderStatus,
+        dateFilter,
+    } = outwardCustomerState
 
     const { data, isFetching, isLoading } = useGetOrderQuery({
         limit: rowsPerPage,
@@ -113,8 +121,9 @@ const OutwardCustomerTabsListingWrapper = () => {
             { fieldName: 'assignWarehouseId', value: warehouseId },
             { fieldName: 'companyId', value: userData?.companyId },
             { fieldName: 'firstCallApproval', value: true },
+            { fieldName: 'status', value: orderStatus },
         ],
-        dateFilter: {},
+        dateFilter: dateFilter,
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,

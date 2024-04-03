@@ -767,3 +767,75 @@ export const dealerValidReamrkType = () => {
         }
     })
 }
+
+// Order Status Types
+enum OrderStatusTypes {
+    fresh = 'FRESH',
+    prepaid = 'PREPAID',
+    delivered = 'DELIVERED',
+    doorCancelled = 'DOORCANCELLED',
+    hold = 'HOLD',
+    psc = 'PSC',
+    una = 'UNA',
+    pnd = 'PND',
+    urgent = 'URGENT',
+    inquiry = 'INQUIRY',
+    'non-action' = 'NON_ACTION',
+    reattempt = 'REATTEMPT',
+}
+
+export const orderStatusOptionsType = () => {
+    let options = [
+        {
+            value: OrderStatusTypes.fresh,
+            label: 'Fresh',
+        },
+        {
+            value: OrderStatusTypes.prepaid,
+            label: 'Prepaid',
+        },
+        {
+            value: OrderStatusTypes.delivered,
+            label: 'Delivered',
+        },
+        {
+            value: OrderStatusTypes.doorCancelled,
+            label: 'Door Cancelled',
+        },
+        {
+            value: OrderStatusTypes.hold,
+            label: 'Hold',
+        },
+        {
+            value: OrderStatusTypes.psc,
+            label: OrderStatusTypes.psc,
+        },
+        {
+            value: OrderStatusTypes.una,
+            label: OrderStatusTypes.una,
+        },
+        {
+            value: OrderStatusTypes.pnd,
+            label: OrderStatusTypes.pnd,
+        },
+        {
+            value: OrderStatusTypes.urgent,
+            label: 'Urgent',
+        },
+        {
+            value: OrderStatusTypes?.['non-action'],
+            label: 'Non Action',
+        },
+        {
+            value: OrderStatusTypes.reattempt,
+            label: 'Reattempt',
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}
