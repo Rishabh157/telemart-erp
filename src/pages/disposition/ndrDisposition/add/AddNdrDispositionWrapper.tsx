@@ -13,7 +13,8 @@ export type FormInitialValues = {
     priority: string
     smsType: string
     emailType: string
-    rtoAttempt: string[]
+    subDispositions: string[]
+    rtoAttempt: string
 }
 
 const AddNdrDispositionWrapper = () => {
@@ -27,7 +28,8 @@ const AddNdrDispositionWrapper = () => {
         priority: '',
         smsType: '',
         emailType: '',
-        rtoAttempt: [],
+        subDispositions: [],
+        rtoAttempt: '',
     }
 
     const validationSchema = object({
@@ -35,7 +37,7 @@ const AddNdrDispositionWrapper = () => {
         priority: string().required('Priority is required'),
         smsType: string().required('SMS Type is required'),
         emailType: string().required('Email Type is required'),
-        rtoAttempt: array()
+        subDispositions: array()
             .of(string())
             .test(
                 'at-least-one-selected',
@@ -46,6 +48,7 @@ const AddNdrDispositionWrapper = () => {
             )
             .nullable()
             .default([]),
+        rtoAttempt: string().required('RTO Attempt is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -57,6 +60,7 @@ const AddNdrDispositionWrapper = () => {
                 priority: values.priority,
                 smsType: values.smsType,
                 emailType: values.emailType,
+                subDispositions: values.subDispositions,
                 rtoAttempt: values.rtoAttempt,
             }).then((res: any) => {
                 if ('data' in res) {

@@ -18,7 +18,8 @@ export type FormInitialValues = {
     priority: string
     smsType: string
     emailType: string
-    rtoAttempt: string[]
+    subDispositions: string[]
+    rtoAttempt: string
 }
 
 const EditNdrDispositionWrapper = () => {
@@ -39,7 +40,8 @@ const EditNdrDispositionWrapper = () => {
         priority: selectedDispositionOne?.priority,
         smsType: selectedDispositionOne?.smsType,
         emailType: selectedDispositionOne?.emailType,
-        rtoAttempt: selectedDispositionOne?.rtoAttempt || [],
+        subDispositions: selectedDispositionOne?.subDispositions || [],
+        rtoAttempt: selectedDispositionOne?.rtoAttempt,
     }
 
     useEffect(() => {
@@ -52,7 +54,7 @@ const EditNdrDispositionWrapper = () => {
         priority: string().required('Priority is required'),
         smsType: string().required('SMS Type is required'),
         emailType: string().required('Email Type is required'),
-        rtoAttempt: array()
+        subDispositions: array()
             .of(string())
             .test(
                 'at-least-one-selected',
@@ -63,6 +65,7 @@ const EditNdrDispositionWrapper = () => {
             )
             .nullable()
             .default([]),
+        rtoAttempt: string().required('RTO Attempt is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -75,6 +78,7 @@ const EditNdrDispositionWrapper = () => {
                     priority: values?.priority,
                     smsType: values?.smsType,
                     emailType: values?.emailType,
+                    subDispositions: values.subDispositions,
                     rtoAttempt: values?.rtoAttempt,
                 },
                 id: Id || '',
