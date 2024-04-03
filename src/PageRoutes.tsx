@@ -272,8 +272,6 @@ import HouseArrestListingWrapper from './pages/request/all/houseArrest/HouseArre
 import AddHouseArrestFormWrapper from './pages/request/all/houseArrest/add/AddHouseArrestFormWrapper'
 import HouseArrestViewWrapper from './pages/request/all/houseArrest/view/HouseArrestViewWrapper'
 import HouseArrestLogsListingWrapper from './pages/request/all/houseArrest/logs/HouseArrestLogsListingWrapper'
-import WarehouseOrdersTab from './pages/warehouses/view/warehouse-orders'
-import WarehouseConfirmedOrderWrapper from './pages/warehouses/view/warehouse-orders/confirmOrders/list/WarehouseConfirmedOrderWrapper'
 import BatchOrderView from './pages/batchOrder'
 import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches/CreateBatchOrderListingWrapper'
 import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/AssigneBatchesListingWrapper'
@@ -830,31 +828,6 @@ const PageRoutes = () => {
                                     children={<OutwardEcomTabsListingWrapper />}
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE
-                                    }
-                                />
-                            }
-                        />
-                    </Route>
-                    <Route
-                        path="warehouse-orders"
-                        element={
-                            <Authorization
-                                children={<WarehouseOrdersTab />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
-                                }
-                            />
-                        }
-                    >
-                        <Route
-                            path="confirmed-order"
-                            element={
-                                <Authorization
-                                    children={
-                                        <WarehouseConfirmedOrderWrapper />
-                                    }
-                                    permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_ORDERS_CONFIRMED_ORDERS
                                     }
                                 />
                             }
@@ -2236,6 +2209,18 @@ const PageRoutes = () => {
                     element={<CallerPageWrapper />}
                 />
 
+                {/* Calling outcall Dialer page */}
+                <Route
+                    path="/calling-outcall"
+                    element={<WarehouseFirstCallDialerPageWrapper />}
+                />
+
+                {/* Dealer NDR Page */}
+                <Route
+                    path="media/dealer-ndrcalling"
+                    element={<AddDealerNDRDetailsWrapper />}
+                />
+
                 <Route
                     path="/media/customer-care"
                     element={<CustomerCarePageWrapper />}
@@ -2418,16 +2403,7 @@ const PageRoutes = () => {
                         />
                     }
                 />
-                {/* TODO */}
-                <Route
-                    path="media/dealer-ndrcalling"
-                    element={
-                        <Authorization
-                            children={<AddDealerNDRDetailsWrapper />}
-                            permission={UserModuleNameTypes.NAV_DEALER_NDR}
-                        />
-                    }
-                />
+
                 <Route
                     path="/warehouse-first-call/:id"
                     element={
@@ -2438,12 +2414,6 @@ const PageRoutes = () => {
                             }
                         />
                     }
-                />
-
-                {/* Dialer page */}
-                <Route
-                    path="/calling-outcall"
-                    element={<WarehouseFirstCallDialerPageWrapper />}
                 />
 
                 {/* Request Tabs */}

@@ -120,6 +120,17 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
 
                         <ATMSelectSearchable
                             required
+                            options={rtoAttemptTypeOptions()}
+                            name="rtoAttempt"
+                            value={values.rtoAttempt}
+                            label="Rto Attempt"
+                            onChange={(e) =>
+                                handleSetFieldValue('rtoAttempt', e)
+                            }
+                        />
+
+                        <ATMSelectSearchable
+                            required
                             isMulti
                             options={ndrSubDispositionsTypeOptions()}
                             name="subDispositions"
@@ -127,17 +138,6 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                             label="Sub Disposition"
                             onChange={(e) =>
                                 handleSetFieldValue('subDispositions', e)
-                            }
-                        />
-
-                        <ATMSelectSearchable
-                            required
-                            options={rtoAttemptTypeOptions()}
-                            name="rtoAttempt"
-                            value={values.rtoAttempt}
-                            label="Rto Attempt"
-                            onChange={(e) =>
-                                handleSetFieldValue('rtoAttempt', e)
                             }
                         />
                     </div>

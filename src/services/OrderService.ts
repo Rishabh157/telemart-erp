@@ -202,7 +202,7 @@ export const OrderApi = apiSlice.injectEndpoints({
         getWHFirstCallOrderDetails: builder.query({
             // providesTags: ['order'],
             query: (phoneNumber: string) => ({
-                url: `/order-inquiry/get-active-order/${phoneNumber}`,
+                url: `/order-inquiry/unauth/get-active-order/${phoneNumber}`,
                 method: 'GET',
             }),
         }),
