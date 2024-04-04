@@ -38,19 +38,18 @@ const AddPincodeDialog = ({ onClose, formikProps, apiStatus }: Props) => {
             <DialogTitle className="text-primary-main">Add Pincode</DialogTitle>
             <DialogContent>
                 <div>
-                    <div>
-                        <ATMTextField
-                            required
-                            name="pincode"
-                            value={values.pincode}
-                            onChange={(e) => {
-                                setFieldValue('pincode', e.target.value)
-                            }}
-                            placeholder="Pincode"
-                            label="Name"
-                        />
-                    </div>
-                    <div>
+                    <ATMTextField
+                        required
+                        name="pincode"
+                        value={values.pincode}
+                        onChange={(e) => {
+                            setFieldValue('pincode', e.target.value)
+                        }}
+                        placeholder="Pincode"
+                        label="Pincode Number"
+                    />
+
+                    <div className="mb-6">
                         <ATMSelectSearchable
                             name="preferredCourier"
                             required
