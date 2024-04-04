@@ -34,7 +34,7 @@ const initialState: InitialStateType = {
     totalItems: 0,
     isTableLoading: false,
     page: 1,
-    rowsPerPage: 10,
+    rowsPerPage: 20,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedDealerId: '',
