@@ -77,7 +77,7 @@ const mediaNavigation: NavItemType[] = [
     {
         label: 'Dealer Ndr',
         icon: MdViewTimeline,
-        path: 'dealer-ndrcalling?phone=9009648665&user=rishabh.gour',
+        path: 'dealer-ndrcalling?phone=9009648665&username=rishabh.gour',
         // ?phone={{PHONENUMBER}}&user={{USERLOGIN}}&postalcode={{postalcode}}&verve=111&dstphone={{dnis}}&campaignId={{CAMPNAME}}
         name: UserModuleNameTypes.NAV_DEALER_NDR,
     },
@@ -97,7 +97,7 @@ const mediaNavigation: NavItemType[] = [
     {
         label: 'Courier NDR',
         icon: MdViewTimeline,
-        path: 'courier-ndr?phone=9009648665&userlogin=rishabh.gour&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR',
+        path: 'courier-ndr?phone=9009648665&username=rishabh.gour&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR',
         name: UserModuleNameTypes.NAV_INBOUND,
     },
 ]
