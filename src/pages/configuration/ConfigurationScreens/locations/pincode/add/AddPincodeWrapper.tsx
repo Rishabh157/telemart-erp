@@ -27,6 +27,7 @@ type Props = {
 }
 export type FormInitialValues = {
     pincode: string
+    preferredCourier: string
 }
 
 const AddPincodeWrapper = ({ onClose }: Props) => {
@@ -48,9 +49,11 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
     const initialValues: FormInitialValues = {
         pincode: '',
+        preferredCourier: '',
     }
     const validationSchema = object({
         pincode: string().required('Required'),
+        preferredCourier: string().required('Required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
@@ -79,23 +82,21 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
     }
 
     return (
-        <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddPincodeDialog
-                            onClose={onClose}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddPincodeDialog
+                        onClose={onClose}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik> 
     )
 }
 

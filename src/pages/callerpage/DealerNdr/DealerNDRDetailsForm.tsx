@@ -263,6 +263,7 @@ const DealerNDRDetailsForm = ({
                             }}
                         />
                         <ATMDatePicker
+                            required
                             inputSize="16px"
                             name="reAttemptDate"
                             className="mt-0"

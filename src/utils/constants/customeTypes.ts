@@ -839,3 +839,24 @@ export const orderStatusOptionsType = () => {
         }
     })
 }
+
+// Courier Types
+enum CourierTypes {
+    shipyaari = 'SHIPYAARI',
+}
+
+export const courierOptionsType = () => {
+    let options = [
+        {
+            value: CourierTypes.shipyaari,
+            label: 'Shipyaari',
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}

@@ -49,7 +49,7 @@ const AddDealerNDRDetailsWrapper = () => {
     const locationUrl = useLocation()
     const queryParams = new URLSearchParams(locationUrl.search)
     const phoneNumber = queryParams.get('phone')
-    const userName = queryParams.get('user')
+    const userName = queryParams.get('username')
 
     const initialValues: FormInitialValues = {
         customerName: orderDetails?.customerName || '',
@@ -79,10 +79,10 @@ const AddDealerNDRDetailsWrapper = () => {
     // Form Validation Schema
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const validationSchema = object({
-        callDisposition: string(),
+        ndrCallDisposition: string().required('Required'),
         dealerValidRemark: string().required('Required'),
-        ndrRtoReattemptReason: string(),
-        reAttemptDate: string(),
+        ndrRtoReattemptReason: string().required('Required'),
+        reAttemptDate: string().required('Required'),
         ndrDiscountApplicable: string().required('Required'),
         ndrRemark: string().required('Required'),
     })
