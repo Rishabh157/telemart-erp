@@ -49,7 +49,7 @@ const WarehouseFirstCallDialerPageWrapper = () => {
     const location = useLocation()
     const searchParams = new URLSearchParams(location.search)
     const phoneNumber = searchParams.get('phone') || ''
-    const userName = searchParams.get('userid') || ''
+    const userName = searchParams.get('username') || ''
     const navigate = useNavigate()
 
     //  showing initial order details
