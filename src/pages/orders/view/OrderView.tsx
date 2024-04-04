@@ -149,9 +149,9 @@ const OrderView = ({ items }: Props) => {
                                             -{' '}
                                         </p>
                                         <p className="text-slate-600 col-span-1">
-                                            {items?.schemeLabel === ''
+                                            {items?.schemeName === ''
                                                 ? 'NA'
-                                                : items?.schemeLabel}
+                                                : items?.schemeName}
                                         </p>
                                     </div>
 
