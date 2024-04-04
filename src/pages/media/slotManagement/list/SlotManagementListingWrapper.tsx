@@ -104,7 +104,6 @@ const SlotManagementListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -122,7 +121,7 @@ const SlotManagementListingWrapper = () => {
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
-                        navigate(`edit/${row?._id}`)
+                        navigate(`/media/slot/edit/${row?._id}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
@@ -138,7 +137,6 @@ const SlotManagementListingWrapper = () => {
                     }}
                 />
             ),
-            
         },
         {
             field: 'slotName',
@@ -224,7 +222,6 @@ const SlotManagementListingWrapper = () => {
                 </span>
             ),
         },
-
     ]
     const handleDelete = () => {
         setShowDropdown(false)
