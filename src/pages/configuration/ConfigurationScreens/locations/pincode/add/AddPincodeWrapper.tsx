@@ -60,6 +60,7 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
         setTimeout(() => {
             AddPincode({
                 pincode: values.pincode,
+                preferredCourier: values.preferredCourier,
                 stateId: selectedLocationState || '',
                 tehsilId: selectedLocationTehsil || '',
                 districtId: selectedLocationDistrict || '',
@@ -96,7 +97,7 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
                     />
                 )
             }}
-        </Formik> 
+        </Formik>
     )
 }
 
