@@ -137,7 +137,7 @@ export const userApi = apiSlice.injectEndpoints({
                 comapnyId: string
                 role: string
             }) => ({
-                url: `user/company/${comapnyId}/distribution/${role}`,
+                url: `/user/distribution/${role}`,
                 method: 'GET',
             }),
         }),
