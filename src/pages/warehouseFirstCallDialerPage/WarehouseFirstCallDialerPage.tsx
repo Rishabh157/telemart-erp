@@ -12,6 +12,7 @@ import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMD
 import { format } from 'date-fns'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { handleValidNumber } from 'src/utils/methods/numberMethods'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -35,7 +36,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
         price,
         contactNumber,
         mobileNumber,
-        alternateNumber,
+        // alternateNumber,
         country,
         state,
         district,
@@ -62,7 +63,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                 )}
 
                 {/* Customer Details Section */}
-                <div className="w-full mt-2 shadow border rounded bg-white p-2 my-1">
+                <div className="w-full mt-2 shadow border rounded bg-white px-2 pb-6 pt-2 my-1">
                     <h1 className="text-sm font-semibold mb-2">
                         Customer Details
                     </h1>
@@ -151,13 +152,12 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                             extraClassField="mt-0"
                             labelDirection="horizontal"
                             className="mt-0 rounded"
-                            name="customerName"
+                            name="alternateNo"
                             placeholder=""
-                            value={alternateNumber}
-                            readOnly
-                            disabled
+                            value={values.alternateNo}
                             onChange={(e) => {
-                                // setFieldValue('customerName', e.target.value)
+                                handleValidNumber(e) &&
+                                    setFieldValue('alternateNo', e.target.value)
                             }}
                         />
 
@@ -277,7 +277,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                             </span>
                             <div className="-mt-2">
                                 <ATMTextArea
-                                    name="Address"
+                                    name="address"
                                     value={values.address}
                                     label=""
                                     placeholder="address"

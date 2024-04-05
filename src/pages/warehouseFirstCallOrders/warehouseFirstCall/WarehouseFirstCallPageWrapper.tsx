@@ -17,6 +17,7 @@ export type FormInitialValues = {
     remark: string
     callbackDate: string
     status: string
+    alternateNo: string
 }
 
 export interface OrderDetailsPropsTypes {
@@ -165,13 +166,15 @@ const WarehouseFirstCallPageWrapper = () => {
         remark: '',
         callbackDate: '',
         status: '',
+        alternateNo: orderDetails.alternateNumber,
     }
 
     const validationSchema = object({
+        address: string().required('address is required'),
         remark: string().required('remark is required'),
         callbackDate: string().when(['status'], (status, schema) => {
             return status[0] === 'CALLBACK'
-                ? schema.required('Callback data is required')
+                ? schema.required('Callback date is required')
                 : schema.notRequired()
         }),
     })

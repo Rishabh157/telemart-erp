@@ -18,6 +18,7 @@ export type FormInitialValues = {
     callbackDate: string
     status: string
     approvedBy: string
+    alternateNo: string
 }
 
 export interface OrderDetailsPropsTypes {
@@ -176,9 +177,11 @@ const WarehouseFirstCallDialerPageWrapper = () => {
         callbackDate: '',
         status: '',
         approvedBy: userName,
+        alternateNo: orderDetails?.alternateNumber,
     }
 
     const validationSchema = object({
+        address: string().required('address is required'),
         remark: string().required('remark is required'),
         callbackDate: string().when(['status'], (status, schema) => {
             return status[0] === 'CALLBACK'
