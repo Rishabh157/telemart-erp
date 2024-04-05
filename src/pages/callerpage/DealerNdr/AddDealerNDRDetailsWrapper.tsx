@@ -36,6 +36,8 @@ export type FormInitialValues = {
     ndrDiscountApplicable: boolean
     ndrRemark: string
     dealerValidRemark: string
+    orderDate: string
+    preShipCancelDate: string
 }
 
 const AddDealerNDRDetailsWrapper = () => {
@@ -43,6 +45,7 @@ const AddDealerNDRDetailsWrapper = () => {
     const [ndrDispositions, setNdrDispositions] =
         React.useState<NdrDispositionListResponseType[]>()
 
+    console.log('orderDetails: ', orderDetails)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [updateOrderNdrDealer, updateOrderNdrDealerInfo] =
         useUpdateNdrDealerDialerMutation()
@@ -74,6 +77,8 @@ const AddDealerNDRDetailsWrapper = () => {
         courier: '',
         dealerValidRemark: '',
         reAttemptDate: '',
+        orderDate: orderDetails?.createdAt || '',
+        preShipCancelDate: orderDetails?.preShipCancelationDate || '',
     }
 
     // Form Validation Schema

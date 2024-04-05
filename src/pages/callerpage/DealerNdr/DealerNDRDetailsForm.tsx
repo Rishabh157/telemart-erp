@@ -148,17 +148,55 @@ const DealerNDRDetailsForm = ({
                                     {values?.status}
                                 </span>
                             </div>
+
+                            <div className="flex items-center gap-x-4">
+                                <span className="text-sm text-[#406698] font-semibold flex-1">
+                                    Order Date
+                                </span>
+                                {' : '}
+                                <span className="text-sm text-black font-semibold flex-1 text-center">
+                                    <div>
+                                        {moment(values?.orderDate).format(
+                                            'DD-MM-YYYY'
+                                        )}
+                                    </div>
+                                    <div>
+                                        {moment(values?.orderDate).format(
+                                            'hh:mm A'
+                                        )}
+                                    </div>
+                                </span>
+                            </div>
+
+                            <div className="flex items-center gap-x-4">
+                                <span className="text-sm text-[#406698] font-semibold flex-1">
+                                    Pre-ship Cancel Date
+                                </span>
+                                {' : '}
+                                <span className="text-sm text-black font-semibold flex-1 text-center">
+                                    <div>
+                                        {moment(
+                                            values?.preShipCancelDate
+                                        ).format('DD-MM-YYYY')}
+                                    </div>
+                                    <div>
+                                        {moment(
+                                            values?.preShipCancelDate
+                                        ).format('hh:mm A')}
+                                    </div>
+                                </span>
+                            </div>
+
                             <div className="flex items-center gap-x-4">
                                 <span className="text-sm text-[#406698] font-semibold flex-1">
                                     Dealer Remark
                                 </span>
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-center">
-                                    {values?.remark}
+                                    {values.remark || '-'}
                                 </span>
                             </div>
                         </div>
-                        {/* <div className="grid gap-x-16 grid-cols-4"></div> */}
                     </div>
                     <Divider />
 
