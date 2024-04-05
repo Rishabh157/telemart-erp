@@ -70,6 +70,7 @@ export type OrderListResponse = {
     totalAmount: number
     dispositionLevelTwoId: string
     dispositionLevelThreeId: string
+    preShipCancelationDate: string
     preffered_delivery_start_time: string
     preffered_delivery_end_time: string
     preffered_delivery_date: string
