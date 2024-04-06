@@ -1,4 +1,6 @@
+import { statusProps } from 'src/pages/orders'
 import { GetHierarchByDeptProps } from '../GetHierarchyByDept'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 
 // SMS TYPE
 enum smsType {
@@ -860,3 +862,281 @@ export const courierOptionsType = () => {
         }
     })
 }
+
+
+// Dealer Reason Types Accroding to Status
+enum DealerReasonStatus {
+    DELIVEREDSUCCESSFULLY = 'DELIVEREDSUCCESSFULLY',
+    DELIVERYOUTOFNETWORK = 'DELIVERYOUTOFNETWORK',
+    PENDING = 'PENDING',
+    CONFIRMED = 'CONFIRMED',
+    CALLBACK = 'CALLBACK',
+    PICKBYCOURIER = 'PICKBYCOURIER',
+    HOLDCANCEL = 'HOLDCANCEL',
+    CALLBACKFUTURECONFIRMED = 'CALLBACKFUTURECONFIRMED',
+    CUSTOMERNOTAVAILABLE = 'CUSTOMERNOTAVAILABLE',
+    UNCLAIMED = 'UNCLAIMED',
+    REFUSED = 'REFUSED',
+    INTIMATIONONLY = 'INTIMATIONONLY',
+    WRONGPINCODEADDRESSPHONENUMBER = 'WRONGPINCODEADDRESSPHONENUMBER',
+    NOCASH = 'NOCASH',
+    NOTINTERESTED = 'NOTINTERESTED',
+    FAKEORDER = 'FAKEORDER',
+    DEMANDOPENPARCEL = 'DEMANDOPENPARCEL',
+    NOTSATISFIEDAFTEROPENING = 'NOTSATISFIEDAFTEROPENING',
+    NOTACCEPTINGCCC = 'NOTACCEPTINGCCC',
+    DELAYDELIVERY = 'DELAYDELIVERY',
+    PRODUCTCHANGEANDREASSIGN = 'PRODUCTCHANGEANDREASSIGN',
+    OUTOFSERVICEABLEAREA = 'OUTOFSERVICEABLEAREA',
+    CANCELLATIONAFTERSHIPPING = 'CANCELLATIONAFTERSHIPPING',
+    RNR = 'RNR',
+    PERSONNOTAVAILABLE = 'PERSONNOTAVAILABLE',
+    DAMAGEDPARCEL = 'DAMAGEDPARCEL',
+    CUSTOMERNOTPICKUPTHECALL = 'CUSTOMERNOTPICKUPTHECALL',
+    CUSTOMERWANTSTOCANCELTHEORDER = 'CUSTOMERWANTSTOCANCELTHEORDER',
+    NOORDERPLACED = 'NOORDERPLACED',
+    WRONGNUMBER = 'WRONGNUMBER',
+    DONOTWANT = 'DONOTWANT',
+    NONSERVICEABLEAREA = 'NONSERVICEABLEAREA',
+    OUTOFASSIGNEDAREA = 'OUTOFASSIGNEDAREA',
+}
+
+export const dealerReasonTypes = (orderStatus = 'DELIVERED') => {
+    let options: SelectOption[] = []
+
+    switch (orderStatus) {
+        case statusProps.delivered:
+            return (options = [
+                {
+                    value: DealerReasonStatus.DELIVEREDSUCCESSFULLY,
+                    label: 'Delivered Successfully',
+                },
+            ])
+        case statusProps.deliveryOutOfNetwork:
+            return (options = [
+                {
+                    value: DealerReasonStatus.DELIVERYOUTOFNETWORK,
+                    label: 'Delivery out of network',
+                },
+            ])
+        case statusProps.hold:
+            return (options = [
+                {
+                    value: DealerReasonStatus.PENDING,
+                    label: 'Pending',
+                },
+                {
+                    value: DealerReasonStatus.CONFIRMED,
+                    label: 'Confirmed',
+                },
+                {
+                    value: DealerReasonStatus.CALLBACK,
+                    label: 'Call Back',
+                },
+                {
+                    value: DealerReasonStatus.HOLDCANCEL,
+                    label: 'Hold Cancel',
+                },
+                {
+                    value: DealerReasonStatus.CALLBACKFUTURECONFIRMED,
+                    label: 'Call Back Future Confirmed',
+                },
+            ])
+        case statusProps.intransit:
+            return (options = [
+                {
+                    value: DealerReasonStatus.PICKBYCOURIER,
+                    label: 'Pick by Courier',
+                },
+            ])
+        case statusProps.doorCancelled:
+            return (options = [
+                {
+                    value: DealerReasonStatus.CUSTOMERNOTAVAILABLE,
+                    label: 'Customer Not Available',
+                },
+                {
+                    value: DealerReasonStatus.UNCLAIMED,
+                    label: 'Unclaimed',
+                },
+                {
+                    value: DealerReasonStatus.REFUSED,
+                    label: 'Refused',
+                },
+                {
+                    value: DealerReasonStatus.INTIMATIONONLY,
+                    label: 'Intimation Only',
+                },
+                {
+                    value: DealerReasonStatus.WRONGPINCODEADDRESSPHONENUMBER,
+                    label: 'Wrong (pincode/address/phone no.)',
+                },
+                {
+                    value: DealerReasonStatus.NOCASH,
+                    label: 'No Cash',
+                },
+                {
+                    value: DealerReasonStatus.NOTINTERESTED,
+                    label: 'Not Interested',
+                },
+                {
+                    value: DealerReasonStatus.FAKEORDER,
+                    label: 'Fake Order',
+                },
+                {
+                    value: DealerReasonStatus.DEMANDOPENPARCEL,
+                    label: 'Demand Open Parcel',
+                },
+                {
+                    value: DealerReasonStatus.NOTSATISFIEDAFTEROPENING,
+                    label: 'Not Satisfied After Opening',
+                },
+                {
+                    value: DealerReasonStatus.NOTACCEPTINGCCC,
+                    label: 'Not Accepting CCC',
+                },
+                {
+                    value: DealerReasonStatus.DELAYDELIVERY,
+                    label: 'Delay Delivery',
+                },
+                {
+                    value: DealerReasonStatus.PRODUCTCHANGEANDREASSIGN,
+                    label: 'Product Change And Re-Assign',
+                },
+                {
+                    value: DealerReasonStatus.OUTOFSERVICEABLEAREA,
+                    label: 'Out Of Serviceable Area',
+                },
+                {
+                    value: DealerReasonStatus.CANCELLATIONAFTERSHIPPING,
+                    label: 'Cancellation After Shipping',
+                },
+                {
+                    value: DealerReasonStatus.RNR,
+                    label: 'RNR',
+                },
+                {
+                    value: DealerReasonStatus.PERSONNOTAVAILABLE,
+                    label: 'Person Not Available',
+                },
+                {
+                    value: DealerReasonStatus.DAMAGEDPARCEL,
+                    label: 'Damaged Parcel',
+                },
+            ])
+        case statusProps.psc:
+            return (options = [
+                {
+                    value: DealerReasonStatus.CUSTOMERNOTPICKUPTHECALL,
+                    label: 'Customer Not Pickup The Call',
+                },
+                {
+                    value: DealerReasonStatus.CUSTOMERWANTSTOCANCELTHEORDER,
+                    label: 'Customer Wants To Cancel The Order',
+                },
+                {
+                    value: DealerReasonStatus.UNCLAIMED,
+                    label: 'Unclaimed',
+                },
+                {
+                    value: DealerReasonStatus.REFUSED,
+                    label: 'Refused',
+                },
+                {
+                    value: DealerReasonStatus.INTIMATIONONLY,
+                    label: 'Intimation Only',
+                },
+                {
+                    value: DealerReasonStatus.WRONGPINCODEADDRESSPHONENUMBER,
+                    label: 'Wrong (pincode/address/phone no.)',
+                },
+                {
+                    value: DealerReasonStatus.NOCASH,
+                    label: 'No Cash',
+                },
+                {
+                    value: DealerReasonStatus.NOTINTERESTED,
+                    label: 'Not Interested',
+                },
+                {
+                    value: DealerReasonStatus.FAKEORDER,
+                    label: 'Fake Order',
+                },
+                {
+                    value: DealerReasonStatus.DEMANDOPENPARCEL,
+                    label: 'Demand Open Parcel',
+                },
+                {
+                    value: DealerReasonStatus.NOTSATISFIEDAFTEROPENING,
+                    label: 'Not Satisfied After Opening',
+                },
+                {
+                    value: DealerReasonStatus.NOTACCEPTINGCCC,
+                    label: 'Not Accepting CCC',
+                },
+                {
+                    value: DealerReasonStatus.DELAYDELIVERY,
+                    label: 'Delay Delivery',
+                },
+                {
+                    value: DealerReasonStatus.PRODUCTCHANGEANDREASSIGN,
+                    label: 'Product Change And Re-Assign',
+                },
+                {
+                    value: DealerReasonStatus.OUTOFSERVICEABLEAREA,
+                    label: 'Out Of Serviceable Area',
+                },
+                {
+                    value: DealerReasonStatus.CANCELLATIONAFTERSHIPPING,
+                    label: 'Cancellation After Shipping',
+                },
+                {
+                    value: DealerReasonStatus.RNR,
+                    label: 'RNR',
+                },
+                {
+                    value: DealerReasonStatus.PERSONNOTAVAILABLE,
+                    label: 'Person Not Available',
+                },
+                {
+                    value: DealerReasonStatus.DAMAGEDPARCEL,
+                    label: 'Damaged Parcel',
+                },
+                {
+                    value: DealerReasonStatus.NOORDERPLACED,
+                    label: 'No Order Placed',
+                },
+                {
+                    value: DealerReasonStatus.WRONGNUMBER,
+                    label: 'Wrong Number',
+                },
+                {
+                    value: DealerReasonStatus.DONOTWANT,
+                    label: 'Do Not Want',
+                },
+            ])
+        case statusProps.una:
+            return (options = [
+                {
+                    value: DealerReasonStatus.NONSERVICEABLEAREA,
+                    label: 'Non-serviceable Area',
+                },
+                {
+                    value: DealerReasonStatus.OUTOFSERVICEABLEAREA,
+                    label: 'Out Of Assigned Area',
+                },
+            ])
+
+        default:
+            options = []
+            break
+    }
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}
+

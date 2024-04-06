@@ -21,6 +21,7 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
