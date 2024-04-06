@@ -1,30 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import Dashboard from './Dashboard'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useGetAgentDataQuery } from 'src/services/DashboardServices'
 
+type AgentOrdersData = {
+    label: string
+    y: number
+}
+
 type Props = {}
 
 const DashboardWrappper = (props: Props) => {
-    const { isLoading, isFetching, data } = useGetAgentDataQuery({})
+    const [agentOrdersData, setAgentOrdersData] = useState<AgentOrdersData[]>(
+        []
+    )
 
-    console.log({ isLoading, isFetching, data })
+    const { isLoading, isFetching, data } = useGetAgentDataQuery<any>('')
 
-    const dataPoints: { y: number; label: string }[] = [
-        { y: 220, label: 'ORDER ASSIGNED' },
-        { y: 180, label: 'NEW ORDER' },
-        { y: 80, label: 'DELIVERY' },
-        { y: 560, label: 'DELIVERY OUT OF NETWORK' },
-        { y: 370, label: 'DELIVERY NETWORK BARCODE' },
-        { y: 330, label: 'HOLD' },
-        { y: 60, label: 'IN TRANSIT' },
-        { y: 790, label: 'NDR' },
-        { y: 30, label: 'PRE-SHIP CANCELLATION' },
-        { y: 400, label: 'RE-ATTEMPT' },
-        { y: 970, label: 'UNA' },
-        { y: 452, label: 'MONTH TOTAL' },
-    ]
+    useEffect(() => {
+        if (!isLoading && !isFetching) {
+            // console.log('data', data)
+
+            const dataPoints: AgentOrdersData[] = [
+                { y: data?.noOfOrdersCalls, label: 'Orders' },
+                { y: data?.noOfInquiryCalls, label: 'Inquiries' },
+                { y: data?.numberOfComplaintCalls, label: 'Total Complaints' },
+                {
+                    y: data?.numberOfProductReplacementCase,
+                    label: 'House Arrest',
+                },
+                {
+                    y: data?.numberOfProductReplacementCase,
+                    label: 'Product Replacement',
+                },
+                { y: data?.numberOfMoneyBackCase, label: 'Money Back' },
+            ]
+
+            setAgentOrdersData(dataPoints)
+        }
+    }, [isLoading, isFetching, data])
+
+    // console.log({ isLoading, isFetching, data })
+
+    // const dataPoints: { y: number; label: string }[] = [
+    //     { y: 2, label: 'Orders' },
+    //     { y: 1, label: 'Inquiries' },
+    //     { y: 3, label: 'Total Complaints' },
+    //     { y: 1, label: 'House Arrest' },
+    //     { y: 1, label: 'Product Replacement' },
+    //     { y: 1, label: 'Money Back' },
+    //     // { y: 790, label: 'NDR' },
+    //     // { y: 30, label: 'PRE-SHIP CANCELLATION' },
+    //     // { y: 400, label: 'RE-ATTEMPT' },
+    //     // { y: 970, label: 'UNA' },
+    //     // { y: 452, label: 'MONTH TOTAL' },
+    // ]
+
     const columns: columnTypes[] = [
         {
             field: 'pincode',
@@ -378,11 +410,11 @@ const DashboardWrappper = (props: Props) => {
         <>
             <SideNavLayout>
                 <Dashboard
+                    dataPoints={agentOrdersData} // for orders of agent
                     columns={columns}
                     rows={rows}
                     columns2={columns2}
                     rows2={rows2}
-                    dataPoints={dataPoints}
                 />
             </SideNavLayout>
         </>

@@ -25,12 +25,12 @@ const Dashboard = ({ columns, rows, columns2, rows2, dataPoints }: Props) => {
                             <div className=" text-center">
                                 <ATMPageHeading>
                                     {' '}
-                                    Order Statistics{' '}
+                                    Agent{' '}
                                 </ATMPageHeading>
                             </div>
                             <BarGraph
                                 dataPoints={dataPoints}
-                                label={'Order '}
+                                label={'Order Inquiry & Complaints'}
                                 verticalLabel={'Quantity'}
                             />
                         </div>
