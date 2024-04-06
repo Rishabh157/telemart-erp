@@ -13,6 +13,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { dealerValidReamrkType } from 'src/utils/constants/customeTypes'
 import moment from 'moment'
 import { NdrDispositionListResponseType } from 'src/models/configurationModel/NdrDisposition.model'
+import { dealerReasonTypes } from 'src/utils/constants/customeTypes'
 
 // |-- Types --|
 type Props = {
@@ -49,6 +50,18 @@ const DealerNDRDetailsForm = ({
                 value: ele,
             }
         })
+    }
+
+    const getDealerReasonLabel = (orderStatus: string) => {
+        const options = dealerReasonTypes(values.status)
+
+        const dealerReasonObj: any = options?.find(
+            (ele: any) => ele?.value === values?.dealerReason
+        )
+
+        return {
+            label: dealerReasonObj?.label,
+        }
     }
 
     return (
@@ -194,6 +207,17 @@ const DealerNDRDetailsForm = ({
                                 {' : '}
                                 <span className="text-sm text-black font-semibold flex-1 text-center">
                                     {values.remark || '-'}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center gap-x-4">
+                                <span className="text-sm text-[#406698] font-semibold flex-1">
+                                    Dealer Reason
+                                </span>
+                                {' : '}
+                                <span className="text-sm text-black font-semibold flex-1 text-center">
+                                    {getDealerReasonLabel(values.status)
+                                        ?.label || '-'}
                                 </span>
                             </div>
                         </div>

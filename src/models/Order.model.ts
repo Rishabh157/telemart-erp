@@ -40,6 +40,7 @@ export type OrderListResponse = {
     areaId: string
     emailId: string
     flagStatus: string
+    dealerReason: string
     gender: string
     houseNumber: string
     incomingCallerNo: string

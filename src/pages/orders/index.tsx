@@ -25,12 +25,14 @@ import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import OrderListing from './all/OrderListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+
 interface tabsProps {
     label: string
     icon: IconType
     path: string
     name: string
 }
+
 export enum statusProps {
     all = 'ALL',
     fresh = 'FRESH',
@@ -45,6 +47,9 @@ export enum statusProps {
     inquiry = 'INQUIRY',
     'non-action' = 'NON_ACTION',
     reattempt = 'REATTEMPT',
+    deliveryOutOfNetwork = 'DELIVERYOUTOFNETWORK',
+    intransit = 'INTRANSIT',
+    ndr = 'NDR',
 }
 
 const ViewOrder = () => {
