@@ -3,11 +3,207 @@
     "moduleName": "NAV_ORDER",
     "moduleAction": [
         {
+            "actionId": "ACTION_ORDER_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_ORDER_NUMBER",
+                    "fieldName": "ORDER NUMBER",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_ASSIGNED_DEALER",
+                    "fieldName": "ASSIGNED DEALER",
+                    "fieldValue": "assignDealerLabel"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_FIRST_CALL_APPROVAL",
+                    "fieldName": "FIRST CALL APPROVAL",
+                    "fieldValue": "firstCallApproval"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_FIRST_CALL_REMARK",
+                    "fieldName": "FIRST CALL REMARK",
+                    "fieldValue": "firstCallRemark"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_FIRST_CALL_STATE",
+                    "fieldName": "FIRST CALL STATE",
+                    "fieldValue": "firstCallState"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_FIRST_CALL_BACK_DATE",
+                    "fieldName": "FIRST CALL BACK DATE",
+                    "fieldValue": "firstCallCallBackDate"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE",
+                    "fieldName": "ASSIGNED WEARHOUSE",
+                    "fieldValue": "assignWarehouseLabel"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_ORDER_REF_NUMBER",
+                    "fieldName": "ORDER REF NUMBER",
+                    "fieldValue": "orderReferenceNumber"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_ENQUIRY_NUMBER",
+                    "fieldName": "ENQUIRY NUMBER",
+                    "fieldValue": "inquiryNumber"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_TRACKING_NUMBER",
+                    "fieldName": "TRACKING_ NUMBER",
+                    "fieldValue": "trackingNo"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_TALUK",
+                    "fieldName": "TALUK",
+                    "fieldValue": "tehsilLabel"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_STATUS_DATE",
+                    "fieldName": "STATUS DATE",
+                    "fieldValue": "statusDate"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_STATUS",
+                    "fieldName": "STATUS",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_SHIPPING_CHARGES",
+                    "fieldName": "SHIPPING CHARGES",
+                    "fieldValue": "shippingCharges"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_SCHEME_NAME",
+                    "fieldName": "SCHEME NAME",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_SCHEME_CODE",
+                    "fieldName": "SCHEME CODE",
+                    "fieldValue": "schemeCode"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_SHCEME_QUANTITY",
+                    "fieldName": "SHCEME QUANTITY",
+                    "fieldValue": "shcemeQuantity"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_PRICE",
+                    "fieldName": "PRICE",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_PIN_CODE_LABEL",
+                    "fieldName": "PIN CODE LABEL",
+                    "fieldValue": "pincodeLabel"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_PAYMENT_MODE",
+                    "fieldName": "PAYMENT MODE",
+                    "fieldValue": "paymentMode"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_CREATED_AT",
+                    "fieldName": "CREATED AT",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_EDP_DATE",
+                    "fieldName": "EDP DATE",
+                    "fieldValue": "edpDate"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_DISTRICT_LABEL",
+                    "fieldName": "DISTRICT",
+                    "fieldValue": "districtLabel"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_DISPOSITION_LEVEL_THREE",
+                    "fieldName": "DISPOSITION",
+                    "fieldValue": "dispositionLevelThree"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_DEALER_STATUS",
+                    "fieldName": "DEALER STATUS",
+                    "fieldValue": "dealerStatus"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_DEALER_CODE",
+                    "fieldName": "DEALER CODE",
+                    "fieldValue": "dealerCode"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_CUSTOMER_NAME",
+                    "fieldName": "CUSTOMER NAME",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_AREA_LABEL",
+                    "fieldName": "CUSTOMER ADDRESS",
+                    "fieldValue": "areaLabel"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_MOBILE_NO",
+                    "fieldName": "MOBILE NO",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_CHANNEL_NAME",
+                    "fieldName": "CHANNEL NAME",
+                    "fieldValue": "channelName"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_CALL_CENTER_LABEL",
+                    "fieldName": "CALL CENTER NAME",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_REMARK",
+                    "fieldName": "REMARK",
+                    "fieldValue": "remark"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_AGENT",
+                    "fieldName": "AGENT",
+                    "fieldValue": "agent"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_IS_APPROVED",
+                    "fieldName": "APPROVED",
+                    "fieldValue": "isApproved"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_PREFFERED_DELIVERY_DATE",
+                    "fieldName": "PREFFERED DELIVERY DATE",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_PREFFERED_DELIVERY_TIME",
+                    "fieldName": "PREFFERED DELIVERY TIME",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "ORDER_ALL_TAB_LIST_ORDER_MBK_NUMBER",
+                    "fieldName": "MBK NUMBER",
+                    "fieldValue": "orderMBKNumber"
+                }
+            ]
+        },
+        {
             "actionId": "ACTION_ORDER_ALL_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_ALL_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -15,7 +211,9 @@
             "actionUrl": "",
             "actionName": "ORDER_FRESH_ORDER_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -23,7 +221,9 @@
             "actionUrl": "",
             "actionName": "ORDER_FRESH_ORDER_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -31,7 +231,9 @@
             "actionUrl": "",
             "actionName": "ORDER_APPROVAL_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -39,7 +241,9 @@
             "actionUrl": "",
             "actionName": "ORDER_DELIVERED_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -47,7 +251,9 @@
             "actionUrl": "",
             "actionName": "ORDER_DOOR_CANCELLED_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -55,7 +261,9 @@
             "actionUrl": "",
             "actionName": "ORDER_HOLD_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -63,7 +271,9 @@
             "actionUrl": "",
             "actionName": "ORDER_PSC_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -71,7 +281,9 @@
             "actionUrl": "",
             "actionName": "ORDER_UNA_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -79,7 +291,9 @@
             "actionUrl": "",
             "actionName": "ORDER_PND_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -87,7 +301,9 @@
             "actionUrl": "",
             "actionName": "ORDER_URGENT_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -95,7 +311,9 @@
             "actionUrl": "",
             "actionName": "ORDER_NON_ACTION_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -103,7 +321,9 @@
             "actionUrl": "",
             "actionName": "ORDER_GLOBAL_ORDER_SEARCH_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -111,7 +331,9 @@
             "actionUrl": "",
             "actionName": "ACTION_ORDER_INQUIRY_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         },
         {
@@ -120,14 +342,52 @@
             "actionName": "ACTION_ORDER_COMPAINT_TAB",
             "compulsoryFields": [],
             "parentGroup": [],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "ACTION_ORDER_COMPAINT_LIST_ORDER_NUMBER",
+                    "fieldName": "ORDER NUMBER",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "ACTION_ORDER_COMPAINT_LIST_COMPLAINT_NUMBER",
+                    "fieldName": "COMPLAINT NUMBER",
+                    "fieldValue": "complaintNumber"
+                },
+                {
+                    "fieldId": "ACTION_ORDER_COMPAINT_LIST_COMPLAINT_LABEL",
+                    "fieldName": "COMPLAINT LABEL",
+                    "fieldValue": "complaintbyLabel"
+                },
+                {
+                    "fieldId": "ACTION_ORDER_COMPAINT_LIST_SCHEME_NAME",
+                    "fieldName": "SCHEME",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "ACTION_ORDER_COMPAINT_LIST_INITAL_CALL_ONE_LABEL",
+                    "fieldName": "INITAL CALL ONE LABEL",
+                    "fieldValue": "initialCallOneLabel"
+                },
+                {
+                    "fieldId": "ACTION_ORDER_COMPAINT_LIST_INITAL_CALL_TWO_LABEL",
+                    "fieldName": "INITAL CALL TWO LABEL",
+                    "fieldValue": "initialCallTwoLabel"
+                },
+                {
+                    "fieldId": "ACTION_ORDER_COMPAINT_LIST_INITAL_CALL_THREE_LABEL",
+                    "fieldName": "INITAL CALL THREE LABEL",
+                    "fieldValue": "initialCallThreeLabel"
+                }
+            ]
         },
         {
             "actionId": "ACTION_ORDER_REATTEMPT_TAB",
             "actionUrl": "",
             "actionName": "ACTION_ORDER_REATTEMPT_TAB",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": [
+                "LIST"
+            ],
             "fields": []
         }
     ]
