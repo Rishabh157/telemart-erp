@@ -8,6 +8,7 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useDispatch } from 'react-redux'
+import { handleValidCharchater } from 'src/utils/methods/charchterMethods'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -73,12 +74,32 @@ const AddDispositionOne = ({ formikProps, apiStatus }: Props) => {
                             value={values.dispositionName}
                             label="Disposition Name"
                             placeholder="Name"
-                            onChange={(e) =>
-                                handleSetFieldValue(
-                                    'dispositionName',
-                                    e.target.value
-                                )
-                            }
+                            onChange={(e: any) => {
+                                if (
+                                    e.nativeEvent.inputType ===
+                                    'deleteContentBackward'
+                                ) {
+                                    // If backspace, remove the last character
+                                    handleSetFieldValue(
+                                        'dispositionName',
+                                        e.target.value
+                                    )
+                                } else {
+                                    // If not backspace, perform character validation
+                                    if (!values.dispositionName) {
+                                        handleSetFieldValue(
+                                            'dispositionName',
+                                            e.target.value
+                                        )
+                                    } else {
+                                        handleValidCharchater(e) &&
+                                            handleSetFieldValue(
+                                                'dispositionName',
+                                                e.target.value
+                                            )
+                                    }
+                                }
+                            }}
                         />
                     </div>
                 </div>

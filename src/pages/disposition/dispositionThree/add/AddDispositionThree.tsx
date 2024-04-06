@@ -19,6 +19,7 @@ import {
 } from 'src/utils/constants/customeTypes'
 import { useGetDispostionTwoByOneQuery } from 'src/services/configurations/DispositionTwoServices'
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
+import { handleValidCharchater } from 'src/utils/methods/charchterMethods'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -124,11 +125,31 @@ const AddDispositionThree = ({
                             label="Disposition Name"
                             required
                             placeholder="Disposition Name"
-                            onChange={(e) => {
-                                handleSetFieldValue(
-                                    'dispositionName',
-                                    e.target.value
-                                )
+                            onChange={(e: any) => {
+                                if (
+                                    e.nativeEvent.inputType ===
+                                    'deleteContentBackward'
+                                ) {
+                                    // If backspace, remove the last character
+                                    handleSetFieldValue(
+                                        'dispositionName',
+                                        e.target.value
+                                    )
+                                } else {
+                                    // If not backspace, perform character validation
+                                    if (!values.dispositionName) {
+                                        handleSetFieldValue(
+                                            'dispositionName',
+                                            e.target.value
+                                        )
+                                    } else {
+                                        handleValidCharchater(e) &&
+                                            handleSetFieldValue(
+                                                'dispositionName',
+                                                e.target.value
+                                            )
+                                    }
+                                }
                             }}
                         />
                         <ATMSelectSearchable

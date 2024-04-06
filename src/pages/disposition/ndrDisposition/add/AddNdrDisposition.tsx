@@ -15,6 +15,7 @@ import {
     ndrSubDispositionsTypeOptions,
     rtoAttemptTypeOptions,
 } from 'src/utils/constants/customeTypes'
+import { handleValidCharchater } from 'src/utils/methods/charchterMethods'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -83,12 +84,33 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                             value={values.ndrDisposition}
                             label="Disposition Name"
                             placeholder="Name"
-                            onChange={(e) =>
-                                handleSetFieldValue(
-                                    'ndrDisposition',
-                                    e.target.value
-                                )
-                            }
+                            onChange={(e: any) => {
+                                // Check if the pressed key is backspace
+                                if (
+                                    e.nativeEvent.inputType ===
+                                    'deleteContentBackward'
+                                ) {
+                                    // If backspace, remove the last character
+                                    handleSetFieldValue(
+                                        'ndrDisposition',
+                                        e.target.value
+                                    )
+                                } else {
+                                    // If not backspace, perform character validation
+                                    if (!values.ndrDisposition) {
+                                        handleSetFieldValue(
+                                            'ndrDisposition',
+                                            e.target.value
+                                        )
+                                    } else {
+                                        handleValidCharchater(e) &&
+                                            handleSetFieldValue(
+                                                'ndrDisposition',
+                                                e.target.value
+                                            )
+                                    }
+                                }
+                            }}
                         />
                         <ATMSelectSearchable
                             required

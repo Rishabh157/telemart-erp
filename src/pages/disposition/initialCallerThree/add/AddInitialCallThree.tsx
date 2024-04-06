@@ -21,6 +21,7 @@ import {
     complaintTypeOptions,
     returnTypeOptions,
 } from 'src/utils/constants/customeTypes'
+import { handleValidCharchater } from 'src/utils/methods/charchterMethods'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -172,12 +173,32 @@ const AddInitialCallThree = ({
                             placeholder="Name"
                             labelClass="text-slate-700 text-sm font-medium mt-1"
                             className="mt-1 rounded"
-                            onChange={(e) =>
-                                handleSetFieldValue(
-                                    'initialCallName',
-                                    e.target.value
-                                )
-                            }
+                            onChange={(e: any) => {
+                                if (
+                                    e.nativeEvent.inputType ===
+                                    'deleteContentBackward'
+                                ) {
+                                    // If backspace, remove the last character
+                                    handleSetFieldValue(
+                                        'initialCallName',
+                                        e.target.value
+                                    )
+                                } else {
+                                    // If not backspace, perform character validation
+                                    if (!values.initialCallName) {
+                                        handleSetFieldValue(
+                                            'initialCallName',
+                                            e.target.value
+                                        )
+                                    } else {
+                                        handleValidCharchater(e) &&
+                                            handleSetFieldValue(
+                                                'initialCallName',
+                                                e.target.value
+                                            )
+                                    }
+                                }
+                            }}
                         />
                         <ATMSelectSearchable
                             options={initialCalleOneOption}

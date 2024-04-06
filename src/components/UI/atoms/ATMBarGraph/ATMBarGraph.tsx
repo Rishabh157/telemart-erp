@@ -11,9 +11,25 @@ type BarGraphProps = {
     verticalLabel: string
 }
 
+function max(arr: any) {
+    let maxValue = 10
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].y > maxValue) {
+            maxValue = arr[i].y
+        }
+    }
+    const numDigits = String(maxValue).length
+
+    const orderOfMagnitude = Math.pow(10, numDigits - 1)
+    const roundedValue =
+        Math.ceil(maxValue / orderOfMagnitude) * orderOfMagnitude
+    return roundedValue
+}
 const BarGraph = (props: BarGraphProps) => {
     const { dataPoints, label, verticalLabel } = props
+    let maxrer = max(dataPoints)
 
+    // Example usage:
     const data = {
         labels: dataPoints.map((dataPoint) => dataPoint.label),
 
@@ -32,6 +48,8 @@ const BarGraph = (props: BarGraphProps) => {
         indexAxis: 'y', // Set the indexAxis to 'y' to display bars horizontally
         scales: {
             x: {
+                min: 0,
+                max: maxrer,
                 type: 'linear',
                 beginAtZero: true,
                 title: {

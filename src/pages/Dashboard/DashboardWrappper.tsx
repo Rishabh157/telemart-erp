@@ -3,6 +3,9 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import Dashboard from './Dashboard'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { useGetAgentDataQuery } from 'src/services/DashboardServices'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
+import moment from 'moment'
 
 type AgentOrdersData = {
     label: string
@@ -12,20 +15,34 @@ type AgentOrdersData = {
 type Props = {}
 
 const DashboardWrappper = (props: Props) => {
+    const { dateFilter } = useSelector((state: RootState) => state.dashboard)
+
     const [agentOrdersData, setAgentOrdersData] = useState<AgentOrdersData[]>(
         []
     )
 
-    const { isLoading, isFetching, data } = useGetAgentDataQuery<any>('')
+    const { isLoading, isFetching, data } = useGetAgentDataQuery<any>({
+        dateFilter: {
+            startDate: dateFilter.start_date
+                ? moment(dateFilter?.start_date).format('YYYY-MM-DD')
+                : '',
+            endDate: dateFilter.end_date
+                ? moment(dateFilter?.end_date).format('YYYY-MM-DD')
+                : dateFilter.start_date
+                ? moment().format('YYYY-MM-DD')
+                : '',
+        },
+    })
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            // console.log('data', data)
-
             const dataPoints: AgentOrdersData[] = [
                 { y: data?.noOfOrdersCalls, label: 'Orders' },
                 { y: data?.noOfInquiryCalls, label: 'Inquiries' },
-                { y: data?.numberOfComplaintCalls, label: 'Total Complaints' },
+                {
+                    y: data?.numberOfComplaintCalls,
+                    label: 'Total Complaints',
+                },
                 {
                     y: data?.numberOfProductReplacementCase,
                     label: 'House Arrest',
@@ -40,22 +57,6 @@ const DashboardWrappper = (props: Props) => {
             setAgentOrdersData(dataPoints)
         }
     }, [isLoading, isFetching, data])
-
-    // console.log({ isLoading, isFetching, data })
-
-    // const dataPoints: { y: number; label: string }[] = [
-    //     { y: 2, label: 'Orders' },
-    //     { y: 1, label: 'Inquiries' },
-    //     { y: 3, label: 'Total Complaints' },
-    //     { y: 1, label: 'House Arrest' },
-    //     { y: 1, label: 'Product Replacement' },
-    //     { y: 1, label: 'Money Back' },
-    //     // { y: 790, label: 'NDR' },
-    //     // { y: 30, label: 'PRE-SHIP CANCELLATION' },
-    //     // { y: 400, label: 'RE-ATTEMPT' },
-    //     // { y: 970, label: 'UNA' },
-    //     // { y: 452, label: 'MONTH TOTAL' },
-    // ]
 
     const columns: columnTypes[] = [
         {

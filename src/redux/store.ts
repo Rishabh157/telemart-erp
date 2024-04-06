@@ -105,6 +105,7 @@ import warehouseAssignedOrderSlice from './slices/warehouseOrders/warehouseAssig
 import CreateBatchOrderSlice from './slices/CreateBatchOrderSlice'
 import OfferAppliedNdrSlice from './slices/OfferAppliedNdrSlice'
 import outwardCustomerSlice from './slices/outwardCustomerSlice'
+import DashboardSlice from './slices/DashboardSlice'
 
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
@@ -119,6 +120,7 @@ const store = configureStore({
     reducer: {
         auth: authSlice,
         userAccess: userAcessSlice,
+        dashboard: DashboardSlice,
         sideNavLayout: sideNavLayoutSlice,
         dealer: dealerSlice,
         dealerRatio: dealersRatioSlice,
