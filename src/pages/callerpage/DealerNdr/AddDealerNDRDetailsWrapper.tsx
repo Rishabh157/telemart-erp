@@ -131,7 +131,9 @@ const AddDealerNDRDetailsWrapper = () => {
             ndrApprovedBy: userName || '',
             ndrCallDisposition: values?.ndrCallDisposition || '',
             ndrRtoReattemptReason: values?.ndrRtoReattemptReason || '',
+            mobileNo: phoneNumber,
         }
+        
         updateOrderNdrDealer({
             id: orderDetails?._id,
             body: formatedValues,
