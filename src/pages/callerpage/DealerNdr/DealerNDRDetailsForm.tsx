@@ -338,7 +338,6 @@ const DealerNDRDetailsForm = ({
                             // minDate={moment().subtract(0, 'days')}
                             maxDate={moment().add(15, 'days')}
                             onChange={(e) => {
-                                // console.log(e, 'ehehe')
                                 setFieldValue('reAttemptDate', e)
                             }}
                         />

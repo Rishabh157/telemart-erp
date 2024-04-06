@@ -94,12 +94,37 @@ const AddDispositionComplaint = ({ formikProps, apiStatus }: Props) => {
                             value={values.dispositionName}
                             label="Disposition Name"
                             placeholder="Name"
-                            onChange={(e) =>
+                            onChange={(e: any) => {
                                 handleSetFieldValue(
                                     'dispositionName',
                                     e.target.value
                                 )
-                            }
+                                // Check if the pressed key is backspace
+                                // if (
+                                //     e.nativeEvent.inputType ===
+                                //     'deleteContentBackward'
+                                // ) {
+                                //     // If backspace, remove the last character
+                                //     handleSetFieldValue(
+                                //         'dispositionName',
+                                //         e.target.value
+                                //     )
+                                // } else {
+                                //     // If not backspace, perform character validation
+                                //     if (!values.dispositionName) {
+                                //         handleSetFieldValue(
+                                //             'dispositionName',
+                                //             e.target.value
+                                //         )
+                                //     } else {
+                                //         handleValidCharchater(e) &&
+                                //             handleSetFieldValue(
+                                //                 'dispositionName',
+                                //                 e.target.value
+                                //             )
+                                //     }
+                                // }
+                            }}
                         />
                         <ATMSelectSearchable
                             required
