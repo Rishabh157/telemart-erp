@@ -99,7 +99,6 @@ const DispositionComplaintListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -133,15 +132,14 @@ const DispositionComplaintListingWrapper = () => {
                     }}
                 />
             ),
-            
         },
         {
-            field: 'dispositionName',
+            field: 'displayName',
             headerName: 'Disposition Complaint',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DISPOSITION_COMPLAINT_LIST_DISPOSITION_COMPLAINT,
             renderCell: (row: DispositionComplaintListResponse) => (
-                <span> {row.dispositionName} </span>
+                <span> {row.displayName} </span>
             ),
         },
         {

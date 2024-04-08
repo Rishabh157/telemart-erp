@@ -9,6 +9,7 @@
 export type NdrDispositionListResponseType = {
     _id: string
     ndrDisposition: string
+    displayName: string
     priority: string
     smsType: string
     emailType: string

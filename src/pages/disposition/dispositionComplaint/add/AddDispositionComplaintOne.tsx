@@ -28,6 +28,7 @@ import {
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { handleValidCharchater } from 'src/utils/methods/charchterMethods'
 
 // |-- Types --|
 type Props = {
@@ -95,35 +96,31 @@ const AddDispositionComplaint = ({ formikProps, apiStatus }: Props) => {
                             label="Disposition Name"
                             placeholder="Name"
                             onChange={(e: any) => {
-                                handleSetFieldValue(
-                                    'dispositionName',
-                                    e.target.value
-                                )
                                 // Check if the pressed key is backspace
-                                // if (
-                                //     e.nativeEvent.inputType ===
-                                //     'deleteContentBackward'
-                                // ) {
-                                //     // If backspace, remove the last character
-                                //     handleSetFieldValue(
-                                //         'dispositionName',
-                                //         e.target.value
-                                //     )
-                                // } else {
-                                //     // If not backspace, perform character validation
-                                //     if (!values.dispositionName) {
-                                //         handleSetFieldValue(
-                                //             'dispositionName',
-                                //             e.target.value
-                                //         )
-                                //     } else {
-                                //         handleValidCharchater(e) &&
-                                //             handleSetFieldValue(
-                                //                 'dispositionName',
-                                //                 e.target.value
-                                //             )
-                                //     }
-                                // }
+                                if (
+                                    e.nativeEvent.inputType ===
+                                    'deleteContentBackward'
+                                ) {
+                                    // If backspace, remove the last character
+                                    handleSetFieldValue(
+                                        'dispositionName',
+                                        e.target.value
+                                    )
+                                } else {
+                                    // If not backspace, perform character validation
+                                    if (!values.dispositionName) {
+                                        handleSetFieldValue(
+                                            'dispositionName',
+                                            e.target.value
+                                        )
+                                    } else {
+                                        handleValidCharchater(e) &&
+                                            handleSetFieldValue(
+                                                'dispositionName',
+                                                e.target.value
+                                            )
+                                    }
+                                }
                             }}
                         />
                         <ATMSelectSearchable
