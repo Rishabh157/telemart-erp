@@ -25,7 +25,6 @@ const Dashboard = ({ columns, rows, columns2, rows2, dataPoints }: Props) => {
     const { dateFilter } = useSelector((state: RootState) => state.dashboard)
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useGetLocalStorage() || null
-    // console.log('userData: ', userData)
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">

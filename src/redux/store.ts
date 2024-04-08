@@ -107,6 +107,7 @@ import OfferAppliedNdrSlice from './slices/OfferAppliedNdrSlice'
 import outwardCustomerSlice from './slices/outwardCustomerSlice'
 import DashboardSlice from './slices/DashboardSlice'
 import dealerInventorySlice from './slices/dealerInventorySlice'
+import MultiOrderSearchSlice from './slices/MultiOrderSearchSlice'
 // Middleware for handling 401 Error
 // const authMiddelware = () => (next: any) => (action: any) => {
 //     if (action.type.includes("rejected") && action.payload.status === 401) {
@@ -211,6 +212,7 @@ const store = configureStore({
         offerAppliedNdr: OfferAppliedNdrSlice,
         outwardCustomer: outwardCustomerSlice,
         dealerInventory: dealerInventorySlice,
+        multiOrderSearch: MultiOrderSearchSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>

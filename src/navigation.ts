@@ -28,7 +28,7 @@ import { IconType } from 'react-icons'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
 import { TiFlowSwitch } from 'react-icons/ti'
 import { RiCustomerServiceLine } from 'react-icons/ri'
-import { GrCompliance } from 'react-icons/gr'
+import { GrCompliance, GrMultiple } from 'react-icons/gr'
 import { GiRadarCrossSection } from 'react-icons/gi'
 import { IoIosGitPullRequest } from 'react-icons/io'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
@@ -145,11 +145,18 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_WAREHOUSE_TO_COMPANY_TRANSFER,
     },
     {
+        label: 'Multi Order Search',
+        icon: GrMultiple,
+        path: '/multi-order-search',
+        name: UserModuleNameTypes.NAV_ORDER,
+    },
+    {
         label: 'Orders',
         icon: MdOutlineBorderColor,
         path: '/orders',
         name: UserModuleNameTypes.NAV_ORDER,
     },
+
     {
         label: 'Batch',
         icon: MdOutlineBatchPrediction,

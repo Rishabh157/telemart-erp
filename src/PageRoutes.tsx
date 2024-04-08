@@ -284,6 +284,7 @@ import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerND
 import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
 import OfferAppliedNdrListingWrapper from './pages/offerAppliedNdr/list/OfferAppliedNdrListingWrapper'
 import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
+import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiOrderSearchListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1293,6 +1294,16 @@ const PageRoutes = () => {
                         />
                     }
                 />
+                {/* Multi Order Search */}
+                <Route
+                    path="/multi-order-search"
+                    element={
+                        <Authorization
+                            children={<MultiOrderSearchListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_ORDER}
+                        />
+                    }
+                ></Route>
 
                 {/* Orders */}
                 <Route

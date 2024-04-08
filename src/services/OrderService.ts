@@ -244,6 +244,16 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // get multiple search order by mobile no and order no
+        getMultiSearchOrderByMobAndOrderNo: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (body) => ({
+                url: `/order-inquiry/get-multiple-orders`,
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -270,4 +280,5 @@ export const {
     useGetOrderByNumberUsingForNdrDealerQuery,
     useUpdateNdrDealerDialerMutation,
     useUpdateOfferAppliedNdrOrderMutation,
+    useGetMultiSearchOrderByMobAndOrderNoMutation,
 } = OrderApi
