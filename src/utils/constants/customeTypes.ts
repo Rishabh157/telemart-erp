@@ -863,7 +863,6 @@ export const courierOptionsType = () => {
     })
 }
 
-
 // Dealer Reason Types Accroding to Status
 enum DealerReasonStatus {
     DELIVEREDSUCCESSFULLY = 'DELIVEREDSUCCESSFULLY',
@@ -901,7 +900,7 @@ enum DealerReasonStatus {
     OUTOFASSIGNEDAREA = 'OUTOFASSIGNEDAREA',
 }
 
-export const dealerReasonTypes = (orderStatus = 'DELIVERED') => {
+export const dealerReasonTypes = (orderStatus: string) => {
     let options: SelectOption[] = []
 
     switch (orderStatus) {
@@ -1140,3 +1139,12 @@ export const dealerReasonTypes = (orderStatus = 'DELIVERED') => {
     })
 }
 
+// Dashboard Graph Condition Via Department
+export const showTheDashboardGraphToDeparment = (departmentType: string) => {
+    switch (departmentType) {
+        case GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT:
+            return true
+        default:
+            return false
+    }
+}

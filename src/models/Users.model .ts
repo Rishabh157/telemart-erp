@@ -71,6 +71,7 @@ export type userData = {
     userName: string
     role: string
     userRole: string
+    userDepartment: string
     firstName: string
     lastName: string
     branchId: string
