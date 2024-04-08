@@ -8,6 +8,7 @@
 // |-- Types --|
 export type DispositionComplaintListResponse = {
     dispositionName: string
+    displayName: string
     companyId: string
     isActive: boolean
     isDeleted: boolean

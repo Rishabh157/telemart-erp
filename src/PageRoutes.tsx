@@ -283,6 +283,8 @@ import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrde
 import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerNDRDetailsWrapper'
 import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
 import OfferAppliedNdrListingWrapper from './pages/offerAppliedNdr/list/OfferAppliedNdrListingWrapper'
+import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
+import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiOrderSearchListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -644,6 +646,17 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<DealersRatioListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_DELEAR_RATIO}
+                        />
+                    }
+                />
+
+                {/* Dealers-inventory */}
+                <Route
+                    path="/dealers-inventory"
+                    element={
+                        <Authorization
+                            children={<DealerInventoryListingWrapper />}
                             permission={UserModuleNameTypes.NAV_DELEAR_RATIO}
                         />
                     }
@@ -1281,6 +1294,16 @@ const PageRoutes = () => {
                         />
                     }
                 />
+                {/* Multi Order Search */}
+                <Route
+                    path="/multi-order-search"
+                    element={
+                        <Authorization
+                            children={<MultiOrderSearchListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_ORDER}
+                        />
+                    }
+                ></Route>
 
                 {/* Orders */}
                 <Route

@@ -36,7 +36,7 @@ const EditNdrDispositionWrapper = () => {
 
     const { data, isLoading, isFetching } = useGetNdrdispositionByIdQuery(Id)
     const initialValues: FormInitialValues = {
-        dispositionName: selectedDispositionOne?.ndrDisposition || '',
+        dispositionName: selectedDispositionOne?.displayName || '',
         priority: selectedDispositionOne?.priority,
         smsType: selectedDispositionOne?.smsType,
         emailType: selectedDispositionOne?.emailType,

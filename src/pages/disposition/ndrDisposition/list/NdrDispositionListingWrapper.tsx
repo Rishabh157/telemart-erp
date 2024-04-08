@@ -62,7 +62,6 @@ const NdrDispositionListingWrapper = () => {
     }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -97,7 +96,6 @@ const NdrDispositionListingWrapper = () => {
                     }}
                 />
             ),
-            
         },
         {
             field: 'ndrDisposition',
@@ -105,7 +103,7 @@ const NdrDispositionListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.NDR_DISPOSITION_LIST_DISPOSITION_NAME,
             renderCell: (row: NdrDispositionListResponseType) => (
-                <span> {row?.ndrDisposition} </span>
+                <span> {row?.displayName} </span>
             ),
         },
         {

@@ -51,7 +51,7 @@ const EditDispositionComplaintWrappper = () => {
         useGetdispositionComplaintByIdQuery(Id)
 
     const initialValues: FormInitialValues = {
-        dispositionName: selectedDispositionCompalint?.dispositionName || '',
+        dispositionName: selectedDispositionCompalint?.displayName || '',
         priority: selectedDispositionCompalint?.priority || '',
         emailType: selectedDispositionCompalint?.emailType || '',
         smsType: selectedDispositionCompalint?.smsType || '',
