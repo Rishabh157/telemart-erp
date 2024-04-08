@@ -192,6 +192,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // Get dealers inventory
+        getDealersInventory: builder.query({
+            providesTags: ['Barcode'],
+            query: (body: PaginationType) => ({
+                url: '/bar-code/get-dealer-inventory',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -209,4 +219,5 @@ export const {
     useInwardInventoryBarcodeMutation,
     useGetInventoriesByBarcodeQuery,
     useDispatchDealerBarcodeMutation,
+    useGetDealersInventoryQuery,
 } = barcodeApi

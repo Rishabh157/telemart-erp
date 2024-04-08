@@ -283,6 +283,7 @@ import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrde
 import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerNDRDetailsWrapper'
 import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
 import OfferAppliedNdrListingWrapper from './pages/offerAppliedNdr/list/OfferAppliedNdrListingWrapper'
+import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -644,6 +645,17 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<DealersRatioListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_DELEAR_RATIO}
+                        />
+                    }
+                />
+
+                {/* Dealers-inventory */}
+                <Route
+                    path="/dealers-inventory"
+                    element={
+                        <Authorization
+                            children={<DealerInventoryListingWrapper />}
                             permission={UserModuleNameTypes.NAV_DELEAR_RATIO}
                         />
                     }

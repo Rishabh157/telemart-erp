@@ -19,6 +19,7 @@ import {
     MdWeb,
     MdOutlineBatchPrediction,
     MdOutlineLocalOffer,
+    MdOutlineInventory,
 } from 'react-icons/md'
 import { IoCallOutline } from 'react-icons/io5'
 import { AiOutlineSetting } from 'react-icons/ai'
@@ -58,6 +59,12 @@ export const navigation: NavItemType[] = [
         icon: FaRegHandshake,
         path: '/dealers',
         name: UserModuleNameTypes.NAV_DEALER,
+    },
+    {
+        label: 'Dealers Inventory',
+        icon: MdOutlineInventory,
+        path: '/dealers-inventory',
+        name: UserModuleNameTypes.NAV_DELEAR_RATIO,
     },
     {
         label: 'Dealers-ratio',

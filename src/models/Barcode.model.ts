@@ -26,22 +26,6 @@ export type BarcodeListResponseType = {
     updatedAt: string
 }
 
-// export type BarcodeListResponseType = {
-//     productGroupId: string
-//     productGroupLabel: string
-//     wareHouseId: string
-//     barcodeNumber: string
-//     barcodeGroupNumber: string
-//     isUsed: boolean
-//     companyId: string
-//     isActive: boolean
-//     isDeleted: boolean
-//     createdAt: string
-//     updatedAt: string
-//     _id: string
-//     __v: number
-// }
-
 export type ProductBarcodeGroupResponse = {
     _id: string
     barcodeGroupNumber: string
@@ -80,4 +64,31 @@ export type InwardInventoryBarcode = {
         cartonBoxId: string
         _id: string
     }[]
+}
+
+export type DealersInventoryListResponse = {
+    count: number
+    firstDocument: {
+        _id: string
+        productGroupId: string
+        barcodeNumber: string
+        outerBoxbarCodeNumber: string | null
+        cartonBoxId: string | null
+        barcodeGroupNumber: string
+        lotNumber: string
+        isUsed: boolean
+        wareHouseId: string
+        vendorId: string | null
+        dealerId: string
+        status: string
+        companyId: string
+        isDeleted: boolean
+        isActive: boolean
+        __v: number
+        createdAt: string
+        updatedAt: string
+        productGroupLabel: string
+        wareHouseLabel: string
+    }
+    productGroupId: string
 }

@@ -133,6 +133,15 @@ export const dealerApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** GET *****/
+        getAllDealersByZonalExe: builder.query({
+            providesTags: ['dealer'],
+            query: (companyId) => ({
+                url: `/dealer/get-zme-dealers`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -149,4 +158,5 @@ export const {
     useGetAllDealerBySchemeIdQuery,
     useSaveMultipleDealerToSingleSchemeMutation,
     useSaveMultipleSchemeToSingleDealerMutation,
+    useGetAllDealersByZonalExeQuery,
 } = dealerApi
