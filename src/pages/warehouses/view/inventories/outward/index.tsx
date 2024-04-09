@@ -64,6 +64,12 @@ const OutwardTabs = (props: Props) => {
             path: 'gpo',
             name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY,
         },
+        {
+            label: 'Shipyaari Orders',
+            icon: MdOutbond,
+            path: 'shipyaari-orders',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY,
+        },
     ]
     const [activeTab, setActiveTab] = useState(0)
 

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useReactToPrint } from 'react-to-print'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import DispatchedInvoiceTemplate from './DispatchedInvoiceTemplate'
-import { useGetSalesOrderInvoiceQuery } from 'src/services/SalesOrderService'
+import { useGetSalesOrderByIdQuery } from 'src/services/SalesOrderService'
 
 const DispatchedInvoiceWrapper = () => {
     const navigate = useNavigate()
@@ -15,7 +15,7 @@ const DispatchedInvoiceWrapper = () => {
         content: () => saleOrderInvoiceRef?.current,
     })
 
-    const { isLoading, isFetching, data } = useGetSalesOrderInvoiceQuery(
+    const { isLoading, isFetching, data } = useGetSalesOrderByIdQuery(
         saleOrderId || ' ',
         {
             skip: !saleOrderId,

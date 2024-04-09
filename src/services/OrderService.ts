@@ -180,7 +180,7 @@ export const OrderApi = apiSlice.injectEndpoints({
 
         //***** update first call id *****/
         updateWarehouseFirstCall: builder.mutation({
-            // providesTags: ['order'],
+            invalidatesTags: ['order'],
             query: ({ id, body }) => ({
                 url: `/order-inquiry/first-call-confirmation/${id}`,
                 method: 'PUT',

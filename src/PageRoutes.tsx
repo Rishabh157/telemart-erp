@@ -286,6 +286,7 @@ import OfferAppliedNdrListingWrapper from './pages/offerAppliedNdr/list/OfferApp
 import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
 import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiOrderSearchListingWrapper'
 import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
+import OutwardShipyaariOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/ShipyaariOrders/OutwardShipyaariOrdersTabListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -858,6 +859,19 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={
                                         <OutwardGpoOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="shipyaari-orders"
+                            element={
+                                <Authorization
+                                    children={
+                                        <OutwardShipyaariOrdersTabListingWrapper />
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER

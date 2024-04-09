@@ -1,67 +1,86 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
+import { IconType } from 'react-icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import WarehouseAssignedOrdersListing from './WarehouseAssignedOrderListing'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/warehouseOrders/warehouseAssignedOrderSlice'
-import { OrderListResponse } from 'src/models/Order.model'
+import OutwardShipyaariOrdersTabListing from './OutwardShipyaariOrdersTabListing'
+// import { useParams } from 'react-router-dom'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useGetWHFristCallAssignedOrderQuery,
-    useApprovedWHFirstCallApprovalMutation,
-} from 'src/services/OrderService'
-import moment from 'moment'
-import { useParams } from 'react-router-dom'
+    setIsTableLoading,
+    setItems,
+    setTotalItems,
+} from 'src/redux/slices/outwardCustomerSlice'
+import { useGetOrderQuery } from 'src/services/OrderService'
 import { Chip } from '@mui/material'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { isAuthorized } from 'src/utils/authorization'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { OrderListResponse } from 'src/models'
+import moment from 'moment'
 
-export enum FirstCallApprovalStatus {
+// |-- Types --|
+export type Tabs = {
+    label: string
+    icon: IconType
+    path?: string
+}
+
+enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
     'CANCEL' = 'CANCEL',
 }
 
-const WarehouseAssignedOrderListingWrapper = () => {
+const OutwardShipyaariOrdersTabListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
+    // const params = useParams()
+    // const warehouseId = params?.id
 
-    const [, setShowDropdown] = useState(false)
-    const params = useParams()
-    const warehouseId = params.id
-    const warehouseAssignedOrdersState: any = useSelector(
-        (state: RootState) => state.warehouseOrdersAssigned
+    const { userData }: any = useSelector((state: RootState) => state?.auth)
+
+    const outwardCustomerState: any = useSelector(
+        (state: RootState) => state.outwardCustomer
     )
-    const [warehousefirstCallApproval] =
-        useApprovedWHFirstCallApprovalMutation()
+
     const {
         page,
         rowsPerPage,
         items,
         searchValue,
-        // filter value
-        schemeValueFilter,
-        // orderTypeValueFilter,
-        stateValueFilter,
-        districtValueFilter,
-        callCenterManagerValueFilter,
-        langBarrierValueFilter,
-        pndOrderValueFilter,
+        // courierValue,
+        // orderStatus,
         dateFilter,
-        callbackDateFilter,
-    } = warehouseAssignedOrdersState
+    } = outwardCustomerState
+
+    const { data, isFetching, isLoading } = useGetOrderQuery({
+        limit: rowsPerPage,
+        searchValue: searchValue,
+        params: ['didNo', 'mobileNo'],
+        page: page,
+        filterBy: [
+            { fieldName: 'orderAssignedToCourier', value: 'SHIPYAARI' },
+            { fieldName: 'companyId', value: userData?.companyId },
+        ],
+        dateFilter: dateFilter,
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: true,
+    })
+
+    useEffect(() => {
+        if (!isFetching && !isLoading) {
+            dispatch(setIsTableLoading(false))
+            dispatch(setItems(data?.data || []))
+            dispatch(setTotalItems(data?.totalItem || 4))
+        } else {
+            dispatch(setIsTableLoading(true))
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
         {
@@ -93,42 +112,38 @@ const WarehouseAssignedOrderListingWrapper = () => {
                         ) : (
                             <Chip
                                 onClick={() => {
-                                    isAuthorized(
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_APPROVAL
-                                    ) &&
-                                        showConfirmationDialog({
-                                            title: 'Approval',
-                                            text: `Do you want to ${
-                                                row.firstCallApproval
-                                                    ? 'Disapprove '
-                                                    : 'Approval '
-                                            }`,
-                                            showCancelButton: true,
-                                            showDenyButton: true,
-                                            confirmButtonText: 'Order approval',
-                                            denyButtonText: 'Order cancled',
-                                            confirmButtonColor: '#239B56',
-                                            denyButtonColor: '#F1948A',
-
-                                            next: (res) => {
-                                                if (res.isConfirmed) {
-                                                    return res.isConfirmed
-                                                        ? handleApproval(
-                                                              row?._id,
-                                                              FirstCallApprovalStatus.APPROVED
-                                                          )
-                                                        : setShowDropdown(false)
-                                                }
-                                                if (res.isDenied) {
-                                                    return res.isDenied
-                                                        ? handleApproval(
-                                                              row?._id,
-                                                              FirstCallApprovalStatus.CANCEL
-                                                          )
-                                                        : setShowDropdown(false)
-                                                }
-                                            },
-                                        })
+                                    // showConfirmationDialog({
+                                    //     title: 'Approval',
+                                    //     text: `Do you want to ${
+                                    //         row.firstCallApproval
+                                    //             ? 'Disapprove '
+                                    //             : 'Approval '
+                                    //     }`,
+                                    //     showCancelButton: true,
+                                    //     showDenyButton: true,
+                                    //     confirmButtonText: 'Order approval',
+                                    //     denyButtonText: 'Order cancled',
+                                    //     confirmButtonColor: '#239B56',
+                                    //     denyButtonColor: '#F1948A',
+                                    //     next: (res) => {
+                                    //         if (res.isConfirmed) {
+                                    //             return res.isConfirmed
+                                    //                 ? handleApproval(
+                                    //                       row?._id,
+                                    //                       FirstCallApprovalStatus.APPROVED
+                                    //                   )
+                                    //                 : setShowDropdown(false)
+                                    //         }
+                                    //         if (res.isDenied) {
+                                    //             return res.isDenied
+                                    //                 ? handleApproval(
+                                    //                       row?._id,
+                                    //                       FirstCallApprovalStatus.CANCEL
+                                    //                   )
+                                    //                 : setShowDropdown(false)
+                                    //         }
+                                    //     },
+                                    // })
                                 }}
                                 className="cursor-pointer"
                                 label="Pending"
@@ -147,11 +162,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <Link to={`/warehouse-first-call/${row?._id}`}>
-                    <span className="text-primary-main">
-                        # {row.orderNumber}
-                    </span>{' '}
-                </Link>
+                <span className="text-primary-main "># {row.orderNumber}</span>
             ),
         },
         {
@@ -523,83 +534,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
         },
     ]
 
-    const handleApproval = (rowId: string, status: string) => {
-        setShowDropdown(false)
-        let body = {
-            status,
-        }
-        warehousefirstCallApproval({ body: body, id: rowId }).then(
-            (res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Approvaled successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast(
-                        'error',
-                        'Something went wrong, Please try again later'
-                    )
-                }
-            }
-        )
-    }
-    const { userData }: any = useSelector((state: RootState) => state?.auth)
-
-    const { data, isFetching, isLoading } = useGetWHFristCallAssignedOrderQuery(
-        {
-            limit: rowsPerPage,
-            searchValue: searchValue,
-            params: ['didNo', 'mobileNo'],
-            page: page,
-            filterBy: [
-                { fieldName: 'assignWarehouseId', value: warehouseId },
-                { fieldName: 'companyId', value: userData?.companyId },
-                { fieldName: 'firstCallApproval', value: false },
-                { fieldName: 'approved', value: true },
-                { fieldName: 'schemeId', value: schemeValueFilter },
-                // { fieldName: 'orderType', value: orderTypeValueFilter },
-                { fieldName: 'stateId', value: stateValueFilter },
-                { fieldName: 'districtId', value: districtValueFilter },
-                {
-                    fieldName: 'firstCallState',
-                    value: langBarrierValueFilter ? ['LANGUAGEBARRIER'] : '',
-                },
-                {
-                    fieldName: 'status',
-                    value: pndOrderValueFilter ? ['PND'] : '',
-                },
-            ],
-            dateFilter: dateFilter || {},
-            callbackDateFilter: callbackDateFilter || {},
-            callCenterId: callCenterManagerValueFilter || null,
-            orderBy: 'createdAt',
-            orderByValue: -1,
-            isPaginationRequired: true,
-        }
-    )
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    return (
-        <SideNavLayout>
-            <WarehouseAssignedOrdersListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </SideNavLayout>
-    )
+    return <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
 }
 
-export default WarehouseAssignedOrderListingWrapper
+export default OutwardShipyaariOrdersTabListingWrapper
