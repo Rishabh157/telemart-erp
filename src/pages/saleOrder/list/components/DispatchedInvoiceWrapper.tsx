@@ -1,23 +1,30 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useReactToPrint } from 'react-to-print'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import DispatchedInvoiceTemplate from './DispatchedInvoiceTemplate'
-import { useGetSalesOrderInvoiceQuery } from 'src/services/SalesOrderService'
+import { useGetSalesOrderByIdQuery } from 'src/services/SalesOrderService'
 
 const DispatchedInvoiceWrapper = () => {
     const navigate = useNavigate()
+    const params = useParams()
+    const saleOrderId = params?.id
     const saleOrderInvoiceRef = React.useRef(null)
 
     const handlePrint = useReactToPrint({
         content: () => saleOrderInvoiceRef?.current,
     })
 
-    const { isLoading, isFetching, data } = useGetSalesOrderInvoiceQuery('3')
+    const { isLoading, isFetching, data } = useGetSalesOrderByIdQuery(
+        saleOrderId || ' ',
+        {
+            skip: !saleOrderId,
+        }
+    )
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            // console.log('data', data)
+            console.log('data', data)
         }
     }, [isLoading, isFetching, data])
 

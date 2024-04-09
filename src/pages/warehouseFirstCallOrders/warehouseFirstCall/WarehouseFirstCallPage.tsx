@@ -9,7 +9,6 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-import { format } from 'date-fns'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
@@ -37,7 +36,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
         contactNumber,
         mobileNumber,
         // alternateNumber,
-        country,
+        // country,
         state,
         district,
         tehsil,
@@ -146,6 +145,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
 
                         <ATMTextField
                             label="Alternate No."
+                            required
                             labelSize="xxs"
                             size="xxs"
                             labelClass=""
@@ -162,7 +162,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                         />
 
                         {/* Location */}
-                        <ATMTextField
+                        {/* <ATMTextField
                             label="Country"
                             labelSize="xxs"
                             size="xxs"
@@ -178,7 +178,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             onChange={(e) => {
                                 // setFieldValue('customerName', e.target.value)
                             }}
-                        />
+                        /> */}
 
                         <ATMTextField
                             label="state"
@@ -413,10 +413,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             value={values.callbackDate}
                             dateTimeFormat="DD/MM/YY"
                             onChange={(e) => {
-                                setFieldValue(
-                                    'callbackDate',
-                                    format(new Date(e), 'yyyy-MM-dd')
-                                )
+                                setFieldValue('callbackDate', e)
                             }}
                         />
                     </div>
@@ -449,6 +446,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     loadingText="Saving..."
                     onClick={() => {
                         setFieldValue('status', 'APPROVED')
+                        setFieldValue('callbackDate', '')
                     }}
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'APPROVED'
@@ -464,7 +462,10 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     disabled={false}
                     type="button"
                     loadingText="Saving..."
-                    onClick={() => setFieldValue('status', 'LANGUAGEBARRIER')}
+                    onClick={() => {
+                        setFieldValue('status', 'LANGUAGEBARRIER')
+                        setFieldValue('callbackDate', '')
+                    }}
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'LANGUAGEBARRIER'
                             ? 'bg-primary-main'
@@ -478,7 +479,10 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     disabled={false}
                     type="button"
                     loadingText="Cancel"
-                    onClick={() => setFieldValue('status', 'CANCEL')}
+                    onClick={() => {
+                        setFieldValue('status', 'CANCEL')
+                        setFieldValue('callbackDate', '')
+                    }}
                     className={`text-white flex items-center py-1 px-2 rounded w-50 ${
                         values.status === 'CANCEL'
                             ? 'bg-primary-main'

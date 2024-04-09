@@ -206,7 +206,7 @@ import InwardCompanyTabsListingWrapper from './pages/warehouses/view/inventories
 import InwardCustomerTabsListingWrapper from './pages/warehouses/view/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
 import InwardDealerTabsListingWrapper from './pages/warehouses/view/inventories/inward/Dealer/InwardDealerTabsListingWrapper'
 import InwardEcomTabsListingWrapper from './pages/warehouses/view/inventories/inward/Ecom/InwardEcomTabsListingWrapper'
-import DispatchedInvoice from './pages/saleOrder/list/components/DispatchedInvoiceWrapper'
+import DispatchedInvoiceWrapper from './pages/saleOrder/list/components/DispatchedInvoiceWrapper'
 import InwardSampleTabsListingWrapper from './pages/warehouses/view/inventories/inward/Sample/InwardSampleTabsListingWrapper'
 import InwardWarehouseTabsListingWrapper from './pages/warehouses/view/inventories/inward/Warehouse/InwardWarehouseTabsListingWrapper'
 import OutwardTabs from './pages/warehouses/view/inventories/outward'
@@ -286,6 +286,7 @@ import OfferAppliedNdrListingWrapper from './pages/offerAppliedNdr/list/OfferApp
 import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
 import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiOrderSearchListingWrapper'
 import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
+import OutwardShipyaariOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/ShipyaariOrders/OutwardShipyaariOrdersTabListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -344,15 +345,6 @@ const PageRoutes = () => {
                         />
                     }
                 />
-                {/* <Route
-                        path="warehouse/so-order/dispatched-invoice"
-                        element={
-                            <Authorization
-                                children={<DispatchedInvoice />}
-                                permission={UserModuleNameTypes.vendor}
-                            />
-                        }
-                    /> */}
                 <Route
                     path="/vendors/add-vendor"
                     element={
@@ -874,6 +866,19 @@ const PageRoutes = () => {
                                 />
                             }
                         />
+                        <Route
+                            path="shipyaari-orders"
+                            element={
+                                <Authorization
+                                    children={
+                                        <OutwardShipyaariOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER
+                                    }
+                                />
+                            }
+                        />
                     </Route>
 
                     <Route
@@ -1052,9 +1057,10 @@ const PageRoutes = () => {
                         />
                     }
                 />
+                {/* Sale Order Invoice */}
                 <Route
                     path="/sale-order/:id/invoice"
-                    element={<DispatchedInvoice />}
+                    element={<DispatchedInvoiceWrapper />}
                 />
                 <Route
                     path="/sale-order/add-sale-order"
