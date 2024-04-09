@@ -148,7 +148,7 @@ const StepAddSchemeDetails = ({
                 <div className="mt-2">
                     <label className="font-medium text-slate-700">
                         {' '}
-                        Dimensions
+                        Dimensions (in cm):
                         <span className="ml-1 text-sm text-red-500">
                             *
                         </span>{' '}
