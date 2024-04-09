@@ -1052,6 +1052,16 @@ export enum offerAppliedNdrUserAccessType {
     ACTION_OFFER_APPLIED_NDR_EDIT = 'ACTION_OFFER_APPLIED_NDR_EDIT',
 }
 
+export enum dealersInventoryUserAccessType {
+    NAV_MUILTI_ORDER_SEARCH = 'NAV_MUILTI_ORDER_SEARCH'
+}
+
+
+export enum multiOrderSearchUserAccessType {
+    NAV_DEALERS_INVENTORY = 'NAV_DEALERS_INVENTORY'
+}
+
+
 export const UserModuleNameTypes = {
     ...AttributeUserAccessType,
     ...AttributeGroupUserAccessType,
@@ -1129,4 +1139,6 @@ export const UserModuleNameTypes = {
     ...requestUserAccessType,
     ...batchUserAccessType,
     ...offerAppliedNdrUserAccessType,
+    ...dealersInventoryUserAccessType,
+    ...multiOrderSearchUserAccessType
 } as const

@@ -64,7 +64,7 @@ export const navigation: NavItemType[] = [
         label: 'Dealers Inventory',
         icon: MdOutlineInventory,
         path: '/dealers-inventory',
-        name: UserModuleNameTypes.NAV_DELEAR_RATIO,
+        name: UserModuleNameTypes.NAV_DEALERS_INVENTORY,
     },
     {
         label: 'Dealers-ratio',
@@ -148,7 +148,7 @@ export const navigation: NavItemType[] = [
         label: 'Multi Order Search',
         icon: GrMultiple,
         path: '/multi-order-search',
-        name: UserModuleNameTypes.NAV_ORDER,
+        name: UserModuleNameTypes.NAV_MUILTI_ORDER_SEARCH,
     },
     {
         label: 'Orders',

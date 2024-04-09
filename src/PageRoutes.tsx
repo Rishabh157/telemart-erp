@@ -657,7 +657,7 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<DealerInventoryListingWrapper />}
-                            permission={UserModuleNameTypes.NAV_DELEAR_RATIO}
+                            permission={UserModuleNameTypes.NAV_DEALERS_INVENTORY}
                         />
                     }
                 />
@@ -1300,7 +1300,7 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<MultiOrderSearchListingWrapper />}
-                            permission={UserModuleNameTypes.NAV_ORDER}
+                            permission={UserModuleNameTypes.NAV_MUILTI_ORDER_SEARCH}
                         />
                     }
                 ></Route>

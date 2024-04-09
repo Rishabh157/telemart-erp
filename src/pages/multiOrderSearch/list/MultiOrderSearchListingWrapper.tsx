@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useGetMultiSearchOrderByMobAndOrderNoMutation } from 'src/services/OrderService'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -87,7 +86,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
@@ -97,7 +95,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'assignDealerLabel',
             headerName: 'Assigned Dealer',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_DEALER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -108,7 +105,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'firstCallRemark',
             headerName: '1st call remark',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_FIRST_CALL_REMARK,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -119,7 +115,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'firstCallState',
             headerName: 'first Call State',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_FIRST_CALL_STATE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -130,7 +125,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'firstCallCallBackDate',
             headerName: 'call back date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_FIRST_CALL_BACK_DATE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -141,7 +135,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'assignWarehouseLabel',
             headerName: 'Assigned Warehouse',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -152,7 +145,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'orderReferenceNumber',
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_REF_NUMBER,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderReferenceNumber || '-'}</span>
@@ -162,7 +154,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'inquiryNumber',
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ENQUIRY_NUMBER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
@@ -172,7 +163,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'trackingNo',
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_TRACKING_NUMBER,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>-</span>,
@@ -181,7 +171,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'tehsilLabel',
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_TALUK,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -192,7 +181,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'statusDate',
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_STATUS_DATE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // renderCell: (row: OrderListResponse) => (
@@ -203,7 +191,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_STATUS,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
@@ -212,7 +199,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'shippingCharges',
             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SHIPPING_CHARGES,
             align: 'start',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -223,7 +209,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'schemeName',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SCHEME_NAME,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -234,7 +219,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'schemeCode',
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SCHEME_CODE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -245,7 +229,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'shcemeQuantity',
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SHCEME_QUANTITY,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -256,7 +239,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'price',
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PRICE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
@@ -265,7 +247,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'pincodeLabel',
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PIN_CODE_LABEL,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -276,7 +257,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'paymentMode',
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PAYMENT_MODE,
             align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -287,7 +267,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CREATED_AT,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
@@ -304,7 +283,7 @@ const MultiOrderSearchListingWrapper = () => {
         //     field: 'onBackVerifiedDate',
         //     headerName: 'ONBACK Verifie Date',
         //     flex: 'flex-[1_1_0%]',
-        // name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_ORDER_NUMBER,
+
         //     extraClasses: 'min-w-[150px]',
         //     renderCell: (row: OrderListResponse) => <div>-</div>,
         // },
@@ -312,7 +291,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'edpDate',
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_EDP_DATE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => <div>-</div>,
         },
@@ -320,7 +298,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'districtLabel',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DISTRICT_LABEL,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.districtLabel}</div>
@@ -330,7 +307,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'dispositionLevelThree',
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DISPOSITION_LEVEL_THREE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dispositionLevelThree}</div>
@@ -340,7 +316,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'dealerStatus',
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DEALER_STATUS,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
@@ -352,7 +327,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'dealerCode',
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DEALER_CODE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dealerCode || '-'}</div>
@@ -362,7 +336,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CUSTOMER_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.customerName || '-'}</div>
@@ -372,7 +345,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_AREA_LABEL,
             extraClasses: 'min-w-[30px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
@@ -382,7 +354,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'mobileNo',
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_MOBILE_NO,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.mobileNo}</div>
@@ -392,7 +363,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CHANNEL_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.channelLabel?.[0]}</div>
@@ -402,7 +372,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'callCenterLabel',
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CALL_CENTER_LABEL,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.callCenterLabel}</div>
@@ -413,7 +382,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'remark',
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_REMARK,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.remark}</div>
@@ -423,7 +391,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'agent',
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_AGENT,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.agentName}</div>
@@ -433,7 +400,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PREFFERED_DELIVERY_DATE,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             // hidden: activeTab === TabTypes?.complaint,
@@ -443,8 +409,8 @@ const MultiOrderSearchListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -461,7 +427,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PREFFERED_DELIVERY_TIME,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
@@ -487,7 +452,6 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'orderMBKNumber',
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_MBK_NUMBER,
             extraClasses: 'min-w-[250px]',
             renderCell: (row: any) => (
                 <span> {row.orderMBKNumber || '-'} </span>
