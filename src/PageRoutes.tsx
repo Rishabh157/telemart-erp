@@ -285,6 +285,7 @@ import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/Cou
 import OfferAppliedNdrListingWrapper from './pages/offerAppliedNdr/list/OfferAppliedNdrListingWrapper'
 import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
 import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiOrderSearchListingWrapper'
+import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -847,6 +848,19 @@ const PageRoutes = () => {
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="gpo"
+                            element={
+                                <Authorization
+                                    children={
+                                        <OutwardGpoOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER
                                     }
                                 />
                             }
