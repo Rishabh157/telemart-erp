@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import OutwardRequestListing from './OutwardCustomerTabs'
-import { useParams } from 'react-router-dom'
+import OutwardGpoOrdersTabListing from './OutwardGpoOrdersTabListing'
+// import { useParams } from 'react-router-dom'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -34,10 +34,10 @@ enum FirstCallApprovalStatus {
     'CANCEL' = 'CANCEL',
 }
 
-const OutwardCustomerTabsListingWrapper = () => {
+const OutwardGpoOrdersTabListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const params = useParams()
-    const warehouseId = params?.id
+    // const params = useParams()
+    // const warehouseId = params?.id
 
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
@@ -51,7 +51,7 @@ const OutwardCustomerTabsListingWrapper = () => {
         items,
         searchValue,
         // courierValue,
-        orderStatus,
+        // orderStatus,
         dateFilter,
     } = outwardCustomerState
 
@@ -61,10 +61,8 @@ const OutwardCustomerTabsListingWrapper = () => {
         params: ['didNo', 'mobileNo'],
         page: page,
         filterBy: [
-            { fieldName: 'assignWarehouseId', value: warehouseId },
+            { fieldName: 'isGPO', value: true },
             { fieldName: 'companyId', value: userData?.companyId },
-            { fieldName: 'firstCallApproval', value: true },
-            { fieldName: 'status', value: orderStatus },
         ],
         dateFilter: dateFilter,
         orderBy: 'createdAt',
@@ -536,7 +534,7 @@ const OutwardCustomerTabsListingWrapper = () => {
         },
     ]
 
-    return <OutwardRequestListing columns={columns} rows={items} />
+    return <OutwardGpoOrdersTabListing columns={columns} rows={items} />
 }
 
-export default OutwardCustomerTabsListingWrapper
+export default OutwardGpoOrdersTabListingWrapper
