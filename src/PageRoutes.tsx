@@ -285,6 +285,7 @@ import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/Cou
 import OfferAppliedNdrListingWrapper from './pages/offerAppliedNdr/list/OfferAppliedNdrListingWrapper'
 import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
 import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiOrderSearchListingWrapper'
+import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -657,7 +658,9 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<DealerInventoryListingWrapper />}
-                            permission={UserModuleNameTypes.NAV_DEALERS_INVENTORY}
+                            permission={
+                                UserModuleNameTypes.NAV_DEALERS_INVENTORY
+                            }
                         />
                     }
                 />
@@ -854,6 +857,19 @@ const PageRoutes = () => {
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="gpo"
+                            element={
+                                <Authorization
+                                    children={
+                                        <OutwardGpoOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER
                                     }
                                 />
                             }
@@ -1300,7 +1316,9 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<MultiOrderSearchListingWrapper />}
-                            permission={UserModuleNameTypes.NAV_MUILTI_ORDER_SEARCH}
+                            permission={
+                                UserModuleNameTypes.NAV_MUILTI_ORDER_SEARCH
+                            }
                         />
                     }
                 ></Route>
