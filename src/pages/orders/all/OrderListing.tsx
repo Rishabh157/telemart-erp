@@ -1281,7 +1281,7 @@ const OrderListing = ({
                         }}
                         isRefresh
                         onFilterDispatch={() => dispatch(setFilterValue([]))}
-                        isFilter
+                        // isFilter
                         onFilterClick={() => setIsOpenFilterFormDialog(true)}
                     />
                 )}
