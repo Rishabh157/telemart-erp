@@ -861,7 +861,7 @@ const PageRoutes = () => {
                                         <OutwardGpoOrdersTabListingWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO
                                     }
                                 />
                             }
@@ -874,7 +874,7 @@ const PageRoutes = () => {
                                         <OutwardShipyaariOrdersTabListingWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
                                     }
                                 />
                             }

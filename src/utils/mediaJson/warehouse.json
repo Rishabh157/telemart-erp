@@ -54,7 +54,10 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_DETAILS",
             "compulsoryFields": [],
-            "parentGroup": ["VIEW", "TAB_WAREHOUSE_DETAILS"],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_DETAILS"
+            ],
             "fields": []
         },
         {
@@ -62,7 +65,9 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INVENTORIES",
             "compulsoryFields": [],
-            "parentGroup": ["VIEW"],
+            "parentGroup": [
+                "VIEW"
+            ],
             "fields": []
         },
         {
@@ -70,7 +75,9 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
             "compulsoryFields": [],
-            "parentGroup": ["VIEW", "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER"],
+            "parentGroup": [
+                "VIEW"
+            ],
             "fields": []
         },
         {
@@ -78,7 +85,10 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_ADD",
             "compulsoryFields": [],
-            "parentGroup": ["VIEW", "TAB_WAREHOUSE_INVENTORIES"],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_INVENTORIES"
+            ],
             "fields": []
         },
         {
@@ -87,9 +97,7 @@
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES",
             "compulsoryFields": [],
             "parentGroup": [
-                "VIEW",
-                "TAB_WAREHOUSE_DETAILS",
-                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER"
+                "VIEW"
             ],
             "fields": []
         },
@@ -176,6 +184,392 @@
                 "TAB_WAREHOUSE_OUTWARD_INVENTORIES"
             ],
             "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_DETAILS",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES"
+            ],
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_FIRST_CALL_APPROVAL",
+                    "fieldName": "FIRST CALL APPROVAL",
+                    "fieldValue": "firstCallApproval"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_NUMBER",
+                    "fieldName": "ORDER NUMBER",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_REF_NUMBER",
+                    "fieldName": "ORDER REF NUMBER",
+                    "fieldValue": "orderReferenceNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ENQUIRY_NUMBER",
+                    "fieldName": "ENQUIRY NUMBER",
+                    "fieldValue": "inquiryNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_FIRST_CALL_REMARK",
+                    "fieldName": "FIRST CALL REMARK",
+                    "fieldValue": "firstCallRemark"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_FIRST_CALL_STATE",
+                    "fieldName": "FIRST CALL STATE",
+                    "fieldValue": "firstCallState"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_FIRST_CALL_BACK_DATE",
+                    "fieldName": "FIRST CALL BACK DATE",
+                    "fieldValue": "firstCallCallBackDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ASSIGNED_WEARHOUSE",
+                    "fieldName": "ASSIGNED WEARHOUSE",
+                    "fieldValue": "assignWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_TRACKING_NUMBER",
+                    "fieldName": "TRACKING_ NUMBER",
+                    "fieldValue": "trackingNo"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_TALUK",
+                    "fieldName": "TALUK",
+                    "fieldValue": "tehsilLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_STATUS_DATE",
+                    "fieldName": "STATUS DATE",
+                    "fieldValue": "statusDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_STATUS",
+                    "fieldName": "STATUS",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_SHIPPING_CHARGES",
+                    "fieldName": "SHIPPING CHARGES",
+                    "fieldValue": "shippingCharges"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_SCHEME_NAME",
+                    "fieldName": "SCHEME NAME",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_SCHEME_CODE",
+                    "fieldName": "SCHEME CODE",
+                    "fieldValue": "schemeCode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_SHCEME_QUANTITY",
+                    "fieldName": "SHCEME QUANTITY",
+                    "fieldValue": "shcemeQuantity"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_PRICE",
+                    "fieldName": "PRICE",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_PIN_CODE_LABEL",
+                    "fieldName": "PIN CODE LABEL",
+                    "fieldValue": "pincodeLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_PAYMENT_MODE",
+                    "fieldName": "PAYMENT MODE",
+                    "fieldValue": "paymentMode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_DATE",
+                    "fieldName": "ORDER DATE",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_EDP_DATE",
+                    "fieldName": "EDP DATE",
+                    "fieldValue": "edpDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_DISTRICT_LABEL",
+                    "fieldName": "DISTRICT",
+                    "fieldValue": "districtLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_DISPOSITION_LEVEL_THREE",
+                    "fieldName": "DISPOSITION",
+                    "fieldValue": "dispositionLevelThree"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_DEALER_STATUS",
+                    "fieldName": "DEALER STATUS",
+                    "fieldValue": "dealerStatus"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_DEALER_CODE",
+                    "fieldName": "DEALER CODE",
+                    "fieldValue": "dealerCode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_CUSTOMER_NAME",
+                    "fieldName": "CUSTOMER NAME",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_AREA_LABEL",
+                    "fieldName": "CUSTOMER ADDRESS",
+                    "fieldValue": "areaLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_MOBILE_NO",
+                    "fieldName": "MOBILE NO",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_CHANNEL_NAME",
+                    "fieldName": "CHANNEL NAME",
+                    "fieldValue": "channelName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_CALL_CENTER_LABEL",
+                    "fieldName": "CALL CENTER NAME",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_AREA",
+                    "fieldName": "AREA",
+                    "fieldValue": "area"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_REMARK",
+                    "fieldName": "REMARK",
+                    "fieldValue": "remark"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_AGENT",
+                    "fieldName": "AGENT",
+                    "fieldValue": "agent"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_PREFFERED_DELIVERY_DATE",
+                    "fieldName": "PREFFERED DELIVERY DATE",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_PREFFERED_DELIVERY_TIME",
+                    "fieldName": "PREFFERED DELIVERY TIME",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_MBK_NUMBER",
+                    "fieldName": "MBK NUMBER",
+                    "fieldValue": "orderMBKNumber"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_DETAILS",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES"
+            ],
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL",
+                    "fieldName": "FIRST CALL APPROVAL",
+                    "fieldValue": "firstCallApproval"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER",
+                    "fieldName": "ORDER NUMBER",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_REF_NUMBER",
+                    "fieldName": "ORDER REF NUMBER",
+                    "fieldValue": "orderReferenceNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ENQUIRY_NUMBER",
+                    "fieldName": "ENQUIRY NUMBER",
+                    "fieldValue": "inquiryNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_REMARK",
+                    "fieldName": "FIRST CALL REMARK",
+                    "fieldValue": "firstCallRemark"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_STATE",
+                    "fieldName": "FIRST CALL STATE",
+                    "fieldValue": "firstCallState"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_BACK_DATE",
+                    "fieldName": "FIRST CALL BACK DATE",
+                    "fieldValue": "firstCallCallBackDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ASSIGNED_WEARHOUSE",
+                    "fieldName": "ASSIGNED WEARHOUSE",
+                    "fieldValue": "assignWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_TRACKING_NUMBER",
+                    "fieldName": "TRACKING_ NUMBER",
+                    "fieldValue": "trackingNo"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_TALUK",
+                    "fieldName": "TALUK",
+                    "fieldValue": "tehsilLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_STATUS_DATE",
+                    "fieldName": "STATUS DATE",
+                    "fieldValue": "statusDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_STATUS",
+                    "fieldName": "STATUS",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHIPPING_CHARGES",
+                    "fieldName": "SHIPPING CHARGES",
+                    "fieldValue": "shippingCharges"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SCHEME_NAME",
+                    "fieldName": "SCHEME NAME",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SCHEME_CODE",
+                    "fieldName": "SCHEME CODE",
+                    "fieldValue": "schemeCode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHCEME_QUANTITY",
+                    "fieldName": "SHCEME QUANTITY",
+                    "fieldValue": "shcemeQuantity"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PRICE",
+                    "fieldName": "PRICE",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PIN_CODE_LABEL",
+                    "fieldName": "PIN CODE LABEL",
+                    "fieldValue": "pincodeLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PAYMENT_MODE",
+                    "fieldName": "PAYMENT MODE",
+                    "fieldValue": "paymentMode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_DATE",
+                    "fieldName": "ORDER DATE",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_EDP_DATE",
+                    "fieldName": "EDP DATE",
+                    "fieldValue": "edpDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DISTRICT_LABEL",
+                    "fieldName": "DISTRICT",
+                    "fieldValue": "districtLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DISPOSITION_LEVEL_THREE",
+                    "fieldName": "DISPOSITION",
+                    "fieldValue": "dispositionLevelThree"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DEALER_STATUS",
+                    "fieldName": "DEALER STATUS",
+                    "fieldValue": "dealerStatus"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DEALER_CODE",
+                    "fieldName": "DEALER CODE",
+                    "fieldValue": "dealerCode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CUSTOMER_NAME",
+                    "fieldName": "CUSTOMER NAME",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AREA_LABEL",
+                    "fieldName": "CUSTOMER ADDRESS",
+                    "fieldValue": "areaLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_MOBILE_NO",
+                    "fieldName": "MOBILE NO",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CHANNEL_NAME",
+                    "fieldName": "CHANNEL NAME",
+                    "fieldValue": "channelName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CALL_CENTER_LABEL",
+                    "fieldName": "CALL CENTER NAME",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AREA",
+                    "fieldName": "AREA",
+                    "fieldValue": "area"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_REMARK",
+                    "fieldName": "REMARK",
+                    "fieldValue": "remark"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AGENT",
+                    "fieldName": "AGENT",
+                    "fieldValue": "agent"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PREFFERED_DELIVERY_DATE",
+                    "fieldName": "PREFFERED DELIVERY DATE",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PREFFERED_DELIVERY_TIME",
+                    "fieldName": "PREFFERED DELIVERY TIME",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_MBK_NUMBER",
+                    "fieldName": "MBK NUMBER",
+                    "fieldValue": "orderMBKNumber"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_DEALER",
