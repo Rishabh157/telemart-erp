@@ -21,6 +21,7 @@ import { useGetOrderQuery } from 'src/services/OrderService'
 import { Chip } from '@mui/material'
 import { OrderListResponse } from 'src/models'
 import moment from 'moment'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -85,6 +86,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'firstCallApproval',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
             headerName: '1st Call Approval',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -101,7 +103,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
+                            FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -158,6 +160,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'orderNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER,
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -167,6 +170,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'orderReferenceNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_REF_NUMBER,
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -176,6 +180,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'inquiryNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ENQUIRY_NUMBER,
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -183,7 +188,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
-            field: 'firstCallRemark',
+            field: 'firstCallRemark', 
+                       name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_REMARK,
             headerName: '1st call remark',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -194,6 +200,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'firstCallState',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_STATE,
             headerName: 'first Call State',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -204,6 +211,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'firstCallCallBackDate',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_BACK_DATE,
             headerName: 'call back date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -214,6 +222,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'assignWarehouseLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ASSIGNED_WEARHOUSE,
             headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -224,6 +233,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'trackingNo',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_TRACKING_NUMBER,
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -232,6 +242,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'tehsilLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_TALUK,
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -242,6 +253,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'statusDate',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_STATUS_DATE,
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -249,6 +261,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_STATUS,
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -257,6 +270,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'shippingCharges',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHIPPING_CHARGES,
             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -267,6 +281,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'schemeName',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SCHEME_NAME,
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -277,6 +292,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'schemeCode',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SCHEME_CODE,
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -287,6 +303,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'shcemeQuantity',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHCEME_QUANTITY,
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -297,6 +314,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'price',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PRICE,
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -305,6 +323,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'pincodeLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PIN_CODE_LABEL,
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -315,6 +334,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'paymentMode',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PAYMENT_MODE,
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -325,6 +345,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'createdAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_DATE,
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -342,6 +363,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
 
         {
             field: 'edpDate',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_EDP_DATE,
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -349,6 +371,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'districtLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DISTRICT_LABEL,
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -358,6 +381,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'dispositionLevelThree',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DISPOSITION_LEVEL_THREE,
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -367,6 +391,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'dealerStatus',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DEALER_STATUS,
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -378,6 +403,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'dealerCode',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DEALER_CODE,
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -387,6 +413,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'customerName',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CUSTOMER_NAME,
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -396,6 +423,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'areaLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AREA_LABEL,
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[30px]',
@@ -405,6 +433,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'mobileNo',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_MOBILE_NO,
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -414,6 +443,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'channelName',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CHANNEL_NAME,
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -423,6 +453,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'callCenterLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CALL_CENTER_LABEL,
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -432,6 +463,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'areaLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AREA,
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -441,6 +473,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'remark',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_REMARK,
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -450,6 +483,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'agent',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AGENT,
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -459,20 +493,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
 
         {
-            field: 'Shipping Charges',
-            headerName: 'Delivery Charges',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main ">
-                    &#8377; {row.deliveryCharges}
-                </span>
-            ),
-        },
-
-        {
             field: 'preffered_delivery_date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PREFFERED_DELIVERY_DATE,
             headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
@@ -484,8 +506,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -500,6 +522,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'preffered_delivery_date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PREFFERED_DELIVERY_TIME,
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
@@ -525,6 +548,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'orderMBKNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_MBK_NUMBER,
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px]',
