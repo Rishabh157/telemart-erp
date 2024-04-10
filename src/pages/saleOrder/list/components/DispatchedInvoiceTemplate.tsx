@@ -8,6 +8,11 @@ type Props = {
 
 const DispatchedInvoiceTemplate = React.forwardRef(
     ({ saleOrderData }: Props, ref: any) => {
+        console.log(
+            '%c saleOrderData',
+            'color:orange; font-weight:900; font-size:23px;',
+            saleOrderData
+        )
         return (
             <div
                 ref={ref}
