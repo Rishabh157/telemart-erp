@@ -25,6 +25,28 @@ export type InitialStateType = {
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedDealerId: string
     filterValue: string
+    // filters
+    schemeValueFilter: string
+    orderStatusValueFilter: string
+    deliveryBoyValueFilter: string
+    dispositionValueFilter: string
+    districtValueFilter: string
+    tehsilValueFilter: string
+    // date from
+    dateFilter: {
+        startDate: string
+        endDate: string
+    }
+    // order status date from
+    orderStatusdateFilter: {
+        startDate: string
+        endDate: string
+    }
+    // follo up date from
+    folloUpTodateFilter: {
+        startDate: string
+        endDate: string
+    }
 }
 
 const initialState: InitialStateType = {
@@ -39,6 +61,29 @@ const initialState: InitialStateType = {
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedDealerId: '',
     filterValue: '',
+    // filter values
+    schemeValueFilter: '',
+    orderStatusValueFilter: '',
+    deliveryBoyValueFilter: '',
+    dispositionValueFilter: '',
+    districtValueFilter: '',
+    tehsilValueFilter: '',
+
+    // date from
+    dateFilter: {
+        startDate: '',
+        endDate: '',
+    },
+    // order status date from
+    orderStatusdateFilter: {
+        startDate: '',
+        endDate: '',
+    },
+    // follo up date from
+    folloUpTodateFilter: {
+        startDate: '',
+        endDate: '',
+    },
 }
 
 const orderSlice: Slice<InitialStateType> = createSlice({
@@ -92,6 +137,35 @@ const orderSlice: Slice<InitialStateType> = createSlice({
         setFilterValue: (state, action: PayloadAction<string>) => {
             state.filterValue = action.payload
         },
+
+        // Filters
+        setSchemeFilterValue: (state, action: PayloadAction<string>) => {
+            state.schemeValueFilter = action.payload
+        },
+        setOrderStatusFilterValue: (state, action: PayloadAction<string>) => {
+            state.orderStatusValueFilter = action.payload
+        },
+        setDeliveryBoyFilterValue: (state, action: PayloadAction<string>) => {
+            state.deliveryBoyValueFilter = action.payload
+        },
+        setDispositionFilterValue: (state, action: PayloadAction<string>) => {
+            state.dispositionValueFilter = action.payload
+        },
+        setDistrictFilterValue: (state, action: PayloadAction<string>) => {
+            state.districtValueFilter = action.payload
+        },
+        setTehsilFilterValue: (state, action: PayloadAction<string>) => {
+            state.tehsilValueFilter = action.payload
+        },
+        setDateFilter: (state, action: PayloadAction<any>) => {
+            state.dateFilter = action.payload
+        },
+        setOrderStatusDateFilter: (state, action: PayloadAction<any>) => {
+            state.orderStatusdateFilter = action.payload
+        },
+        setFolloUpToDateFilter: (state, action: PayloadAction<any>) => {
+            state.folloUpTodateFilter = action.payload
+        },
     },
 })
 
@@ -107,5 +181,15 @@ export const {
     setSelectedItem,
     setAllItems,
     setFilterValue,
+    // filters
+    setSchemeFilterValue,
+    setOrderStatusFilterValue,
+    setDeliveryBoyFilterValue,
+    setDispositionFilterValue,
+    setDistrictFilterValue,
+    setTehsilFilterValue,
+    setDateFilter,
+    setOrderStatusDateFilter,
+    setFolloUpToDateFilter,
 } = orderSlice.actions
 export default orderSlice.reducer

@@ -62,6 +62,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
+import OrdersFilterFormDialogWrapper from './OrdersFilterFormDialog/OrdersFilterFormDialogWrapper'
 
 enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -100,6 +101,8 @@ const OrderListing = ({
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     // Dispatching State
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -133,6 +136,26 @@ const OrderListing = ({
 
     const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
 
+    // Get All Order Data Query
+    const {
+        page,
+        rowsPerPage,
+        searchValue,
+        items,
+        totalItems,
+        isTableLoading,
+        // filter
+        schemeValueFilter,
+        // orderStatusValueFilter,
+        // deliveryBoyValueFilter,
+        // dispositionValueFilter,
+        districtValueFilter,
+        tehsilValueFilter,
+        // dateFilter,
+        // orderStatusdateFilter,
+        // folloUpTodateFilter,
+    } = orderState
+
     const [filterBy, setFilterBy] = useState<any>([])
     useEffect(() => {
         let filter: any = [
@@ -147,6 +170,18 @@ const OrderListing = ({
             {
                 fieldName: 'mobileNo',
                 value: [orderMobSearchValue],
+            },
+            {
+                fieldName: 'schemeId',
+                value: schemeValueFilter,
+            },
+            {
+                fieldName: 'districtId',
+                value: districtValueFilter,
+            },
+            {
+                fieldName: 'tehsilId',
+                value: tehsilValueFilter,
             },
         ]
         if (!orderStatus) {
@@ -261,15 +296,6 @@ const OrderListing = ({
         orderNumberSearch,
         complaintNumberSearch,
     ])
-
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        items,
-        totalItems,
-        isTableLoading,
-    } = orderState
 
     const { data, isLoading, isFetching } = useGetOrderQuery(
         {
@@ -432,7 +458,6 @@ const OrderListing = ({
                     }
                 />
             ),
-
         },
         {
             field: 'orderNumber',
@@ -475,7 +500,7 @@ const OrderListing = ({
                                     size="small"
                                 />
                             ) : row?.firstCallState ===
-                                FirstCallApprovalStatus.CANCEL ? (
+                              FirstCallApprovalStatus.CANCEL ? (
                                 <Chip
                                     className="cursor-pointer"
                                     label="Cancled"
@@ -891,10 +916,11 @@ const OrderListing = ({
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Approved',
-                                        text: `Do you want to ${row?.approved
+                                        text: `Do you want to ${
+                                            row?.approved
                                                 ? 'Disapprove this order'
                                                 : 'Approval this order'
-                                            }`,
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
@@ -928,8 +954,8 @@ const OrderListing = ({
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -1228,11 +1254,6 @@ const OrderListing = ({
                         onSearch={(newValue) =>
                             dispatch(setSearchValue(newValue))
                         }
-                    // onFilterClick={() => {
-                    //     setIsOpenFilterFormDialog(true)
-                    // }}
-                    // isFilter
-                    // isFilter
                     />
                 ) : (
                     <ATMTableHeader
@@ -1258,11 +1279,14 @@ const OrderListing = ({
                         onAnotherSearch={(newValue) => {
                             setOrderMobSearchValue(newValue)
                         }}
-                        // isFilter
                         isRefresh
                         onFilterDispatch={() => dispatch(setFilterValue([]))}
+                        isFilter
+                        onFilterClick={() => setIsOpenFilterFormDialog(true)}
                     />
                 )}
+
+                {/* Table */}
                 <div className="grow overflow-auto">
                     <ATMTable
                         extraClasses="w-[200%]"
@@ -1283,6 +1307,14 @@ const OrderListing = ({
                         isLoading={isTableLoading}
                     />
                 </div>
+
+                {/* Order Filter Form Dialog in All Orders Tab*/}
+                {isOpenFilterFormDialog && (
+                    <OrdersFilterFormDialogWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 <DialogLogBox
                     maxWidth="md"
@@ -1404,7 +1436,7 @@ const OrderListing = ({
                                                 handleBarcodeSubmit(
                                                     e.target.value,
                                                     selectedItemsTobeDispatch?.productGroupId ||
-                                                    ''
+                                                        ''
                                                 )
                                             }
                                             setBarcodeNumber(e.target.value)
