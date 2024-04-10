@@ -32,7 +32,7 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetInventoriesByBarcodeQuery } from 'src/services/BarcodeService'
 // import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+
 const columns: columnTypes[] = [
     {
         field: 'productName',
@@ -41,13 +41,11 @@ const columns: columnTypes[] = [
         renderCell: (row: WareHouseInventory) => (
             <span> {row?.firstDocument?.productGroupLabel} </span>
         ),
-        name: UserModuleNameTypes.PURCHASE_ORDER_LIST_VENDOR,
     },
     {
         field: 'quantity',
         headerName: 'Quantity',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.PURCHASE_ORDER_LIST_VENDOR,
 
         renderCell: (row: WareHouseInventory) => (
             <span className="p-1"> {row.count} </span>
@@ -57,7 +55,6 @@ const columns: columnTypes[] = [
         field: 'warehouse',
         headerName: 'Warehouse',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.PURCHASE_ORDER_LIST_VENDOR,
         renderCell: (row: WareHouseInventory) => (
             <span> {row?.firstDocument?.wareHouseLabel} </span>
         ),
@@ -82,7 +79,6 @@ const columns: columnTypes[] = [
         field: 'status',
         headerName: 'status',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.PURCHASE_ORDER_LIST_VENDOR,
         renderCell: (row: WareHouseInventory) => (
             <span> {row?.firstDocument?.status} </span>
         ),
@@ -91,7 +87,6 @@ const columns: columnTypes[] = [
         field: 'date',
         headerName: 'created date',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.PURCHASE_ORDER_LIST_VENDOR,
         renderCell: (row: WareHouseInventory) => (
             <span>
                 {' '}
