@@ -8,7 +8,7 @@
 // |-- External Dependencies --|
 import { RxDashboard } from 'react-icons/rx'
 import { FiUsers, FiPhoneCall } from 'react-icons/fi'
-import { TbBuildingWarehouse } from 'react-icons/tb'
+import { TbBuildingWarehouse, TbCloudDataConnection } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
 import { FaRegHandshake, FaSitemap } from 'react-icons/fa'
 import { CiMemoPad, CiStickyNote } from 'react-icons/ci'
@@ -113,6 +113,12 @@ export const navigation: NavItemType[] = [
         icon: FaSitemap,
         path: '/mapping',
         name: UserModuleNameTypes.NAV_MULTI_MAPPING,
+    },
+    {
+        label: 'Dealer To Dealer',
+        icon: TbCloudDataConnection,
+        path: '/dealer-to-dealer',
+        name: UserModuleNameTypes.NAV_SALE_ORDER,
     },
     {
         label: 'Sale Order',
