@@ -287,6 +287,9 @@ import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerIn
 import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiOrderSearchListingWrapper'
 import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
 import OutwardShipyaariOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/ShipyaariOrders/OutwardShipyaariOrdersTabListingWrapper'
+import DealerToDealerOrderListingWrapper from './pages/dealerTodealer/list/DealerToDealerOrderListingWrapper'
+import AddDealerToDealerOrderWrapper from './pages/dealerTodealer/add/AddDealerToDealerOrderWrapper'
+import EditDealerToDealerOrderWrapper from './pages/dealerTodealer/edit/EditDealerToDealerOrderWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1042,6 +1045,41 @@ const PageRoutes = () => {
                             children={<WarehouseAssignedOrderListingWrapper />}
                             permission={
                                 UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST
+                            }
+                        />
+                    }
+                />
+
+                {/* Dealer To Dealer Order */}
+                <Route
+                    path="/dealer-to-dealer"
+                    element={
+                        <Authorization
+                            children={<DealerToDealerOrderListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_SALE_ORDER}
+                        />
+                    }
+                />
+                {/* Add */}
+                <Route
+                    path="/dealer-to-dealer/add"
+                    element={
+                        <Authorization
+                            children={<AddDealerToDealerOrderWrapper />}
+                            permission={
+                                UserModuleNameTypes.ACTION_SALE_ORDER_ADD
+                            }
+                        />
+                    }
+                />
+
+                <Route
+                    path="/dealer-to-dealer/:id"
+                    element={
+                        <Authorization
+                            children={<EditDealerToDealerOrderWrapper />}
+                            permission={
+                                UserModuleNameTypes.ACTION_SALE_ORDER_EDIT
                             }
                         />
                     }
