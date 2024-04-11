@@ -42,6 +42,16 @@ export const dealerToDealerApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //update
+        updateDealerToDealerOrder: builder.mutation({
+            invalidatesTags: ['dealer-to-dealer'],
+            query: ({ dtdData, id }) => ({
+                url: `/dtd-transfer/update-dtd`,
+                method: 'PUT',
+                body: { dtdData: dtdData }
+            }),
+        }),
+
         //***** DELETE REQUEST *****/
         deleteDealerToDealerOrder: builder.mutation({
             invalidatesTags: ['dealer-to-dealer'],
@@ -59,4 +69,5 @@ export const {
     useAddDealerToDealerOrderMutation,
     useApprovealDealerToDealerOrderMutation,
     useDeleteDealerToDealerOrderMutation,
+    useUpdateDealerToDealerOrderMutation
 } = dealerToDealerApi

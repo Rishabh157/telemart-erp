@@ -289,6 +289,7 @@ import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventori
 import OutwardShipyaariOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/ShipyaariOrders/OutwardShipyaariOrdersTabListingWrapper'
 import DealerToDealerOrderListingWrapper from './pages/dealerTodealer/list/DealerToDealerOrderListingWrapper'
 import AddDealerToDealerOrderWrapper from './pages/dealerTodealer/add/AddDealerToDealerOrderWrapper'
+import EditDealerToDealerOrderWrapper from './pages/dealerTodealer/edit/EditDealerToDealerOrderWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1067,6 +1068,18 @@ const PageRoutes = () => {
                             children={<AddDealerToDealerOrderWrapper />}
                             permission={
                                 UserModuleNameTypes.ACTION_SALE_ORDER_ADD
+                            }
+                        />
+                    }
+                />
+
+                <Route
+                    path="/dealer-to-dealer/:id"
+                    element={
+                        <Authorization
+                            children={<EditDealerToDealerOrderWrapper />}
+                            permission={
+                                UserModuleNameTypes.ACTION_SALE_ORDER_EDIT
                             }
                         />
                     }
