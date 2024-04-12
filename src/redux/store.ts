@@ -11,6 +11,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query'
 
 // |-- Internal Dependencies --|
 import { apiSlice } from 'src/services'
+import { filePickerSlice } from 'src/services/FilePickerServices'
 import {
     barcodeSlice,
     companySlice,
@@ -216,11 +217,16 @@ const store = configureStore({
         multiOrderSearch: MultiOrderSearchSlice,
         delaerToDealer: DealerToDealerSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
+        [filePickerSlice.reducerPath]: filePickerSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: false,
-        }).concat([authMiddleware, apiSlice.middleware]),
+        }).concat([
+            authMiddleware,
+            apiSlice.middleware,
+            filePickerSlice.middleware,
+        ]),
 })
 
 setupListeners(store.dispatch)
