@@ -20,7 +20,8 @@ import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUplo
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { FieldType } from './StepAddDocumentsWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -40,7 +41,42 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
 
     const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
     const [loaderState, setLoaderState] = useState<string>('')
-    const [fileUploader] = useFileUploaderMutation()
+    const [uploadFile] = useAddFileUrlMutation()
+
+    const getTheValueByNameKey = (name: string) => {
+        switch (name) {
+            case 'document.gstCertificate':
+                return values?.document?.gstCertificate
+            case 'document.adharCard':
+                return values?.document?.adharCard
+            default:
+                return ''
+        }
+    }
+
+    const handleFileUpload = (file: File, name: string) => {
+        let formData = new FormData()
+        setLoaderState(name)
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                console.log('fileUrl: ', fileUrl)
+                setFieldValue(name, fileUrl)
+                setLoaderState('')
+                setImageApiStatus(false)
+            }
+        })
+    }
 
     return (
         <div className="">
@@ -154,52 +190,23 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     name={name}
                                                     label={label}
                                                     placeholder={placeholder}
+                                                    selectedFile={getTheValueByNameKey(
+                                                        name
+                                                    )}
                                                     onSelect={(newFile) => {
-                                                        setLoaderState(name)
-                                                        const formData =
-                                                            new FormData()
-                                                        formData.append(
-                                                            'fileType',
-                                                            'IMAGE'
+                                                        handleFileUpload(
+                                                            newFile,
+                                                            name
                                                         )
-                                                        formData.append(
-                                                            'category',
-                                                            'Dealer'
-                                                        )
-                                                        formData.append(
-                                                            'fileUrl',
-                                                            newFile || ''
-                                                        )
-                                                        setImageApiStatus(true)
-                                                        fileUploader(
-                                                            formData
-                                                        ).then((res) => {
-                                                            if ('data' in res) {
-                                                                setImageApiStatus(
-                                                                    false
-                                                                )
-                                                                setFieldValue(
-                                                                    name,
-                                                                    res?.data
-                                                                        ?.data
-                                                                        ?.fileUrl
-                                                                )
-                                                            }
-                                                            setImageApiStatus(
-                                                                false
-                                                            )
-                                                        })
                                                     }}
-                                                    selectedFile={
-                                                        values[name] ||
-                                                        'http://192.168.1.55:3009/api/public/uploads/IMAGE/fileUrl-4d6f7af9-f127-47f0-b360-6bb4bdbcdbcd.jpeg'
-                                                    }
                                                     isSubmitting={isSubmitting}
                                                 />
                                                 {loaderState === name &&
                                                 imageApiStatus ? (
-                                                    <div className="mt-3 ">
-                                                        <CircularProgress />
+                                                    <div className="mt-3">
+                                                        <CircularProgress
+                                                            size={18}
+                                                        />
                                                     </div>
                                                 ) : null}
                                             </div>

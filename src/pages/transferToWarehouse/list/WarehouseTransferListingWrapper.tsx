@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:WarehouseTransferListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -189,7 +182,6 @@ const WarehouseTransferListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'wtsNumber',
@@ -260,8 +252,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -299,8 +291,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -488,15 +480,13 @@ const WarehouseTransferListingWrapper = () => {
     ]
 
     return (
-        <>
-            <SideNavLayout>
-                <WarehouseTransferListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <WarehouseTransferListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </SideNavLayout>
     )
 }
 

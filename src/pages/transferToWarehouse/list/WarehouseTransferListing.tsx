@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:WarehouseTransferListing.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -41,8 +33,6 @@ const WarehouseTransferListing = ({
     rows,
     setShowDropdown,
 }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-
     const dispatch = useDispatch<AppDispatch>()
     const WarehouseTransferState: any = useSelector(
         (state: RootState) => state.warehouseTransfer
@@ -54,11 +44,7 @@ const WarehouseTransferListing = ({
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         WarehouseTransferState
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
+
     return (
         <div
             className={`px-4 ${
@@ -102,8 +88,6 @@ const WarehouseTransferListing = ({
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

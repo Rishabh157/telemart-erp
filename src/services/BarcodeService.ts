@@ -75,7 +75,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 status: string
                 companyId: string
             }) => ({
-                url: `/bar-code/companyid/${companyId}/productgroupid/${groupId}/barcode/${id}/status/${status}`,
+                url: `/bar-code/productgroupid/${groupId}/barcode/${id}/status/${status}`,
                 method: 'GET',
                 // body,
             }),
