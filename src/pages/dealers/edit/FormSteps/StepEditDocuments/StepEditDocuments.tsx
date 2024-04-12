@@ -75,16 +75,26 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
         formData.append('file', file || '', file?.name)
 
         // call the file manager api
-        uploadFile(formData).then((res: any) => {
-            if ('data' in res) {
-                setImageApiStatus(false)
-                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
-                console.log('fileUrl: ', fileUrl)
-                handleSetFieldValue(name, fileUrl)
+        uploadFile(formData)
+            .then((res: any) => {
+                if ('data' in res) {
+                    setImageApiStatus(false)
+                    let fileUrl =
+                        BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                    console.log('fileUrl: ', fileUrl)
+                    handleSetFieldValue(name, fileUrl)
+                    setLoaderState('')
+                    setImageApiStatus(false)
+                } else {
+                    setLoaderState('')
+                    setImageApiStatus(false)
+                }
+            })
+            .catch((err) => {
                 setLoaderState('')
                 setImageApiStatus(false)
-            }
-        })
+                console.error(err)
+            })
     }
 
     return (

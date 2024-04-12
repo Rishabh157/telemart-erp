@@ -48,7 +48,7 @@ const formFields: FieldType[] = [
     },
     {
         name: 'firmName',
-        label: 'Firm Name',
+        label: 'Party(firm) Name',
         placeholder: 'Firm Name',
         required: true,
     },
@@ -80,12 +80,6 @@ const formFields: FieldType[] = [
     //     placeholder: 'Auto Mapping',
     //     type: 'switch-button',
     // },
-    {
-        name: 'firmName',
-        label: 'Party(firm) Name',
-        placeholder: 'Party Name',
-        required: true,
-    },
     {
         name: 'lastName',
         label: 'Last Name',

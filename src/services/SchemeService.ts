@@ -25,7 +25,7 @@ export const schemeApi = apiSlice.injectEndpoints({
         getAllSchemeListByPgi: builder.query({
             // providesTags: ['scheme'],
             query: ({ companyId, productGroupId }) => ({
-                url: `scheme/product-group/${productGroupId}`,
+                url: `scheme/product-group/${productGroupId}/company/${companyId}`,
                 method: 'GET',
             }),
         }),
