@@ -1,11 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:AddWarehouseTransfer.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -13,10 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
-import {
-    useDispatch,
-    //  useSelector
-} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -26,17 +16,9 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddWarehouseTransferWrapper'
-// import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
-
-// |-- Redux --|
-// import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
-import {
-    AppDispatch,
-    //  RootState
-} from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useParams } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
@@ -44,7 +26,6 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: {
-        // dealerOptions: SelectOption[]
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
@@ -58,16 +39,10 @@ const AddWarehouseTransfer = ({
     apiStatus,
     productPriceOptions,
 }: Props) => {
-    const params = useParams()
-    // Breadcrumbs
     const breadcrumbs: BreadcrumbType[] = [
         {
-            label: `${params.dealerId ? ' Dealers Sale Order' : 'Sale Order'}`,
-            path: `${
-                params.dealerId
-                    ? `/dealers/${params.dealerId}/warehouse-transfer`
-                    : '/warehouse-transfer'
-            }`,
+            label: `Warehouse Transfer`,
+            path: '/warehouse-transfer',
         },
         {
             label: 'Add warehouse transfer',
