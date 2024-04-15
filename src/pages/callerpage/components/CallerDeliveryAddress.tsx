@@ -41,6 +41,7 @@ import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
 // Get All Info By Pincode
 import { useGetAllInfoByPincodeMutation } from 'src/services/PinCodeService'
 import { showToast } from 'src/utils'
+import moment from 'moment'
 
 type Props = {
     // dropdownOptions: dropdownOptions
@@ -70,6 +71,9 @@ const CallerDeliveryAddress = ({
     const [endTimeOptionsList, setEndTimeOptionsList] = React.useState<
         SelectOption[] | []
     >([])
+
+    const currentDate = moment() // Get today's date
+    const maxDate = currentDate.clone().add(15, 'days') // Calculate 15 days from today
 
     // const [isRecording, setIsRecording] = React.useState<boolean>(false)
 
@@ -653,9 +657,10 @@ const CallerDeliveryAddress = ({
                                         name="preffered_delivery_date"
                                         value={values.preffered_delivery_date}
                                         size="xxs"
+                                        maxDate={maxDate}
                                         labelClass="font-medium"
                                         dateTimeFormat="MM/DD/YYYY"
-                                        minDate
+                                        minDate={moment()}
                                         onChange={(e) => {
                                             setFieldValue(
                                                 'preffered_delivery_date',
