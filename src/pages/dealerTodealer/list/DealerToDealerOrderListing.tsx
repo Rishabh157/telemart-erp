@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+// import { useLocation, useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -26,8 +26,8 @@ import {
     setSearchValue,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { isAuthorized } from 'src/utils/authorization'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+// import { isAuthorized } from 'src/utils/authorization'
+// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
@@ -48,10 +48,10 @@ const DealerToDealerOrderListing = ({
     const saleOrderState: any = useSelector(
         (state: RootState) => state.saleOrder
     )
-    const { pathname } = useLocation()
-    const path = pathname.split('/')[1]
-    const isDealerPath = path === 'dealers'
-    const navigate = useNavigate()
+    // const { pathname } = useLocation()
+    // const path = pathname.split('/')[1]
+    // const isDealerPath = path === 'dealers'
+    // const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
@@ -66,7 +66,7 @@ const DealerToDealerOrderListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Dealer To Dealer Orders </ATMPageHeading>
-                {isAuthorized(
+                {/* {isAuthorized(
                     isDealerPath
                         ? UserModuleNameTypes.ACTION_DEALER_DEALER_SALE_ORDER_ADD
                         : UserModuleNameTypes.ACTION_SALE_ORDER_ADD
@@ -77,7 +77,7 @@ const DealerToDealerOrderListing = ({
                     >
                         + Add
                     </button>
-                )}
+                )} */}
             </div>
 
             <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
