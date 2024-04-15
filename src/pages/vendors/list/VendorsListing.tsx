@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:VendorListing.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,14 +10,13 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import FilterDialogWarpper from '../components/FilterDialog/FilterDialogWarpper'
 
 // |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/vendorSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
@@ -33,17 +25,20 @@ import { isAuthorized } from 'src/utils/authorization'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
+const VendorsListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const vendorState: any = useSelector((state: RootState) => state.vendor)
-    const [isFilterOpen, setIsFilterOpen] = useState(false)
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        listingPaginationState
+
     const navigate = useNavigate()
-    const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
-        vendorState
+
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}
@@ -83,11 +78,6 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                         isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                     />
                 </div>
 
@@ -103,10 +93,6 @@ const VendorsListing = ({ columns, rows, setShowDropdown }: Props) => {
                     />
                 </div>
             </div>
-
-            {isFilterOpen && (
-                <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
-            )}
         </div>
     )
 }

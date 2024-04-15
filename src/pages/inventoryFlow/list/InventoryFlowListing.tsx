@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:InventoryFlowListing.tsx
-// Type: List Component
-// Last Updated: OCTOBER 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -27,7 +20,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/InventoryFlowSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { HiDotsVertical } from 'react-icons/hi'
 import {
     BarcodeFlowListResponse,
@@ -37,7 +30,7 @@ import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeForma
 
 // |-- Types --|
 type Props = {
-    items: BarcodeFlowListResponse[]
+    items: BarcodeFlowListResponse[] | any
     onBarcodeClick: (barcode: any) => void
 }
 
@@ -52,24 +45,20 @@ enum BarcodeStatusEnum {
     wtw = 'WTW',
 }
 
-const InventoryFlowListing = ({
-    // columns,
-    items,
-    onBarcodeClick,
-}: Props) => {
-    const dispatch = useDispatch<AppDispatch>()
-
+const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
+    // state
     const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
     const [selectedFlowItem, setSelectedFlowItem] = useState<
         BarcodeFlowDataListResponsee[]
     >([])
-
-    const inventoryFlowState: any = useSelector(
-        (state: RootState) => state.inventoryFlow
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
 
-    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
-        inventoryFlowState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        listingPaginationState
+
+    const dispatch = useDispatch<AppDispatch>()
 
     const showBarcodeStatusText = (
         status: string,
@@ -116,7 +105,7 @@ const InventoryFlowListing = ({
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
-                    isDateFilter
+                    // isDateFilter
                     page={page}
                     searchValue={searchValue}
                     rowCount={totalItems}
@@ -126,7 +115,6 @@ const InventoryFlowListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

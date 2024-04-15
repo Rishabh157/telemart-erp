@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:VendorListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -26,28 +19,54 @@ import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/vendorSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const VendorsListingWrapper = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
-    const [showDropdown, setShowDropdown] = useState(false)
-    const vendorState: any = useSelector((state: RootState) => state.vendor)
-    const { page, rowsPerPage, searchValue, items } = vendorState
+    useUnmountCleanup()
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    // state
     const [currentId, setCurrentId] = useState('')
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    // initiate method
+    const navigate = useNavigate()
+
     const [deleteVendor] = useDeleteVendorMutation()
 
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetPaginationVendorsQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: [
+                'companyType',
+                'ownerShipType',
+                'vendorCode',
+                'companyName',
+            ],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
+    })
+
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -64,7 +83,6 @@ const VendorsListingWrapper = () => {
                         UserModuleNameTypes.ACTION_VENDOR_DELETE
                     )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleViewActionButton={() => {
@@ -79,15 +97,12 @@ const VendorsListingWrapper = () => {
                             text: 'Do you want to delete',
                             showCancelButton: true,
                             next: (res) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'vendorCode',
@@ -142,38 +157,9 @@ const VendorsListingWrapper = () => {
             ),
         },
     ]
-    const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['companyType', 'ownerShipType', 'vendorCode', 'companyName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const handleDelete = () => {
-        setShowDropdown(false)
-        deleteVendor(currentId).then((res) => {
+        deleteVendor(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Vendor deleted successfully!')
@@ -191,11 +177,7 @@ const VendorsListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <VendorsListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <VendorsListing columns={columns} rows={items} />
         </SideNavLayout>
     )
 }

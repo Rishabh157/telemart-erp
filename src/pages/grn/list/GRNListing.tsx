@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:GRNListing.tsx
-// Type: List Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,7 +15,7 @@ import {
     setPage,
     setSearchValue,
     setFilterValue,
-} from 'src/redux/slices/GRNSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -34,16 +27,19 @@ type Props = {
 }
 
 const GRNListing = ({ columns, rows }: Props) => {
-    const location = useLocation()
-    const route: boolean = location?.pathname?.split('/')[1] === 'grn' || false
-    const [selectedRows, setSelectedRows] = useState([])
-
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const grnState: any = useSelector((state: RootState) => state.grn)
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
-    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
-        grnState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        listingPaginationState
+
+    // const navigate = useNavigate()
+    const location = useLocation()
+
+    const route: boolean = location?.pathname?.split('/')[1] === 'grn' || false
 
     return (
         <div
@@ -67,11 +63,9 @@ const GRNListing = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    // isFilter
                     isRefresh
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     onFilterDispatch={() => dispatch(setFilterValue([]))}
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -80,11 +74,6 @@ const GRNListing = ({ columns, rows }: Props) => {
                         isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
                         extraClasses="max-h-full overflow-auto"
                     />
                 </div>
@@ -100,12 +89,6 @@ const GRNListing = ({ columns, rows }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
         </div>
     )
 }

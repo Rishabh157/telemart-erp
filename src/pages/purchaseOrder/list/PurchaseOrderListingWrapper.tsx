@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:PurchaseOrderListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
@@ -29,102 +22,49 @@ import PurchaseOrderListing from './PurchaseOrderListing'
 
 // |-- Redux --|
 import { setFilterValue } from 'src/redux/slices/GRNSlice'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/PurchaseOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const PurchaseOrderListingWrapper = () => {
+    useUnmountCleanup()
+
+    // state
+    const [currentId, setCurrentId] = useState('')
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    // initiate method
     const navigate = useNavigate()
+    const [updatePoLevel] = useUpdatePoLevelMutation()
     const dispatch = useDispatch<AppDispatch>()
 
-    const [updatePoLevel] = useUpdatePoLevelMutation()
-    const productOrderState: any = useSelector(
-        (state: RootState) => state.purchaseOrder
-    )
-
-    const { page, rowsPerPage, searchValue, items } = productOrderState
-    const { userData }: any = useSelector((state: RootState) => state.auth)
-    const [showDropdown, setShowDropdown] = useState(false)
-    const [currentId, setCurrentId] = useState('')
-
-    const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['poCode', 'wareHouseId'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetPurchaseOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['poCode', 'wareHouseId'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    const handleComplete = (_id: string, level: number) => {
-        const currentDate = new Date().toLocaleString('en-GB', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-        })
-        if (level === 1) {
-            updatePoLevel({
-                body: {
-                    approval: {
-                        approvalLevel: level,
-                        approvalByName: userData?.userName,
-                        approvalById: userData?.userId,
-                        time: currentDate,
-                    },
-                },
-                id: _id,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Level 1 approved successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-            })
-        } else {
-            updatePoLevel({
-                body: {
-                    approval: {
-                        approvalLevel: level,
-                        approvalByName: userData?.userName,
-                        approvalById: userData?.userId,
-                        time: currentDate,
-                    },
-                },
-                id: _id,
-            }).then((res: any) => {
-                if ('data' in res) {
-                    if (res?.data?.status) {
-                        showToast('success', 'Level 2 approved successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
-                    }
-                } else {
-                    showToast('error', 'Something went wrong')
-                }
-            })
-        }
-    }
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -146,7 +86,6 @@ const PurchaseOrderListingWrapper = () => {
                         })
                     }}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                 >
@@ -187,10 +126,6 @@ const PurchaseOrderListingWrapper = () => {
                                     navigate('/grn', {
                                         state: {
                                             poCode: row?.poCode,
-                                            // itemId: row?.purchaseOrder.itemId,
-                                            // itemName: row?.purchaseOrder.itemName,
-                                            // quantity: row?.purchaseOrder.quantity,
-                                            // companyId: row?.companyId,
                                         },
                                     })
                                 }}
@@ -202,7 +137,6 @@ const PurchaseOrderListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-            
         },
         {
             field: 'poCode',
@@ -373,28 +307,65 @@ const PurchaseOrderListingWrapper = () => {
         },
     ]
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
+    const handleComplete = (_id: string, level: number) => {
+        const currentDate = new Date().toLocaleString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        })
+        if (level === 1) {
+            updatePoLevel({
+                body: {
+                    approval: {
+                        approvalLevel: level,
+                        approvalByName: userData?.userName || '',
+                        approvalById: userData?.userId || '',
+                        time: currentDate,
+                    },
+                },
+                id: _id,
+            }).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'Level 1 approved successfully!')
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+            })
         } else {
-            dispatch(setIsTableLoading(true))
+            updatePoLevel({
+                body: {
+                    approval: {
+                        approvalLevel: level,
+                        approvalByName: userData?.userName || '',
+                        approvalById: userData?.userId || '',
+                        time: currentDate,
+                    },
+                },
+                id: _id,
+            }).then((res: any) => {
+                if ('data' in res) {
+                    if (res?.data?.status) {
+                        showToast('success', 'Level 2 approved successfully!')
+                    } else {
+                        showToast('error', res?.data?.message)
+                    }
+                } else {
+                    showToast('error', 'Something went wrong')
+                }
+            })
         }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
+    }
 
     return (
-        <>
-            <SideNavLayout>
-                <PurchaseOrderListing
-                    columns={columns}
-                    rows={items || []}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <PurchaseOrderListing columns={columns} rows={items || []} />
+        </SideNavLayout>
     )
 }
 

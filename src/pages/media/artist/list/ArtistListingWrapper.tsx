@@ -21,7 +21,6 @@ import ArtistListing from './ArtistListing'
 import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
-
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
@@ -39,15 +38,6 @@ const ArtistListingWrapper = () => {
     // initiate method
     const navigate = useNavigate()
     const [deleteCompetitor] = useDeletegetArtistMutation()
-
-    // const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate()
-    // const [currentId, setCurrentId] = useState('')
-    // const [showDropdown, setShowDropdown] = useState(false)
-    // const ArtistState: any = useSelector((state: RootState) => state.artist)
-
-    // const { page, rowsPerPage, searchValue, items } = ArtistState
-    // const { userData } = useSelector((state: RootState) => state?.auth)
 
     // pagination api
     const { items } = useGetCustomListingData<any[]>({
@@ -112,39 +102,6 @@ const ArtistListingWrapper = () => {
             ),
         },
     ]
-
-    // const { data, isFetching, isLoading } = useGetPaginationArtistQuery({
-    //     limit: rowsPerPage,
-    //     searchValue: searchValue,
-    //     params: ['artistName'],
-    //     page: page,
-    //     filterBy: [
-    //         {
-    //             fieldName: 'companyId',
-    //             value: userData?.companyId as string,
-    //         },
-    //         {
-    //             fieldName: '',
-    //             value: [],
-    //         },
-    //     ],
-    //     dateFilter: {},
-    //     orderBy: 'createdAt',
-    //     orderByValue: -1,
-    //     isPaginationRequired: true,
-    // })
-
-    // useEffect(() => {
-    //     if (!isFetching && !isLoading) {
-    //         dispatch(setIsTableLoading(false))
-    //         dispatch(setItems(data?.data || []))
-    //         dispatch(setTotalItems(data?.totalItem || 4))
-    //     } else {
-    //         dispatch(setIsTableLoading(true))
-    //     }
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [isLoading, isFetching, data])
 
     const handleDelete = () => {
         deleteCompetitor(currentId).then((res: any) => {
