@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -9,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DealerToDealerListResponseTypes } from 'src/models/DealerToDealer.model'
 import {
     useGetDealerToDealerOrderQuery,
@@ -27,7 +28,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { isAuthorized } from 'src/utils/authorization'
+// import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const DealerToDealerOrderListingWrapper = () => {
@@ -142,41 +143,41 @@ const DealerToDealerOrderListingWrapper = () => {
     // }
 
     const columns: columnTypes[] = [
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            flex: 'flex-[0.5_0.5_0%]',
-            renderCell: (row: DealerToDealerListResponseTypes) =>
-                row?.requestApproved === null && (
-                    <ActionPopup
-                        isEdit={isAuthorized(
-                            UserModuleNameTypes.ACTION_SALE_ORDER_EDIT
-                        )}
-                        isDelete={isAuthorized(
-                            UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
-                        )}
-                        handleEditActionButton={() => {
-                            navigate(`/dealer-to-dealer/${row?._id}`)
-                        }}
-                        handleDeleteActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Delete Dealer To Dealer Oreder',
-                                text: 'Do you want to delete order?',
-                                showCancelButton: true,
-                                next: (res: any) => {
-                                    return res.isConfirmed
-                                        ? handleDelete()
-                                        : setShowDropdown(false)
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            setCurrentId(row?._id)
-                        }}
-                    />
-                ),
-        },
+        // {
+        //     field: 'actions',
+        //     headerName: 'Actions',
+        //     flex: 'flex-[0.5_0.5_0%]',
+        //     renderCell: (row: DealerToDealerListResponseTypes) =>
+        //         row?.requestApproved === null && (
+        //             <ActionPopup
+        //                 // isEdit={isAuthorized(
+        //                 //     UserModuleNameTypes.ACTION_SALE_ORDER_EDIT
+        //                 // )}
+        //                 // isDelete={isAuthorized(
+        //                 //     UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
+        //                 // )}
+        //                 handleEditActionButton={() => {
+        //                     navigate(`/dealer-to-dealer/${row?._id}`)
+        //                 }}
+        //                 handleDeleteActionButton={() => {
+        //                     showConfirmationDialog({
+        //                         title: 'Delete Dealer To Dealer Oreder',
+        //                         text: 'Do you want to delete order?',
+        //                         showCancelButton: true,
+        //                         next: (res: any) => {
+        //                             return res.isConfirmed
+        //                                 ? handleDelete()
+        //                                 : setShowDropdown(false)
+        //                         },
+        //                     })
+        //                 }}
+        //                 handleOnAction={() => {
+        //                     setShowDropdown(!showDropdown)
+        //                     setCurrentId(row?._id)
+        //                 }}
+        //             />
+        //         ),
+        // },
         {
             field: '_id',
             headerName: 'Dealer To Dealer Number',
