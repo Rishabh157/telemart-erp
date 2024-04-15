@@ -1,17 +1,11 @@
+import React, { useState } from 'react'
 import { Chip } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
-
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/configuration/dispositionTwoSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import {
     useDeactiveDispositionTwoMutation,
     useDeletedispositionTwoMutation,
@@ -22,64 +16,53 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispositionTwoListing from './DispositionTwoListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const DispositionTwoListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
-    const navigate = useNavigate()
-    const [showDropdown, setShowDropdown] = useState(false)
+    useUnmountCleanup()
+
+    // state
     const [currentId, setCurrentId] = useState('')
-    const { items }: any = useSelector(
-        (state: RootState) => state.dispositionTwo
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-
+    const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
+    
+    // initiate method
+    const navigate = useNavigate()
     const [deleteDispositonTwo] = useDeletedispositionTwoMutation()
-
-    const { searchValue, filterValue }: any = useSelector(
-        (state: RootState) => state.dispositionTwo
-    )
-    const dispositionTwoState: any = useSelector(
-        (state: RootState) => state.dispositionTwo
-    )
-
-    const { page, rowsPerPage, isActive } = dispositionTwoState
     const [deactiveUser] = useDeactiveDispositionTwoMutation()
-    const { data, isFetching, isLoading } = useGetdispositionTwoQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: [
-            'dispositionName',
-            'dispositionOneId',
-            'dispositionDisplayName',
-        ],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'dispositionOneId',
-                value: filterValue ? filterValue : [],
-            },
-            {
-                fieldName: 'isActive',
-                value:
-                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
+
+    // pagination api
+    const { items } = useGetCustomListingData<DispositionTwoListResponse[]>({
+        useEndPointHook: useGetdispositionTwoQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: [
+                'dispositionName',
+                'dispositionOneId',
+                'dispositionDisplayName',
+            ],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'isActive',
+                    value:
+                        isActive === ''
+                            ? ''
+                            : isActive === 'ACTIVE'
+                            ? true
+                            : false,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+        }),
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [dispatch, data, isFetching, isLoading])
-
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -93,7 +76,6 @@ const DispositionTwoListingWrapper = () => {
                     //     UserModuleNameTypes.ACTION_DISPOSITION_TWO_DELETE
                     // )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
@@ -105,15 +87,12 @@ const DispositionTwoListingWrapper = () => {
                             text: 'Do you want to delete Disposition-Two?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'dispositionDisplayName',
@@ -155,7 +134,7 @@ const DispositionTwoListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -177,7 +156,7 @@ const DispositionTwoListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -193,8 +172,8 @@ const DispositionTwoListingWrapper = () => {
             },
         },
     ]
+
     const handleDeactive = (rowId: string) => {
-        setShowDropdown(false)
         deactiveUser(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -210,8 +189,8 @@ const DispositionTwoListingWrapper = () => {
             }
         })
     }
+
     const handleDelete = () => {
-        setShowDropdown(false)
         deleteDispositonTwo(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -233,11 +212,7 @@ const DispositionTwoListingWrapper = () => {
 
     return (
         <div className="h-full">
-            <DispositionTwoListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <DispositionTwoListing columns={columns} rows={items} />
         </div>
     )
 }

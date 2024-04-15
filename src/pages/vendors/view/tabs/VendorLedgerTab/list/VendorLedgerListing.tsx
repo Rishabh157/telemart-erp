@@ -176,11 +176,6 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-                <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
-            )} */}
-
             <DialogLogBox
                 isOpen={isOpenModel}
                 maxWidth="sm"

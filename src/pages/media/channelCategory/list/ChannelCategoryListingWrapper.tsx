@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:ChannelCategoryListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -25,30 +18,30 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ChannelCategoryListing from './ChannelCategoryListing'
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/media/channelCategorySlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const ChannelCategoryListingWrapper = () => {
-    const [showDropdown, setShowDropdown] = useState(false)
-    const [currentId, setCurrentId] = useState('')
-    const channelCategoryState: any = useSelector(
-        (state: RootState) => state.channelCategory
-    )
+    useUnmountCleanup()
 
-    const { page, rowsPerPage, searchValue, items } = channelCategoryState
+    // state
+    const [currentId, setCurrentId] = useState('')
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const dispatch = useDispatch<AppDispatch>()
+
+    // initiate method
     const navigate = useNavigate()
     const [deleteChannelCategory] = useDeleteChannelCategoryMutation()
 
-    const { data, isFetching, isLoading } =
-        useGetPaginationChannelCategoryQuery({
+ // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetPaginationChannelCategoryQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['channelCategory'],
@@ -67,22 +60,10 @@ const ChannelCategoryListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
+        }),
+    })   
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -96,7 +77,6 @@ const ChannelCategoryListingWrapper = () => {
                         UserModuleNameTypes.ACTION_CHANNEL_CATEGORY_DELETE
                     )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
@@ -108,15 +88,12 @@ const ChannelCategoryListingWrapper = () => {
                             text: 'Do you want to delete Channel Category?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'channelCategory',
@@ -131,8 +108,6 @@ const ChannelCategoryListingWrapper = () => {
     ]
 
     const handleDelete = () => {
-        setShowDropdown(false)
-        //alert(currentId)
         deleteChannelCategory(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -154,11 +129,7 @@ const ChannelCategoryListingWrapper = () => {
 
     return (
         <div className="h-full">
-            <ChannelCategoryListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <ChannelCategoryListing columns={columns} rows={items} />
         </div>
     )
 }

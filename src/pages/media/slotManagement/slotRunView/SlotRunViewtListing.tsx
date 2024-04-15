@@ -1,16 +1,8 @@
-/// ==============================================
-// Filename:SlotRunViewtListing.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -20,35 +12,31 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-// import {
-//     UserModuleActionTypes,
-//     UserModuleNameTypes,
-// } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/media/slotManagementSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
-    // setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const SlotRunViewtListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const slotManagementState: any = useSelector(
-        (state: RootState) => state.slotManagement
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
+
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        slotManagementState
-    // const navigate = useNavigate()
+        listingPaginationState
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Media',
@@ -89,12 +77,6 @@ const SlotRunViewtListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        // setShowDropdown={setShowDropdown}
                         extraClasses="max-h-full overflow-auto"
                         isLoading={isTableLoading}
                     />

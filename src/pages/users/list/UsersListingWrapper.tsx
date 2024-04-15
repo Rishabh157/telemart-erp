@@ -1,16 +1,8 @@
-/// ==============================================
-// Filename:UsersListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { FaCheck } from 'react-icons/fa'
 
@@ -22,19 +14,12 @@ import {
     useDeactiveUserMutation,
 } from 'src/services/UserServices'
 import UsersListing from './UsersListing'
-import {
-    getDepartmentLabel,
-    //getUserRoleLabel,
-} from 'src/utils/GetHierarchyByDept'
-
+import { getDepartmentLabel } from 'src/utils/GetHierarchyByDept'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/NewUserSlice'
+import useGetCustomListingData from '../../../hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { Chip } from '@mui/material'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
@@ -45,50 +30,56 @@ import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import ChangePasswordWrapper from '../ChangePassword/ChangePasswordWrapper'
 
 const UsersListingWrapper = () => {
-    const userState: any = useSelector((state: RootState) => state.newUser)
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    useUnmountCleanup()
 
-    const { items, page, rowsPerPage, searchValue, isActive } = userState
-    const [showDropdown, setShowDropdown] = useState(false)
+    // state
+    const [currentId, setCurrentId] = useState('')
     const [changePasswordDialogOpen, setChangePasswordDialogOpen] =
         useState<boolean>(false)
-    const [currentId, setCurrentId] = useState('')
+
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
     const navigate = useNavigate()
     const [deactiveUser] = useDeactiveUserMutation()
-    const dispatch = useDispatch<AppDispatch>()
-    const { data, isFetching, isLoading } = useGetNewUsersQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['userName', 'mobile', 'email', 'userRole', 'userDepartment'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: 'isActive',
-                value:
-                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+
+    // pagination api
+    const { items } = useGetCustomListingData<UsersListResponse[]>({
+        useEndPointHook: useGetNewUsersQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: [
+                'userName',
+                'mobile',
+                'email',
+                'userRole',
+                'userDepartment',
+            ],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: 'isActive',
+                    value:
+                        isActive === ''
+                            ? ''
+                            : isActive === 'ACTIVE'
+                            ? true
+                            : false,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
         {
@@ -108,25 +99,11 @@ const UsersListingWrapper = () => {
                         setChangePasswordDialogOpen(true)
                         setCurrentId(row?._id)
                     }}
-                    // handleDeleteActionButton={() => {
-                    //     showConfirmationDialog({
-                    //         title: 'Delete User',
-                    //         text: 'Do you want to delete User?',
-                    //         showCancelButton: true,
-                    //         next: (res: any) => {
-                    //             return res.isConfirmed
-                    //                 ? handleDelete()
-                    //                 : setShowDropdown(false)
-                    //         },
-                    //     })
-                    // }}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                 />
             ),
-            
         },
         {
             field: 'userName',
@@ -224,13 +201,14 @@ const UsersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive User',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -245,13 +223,14 @@ const UsersListingWrapper = () => {
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive Scheme',
-                                        text: `Do you want to ${row.isActive ? 'Deactive' : 'Active'
-                                            }`,
+                                        text: `Do you want to ${
+                                            row.isActive ? 'Deactive' : 'Active'
+                                        }`,
                                         showCancelButton: true,
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -266,11 +245,9 @@ const UsersListingWrapper = () => {
                 )
             },
         },
-
     ]
 
     const handleDeactive = (rowId: string) => {
-        setShowDropdown(false)
         deactiveUser(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -286,13 +263,10 @@ const UsersListingWrapper = () => {
             }
         })
     }
+
     return (
         <SideNavLayout>
-            <UsersListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={() => { }}
-            />
+            <UsersListing columns={columns} rows={items} />
 
             {/* Usre Change Password */}
             <DialogLogBox

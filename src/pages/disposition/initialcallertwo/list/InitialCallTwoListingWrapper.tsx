@@ -1,76 +1,65 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import InitialCallTwoListing from './InitialCallTwoListing'
-
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InitialCallerTwoListResponse } from 'src/models/configurationModel/InitialCallerTwo.model'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/configuration/initialCallerTwoSlice'
 import {
     useDeactiveInitialCallerTwoMutation,
     useDeleteinitialCallerTwoMutation,
     useGetinitialCallerTwoQuery,
 } from 'src/services/configurations/InitialCallerTwoServices'
-
 import { Chip } from '@mui/material'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 
 const InitialCallTwoListingWrapper = () => {
-    const navigate = useNavigate()
-    const [deleteTape] = useDeleteinitialCallerTwoMutation()
-    const [showDropdown, setShowDropdown] = useState(false)
+    useUnmountCleanup()
+
+    // state
     const [currentId, setCurrentId] = useState('')
-    const initialCallTwoState: any = useSelector(
-        (state: RootState) => state.initialCallerTwo
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
+    const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
 
-    const { page, rowsPerPage, searchValue, items, isActive } =
-        initialCallTwoState
-
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
+    // initiate method
+    const navigate = useNavigate()
     const [deactiveInitialCallerTwo] = useDeactiveInitialCallerTwoMutation()
-    const { data, isFetching, isLoading } = useGetinitialCallerTwoQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['initialCallName', 'initialCallDisplayName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'isActive',
-                value:
-                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const [deleteDisposition] = useDeleteinitialCallerTwoMutation()
+
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetinitialCallerTwoQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['initialCallName', 'initialCallDisplayName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'isActive',
+                    value:
+                        isActive === ''
+                            ? ''
+                            : isActive === 'ACTIVE'
+                            ? true
+                            : false,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -84,7 +73,6 @@ const InitialCallTwoListingWrapper = () => {
                     //     UserModuleNameTypes.ACTION_IC_TWO_DELETE
                     // )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
@@ -96,15 +84,12 @@ const InitialCallTwoListingWrapper = () => {
                             text: 'Do you want to delete Initial Call-Two?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'initialCallDisplayName',
@@ -155,7 +140,7 @@ const InitialCallTwoListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -177,7 +162,7 @@ const InitialCallTwoListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -193,8 +178,8 @@ const InitialCallTwoListingWrapper = () => {
             },
         },
     ]
+
     const handleDeactive = (rowId: string) => {
-        setShowDropdown(false)
         deactiveInitialCallerTwo(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -210,9 +195,9 @@ const InitialCallTwoListingWrapper = () => {
             }
         })
     }
+
     const handleDelete = () => {
-        setShowDropdown(false)
-        deleteTape(currentId).then((res: any) => {
+        deleteDisposition(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Deleted successfully!')
@@ -230,11 +215,7 @@ const InitialCallTwoListingWrapper = () => {
 
     return (
         <div className="h-full">
-            <InitialCallTwoListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <InitialCallTwoListing columns={columns} rows={items} />
         </div>
     )
 }

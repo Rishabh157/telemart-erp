@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:UsersListing.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -17,6 +10,7 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+import FilterStatusFormDialogWrapper from 'src/filtersDialogs/filterStatusDialog/FilterStatusFormDialogWrapper'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -24,8 +18,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/NewUserSlice'
-import UserListFilterFormDialogWrapper from './UserFilter/UserListFilterFormDialogWrapper'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -33,24 +26,23 @@ import { isAuthorized } from 'src/utils/authorization'
 export type Props = {
     columns: any[]
     rows: any[] | []
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
-    const newUserState: any = useSelector((state: RootState) => state.newUser)
+const UsersListing = ({ columns, rows }: Props) => {
+    // state
+    const [isOpenFilterForm, setIsOpenFilterForm] = useState<boolean>(false)
+
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        newUserState
+        listingPaginationState
 
     const dispatch = useDispatch<AppDispatch>()
 
     // Hooks
     const navigate = useNavigate()
-
-    // States
-    const [selectedRows, setSelectedRows] = useState([])
-    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-        useState<boolean>(false)
 
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
@@ -62,8 +54,7 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onClick={() => navigate('add-user')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
-                        {' '}
-                        + Add User{' '}
+                        + Add User
                     </button>
                 )}
             </div>
@@ -79,19 +70,16 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue) => {
-                        dispatch(setSearchValue(newValue))
-                    }}
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
-                    onFilterClick={() => {
-                        setIsOpenFilterFormDialog(true)
-                    }}
+                    onFilterClick={() => setIsOpenFilterForm(true)}
                 />
 
-                {isOpenFilterFormDialog && (
-                    <UserListFilterFormDialogWrapper
+                {/* filter status form */}
+                {isOpenFilterForm && (
+                    <FilterStatusFormDialogWrapper
                         open
-                        onClose={() => setIsOpenFilterFormDialog(false)}
+                        onClose={() => setIsOpenFilterForm(false)}
                     />
                 )}
 
@@ -100,13 +88,7 @@ const UsersListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
                         extraClasses="h-full overflow-auto"
-                        setShowDropdown={setShowDropdown}
                         isLoading={isTableLoading}
                     />
                 </div>

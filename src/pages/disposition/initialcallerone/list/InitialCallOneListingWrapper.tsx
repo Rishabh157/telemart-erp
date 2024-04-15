@@ -1,20 +1,14 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import InitialCallOneListing from './InitialCallOneListing'
-
 import { Chip } from '@mui/material'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/configuration/initialCallerOneSlice'
 import {
     useDeactiveInitialCallerOneMutation,
     useDeleteinitialCallerOneMutation,
@@ -23,54 +17,50 @@ import {
 
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const InitialCallOneListingWrapper = () => {
-    const navigate = useNavigate()
-    const [deleteTape] = useDeleteinitialCallerOneMutation()
-    const [showDropdown, setShowDropdown] = useState(false)
+    useUnmountCleanup()
+
+    // state
     const [currentId, setCurrentId] = useState('')
-    const initialCallOneState: any = useSelector(
-        (state: RootState) => state.initialCallerOne
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
+    const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
 
-    const { page, rowsPerPage, searchValue, items, isActive } =
-        initialCallOneState
-
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
+    // initiate method
+    const navigate = useNavigate()
     const [deactiveInitialCallerOne] = useDeactiveInitialCallerOneMutation()
-    const { data, isFetching, isLoading } = useGetinitialCallerOneQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['initialCallName', 'initialCallDisplayName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'isActive',
-                value:
-                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const [deleteDisposition] = useDeleteinitialCallerOneMutation()
+
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetinitialCallerOneQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['initialCallName', 'initialCallDisplayName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'isActive',
+                    value:
+                        isActive === ''
+                            ? ''
+                            : isActive === 'ACTIVE'
+                            ? true
+                            : false,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -84,7 +74,6 @@ const InitialCallOneListingWrapper = () => {
                     //     UserModuleNameTypes.ACTION_IC_ONE_DELETE
                     // )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
@@ -96,15 +85,12 @@ const InitialCallOneListingWrapper = () => {
                             text: 'Do you want to delete Initial Call One?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'initialCallDisplayName',
@@ -146,7 +132,7 @@ const InitialCallOneListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -168,7 +154,7 @@ const InitialCallOneListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -184,8 +170,8 @@ const InitialCallOneListingWrapper = () => {
             },
         },
     ]
+
     const handleDeactive = (rowId: string) => {
-        setShowDropdown(false)
         deactiveInitialCallerOne(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -201,9 +187,9 @@ const InitialCallOneListingWrapper = () => {
             }
         })
     }
+
     const handleDelete = () => {
-        setShowDropdown(false)
-        deleteTape(currentId).then((res: any) => {
+        deleteDisposition(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Deleted successfully!')
@@ -221,11 +207,7 @@ const InitialCallOneListingWrapper = () => {
 
     return (
         <div className="h-full">
-            <InitialCallOneListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <InitialCallOneListing columns={columns} rows={items} />
         </div>
     )
 }

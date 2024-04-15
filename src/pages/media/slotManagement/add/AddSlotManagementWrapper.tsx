@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddSlotManagementWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -230,34 +223,23 @@ const AddSlotManagementWrapper = () => {
                 }
             }
         ),
-        // paymentOptions: [
-        //     { label: 'checque', value: 'CHECQUE' },
-        //     { label: 'netBanking', value: 'NETBANKING' },
-        //     { label: 'cash', value: 'CASH' },
-        //     { label: 'creditCard', value: 'CREDITCARD' },
-        //     { label: 'debitCard', value: 'DEBITCARD' },
-        // ],
     }
     return (
-        <>
-            {/* // <> */}
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <AddSlotManagement
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-            {/* </> */}
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <AddSlotManagement
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

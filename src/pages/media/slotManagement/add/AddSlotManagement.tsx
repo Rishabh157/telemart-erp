@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddSlotManagement.tsx
-// Type: Add Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -64,9 +57,6 @@ const AddSlotManagement = ({
         ...dropdownOptions,
     }
 
-    // const [showSlots, setShowSlots] = useState(false)
-
-    // const options = ['FIXED', 'FLEXIBLE']
     const options = [
         {
             label: 'Fixed',
@@ -78,33 +68,12 @@ const AddSlotManagement = ({
         },
     ]
 
-    // const getDates = (startDate: any, endDate: any) => {
-    //     const dateArray = []
-    //     const currentDate = moment(startDate, 'MM/DD/YYYY')
-    //     const finalDate = moment(endDate, 'MM/DD/YYYY')
-    //     while (moment(currentDate).isSameOrBefore(finalDate)) {
-    //         dateArray.push(currentDate.format('MM/DD/YYYY'))
-    //         currentDate.add(1, 'days')
-    //     }
-
-    //     return dateArray
-    // }
-
-    // const handleConfirm = () => {
-    //     setShowSlots(true)
-    //     const startDate = moment(slotStartDate).format('MM/DD/YYYY')
-    //     const endDate = moment(slotEndDate).format('MM/DD/YYYY')
-    //     const datesBetween = getDates(startDate, endDate)
-    //     const newData = datesBetween?.map((ele) => {
-    //         return { date: ele, startTime: slotStartTime, endTime: slotEndTime }
-    //     })
-    //     setFieldValue('channelSlot', newData)
-    // }
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div className="">
             <div className="flex flex-col gap-2 p-4 ">
@@ -329,28 +298,6 @@ const AddSlotManagement = ({
                                         }
                                     />
                                 </div>
-                                {/* <button
-                                    type="button"
-                                    disabled={
-                                        !slotStartDate ||
-                                        !slotEndDate ||
-                                        !slotStartTime ||
-                                        !slotEndTime
-                                    }
-                                    onClick={() => {
-                                        handleConfirm()
-                                    }}
-                                    className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                        !slotStartDate ||
-                                        !slotEndDate ||
-                                        !slotStartTime ||
-                                        !slotEndTime
-                                            ? 'opacity-50'
-                                            : ''
-                                    }`}
-                                >
-                                    Confirm
-                                </button> */}
                             </div>
                         </div>
                     </div>

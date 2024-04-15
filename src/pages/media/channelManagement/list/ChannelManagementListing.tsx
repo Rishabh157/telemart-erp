@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:ChannelManagementListing.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,29 +21,27 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/media/channelManagementSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ChannelManagementListing = ({
-    columns,
-    rows,
-    setShowDropdown,
-}: Props) => {
+const ChannelManagementListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const channelManagementState: any = useSelector(
-        (state: RootState) => state.channelManagement
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
+
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        channelManagementState
+        listingPaginationState
+
     const navigate = useNavigate()
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Media',
@@ -94,7 +85,6 @@ const ChannelManagementListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
                 />
 
                 {/* Table */}
@@ -102,13 +92,7 @@ const ChannelManagementListing = ({
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
                         extraClasses="h-full overflow-auto"
-                        setShowDropdown={setShowDropdown}
                         isLoading={isTableLoading}
                     />
                 </div>

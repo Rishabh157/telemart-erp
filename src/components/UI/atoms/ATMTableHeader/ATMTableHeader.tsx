@@ -76,6 +76,7 @@ const ATMTableHeader = ({
                 <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
                     <BiSearch className="text-slate-600 text-xl" />
                     <input
+                        onFocus={(newValue:React.FocusEvent<HTMLInputElement>) => newValue.target.select()}
                         className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
                         value={searchValue}
                         onChange={(e) => {

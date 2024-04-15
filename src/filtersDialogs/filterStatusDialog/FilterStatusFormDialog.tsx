@@ -1,8 +1,9 @@
 import React from 'react'
 import { FormikProps } from 'formik'
-import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { FormInitialValues } from './InitialCallerTwoListFilterFormDialogWrapper'
 import ATMRadioButtonGroup from 'src/components/UI/atoms/ATMRadioButtonGroup/ATMRadioButtonGroup'
+import { filterStatusOptions } from 'src/utils/constants/customeTypes'
+import { FormInitialValues } from './FilterStatusFormDialogWrapper'
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -10,11 +11,7 @@ type Props = {
     onClose: () => void
 }
 
-const InitialCallerTwoListFilterFormDialog = ({
-    formikProps,
-    onReset,
-    onClose,
-}: Props) => {
+const FilterStatusFormDialog = ({ formikProps, onReset, onClose }: Props) => {
     const { values, setFieldValue, isSubmitting, handleSubmit } = formikProps
 
     return (
@@ -31,22 +28,13 @@ const InitialCallerTwoListFilterFormDialog = ({
                 </button>
             </div>
 
-            {/* Is Active Filter */}
+            {/*  Active Field */}
             <ATMRadioButtonGroup
                 name="isActive"
-                label="Call Two Status"
+                label="Status"
                 required={false}
                 value={values.isActive}
-                options={[
-                    {
-                        label: 'Active',
-                        value: 'ACTIVE',
-                    },
-                    {
-                        label: 'Deactive',
-                        value: 'DE_ACTIVATE',
-                    },
-                ]}
+                options={filterStatusOptions()}
                 onChange={(newValue: any) => {
                     setFieldValue('isActive', newValue)
                 }}
@@ -78,4 +66,4 @@ const InitialCallerTwoListFilterFormDialog = ({
     )
 }
 
-export default InitialCallerTwoListFilterFormDialog
+export default FilterStatusFormDialog

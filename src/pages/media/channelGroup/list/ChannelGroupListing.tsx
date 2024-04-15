@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:ChannelGroupListing.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,7 +18,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/media/channelGroupSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
@@ -34,17 +27,20 @@ import { isAuthorized } from 'src/utils/authorization'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ChannelGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
+const ChannelGroupListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const channelGroupState: any = useSelector(
-        (state: RootState) => state.channelGroup
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, isTableLoading } = channelGroupState
+
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        listingPaginationState
+
     const navigate = useNavigate()
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Media',
@@ -81,13 +77,13 @@ const ChannelGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
+                    searchValue={searchValue}
                     onSearch={(searchvalue) =>
                         dispatch(setSearchValue(searchvalue))
                     }
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    // isFilter
                 />
 
                 {/* Table */}
@@ -95,19 +91,12 @@ const ChannelGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        isCheckbox={false}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>
 
                 {/* Pagination */}
-
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}

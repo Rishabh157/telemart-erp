@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
@@ -11,55 +11,48 @@ import {
     useDeleteNdrDispositionMutation,
     useDeactiveNdrDispositionMutation,
 } from 'src/services/configurations/NdrDisositionServices'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/configuration/ndrDispositionSlice'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import NdrDispositionListing from './NdrDispositionListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 import { NdrDispositionListResponseType } from 'src/models/configurationModel/NdrDisposition.model'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 
 const NdrDispositionListingWrapper = () => {
+    useUnmountCleanup()
+
+    // state
+    const [currentId, setCurrentId] = useState('')
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
+
+    // initiate method
     const navigate = useNavigate()
     const [deleteTape] = useDeleteNdrDispositionMutation()
-    const [showDropdown, setShowDropdown] = useState(false)
-    const [currentId, setCurrentId] = useState('')
-
-    const ndrDispositionState: any = useSelector(
-        (state: RootState) => state.ndrDisposition
-    )
-
-    const { page, rowsPerPage, searchValue, items } = ndrDispositionState
-
-    const dispatch = useDispatch<AppDispatch>()
     const [deactiveDispositionOne] = useDeactiveNdrDispositionMutation()
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetNdrdispositionQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['ndrDisposition'],
-        page: page,
-        filterBy: [],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetNdrdispositionQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: [
+                'ndrDisposition',
+                'subDispositions',
+                'rtoAttempt',
+                'displayName',
+            ],
+            page: page,
+            filterBy: [],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
         {
@@ -68,7 +61,6 @@ const NdrDispositionListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: NdrDispositionListResponseType) => (
                 <ActionPopup
-                    // moduleName={UserModuleNameTypes.ndrDisposition}
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_NDR_DISPOSITION_EDIT
                     )}
@@ -76,7 +68,6 @@ const NdrDispositionListingWrapper = () => {
                     //     UserModuleNameTypes.ACTION_NDR_DISPOSITION_DELETE
                     // )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
@@ -88,9 +79,7 @@ const NdrDispositionListingWrapper = () => {
                             text: 'Do you want to delete NDR Disposition?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
@@ -171,7 +160,7 @@ const NdrDispositionListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -193,7 +182,7 @@ const NdrDispositionListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -211,7 +200,6 @@ const NdrDispositionListingWrapper = () => {
     ]
 
     const handleDeactive = (rowId: string) => {
-        setShowDropdown(false)
         deactiveDispositionOne(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -229,7 +217,6 @@ const NdrDispositionListingWrapper = () => {
     }
 
     const handleDelete = () => {
-        setShowDropdown(false)
         deleteTape(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -248,11 +235,7 @@ const NdrDispositionListingWrapper = () => {
 
     return (
         <div className="h-full">
-            <NdrDispositionListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <NdrDispositionListing columns={columns} rows={items} />
         </div>
     )
 }

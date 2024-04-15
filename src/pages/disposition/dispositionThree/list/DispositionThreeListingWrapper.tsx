@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Chip } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DispositionThreeListResponse } from 'src/models/configurationModel/DispositionThree.model'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/configuration/dispositionThreeSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import {
     useDeactiveDispositionThreeMutation,
     useDeletedispositionThreeMutation,
@@ -21,52 +16,53 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispositionThreeListing from './DispositionThreeListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const DispositionThreeListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
-    const navigate = useNavigate()
-    const { searchValue, filterValue, items, isActive }: any = useSelector(
-        (state: RootState) => state.dispositionThree
-    )
+    useUnmountCleanup()
 
+    // state
+    const [currentId, setCurrentId] = useState('')
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
+
+    // initiate method
+    const navigate = useNavigate()
     const [deactiveDispositionThree] = useDeactiveDispositionThreeMutation()
     const [deleteDispositonThree] = useDeletedispositionThreeMutation()
 
-    const [showDropdown, setShowDropdown] = useState(false)
-    const [currentId, setCurrentId] = useState('')
-    const dispositionThreeState: any = useSelector(
-        (state: RootState) => state.dispositionThree
-    )
-
-    const { page, rowsPerPage } = dispositionThreeState
-
-    const { data, isFetching, isLoading } = useGetdispositionThreeQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: [
-            'dispositionName',
-            'dispositionTwoId',
-            'dispositionDisplayName',
-        ],
-        page: page,
-        filterBy: [
-            {
-                fieldName: '',
-                value: filterValue ? filterValue : [],
-            },
-            {
-                fieldName: 'isActive',
-                value:
-                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
+    // pagination api
+    const { items } = useGetCustomListingData<DispositionThreeListResponse[]>({
+        useEndPointHook: useGetdispositionThreeQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: [
+                'dispositionName',
+                'dispositionTwoId',
+                'dispositionDisplayName',
+            ],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'isActive',
+                    value:
+                        isActive === ''
+                            ? ''
+                            : isActive === 'ACTIVE'
+                            ? true
+                            : false,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+        }),
     })
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -83,7 +79,6 @@ const DispositionThreeListingWrapper = () => {
                     //     UserModuleNameTypes.ACTION_DISPOSITION_THREE_DELETE
                     // )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleViewActionButton={() => {
@@ -98,15 +93,12 @@ const DispositionThreeListingWrapper = () => {
                             text: 'Do you want to delete Disposition-Three?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'dispositionDisplayName',
@@ -178,7 +170,7 @@ const DispositionThreeListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -200,7 +192,7 @@ const DispositionThreeListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -215,10 +207,9 @@ const DispositionThreeListingWrapper = () => {
                 )
             },
         },
-
     ]
+
     const handleDeactive = (rowId: string) => {
-        setShowDropdown(false)
         deactiveDispositionThree(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -236,7 +227,6 @@ const DispositionThreeListingWrapper = () => {
     }
 
     const handleDelete = () => {
-        setShowDropdown(false)
         deleteDispositonThree(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -256,23 +246,9 @@ const DispositionThreeListingWrapper = () => {
         })
     }
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [dispatch, data, isFetching, isLoading])
-
     return (
         <div className="h-full">
-            <DispositionThreeListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <DispositionThreeListing columns={columns} rows={items} />
         </div>
     )
 }

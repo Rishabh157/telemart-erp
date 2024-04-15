@@ -2,6 +2,32 @@ import { statusProps } from 'src/pages/orders'
 import { GetHierarchByDeptProps } from '../GetHierarchyByDept'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
+// Filter Status Types
+enum FilterStatusType {
+    active = 'ACTIVE',
+    deActivate = 'DE_ACTIVATE',
+}
+
+export const filterStatusOptions = () => {
+    let options = [
+        {
+            label: 'Activate',
+            value: FilterStatusType.active,
+        },
+        {
+            label: 'Deactivate',
+            value: FilterStatusType.deActivate,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label?.replaceAll('_', ' '),
+        }
+    })
+}
+
 // SMS TYPE
 enum smsType {
     alcobanSms = 'ALCOBAN_SMS',

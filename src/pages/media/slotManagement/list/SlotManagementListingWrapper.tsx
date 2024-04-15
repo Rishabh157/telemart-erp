@@ -1,20 +1,10 @@
-/// ==============================================
-// Filename:SlotManagementListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
-// import { FaTimes } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
-// import { FaExclamation } from 'react-icons/fa'
-// import { TiTick } from 'react-icons/ti'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -27,81 +17,55 @@ import {
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import SlotManagementListing from './SlotManagementListing'
-// import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-// import SlotRunWrapper from '../update/SlotRunWrapper'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
 import { CiPause1, CiPlay1 } from 'react-icons/ci'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/media/slotManagementSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const SlotManagementListingWrapper = () => {
-    const navigate = useNavigate()
-    // const [isOpenDialog, setIsOpenDialog] = useState(false)
-    const slotManagementState: any = useSelector(
-        (state: RootState) => state.slotManagement
-    )
-    const [showDropdown, setShowDropdown] = useState(false)
-    // const [runState, setRunState] = useState('')
+    useUnmountCleanup()
+
+    // state
     const [currentId, setCurrentId] = useState('')
-    const { page, rowsPerPage, searchValue, items } = slotManagementState
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
+    // initiate method
+    const navigate = useNavigate()
     const [updatePausePlay] = useUpdateSlotContinueStatusMutation()
-
     const [deleteSlotMangement] = useDeleteSlotMangementMutation()
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationSlotQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['slotName', 'channelLabel', 'groupNameLabel', 'tapeLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetPaginationSlotQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['slotName', 'channelLabel', 'groupNameLabel', 'tapeLabel'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: '',
+                    value: [],
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handlePausePlay = (id: string) => {
-        updatePausePlay(id).then((res: any) => {
-            if (res?.data?.status) {
-                showToast('success', 'Slot Updated successfully!')
-                navigate('/media/slot/defination')
-            } else {
-                showToast('error', res?.data?.message)
-            }
-        })
-    }
 
     const columns: columnTypes[] = [
         {
@@ -117,7 +81,6 @@ const SlotManagementListingWrapper = () => {
                         UserModuleNameTypes.ACTION_SLOT_MANAGEMENT_DELETE
                     )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
@@ -129,9 +92,7 @@ const SlotManagementListingWrapper = () => {
                             text: 'Do you want to delete Slot ?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
@@ -223,9 +184,19 @@ const SlotManagementListingWrapper = () => {
             ),
         },
     ]
+
+    const handlePausePlay = (id: string) => {
+        updatePausePlay(id).then((res: any) => {
+            if (res?.data?.status) {
+                showToast('success', 'Slot Updated successfully!')
+                navigate('/media/slot/defination')
+            } else {
+                showToast('error', res?.data?.message)
+            }
+        })
+    }
+
     const handleDelete = () => {
-        setShowDropdown(false)
-        //alert(currentId)
         deleteSlotMangement(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -243,17 +214,9 @@ const SlotManagementListingWrapper = () => {
     }
 
     return (
-        <>
-            {/* <> */}
-            <div className="h-full">
-                <SlotManagementListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </div>
-            {/* </> */}
-        </>
+        <div className="h-full">
+            <SlotManagementListing columns={columns} rows={items} />
+        </div>
     )
 }
 
