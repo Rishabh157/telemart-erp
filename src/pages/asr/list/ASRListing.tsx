@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:ASRListing.ts
-// Type: List Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,7 +14,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/ASRSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -32,18 +25,19 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
+const ASRListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const [selectedRows, setSelectedRows] = useState([])
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
-    const asrState: any = useSelector((state: RootState) => state.asr)
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        listingPaginationState
 
     const navigate = useNavigate()
-
-    const { page, rowsPerPage, searchValue, totalItems } = asrState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] ">
@@ -79,12 +73,7 @@ const ASRListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
+                        isLoading={isTableLoading}
                     />
                 </div>
 

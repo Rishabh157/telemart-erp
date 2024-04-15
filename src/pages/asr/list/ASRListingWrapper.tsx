@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:ASRListingWrapper.tsx
-// Type: ASR List Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Chip, Stack } from '@mui/material'
 
@@ -24,28 +17,53 @@ import {
     useGetAsrQuery,
     useUpdateAsrStatusMutation,
 } from 'src/services/AsrService'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/ASRSlice'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const ASRListingWrapper = () => {
-    const navigate = useNavigate()
-    const AsrState: any = useSelector((state: RootState) => state.asr)
+    useUnmountCleanup()
 
-    const [deleteAsr] = useDeleteAsrMutation()
-    const [updateAsrStatus] = useUpdateAsrStatusMutation()
-    const [showDropdown, setShowDropdown] = useState(false)
+    // state
     const [currentId, setCurrentId] = useState('')
     const [isDisabled, setIsDisabled] = useState(false)
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    // initiate method
+    const navigate = useNavigate()
+    const [deleteAsr] = useDeleteAsrMutation()
+    const [updateAsrStatus] = useUpdateAsrStatusMutation()
+
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetAsrQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['asrDetails.productName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
+    })
+
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -66,15 +84,11 @@ const ASRListingWrapper = () => {
                             text: 'Do you want to delete',
                             showCancelButton: true,
                             next: (res) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                     handleOnAction={() => {
-                        // e.stopPropagation()
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                 />
@@ -203,41 +217,8 @@ const ASRListingWrapper = () => {
                     </Stack>{' '}
                 </span>
             ),
-        }
+        },
     ]
-    const { page, rowsPerPage, searchValue, items } = AsrState
-    const { userData } = useSelector((state: RootState) => state?.auth)
-
-    const dispatch = useDispatch<AppDispatch>()
-    // // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetAsrQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['asrDetails.productName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const handleComplete = (id: string) => {
         updateAsrStatus(id).then((res) => {
@@ -259,7 +240,6 @@ const ASRListingWrapper = () => {
     }
 
     const handleDelete = () => {
-        setShowDropdown(false)
         deleteAsr(currentId).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -277,15 +257,9 @@ const ASRListingWrapper = () => {
     }
 
     return (
-        <>
-            <SideNavLayout>
-                <ASRListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <ASRListing columns={columns} rows={items} />
+        </SideNavLayout>
     )
 }
 

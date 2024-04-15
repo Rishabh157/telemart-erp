@@ -1,16 +1,8 @@
-/// ==============================================
-// Filename:GRNListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -18,16 +10,12 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { GRNListResponse } from 'src/models/GRN.model'
 import { useGetPaginationGRNQuery } from 'src/services/GRNService'
 import GRNListing from './GRNListing'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/GRNSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const columns: columnTypes[] = [
     {
@@ -73,78 +61,42 @@ const columns: columnTypes[] = [
             return <span> {row.defectiveQuantity} </span>
         },
     },
-    // {
-    //     field: 'actions',
-    //     headerName: 'Actions',
-    //     flex: 'flex-[0.5_0.5_0%]',
-    //     renderCell: (row: any) => (
-    //         <ActionPopup
-    //             isView
-    //             isEdit
-    //             isDelete
-    //             handleOnAction={() => {
-    //                 // setShowDropdown(!showDropdown)
-    //                 // setCurrentId(row?._id)
-    //             }}
-    //         />
-    //     ),
-    //     
-    // },
 ]
 
 const GRNListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    useUnmountCleanup()
 
-    const grnState: any = useSelector((state: RootState) => state.grn)
-    const { page, rowsPerPage, searchValue, items, filterValue } = grnState
-    const { userData }: any = useSelector((state: RootState) => state.auth)
+    // state
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
+    const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { data, isLoading, isFetching } = useGetPaginationGRNQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['poCode', 'itemName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: 'poCode',
-                value: filterValue,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetPaginationGRNQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['poCode', 'itemName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
-    //
-
-    // useEffect(() => {
-    //   if (poCode) {
-    //    dispatch(setFilterValue([poCode]));
-    //   }
-    // }, [poCode]);
-
     return (
-        <>
-            <SideNavLayout>
-                <GRNListing columns={columns} rows={items} />
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <GRNListing columns={columns} rows={items} />
+        </SideNavLayout>
     )
 }
 
