@@ -5,7 +5,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/configuration/dispositionThreeSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -14,27 +14,29 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { useNavigate } from 'react-router-dom'
-
-import DispositionThreeListFilterFormDialogWrapper from './DispositionThreeFilter/DispositionThreeListFilterFormDialogWrapper'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import FilterStatusFormDialogWrapper from 'src/filtersDialogs/filterStatusDialog/FilterStatusFormDialogWrapper'
+
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
-    const dispositionThreeState: any = useSelector(
-        (state: RootState) => state.dispositionThree
+const DispositionThreeListing = ({ columns, rows }: Props) => {
+    // state
+    const [isOpenFilterForm, setIsOpenFilterForm] = useState<boolean>(false)
+
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
+
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        dispositionThreeState
-    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-        useState<boolean>(false)
+        listingPaginationState
+
+    const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Disposition',
@@ -82,14 +84,15 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }}
                     isFilter
                     onFilterClick={() => {
-                        setIsOpenFilterFormDialog(true)
+                        setIsOpenFilterForm(true)
                     }}
                 />
 
-                {isOpenFilterFormDialog && (
-                    <DispositionThreeListFilterFormDialogWrapper
+                {/* filter status form */}
+                {isOpenFilterForm && (
+                    <FilterStatusFormDialogWrapper
                         open
-                        onClose={() => setIsOpenFilterFormDialog(false)}
+                        onClose={() => setIsOpenFilterForm(false)}
                     />
                 )}
 
@@ -98,12 +101,6 @@ const DispositionThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />

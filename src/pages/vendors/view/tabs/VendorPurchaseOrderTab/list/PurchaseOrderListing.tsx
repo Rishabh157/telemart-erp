@@ -107,12 +107,6 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
         </div>
     )
 }

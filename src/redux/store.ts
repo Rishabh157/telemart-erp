@@ -20,6 +20,7 @@ import {
     userSlice,
     vendorSlice,
 } from './slices'
+import ListingPaginationSlice from './slices/ListingPaginationSlice'
 import ASRSlice from './slices/ASRSlice'
 import attributesGroupSlice from './slices/attributesGroupSlice'
 import attributesSlice from './slices/attributesSlice'
@@ -125,6 +126,7 @@ const store = configureStore({
         userAccess: userAcessSlice,
         dashboard: DashboardSlice,
         sideNavLayout: sideNavLayoutSlice,
+        listingPagination: ListingPaginationSlice,
         dealer: dealerSlice,
         dealerRatio: dealersRatioSlice,
         dealerPincode: dealerPincodeSlice,

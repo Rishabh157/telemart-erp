@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:ChannelGroupListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -24,31 +17,50 @@ import {
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ChannelGroupListing from './ChannelGroupListing'
+
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/media/channelGroupSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const ChannelGroupListingWrapper = () => {
-    const navigate = useNavigate()
+    useUnmountCleanup()
 
-    const channelGroupState: any = useSelector(
-        (state: RootState) => state.channelGroup
-    )
-    const [deleteChannelGroup] = useDeleteChannelGroupMutation()
+    // state
     const [currentId, setCurrentId] = useState('')
-    const [showDropdown, setShowDropdown] = useState(false)
-    const { page, rowsPerPage, searchValue, items } = channelGroupState
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const dispatch = useDispatch<AppDispatch>()
+    // initiate method
+    const navigate = useNavigate()
+    const [deleteChannelGroup] = useDeleteChannelGroupMutation()
+
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetPaginationChannelGroupQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['groupName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
+    })
+
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -62,7 +74,6 @@ const ChannelGroupListingWrapper = () => {
                         UserModuleNameTypes.ACTION_CHANNEL_GROUP_DELETE
                     )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
@@ -74,15 +85,12 @@ const ChannelGroupListingWrapper = () => {
                             text: 'Do you want to delete',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'groupName',
@@ -95,37 +103,8 @@ const ChannelGroupListingWrapper = () => {
             ),
         },
     ]
-    const { data, isFetching, isLoading } = useGetPaginationChannelGroupQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['groupName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const handleDelete = () => {
-        setShowDropdown(false)
         deleteChannelGroup(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -143,11 +122,7 @@ const ChannelGroupListingWrapper = () => {
     }
     return (
         <div className="h-full">
-            <ChannelGroupListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <ChannelGroupListing columns={columns} rows={items} />
         </div>
     )
 }

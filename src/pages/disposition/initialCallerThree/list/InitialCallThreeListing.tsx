@@ -5,7 +5,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/configuration/initialCallerThreeSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
@@ -14,28 +14,29 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-import InitialCallerThreeListFilterFormDialogWrapper from './InitialCallerThreeFilter/InitialCallerThreeListFilterFormDialogWrapper'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import FilterStatusFormDialogWrapper from 'src/filtersDialogs/filterStatusDialog/FilterStatusFormDialogWrapper'
 
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
-    const dispatch = useDispatch<AppDispatch>()
-    const initialCallThreeState: any = useSelector(
-        (state: RootState) => state.initialCallerThree
-    )
-    const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        initialCallThreeState
-    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-        useState<boolean>(false)
+const InitialCallThreeListing = ({ columns, rows }: Props) => {
+    // state
+    const [isOpenFilterForm, setIsOpenFilterForm] = useState<boolean>(false)
 
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        listingPaginationState
+
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Initial Call',
@@ -81,35 +82,29 @@ const InitialCallThreeListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }}
                     isFilter
                     onFilterClick={() => {
-                        setIsOpenFilterFormDialog(true)
+                        setIsOpenFilterForm(true)
                     }}
                 />
 
-                {isOpenFilterFormDialog && (
-                    <InitialCallerThreeListFilterFormDialogWrapper
+                {/* filter status form */}
+                {isOpenFilterForm && (
+                    <FilterStatusFormDialogWrapper
                         open
-                        onClose={() => setIsOpenFilterFormDialog(false)}
+                        onClose={() => setIsOpenFilterForm(false)}
                     />
                 )}
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>
 
                 {/* Pagination */}
-
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}

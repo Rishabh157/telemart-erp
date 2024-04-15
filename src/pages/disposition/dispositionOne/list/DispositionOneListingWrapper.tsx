@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import DispositionOneListing from './DispositionOneListing'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { useSelector } from 'react-redux'
+import { RootState } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
@@ -12,65 +12,54 @@ import {
     useDeletedispositionOneMutation,
     useDeactiveDispositionOneMutation,
 } from 'src/services/configurations/DispositiononeServices'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/configuration/dispositionOneSlice'
 import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
-
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 
 const DispositionOneListingWrapper = () => {
-    const navigate = useNavigate()
-    const [deleteTape] = useDeletedispositionOneMutation()
-    const [showDropdown, setShowDropdown] = useState(false)
+    useUnmountCleanup()
+
+    // state
     const [currentId, setCurrentId] = useState('')
-
-    const dispositionOneState: any = useSelector(
-        (state: RootState) => state.dispositionOne
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
+    const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
 
-    const { page, rowsPerPage, searchValue, items, isActive } =
-        dispositionOneState
-
-    const dispatch = useDispatch<AppDispatch>()
+    // initiate method
+    const navigate = useNavigate()
+    const [deleteDisposition] = useDeletedispositionOneMutation()
     const [deactiveDispositionOne] = useDeactiveDispositionOneMutation()
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetdispositionOneQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['dispositionName', 'dispositionDisplayName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'isActive',
-                value:
-                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+
+    // pagination api
+    const { items } = useGetCustomListingData<DispositionOneListResponse[]>({
+        useEndPointHook: useGetdispositionOneQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['dispositionName', 'dispositionDisplayName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'isActive',
+                    value:
+                        isActive === ''
+                            ? ''
+                            : isActive === 'ACTIVE'
+                            ? true
+                            : false,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -84,7 +73,6 @@ const DispositionOneListingWrapper = () => {
                     //     UserModuleNameTypes.ACTION_DISPOSITION_ONE_DELETE
                     // )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
@@ -96,15 +84,12 @@ const DispositionOneListingWrapper = () => {
                             text: 'Do you want to delete Disposition-One?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'dispositionDisplayName',
@@ -137,7 +122,7 @@ const DispositionOneListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -159,7 +144,7 @@ const DispositionOneListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -174,10 +159,9 @@ const DispositionOneListingWrapper = () => {
                 )
             },
         },
-
     ]
+
     const handleDeactive = (rowId: string) => {
-        setShowDropdown(false)
         deactiveDispositionOne(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -193,9 +177,9 @@ const DispositionOneListingWrapper = () => {
             }
         })
     }
+
     const handleDelete = () => {
-        setShowDropdown(false)
-        deleteTape(currentId).then((res: any) => {
+        deleteDisposition(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Deleted successfully!')
@@ -213,11 +197,7 @@ const DispositionOneListingWrapper = () => {
 
     return (
         <div className="h-full">
-            <DispositionOneListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <DispositionOneListing columns={columns} rows={items} />
         </div>
     )
 }

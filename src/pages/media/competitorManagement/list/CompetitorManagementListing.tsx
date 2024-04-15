@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:CompitorManagementListing.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,28 +21,24 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/media/competitorManagementSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CompetitorManagementListing = ({
-    columns,
-    rows,
-    setShowDropdown,
-}: Props) => {
+const CompetitorManagementListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const competitorState: any = useSelector(
-        (state: RootState) => state.competitor
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        competitorState
+        listingPaginationState
+
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -100,12 +89,6 @@ const CompetitorManagementListing = ({
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         isLoading={isTableLoading}
                         extraClasses="h-full overflow-auto"
                     />

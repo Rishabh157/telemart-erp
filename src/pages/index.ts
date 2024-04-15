@@ -1,11 +1,7 @@
-/// ==============================================
-// Filename:index.tsx
-// Type: index Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
+import UsersListingWrapper from './users/list/UsersListingWrapper'
+import EditUserWrapper from './users/edit/EditUserWrapper'
+import AddUserWrapper from './users/add/AddUserWrapper'
 import AddAttributeWrapper from './configuration/ConfigurationScreens/attributes/add/AddAttributeWrapper'
 import AttributesListingWrapper from './configuration/ConfigurationScreens/attributes/list/AttributesListingWrapper'
 import AddAttributeGroupWrapper from './configuration/ConfigurationScreens/attributesGroup/add/AddAttributeGroupWrapper'
@@ -187,9 +183,13 @@ import { ASRListingWrapper, EditASRWrapper, AddASRWrapper } from './asr'
 import { AddVendorWrapper, VendorsListingWrapper, ViewVendor } from './vendors'
 
 // import Users
-import { AddUserWrapper, UsersListingWrapper, EditUserWrapper } from './users'
+// import { AddUserWrapper, UsersListingWrapper, EditUserWrapper } from './users'
 
 export {
+    // AddUserWrapper
+    AddUserWrapper,
+    UsersListingWrapper,
+    EditUserWrapper,
     AddASRWrapper,
     ASRListingWrapper,
     AddAttributeWrapper,
@@ -247,9 +247,6 @@ export {
     AddSaleOrderWrapper,
     EditSaleOrderWrapper,
     SaleOrderListingWrapper,
-    UsersListingWrapper,
-    AddUserWrapper,
-    EditUserWrapper,
     AddVendorWrapper,
     VendorsListingWrapper,
     AddPurchaseOrderTabWrapper,

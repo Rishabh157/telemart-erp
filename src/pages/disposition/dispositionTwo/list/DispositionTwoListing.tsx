@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/configuration/dispositionTwoSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { useNavigate } from 'react-router-dom'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -15,29 +14,28 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-import DispositionTwoListFilterFormDialogWrapper from './DispositionTwoFilter/DispositionTwoListFilterFormDialogWrapper'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import FilterStatusFormDialogWrapper from 'src/filtersDialogs/filterStatusDialog/FilterStatusFormDialogWrapper'
 
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
+const DispositionTwoListing = ({ columns, rows }: Props) => {
+    // state
+    const [isOpenFilterForm, setIsOpenFilterForm] = useState<boolean>(false)
+
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        listingPaginationState
+
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-
-    const dispositionTwoState: any = useSelector(
-        (state: RootState) => state.dispositionTwo
-    )
-    const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        dispositionTwoState
-
-    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-        useState<boolean>(false)
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -87,14 +85,15 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                     }}
                     isFilter
                     onFilterClick={() => {
-                        setIsOpenFilterFormDialog(true)
+                        setIsOpenFilterForm(true)
                     }}
                 />
 
-                {isOpenFilterFormDialog && (
-                    <DispositionTwoListFilterFormDialogWrapper
+                {/* filter status */}
+                {isOpenFilterForm && (
+                    <FilterStatusFormDialogWrapper
                         open
-                        onClose={() => setIsOpenFilterFormDialog(false)}
+                        onClose={() => setIsOpenFilterForm(false)}
                     />
                 )}
 
@@ -103,12 +102,6 @@ const DispositionTwoListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />

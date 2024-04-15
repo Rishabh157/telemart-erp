@@ -1,18 +1,10 @@
-/// ==============================================
-// Filename:SlotRunViewsListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import moment from 'moment'
 import { FaTimes } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { FaExclamation } from 'react-icons/fa'
 import { TiTick } from 'react-icons/ti'
 
@@ -20,71 +12,52 @@ import { TiTick } from 'react-icons/ti'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SlotManagementListResponse } from 'src/models/Slot.model'
 import SlotManagementListing from './SlotRunViewtListing'
-// import {
-//     // useDeleteSlotMangementMutation,
-//     useGetPaginationSlotQuery,
-// } from 'src/services/media/SlotDefinitionServices'
-// import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-// import { showToast } from 'src/utils'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import SlotRunWrapper from '../update/SlotRunWrapper'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/media/slotManagementSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { useGetPaginationSlotViewQuery } from 'src/services/media/SlotsViewServices'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const SlotRunViewsListingWrapper = () => {
-    // const navigate = useNavigate()
-    const [isOpenDialog, setIsOpenDialog] = useState(false)
-    const slotManagementState: any = useSelector(
-        (state: RootState) => state.slotManagement
-    )
-    // const [showDropdown, setShowDropdown] = useState(false)
+    useUnmountCleanup()
+
+    // state
     const [runState, setRunState] = useState('')
+    const [isOpenDialog, setIsOpenDialog] = useState(false)
     // const [currentId, setCurrentId] = useState('')
-    const { page, rowsPerPage, searchValue, items } = slotManagementState
+
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = listingPaginationState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    // const [deleteSlotMangement] = useDeleteSlotMangementMutation()
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationSlotViewQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['slotName', 'channelLabel', 'groupNameLabel', 'tapeLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetPaginationSlotViewQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['slotName', 'channelLabel', 'groupNameLabel', 'tapeLabel'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: '',
+                    value: [],
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
         {
@@ -171,35 +144,26 @@ const SlotRunViewsListingWrapper = () => {
                     {/* )} */}
                 </div>
             ),
-            
         },
     ]
 
     return (
-        <>
-            {/* <> */}
-            <div className="h-full">
-                <SlotManagementListing
-                    columns={columns}
-                    rows={items}
-                    // setShowDropdown={setShowDropdown}
-                />
-                <DialogLogBox
-                    isOpen={isOpenDialog}
-                    buttonClass="cursor-pointer"
-                    handleClose={() => {
-                        setIsOpenDialog(false)
-                    }}
-                    component={
-                        <SlotRunWrapper
-                            id={runState}
-                            setIsOpenDialog={setIsOpenDialog}
-                        />
-                    }
-                />
-            </div>
-            {/* </> */}
-        </>
+        <div className="h-full">
+            <SlotManagementListing columns={columns} rows={items} />
+            <DialogLogBox
+                isOpen={isOpenDialog}
+                buttonClass="cursor-pointer"
+                handleClose={() => {
+                    setIsOpenDialog(false)
+                }}
+                component={
+                    <SlotRunWrapper
+                        id={runState}
+                        setIsOpenDialog={setIsOpenDialog}
+                    />
+                }
+            />
+        </div>
     )
 }
 

@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:ChannelCategoryListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,7 +21,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/media/channelCategorySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -36,23 +29,20 @@ type Props = {
     columns: any[]
     rows: any[]
     isHeader?: boolean
-    setShowDropdown?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ChannelCategoryListing = ({
-    columns,
-    rows,
-    setShowDropdown,
-    isHeader = true,
-}: Props) => {
+const ChannelCategoryListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const channelCategoryState: any = useSelector(
-        (state: RootState) => state.channelCategory
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, isTableLoading } =
-        channelCategoryState
+
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        listingPaginationState
+
     const navigate = useNavigate()
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Media',
@@ -65,59 +55,51 @@ const ChannelCategoryListing = ({
 
     return (
         <div className="px-4 h-full overflow-auto pt-3 ">
-            {isHeader && (
-                <div className="h-[30px]">
-                    <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                </div>
-            )}
-            {/* Page Header */}
-            {isHeader && (
-                <div className="flex justify-between items-center h-[45px]">
-                    <ATMPageHeading> Channel Category</ATMPageHeading>
+            <div className="h-[30px]">
+                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
+            </div>
 
-                    {isAuthorized(
-                        UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_ADD
-                    ) && (
-                        <button
-                            type="button"
-                            onClick={() => navigate('add')}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Add Channel Category
-                        </button>
-                    )}
-                </div>
-            )}
+            {/* Page Header */}
+
+            <div className="flex justify-between items-center h-[45px]">
+                <ATMPageHeading> Channel Category</ATMPageHeading>
+
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_CHANNEL_MANAGEMENT_ADD
+                ) && (
+                    <button
+                        type="button"
+                        onClick={() => navigate('add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add Channel Category
+                    </button>
+                )}
+            </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
                 {/*Table Header */}
-                {isHeader && (
-                    <ATMTableHeader
-                        page={page}
-                        rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
-                        rows={rows}
-                        onSearch={(searchvalue) =>
-                            dispatch(setSearchValue(searchvalue))
-                        }
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        //  isFilter
-                    />
-                )}
+
+                <ATMTableHeader
+                    page={page}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={rows}
+                    searchValue={searchValue}
+                    onSearch={(searchvalue) =>
+                        dispatch(setSearchValue(searchvalue))
+                    }
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    //  isFilter
+                />
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />

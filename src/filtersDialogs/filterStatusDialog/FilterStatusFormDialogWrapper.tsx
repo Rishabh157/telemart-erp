@@ -4,8 +4,8 @@ import { object, string } from 'yup'
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
-import DispositionThreeListFilterFormDialog from './DispositionThreeListFilterFormDialog'
-import { setIsActivateUser } from 'src/redux/slices/configuration/dispositionThreeSlice'
+import FilterStatusFormDialog from './FilterStatusFormDialog'
+import { setIsActivate } from 'src/redux/slices/ListingPaginationSlice'
 
 type Props = {
     open: boolean
@@ -16,22 +16,19 @@ export type FormInitialValues = {
     isActive: string
 }
 
-const DispositionThreeListFilterFormDialogWrapper = ({
-    open,
-    onClose,
-}: Props) => {
+const FilterStatusFormDialogWrapper = ({ open, onClose }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const userState: any = useSelector(
-        (state: RootState) => state.dispositionThree
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const { isActive } = userState
+    const { isActive } = listingPaginationState
 
     const initialValues: FormInitialValues = {
         isActive: isActive,
     }
 
     const validationSchema: any = object({
-        isActive: string().required('please select disposition status'),
+        isActive: string().required('Please select user status'),
     })
 
     // Submit Handler
@@ -42,7 +39,7 @@ const DispositionThreeListFilterFormDialogWrapper = ({
         setSubmitting(false)
 
         // user status  dispatch
-        dispatch(setIsActivateUser(values.isActive))
+        dispatch(setIsActivate(values.isActive))
 
         onClose()
     }
@@ -50,8 +47,7 @@ const DispositionThreeListFilterFormDialogWrapper = ({
     // Reset Handler
     const handleReset = async (formikProps: FormikProps<FormInitialValues>) => {
         await // user status  dispatch
-        dispatch(setIsActivateUser(''))
-
+        dispatch(setIsActivate(''))
         // reset formik props
         formikProps.resetForm()
     }
@@ -66,7 +62,7 @@ const DispositionThreeListFilterFormDialogWrapper = ({
             >
                 {(formikProps) => (
                     <Form>
-                        <DispositionThreeListFilterFormDialog
+                        <FilterStatusFormDialog
                             onClose={onClose}
                             formikProps={formikProps}
                             onReset={() => handleReset(formikProps)}
@@ -78,4 +74,4 @@ const DispositionThreeListFilterFormDialogWrapper = ({
     )
 }
 
-export default DispositionThreeListFilterFormDialogWrapper
+export default FilterStatusFormDialogWrapper

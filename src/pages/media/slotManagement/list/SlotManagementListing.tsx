@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:SlotManagementListing.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +19,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/media/slotManagementSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -35,18 +28,20 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
+const SlotManagementListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const slotManagementState: any = useSelector(
-        (state: RootState) => state.slotManagement
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
+
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        slotManagementState
+        listingPaginationState
+
     const navigate = useNavigate()
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Media',
@@ -90,7 +85,6 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
                 />
 
                 {/* Table */}
@@ -98,12 +92,6 @@ const SlotManagementListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="max-h-full overflow-auto"
                         isLoading={isTableLoading}
                     />

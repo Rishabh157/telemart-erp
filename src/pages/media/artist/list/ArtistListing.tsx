@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:ArtistListing.tsx
-// Type: List Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +19,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/media/artist'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -35,16 +28,20 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
+const ArtistListing = ({ columns, rows }: Props) => {
+    // state
     const dispatch = useDispatch<AppDispatch>()
-    const artistState: any = useSelector((state: RootState) => state.artist)
-    const [selectedRows, setSelectedRows] = useState([])
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        artistState
+        listingPaginationState
+
     const navigate = useNavigate()
+
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Media',
@@ -86,7 +83,6 @@ const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
                 />
 
                 {/* Table */}
@@ -94,12 +90,6 @@ const ArtistListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />

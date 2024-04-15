@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Chip } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { InitialCallerThreeListResponse } from 'src/models/configurationModel/InitialCallerThree.model'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/configuration/initialCallerThreeSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import {
     useDeactiveInitialCallerThreeMutation,
     useDeleteInitialCallerThreeMutation,
@@ -21,54 +16,50 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import InitialCallThreeListing from './InitialCallThreeListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const InitialCallThreeListingWrapper = () => {
+    useUnmountCleanup()
+
+    // state
+    const [currentId, setCurrentId] = useState('')
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
+
+    // initiate method
     const navigate = useNavigate()
     const [deleteIniticallthree] = useDeleteInitialCallerThreeMutation()
     const [deactiveInitialCallerThree] = useDeactiveInitialCallerThreeMutation()
-    const [showDropdown, setShowDropdown] = useState(false)
-    const [currentId, setCurrentId] = useState('')
-    const initialCallThreeState: any = useSelector(
-        (state: RootState) => state.initialCallerThree
-    )
 
-    const { page, rowsPerPage, searchValue, items, isActive } =
-        initialCallThreeState
-
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetInitialCallerThreeQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['initailCallName', 'initialCallDisplayName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'isActive',
-                value:
-                    isActive === '' ? '' : isActive === 'ACTIVE' ? true : false,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetInitialCallerThreeQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['initailCallName', 'initialCallDisplayName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'isActive',
+                    value:
+                        isActive === ''
+                            ? ''
+                            : isActive === 'ACTIVE'
+                            ? true
+                            : false,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -85,7 +76,6 @@ const InitialCallThreeListingWrapper = () => {
                     //     UserModuleNameTypes.ACTION_IC_THREE_DELETE
                     // )}
                     handleOnAction={() => {
-                        setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
                     handleViewActionButton={() => {
@@ -100,15 +90,12 @@ const InitialCallThreeListingWrapper = () => {
                             text: 'Do you want to delete InitialCaller-Three?',
                             showCancelButton: true,
                             next: (res: any) => {
-                                return res.isConfirmed
-                                    ? handleDelete()
-                                    : setShowDropdown(false)
+                                return res.isConfirmed ? handleDelete() : null
                             },
                         })
                     }}
                 />
             ),
-            
         },
         {
             field: 'initialCallDisplayName',
@@ -196,7 +183,7 @@ const InitialCallThreeListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -218,7 +205,7 @@ const InitialCallThreeListingWrapper = () => {
                                         next: (res) => {
                                             return res.isConfirmed
                                                 ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
+                                                : null
                                         },
                                     })
                                 }}
@@ -236,7 +223,6 @@ const InitialCallThreeListingWrapper = () => {
     ]
 
     const handleDeactive = (rowId: string) => {
-        setShowDropdown(false)
         deactiveInitialCallerThree(rowId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -254,7 +240,6 @@ const InitialCallThreeListingWrapper = () => {
     }
 
     const handleDelete = () => {
-        setShowDropdown(false)
         deleteIniticallthree(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -274,13 +259,7 @@ const InitialCallThreeListingWrapper = () => {
         })
     }
 
-    return (
-        <InitialCallThreeListing
-            columns={columns}
-            rows={items}
-            setShowDropdown={setShowDropdown}
-        />
-    )
+    return <InitialCallThreeListing columns={columns} rows={items} />
 }
 
 export default InitialCallThreeListingWrapper

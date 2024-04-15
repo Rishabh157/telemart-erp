@@ -12,28 +12,28 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/configuration/dispositionOneSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import DispositionOneListFilterFormDialogWrapper from './DispositionOneFilter/DispositionOneListFilterFormDialogWrapper'
+import FilterStatusFormDialogWrapper from 'src/filtersDialogs/filterStatusDialog/FilterStatusFormDialogWrapper'
 
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
+const DispositionOneListing = ({ columns, rows }: Props) => {
+    // state
+    const [isOpenFilterForm, setIsOpenFilterForm] = useState<boolean>(false)
+
     const dispatch = useDispatch<AppDispatch>()
-    const dispositionOneState: any = useSelector(
-        (state: RootState) => state.dispositionOne
+    const listingPaginationState: any = useSelector(
+        (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
+
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        dispositionOneState
-    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-        useState<boolean>(false)
+        listingPaginationState
 
     const navigate = useNavigate()
     const breadcrumbs: BreadcrumbType[] = [
@@ -82,15 +82,13 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setSearchValue(newValue))
                     }}
                     isFilter
-                    onFilterClick={() => {
-                        setIsOpenFilterFormDialog(true)
-                    }}
+                    onFilterClick={() => setIsOpenFilterForm(true)}
                 />
 
-                {isOpenFilterFormDialog && (
-                    <DispositionOneListFilterFormDialogWrapper
+                {isOpenFilterForm && (
+                    <FilterStatusFormDialogWrapper
                         open
-                        onClose={() => setIsOpenFilterFormDialog(false)}
+                        onClose={() => setIsOpenFilterForm(false)}
                     />
                 )}
 
@@ -99,12 +97,6 @@ const DispositionOneListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
-                        setShowDropdown={setShowDropdown}
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />
