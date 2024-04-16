@@ -55,11 +55,12 @@ export enum statusProps {
 const ViewOrder = () => {
     const tabs: tabsProps[] = [
         {
-            label: 'All',
+            label: 'Global Order Search',
             icon: MdOutbond,
-            path: '?orderStatus=all',
-            name: UserModuleNameTypes.ACTION_ORDER_ALL_TAB_LIST,
+            path: '?orderStatus=global-search',
+            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
         },
+
         {
             label: 'Fresh Order',
             icon: MdOutbond,
@@ -132,12 +133,7 @@ const ViewOrder = () => {
             path: '?orderStatus=inquiry',
             name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
         },
-        {
-            label: 'Global Order Search',
-            icon: MdOutbond,
-            path: '?orderStatus=global-search',
-            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
-        },
+
         {
             label: 'Complaint',
             icon: MdOutbond,
@@ -149,6 +145,12 @@ const ViewOrder = () => {
             icon: MdOutbond,
             path: '?orderStatus=reattempt',
             name: UserModuleNameTypes.ACTION_ORDER_REATTEMPT_TAB,
+        },
+        {
+            label: 'All',
+            icon: MdOutbond,
+            path: '?orderStatus=all',
+            name: UserModuleNameTypes.ACTION_ORDER_ALL_TAB_LIST,
         },
     ]
 
