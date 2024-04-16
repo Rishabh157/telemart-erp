@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddASR.tsx
-// Type: ADD Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -20,18 +13,19 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddASRWrapper'
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 
 // |-- Redux --|
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { useDispatch } from 'react-redux'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    dropDownOptions: SelectOption[] | []
 }
 
 // Breadcrumbs
@@ -45,15 +39,8 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddASR = ({ formikProps, apiStatus }: Props) => {
+const AddASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
     const { values, setFieldValue } = formikProps
-    const { items }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
-
-    const options = items?.map((ele: any) => {
-        return { id: ele?._id, label: ele?.groupName, value: ele?.groupName }
-    })
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
@@ -99,8 +86,7 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                 <div className="">
                                     {values?.asrDetails?.map(
                                         (asr: any, asrIndex: number) => {
-                                            const { productName, quantity } =
-                                                asr
+                                            const { quantity, productId } = asr
 
                                             return (
                                                 <div
@@ -131,38 +117,43 @@ const AddASR = ({ formikProps, apiStatus }: Props) => {
                                                             )}
                                                         </div>
 
-                                                        <div className="grid grid-cols-3 gap-4 gap-y-5">
+                                                        <div className="grid grid-cols-3 gap-4  gap-y-5">
                                                             {/* Product Name */}
                                                             {/* <div className="flex-1"> */}
-                                                            <ATMSelect
+                                                            <ATMSelectSearchable
+                                                                componentClass="mt-3"
                                                                 required
                                                                 name={`asrDetails[${asrIndex}].productName`}
                                                                 value={
-                                                                    productName
+                                                                    productId
                                                                 }
                                                                 label="Product group"
                                                                 options={
-                                                                    options
+                                                                    dropDownOptions
                                                                 }
                                                                 onChange={(
                                                                     e
                                                                 ) => {
-                                                                    handleSetFieldValue(
-                                                                        `asrDetails[${asrIndex}].productName`,
-                                                                        e.target
-                                                                            .value
-                                                                    )
-                                                                    handleSetFieldValue(
-                                                                        `asrDetails[${asrIndex}].productId`,
-                                                                        options.find(
+                                                                    let findData =
+                                                                        dropDownOptions?.find(
                                                                             (
                                                                                 obj: any
                                                                             ) =>
-                                                                                obj.label ===
+                                                                                obj.value ===
                                                                                 e
-                                                                                    .target
-                                                                                    .value
-                                                                        ).id
+                                                                        )
+
+                                                                    handleSetFieldValue(
+                                                                        `asrDetails[${asrIndex}].productId`,
+                                                                        findData
+                                                                            ? (findData?.value as string)
+                                                                            : ''
+                                                                    )
+                                                                    handleSetFieldValue(
+                                                                        `asrDetails[${asrIndex}].productName`,
+                                                                        findData
+                                                                            ? findData?.label
+                                                                            : ''
                                                                     )
                                                                 }}
                                                             />

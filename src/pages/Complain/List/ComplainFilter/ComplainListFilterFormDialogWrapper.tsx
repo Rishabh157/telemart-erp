@@ -5,7 +5,7 @@ import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import DispositionOneListFilterFormDialog from './ComplainListFilterFormDialog'
-import { setDateFilter } from 'src/redux/slices/ComplainSlice'
+import { setDateFilter } from 'src/redux/slices/ListingPaginationSlice'
 import moment from 'moment'
 
 type Props = {
@@ -20,7 +20,7 @@ export type FormInitialValues = {
 
 const ComplainListFilterFormDialogWrapper = ({ open, onClose }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const complain: any = useSelector((state: RootState) => state.complain)
+    const complain: any = useSelector((state: RootState) => state.listingPagination)
     const { dateFilter } = complain
 
     const initialValues: FormInitialValues = {

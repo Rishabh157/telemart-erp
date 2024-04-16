@@ -86,9 +86,7 @@ const BatchOrderView = () => {
                             active={activeTabIndex}
                             navBtnContainerClassName="bg-red-500"
                         />
-                        {/* <div className="py-2 px-4">
-                            <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                        </div> */}
+
                         {/* Children */}
                         <div className="h-[calc(100%-30px)] pt-4">
                             <div className="h-full overflow-auto">

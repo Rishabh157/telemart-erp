@@ -1,41 +1,32 @@
-/// ==============================================
-// Filename:CallListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import CallListing from './CallListing'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/media/inboundCallerSlice'
+
 import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
 import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const CallListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    useUnmountCleanup()
 
     const [, setShowDropdown] = useState(false)
     const inboundCallerState: any = useSelector(
-        (state: RootState) => state.inboundCaller
+        (state: RootState) => state.listingPagination
     )
 
-    const { page, rowsPerPage, searchValue, items } = inboundCallerState
+    const { page, rowsPerPage, searchValue } = inboundCallerState
     const columns: columnTypes[] = [
         {
             field: 'didNo',
@@ -114,38 +105,55 @@ const CallListingWrapper = () => {
         //
         //
         //     ),
-        //     
+        //
         // },
     ]
-
-    const { data, isFetching, isLoading } = useGetPaginationInboundCallerQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData<InbooundCallerListResponse>({
+        useEndPointHook: useGetPaginationInboundCallerQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['didNo'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: '',
+                    value: [],
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
+    // const { data, isFetching, isLoading } = useGetPaginationInboundCallerQuery({
+    //     limit: rowsPerPage,
+    //     searchValue: searchValue,
+    //     params: ['didNo'],
+    //     page: page,
+    //     filterBy: [
+    //         {
+    //             fieldName: '',
+    //             value: [],
+    //         },
+    //     ],
+    //     dateFilter: {},
+    //     orderBy: 'createdAt',
+    //     orderByValue: -1,
+    //     isPaginationRequired: true,
+    // })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
+    // useEffect(() => {
+    //     if (!isFetching && !isLoading) {
+    //         dispatch(setIsTableLoading(false))
+    //         dispatch(setItems(data?.data || []))
+    //         dispatch(setTotalItems(data?.totalItem || 4))
+    //     } else {
+    //         dispatch(setIsTableLoading(true))
+    //     }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [isLoading, isFetching, data])
 
     return (
         <>

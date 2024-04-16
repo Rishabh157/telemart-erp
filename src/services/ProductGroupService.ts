@@ -38,7 +38,7 @@ export const productGroupApi = apiSlice.injectEndpoints({
         getAllProductGroup: builder.query({
             providesTags: ['productGroup'],
             query: (companyId) => ({
-                url: `/product-group/company/${companyId}`,
+                url: `/product-group`,
                 method: 'GET',
                 // body,
             }),

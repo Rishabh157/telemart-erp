@@ -21,7 +21,7 @@ import {
     vendorSlice,
 } from './slices'
 import ListingPaginationSlice from './slices/ListingPaginationSlice'
-import ASRSlice from './slices/ASRSlice'
+// import ASRSlice from './slices/ASRSlice'
 import attributesGroupSlice from './slices/attributesGroupSlice'
 import attributesSlice from './slices/attributesSlice'
 import cartonBoxSlice from './slices/cartonBoxSlice'
@@ -111,14 +111,6 @@ import DashboardSlice from './slices/DashboardSlice'
 import dealerInventorySlice from './slices/dealerInventorySlice'
 import MultiOrderSearchSlice from './slices/MultiOrderSearchSlice'
 import DealerToDealerSlice from './slices/DealerToDealerOrderSlice'
-// Middleware for handling 401 Error
-// const authMiddelware = () => (next: any) => (action: any) => {
-//     if (action.type.includes("rejected") && action.payload.status === 401) {
-//         localStorage.clear(
-//         window.location.href = "/"
-//     }
-//     return next(action)
-// }
 
 const store = configureStore({
     reducer: {
@@ -165,7 +157,7 @@ const store = configureStore({
         products: productSlice,
         tehsils: tehsilSlice,
         pincode: pincodeSlice,
-        asr: ASRSlice,
+        // asr: ASRSlice,
         country: countrySlice,
         configurationCompany: configurationCompanySlice,
         companybranch: companyBranchSlice,

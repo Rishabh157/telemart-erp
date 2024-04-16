@@ -24,8 +24,9 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
-    allItems: any
+    // allItems: any
     apiStatus: boolean
+    attributeOptions:  [] | any
 }
 
 // Breadcrumbs
@@ -39,12 +40,15 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
-    const [allOptions, setAllOtions] = useState([])
+const AddAttributeGroup = ({
+    formikProps,
+    // allItems,
+    apiStatus,
+    attributeOptions = [],
+}: Props) => {
+    const [allOptions, setAllOtions] = useState< []>([])
     const [flag, setFlag] = useState(true)
-    const attributeOptions = allItems?.map((ele: any) => {
-        return { label: ele.attributeName, value: ele._id }
-    })
+
     useEffect(() => {
         if (flag && attributeOptions?.length) {
             setFlag(false)
@@ -53,11 +57,10 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
     }, [flag, attributeOptions])
 
     const { values, setFieldValue } = formikProps
-    const options: { label: string; value: string }[] = allOptions
 
     const transferListProps = {
         name: 'attributes',
-        options,
+        options:allOptions,
         right: values.attributes,
         setRight: (newValue: { label: string; value: string }[]) =>
             setFieldValue('attributes', newValue),
@@ -124,7 +127,7 @@ const AddAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
                         </div>
 
                         <div className="h-[300px] mt-8">
-                            {options ? (
+                            {allOptions ? (
                                 <ATMTransferList {...transferListProps} />
                             ) : null}
                         </div>

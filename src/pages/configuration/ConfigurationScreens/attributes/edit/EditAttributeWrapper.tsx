@@ -1,32 +1,26 @@
-/// ==============================================
-// Filename:EditAttributesWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditAttribute from './EditAttribute'
 
-import { showToast } from 'src/utils'
 import {
     useGetattributesByIdQuery,
     useUpdateattributesMutation,
 } from 'src/services/AttributeService'
-import { setSelectedAttribute } from 'src/redux/slices/attributesSlice'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AttributesListResponse } from 'src/models'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -41,16 +35,16 @@ const EditAttributeWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
-    const { selectedAttribute }: any = useSelector(
-        (state: RootState) => state.attributes
-    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [EditAttributes] = useUpdateattributesMutation()
-    const { data, isLoading } = useGetattributesByIdQuery(Id)
+    const { items } = useGetDataByIdCustomQuery<AttributesListResponse>({
+        useEndPointHook: useGetattributesByIdQuery(Id),
+    })
     const initialValues: FormInitialValues = {
-        attributeName: selectedAttribute?.attributeName || '',
+        attributeName: items?.attributeName || '',
     }
 
     // Form Validation Schema
@@ -85,9 +79,6 @@ const EditAttributeWrapper = (props: Props) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        dispatch(setSelectedAttribute(data?.data))
-    }, [dispatch, data, isLoading])
     return (
         <Formik
             enableReinitialize

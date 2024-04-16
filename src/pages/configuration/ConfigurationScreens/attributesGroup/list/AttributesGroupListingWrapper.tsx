@@ -1,15 +1,9 @@
-// Filename:AttributeGroupListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showToast } from 'src/utils'
 
@@ -20,11 +14,6 @@ import { AttributesGroupListResponse } from 'src/models/AttrbutesGroup.model'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/attributesGroupSlice'
-import {
     useDeleteattributeGroupMutation,
     useGetAttributeGroupQuery,
 } from 'src/services/AttributeGroup'
@@ -32,10 +21,13 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import AttributesGroupListing from './AttributesGroupListing'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 
 const AttributesGroupListingWrapper = () => {
+    useUnmountCleanup()
     const navigate = useNavigate()
     const [deleteAttGroup] = useDeleteattributeGroupMutation()
     const [showDropdown, setShowDropdown] = useState(false)
@@ -43,7 +35,6 @@ const AttributesGroupListingWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -57,7 +48,6 @@ const AttributesGroupListingWrapper = () => {
                         UserModuleNameTypes.ACTION_ATTRIBUTE_GROUP_DELETE
                     )}
                     handleOnAction={() => {
-                        // e.stopPropagation()
                         setShowDropdown(!showDropdown)
                         setCurrentId(row?._id)
                     }}
@@ -80,7 +70,6 @@ const AttributesGroupListingWrapper = () => {
                     }}
                 />
             ),
-            
         },
         {
             field: 'groupName',
@@ -137,41 +126,29 @@ const AttributesGroupListingWrapper = () => {
         },
     ]
     const attributeGroupState: any = useSelector(
-        (state: RootState) => state.attributesGroup
+        (state: RootState) => state.listingPagination
     )
 
-    const { page, rowsPerPage, items, searchValue } = attributeGroupState
+    const { page, rowsPerPage, searchValue } = attributeGroupState
 
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetAttributeGroupQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['groupName', 'attributes'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetAttributeGroupQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['groupName', 'attributes'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const handleDelete = () => {
         setShowDropdown(false)

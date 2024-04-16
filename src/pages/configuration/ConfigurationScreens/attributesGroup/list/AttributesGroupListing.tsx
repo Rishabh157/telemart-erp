@@ -1,9 +1,3 @@
-// Filename:AttributeGroupListing.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -24,7 +18,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/attributesGroupSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -41,9 +35,8 @@ type Props = {
 const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const attributesGroupState: any = useSelector(
-        (state: RootState) => state.attributesGroup
+        (state: RootState) => state.listingPagination
     )
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
@@ -77,8 +70,7 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                         }}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
-                        {' '}
-                        + Add{' '}
+                        + Add
                     </button>
                 )}
             </div>
@@ -95,8 +87,6 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -104,7 +94,6 @@ const AttributesGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

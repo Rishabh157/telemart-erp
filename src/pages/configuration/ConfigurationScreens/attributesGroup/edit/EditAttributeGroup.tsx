@@ -1,32 +1,26 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// Filename:EditAttributeGroup.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
+import { useDispatch } from 'react-redux'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './EditAttributeGroupWrapper'
 import ATMTransferList from 'src/components/UI/atoms/ATMTransferList/ATMTransferList'
-import { useDispatch } from 'react-redux'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { FormInitialValues } from './EditAttributeGroupWrapper'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
-    allItems: any
     apiStatus: boolean
+    attributeOptions: [] | any
 }
 
 // Breadcrumbs
@@ -40,15 +34,17 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
+const EditAttributeGroup = ({
+    formikProps,
+    apiStatus,
+    attributeOptions = [],
+}: Props) => {
     const { values, setFieldValue } = formikProps
     const [flag, setFlag] = useState(false)
     const [filteredOptions, setFilteredOptions] = useState<
         { label: string; value: string }[]
     >([])
-    const attributeOptions = allItems?.map((ele: any) => {
-        return { label: ele.attributeName, value: ele._id }
-    })
+
     useEffect(() => {
         if (attributeOptions?.length) setFlag(true)
     }, [attributeOptions])
@@ -63,6 +59,7 @@ const EditAttributeGroup = ({ formikProps, allItems, apiStatus }: Props) => {
             })
             setFilteredOptions(result || [])
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [values.attributes, flag])
 
     const transferListProps = {
