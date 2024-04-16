@@ -198,10 +198,10 @@ const OrderListing = ({
                         fieldName: 'companyId',
                         value: userData?.companyId,
                     },
-                    {
-                        fieldName: 'orderNumber',
-                        value: null,
-                    },
+                    // {
+                    //     fieldName: 'orderNumber',
+                    //     value: null,
+                    // },
                     {
                         fieldName: 'mobileNo',
                         value: [orderMobSearchValue],
