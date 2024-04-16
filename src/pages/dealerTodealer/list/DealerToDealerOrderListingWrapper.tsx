@@ -182,7 +182,7 @@ const DealerToDealerOrderListingWrapper = () => {
             field: '_id',
             headerName: 'Dealer To Dealer Number',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
+            name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_D_To_D_NUMBER,
             renderCell: (row: DealerToDealerListResponseTypes) => (
                 <span> {row?._id} </span>
             ),
@@ -191,7 +191,7 @@ const DealerToDealerOrderListingWrapper = () => {
             field: 'fromDealerLabelLabel',
             headerName: 'From Dealer',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DEALER_NAME,
+            name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_DEALER_FROM_DEALER,
             align: 'center',
             renderCell: (row: DealerToDealerListResponseTypes) => (
                 <>
@@ -209,7 +209,7 @@ const DealerToDealerOrderListingWrapper = () => {
             field: 'toDealerLabelLabel',
             headerName: 'To Dealer',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DEALER_NAME,
+            name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_TO_DEALER,
             align: 'center',
             renderCell: (row: DealerToDealerListResponseTypes) => (
                 <>
@@ -227,7 +227,7 @@ const DealerToDealerOrderListingWrapper = () => {
             field: 'requestCreatedByLabel',
             headerName: 'Request Created By',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_REQUEST_CREATED_BY,
             align: 'center',
             renderCell: (row: DealerToDealerListResponseTypes) => {
                 return <span> {row?.requestCreatedByLabel} </span>
@@ -237,7 +237,7 @@ const DealerToDealerOrderListingWrapper = () => {
             field: 'items',
             headerName: 'Items / Quantity',
             flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_ITEM_QUANTITY,
+            name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_ITEM_AND_QUANTITY,
             align: 'center',
             renderCell: (row: DealerToDealerListResponseTypes) => {
                 return (
@@ -265,7 +265,7 @@ const DealerToDealerOrderListingWrapper = () => {
             field: 'requestApproved',
             headerName: 'First Status',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_STATUS,
+            name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_FIRST_STATUS,
             align: 'center',
             renderCell: (row: DealerToDealerListResponseTypes) => {
                 return (
@@ -283,7 +283,7 @@ const DealerToDealerOrderListingWrapper = () => {
             field: 'requestApprovedByLabel',
             headerName: 'First Approved By',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
+            name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_DH_FIRST_APPROVED_BY,
             align: 'center',
             renderCell: (row: DealerToDealerListResponseTypes) => {
                 return <span> {row?.requestApprovedByLabel} </span>
@@ -293,7 +293,7 @@ const DealerToDealerOrderListingWrapper = () => {
             field: 'Approved',
             headerName: 'Approval',
             flex: 'flex-[1.0_1.0_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_APPROVAL,
+            name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_ACCOUNT_APPROVAL,
             align: 'center',
             renderCell: (row: DealerToDealerListResponseTypes) => {
                 return (

@@ -67,6 +67,7 @@ import { default as warehouseFirstCallOrdersjson } from '../../utils/mediaJson/w
 import { default as offerAppliedNdrJson } from '../../utils/mediaJson/offerAppliedNdr.json'
 import { default as dealersInventoryJson } from '../../utils/mediaJson/dealersInventory.json'
 import { default as multiOrderSearchJson } from '../../utils/mediaJson/multiOrderSearch.json'
+import { default as dealerToDealerRequestJson } from '../../utils/mediaJson/dealerToDealerJson.json'
 
 export const mergeUserModules = [
     { ...dashboardJson },
@@ -81,6 +82,7 @@ export const mergeUserModules = [
     { ...grnJson },
     { ...inventoryFlowJson },
     { ...saleOrderJson },
+    { ...dealerToDealerRequestJson },
     { ...returnToVendorJson },
     { ...warehouseTransferJson },
     { ...sampleTransferJson },

@@ -288,8 +288,8 @@ import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiO
 import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
 import OutwardShipyaariOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/ShipyaariOrders/OutwardShipyaariOrdersTabListingWrapper'
 import DealerToDealerOrderListingWrapper from './pages/dealerTodealer/list/DealerToDealerOrderListingWrapper'
-import AddDealerToDealerOrderWrapper from './pages/dealerTodealer/add/AddDealerToDealerOrderWrapper'
-import EditDealerToDealerOrderWrapper from './pages/dealerTodealer/edit/EditDealerToDealerOrderWrapper'
+// import AddDealerToDealerOrderWrapper from './pages/dealerTodealer/add/AddDealerToDealerOrderWrapper'
+// import EditDealerToDealerOrderWrapper from './pages/dealerTodealer/edit/EditDealerToDealerOrderWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1050,18 +1050,20 @@ const PageRoutes = () => {
                     }
                 />
 
-                {/* Dealer To Dealer Order */}
+                {/* Dealer To Dealer Request */}
                 <Route
                     path="/dealer-to-dealer"
                     element={
                         <Authorization
                             children={<DealerToDealerOrderListingWrapper />}
-                            permission={UserModuleNameTypes.NAV_SALE_ORDER}
+                            permission={
+                                UserModuleNameTypes.NAV_DEALER_TO_DEALER
+                            }
                         />
                     }
                 />
                 {/* Add */}
-                <Route
+                {/* <Route
                     path="/dealer-to-dealer/add"
                     element={
                         <Authorization
@@ -1071,9 +1073,9 @@ const PageRoutes = () => {
                             }
                         />
                     }
-                />
+                /> */}
 
-                <Route
+                {/* <Route
                     path="/dealer-to-dealer/:id"
                     element={
                         <Authorization
@@ -1083,7 +1085,7 @@ const PageRoutes = () => {
                             }
                         />
                     }
-                />
+                /> */}
 
                 {/* Sale Order */}
                 <Route
