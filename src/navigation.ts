@@ -118,7 +118,7 @@ export const navigation: NavItemType[] = [
         label: 'Dealer To Dealer',
         icon: TbCloudDataConnection,
         path: '/dealer-to-dealer',
-        name: UserModuleNameTypes.NAV_SALE_ORDER,
+        name: UserModuleNameTypes.NAV_DEALER_TO_DEALER,
     },
     {
         label: 'Sale Order',

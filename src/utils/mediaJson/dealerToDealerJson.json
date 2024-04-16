@@ -1,0 +1,55 @@
+{
+    "moduleId": "NAV_DEALER_TO_DEALER",
+    "moduleName": "NAV_DEALER_TO_DEALER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_LIST_DEALER_TO_DEALER",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "DEALER_TO_DEALER_LIST_D_To_D_NUMBER",
+                    "fieldName": "Dealer To Dealer Number",
+                    "fieldValue": "soNumber"
+                },
+                {
+                    "fieldId": "DEALER_TO_DEALER_LIST_DEALER_FROM_DEALER",
+                    "fieldName": "From Dealer",
+                    "fieldValue": "dealerLabel"
+                },
+                {
+                    "fieldId": "DEALER_TO_DEALER_LIST_TO_DEALER",
+                    "fieldName": "To Dealer",
+                    "fieldValue": "warehouseStateLabel"
+                },
+                {
+                    "fieldId": "DEALER_TO_DEALER_LIST_REQUEST_CREATED_BY",
+                    "fieldName": "Request Created By",
+                    "fieldValue": "groupName"
+                },
+                {
+                    "fieldId": "DEALER_TO_DEALER_LIST_ITEM_AND_QUANTITY",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "dhApproved"
+                },
+                {
+                    "fieldId": "DEALER_TO_DEALER_LIST_FIRST_STATUS",
+                    "fieldName": "First Status",
+                    "fieldValue": "dhApprovedActionBy"
+                },
+                {
+                    "fieldId": "DEALER_TO_DEALER_LIST_DH_FIRST_APPROVED_BY",
+                    "fieldName": "First Approved By",
+                    "fieldValue": "dhApprovedAt"
+                },
+                {
+                    "fieldId": "DEALER_TO_DEALER_LIST_ACCOUNT_APPROVAL",
+                    "fieldName": "Approval",
+                    "fieldValue": "accApproved"
+                }
+            ]
+        }
+    ]
+}
