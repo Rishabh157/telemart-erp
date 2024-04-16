@@ -25,7 +25,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/attributesSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -46,7 +46,7 @@ const AttributesListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
     const attributesState: any = useSelector(
-        (state: RootState) => state.attributes
+        (state: RootState) => state.listingPagination
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 

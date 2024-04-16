@@ -11,10 +11,16 @@ export interface ListingPaginationSliceStateType {
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedId: string
     filterValue: string
+    dateFilter: {
+        startDate: string,
+        endDate: string,
+    },
     filterBy: any
     filterkeysValue: any
     isActive: string | boolean
     selectedItem: null | any
+    orderNumberSearch: any
+    complaintNumberSearch: any
 }
 
 const initialState: ListingPaginationSliceStateType = {
@@ -30,6 +36,12 @@ const initialState: ListingPaginationSliceStateType = {
     filterBy: {},
     selectedItem: null,
     isActive: '',
+    dateFilter: {
+        startDate: '',
+        endDate: '',
+    },
+    orderNumberSearch: '',
+    complaintNumberSearch: '',
     filterkeysValue: {
         schemeId: '',
         orderStatus: '',
@@ -102,6 +114,15 @@ const ListingPaginationSlice: Slice<ListingPaginationSliceStateType> =
             ) => {
                 state.filterkeysValue = action.payload
             },
+            setDateFilter: (state, action: PayloadAction<any>) => {
+                state.dateFilter = action.payload
+            },
+            setOrderNumberSearch: (state, action: PayloadAction<any>) => {
+                state.orderNumberSearch = action.payload
+            },
+            setComplaintNumberSearch: (state, action: PayloadAction<any>) => {
+                state.complaintNumberSearch = action.payload
+            },
         },
     })
 
@@ -119,6 +140,9 @@ export const {
     setOrdersFilterKeysValue,
     setIsActivate,
     setSelectedItem,
+    setOrderNumberSearch,
+    setComplaintNumberSearch,
+    setDateFilter
 } = ListingPaginationSlice.actions
 
 export default ListingPaginationSlice.reducer

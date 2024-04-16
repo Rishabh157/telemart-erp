@@ -1,9 +1,4 @@
-/// ==============================================
-// Filename:AttributeService.tsx
-// Type: Service Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
+
 
 // |-- Internal Dependencies --|
 import { AddAttributes, UpdateAttributes } from 'src/models'
@@ -26,7 +21,7 @@ export const attributesApi = apiSlice.injectEndpoints({
         getAllAttributes: builder.query({
             providesTags: ['attributes'],
             query: (companyId) => ({
-                url: `/attribute/company/${companyId}`,
+                url: `/attribute`,
                 method: 'GET',
                 // body,
             }),
@@ -81,9 +76,8 @@ export const attributesApi = apiSlice.injectEndpoints({
         // **** Delete
         deleteattributes: builder.mutation({
             invalidatesTags: ['attributes', 'attributeGroup'],
-            query: (id) => ({
+            query: (id: any) => ({
                 url: `/attribute/${id}`,
-
                 method: 'DELETE',
             }),
         }),

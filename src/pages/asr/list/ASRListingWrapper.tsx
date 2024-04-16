@@ -29,7 +29,6 @@ import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const ASRListingWrapper = () => {
     useUnmountCleanup()
-
     // state
     const [currentId, setCurrentId] = useState('')
     const [isDisabled, setIsDisabled] = useState(false)

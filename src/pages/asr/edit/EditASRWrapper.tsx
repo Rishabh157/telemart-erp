@@ -1,37 +1,30 @@
-/// ==============================================
-// Filename:EditAsrWrapper.tsx
-// Type: Edit Wrapper Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { array, object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditASR from './EditASR'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { showToast } from 'src/utils'
 import {
     useGetAsrByIdQuery,
     useUpdateAsrMutation,
 } from 'src/services/AsrService'
-import { setSelectedItem } from 'src/redux/slices/ASRSlice'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import { setItems } from 'src/redux/slices/productGroupSlice'
+import { showToast } from 'src/utils'
+import EditASR from './EditASR'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ASRListResponse } from 'src/models'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
-type Props = {}
 
 export type FormInitialValues = {
     asrDetails: {
@@ -41,7 +34,7 @@ export type FormInitialValues = {
     }[]
 }
 
-const EditASRWrapper = (props: Props) => {
+const EditASRWrapper = () => {
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()
@@ -50,18 +43,19 @@ const EditASRWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [editAsr] = useUpdateAsrMutation()
-    const { data, isLoading, isFetching } = useGetAsrByIdQuery(Id)
-    const {
-        data: productGroupData,
-        isLoading: pgIsLoading,
-        isFetching: pgIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
+    const { items: selectedItem } = useGetDataByIdCustomQuery<ASRListResponse>({
+        useEndPointHook: useGetAsrByIdQuery(Id),
+    })
 
-    const { selectedItem }: any = useSelector((state: RootState) => state?.asr)
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        asrDetails: selectedItem?.asrDetails,
+        asrDetails: selectedItem?.asrDetails as any,
     }
 
     // Form Validation Schema
@@ -103,14 +97,6 @@ const EditASRWrapper = (props: Props) => {
         })
     }
 
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
-
-    useEffect(() => {
-        dispatch(setItems(productGroupData?.data))
-    }, [dispatch, productGroupData, pgIsLoading, pgIsFetching])
-
     return (
         <SideNavLayout>
             <Formik
@@ -124,6 +110,7 @@ const EditASRWrapper = (props: Props) => {
                         <EditASR
                             apiStatus={apiStatus}
                             formikProps={formikProps}
+                            dropDownOptions={options}
                         />
                     )
                 }}

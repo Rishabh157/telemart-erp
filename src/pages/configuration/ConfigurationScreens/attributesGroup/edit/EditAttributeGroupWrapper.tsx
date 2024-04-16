@@ -1,34 +1,29 @@
-// Filename:EditAttributeGroupWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { array, object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditAttributeGroup from './EditAttributeGroup'
 
-// import { useEditAttributeGroupMutation } from "src/services/AttributeGroup";
-import { showToast } from 'src/utils'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     useGetattributeGroupByIdQuery,
     useUpdateattributeGroupMutation,
 } from 'src/services/AttributeGroup'
-import { setSelectedAttGroup } from 'src/redux/slices/attributesGroupSlice'
 import { useGetAllAttributesQuery } from 'src/services/AttributeService'
-import { setAllItems } from 'src/redux/slices/attributesSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AttributesGroupListResponse } from 'src/models'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -45,28 +40,24 @@ const EditAttributeGroupWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const dispatch = useDispatch<AppDispatch>()
     // Form Initial Values
-    const { selectedAttributeGroup }: any = useSelector(
-        (state: RootState) => state.attributesGroup
-    )
-    const { allItems }: any = useSelector(
-        (state: RootState) => state.attributes
-    )
-    const { data, isLoading, isFetching } = useGetattributeGroupByIdQuery(Id)
-    const {
-        data: attributeData,
-        isLoading: attrLoading,
-        isFetching: attrIsFetching,
-    } = useGetAllAttributesQuery(userData?.companyId)
+
+    const { items } = useGetDataByIdCustomQuery<AttributesGroupListResponse>({
+        useEndPointHook: useGetattributeGroupByIdQuery(Id),
+    })
+
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAllAttributesQuery(''),
+        keyName: 'attributeName',
+        value: '_id',
+    })
 
     const [EditAttributeGroups] = useUpdateattributeGroupMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const attributeOptions = selectedAttributeGroup?.attributes?.map(
-        (ele: any) => {
-            return { label: ele.label, value: ele.value }
-        }
-    )
+    const attributeOptions = items?.attributes?.map((ele: any) => {
+        return { label: ele.label, value: ele.value }
+    })
     const initialValues: FormInitialValues = {
-        group_name: selectedAttributeGroup?.groupName || '',
+        group_name: items?.groupName || '',
         attributes: attributeOptions || [],
     }
 
@@ -111,13 +102,6 @@ const EditAttributeGroupWrapper = (props: Props) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        dispatch(setSelectedAttGroup(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
-
-    useEffect(() => {
-        dispatch(setAllItems(attributeData?.data))
-    }, [dispatch, attributeData, attrLoading, attrIsFetching])
     return (
         <Formik
             enableReinitialize
@@ -130,7 +114,8 @@ const EditAttributeGroupWrapper = (props: Props) => {
                     <EditAttributeGroup
                         apiStatus={apiStatus}
                         formikProps={formikProps}
-                        allItems={allItems}
+                       
+                        attributeOptions={options}
                     />
                 )
             }}

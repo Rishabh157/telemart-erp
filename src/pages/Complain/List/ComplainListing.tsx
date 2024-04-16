@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:CallListing.tsx
-// Type: ADD Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -22,7 +15,7 @@ import {
     setSearchValue,
     setOrderNumberSearch,
     setComplaintNumberSearch,
-} from 'src/redux/slices/ComplainSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -37,7 +30,9 @@ type Props = {
 
 const ComplainListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const complainState: any = useSelector((state: RootState) => state.complain)
+    const complainState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const [selectedRows, setSelectedRows] = useState([])
     const {
         page,
@@ -52,18 +47,10 @@ const ComplainListing = ({ columns, rows, setShowDropdown }: Props) => {
         useState<boolean>(false)
 
     return (
-        // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
         <div className="px-4 h-[calc(100vh-55px)] bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Complaint </ATMPageHeading>
-                {/* <button
-                    type="button"
-                    onClick={() => navigate('add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add 
-                </button> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -108,13 +95,11 @@ const ComplainListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
                         setShowDropdown={setShowDropdown}
-                        // extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

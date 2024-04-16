@@ -4,16 +4,13 @@ import React, { useEffect, useState } from 'react'
 // |-- External Dependencies --|
 import { Formik } from 'formik'
 import { array, object, string } from 'yup'
-// import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddSchemeToDealerMapping from './AddSchemeToDealerMapping'
 
-// import { useAddAttributeGroupMutation } from 'src/services/AttributeGroup'
 import { showToast } from 'src/utils'
-// import { useGetAllAttributesQuery } from 'src/services/AttributeService'
-// import { setAllItems } from 'src/redux/slices/attributesSlice'
+
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useSaveMultipleDealerToSingleSchemeMutation } from 'src/services/DealerServices'

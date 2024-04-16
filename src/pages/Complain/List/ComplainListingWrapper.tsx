@@ -1,85 +1,62 @@
-/// ==============================================
-// Filename:CallListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
-
+import React, { useState } from 'react'
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
-
+import { useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/ComplainSlice'
 import { useGetPaginationComplaintQuery } from 'src/services/CallerService'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import ComplainListing from './ComplainListing'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import SingleComplaintListingLogsWrapper from 'src/pages/CustomerComplain/components/ComplaintListing/SingleComplaintLogs/SingleComplaintListingLogsWrapper'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const ComplainListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
-
+    useUnmountCleanup()
     const [currentId, setCurrentId] = useState('')
     const [isFlowDialogShow, setIsFlowDialogShow] =
         React.useState<boolean>(false)
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
-    const complainState: any = useSelector((state: RootState) => state.complain)
+    const complainState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
     const {
         page,
         rowsPerPage,
         searchValue,
-        items,
         dateFilter,
         orderNumberSearch,
         complaintNumberSearch,
     } = complainState
-
-    const { data, isFetching, isLoading } = useGetPaginationComplaintQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['customerNumber'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'orderNumber',
-                value: orderNumberSearch,
-            },
-            {
-                fieldName: 'complaintNumber',
-                value: complaintNumberSearch,
-            },
-        ],
-        dateFilter: dateFilter,
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData<any>({
+        useEndPointHook: useGetPaginationComplaintQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['customerNumber'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'orderNumber',
+                    value: orderNumberSearch,
+                },
+                {
+                    fieldName: 'complaintNumber',
+                    value: complaintNumberSearch,
+                },
+            ],
+            dateFilter: dateFilter,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
         {
@@ -99,7 +76,6 @@ const ComplainListingWrapper = () => {
                     }}
                 />
             ),
-            
         },
         {
             field: 'orderNumber',

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -19,12 +19,13 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useAddAsrMutation } from 'src/services/AsrService'
 import { showToast } from 'src/utils'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import { setItems } from 'src/redux/slices/productGroupSlice'
+// import { setItems } from 'src/redux/slices/productGroupSlice'
 
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {}
@@ -43,9 +44,12 @@ const AddASRWrapper = (props: Props) => {
     const [addAsr] = useAddAsrMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { data, isLoading, isFetching } = useGetAllProductGroupQuery(
-        userData?.companyId
-    )
+
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
@@ -92,10 +96,6 @@ const AddASRWrapper = (props: Props) => {
         })
     }
 
-    useEffect(() => {
-        dispatch(setItems(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
-
     return (
         <SideNavLayout>
             <Formik
@@ -108,6 +108,7 @@ const AddASRWrapper = (props: Props) => {
                         <AddASR
                             apiStatus={apiStatus}
                             formikProps={formikProps}
+                            dropDownOptions={options}
                         />
                     )
                 }}

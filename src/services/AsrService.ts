@@ -22,15 +22,15 @@ export const asrApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET *****/
-        getAllAsr: builder.query({
-            providesTags: ['Asr'],
-            query: () => ({
-                url: '/asr',
-                method: 'GET',
-                // body,
-            }),
-        }),
+        // //***** GET *****/
+        // getAllAsr: builder.query({
+        //     providesTags: ['Asr'],
+        //     query: () => ({
+        //         url: '/asr',
+        //         method: 'GET',
+        //         // body,
+        //     }),
+        // }),
 
         //***** ADD *****/
         addAsr: builder.mutation({
@@ -64,19 +64,19 @@ export const asrApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportAsrData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
+        // //**** Export
+        // exportAsrData: builder.mutation({
+        //     query: (body: PaginationType) => ({
+        //         url: '',
 
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
+        //         params: {
+        //             _page: body.page,
+        //             _limit: body.limit,
+        //         },
+        //         method: 'GET',
+        //         // body,
+        //     }),
+        // }),
 
         //**** Status
         updateAsrStatus: builder.mutation({
@@ -105,7 +105,7 @@ export const {
     useUpdateAsrMutation,
     useUpdateAsrStatusMutation,
     useGetAsrByIdQuery,
-    useExportAsrDataMutation,
+    // useExportAsrDataMutation,
     useDeleteAsrMutation,
-    useGetAllAsrQuery,
+    // useGetAllAsrQuery,
 } = asrApi

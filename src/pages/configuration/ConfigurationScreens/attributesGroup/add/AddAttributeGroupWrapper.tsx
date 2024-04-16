@@ -1,11 +1,5 @@
-// Filename:AddAttributeGroupWrapper.tsx
-// Type: Add Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -19,11 +13,11 @@ import AddAttributeGroup from './AddAttributeGroup'
 import { useAddAttributeGroupMutation } from 'src/services/AttributeGroup'
 import { showToast } from 'src/utils'
 import { useGetAllAttributesQuery } from 'src/services/AttributeService'
-import { setAllItems } from 'src/redux/slices/attributesSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {}
@@ -38,10 +32,12 @@ const AddAttributeGroupWrapper = (props: Props) => {
     // Form Initial Values
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allItems } = useSelector((state: RootState) => state?.attributes)
-    const { data, isLoading, isFetching } = useGetAllAttributesQuery(
-        userData?.companyId
-    )
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAllAttributesQuery(''),
+        keyName: 'attributeName',
+        value: '_id',
+    })
+
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [AddAttributeGroups] = useAddAttributeGroupMutation()
 
@@ -88,10 +84,6 @@ const AddAttributeGroupWrapper = (props: Props) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        dispatch(setAllItems(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
-
     return (
         <Formik
             initialValues={initialValues}
@@ -103,7 +95,8 @@ const AddAttributeGroupWrapper = (props: Props) => {
                     <AddAttributeGroup
                         apiStatus={apiStatus}
                         formikProps={formikProps}
-                        allItems={allItems}
+                        // allItems={allItems}
+                        attributeOptions={options}
                     />
                 )
             }}
