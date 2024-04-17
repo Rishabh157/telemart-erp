@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:CallCenterMasterListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -18,37 +11,69 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CallCenterMasterListResponse } from 'src/models/CallCenterMaster.model'
 
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/CallCenterMasterSlice'
-import {
     useDeleteCallCenterMasterMutation,
     useGetCallCenterMasterQuery,
 } from 'src/services/CallCenterMasterServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import CallCenterMasterListing from './CallCenterMasterListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
-// import { setIsTableLoading } from 'src/redux/slices/CallCenterMasterSlice'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const CallCenterMasterListingWrapper = () => {
+    useUnmountCleanup()
     const callCenterState: any = useSelector(
-        (state: RootState) => state.attributes
+        (state: RootState) => state.listingPagination
     )
     const [deleteAttribute] = useDeleteCallCenterMasterMutation()
     const navigate = useNavigate()
-    const { page, rowsPerPage, searchValue, items } = callCenterState
+    const { page, rowsPerPage, searchValue } = callCenterState
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
+    const { items } = useGetCustomListingData<CallCenterMasterListResponse>({
+        useEndPointHook: useGetCallCenterMasterQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['callCenterName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteAttribute(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Call center deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
     const columns: columnTypes[] = [
-        
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -84,7 +109,7 @@ const CallCenterMasterListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'callCenterName',
@@ -97,53 +122,6 @@ const CallCenterMasterListingWrapper = () => {
             ),
         },
     ]
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetCallCenterMasterQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['callCenterName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteAttribute(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Call center deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     return (
         <CallCenterMasterListing
             columns={columns}

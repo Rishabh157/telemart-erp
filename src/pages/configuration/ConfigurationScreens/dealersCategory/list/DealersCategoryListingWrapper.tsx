@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:ListDealerCategoryWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -18,11 +11,6 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DealersCategoryListResponse } from 'src/models/DealersCategory.model'
 
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/dealersCategorySlice'
-import {
     useDeleteDealerCategoryMutation,
     useGetDealerCategoryQuery,
 } from 'src/services/DealerCategoryService'
@@ -30,21 +18,66 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DealersCategoryListing from './DealersCategoryListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 
 const DealersCategoryListingWrapper = () => {
+    useUnmountCleanup()
+
     const navigate = useNavigate()
     const [deleteDealersCategory] = useDeleteDealerCategoryMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const dealersCategoryState: any = useSelector(
-        (state: RootState) => state.dealersCategory
+        (state: RootState) => state.listingPagination
     )
 
-    const columns: columnTypes[] = [
-        
+    const { page, rowsPerPage, searchValue } = dealersCategoryState
+    const { userData } = useSelector((state: RootState) => state?.auth)
+  
+    const { items } = useGetCustomListingData<DealersCategoryListResponse>({
+        useEndPointHook: useGetDealerCategoryQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['dealersCategory'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: '',
+                    value: [],
+                },
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteDealersCategory(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+     const columns: columnTypes[] = [
         {
             field: 'actions',
             headerName: 'Actions',
@@ -80,7 +113,7 @@ const DealersCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'dealersCategory',
@@ -119,60 +152,6 @@ const DealersCategoryListingWrapper = () => {
             ),
         },
     ]
-    const { page, rowsPerPage, searchValue, items } = dealersCategoryState
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const dispatch = useDispatch<AppDispatch>()
-    // // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetDealerCategoryQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['dealersCategory'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteDealersCategory(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     return (
         <>
             <DealersCategoryListing

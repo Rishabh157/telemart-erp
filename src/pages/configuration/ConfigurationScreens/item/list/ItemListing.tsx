@@ -25,7 +25,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/itemSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
@@ -41,8 +41,7 @@ type Props = {
 
 const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const itemState: any = useSelector((state: RootState) => state.item)
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+    const itemState: any = useSelector((state: RootState) => state.listingPagination)
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =

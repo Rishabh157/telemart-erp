@@ -6,10 +6,10 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -25,27 +25,63 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ProductCategoryListing from './ProductCategoryListing'
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/productCategorySlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const ProductCategoryListingWrapper = () => {
+    useUnmountCleanup()
+
     const productCategoryState: any = useSelector(
-        (state: RootState) => state.productCategory
+        (state: RootState) => state.listingPagination
     )
     const [deleteProductCategory] = useDeleteProductCategoryMutation()
-    const { page, rowsPerPage, searchValue, items } = productCategoryState
+    const { page, rowsPerPage, searchValue } = productCategoryState
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
+
+    const { items } = useGetCustomListingData<ProductCategoryListResponse>({
+        useEndPointHook: useGetProductCategoryQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['categoryCode'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteProductCategory(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+    
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -82,7 +118,7 @@ const ProductCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'categoryCode',
@@ -103,52 +139,6 @@ const ProductCategoryListingWrapper = () => {
             },
         },
     ]
-    const { data, isFetching, isLoading } = useGetProductCategoryQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['categoryCode'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteProductCategory(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
     return (
         <>
             <ProductCategoryListing

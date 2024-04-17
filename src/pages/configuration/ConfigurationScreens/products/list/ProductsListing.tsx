@@ -28,7 +28,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/productSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -40,8 +40,8 @@ type Props = {
 
 const ProductsListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const productsState: any = useSelector((state: RootState) => state.products)
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+    const productsState: any = useSelector((state: RootState) => state.listingPagination)
+
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 

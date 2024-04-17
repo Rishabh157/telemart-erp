@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:SchemeListingWrapper.tsx
-// Type: List Component
-// Last Updated: DEC 16, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -25,47 +18,65 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import SchemeListing from './SchemeListing'
 // |-- Types --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/schemeSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const SchemeListingWrapper = () => {
+
+    useUnmountCleanup()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteScheme] = useDeleteSchemeMutation()
-    const schemeState: any = useSelector((state: RootState) => state.scheme)
-    const { page, rowsPerPage, items, searchValue } = schemeState
+    const schemeState: any = useSelector((state: RootState) => state.listingPagination)
+    const { page, rowsPerPage, searchValue } = schemeState
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const { data, isFetching, isLoading } = useGetAllSchemeQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['schemeName', 'schemeCode'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+
+    const { items } = useGetCustomListingData<SchemeListResponse>({
+        useEndPointHook: useGetAllSchemeQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['schemeName', 'schemeCode'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: '',
+                    value: [],
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
     })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteScheme(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Scheme deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -99,7 +110,7 @@ const SchemeListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'schemeCode',
@@ -151,36 +162,6 @@ const SchemeListingWrapper = () => {
         },
 
     ]
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteScheme(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Scheme deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
     return (
         <SchemeListing
             columns={columns}

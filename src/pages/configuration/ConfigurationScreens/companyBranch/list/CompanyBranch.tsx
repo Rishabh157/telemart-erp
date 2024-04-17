@@ -25,7 +25,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/companyBranchSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -44,7 +44,7 @@ const CompanyBranch = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
 
     const companyBranchState: any = useSelector(
-        (state: RootState) => state.companybranch
+        (state: RootState) => state.listingPagination
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()

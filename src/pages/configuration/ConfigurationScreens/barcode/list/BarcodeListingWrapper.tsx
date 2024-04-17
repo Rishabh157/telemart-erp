@@ -22,12 +22,9 @@ import {
     ProductBarcodeGroupResponse,
 } from 'src/models'
 
-import {
-    setActiveTabIndex,
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/barcodeSlice'
+// import {
+//     setActiveTabIndex,
+// } from 'src/redux/slices/barcodeSlice'
 import BarcodeListing from './BarcodeListing'
 import {
     useGetBarcodeQuery,
@@ -51,6 +48,8 @@ import ProductGroupListing from './components/BarcodeGroup/ProductGroupBarcodeLi
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 // |-- Types --|
 export type Tabs = {
@@ -68,48 +67,41 @@ export type barcodecardType = {
 }
 
 const BarcodeListingWrapper = () => {
-    const barcodeState: any = useSelector((state: RootState) => state.barcode)
+    useUnmountCleanup()
+    const barcodeState: any = useSelector((state: RootState) => state.listingPagination)
     const [groupBarcode, setGroupBarcode] = useState('')
-    const { page, rowsPerPage, searchValue, items, activeTabIndex } =
+    const [activeTabIndex, setActiveTabIndex] = useState(0)
+    const { page, rowsPerPage, searchValue } =
         barcodeState
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     // const navigate = useNavigate()
 
-    const { data, isFetching, isLoading } = useGetBarcodeQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['barcodeNumber', 'productGroupLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'barcodeGroupNumber',
-                value: [groupBarcode],
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetBarcodeQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['barcodeNumber', 'productGroupLabel'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'barcodeGroupNumber',
+                    value: [groupBarcode],
+                },
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
 
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const productGroupState: any = useSelector(
         (state: RootState) => state.productGroupBarcode
@@ -281,14 +273,13 @@ const BarcodeListingWrapper = () => {
                         <button
                             type="button"
                             onClick={() => {
-                                dispatch(setActiveTabIndex(index))
+                                setActiveTabIndex(index)
                             }}
                             key={tabIndex}
-                            className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${
-                                activeTabIndex === index
-                                    ? 'bg-slate-100 text-primary-main '
-                                    : 'text-slate-500'
-                            }`}
+                            className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${activeTabIndex === index
+                                ? 'bg-slate-100 text-primary-main '
+                                : 'text-slate-500'
+                                }`}
                         >
                             <div>
                                 {' '}
@@ -315,10 +306,10 @@ const BarcodeListingWrapper = () => {
                     rows={items}
                     selectedBarcodes={selectedBarcodes}
                     onBarcodeSelect={onBarcodeSelect}
-                    onBarcodeClick={() => {}}
-                    // onBarcodeClick={(barcode: BarcodeListResponseType) =>
-                    //     navigate(`${barcode._id}`)
-                    //}
+                    onBarcodeClick={() => { }}
+                // onBarcodeClick={(barcode: BarcodeListResponseType) =>
+                //     navigate(`${barcode._id}`)
+                //}
                 />
             ) : activeTabIndex === 1 ? (
                 <CartonBoxBarcodeListing />
@@ -329,7 +320,7 @@ const BarcodeListingWrapper = () => {
                     onProductGroupcodeSelect={onProductGroupSelect}
                     onBarcodeClick={(barcode: ProductBarcodeGroupResponse) => {
                         setGroupBarcode(barcode._id)
-                        dispatch(setActiveTabIndex(0))
+                        setActiveTabIndex(0)
                     }}
                 />
             )}

@@ -1,58 +1,81 @@
-/// ==============================================
-// Filename:ProductSubCategoryListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ProductSubCategoryListResponse } from 'src/models/ProductSubCategory.model'
 
-// import {
-//     setIsTableLoading,
-//     setItems,
-//     setTotalItems,
-// } from "src/redux/slices/vendorSlice";
-// import { useGetVendorsQuery } from "src/services/VendorServices";
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import {
     useDeleteProductSubCategoryMutation,
     useGetProductSubCategoryQuery,
 } from 'src/services/ProductSubCategoryService'
 import { showToast } from 'src/utils'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ProductSubCategoryListing from './ProductSubCategoryListing'
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/productSubCategorySlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 
 const ProductSubCategoryListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+
+    useUnmountCleanup()
     const navigate = useNavigate()
     const [deleteProductSubCategory] = useDeleteProductSubCategoryMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const productSubCategoryState: any = useSelector(
-        (state: RootState) => state.productSubCategory
+        (state: RootState) => state.listingPagination
     )
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { page, rowsPerPage, searchValue } = productSubCategoryState
 
+    const { items } = useGetCustomListingData<ProductSubCategoryListResponse>({
+        useEndPointHook: useGetProductSubCategoryQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['subCategoryName', 'subCategoryCode', 'parentCategoryLabel'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteProductSubCategory(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast(
+                        'success',
+                        'Product sub category deleted successfully!'
+                    )
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -88,7 +111,7 @@ const ProductSubCategoryListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'subCategoryCode',
@@ -128,68 +151,12 @@ const ProductSubCategoryListingWrapper = () => {
             },
         },
     ]
-    const { page, rowsPerPage, searchValue, items } = productSubCategoryState
-    // const { userData } = useSelector((state: RootState) => state?.auth)
-
-    // const dispatch = useDispatch<AppDispatch>();
-    // // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetProductSubCategoryQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['subCategoryName', 'subCategoryCode', 'parentCategoryLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteProductSubCategory(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast(
-                        'success',
-                        'Product sub category deleted successfully!'
-                    )
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     return (
-        <>
-            <ProductSubCategoryListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </>
+        <ProductSubCategoryListing
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 

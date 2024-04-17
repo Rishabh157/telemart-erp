@@ -6,10 +6,10 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -18,11 +18,6 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CartonBoxListResponse } from 'src/models/CartonBox.model'
 
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/cartonBoxSlice'
-import {
     useDeleteCartonBoxMutation,
     useGetCartonBoxQuery,
 } from 'src/services/CartonBoxService'
@@ -30,23 +25,61 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import CartonBoxListing from './CartonBoxListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const CartonBoxListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    
+    useUnmountCleanup()
     const navigate = useNavigate()
     const [deleteCartonBox] = useDeleteCartonBoxMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const cartonBoxState: any = useSelector(
-        (state: RootState) => state.cartonBox
-    )
+    const cartonBoxState: any = useSelector((state: RootState) => state.listingPagination)
+    const { page, rowsPerPage, searchValue } = cartonBoxState
+
+    const { items } = useGetCustomListingData<CartonBoxListResponse>({
+        useEndPointHook: useGetCartonBoxQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['boxName', 'innerItemCount'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteCartonBox(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -81,7 +114,7 @@ const CartonBoxListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'boxName',
@@ -127,55 +160,6 @@ const CartonBoxListingWrapper = () => {
         },
 
     ]
-    const { page, rowsPerPage, items, searchValue } = cartonBoxState
-    // const dispatch = useDispatch<AppDispatch>();
-    // // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetCartonBoxQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['boxName', 'innerItemCount'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteCartonBox(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     return (
         <>
             <CartonBoxListing

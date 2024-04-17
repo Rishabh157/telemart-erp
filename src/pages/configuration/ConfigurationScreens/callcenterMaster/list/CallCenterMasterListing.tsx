@@ -25,7 +25,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/CallCenterMasterSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -44,7 +44,7 @@ const CallCenterMasterListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
     const callCenterState: any = useSelector(
-        (state: RootState) => state.callCenter
+        (state: RootState) => state.listingPagination
     )
 
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =

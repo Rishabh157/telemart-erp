@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:ItemListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -19,11 +12,6 @@ import { ItemListResponse } from 'src/models/Item.model'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/itemSlice'
-import {
     useDeleteItemsMutation,
     useGetItemsQuery,
 } from 'src/services/ItemService'
@@ -31,22 +19,61 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import ItemListing from './ItemListing'
 // |-- Redux --|
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const ItemListingWrapper = () => {
+    useUnmountCleanup()
+
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const itemState: any = useSelector((state: RootState) => state.item)
-    const { page, rowsPerPage, searchValue, items } = itemState
+    const itemState: any = useSelector((state: RootState) => state.listingPagination)
+    const { page, rowsPerPage, searchValue } = itemState
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteItem] = useDeleteItemsMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
+    const { items } = useGetCustomListingData<ItemListResponse>({
+        useEndPointHook: useGetItemsQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['itemName', 'itemWeight', 'itemCode'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteItem(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
     const columns: columnTypes[] = [
-        
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -78,7 +105,7 @@ const ItemListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'itemCode',
@@ -110,53 +137,6 @@ const ItemListingWrapper = () => {
         },
 
     ]
-
-    const { data, isFetching, isLoading } = useGetItemsQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['itemName', 'itemWeight', 'itemCode'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteItem(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     return (
         <>
             <ItemListing

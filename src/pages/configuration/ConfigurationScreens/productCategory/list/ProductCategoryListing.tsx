@@ -28,9 +28,8 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/productCategorySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
 type Props = {
@@ -44,7 +43,7 @@ const ProductCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
 
     const productCategoryState: any = useSelector(
-        (state: RootState) => state.productCategory
+        (state: RootState) => state.listingPagination
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =

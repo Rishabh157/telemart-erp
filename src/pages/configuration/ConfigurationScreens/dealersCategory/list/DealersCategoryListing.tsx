@@ -25,7 +25,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/dealersCategorySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -42,7 +42,7 @@ type Props = {
 const DealerCategoryListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const dealerCategoryState: any = useSelector(
-        (state: RootState) => state.dealersCategory
+        (state: RootState) => state.listingPagination
     )
     const navigate = useNavigate()
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =

@@ -25,7 +25,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/languageSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -43,8 +43,7 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const languageState: any = useSelector((state: RootState) => state.language)
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+    const languageState: any = useSelector((state: RootState) => state.listingPagination)
     const navigate = useNavigate()
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
