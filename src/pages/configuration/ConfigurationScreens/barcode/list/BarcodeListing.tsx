@@ -17,7 +17,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/barcodeSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { BarcodeListResponseType } from 'src/models'
 import BarcodeDetailsCard from './components/BarcodeDetailsCard/BarcodeDetailsCard'
 
@@ -47,7 +47,7 @@ const BarcodeListing = ({
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const barcodeState: any = useSelector((state: RootState) => state.barcode)
+    const barcodeState: any = useSelector((state: RootState) => state.listingPagination)
 
     const { page, rowsPerPage, totalItems, searchValue } = barcodeState
 

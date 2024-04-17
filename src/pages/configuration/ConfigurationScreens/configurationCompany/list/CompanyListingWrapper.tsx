@@ -1,47 +1,74 @@
-/// ==============================================
-// Filename:ConfigurationCompanyListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { ConfigurationCompanyListResponse } from 'src/models/ConfigurationCompany.model'
 
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import {
     useDeleteCompanyMutation,
     useGetCompaniesQuery,
 } from 'src/services/CompanyServices'
 import ConfigurationCompanyListing from './CompanyListing'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/companySlice'
+
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const ConfigurationCompanyListingWrapper = () => {
+    useUnmountCleanup()
     const navigate = useNavigate()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteCompany] = useDeleteCompanyMutation()
 
+
+    const { page, rowsPerPage, searchValue }: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+
+    const { items } = useGetCustomListingData<ConfigurationCompanyListResponse>({
+        useEndPointHook: useGetCompaniesQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['companyName', 'phoneNo'],
+            page: page,
+            filterBy: [],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteCompany(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Company deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const columns: columnTypes[] = [
-        
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -76,7 +103,7 @@ const ConfigurationCompanyListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'companyName',
@@ -124,52 +151,6 @@ const ConfigurationCompanyListingWrapper = () => {
             },
         },
     ]
-    const { page, rowsPerPage, items, searchValue }: any = useSelector(
-        (state: RootState) => state.company
-    )
-    const dispatch = useDispatch<AppDispatch>()
-    const { data, isFetching, isLoading } = useGetCompaniesQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['companyName', 'phoneNo'],
-        page: page,
-        filterBy: [],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteCompany(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Company deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
     return (
         <>
             <ConfigurationCompanyListing

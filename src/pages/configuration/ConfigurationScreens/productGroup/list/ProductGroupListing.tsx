@@ -26,7 +26,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/productGroupSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
@@ -41,7 +41,7 @@ type Props = {
 const ProductGroupListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const productGroupState: any = useSelector(
-        (state: RootState) => state.productGroup
+        (state: RootState) => state.listingPagination
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()

@@ -26,9 +26,9 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/productSubCategorySlice'
+    setSearchValue
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setSearchValue } from 'src/redux/slices/productSubCategorySlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -46,7 +46,7 @@ const ProductSubCategoryListing = ({
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const productSubCategoryState: any = useSelector(
-        (state: RootState) => state.productSubCategory
+        (state: RootState) => state.listingPagination
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()

@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:CompanyBranchListingWrapper.tsx
-// Type: List Component
-// Last Updated: SEPTEMBER 11, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -18,11 +11,6 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { CompanyBranchListResponse } from 'src/models/CompanyBranch.model'
 
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/companyBranchSlice'
-import {
     useDeleteCompanyBranchMutation,
     useGetCompanyBranchQuery,
 } from 'src/services/CompanyBranchService'
@@ -30,25 +18,63 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import CompanyBranch from './CompanyBranch'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 
 const CompanyBranchListingWrapper = () => {
+    useUnmountCleanup()
     const navigate = useNavigate()
     const companyBranchState: any = useSelector(
-        (state: RootState) => state.companybranch
+        (state: RootState) => state.listingPagination
     )
     const { userData } = useSelector((state: RootState) => state.auth)
-    const { page, rowsPerPage, items, searchValue } = companyBranchState
+    const { page, rowsPerPage, searchValue } = companyBranchState
 
     const [deleteCompanyBranch] = useDeleteCompanyBranchMutation()
-    const dispatch = useDispatch<AppDispatch>()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
 
+    const { items } = useGetCustomListingData<CompanyBranchListResponse>({
+        useEndPointHook: useGetCompanyBranchQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['branchName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteCompanyBranch(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -82,7 +108,7 @@ const CompanyBranchListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'companyLabel',
@@ -103,53 +129,6 @@ const CompanyBranchListingWrapper = () => {
             ),
         },
     ]
-    const { data, isFetching, isLoading } = useGetCompanyBranchQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['branchName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteCompanyBranch(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
     return (
         <>
             <CompanyBranch

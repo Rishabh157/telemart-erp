@@ -25,7 +25,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/cartonBoxSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
@@ -42,7 +42,7 @@ type Props = {
 const CartonBoxListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const cartonBoxState: any = useSelector(
-        (state: RootState) => state.cartonBox
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
 

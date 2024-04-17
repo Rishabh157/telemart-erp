@@ -25,7 +25,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/schemeSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -37,13 +37,11 @@ type Props = {
 
 const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const schemeState: any = useSelector((state: RootState) => state.scheme)
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+    const schemeState: any = useSelector((state: RootState) => state.listingPagination)
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
-        schemeState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } = schemeState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] ">
