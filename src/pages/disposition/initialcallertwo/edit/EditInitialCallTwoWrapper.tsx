@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik } from 'formik'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { RootState } from 'src/redux/store'
+import { showToast } from 'src/utils'
+import { object, string } from 'yup'
 
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     useGetinitialCallerTwoByIdQuery,
     useUpdateinitialCallerTwoMutation,
 } from 'src/services/configurations/InitialCallerTwoServices'
-import { setSelectedInitialCallerTwo } from 'src/redux/slices/configuration/initialCallerTwoSlice'
 import EditInitialCallTwo from './EditInitialCallTwo'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -28,24 +28,10 @@ const EditInitialCallTwoWrapper = () => {
     const [editInitialCallTwo] = useUpdateinitialCallerTwoMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
-    const { selectedInitialCallerTwo }: any = useSelector(
-        (state: RootState) => state?.initialCallerTwo
-    )
 
-    const {
-        data: InitialCallData,
-        isFetching: InitialCallIsFetching,
-        isLoading: InitialCallIsLoading,
-    } = useGetinitialCallerTwoByIdQuery(Id)
-
-    useEffect(() => {
-        if (!InitialCallIsFetching && !InitialCallIsLoading) {
-            dispatch(setSelectedInitialCallerTwo(InitialCallData?.data || []))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [InitialCallIsLoading, InitialCallIsFetching, InitialCallData])
-
+    const { items: selectedInitialCallerTwo } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetinitialCallerTwoByIdQuery(Id),
+    })
     const initialValues: FormInitialValues = {
         initialCallName: selectedInitialCallerTwo?.initialCallName || '',
         callType: selectedInitialCallerTwo?.callType || '',

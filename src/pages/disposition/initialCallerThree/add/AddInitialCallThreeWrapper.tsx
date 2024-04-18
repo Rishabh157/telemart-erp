@@ -26,9 +26,7 @@ const AddInitialCallThreeWrappper = () => {
     const [addIntialCallThree] = useAddInitialCallerThreeMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.initialCallerOne
-    )
+
 
     const initialValues: FormInitialValues = {
         initialCallName: '',
@@ -85,12 +83,7 @@ const AddInitialCallThreeWrappper = () => {
     }
 
     const dropdownoptions = {
-        initialCallOneOptions: allItems?.map((ele: any) => {
-            return {
-                label: ele.initialCallDisplayName,
-                value: ele._id,
-            }
-        }),
+        initialCallOneOptions: [],
     }
 
     return (

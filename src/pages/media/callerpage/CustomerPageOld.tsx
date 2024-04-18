@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import CallerButton from './components/CallerButton'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { FormInitialValues } from './CustomerPageWrapperOld'
-import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
-import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
-import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
-import { useGetSchemeByIdUnAuthQuery } from 'src/services/SchemeService'
+import React, { useEffect, useState } from 'react'
+import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
+import { useGetSchemeByIdUnAuthQuery } from 'src/services/SchemeService'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
+import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
+import { FormInitialValues } from './CustomerPageWrapperOld'
+import CallerButton from './components/CallerButton'
+import CallerDeliveryAddress from './components/CallerDeliveryAddress'
 import CallerHeader from './components/CallerHeader'
+import CallerOtherDetails from './components/CallerOtherDetails'
 import CallerPageTopNav from './components/CallerPageTopNav'
 import CallerScheme from './components/CallerScheme'
-import CallerDeliveryAddress from './components/CallerDeliveryAddress'
-import CallerOtherDetails from './components/CallerOtherDetails'
 export type dropdownOptions = {
     stateOptions?: SelectOption[] | []
     districtOptions?: SelectOption[] | []
@@ -83,12 +80,6 @@ const CustomerPage: React.FC<Props> = ({
     >([])
 
     const { values, setFieldValue } = formikProps
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate()
-
-    const { allItems: allDispositionItems }: any = useSelector(
-        (state: RootState) => state.dispositionThree
-    )
 
     // Get Product Group Data
     const {
@@ -144,7 +135,7 @@ const CustomerPage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                        singleSchemeData?.data?.deliveryCharges || 0,
+                    singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -152,49 +143,6 @@ const CustomerPage: React.FC<Props> = ({
         isSingleSchemeLoading,
         isSingleSchemeFetching,
         values?.productGroupId,
-    ])
-
-    // Disposition Three Data
-    const {
-        data: dispositionThreedata,
-        isLoading: dispositionThreeIsLoading,
-        isFetching: dispositionThreeIsFetching,
-    } = useGetAllUnAuthDispositionThreeQuery(
-        formikProps.values.dispositionLevelTwoId,
-        { skip: !formikProps?.values?.dispositionLevelTwoId }
-    )
-
-    // Disposition Two Data
-    const {
-        data: dispositionTwodata,
-        isLoading: dispositionTwoIsLoading,
-        isFetching: dispositionTwoIsFetching,
-    } = useGetAllUnAuthdispositionTwoQuery('')
-
-    const { items: dispositionTwoItems }: any = useSelector(
-        (state: RootState) => state.dispositionTwo
-    )
-
-    useEffect(() => {
-        if (!dispositionThreeIsLoading && !dispositionThreeIsFetching) {
-            dispatch(setAllItems(dispositionThreedata?.data))
-        }
-    }, [
-        dispositionThreedata,
-        dispatch,
-        dispositionThreeIsLoading,
-        dispositionThreeIsFetching,
-    ])
-
-    useEffect(() => {
-        if (!dispositionTwoIsLoading && !dispositionTwoIsFetching) {
-            dispatch(setDispositionTwoItems(dispositionTwodata?.data))
-        }
-    }, [
-        dispositionTwodata,
-        dispatch,
-        dispositionTwoIsLoading,
-        dispositionTwoIsFetching,
     ])
 
     useEffect(() => {
@@ -207,14 +155,30 @@ const CustomerPage: React.FC<Props> = ({
         // eslint-disable-next-line
     }, [schemeDetails])
 
+
+    // Disposition Three Data
+
+    const { options: allDispositionItems } = useCustomOptions({
+        useEndPointHook: useGetAllUnAuthDispositionThreeQuery(
+            formikProps.values.dispositionLevelTwoId,
+            { skip: !formikProps?.values?.dispositionLevelTwoId }
+        ),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
+
+    // Disposition Two Data
+
+    const { options: dispositionTwoItems } = useCustomOptions({
+        useEndPointHook: useGetAllUnAuthdispositionTwoQuery(''),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const dropdownOptions = {
-        dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
-            return { label: ele?.dispositionName, value: ele?._id }
-        }),
-        dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
-            return { label: ele?.dispositionName, value: ele?._id }
-        }),
+        dispositionThreeOptions: allDispositionItems,
+        dispositionTwoOptions: dispositionTwoItems,
     }
 
     return (
@@ -307,7 +271,7 @@ const CustomerPage: React.FC<Props> = ({
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column}
                     rows={[]}
-                    // rows={rows}
+                // rows={rows}
                 />
             </div>
         </div>

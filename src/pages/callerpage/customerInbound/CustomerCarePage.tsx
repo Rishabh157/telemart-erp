@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import CallerButton from '../components/CallerButton'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { FormInitialValues } from './CustomerCarePageWrapper'
-import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
-import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
-import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
-import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
-import { useGetSchemeByIdUnAuthQuery } from 'src/services/SchemeService'
-import CallerHeader from '../components/CallerHeader'
-import CallerPageTopNav from '../components/CallerPageTopNav'
-import CallerScheme from '../components/CallerScheme'
-import CallerDeliveryAddress from '../components/CallerDeliveryAddress'
-import CallerOtherDetails from '../components/CallerOtherDetails'
+import React, { useEffect, useState } from 'react'
 import { IoReorderFour } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
+import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import { useGetSchemeByIdUnAuthQuery } from 'src/services/SchemeService'
+import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
+import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
+import CallerButton from '../components/CallerButton'
+import CallerDeliveryAddress from '../components/CallerDeliveryAddress'
+import CallerHeader from '../components/CallerHeader'
+import CallerOtherDetails from '../components/CallerOtherDetails'
+import CallerPageTopNav from '../components/CallerPageTopNav'
+import CallerScheme from '../components/CallerScheme'
+import { FormInitialValues } from './CustomerCarePageWrapper'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 export type dropdownOptions = {
     stateOptions?: SelectOption[] | []
@@ -82,12 +79,6 @@ const CustomerCarePage: React.FC<Props> = ({
 
     const { values, setFieldValue } = formikProps
 
-    const dispatch = useDispatch<AppDispatch>()
-
-    const { allItems: allDispositionItems }: any = useSelector(
-        (state: RootState) => state.dispositionThree
-    )
-
     // GET SINGLE SCHEME BY ID
     const {
         data: singleSchemeData,
@@ -107,7 +98,7 @@ const CustomerCarePage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                        singleSchemeData?.data?.deliveryCharges || 0,
+                    singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -117,48 +108,6 @@ const CustomerCarePage: React.FC<Props> = ({
         values.productGroupId,
     ])
 
-    // Disposition Three Data
-    const {
-        data: dispositionThreedata,
-        isLoading: dispositionThreeIsLoading,
-        isFetching: dispositionThreeIsFetching,
-    } = useGetAllUnAuthDispositionThreeQuery(
-        formikProps.values.dispositionLevelTwoId,
-        { skip: !formikProps?.values?.dispositionLevelTwoId }
-    )
-
-    // Disposition Two Data
-    const {
-        data: dispositionTwodata,
-        isLoading: dispositionTwoIsLoading,
-        isFetching: dispositionTwoIsFetching,
-    } = useGetAllUnAuthdispositionTwoQuery('')
-
-    const { items: dispositionTwoItems }: any = useSelector(
-        (state: RootState) => state.dispositionTwo
-    )
-
-    useEffect(() => {
-        if (!dispositionThreeIsLoading && !dispositionThreeIsFetching) {
-            dispatch(setAllItems(dispositionThreedata?.data))
-        }
-    }, [
-        dispositionThreedata,
-        dispatch,
-        dispositionThreeIsLoading,
-        dispositionThreeIsFetching,
-    ])
-
-    useEffect(() => {
-        if (!dispositionTwoIsLoading && !dispositionTwoIsFetching) {
-            dispatch(setDispositionTwoItems(dispositionTwodata?.data))
-        }
-    }, [
-        dispositionTwodata,
-        dispatch,
-        dispositionTwoIsLoading,
-        dispositionTwoIsFetching,
-    ])
 
     useEffect(() => {
         setFieldValue('totalAmount', schemeDetails.totalAmount)
@@ -170,13 +119,28 @@ const CustomerCarePage: React.FC<Props> = ({
         // eslint-disable-next-line
     }, [schemeDetails])
 
+    // Disposition Three Data
+
+    const { options: allDispositionItems } = useCustomOptions({
+        useEndPointHook: useGetAllUnAuthDispositionThreeQuery(
+            formikProps.values.dispositionLevelTwoId,
+            { skip: !formikProps?.values?.dispositionLevelTwoId }
+        ),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
+
+    // Disposition Two Data
+
+    const { options: dispositionTwoItems } = useCustomOptions({
+        useEndPointHook: useGetAllUnAuthdispositionTwoQuery(''),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
+
     const dropdownOptions = {
-        dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
-            return { label: ele?.dispositionDisplayName, value: ele?._id }
-        }),
-        dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
-            return { label: ele?.dispositionName, value: ele?._id }
-        }),
+        dispositionThreeOptions: allDispositionItems,
+        dispositionTwoOptions: dispositionTwoItems,
     }
 
     return (
@@ -281,11 +245,10 @@ const CustomerCarePage: React.FC<Props> = ({
             {/* TABS */}
             <div className="flex gap-x-4 mt-2 mb-1">
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
-                        TabTypes[activeTab] === TabTypes.history
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.history
                             ? 'bg-[#87527c] text-white'
                             : 'bg-slate-200'
-                    }`}
+                        }`}
                     onClick={() => setActiveTab(TabTypes.history)}
                 >
                     <div className=" text-xs mr-2">
@@ -294,11 +257,10 @@ const CustomerCarePage: React.FC<Props> = ({
                     <div className="text-xs">History</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
-                        TabTypes[activeTab] === TabTypes.order
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.order
                             ? 'bg-[#87527c] text-white'
                             : 'bg-slate-200'
-                    }`}
+                        }`}
                     onClick={() => setActiveTab(TabTypes.order)}
                 >
                     <div className=" text-xs mr-2">
@@ -307,11 +269,10 @@ const CustomerCarePage: React.FC<Props> = ({
                     <div className="text-xs">Order</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
-                        TabTypes[activeTab] === TabTypes.complaint
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.complaint
                             ? 'bg-[#87527c] text-white'
                             : 'bg-slate-200'
-                    }`}
+                        }`}
                     onClick={() => setActiveTab(TabTypes.complaint)}
                 >
                     <div className=" text-xs mr-2">

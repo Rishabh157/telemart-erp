@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { FormInitialValues } from './EditInitialCallTwoWrapper'
-import { useDispatch } from 'react-redux'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
 import { complaintTypeOptions } from 'src/utils/constants/customeTypes'
+import { FormInitialValues } from './EditInitialCallTwoWrapper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -21,9 +20,6 @@ type Props = {
 
 const EditInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-    const [initicalCallOneOptions, setiniticalCallOneOptions] = useState<
-        SelectOption[]
-    >([])
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -40,25 +36,16 @@ const EditInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery(
-        values.callType,
-        {
-            skip: !values.callType,
-        }
-    )
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            const filterOption = data?.data?.map((ele: any) => {
-                return {
-                    label: ele.initialCallDisplayName,
-                    value: ele._id,
-                }
-            })
-            setiniticalCallOneOptions(filterOption || [])
-        }
-    }, [isFetching, isLoading, data, dispatch])
-
+    const { options :initicalCallOneOptions } = useCustomOptions({
+        useEndPointHook: useGetAllinitialCallerOneQuery(
+            values.callType,
+            {
+                skip: !values.callType,
+            }
+        ),
+        keyName: 'initialCallDisplayName',
+        value: '_id',
+    })
     return (
         <div className="p-4 flex flex-col gap-2  ">
             {/* Breadcrumbs */}
