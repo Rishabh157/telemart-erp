@@ -27,7 +27,6 @@ const DispatchedInvoiceWrapper = () => {
     useEffect(() => {
         if (!isLoading && !isFetching) {
             setInvoiceData(data?.data?.[0])
-            console.log('data', data)
         }
     }, [isLoading, isFetching, data])
 

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:slotManagementSlice.ts
-// Type: Slice Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { SlotManagementListResponse } from '../../../models/Slot.model'
 

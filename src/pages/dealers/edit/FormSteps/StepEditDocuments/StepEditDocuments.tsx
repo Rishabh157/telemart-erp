@@ -81,7 +81,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                     setImageApiStatus(false)
                     let fileUrl =
                         BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
-                    console.log('fileUrl: ', fileUrl)
+
                     handleSetFieldValue(name, fileUrl)
                     setLoaderState('')
                     setImageApiStatus(false)

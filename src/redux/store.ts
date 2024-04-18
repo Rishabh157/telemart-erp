@@ -40,13 +40,7 @@ import pincodeSlice from './slices/pincodeSlice'
 import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
-import didManagementSlice from './slices/media/didManagementSlice'
-import channelManagementSlice from './slices/media/channelManagementSlice'
-import tapeManagementSlice from './slices/media/tapeManagementSlice'
 import slotManagementSlice from './slices/media/slotManagementSlice'
-import channelCategorySlice from './slices/media/channelCategorySlice'
-import competitorSlice from './slices/media/competitorManagementSlice'
-import artistSlice from './slices/media/artist'
 import websiteSlice from './slices/website/websiteSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
@@ -114,13 +108,9 @@ const store = configureStore({
         barcode: barcodeSlice,
         cartonBoxBarcode: CartonBoxBarcodeSlice,
         productGroupBarcode: ProductGroupBarcodeSlice,
-        didManagement: didManagementSlice,
-        channelManagement: channelManagementSlice,
+
         slotManagement: slotManagementSlice,
-        tapeManagement: tapeManagementSlice,
-        channelCategory: channelCategorySlice,
-        competitor: competitorSlice,
-        artist: artistSlice,
+
         website: websiteSlice,
         websiteBlog: websiteBlogSlice,
         websiteTags: websiteTagsSlice,

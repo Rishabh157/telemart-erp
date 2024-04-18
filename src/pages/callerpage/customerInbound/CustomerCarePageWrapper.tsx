@@ -15,7 +15,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
-import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import {
     useGetOrderNumberUnAuthCallerDataQuery,
     useGetPaginationUnAuthCallerDataQuery,
@@ -29,6 +28,7 @@ import moment from 'moment'
 import { ProductGroupListResponse } from 'src/models/ProductGroup.model'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -455,6 +455,13 @@ const CustomerCarePageWrapper = () => {
     const [AddCallerForm] = useAddCallerFormMutation()
     const [UpdateCallerForm] = useUpdateCallerFormMutation()
 
+    // get DID number by
+    const { items: didItems } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetByDidNumberQuery(didNumber, {
+            skip: !didNumber,
+        }),
+    })
+
     const {
         data: callerListingData,
         isFetching: isCallerFetching,
@@ -489,24 +496,6 @@ const CustomerCarePageWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isCallerLoading, isCallerFetching, callerListingData])
     const dispatch = useDispatch<AppDispatch>()
-
-    const { selectedItem: didItems }: any = useSelector(
-        (state: RootState) => state.didManagement
-    )
-
-    // Set did Number
-    const {
-        data: didData,
-        isLoading: didIsLoading,
-        isFetching: didIsFetching,
-    } = useGetByDidNumberQuery(didNumber, {
-        skip: !didNumber,
-    })
-    useEffect(() => {
-        if (!didIsLoading && !didIsFetching) {
-            dispatch(setDidItems(didData?.data))
-        }
-    }, [didData, didIsLoading, didIsFetching, dispatch])
 
     //  Add Form when page loaded & set 'callerPageData' key in LocalStorage
     useEffect(() => {
@@ -709,7 +698,6 @@ const CustomerCarePageWrapper = () => {
                 })
         }, 1000)
     }
-
     return (
         <Formik
             enableReinitialize
