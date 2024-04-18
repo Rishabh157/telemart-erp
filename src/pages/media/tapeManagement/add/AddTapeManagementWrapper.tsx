@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:AddTapeManagementWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,27 +8,21 @@ import { object, string, array } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-
-import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
 import { showToast } from 'src/utils'
-import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
 import AddTapeManagement from './AddTapeManagement'
-import { SchemeListResponse } from 'src/models/scheme.model'
-import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { LanguageListResponse } from 'src/models'
-import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
 
 // |-- Redux --|
+import { useAddTapeMutation } from 'src/services/media/TapeManagementServices'
+import { useGetSchemeQuery } from 'src/services/SchemeService'
+import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
+import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
 import { RootState } from 'src/redux/store'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
-import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
-import { setLanguage } from 'src/redux/slices/languageSlice'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types--|
 export type FormInitialValues = {
@@ -58,66 +45,40 @@ export type FormInitialValues = {
 }
 
 const AddTapeManagementWrapper = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [schemeData, setSchemeData] = useState([])
-
-    const ArtistState: any = useSelector((state: RootState) => state.artist)
-    const { allItems: allArtist } = ArtistState
-
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { channelgroup } = useSelector(
-        (state: RootState) => state?.channelGroup
-    )
-    const { language } = useSelector((state: RootState) => state?.language)
+    // Initiate Method
+    const [addTapeApi] = useAddTapeMutation()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    const [AddTapeApi] = useAddTapeMutation()
-    const {
-        data: artistData,
-        isLoading: artistIsLoading,
-        isFetching: artistIsFetching,
-    } = useGetAllArtistQuery(userData?.companyId)
+    // Hook
+    const { options: channelGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelGroupQuery(userData?.companyId),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
-    const {
-        isLoading: isSchemeLoading,
-        isFetching: isSchemeFetching,
-        data: schemeDataApi,
-    } = useGetSchemeQuery(userData?.companyId)
-    const {
-        isLoading: isLanguageLoading,
-        isFetching: isLanguageFetching,
-        data: languageDataApi,
-    } = useGetAllLanguageQuery('')
-    const {
-        isLoading,
-        isFetching,
-        data: TapeGroupsData,
-    } = useGetAllChannelGroupQuery(userData?.companyId)
+    const { options: languageOptions } = useCustomOptions({
+        useEndPointHook: useGetAllLanguageQuery(''),
+        keyName: 'languageName',
+        value: '_id',
+    })
 
-    useEffect(() => {
-        if (!artistIsLoading && !artistIsFetching) {
-            dispatch(setAllArtist(artistData?.data || []))
-        }
-    }, [artistData, artistIsLoading, artistIsFetching, dispatch])
+    const { options: artistOptions } = useCustomOptions({
+        useEndPointHook: useGetAllArtistQuery(userData?.companyId, {
+            skip: !userData?.companyId,
+        }),
+        keyName: 'artistName',
+        value: '_id',
+    })
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(TapeGroupsData?.data || []))
-        }
-    }, [isLoading, isFetching, TapeGroupsData, dispatch])
-
-    useEffect(() => {
-        if (!isLanguageLoading && !isLanguageFetching) {
-            dispatch(setLanguage(languageDataApi?.data || []))
-        }
-    }, [isLanguageLoading, isLanguageFetching, languageDataApi, dispatch])
-    useEffect(() => {
-        if (!isSchemeLoading && !isSchemeFetching) {
-            setSchemeData(schemeDataApi?.data)
-        }
-    }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
+    const { options: schemeOptions } = useCustomOptions({
+        useEndPointHook: useGetSchemeQuery(''),
+        keyName: 'schemeName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
         tapeName: '',
@@ -174,7 +135,7 @@ const AddTapeManagementWrapper = () => {
         let duration = `${values.hour}:${values.minute}:${values.second}`
 
         setTimeout(() => {
-            AddTapeApi({
+            addTapeApi({
                 tapeName: values.tapeName,
                 tapeType: values.tapeType,
                 schemeId: values.schemeId || null,
@@ -202,57 +163,30 @@ const AddTapeManagementWrapper = () => {
         }, 1000)
         dispatch(setFormSubmitting(false))
     }
-    const dropdownOptions = {
-        artistOption: allArtist.map((item: any) => {
-            return {
-                label: item.artistName,
-                value: item._id,
-            }
-        }),
-        channelGroupOptions:
-            channelgroup?.map((channelGroup: GetAllChannelGroupResponse) => {
-                return {
-                    label: channelGroup.groupName,
-                    value: channelGroup._id,
-                }
-            }) || [],
-        schemeDataOption: schemeData?.map((schemeItem: SchemeListResponse) => {
-            return {
-                label: schemeItem?.schemeName,
-                value: schemeItem?._id,
-            }
-        }),
-        languageOptions: language?.map((languageItem: LanguageListResponse) => {
-            return {
-                label: languageItem?.languageName,
-                value: languageItem?._id,
-            }
-        }),
 
-        tapeTypeOption: [
-            { label: 'Scheme Code', value: 'SCHEME_CODE' },
-            { label: 'Promotional', value: 'PROMOTIONAL' },
-            { label: 'Intruption', value: 'INTRUPTION' },
-        ],
+    const dropdownOptions = {
+        channelGroupOptions,
+        languageOptions,
+        artistOptions,
+        schemeOptions,
     }
+
     return (
-        <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <AddTapeManagement
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <AddTapeManagement
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

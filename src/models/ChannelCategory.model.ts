@@ -1,19 +1,13 @@
-/// ==============================================
-// Filename:ChannelCategory.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type ChannelCategoryListResponse = {
     channelCategory: string
-    _id: string
-    is_active: boolean
-    is_deleted: boolean
+    companyId: string
     createdAt: string
+    isActive: boolean
+    isDeleted: boolean
     updatedAt: string
     __v: number
+    _id: string
 }
 
 export type AddChannelCategory = {

@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:AddChannelGroup.tsx
-// Type: Add Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,24 +8,18 @@ import { object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-
-import { useAddChannelMutation } from 'src/services/media/ChannelManagementServices'
 import { showToast } from 'src/utils'
 import AddChannelManagement from './AddChannelManagement'
-import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
-import { CountryListResponse } from 'src/models/Country.model'
-import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { LanguageListResponse } from 'src/models'
-import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
-import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
-import useCountries from 'src/hooks/useCountry'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
+import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
+import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import { useAddChannelMutation } from 'src/services/media/ChannelManagementServices'
+import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllCountryQuery } from 'src/services/CountryService'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -53,63 +40,42 @@ export type FormInitialValues = {
     paymentType: string
     companyId: string
 }
+
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
 const AddChannelManagementWrapper = () => {
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    // Initiate Method
+    const [addChannelApi] = useAddChannelMutation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    // const [countryData, setCountryData] = useState([])
-    const [languageData, setlanguageData] = useState([])
-    const [channelCategoryData, setChannelCategoryData] = useState([])
-    const { allCountry: countryData } = useSelector(
-        (state: RootState) => state?.country
-    )
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { channelgroup }: any = useSelector(
-        (state: RootState) => state?.channelGroup
-    )
-    const [AddChannelApi] = useAddChannelMutation()
-    const {
-        isLoading: isLanguageLoading,
-        isFetching: isLanguageFetching,
-        data: languageDataApi,
-    } = useGetAllLanguageQuery('')
-    const {
-        isLoading: isCategoryLoading,
-        isFetching: isCategoryFetching,
-        data: categoryDataApi,
-    } = useGetAllChannelCategoryQuery(userData?.companyId)
 
-    const { country } = useCountries()
+    // Hook
+    const { options: channelGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelGroupQuery(userData?.companyId),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
-    const {
-        isLoading,
-        isFetching,
-        data: channelGroupsData,
-    } = useGetAllChannelGroupQuery(userData?.companyId)
+    const { options: channelCategoryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelCategoryQuery(userData?.companyId),
+        keyName: 'channelCategory',
+        value: '_id',
+    })
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(channelGroupsData?.data || []))
-        }
-    }, [isLoading, isFetching, channelGroupsData, dispatch])
+    const { options: languageOptions } = useCustomOptions({
+        useEndPointHook: useGetAllLanguageQuery(''),
+        keyName: 'languageName',
+        value: '_id',
+    })
 
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
-    useEffect(() => {
-        if (!isLanguageLoading && !isLanguageFetching) {
-            setlanguageData(languageDataApi?.data)
-        }
-    }, [isLanguageLoading, isLanguageFetching, languageDataApi])
-    useEffect(() => {
-        if (!isCategoryLoading && !isCategoryFetching) {
-            setChannelCategoryData(categoryDataApi?.data)
-        }
-    }, [isCategoryLoading, isCategoryFetching, categoryDataApi])
+    const { options: countryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllCountryQuery(''),
+        keyName: 'countryName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
         channelName: '',
@@ -156,7 +122,7 @@ const AddChannelManagementWrapper = () => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
-            AddChannelApi({
+            addChannelApi({
                 channelName: values.channelName,
                 address: values.address,
                 phone: values.phone,
@@ -188,36 +154,14 @@ const AddChannelManagementWrapper = () => {
             })
         }, 1000)
     }
+
     const dropdownOptions = {
-        channelGroupOptions: channelgroup?.map(
-            (channelGroup: GetAllChannelGroupResponse) => {
-                return {
-                    label: channelGroup.groupName,
-                    value: channelGroup._id,
-                }
-            }
-        ),
-        countryOption: countryData?.map((country: CountryListResponse) => {
-            return {
-                label: country.countryName,
-                value: country._id,
-            }
-        }),
-        languageOption: languageData?.map((language: LanguageListResponse) => {
-            return {
-                label: language.languageName,
-                value: language._id,
-            }
-        }),
-        categoryOption: channelCategoryData?.map(
-            (category: ChannelCategoryListResponse) => {
-                return {
-                    label: category.channelCategory,
-                    value: category._id,
-                }
-            }
-        ),
+        channelGroupOptions,
+        channelCategoryOptions,
+        countryOptions,
+        languageOptions,
     }
+
     return (
         <Formik
             initialValues={initialValues}

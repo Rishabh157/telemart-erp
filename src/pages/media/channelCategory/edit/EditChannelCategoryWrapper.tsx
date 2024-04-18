@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:EditChannelCategoryWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useSelector, useDispatch } from 'react-redux'
@@ -15,18 +8,18 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-
-import { showToast } from 'src/utils'
 import EditChannelGroup from './EditChannelCategory'
 import {
     useGetChannelCategoryByIdQuery,
     useUpdateChannelCategoryMutation,
 } from 'src/services/media/ChannelCategoriesServices'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/media/channelCategorySlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -35,25 +28,20 @@ export type FormInitialValues = {
 }
 
 const EditChannelCategoryWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
-    const navigate = useNavigate()
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
     const params = useParams()
     const id = params.id
-    //alert(id)
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [updateChannelCategory] = useUpdateChannelCategoryMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.channelCategory
-    )
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<ChannelCategoryListResponse>({
+        useEndPointHook: useGetChannelCategoryByIdQuery(id),
+    })
 
-    const { data, isLoading, isFetching } = useGetChannelCategoryByIdQuery(id)
-
-    //Channel category
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+    // Initiate Method
+    const [updateChannelCategory] = useUpdateChannelCategoryMutation()
+    const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
 
     // Form Validation Schema
     const validationSchema = object({
@@ -61,8 +49,8 @@ const EditChannelCategoryWrapper = () => {
     })
 
     const initialValues: FormInitialValues = {
-        channelCategory: selectedItem?.channelCategory || '',
-        companyId: selectedItem?.companyId || userData?.companyId || '',
+        channelCategory: items?.channelCategory || '',
+        companyId: items?.companyId || userData?.companyId || '',
     }
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -93,6 +81,7 @@ const EditChannelCategoryWrapper = () => {
             })
         }, 1000)
     }
+
     return (
         <Formik
             enableReinitialize

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddDidManagement.tsx
-// Type: Add Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -30,8 +23,8 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-        channelOptions: SelectOption[]
-        schemeDataOption: SelectOption[]
+        schemeOptions: SelectOption[]
+        channelNameOptions: SelectOption[]
         slotOptions: SelectOption[]
     }
 }
@@ -114,7 +107,7 @@ const AddDidManagements = ({
                                 onChange={(value) =>
                                     handleSetFieldValue('schemeId', value)
                                 }
-                                options={dropdownOptions.schemeDataOption}
+                                options={dropdownOptions.schemeOptions}
                                 label="Scheme Name"
                             />
                             <ATMSelectSearchable
@@ -124,7 +117,7 @@ const AddDidManagements = ({
                                 onChange={(value) =>
                                     handleSetFieldValue('channelId', value)
                                 }
-                                options={dropdownOptions.channelOptions}
+                                options={dropdownOptions.channelNameOptions}
                                 label="Channel Name"
                             />
                             <ATMSelectSearchable

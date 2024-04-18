@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:EditTapeManagementWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,29 +8,24 @@ import { object, string, array } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
+import { showToast } from 'src/utils'
+import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
+import EditTapeManagement from './EditTapeManagement'
+import { Field } from 'src/models/FormField/FormField.model'
 
+// |-- Redux --|
 import {
     useUpdateTapeMutation,
     useGetTapeByIdQuery,
 } from 'src/services/media/TapeManagementServices'
-import { showToast } from 'src/utils'
-import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
+import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
 import { useGetAllArtistQuery } from 'src/services/media/ArtistServices'
-import EditTapeManagement from './EditTapeManagement'
-import { SchemeListResponse } from 'src/models/scheme.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { LanguageListResponse } from 'src/models'
-import { setAllItems as setAllArtist } from 'src/redux/slices/media/artist'
-import { Field } from 'src/models/FormField/FormField.model'
-
-// |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/media/tapeManagementSlice'
-import { setLanguage } from 'src/redux/slices/languageSlice'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -74,115 +62,70 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
 ]
 
 const EditTapeManagementWrapper = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
     const params = useParams()
     const id = params.id
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [schemeData, setSchemeData] = useState([])
-
-    const ArtistState: any = useSelector((state: RootState) => state.artist)
-
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.tapeManagement
-    )
-    const {
-        data: tapeData,
-        isLoading: tapeIsLoading,
-        isFetching: tapeIsFetching,
-    } = useGetTapeByIdQuery(id)
-
-    useEffect(() => {
-        if (!tapeIsLoading && !tapeIsFetching) {
-            dispatch(setSelectedItem(tapeData?.data || []))
-        }
-    }, [dispatch, tapeData, tapeIsLoading, tapeIsFetching])
-
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { channelgroup } = useSelector(
-        (state: RootState) => state?.channelGroup
-    )
-    const { language } = useSelector((state: RootState) => state?.language)
-
-    const { allItems: allArtist } = ArtistState
-
+    // Initiate Method
     const [updateTape] = useUpdateTapeMutation()
+    const navigate = useNavigate()
+    const dispatch = useDispatch<AppDispatch>()
 
-    const {
-        data: artistData,
-        isLoading: artistIsLoading,
-        isFetching: artistIsFetching,
-    } = useGetAllArtistQuery(userData?.companyId)
-
-    const {
-        isLoading: isSchemeLoading,
-        isFetching: isSchemeFetching,
-        data: schemeDataApi,
-    } = useGetSchemeQuery(userData?.companyId)
-
-    const {
-        isLoading: isLanguageLoading,
-        isFetching: isLanguageFetching,
-        data: languageDataApi,
-    } = useGetAllLanguageQuery('')
-    const {
-        isLoading,
-        isFetching,
-        data: TapeGroupsData,
-    } = useGetAllChannelGroupQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!artistIsLoading && !artistIsFetching) {
-            dispatch(setAllArtist(artistData?.data || []))
-        }
-    }, [artistData, artistIsLoading, artistIsFetching, dispatch])
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(TapeGroupsData?.data || []))
-        }
-    }, [isLoading, isFetching, TapeGroupsData, dispatch])
-
-    useEffect(() => {
-        if (!isLanguageLoading && !isLanguageFetching) {
-            dispatch(setLanguage(languageDataApi?.data || []))
-        }
-    }, [isLanguageLoading, isLanguageFetching, languageDataApi, dispatch])
-
-    useEffect(() => {
-        if (!isSchemeLoading && !isSchemeFetching) {
-            setSchemeData(schemeDataApi?.data)
-        }
-    }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
-
-    const artist = selectedItem?.artistId?.map((ele: any) => {
-        return ele._id
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<TapeManagementListResponse>({
+        useEndPointHook: useGetTapeByIdQuery(id),
     })
 
-    const newDuration = selectedItem?.duration?.split(':')
+    const { options: channelGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelGroupQuery(userData?.companyId),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
+    const { options: languageOptions } = useCustomOptions({
+        useEndPointHook: useGetAllLanguageQuery(''),
+        keyName: 'languageName',
+        value: '_id',
+    })
+
+    const { options: artistOptions } = useCustomOptions({
+        useEndPointHook: useGetAllArtistQuery(userData?.companyId, {
+            skip: !userData?.companyId,
+        }),
+        keyName: 'artistName',
+        value: '_id',
+    })
+
+    const { options: schemeOptions } = useCustomOptions({
+        useEndPointHook: useGetSchemeQuery(''),
+        keyName: 'schemeName',
+        value: '_id',
+    })
+
+    // set the phone number in field array format
+    const newDuration = items?.duration?.split(':')
     let phoneNumber: any = []
 
-    selectedItem?.phone?.map((val: any) => {
+    items?.phone?.map((val: any) => {
         return phoneNumber.push({ phoneNo: val })
     })
 
     const initialValues: FormInitialValues = {
-        tapeName: selectedItem?.tapeName || '',
-        tapeType: selectedItem?.tapeType || '',
-        schemeId: selectedItem?.schemeId || '',
-        languageId: selectedItem?.languageId || [],
-        duration: selectedItem?.duration || '',
-        artistId: artist || [],
-        remarks: selectedItem?.remarks || '',
+        tapeName: items?.tapeName || '',
+        tapeType: items?.tapeType || '',
+        schemeId: items?.schemeId || '',
+        languageId: items?.languageId || [],
+        duration: items?.duration || '',
+        artistId: items?.artistId?.map((ele: any) => ele?._id) || [],
+        remarks: items?.remarks || '',
         phone: phoneNumber || '',
-        webSiteLink: selectedItem?.webSiteLink || '',
-        youtubeLink: selectedItem?.youtubeLink || '',
+        webSiteLink: items?.webSiteLink || '',
+        youtubeLink: items?.youtubeLink || '',
         hour: newDuration ? newDuration[0] : '0',
         minute: newDuration ? newDuration[1] : '00',
         second: newDuration ? newDuration[2] : '00',
-        companyId: selectedItem?.companyId || userData?.companyId || '',
+        companyId: items?.companyId || userData?.companyId || '',
     }
 
     // Form Validation Schema
@@ -237,7 +180,7 @@ const EditTapeManagementWrapper = () => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Tape Updated successfully!')
-                        navigate('/media/Tape')
+                        navigate('/media/tape')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -248,58 +191,32 @@ const EditTapeManagementWrapper = () => {
             })
         }, 1000)
     }
+
     const dropdownOptions = {
-        artistOption: allArtist?.map((item: any) => {
-            return {
-                label: item.artistName,
-                value: item._id,
-            }
-        }),
-        channelGroupOptions:
-            channelgroup?.map((channelGroup: GetAllChannelGroupResponse) => {
-                return {
-                    label: channelGroup.groupName,
-                    value: channelGroup._id,
-                }
-            }) || [],
-        schemeDataOption: schemeData?.map((schemeItem: SchemeListResponse) => {
-            return {
-                label: schemeItem?.schemeName,
-                value: schemeItem?._id,
-            }
-        }),
-        languageOptions: language?.map((languageItem: LanguageListResponse) => {
-            return {
-                label: languageItem?.languageName,
-                value: languageItem?._id,
-            }
-        }),
-        tapeTypeOption: [
-            { label: 'Scheme Code', value: 'SCHEME_CODE' },
-            { label: 'Promotional', value: 'PROMOTIONAL' },
-            { label: 'Intruption', value: 'INTRUPTION' },
-        ],
+        channelGroupOptions,
+        languageOptions,
+        artistOptions,
+        schemeOptions,
     }
+
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <EditTapeManagement
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                            formFields={formFields}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <EditTapeManagement
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        formFields={formFields}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

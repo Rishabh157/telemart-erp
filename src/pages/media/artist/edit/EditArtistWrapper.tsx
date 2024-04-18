@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:EditArtistWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -17,15 +10,16 @@ import { useDispatch, useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import EditArtist from './EditArtist'
 import { showToast } from 'src/utils'
+import { ArtistListResponse } from 'src/models'
+
+// |-- Redux --|
 import {
     useGetArtistByIdQuery,
     useUpdateArtistMutation,
 } from 'src/services/media/ArtistServices'
-import { setSelectedArtist } from 'src/redux/slices/media/artist'
-
-// |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {}
@@ -35,21 +29,23 @@ export type FormInitialValues = {
 }
 
 const EditArtistWrapper = (props: Props) => {
-    // Form Initial Values
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const params = useParams()
+    const id = params.id
+
+    // Initiate Method
+    const [editArtists] = useUpdateArtistMutation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const params = useParams()
-    const Id = params.id
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state.artist
-    )
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const [editArtists] = useUpdateArtistMutation()
-    const { data, isLoading, isFetching } = useGetArtistByIdQuery(Id)
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<ArtistListResponse>({
+        useEndPointHook: useGetArtistByIdQuery(id),
+    })
+
     const initialValues: FormInitialValues = {
-        artistName: selectedItem?.artistName || '',
+        artistName: items?.artistName || '',
     }
 
     // Form Validation Schema
@@ -67,7 +63,7 @@ const EditArtistWrapper = (props: Props) => {
                     artistName: values.artistName,
                     companyId: userData?.companyId || '',
                 },
-                id: Id || '',
+                id: id || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -84,9 +80,6 @@ const EditArtistWrapper = (props: Props) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        dispatch(setSelectedArtist(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
     return (
         <Formik
             enableReinitialize

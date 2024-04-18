@@ -15,7 +15,7 @@ export const schemeApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getScheme: builder.query({
             providesTags: ['scheme'],
-            query: (companyId) => ({
+            query: () => ({
                 url: `/scheme`,
                 method: 'GET',
             }),
