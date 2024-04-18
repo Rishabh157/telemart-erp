@@ -1,30 +1,17 @@
-/// ==============================================
-// Filename:StepAddSchemeDeatilsWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { Field } from 'src/models/FormField/FormField.model'
-import { FormInitialValues } from '../../AddSchemeWrapper'
-import StepAddSchemeDetails from './StepAddSchemeDetails'
-//import { useGetAllProductSubCategoryQuery, useGetProductCategoryIdSubCategoryQuery } from "src/services/ProductSubCategoryService";
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
 import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
-//import { useGetAllProductSubCategoryQuery } from "src/services/ProductSubCategoryService";
+import { FormInitialValues } from '../../AddSchemeWrapper'
+import StepAddSchemeDetails from './StepAddSchemeDetails'
 
 // |-- Redux --|
-import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/productSubCategorySlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {
@@ -123,57 +110,22 @@ const formFields: {
 ]
 
 const StepAddSchemeDetailsWrapper = ({ formikProps }: Props) => {
-    const dispatch = useDispatch<AppDispatch>()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-
-    const { allProductCategory }: any = useSelector(
-        (state: RootState) => state.productCategory
-    )
-
-    const {
-        data: dataPC,
-        isLoading: isLoadingPC,
-        isFetching: isFetchingPC,
-    } = useGetAllProductCategoryQuery(userData?.companyId)
-
-    useEffect(() => {
-        dispatch(setAllProductCategory(dataPC?.data))
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoadingPC, isFetchingPC, dataPC])
-
-    const productCategoryoption: any = allProductCategory?.map((ele: any) => {
-        return {
-            label: ele.categoryName,
-            value: ele._id,
-        }
+    const { options: productCategoryoption } = useCustomOptions({
+        useEndPointHook: useGetAllProductCategoryQuery(''),
+        keyName: 'categoryName',
+        value: '_id',
     })
 
-    const {
-        data: ProductScData,
-        isLoading: ProductScIsLoading,
-        isFetching: ProductScIsFetching,
-    } = useGetSubCategoryByParentQuery(formikProps.values.category, {
-        skip: !formikProps.values.category,
-    })
-    useEffect(() => {
-        dispatch(setAllItems(ProductScData?.data))
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ProductScData, ProductScIsLoading, ProductScIsFetching])
-
-    const { allItems: productSubCategory }: any = useSelector(
-        (state: RootState) => state.productSubCategory
-    )
-
-    const productSubCategoryOption: any = productSubCategory?.map(
-        (ele: any) => {
-            return {
-                label: ele.subCategoryName,
-                value: ele._id,
+    const { options: productSubCategoryOption } = useCustomOptions({
+        useEndPointHook: useGetSubCategoryByParentQuery(
+            formikProps?.values?.category,
+            {
+                skip: !formikProps?.values?.category,
             }
-        }
-    )
+        ),
+        keyName: 'subCategoryName',
+        value: '_id',
+    })
 
     const dropdownOptions = {
         productCategoryoption,

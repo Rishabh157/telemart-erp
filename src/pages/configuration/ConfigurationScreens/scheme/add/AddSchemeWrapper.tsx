@@ -1,37 +1,31 @@
-/// ==============================================
-// Filename:AddSchemeWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { Formik, Form, FormikProps } from 'formik'
-import { array, boolean, number, object, string } from 'yup'
+import { Form, Formik, FormikProps } from 'formik'
+import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import moment from 'moment'
+import { array, boolean, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import AddScheme from './AddScheme'
-import StepAddSchemeDetailsWrapper from './FormSteps/StepAddSchemeDetails/StepAddSchemeDetailsWrapper'
-import StepAddProductsWrapper from './FormSteps/StepAddProducts/StepAddProductsWrapper'
 import StepAddFAQ from './FormSteps/StepAddFAQ/StepAddFAQ'
+import StepAddProductsWrapper from './FormSteps/StepAddProducts/StepAddProductsWrapper'
+import StepAddSchemeDetailsWrapper from './FormSteps/StepAddSchemeDetails/StepAddSchemeDetailsWrapper'
 
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import { showToast } from 'src/utils'
 import { useAddSchemeMutation } from 'src/services/SchemeService'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/productGroupSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -247,23 +241,12 @@ const AddSchemeWrapper = () => {
         }
     }
 
-    const { data, isLoading, isFetching } = useGetAllProductGroupQuery(
-        userData?.companyId
-    )
-    const { allItems: productGroup }: any = useSelector(
-        (state: RootState) => state.productGroup
-    )
 
-    const productGroupOptions = productGroup?.map((ele: any) => {
-        return {
-            label: ele?.groupName,
-            value: ele?._id,
-        }
+    const { options:productGroupOptions} = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
     })
-
-    useEffect(() => {
-        dispatch(setAllItems(data?.data))
-    }, [data, dispatch, isLoading, isFetching])
     return (
         <Formik
             initialValues={initialValues}

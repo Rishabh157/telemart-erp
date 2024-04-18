@@ -1,33 +1,26 @@
-/// ==============================================
-// Filename:AddRTVendorWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
+/* eslint-disable no-useless-escape */
+/* eslint-disable react-hooks/exhaustive-deps */
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { array, number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddRTVendor from './AddRTVendor'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { showToast } from 'src/utils'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { useAddReturnToVendorMutation } from 'src/services/ReturnToVendorService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
+import { showToast } from 'src/utils'
+import AddRTVendor from './AddRTVendor'
 
 // |-- Redux--|
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
-import { setAllItems as setAllVendor } from 'src/redux/slices/vendorSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
 
 // |-- Types --|
@@ -52,91 +45,34 @@ const AddRTVendorWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData }: any = useSelector((state: RootState) => state?.auth)
     const [addReturnToVendor] = useAddReturnToVendorMutation()
-
-    // all warehouse query
-    const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
-    const { allItems: warehouseItems }: any = useSelector(
-        (state: RootState) => state?.warehouse
-    )
-    // all vendor query
-    const { allItems: allVendor }: any = useSelector(
-        (state: RootState) => state.vendor
-    )
-
-    const {
-        data: vendorData,
-        isLoading: vendorIsLoading,
-        isFetching: VendorIsFetching,
-    } = useGetVendorsQuery(userData?.companyId)
-
-    //vendor
-    useEffect(() => {
-        if (!vendorIsLoading && !VendorIsFetching) {
-            dispatch(setAllVendor(vendorData?.data))
-        }
-    }, [vendorData, vendorIsLoading, VendorIsFetching, dispatch])
-
-    const {
-        data: productGroupData,
-        isLoading: productGroupIsLoading,
-        isFetching: productGroupIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
-    const { allItems: productGroupItems }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
-
-    const warehouseOptions = warehouseItems?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
+    const { options: vendorOptions } = useCustomOptions({
+        useEndPointHook: useGetVendorsQuery(''),
+        keyName: 'companyName',
+        value: '_id',
     })
 
-    const productGroupOptions = productGroupItems?.map((ele: any) => {
-        return {
-            label: ele.groupName,
-            value: ele._id,
-        }
+    const { options: warehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetWareHousesQuery(''),
+        keyName: 'wareHouseName',
+        value: '_id',
     })
 
-    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
-        return {
-            key: ele._id,
-            value: ele.dealerSalePrice,
-        }
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
     })
 
-    const vendorOptions = allVendor?.map((ele: any) => {
-        return {
-            label: ele?.companyName,
-            value: ele?._id,
-        }
+    const { options: productPriceOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'dealerSalePrice',
+        value: '_id',
     })
-
     const dropdownOptions = {
         warehouseOptions: warehouseOptions,
         productGroupOptions: productGroupOptions,
         vendorOptions: vendorOptions,
     }
-
-    //Warehouse
-    useEffect(() => {
-        dispatch(setAllWareHouse(warehouseData?.data))
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
-
-    //ProductGroup
-    useEffect(() => {
-        dispatch(setAllProductGroups(productGroupData?.data))
-    }, [
-        productGroupData,
-        productGroupIsLoading,
-        productGroupIsFetching,
-        dispatch,
-    ])
 
     // Form Initial Values
     const initialValues: FormInitialValues = {

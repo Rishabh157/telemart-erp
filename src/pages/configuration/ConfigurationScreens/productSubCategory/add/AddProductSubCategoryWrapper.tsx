@@ -1,32 +1,23 @@
-/// ==============================================
-// Filename:AddProductSubWrapper.tsx
-// Type: Add Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import AddProductSubCategory from './AddProductSubCategory'
 
+import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
 import { useAddProductSubCategoryMutation } from 'src/services/ProductSubCategoryService'
 import { showToast } from 'src/utils'
-import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
-import { useGetAllTaxesQuery } from 'src/services/TaxesService'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllTaxes } from 'src/redux/slices/TaxesSlice'
-import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -43,22 +34,13 @@ const AddProductSubCategoryWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allProductCategory }: any = useSelector(
-        (state: RootState) => state?.productCategory
-    )
-    // const { allTaxes }: any = useSelector((state: RootState) => state?.tax);
 
-    const {
-        data: pcData,
-        isLoading: pcIsLoading,
-        isFetching: pcIsFetching,
-    } = useGetAllProductCategoryQuery(userData?.companyId)
+    const { options: productCategoryOPtions } = useCustomOptions({
+        useEndPointHook: useGetAllProductCategoryQuery(''),
+        keyName: 'categoryName',
+        value: '_id',
+    })
 
-    const {
-        data: tData,
-        isLoading: tIsLoading,
-        isFetching: tIsFetching,
-    } = useGetAllTaxesQuery(userData?.companyId)
     const [addProductSubCategory] = useAddProductSubCategoryMutation()
     // Form Initial Values
     const initialValues: FormInitialValues = {
@@ -102,22 +84,8 @@ const AddProductSubCategoryWrapper = (props: Props) => {
         })
     }
 
-    useEffect(() => {
-        dispatch(setAllProductCategory(pcData?.data))
-    }, [dispatch, pcData, pcIsLoading, pcIsFetching])
-
-    useEffect(() => {
-        dispatch(setAllTaxes(tData?.data))
-    }, [dispatch, tData, tIsLoading, tIsFetching])
-
-    const parentCategoryIdOptions = allProductCategory?.map((ele: any) => {
-        return { label: ele?.categoryName, value: ele?._id }
-    })
-    // const applicableTaxesOptions = allTaxes?.map((ele: any) => {
-    //   return { label: ele?.taxName, value: ele?._id };
-    // });
     const dropdownOptions = {
-        parentCategoryOptions: parentCategoryIdOptions,
+        parentCategoryOptions: productCategoryOPtions,
     }
 
     return (

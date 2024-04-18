@@ -16,7 +16,7 @@ export const vendorApi = apiSlice.injectEndpoints({
         getVendors: builder.query({
             providesTags: ['vendor'],
             query: (companyId) => ({
-                url: `/vendor/company/${companyId}`,
+                url: `/vendor`,
 
                 method: 'GET',
                 // body,

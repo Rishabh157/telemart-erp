@@ -41,7 +41,7 @@ type Props = {
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
-    productPriceOptions: []
+    productPriceOptions: any
     apiStatus: boolean
 }
 
@@ -69,7 +69,6 @@ const EditSaleOrder = ({
     const { values, setFieldValue } = formikProps
     const [i, setI] = useState(0)
     const dispatch = useDispatch<AppDispatch>()
-    // const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
 
     const dealerWarehouse: any = useSelector(
@@ -105,11 +104,11 @@ const EditSaleOrder = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e) => e['key'] === productGroup
+            (e:any) => e['value'] === productGroup
         )
 
         if (val) {
-            setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
+            setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }

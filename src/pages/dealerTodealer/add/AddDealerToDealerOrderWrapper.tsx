@@ -17,9 +17,9 @@ import { useAddDealerToDealerOrderMutation } from 'src/services/DealerToDealerOr
 
 // |-- Redux--|
 import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {}
@@ -49,15 +49,16 @@ const AddDealerToDealerOrderWrapper = (props: Props) => {
         isFetching: dealerIsFetching,
     } = useGetAllDealersQuery(userData?.companyId)
     const { allItems }: any = useSelector((state: RootState) => state?.dealer)
-
-    const {
-        data: productGroupData,
-        isLoading: productGroupIsLoading,
-        isFetching: productGroupIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
-    const { allItems: productGroupItems }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
+    })
+    const { options: productPriceOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'dealerSalePrice',
+        value: '_id',
+    })
 
     const dealerOptions = allItems?.map((ele: any) => {
         return {
@@ -66,34 +67,14 @@ const AddDealerToDealerOrderWrapper = (props: Props) => {
         }
     })
 
-    const productGroupOptions = productGroupItems?.map((ele: any) => {
-        return {
-            label: ele.groupName,
-            value: ele._id,
-        }
-    })
 
-    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
-        return {
-            key: ele._id,
-            value: ele.dealerSalePrice,
-        }
-    })
 
     //Dealer
     useEffect(() => {
         dispatch(setAllItems(dealerData?.data))
     }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
 
-    //ProductGroup
-    useEffect(() => {
-        dispatch(setAllProductGroups(productGroupData?.data))
-    }, [
-        productGroupData,
-        productGroupIsLoading,
-        productGroupIsFetching,
-        dispatch,
-    ])
+ 
 
     const dropdownOptions = {
         dealerOptions: dealerOptions,

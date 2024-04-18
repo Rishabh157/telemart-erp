@@ -10,7 +10,6 @@ import { array, number, object, string } from 'yup'
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import EditDealerToDealerOrder from './EditDealerToDealerOrder'
-// import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useGetAllDealersQuery } from 'src/services/DealerServices'
 import {
     useGetDealerToDealerOrderByIdQuery,
@@ -21,10 +20,10 @@ import { showToast } from 'src/utils'
 
 // |-- Redux--|
 import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
-import { setSelectedItem } from 'src/redux/slices/DealerToDealerOrderSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 //
 // |-- Types --|
 type Props = {}
@@ -57,14 +56,10 @@ const EditDealerToDealerOrderWrapper = (props: Props) => {
     const [updateDealerToDealer] = useUpdateDealerToDealerOrderMutation()
     const params = useParams()
     const Id = params.id
-    const { data, isLoading, isFetching } = useGetDealerToDealerOrderByIdQuery(
-        Id || ''
-    )
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedItem(data?.data))
-        }
-    }, [dispatch, data, isLoading, isFetching])
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetDealerToDealerOrderByIdQuery(Id || ''),
+    })
 
     const {
         data: dealerData,
@@ -72,18 +67,6 @@ const EditDealerToDealerOrderWrapper = (props: Props) => {
         isFetching: dealerIsFetching,
     } = useGetAllDealersQuery(userData?.companyId)
     const { allItems }: any = useSelector((state: RootState) => state?.dealer)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.delaerToDealer
-    )
-
-    const {
-        data: productGroupData,
-        isLoading: productGroupIsLoading,
-        isFetching: productGroupIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
-    const { allItems: productGroupItems }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
 
     const dealerOptions = allItems?.map((ele: any) => {
         return {
@@ -92,34 +75,21 @@ const EditDealerToDealerOrderWrapper = (props: Props) => {
         }
     })
 
-    const productGroupOptions = productGroupItems?.map((ele: any) => {
-        return {
-            label: ele.groupName,
-            value: ele._id,
-        }
-    })
-
-    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
-        return {
-            key: ele._id,
-            value: ele.dealerSalePrice,
-        }
-    })
-
     //Dealer
     useEffect(() => {
         dispatch(setAllItems(dealerData?.data))
     }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
 
-    //ProductGroup
-    useEffect(() => {
-        dispatch(setAllProductGroups(productGroupData?.data))
-    }, [
-        productGroupData,
-        productGroupIsLoading,
-        productGroupIsFetching,
-        dispatch,
-    ])
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
+    })
+    const { options: productPriceOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'dealerSalePrice',
+        value: '_id',
+    })
 
     const dropdownOptions = {
         dealerOptions: dealerOptions,

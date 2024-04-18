@@ -1,10 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditWarehouseToComapny.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
@@ -27,10 +20,7 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './EditWarehouseToComapnyWrapper'
-// import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
-// |-- Redux --|
-// import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { setItems as setAnotherComanyWareHouse } from 'src/redux/slices/warehouseSlice'
 import {
     AppDispatch,
@@ -52,7 +42,7 @@ type Props = {
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
-    productPriceOptions: []
+    productPriceOptions: any
     apiStatus: boolean
 }
 
@@ -81,29 +71,10 @@ const EditWarehouseToComapny = ({
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
-    // const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
     const { items }: any = useSelector((state: RootState) => state.warehouse)
-    // const { userData } = useSelector((state: RootState) => state?.auth)
-    // const companyId = userData?.companyId
-
-    // const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
-    //     {
-    //         companyId,
-    //         dealerId,
-    //     },
-    //     {
-    //         skip: !dealerId,
-    //     }
-    // )
-
-    // useEffect(() => {
-    //     if (!isLoading && !isFetching) {
-    //         dispatch(setDealerWarehouse(data?.data))
-    //     }
-    // }, [data, isLoading, isFetching, dealerId, dispatch])
 
     const selectedCompanyWarehouseOption: SelectOption[] = items?.map(
         (ele: any) => {
@@ -130,14 +101,15 @@ const EditWarehouseToComapny = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e) => e['key'] === productGroup
+            (e:any) => e['value'] === productGroup
         )
 
         if (val) {
-            setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
+            setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
