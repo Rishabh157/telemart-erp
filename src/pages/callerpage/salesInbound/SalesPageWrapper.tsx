@@ -14,7 +14,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
-import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import {
     useGetOrderNumberUnAuthCallerDataQuery,
     useGetPaginationUnAuthCallerDataQuery,
@@ -28,6 +27,7 @@ import SalesPage from './SalesPage'
 import moment from 'moment'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -142,9 +142,13 @@ const SalesPageWrapper = () => {
     const [AddCallerForm] = useAddCallerFormMutation()
 
     const [UpdateCallerForm] = useUpdateCallerFormMutation()
-    const { selectedItem: didItems }: any = useSelector(
-        (state: RootState) => state.didManagement
-    )
+
+    // get DID number by
+    const { items: didItems } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetByDidNumberQuery(didNumber, {
+            skip: !didNumber,
+        }),
+    })
 
     const {
         data: callerListingData,
@@ -178,20 +182,6 @@ const SalesPageWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isCallerLoading, isCallerFetching, callerListingData])
     const dispatch = useDispatch<AppDispatch>()
-
-    const {
-        data: didData,
-        isLoading: didIsLoading,
-        isFetching: didIsFetching,
-    } = useGetByDidNumberQuery(didNumber, {
-        skip: !didNumber,
-    })
-
-    useEffect(() => {
-        if (!didIsLoading && !didIsFetching) {
-            dispatch(setDidItems(didData?.data))
-        }
-    }, [didData, didIsLoading, didIsFetching, dispatch])
 
     //  Add Form when page loaded & set 'callerPageData' key in LocalStorage
     useEffect(() => {
@@ -253,7 +243,7 @@ const SalesPageWrapper = () => {
             dispatch(setIsTableLoading(null))
             dispatch(setItems(null))
             dispatch(setTotalItems(null))
-            dispatch(setDidItems(null))
+            // dispatch(setDidItems(null))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -729,6 +719,7 @@ const SalesPageWrapper = () => {
                 })
         }, 1000)
     }
+
     return (
         <Formik
             enableReinitialize

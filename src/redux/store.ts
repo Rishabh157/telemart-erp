@@ -61,16 +61,16 @@ import pincodeSlice from './slices/pincodeSlice'
 import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
-import didManagementSlice from './slices/media/didManagementSlice'
-import channelManagementSlice from './slices/media/channelManagementSlice'
-import tapeManagementSlice from './slices/media/tapeManagementSlice'
+// import didManagementSlice from './slices/media/didManagementSlice'
+// import channelManagementSlice from './slices/media/channelManagementSlice'
+// import tapeManagementSlice from './slices/media/tapeManagementSlice'
 import slotManagementSlice from './slices/media/slotManagementSlice'
 import dispositionOneSlice from './slices/configuration/dispositionOneSlice'
 // import channelGroupSlice from './slices/media/channelGroupSlice'
-import channelCategorySlice from './slices/media/channelCategorySlice'
-import competitorSlice from './slices/media/competitorManagementSlice'
+// import channelCategorySlice from './slices/media/channelCategorySlice'
+// import competitorSlice from './slices/media/competitorManagementSlice'
 import dispositionTwoSlice from './slices/configuration/dispositionTwoSlice'
-import artistSlice from './slices/media/artist'
+// import artistSlice from './slices/media/artist'
 import dispositionThreeSlice from './slices/configuration/dispositionThreeSlice'
 import initialCallerOneSlice from './slices/configuration/initialCallerOneSlice'
 import initialCallerTwoSlice from './slices/configuration/initialCallerTwoSlice'
@@ -164,15 +164,15 @@ const store = configureStore({
         barcode: barcodeSlice,
         cartonBoxBarcode: CartonBoxBarcodeSlice,
         productGroupBarcode: ProductGroupBarcodeSlice,
-        didManagement: didManagementSlice,
-        channelManagement: channelManagementSlice,
+        // didManagement: didManagementSlice,
+        // channelManagement: channelManagementSlice,
         slotManagement: slotManagementSlice,
-        tapeManagement: tapeManagementSlice,
+        // tapeManagement: tapeManagementSlice,
         dispositionOne: dispositionOneSlice,
         // channelGroup: channelGroupSlice,
-        channelCategory: channelCategorySlice,
-        competitor: competitorSlice,
-        artist: artistSlice,
+        // channelCategory: channelCategorySlice,
+        // competitor: competitorSlice,
+        // artist: artistSlice,
         website: websiteSlice,
         websiteBlog: websiteBlogSlice,
         websiteTags: websiteTagsSlice,
@@ -187,7 +187,7 @@ const store = configureStore({
         inquiry: inquirySlice,
         dispositionComplaint: dispositionComplaintSlice,
         influencer: influencerSlice,
-        inboundCaller: inboundCallerSlice,
+        inboundCaller: inboundCallerSlice, // inbound , courier ndr , customer care slice
         assetLocation: assetLocationSlice,
         assetsRequest: assetsRequestSlice,
         assetsCategory: assetsCategorySlice,

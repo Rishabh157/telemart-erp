@@ -38,7 +38,7 @@ const initialState: InboundCallerSliceStateType = {
     channelMgt: null,
 }
 
-const channelManagementSlice: Slice<InboundCallerSliceStateType> = createSlice({
+const inboundCallerSlice: Slice<InboundCallerSliceStateType> = createSlice({
     name: 'inboundCaller',
     initialState,
     reducers: {
@@ -103,5 +103,5 @@ export const {
     setSelectedId,
     setChannelMgt,
     setSelectedItem,
-} = channelManagementSlice.actions
-export default channelManagementSlice.reducer
+} = inboundCallerSlice.actions
+export default inboundCallerSlice.reducer
