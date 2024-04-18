@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddCompitor.tsx
-// Type: Add Component
-// Last Updated: JULY 10, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -32,14 +25,15 @@ import { HiPlus } from 'react-icons/hi'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { CircularProgress } from '@mui/material'
 import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
+import { getProductCategoryOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-        channelOptions: SelectOption[] | []
         languageOptions: SelectOption[]
+        channelNameOptions: SelectOption[] | []
     }
 }
 
@@ -55,9 +49,6 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
-    dropdownOptions = {
-        ...dropdownOptions,
-    }
     const { values, setFieldValue } = formikProps
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
@@ -68,24 +59,6 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
     const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
     const [fileUploader] = useFileUploaderMutation()
 
-    const productCategoryOption = [
-        {
-            label: 'Herbal',
-            value: 'HERBAL',
-        },
-        {
-            label: 'Education',
-            value: 'EDUCATION',
-        },
-        {
-            label: 'Spiritual',
-            value: 'SPIRITUAL',
-        },
-        {
-            label: 'Other',
-            value: 'OTHER',
-        },
-    ]
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2  ">
@@ -159,7 +132,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 value={values.productCategory}
                                 label="Product Category"
                                 // placeholder="Product Category"
-                                options={productCategoryOption}
+                                options={getProductCategoryOptions()}
                                 onChange={(e) =>
                                     handleSetFieldValue('productCategory', e)
                                 }
@@ -171,7 +144,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 onChange={(e) =>
                                     handleSetFieldValue('channelNameId', e)
                                 }
-                                options={dropdownOptions.channelOptions}
+                                options={dropdownOptions.channelNameOptions}
                                 label="Channel Name"
                             />
                             <ATMSelectSearchable

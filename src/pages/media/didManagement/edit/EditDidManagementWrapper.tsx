@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditDidManagementWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useNavigate, useParams } from 'react-router-dom'
@@ -16,24 +8,22 @@ import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-
 import { showToast } from 'src/utils'
+import { DidManagementListResponse } from 'src/models/Media.model'
+import EditDidManagements from './EditDidManagement'
+
+// |-- Redux --|
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
-import { SchemeListResponse } from 'src/models/scheme.model'
-import { ChannelManagementListResponse } from 'src/models/Channel.model'
-import EditDidManagements from './EditDidManagement'
 import {
     useGetDidByIdQuery,
     useUpdateDidMutation,
 } from 'src/services/media/DidManagementServices'
 import { useGetSlotMangementQuery } from 'src/services/media/SlotDefinitionServices'
-
-// |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/media/didManagementSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { SlotManagementListResponse } from 'src/models/Slot.model'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -48,27 +38,46 @@ const EditDidManagementWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
-    const Id = params.id
-    const {
-        data: didData,
-        isLoading: didIsLoading,
-        isFetching: didIsFetching,
-    } = useGetDidByIdQuery(Id)
+    const id = params.id
+
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [EditDidManagement] = useUpdateDidMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem } = useSelector(
-        (state: RootState) => state?.didManagement
-    )
-    const [channel, setChannel] = useState([])
-    const [schemeData, setSchemeData] = useState([])
-    const [slot, setSlot] = useState([])
+
+    // const { selectedItem } = useSelector(
+    //     (state: RootState) => state?.didManagement
+    // )
+
+    // Initiate Method
+    const [editDidManagement] = useUpdateDidMutation()
+
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<DidManagementListResponse>({
+        useEndPointHook: useGetDidByIdQuery(id),
+    })
+
+    const { options: schemeOptions } = useCustomOptions({
+        useEndPointHook: useGetSchemeQuery(userData?.companyId),
+        keyName: 'schemeName',
+        value: '_id',
+    })
+
+    const { options: channelNameOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelQuery(userData?.companyId),
+        keyName: 'channelName',
+        value: '_id',
+    })
+
+    const { options: slotOptions } = useCustomOptions({
+        useEndPointHook: useGetSlotMangementQuery(userData?.companyId),
+        keyName: 'slotName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
-        didNumber: selectedItem?.didNumber || '',
-        slotId: selectedItem?.slotId || '',
-        schemeId: selectedItem?.schemeId || '',
-        channelId: selectedItem?.channelId || '',
+        didNumber: items?.didNumber || '',
+        slotId: items?.slotId || '',
+        schemeId: items?.schemeId || '',
+        channelId: items?.channelId || '',
         companyId: userData?.companyId || '',
     }
 
@@ -84,7 +93,7 @@ const EditDidManagementWrapper = () => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
-            EditDidManagement({
+            editDidManagement({
                 body: {
                     didNumber: values.didNumber,
                     slotId: values.slotId,
@@ -92,7 +101,7 @@ const EditDidManagementWrapper = () => {
                     channelId: values.channelId,
                     companyId: values.companyId || '',
                 },
-                id: Id || '',
+                id: id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -109,88 +118,29 @@ const EditDidManagementWrapper = () => {
         }, 1000)
     }
 
-    const {
-        isLoading: isSchemeLoading,
-        isFetching: isSchemeFetching,
-        data: schemeDataApi,
-    } = useGetSchemeQuery(userData?.companyId)
-    const {
-        isLoading,
-        isFetching,
-        data: channelData,
-    } = useGetAllChannelQuery(userData?.companyId)
-    const {
-        isLoading: isSlotLoading,
-        isFetching: isSlotFetching,
-        data: slotDataApi,
-    } = useGetSlotMangementQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            setChannel(channelData?.data)
-        }
-    }, [isLoading, isFetching, channelData])
-
-    useEffect(() => {
-        if (!isSlotLoading && !isSlotFetching) {
-            setSlot(slotDataApi?.data)
-        }
-    }, [isSlotLoading, isSlotFetching, slotDataApi])
-
-    useEffect(() => {
-        if (!isSchemeLoading && !isSchemeFetching) {
-            setSchemeData(schemeDataApi?.data)
-        }
-    }, [isSchemeLoading, isSchemeFetching, schemeDataApi])
-
-    useEffect(() => {
-        if (!didIsLoading && !didIsFetching) {
-            dispatch(setSelectedItem(didData?.data))
-        }
-    }, [didIsLoading, didIsFetching, didData])
-
     const dropdownOptions = {
-        channelOptions: channel?.map(
-            (channelItem: ChannelManagementListResponse) => {
-                return {
-                    label: channelItem.channelName,
-                    value: channelItem._id,
-                }
-            }
-        ),
-        slotOptions: slot?.map((slotItem: SlotManagementListResponse) => {
-            return {
-                label: slotItem.slotName,
-                value: slotItem._id,
-            }
-        }),
-
-        schemeDataOption: schemeData?.map((schemeItem: SchemeListResponse) => {
-            return {
-                label: schemeItem?.schemeName,
-                value: schemeItem?._id,
-            }
-        }),
+        schemeOptions,
+        channelNameOptions,
+        slotOptions,
     }
+
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <EditDidManagements
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                            dropdownOptions={dropdownOptions}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <EditDidManagements
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        dropdownOptions={dropdownOptions}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

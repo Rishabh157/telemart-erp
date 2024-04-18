@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddTapeManagement.tsx
-// Type: Add Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -15,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { MdDeleteOutline } from 'react-icons/md'
 
 // |-- Internal Dependencies --|
+import { getTapeManagementTypes } from 'src/utils/constants/customeTypes'
 import { FormInitialValues } from './AddTapeManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
@@ -38,10 +32,9 @@ type Props = {
     apiStatus: boolean
     dropdownOptions: {
         channelGroupOptions: SelectOption[]
-        schemeDataOption: SelectOption[]
+        schemeOptions: SelectOption[]
         languageOptions: SelectOption[]
-        artistOption: SelectOption[]
-        tapeTypeOption: SelectOption[]
+        artistOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -76,10 +69,12 @@ const AddTapeManagement = ({
         }
         return options
     }
+
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div className="">
             <div className="p-4 flex flex-col gap-2 ">
@@ -157,7 +152,7 @@ const AddTapeManagement = ({
                             />
 
                             <ATMSelectSearchable
-                                options={dropdownOptions.tapeTypeOption}
+                                options={getTapeManagementTypes()}
                                 name="tapeType"
                                 required
                                 value={values.tapeType}
@@ -174,7 +169,7 @@ const AddTapeManagement = ({
                                 onChange={(value) =>
                                     handleSetFieldValue('schemeId', value)
                                 }
-                                options={dropdownOptions.schemeDataOption}
+                                options={dropdownOptions.schemeOptions}
                                 label="Scheme"
                             />
                         </div>
@@ -189,7 +184,7 @@ const AddTapeManagement = ({
                                 onChange={(value) =>
                                     handleSetFieldValue('artistId', value)
                                 }
-                                options={dropdownOptions.artistOption}
+                                options={dropdownOptions.artistOptions}
                                 label="Artist"
                             />
                             <ATMSelectSearchable

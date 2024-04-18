@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:tapeManagement.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type TapeManagementListResponse = {
     _id: string
@@ -16,6 +9,7 @@ export type TapeManagementListResponse = {
     artistId: string[]
     phone: string[]
     webSiteLink: string
+    schemeId: string
     youtubeLink: string
     companyId: string
     remarks: string

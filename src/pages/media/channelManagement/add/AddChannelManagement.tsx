@@ -1,16 +1,9 @@
-/// ==============================================
-// Filename:AddChannelGroup.tsx
-// Type: Add Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { FormInitialValues } from './AddChannelManagementWrapper'
@@ -25,13 +18,10 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { paymentTypeOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
-// import { setAllStates } from 'src/redux/slices/statesSlice'
-import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import useStatesByCountry from 'src/hooks/useStatesByCountry'
-import { setAllStates } from 'src/redux/slices/statesSlice'
-import useStateDistricts from 'src/hooks/useDistrictsByState'
+import { useGetAllStateByCountryQuery } from 'src/services/StateService'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 
 // |-- Types --|
 type Props = {
@@ -39,11 +29,11 @@ type Props = {
     apiStatus: boolean
     dropdownOptions: {
         channelGroupOptions: SelectOption[]
-        countryOption: SelectOption[]
-        stateOption?: SelectOption[]
+        channelCategoryOptions: SelectOption[]
+        countryOptions: SelectOption[]
+        languageOptions: SelectOption[]
+        stateOptions?: SelectOption[]
         districtOptions?: SelectOption[]
-        languageOption: SelectOption[]
-        categoryOption: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -62,45 +52,38 @@ const AddChannelManagement = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    // Initiate Method
     const dispatch = useDispatch()
-    const { allStates }: any = useSelector((state: RootState) => state.states)
-    const { allDistricts }: any = useSelector(
-        (state: RootState) => state.district
-    )
-    const { stateByCountry } = useStatesByCountry(formikProps.values.country)
 
-    const { stateDistricts } = useStateDistricts(formikProps.values.state)
+    // Hook
+    const { options: stateOptions } = useCustomOptions({
+        useEndPointHook: useGetAllStateByCountryQuery(values.country || '', {
+            skip: !values.country,
+        }),
+        keyName: 'stateName',
+        value: '_id',
+    })
 
-    //state
-    useEffect(() => {
-        if (stateByCountry) {
-            dispatch(setAllStates(stateByCountry))
-        }
-    }, [stateByCountry, dispatch])
-
-    //district
-    useEffect(() => {
-        if (stateDistricts) {
-            dispatch(setAllDistrict(stateDistricts))
-        }
-    }, [stateDistricts, dispatch])
+    const { options: districtOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDistrictByStateQuery(values.state || '', {
+            skip: !values.state,
+        }),
+        keyName: 'districtName',
+        value: '_id',
+    })
 
     dropdownOptions = {
         ...dropdownOptions,
-        stateOption: allStates?.map((schemeItem: any) => {
-            return {
-                label: schemeItem?.stateName,
-                value: schemeItem?._id,
-            }
-        }),
-        districtOptions: allDistricts?.map((ele: any) => {
-            return { label: ele?.districtName, value: ele?._id }
-        }),
+        stateOptions,
+        districtOptions,
     }
+
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div className="flex flex-col gap-2 p-4 ">
             {/* Breadcrumbs */}
@@ -136,7 +119,6 @@ const AddChannelManagement = ({
                 {/* Form */}
                 <div className="px-3 py-8 grow ">
                     <div className="grid grid-cols-3 gap-4">
-                        {/* FirstName */}
                         <ATMTextField
                             name="channelName"
                             value={values.channelName}
@@ -150,26 +132,29 @@ const AddChannelManagement = ({
                                 )
                             }
                         />
+
                         <ATMSelectSearchable
                             name="channelGroupId"
                             required
                             value={values.channelGroupId}
+                            options={dropdownOptions.channelGroupOptions}
+                            label="Channel Group"
                             onChange={(e) =>
                                 handleSetFieldValue('channelGroupId', e)
                             }
-                            options={dropdownOptions.channelGroupOptions}
-                            label="Channel Group"
                         />
+
                         <ATMSelectSearchable
-                            options={dropdownOptions.categoryOption}
                             required
                             name="channelCategory"
                             value={values.channelCategory}
                             label="Channel Category "
+                            options={dropdownOptions.channelCategoryOptions}
                             onChange={(value) =>
                                 handleSetFieldValue('channelCategory', value)
                             }
-                        />{' '}
+                        />
+
                         <ATMTextField
                             name="contactPerson"
                             value={values.contactPerson}
@@ -182,6 +167,7 @@ const AddChannelManagement = ({
                                 )
                             }
                         />
+
                         <ATMTextField
                             name="designation"
                             required
@@ -195,6 +181,7 @@ const AddChannelManagement = ({
                                 )
                             }
                         />
+
                         <ATMTextField
                             name="email"
                             value={values.email}
@@ -204,8 +191,9 @@ const AddChannelManagement = ({
                                 handleSetFieldValue('email', e.target.value)
                             }
                         />
+
                         <ATMSelectSearchable
-                            options={dropdownOptions.countryOption}
+                            options={dropdownOptions.countryOptions}
                             name="country"
                             required
                             value={values.country}
@@ -215,8 +203,9 @@ const AddChannelManagement = ({
                                 handleSetFieldValue('country', value)
                             }}
                         />
+
                         <ATMSelectSearchable
-                            options={dropdownOptions.stateOption || []}
+                            options={dropdownOptions.stateOptions || []}
                             name="state"
                             required
                             value={values.state}
@@ -225,6 +214,7 @@ const AddChannelManagement = ({
                                 handleSetFieldValue('state', value)
                             }
                         />
+
                         <ATMSelectSearchable
                             options={dropdownOptions.districtOptions || []}
                             name="district"
@@ -235,9 +225,10 @@ const AddChannelManagement = ({
                                 handleSetFieldValue('district', value)
                             }
                         />
+
                         <ATMSelectSearchable
                             required
-                            options={dropdownOptions.languageOption}
+                            options={dropdownOptions.languageOptions}
                             name="language"
                             value={values.language}
                             label="Language"
@@ -245,6 +236,7 @@ const AddChannelManagement = ({
                                 handleSetFieldValue('language', value)
                             }
                         />
+
                         <ATMSelectSearchable
                             options={paymentTypeOptions()}
                             required
@@ -255,6 +247,7 @@ const AddChannelManagement = ({
                                 handleSetFieldValue('paymentType', value)
                             }
                         />
+
                         <ATMTextField
                             name="phone"
                             value={values.phone}
@@ -264,6 +257,7 @@ const AddChannelManagement = ({
                                 handleSetFieldValue('phone', e.target.value)
                             }
                         />
+
                         <ATMTextField
                             name="mobile"
                             value={values.mobile}
@@ -273,6 +267,7 @@ const AddChannelManagement = ({
                                 handleSetFieldValue('mobile', e.target.value)
                             }
                         />
+
                         <ATMTextField
                             name="website"
                             value={values.website}
@@ -281,7 +276,8 @@ const AddChannelManagement = ({
                             onChange={(e) =>
                                 handleSetFieldValue('website', e.target.value)
                             }
-                        />{' '}
+                        />
+
                         <ATMTextArea
                             name="address"
                             value={values.address}

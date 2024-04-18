@@ -56,7 +56,7 @@ import didManagementSlice from './slices/media/didManagementSlice'
 import channelManagementSlice from './slices/media/channelManagementSlice'
 import tapeManagementSlice from './slices/media/tapeManagementSlice'
 import slotManagementSlice from './slices/media/slotManagementSlice'
-import channelGroupSlice from './slices/media/channelGroupSlice'
+// import channelGroupSlice from './slices/media/channelGroupSlice'
 import channelCategorySlice from './slices/media/channelCategorySlice'
 import competitorSlice from './slices/media/competitorManagementSlice'
 import artistSlice from './slices/media/artist'
@@ -141,7 +141,7 @@ const store = configureStore({
         channelManagement: channelManagementSlice,
         slotManagement: slotManagementSlice,
         tapeManagement: tapeManagementSlice,
-        channelGroup: channelGroupSlice,
+        // channelGroup: channelGroupSlice,
         channelCategory: channelCategorySlice,
         competitor: competitorSlice,
         artist: artistSlice,

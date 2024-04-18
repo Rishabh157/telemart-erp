@@ -30,8 +30,8 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-        channelOptions: SelectOption[]
-        schemeDataOption: SelectOption[]
+        schemeOptions: SelectOption[]
+        channelNameOptions: SelectOption[]
         slotOptions: SelectOption[]
     }
 }
@@ -114,7 +114,7 @@ const EditDidManagements = ({
                                 onChange={(value) =>
                                     handleSetFieldValue('schemeId', value)
                                 }
-                                options={dropdownOptions.schemeDataOption}
+                                options={dropdownOptions.schemeOptions}
                                 label="Scheme Name"
                             />
 
@@ -125,7 +125,7 @@ const EditDidManagements = ({
                                 onChange={(value) =>
                                     handleSetFieldValue('channelId', value)
                                 }
-                                options={dropdownOptions.channelOptions}
+                                options={dropdownOptions.channelNameOptions}
                                 label="Channel Name"
                             />
                             <ATMSelectSearchable
