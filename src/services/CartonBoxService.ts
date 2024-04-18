@@ -26,7 +26,7 @@ export const cartonBoxApi = apiSlice.injectEndpoints({
         getAllCartonBox: builder.query({
             providesTags: ['CartonBox'],
             query: (companyId) => ({
-                url: `/carton-box/company/${companyId}`,
+                url: `/carton-box`,
                 method: 'GET',
                 // body,
             }),

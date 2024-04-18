@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:AddVendorWarehouseWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
@@ -26,7 +18,6 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
 import {
     setFieldCustomized,
     setFormSubmitting,
@@ -148,17 +139,11 @@ const AddVendorWarehouseWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addVendorWarehouse] = useAddVendorWarehouseMutation()
-    const { country } = useCountries()
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
+    const { country: allCountry } = useCountries()
 
     // States
     const [apiStatus, setApiStatus] = useState(false)
     const [activeStep, setActiveStep] = React.useState(0)
-    const { allCountry }: any = useSelector((state: RootState) => state.country)
 
     // From Initial Values
     const initialValues: FormInitialValues = {

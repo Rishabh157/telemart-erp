@@ -1,33 +1,26 @@
-/// ==============================================
-// Filename:EditLanguageWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditLanguage from './EditLanguage'
 
-// import { useEditLanguageMutation } from "src/services/LanguageService";
-import { showToast } from 'src/utils'
 import {
     useGetLanguageByIdQuery,
     useUpdateLanguageMutation,
 } from 'src/services/LanguageService'
-import { setSelectedItem } from 'src/redux/slices/languageSlice'
+import { showToast } from 'src/utils'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -44,13 +37,10 @@ const EditLanguageWrapper = (props: Props) => {
     const [editLanguage] = useUpdateLanguageMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.language
-    )
 
-    const { data, isLoading, isFetching } = useGetLanguageByIdQuery(Id)
-    // const [EditLanguage] = useEditLanguageMutation();
-    // Form Initial Values
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetLanguageByIdQuery(Id),
+    })
     const initialValues: FormInitialValues = {
         languageName: selectedItem?.languageName,
     }
@@ -84,9 +74,7 @@ const EditLanguageWrapper = (props: Props) => {
             setApiStatus(false)
         })
     }
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+
     return (
         <Formik
             enableReinitialize

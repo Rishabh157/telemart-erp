@@ -1,39 +1,33 @@
-/// ==============================================
-// Filename:EditDealerWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 import { array, boolean, mixed, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import EditDealers from './EditDealers'
-import StepEditDealerDetailsWrapper from './FormSteps/StepEditDealerDetails/StepEditDealerDetailsWrapper'
-import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
-import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
-import StepEditDocumentsWrapper from './FormSteps/StepEditDocuments/StepEditDocumentsWrapper'
-import StepEditOthersWrapper from './FormSteps/StepEditOthers/StepEditOthersWrapper'
+import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import {
     useGetDealerByIdQuery,
     useUpdateDealerMutation,
 } from 'src/services/DealerServices'
 import { showToast, validationofGst } from 'src/utils'
-import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
-import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+import EditDealers from './EditDealers'
+import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
+import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
+import StepEditDealerDetailsWrapper from './FormSteps/StepEditDealerDetails/StepEditDealerDetailsWrapper'
+import StepEditDocumentsWrapper from './FormSteps/StepEditDocuments/StepEditDocumentsWrapper'
+import StepEditOthersWrapper from './FormSteps/StepEditOthers/StepEditOthersWrapper'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
-import { setSelectedItem } from 'src/redux/slices/dealerSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import {
     setFieldCustomized,
     setFormSubmitting,
@@ -220,15 +214,10 @@ const EditDealerWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const params = useParams()
     const Id = params.id
-    const { data, isLoading, isFetching } = useGetDealerByIdQuery(Id)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.dealer
-    )
-    const {
-        data: dealerData,
-        isLoading: isDealerLoading,
-        isFetching: isDealerFetching,
-    } = useGetAllDealerCategoryQuery(userData?.companyId)
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetDealerByIdQuery(Id),
+    })
 
     // From Initial Values
     const initialValues: FormInitialValues = {
@@ -276,25 +265,11 @@ const EditDealerWrapper = () => {
         return steps.find((_, stepIndex) => stepIndex === activeStep)
             ?.validationSchema
     }
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
 
-    const { alldealerCategory }: any = useSelector(
-        (state: RootState) => state.dealersCategory
-    )
-
-    useEffect(() => {
-        if (!isDealerFetching && !isDealerLoading) {
-            dispatch(setAllDealerCategory(dealerData?.data))
-        }
-    }, [dealerData, isDealerLoading, isDealerFetching, dispatch])
-
-    const dealerCategoryOptions = alldealerCategory?.map((ele: any) => {
-        return {
-            label: ele?.dealersCategory,
-            value: ele?._id,
-        }
+    const { options: dealerCategoryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDealerCategoryQuery(userData?.companyId),
+        keyName: 'dealersCategory',
+        value: '_id',
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {

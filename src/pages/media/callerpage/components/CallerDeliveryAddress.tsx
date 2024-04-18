@@ -12,10 +12,7 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import AddressDialog from './AddressDialog'
 import { useDispatch, useSelector } from 'react-redux'
 
-//  Country
-// import { useGetAllCountryUnauthQuery } from 'src/services/CountryService'
-// import { CountryListResponse } from 'src/models/Country.model'
-// import { setAllCountry } from 'src/redux/slices/countrySlice'
+
 
 //  State
 import { useGetByAllStateUnauthQuery } from 'src/services/StateService'

@@ -6,27 +6,27 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditCompanyBranch from './EditCompanyBranch'
 
-import { showToast } from 'src/utils'
 import {
     useGetCompanyBranchByIdQuery,
     useUpdateCompanyBranchMutation,
 } from 'src/services/CompanyBranchService'
-import { setSelectedItem } from 'src/redux/slices/companyBranchSlice'
+import { showToast } from 'src/utils'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -43,11 +43,10 @@ const EditCompanyBranchWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.companybranch
-    )
 
-    const { data, isLoading, isFetching } = useGetCompanyBranchByIdQuery(Id)
+   const {items:selectedItem}= useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetCompanyBranchByIdQuery(Id),
+    })
     const [updateCompanyBranch] = useUpdateCompanyBranchMutation()
     // Form Initial Values
     const initialValues: FormInitialValues = {
@@ -83,9 +82,7 @@ const EditCompanyBranchWrapper = (props: Props) => {
             setApiStatus(false)
         })
     }
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data[0]))
-    }, [dispatch, data, isLoading, isFetching])
+   
     return (
         <Formik
             enableReinitialize

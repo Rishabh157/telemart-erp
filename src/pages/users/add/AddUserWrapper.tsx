@@ -1,12 +1,7 @@
-/// ==============================================
-// Filename:AddUserWrapper.tsx
-// Type: Add Component
-// Last Updated: MARCH 07, 2024
-// Project: TELIMART - Front End
-// ==============================================
+
 
 // |-- Built-in Dependencies --|
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
@@ -21,8 +16,7 @@ import { showToast } from 'src/utils'
 import AddUser from './AddUser'
 
 // |-- Redux --|
-import { CallCenterMasterListResponse } from 'src/models'
-import { setItems } from 'src/redux/slices/CallCenterMasterSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
@@ -59,7 +53,6 @@ const AddUserWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addNewUser] = useAddNewUserMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { items } = useSelector((state: RootState) => state?.callCenter)
     const ref = useRef<any>(null)
     const initialValues: FormInitialValues = {
         firstName: '',
@@ -178,28 +171,17 @@ const AddUserWrapper = (props: Props) => {
         }, 1000)
     }
 
-    const { isLoading, isFetching, data } = useGetAllCallCenterMasterQuery(
-        userData?.companyId,
-        {
-            skip: !userData?.companyId,
-        }
-    )
 
-    React.useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setItems(data?.data))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching])
+   const {options}= useCustomOptions({
+        useEndPointHook: useGetAllCallCenterMasterQuery(userData?.companyId, {
+            skip: !userData?.companyId,
+        }),
+        keyName: 'callCenterName',
+        value: '_id',
+    })
+ 
     const dropDownOption = {
-        callCenterOptions: items?.map(
-            (assetCategory: CallCenterMasterListResponse) => {
-                return {
-                    label: assetCategory.callCenterName,
-                    value: assetCategory._id,
-                }
-            }
-        ),
+        callCenterOptions: options
     }
 
     return (

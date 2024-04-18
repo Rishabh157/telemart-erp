@@ -1,32 +1,26 @@
-/// ==============================================
-// Filename:EditCartonBoxWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditCartonBox from './EditCartonBox'
 
-import { showToast } from 'src/utils'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     useGetCartonBoxByIdQuery,
     useUpdateCartonBoxMutation,
 } from 'src/services/CartonBoxService'
-import { setSelectedItem } from 'src/redux/slices/cartonBoxSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -48,12 +42,12 @@ const EditCartonBoxWrapper = (props: Props) => {
     const params = useParams()
     const Id = params.id
     const [EditSelectedCartonBox] = useUpdateCartonBoxMutation()
-    const { data, isLoading, isFetching } = useGetCartonBoxByIdQuery(Id)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.cartonBox
-    )
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetCartonBoxByIdQuery(Id),
+    })
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
@@ -107,10 +101,6 @@ const EditCartonBoxWrapper = (props: Props) => {
             setApiStatus(false)
         })
     }
-
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
     return (
         <Formik
             enableReinitialize
