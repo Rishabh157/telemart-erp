@@ -1,41 +1,33 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditVendorWarehouseWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 29, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import { array, object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper'
-import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
-import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
-import EditVendorWarehouse from './EditVendorWarehouse'
-import { showToast } from 'src/utils'
+import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
 import {
     useGetVendorWarehouseByIdQuery,
     useUpdateVendorWarehouseMutation,
 } from 'src/services/VendorWarehouseService'
-import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
+import { showToast } from 'src/utils'
+import EditVendorWarehouse from './EditVendorWarehouse'
+import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
+import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper'
+import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
-import { setSelectedItem } from 'src/redux/slices/VendorWarehouseSlice'
+import useCountries from 'src/hooks/useCountry'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
-import useCountries from 'src/hooks/useCountry'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -150,26 +142,19 @@ const EditVendorWarehouseWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isLoading, isFetching } = useGetVendorWarehouseByIdQuery(Id)
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetVendorWarehouseByIdQuery(Id),
+    })
     const [updateVendorWarehouse] = useUpdateVendorWarehouseMutation()
 
     // States
-    const { allCountry }: any = useSelector((state: RootState) => state.country)
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.vendorWarehouse
-    )
 
     const [apiStatus, setApiStatus] = useState(false)
     const [activeStep, setActiveStep] = React.useState(0)
 
-    const { country } = useCountries()
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
+    const { country: allCountry } = useCountries()
 
     // From Initial Values
     const initialValues: FormInitialValues = {
@@ -271,9 +256,6 @@ const EditVendorWarehouseWrapper = () => {
         }
     }
 
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [data, isLoading, isFetching])
     return (
         <Formik
             enableReinitialize

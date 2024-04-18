@@ -1,9 +1,3 @@
-/// ==============================================
-// Filename:StepEditAddressWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
@@ -19,7 +13,6 @@ import { Field } from 'src/models/FormField/FormField.model'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
@@ -157,7 +150,6 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     const [billingStateData, setBillingStateData] = useState<any>()
     const [billingDistrictData, setBillingDistrictData] = useState<any>()
     const [billingPincodeData, setBillingPincodeData] = useState<any>()
-    const { allCountry }: any = useSelector((state: RootState) => state.country)
     const { allStates }: any = useSelector((state: RootState) => state.states)
     const { allDistricts }: any = useSelector(
         (state: RootState) => state.district
@@ -167,7 +159,7 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     )
 
     //hooks call
-    const { country } = useCountries()
+    const { country:allCountry } = useCountries()
     //REGSITRATION state hook
     const { stateByCountry } = useStatesByCountry(
         formikProps.values.registrationAddress.countryId
@@ -194,11 +186,7 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         formikProps.values.billingAddress.districtId
     )
 
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
+
     useEffect(() => {
         if (stateByCountry) {
             dispatch(setAllStates(stateByCountry))

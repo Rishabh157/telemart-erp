@@ -1,9 +1,4 @@
-/// ==============================================
-// Filename:store.ts
-// Type: Redux Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
+
 
 // |-- External Dependencies --|
 import { configureStore } from '@reduxjs/toolkit'
@@ -14,16 +9,12 @@ import { apiSlice } from 'src/services'
 import { filePickerSlice } from 'src/services/FilePickerServices'
 import {
     barcodeSlice,
-    companySlice,
     dealerSlice,
     sideNavLayoutSlice,
     userSlice,
     vendorSlice,
 } from './slices'
 import ListingPaginationSlice from './slices/ListingPaginationSlice'
-import cartonBoxSlice from './slices/cartonBoxSlice'
-import configurationCompanySlice from './slices/configurationCompanySlice'
-import dealersCategorySlice from './slices/dealersCategorySlice'
 import dealerPincodeSlice from './slices/dealerPincodeSlice'
 import DealerLedgerSlice from './slices/DealerLedgerSlice'
 import DealerWarehouseSlice from './slices/DealerWarehouseSlice'
@@ -32,8 +23,6 @@ import VendorWarehouseSlice from './slices/VendorWarehouseSlice'
 import DealerSupervisorSlice from './slices/DealerSupervisorSlice'
 import GRNSlice from './slices/GRNSlice'
 import inventorySlice from './slices/inventorySlice'
-import itemSlice from './slices/itemSlice'
-import languageSlice from './slices/languageSlice'
 import outwardRequestSlice from './slices/warehouseOutwardSlice/outwardRequestDealerSlice'
 import inwardRequestSlice from './slices/warehouseInwardSlice/inwardRequestDealerSlice'
 import PurchaseOrderSlice from './slices/PurchaseOrderSlice'
@@ -42,7 +31,6 @@ import saleOrderSlice from './slices/saleOrderSlice'
 import warehouseSlice from './slices/warehouseSlice'
 import authSlice from './slices/authSlice'
 import { authMiddleware } from 'src/utils'
-import TaxesSlice from './slices/TaxesSlice'
 import areaSlice from './slices/areaSlice'
 import countrySlice from './slices/countrySlice'
 import statesSlice from './slices/statesSlice'
@@ -52,14 +40,7 @@ import pincodeSlice from './slices/pincodeSlice'
 import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
-import didManagementSlice from './slices/media/didManagementSlice'
-import channelManagementSlice from './slices/media/channelManagementSlice'
-import tapeManagementSlice from './slices/media/tapeManagementSlice'
 import slotManagementSlice from './slices/media/slotManagementSlice'
-// import channelGroupSlice from './slices/media/channelGroupSlice'
-import channelCategorySlice from './slices/media/channelCategorySlice'
-import competitorSlice from './slices/media/competitorManagementSlice'
-import artistSlice from './slices/media/artist'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
 import orderSlice from './slices/orderSlice'
@@ -71,14 +52,12 @@ import assetsCategorySlice from './slices/assets/assetsCategorySlice'
 import vendorLedgerSlice from './slices/VendorLedgerSlice'
 import dealersRatioSlice from './slices/dealersRatioSlice'
 import userAcessSlice from './slices/access/userAcessSlice'
-import companyBranchSlice from './slices/companyBranchSlice'
 import returnToVendorSlice from './slices/returnToVendorSlice'
 import warehouseTransferSlice from './slices/warehouseTransferSlice'
 import warehouseToSampleSlice from './slices/warehouseToSampleSlice'
 import warehouseToComapnySlice from './slices/WarehouseToComapnySlice'
 import InventoryFlowSlice from './slices/InventoryFlowSlice'
 import InwardDealerSlice from './slices/InwardDealerSlice'
-import CallCenterMasterSlice from './slices/CallCenterMasterSlice'
 import ComplainSlice from './slices/ComplainSlice'
 import MoneybackSlice from './slices/MoneybackSlice'
 import ProductReplacementSlice from './slices/ProductReplacementSlice'
@@ -110,39 +89,24 @@ const store = configureStore({
         vendorWarehouse: VendorWarehouseSlice,
         user: userSlice,
         newUser: NewUserSlice,
-        company: companySlice,
         warehouse: warehouseSlice,
         inventory: inventorySlice,
         outwardRequest: outwardRequestSlice,
         inwardRequest: inwardRequestSlice,
         saleOrder: saleOrderSlice,
-        cartonBox: cartonBoxSlice,
         purchaseOrder: PurchaseOrderSlice,
         inventoryManagement: InventoryManagementSlice,
         grn: GRNSlice,
-        tax: TaxesSlice,
-        item: itemSlice,
         states: statesSlice,
         district: districtSlice,
         areas: areaSlice,
-        language: languageSlice,
-        dealersCategory: dealersCategorySlice,
         tehsils: tehsilSlice,
         pincode: pincodeSlice,
         country: countrySlice,
-        configurationCompany: configurationCompanySlice,
-        companybranch: companyBranchSlice,
         barcode: barcodeSlice,
         cartonBoxBarcode: CartonBoxBarcodeSlice,
         productGroupBarcode: ProductGroupBarcodeSlice,
-        didManagement: didManagementSlice,
-        channelManagement: channelManagementSlice,
         slotManagement: slotManagementSlice,
-        tapeManagement: tapeManagementSlice,
-        // channelGroup: channelGroupSlice,
-        channelCategory: channelCategorySlice,
-        competitor: competitorSlice,
-        artist: artistSlice,
         websiteBlog: websiteBlogSlice,
         websitePage: websitePageSlice,
         order: orderSlice,
@@ -158,7 +122,6 @@ const store = configureStore({
         warehouseToComapny: warehouseToComapnySlice,
         inventoryFlow: InventoryFlowSlice,
         inwardDealer: InwardDealerSlice,
-        callCenter: CallCenterMasterSlice,
         complain: ComplainSlice,
         moneyback: MoneybackSlice,
         productReplacement: ProductReplacementSlice,

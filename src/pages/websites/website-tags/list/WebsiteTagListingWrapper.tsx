@@ -23,8 +23,10 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const WebsiteTagListingWrapper = () => {
+    useUnmountCleanup()
     const navigate = useNavigate()
     const [deleteWebsiteTags] = useDeleteWebsiteTagsMutation()
     const [currentId, setCurrentId] = useState('')

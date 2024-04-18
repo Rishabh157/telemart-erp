@@ -1,31 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:PicodeListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import PincodeListing from './PincodeListing'
-// import { useGetPincodeQuery } from 'src/services/PinCodeService'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
+import useAllInfoByPincode from 'src/hooks/useAllInfoByPincode'
+import usePincodesByTehsil from 'src/hooks/usePincodesByTehsil'
+import { setSelectedLocationCountry } from 'src/redux/slices/countrySlice'
+import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
 import {
     setItems,
     setSelectedLocationPincode,
 } from 'src/redux/slices/pincodeSlice'
-import usePincodesByTehsil from 'src/hooks/usePincodesByTehsil'
-import useAllInfoByPincode from 'src/hooks/useAllInfoByPincode'
-import { setSelectedLocationCountry } from 'src/redux/slices/countrySlice'
 import { setSelctedLocationState } from 'src/redux/slices/statesSlice'
-import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
 import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 const PincodeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -58,6 +52,7 @@ const PincodeListingWrapper = () => {
             dispatch(setSelectedLocationDistrict(pincodeData?.districtId))
             dispatch(setSelectedLocationTehsil(pincodeData?.tehsilId))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pincodeData])
 
     return (

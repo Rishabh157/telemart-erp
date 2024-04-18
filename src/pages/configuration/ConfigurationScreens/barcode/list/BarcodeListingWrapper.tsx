@@ -22,9 +22,7 @@ import {
     ProductBarcodeGroupResponse,
 } from 'src/models'
 
-// import {
-//     setActiveTabIndex,
-// } from 'src/redux/slices/barcodeSlice'
+
 import BarcodeListing from './BarcodeListing'
 import {
     useGetBarcodeQuery,

@@ -23,12 +23,11 @@ import useCountries from 'src/hooks/useCountry'
 import useStateDistricts from 'src/hooks/useDistrictsByState'
 import usePincodesByDistrict from 'src/hooks/usePincodesByDistrict'
 import useStatesByCountry from 'src/hooks/useStatesByCountry'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
+import useAllInfoByPincode from 'src/hooks/useAllInfoByPincode'
 import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 import { setAllStates } from 'src/redux/slices/statesSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import useAllInfoByPincode from 'src/hooks/useAllInfoByPincode'
 
 // |-- Types --|
 type Props = {
@@ -166,7 +165,7 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
     const [billingDistrictData, setBillingDistrictData] = useState<any>()
     const [billingPincodeData, setBillingPincodeData] = useState<any>()
 
-    const { country } = useCountries()
+    const { country:allCountry } = useCountries()
 
     //registraion
 
@@ -197,7 +196,6 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
         formikProps.values.billing_address.district
     )
 
-    const { allCountry }: any = useSelector((state: RootState) => state.country)
     const { allStates }: any = useSelector((state: RootState) => state.states)
     const { allDistricts }: any = useSelector(
         (state: RootState) => state.district
@@ -206,11 +204,6 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
         (state: RootState) => state.pincode
     )
 
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
 
     //registration
 

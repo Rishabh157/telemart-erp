@@ -1,24 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react'
 import { Form, Formik, FormikProps } from 'formik'
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { array, object, string } from 'yup'
-import StepAddCompanyDetailsWrapper from './FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper'
-import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
-import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
-import AddWarehouse from './AddWarehouse'
-import { useAddWareHouseMutation } from 'src/services/WareHouseService'
-import { showToast, validationofGst } from 'src/utils'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
 import { useNavigate } from 'react-router-dom'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import useCountries from 'src/hooks/useCountry'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
-import useCountries from 'src/hooks/useCountry'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { useAddWareHouseMutation } from 'src/services/WareHouseService'
+import { showToast, validationofGst } from 'src/utils'
+import { array, object, string } from 'yup'
+import AddWarehouse from './AddWarehouse'
+import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
+import StepAddCompanyDetailsWrapper from './FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper'
+import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
 
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
@@ -135,21 +134,13 @@ const steps = [
 
 const AddWarehouseWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
-
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addWareHouse] = useAddWareHouseMutation()
-    const { country } = useCountries()
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
-
+    const { country: allCountry } = useCountries()
     // States
     const [apiStatus, setApiStatus] = useState(false)
     const [activeStep, setActiveStep] = React.useState(0)
-    const { allCountry }: any = useSelector((state: RootState) => state.country)
 
     // From Initial Values
     const initialValues: FormInitialValues = {

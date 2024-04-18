@@ -23,8 +23,10 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const InfluencerListingWrapper = () => {
+    useUnmountCleanup()
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteWebsite] = useDeletegetWebsiteMutation()

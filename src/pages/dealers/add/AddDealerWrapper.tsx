@@ -1,35 +1,29 @@
-/// ==============================================
-// Filename:StepAddDealerWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { array, boolean, mixed, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import AddDealers from './AddDealers'
-import StepAddDealerDetailsWrapper from './FormSteps/StepAddDealerDetails/StepAddDealerDetailsWrapper'
-import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
-import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
-import StepAddDocumentsWrapper from './FormSteps/StepAddDocuments/StepAddDocumentsWrapper'
-import StepAddOthersWrapper from './FormSteps/StepAddOthers/StepAddOthersWrapper'
+import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
 import { useAddDealerMutation } from 'src/services/DealerServices'
 import { showToast, validationofGst } from 'src/utils'
-import { useGetAllDealerCategoryQuery } from 'src/services/DealerCategoryService'
-import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+import AddDealers from './AddDealers'
+import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
+import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
+import StepAddDealerDetailsWrapper from './FormSteps/StepAddDealerDetails/StepAddDealerDetailsWrapper'
+import StepAddDocumentsWrapper from './FormSteps/StepAddDocuments/StepAddDocumentsWrapper'
+import StepAddOthersWrapper from './FormSteps/StepAddOthers/StepAddOthersWrapper'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllDealerCategory } from 'src/redux/slices/dealersCategorySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import {
     setFieldCustomized,
     setFormSubmitting,
@@ -290,26 +284,14 @@ const AddDealerWrapper = () => {
     }
 
     const dispatch = useDispatch<AppDispatch>()
-    const { data, isLoading, isFetching } = useGetAllDealerCategoryQuery(
-        userData?.companyId
-    )
-
-    const { alldealerCategory }: any = useSelector(
-        (state: RootState) => state.dealersCategory
-    )
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setAllDealerCategory(data?.data))
-        }
-    }, [data, isLoading, isFetching, dispatch])
-
-    const dealerCategoryOptions = alldealerCategory?.map((ele: any) => {
-        return {
-            label: ele?.dealersCategory,
-            value: ele?._id,
-        }
+   const {options:dealerCategoryOptions}= useCustomOptions({
+        useEndPointHook: useGetAllDealerCategoryQuery(
+                userData?.companyId
+            ),
+            keyName:'dealersCategory',
+            value:"_id"
     })
+
 
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {

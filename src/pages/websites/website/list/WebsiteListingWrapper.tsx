@@ -26,8 +26,10 @@ import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/w
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const WebstieListingWrapper = () => {
+    useUnmountCleanup()
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteWebsite] = useDeletegetWebsiteMutation()

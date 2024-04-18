@@ -76,16 +76,6 @@ const MultiOrderSearchListing = ({
                             placeholder="Enter Mobile number... "
                             className="rounded"
                             onChange={(event: string) => {
-                                // let newValue = event
-                                // // Replace spaces with commas
-                                // newValue = event.replace(/\s+/g, ',')
-                                // console.log('newValue: replace', newValue)
-                                // // Add comma after every 10 characters
-                                // newValue = newValue.replace(/(.{10})/g, '$1,')
-                                // console.log(
-                                //     'newValue: repalce after 10',
-                                //     newValue
-                                // )
                                 setFieldValue('mobileNumbers', event)
                             }}
                         />

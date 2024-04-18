@@ -1,13 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditUserWrapper.tsx
-// Type: Edit Component
-// Last Updated: FEB 28, 2024
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
@@ -25,8 +18,8 @@ import { showToast } from 'src/utils'
 import EditUser from './EditUser'
 
 // |-- Redux --|
-import { CallCenterMasterListResponse } from 'src/models'
-import { setItems } from 'src/redux/slices/CallCenterMasterSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { setSelectedItem } from 'src/redux/slices/userSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -84,15 +77,11 @@ const EditUserWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateNewUser] = useUpdateNewUserMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector((state: RootState) => state?.user)
-    const { items } = useSelector((state: RootState) => state?.callCenter)
-    const { data, isLoading, isFetching } = useGetUserByIdQuery(Id)
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedItem(data?.data[0]))
-        }
-    }, [data, isLoading, isFetching])
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetUserByIdQuery(Id),
+    })
+
     let allowedIps: any = []
 
     selectedItem?.allowedIp?.map((val: any) => {
@@ -224,29 +213,16 @@ const EditUserWrapper = (props: Props) => {
             })
         }, 1000)
     }
-    const {
-        isLoading: isCallCenterLoading,
-        isFetching: isCallCenterFetching,
-        data: callCenterData,
-    } = useGetAllCallCenterMasterQuery(userData?.companyId, {
-        skip: !userData?.companyId,
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAllCallCenterMasterQuery(userData?.companyId, {
+            skip: !userData?.companyId,
+        }),
+        keyName: 'callCenterName',
+        value: '_id',
     })
 
-    React.useEffect(() => {
-        if (!isCallCenterLoading && !isCallCenterFetching) {
-            dispatch(setItems(callCenterData?.data))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isCallCenterLoading, isCallCenterFetching])
     const dropDownOption = {
-        callCenterOptions: items?.map(
-            (assetCategory: CallCenterMasterListResponse) => {
-                return {
-                    label: assetCategory.callCenterName,
-                    value: assetCategory._id,
-                }
-            }
-        ),
+        callCenterOptions: options,
     }
     return (
         <SideNavLayout>

@@ -1,40 +1,30 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditPurchaseOrderWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { date, number, object, string } from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { date, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditPurchaseOrder from './EditPurchaseOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import { useGetAllItemsQuery } from 'src/services/ItemService'
 import {
     useGetByIdPurchaseOrderQuery,
     useUpdatePurchaseOrderMutation,
 } from 'src/services/PurchaseOrderService'
-import { showToast } from 'src/utils'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
-import { useGetAllItemsQuery } from 'src/services/ItemService'
+import { showToast } from 'src/utils'
+import EditPurchaseOrder from './EditPurchaseOrder'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItems } from 'src/redux/slices/PurchaseOrderSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setAllItems } from 'src/redux/slices/vendorSlice'
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -62,27 +52,14 @@ const EditPurchaseOrderWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [UpdatePurchaseOrder] = useUpdatePurchaseOrderMutation()
 
-    const {
-        data: poData,
-        isLoading: poIsLoading,
-        isFetching: poIsFetching,
-    }: any = useGetByIdPurchaseOrderQuery(Id)
-
-    const { selectedItems }: any = useSelector(
-        (state: RootState) => state?.purchaseOrder
-    )
-
-    useEffect(() => {
-        if (!poIsFetching && !poIsLoading) {
-            dispatch(setSelectedItems(poData?.data || []))
-        }
-    }, [poData, poIsLoading, poIsFetching])
+    const { items: selectedItems } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetByIdPurchaseOrderQuery(Id),
+    })
 
     const initialValues: FormInitialValues = {
         vendorId: selectedItems?.vendorId || '',
         wareHouseId: selectedItems?.wareHouseId || '',
         isEditable: selectedItems?.isEditable || true,
-        // purchaseOrder: selectedItems?.purchaseOrder || {},
         purchaseOrder:
             {
                 id: selectedItems?.purchaseOrder?._id,
@@ -93,67 +70,21 @@ const EditPurchaseOrderWrapper = (props: Props) => {
                     selectedItems?.purchaseOrder?.estReceivingDate,
             } || {},
     }
-
-    const {
-        data: vendorData,
-        isLoading: vendorIsLoading,
-        isFetching: VendorIsFetching,
-    } = useGetVendorsQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state.vendor)
-
-    const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
-
-    const { allItems: warehouseItems }: any = useSelector(
-        (state: RootState) => state?.warehouse
-    )
-    const {
-        data: itemsData,
-        isLoading: itemsIsLoading,
-        isFetching: itemsIsFetching,
-    } = useGetAllItemsQuery(userData?.companyId)
-
-    const { allItems: itemsList }: any = useSelector(
-        (state: RootState) => state.item
-    )
-
-    const vendorOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.companyName,
-            value: ele._id,
-        }
+    const { options: itemOptions } = useCustomOptions({
+        useEndPointHook: useGetAllItemsQuery(userData?.companyId),
+        keyName: 'itemName',
+        value: '_id',
     })
-
-    const warehouseOptions = warehouseItems?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
+    const { options: warehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetWareHousesQuery(userData?.companyId),
+        keyName: 'wareHouseName',
+        value: '_id',
     })
-
-    const itemOptions = itemsList?.map((ele: any) => {
-        return {
-            label: ele.itemName,
-            value: ele._id,
-        }
+    const { options: vendorOptions } = useCustomOptions({
+        useEndPointHook: useGetVendorsQuery(userData?.companyId),
+        keyName: 'companyName',
+        value: '_id',
     })
-
-    //vendor
-    useEffect(() => {
-        dispatch(setAllItems(vendorData?.data))
-    }, [vendorData, vendorIsLoading, VendorIsFetching, dispatch])
-
-    //warehouse
-    useEffect(() => {
-        dispatch(setAllWareHouse(warehouseData?.data))
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
-
-    useEffect(() => {
-        dispatch(setAllItem(itemsData?.data))
-    }, [itemsData, dispatch, itemsIsLoading, itemsIsFetching])
 
     // Form Validation Schema
     const validationSchema = object({
