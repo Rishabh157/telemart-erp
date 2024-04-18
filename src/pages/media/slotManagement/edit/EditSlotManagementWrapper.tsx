@@ -1,43 +1,29 @@
-/// ==============================================
-// Filename:EditSlotManagementWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik, FormikProps } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { array, boolean, number, object, string } from 'yup'
-// import { showToast } from 'src/utils'
 
 // |-- Internal Dependencies --|
-import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
-import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import { showToast } from 'src/utils'
+import EditSlotManagement from './EditSlotManagement'
+import { SlotManagementListResponse } from 'src/models/Slot.model'
+
+// |-- Redux --|
+import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
 import {
     useGetSlotMangementByIdQuery,
     useUpdateSlotMutation,
 } from 'src/services/media/SlotDefinitionServices'
-import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
-import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
-import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
-import { ChannelManagementListResponse } from 'src/models/Channel.model'
 import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
-import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
-import EditSlotManagement from './EditSlotManagement'
-
-// |-- Redux --|
-import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
+import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -61,104 +47,54 @@ export type FormInitialValues = {
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
 const EditSlotManagementWrapper = () => {
-    const navigate = useNavigate()
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const params = useParams()
-    const Id = params.id
+    const id = params.id
+
+    // Initiate Method
+    const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [updateSlot] = useUpdateSlotMutation()
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [channelCategoryData, setChannelCategoryData] = useState([])
-    const { selectedItems }: any = useSelector(
-        (state: RootState) => state?.slotManagement
-    )
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { channelgroup }: any = useSelector(
-        (state: RootState) => state?.channelGroup
-    )
-    const { tapeMangement }: any = useSelector(
-        (state: RootState) => state.tapeManagement
-    )
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<SlotManagementListResponse>({
+        useEndPointHook: useGetSlotMangementByIdQuery(id || ''),
+    })
 
-    const { channelMgt }: any = useSelector(
-        (state: RootState) => state?.channelManagement
-    )
+    const { options: channelGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelGroupQuery(userData?.companyId),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
-    const {
-        data: dataSmApi,
-        isLoading: smisLoading,
-        isFetching: smisFetching,
-    } = useGetSlotMangementByIdQuery(Id || '')
+    const { options: channelNameOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelQuery(userData?.companyId),
+        keyName: 'channelName',
+        value: '_id',
+    })
 
-    useEffect(() => {
-        if (!smisLoading && !smisFetching) {
-            dispatch(setSelectedItems(dataSmApi?.data || []))
-        }
-    }, [smisLoading, smisFetching, dataSmApi, dispatch])
-
-    const {
-        isLoading: isCategoryLoading,
-        isFetching: isCategoryFetching,
-        data: categoryDataApi,
-    } = useGetAllChannelCategoryQuery(userData?.companyId)
-
-    const {
-        isLoading: isChannelMgtLoading,
-        isFetching: isChannelMgtFetching,
-        data: ChannelMgtDataApi,
-    } = useGetAllChannelQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isChannelMgtLoading && !isChannelMgtFetching) {
-            dispatch(setChannelMgt(ChannelMgtDataApi?.data || []))
-        }
-    }, [isChannelMgtLoading, isChannelMgtFetching, ChannelMgtDataApi, dispatch])
-
-    const {
-        isLoading,
-        isFetching,
-        data: channelGroupsData,
-    } = useGetAllChannelGroupQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(channelGroupsData?.data || []))
-        }
-    }, [isLoading, isFetching, channelGroupsData, dispatch])
-
-    const {
-        isLoading: isTapeMgtLoading,
-        isFetching: isTapeMgtFetching,
-        data: TapeMgtdata,
-    } = useGetAllTapeMangementQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isTapeMgtLoading && !isTapeMgtFetching) {
-            dispatch(setSelectedTapManagement(TapeMgtdata?.data || []))
-        }
-    }, [isTapeMgtLoading, isTapeMgtFetching, TapeMgtdata, dispatch])
-
-    useEffect(() => {
-        if (!isCategoryLoading && !isCategoryFetching) {
-            setChannelCategoryData(categoryDataApi?.data)
-        }
-    }, [isCategoryLoading, isCategoryFetching, categoryDataApi])
+    const { options: tapeManagementOptions } = useCustomOptions({
+        useEndPointHook: useGetAllTapeMangementQuery(userData?.companyId),
+        keyName: 'tapeName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
-        slotName: selectedItems?.slotName || '',
-        channelGroupId: selectedItems?.channelGroupId || '',
-        type: selectedItems?.type || '',
-        tapeNameId: selectedItems?.tapeNameId || '',
-        channelNameId: selectedItems?.channelNameId || '',
-        slotPrice: selectedItems?.slotPrice || 0,
-        slotDay: selectedItems?.slotDay || [],
-        slotStartTime: selectedItems?.slotStartTime || '',
-        slotEndTime: selectedItems?.slotEndTime || '',
-        slotRenewal: selectedItems?.slotRenewal || '',
-        slotContinueStatus: selectedItems?.slotContinueStatus || false,
-        channelTrp: selectedItems?.channelTrp || '',
-        remarks: selectedItems?.remarks || '',
-        slotStartDate: selectedItems?.slotStartDate || '',
+        slotName: items?.slotName || '',
+        channelGroupId: items?.channelGroupId || '',
+        type: items?.type || '',
+        tapeNameId: items?.tapeNameId || '',
+        channelNameId: items?.channelNameId || '',
+        slotPrice: items?.slotPrice || 0,
+        slotDay: items?.slotDay || [],
+        slotStartTime: items?.slotStartTime || '',
+        slotEndTime: items?.slotEndTime || '',
+        slotRenewal: items?.slotRenewal || '',
+        slotContinueStatus: items?.slotContinueStatus || false,
+        channelTrp: items?.channelTrp || '',
+        remarks: items?.remarks || '',
+        slotStartDate: items?.slotStartDate || '',
         companyId: userData?.companyId || '',
     }
 
@@ -169,7 +105,7 @@ const EditSlotManagementWrapper = () => {
         type: string().required('Required'),
         slotPrice: number().required('Required'),
         slotDay: array()
-            .of(string().required('Required'))
+            .of(string())
             .min(1, 'At least one slot day is required')
             .required('Required'),
         slotStartTime: string().required('Required'),
@@ -204,12 +140,12 @@ const EditSlotManagementWrapper = () => {
                     slotStartDate: values.slotStartDate,
                     companyId: values?.companyId,
                 },
-                id: Id || '',
+                id: id || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Slot Updated successfully!')
-                        navigate('/media/slo/definationt')
+                        navigate('/media/slot/defination')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -220,82 +156,30 @@ const EditSlotManagementWrapper = () => {
             })
         }, 1000)
     }
+
     const dropdownOptions = {
-        channelGroupOptions: channelgroup?.map(
-            (channelGroup: GetAllChannelGroupResponse) => {
-                return {
-                    label: channelGroup.groupName,
-                    value: channelGroup._id,
-                }
-            }
-        ),
-
-        channelMgtOptions: channelMgt?.map(
-            (channelMgt: ChannelManagementListResponse) => {
-                return {
-                    label: channelMgt.channelName,
-                    value: channelMgt._id,
-                }
-            }
-        ),
-
-        // countryOption: countryData?.map((country: CountryListResponse) => {
-        //     return {
-        //         label: country.countryName,
-        //         value: country._id,
-        //     }
-        // }),
-        // languageOption: languageData?.map((language: LanguageListResponse) => {
-        //     return {
-        //         label: language.languageName,
-        //         value: language._id,
-        //     }
-        // }),
-        categoryOption: channelCategoryData?.map(
-            (category: ChannelCategoryListResponse) => {
-                return {
-                    label: category.channelCategory,
-                    value: category._id,
-                }
-            }
-        ),
-
-        tapeMangementOptions: tapeMangement?.map(
-            (tapeMangement: TapeManagementListResponse) => {
-                return {
-                    label: tapeMangement.tapeName,
-                    value: tapeMangement._id,
-                }
-            }
-        ),
-        // paymentOptions: [
-        //     { label: 'checque', value: 'CHECQUE' },
-        //     { label: 'netBanking', value: 'NETBANKING' },
-        //     { label: 'cash', value: 'CASH' },
-        //     { label: 'creditCard', value: 'CREDITCARD' },
-        //     { label: 'debitCard', value: 'DEBITCARD' },
-        // ],
+        channelGroupOptions,
+        channelNameOptions,
+        tapeManagementOptions,
     }
 
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <EditSlotManagement
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <EditSlotManagement
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

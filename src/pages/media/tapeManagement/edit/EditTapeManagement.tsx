@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditTapeManagement.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -28,6 +21,7 @@ import { FieldType } from './EditTapeManagementWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { getTapeManagementTypes } from 'src/utils/constants/customeTypes'
 
 // |-- Types --|
 type Props = {
@@ -36,10 +30,9 @@ type Props = {
     apiStatus: boolean
     dropdownOptions: {
         channelGroupOptions: SelectOption[]
-        schemeDataOption: SelectOption[]
+        schemeOptions: SelectOption[]
         languageOptions: SelectOption[]
-        artistOption: SelectOption[]
-        tapeTypeOption: SelectOption[]
+        artistOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -58,10 +51,10 @@ const EditTapeManagement = ({
     dropdownOptions,
     formFields,
 }: Props) => {
+    const [show, setShow] = useState(false)
     const dispatch = useDispatch()
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
-    const [show, setShow] = useState(false)
 
     const MinuteOptions = () => {
         let options: SelectOption[] = []
@@ -72,10 +65,15 @@ const EditTapeManagement = ({
         }
         return options
     }
+
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+    console.log('dropdownOptionsdropdownOptions', dropdownOptions)
+    console.log('valuesvaluesvalues', values)
+
     return (
         <div className="">
             <div className="flex flex-col gap-2 p-4 ">
@@ -149,8 +147,9 @@ const EditTapeManagement = ({
                                     )
                                 }
                             />
+
                             <ATMSelectSearchable
-                                options={dropdownOptions.tapeTypeOption}
+                                options={getTapeManagementTypes()}
                                 name="tapeType"
                                 required
                                 value={values.tapeType}
@@ -168,7 +167,7 @@ const EditTapeManagement = ({
                                 onChange={(value) =>
                                     handleSetFieldValue('schemeId', value)
                                 }
-                                options={dropdownOptions.schemeDataOption}
+                                options={dropdownOptions.schemeOptions}
                                 label="Scheme"
                             />
                         </div>
@@ -183,7 +182,7 @@ const EditTapeManagement = ({
                                 onChange={(value) =>
                                     handleSetFieldValue('artistId', value)
                                 }
-                                options={dropdownOptions.artistOption}
+                                options={dropdownOptions.artistOptions}
                                 label="Artist"
                             />
                             <ATMSelectSearchable

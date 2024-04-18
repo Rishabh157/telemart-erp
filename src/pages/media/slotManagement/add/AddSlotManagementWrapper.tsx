@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,23 +9,16 @@ import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
-import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
-import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import AddSlotManagement from './AddSlotManagement'
-import { useAddSlotMutation } from 'src/services/media/SlotDefinitionServices'
-import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
-import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
-import { ChannelManagementListResponse } from 'src/models/Channel.model'
-import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
-import { TapeManagementListResponse } from 'src/models/tapeManagement.model'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-import { setSelectedTapManagement } from 'src/redux/slices/media/tapeManagementSlice'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
+import { useAddSlotMutation } from 'src/services/media/SlotDefinitionServices'
+import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
+import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
+import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -46,82 +39,43 @@ export type FormInitialValues = {
     runYoutubeLink: string
     companyId: string
 }
+
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
 const AddSlotManagementWrapper = () => {
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    // Initiate Method
+    const [addSlotManagement] = useAddSlotMutation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [channelCategoryData, setChannelCategoryData] = useState([])
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { channelgroup }: any = useSelector(
-        (state: RootState) => state?.channelGroup
-    )
-    const { tapeMangement }: any = useSelector(
-        (state: RootState) => state.tapeManagement
-    )
+    // Hook
+    const { options: channelGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelGroupQuery(userData?.companyId),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
-    const { channelMgt }: any = useSelector(
-        (state: RootState) => state?.channelManagement
-    )
+    const { options: channelNameOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelQuery(userData?.companyId),
+        keyName: 'channelName',
+        value: '_id',
+    })
 
-    const [AddSlotManagementApi] = useAddSlotMutation()
-
-    const {
-        isLoading: isCategoryLoading,
-        isFetching: isCategoryFetching,
-        data: categoryDataApi,
-    } = useGetAllChannelCategoryQuery(userData?.companyId)
-
-    const {
-        isLoading: isChannelMgtLoading,
-        isFetching: isChannelMgtFetching,
-        data: ChannelMgtDataApi,
-    } = useGetAllChannelQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isChannelMgtLoading && !isChannelMgtFetching) {
-            dispatch(setChannelMgt(ChannelMgtDataApi?.data || []))
-        }
-    }, [isChannelMgtLoading, isChannelMgtFetching, ChannelMgtDataApi, dispatch])
-
-    const {
-        isLoading,
-        isFetching,
-        data: channelGroupsData,
-    } = useGetAllChannelGroupQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(channelGroupsData?.data || []))
-        }
-    }, [isLoading, isFetching, channelGroupsData, dispatch])
-
-    const {
-        isLoading: isTapeMgtLoading,
-        isFetching: isTapeMgtFetching,
-        data: TapeMgtdata,
-    } = useGetAllTapeMangementQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isTapeMgtLoading && !isTapeMgtFetching) {
-            dispatch(setSelectedTapManagement(TapeMgtdata?.data || []))
-        }
-    }, [isTapeMgtLoading, isTapeMgtFetching, TapeMgtdata, dispatch])
-
-    useEffect(() => {
-        if (!isCategoryLoading && !isCategoryFetching) {
-            setChannelCategoryData(categoryDataApi?.data)
-        }
-    }, [isCategoryLoading, isCategoryFetching, categoryDataApi])
+    const { options: tapeManagementOptions } = useCustomOptions({
+        useEndPointHook: useGetAllTapeMangementQuery(userData?.companyId),
+        keyName: 'tapeName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
         slotName: '',
         channelGroup: '',
         type: '',
         slotPrice: 0,
-        slotDay: [''],
+        slotDay: [],
         slotStartTime: '',
         slotStartDate: '',
         slotRenewal: '',
@@ -142,7 +96,7 @@ const AddSlotManagementWrapper = () => {
         type: string().required('Required'),
         slotPrice: number().required('Required'),
         slotStartDate: string().required('Required'),
-        slotDay: array().of(string().required('Required')).required('Required'),
+        slotDay: array().of(string()).required('Required'),
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
         slotContinueStatus: boolean().required('Required'),
@@ -153,9 +107,10 @@ const AddSlotManagementWrapper = () => {
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
+        console.log('values: onSubmit ', values)
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        AddSlotManagementApi({
+        addSlotManagement({
             slotName: values.slotName,
             channelGroupId: values.channelGroup,
             type: values.type,
@@ -170,7 +125,6 @@ const AddSlotManagementWrapper = () => {
             slotRenewal: values.slotRenewal,
             slotEndTime: values.slotEndTime,
             slotContinueStatus: values.slotContinueStatus,
-
             companyId: values.companyId || '',
         }).then((res: any) => {
             if ('data' in res) {
@@ -188,42 +142,11 @@ const AddSlotManagementWrapper = () => {
     }
 
     const dropdownOptions = {
-        channelGroupOptions: channelgroup?.map(
-            (channelGroup: GetAllChannelGroupResponse) => {
-                return {
-                    label: channelGroup.groupName,
-                    value: channelGroup._id,
-                }
-            }
-        ),
-
-        channelMgtOptions: channelMgt?.map(
-            (channelMgt: ChannelManagementListResponse) => {
-                return {
-                    label: channelMgt.channelName,
-                    value: channelMgt._id,
-                }
-            }
-        ),
-
-        categoryOption: channelCategoryData?.map(
-            (category: ChannelCategoryListResponse) => {
-                return {
-                    label: category.channelCategory,
-                    value: category._id,
-                }
-            }
-        ),
-
-        tapeMangementOptions: tapeMangement?.map(
-            (tapeMangement: TapeManagementListResponse) => {
-                return {
-                    label: tapeMangement.tapeName,
-                    value: tapeMangement._id,
-                }
-            }
-        ),
+        channelGroupOptions,
+        channelNameOptions,
+        tapeManagementOptions,
     }
+
     return (
         <Formik
             initialValues={initialValues}

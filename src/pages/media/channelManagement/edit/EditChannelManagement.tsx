@@ -1,16 +1,9 @@
-/// ==============================================
-// Filename:EditChannelManagement.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { FormInitialValues } from './EditChannelManagementWrapper'
@@ -25,12 +18,15 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { paymentTypeOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
-import { setAllStates } from 'src/redux/slices/statesSlice'
-import { setAllDistrict } from 'src/redux/slices/districtSlice'
+// import { RootState } from 'src/redux/store'
+// import { setAllStates } from 'src/redux/slices/statesSlice'
+// import { setAllDistrict } from 'src/redux/slices/districtSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import useStatesByCountry from 'src/hooks/useStatesByCountry'
-import useStateDistricts from 'src/hooks/useDistrictsByState'
+// import useStatesByCountry from 'src/hooks/useStatesByCountry'
+// import useStateDistricts from 'src/hooks/useDistrictsByState'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllStateByCountryQuery } from 'src/services/StateService'
+import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 
 // |-- Types --|
 type Props = {
@@ -38,11 +34,11 @@ type Props = {
     apiStatus: boolean
     dropdownOptions: {
         channelGroupOptions: SelectOption[]
-        countryOption: SelectOption[]
-        stateOption?: SelectOption[]
+        channelCategoryOptions: SelectOption[]
+        countryOptions: SelectOption[]
+        languageOptions: SelectOption[]
+        stateOptions?: SelectOption[]
         districtOptions?: SelectOption[]
-        languageOption: SelectOption[]
-        categoryOption: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -61,47 +57,33 @@ const EditChannelManagement = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    // Initiate Method
     const dispatch = useDispatch()
-    const { allStates }: any = useSelector((state: RootState) => state.states)
-    const { allDistricts }: any = useSelector(
-        (state: RootState) => state.district
-    )
-    const { stateByCountry } = useStatesByCountry(formikProps.values.country)
 
-    const { stateDistricts } = useStateDistricts(formikProps.values.state)
+    // Hook
+    const { options: stateOptions } = useCustomOptions({
+        useEndPointHook: useGetAllStateByCountryQuery(values.country || '', {
+            skip: !values.country,
+        }),
+        keyName: 'stateName',
+        value: '_id',
+    })
 
-    //district
-    useEffect(() => {
-        if (stateDistricts) {
-            dispatch(setAllDistrict(stateDistricts))
-        }
-    }, [stateDistricts, dispatch])
-    //state
-    useEffect(() => {
-        if (stateByCountry) {
-            dispatch(setAllStates(stateByCountry))
-        }
-    }, [stateByCountry, dispatch])
-
-    //district
-    // useEffect(() => {
-    //     if (!districtIsLoading && !districtIsFetching) {
-    //         dispatch(setAllDistrict(districtData?.data))
-    //     }
-    // }, [districtData, districtIsLoading, districtIsFetching, dispatch])
+    const { options: districtOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDistrictByStateQuery(values.state || '', {
+            skip: !values.state,
+        }),
+        keyName: 'districtName',
+        value: '_id',
+    })
 
     dropdownOptions = {
         ...dropdownOptions,
-        stateOption: allStates?.map((schemeItem: any) => {
-            return {
-                label: schemeItem?.stateName,
-                value: schemeItem?._id,
-            }
-        }),
-        districtOptions: allDistricts?.map((ele: any) => {
-            return { label: ele?.districtName, value: ele?._id }
-        }),
+        stateOptions,
+        districtOptions,
     }
+
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
@@ -141,7 +123,6 @@ const EditChannelManagement = ({
                 {/* Form */}
                 <div className="px-3 py-2 grow pb-9 ">
                     <div className="grid grid-cols-3 gap-4">
-                        {/* FirstName */}
                         <ATMTextField
                             name="channelName"
                             value={values.channelName}
@@ -155,33 +136,29 @@ const EditChannelManagement = ({
                                 )
                             }
                         />
+
                         <ATMSelectSearchable
                             name="channelGroupId"
                             required
                             value={values.channelGroupId}
+                            options={dropdownOptions.channelGroupOptions}
+                            label="Channel Group"
                             onChange={(e) =>
                                 handleSetFieldValue('channelGroupId', e)
                             }
-                            options={dropdownOptions.channelGroupOptions}
-                            label="Channel Group"
                         />
+
                         <ATMSelectSearchable
-                            options={dropdownOptions.categoryOption}
                             required
                             name="channelCategory"
                             value={values.channelCategory}
                             label="Channel Category "
+                            options={dropdownOptions.channelCategoryOptions}
                             onChange={(value) =>
                                 handleSetFieldValue('channelCategory', value)
                             }
-                        />{' '}
-                        {/* <ATMTextArea
-                                name="address"
-                                value={values.address}
-                                label="Address Name"
-                                placeholder="Address Name"
-                                onChange={(e) => handleSetFieldValue('address', e)}
-                            /> */}
+                        />
+
                         <ATMTextField
                             name="contactPerson"
                             value={values.contactPerson}
@@ -194,6 +171,7 @@ const EditChannelManagement = ({
                                 )
                             }
                         />
+
                         <ATMTextField
                             name="designation"
                             required
@@ -207,6 +185,7 @@ const EditChannelManagement = ({
                                 )
                             }
                         />
+
                         <ATMTextField
                             name="email"
                             value={values.email}
@@ -216,8 +195,9 @@ const EditChannelManagement = ({
                                 handleSetFieldValue('email', e.target.value)
                             }
                         />
+
                         <ATMSelectSearchable
-                            options={dropdownOptions.countryOption}
+                            options={dropdownOptions.countryOptions}
                             name="country"
                             required
                             value={values.country}
@@ -227,8 +207,9 @@ const EditChannelManagement = ({
                                 handleSetFieldValue('country', value)
                             }}
                         />
+
                         <ATMSelectSearchable
-                            options={dropdownOptions.stateOption || []}
+                            options={dropdownOptions.stateOptions || []}
                             name="state"
                             required
                             value={values.state}
@@ -237,6 +218,7 @@ const EditChannelManagement = ({
                                 handleSetFieldValue('state', value)
                             }
                         />
+
                         <ATMSelectSearchable
                             options={dropdownOptions.districtOptions || []}
                             name="district"
@@ -247,9 +229,10 @@ const EditChannelManagement = ({
                                 handleSetFieldValue('district', value)
                             }
                         />
+
                         <ATMSelectSearchable
                             required
-                            options={dropdownOptions.languageOption}
+                            options={dropdownOptions.languageOptions}
                             name="language"
                             value={values.language}
                             label="Language"
@@ -257,6 +240,7 @@ const EditChannelManagement = ({
                                 handleSetFieldValue('language', value)
                             }
                         />
+
                         <ATMSelectSearchable
                             options={paymentTypeOptions()}
                             required
@@ -267,6 +251,7 @@ const EditChannelManagement = ({
                                 handleSetFieldValue('paymentType', value)
                             }
                         />
+
                         <ATMTextField
                             name="phone"
                             value={values.phone}
@@ -276,6 +261,7 @@ const EditChannelManagement = ({
                                 handleSetFieldValue('phone', e.target.value)
                             }
                         />
+
                         <ATMTextField
                             name="mobile"
                             value={values.mobile}
@@ -285,15 +271,17 @@ const EditChannelManagement = ({
                                 handleSetFieldValue('mobile', e.target.value)
                             }
                         />
+
                         <ATMTextField
                             name="website"
                             value={values.website}
                             label="Website "
                             placeholder="Website "
-                            onChange={(e) =>
+                            onChange={(e) => {
                                 handleSetFieldValue('website', e.target.value)
-                            }
+                            }}
                         />
+
                         <ATMTextArea
                             name="address"
                             value={values.address}

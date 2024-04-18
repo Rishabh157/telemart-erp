@@ -1174,3 +1174,25 @@ export const showTheDashboardGraphToDeparment = (departmentType: string) => {
             return false
     }
 }
+
+// Tape Type Options
+enum TapeManagementTypes {
+    schemeCode = 'SCHEME_CODE',
+    promotional = 'PROMOTIONAL',
+    intruption = 'INTRUPTION',
+}
+
+export const getTapeManagementTypes = () => {
+    let options = [
+        { value: TapeManagementTypes.schemeCode, label: 'Scheme Code' },
+        { value: TapeManagementTypes.promotional, label: 'Promotional' },
+        { value: TapeManagementTypes.intruption, label: 'Intruption' },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}

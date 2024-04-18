@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditChannelManagementWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useNavigate, useParams } from 'react-router-dom'
@@ -16,28 +8,23 @@ import { object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-
 import {
     useGetChannelByIdQuery,
     useUpdateChannelMutation,
 } from 'src/services/media/ChannelManagementServices'
 import { showToast } from 'src/utils'
 import { useGetAllChannelGroupQuery } from 'src/services/media/ChannelGroupServices'
-import { GetAllChannelGroupResponse } from 'src/models/ChannelGroup.model'
-import { CountryListResponse } from 'src/models/Country.model'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { LanguageListResponse } from 'src/models'
 import { useGetAllChannelCategoryQuery } from 'src/services/media/ChannelCategoriesServices'
-import { ChannelCategoryListResponse } from 'src/models/ChannelCategory.model'
 import EditChannelManagement from './EditChannelManagement'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-import { setChannelGroups } from 'src/redux/slices/media/channelGroupSlice'
-import { setSelectedItem } from 'src/redux/slices/media/channelManagementSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import useCountries from 'src/hooks/useCountry'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
+import { ChannelManagementListResponse } from 'src/models/Channel.model'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllCountryQuery } from 'src/services/CountryService'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -61,92 +48,61 @@ export type FormInitialValues = {
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 
 const EditChannelManagementWrapper = () => {
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const params = useParams()
+    const id = params.id
+
+    // Initiate Method
+    const [EditChannelApi] = useUpdateChannelMutation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const params = useParams()
-    const Id = params.id
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [languageData, setlanguageData] = useState([])
-    const [channelCategoryData, setChannelCategoryData] = useState([])
-    const {
-        data: chData,
-        isLoading: chIsLoading,
-        isFetching: chIsFetching,
-    } = useGetChannelByIdQuery(Id)
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allCountry } = useSelector((state: RootState) => state?.country)
 
-    const { selectedItem } = useSelector(
-        (state: RootState) => state?.channelManagement
-    )
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<ChannelManagementListResponse>({
+        useEndPointHook: useGetChannelByIdQuery(id),
+    })
 
-    const { channelgroup }: any = useSelector(
-        (state: RootState) => state?.channelGroup
-    )
-    const [EditChannelApi] = useUpdateChannelMutation()
-    const {
-        isLoading: isLanguageLoading,
-        isFetching: isLanguageFetching,
-        data: languageDataApi,
-    } = useGetAllLanguageQuery('')
-    const {
-        isLoading: isCategoryLoading,
-        isFetching: isCategoryFetching,
-        data: categoryDataApi,
-    } = useGetAllChannelCategoryQuery(userData?.companyId)
+    const { options: channelGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelGroupQuery(userData?.companyId),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
-    const { country } = useCountries()
+    const { options: channelCategoryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelCategoryQuery(userData?.companyId),
+        keyName: 'channelCategory',
+        value: '_id',
+    })
 
-    const {
-        isLoading,
-        isFetching,
-        data: channelGroupsData,
-    } = useGetAllChannelGroupQuery(userData?.companyId)
+    const { options: languageOptions } = useCustomOptions({
+        useEndPointHook: useGetAllLanguageQuery(''),
+        keyName: 'languageName',
+        value: '_id',
+    })
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setChannelGroups(channelGroupsData?.data || []))
-        }
-    }, [isLoading, isFetching, channelGroupsData, dispatch])
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
-
-    useEffect(() => {
-        if (!isLanguageLoading && !isLanguageFetching) {
-            setlanguageData(languageDataApi?.data)
-        }
-    }, [isLanguageLoading, isLanguageFetching, languageDataApi])
-    useEffect(() => {
-        if (!isCategoryLoading && !isCategoryFetching) {
-            setChannelCategoryData(categoryDataApi?.data)
-        }
-    }, [isCategoryLoading, isCategoryFetching, categoryDataApi])
-
-    useEffect(() => {
-        if (!chIsLoading && !chIsFetching) {
-            dispatch(setSelectedItem(chData?.data))
-        }
-    }, [chIsLoading, chIsFetching, chData])
+    const { options: countryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllCountryQuery(''),
+        keyName: 'countryName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
-        channelName: selectedItem?.channelName || '',
-        address: selectedItem?.address || '',
-        phone: selectedItem?.phone || '',
-        email: selectedItem?.email || '',
-        district: selectedItem?.districtId || '',
-        channelGroupId: selectedItem?.channelGroupId || '',
-        contactPerson: selectedItem?.contactPerson || '',
-        mobile: selectedItem?.mobile || '',
-        country: selectedItem?.countryId || '',
-        language: selectedItem?.languageId || '',
-        channelCategory: selectedItem?.channelCategoryId || '',
-        designation: selectedItem?.designation || '',
-        website: selectedItem?.website || '',
-        state: selectedItem?.stateId || '',
-        paymentType: selectedItem?.paymentType || '',
+        channelName: items?.channelName || '',
+        address: items?.address || '',
+        phone: items?.phone || '',
+        email: items?.email || '',
+        district: items?.districtId || '',
+        channelGroupId: items?.channelGroupId || '',
+        contactPerson: items?.contactPerson || '',
+        mobile: items?.mobile || '',
+        country: items?.countryId || '',
+        language: items?.languageId || '',
+        channelCategory: items?.channelCategoryId || '',
+        designation: items?.designation || '',
+        website: items?.website || '',
+        state: items?.stateId || '',
+        paymentType: items?.paymentType || '',
         companyId: userData?.companyId || '',
     }
 
@@ -195,7 +151,7 @@ const EditChannelManagementWrapper = () => {
                     paymentType: values.paymentType,
                     companyId: values.companyId || '',
                 },
-                id: Id || '',
+                id: id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -211,36 +167,14 @@ const EditChannelManagementWrapper = () => {
             })
         }, 1000)
     }
+
     const dropdownOptions = {
-        channelGroupOptions: channelgroup?.map(
-            (channelGroup: GetAllChannelGroupResponse) => {
-                return {
-                    label: channelGroup.groupName,
-                    value: channelGroup._id,
-                }
-            }
-        ),
-        countryOption: allCountry?.map((country: CountryListResponse) => {
-            return {
-                label: country.countryName,
-                value: country._id,
-            }
-        }),
-        languageOption: languageData?.map((language: LanguageListResponse) => {
-            return {
-                label: language.languageName,
-                value: language._id,
-            }
-        }),
-        categoryOption: channelCategoryData?.map(
-            (category: ChannelCategoryListResponse) => {
-                return {
-                    label: category.channelCategory,
-                    value: category._id,
-                }
-            }
-        ),
+        channelGroupOptions,
+        channelCategoryOptions,
+        countryOptions,
+        languageOptions,
     }
+
     return (
         <Formik
             enableReinitialize
