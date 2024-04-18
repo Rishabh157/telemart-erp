@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:TehsilListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -26,11 +19,6 @@ import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
-// import {
-//     setFilterValue,
-//     setSelectedLocationPincode,
-// } from 'src/redux/slices/pincodeSlice'
-// import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
 
 // |-- Types --|
 type Props = {
@@ -82,7 +70,11 @@ const TehsilListing = ({ tehsils }: Props) => {
                     }
                 }}
                 disabled={false}
-                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_TEHSILS_ADD) as boolean}
+                isAddButton={
+                    isAuthorized(
+                        UserModuleNameTypes.ACTION_TEHSILS_ADD
+                    ) as boolean
+                }
             />
             {isOpenAddForm && (
                 <AddTehsilWrapper onClose={() => setisOpenAddForm(false)} />
