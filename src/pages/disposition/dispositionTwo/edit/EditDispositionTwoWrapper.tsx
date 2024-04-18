@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useNavigate, useParams } from 'react-router-dom'
-import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
-import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
-import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
-import EditDispositionTwo from './EditDispositionTwo'
+import { setSelectedDispostion } from 'src/redux/slices/configuration/dispositionTwoSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useGetdispositionTwoByIdQuery,
     useUpdatedispositionTwoMutation,
 } from 'src/services/configurations/DispositionTwoServices'
-import { setSelectedDispostion } from 'src/redux/slices/configuration/dispositionTwoSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
+import { showToast } from 'src/utils'
+import { object, string } from 'yup'
+import EditDispositionTwo from './EditDispositionTwo'
 
 export type FormInitialValues = {
     dispositionName: string
@@ -33,14 +35,6 @@ const EditDispositionTwoWrapper = () => {
     const [updatedispositionTwo] = useUpdatedispositionTwoMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-
-    const { allItems: dispositionOne }: any = useSelector(
-        (state: RootState) => state.dispositionOne
-    )
-
-    const { selectedDispostion }: any = useSelector(
-        (state: RootState) => state?.dispositionTwo
-    )
 
     const { data, isLoading, isFetching } = useGetdispositionTwoByIdQuery(Id)
 
@@ -61,6 +55,16 @@ const EditDispositionTwoWrapper = () => {
             dispatch(setAllDispositionOne(DoData?.data || []))
         }
     }, [isDOLoading, isDOFetching, DoData, dispatch])
+
+    const { items: selectedDispostion } = useGetDataByIdCustomQuery<DispositionTwoListResponse>({
+        useEndPointHook: useGetdispositionTwoByIdQuery(Id),
+    })
+
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAlldispositionOneQuery(''),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispostion?.dispositionName || '',
@@ -107,14 +111,7 @@ const EditDispositionTwoWrapper = () => {
     }
 
     const dropdownOptions = {
-        DispotionOneOptions: dispositionOne?.map(
-            (dispositionOne: DispositionOneListResponse) => {
-                return {
-                    label: dispositionOne?.dispositionDisplayName,
-                    value: dispositionOne?._id,
-                }
-            }
-        ),
+        DispotionOneOptions: options
     }
 
     return (

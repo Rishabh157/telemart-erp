@@ -1,26 +1,24 @@
-import React, { useEffect } from 'react'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './EditInitialCallThreeWrapper'
 import { FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { useGetAllinitialCallerTwoByIdQuery } from 'src/services/configurations/InitialCallerTwoServices'
-import { SelectOption } from 'src/models/FormField/FormField.model'
-import { setAllItems as setAllItemsdisposition } from 'src/redux/slices/configuration/initialCallerTwoSlice'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useGetAllinitialCallerOneQuery } from 'src/services/configurations/InitialCallerOneServices'
-import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
+import { useGetAllinitialCallerTwoByIdQuery } from 'src/services/configurations/InitialCallerTwoServices'
 import {
-    smstypeOptions,
-    emailTypeOptions,
     complaintTypeOptions,
+    emailTypeOptions,
     returnTypeOptions,
+    smstypeOptions,
 } from 'src/utils/constants/customeTypes'
+import { FormInitialValues } from './EditInitialCallThreeWrapper'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -37,9 +35,7 @@ const EditInitialCallThree = ({
     dropdownoptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
-    const [initialCalleOneOption, setInitialCalleOneOption] = React.useState<
-        any[]
-    >([])
+    
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -51,60 +47,38 @@ const EditInitialCallThree = ({
         },
     ]
 
-    const { allItems: allItemsDisposition }: any = useSelector(
-        (state: RootState) => state?.initialCallerTwo
-    )
-    const {
-        data: dispositionData,
-        isFetching: dispositionisFetching,
-        isLoading: dispositionisLoading,
-    } = useGetAllinitialCallerTwoByIdQuery(
-        {
-            id: formikProps.values.initialCallOneId,
-            callType: formikProps.values.callType,
-        },
-        {
-            skip: !(
-                formikProps.values.initialCallOneId &&
-                formikProps.values.callType
-            ),
-        }
-    )
+    const { options: initialCalleOneOption } = useCustomOptions({
+        useEndPointHook: useGetAllinitialCallerOneQuery(
+            values.callType,
+            {
+                skip: !values.callType,
+            }
+        ),
+        keyName: 'initialCallDisplayName',
+        value: '_id',
+    })
 
-    const { data, isFetching, isLoading } = useGetAllinitialCallerOneQuery(
-        values.callType,
-        {
-            skip: !values.callType,
-        }
-    )
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            const filterOption = data?.data?.map((ele: any) => {
-                return {
-                    label: ele?.initialCallDisplayName,
-                    value: ele?._id,
-                }
-            })
-            setInitialCalleOneOption(filterOption)
-        }
-    }, [data, isLoading, isFetching, dispatch])
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAllinitialCallerTwoByIdQuery(
+            {
+                id: formikProps.values.initialCallOneId,
+                callType: formikProps.values.callType,
+            },
+            {
+                skip: !(
+                    formikProps.values.initialCallOneId &&
+                    formikProps.values.callType
+                ),
+            }
+        ),
+        keyName: 'initialCallDisplayName',
+        value: '_id',
+    })
 
     dropdownoptions = {
         ...dropdownoptions,
-        initialCallTwoOptions: allItemsDisposition?.map((ele: any) => {
-            return {
-                label: ele?.initialCallDisplayName,
-                value: ele._id,
-            }
-        }),
+        initialCallTwoOptions:options
     }
-
-    useEffect(() => {
-        if (!dispositionisFetching && !dispositionisLoading) {
-            dispatch(setAllItemsdisposition(dispositionData?.data || []))
-        }
-    }, [dispositionData, dispositionisLoading, dispositionisFetching, dispatch])
 
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)

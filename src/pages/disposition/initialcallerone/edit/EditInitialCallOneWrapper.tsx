@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik } from 'formik'
-import { useUpdateinitialCallerOneMutation } from 'src/services/configurations/InitialCallerOneServices'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { RootState } from 'src/redux/store'
+import { useUpdateinitialCallerOneMutation } from 'src/services/configurations/InitialCallerOneServices'
+import { showToast } from 'src/utils'
+import { object, string } from 'yup'
 
-import EditInitialCallOne from './EditInitialCallOne'
-import { useGetinitialCallerOneByIdQuery } from 'src/services/configurations/InitialCallerOneServices'
-import { setSelectedInitialOne } from 'src/redux/slices/configuration/initialCallerOneSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { InitialCallerOneListResponse } from 'src/models/configurationModel/InitialCallerOne.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetinitialCallerOneByIdQuery } from 'src/services/configurations/InitialCallerOneServices'
+import EditInitialCallOne from './EditInitialCallOne'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -24,12 +25,12 @@ const EditInitialCallOneWrapper = () => {
     const Id = params.id
     const [editInitialcallOne] = useUpdateinitialCallerOneMutation()
 
-    const { selectedInitialOne }: any = useSelector(
-        (state: RootState) => state.initialCallerOne
-    )
-
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
+
+    const { items: selectedInitialOne } = useGetDataByIdCustomQuery<InitialCallerOneListResponse>({
+        useEndPointHook: useGetinitialCallerOneByIdQuery(Id),
+    })
 
     const initialValues: FormInitialValues = {
         initialCallName: selectedInitialOne?.initialCallName || '',
@@ -42,15 +43,6 @@ const EditInitialCallOneWrapper = () => {
         callType: string().required('Required'),
     })
 
-    const { data, isFetching, isLoading } = useGetinitialCallerOneByIdQuery(Id)
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setSelectedInitialOne(data?.data || []))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
