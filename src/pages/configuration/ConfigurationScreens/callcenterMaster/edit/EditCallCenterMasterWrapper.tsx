@@ -1,13 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditCallCenterMasterWrapper.tsx
-// Type: Edit Component
-// Last Updated: jan 10, 2024
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -25,9 +18,9 @@ import { showToast } from 'src/utils'
 import EditCallCenterMaster from './EditCallCenterMaster'
 
 // |-- Redux --|
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setSelectedCallCenter } from 'src/redux/slices/CallCenterMasterSlice'
 
 // |-- Types --|
 type Props = {}
@@ -42,14 +35,14 @@ const EditCallCenterMasterWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
-    const { selectedCallCenter }: any = useSelector(
-        (state: RootState) => state.callCenter
-    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [EditCallCenterMasters] = useUpdateCallCenterMasterMutation()
-    const { data, isLoading, isFetching } = useGetCallCenterMasterByIdQuery(Id)
+    const { items: selectedCallCenter } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetCallCenterMasterByIdQuery(Id),
+    })
     const initialValues: FormInitialValues = {
         callCenterName: selectedCallCenter?.callCenterName || '',
     }
@@ -86,11 +79,7 @@ const EditCallCenterMasterWrapper = (props: Props) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedCallCenter(data?.data))
-        }
-    }, [dispatch, data, isLoading, isFetching])
+
     return (
         <Formik
             enableReinitialize
