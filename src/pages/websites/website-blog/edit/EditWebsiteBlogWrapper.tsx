@@ -1,31 +1,24 @@
-/// ==============================================
-// Filename:EditWebsiteBlogWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditWebsiteBlog from './EditWebsiteBlog'
-import { showToast } from 'src/utils'
 import {
     useGetWebsiteBlogByIdQuery,
     useUpdateWebsiteBlogMutation,
 } from 'src/services/websites/WebsiteBlogServices'
+import { showToast } from 'src/utils'
+import EditWebsiteBlog from './EditWebsiteBlog'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setSelectedWebsiteBlog } from 'src/redux/slices/website/websiteBlogSlice'
+import { RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -45,18 +38,14 @@ const EditWebsiteBlogWrapper = (props: Props) => {
     const dispatch = useDispatch()
     const params = useParams()
     const Id = params.id
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state.websiteBlog
-    )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [updateWebsiteBlog] = useUpdateWebsiteBlogMutation()
-    const { data, isLoading, isFetching } = useGetWebsiteBlogByIdQuery(Id)
-
-    useEffect(() => {
-        dispatch(setSelectedWebsiteBlog(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+  
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetWebsiteBlogByIdQuery(Id),
+    })
 
     const initialValues: FormInitialValues = {
         blogName: selectedItem?.blogName || '',

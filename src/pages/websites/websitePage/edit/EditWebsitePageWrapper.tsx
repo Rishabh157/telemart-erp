@@ -1,18 +1,11 @@
-/// ==============================================
-// Filename:EditWebsitePageWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
@@ -24,7 +17,7 @@ import {
 import EditWebsitePage from './EditWebsitePage'
 
 // |-- Redux --|
-import { setSelectedWebsite } from 'src/redux/slices/website/websitePageSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState } from 'src/redux/store'
 
@@ -48,11 +41,10 @@ const EditWebsitePageWrapper = (props: Props) => {
     const Id = params.id
     const [editWebsitePage] = useUpdateWebsitePageMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.websitePage
-    )
 
-    const { data, isLoading, isFetching } = useGetWebsitePageByIdQuery(Id)
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetWebsitePageByIdQuery(Id),
+    })
 
     const initialValues: FormInitialValues = {
         pageName: selectedItem?.pageName || '',
@@ -61,10 +53,6 @@ const EditWebsitePageWrapper = (props: Props) => {
         footerSpace: selectedItem?.footerSpace || '',
         websiteId: selectedItem?.websiteId || '',
     }
-
-    useEffect(() => {
-        dispatch(setSelectedWebsite(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
 
     // Form Validation Schema
     const validationSchema = object({

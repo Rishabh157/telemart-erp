@@ -60,10 +60,8 @@ import slotManagementSlice from './slices/media/slotManagementSlice'
 import channelCategorySlice from './slices/media/channelCategorySlice'
 import competitorSlice from './slices/media/competitorManagementSlice'
 import artistSlice from './slices/media/artist'
-import websiteSlice from './slices/website/websiteSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
-import websiteTagsSlice from './slices/website/websiteTagsSlice'
 import orderSlice from './slices/orderSlice'
 import inquirySlice from './slices/inquirySlice'
 import inboundCallerSlice from './slices/media/inboundCallerSlice'
@@ -145,9 +143,7 @@ const store = configureStore({
         channelCategory: channelCategorySlice,
         competitor: competitorSlice,
         artist: artistSlice,
-        website: websiteSlice,
         websiteBlog: websiteBlogSlice,
-        websiteTags: websiteTagsSlice,
         websitePage: websitePageSlice,
         order: orderSlice,
         inquiry: inquirySlice,
