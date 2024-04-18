@@ -1,19 +1,12 @@
-/// ==============================================
-// Filename:ListWebsiteBlogWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { WebsiteBlogListResponse } from 'src/models/website/WebsiteBlog.model'
 import {
@@ -22,37 +15,73 @@ import {
 } from 'src/services/websites/WebsiteBlogServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-
 import ListWebsiteBlog from './ListWebsiteBlog'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websiteBlogSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const ListWebsiteBlogWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    useUnmountCleanup()
+
     const navigate = useNavigate()
 
     const [deleteWebsiteBlog] = useDeletegetWebsiteBlogMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteBlogState: any = useSelector(
-        (state: RootState) => state.websiteBlog
+        (state: RootState) => state.listingPagination
     )
-
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { page, rowsPerPage, searchValue, items, filterValue } =
-        WebsiteBlogState
+    const { page, rowsPerPage, searchValue, filterValue } = WebsiteBlogState
 
+    // pagination api
+    const { items } = useGetCustomListingData<WebsiteBlogListResponse[]>({
+        useEndPointHook: useGetPaginationWebsiteBlogQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['blogName', 'blogTitle'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'websiteId',
+                    value: filterValue,
+                },
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteWebsiteBlog(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Blog deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const columns: columnTypes[] = [
-        
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -92,7 +121,7 @@ const ListWebsiteBlogWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'blogName',
@@ -123,65 +152,12 @@ const ListWebsiteBlogWrapper = () => {
         },
 
     ]
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteBlogQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['blogName', 'blogTitle'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'websiteId',
-                value: filterValue,
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteWebsiteBlog(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Blog deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
     return (
-        <>
-            <ListWebsiteBlog
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </>
+        <ListWebsiteBlog
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 

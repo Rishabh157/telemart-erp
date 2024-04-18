@@ -1,34 +1,24 @@
-/// ==============================================
-// Filename:AddWebsiteTagsWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddWebsiteTag from './AddWebsiteTag'
-import { showToast } from 'src/utils'
 import { useAddWebsiteTagsMutation } from 'src/services/websites/WebsiteTagsServices'
+import { showToast } from 'src/utils'
+import AddWebsiteTag from './AddWebsiteTag'
 
-import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
 import { useGetAllWebsitePageQuery } from 'src/services/websites/WebsitePageServices'
-import { WebsiteListResponse } from 'src/models/website/Website.model'
-import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
+import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setAllItems as setAllWebsites } from 'src/redux/slices/website/websiteSlice'
-import { setAllItems as setAllWebsitePage } from 'src/redux/slices/website/websitePageSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -56,38 +46,6 @@ const AddWebsiteTagsWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addWebsiteTags] = useAddWebsiteTagsMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-
-    const { allItems: websiteItems }: any = useSelector(
-        (state: RootState) => state.website
-    )
-
-    const { allItems: websitePageItems }: any = useSelector(
-        (state: RootState) => state?.websitePage
-    )
-
-    const {
-        isLoading: iswebsiteLoading,
-        isFetching: isWebsiteFetching,
-        data: WebsiteData,
-    } = useGetAllWebsiteQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!iswebsiteLoading && !isWebsiteFetching) {
-            dispatch(setAllWebsites(WebsiteData?.data || []))
-        }
-    }, [dispatch, iswebsiteLoading, isWebsiteFetching, WebsiteData])
-
-    const {
-        isLoading: isPageLoading,
-        isFetching: isPageFetching,
-        data: PageData,
-    } = useGetAllWebsitePageQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isPageLoading && !isPageFetching) {
-            dispatch(setAllWebsitePage(PageData?.data || []))
-        }
-    }, [isPageLoading, isPageFetching, PageData, dispatch])
 
     const initialValues: FormInitialValues = {
         websitPageId: '',
@@ -147,22 +105,20 @@ const AddWebsiteTagsWrapper = (props: Props) => {
         }, 1000)
     }
 
-    const dropdownOptions = {
-        WebsiteOptions: websiteItems?.map((website: WebsiteListResponse) => {
-            return {
-                label: website.productName,
-                value: website._id,
-            }
-        }),
+    const { options: websiteItems } = useCustomOptions({
+        useEndPointHook: useGetAllWebsiteQuery(userData?.companyId),
+        keyName: 'productName',
+        value: '_id',
+    })
 
-        WebsitePageOptions: websitePageItems?.map(
-            (page: WebsitePageListResponse) => {
-                return {
-                    label: page.pageName,
-                    value: page._id,
-                }
-            }
-        ),
+    const { options: websitePageItems } = useCustomOptions({
+        useEndPointHook: useGetAllWebsitePageQuery(userData?.companyId),
+        keyName: 'pageName',
+        value: '_id',
+    })
+    const dropdownOptions = {
+        WebsiteOptions: websiteItems,
+        WebsitePageOptions: websitePageItems,
     }
 
     return (

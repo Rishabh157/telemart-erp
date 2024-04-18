@@ -1,51 +1,80 @@
-/// ==============================================
-// Filename:InfluencerListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 05, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { WebsiteListResponse } from 'src/models/website/Website.model'
 import {
     useDeletegetWebsiteMutation,
     useGetPaginationWebsiteQuery,
 } from 'src/services/websites/WebsiteServices'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import InfluencerListing from './InfluencerListing'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websiteSlice'
-import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const InfluencerListingWrapper = () => {
+    useUnmountCleanup()
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteWebsite] = useDeletegetWebsiteMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteState: any = useSelector((state: RootState) => state.website)
+    const WebsiteState: any = useSelector((state: RootState) => state.listingPagination)
 
-    const { page, rowsPerPage, searchValue, items } = WebsiteState
+    const { page, rowsPerPage, searchValue } = WebsiteState
+
+    // pagination api
+    const { items } = useGetCustomListingData<[]>({
+        useEndPointHook: useGetPaginationWebsiteQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['productName', 'url'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: '',
+                    value: [],
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteWebsite(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Website deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const columns: columnTypes[] = [
-        
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -145,7 +174,7 @@ const InfluencerListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-            
+
         },
         {
             field: 'productName',
@@ -156,53 +185,6 @@ const InfluencerListingWrapper = () => {
             ),
         },
     ]
-
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['productName', 'url'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteWebsite(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Website deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     return (
         <>
             <InfluencerListing

@@ -1,38 +1,28 @@
-/// ==============================================
-// Filename:EditWebsiteTagsWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditWebsiteTag from './EditWebsiteTag'
-import { showToast } from 'src/utils'
 import {
     useGetWebsiteTagsByIdQuery,
     useUpdateWebsiteTagsMutation,
 } from 'src/services/websites/WebsiteTagsServices'
+import { showToast } from 'src/utils'
+import EditWebsiteTag from './EditWebsiteTag'
 
-import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
 import { useGetAllWebsitePageQuery } from 'src/services/websites/WebsitePageServices'
-import { setAllItems as setAllWebsites } from 'src/redux/slices/website/websiteSlice'
-import { setAllItems as setAllWebsitePage } from 'src/redux/slices/website/websitePageSlice'
-import { WebsiteListResponse } from 'src/models/website/Website.model'
-import { WebsitePageListResponse } from 'src/models/website/WebsitePage.model'
+import { useGetAllWebsiteQuery } from 'src/services/websites/WebsiteServices'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedTags } from 'src/redux/slices/website/websiteTagsSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -63,48 +53,21 @@ const EditWebsiteTagWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [updateWebsiteTags] = useUpdateWebsiteTagsMutation()
 
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state.websiteTags
-    )
-    const { isLoading, isFetching, data } = useGetWebsiteTagsByIdQuery(Id)
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetWebsiteTagsByIdQuery(Id),
+    })
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedTags(data?.data || []))
-        }
-    }, [isLoading, isFetching, data, dispatch])
+    const { options: websiteItems } = useCustomOptions({
+        useEndPointHook: useGetAllWebsiteQuery(userData?.companyId),
+        keyName: 'productName',
+        value: '_id',
+    })
 
-    const { allItems: websiteItems }: any = useSelector(
-        (state: RootState) => state.website
-    )
-
-    const { allItems: websitePageItems }: any = useSelector(
-        (state: RootState) => state?.websitePage
-    )
-
-    const {
-        isLoading: iswebsiteLoading,
-        isFetching: isWebsiteFetching,
-        data: WebsiteData,
-    } = useGetAllWebsiteQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!iswebsiteLoading && !isWebsiteFetching) {
-            dispatch(setAllWebsites(WebsiteData?.data || []))
-        }
-    }, [dispatch, iswebsiteLoading, isWebsiteFetching, WebsiteData])
-
-    const {
-        isLoading: isPageLoading,
-        isFetching: isPageFetching,
-        data: PageData,
-    } = useGetAllWebsitePageQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!isPageLoading && !isPageFetching) {
-            dispatch(setAllWebsitePage(PageData?.data || []))
-        }
-    }, [isPageLoading, isPageFetching, PageData, dispatch])
+    const { options: websitePageItems } = useCustomOptions({
+        useEndPointHook: useGetAllWebsitePageQuery(userData?.companyId),
+        keyName: 'pageName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
         websitPageId: selectedItem?.websitPageId || '',
@@ -168,21 +131,8 @@ const EditWebsiteTagWrapper = (props: Props) => {
     }
 
     const dropdownOptions = {
-        WebsiteOptions: websiteItems?.map((website: WebsiteListResponse) => {
-            return {
-                label: website.productName,
-                value: website._id,
-            }
-        }),
-
-        WebsitePageOptions: websitePageItems?.map(
-            (page: WebsitePageListResponse) => {
-                return {
-                    label: page.pageName,
-                    value: page._id,
-                }
-            }
-        ),
+        WebsiteOptions: websiteItems,
+        WebsitePageOptions: websitePageItems
     }
 
     return (

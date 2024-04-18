@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:WebListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 05, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,29 +20,68 @@ import WebsiteListing from './WebsitetListing'
 
 // |-- Redux --|
 
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { setFilterValue } from 'src/redux/slices/website/websiteBlogSlice'
 import { setFilterValue as setPageFilterValue } from 'src/redux/slices/website/websitePageSlice'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websiteSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const WebstieListingWrapper = () => {
+    useUnmountCleanup()
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [deleteWebsite] = useDeletegetWebsiteMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteState: any = useSelector((state: RootState) => state.website)
+    const WebsiteState: any = useSelector((state: RootState) => state.listingPagination)
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { page, rowsPerPage, searchValue, items } = WebsiteState
+    const { page, rowsPerPage, searchValue } = WebsiteState
+
+    // pagination api
+    const { items } = useGetCustomListingData<WebsiteListResponse[]>({
+        useEndPointHook: useGetPaginationWebsiteQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['productName', 'url'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: '',
+                    value: [],
+                },
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteWebsite(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Website deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -138,7 +170,7 @@ const WebstieListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-            
+
         },
         {
             field: 'productName',
@@ -166,57 +198,6 @@ const WebstieListingWrapper = () => {
             renderCell: (row: WebsiteListResponse) => <span> {row.url} </span>,
         },
     ]
-
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['productName', 'url'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteWebsite(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Website deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     return (
         <>
             <WebsiteListing

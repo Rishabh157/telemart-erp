@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ListWebsiteBlog.tsx
-// Type: List Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -27,7 +20,7 @@ import {
     setPage,
     setSearchValue,
     setFilterValue,
-} from 'src/redux/slices/website/websiteBlogSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -40,7 +33,7 @@ type Props = {
 const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const WebsiteBlogState: any = useSelector(
-        (state: RootState) => state.websiteBlog
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
