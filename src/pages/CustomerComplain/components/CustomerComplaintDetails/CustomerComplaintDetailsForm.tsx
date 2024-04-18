@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddCustomerComplaintDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { Divider } from '@mui/material'
+import { CircularProgress, Divider } from '@mui/material'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { useGetAllInitialByCallType } from 'src/hooks/useGetAllInitialByCallType'
@@ -10,6 +10,9 @@ import { useGetAllInitialCallTwoByCallTypeAndOneId } from 'src/hooks/useGetAllIn
 import { useGetAllInitialCallThreeByCallTypeAndTwoId } from 'src/hooks/useGetAllInitialCallThreeByCallTypeAndTwoId'
 import { complaintTypeOptions } from 'src/utils/constants/customeTypes'
 import moment from 'moment'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 
 // |-- Types --|
 type Props = {
@@ -34,13 +37,31 @@ const statusOption = [
     },
 ]
 
+const isShowImageUploadOptionInInitialCallerOneCase = [
+    // complaint case
+    'DELIVERYBOYHOUSEARRESTCASE',
+    'MONEYBACK',
+    'PRODUCTREPLACEMENT',
+    'SIDEEFFECT',
+    'NOTSATISFIEDBYPRODUCT',
+    'DUPLICACYOFPRODUCT',
+    // inquiry case
+    'ALREADYORDERED',
+    'DELIVERYRELATEDENQUIRY',
+]
+
 const CustomerComplaintDetailsForm = ({
     formikProps,
     apiStatus,
     formType,
     complaintLogs,
 }: Props) => {
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+
     const { values, setFieldValue, handleSubmit } = formikProps
+
+    // Upload File Mutation
+    const [uploadFile] = useAddFileUrlMutation()
 
     // Get IC1 Option By Only Call Type
     const { initialCallOneByCallType, isDataLoading } =
@@ -63,6 +84,28 @@ const CustomerComplaintDetailsForm = ({
         values.initialCallTwo,
         values.callType
     )
+
+    const handleFileUpload = (file: File, name: string) => {
+        let formData = new FormData()
+
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                setImageApiStatus(false)
+            }
+        })
+    }
 
     return (
         <div className="p-4 h-[70vh]">
@@ -275,6 +318,33 @@ const CustomerComplaintDetailsForm = ({
                                 setFieldValue('status', e)
                             }}
                         />
+
+                        {isShowImageUploadOptionInInitialCallerOneCase?.includes(
+                            values.icOneLabel
+                        ) && (
+                            <div className="mt-3">
+                                <ATMFilePickerWrapper
+                                    required={true}
+                                    name="productImage"
+                                    label=""
+                                    placeholder={'Upload Product Image'}
+                                    selectedFile={'https://google.com.png'}
+                                    // selectedFile={getTheValueByNameKey(name)}
+                                    onSelect={(newFile: any) => {
+                                        handleFileUpload(
+                                            newFile,
+                                            'productImage'
+                                        )
+                                    }}
+                                    // isSubmitting={false}
+                                />
+                                {imageApiStatus ? (
+                                    <div className="mt-3">
+                                        <CircularProgress size={18} />
+                                    </div>
+                                ) : null}
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex items-center gap-x-4">
