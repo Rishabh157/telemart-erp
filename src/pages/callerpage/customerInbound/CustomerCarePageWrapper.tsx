@@ -698,7 +698,6 @@ const CustomerCarePageWrapper = () => {
                 })
         }, 1000)
     }
-    console.log('initialValues', initialValues)
     return (
         <Formik
             enableReinitialize
