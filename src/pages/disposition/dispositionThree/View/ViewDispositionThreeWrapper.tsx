@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useParams } from 'react-router-dom'
 import { Formik, FormikProps } from 'formik'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { RootState } from 'src/redux/store'
 
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetDispositionThreeByIdQuery } from 'src/services/configurations/DispositionThreeServices'
-import { setSelectedDispostionThree } from 'src/redux/slices/configuration/dispositionThreeSlice'
 import ViewDispositionThree from './ViewDispositionThree'
 
 export type FormInitialValues = {
@@ -24,21 +23,12 @@ export type FormInitialValues = {
 const ViewDispositionThreeWrappper = () => {
     const params = useParams()
     const Id = params.id
-    const dispatch = useDispatch<AppDispatch>()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { selectedDispostionThree }: any = useSelector(
-        (state: RootState) => state?.dispositionThree
-    )
-
-    const { data, isLoading, isFetching } = useGetDispositionThreeByIdQuery(Id)
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedDispostionThree(data?.data || []))
-        }
-    }, [isLoading, isFetching, data, dispatch])
+    const { items: selectedDispostionThree } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetDispositionThreeByIdQuery(Id),
+    })
 
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispostionThree?.dispositionName || '',

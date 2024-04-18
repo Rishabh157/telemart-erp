@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { useParams } from 'react-router-dom'
-import { array, object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
-import ViewInitialCallThree from './ViewInitialCallThree'
+import { useParams } from 'react-router-dom'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetInitialCallerThreeByIdQuery } from 'src/services/configurations/InitialCallerThreeServices'
-import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/initialCallerThreeSlice'
+import { array, object, string } from 'yup'
+import ViewInitialCallThree from './ViewInitialCallThree'
 
 export type FormInitialValues = {
     initialCallName: string
@@ -22,12 +19,12 @@ export type FormInitialValues = {
 }
 
 const ViewInitialCallThreeWrappper = () => {
-    const dispatch = useDispatch()
     const params = useParams()
     const Id = params.id
-    const { selectedInitialCallerThree }: any = useSelector(
-        (state: RootState) => state.initialCallerThree
-    )
+
+    const { items: selectedInitialCallerThree } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetInitialCallerThreeByIdQuery(Id),
+    })
 
     const initialValues: FormInitialValues = {
         initialCallName: selectedInitialCallerThree?.initialCallName || '',
@@ -52,19 +49,7 @@ const ViewInitialCallThreeWrappper = () => {
         returnType: array().of(string().required('Required')),
     })
 
-    const {
-        data: Icdata,
-        isFetching: IcisFetching,
-        isLoading: IcisLoading,
-    } = useGetInitialCallerThreeByIdQuery(Id)
-
-    useEffect(() => {
-        if (!IcisLoading && !IcisFetching) {
-            dispatch(setSelectedInitialCallerThree(Icdata?.data || []))
-        }
-    }, [Icdata, IcisLoading, IcisFetching, dispatch])
-
-    const onSubmitHandler = (values: FormInitialValues) => {}
+    const onSubmitHandler = (values: FormInitialValues) => { }
 
     return (
         <Formik

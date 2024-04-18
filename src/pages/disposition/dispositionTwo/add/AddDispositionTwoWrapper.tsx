@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
-import { object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
-import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
-import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
-import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
-import AddDispositionTwo from './AddDispositionTwo'
-import { useAdddispositionTwoMutation } from 'src/services/configurations/DispositionTwoServices'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { useAdddispositionTwoMutation } from 'src/services/configurations/DispositionTwoServices'
+import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
+import { showToast } from 'src/utils'
+import { object, string } from 'yup'
+import AddDispositionTwo from './AddDispositionTwo'
 
 export type FormInitialValues = {
     dispositionName: string
@@ -25,24 +24,14 @@ const AddDispositionTwoWrapper = () => {
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { allItems: dispositionOne }: any = useSelector(
-        (state: RootState) => state.dispositionOne
-    )
-
     const [adddispositionTwo] = useAdddispositionTwoMutation()
 
-    const {
-        isLoading: isDOLoading,
-        isFetching: isDOFetching,
-        data: DoData,
-    } = useGetAlldispositionOneQuery('')
 
-    useEffect(() => {
-        if (!isDOLoading && !isDOFetching) {
-            dispatch(setAllDispositionOne(DoData?.data || []))
-        }
-    }, [isDOLoading, isDOFetching, DoData, dispatch])
-
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAlldispositionOneQuery(''),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
     const initialValues: FormInitialValues = {
         dispositionName: '',
         dispositionOneId: '',
@@ -80,14 +69,7 @@ const AddDispositionTwoWrapper = () => {
     }
 
     const dropdownOptions = {
-        DispotionOneOptions: dispositionOne?.map(
-            (dispositionOne: DispositionOneListResponse) => {
-                return {
-                    label: dispositionOne.dispositionDisplayName,
-                    value: dispositionOne._id,
-                }
-            }
-        ),
+        DispotionOneOptions: options
     }
 
     return (

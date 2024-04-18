@@ -1,18 +1,11 @@
-/// ==============================================
-// Filename:EditDispositionComplaintWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { Formik } from 'formik'
+import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { object, string } from 'yup'
-import { Formik } from 'formik'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
@@ -24,8 +17,8 @@ import {
 } from 'src/services/configurations/DispositionComplaintServices'
 
 // |-- Redux --|
-import { setSelectedDispositionComplaint } from 'src/redux/slices/configuration/dispositionComplaintSlice'
 import { useNavigate, useParams } from 'react-router-dom'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -36,20 +29,15 @@ export type FormInitialValues = {
 }
 const EditDispositionComplaintWrappper = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
     const [editDispositionComplaint] = useUpdatedispositionComplaintMutation()
     const params = useParams()
     const Id = params.id
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { selectedDispositionCompalint }: any = useSelector(
-        (state: RootState) => state.dispositionComplaint
-    )
-
-    const { data, isLoading, isFetching } =
-        useGetdispositionComplaintByIdQuery(Id)
-
+    const { items: selectedDispositionCompalint } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetdispositionComplaintByIdQuery(Id),
+    })
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispositionCompalint?.displayName || '',
         priority: selectedDispositionCompalint?.priority || '',
@@ -63,10 +51,6 @@ const EditDispositionComplaintWrappper = () => {
         emailType: string().required('Email Type is required'),
         smsType: string().required('SMS Type is required'),
     })
-    useEffect(() => {
-        if (!isLoading && !isFetching)
-            dispatch(setSelectedDispositionComplaint(data?.data || []))
-    }, [data, dispatch, isFetching, isLoading])
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)

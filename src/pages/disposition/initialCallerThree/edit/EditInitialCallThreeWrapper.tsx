@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { array, boolean, object, string } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik } from 'formik'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import EditInitialCallOne from './EditInitialCallThree'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
 import {
     useGetInitialCallerThreeByIdQuery,
     useUpdateInitialCallerThreeMutation,
 } from 'src/services/configurations/InitialCallerThreeServices'
-import { setSelectedInitialCallerThree } from 'src/redux/slices/configuration/initialCallerThreeSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { showToast } from 'src/utils'
+import { array, boolean, object, string } from 'yup'
+import EditInitialCallOne from './EditInitialCallThree'
 
 export type FormInitialValues = {
     callType: string
@@ -33,10 +33,10 @@ const EditInitialCallThreeWrapper = () => {
     const [apiStatus, setApiStatus] = useState(false)
     const params = useParams()
     const Id = params.id
-    const { selectedInitialCallerThree }: any = useSelector(
-        (state: RootState) => state.initialCallerThree
-    )
 
+    const { items: selectedInitialCallerThree } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetInitialCallerThreeByIdQuery(Id),
+    })
     const initialValues: FormInitialValues = {
         callType: selectedInitialCallerThree?.callType || '',
         initialCallName: selectedInitialCallerThree?.initialCallName || '',
@@ -50,22 +50,6 @@ const EditInitialCallThreeWrapper = () => {
         isPnd: selectedInitialCallerThree?.isPnd,
         cancelFlag: selectedInitialCallerThree?.cancelFlag,
     }
-
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.initialCallerOne
-    )
-
-    const {
-        data: Icdata,
-        isFetching: IcisFetching,
-        isLoading: IcisLoading,
-    } = useGetInitialCallerThreeByIdQuery(Id)
-
-    useEffect(() => {
-        if (!IcisLoading && !IcisFetching) {
-            dispatch(setSelectedInitialCallerThree(Icdata?.data || []))
-        }
-    }, [Icdata, IcisLoading, IcisFetching, dispatch])
 
     const validationSchema = object({
         initialCallName: string().required('Initial Call Name is required'),
@@ -114,12 +98,7 @@ const EditInitialCallThreeWrapper = () => {
     }
 
     const dropdownoptions = {
-        initialCallOneOptions: allItems?.map((ele: any) => {
-            return {
-                label: ele.initialCallDisplayName,
-                value: ele._id,
-            }
-        }),
+        initialCallOneOptions: []
     }
 
     return (
