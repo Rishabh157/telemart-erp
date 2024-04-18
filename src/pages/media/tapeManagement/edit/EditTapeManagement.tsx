@@ -71,9 +71,6 @@ const EditTapeManagement = ({
         dispatch(setFieldCustomized(true))
     }
 
-    console.log('dropdownOptionsdropdownOptions', dropdownOptions)
-    console.log('valuesvaluesvalues', values)
-
     return (
         <div className="">
             <div className="flex flex-col gap-2 p-4 ">

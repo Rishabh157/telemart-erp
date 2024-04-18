@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -68,7 +67,7 @@ const EditDealerToDealerOrderWrapper = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e:any) => e['value'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {
@@ -76,7 +75,7 @@ const EditDealerToDealerOrderWrapper = ({
         } else {
             setFieldValue(`productDetails[${i}].rate`, '')
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -225,10 +224,6 @@ const EditDealerToDealerOrderWrapper = ({
                                                                     onChange={(
                                                                         e
                                                                     ) => {
-                                                                        console.log(
-                                                                            'COSMOS',
-                                                                            e
-                                                                        )
                                                                         if (
                                                                             !values?.productDetails?.find(
                                                                                 (

@@ -35,7 +35,6 @@ const OrdersFilterFormDialog = ({
     onClose,
 }: Props) => {
     const { values, setFieldValue, isSubmitting, handleSubmit } = formikProps
-    // console.log('values: ', values)
     const { userData } = useGetLocalStorage()
     // options
     const [allSchemes, setAllSchemes] = useState<SelectOption[]>([])

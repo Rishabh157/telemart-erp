@@ -230,10 +230,6 @@ const AddDealerToDealerOrder = ({
                                                                     onChange={(
                                                                         e
                                                                     ) => {
-                                                                        console.log(
-                                                                            'COSMOS',
-                                                                            e
-                                                                        )
                                                                         if (
                                                                             !values?.productDetails?.find(
                                                                                 (

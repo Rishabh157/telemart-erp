@@ -107,7 +107,6 @@ const AddSlotManagementWrapper = () => {
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
-        console.log('values: onSubmit ', values)
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         addSlotManagement({
