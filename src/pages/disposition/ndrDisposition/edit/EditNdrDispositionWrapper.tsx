@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import { object, string, array } from 'yup'
-import { showToast } from 'src/utils'
 import { Formik } from 'formik'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     useGetNdrdispositionByIdQuery,
     useUpdateNdrDispositionMutation,
 } from 'src/services/configurations/NdrDisositionServices'
-import { useNavigate, useParams } from 'react-router-dom'
-import { setSelectedDispositionOne } from 'src/redux/slices/configuration/ndrDispositionSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { showToast } from 'src/utils'
+import { array, object, string } from 'yup'
 import EditNdrDisposition from './EditNdrDisposition'
 
 export type FormInitialValues = {
@@ -30,11 +29,10 @@ const EditNdrDispositionWrapper = () => {
     const Id = params.id
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { selectedDispositionOne }: any = useSelector(
-        (state: RootState) => state?.ndrDisposition
-    )
+    const { items: selectedDispositionOne } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetNdrdispositionByIdQuery(Id),
+    })
 
-    const { data, isLoading, isFetching } = useGetNdrdispositionByIdQuery(Id)
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispositionOne?.displayName || '',
         priority: selectedDispositionOne?.priority,
@@ -43,11 +41,6 @@ const EditNdrDispositionWrapper = () => {
         subDispositions: selectedDispositionOne?.subDispositions || [],
         rtoAttempt: selectedDispositionOne?.rtoAttempt,
     }
-
-    useEffect(() => {
-        if (!isLoading && !isFetching)
-            dispatch(setSelectedDispositionOne(data?.data))
-    }, [data, dispatch, isFetching, isLoading])
 
     const validationSchema = object({
         dispositionName: string().required('NDR Disposition is required'),

@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import CallerButton from '../components/CallerButton'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import React, { useEffect, useState } from 'react'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import CallerButton from '../components/CallerButton'
 // import { FormInitialValues } from './SalesPageWrapper'
-import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/configuration/dispositionThreeSlice'
-import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
-import { setItems as setDispositionTwoItems } from 'src/redux/slices/configuration/dispositionTwoSlice'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetSchemeByIdUnAuthQuery } from 'src/services/SchemeService'
+import { useGetAllUnAuthdispositionTwoQuery } from 'src/services/configurations/DispositionTwoServices'
 // import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
+import { IoReorderFour } from 'react-icons/io5'
 import { useGetAllUnAuthDispositionThreeQuery } from 'src/services/configurations/DispositionThreeServices'
+import CallerDeliveryAddress from '../components/CallerDeliveryAddress'
 import CallerHeader from '../components/CallerHeader'
+import CallerOtherDetails from '../components/CallerOtherDetails'
 import CallerPageTopNav from '../components/CallerPageTopNav'
 import CallerScheme from '../components/CallerScheme'
-import CallerDeliveryAddress from '../components/CallerDeliveryAddress'
-import CallerOtherDetails from '../components/CallerOtherDetails'
-import { IoReorderFour } from 'react-icons/io5'
 import { FormInitialValues } from './SalesPageWrapper'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 export type dropdownOptions = {
     stateOptions?: SelectOption[] | []
@@ -83,11 +80,6 @@ const SalesPage: React.FC<Props> = ({
 
     const { values, setFieldValue } = formikProps
 
-    const dispatch = useDispatch<AppDispatch>()
-
-    const { allItems: allDispositionItems }: any = useSelector(
-        (state: RootState) => state.dispositionThree
-    )
 
     // GET SINGLE SCHEME BY ID
     const {
@@ -108,7 +100,7 @@ const SalesPage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                        singleSchemeData?.data?.deliveryCharges || 0,
+                    singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -116,49 +108,6 @@ const SalesPage: React.FC<Props> = ({
         isSingleSchemeLoading,
         isSingleSchemeFetching,
         values.productGroupId,
-    ])
-
-    // Disposition Three Data
-    const {
-        data: dispositionThreedata,
-        isLoading: dispositionThreeIsLoading,
-        isFetching: dispositionThreeIsFetching,
-    } = useGetAllUnAuthDispositionThreeQuery(
-        formikProps.values.dispositionLevelTwoId,
-        { skip: !formikProps?.values?.dispositionLevelTwoId }
-    )
-
-    // Disposition Two Data
-    const {
-        data: dispositionTwodata,
-        isLoading: dispositionTwoIsLoading,
-        isFetching: dispositionTwoIsFetching,
-    } = useGetAllUnAuthdispositionTwoQuery('')
-
-    const { items: dispositionTwoItems }: any = useSelector(
-        (state: RootState) => state.dispositionTwo
-    )
-
-    useEffect(() => {
-        if (!dispositionThreeIsLoading && !dispositionThreeIsFetching) {
-            dispatch(setAllItems(dispositionThreedata?.data))
-        }
-    }, [
-        dispositionThreedata,
-        dispatch,
-        dispositionThreeIsLoading,
-        dispositionThreeIsFetching,
-    ])
-
-    useEffect(() => {
-        if (!dispositionTwoIsLoading && !dispositionTwoIsFetching) {
-            dispatch(setDispositionTwoItems(dispositionTwodata?.data))
-        }
-    }, [
-        dispositionTwodata,
-        dispatch,
-        dispositionTwoIsLoading,
-        dispositionTwoIsFetching,
     ])
 
     useEffect(() => {
@@ -171,13 +120,30 @@ const SalesPage: React.FC<Props> = ({
         // eslint-disable-next-line
     }, [schemeDetails])
 
+
+    // Disposition Three Data
+
+    const { options: allDispositionItems } = useCustomOptions({
+        useEndPointHook: useGetAllUnAuthDispositionThreeQuery(
+            formikProps.values.dispositionLevelTwoId,
+            { skip: !formikProps?.values?.dispositionLevelTwoId }
+        ),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
+
+    // Disposition Two Data
+
+    const { options: dispositionTwoItems } = useCustomOptions({
+        useEndPointHook: useGetAllUnAuthdispositionTwoQuery(''),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
+
+
     const dropdownOptions = {
-        dispositionThreeOptions: allDispositionItems?.map((ele: any) => {
-            return { label: ele?.dispositionDisplayName, value: ele?._id }
-        }),
-        dispositionTwoOptions: dispositionTwoItems?.map((ele: any) => {
-            return { label: ele?.dispositionDisplayName, value: ele?._id }
-        }),
+        dispositionThreeOptions: allDispositionItems,
+        dispositionTwoOptions: dispositionTwoItems,
     }
 
     return (
@@ -268,11 +234,10 @@ const SalesPage: React.FC<Props> = ({
             {/* TABS */}
             <div className="flex gap-x-4 mt-2 mb-1">
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
-                        TabTypes[activeTab] === TabTypes.history
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.history
                             ? 'bg-[#87527c] text-white'
                             : 'bg-slate-200'
-                    }`}
+                        }`}
                     onClick={() => setActiveTab(TabTypes.history)}
                 >
                     <div className=" text-xs mr-2">
@@ -281,11 +246,10 @@ const SalesPage: React.FC<Props> = ({
                     <div className="text-xs">History</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
-                        TabTypes[activeTab] === TabTypes.order
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.order
                             ? 'bg-[#87527c] text-white'
                             : 'bg-slate-200'
-                    }`}
+                        }`}
                     onClick={() => setActiveTab(TabTypes.order)}
                 >
                     <div className=" text-xs mr-2">
@@ -294,11 +258,10 @@ const SalesPage: React.FC<Props> = ({
                     <div className="text-xs">Order</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
-                        TabTypes[activeTab] === TabTypes.complaint
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.complaint
                             ? 'bg-[#87527c] text-white'
                             : 'bg-slate-200'
-                    }`}
+                        }`}
                     onClick={() => setActiveTab(TabTypes.complaint)}
                 >
                     <div className=" text-xs mr-2">

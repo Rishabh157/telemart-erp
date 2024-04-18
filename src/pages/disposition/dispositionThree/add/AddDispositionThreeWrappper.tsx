@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { useNavigate } from 'react-router-dom'
-import { object, string } from 'yup'
-import { showToast } from 'src/utils'
+import { useState } from 'react'
 import { Formik, FormikProps } from 'formik'
-import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
-import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
-import { DispositionOneListResponse } from 'src/models/configurationModel/DisposiionOne.model'
-import AddDispositionThree from './AddDispositionThree'
-import { useAdddispositionThreeMutation } from 'src/services/configurations/DispositionThreeServices'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { useAdddispositionThreeMutation } from 'src/services/configurations/DispositionThreeServices'
+import { useGetAlldispositionOneQuery } from 'src/services/configurations/DispositiononeServices'
+import { showToast } from 'src/utils'
+import { object, string } from 'yup'
+import AddDispositionThree from './AddDispositionThree'
 
 export type FormInitialValues = {
     dispositionName: string
@@ -32,25 +30,14 @@ const AddDispositionThreeWrappper = () => {
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { allItems: dispositionOne }: any = useSelector(
-        (state: RootState) => state.dispositionOne
-    )
-
     const [adddispositionThree] = useAdddispositionThreeMutation()
 
-    // Get All Disposition One
-    const {
-        isLoading: isDOLoading,
-        isFetching: isDOFetching,
-        data: DoData,
-    } = useGetAlldispositionOneQuery('')
-
-    useEffect(() => {
-        if (!isDOLoading && !isDOFetching) {
-            dispatch(setAllDispositionOne(DoData?.data || []))
-        }
-    }, [isDOLoading, isDOFetching, DoData, dispatch])
-
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAlldispositionOneQuery(''),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
+    })
+    
     const initialValues: FormInitialValues = {
         dispositionName: '',
         dispositionOneId: '',
@@ -65,18 +52,10 @@ const AddDispositionThreeWrappper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
-        dispositionName: string().required(
-            'Disposition three name is required'
-        ),
-        dispositionOneId: string().required(
-            'Please select disposition one name'
-        ),
-        dispositionTwoId: string().required(
-            'Please select disposition two name'
-        ),
-        applicableCriteria: string().required(
-            'Please select applicable criteria'
-        ),
+        dispositionName: string().required('Disposition three name is required'),
+        dispositionOneId: string().required('Please select disposition one name'),
+        dispositionTwoId: string().required('Please select disposition two name'),
+        applicableCriteria: string().required('Please select applicable criteria'),
         smsType: string(),
         emailType: string(),
         whatsApp: string(),
@@ -111,16 +90,7 @@ const AddDispositionThreeWrappper = () => {
         })
     }
 
-    const dropdownOptions = {
-        DispotionOneOptions: dispositionOne?.map(
-            (dispositionOne: DispositionOneListResponse) => {
-                return {
-                    label: dispositionOne?.dispositionDisplayName,
-                    value: dispositionOne?._id,
-                }
-            }
-        ),
-    }
+    const dropdownOptions = { DispotionOneOptions: options }
 
     return (
         <Formik

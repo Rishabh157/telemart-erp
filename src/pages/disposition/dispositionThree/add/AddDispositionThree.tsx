@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react'
 import { FormikProps } from 'formik'
-import { FormInitialValues } from './AddDispositionThreeWrappper'
+import { useDispatch } from 'react-redux'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { SelectOption } from 'src/models/FormField/FormField.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { useDispatch } from 'react-redux'
-import {
-    smstypeOptions,
-    priorityOptions,
-    emailTypeOptions,
-    whatsappTypeOptions,
-    applicableCriteriaOptionsType,
-} from 'src/utils/constants/customeTypes'
 import { useGetDispostionTwoByOneQuery } from 'src/services/configurations/DispositionTwoServices'
-import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
+import {
+    applicableCriteriaOptionsType,
+    emailTypeOptions,
+    priorityOptions,
+    smstypeOptions,
+    whatsappTypeOptions,
+} from 'src/utils/constants/customeTypes'
 import { handleValidCharchater } from 'src/utils/methods/charchterMethods'
+import { FormInitialValues } from './AddDispositionThreeWrappper'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -45,36 +44,20 @@ const AddDispositionThree = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
-    const [dispositionTwoOptions, setDispositionTwoOptions] = useState<any[]>(
-        []
-    )
 
     dropdownOptions = {
         ...dropdownOptions,
     }
     const dispatch = useDispatch()
 
-    const {
-        isLoading: isDTLoading,
-        isFetching: isDTFetching,
-        data: DtData,
-    } = useGetDispostionTwoByOneQuery(values.dispositionOneId, {
-        skip: !values.dispositionOneId,
+    const { options  :dispositionTwoOptions} = useCustomOptions({
+        useEndPointHook: useGetDispostionTwoByOneQuery(values.dispositionOneId, {
+            skip: !values.dispositionOneId,
+        }),
+        keyName: 'dispositionDisplayName',
+        value: '_id',
     })
 
-    useEffect(() => {
-        if (!isDTLoading && !isDTFetching) {
-            const filteredDispositionTwo = DtData?.data?.map(
-                (dispositionTwo: DispositionTwoListResponse) => {
-                    return {
-                        label: dispositionTwo?.dispositionDisplayName,
-                        value: dispositionTwo?._id,
-                    }
-                }
-            )
-            setDispositionTwoOptions(filteredDispositionTwo || [])
-        }
-    }, [isDTLoading, isDTFetching, DtData])
 
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
