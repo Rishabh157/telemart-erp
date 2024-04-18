@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditArtist.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 

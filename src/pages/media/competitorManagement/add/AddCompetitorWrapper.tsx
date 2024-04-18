@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:AddCompitorWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -16,20 +9,15 @@ import { useSelector, useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddCompetitor from './Addcompetitor'
-// import { useAddCompetitorsMutation } from 'src/services/AttributeService'
 import { showToast } from 'src/utils'
-import { useAddcompetitorMutation } from 'src/services/media/CompetitorManagementServices'
-
-import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
-import { ChannelManagementListResponse } from 'src/models/Channel.model'
 
 // |-- Redux --|
+import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
+import { useAddcompetitorMutation } from 'src/services/media/CompetitorManagementServices'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { LanguageListResponse } from 'src/models'
-import { setLanguage } from 'src/redux/slices/languageSlice'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {}
@@ -51,68 +39,26 @@ export type FormInitialValues = {
 }
 
 const AddCompetitorWrapper = (props: Props) => {
-    // Form Initial Values
-    const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [addCompetitor] = useAddcompetitorMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { channelMgt } = useSelector(
-        (state: RootState) => state?.channelManagement
-    )
-    const { language } = useSelector((state: RootState) => state?.language)
+    // Initiate Method
+    const navigate = useNavigate()
+    const dispatch = useDispatch<AppDispatch>()
+    const [addCompetitor] = useAddcompetitorMutation()
 
-    const {
-        isLoading: isLanguageLoading,
-        isFetching: isLanguageFetching,
-        data: languageDataApi,
-    } = useGetAllLanguageQuery('')
-
-    const { data, isLoading, isFetching } = useGetPaginationchannelQuery({
-        limit: 10,
-        searchValue: '',
-        params: ['channelName'],
-        page: 1,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: false,
+    // Hook
+    const { options: languageOptions } = useCustomOptions({
+        useEndPointHook: useGetAllLanguageQuery(''),
+        keyName: 'languageName',
+        value: '_id',
     })
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setChannelMgt(data?.data || []))
-        }
-    }, [dispatch, data, isLoading, isFetching])
-
-    useEffect(() => {
-        if (!isLanguageLoading && !isLanguageFetching) {
-            dispatch(setLanguage(languageDataApi?.data || []))
-        }
-    }, [isLanguageLoading, isLanguageFetching, languageDataApi, dispatch])
-
-    const dropdownOptions = {
-        channelOptions:
-            channelMgt?.map((channel: ChannelManagementListResponse) => {
-                return {
-                    label: channel.channelName,
-                    value: channel._id,
-                }
-            }) || [],
-        languageOptions: language?.map((languageItem: LanguageListResponse) => {
-            return {
-                label: languageItem?.languageName,
-                value: languageItem?._id,
-            }
-        }),
-    }
+    const { options: channelNameOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelQuery(userData?.companyId),
+        keyName: 'channelName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
         competitorName: '',
@@ -185,24 +131,28 @@ const AddCompetitorWrapper = (props: Props) => {
             })
         }, 1000)
     }
+
+    const dropdownOptions = {
+        languageOptions,
+        channelNameOptions,
+    }
+
     return (
-        <>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddCompetitor
-                            dropdownOptions={dropdownOptions}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddCompetitor
+                        dropdownOptions={dropdownOptions}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditSlotManagement.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -36,9 +29,8 @@ type Props = {
     apiStatus: boolean
     dropdownOptions: {
         channelGroupOptions: SelectOption[]
-        categoryOption: SelectOption[]
-        channelMgtOptions: SelectOption[]
-        tapeMangementOptions: SelectOption[]
+        channelNameOptions: SelectOption[]
+        tapeManagementOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -58,11 +50,6 @@ const EditSlotManagement = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
 
-    dropdownOptions = {
-        ...dropdownOptions,
-    }
-
-    // const options = ['FIXED', 'FLEXIBLE']
     const options = [
         {
             label: 'Fixed',
@@ -73,11 +60,13 @@ const EditSlotManagement = ({
             value: 'FLEXIBLE',
         },
     ]
+
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div className="">
             <div className="flex flex-col gap-2 p-4 ">
@@ -160,7 +149,7 @@ const EditSlotManagement = ({
                                     onChange={(e) =>
                                         handleSetFieldValue('channelNameId', e)
                                     }
-                                    options={dropdownOptions.channelMgtOptions}
+                                    options={dropdownOptions.channelNameOptions}
                                     label="Channel Name"
                                 />
                             </div>
@@ -171,7 +160,7 @@ const EditSlotManagement = ({
                                 onChange={(e) =>
                                     handleSetFieldValue('tapeNameId', e)
                                 }
-                                options={dropdownOptions.tapeMangementOptions}
+                                options={dropdownOptions.tapeManagementOptions}
                                 label="Tape Name"
                             />
                             <ATMTextField

@@ -1,16 +1,9 @@
-/// ==============================================
-// Filename:Slot.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type SlotManagementListResponse = {
     slotName: string
     channelGroupId: string
     type: string
-    tapeNameId: String
+    tapeNameId: string
     channelNameId: string
     slotPrice: number
     slotDay: string[]
@@ -25,10 +18,11 @@ export type SlotManagementListResponse = {
     run: boolean
     slotRunImage: string
     slotRenewal: string
-    // slotRunVideo: string
-    // runStartTime: string
-    // runEndTime: string
+    slotRunVideo: string
+    runStartTime: string
+    runEndTime: string
     runRemark: string
+    slotStartDate: string
     groupNameLabel: string
     tapeLabel: string
     channelLabel: string
@@ -40,20 +34,6 @@ export type SlotManagementListResponse = {
     updatedAt: string
     __v: number
 }
-// export enum Weeks {
-//     MONDAY = 'MONDAY',
-//     TUESDAY = 'TUESDAY',
-//     WEDNESDAY = 'WEDNESDAY',
-//     TRUSDAY = 'TRUSDAY',
-//     FRIDAY = 'FRIDAY',
-//     SATURDAY = 'SATURDAY',
-//     SUNDAY = 'SUNDAY',
-// }
-
-// export enum Type{
-// FIXED="FIXED",
-// FLEXIBLE="FLEXIBLE"
-// }
 
 export type AddSlotDefinition = {
     slotName: string
@@ -72,6 +52,7 @@ export type AddSlotDefinition = {
     slotStartDate: string
     companyId: string
 }
+
 export type UpdateSlotDefinition = {
     body: {
         slotName: string

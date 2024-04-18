@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:EditCompitorWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -17,22 +10,18 @@ import { useDispatch, useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import EditCompetitor from './EditCompetitor'
 import { showToast } from 'src/utils'
+
+// |-- Redux --|
+import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import {
     useGetCompetitorByIdQuery,
     useUpdatecompetitorMutation,
 } from 'src/services/media/CompetitorManagementServices'
-import { setSelectedCompetitor } from 'src/redux/slices/media/competitorManagementSlice'
-
-import { useGetPaginationchannelQuery } from 'src/services/media/ChannelManagementServices'
-import { ChannelManagementListResponse } from 'src/models/Channel.model'
-
-// |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setChannelMgt } from 'src/redux/slices/media/channelManagementSlice'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { LanguageListResponse } from 'src/models'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetAllLanguageQuery } from 'src/services/LanguageService'
-import { setLanguage } from 'src/redux/slices/languageSlice'
+import { RootState, AppDispatch } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {}
@@ -55,83 +44,48 @@ export type FormInitialValues = {
 }
 
 const EditCompetitorWrapper = (props: Props) => {
-    // Form Initial Values
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const { userData } = useSelector((state: RootState) => state?.auth)
+    const params = useParams()
+    const id = params.id
+
+    // Initiate Method
+    const [editCompetitors] = useUpdatecompetitorMutation()
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const params = useParams()
-    const Id = params.id
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state.competitor
-    )
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const { channelMgt } = useSelector(
-        (state: RootState) => state?.channelManagement
-    )
-
-    const { language } = useSelector((state: RootState) => state?.language)
-
-    const {
-        data: channelData,
-        isLoading: channelIsLoading,
-        isFetching: channelIsFetching,
-    } = useGetPaginationchannelQuery({
-        limit: 10,
-        searchValue: '',
-        params: ['channelName'],
-        page: 1,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: false,
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetCompetitorByIdQuery(id || ''),
     })
 
-    useEffect(() => {
-        if (!channelIsLoading && !channelIsFetching) {
-            dispatch(setChannelMgt(channelData?.data || []))
-        }
-    }, [dispatch, channelData, channelIsLoading, channelIsFetching])
+    const { options: languageOptions } = useCustomOptions({
+        useEndPointHook: useGetAllLanguageQuery(''),
+        keyName: 'languageName',
+        value: '_id',
+    })
 
-    const {
-        isLoading: isLanguageLoading,
-        isFetching: isLanguageFetching,
-        data: languageDataApi,
-    } = useGetAllLanguageQuery('')
-    useEffect(() => {
-        if (!isLanguageLoading && !isLanguageFetching) {
-            dispatch(setLanguage(languageDataApi?.data || []))
-        }
-    }, [isLanguageLoading, isLanguageFetching, languageDataApi, dispatch])
-
-    const [EditCompetitors] = useUpdatecompetitorMutation()
-    const { data, isLoading, isFetching } = useGetCompetitorByIdQuery(Id)
-
-    useEffect(() => {
-        dispatch(setSelectedCompetitor(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+    const { options: channelNameOptions } = useCustomOptions({
+        useEndPointHook: useGetAllChannelQuery(userData?.companyId),
+        keyName: 'channelName',
+        value: '_id',
+    })
 
     const initialValues: FormInitialValues = {
-        competitorName: selectedItem?.competitorName || '',
-        companyName: selectedItem?.channelNameId || '',
-        productName: selectedItem?.productName || '',
-        websiteLink: selectedItem?.websiteLink || '',
-        ytLink: selectedItem?.ytLink || '',
-        schemePrice: selectedItem?.schemePrice || '',
-        channelNameId: selectedItem?.channelNameId || '',
-        startTime: selectedItem?.startTime || '',
-        endTime: selectedItem?.endTime || '',
-        mobileNumber: selectedItem?.mobileNumber || '',
-        date: selectedItem?.date || '',
-        languageId: selectedItem?.languageId ? selectedItem?.languageId : '',
-        productCategory: selectedItem?.productCategory,
-        image: selectedItem?.image || [],
+        competitorName: items?.competitorName || '',
+        companyName: items?.channelNameId || '',
+        productName: items?.productName || '',
+        websiteLink: items?.websiteLink || '',
+        ytLink: items?.ytLink || '',
+        schemePrice: items?.schemePrice || '',
+        channelNameId: items?.channelNameId || '',
+        startTime: items?.startTime || '',
+        endTime: items?.endTime || '',
+        mobileNumber: items?.mobileNumber || '',
+        date: items?.date || '',
+        languageId: items?.languageId ? items?.languageId : '',
+        productCategory: items?.productCategory,
+        image: items?.image || [],
     }
 
     // Form Validation Schema
@@ -153,28 +107,12 @@ const EditCompetitorWrapper = (props: Props) => {
         date: string().required('Required'),
     })
 
-    const dropdownOptions = {
-        channelOptions:
-            channelMgt?.map((ele: ChannelManagementListResponse) => {
-                return {
-                    label: ele.channelName,
-                    value: ele._id,
-                }
-            }) || [],
-        languageOptions: language?.map((languageItem: LanguageListResponse) => {
-            return {
-                label: languageItem?.languageName,
-                value: languageItem?._id,
-            }
-        }),
-    }
-
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
-            EditCompetitors({
+            editCompetitors({
                 body: {
                     competitorName: values.competitorName,
                     productName: values.productName,
@@ -191,7 +129,7 @@ const EditCompetitorWrapper = (props: Props) => {
                     languageId: values.languageId,
                     companyId: userData?.companyId || '',
                 },
-                id: Id || '',
+                id: id || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -208,27 +146,28 @@ const EditCompetitorWrapper = (props: Props) => {
         }, 1000)
     }
 
+    const dropdownOptions = {
+        languageOptions,
+        channelNameOptions,
+    }
+
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <>
-                            <EditCompetitor
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                                dropdownOptions={dropdownOptions}
-                            />
-                        </>
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <EditCompetitor
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        dropdownOptions={dropdownOptions}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

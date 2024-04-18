@@ -3,7 +3,6 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
-
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -18,12 +17,12 @@ import ATMTimePicker from 'src/components/UI/atoms/formFields/ATMTimePicker/ATMT
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMRadioButton from 'src/components/UI/atoms/formFields/ATMRadioButton/ATMRadioButton'
-
-// |-- Redux --|
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { weekDaysOptions } from 'src/utils/constants/customeTypes'
+
+// |-- Redux --|
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
 type Props = {
@@ -31,9 +30,8 @@ type Props = {
     apiStatus: boolean
     dropdownOptions: {
         channelGroupOptions: SelectOption[]
-        categoryOption: SelectOption[]
-        channelMgtOptions: SelectOption[]
-        tapeMangementOptions: SelectOption[]
+        channelNameOptions: SelectOption[]
+        tapeManagementOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
@@ -51,11 +49,7 @@ const AddSlotManagement = ({
     apiStatus,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue } = formikProps
-
-    dropdownOptions = {
-        ...dropdownOptions,
-    }
+    const { values, setFieldValue, handleSubmit } = formikProps
 
     const options = [
         {
@@ -95,14 +89,12 @@ const AddSlotManagement = ({
                         {/* BUTTON - Add Button */}
                         <div>
                             <button
-                                type="button"
+                                type="submit"
                                 disabled={apiStatus}
-                                onClick={() => {
-                                    formikProps.handleSubmit()
-                                }}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     apiStatus ? 'opacity-50' : ''
                                 }`}
+                                onClick={() => handleSubmit()}
                             >
                                 Submit
                             </button>
@@ -156,7 +148,7 @@ const AddSlotManagement = ({
                                     onChange={(e) =>
                                         handleSetFieldValue('channelName', e)
                                     }
-                                    options={dropdownOptions.channelMgtOptions}
+                                    options={dropdownOptions.channelNameOptions}
                                     label="Channel Name"
                                 />
                             </div>
@@ -167,7 +159,7 @@ const AddSlotManagement = ({
                                 onChange={(e) =>
                                     handleSetFieldValue('tapeName', e)
                                 }
-                                options={dropdownOptions.tapeMangementOptions}
+                                options={dropdownOptions.tapeManagementOptions}
                                 label="Tape Name"
                             />
                             <ATMTextField
@@ -202,16 +194,16 @@ const AddSlotManagement = ({
                                 <div className="mt-0">
                                     <ATMSelectSearchable
                                         isAllSelect
-                                        name={'slotDay'}
+                                        name="slotDay"
                                         value={values.slotDay}
                                         required
-                                        onChange={(e) => {
-                                            handleSetFieldValue('slotDay', e)
-                                        }}
                                         size="small"
                                         label={'Slot Days'}
                                         isMulti={true}
                                         options={weekDaysOptions()}
+                                        onChange={(e) => {
+                                            handleSetFieldValue('slotDay', e)
+                                        }}
                                     />
                                 </div>
                                 <div>

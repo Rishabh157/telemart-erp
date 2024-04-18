@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditChannelGroup.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -28,6 +21,7 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
 }
+
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: ' Channel Group',

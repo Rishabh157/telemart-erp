@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditChannelGroupWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useNavigate, useParams } from 'react-router-dom'
@@ -16,8 +8,6 @@ import { object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-
-// import { useEditChannelGroupMutation } from 'src/services/media/ChannelGroupServices'
 import { showToast } from 'src/utils'
 import EditChannelGroup from './EditChannelGroup'
 import {
@@ -27,8 +17,9 @@ import {
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/media/channelGroupSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ChannelGroupListResponse } from 'src/models/ChannelGroup.model'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -37,20 +28,23 @@ export type FormInitialValues = {
 }
 
 const EditChannelGroupWrapper = () => {
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
+    const params = useParams()
+    const id = params.id
+    const { userData } = useSelector((state: RootState) => state?.auth)
+
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<ChannelGroupListResponse>({
+        useEndPointHook: useGetChannelGroupByIdQuery(id),
+    })
+
+    // Initiate Method
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const params = useParams()
-    const Id = params.id
-    const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { data, isLoading, isFetching } = useGetChannelGroupByIdQuery(Id)
-    const [EditChannelGroupApi] = useUpdateChannelGroupMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem } = useSelector(
-        (state: RootState) => state?.channelGroup
-    )
+    const [editChannelGroupApi] = useUpdateChannelGroupMutation()
 
     const initialValues: FormInitialValues = {
-        groupName: selectedItem?.groupName || '',
+        groupName: items?.groupName || '',
         companyId: userData?.companyId || '',
     }
 
@@ -59,20 +53,16 @@ const EditChannelGroupWrapper = () => {
         groupName: string().required('Group Name is required'),
     })
 
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [data, isLoading, isFetching])
-
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
-            EditChannelGroupApi({
+            editChannelGroupApi({
                 body: {
                     groupName: values.groupName,
                     companyId: values.companyId || '',
                 },
-                id: Id || '',
+                id: id || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -91,6 +81,7 @@ const EditChannelGroupWrapper = () => {
             })
         }, 1000)
     }
+
     return (
         <Formik
             enableReinitialize

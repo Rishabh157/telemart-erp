@@ -66,7 +66,7 @@ import channelManagementSlice from './slices/media/channelManagementSlice'
 import tapeManagementSlice from './slices/media/tapeManagementSlice'
 import slotManagementSlice from './slices/media/slotManagementSlice'
 import dispositionOneSlice from './slices/configuration/dispositionOneSlice'
-import channelGroupSlice from './slices/media/channelGroupSlice'
+// import channelGroupSlice from './slices/media/channelGroupSlice'
 import channelCategorySlice from './slices/media/channelCategorySlice'
 import competitorSlice from './slices/media/competitorManagementSlice'
 import dispositionTwoSlice from './slices/configuration/dispositionTwoSlice'
@@ -169,7 +169,7 @@ const store = configureStore({
         slotManagement: slotManagementSlice,
         tapeManagement: tapeManagementSlice,
         dispositionOne: dispositionOneSlice,
-        channelGroup: channelGroupSlice,
+        // channelGroup: channelGroupSlice,
         channelCategory: channelCategorySlice,
         competitor: competitorSlice,
         artist: artistSlice,
