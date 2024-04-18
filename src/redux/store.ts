@@ -22,13 +22,13 @@ import {
 } from './slices'
 import ListingPaginationSlice from './slices/ListingPaginationSlice'
 // import ASRSlice from './slices/ASRSlice'
-import attributesGroupSlice from './slices/attributesGroupSlice'
-import attributesSlice from './slices/attributesSlice'
+// import attributesGroupSlice from './slices/attributesGroupSlice'
+// import attributesSlice from './slices/attributesSlice'
 import cartonBoxSlice from './slices/cartonBoxSlice'
 import configurationCompanySlice from './slices/configurationCompanySlice'
 import dealersCategorySlice from './slices/dealersCategorySlice'
 import dealerPincodeSlice from './slices/dealerPincodeSlice'
-import dealerSchemeSlice from './slices/dealerSchemeSlice'
+// import dealerSchemeSlice from './slices/dealerSchemeSlice'
 import DealerLedgerSlice from './slices/DealerLedgerSlice'
 import DealerWarehouseSlice from './slices/DealerWarehouseSlice'
 import DealerOrderLedgerSlice from './slices/dealerOrderLedgerSlice'
@@ -40,17 +40,17 @@ import itemSlice from './slices/itemSlice'
 import languageSlice from './slices/languageSlice'
 import outwardRequestSlice from './slices/warehouseOutwardSlice/outwardRequestDealerSlice'
 import inwardRequestSlice from './slices/warehouseInwardSlice/inwardRequestDealerSlice'
-import productCategorySlice from './slices/productCategorySlice'
-import productSlice from './slices/productSlice'
-import productSubCategorySlice from './slices/productSubCategorySlice'
+// import productCategorySlice from './slices/productCategorySlice'
+// import productSlice from './slices/productSlice'
+// import productSubCategorySlice from './slices/productSubCategorySlice'
 import PurchaseOrderSlice from './slices/PurchaseOrderSlice'
 import InventoryManagementSlice from './slices/InventoryManagementSlice'
 import saleOrderSlice from './slices/saleOrderSlice'
-import schemeSlice from './slices/schemeSlice'
+// import schemeSlice from './slices/schemeSlice'
 import warehouseSlice from './slices/warehouseSlice'
 import authSlice from './slices/authSlice'
 import { authMiddleware } from 'src/utils'
-import productGroupSlice from './slices/productGroupSlice'
+// import productGroupSlice from './slices/productGroupSlice'
 import TaxesSlice from './slices/TaxesSlice'
 import areaSlice from './slices/areaSlice'
 import countrySlice from './slices/countrySlice'
@@ -122,7 +122,7 @@ const store = configureStore({
         dealer: dealerSlice,
         dealerRatio: dealersRatioSlice,
         dealerPincode: dealerPincodeSlice,
-        dealerScheme: dealerSchemeSlice,
+        // dealerScheme: dealerSchemeSlice,
         dealerSupervisor: DealerSupervisorSlice,
         dealerLedger: DealerLedgerSlice,
         dealerWarehouse: DealerWarehouseSlice,
@@ -137,16 +137,16 @@ const store = configureStore({
         outwardRequest: outwardRequestSlice,
         inwardRequest: inwardRequestSlice,
         saleOrder: saleOrderSlice,
-        attributesGroup: attributesGroupSlice,
-        productCategory: productCategorySlice,
+        // attributesGroup: attributesGroupSlice,
+        // productCategory: productCategorySlice,
         cartonBox: cartonBoxSlice,
-        scheme: schemeSlice,
+        // scheme: schemeSlice,
         purchaseOrder: PurchaseOrderSlice,
         inventoryManagement: InventoryManagementSlice,
         grn: GRNSlice,
-        productSubCategory: productSubCategorySlice,
-        productGroup: productGroupSlice,
-        attributes: attributesSlice,
+        // productSubCategory: productSubCategorySlice,
+        // productGroup: productGroupSlice,
+        // attributes: attributesSlice,
         tax: TaxesSlice,
         item: itemSlice,
         states: statesSlice,
@@ -154,7 +154,7 @@ const store = configureStore({
         areas: areaSlice,
         language: languageSlice,
         dealersCategory: dealersCategorySlice,
-        products: productSlice,
+        // products: productSlice,
         tehsils: tehsilSlice,
         pincode: pincodeSlice,
         // asr: ASRSlice,

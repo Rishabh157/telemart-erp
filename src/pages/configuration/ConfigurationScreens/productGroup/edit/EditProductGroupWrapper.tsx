@@ -5,27 +5,27 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { number, object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 
-import { showToast } from 'src/utils'
-import { setSelectedProductGroup } from 'src/redux/slices/productGroupSlice'
 import {
     useGetProductGroupByIdQuery,
     useUpdateProductGroupMutation,
 } from 'src/services/ProductGroupService'
+import { showToast } from 'src/utils'
 import EditProductGroupListing from './EditProductGroupListing'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -46,25 +46,24 @@ const EditProductGroupWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
-    const { selectedProductGroup }: any = useSelector(
-        (state: RootState) => state.productGroup
-    )
+
+    const { items } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetProductGroupByIdQuery(Id),
+    })
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [EditProductGroup] = useUpdateProductGroupMutation()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const { data, isLoading } = useGetProductGroupByIdQuery(Id)
-
     const initialValues: FormInitialValues = {
-        groupName: selectedProductGroup?.groupName || '',
-        dealerSalePrice: selectedProductGroup?.dealerSalePrice,
-        gst: selectedProductGroup?.gst,
-        sgst: selectedProductGroup?.sgst,
-        cgst: selectedProductGroup?.cgst,
-        igst: selectedProductGroup?.igst,
-        utgst: selectedProductGroup?.utgst,
+        groupName: items?.groupName || '',
+        dealerSalePrice: items?.dealerSalePrice,
+        gst: items?.gst,
+        sgst: items?.sgst,
+        cgst: items?.cgst,
+        igst: items?.igst,
+        utgst: items?.utgst,
     }
 
     // Form Validation Schema
@@ -112,9 +111,6 @@ const EditProductGroupWrapper = (props: Props) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        dispatch(setSelectedProductGroup(data?.data))
-    }, [dispatch, data, isLoading])
     return (
         <Formik
             enableReinitialize

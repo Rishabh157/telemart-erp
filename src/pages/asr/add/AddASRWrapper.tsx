@@ -19,7 +19,6 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useAddAsrMutation } from 'src/services/AsrService'
 import { showToast } from 'src/utils'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-// import { setItems } from 'src/redux/slices/productGroupSlice'
 
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'

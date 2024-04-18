@@ -29,7 +29,7 @@ export const productCategoryApi = apiSlice.injectEndpoints({
         getAllProductCategory: builder.query({
             providesTags: ['productCategory'],
             query: (companyId) => ({
-                url: `/product-category/company/${companyId}`,
+                url: `/product-category`,
                 method: 'GET',
                 // body,
             }),

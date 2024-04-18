@@ -1,36 +1,26 @@
-/// ==============================================
-// Filename:AddWarehouseToComapnyTransferWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 30, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { array, number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddWarehouseToComapny from './AddWarehouseToComapnyTransfer'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { showToast } from 'src/utils'
-import { useGetAllDealersQuery } from 'src/services/DealerServices'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useAddWarehouseToComapnyMutation } from 'src/services/WarehouseToComapnyService'
+import { showToast } from 'src/utils'
+import AddWarehouseToComapny from './AddWarehouseToComapnyTransfer'
 
 // |-- Redux--|
-import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { setItems as setAllCompany } from 'src/redux/slices/companySlice'
 
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllCompaniesQuery } from 'src/services/CompanyServices'
 
 // |-- Types --|
@@ -58,103 +48,35 @@ const AddWarehouseToComapnyTransferWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [AddWarehouseToComapnyApi] = useAddWarehouseToComapnyMutation()
 
-    const {
-        data: dealerData,
-        isLoading: dealerIsLoading,
-        isFetching: dealerIsFetching,
-    } = useGetAllDealersQuery(userData?.companyId)
-    // const { allItems }: any = useSelector((state: RootState) => state?.dealer)
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetAllCompaniesQuery('', {
+            skip: !userData?.companyId,
+        }),
+        keyName: 'companyName',
+        value: '_id',
+    })
 
-    const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
-    //Warehouse
-    useEffect(() => {
-        if (!warehouseIsLoading && !warehouseIsFetching) {
-            dispatch(setAllWareHouse(warehouseData?.data))
-        }
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
+    const { options: warehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetWareHousesQuery(''),
+        keyName: 'wareHouseName',
+        value: '_id',
+    })
 
-    const { allItems: warehouseItems }: any = useSelector(
-        (state: RootState) => state?.warehouse
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
+    })
+
+    const { options: productPriceOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'dealerSalePrice',
+        value: '_id',
+    })
+
+    const companyOption = options?.filter(
+        (ele: any) => ele.value !== userData?.companyId
     )
-    const { items: companyAllItems }: any = useSelector(
-        (state: RootState) => state?.company
-    )
-    const companyOption = companyAllItems
-        ?.filter((ele: any) => ele._id !== userData?.companyId)
-        ?.map((ele: any) => {
-            return {
-                label: ele.companyName,
-                value: ele._id,
-            }
-        })
-    const {
-        data: productGroupData,
-        isLoading: productGroupIsLoading,
-        isFetching: productGroupIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
-    const { allItems: productGroupItems }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
-
-    const warehouseOptions = warehouseItems?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
-    })
-
-    const productGroupOptions = productGroupItems?.map((ele: any) => {
-        return {
-            label: ele.groupName,
-            value: ele._id,
-        }
-    })
-
-    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
-        return {
-            key: ele._id,
-            value: ele.dealerSalePrice,
-        }
-    })
-
-    //Dealer
-    useEffect(() => {
-        if (!dealerIsLoading && !dealerIsFetching) {
-            dispatch(setAllItems(dealerData?.data))
-        }
-    }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
-
-    //ProductGroup
-    useEffect(() => {
-        if (!productGroupIsLoading && !productGroupIsFetching) {
-            // dispatch(setAllWareHouse(warehouseData?.data))
-            dispatch(setAllProductGroups(productGroupData?.data))
-        }
-    }, [
-        productGroupData,
-        productGroupIsLoading,
-        productGroupIsFetching,
-        dispatch,
-    ])
-
-    const {
-        data: companyData,
-        isFetching,
-        isLoading,
-    } = useGetAllCompaniesQuery('', {
-        skip: !userData?.companyId,
-    })
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setAllCompany(companyData?.data))
-        }
-
-        // eslint-disable-next-line
-    }, [companyData, isLoading, isFetching])
 
     const dropdownOptions = {
         companyOption: companyOption,

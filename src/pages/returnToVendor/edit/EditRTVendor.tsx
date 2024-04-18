@@ -40,7 +40,7 @@ type Props = {
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
-    productPriceOptions: []
+    productPriceOptions: any
     apiStatus: boolean
 }
 
@@ -72,11 +72,11 @@ const EditRTVendor = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e) => e['key'] === productGroup
+            (e:any) => e['value'] === productGroup
         )
 
         if (val) {
-            setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
+            setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
