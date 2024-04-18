@@ -1196,3 +1196,39 @@ export const getTapeManagementTypes = () => {
         }
     })
 }
+
+// Tape Type Options
+enum ProductCategoryOptions {
+    herbal = 'HERBAL',
+    education = 'EDUCATION',
+    spiritual = 'SPIRITUAL',
+    other = 'OTHER',
+}
+
+export const getProductCategoryOptions = () => {
+    let options = [
+        {
+            label: 'Herbal',
+            value: ProductCategoryOptions.herbal,
+        },
+        {
+            label: 'Education',
+            value: ProductCategoryOptions.education,
+        },
+        {
+            label: 'Spiritual',
+            value: ProductCategoryOptions.spiritual,
+        },
+        {
+            label: 'Other',
+            value: ProductCategoryOptions.other,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditCompitor.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -33,13 +26,14 @@ import { CircularProgress } from '@mui/material'
 import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
+import { getProductCategoryOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     dropdownOptions: {
-        channelOptions: SelectOption[] | []
+        channelNameOptions: SelectOption[] | []
         languageOptions: SelectOption[]
     }
 }
@@ -58,9 +52,6 @@ const breadcrumbs: BreadcrumbType[] = [
 const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
 
-    dropdownOptions = {
-        ...dropdownOptions,
-    }
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
@@ -70,26 +61,8 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
     const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
     const [fileUploader] = useFileUploaderMutation()
 
-    const productCategoryOption = [
-        {
-            label: 'Herbal',
-            value: 'HERBAL',
-        },
-        {
-            label: 'Education',
-            value: 'EDUCATION',
-        },
-        {
-            label: 'Spiritual',
-            value: 'SPIRITUAL',
-        },
-        {
-            label: 'Other',
-            value: 'OTHER',
-        },
-    ]
     return (
-        <div className="">
+        <div>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -160,8 +133,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 required
                                 value={values.productCategory}
                                 label="Product Category"
-                                // placeholder="Product Category"
-                                options={productCategoryOption}
+                                options={getProductCategoryOptions()}
                                 onChange={(e) =>
                                     handleSetFieldValue('productCategory', e)
                                 }
@@ -173,7 +145,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 onChange={(e) =>
                                     handleSetFieldValue('channelNameId', e)
                                 }
-                                options={dropdownOptions.channelOptions}
+                                options={dropdownOptions.channelNameOptions}
                                 label="Channel Name"
                             />
                             <ATMSelectSearchable
