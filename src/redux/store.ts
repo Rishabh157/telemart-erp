@@ -36,7 +36,7 @@ import VendorWarehouseSlice from './slices/VendorWarehouseSlice'
 import DealerSupervisorSlice from './slices/DealerSupervisorSlice'
 import GRNSlice from './slices/GRNSlice'
 import inventorySlice from './slices/inventorySlice'
-import itemSlice from './slices/itemSlice'
+// import itemSlice from './slices/itemSlice'
 import languageSlice from './slices/languageSlice'
 import outwardRequestSlice from './slices/warehouseOutwardSlice/outwardRequestDealerSlice'
 import inwardRequestSlice from './slices/warehouseInwardSlice/inwardRequestDealerSlice'
@@ -148,7 +148,7 @@ const store = configureStore({
         // productGroup: productGroupSlice,
         // attributes: attributesSlice,
         tax: TaxesSlice,
-        item: itemSlice,
+        // item: itemSlice,
         states: statesSlice,
         district: districtSlice,
         areas: areaSlice,

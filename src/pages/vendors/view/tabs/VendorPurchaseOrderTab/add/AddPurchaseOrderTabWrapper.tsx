@@ -1,33 +1,25 @@
-/// ==============================================
-// Filename:AddPurchaseOrderTabWrapper.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { array, date, number, object, string } from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { array, date, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddPurchaseOrder from './AddPurchaseOrder'
-import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
-import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import { useGetVendorsQuery } from 'src/services/VendorServices'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
-import { setAllItems } from 'src/redux/slices/vendorSlice'
+import { useAddPurchaseOrderMutation } from 'src/services/PurchaseOrderService'
+import { useGetVendorsQuery } from 'src/services/VendorServices'
+import { showToast } from 'src/utils'
+import AddPurchaseOrder from './AddPurchaseOrder'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllItem } from 'src/redux/slices/itemSlice'
+import { RootState } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { useGetVendorWarehouseByVendorIdQuery } from 'src/services/VendorWarehouseService'
 
 // |-- Types --|
@@ -46,89 +38,36 @@ export type FormInitialValues = {
     }[]
 }
 
-// export type DropdownOptions = {
-// vendorOptions : SelectOption[]
-// warehouseOptions : SelectOption[]
-// itemOptions : SelectOption[]
-// }
+
 
 const AddPurchaseOrderTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const vendorId: any = params.vendorId
 
-    const disptach = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addPurchaseOrder] = useAddPurchaseOrderMutation()
-    const {
-        data: vendorData,
-        isLoading: vendorIsLoading,
-        isFetching: VendorIsFetching,
-    } = useGetVendorsQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state.vendor)
 
-    // Get Warehouse by CompanyId & VendorId
-    const {
-        data: vendorWarehouseData,
-        isLoading: vendorWarehouseIsLoading,
-        isFetching: vendorWarehouseIsFetching,
-    } = useGetVendorWarehouseByVendorIdQuery({
-        companyId: userData?.companyId,
-        vendorId: vendorId,
+    const { options: itemOptions } = useCustomOptions({
+        useEndPointHook: useGetAllItemsQuery(userData?.companyId),
+        keyName: 'itemName',
+        value: '_id',
+    })
+    const { options: warehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetVendorWarehouseByVendorIdQuery({
+            companyId: userData?.companyId,
+            vendorId: vendorId,
+        }),
+        keyName: 'wareHouseName',
+        value: '_id',
+    })
+    const { options: vendorOptions } = useCustomOptions({
+        useEndPointHook: useGetVendorsQuery(userData?.companyId),
+        keyName: 'companyName',
+        value: '_id',
     })
 
-    const { allItems: warehouseItems }: any = useSelector(
-        (state: RootState) => state?.warehouse
-    )
-    const {
-        data: itemsData,
-        isLoading: itemsIsLoading,
-        isFetching: itemsIsFetching,
-    } = useGetAllItemsQuery(userData?.companyId)
-    const { allItems: itemsList }: any = useSelector(
-        (state: RootState) => state.item
-    )
-
-    const vendorOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.companyName,
-            value: ele._id,
-        }
-    })
-
-    const warehouseOptions = warehouseItems?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
-    })
-
-    const itemOptions = itemsList?.map((ele: any) => {
-        return {
-            label: ele.itemName,
-            value: ele._id,
-        }
-    })
-
-    //vendor
-    useEffect(() => {
-        disptach(setAllItems(vendorData?.data))
-    }, [vendorData, vendorIsLoading, VendorIsFetching, disptach])
-
-    //warehouse
-    useEffect(() => {
-        disptach(setAllWareHouse(vendorWarehouseData?.data))
-    }, [
-        vendorWarehouseData,
-        vendorWarehouseIsLoading,
-        vendorWarehouseIsFetching,
-        disptach,
-    ])
-
-    useEffect(() => {
-        disptach(setAllItem(itemsData?.data))
-    }, [itemsData, disptach, itemsIsLoading, itemsIsFetching])
     //itemOption
 
     // Form Initial Values
