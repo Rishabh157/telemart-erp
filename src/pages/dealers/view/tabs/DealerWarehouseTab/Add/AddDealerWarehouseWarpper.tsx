@@ -1,37 +1,29 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:AddDealerWarehouseWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import { array, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import StepAddCompanyDetailsWrapper from './FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper'
-import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
-import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
-import AddDealerWarehouse from './AddDealerWarehouse'
-import { useAddDealerWarehouseMutation } from 'src/services/DealerWarehouseService'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
+import { useAddDealerWarehouseMutation } from 'src/services/DealerWarehouseService'
 import { showToast, validationofGst } from 'src/utils'
+import AddDealerWarehouse from './AddDealerWarehouse'
+import StepAddAddressWrapper from './FormSteps/StepAddAddress/StepAddAddressWrapper'
+import StepAddCompanyDetailsWrapper from './FormSteps/StepAddComapnyDetails/StepAddCompanyDetailsWrapper'
+import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrapper'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
+import useCountries from 'src/hooks/useCountry'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
-import useCountries from 'src/hooks/useCountry'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -150,18 +142,11 @@ const AddDealerWarehouseWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addDealerWarehouse] = useAddDealerWarehouseMutation()
-    const { country } = useCountries()
-
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
+    const { country: allCountry } = useCountries()
 
     // States
     const [apiStatus, setApiStatus] = useState(false)
     const [activeStep, setActiveStep] = React.useState(0)
-    const { allCountry }: any = useSelector((state: RootState) => state.country)
 
     // From Initial Values
     const initialValues: FormInitialValues = {

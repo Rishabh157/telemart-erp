@@ -1,39 +1,31 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:AddProductWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
+import draftToHtml from 'draftjs-to-html'
 import { Form, Formik, FormikProps } from 'formik'
-import { array, number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import draftToHtml from 'draftjs-to-html'
+import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import StepAddProductDetailsWrapper from './FormSteps/StepAddProductDetails/StepAddProductDetailsWrapper'
 import AddProduct from './AddProduct'
+import StepAddProductDetailsWrapper from './FormSteps/StepAddProductDetails/StepAddProductDetailsWrapper'
 
-import StepAddItemsWrapper from './FormSteps/StepAddItems/StepAddItemsWrapper'
-import StepAddFAQsWrapper from './FormSteps/StepAddFAQs/StepAddFAQsWrapper'
-import StepAddVideoWrapper from './FormSteps/StepAddVideo/StepAddVideoWrapper'
 import { EditorState, convertToRaw } from 'draft-js'
-import StepAddCallScriptWrapper from './FormSteps/StepAddCallScript/StepAddCallScriptWrapper'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
+import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 import { useAddProductMutation } from 'src/services/ProductService'
 import { showToast } from 'src/utils'
-import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import StepAddCallScriptWrapper from './FormSteps/StepAddCallScript/StepAddCallScriptWrapper'
+import StepAddFAQsWrapper from './FormSteps/StepAddFAQs/StepAddFAQsWrapper'
+import StepAddItemsWrapper from './FormSteps/StepAddItems/StepAddItemsWrapper'
+import StepAddVideoWrapper from './FormSteps/StepAddVideo/StepAddVideoWrapper'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/itemSlice'
-import { setAllItems as setAllLanguage } from 'src/redux/slices/languageSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ItemListResponse } from 'src/models'
 import {
     setFieldCustomized,
     setFormSubmitting,
@@ -168,49 +160,20 @@ const AddProductWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [addProduct] = useAddProductMutation()
-    // const [taxStatus, setTaxStatus] = useState(false);
     const [apiStatus, setApiStatus] = useState(false)
-
-    // const { allTaxes: taxData }: any = useSelector(
-    //   (state: RootState) => state?.tax
-    // );
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { allItems }: any = useSelector((state: RootState) => state?.item)
-    const { allItems: allLanguages }: any = useSelector(
-        (state: RootState) => state?.language
+    const { items: allLanguages } = useGetDataByIdCustomQuery<ItemListResponse>(
+        {
+            useEndPointHook: useGetAllLanguageQuery(''),
+        }
     )
 
-    const {
-        data: languageData,
-        isLoading: lIsLoading,
-        isFetching: lIsFetching,
-    } = useGetAllLanguageQuery('')
-
-    const {
-        data: itemData,
-        isLoading: itemIsLoading,
-        isFetching: itemIsFetching,
-    } = useGetAllItemsQuery(userData?.companyId)
-
+    const { items: allItems } = useGetDataByIdCustomQuery<ItemListResponse>({
+        useEndPointHook: useGetAllItemsQuery(userData?.companyId),
+    })
     // States
     const [activeStep, setActiveStep] = React.useState(0)
-    // const allTaxes = taxData?.map((ele: any) => {
-    //   return { tax_name: ele?.taxName, id: ele?._id };
-    // });
-    // [{ tax_name: "ele?.taxName", id: "ele?._id" }];
-
-    useEffect(() => {
-        if (!itemIsLoading && !itemIsFetching) {
-            dispatch(setAllItems(itemData?.data || []))
-        }
-    }, [itemData, itemIsLoading, itemIsFetching])
-
-    useEffect(() => {
-        if (!lIsLoading && !lIsFetching) {
-            dispatch(setAllLanguage(languageData?.data || []))
-        }
-    }, [languageData, lIsLoading, lIsFetching])
 
     // From Initial Values
     const initialValues: FormInitialValues = {

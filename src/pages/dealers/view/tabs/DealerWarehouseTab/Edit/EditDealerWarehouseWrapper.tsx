@@ -29,7 +29,6 @@ import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllCountry } from 'src/redux/slices/countrySlice'
 import { setSelectedItem } from 'src/redux/slices/DealerWarehouseSlice'
 import {
     setFieldCustomized,
@@ -146,7 +145,6 @@ const EditDealerWarehouseWrapper = () => {
     const [activeStep, setActiveStep] = React.useState(0)
 
     // Redux States
-    const { allCountry }: any = useSelector((state: RootState) => state.country)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedItem }: any = useSelector(
         (state: RootState) => state?.dealerWarehouse
@@ -160,12 +158,7 @@ const EditDealerWarehouseWrapper = () => {
     const navigate = useNavigate()
     const [updateDealerWarehouse] = useUpdateDealerWarehouseMutation()
 
-    const { country } = useCountries()
-    useEffect(() => {
-        if (country) {
-            dispatch(setAllCountry(country))
-        }
-    }, [country, dispatch])
+    const { country: allCountry } = useCountries()
 
     // From Initial Values
     const initialValues: FormInitialValues = {

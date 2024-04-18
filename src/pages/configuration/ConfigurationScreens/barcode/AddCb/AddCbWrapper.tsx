@@ -1,31 +1,23 @@
-/// ==============================================
-// Filename:AddCbWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 
-import { showToast } from 'src/utils'
-// import { v4 as uuidv4 } from "uuid";
-import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
-// import { useAddCartonBoxBarcodeMutation } from "src/services/CartonBoxBarcodeService";
-import AddCbBarcode from './AddCbBarcode'
-import { setAllItems } from 'src/redux/slices/cartonBoxSlice'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
+import { showToast } from 'src/utils'
+import AddCbBarcode from './AddCbBarcode'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -39,22 +31,11 @@ const AddCbBarcodeWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState(false)
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.cartonBox
-    )
-
-    // const [AddCartonBoxBarcode] = useAddCartonBoxBarcodeMutation();
-    const {
-        data: cbData,
-        isLoading: cbIsLoading,
-        isFetching: cbIsFetching,
-    } = useGetAllCartonBoxQuery(userData?.companyId)
-
-    useEffect(() => {
-        dispatch(setAllItems(cbData?.data))
-    }, [dispatch, cbData, cbIsLoading, cbIsFetching])
-
+    const { options: cartonBoxOption } = useCustomOptions({
+        useEndPointHook: useGetAllCartonBoxQuery(''),
+        keyName: 'boxName',
+        value: '_id',
+    })
     // Form Initial Values
     const initialValues: FormInitialValues = {
         cartonBox: '',
@@ -71,28 +52,10 @@ const AddCbBarcodeWrapper = (props: Props) => {
     const onSubmitHandler = async (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        // const uniqueGroupId = uuidv4();
-        // const promises = [];
-        // for (let i = 0; i < Number(values?.quantity); i++) {
-        //   const uniqueId = uuidv4();
-        //   promises.push(
-        //     AddCartonBoxBarcode({
-        //       cartonBoxId: values.cartonBox,
-        //       barcodeNumber: uniqueId,
-        //       barcodeGroupNumber: uniqueGroupId,
-        //       companyId: userData?.companyId || "",
-        //       cartonBoxItems: ["string"],
-        //     })
-        //   );
-        // }
-        // await Promise.all(promises); // Wait for all promises to complete
         setApiStatus(false)
         navigate('/configurations/barcode')
         showToast('success', 'Carton-box Barcode added successfully!')
     }
-    const cartonBoxOption = allItems?.map((ele: any) => {
-        return { label: ele?.boxName, value: ele?._id }
-    })
 
     return (
         <Formik

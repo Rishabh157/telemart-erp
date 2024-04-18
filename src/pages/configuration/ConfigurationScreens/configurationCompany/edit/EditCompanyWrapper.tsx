@@ -1,39 +1,30 @@
-/// ==============================================
-// Filename:EditCompanyWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import { array, object, string } from 'yup'
+import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditCompany from './EditCompany'
-
-import StepEditCompanyDetailsWrapper from './FormSteps/StepEditCompanyDetails/StepEditCompanyDetailsWrapper'
 import StepEditBankDetailsWrapper from './FormSteps/StepEditBankDetails/StepEditBankDetailsWrapper'
-// import { useEditCompanyMutation } from "src/services/CompanyServices";
-import {
-    useGetCompanyByIdQuery,
-    useUpdateCompanyMutation,
-} from 'src/services/CompanyServices'
-import { showToast, validationofGst } from 'src/utils'
+import StepEditCompanyDetailsWrapper from './FormSteps/StepEditCompanyDetails/StepEditCompanyDetailsWrapper'
 import { regIndiaPhone } from 'src/pages/vendors/add/AddVendorWrapper'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import {
+    useGetCompanyByIdQuery,
+    useUpdateCompanyMutation,
+} from 'src/services/CompanyServices'
+import { showToast, validationofGst } from 'src/utils'
 
 // |-- Redux --|
-import { setSelectedCompany } from 'src/redux/slices/companySlice'
-import { RootState, AppDispatch } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
 // TYPE-  Form Intial Values
@@ -104,10 +95,10 @@ const EditCompanyWrapper = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { selectedCompany }: any = useSelector(
-        (state: RootState) => state.company
-    )
-    const { data, isLoading } = useGetCompanyByIdQuery(params.id)
+
+    const { items: selectedCompany } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetCompanyByIdQuery(params.id),
+    })
     const [update] = useUpdateCompanyMutation()
     // Breadcrumbs
     const breadcrumbs = [
@@ -123,7 +114,6 @@ const EditCompanyWrapper = () => {
     ]
 
     // States
-    // const [company, companyInfo] = useEditCompanyMutation();
     const [activeStep, setActiveStep] = React.useState(0)
     // From Initial Values
     const initialValues: FormInitialValues = {
@@ -183,10 +173,6 @@ const EditCompanyWrapper = () => {
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }
-
-    useEffect(() => {
-        dispatch(setSelectedCompany(data?.data))
-    }, [dispatch, data, isLoading])
 
     return (
         <Formik

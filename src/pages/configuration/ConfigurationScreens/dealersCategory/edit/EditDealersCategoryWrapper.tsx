@@ -1,33 +1,27 @@
-/// ==============================================
-// Filename:EditDealerCategoryWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
+
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditDealersCategory from './EditDealersCategory'
 
-// import { useAddDealerCategoryMutation } from "src/services/DealerCategoryService";
-import { showToast } from 'src/utils'
 import {
     useGetDealerCategoryByIdQuery,
     useUpdateDealerCategoryMutation,
 } from 'src/services/DealerCategoryService'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/dealersCategorySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {}
@@ -45,12 +39,11 @@ const EditDealersCategoryWrapper = (props: Props) => {
     const params = useParams()
     const Id = params.id
     const [apiStatus, setApiStatus] = useState(false)
-    const { data, isLoading, isFetching } = useGetDealerCategoryByIdQuery(Id)
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetDealerCategoryByIdQuery(Id),
+    })
     const [editDealerscategory] = useUpdateDealerCategoryMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.dealersCategory
-    )
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
@@ -97,9 +90,6 @@ const EditDealersCategoryWrapper = (props: Props) => {
         })
     }
 
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
     return (
         <Formik
             enableReinitialize

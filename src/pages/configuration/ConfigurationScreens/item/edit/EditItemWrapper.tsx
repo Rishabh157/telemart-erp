@@ -6,27 +6,27 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditItem from './EditItem'
 
-// import { useEditItemsMutation } from "src/services/ItemService";
-import { showToast } from 'src/utils'
 import {
     useGetItemsByIdQuery,
     useUpdateItemsMutation,
 } from 'src/services/ItemService'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/itemSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ItemListResponse } from 'src/models'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
@@ -45,10 +45,11 @@ const EditItemWrapper = (props: Props) => {
     const Id = params.id
     const [EditItems] = useUpdateItemsMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector((state: RootState) => state?.item)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { data, isLoading, isFetching } = useGetItemsByIdQuery(Id)
+    const { items: selectedItem } = useGetDataByIdCustomQuery<ItemListResponse>({
+        useEndPointHook: useGetItemsByIdQuery(Id),
+    })
     // Form Initial Values
     const initialValues: FormInitialValues = {
         itemCode: selectedItem?.itemCode || '',
@@ -90,9 +91,6 @@ const EditItemWrapper = (props: Props) => {
         })
     }
 
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
 
     return (
         <Formik
