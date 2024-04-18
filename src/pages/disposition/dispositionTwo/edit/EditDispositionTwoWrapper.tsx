@@ -1,13 +1,11 @@
 import { Formik, FormikProps } from 'formik'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { DispositionTwoListResponse } from 'src/models/configurationModel/DispositionTwo.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setAllItems as setAllDispositionOne } from 'src/redux/slices/configuration/dispositionOneSlice'
-import { setSelectedDispostion } from 'src/redux/slices/configuration/dispositionTwoSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useGetdispositionTwoByIdQuery,
@@ -35,27 +33,7 @@ const EditDispositionTwoWrapper = () => {
     const [updatedispositionTwo] = useUpdatedispositionTwoMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-
-    const { data, isLoading, isFetching } = useGetdispositionTwoByIdQuery(Id)
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedDispostion(data?.data || []))
-        }
-    }, [isLoading, isFetching, data, dispatch])
-
-    const {
-        isLoading: isDOLoading,
-        isFetching: isDOFetching,
-        data: DoData,
-    } = useGetAlldispositionOneQuery('')
-
-    useEffect(() => {
-        if (!isDOLoading && !isDOFetching) {
-            dispatch(setAllDispositionOne(DoData?.data || []))
-        }
-    }, [isDOLoading, isDOFetching, DoData, dispatch])
-
+   
     const { items: selectedDispostion } = useGetDataByIdCustomQuery<DispositionTwoListResponse>({
         useEndPointHook: useGetdispositionTwoByIdQuery(Id),
     })

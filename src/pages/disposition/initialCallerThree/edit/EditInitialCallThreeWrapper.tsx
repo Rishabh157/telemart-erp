@@ -51,9 +51,6 @@ const EditInitialCallThreeWrapper = () => {
         cancelFlag: selectedInitialCallerThree?.cancelFlag,
     }
 
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.initialCallerOne
-    )
     const validationSchema = object({
         initialCallName: string().required('Initial Call Name is required'),
         initialCallOneId: string().required('Initial Call One is required'),
@@ -101,12 +98,7 @@ const EditInitialCallThreeWrapper = () => {
     }
 
     const dropdownoptions = {
-        initialCallOneOptions: allItems?.map((ele: any) => {
-            return {
-                label: ele.initialCallDisplayName,
-                value: ele._id,
-            }
-        }),
+        initialCallOneOptions: []
     }
 
     return (
