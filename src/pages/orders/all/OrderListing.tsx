@@ -425,10 +425,8 @@ const OrderListing = ({
                 <ActionPopup
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
-                        // setCurrentId(row?._id)
                     }}
                     isCustomBtn={!row?.isOrderAssigned}
-                    // row?.status === 'FRESH' && row?.approved === true
                     customBtnText="Order Assignee"
                     handleCustomActionButton={() => {
                         setIsOrderAssigneeFormOpen(true)
@@ -444,20 +442,19 @@ const OrderListing = ({
                             >
                                 View
                             </button>
-                            {/* <button
-                                onClick={() => {
-                                    setIsShow(true)
-                                    setBarcodeQuantity(row?.shcemeQuantity)
-                                    setSelectedItemsTobeDispatch(row)
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                Dispatch
-                            </button> */}
                         </>
                     }
                 />
             ),
+        },
+        {
+            field: 'inquiryNumber',
+            headerName: 'Enquiry No.',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ENQUIRY_NUMBER,
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
             field: 'orderNumber',
@@ -510,42 +507,6 @@ const OrderListing = ({
                                 />
                             ) : (
                                 <Chip
-                                    // onClick={() => {
-                                    //     showConfirmationDialog({
-                                    //         title: 'Approval',
-                                    //         text: `Do you want to ${
-                                    //             row.firstCallApproval
-                                    //                 ? 'Disapprove '
-                                    //                 : 'Approval '
-                                    //         }`,
-                                    //         showCancelButton: true,
-                                    //         showDenyButton: true,
-                                    //         confirmButtonText: 'Order approval',
-                                    //         denyButtonText: 'Order cancled',
-                                    //         confirmButtonColor: '#239B56',
-                                    //         denyButtonColor: '#F1948A',
-
-                                    //         next: (res) => {
-
-                                    //             if (res.isConfirmed) {
-                                    //                 return res.isConfirmed
-                                    //                     ? handleApproval(
-                                    //                           row?._id,
-                                    //                           FirstCallApprovalStatus.APPROVED
-                                    //                       )
-                                    //                     : setShowDropdown(false)
-                                    //             }
-                                    //             if (res.isDenied) {
-                                    //                 return res.isDenied
-                                    //                     ? handleApproval(
-                                    //                           row?._id,
-                                    //                           FirstCallApprovalStatus.CANCEL
-                                    //                       )
-                                    //                     : setShowDropdown(false)
-                                    //             }
-                                    //         },
-                                    //     })
-                                    // }}
                                     className="cursor-pointer"
                                     label="Pending"
                                     color="error"
@@ -611,15 +572,6 @@ const OrderListing = ({
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderReferenceNumber || '-'}</span>
             ),
-        },
-        {
-            field: 'inquiryNumber',
-            headerName: 'Enquiry No.',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ENQUIRY_NUMBER,
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            // renderCell: (row: OrderListResponse) => <span></span>,
         },
 
         {

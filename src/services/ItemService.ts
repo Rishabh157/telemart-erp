@@ -26,7 +26,7 @@ export const itemsApi = apiSlice.injectEndpoints({
         getAllItems: builder.query({
             providesTags: ['Items'],
             query: (companyId) => ({
-                url: `/item/company/${companyId}`,
+                url: `/item`,
                 method: 'GET',
                 // body,
             }),

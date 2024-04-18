@@ -1,33 +1,29 @@
-/// ==============================================
-// Filename:EditProductSubWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import EditProductSubCategory from './EditProductSubCategory'
 
-import { showToast } from 'src/utils'
 import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
 import {
     useGetProductSubCategoryByIdQuery,
     useUpdateProductSubCategoryMutation,
 } from 'src/services/ProductSubCategoryService'
+import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/productSubCategorySlice'
-import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
+import { AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import { ProductSubCategoryListResponse } from 'src/models'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
@@ -46,42 +42,20 @@ const EditProductSubCategoryWrapper = (props: Props) => {
     const params = useParams()
     const Id = params.id
     const [apiStatus, setApiStatus] = useState(false)
-    // Product sub category single view data (PS)
-    const {
-        data: psData,
-        isLoading: psIsLoading,
-        isFetching: psIsFetching,
-    } = useGetProductSubCategoryByIdQuery(Id)
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allProductCategory }: any = useSelector(
-        (state: RootState) => state?.productCategory
+    const { userData } = useGetLocalStorage()
+    const { items } = useGetDataByIdCustomQuery<ProductSubCategoryListResponse>(
+        {
+            useEndPointHook: useGetProductSubCategoryByIdQuery(Id),
+        }
     )
 
-    // const { allTaxes }: any = useSelector((state: RootState) => state?.tax);
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.productSubCategory
-    )
-
-    // Product category all data (pc)
-    const {
-        data: pcData,
-        isLoading: pcIsLoading,
-        isFetching: pcIsFetching,
-    } = useGetAllProductCategoryQuery(userData?.companyId)
-
-    // Taxes all data (t)
-    // const {
-    //   data: tData,
-    //   isLoading: tIsLoading,
-    //   isFetching: tIsFetching,
-    // } = useGetAllTaxesQuery("");
     const [editProductSubCategory] = useUpdateProductSubCategoryMutation()
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        subCategoryCode: selectedItem?.subCategoryCode || '',
-        subCategoryName: selectedItem?.subCategoryName || '',
-        parentCategoryId: selectedItem?.parentCategoryId || '',
-        hsnCode: selectedItem?.hsnCode || '',
+        subCategoryCode: items?.subCategoryCode || '',
+        subCategoryName: items?.subCategoryName || '',
+        parentCategoryId: items?.parentCategoryId || '',
+        hsnCode: items?.hsnCode || '',
     }
 
     // Form Validation Schema
@@ -121,24 +95,14 @@ const EditProductSubCategoryWrapper = (props: Props) => {
         })
     }
 
-    useEffect(() => {
-        dispatch(setSelectedItem(psData?.data))
-    }, [dispatch, psData, psIsFetching, psIsLoading])
-
-    useEffect(() => {
-        dispatch(setAllProductCategory(pcData?.data))
-    }, [dispatch, pcData, pcIsLoading, pcIsFetching])
-
-    // useEffect(() => {
-    //   dispatch(setAllTaxes(tData?.data));
-    // }, [dispatch, tData, tIsLoading, tIsFetching]);
-
-    const parentCategoryOptions = allProductCategory?.map((ele: any) => {
-        return { label: ele?.categoryName, value: ele?._id }
+    const { options: productCategoryOPtions } = useCustomOptions({
+        useEndPointHook: useGetAllProductCategoryQuery(''),
+        keyName: 'categoryName',
+        value: '_id',
     })
 
     const dropdownOptions = {
-        parentCategoryOptions: parentCategoryOptions,
+        parentCategoryOptions: productCategoryOPtions,
     }
 
     return (

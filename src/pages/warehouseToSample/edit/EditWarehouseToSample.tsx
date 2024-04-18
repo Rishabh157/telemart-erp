@@ -44,11 +44,10 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: {
-        dealerOptions: SelectOption[]
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
-    productPriceOptions: []
+    productPriceOptions: any
     apiStatus: boolean
 }
 
@@ -76,47 +75,15 @@ const EditWarehouseToSample = ({
     const { values, setFieldValue } = formikProps
     const [i, setI] = useState(0)
     const dispatch = useDispatch<AppDispatch>()
-    // const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
-
-    // const dealerWarehouse: any = useSelector(
-    //     (state: RootState) => state.warehouse
-    // )
-    // // const { userData } = useSelector((state: RootState) => state?.auth)
-    // const companyId = userData?.companyId
-
-    // const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
-    //     {
-    //         companyId,
-    //         dealerId: values?.dealerId,
-    //     },
-    //     {
-    //         skip: !values.dealerId,
-    //     }
-    // )
-
-    // useEffect(() => {
-    //     if (!isLoading && !isFetching) {
-    //         dispatch(setDealerWarehouse(data?.data))
-    //     }
-    // }, [data, isLoading, isFetching, dispatch])
-
-    // const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
-    //     (ele: any) => {
-    //         return {
-    //             label: ele.wareHouseName,
-    //             value: ele._id,
-    //         }
-    //     }
-    // )
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e) => e['key'] === productGroup
+            (e:any) => e['value'] === productGroup
         )
 
         if (val) {
-            setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
+            setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }

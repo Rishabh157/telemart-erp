@@ -150,11 +150,8 @@ export const {
     useAddInventoryManagementMutation,
     useUpdateInventoryManagementMutation,
     useGetInventoryManagementByIdQuery,
-    //useGetInventoryManagementByVendorIdQuery,
     useDeleteInventoryManagementMutation,
-    //useExportinventoryManagementDataMutation,
-    //useGetByPoCodeQuery,
+
     useGetByIdInventoryManagementQuery,
-    //useUpdatePoLevelMutation,
-    //useGetSubCategoryByParentQuery,
+
 } = inventoryManagementApi

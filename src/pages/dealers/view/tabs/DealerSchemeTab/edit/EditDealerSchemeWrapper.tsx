@@ -1,99 +1,64 @@
-/// ==============================================
-// Filename:EditDealerSchemeWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
+
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import { Formik } from 'formik'
-import { object, array, string } from 'yup'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import {
+    DealerSchemeByIdResponse,
+    UpdateDealerSchemeInitialValues,
+} from 'src/models/DealerScheme.model'
+import {
     useGetDealerSchemeByIdQuery,
-    useUpdateDealerSchemeMutation,
+    useUpdateDealerSchemeMutation
 } from 'src/services/DealerSchemeService'
+import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { showToast } from 'src/utils'
 import EditDealerScheme from './EditDealerScheme'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
-import {
-    UpdateDealerSchemeInitialValues,
-    DealerSchemeByIdResponse,
-} from 'src/models/DealerScheme.model'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetAllPincodeDealerQuery } from 'src/services/DealerPincodeService'
 
 const EditDealerSchemeWrapper = () => {
     const params = useParams()
     const navigate = useNavigate()
-    const dispatch = useDispatch()
     const schemeId = params.schemeId
     const dealerId = params.dealerId
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
-    const [schemeData, setSchemeData] = useState<DealerSchemeByIdResponse>()
-    const [pinCodeOptions, setPinCodeOptions] = useState([])
+   
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { data, isLoading, isFetching } = useGetDealerSchemeByIdQuery(
-        schemeId || ''
-    )
+
+    const { items: schemeData } =
+        useGetDataByIdCustomQuery<DealerSchemeByIdResponse>({
+            useEndPointHook: useGetDealerSchemeByIdQuery(schemeId || ''),
+        })
     const [updateScheme] = useUpdateDealerSchemeMutation()
 
-    const {
-        data: pinCodeList,
-        isLoading: pinCodeIsLoading,
-        isFetching: pinCodeIsFetching,
-    } = useGetAllPincodeDealerQuery({
-        tehsilid: '',
-        dealerId: dealerId || '',
+   const { options: schemeOptions } = useCustomOptions({
+        useEndPointHook: useGetSchemeQuery({
+            companyId: userData?.companyId,
+        }),
+        keyName: 'schemeName',
+        value: '_id',
     })
-    const {
-        data: schemeDataListInfo,
-        isLoading: schemeIsLoading,
-        isFetching: schemeIsFetching,
-    } = useGetSchemeQuery(companyId)
-
-    useEffect(() => {
-        dispatch(setAllDealerSchemes(schemeDataListInfo?.data))
-    }, [schemeDataListInfo, schemeIsLoading, schemeIsFetching, dispatch])
-
-    const { allItems: schemeItems }: any = useSelector(
-        (state: RootState) => state?.scheme
-    )
-    const schemeOptions = schemeItems?.map((ele: any) => {
-        return {
-            label: ele.schemeName,
-            value: ele._id,
-        }
+    const { options: pinCodeOptions } = useCustomOptions({
+        useEndPointHook: useGetAllPincodeDealerQuery({
+            tehsilid: '',
+            dealerId: dealerId,
+        }),
+        keyName: 'pincode',
+        value: 'pincode',
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            setSchemeData(data?.data || [])
-        }
-    }, [isLoading, isFetching, data])
-
-    useEffect(() => {
-        if (!pinCodeIsLoading && !pinCodeIsFetching) {
-            let options = pinCodeList?.data?.map((item: any) => {
-                return {
-                    label: item?.pincode,
-                    value: item?.pincode,
-                }
-            })
-            setPinCodeOptions(options)
-        }
-    }, [pinCodeList, pinCodeIsLoading, pinCodeIsFetching])
 
     const initialValues: UpdateDealerSchemeInitialValues = {
         companyId: companyId || '',

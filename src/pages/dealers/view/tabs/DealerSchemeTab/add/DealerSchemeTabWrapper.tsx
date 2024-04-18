@@ -1,33 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:DealerSchemeTabWrapper.tsx
-// Type: Tab Add Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { array, object, string } from 'yup'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddDealerScheme from './AddDealerScheme'
+import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
+import { useGetAllPincodeDealerQuery } from 'src/services/DealerPincodeService'
 import {
     useAddDealerSchemeMutation,
     useGetAllDealerSchemeByDealerIdQuery,
 } from 'src/services/DealerSchemeService'
-import { useGetAllPincodeDealerQuery } from 'src/services/DealerPincodeService'
 import { showToast } from 'src/utils'
-import { AddDealerSchemeFormInitialValues } from 'src/models/DealerScheme.model'
+import AddDealerScheme from './AddDealerScheme'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems as setAllDealerSchemes } from 'src/redux/slices/schemeSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -36,63 +28,27 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const [pinCodeOptions, setPinCodeOptions] = useState([])
     const [addDealerScheme] = useAddDealerSchemeMutation()
 
-    const {
-        data: schemeData,
-        isLoading: schemeIsLoading,
-        isFetching: schemeIsFetching,
-    } = useGetAllDealerSchemeByDealerIdQuery({
-        companyId: userData?.companyId,
-        dealerId,
+    const { options: schemeOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDealerSchemeByDealerIdQuery({
+            companyId: userData?.companyId,
+            dealerId,
+        }),
+        keyName: 'schemeName',
+        value: '_id',
     })
-    useEffect(() => {
-        return () => {
-            dispatch(setAllDealerSchemes([]))
-        }
-    }, [])
-    useEffect(() => {
-        dispatch(setAllDealerSchemes(schemeData?.data))
-    }, [schemeData, schemeIsLoading, schemeIsFetching, dispatch, dealerId])
-
-    const { allItems: schemeItems }: any = useSelector(
-        (state: RootState) => state?.scheme
-    )
-    const schemeOptions = schemeItems?.map((ele: any) => {
-        return {
-            label: ele.schemeName,
-            value: ele._id,
-        }
+    const { options: pinCodeOptions } = useCustomOptions({
+        useEndPointHook: useGetAllPincodeDealerQuery({
+            tehsilid: '',
+            dealerId: dealerId,
+        }),
+        keyName: 'pincode',
+        value: 'pincode',
     })
-    const {
-        data: pinCodeList,
-        isLoading: pinCodeIsLoading,
-        isFetching: pinCodeIsFetching,
-    } = useGetAllPincodeDealerQuery({
-        tehsilid: '',
-        dealerId: dealerId,
-    })
-
-    useEffect(() => {
-        if (!pinCodeIsLoading && !pinCodeIsFetching) {
-            let options: any = []
-            pinCodeList?.data?.map((item: any) => {
-                return (options = [
-                    ...options,
-                    {
-                        label: item.pincode,
-                        value: item.pincode,
-                    },
-                ])
-            })
-            setPinCodeOptions(options)
-        }
-    }, [pinCodeList, pinCodeIsLoading, pinCodeIsFetching])
 
     const initialValues: AddDealerSchemeFormInitialValues = {
         companyId: companyId,

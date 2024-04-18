@@ -1,53 +1,42 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditProductWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { Form, Formik, FormikProps } from 'formik'
-import { array, number, object, string } from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
 import {
     ContentState,
+    EditorState,
     convertFromHTML,
     convertToRaw,
-    EditorState,
 } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
+import { Form, Formik, FormikProps } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import StepEditProductDetailsWrapper from './FormSteps/StepEditProductDetails/StepEditProductDetailsWrapper'
 import EditProduct from './EditProduct'
+import StepEditProductDetailsWrapper from './FormSteps/StepEditProductDetails/StepEditProductDetailsWrapper'
 
-import StepEditItemsWrapper from './FormSteps/StepEditItems/StepEditItemsWrapper'
-import StepEditFAQsWrapper from './FormSteps/StepEditFAQs/StepEditFAQsWrapper'
-import StepEditVideoWrapper from './FormSteps/StepEditVideo/StepEditVideoWrapper'
-import StepEditCallScriptWrapper from './FormSteps/StepEditCallScript/StepEditCallScriptWrapper'
 import { useGetAllItemsQuery } from 'src/services/ItemService'
-// import { useEditProductMutation } from "src/services/ProductService";
-import { showToast } from 'src/utils'
 import {
     useGetProductByIdQuery,
     useUpdateProductMutation,
 } from 'src/services/ProductService'
+import { showToast } from 'src/utils'
+import StepEditCallScriptWrapper from './FormSteps/StepEditCallScript/StepEditCallScriptWrapper'
+import StepEditFAQsWrapper from './FormSteps/StepEditFAQs/StepEditFAQsWrapper'
+import StepEditItemsWrapper from './FormSteps/StepEditItems/StepEditItemsWrapper'
+import StepEditVideoWrapper from './FormSteps/StepEditVideo/StepEditVideoWrapper'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/itemSlice'
-import { setAllItems as setAllLanguage } from 'src/redux/slices/languageSlice'
-import { setSelectedItem } from 'src/redux/slices/productSlice'
-import { useGetAllLanguageQuery } from 'src/services/LanguageService'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
+import { useGetAllLanguageQuery } from 'src/services/LanguageService'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -179,56 +168,24 @@ const EditProductWrapper = () => {
     const Id = params.id
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const {
-        data: prData,
-        isLoading: prIsLoading,
-        isFetching: prIsFetching,
-    } = useGetProductByIdQuery(Id)
 
     const [editProduct] = useUpdateProductMutation()
     const [apiStatus, setApiStatus] = useState(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { allItems }: any = useSelector((state: RootState) => state?.item)
-    const { allItems: allLanguages }: any = useSelector(
-        (state: RootState) => state?.language
-    )
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.products
-    )
-
-    const {
-        data: languageData,
-        isLoading: lIsLoading,
-        isFetching: lIsFetching,
-    } = useGetAllLanguageQuery('')
-
-    const {
-        data: itemData,
-        isLoading: itemIsLoading,
-        isFetching: itemIsFetching,
-    } = useGetAllItemsQuery(userData?.companyId)
+    const { items: allLanguages } = useGetDataByIdCustomQuery({
+        useEndPointHook: useGetAllLanguageQuery(''),
+    })
+    const { items: allItems } = useGetDataByIdCustomQuery({
+        useEndPointHook: useGetAllItemsQuery(''),
+    })
+    const { items: selectedItem } =
+        useGetDataByIdCustomQuery<any>({
+            useEndPointHook: useGetProductByIdQuery(Id),
+        })
 
     // States
     const [activeStep, setActiveStep] = React.useState(0)
-
-    useEffect(() => {
-        if (!itemIsLoading && !itemIsFetching) {
-            dispatch(setAllItems(itemData?.data || []))
-        }
-    }, [itemData, itemIsLoading, itemIsFetching])
-
-    useEffect(() => {
-        if (!prIsFetching && !prIsLoading) {
-            dispatch(setSelectedItem(prData?.data || []))
-        }
-    }, [prData, prIsLoading, prIsFetching])
-
-    useEffect(() => {
-        if (!lIsLoading && !lIsFetching) {
-            dispatch(setAllLanguage(languageData?.data || []))
-        }
-    }, [languageData, lIsLoading, lIsFetching])
 
     // From Initial Values
     const initialValues: FormInitialValues = {
@@ -237,11 +194,11 @@ const EditProductWrapper = () => {
         product_category: selectedItem?.productCategoryId || '',
         product_sub_category: selectedItem?.productSubCategoryId || '',
         productGroup: selectedItem?.productGroupId || '',
-        product_weight: selectedItem?.productWeight || '',
+        product_weight: selectedItem?.productWeight || 0,
         dimensions: {
-            height: selectedItem?.dimension?.height || '',
-            width: selectedItem?.dimension?.width || '',
-            depth: selectedItem?.dimension?.depth || '',
+            height: selectedItem?.dimension?.height || 0,
+            width: selectedItem?.dimension?.width || 0,
+            depth: selectedItem?.dimension?.depth || 0,
         },
         description: selectedItem?.description,
         items: selectedItem?.item?.map((ele: any) => {
