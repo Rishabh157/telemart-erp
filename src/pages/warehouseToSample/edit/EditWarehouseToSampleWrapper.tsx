@@ -1,75 +1,29 @@
-/// ==============================================
-// Filename:EditWarehouseToSampleWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { array, number, object, string } from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditWarehouseToSample from './EditWarehouseToSample'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { showToast } from 'src/utils'
-import { useGetAllDealersQuery } from 'src/services/DealerServices'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import {
     useGetWarehouseToSampleByIdQuery,
     useUpdateWarehouseToSampleOrderMutation,
 } from 'src/services/WarehouseToSampleService'
+import { showToast } from 'src/utils'
+import EditWarehouseToSample from './EditWarehouseToSample'
 
 // |-- Redux --|
-import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/warehouseToSampleSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {}
-
-// interface ProductSalesOrder {
-//     productGroupId: string
-//     rate: number
-//     quantity: number
-//     _id: string
-//     groupName: string
-// }
-
-// interface ProductSalesOrderListResponseType {
-//     _id: string
-//     soNumber: string
-//     dealerId: string
-//     dealerWareHouseId: string
-//     companyWareHouseId: string
-//     dhApprovedById: string | null
-//     dhApproved: ''
-//     dhApprovedActionBy: string
-//     dhApprovedAt: string
-//     accApprovedById: string | null
-//     accApproved: boolean | null
-//     accApprovedActionBy: string
-//     accApprovedAt: string
-//     productSalesOrder: ProductSalesOrder
-//     status: string
-//     companyId: string
-//     isDeleted: boolean
-//     isActive: boolean
-//     __v: number
-//     createdAt: string
-//     updatedAt: string
-//     dealerLabel: string
-//     companyWarehouseLabel: string
-//     warehouseLabel: string
-// }
 
 interface ProductSalesOrder {
     productGroupId: string
@@ -99,7 +53,6 @@ export type FormInitialValues = {
 
 const EditWarehouseToSampleWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const [editWarehouseTransfer, setEditWarehouseTransfer] =
         useState<FormInitialValues>({
@@ -123,100 +76,30 @@ const EditWarehouseToSampleWrapper = (props: Props) => {
     const Id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateWarehouseToSample] = useUpdateWarehouseToSampleOrderMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.warehouseToSample
-    )
 
-    const { data, isLoading, isFetching } = useGetWarehouseToSampleByIdQuery(
-        Id || ''
-    )
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedItem(data?.data))
-        }
-    }, [dispatch, data, isLoading, isFetching])
 
-    const {
-        data: dealerData,
-        isLoading: dealerIsLoading,
-        isFetching: dealerIsFetching,
-    } = useGetAllDealersQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state?.dealer)
-
-    const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
-    const { allItems: warehouseItems }: any = useSelector(
-        (state: RootState) => state?.warehouse
-    )
-
-    const {
-        data: productGroupData,
-        isLoading: productGroupIsLoading,
-        isFetching: productGroupIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
-    const { allItems: productGroupItems }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
-    const dealerOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.firstName + ' ' + ele.lastName,
-            value: ele._id,
-        }
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetWarehouseToSampleByIdQuery(Id || ''),
     })
 
-    const warehouseOptions = warehouseItems?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
+    const { options: warehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetWareHousesQuery(''),
+        keyName: 'wareHouseName',
+        value: '_id',
     })
 
-    const productGroupOptions = productGroupItems?.map((ele: any) => {
-        return {
-            label: ele.groupName,
-            value: ele._id,
-        }
-    })
-    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
-        return {
-            key: ele._id,
-            value: ele.dealerSalePrice,
-        }
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
     })
 
-    //Dealer
-    useEffect(() => {
-        if (!dealerIsLoading && !dealerIsFetching) {
-            dispatch(setAllItems(dealerData?.data))
-        }
-    }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
-
-    //Warehouse
-    useEffect(() => {
-        if (!warehouseIsLoading && !warehouseIsFetching) {
-            dispatch(setAllWareHouse(warehouseData?.data))
-        }
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
-
-    //ProductGroup
-    useEffect(() => {
-        if (!productGroupIsLoading && !productGroupIsFetching) {
-            // dispatch(setAllWareHouse(warehouseData?.data))
-            dispatch(setAllProductGroups(productGroupData?.data))
-        }
-    }, [
-        productGroupData,
-        productGroupIsLoading,
-        productGroupIsFetching,
-        dispatch,
-    ])
-
+    const { options: productPriceOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'dealerSalePrice',
+        value: '_id',
+    })
     const dropdownOptions = {
-        dealerOptions: dealerOptions,
         warehouseOptions: warehouseOptions,
         productGroupOptions: productGroupOptions,
     }
@@ -337,7 +220,6 @@ const EditWarehouseToSampleWrapper = (props: Props) => {
             secondApprovedAt: values.secondApprovedAt,
             firstApprovedById: values.firstApprovedById,
             secondApprovedById: values.secondApprovedById,
-            // status: values.status,
             companyId: values.companyId,
             id: '',
         }

@@ -1,21 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditWarehouseTransfer.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
-// import { MdDeleteOutline } from "react-icons/md";
-import {
-    useDispatch,
-    //  useSelector
-} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { HiPlus } from 'react-icons/hi'
 
 // |-- Internal Dependencies --|
@@ -27,13 +15,9 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './EditWarehouseTransferWrapper'
-// import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
-// |-- Redux --|
-// import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import {
     AppDispatch,
-    //  RootState
 } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { showToast } from 'src/utils'
@@ -44,11 +28,10 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     dropdownOptions: {
-        dealerOptions: SelectOption[]
         warehouseOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
-    productPriceOptions: []
+    productPriceOptions: any
     apiStatus: boolean
 }
 
@@ -76,50 +59,19 @@ const EditWarehouseTransfer = ({
     const { values, setFieldValue } = formikProps
     const [i, setI] = useState(0)
     const dispatch = useDispatch<AppDispatch>()
-    // const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
-
-    // const dealerWarehouse: any = useSelector(
-    //     (state: RootState) => state.warehouse
-    // )
-    // // const { userData } = useSelector((state: RootState) => state?.auth)
-    // const companyId = userData?.companyId
-
-    // const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
-    //     {
-    //         companyId,
-    //         dealerId: values?.dealerId,
-    //     },
-    //     {
-    //         skip: !values.dealerId,
-    //     }
-    // )
-
-    // useEffect(() => {
-    //     if (!isLoading && !isFetching) {
-    //         dispatch(setDealerWarehouse(data?.data))
-    //     }
-    // }, [data, isLoading, isFetching, dispatch])
-
-    // const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
-    //     (ele: any) => {
-    //         return {
-    //             label: ele.wareHouseName,
-    //             value: ele._id,
-    //         }
-    //     }
-    // )
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e) => e['key'] === productGroup
+            (e:any) => e['value'] === productGroup
         )
 
         if (val) {
-            setFieldValue(`productSalesOrder[${i}].rate`, val['value'])
+            setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {

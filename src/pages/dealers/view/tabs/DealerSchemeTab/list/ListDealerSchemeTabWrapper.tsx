@@ -1,75 +1,62 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/// ==============================================
-// Filename:ListDealerSchemeTabWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-import Stack from '@mui/material/Stack'
 import Chip from '@mui/material/Chip'
+import Stack from '@mui/material/Stack'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { DealersSchemeListResponse } from 'src/models/DealerScheme.model'
-import DealerSchemeListing from './DealerSchemeListing'
-import {
-    useGetDealerSchemeQuery,
-    useDeleteDealerSchemeMutation,
-    useDeactiveDealerSchemeMutation,
-} from 'src/services/DealerSchemeService'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-
-// |-- Redux --|
+import { DealersSchemeListResponse } from 'src/models/DealerScheme.model'
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/dealerSchemeSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+    useDeactiveDealerSchemeMutation,
+    useGetDealerSchemeQuery,
+} from 'src/services/DealerSchemeService'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import DealerSchemeListing from './DealerSchemeListing'
+
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const ListDealerSchemeTabWrapper = () => {
+    useUnmountCleanup()
     const [showDropdown, setShowDropdown] = useState(false)
-    const [currentId, setCurrentId] = useState('')
 
     const params = useParams()
     const dealerId: any = params.dealerId
     const dealerSchemeState: any = useSelector(
-        (state: RootState) => state.dealerScheme
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, items, searchValue } = dealerSchemeState
+    const { page, rowsPerPage, searchValue } = dealerSchemeState
 
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const { data, isFetching, isLoading } = useGetDealerSchemeQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['schemeName', 'price'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'dealerId',
-                value: dealerId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData<DealersSchemeListResponse>({
+        useEndPointHook: useGetDealerSchemeQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['schemeName', 'price'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'dealerId',
+                    value: dealerId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -78,7 +65,6 @@ const ListDealerSchemeTabWrapper = () => {
                 <ActionPopup
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
-                        setCurrentId(row?._id)
                     }}
                 >
                     <>
@@ -97,27 +83,9 @@ const ListDealerSchemeTabWrapper = () => {
                                 Edit
                             </button>
                         )}
-                        {/* <button
-                            onClick={() => {
-                                showConfirmationDialog({
-                                    title: 'Delete Scheme',
-                                    text: 'Do you want to delete',
-                                    showCancelButton: true,
-                                    next: (res) => {
-                                        return res.isConfirmed
-                                            ? handleDelete()
-                                            : setShowDropdown(false)
-                                    },
-                                })
-                            }}
-                            className="block w-full text-left px-2 py-1  hover:bg-gray-100"
-                        >
-                            Delete
-                        </button> */}
                     </>
                 </ActionPopup>
             ),
-            
         },
         {
             field: 'schemeName',
@@ -247,40 +215,9 @@ const ListDealerSchemeTabWrapper = () => {
                 )
             },
         },
-
     ]
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
-    const [deleteDealerSchemeCall] = useDeleteDealerSchemeMutation()
     const [deactiveDealerScheme] = useDeactiveDealerSchemeMutation()
-
-    // const handleDelete = () => {
-    //     setShowDropdown(false)
-    //     deleteDealerSchemeCall(currentId).then((res: any) => {
-    //         if ('data' in res) {
-    //             if (res?.data?.status) {
-    //                 showToast('success', 'Scheme deleted successfully!')
-    //             } else {
-    //                 showToast('error', res?.data?.message)
-    //             }
-    //         } else {
-    //             showToast(
-    //                 'error',
-    //                 'Something went wrong, Please try again later'
-    //             )
-    //         }
-    //     })
-    // }
 
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)

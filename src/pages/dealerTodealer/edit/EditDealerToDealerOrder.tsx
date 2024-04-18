@@ -1,10 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:AddSaleOrder.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
@@ -41,7 +34,7 @@ type Props = {
         dealerOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
-    productPriceOptions: []
+    productPriceOptions: SelectOption[] | any
     apiStatus: boolean
 }
 
@@ -75,14 +68,15 @@ const EditDealerToDealerOrderWrapper = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e) => e['key'] === productGroup
+            (e:any) => e['value'] === productGroup
         )
 
         if (val) {
-            setFieldValue(`productDetails[${i}].rate`, val['value'])
+            setFieldValue(`productDetails[${i}].rate`, val['label'])
         } else {
             setFieldValue(`productDetails[${i}].rate`, '')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -127,7 +121,7 @@ const EditDealerToDealerOrderWrapper = ({
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-3">
                             <ATMTextField
-                            disabled
+                                disabled
                                 name="dtdNumber"
                                 value={values.dtdNumber}
                                 label="Dealer To Dealer No."

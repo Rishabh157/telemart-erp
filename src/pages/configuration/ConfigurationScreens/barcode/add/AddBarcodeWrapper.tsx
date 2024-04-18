@@ -6,29 +6,29 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string, number } from 'yup'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
+import { number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 
-import AddBarcode from './AddBarcode'
-import { useAddBarcodeMutation } from 'src/services/BarcodeService'
-import { showToast } from 'src/utils'
-import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { WarehousesListResponse } from 'src/models'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { useAddBarcodeMutation } from 'src/services/BarcodeService'
+import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
+import { showToast } from 'src/utils'
+import AddBarcode from './AddBarcode'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/productGroupSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -45,9 +45,6 @@ const AddBarcodeWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allItems }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
 
     const [wareHouseOption, setWareHouseOption] = useState<SelectOption[] | []>(
         []
@@ -72,20 +69,10 @@ const AddBarcodeWrapper = (props: Props) => {
     }, [whData, whIsLoading, whIsFetching])
 
     const [addBarcode] = useAddBarcodeMutation()
-    const {
-        data: productGroupData,
-        isLoading: pgIsLoading,
-        isFetching: pgIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
-
-    useEffect(() => {
-        dispatch(setAllItems(productGroupData?.data))
-    }, [dispatch, productGroupData, pgIsLoading, pgIsFetching])
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
         productGroup: '',
-        // wareHouseId: '',
         quantity: '',
         lotNumber: '',
     }
@@ -112,7 +99,6 @@ const AddBarcodeWrapper = (props: Props) => {
             barcodeGroupNumber: uniqueGrouId,
             quantity: Number(values?.quantity),
             lotNumber: values.lotNumber,
-            // wareHouseId: null,
             companyId: userData?.companyId || '',
         }).then((res) => {
             if ('data' in res) {
@@ -128,8 +114,11 @@ const AddBarcodeWrapper = (props: Props) => {
             setApiStatus(false)
         })
     }
-    const productGroupOption = allItems?.map((ele: any) => {
-        return { label: ele?.groupName, value: ele?._id }
+
+    const { options: productGroupOption } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
     })
 
     return (

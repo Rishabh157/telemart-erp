@@ -7,31 +7,27 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
 // import { number, object, string } from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import EditRTVendor from './EditRTVendor'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { showToast } from 'src/utils'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import {
     useGetReturnToOrderByIdQuery,
     useUpdateReturnToVendorOrderMutation,
 } from 'src/services/ReturnToVendorService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
+import { showToast } from 'src/utils'
+import EditRTVendor from './EditRTVendor'
 
 // |-- Redux --|
-import { setAllItems as setAllVendor } from 'src/redux/slices/vendorSlice'
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/returnToVendorSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
 import { array, number, object, string } from 'yup'
 
@@ -63,7 +59,6 @@ export type FormInitialValues = {
 
 const EditRTVendorWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const [editSaleOrder, setEditSaleOrder] = useState<FormInitialValues>({
         rtvNo: '',
@@ -85,98 +80,34 @@ const EditRTVendorWrapper = (props: Props) => {
     const Id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateReturnToVendor] = useUpdateReturnToVendorOrderMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.returnToVendor
-    )
-    // all vendor query
-    const { allItems: allVendor }: any = useSelector(
-        (state: RootState) => state.vendor
-    )
 
-    const { data, isLoading, isFetching } = useGetReturnToOrderByIdQuery(Id)
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedItem(data?.data))
-        }
-    }, [dispatch, data, isLoading, isFetching])
-
-    const {
-        data: vendorData,
-        isLoading: vendorIsLoading,
-        isFetching: VendorIsFetching,
-    } = useGetVendorsQuery(userData?.companyId)
-
-    //vendor
-    useEffect(() => {
-        if (!vendorIsLoading && !VendorIsFetching) {
-            dispatch(setAllVendor(vendorData?.data))
-        }
-    }, [vendorData, vendorIsLoading, VendorIsFetching, dispatch])
-
-    const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
-    const { allItems: warehouseItems }: any = useSelector(
-        (state: RootState) => state?.warehouse
-    )
-
-    const {
-        data: productGroupData,
-        isLoading: productGroupIsLoading,
-        isFetching: productGroupIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
-    const { allItems: productGroupItems }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
-
-    const vendorOptions = allVendor?.map((ele: any) => {
-        return {
-            label: ele?.companyName,
-            value: ele?._id,
-        }
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetReturnToOrderByIdQuery(Id),
     })
 
-    const warehouseOptions = warehouseItems?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
+    const { options: vendorOptions } = useCustomOptions({
+        useEndPointHook: useGetVendorsQuery(''),
+        keyName: 'companyName',
+        value: '_id',
     })
 
-    const productGroupOptions = productGroupItems?.map((ele: any) => {
-        return {
-            label: ele.groupName,
-            value: ele._id,
-        }
-    })
-    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
-        return {
-            key: ele._id,
-            value: ele.dealerSalePrice,
-        }
+    const { options: warehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetWareHousesQuery(''),
+        keyName: 'wareHouseName',
+        value: '_id',
     })
 
-    //Warehouse
-    useEffect(() => {
-        if (!warehouseIsLoading && !warehouseIsFetching) {
-            dispatch(setAllWareHouse(warehouseData?.data))
-        }
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
+    })
 
-    //ProductGroup
-    useEffect(() => {
-        if (!productGroupIsLoading && !productGroupIsFetching) {
-            dispatch(setAllProductGroups(productGroupData?.data))
-        }
-    }, [
-        productGroupData,
-        productGroupIsLoading,
-        productGroupIsFetching,
-        dispatch,
-    ])
+    const { options: productPriceOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'dealerSalePrice',
+        value: '_id',
+    })
 
     const dropdownOptions = {
         warehouseOptions: warehouseOptions,

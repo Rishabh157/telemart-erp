@@ -1,32 +1,26 @@
-/// ==============================================
-// Filename:EditProductCategoryWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 
-import { showToast } from 'src/utils'
 import {
     useGetProductCategoryByIdQuery,
     useUpdateProductCategoryMutation,
 } from 'src/services/ProductCategoryServices'
+import { showToast } from 'src/utils'
 import EditProductCategoryListing from './EditProductCategoryListing'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedProductCategory } from 'src/redux/slices/productCategorySlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ProductCategoryListResponse } from 'src/models/ProductCategory.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -42,18 +36,18 @@ const EditProductCategoryWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
-    const { selectedProductCategory }: any = useSelector(
-        (state: RootState) => state.productCategory
-    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [EditPrductCategory] = useUpdateProductCategoryMutation()
 
-    const { data, isLoading } = useGetProductCategoryByIdQuery(Id)
+    const { items } = useGetDataByIdCustomQuery<ProductCategoryListResponse>({
+        useEndPointHook: useGetProductCategoryByIdQuery(Id),
+    })
 
     const initialValues: FormInitialValues = {
-        categoryCode: selectedProductCategory?.categoryCode || '',
-        categoryName: selectedProductCategory?.categoryName || '',
+        categoryCode: items?.categoryCode || '',
+        categoryName: items?.categoryName || '',
     }
 
     // Form Validation Schema
@@ -91,9 +85,6 @@ const EditProductCategoryWrapper = (props: Props) => {
         }, 1000)
     }
 
-    useEffect(() => {
-        dispatch(setSelectedProductCategory(data?.data))
-    }, [dispatch, data, isLoading])
     return (
         <Formik
             enableReinitialize

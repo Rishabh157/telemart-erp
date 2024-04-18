@@ -1,34 +1,26 @@
-/// ==============================================
-// Filename:AddSaleOrderWrapper.tsx
-// Type: Add Component
-// Last Updated: JULY 30, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { array, number, object, string } from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddSaleOrder from './AddSaleOrder'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { showToast } from 'src/utils'
 import { useGetAllDealersQuery } from 'src/services/DealerServices'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { useAddSalesOrderMutation } from 'src/services/SalesOrderService'
+import { useGetWareHousesQuery } from 'src/services/WareHouseService'
+import { showToast } from 'src/utils'
+import AddSaleOrder from './AddSaleOrder'
 
 // |-- Redux--|
-import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { setAllItems as setAllWareHouse } from 'src/redux/slices/warehouseSlice'
-import { setAllItems as setAllProductGroups } from 'src/redux/slices/productGroupSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { setAllItems } from 'src/redux/slices/dealerSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -60,24 +52,6 @@ const AddSaleOrderWrapper = (props: Props) => {
     } = useGetAllDealersQuery(userData?.companyId)
     const { allItems }: any = useSelector((state: RootState) => state?.dealer)
 
-    const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
-    const { allItems: warehouseItems }: any = useSelector(
-        (state: RootState) => state?.warehouse
-    )
-
-    const {
-        data: productGroupData,
-        isLoading: productGroupIsLoading,
-        isFetching: productGroupIsFetching,
-    } = useGetAllProductGroupQuery(userData?.companyId)
-    const { allItems: productGroupItems }: any = useSelector(
-        (state: RootState) => state?.productGroup
-    )
-
     const dealerOptions = allItems?.map((ele: any) => {
         return {
             label: ele.firstName + ' ' + ele.lastName,
@@ -85,46 +59,28 @@ const AddSaleOrderWrapper = (props: Props) => {
         }
     })
 
-    const warehouseOptions = warehouseItems?.map((ele: any) => {
-        return {
-            label: ele.wareHouseName,
-            value: ele._id,
-        }
+    const { options: warehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetWareHousesQuery(''),
+        keyName: 'wareHouseName',
+        value: '_id',
     })
 
-    const productGroupOptions = productGroupItems?.map((ele: any) => {
-        return {
-            label: ele.groupName,
-            value: ele._id,
-        }
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
     })
 
-    const productPriceOptions: any = productGroupItems?.map((ele: any) => {
-        return {
-            key: ele._id,
-            value: ele.dealerSalePrice,
-        }
+    const { options: productPriceOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'dealerSalePrice',
+        value: '_id',
     })
 
     //Dealer
     useEffect(() => {
         dispatch(setAllItems(dealerData?.data))
     }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
-
-    //Warehouse
-    useEffect(() => {
-        dispatch(setAllWareHouse(warehouseData?.data))
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
-
-    //ProductGroup
-    useEffect(() => {
-        dispatch(setAllProductGroups(productGroupData?.data))
-    }, [
-        productGroupData,
-        productGroupIsLoading,
-        productGroupIsFetching,
-        dispatch,
-    ])
 
     const dropdownOptions = {
         dealerOptions: dealerOptions,
@@ -134,7 +90,6 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        // soNumber: '',
         dealerId: '',
         dealerWareHouseId: '',
         companyWareHouseId: '',
@@ -150,7 +105,6 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        // soNumber: string().required('Sale order number is required').matches(/^[a-zA-Z]+$/, 'Only alphabetical characters are allowed'),
         dealerId: string().required('Please select a dealer'),
         dealerWareHouseId: string().required(
             'Please select a  Dealer Warehouse'

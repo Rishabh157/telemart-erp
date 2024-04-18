@@ -41,7 +41,7 @@ type Props = {
         dealerOptions: SelectOption[]
         productGroupOptions: SelectOption[]
     }
-    productPriceOptions: []
+    productPriceOptions: any
     apiStatus: boolean
 }
 
@@ -75,11 +75,11 @@ const AddDealerToDealerOrder = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e) => e['key'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {
-            setFieldValue(`productDetails[${i}].rate`, val['value'])
+            setFieldValue(`productDetails[${i}].rate`, val['label'])
         } else {
             setFieldValue(`productDetails[${i}].rate`, '')
         }

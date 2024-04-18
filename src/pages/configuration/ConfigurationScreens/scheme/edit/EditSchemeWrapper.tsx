@@ -9,34 +9,32 @@
 import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { Formik, Form, FormikProps } from 'formik'
-import { array, boolean, number, object, string } from 'yup'
+import { Form, Formik, FormikProps } from 'formik'
+import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import moment from 'moment'
+import { array, boolean, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import StepEditSchemeDetailsWrapper from './FormSteps/StepEditSchemeDetail/StepEditSchemeDetailsWrapper'
 import StepEditFAQ from './FormSteps/StepEditFAQ/StepEditFAQ'
+import StepEditSchemeDetailsWrapper from './FormSteps/StepEditSchemeDetail/StepEditSchemeDetailsWrapper'
 
+import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import { showToast } from 'src/utils'
+import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
 import {
     useGetSchemeByIdQuery,
     useUpdateSchemeMutation,
 } from 'src/services/SchemeService'
+import { showToast } from 'src/utils'
 import EditScheme from './EditScheme'
-import { useGetAllProductCategoryQuery } from 'src/services/ProductCategoryServices'
-import { useGetSubCategoryByParentQuery } from 'src/services/ProductSubCategoryService'
 import StepEditProductDetailWrapper from './FormSteps/StepEditProductInformationDetails/StepEditProductDetailWrapper'
 
 // |-- Redux --|
-import { setAllProductCategory } from 'src/redux/slices/productCategorySlice'
-import { setSelectedItem } from 'src/redux/slices/schemeSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setAllItems } from 'src/redux/slices/productGroupSlice'
-import { setAllItems as setAllSubCategory } from 'src/redux/slices/productSubCategorySlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -167,20 +165,17 @@ const EditSchemeWrapper = () => {
     const [activeStep, setActiveStep] = React.useState(0)
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    //const [AddSchemes] = useAddSchemeMutation();
     const [apiStatus, setApiStatus] = useState(false)
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [selectedCategory, setSelectedCategory] = useState('')
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state.scheme
-    )
+
     const [UpdateScheme] = useUpdateSchemeMutation()
-    const {
-        data: updateData,
-        isLoading: updateisLoading,
-        isFetching: updateisFetching,
-    } = useGetSchemeByIdQuery(Id)
+
+    const { items: selectedItem } =
+        useGetDataByIdCustomQuery<any>({
+            useEndPointHook: useGetSchemeByIdQuery(Id),
+        })
 
     useEffect(() => {
         if (selectedItem !== null) {
@@ -231,77 +226,25 @@ const EditSchemeWrapper = () => {
             ?.validationSchema
     }
 
-    // On Submit Handler
-    const { allProductCategory }: any = useSelector(
-        (state: RootState) => state.productCategory
-    )
-
-    const {
-        data: dataPC,
-        isLoading: isLoadingPC,
-        isFetching: isFetchingPC,
-    } = useGetAllProductCategoryQuery(userData?.companyId)
-
-    useEffect(() => {
-        dispatch(setAllProductCategory(dataPC?.data))
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoadingPC, isFetchingPC, dataPC])
-
-    const productCategoryoption: any = allProductCategory?.map((ele: any) => {
-        return {
-            label: ele.categoryName,
-            value: ele._id,
-        }
+    const { options: productCategoryoption } = useCustomOptions({
+        useEndPointHook: useGetAllProductCategoryQuery(''),
+        keyName: 'categoryName',
+        value: '_id',
     })
 
-    const {
-        data: ProductScData,
-        isLoading: ProductScIsLoading,
-        isFetching: ProductScIsFetching,
-    } = useGetSubCategoryByParentQuery(selectedCategory, {
-        skip: !selectedCategory,
+    const { options: productSubCategoryOption } = useCustomOptions({
+        useEndPointHook: useGetSubCategoryByParentQuery(selectedCategory, {
+            skip: !selectedCategory,
+        }),
+        keyName: 'subCategoryName',
+        value: '_id',
     })
 
-    useEffect(() => {
-        dispatch(setAllSubCategory(ProductScData?.data))
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ProductScData, ProductScIsLoading, ProductScIsFetching])
-
-    const { allItems: productSubCategory }: any = useSelector(
-        (state: RootState) => state.productSubCategory
-    )
-    const productSubCategoryOption: any = productSubCategory?.map(
-        (ele: any) => {
-            return {
-                label: ele.subCategoryName,
-                value: ele._id,
-            }
-        }
-    )
-
-    const { data, isLoading, isFetching } = useGetAllProductGroupQuery(
-        userData?.companyId
-    )
-    const { allItems: productGroup }: any = useSelector(
-        (state: RootState) => state.productGroup
-    )
-
-    const productGroupOptions = productGroup?.map((ele: any) => {
-        return {
-            label: ele?.groupName,
-            value: ele?._id,
-        }
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
     })
-
-    useEffect(() => {
-        dispatch(setAllItems(data?.data))
-    }, [data, dispatch, isLoading, isFetching])
-
-    useEffect(() => {
-        dispatch(setSelectedItem(updateData?.data))
-    }, [updateData, dispatch, updateisLoading, updateisFetching])
 
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps?.length - 1) {

@@ -153,8 +153,6 @@ export const {
     useGetPurchaseOrderByVendorIdQuery,
     useDeletePurchaseOrderMutation,
     useExportPurchaseOrderDataMutation,
-    // useGetByPoCodeQuery,
     useGetByIdPurchaseOrderQuery,
     useUpdatePoLevelMutation,
-    //useGetSubCategoryByParentQuery,
 } = purchaseOrderApi
