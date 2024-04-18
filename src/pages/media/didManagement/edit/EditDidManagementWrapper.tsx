@@ -43,10 +43,6 @@ const EditDidManagementWrapper = () => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    // const { selectedItem } = useSelector(
-    //     (state: RootState) => state?.didManagement
-    // )
-
     // Initiate Method
     const [editDidManagement] = useUpdateDidMutation()
 

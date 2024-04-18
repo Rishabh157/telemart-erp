@@ -14,7 +14,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
-import { setSelectedItem as setDidItems } from 'src/redux/slices/media/didManagementSlice'
 import {
     // useGetOrderNumberUnAuthCallerDataQuery,
     useGetPaginationUnAuthCallerDataQuery,
@@ -29,6 +28,7 @@ import moment from 'moment'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -137,9 +137,13 @@ const CourierNdrDialerPageWrapper = () => {
     // Table Data with MobileNo filtered
 
     const [updateCourierCaller] = useUpdateCourierOrderDataMutation()
-    const { selectedItem: didItems }: any = useSelector(
-        (state: RootState) => state.didManagement
-    )
+
+    // get DID number by
+    const { items: didItems } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetByDidNumberQuery(didNumber, {
+            skip: !didNumber,
+        }),
+    })
 
     const {
         data: callerListingData,
@@ -172,19 +176,21 @@ const CourierNdrDialerPageWrapper = () => {
     }, [isCallerLoading, isCallerFetching, callerListingData])
     const dispatch = useDispatch<AppDispatch>()
 
-    const {
-        data: didData,
-        isLoading: didIsLoading,
-        isFetching: didIsFetching,
-    } = useGetByDidNumberQuery(didNumber, {
-        skip: !didNumber,
-    })
+    // const {
+    //     data: didData,
+    //     isLoading: didIsLoading,
+    //     isFetching: didIsFetching,
+    // } = useGetByDidNumberQuery(didNumber, {
+    //     skip: !didNumber,
+    // })
 
-    useEffect(() => {
-        if (!didIsLoading && !didIsFetching) {
-            dispatch(setDidItems(didData?.data))
-        }
-    }, [didData, didIsLoading, didIsFetching, dispatch])
+    // get DID number by
+
+    // useEffect(() => {
+    //     if (!didIsLoading && !didIsFetching) {
+    //         dispatch(setDidItems(didData?.data))
+    //     }
+    // }, [didData, didIsLoading, didIsFetching, dispatch])
 
     //  Add Form when page loaded & set 'callerPageData' key in LocalStorage
     // useEffect(() => {
@@ -246,7 +252,6 @@ const CourierNdrDialerPageWrapper = () => {
             dispatch(setIsTableLoading(null))
             dispatch(setItems(null))
             dispatch(setTotalItems(null))
-            dispatch(setDidItems(null))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -730,7 +735,7 @@ const CourierNdrDialerPageWrapper = () => {
                     }
                     // setApiStatus(false)
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     setApiStatus(false)
                     showToast('error', 'Something went wrong')
                 })
