@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:InfluencerListing.tsx
-// Type: List Component
-// Last Updated: JULY 05, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -26,7 +19,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/website/websiteSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -38,7 +31,7 @@ type Props = {
 
 const InfluencerListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const WebsiteState: any = useSelector((state: RootState) => state.website)
+    const WebsiteState: any = useSelector((state: RootState) => state.listingPagination)
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         WebsiteState

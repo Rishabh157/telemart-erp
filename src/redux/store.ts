@@ -41,10 +41,8 @@ import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
 import slotManagementSlice from './slices/media/slotManagementSlice'
-import websiteSlice from './slices/website/websiteSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
-import websiteTagsSlice from './slices/website/websiteTagsSlice'
 import orderSlice from './slices/orderSlice'
 import inquirySlice from './slices/inquirySlice'
 import inboundCallerSlice from './slices/media/inboundCallerSlice'
@@ -108,12 +106,8 @@ const store = configureStore({
         barcode: barcodeSlice,
         cartonBoxBarcode: CartonBoxBarcodeSlice,
         productGroupBarcode: ProductGroupBarcodeSlice,
-
         slotManagement: slotManagementSlice,
-
-        website: websiteSlice,
         websiteBlog: websiteBlogSlice,
-        websiteTags: websiteTagsSlice,
         websitePage: websitePageSlice,
         order: orderSlice,
         inquiry: inquirySlice,

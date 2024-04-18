@@ -6,26 +6,26 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditWebsite from './EditWebsite'
-import { showToast } from 'src/utils'
 import {
     useGetWebsiteByIdQuery,
     useUpdateWebsiteMutation,
 } from 'src/services/websites/WebsiteServices'
+import { showToast } from 'src/utils'
+import EditWebsite from './EditWebsite'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-import { setSelectedWebsite } from 'src/redux/slices/website/websiteSlice'
 
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
@@ -47,18 +47,15 @@ const EditWebsiteWrapper = (props: Props) => {
     const dispatch = useDispatch()
     const params = useParams()
     const Id = params.id
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state.website
-    )
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [updateWebsite] = useUpdateWebsiteMutation()
-    const { data, isLoading, isFetching } = useGetWebsiteByIdQuery(Id)
 
-    useEffect(() => {
-        dispatch(setSelectedWebsite(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetWebsiteByIdQuery(Id),
+    })
 
     const initialValues: FormInitialValues = {
         productName: selectedItem?.productName,
@@ -124,12 +121,10 @@ const EditWebsiteWrapper = (props: Props) => {
             >
                 {(formikProps) => {
                     return (
-                        <>
-                            <EditWebsite
-                                apiStatus={apiStatus}
-                                formikProps={formikProps}
-                            />
-                        </>
+                        <EditWebsite
+                            apiStatus={apiStatus}
+                            formikProps={formikProps}
+                        />
                     )
                 }}
             </Formik>

@@ -29,7 +29,7 @@ import {
     setPage,
     setSearchValue,
     setFilterValue,
-} from 'src/redux/slices/website/websiteBlogSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -43,7 +43,7 @@ const ListWebsiteBlog = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const WebsiteBlogState: any = useSelector(
-        (state: RootState) => state.websiteBlog
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =

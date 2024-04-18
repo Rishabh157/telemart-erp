@@ -1,15 +1,8 @@
-/// ==============================================
-// Filename:ListWebsiteTagsListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -26,33 +19,67 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WebsiteTagListing from './WebsiteTagListing'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/website/websiteTagsSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const WebsiteTagListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    useUnmountCleanup()
     const navigate = useNavigate()
-    //const {state} = useLocation()
-    //const {websiteId} = state
     const [deleteWebsiteTags] = useDeleteWebsiteTagsMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const WebsiteTagsState: any = useSelector(
-        (state: RootState) => state.websiteTags
+        (state: RootState) => state.listingPagination
     )
 
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { page, rowsPerPage, searchValue } = WebsiteTagsState
 
-    const { page, rowsPerPage, searchValue, items } = WebsiteTagsState
+    // pagination api
+    const { items } = useGetCustomListingData<WebsiteTagsListResponse[]>({
+        useEndPointHook: useGetPaginationWebsiteTagsQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['metaKeyword'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: '',
+                    value: [],
+                },
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
 
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteWebsiteTags(currentId).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Tag deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -92,7 +119,7 @@ const WebsiteTagListingWrapper = () => {
                     }}
                 />
             ),
-            
+
         },
         {
             field: 'metaKeyword',
@@ -132,65 +159,12 @@ const WebsiteTagListingWrapper = () => {
         },
 
     ]
-    const { data, isFetching, isLoading } = useGetPaginationWebsiteTagsQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['metaKeyword'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteWebsiteTags(currentId).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Tag deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
     return (
-        <>
-            <WebsiteTagListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </>
+        <WebsiteTagListing
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 
