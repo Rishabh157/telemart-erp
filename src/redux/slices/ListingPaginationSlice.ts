@@ -21,6 +21,7 @@ export interface ListingPaginationSliceStateType {
     selectedItem: null | any
     orderNumberSearch: any
     complaintNumberSearch: any
+    selectedDealer: string
 }
 
 const initialState: ListingPaginationSliceStateType = {
@@ -56,6 +57,7 @@ const initialState: ListingPaginationSliceStateType = {
         folloUpDateFrom: '',
         folloUpDateTo: '',
     },
+    selectedDealer: '',
 }
 
 const ListingPaginationSlice: Slice<ListingPaginationSliceStateType> =
@@ -123,6 +125,9 @@ const ListingPaginationSlice: Slice<ListingPaginationSliceStateType> =
             setComplaintNumberSearch: (state, action: PayloadAction<any>) => {
                 state.complaintNumberSearch = action.payload
             },
+            setSelectedDealerFilter: (state, action: PayloadAction<string>) => {
+                state.selectedDealer = action.payload
+            },
         },
     })
 
@@ -142,7 +147,8 @@ export const {
     setSelectedItem,
     setOrderNumberSearch,
     setComplaintNumberSearch,
-    setDateFilter
+    setDateFilter,
+    setSelectedDealerFilter
 } = ListingPaginationSlice.actions
 
 export default ListingPaginationSlice.reducer

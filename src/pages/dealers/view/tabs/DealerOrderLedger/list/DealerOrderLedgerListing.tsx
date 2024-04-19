@@ -25,7 +25,7 @@ import {
     setPage,
     setSearchValue,
     setFilterBy,
-} from 'src/redux/slices/DealerLedgerSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -35,10 +35,9 @@ type Props = {
 }
 
 const DealerOrderLedgerListing = ({ columns, rows }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
     const dealerLedgerState: any = useSelector(
-        (state: RootState) => state.dealerLedger
+        (state: RootState) => state.listingPagination
     )
 
     const [selectedRows, setSelectedRows] = useState([])
