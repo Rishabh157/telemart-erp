@@ -1,9 +1,3 @@
-/// ==============================================
-// Filename:VendorInfoCard.tsx
-// Type: card Component
-// Last Updated: OCTOBER 16, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React from 'react'
@@ -29,7 +23,7 @@ type Props = {
 
 const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
     const { selectedItem }: any = useSelector(
-        (state: RootState) => state.vendor
+        (state: RootState) => state.listingPagination
     )
 
     const [changeVendorStatus] = useDeactivateVendorMutation()
@@ -74,8 +68,7 @@ const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
             {/* Chips */}
             <div className="flex gap-2 justify-center">
                 <span className="rounded-full px-3 py-[2px] bg-slate-100 text-[10px]">
-                    {' '}
-                    Vendor{' '}
+                    Vendor
                 </span>
                 <span
                     className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 ${

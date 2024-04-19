@@ -1,66 +1,52 @@
-/// ==============================================
-// Filename:VendorListLedgerTabWrapper.tsx
-// Type: Tab List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
-
 // |-- External Dependencies --|
 import { format } from 'date-fns'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { LedgerListResponse } from 'src/models/Ledger.model'
 import { useGetVendorLedgerQuery } from 'src/services/VendorLedgerServices'
-import VendorLedgerListing from './VendorLedgerListing'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ledgerNoteType } from 'src/utils'
+import VendorLedgerListing from './VendorLedgerListing'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/VendorLedgerSlice'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 
 const VendorListLedgerTabWrapper = () => {
+    useUnmountCleanup()
     const params = useParams()
     const vendorId: any = params.vendorId
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
 
     const vendorLedgerState: any = useSelector(
-        (state: RootState) => state.vendorLedger
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, items, searchValue, filterBy } =
-        vendorLedgerState
-    const dispatch = useDispatch<AppDispatch>()
-
-    const { data, isFetching, isLoading } = useGetVendorLedgerQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['noteType'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'vendorId',
-                value: vendorId,
-            },
-            {
-                fieldName: 'companyId',
-                value: companyId,
-            },
-        ],
-        dateFilter: filterBy,
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { page, rowsPerPage, searchValue, filterBy } = vendorLedgerState
+    const { items } = useGetCustomListingData<LedgerListResponse>({
+        useEndPointHook: useGetVendorLedgerQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['noteType'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'vendorId',
+                    value: vendorId,
+                },
+                {
+                    fieldName: 'companyId',
+                    value: companyId,
+                },
+            ],
+            dateFilter: filterBy,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
     const columns: columnTypes[] = [
@@ -118,23 +104,7 @@ const VendorListLedgerTabWrapper = () => {
         },
     ]
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
-
-    return (
-        <>
-            <VendorLedgerListing columns={columns} rows={items} />
-        </>
-    )
+    return <VendorLedgerListing columns={columns} rows={items} />
 }
 
 export default VendorListLedgerTabWrapper

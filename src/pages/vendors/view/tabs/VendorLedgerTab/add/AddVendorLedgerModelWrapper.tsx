@@ -1,28 +1,18 @@
-/// ==============================================
-// Filename:AddVendorLedgerModelWrapper.tsx
-// Type: Tab Add Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-
 // |-- External Dependencies --|
 import { Formik } from 'formik'
 import { number, object, string } from 'yup'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
 // |-- Internal Dependencies --|
 import { useAddVendorLedgerMutation } from 'src/services/VendorLedgerServices'
 import { showToast } from 'src/utils'
 import { NoteType } from 'src/models/Ledger.model'
 import AddVendorLedgerModel from './AddVendorLedgerModel'
-
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
-
 interface PropsType {
     addType: keyof typeof NoteType
     setIsOpenModel: any

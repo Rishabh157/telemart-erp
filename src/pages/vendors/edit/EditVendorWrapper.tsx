@@ -6,13 +6,13 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import { array, object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -23,19 +23,19 @@ import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/St
 import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
 import StepEditDocumentsWrapper from './FormSteps/StepEditDocuments/StepEditDocumentsWrapper'
 // import { useEditVendorMutation } from "src/services/VendorServices";
-import { showToast, validationofGst } from 'src/utils'
 import {
     useGetVendorByIdQuery,
     useUpdateVendorMutation,
 } from 'src/services/VendorServices'
+import { showToast, validationofGst } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/vendorSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -194,48 +194,41 @@ const EditVendorWrapper = () => {
     const [apiStatus, setApiStatus] = useState(false)
     const [editVendor] = useUpdateVendorMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.vendor
-    )
 
-    const { data, isLoading, isFetching } = useGetVendorByIdQuery(Id)
+    const { items } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetVendorByIdQuery(Id),
+    })
 
     // States
     const [activeStep, setActiveStep] = React.useState(0)
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedItem(data?.data))
-        }
-    }, [dispatch, data, isLoading, isFetching])
 
-    // From Initial Values
     const initialValues: FormInitialValues = {
-        company_name: selectedItem?.companyName || '',
-        company_type: selectedItem?.companyType || '',
-        ownership_type: selectedItem?.ownerShipType || '',
-        website_address: selectedItem?.websiteAddress || '',
-        vendor_code: selectedItem?.vendorCode || '',
+        company_name: items?.companyName || '',
+        company_type: items?.companyType || '',
+        ownership_type: items?.ownerShipType || '',
+        website_address: items?.websiteAddress || '',
+        vendor_code: items?.vendorCode || '',
         regd_address: {
-            phone: selectedItem?.registrationAddress?.phone || '',
-            address: selectedItem?.registrationAddress?.address || '',
-            country: selectedItem?.registrationAddress?.countryId || '',
-            state: selectedItem?.registrationAddress?.stateId || '',
-            district: selectedItem?.registrationAddress?.districtId || '',
-            pincode: selectedItem?.registrationAddress?.pincodeId || '',
+            phone: items?.registrationAddress?.phone || '',
+            address: items?.registrationAddress?.address || '',
+            country: items?.registrationAddress?.countryId || '',
+            state: items?.registrationAddress?.stateId || '',
+            district: items?.registrationAddress?.districtId || '',
+            pincode: items?.registrationAddress?.pincodeId || '',
         },
         billing_address: {
-            phone: selectedItem?.billingAddress?.phone || '',
-            address: selectedItem?.billingAddress?.address || '',
-            country: selectedItem?.billingAddress?.countryId || '',
-            state: selectedItem?.billingAddress?.stateId || '',
-            district: selectedItem?.billingAddress?.districtId || '',
-            pincode: selectedItem?.billingAddress?.pincodeId || '',
+            phone: items?.billingAddress?.phone || '',
+            address: items?.billingAddress?.address || '',
+            country: items?.billingAddress?.countryId || '',
+            state: items?.billingAddress?.stateId || '',
+            district: items?.billingAddress?.districtId || '',
+            pincode: items?.billingAddress?.pincodeId || '',
         },
-        contact_informations: selectedItem?.contactInformation || '',
-        gst_no: selectedItem?.document?.gstNumber || '',
-        gst_certificate: selectedItem?.document?.gstCertificate || '',
-        declaration_form: selectedItem?.document?.declarationForm || '',
-        bank_informations: selectedItem?.bankInformation || '',
+        contact_informations: items?.contactInformation || '',
+        gst_no: items?.document?.gstNumber || '',
+        gst_certificate: items?.document?.gstCertificate || '',
+        declaration_form: items?.document?.declarationForm || '',
+        bank_informations: items?.bankInformation || '',
     }
 
     // Form validation schema based on the active step
