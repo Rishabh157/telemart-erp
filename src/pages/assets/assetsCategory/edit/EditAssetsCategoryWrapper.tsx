@@ -1,31 +1,22 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/// ==============================================
-// Filename:EditAssetCategoryWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditAsstesCategory from './EditAssetsCategory'
 import {
-    useUpdateAssetsCategoryMutation,
     useGetAssetsCategoryByIdQuery,
+    useUpdateAssetsCategoryMutation,
 } from 'src/services/assets/AssetsCategoryService'
 import { showToast } from 'src/utils'
-import { setSelectedCategory } from 'src/redux/slices/assets/assetsCategorySlice'
+import EditAsstesCategory from './EditAssetsCategory'
 
 // |-- Redux --|
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -38,25 +29,19 @@ export type FormInitialValues = {
 const EditAssetsCategoryWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
-    const dispatch = useDispatch()
     const params = useParams()
     const Id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [editCategory] = useUpdateAssetsCategoryMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem } = useSelector(
-        (state: RootState) => state?.assetsCategory
-    )
-    const { data, isLoading, isFetching } = useGetAssetsCategoryByIdQuery(Id)
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetAssetsCategoryByIdQuery(Id),
+    })
     const initialValues: FormInitialValues = {
         categoryName: selectedItem?.assetCategoryName || '',
     }
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedCategory(data?.data))
-        }
-    }, [data, isFetching, isLoading])
     // Form Validation Schema
     const validationSchema = object({
         categoryName: string().required('Required'),

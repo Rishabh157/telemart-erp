@@ -105,3 +105,4 @@
 // } = outwardCustomerSlice.actions
 
 // export default outwardCustomerSlice.reducer
+export {}

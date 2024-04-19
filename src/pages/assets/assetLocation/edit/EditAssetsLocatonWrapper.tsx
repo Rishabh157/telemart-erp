@@ -1,32 +1,24 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditAssetsLocationWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditAsstesLocation from './EditAssetsLocation'
 import {
-    useUpdateAssetsLocationMutation,
     useGetAssetsLocationByIdQuery,
+    useUpdateAssetsLocationMutation,
 } from 'src/services/assets/AssetsLocationService'
 import { showToast } from 'src/utils'
-import { setSelectedLocation } from 'src/redux/slices/assets/assetsLocationSlice'
+import EditAsstesLocation from './EditAssetsLocation'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -44,19 +36,14 @@ const EditAssetsLocationWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [editLocation] = useUpdateAssetsLocationMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem } = useSelector(
-        (state: RootState) => state?.assetLocation
-    )
-    const { data, isLoading, isFetching } = useGetAssetsLocationByIdQuery(Id)
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetAssetsLocationByIdQuery(Id),
+    })
     const initialValues: FormInitialValues = {
         locationName: selectedItem?.locationName || '',
     }
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedLocation(data?.data))
-        }
-    }, [data, isFetching, isLoading])
     // Form Validation Schema
     const validationSchema = object({
         locationName: string().required('Required'),
