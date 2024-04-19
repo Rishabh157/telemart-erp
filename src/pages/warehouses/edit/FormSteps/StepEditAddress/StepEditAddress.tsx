@@ -182,7 +182,7 @@ const StepEditAddress = ({
                                                         setImageApiStatus(true)
                                                         fileUploader(
                                                             formData
-                                                        ).then((res) => {
+                                                        ).then((res:any) => {
                                                             if ('data' in res) {
                                                                 setImageApiStatus(
                                                                     false

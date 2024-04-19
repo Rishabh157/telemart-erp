@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ChannelCategoryServices.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import {
@@ -16,7 +9,6 @@ import apiSlice from '../ApiSlice'
 export const channelCategoryApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *******/
-
         getPaginationChannelCategory: builder.query({
             providesTags: ['channel-category'],
             query: (body: PaginationType) => ({
@@ -25,7 +17,8 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        //***** GET Without PAGINATION DATA *****/
+
+        //***** GET ALL DATA *****/
         getAllChannelCategory: builder.query({
             providesTags: ['channel-category'],
             query: (companyId) => ({
@@ -54,7 +47,7 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // **** GET BY ID
+        // **** GET BY ID *****/
         getChannelCategoryById: builder.query({
             providesTags: ['channel-category'],
             query: (id) => ({
@@ -69,7 +62,6 @@ export const channelCategoryApi = apiSlice.injectEndpoints({
             invalidatesTags: ['channel-category'],
             query: (id) => ({
                 url: `/channel-category/${id}`,
-
                 method: 'DELETE',
             }),
         }),

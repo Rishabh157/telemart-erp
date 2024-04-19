@@ -18,7 +18,7 @@ import {
     setRowsPerPage,
     setPage,
     setSelectedDealerFilter,
-} from 'src/redux/slices/dealerInventorySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { DealersListResponse } from 'src/models'
@@ -34,7 +34,7 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
 
     const dispatch = useDispatch<AppDispatch>()
     const dealerInventoryState: any = useSelector(
-        (state: RootState) => state.dealerInventory
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, selectedDealer, isTableLoading } =

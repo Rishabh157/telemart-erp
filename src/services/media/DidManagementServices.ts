@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DidManagementService.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import { AddDidManagement, UpdateDidManagement } from 'src/models/Media.model'
@@ -21,14 +14,7 @@ export const didManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        //***** GET Without PAGINATION DATA *****/
-        getAllDid: builder.query({
-            providesTags: ['did'],
-            query: () => ({
-                url: '/did-management',
-                method: 'GET',
-            }),
-        }),
+
         //***** ADD *****/
         addDid: builder.mutation({
             invalidatesTags: ['did'],
@@ -38,7 +24,8 @@ export const didManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        //***** get by id *****/
+
+        //***** GET BY ID *****/
         getDidById: builder.query({
             providesTags: ['did'],
             query: (id) => ({
@@ -46,7 +33,8 @@ export const didManagementApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-        //***** get by id *****/
+
+        //***** DELETE *****/
         deleteDid: builder.mutation({
             invalidatesTags: ['did'],
             query: (id) => ({
@@ -65,7 +53,7 @@ export const didManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** get by id *****/
+        //***** GET BY DID NUMBER *****/
         getByDidNumber: builder.query({
             providesTags: ['did'],
             query: (id) => ({
@@ -77,11 +65,10 @@ export const didManagementApi = apiSlice.injectEndpoints({
 })
 
 export const {
-    useAddDidMutation,
     useGetPaginationDidQuery,
-    useUpdateDidMutation,
-    useGetAllDidQuery,
     useGetDidByIdQuery,
-    useDeleteDidMutation,
+    useAddDidMutation,
+    useUpdateDidMutation,
     useGetByDidNumberQuery,
+    useDeleteDidMutation,
 } = didManagementApi

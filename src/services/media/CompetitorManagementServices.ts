@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:CompetitorManagementService.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import {
@@ -34,15 +27,6 @@ export const competitorManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET SINGLE DATA *****/
-        deletegetCompetitor: builder.mutation({
-            invalidatesTags: ['competitor'],
-            query: (id) => ({
-                url: `/competitor/${id}`,
-                method: 'DELETE',
-            }),
-        }),
-
         //***** ADD *****/
         addcompetitor: builder.mutation({
             invalidatesTags: ['competitor'],
@@ -60,6 +44,15 @@ export const competitorManagementApi = apiSlice.injectEndpoints({
                 url: `/competitor/${id}`,
                 method: 'PUT',
                 body,
+            }),
+        }),
+
+        //***** DELETE *****/
+        deletegetCompetitor: builder.mutation({
+            invalidatesTags: ['competitor'],
+            query: (id) => ({
+                url: `/competitor/${id}`,
+                method: 'DELETE',
             }),
         }),
     }),

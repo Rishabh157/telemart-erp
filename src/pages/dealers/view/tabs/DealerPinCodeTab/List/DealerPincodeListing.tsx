@@ -25,7 +25,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/dealerPincodeSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -39,7 +39,7 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
     const params = useParams()
     const dealerId: any = params.dealerId
     const pincodeState: any = useSelector(
-        (state: RootState) => state.dealerPincode
+        (state: RootState) => state.listingPagination
     )
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()

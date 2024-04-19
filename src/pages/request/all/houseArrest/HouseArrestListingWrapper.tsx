@@ -1,43 +1,40 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { Chip, Stack } from '@mui/material'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { HouseArrestListResponseType } from 'src/models/HouseArrest.modal'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/houseArrestSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { RootState } from 'src/redux/store'
 import {
     useGetHouseArrestQuery,
-    useHouseArrestManagerApprovalMutation,
     useHouesArrestAccountApprovalMutation,
+    useHouseArrestManagerApprovalMutation,
 } from 'src/services/HouseArrestServices'
 import { showToast } from 'src/utils'
 import HouseArrestListing from './HouseArrestListing'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-// import Swal from 'sweetalert2'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddCustomerCareApprovedFormWrapper from './AddCustomerCareApprovedForm/AddCustomerCareApprovedFormWrapper'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
-import Swal from 'sweetalert2'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import Swal from 'sweetalert2'
+import AddCustomerCareApprovedFormWrapper from './AddCustomerCareApprovedForm/AddCustomerCareApprovedFormWrapper'
 import StatusDialog from './HouseArrestStatusDialog/StatusDialog'
 
 const HouseArrestListingWrapper = () => {
+    useUnmountCleanup()
+
     // Hooks
     const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     // Dispatching State
 
     const [newOrderDetails, setNewOrderDetails] = useState<any>()
@@ -50,7 +47,7 @@ const HouseArrestListingWrapper = () => {
     const [houseArrestData, setHouseArrestData] = useState<any>([])
 
     const houseArrestState: any = useSelector(
-        (state: RootState) => state.houseArrest
+        (state: RootState) => state.listingPagination
     )
 
     const [managerLevelApproval] = useHouseArrestManagerApprovalMutation()
@@ -60,33 +57,24 @@ const HouseArrestListingWrapper = () => {
         page,
         rowsPerPage,
         searchValue,
-        items,
         // totalItems,
         // isTableLoading,
     } = houseArrestState
 
-    const { data, isFetching, isLoading } = useGetHouseArrestQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['complaintNumber'],
-        page: page,
-        filterBy: [],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    // pagination api
+    const { items } = useGetCustomListingData<HouseArrestListResponseType[]>({
+        useEndPointHook: useGetHouseArrestQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['complaintNumber'],
+            page: page,
+            filterBy: [],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
-
     // Manager Level Approval
     const handleManagerFirstLevelApprovalComplete = (
         _id: string,
@@ -159,39 +147,31 @@ const HouseArrestListingWrapper = () => {
             <tbody>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Order Number</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.orderNumber || '-'
-                    }</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.oldOrderNumber || '-'
-                    }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.orderNumber || '-'
+        }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldOrderNumber || '-'
+        }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Customer Name</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.customerName || '-'
-                    }</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.oldCustomerName || '-'
-                    }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.customerName || '-'
+        }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerName || '-'
+        }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Customer Number</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.customerNumber || '-'
-                    }</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.oldCustomerNumber || '-'
-                    }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.customerNumber || '-'
+        }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerNumber || '-'
+        }</td>
                 </tr>
                 <tr class="border">
                     <td class="px-4 py-2 border text-sm font-bold">Address</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.address || '-'
-                    }</td>
-                    <td class="px-4 py-2 border text-sm">${
-                        newOrderDetails?.oldCustomerAddress || '-'
-                    }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.address || '-'
+        }</td>
+                    <td class="px-4 py-2 border text-sm">${newOrderDetails?.oldCustomerAddress || '-'
+        }</td>
                 </tr>
                  
             </tbody>
@@ -210,12 +190,10 @@ const HouseArrestListingWrapper = () => {
         <tbody>
             <tr class="border">
                 <td class="px-4 py-2 border text-sm font-bold">Order Number</td>
-                <td class="px-4 py-2 border text-sm">${
-                    newOrderDetails?.orignalBarcode?.join(' , ') || '-'
-                }</td>
-                <td class="px-4 py-2 border text-sm">${
-                    newOrderDetails?.returnItemBarcode?.join(' , ') || '-'
-                }</td>
+                <td class="px-4 py-2 border text-sm">${newOrderDetails?.orignalBarcode?.join(' , ') || '-'
+        }</td>
+                <td class="px-4 py-2 border text-sm">${newOrderDetails?.returnItemBarcode?.join(' , ') || '-'
+        }</td>
             </tr>
         </tbody>
     </table>
@@ -226,20 +204,20 @@ const HouseArrestListingWrapper = () => {
         return row?.ccApproval === false
             ? 'Cc Pending'
             : row?.managerFirstApproval === null
-            ? 'Mang. First Pending'
-            : row?.managerFirstApproval === false
-            ? 'Mang. First Rejected'
-            : row?.dealerApproval === false
-            ? 'Dealer Pending'
-            : row?.managerSecondApproval === null
-            ? 'Mang. Second Pending'
-            : row?.managerSecondApproval === false
-            ? 'Mang. Second Rejected'
-            : row?.accountApproval === null
-            ? 'Account Pending'
-            : row?.accountApproval === false
-            ? 'Account Rejected'
-            : 'Account Aaproved'
+                ? 'Mang. First Pending'
+                : row?.managerFirstApproval === false
+                    ? 'Mang. First Rejected'
+                    : row?.dealerApproval === false
+                        ? 'Dealer Pending'
+                        : row?.managerSecondApproval === null
+                            ? 'Mang. Second Pending'
+                            : row?.managerSecondApproval === false
+                                ? 'Mang. Second Rejected'
+                                : row?.accountApproval === null
+                                    ? 'Account Pending'
+                                    : row?.accountApproval === false
+                                        ? 'Account Rejected'
+                                        : 'Account Aaproved'
     }
     const columns: columnTypes[] = [
         {
@@ -383,40 +361,40 @@ const HouseArrestListingWrapper = () => {
                             html={sweetAlertContent}
                             color={
                                 row?.ccApproval &&
-                                row?.managerFirstApproval === null
+                                    row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
-                                    ? 'error'
-                                    : row?.managerSecondApproval
-                                    ? 'success'
-                                    : row?.managerSecondApproval === null
-                                    ? 'warning'
-                                    : 'error'
+                                        ? 'error'
+                                        : row?.managerSecondApproval
+                                            ? 'success'
+                                            : row?.managerSecondApproval === null
+                                                ? 'warning'
+                                                : 'error'
                             }
                             chipLabel={
                                 row?.ccApproval === false
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === null
-                                    ? 'First Pending'
-                                    : row?.managerFirstApproval === false
-                                    ? 'First Rejected'
-                                    : row?.managerSecondApproval
-                                    ? 'Second Approved'
-                                    : row?.managerSecondApproval === null
-                                    ? 'Second Pending'
-                                    : 'Second Rejected'
+                                        ? 'First Pending'
+                                        : row?.managerFirstApproval === false
+                                            ? 'First Rejected'
+                                            : row?.managerSecondApproval
+                                                ? 'Second Approved'
+                                                : row?.managerSecondApproval === null
+                                                    ? 'Second Pending'
+                                                    : 'Second Rejected'
                             }
                             disabled={
                                 row?.ccApproval === true &&
-                                row?.managerFirstApproval === null
+                                    row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
-                                    ? true
-                                    : row?.dealerApproval === false
-                                    ? true
-                                    : row?.managerSecondApproval === null
-                                    ? false
-                                    : true
+                                        ? true
+                                        : row?.dealerApproval === false
+                                            ? true
+                                            : row?.managerSecondApproval === null
+                                                ? false
+                                                : true
                             }
                             input={'text'}
                             inputPlaceholder="remark"
@@ -492,7 +470,7 @@ const HouseArrestListingWrapper = () => {
                                 />
                             </button>
                         ) : row?.managerSecondApproval === true &&
-                          row?.accountApproval === null ? (
+                            row?.accountApproval === null ? (
                             <button
                                 id="btn"
                                 className="overflow-hidden cursor-pointer z-0"

@@ -19,6 +19,7 @@ export type SlotManagementListResponse = {
     slotRunImage: string
     slotRenewal: string
     slotRunVideo: string
+    runStatus: boolean | null
     runStartTime: string
     runEndTime: string
     runRemark: string

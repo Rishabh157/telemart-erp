@@ -17,7 +17,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/CreateBatchOrderSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -36,13 +36,10 @@ const CreateBatchOrderListing = ({
     rows,
     selectedRows,
     setSelectedRows,
-
     onClick,
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const createBatchState: any = useSelector(
-        (state: RootState) => state.createBatch
-    )
+    const createBatchState: any = useSelector((state: RootState) => state.listingPagination)
 
     const {
         page,
@@ -60,15 +57,15 @@ const CreateBatchOrderListing = ({
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_CREATE_BATCH
                 ) && (
-                    <ATMLoadingButton
-                        disabled={!selectedRows.length}
-                        loadingText="Saving..."
-                        onClick={onClick}
-                        className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-60"
-                    >
-                        Create Selected Order Batch
-                    </ATMLoadingButton>
-                )}
+                        <ATMLoadingButton
+                            disabled={!selectedRows.length}
+                            loadingText="Saving..."
+                            onClick={onClick}
+                            className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-60"
+                        >
+                            Create Selected Order Batch
+                        </ATMLoadingButton>
+                    )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
