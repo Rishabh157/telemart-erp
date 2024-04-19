@@ -1,16 +1,8 @@
-/// ==============================================
-// Filename:VendorPurchaseOrderTabWrapper.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
-// |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -18,63 +10,48 @@ import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import PurchaseOrderListing from './PurchaseOrderListing'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { RootState } from 'src/redux/store'
 import { useGetPurchaseOrderQuery } from 'src/services/PurchaseOrderService'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/PurchaseOrderSlice'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 // |-- Types --|
 type Props = {}
 
 const VendorPurchaseOrderTabWrapper = (props: Props) => {
+    useUnmountCleanup()
     const params = useParams()
     const vendorId: any = params.vendorId
-    const dispatch = useDispatch<AppDispatch>()
 
     const productOrderState: any = useSelector(
-        (state: RootState) => state.purchaseOrder
+        (state: RootState) => state.listingPagination
     )
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [showDropdown, setShowDropdown] = useState(false)
 
-    const { page, rowsPerPage, searchValue, items } = productOrderState
+    const { page, rowsPerPage, searchValue } = productOrderState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { data, isLoading, isFetching } = useGetPurchaseOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['poCode', 'wareHouseId'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: 'vendorId',
-                value: vendorId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData<PurchaseOrderListResponse>({
+        useEndPointHook: useGetPurchaseOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['poCode', 'wareHouseId'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: 'vendorId',
+                    value: vendorId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
 
     const columns: columnTypes[] = [
         {
@@ -140,7 +117,6 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             <PurchaseOrderListing
                 columns={columns}
                 rows={items}
-                setShowDropdown={setShowDropdown}
             />
         </div>
     )

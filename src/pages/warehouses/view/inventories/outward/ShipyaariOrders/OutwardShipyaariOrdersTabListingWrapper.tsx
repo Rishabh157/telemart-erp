@@ -1,9 +1,8 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -11,17 +10,14 @@ import OutwardShipyaariOrdersTabListing from './OutwardShipyaariOrdersTabListing
 // import { useParams } from 'react-router-dom'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/outwardCustomerSlice'
-import { useGetOrderQuery } from 'src/services/OrderService'
 import { Chip } from '@mui/material'
-import { OrderListResponse } from 'src/models'
 import moment from 'moment'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { OrderListResponse } from 'src/models'
+import { RootState } from 'src/redux/store'
+import { useGetOrderQuery } from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 // |-- Types --|
 export type Tabs = {
@@ -36,10 +32,7 @@ enum FirstCallApprovalStatus {
 }
 
 const OutwardShipyaariOrdersTabListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
-    // const params = useParams()
-    // const warehouseId = params?.id
-
+    useUnmountCleanup()
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
     const outwardCustomerState: any = useSelector(
@@ -51,37 +44,26 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         rowsPerPage,
         items,
         searchValue,
-        // courierValue,
-        // orderStatus,
+
         dateFilter,
     } = outwardCustomerState
 
-    const { data, isFetching, isLoading } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            { fieldName: 'orderAssignedToCourier', value: 'SHIPYAARI' },
-            { fieldName: 'companyId', value: userData?.companyId },
-        ],
-        dateFilter: dateFilter,
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    useGetCustomListingData({
+        useEndPointHook: useGetOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['didNo', 'mobileNo'],
+            page: page,
+            filterBy: [
+                { fieldName: 'orderAssignedToCourier', value: 'SHIPYAARI' },
+                { fieldName: 'companyId', value: userData?.companyId },
+            ],
+            dateFilter: dateFilter,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
         {
@@ -103,7 +85,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                            FirstCallApprovalStatus.CANCEL ? (
+                          FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -188,8 +170,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
-            field: 'firstCallRemark', 
-                       name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_REMARK,
+            field: 'firstCallRemark',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_REMARK,
             headerName: '1st call remark',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -506,8 +488,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                         {/* <span>

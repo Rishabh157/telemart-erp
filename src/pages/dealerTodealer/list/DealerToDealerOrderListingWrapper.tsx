@@ -1,94 +1,59 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { DealerToDealerListResponseTypes } from 'src/models/DealerToDealer.model'
 import {
-    useGetDealerToDealerOrderQuery,
     useApprovealDealerToDealerOrderMutation,
-    useDeleteDealerToDealerOrderMutation,
+    useGetDealerToDealerOrderQuery
 } from 'src/services/DealerToDealerOrderService'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DealerToDealerOrderListing from './DealerToDealerOrderListing'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/saleOrderSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-// import { isAuthorized } from 'src/utils/authorization'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const DealerToDealerOrderListingWrapper = () => {
+    useUnmountCleanup()
     const salesOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
+        (state: RootState) => state.listingPagination
     )
-    const dispatch = useDispatch<AppDispatch>()
-    const { page, rowsPerPage, searchValue, items } = salesOrderState
-    const navigate = useNavigate()
-    const [currentId, setCurrentId] = useState('')
-    const [showDropdown, setShowDropdown] = useState(false)
-    const [deleteDealerToDealerOrder] = useDeleteDealerToDealerOrderMutation()
+    const { page, rowsPerPage, searchValue } = salesOrderState
+    const [, setShowDropdown] = useState(false)
     const [updateDealerToDealerRequest] =
         useApprovealDealerToDealerOrderMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
-
-    const { data, isFetching, isLoading } = useGetDealerToDealerOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['dtdNumber', 'fromDealerLabel', 'toDealerLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetDealerToDealerOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['dtdNumber', 'fromDealerLabel', 'toDealerLabel'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteDealerToDealerOrder(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Sale Order deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
+  
 
     const handleFirstComplete = (
         _id: string,
@@ -114,70 +79,9 @@ const DealerToDealerOrderListingWrapper = () => {
         })
     }
 
-    // const handleAccComplete = (
-    //     _id: string,
-    //     value: boolean,
-    //     message: string
-    // ) => {
-    //     const currentDate = new Date().toLocaleDateString('en-GB')
-    //     updateSalesOrder({
-    //         body: {
-    //             accApproved: value,
-    //             type: 'ACC',
-    //             accApprovedById: userData?.userId,
-    //             accApprovedAt: currentDate,
-    //             accApprovedActionBy: userData?.userName,
-    //         },
-    //         id: _id,
-    //     }).then((res: any) => {
-    //         if ('data' in res) {
-    //             if (res?.data?.status) {
-    //                 showToast('success', `Account ${message} is successfully!`)
-    //             } else {
-    //                 showToast('error', res?.data?.message)
-    //             }
-    //         } else {
-    //             showToast('error', 'Something went wrong')
-    //         }
-    //     })
-    // }
-
+    
     const columns: columnTypes[] = [
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: DealerToDealerListResponseTypes) =>
-        //         row?.requestApproved === null && (
-        //             <ActionPopup
-        //                 // isEdit={isAuthorized(
-        //                 //     UserModuleNameTypes.ACTION_SALE_ORDER_EDIT
-        //                 // )}
-        //                 // isDelete={isAuthorized(
-        //                 //     UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
-        //                 // )}
-        //                 handleEditActionButton={() => {
-        //                     navigate(`/dealer-to-dealer/${row?._id}`)
-        //                 }}
-        //                 handleDeleteActionButton={() => {
-        //                     showConfirmationDialog({
-        //                         title: 'Delete Dealer To Dealer Oreder',
-        //                         text: 'Do you want to delete order?',
-        //                         showCancelButton: true,
-        //                         next: (res: any) => {
-        //                             return res.isConfirmed
-        //                                 ? handleDelete()
-        //                                 : setShowDropdown(false)
-        //                         },
-        //                     })
-        //                 }}
-        //                 handleOnAction={() => {
-        //                     setShowDropdown(!showDropdown)
-        //                     setCurrentId(row?._id)
-        //                 }}
-        //             />
-        //         ),
-        // },
+      
         {
             field: '_id',
             headerName: 'Dealer To Dealer Number',

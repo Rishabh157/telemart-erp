@@ -7,41 +7,38 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
 import { useParams } from 'react-router-dom'
 // |-- Internal Dependencies --|
+import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-import { showToast } from 'src/utils'
-import { AlertText } from 'src/pages/callerpage/components/constants'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import {
-    OutwardRequestRTVListResponse,
-    BarcodeListResponseType,
-} from 'src/models'
-import OutwardRTVTabs from './OutwardRTVTabs'
-import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
+import {
+    BarcodeListResponseType,
+    OutwardRequestRTVListResponse,
+} from 'src/models'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { AlertText } from 'src/pages/callerpage/components/constants'
+import { showToast } from 'src/utils'
+import OutwardRTVTabs from './OutwardRTVTabs'
 
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/returnToVendorSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import {
-    useGetPaginationReturnToVendorByGroupQuery,
     useDispatchReturnToVendorBarcodeMutation,
+    useGetPaginationReturnToVendorByGroupQuery,
 } from 'src/services/ReturnToVendorService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
@@ -53,75 +50,61 @@ export type Tabs = {
 }
 
 const OutwardRTVTabsListingWrapper = () => {
+    useUnmountCleanup()
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<OutwardRequestRTVListResponse | null>(null)
-    // const params = useParams()
     const dispatch = useDispatch<AppDispatch>()
-    // const dealerId = params.dealerId
     const returnToVendorState: any = useSelector(
-        (state: RootState) => state.returnToVendor
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, items } = returnToVendorState
+    const { page, rowsPerPage, searchValue } = returnToVendorState
     const { customized, userData }: any = useSelector(
         (state: RootState) => state?.auth
     )
 
     const params = useParams()
     const warehouseId = params.id
-    const {
-        data: soData,
-        isFetching: soIsFetching,
-        isLoading: soIsLoading,
-    } = useGetPaginationReturnToVendorByGroupQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['rtvNumber'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
+    const { items } = useGetCustomListingData<OutwardRequestRTVListResponse>({
+        useEndPointHook: useGetPaginationReturnToVendorByGroupQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['rtvNumber'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
 
-            {
-                fieldName: 'warehouseId',
-                value: warehouseId,
-            },
-            {
-                fieldName: 'firstApproved',
-                value: true,
-            },
-            {
-                fieldName: 'secondApproved',
-                value: true,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+                {
+                    fieldName: 'warehouseId',
+                    value: warehouseId,
+                },
+                {
+                    fieldName: 'firstApproved',
+                    value: true,
+                },
+                {
+                    fieldName: 'secondApproved',
+                    value: true,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchReturnToVendorBarcodeMutation()
 
-    useEffect(() => {
-        if (!soIsFetching && !soIsLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(soData?.data || []))
-            dispatch(setTotalItems(soData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [soIsLoading, soIsFetching, soData, dispatch])
-
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Dispatch',
@@ -149,7 +132,6 @@ const OutwardRTVTabsListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'rtvNumber',

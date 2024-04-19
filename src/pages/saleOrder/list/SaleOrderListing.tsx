@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:SaleOrderListing.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
-// |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,11 +16,10 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/saleOrderSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
 type Props = {
@@ -38,11 +29,10 @@ type Props = {
 }
 
 const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const dispatch = useDispatch<AppDispatch>()
     const saleOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
+        (state: RootState) => state.listingPagination
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
@@ -52,11 +42,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         saleOrderState
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
+
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}

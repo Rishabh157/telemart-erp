@@ -1,9 +1,7 @@
-// |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -11,16 +9,12 @@ import OutwardGpoOrdersTabListing from './OutwardGpoOrdersTabListing'
 // import { useParams } from 'react-router-dom'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/outwardCustomerSlice'
-import { useGetOrderQuery } from 'src/services/OrderService'
 import { Chip } from '@mui/material'
-import { OrderListResponse } from 'src/models'
 import moment from 'moment'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { OrderListResponse } from 'src/models'
+import { RootState } from 'src/redux/store'
+import { useGetOrderQuery } from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
@@ -36,52 +30,28 @@ enum FirstCallApprovalStatus {
 }
 
 const OutwardGpoOrdersTabListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
-    // const params = useParams()
-    // const warehouseId = params?.id
-
     const { userData }: any = useSelector((state: RootState) => state?.auth)
-
     const outwardCustomerState: any = useSelector(
-        (state: RootState) => state.outwardCustomer
+        (state: RootState) => state.listingPagination
     )
 
-    const {
-        page,
-        rowsPerPage,
-        items,
-        searchValue,
-        // courierValue,
-        // orderStatus,
-        dateFilter,
-    } = outwardCustomerState
-
-    const { data, isFetching, isLoading } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            { fieldName: 'isGPO', value: true },
-            { fieldName: 'companyId', value: userData?.companyId },
-        ],
-        dateFilter: dateFilter,
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { page, rowsPerPage, searchValue, dateFilter } = outwardCustomerState
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['didNo', 'mobileNo'],
+            page: page,
+            filterBy: [
+                { fieldName: 'isGPO', value: true },
+                { fieldName: 'companyId', value: userData?.companyId },
+            ],
+            dateFilter: dateFilter,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
         {
@@ -103,7 +73,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                            FirstCallApprovalStatus.CANCEL ? (
+                          FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -113,40 +83,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => {
-                                    // showConfirmationDialog({
-                                    //     title: 'Approval',
-                                    //     text: `Do you want to ${
-                                    //         row.firstCallApproval
-                                    //             ? 'Disapprove '
-                                    //             : 'Approval '
-                                    //     }`,
-                                    //     showCancelButton: true,
-                                    //     showDenyButton: true,
-                                    //     confirmButtonText: 'Order approval',
-                                    //     denyButtonText: 'Order cancled',
-                                    //     confirmButtonColor: '#239B56',
-                                    //     denyButtonColor: '#F1948A',
-                                    //     next: (res) => {
-                                    //         if (res.isConfirmed) {
-                                    //             return res.isConfirmed
-                                    //                 ? handleApproval(
-                                    //                       row?._id,
-                                    //                       FirstCallApprovalStatus.APPROVED
-                                    //                   )
-                                    //                 : setShowDropdown(false)
-                                    //         }
-                                    //         if (res.isDenied) {
-                                    //             return res.isDenied
-                                    //                 ? handleApproval(
-                                    //                       row?._id,
-                                    //                       FirstCallApprovalStatus.CANCEL
-                                    //                   )
-                                    //                 : setShowDropdown(false)
-                                    //         }
-                                    //     },
-                                    // })
-                                }}
+                                onClick={() => {}}
                                 className="cursor-pointer"
                                 label="Pending"
                                 color="error"
@@ -505,8 +442,8 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                         {/* <span>

@@ -1,12 +1,6 @@
-/// ==============================================
-// Filename:PurchaseOrderListingr.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,7 +17,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/PurchaseOrderSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -32,22 +26,17 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
+const PurchaseOrderListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
-
     const purchaseOrderState: any = useSelector(
-        (state: RootState) => state.purchaseOrder
+        (state: RootState) => state.listingPagination
     )
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
     const navigate = useNavigate()
-
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         purchaseOrderState
-
     return (
         <div className="px-4 h-[calc(100vh-190px)]  ">
             {/* Page Header */}
@@ -60,7 +49,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                         onClick={() => navigate('add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
-                        + Add PO{' '}
+                        + Add PO
                     </button>
                 )}
             </div>
@@ -76,9 +65,7 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    // isFilter
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -86,13 +73,11 @@ const PurchaseOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
                         extraClasses="max-h-full overflow-auto"
-                        setShowDropdown={setShowDropdown}
                         isLoading={isTableLoading}
                     />
                 </div>

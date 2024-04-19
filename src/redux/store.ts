@@ -14,15 +14,9 @@ import {
 import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ComplainSlice from './slices/ComplainSlice'
 import DashboardSlice from './slices/DashboardSlice'
-import DealerWarehouseSlice from './slices/DealerWarehouseSlice'
-import InventoryFlowSlice from './slices/InventoryFlowSlice'
 import InventoryManagementSlice from './slices/InventoryManagementSlice'
-import InwardDealerSlice from './slices/InwardDealerSlice'
 import ListingPaginationSlice from './slices/ListingPaginationSlice'
-import MoneybackSlice from './slices/MoneybackSlice'
-import MultiOrderSearchSlice from './slices/MultiOrderSearchSlice'
 import ProductReplacementSlice from './slices/ProductReplacementSlice'
-import PurchaseOrderSlice from './slices/PurchaseOrderSlice'
 import warehouseToComapnySlice from './slices/WarehouseToComapnySlice'
 import userAcessSlice from './slices/access/userAcessSlice'
 import areaSlice from './slices/areaSlice'
@@ -36,11 +30,8 @@ import inquirySlice from './slices/inquirySlice'
 import inventorySlice from './slices/inventorySlice'
 import inboundCallerSlice from './slices/media/inboundCallerSlice'
 import orderSlice from './slices/orderSlice'
-import outwardCustomerSlice from './slices/outwardCustomerSlice'
 import pincodeSlice from './slices/pincodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
-import returnToVendorSlice from './slices/returnToVendorSlice'
-import saleOrderSlice from './slices/saleOrderSlice'
 import statesSlice from './slices/statesSlice'
 import tehsilSlice from './slices/tehsilSlice'
 import inwardRequestSlice from './slices/warehouseInwardSlice/inwardRequestDealerSlice'
@@ -61,13 +52,10 @@ const store = configureStore({
         sideNavLayout: sideNavLayoutSlice,
         listingPagination: ListingPaginationSlice,
         dealer: dealerSlice,
-        dealerWarehouse: DealerWarehouseSlice,
         warehouse: warehouseSlice,
         inventory: inventorySlice,
         outwardRequest: outwardRequestSlice,
         inwardRequest: inwardRequestSlice,
-        saleOrder: saleOrderSlice,
-        purchaseOrder: PurchaseOrderSlice,
         inventoryManagement: InventoryManagementSlice,
         states: statesSlice,
         district: districtSlice,
@@ -86,18 +74,12 @@ const store = configureStore({
         assetLocation: assetLocationSlice,
         assetsRequest: assetsRequestSlice,
         assetsCategory: assetsCategorySlice,
-        returnToVendor: returnToVendorSlice,
         warehouseTransfer: warehouseTransferSlice,
         warehouseToSample: warehouseToSampleSlice,
         warehouseToComapny: warehouseToComapnySlice,
-        inventoryFlow: InventoryFlowSlice,
-        inwardDealer: InwardDealerSlice,
         complain: ComplainSlice,
-        moneyback: MoneybackSlice,
         productReplacement: ProductReplacementSlice,
         warehouseOrdersAssigned: warehouseAssignedOrderSlice,
-        outwardCustomer: outwardCustomerSlice,
-        multiOrderSearch: MultiOrderSearchSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
         [filePickerSlice.reducerPath]: filePickerSlice.reducer,
     },
