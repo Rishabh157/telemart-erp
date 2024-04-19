@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:AddSaleOrder.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -26,12 +18,12 @@ import { FormInitialValues } from './AddSaleOrderWrapper'
 import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
-import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useParams } from 'react-router-dom'
 import { showToast } from 'src/utils'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {
@@ -70,44 +62,29 @@ const AddSaleOrder = ({
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
-    const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
-    const dealerWarehouse: any = useSelector(
-        (state: RootState) => state.warehouse
-    )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId = userData?.companyId
 
-    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
-        {
-            companyId,
-            dealerId,
-        },
-        {
-            skip: !dealerId,
-        }
-    )
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setDealerWarehouse(data?.data))
-        }
-    }, [data, isLoading, isFetching, dealerId, dispatch])
-
-    const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
-        (ele: any) => {
-            return {
-                label: ele.wareHouseName,
-                value: ele._id,
+    const { options: dealerWarehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetAllWareHouseByDealerIdQuery(
+            {
+                companyId,
+                dealerId: values?.dealerId,
+            },
+            {
+                skip: !values.dealerId,
             }
-        }
-    )
+        ),
+        keyName: 'wareHouseName',
+        value: '_id',
+    })
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e:any) => e['value'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {
@@ -115,6 +92,7 @@ const AddSaleOrder = ({
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -165,7 +143,6 @@ const AddSaleOrder = ({
                                     value={values.dealerId}
                                     onChange={(e) => {
                                         handleSetFieldValue('dealerId', e)
-                                        setDealerId(e)
                                     }}
                                     options={dropdownOptions.dealerOptions}
                                     label="Dealer"

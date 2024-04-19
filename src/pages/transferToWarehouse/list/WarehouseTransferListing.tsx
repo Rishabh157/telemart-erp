@@ -16,7 +16,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/warehouseTransferSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -35,7 +35,7 @@ const WarehouseTransferListing = ({
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const WarehouseTransferState: any = useSelector(
-        (state: RootState) => state.warehouseTransfer
+        (state: RootState) => state.listingPagination
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]

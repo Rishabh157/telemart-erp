@@ -28,8 +28,7 @@ export const wareHouseApi = apiSlice.injectEndpoints({
         getWareHouses: builder.query({
             providesTags: ['WareHouse'],
             query: (companyId) => ({
-                url: `/warehouse/`,
-
+                url: `/warehouse`,
                 method: 'GET',
                 // body,
             }),

@@ -16,8 +16,6 @@ import ComplainSlice from './slices/ComplainSlice'
 import DashboardSlice from './slices/DashboardSlice'
 import InventoryManagementSlice from './slices/InventoryManagementSlice'
 import ListingPaginationSlice from './slices/ListingPaginationSlice'
-import ProductReplacementSlice from './slices/ProductReplacementSlice'
-import warehouseToComapnySlice from './slices/WarehouseToComapnySlice'
 import userAcessSlice from './slices/access/userAcessSlice'
 import areaSlice from './slices/areaSlice'
 import assetsCategorySlice from './slices/assets/assetsCategorySlice'
@@ -37,9 +35,6 @@ import tehsilSlice from './slices/tehsilSlice'
 import inwardRequestSlice from './slices/warehouseInwardSlice/inwardRequestDealerSlice'
 import warehouseAssignedOrderSlice from './slices/warehouseOrders/warehouseAssignedOrderSlice'
 import outwardRequestSlice from './slices/warehouseOutwardSlice/outwardRequestDealerSlice'
-import warehouseSlice from './slices/warehouseSlice'
-import warehouseToSampleSlice from './slices/warehouseToSampleSlice'
-import warehouseTransferSlice from './slices/warehouseTransferSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
 
@@ -52,7 +47,6 @@ const store = configureStore({
         sideNavLayout: sideNavLayoutSlice,
         listingPagination: ListingPaginationSlice,
         dealer: dealerSlice,
-        warehouse: warehouseSlice,
         inventory: inventorySlice,
         outwardRequest: outwardRequestSlice,
         inwardRequest: inwardRequestSlice,
@@ -74,11 +68,7 @@ const store = configureStore({
         assetLocation: assetLocationSlice,
         assetsRequest: assetsRequestSlice,
         assetsCategory: assetsCategorySlice,
-        warehouseTransfer: warehouseTransferSlice,
-        warehouseToSample: warehouseToSampleSlice,
-        warehouseToComapny: warehouseToComapnySlice,
         complain: ComplainSlice,
-        productReplacement: ProductReplacementSlice,
         warehouseOrdersAssigned: warehouseAssignedOrderSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
         [filePickerSlice.reducerPath]: filePickerSlice.reducer,

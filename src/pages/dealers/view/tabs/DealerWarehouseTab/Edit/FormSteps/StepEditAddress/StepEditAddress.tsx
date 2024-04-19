@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditAddress.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -178,7 +171,7 @@ const StepEditAddress = ({
                                                         setImageApiStatus(true)
                                                         fileUploader(
                                                             formData
-                                                        ).then((res) => {
+                                                        ).then((res: any) => {
                                                             if ('data' in res) {
                                                                 setImageApiStatus(
                                                                     false

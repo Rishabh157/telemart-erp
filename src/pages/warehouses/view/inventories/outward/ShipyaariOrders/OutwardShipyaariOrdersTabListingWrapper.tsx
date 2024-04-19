@@ -36,7 +36,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
     const outwardCustomerState: any = useSelector(
-        (state: RootState) => state.outwardCustomer
+        (state: RootState) => state.listingPagination
     )
 
     const {
@@ -95,40 +95,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => {
-                                    // showConfirmationDialog({
-                                    //     title: 'Approval',
-                                    //     text: `Do you want to ${
-                                    //         row.firstCallApproval
-                                    //             ? 'Disapprove '
-                                    //             : 'Approval '
-                                    //     }`,
-                                    //     showCancelButton: true,
-                                    //     showDenyButton: true,
-                                    //     confirmButtonText: 'Order approval',
-                                    //     denyButtonText: 'Order cancled',
-                                    //     confirmButtonColor: '#239B56',
-                                    //     denyButtonColor: '#F1948A',
-                                    //     next: (res) => {
-                                    //         if (res.isConfirmed) {
-                                    //             return res.isConfirmed
-                                    //                 ? handleApproval(
-                                    //                       row?._id,
-                                    //                       FirstCallApprovalStatus.APPROVED
-                                    //                   )
-                                    //                 : setShowDropdown(false)
-                                    //         }
-                                    //         if (res.isDenied) {
-                                    //             return res.isDenied
-                                    //                 ? handleApproval(
-                                    //                       row?._id,
-                                    //                       FirstCallApprovalStatus.CANCEL
-                                    //                   )
-                                    //                 : setShowDropdown(false)
-                                    //         }
-                                    //     },
-                                    // })
-                                }}
+                                onClick={() => {}}
                                 className="cursor-pointer"
                                 label="Pending"
                                 color="error"

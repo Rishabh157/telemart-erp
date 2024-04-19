@@ -1,38 +1,26 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:AddRTVendor.tsx
-// Type: Add Component
-// Last Updated: JULY 30, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { FormikProps, FieldArray } from 'formik'
-import { MdDeleteOutline } from 'react-icons/md'
+import { FieldArray, FormikProps } from 'formik'
 import { HiPlus } from 'react-icons/hi'
-import { useDispatch, useSelector } from 'react-redux'
+import { MdDeleteOutline } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-// import { any } from './AddSaleOrderWrapper'
-import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
-import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-// import { useParams } from 'react-router-dom'
-import { showToast } from 'src/utils'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch } from 'src/redux/store'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { showToast } from 'src/utils'
 
 // |-- Types --|
 type Props = {
@@ -52,8 +40,6 @@ const AddRTVendor = ({
     apiStatus,
     productPriceOptions,
 }: Props) => {
-    // const params = useParams()
-    // Breadcrumbs
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Return To Vendor',
@@ -67,28 +53,10 @@ const AddRTVendor = ({
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
-    const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const companyId = userData?.companyId
 
-    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
-        {
-            companyId,
-            dealerId,
-        },
-        {
-            skip: !dealerId,
-        }
-    )
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setDealerWarehouse(data?.data))
-        }
-    }, [data, isLoading, isFetching, dealerId, dispatch])
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
@@ -100,6 +68,7 @@ const AddRTVendor = ({
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -113,11 +82,6 @@ const AddRTVendor = ({
                 <div className="">
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
-
-                {/* Page Heading */}
-                {/* <div className="pt-1">
-                    <ATMPageHeading> Return To Vendor </ATMPageHeading>
-                </div> */}
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
@@ -163,7 +127,6 @@ const AddRTVendor = ({
                                     value={values.vendorId}
                                     onChange={(e) => {
                                         handleSetFieldValue('vendorId', e)
-                                        setDealerId(e)
                                     }}
                                     options={dropdownOptions?.vendorOptions}
                                     label="Vendor"

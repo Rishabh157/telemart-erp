@@ -1,25 +1,17 @@
-/// ==============================================
-// Filename:ProductGroupBarcodeListing.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
-// |-- Built-in Dependencies --|
 import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-// import ATMPageHeading from "src/components/UI/atoms/ATMPageHeading/ATMPageHeading";
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/productGroupBarcodeSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { ProductBarcodeGroupResponse } from 'src/models'
 import ProductGroupDetailCard from './ProductGroupDetailCard'
 
@@ -47,10 +39,8 @@ const ProductGroupListing = ({
     // Hooks
     const dispatch = useDispatch<AppDispatch>()
     const ProductGroupcodeState: any = useSelector(
-        (state: RootState) => state.productGroupBarcode
+        (state: RootState) => state.listingPagination
     )
-    //  const [isFilterOpen, setIsFilterOpen] = useState(false);
-
     const { page, rowsPerPage, totalItems, searchValue } = ProductGroupcodeState
 
     return (

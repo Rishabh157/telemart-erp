@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:WarehouseToComapnyListing.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,9 +18,8 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/WarehouseToComapnySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
 type Props = {
@@ -42,11 +33,9 @@ const WarehouseToComapnyListing = ({
     rows,
     setShowDropdown,
 }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-
     const dispatch = useDispatch<AppDispatch>()
     const WarehouseToComapnyState: any = useSelector(
-        (state: RootState) => state.warehouseToComapny
+        (state: RootState) => state.listingPagination
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
@@ -55,11 +44,7 @@ const WarehouseToComapnyListing = ({
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         WarehouseToComapnyState
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
+
     return (
         <div
             className={`px-4 ${

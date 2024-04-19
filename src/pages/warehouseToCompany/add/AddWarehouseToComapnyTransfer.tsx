@@ -1,38 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { FormikProps, FieldArray } from 'formik'
-import { MdDeleteOutline } from 'react-icons/md'
+import { FieldArray, FormikProps } from 'formik'
 import { HiPlus } from 'react-icons/hi'
+import { MdDeleteOutline } from 'react-icons/md'
 import {
-    useDispatch,
-    useSelector,
-    //  useSelector
+    useDispatch
 } from 'react-redux'
 
 // |-- Internal Dependencies --|
+import { useParams } from 'react-router-dom'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { SelectOption } from 'src/models/FormField/FormField.model'
-import { FormInitialValues } from './AddWarehouseToComapnyTransferWrapper'
-import { setItems as setAnotherComanyWareHouse } from 'src/redux/slices/warehouseSlice'
-import {
-    AppDispatch,
-    RootState,
-    //  RootState
-} from 'src/redux/store'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { useParams } from 'react-router-dom'
-import { showToast } from 'src/utils'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import {
+    AppDispatch
+} from 'src/redux/store'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
+import { showToast } from 'src/utils'
+import { FormInitialValues } from './AddWarehouseToComapnyTransferWrapper'
 
 // |-- Types --|
 type Props = {
@@ -74,30 +70,14 @@ const AddWarehouseToComapnyTransfer = ({
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
-    const { items }: any = useSelector((state: RootState) => state.warehouse)
-
-    const selectedCompanyWarehouseOption: SelectOption[] = items?.map(
-        (ele: any) => {
-            return {
-                label: ele.wareHouseName,
-                value: ele._id,
-            }
-        }
-    )
-
-    const {
-        data: warehouseData,
-        isLoading: warehouseIsLoading,
-        isFetching: warehouseIsFetching,
-    } = useGetWareHousesQuery(values?.toCompanyId, {
-        skip: !values?.toCompanyId,
+    const { options: selectedCompanyWarehouseOption } = useCustomOptions({
+        useEndPointHook: useGetWareHousesQuery(values?.toCompanyId, {
+            skip: !values?.toCompanyId,
+        }),
+        keyName: 'wareHouseName',
+        value: '_id',
     })
-    //Warehouse
-    useEffect(() => {
-        if (!warehouseIsLoading && !warehouseIsFetching) {
-            dispatch(setAnotherComanyWareHouse(warehouseData?.data))
-        }
-    }, [warehouseData, warehouseIsLoading, warehouseIsFetching, dispatch])
+
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
