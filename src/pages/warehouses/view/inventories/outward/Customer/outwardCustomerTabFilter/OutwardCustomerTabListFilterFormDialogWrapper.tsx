@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dialog } from '@mui/material'
 import { object, string } from 'yup'
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
@@ -6,11 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import OutwardCustomerTabListFilterFormDialog from './OutwardCustomerTabListFilterFormDialog'
 import moment from 'moment'
-import {
-    setCourierFilterValue,
-    setOrderStatusFilterValue,
-    setDateFilter,
-} from 'src/redux/slices/outwardCustomerSlice'
+import { setDateFilter } from 'src/redux/slices/ListingPaginationSlice'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 type Props = {
     open: boolean
@@ -29,11 +26,14 @@ const OutwardCustomerTabListFilterFormDialogWrapper = ({
     open,
     onClose,
 }: Props) => {
+    useUnmountCleanup()
     const dispatch = useDispatch<AppDispatch>()
+    const [courierValue, setCourierFilterValue] = useState('')
+    const [orderStatus, setOrderStatusFilterValue] = useState('')
     const outwardCustomerState: any = useSelector(
-        (state: RootState) => state.outwardCustomer
+        (state: RootState) => state.listingPagination
     )
-    const { courierValue, orderStatus, dateFilter } = outwardCustomerState
+    const { dateFilter } = outwardCustomerState
 
     const initialValues: FormInitialValues = {
         courierId: courierValue || '',
@@ -56,11 +56,11 @@ const OutwardCustomerTabListFilterFormDialogWrapper = ({
         { setSubmitting }: FormikHelpers<FormInitialValues>
     ) => {
         setSubmitting(false)
-
         // courirt
-        dispatch(setCourierFilterValue(values.courierId))
+        setCourierFilterValue(values.courierId)
+
         // order status
-        dispatch(setOrderStatusFilterValue(values.orderStatus))
+        setOrderStatusFilterValue(values.orderStatus)
 
         // date FROM to TO
         dispatch(
@@ -74,16 +74,15 @@ const OutwardCustomerTabListFilterFormDialogWrapper = ({
             })
         )
 
-        // dispatch(setIsActivateUser(values.isActive))
         onClose()
     }
 
     // Reset Handler
     const handleReset = async (formikProps: FormikProps<FormInitialValues>) => {
         // courier
-        dispatch(setCourierFilterValue(''))
+        setCourierFilterValue('')
         // order status
-        dispatch(setOrderStatusFilterValue(''))
+        setOrderStatusFilterValue('')
 
         // date FROM to TO
         await dispatch(

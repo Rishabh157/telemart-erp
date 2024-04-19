@@ -1,9 +1,3 @@
-/// ==============================================
-// Filename:MoneybackListing.tsx
-// Type: List Component
-// Last Updated: MARCH 14, 2024
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
@@ -22,11 +16,9 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/MoneybackSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import { isAuthorized } from 'src/utils/authorization'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
+
 
 // |-- Types --|
 type Props = {
@@ -39,7 +31,7 @@ const MoneybackListing = ({ columns, rows, setShowDropdown }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const dispatch = useDispatch<AppDispatch>()
     const moneybackState: any = useSelector(
-        (state: RootState) => state.moneyback
+        (state: RootState) => state.listingPagination
     )
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =

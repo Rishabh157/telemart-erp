@@ -1,34 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditAssetsRequestWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { number, object, string } from 'yup'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 
-import EditAsstesRequest from './EditAsstesRequest'
+import { useGetAllAssetsCategoryQuery } from 'src/services/assets/AssetsCategoryService'
 import {
-    useUpdateAssetsRequestMutation,
     useGetAssetsRequestByIdQuery,
+    useUpdateAssetsRequestMutation,
 } from 'src/services/assets/AssetsRequestServcies'
 import { showToast } from 'src/utils'
-import { useGetAllAssetsCategoryQuery } from 'src/services/assets/AssetsCategoryService'
-import { setAllItems } from 'src/redux/slices/assets/assetsCategorySlice'
-import { AssetsCategoryListResponse } from 'src/models'
-import { setSelectedAssetRequest } from 'src/redux/slices/assets/assetsRequestSlice'
+import EditAsstesRequest from './EditAsstesRequest'
 
 // |-- Redux --|
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -49,37 +40,22 @@ const EditAssetsRequestwrapper = (props: Props) => {
     const params = useParams()
     const Id = params.id
     const navigate = useNavigate()
-    const dispatch = useDispatch()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [editAsset] = useUpdateAssetsRequestMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allItems } = useSelector(
-        (state: RootState) => state?.assetsCategory
-    )
-    const { selectedItem } = useSelector(
-        (state: RootState) => state?.assetsRequest
-    )
 
-    const {
-        data: asData,
-        isLoading: asIsLoading,
-        isFetching: asIsFetching,
-    } = useGetAssetsRequestByIdQuery(Id)
-    const { data, isLoading, isFetching } = useGetAllAssetsCategoryQuery(
-        userData?.companyId
-    )
 
-    useEffect(() => {
-        if (!asIsLoading && !asIsFetching) {
-            dispatch(setSelectedAssetRequest(asData?.data))
-        }
-    }, [asData, asIsLoading, asIsFetching])
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetAssetsRequestByIdQuery(Id),
+    })
+    const { options: allItems } = useCustomOptions({
+        useEndPointHook: useGetAllAssetsCategoryQuery(
+            userData?.companyId
+        ),
+        keyName: 'assetCategoryName',
+        value: '_id',
+    })
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setAllItems(data?.data))
-        }
-    }, [data, isLoading, isFetching])
     const initialValues: FormInitialValues = {
         assetName: selectedItem?.assetName || '',
         assetCategory: selectedItem?.assetCategoryId || '',
@@ -132,14 +108,7 @@ const EditAssetsRequestwrapper = (props: Props) => {
     }
 
     const dropdownOptions = {
-        assetCategoryOptions: allItems?.map(
-            (assetCategory: AssetsCategoryListResponse) => {
-                return {
-                    label: assetCategory.assetCategoryName,
-                    value: assetCategory._id,
-                }
-            }
-        ),
+        assetCategoryOptions: allItems
     }
     return (
         <>

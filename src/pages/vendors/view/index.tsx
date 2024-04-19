@@ -1,33 +1,27 @@
-/// ==============================================
-// Filename:index.tsx
-// Type: index Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { BiBlock, BiMessageDetail } from 'react-icons/bi'
 import { AiOutlineRise } from 'react-icons/ai'
+import { BiBlock, BiMessageDetail } from 'react-icons/bi'
 import { BsArrowRepeat } from 'react-icons/bs'
 import { MdOutlinePeopleAlt } from 'react-icons/md'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ViewLayout from 'src/components/layouts/ViewLayout/ViewLayout'
-import VendorInfoCard from '../components/vendorInfoCard/VendorInfoCard'
 import ListItemCard from '../components/listItemCard/ListItemCard'
+import VendorInfoCard from '../components/vendorInfoCard/VendorInfoCard'
 // import { useParams } from "react-router-dom";
 import { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import { useGetPaginationVendorsQuery } from 'src/services/VendorServices'
 
 // |-- Redux --|
-import { setAllItems } from 'src/redux/slices/vendorSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const tabsData = [
     {
@@ -91,46 +85,46 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const ViewVendor = () => {
-    //   const { vendorId } = useParams();
-    const dispatch = useDispatch<AppDispatch>()
+    useUnmountCleanup()
     const [searchValue, setSearchValue] = useState('')
-    const { allItems }: any = useSelector((state: RootState) => state?.vendor)
-
     const { userData } = useSelector((state: RootState) => state?.auth)
-
     const allowedTabs = tabsData
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
         })
         ?.map((tab) => tab)
-
-    const { data, isFetching, isLoading } = useGetPaginationVendorsQuery({
-        limit: 100,
-        searchValue: searchValue,
-        params: ['companyType', 'ownerShipType', 'vendorCode', 'companyName'],
-        page: 1,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetPaginationVendorsQuery({
+            limit: 100,
+            searchValue: searchValue,
+            params: [
+                'companyType',
+                'ownerShipType',
+                'vendorCode',
+                'companyName',
+            ],
+            page: 1,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
-    const listData = allItems?.map((ele: any) => {
+    const listData = items?.map((ele: any) => {
         return {
             vendorName: ele?.companyName,
             _id: ele?._id,
             mobile: ele?.registrationAddress?.phone,
         }
     })
-    useEffect(() => {
-        dispatch(setAllItems(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+
     return (
         <ViewLayout
             infoCard={

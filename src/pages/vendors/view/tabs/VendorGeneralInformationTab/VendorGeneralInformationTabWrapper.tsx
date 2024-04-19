@@ -1,30 +1,21 @@
-/// ==============================================
-// Filename:VendorGeneralInformationTabWrapper.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
-import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
+import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import { useGetVendorByIdQuery } from 'src/services/VendorServices'
 import AccordianAddress from './components/AccordianAddress'
 import AccordianBankDetail from './components/AccordianBankDetail'
 import AccordianContact from './components/AccordianContact'
 import AccordianDocument from './components/AccordianDocument'
 import AccordianGeneralInformation from './components/AccordianGeneralInformation'
 import VendorGeneralInformationTab from './VendorGeneralInformationTab'
-import { useGetVendorByIdQuery } from 'src/services/VendorServices'
 
 // |-- Redux --|
-import { setSelectedItem } from 'src/redux/slices/vendorSlice'
-import { RootState, AppDispatch } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {}
@@ -36,15 +27,10 @@ export type AccordianType = {
 
 const VendorGeneralInformationTabWrapper = (props: Props) => {
     const params = useParams()
-    const dispatch = useDispatch<AppDispatch>()
     const Id = params.vendorId
-    const { data, isLoading, isFetching } = useGetVendorByIdQuery(Id)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.vendor
-    )
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+    const { items: selectedItem } = useGetDataByIdCustomQuery({
+        useEndPointHook: useGetVendorByIdQuery(Id),
+    })
 
     const accordians: AccordianType[] = [
         {

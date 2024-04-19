@@ -1,43 +1,35 @@
-/// ==============================================
-// Filename:DealerWarehouseTabWrapper.tsx
-// Type: Tab Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { WarehousesListResponse } from 'src/models'
-import DealerWarehouseListing from './DealerWarehouseListing'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import {
     useDeleteDealerWarehouseMutation,
     useGetDealerWarehouseQuery,
 } from 'src/services/DealerWarehouseService'
 import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import DealerWarehouseListing from './DealerWarehouseListing'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/DealerWarehouseSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {}
 
 const DealerWarehouseTabWrapper = (props: Props) => {
+    useUnmountCleanup()
     const navigate = useNavigate()
     const params = useParams()
     const dealerId: any = params.dealerId
@@ -45,14 +37,13 @@ const DealerWarehouseTabWrapper = (props: Props) => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [deleteDealerWarehouse] = useDeleteDealerWarehouseMutation()
     const dealerWarehouseState: any = useSelector(
-        (state: RootState) => state.dealerWarehouse
+        (state: RootState) => state.listingPagination
     )
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId = userData?.companyId
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -91,7 +82,6 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                     }}
                 />
             ),
-            
         },
         {
             field: 'warehouseCode',
@@ -147,49 +137,38 @@ const DealerWarehouseTabWrapper = (props: Props) => {
         },
     ]
 
-    const { page, rowsPerPage, searchValue, items } = dealerWarehouseState
-    const dispatch = useDispatch<AppDispatch>()
-
-    const { data, isFetching, isLoading } = useGetDealerWarehouseQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: [
-            'wareHouseCode',
-            'wareHouseName',
-            // 'country',
-            // 'email',
-            'registrationAddress',
-            'billingAddress',
-            'contactInformation',
-        ],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'dealerId',
-                value: dealerId,
-            },
-            {
-                fieldName: 'companyId',
-                value: companyId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { page, rowsPerPage, searchValue } = dealerWarehouseState
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetDealerWarehouseQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: [
+                'wareHouseCode',
+                'wareHouseName',
+                // 'country',
+                // 'email',
+                'registrationAddress',
+                'billingAddress',
+                'contactInformation',
+            ],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'dealerId',
+                    value: dealerId,
+                },
+                {
+                    fieldName: 'companyId',
+                    value: companyId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
+    
 
     const handleDelete = () => {
         const id = currentId

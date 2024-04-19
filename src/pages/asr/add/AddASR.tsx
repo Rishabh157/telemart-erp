@@ -41,6 +41,8 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    console.log("formikProps",formikProps)
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)

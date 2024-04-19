@@ -16,11 +16,12 @@ import {
     setIsTableLoading,
     setItems,
     setTotalItems,
-} from 'src/redux/slices/MultiOrderSearchSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import MultiOrderSearchListing from './MultiOrderSearchListing'
 import { showToast } from 'src/utils'
 import { OrderListResponse } from 'src/models'
 import moment from 'moment'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 export type FormInitialValues = {
     orderNumbers: string
@@ -28,21 +29,17 @@ export type FormInitialValues = {
 }
 
 const MultiOrderSearchListingWrapper = () => {
+    useUnmountCleanup()
     // Hooks
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [getMultiOrderSearch] =
         useGetMultiSearchOrderByMobAndOrderNoMutation()
     const dispatch = useDispatch<AppDispatch>()
     const multiOrderSearchState: any = useSelector(
-        (state: RootState) => state.multiOrderSearch
+        (state: RootState) => state.listingPagination
     )
 
-    const {
-        //  page,
-        //   rowsPerPage,
-        //   searchValue,
-        items,
-    } = multiOrderSearchState
+    const { items } = multiOrderSearchState
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
@@ -409,8 +406,8 @@ const MultiOrderSearchListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                         {/* <span>

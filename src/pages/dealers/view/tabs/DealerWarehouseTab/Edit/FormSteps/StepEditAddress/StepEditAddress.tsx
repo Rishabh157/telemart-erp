@@ -79,9 +79,8 @@ const StepEditAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${
-                            index !== formFields?.length - 1 && 'border-b'
-                        }  border-slate-300`}
+                        className={`py-9 px-7 ${index !== formFields?.length - 1 && 'border-b'
+                            }  border-slate-300`}
                     >
                         <div className="text-primary-main text-lg pb-2 font-medium">
                             {sectionName}
@@ -103,7 +102,7 @@ const StepEditAddress = ({
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
-                                                    name ===
+                                                        name ===
                                                         'billing_address.phone'
                                                         ? 10
                                                         : 100
@@ -113,16 +112,16 @@ const StepEditAddress = ({
                                                 value={
                                                     name.includes('.')
                                                         ? values[
-                                                              name.split('.')[0]
-                                                          ][name.split('.')[1]]
+                                                        name.split('.')[0]
+                                                        ][name.split('.')[1]]
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
                                                     if (
                                                         name ===
-                                                            'regd_address.phone' ||
+                                                        'regd_address.phone' ||
                                                         name ===
-                                                            'billing_address.phone'
+                                                        'billing_address.phone'
                                                     ) {
                                                         const inputValue =
                                                             e.target.value
@@ -178,7 +177,7 @@ const StepEditAddress = ({
                                                         setImageApiStatus(true)
                                                         fileUploader(
                                                             formData
-                                                        ).then((res:any) => {
+                                                        ).then((res: any) => {
                                                             if ('data' in res) {
                                                                 setImageApiStatus(
                                                                     false
@@ -219,14 +218,14 @@ const StepEditAddress = ({
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     onChange={(e: any) => {
@@ -237,8 +236,8 @@ const StepEditAddress = ({
                                                     }}
                                                     options={
                                                         dropdownOptions[
-                                                            field.optionAccessKey ||
-                                                                'counrtyOptions'
+                                                        field.optionAccessKey ||
+                                                        'counrtyOptions'
                                                         ]
                                                     }
                                                     isSubmitting={isSubmitting}

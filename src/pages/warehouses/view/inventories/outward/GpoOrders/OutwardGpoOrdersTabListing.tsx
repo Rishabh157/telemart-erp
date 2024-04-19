@@ -14,7 +14,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/outwardCustomerSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -26,14 +26,10 @@ type Props = {
 const OutwardGpoOrdersTabListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
 
-    // const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-    //     useState<boolean>(false)
-
     const outwardCustomerState: any = useSelector(
-        (state: RootState) => state.outwardCustomer
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const { page, rowsPerPage, isTableLoading, searchValue } =
         outwardCustomerState

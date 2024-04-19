@@ -1,94 +1,52 @@
-/// ==============================================
-// Filename:DealerSaleOrderTabWrapper.tsx
-// Type: Tab Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-//import { useNavigate } from "react-router-dom";
-//import { showConfirmationDialog } from "src/utils/showConfirmationDialog";
-//import { showToast } from "src/utils";
 
-// |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { SaleOrderListResponse } from 'src/models/SaleOrder.model'
 import SaleOrderListing from 'src/pages/saleOrder/list/SaleOrderListing'
 import { useGetPaginationSaleOrderQuery } from 'src/services/SalesOrderService'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/saleOrderSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { RootState } from 'src/redux/store'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 // |-- Types --|
 type Props = {}
 
 const DealerSaleOrderTabWrapper = (props: Props) => {
+    useUnmountCleanup()
     const params = useParams()
     const dealerId: any = params.dealerId
-    const dispatch = useDispatch<AppDispatch>()
-    // const { page, rowsPerPage, searchValue, items } = salesOrderState;
 
-    //const navigate = useNavigate();
-    //const [currentId, setCurrentId] = useState("");
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [showDropdown, setShowDropdown] = useState(false)
-    //const [deleteSaleOrder] = useDeleteSalesOrderMutation();
+    const [, setShowDropdown] = useState(false)
     const salesOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, items } = salesOrderState
-    // const { data, isFetching, isLoading } =
-    //     useGetSalesOrderByDealerIdQuery(dealerId)
-
-    // useEffect(() => {
-    //     if (!isFetching && !isLoading) {
-    //         dispatch(setIsTableLoading(false))
-    //         dispatch(setItems(data?.data || []))
-    //         dispatch(setTotalItems(data?.totalItems || 4))
-    //     } else {
-    //         dispatch(setIsTableLoading(true))
-    //     }
-    // }, [isLoading, isFetching, data, dispatch])
-
-    const {
-        data: soData,
-        isFetching: soIsFetching,
-        isLoading: soIsLoading,
-    } = useGetPaginationSaleOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['soNumber', 'dealerLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'dealerId',
-                value: dealerId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { page, rowsPerPage, searchValue } = salesOrderState
+    const { items } = useGetCustomListingData<SaleOrderListResponse>({
+        useEndPointHook: useGetPaginationSaleOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['soNumber', 'dealerLabel'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'dealerId',
+                    value: dealerId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-    useEffect(() => {
-        if (!soIsFetching && !soIsLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(soData?.data || []))
-            dispatch(setTotalItems(soData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [soIsLoading, soIsFetching, soData, dispatch])
 
     const columns: columnTypes[] = [
         {

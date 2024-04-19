@@ -14,7 +14,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/outwardCustomerSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -26,14 +26,10 @@ type Props = {
 const OutwardShipyaariOrdersTabListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
 
-    // const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-    //     useState<boolean>(false)
-
     const outwardCustomerState: any = useSelector(
-        (state: RootState) => state.outwardCustomer
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const { page, rowsPerPage, isTableLoading, searchValue } =
         outwardCustomerState
@@ -52,16 +48,7 @@ const OutwardShipyaariOrdersTabListing = ({ columns, rows }: Props) => {
                     }
                     searchValue={searchValue}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsOpenFilterFormDialog(true)}
                 />
-
-                {/* {isOpenFilterFormDialog && (
-                    <OutwardCustomerTabListFilterFormDialogWrapper
-                        open
-                        onClose={() => setIsOpenFilterFormDialog(false)}
-                    />
-                )} */}
 
                 {/* Table */}
                 <div className="grow overflow-auto  ">

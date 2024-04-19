@@ -21,7 +21,6 @@ import EditUser from './EditUser'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setSelectedItem } from 'src/redux/slices/userSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { getHierarchyByDeptWithRole } from 'src/utils/GetHierarchyByDept'
@@ -201,7 +200,6 @@ const EditUserWrapper = (props: Props) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'User Updated successfully!')
-                        dispatch(setSelectedItem(null))
                         navigate('/users')
                     } else {
                         showToast('error', res?.data?.message)

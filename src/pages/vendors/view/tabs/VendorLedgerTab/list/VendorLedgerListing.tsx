@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:VendorLedgerListing.tsx
-// Type: Tab List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -27,7 +20,7 @@ import {
     setPage,
     setSearchValue,
     setFilterBy,
-} from 'src/redux/slices/VendorLedgerSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -44,10 +37,9 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
         'CREDIT_NOTE_CREATED'
     )
     const [isOpenModel, setIsOpenModel] = useState(false)
-    // const [isFilterOpen, setIsFilterOpen] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
     const vendorLedgerState: any = useSelector(
-        (state: RootState) => state.vendorLedger
+        (state: RootState) => state.listingPagination
     )
 
     const [selectedRows, setSelectedRows] = useState([])

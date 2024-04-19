@@ -1,30 +1,27 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/OfferAppliedNdrSlice'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import OfferAppliedNdrListing from './OfferAppliedNdrListing'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { useGetOrderQuery } from 'src/services/OrderService'
-import { OrderListResponse } from 'src/models'
 import { Chip } from '@mui/material'
 import moment from 'moment'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import UpdateOfferAppliedNdrFormWrapper from './UpdateOrder/UpdateOfferAppliedNdrFormWrapper'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { OrderListResponse } from 'src/models'
+import { RootState } from 'src/redux/store'
+import { useGetOrderQuery } from 'src/services/OrderService'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import OfferAppliedNdrListing from './OfferAppliedNdrListing'
+import UpdateOfferAppliedNdrFormWrapper from './UpdateOrder/UpdateOfferAppliedNdrFormWrapper'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -32,57 +29,39 @@ enum FirstCallApprovalStatus {
 }
 
 const OfferAppliedNdrListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
-
+    useUnmountCleanup()
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
     const [orderId, setOrderId] = useState<string>()
     const [isUpdateOrderFormOpen, setIsUpdateOrderFormOpen] =
         useState<boolean>(false)
 
     const offerAppliedNdrState: any = useSelector(
-        (state: RootState) => state.offerAppliedNdr
+        (state: RootState) => state.listingPagination
     )
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        items,
-        // totalItems,
-        // isTableLoading,
-    } = offerAppliedNdrState
+    const { page, rowsPerPage, searchValue } = offerAppliedNdrState
 
-    const { data, isLoading, isFetching } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: '',
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'orderNumber',
-                value: [searchValue],
-            },
-            {
-                fieldName: 'ndrDiscountApplicable',
-                value: true,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData<OrderListResponse>({
+        useEndPointHook: useGetOrderQuery({
+            limit: rowsPerPage,
+            searchValue: '',
+            params: ['didNo', 'mobileNo'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'orderNumber',
+                    value: [searchValue],
+                },
+                {
+                    fieldName: 'ndrDiscountApplicable',
+                    value: true,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const columns: columnTypes[] = [
         {
@@ -105,7 +84,6 @@ const OfferAppliedNdrListingWrapper = () => {
                     }}
                 />
             ),
-            
         },
         {
             field: 'orderNumber',

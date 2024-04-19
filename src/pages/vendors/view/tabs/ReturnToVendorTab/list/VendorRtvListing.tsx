@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:VendorRtvListing.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,12 +12,11 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 
 // |-- Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/returnToVendorSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
 type Props = {
@@ -34,11 +25,9 @@ type Props = {
 }
 
 const VendorRtvListing = ({ columns, rows }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-
     const dispatch = useDispatch<AppDispatch>()
     const saleOrderState: any = useSelector(
-        (state: RootState) => state.returnToVendor
+        (state: RootState) => state.listingPagination
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
@@ -46,11 +35,7 @@ const VendorRtvListing = ({ columns, rows }: Props) => {
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         saleOrderState
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
+
     return (
         <div
             className={`px-4 ${
@@ -59,12 +44,6 @@ const VendorRtvListing = ({ columns, rows }: Props) => {
                     : 'h-[calc(100vh-55px)]'
             }`}
         >
-            {/* Page Header */}
-            {/* <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Return To Vendor </ATMPageHeading>
-               
-            </div> */}
-
             <div
                 className={` border flex flex-col  rounded bg-white ${
                     path === 'dealers'
@@ -85,8 +64,7 @@ const VendorRtvListing = ({ columns, rows }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                   
                 />
 
                 {/* Table */}

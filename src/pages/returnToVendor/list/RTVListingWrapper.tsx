@@ -1,16 +1,9 @@
-/// ==============================================
-// Filename:RTVListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -23,19 +16,16 @@ import {
     useUpdateReturnToVendorApprovalMutation,
 } from 'src/services/ReturnToVendorService'
 import { showToast } from 'src/utils'
+import { isAuthorized } from 'src/utils/authorization'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import RTVendor from './RTVendor'
-import { isAuthorized } from 'src/utils/authorization'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/returnToVendorSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 
 interface ProductSalesOrder {
     productGroupId: string
@@ -87,11 +77,11 @@ interface ReturnToVendorListResponse {
 }
 
 const RTVListingWrapper = () => {
+    useUnmountCleanup()
     const returnToVendorState: any = useSelector(
-        (state: RootState) => state.returnToVendor
+        (state: RootState) => state.listingPagination
     )
-    const dispatch = useDispatch<AppDispatch>()
-    const { page, rowsPerPage, searchValue, items } = returnToVendorState
+    const { page, rowsPerPage, searchValue } = returnToVendorState
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
@@ -99,8 +89,8 @@ const RTVListingWrapper = () => {
     const [updateReturnToVendor] = useUpdateReturnToVendorApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-    const { data, isFetching, isLoading } =
-        useGetPaginationReturnToVendorByGroupQuery({
+    const { items } = useGetCustomListingData<ReturnToVendorListResponse>({
+        useEndPointHook: useGetPaginationReturnToVendorByGroupQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['rtvNumber'],
@@ -115,18 +105,8 @@ const RTVListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
-
-    // listing of return to vendor
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
+        }),
+    })
 
     const handleDelete = () => {
         setShowDropdown(false)
@@ -209,7 +189,6 @@ const RTVListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -250,7 +229,6 @@ const RTVListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'rtvNo',

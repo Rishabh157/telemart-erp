@@ -14,6 +14,7 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { GRNListResponse } from 'src/models'
 import GRNListing from 'src/pages/grn/list/GRNListing'
 
@@ -76,6 +77,7 @@ const GRNColumns: columnTypes[] = [
 ]
 
 const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
+    useUnmountCleanup()
     return (
         <div className=" px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">

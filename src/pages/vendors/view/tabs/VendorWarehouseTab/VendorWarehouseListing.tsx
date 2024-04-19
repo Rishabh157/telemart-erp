@@ -1,13 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:VendorWarehouseListing.tsx
-// Type: Tab List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,15 +11,15 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/VendorWarehouseSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -46,9 +39,8 @@ const VendorWarehouseListing = ({
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const vendorWarehouseState: any = useSelector(
-        (state: RootState) => state.vendorWarehouse
+        (state: RootState) => state.listingPagination
     )
-    // const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
@@ -56,11 +48,6 @@ const VendorWarehouseListing = ({
 
     const params: any = useParams()
 
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
     return (
         <div className="h-full">
             {/* Page Header */}
