@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
-import { FormikProps } from 'formik'
+import React from 'react'
+import { FieldArray, FormikProps } from 'formik'
 import { FormInitialValues } from './AddCustomerComplaintDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { CircularProgress, Divider } from '@mui/material'
+import {
+    // CircularProgress,
+    Divider,
+} from '@mui/material'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { useGetAllInitialByCallType } from 'src/hooks/useGetAllInitialByCallType'
@@ -13,6 +16,8 @@ import moment from 'moment'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { MdDeleteOutline } from 'react-icons/md'
+import { HiPlus } from 'react-icons/hi'
 
 // |-- Types --|
 type Props = {
@@ -56,7 +61,7 @@ const CustomerComplaintDetailsForm = ({
     formType,
     complaintLogs,
 }: Props) => {
-    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    // const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
 
     const { values, setFieldValue, handleSubmit } = formikProps
 
@@ -88,7 +93,7 @@ const CustomerComplaintDetailsForm = ({
     const handleFileUpload = (file: File, name: string) => {
         let formData = new FormData()
 
-        setImageApiStatus(true)
+        // setImageApiStatus(true)
         formData.append(
             'type',
             file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
@@ -99,10 +104,10 @@ const CustomerComplaintDetailsForm = ({
         // call the file manager api
         uploadFile(formData).then((res: any) => {
             if ('data' in res) {
-                setImageApiStatus(false)
+                // setImageApiStatus(false)
                 let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
                 setFieldValue(name, fileUrl)
-                setImageApiStatus(false)
+                // setImageApiStatus(false)
             }
         })
     }
@@ -319,54 +324,126 @@ const CustomerComplaintDetailsForm = ({
                             }}
                         />
 
-                        {isShowImageUploadOptionInInitialCallerOneCase?.includes(
-                            values.icOneLabel
-                        ) && (
-                            <div className="mt-3">
-                                <ATMFilePickerWrapper
-                                    required={true}
-                                    name="productImage"
+                        <div className="flex gap-x-4">
+                            <label className="text-slate-700 text-sm font-medium">
+                                Remarks
+                                <span className="text-red-500">*</span>
+                            </label>
+                            <div className="flex-1 -mt-2">
+                                <ATMTextArea
+                                    required
                                     label=""
-                                    placeholder={'Upload Product Image'}
-                                    selectedFile={'https://google.com.png'}
-                                    // selectedFile={getTheValueByNameKey(name)}
-                                    onSelect={(newFile: any) => {
-                                        handleFileUpload(
-                                            newFile,
-                                            'productImage'
-                                        )
-                                    }}
-                                    // isSubmitting={false}
+                                    minRows={3}
+                                    name="remark"
+                                    value={values.remark}
+                                    placeholder="remark"
+                                    className="rounded"
+                                    onChange={(newValue: string) =>
+                                        setFieldValue('remark', newValue)
+                                    }
                                 />
-                                {imageApiStatus ? (
-                                    <div className="mt-3">
-                                        <CircularProgress size={18} />
-                                    </div>
-                                ) : null}
                             </div>
-                        )}
-                    </div>
-
-                    <div className="flex items-center gap-x-4">
-                        <label className="text-slate-700">
-                            Remarks
-                            <span className="text-red-500">*</span>
-                        </label>
-                        <div className="flex-1 -mt-4">
-                            <ATMTextArea
-                                required
-                                label=""
-                                minRows={2}
-                                name="remark"
-                                value={values.remark}
-                                placeholder="remark"
-                                className="rounded"
-                                onChange={(newValue: string) =>
-                                    setFieldValue('remark', newValue)
-                                }
-                            />
                         </div>
                     </div>
+
+                    {isShowImageUploadOptionInInitialCallerOneCase?.includes(
+                        values.icOneLabel
+                    ) && (
+                        <FieldArray name="images">
+                            {({ push, remove }) => {
+                                return (
+                                    <div className="flex flex-col px-2">
+                                        <div className="grid grid-cols-4 gap-4">
+                                            {values?.images?.map(
+                                                (item, index) => {
+                                                    const { image } = item
+                                                    return (
+                                                        <div
+                                                            key={index}
+                                                            className="flex gap-3 "
+                                                        >
+                                                            <div>
+                                                                <ATMFilePickerWrapper
+                                                                    required={
+                                                                        true
+                                                                    }
+                                                                    name={`images[${index}].image`}
+                                                                    label=""
+                                                                    placeholder={
+                                                                        'Upload Product Image'
+                                                                    }
+                                                                    selectedFile={
+                                                                        image
+                                                                    }
+                                                                    onSelect={(
+                                                                        newFile: any
+                                                                    ) => {
+                                                                        handleFileUpload(
+                                                                            newFile,
+                                                                            `images[${index}].image`
+                                                                        )
+                                                                    }}
+                                                                    // isSubmitting={false}
+                                                                />
+                                                                {/* {imageApiStatus ? (
+                                                                    <div className="mt-3">
+                                                                        <CircularProgress
+                                                                            size={
+                                                                                18
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                ) : null} */}
+                                                            </div>
+
+                                                            {/* BUTTON - Delete */}
+                                                            {values.images
+                                                                ?.length &&
+                                                                values.images
+                                                                    ?.length >
+                                                                    1 && (
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    index
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline
+                                                                            // className="text-2xl"
+                                                                            />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
+                                                        </div>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+
+                                        {/* BUTTON - Add More Product */}
+                                        <div className="flex justify-self-start py-9">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    push({
+                                                        image: '',
+                                                    })
+                                                }
+                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center"
+                                            >
+                                                <HiPlus size="20" /> Add More
+                                            </button>
+                                        </div>
+                                    </div>
+                                )
+                            }}
+                        </FieldArray>
+                    )}
+
                     <div className="flex justify-center">
                         <ATMLoadingButton
                             className="w-24"
