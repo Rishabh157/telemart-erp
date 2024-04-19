@@ -1,32 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:SlotRunWrapper.tsx
-// Type: Update Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import UpdateSlotRun from './UpdateSlotRun'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItems } from 'src/redux/slices/media/slotManagementSlice'
 import {
     useGetSlotViewByIdQuery,
     useUpdateSlotViewMutation,
 } from 'src/services/media/SlotsViewServices'
-// import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-// import { SlotManagementListResponse } from 'src/models/Slot.model'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { SlotManagementListResponse } from 'src/models/Slot.model'
 
 // |-- Types --|
 type FormInitialValues = {
@@ -41,81 +30,61 @@ type FormInitialValues = {
     slotDay: string[]
     slotStartTime: string
     slotEndTime: string
-    // slotStartDate: string
     slotContinueStatus: boolean
     runYoutubeLink: string
     runStatus: boolean
     run: boolean
     showOk: boolean
     slotRunImage: string
-    // slotRunVideo: string
     reasonNotShow: string | null
-    // runStartTime: string
-    // runEndTime: string
     runRemark: string
     companyId: string
 }
+
 type SlotRunWrapperProps = {
     id: string
     setIsOpenDialog: React.Dispatch<React.SetStateAction<boolean>>
 }
+
 const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
     id,
     setIsOpenDialog,
 }) => {
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateSlot] = useUpdateSlotViewMutation()
-    const { selectedItems }: any = useSelector(
-        (state: RootState) => state.slotManagement
-    )
-    const { data, isLoading, isFetching } = useGetSlotViewByIdQuery(id)
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedItems(data?.data || []))
-        }
-    }, [data, dispatch, isLoading, isFetching])
-
-    useEffect(() => {
-        return () => {
-            dispatch(setSelectedItems([]))
-        }
-    }, [dispatch])
+    // Hook
+    const { items } = useGetDataByIdCustomQuery<SlotManagementListResponse>({
+        useEndPointHook: useGetSlotViewByIdQuery(id),
+    })
 
     const initialValues: FormInitialValues = {
-        slotName: selectedItems?.slotName || '',
-        channelGroupId: selectedItems?.channelGroupId || '',
-        type: selectedItems?.type || '',
-        tapeNameId: selectedItems?.tapeNameId || '',
-        channelNameId: selectedItems?.channelNameId || '',
-        channelTrp: selectedItems?.channelTrp || '',
-        remarks: selectedItems?.reamrks || '',
-        slotPrice: selectedItems?.slotPrice || 0,
-        slotDay: selectedItems?.slotDay || [''],
-        // slotStartDate: selectedItems?.slotStartDate || '',
-        slotStartTime: selectedItems?.slotStartTime || '',
-        slotEndTime: selectedItems?.slotEndTime || '',
-        slotContinueStatus: selectedItems?.slotContinueStatus || false,
-        runYoutubeLink: selectedItems?.runYoutubeLink || '',
-        runStatus: selectedItems?.runStatus || false,
-        run: selectedItems?.run || false,
-        slotRunImage: selectedItems?.slotRunImage || '',
-        // slotRunVideo: selectedItems?.slotRunVideo || '',
-        showOk: selectedItems?.showOk,
-        reasonNotShow: selectedItems?.reasonNotShow || '',
-        // runStartTime: selectedItems?.runStartTime || '',
-        // runEndTime: selectedItems?.runEndTime || '',
-        runRemark: selectedItems?.runRemark || '',
-        companyId: selectedItems?.companyId || '',
+        slotName: items?.slotName || '',
+        channelGroupId: items?.channelGroupId || '',
+        type: items?.type || '',
+        tapeNameId: items?.tapeNameId || '',
+        channelNameId: items?.channelNameId || '',
+        channelTrp: items?.channelTrp || '',
+        remarks: items?.remarks || '',
+        slotPrice: items?.slotPrice || 0,
+        slotDay: items?.slotDay || [''],
+        slotStartTime: items?.slotStartTime || '',
+        slotEndTime: items?.slotEndTime || '',
+        slotContinueStatus: items?.slotContinueStatus || false,
+        runYoutubeLink: items?.runYoutubeLink || '',
+        runStatus: items?.runStatus || false,
+        run: items?.run || false,
+        slotRunImage: items?.slotRunImage || '',
+        showOk: items?.showOk || false,
+        reasonNotShow: items?.reasonNotShow || '',
+        runRemark: items?.runRemark || '',
+        companyId: items?.companyId || '',
     }
     const { object, boolean, string } = require('yup')
 
     const validationSchema = object({
         run: boolean(),
-        //reasonNotShow: string().required('Required'),
-
         runRemark: string(),
     })
 
@@ -134,18 +103,14 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
                     slotPrice: values.slotPrice,
                     slotDay: values.slotDay,
                     slotStartTime: values.slotStartTime,
-                    // slotStartDate: values.slotStartDate,
                     slotEndTime: values.slotEndTime,
                     slotContinueStatus: values.slotContinueStatus,
                     runYoutubeLink: values?.runYoutubeLink || '',
                     runStatus: values?.run,
                     run: values?.run,
                     slotRunImage: values?.slotRunImage || '',
-                    // slotRunVideo: values?.slotRunVideo || '',
                     showOk: values?.showOk,
                     reasonNotShow: values?.reasonNotShow || null,
-                    // runStartTime: values?.runStartTime || '',
-                    // runEndTime: values?.runEndTime || '',
                     runRemark: values?.runRemark,
                     companyId: values?.companyId,
                 },
@@ -166,25 +131,24 @@ const SlotRunWrapper: React.FC<SlotRunWrapperProps> = ({
             })
         }, 1000)
     }
+
     return (
-        <>
-            <Formik
-                enableReinitialize
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps: FormikProps<FormInitialValues>) => {
-                    return (
-                        <UpdateSlotRun
-                            dropdownOptions={[]}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps: FormikProps<FormInitialValues>) => {
+                return (
+                    <UpdateSlotRun
+                        dropdownOptions={[]}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

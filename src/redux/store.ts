@@ -1,5 +1,3 @@
-
-
 // |-- External Dependencies --|
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
@@ -40,7 +38,6 @@ import pincodeSlice from './slices/pincodeSlice'
 import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import NewUserSlice from './slices/NewUserSlice'
-import slotManagementSlice from './slices/media/slotManagementSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
 import orderSlice from './slices/orderSlice'
@@ -106,7 +103,6 @@ const store = configureStore({
         barcode: barcodeSlice,
         cartonBoxBarcode: CartonBoxBarcodeSlice,
         productGroupBarcode: ProductGroupBarcodeSlice,
-        slotManagement: slotManagementSlice,
         websiteBlog: websiteBlogSlice,
         websitePage: websitePageSlice,
         order: orderSlice,

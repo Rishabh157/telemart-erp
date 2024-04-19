@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ChannelGroupServices.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import {
@@ -24,7 +17,8 @@ export const channelGroupApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        //***** GET Without PAGINATION DATA *****/
+
+        //***** GET ALL DATA *****/
         getAllChannelGroup: builder.query({
             providesTags: ['channel-group'],
             query: (companyId) => ({
@@ -42,6 +36,7 @@ export const channelGroupApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
         //***** GET BY ID *****/
         getChannelGroupById: builder.query({
             providesTags: ['channel-group'],
@@ -50,6 +45,7 @@ export const channelGroupApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        
         //***** DELETE *****/
         deleteChannelGroup: builder.mutation({
             invalidatesTags: ['channel-group'],

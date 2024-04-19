@@ -141,7 +141,7 @@ const EditSlotManagementWrapper = () => {
                     companyId: values?.companyId,
                 },
                 id: id || '',
-            }).then((res) => {
+            }).then((res:any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Slot Updated successfully!')

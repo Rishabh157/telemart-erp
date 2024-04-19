@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:TapeManagementService.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
@@ -25,6 +18,7 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET ALL DATA *****/
         getAllTapeMangement: builder.query({
             providesTags: ['tape'],
             query: (companyId) => ({
@@ -43,7 +37,7 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
+        //***** UPDATE *****/
         updateTape: builder.mutation({
             invalidatesTags: ['tape'],
             query: ({ body, id }: UpdateTapeManagement) => ({
@@ -58,17 +52,15 @@ export const tapeManagementApi = apiSlice.injectEndpoints({
             providesTags: ['tape'],
             query: (id) => ({
                 url: `/tape-master/${id}`,
-
                 method: 'GET',
             }),
         }),
 
-        //***** Delete *****/
+        //***** DELETE *****/
         deleteTape: builder.mutation({
             invalidatesTags: ['tape'],
             query: (id) => ({
                 url: `/tape-master/${id}`,
-
                 method: 'DELETE',
             }),
         }),

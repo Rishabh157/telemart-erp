@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:index.tsx
-// Type: Index Component
-// Last Updated: July 4, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 import { IconType } from 'react-icons'

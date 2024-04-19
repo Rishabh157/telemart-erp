@@ -1,16 +1,9 @@
-/// ==============================================
-// Filename:SlotManagementService.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
 import { AddSlotDefinition, UpdateSlotDefinition } from 'src/models/Slot.model'
 
-export const slotManagementApi = apiSlice.injectEndpoints({
+export const slotManagementApi: any = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
         getPaginationSlot: builder.query({
@@ -31,6 +24,8 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** GET BY ID *****/
         getSlotMangementById: builder.query({
             providesTags: ['slot'],
             query: (id: string) => ({
@@ -38,6 +33,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
         getSlotMangement: builder.query({
             providesTags: ['slot'],
             query: (companyid) => ({
@@ -45,7 +41,8 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-        //***** Update *****/
+
+        //***** UPDATE *****/
         updateSlot: builder.mutation({
             invalidatesTags: ['slot'],
             query: ({ body, id }: UpdateSlotDefinition) => ({
@@ -54,7 +51,8 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        //***** Update play pause *****/
+
+        //***** SLOT PLAY PAUSE *****/
         updateSlotContinueStatus: builder.mutation({
             invalidatesTags: ['slot'],
             query: (id) => ({
@@ -63,6 +61,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** DELETE *****/
         deleteSlotMangement: builder.mutation({
             invalidatesTags: ['slot'],
             query: (id: string) => ({
@@ -70,6 +69,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
         FileUploader: builder.mutation({
             invalidatesTags: [''],
             query: (body: any) => ({

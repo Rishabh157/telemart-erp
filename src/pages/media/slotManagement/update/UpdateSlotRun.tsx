@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:UpdateSlotRun.tsx
-// Type: Update Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -118,36 +111,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                         </>
                     ) : null}
                 </div>
-                {/* <div className="grid grid-cols-2 gap-4">
-                    {values.run ? (
-                        <>
-                            <div className="">
-                                <ATMTimePicker
-                                    name="runStartTime"
-                                    required
-                                    value={values.runStartTime}
-                                    label="Start Time"
-                                    size="medium"
-                                    onChange={(newValue) => {
-                                        setFieldValue('runStartTime', newValue)
-                                    }}
-                                />
-                            </div>
-                            <div className="">
-                                <ATMTimePicker
-                                    name="runEndTime"
-                                    required
-                                    value={values.runEndTime}
-                                    label="End Time"
-                                    size="medium"
-                                    onChange={(newValue) => {
-                                        setFieldValue('runEndTime', newValue)
-                                    }}
-                                />
-                            </div>
-                        </>
-                    ) : null}
-                </div> */}
+
                 <div className="grid grid-cols-2 gap-4">
                     <div className="  ">
                         <ATMTextArea
@@ -171,7 +135,7 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                                 formData.append('category', 'SLOTS')
                                 formData.append('fileUrl', newFile || '')
                                 setImageApiStatus(true)
-                                fileUploader(formData).then((res) => {
+                                fileUploader(formData).then((res: any) => {
                                     if ('data' in res) {
                                         setImageApiStatus(false)
                                         setFieldValue(
@@ -191,38 +155,6 @@ const UpdateSlotRun = ({ dropdownOptions, apiStatus, formikProps }: any) => {
                             </div>
                         ) : null}
                     </div>
-                    {/* <div className=" mt-4">
-                        <ATMFilePickerWrapper
-                            name="slotRunVideo"
-                            label="Slot Run Video"
-                            placeholder="Slot Run Video"
-                            isVideo
-                            onSelect={(newFile) => {
-                                const formData = new FormData()
-                                formData.append('fileType', 'VIDEO')
-                                formData.append('category', 'SLOTS')
-                                formData.append('fileUrl', newFile || '')
-                                setVideoApiStatus(true)
-                                fileUploader(formData).then((res) => {
-                                    if ('data' in res) {
-                                        setVideoApiStatus(false)
-                                        setFieldValue(
-                                            'slotRunVideo',
-                                            res?.data?.data?.fileUrl
-                                        )
-                                    }
-                                    setVideoApiStatus(false)
-                                })
-                            }}
-                            selectedFile={values.slotRunVideo}
-                            disabled={false}
-                        />
-                        {videoApiStatus ? (
-                            <div className=" mt-3 flex justify-center  items-center w-full h-full">
-                                <CircularProgress />
-                            </div>
-                        ) : null}
-                    </div> */}
                 </div>
             </div>
             <Divider />
