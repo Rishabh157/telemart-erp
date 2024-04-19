@@ -1,14 +1,7 @@
-/// ==============================================
-// Filename:SlotManagementService.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from '../ApiSlice'
-import { AddSlotManagement, UpdateSlotManagement } from 'src/models/Slot.model'
+import { UpdateSlotManagement } from 'src/models/Slot.model'
 
 export const slotManagementApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -22,15 +15,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** ADD *****/
-        addSlotView: builder.mutation({
-            invalidatesTags: ['slot'],
-            query: (body: AddSlotManagement) => ({
-                url: '/slot-master/add',
-                method: 'POST',
-                body,
-            }),
-        }),
+        //***** GET BY ID *****/
         getSlotViewById: builder.query({
             providesTags: ['slot'],
             query: (id: string) => ({
@@ -39,7 +24,7 @@ export const slotManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
+        //***** UPDATE *****/
         updateSlotView: builder.mutation({
             invalidatesTags: ['slot'],
             query: ({ body, id }: UpdateSlotManagement) => ({
@@ -48,21 +33,11 @@ export const slotManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-
-        deleteSlotView: builder.mutation({
-            invalidatesTags: ['slot'],
-            query: (id: string) => ({
-                url: `/slot-master/${id}`,
-                method: 'DELETE',
-            }),
-        }),
     }),
 })
 
 export const {
     useGetPaginationSlotViewQuery,
-    useAddSlotViewMutation,
-    useDeleteSlotViewMutation,
     useGetSlotViewByIdQuery,
     useUpdateSlotViewMutation,
 } = slotManagementApi

@@ -318,7 +318,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                                                 fileUploader(
                                                                     formData
                                                                 ).then(
-                                                                    (res) => {
+                                                                    (res:any) => {
                                                                         if (
                                                                             'data' in
                                                                             res

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ChannelManagementService.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import {
@@ -24,7 +17,7 @@ export const channelManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        //***** GET Without PAGINATION DATA *****/
+        //***** GET ALL PAGINATION *****/
         getAllChannel: builder.query({
             providesTags: ['channel'],
             query: (companyId) => ({
@@ -32,6 +25,7 @@ export const channelManagementApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
         //***** GET BY ID *****/
         getChannelById: builder.query({
             providesTags: ['channel'],
@@ -40,6 +34,7 @@ export const channelManagementApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
         //***** ADD *****/
         addChannel: builder.mutation({
             invalidatesTags: ['channel'],
@@ -59,6 +54,7 @@ export const channelManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        
         //***** DELETE *****/
         deleteChannel: builder.mutation({
             invalidatesTags: ['channel'],
