@@ -36,7 +36,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
     const outwardCustomerState: any = useSelector(
-        (state: RootState) => state.outwardCustomer
+        (state: RootState) => state.listingPagination
     )
 
     const {

@@ -20,9 +20,6 @@ import ProductReplacementSlice from './slices/ProductReplacementSlice'
 import warehouseToComapnySlice from './slices/WarehouseToComapnySlice'
 import userAcessSlice from './slices/access/userAcessSlice'
 import areaSlice from './slices/areaSlice'
-import assetsCategorySlice from './slices/assets/assetsCategorySlice'
-import assetLocationSlice from './slices/assets/assetsLocationSlice'
-import assetsRequestSlice from './slices/assets/assetsRequestSlice'
 import authSlice from './slices/authSlice'
 import countrySlice from './slices/countrySlice'
 import districtSlice from './slices/districtSlice'
@@ -71,9 +68,6 @@ const store = configureStore({
         order: orderSlice,
         inquiry: inquirySlice,
         inboundCaller: inboundCallerSlice,
-        assetLocation: assetLocationSlice,
-        assetsRequest: assetsRequestSlice,
-        assetsCategory: assetsCategorySlice,
         warehouseTransfer: warehouseTransferSlice,
         warehouseToSample: warehouseToSampleSlice,
         warehouseToComapny: warehouseToComapnySlice,

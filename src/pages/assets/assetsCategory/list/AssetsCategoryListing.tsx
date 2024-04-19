@@ -25,7 +25,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/assets/assetsCategorySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -52,7 +52,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     const navigate = useNavigate()
     const assetCategory = useSelector(
-        (state: RootState) => state.assetsCategory
+        (state: RootState) => state.listingPagination
     )
 
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
@@ -69,14 +69,14 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_ASSETS_CATEGORY_ADD
                 ) && (
-                    <button
-                        onClick={() => navigate('add')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        {' '}
-                        + Add{' '}
-                    </button>
-                )}
+                        <button
+                            onClick={() => navigate('add')}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add{' '}
+                        </button>
+                    )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -91,8 +91,8 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

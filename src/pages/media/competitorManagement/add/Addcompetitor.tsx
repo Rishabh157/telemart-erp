@@ -83,9 +83,8 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -262,11 +261,10 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                         return (
                                             <div
                                                 key={ind}
-                                                className={`flex flex-col gap-2 py-6 px-7 ${
-                                                    ind !==
-                                                        values.image.length -
-                                                            1 && 'border-b'
-                                                }  border-slate-300 `}
+                                                className={`flex flex-col gap-2 py-6 px-7 ${ind !==
+                                                    values.image.length -
+                                                    1 && 'border-b'
+                                                    }  border-slate-300 `}
                                             >
                                                 <div className="flex justify-between items-center">
                                                     <div className="text-primary-main text-lg pb-2 font-medium ">
@@ -275,16 +273,16 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                                     {/* Delete Button */}
                                                     {values.image?.length >
                                                         1 && (
-                                                        <button
-                                                            type="button"
-                                                            onClick={() =>
-                                                                remove(ind)
-                                                            }
-                                                            className="p-1 bg-red-500 text-white rounded"
-                                                        >
-                                                            <MdDeleteOutline className="text-2xl" />
-                                                        </button>
-                                                    )}
+                                                            <button
+                                                                type="button"
+                                                                onClick={() =>
+                                                                    remove(ind)
+                                                                }
+                                                                className="p-1 bg-red-500 text-white rounded"
+                                                            >
+                                                                <MdDeleteOutline className="text-2xl" />
+                                                            </button>
+                                                        )}
                                                 </div>
 
                                                 <div className="grid grid-cols-4 gap-4 gap-y-5 my-3">
@@ -309,7 +307,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                                                 formData.append(
                                                                     'fileUrl',
                                                                     newFile ||
-                                                                        ''
+                                                                    ''
                                                                 )
                                                                 setImageApiStatus(
                                                                     true
@@ -317,7 +315,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                                                 fileUploader(
                                                                     formData
                                                                 ).then(
-                                                                    (res) => {
+                                                                    (res: any) => {
                                                                         if (
                                                                             'data' in
                                                                             res
@@ -341,7 +339,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                                             }}
                                                             selectedFile={
                                                                 values.image[
-                                                                    ind
+                                                                ind
                                                                 ]
                                                             }
                                                             disabled={false}

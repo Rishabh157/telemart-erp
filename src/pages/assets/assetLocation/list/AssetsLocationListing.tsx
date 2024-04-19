@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AssertLocationListing.tsx
-// Type: List Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -25,9 +18,9 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/assets/assetsLocationSlice'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -52,7 +45,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
     ]
 
     const navigate = useNavigate()
-    const assetLocation = useSelector((state: RootState) => state.assetLocation)
+    const assetLocation = useSelector((state: RootState) => state.listingPagination)
 
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         assetLocation
@@ -68,14 +61,14 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_ASSETS_LOCATION_ADD
                 ) && (
-                    <button
-                        onClick={() => navigate('add')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        {' '}
-                        + Add{' '}
-                    </button>
-                )}
+                        <button
+                            onClick={() => navigate('add')}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            {' '}
+                            + Add{' '}
+                        </button>
+                    )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -90,8 +83,8 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
