@@ -20,7 +20,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/warehouseOutwardSlice/outwardRequestDealerSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -32,10 +32,9 @@ type Props = {
 const OutwardDealerTabs = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const outwardRequestState: any = useSelector(
-        (state: RootState) => state.outwardRequest
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const { page, rowsPerPage, isTableLoading } = outwardRequestState
 

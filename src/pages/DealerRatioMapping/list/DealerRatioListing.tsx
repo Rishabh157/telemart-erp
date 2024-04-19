@@ -25,7 +25,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/inventorySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -42,12 +42,11 @@ type Props = {
 const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const inventoryState: any = useSelector(
-        (state: RootState) => state.inventory
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         inventoryState
-    // const navigate = useNavigate()
 
     return (
         <>
@@ -55,13 +54,7 @@ const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[45px]  p-1">
                     <ATMPageHeading> Dealer's Raito </ATMPageHeading>
-                    {/* <button
-                        type="button"
-                        onClick={() => navigate('inward-inventory/add')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Inward Inventory
-                    </button> */}
+                    
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
@@ -78,7 +71,6 @@ const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
                         onSearch={(newValue) => {
                             dispatch(setSearchValue(newValue))
                         }}
-                        //  isFilter
                     />
 
                     {/* Table */}
@@ -86,7 +78,6 @@ const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
                         <ATMTable
                             columns={columns}
                             rows={rows}
-                            // isCheckbox={true}
                             selectedRows={selectedRows}
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)

@@ -14,7 +14,6 @@ import {
 import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ComplainSlice from './slices/ComplainSlice'
 import DashboardSlice from './slices/DashboardSlice'
-import InventoryManagementSlice from './slices/InventoryManagementSlice'
 import ListingPaginationSlice from './slices/ListingPaginationSlice'
 import userAcessSlice from './slices/access/userAcessSlice'
 import areaSlice from './slices/areaSlice'
@@ -22,16 +21,13 @@ import authSlice from './slices/authSlice'
 import countrySlice from './slices/countrySlice'
 import districtSlice from './slices/districtSlice'
 import inquirySlice from './slices/inquirySlice'
-import inventorySlice from './slices/inventorySlice'
 import inboundCallerSlice from './slices/media/inboundCallerSlice'
 import orderSlice from './slices/orderSlice'
 import pincodeSlice from './slices/pincodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import statesSlice from './slices/statesSlice'
 import tehsilSlice from './slices/tehsilSlice'
-import inwardRequestSlice from './slices/warehouseInwardSlice/inwardRequestDealerSlice'
 import warehouseAssignedOrderSlice from './slices/warehouseOrders/warehouseAssignedOrderSlice'
-import outwardRequestSlice from './slices/warehouseOutwardSlice/outwardRequestDealerSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
 
@@ -44,10 +40,6 @@ const store = configureStore({
         sideNavLayout: sideNavLayoutSlice,
         listingPagination: ListingPaginationSlice,
         dealer: dealerSlice,
-        inventory: inventorySlice,
-        outwardRequest: outwardRequestSlice,
-        inwardRequest: inwardRequestSlice,
-        inventoryManagement: InventoryManagementSlice,
         states: statesSlice,
         district: districtSlice,
         areas: areaSlice,

@@ -22,7 +22,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/warehouseInwardSlice/inwardRequestDealerSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -34,7 +34,7 @@ type Props = {
 const InwardWarehouseTabs = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const inwardRequestState: any = useSelector(
-        (state: RootState) => state.inwardRequest
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
     // const [isFilterOpen, setIsFilterOpen] = React.useState(false);

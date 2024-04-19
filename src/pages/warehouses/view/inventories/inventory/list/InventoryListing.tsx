@@ -26,7 +26,7 @@ import {
     setRowsPerPage,
     setPage,
     setSearchValue,
-} from 'src/redux/slices/inventorySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -43,7 +43,7 @@ type Props = {
 const InventoryListing = ({ columns, rows, tabs }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const inventoryState: any = useSelector(
-        (state: RootState) => state.inventory
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
