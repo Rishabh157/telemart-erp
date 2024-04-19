@@ -29,6 +29,9 @@ export type FormInitialValues = {
     icOneLabel: string
     icTwoLabel: string
     icThreeLabel: string
+    images?: {
+        image: ''
+    }[]
 }
 
 const AddCustomerComplaintDetailsWrapper = ({
@@ -54,6 +57,11 @@ const AddCustomerComplaintDetailsWrapper = ({
         icOneLabel: '',
         icTwoLabel: '',
         icThreeLabel: '',
+        images: [
+            {
+                image: '',
+            },
+        ],
     }
 
     // Form Validation Schema
@@ -96,6 +104,7 @@ const AddCustomerComplaintDetailsWrapper = ({
             icOneLabel: values.icOneLabel,
             icTwoLabel: values.icTwoLabel,
             icThreeLabel: values.icThreeLabel,
+            images: values.images?.map((ele) => ele?.image) || [],
         }
 
         addComplaint(formatedValues)
