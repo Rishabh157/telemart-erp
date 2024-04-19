@@ -20,7 +20,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/CreateBatchOrderSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -32,7 +32,7 @@ type Props = {
 const AssignBatchesListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const createBatchState: any = useSelector(
-        (state: RootState) => state.createBatch
+        (state: RootState) => state.listingPagination
     )
     const navigate = useNavigate()
 

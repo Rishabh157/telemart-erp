@@ -9,8 +9,6 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-// import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-// import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 
 // |-- Redux --|
 import {
@@ -18,7 +16,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/CreateBatchOrderSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -38,12 +36,11 @@ const AssignBatchesViewListing = ({
     setShowDropdown,
     selectedRows,
     setSelectedRows,
-}: // apiStatus,
-// handleSubmit,
-Props) => {
+}:
+    Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const createBatchState: any = useSelector(
-        (state: RootState) => state.createBatch
+        (state: RootState) => state.listingPagination
     )
 
     const {
@@ -75,8 +72,6 @@ Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
-                    // isRefresh
                     onFilterDispatch={() => dispatch(setFilterValue([]))}
                 />
 

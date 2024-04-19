@@ -1,77 +1,50 @@
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import AddOrderAssigneeFormWrapper from 'src/pages/orders/OrderAssigneeForm/AddOrderAssigneeFormWrapper'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import AddOrderAssigneeFormWrapper from 'src/pages/orders/OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/CreateBatchOrderSlice'
 import { useGetSingleBatchesOrdersQuery } from 'src/services/BatchesServices'
-import { AppDispatch, RootState } from 'src/redux/store'
 import AssignBatchesViewListing from './AssignBatchesViewListing'
 // import { showToast } from 'src/utils'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { OrderListResponse } from 'src/models'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const AssigneBatchesViewListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    useUnmountCleanup()
+
     const params = useParams()
     const [selectedRows, setSelectedRows] = useState([])
-    // const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [selectedOrder, setSelectedOrder] = useState<any>(null)
     const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] =
         useState<boolean>(false)
 
-    // const [currentId, setCurrentId] = useState<string>('')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [showDropdown, setShowDropdown] = useState<boolean>(false)
-    // const [addBatch] = useAddBatchesMutation()
 
-    const createBatchOrderState: any = useSelector(
-        (state: RootState) => state.createBatch
-    )
     const batchId = params?.id
 
-    const {
-        // page,
-        // rowsPerPage,
-        // searchValue,
-        items,
-        // totalItems,
-        // isTableLoading,
-    } = createBatchOrderState
 
-    const { data, isLoading, isFetching } = useGetSingleBatchesOrdersQuery(
-        batchId,
-        {
-            skip: !batchId,
-        }
-    )
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
+    const { items } = useGetDataByIdCustomQuery<OrderListResponse>({
+        useEndPointHook: useGetSingleBatchesOrdersQuery(
+            batchId,
+            {
+                skip: !batchId,
+            }
+        ),
+    })
 
     const columns: columnTypes[] = [
         {
@@ -94,21 +67,21 @@ const AssigneBatchesViewListingWrapper = () => {
                             setIsOrderAssigneeFormOpen(true)
                             setSelectedOrder(row)
                         }}
-                        // children={
-                        //     <>
-                        //         <button
-                        //             onClick={() => {
-                        //                 navigate(`/orders/view/${row?._id}`)
-                        //             }}
-                        //             className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                        //         >
-                        //             View
-                        //         </button>
-                        //     </>
-                        // }
+                    // children={
+                    //     <>
+                    //         <button
+                    //             onClick={() => {
+                    //                 navigate(`/orders/view/${row?._id}`)
+                    //             }}
+                    //             className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    //         >
+                    //             View
+                    //         </button>
+                    //     </>
+                    // }
                     />
                 ),
-            
+
         },
         {
             field: 'orderNumber',
@@ -452,8 +425,8 @@ const AssigneBatchesViewListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -508,12 +481,11 @@ const AssigneBatchesViewListingWrapper = () => {
         <>
             <AssignBatchesViewListing
                 columns={columns}
-                rows={items}
+                rows={items as any}
                 // apiStatus={apiStatus}
                 setShowDropdown={setShowDropdown}
                 selectedRows={selectedRows}
                 setSelectedRows={(ele) => setSelectedRows(ele)}
-                // handleSubmit={() => handleBatchSubmit()}
             />
             <DialogLogBox
                 maxWidth="md"

@@ -15,7 +15,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/houseArrestSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -32,7 +32,7 @@ const HouseArrestListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const houseArrestState: any = useSelector(
-        (state: RootState) => state.houseArrest
+        (state: RootState) => state.listingPagination
     )
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =

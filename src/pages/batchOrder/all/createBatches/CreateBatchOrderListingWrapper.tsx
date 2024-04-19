@@ -1,8 +1,8 @@
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -10,75 +10,58 @@ import { OrderListResponse } from 'src/models'
 import { useGetOrderQuery } from 'src/services/OrderService'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/CreateBatchOrderSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import moment from 'moment'
-import CreateBatchOrderListing from './CreateBatchOrderListing'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddBatchesFormWrapper from './AddBatchesForm/AddBatchesFormWrapper'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import AddBatchesFormWrapper from './AddBatchesForm/AddBatchesFormWrapper'
+import CreateBatchOrderListing from './CreateBatchOrderListing'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const CreateBatchOrderListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    useUnmountCleanup()
+
     const [isShowCreateBatchModel, setIsShowCreateBatchModel] =
         useState<boolean>(false)
     const [selectedRows, setSelectedRows] = useState([])
 
-    // const [currentId, setCurrentId] = useState<string>('')
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [showDropdown, setShowDropdown] = useState<boolean>(false)
-    // const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
+    const createBatchOrderState: any = useSelector((state: RootState) => state.listingPagination)
+    const { page, rowsPerPage, searchValue } = createBatchOrderState
 
-    const createBatchOrderState: any = useSelector(
-        (state: RootState) => state.createBatch
-    )
-
-    const { page, rowsPerPage, searchValue, items } = createBatchOrderState
-
-    const { data, isLoading, isFetching } = useGetOrderQuery({
-        limit: rowsPerPage,
-        searchValue: '',
-        params: ['didNo', 'mobileNo'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'orderNumber',
-                value: [searchValue],
-            },
-            {
-                fieldName: 'status',
-                value: 'FRESH',
-            },
-            {
-                fieldName: 'approved',
-                value: true,
-            },
-            {
-                fieldName: 'isOrderAssigned',
-                value: false,
-            },
-        ],
-        getBatchData: true,
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    // pagination api
+    const { items } = useGetCustomListingData<OrderListResponse[]>({
+        useEndPointHook: useGetOrderQuery({
+            limit: rowsPerPage,
+            searchValue: '',
+            params: ['didNo', 'mobileNo'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'orderNumber',
+                    value: [searchValue],
+                },
+                {
+                    fieldName: 'status',
+                    value: 'FRESH',
+                },
+                {
+                    fieldName: 'approved',
+                    value: true,
+                },
+                {
+                    fieldName: 'isOrderAssigned',
+                    value: false,
+                },
+            ],
+            getBatchData: true,
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
     })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
 
     const columns: columnTypes[] = [
         {
@@ -413,8 +396,8 @@ const CreateBatchOrderListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                     </>

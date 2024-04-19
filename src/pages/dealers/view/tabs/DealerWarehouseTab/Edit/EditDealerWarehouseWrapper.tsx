@@ -7,34 +7,34 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
-import { array, object, string } from 'yup'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper'
-import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
-import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
-import EditDealerWarehouse from './EditDealerWarehouse'
-import { showToast, validationofGst } from 'src/utils'
+import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
 import {
     useGetDealerWarehouseByIdQuery,
     useUpdateDealerWarehouseMutation,
 } from 'src/services/DealerWarehouseService'
-import { regIndiaPhone } from 'src/pages/vendors/edit/EditVendorWrapper'
+import { showToast, validationofGst } from 'src/utils'
+import EditDealerWarehouse from './EditDealerWarehouse'
+import StepEditAddressWrapper from './FormSteps/StepEditAddress/StepEditAddressWrapper'
+import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper'
+import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/DealerWarehouseSlice'
+import useCountries from 'src/hooks/useCountry'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import {
     setFieldCustomized,
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
-import useCountries from 'src/hooks/useCountry'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -146,14 +146,12 @@ const EditDealerWarehouseWrapper = () => {
 
     // Redux States
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.dealerWarehouse
-    )
 
     const { dealerId, id: Id } = useParams()
-    const { data, isLoading, isFetching } = useGetDealerWarehouseByIdQuery(
-        Id || ''
-    )
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetDealerWarehouseByIdQuery(Id || ''),
+    })
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const [updateDealerWarehouse] = useUpdateDealerWarehouseMutation()
@@ -259,10 +257,6 @@ const EditDealerWarehouseWrapper = () => {
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }
-
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [data, isLoading, isFetching])
 
     return (
         <Formik
