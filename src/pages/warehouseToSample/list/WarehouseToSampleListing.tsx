@@ -41,7 +41,6 @@ const WarehouseToSampleListing = ({
     rows,
     setShowDropdown,
 }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const dispatch = useDispatch<AppDispatch>()
     const WarehouseTransferState: any = useSelector(
