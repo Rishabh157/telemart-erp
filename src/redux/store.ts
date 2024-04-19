@@ -13,12 +13,8 @@ import {
     vendorSlice,
 } from './slices'
 import ListingPaginationSlice from './slices/ListingPaginationSlice'
-import dealerPincodeSlice from './slices/dealerPincodeSlice'
-import DealerLedgerSlice from './slices/DealerLedgerSlice'
 import DealerWarehouseSlice from './slices/DealerWarehouseSlice'
-import DealerOrderLedgerSlice from './slices/dealerOrderLedgerSlice'
 import VendorWarehouseSlice from './slices/VendorWarehouseSlice'
-import DealerSupervisorSlice from './slices/DealerSupervisorSlice'
 import GRNSlice from './slices/GRNSlice'
 import inventorySlice from './slices/inventorySlice'
 import outwardRequestSlice from './slices/warehouseOutwardSlice/outwardRequestDealerSlice'
@@ -47,7 +43,6 @@ import assetLocationSlice from './slices/assets/assetsLocationSlice'
 import assetsRequestSlice from './slices/assets/assetsRequestSlice'
 import assetsCategorySlice from './slices/assets/assetsCategorySlice'
 import vendorLedgerSlice from './slices/VendorLedgerSlice'
-import dealersRatioSlice from './slices/dealersRatioSlice'
 import userAcessSlice from './slices/access/userAcessSlice'
 import returnToVendorSlice from './slices/returnToVendorSlice'
 import warehouseTransferSlice from './slices/warehouseTransferSlice'
@@ -58,15 +53,11 @@ import InwardDealerSlice from './slices/InwardDealerSlice'
 import ComplainSlice from './slices/ComplainSlice'
 import MoneybackSlice from './slices/MoneybackSlice'
 import ProductReplacementSlice from './slices/ProductReplacementSlice'
-import houseArrestSlice from './slices/houseArrestSlice'
 import warehouseAssignedOrderSlice from './slices/warehouseOrders/warehouseAssignedOrderSlice'
-import CreateBatchOrderSlice from './slices/CreateBatchOrderSlice'
 import OfferAppliedNdrSlice from './slices/OfferAppliedNdrSlice'
 import outwardCustomerSlice from './slices/outwardCustomerSlice'
 import DashboardSlice from './slices/DashboardSlice'
-import dealerInventorySlice from './slices/dealerInventorySlice'
 import MultiOrderSearchSlice from './slices/MultiOrderSearchSlice'
-import DealerToDealerSlice from './slices/DealerToDealerOrderSlice'
 
 const store = configureStore({
     reducer: {
@@ -76,12 +67,7 @@ const store = configureStore({
         sideNavLayout: sideNavLayoutSlice,
         listingPagination: ListingPaginationSlice,
         dealer: dealerSlice,
-        dealerRatio: dealersRatioSlice,
-        dealerPincode: dealerPincodeSlice,
-        dealerSupervisor: DealerSupervisorSlice,
-        dealerLedger: DealerLedgerSlice,
         dealerWarehouse: DealerWarehouseSlice,
-        dealerOrderLedger: DealerOrderLedgerSlice,
         vendor: vendorSlice,
         vendorWarehouse: VendorWarehouseSlice,
         user: userSlice,
@@ -121,14 +107,10 @@ const store = configureStore({
         complain: ComplainSlice,
         moneyback: MoneybackSlice,
         productReplacement: ProductReplacementSlice,
-        houseArrest: houseArrestSlice,
         warehouseOrdersAssigned: warehouseAssignedOrderSlice,
-        createBatch: CreateBatchOrderSlice,
         offerAppliedNdr: OfferAppliedNdrSlice,
         outwardCustomer: outwardCustomerSlice,
-        dealerInventory: dealerInventorySlice,
         multiOrderSearch: MultiOrderSearchSlice,
-        delaerToDealer: DealerToDealerSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
         [filePickerSlice.reducerPath]: filePickerSlice.reducer,
     },

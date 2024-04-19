@@ -1,8 +1,7 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -10,60 +9,48 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useGetDealersInventoryQuery } from 'src/services/BarcodeService'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/dealerInventorySlice'
-import DealerInventoryListing from './DealerInventoryListing'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { DealersInventoryListResponse } from 'src/models/Barcode.model'
+import { RootState } from 'src/redux/store'
+import DealerInventoryListing from './DealerInventoryListing'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 
 const DealerInventoryListingWrapper = () => {
-    // Hooks
-    const dispatch = useDispatch<AppDispatch>()
+    // Hooks    
+    useUnmountCleanup()
+
 
     const dealerInventoryState: any = useSelector(
-        (state: RootState) => state.dealerInventory
+        (state: RootState) => state.listingPagination
     )
 
-    const { page, rowsPerPage, searchValue, items, selectedDealer } =
+    const { page, rowsPerPage, searchValue, selectedDealer } =
         dealerInventoryState
 
-    const { data, isLoading, isFetching } = useGetDealersInventoryQuery(
-        {
-            limit: rowsPerPage,
-            searchValue: searchValue,
-            params: ['productGroupLabel'],
-            page: page,
-            filterBy: [
-                {
-                    fieldName: 'dealerId',
-                    value: selectedDealer,
-                },
-            ],
-            dateFilter: {},
-            orderBy: 'createdAt',
-            orderByValue: -1,
-            isPaginationRequired: true,
-        },
-        {
-            skip: !selectedDealer,
-        }
-    )
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
-
+    // pagination api
+    const { items } = useGetCustomListingData<DealersInventoryListResponse[]>({
+        useEndPointHook: useGetDealersInventoryQuery(
+            {
+                limit: rowsPerPage,
+                searchValue: searchValue,
+                params: ['productGroupLabel'],
+                page: page,
+                filterBy: [
+                    {
+                        fieldName: 'dealerId',
+                        value: selectedDealer,
+                    },
+                ],
+                dateFilter: {},
+                orderBy: 'createdAt',
+                orderByValue: -1,
+                isPaginationRequired: true,
+            },
+            {
+                skip: !selectedDealer,
+            }
+        )
+    })
     const columns: columnTypes[] = [
         {
             field: 'productGroupLabel',

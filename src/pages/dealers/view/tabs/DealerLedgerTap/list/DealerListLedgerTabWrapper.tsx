@@ -1,16 +1,6 @@
-/// ==============================================
-// Filename:DealerListLedgerTabWrapper.tsx
-// Type: Tab List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
-
 // |-- External Dependencies --|
 import { format } from 'date-fns'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -22,47 +12,46 @@ import DealerLedgerListing from './DealerLedgerListing'
 import { ledgerNoteType } from 'src/utils'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/DealerLedgerSlice'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 
 const DealerListLedgerTabWrapper = () => {
+    useUnmountCleanup()
     const params = useParams()
     const dealerId: any = params.dealerId
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
 
     const dealerLedgerState: any = useSelector(
-        (state: RootState) => state.dealerLedger
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, items, searchValue, filterBy } =
+    const { page, rowsPerPage, searchValue, filterBy } =
         dealerLedgerState
-    const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isFetching, isLoading } = useGetDealerLedgerQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['noteType'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'dealerId',
-                value: dealerId,
-            },
-            {
-                fieldName: 'companyId',
-                value: companyId,
-            },
-        ],
-        dateFilter: filterBy,
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    // pagination api
+    const { items } = useGetCustomListingData<LedgerListResponse[]>({
+        useEndPointHook: useGetDealerLedgerQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['noteType'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'dealerId',
+                    value: dealerId,
+                },
+                {
+                    fieldName: 'companyId',
+                    value: companyId,
+                },
+            ],
+            dateFilter: filterBy,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
     })
-
     const columns: columnTypes[] = [
         {
             field: 'createdAt',
@@ -127,19 +116,6 @@ const DealerListLedgerTabWrapper = () => {
             ),
         },
     ]
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
-
     return (
         <>
             <DealerLedgerListing columns={columns} rows={items} />
