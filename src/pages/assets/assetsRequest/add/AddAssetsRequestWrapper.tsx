@@ -7,24 +7,23 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { number, object, string } from 'yup'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 
-import AddAsstesRequest from './AddAssetsRequest'
+import { useGetAllAssetsCategoryQuery } from 'src/services/assets/AssetsCategoryService'
 import { useAddAssetsRequestMutation } from 'src/services/assets/AssetsRequestServcies'
 import { showToast } from 'src/utils'
-import { useGetAllAssetsCategoryQuery } from 'src/services/assets/AssetsCategoryService'
-import { setAllItems } from 'src/redux/slices/assets/assetsCategorySlice'
-import { AssetsCategoryListResponse } from 'src/models'
+import AddAsstesRequest from './AddAssetsRequest'
 
 // |-- Redux --|
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -42,23 +41,19 @@ export type FormInitialValues = {
 const AddAssetsRequestWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addAsset] = useAddAssetsRequestMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { allItems } = useSelector(
-        (state: RootState) => state?.assetsCategory
-    )
-    const { data, isLoading, isFetching } = useGetAllAssetsCategoryQuery(
-        userData?.companyId
-    )
 
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setAllItems(data?.data))
-        }
-    }, [data, isLoading, isFetching])
+    const { options: allItems } = useCustomOptions({
+        useEndPointHook: useGetAllAssetsCategoryQuery(
+            userData?.companyId
+        ),
+        keyName: 'assetCategoryName',
+        value: '_id',
+    })
+
     const initialValues: FormInitialValues = {
         assetName: '',
         assetCategory: '',
@@ -108,14 +103,7 @@ const AddAssetsRequestWrapper = (props: Props) => {
     }
 
     const dropdownOptions = {
-        assetCategoryOptions: allItems?.map(
-            (assetCategory: AssetsCategoryListResponse) => {
-                return {
-                    label: assetCategory.assetCategoryName,
-                    value: assetCategory._id,
-                }
-            }
-        ),
+        assetCategoryOptions: allItems
     }
     return (
         <>

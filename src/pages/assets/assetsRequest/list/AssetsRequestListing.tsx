@@ -25,7 +25,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/assets/assetsRequestSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -51,7 +51,7 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
+    const assetsRequest = useSelector((state: RootState) => state.listingPagination)
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         assetsRequest
     return (

@@ -1,26 +1,14 @@
-/// ==============================================
-// Filename:AssetsRequestWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { AssetsRequestListResponse } from 'src/models'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/assets/assetsRequestSlice'
 import {
     useDeleteAssetsRequestMutation,
     useGetAssetsRequestQuery,
@@ -30,19 +18,61 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 import AssetsRequestListing from './AssetsRequestListing'
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const AssetsRequestWrapper = () => {
+    useUnmountCleanup()
     const navigate = useNavigate()
-    const assetsRequest = useSelector((state: RootState) => state.assetsRequest)
+    const assetsRequest = useSelector((state: RootState) => state.listingPagination)
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteAsset] = useDeleteAssetsRequestMutation()
 
-    const columns: columnTypes[] = [
+    const { page, rowsPerPage, searchValue } = assetsRequest
 
+    // pagination api
+    const { items } = useGetCustomListingData<AssetsRequestListResponse[]>({
+        useEndPointHook: useGetAssetsRequestQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['assetName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: '',
+                    value: [],
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        })
+    })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteAsset(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
+    const columns: columnTypes[] = [
         {
             field: 'actions',
             headerName: 'Actions',
@@ -114,57 +144,6 @@ const AssetsRequestWrapper = () => {
             ),
         },
     ]
-
-    const { page, rowsPerPage, searchValue, items } = assetsRequest
-
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetAssetsRequestQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['assetName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteAsset(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
 
     return (
         <>
