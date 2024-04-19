@@ -1,13 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:RTVendor.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,7 +17,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/returnToVendorSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -37,11 +30,9 @@ type Props = {
 }
 
 const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-
     const dispatch = useDispatch<AppDispatch>()
     const saleOrderState: any = useSelector(
-        (state: RootState) => state.returnToVendor
+        (state: RootState) => state.listingPagination
     )
 
     const navigate = useNavigate()
@@ -49,11 +40,7 @@ const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         saleOrderState
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
+
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}

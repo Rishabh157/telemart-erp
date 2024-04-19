@@ -13,9 +13,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-    // setOrderNumberSearch,
-    // setComplaintNumberSearch,
-} from 'src/redux/slices/OfferAppliedNdrSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -30,31 +28,17 @@ type Props = {
 const OfferAppliedNdrListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const offerAppliedNdrState: any = useSelector(
-        (state: RootState) => state.offerAppliedNdr
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const {
-        page,
-        rowsPerPage,
-        totalItems,
-        searchValue,
-        isTableLoading,
-        // orderNumberSearch,
-        // complaintNumberSearch,
-    } = offerAppliedNdrState
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+        offerAppliedNdrState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Offer Apply NDR </ATMPageHeading>
-                {/* <button
-                    type="button"
-                    onClick={() => navigate('add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add
-                </button> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">

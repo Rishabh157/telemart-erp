@@ -25,8 +25,8 @@ import EditSaleOrder from './EditSaleOrder'
 // |-- Redux --|
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { setSelectedItem } from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {}
@@ -79,16 +79,11 @@ const EditSaleOrderWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateSaleOrder] = useUpdateSalesOrderMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.saleOrder
-    )
 
-    const { data, isLoading, isFetching } = useGetSalesOrderByIdQuery(Id || '')
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setSelectedItem(data?.data))
-        }
-    }, [dispatch, data, isLoading, isFetching])
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetSalesOrderByIdQuery(Id || ''),
+    })
+  
 
     const {
         data: dealerData,

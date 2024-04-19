@@ -7,32 +7,32 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { IconType } from 'react-icons'
 import { Chip, Stack } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
+import { IconType } from 'react-icons'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 import {
     BarcodeListResponseType,
     InwardDealerRequstListResponse,
 } from 'src/models'
-import OutwardRequestListing from './InwardDealerTabs'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
-import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
-import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import OutwardRequestListing from './InwardDealerTabs'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -41,11 +41,9 @@ import {
     useInwardDealerBarcodeMutation,
     useUpdateInwardDealerApprovalMutation,
 } from 'src/services/InwardDealerServices'
-import {
-    setItems,
-    setTotalItems,
-    setIsTableLoading,
-} from 'src/redux/slices/InwardDealerSlice'
+
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 
 // |-- Types --|
@@ -56,6 +54,7 @@ export type Tabs = {
 }
 
 const InwardDealerTabsListingWrapper = () => {
+    useUnmountCleanup()
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
@@ -67,32 +66,31 @@ const InwardDealerTabsListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const inwardDealerState: any = useSelector(
-        (state: RootState) => state.inwardDealer
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, items } = inwardDealerState
+    const { page, rowsPerPage, searchValue } = inwardDealerState
 
     const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
-    const {
-        data: warehouseTransferData,
-        isFetching: warehouseTransferIsFetching,
-        isLoading: warehouseTransferIsLoading,
-    } = useGetPaginationInwardDealerOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['dtwNumber'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'toWarehouseId',
-                value: warehouseId,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetPaginationInwardDealerOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['dtwNumber'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'toWarehouseId',
+                    value: warehouseId,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
@@ -100,23 +98,7 @@ const InwardDealerTabsListingWrapper = () => {
         useInwardDealerBarcodeMutation()
     const [updateInwardDealerApproval] = useUpdateInwardDealerApprovalMutation()
 
-    useEffect(() => {
-        if (!warehouseTransferIsFetching && !warehouseTransferIsLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(warehouseTransferData?.data || []))
-            dispatch(setTotalItems(warehouseTransferData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [
-        warehouseTransferIsLoading,
-        warehouseTransferIsFetching,
-        warehouseTransferData,
-        dispatch,
-    ])
-
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Inward',

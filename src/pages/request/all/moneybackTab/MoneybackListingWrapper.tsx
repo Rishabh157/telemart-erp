@@ -1,55 +1,39 @@
-/// ==============================================
-// Filename:MoneybackListingWrapper.tsx
-// Type: List Component
-// Last Updated: March 14, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { Chip, Stack } from '@mui/material'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { MoneybackListResponse } from 'src/models/Moneyback.model'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/MoneybackSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 import {
     useGetMoneybackOrderQuery,
     useMangerFirstApprovalMutation,
 } from 'src/services/MoneybackServices'
 import { showToast } from 'src/utils'
-// import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-// Dispatching imports
-// import { IoRemoveCircle } from 'react-icons/io5'
-// import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-// import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-// import moment from 'moment'
-import MoneybackListing from './MoneybackListing'
+
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-// import Swal from 'sweetalert2'
+import MoneybackListing from './MoneybackListing'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddCustomerInfoFormWrapper from './AddCustomerInfoForm/AddCustomerInfoFormWrapper'
-import AddAccountApprovedFormWrapper from './AddAccountApprovedForm/AddAccountApprovedFormWrapper'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import AddAccountApprovedFormWrapper from './AddAccountApprovedForm/AddAccountApprovedFormWrapper'
+import AddCustomerInfoFormWrapper from './AddCustomerInfoForm/AddCustomerInfoFormWrapper'
 import StatusDialog from './MoneyBackStatusDialog/statusDialog'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const MoneybackListingWrapper = () => {
+    useUnmountCleanup()
     // Hooks
     const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     // Dispatching State
 
     const [currentId, setCurrentId] = useState<string>()
@@ -65,41 +49,26 @@ const MoneybackListingWrapper = () => {
     const [moneyBackData, setMoneyBackData] = useState<any>([])
 
     const moneybackState: any = useSelector(
-        (state: RootState) => state.moneyback
+        (state: RootState) => state.listingPagination
     )
 
     const [managerLevelApproval] = useMangerFirstApprovalMutation()
 
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        items,
-        // totalItems,
-        // isTableLoading,
-    } = moneybackState
+    const { page, rowsPerPage, searchValue } = moneybackState
 
-    const { data, isFetching, isLoading } = useGetMoneybackOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['complaintNumber', 'orderNumber'],
-        page: page,
-        filterBy: [],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData<MoneybackListResponse>({
+        useEndPointHook: useGetMoneybackOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['complaintNumber', 'orderNumber'],
+            page: page,
+            filterBy: [],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
 
     // Manager First Level Approval
     const handleManagerFirstLevelApprovalComplete = (

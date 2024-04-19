@@ -1,13 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:DealerWarehouseListing.tsx
-// Type: Tab List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +19,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/DealerWarehouseSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -48,21 +41,14 @@ const DealerWarehouseListing = ({
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const dealerWarehouseState: any = useSelector(
-        (state: RootState) => state.dealerWarehouse
+        (state: RootState) => state.listingPagination
     )
-    // const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         dealerWarehouseState
 
     const params: any = useParams()
-
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
 
     return (
         <div className="h-full">

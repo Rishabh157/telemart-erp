@@ -1,45 +1,34 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:OutwardDealerTabsListingWrapper.tsx
-// Type: List Component
-// Last Updated: OCTOBER 23, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
 
 // |-- Internal Dependencies --|
 import { useNavigate, useParams } from 'react-router-dom'
+import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import {
-    OutwardRequestDealerListResponse,
-    BarcodeListResponseType,
-} from 'src/models'
-import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
-import OutwardRequestListing from './OutwardDealerTabs'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-import { showToast } from 'src/utils'
-import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import {
+    BarcodeListResponseType,
+    OutwardRequestDealerListResponse,
+} from 'src/models'
+import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { AlertText } from 'src/pages/callerpage/components/constants'
+import { showToast } from 'src/utils'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import OutwardRequestListing from './OutwardDealerTabs'
 
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/saleOrderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
     useDispatchDealerBarcodeMutation,
@@ -55,6 +44,7 @@ export type Tabs = {
 }
 
 const OutwardDealerTabsListingWrapper = () => {
+    useUnmountCleanup()
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
@@ -66,62 +56,51 @@ const OutwardDealerTabsListingWrapper = () => {
     const params = useParams()
     const warehouseId = params.id
     const salesOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, items } = salesOrderState
+    const { page, rowsPerPage, searchValue } = salesOrderState
     const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
 
-    const {
-        data: soData,
-        isFetching: soIsFetching,
-        isLoading: soIsLoading,
-    } = useGetPaginationSaleOrderByGroupQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['soNumber', 'dealerLabel'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyWareHouseId',
-                value: warehouseId,
-            },
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: 'dhApproved',
-                value: true,
-            },
-            {
-                fieldName: 'accApproved',
-                value: true,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+    const { items } = useGetCustomListingData<OutwardRequestDealerListResponse>(
+        {
+            useEndPointHook: useGetPaginationSaleOrderByGroupQuery({
+                limit: rowsPerPage,
+                searchValue: searchValue,
+                params: ['soNumber', 'dealerLabel'],
+                page: page,
+                filterBy: [
+                    {
+                        fieldName: 'companyWareHouseId',
+                        value: warehouseId,
+                    },
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId as string,
+                    },
+                    {
+                        fieldName: 'dhApproved',
+                        value: true,
+                    },
+                    {
+                        fieldName: 'accApproved',
+                        value: true,
+                    },
+                ],
+                dateFilter: {},
+                orderBy: 'createdAt',
+                orderByValue: -1,
+                isPaginationRequired: true,
+            }),
+        }
+    )
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchDealerBarcodeMutation()
 
-    useEffect(() => {
-        if (!soIsFetching && !soIsLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(soData?.data || []))
-            dispatch(setTotalItems(soData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [soIsLoading, soIsFetching, soData, dispatch])
-
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Dispatch',
@@ -151,7 +130,6 @@ const OutwardDealerTabsListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'soNumber',

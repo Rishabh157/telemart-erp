@@ -6,11 +6,11 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -29,21 +29,18 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import SaleOrderListing from './SaleOrderListing'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/saleOrderSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const SaleOrderListingWrapper = () => {
+    useUnmountCleanup()
     const salesOrderState: any = useSelector(
-        (state: RootState) => state.saleOrder
+        (state: RootState) => state.listingPagination
     )
-    const dispatch = useDispatch<AppDispatch>()
-    const { page, rowsPerPage, searchValue, items } = salesOrderState
+    const { page, rowsPerPage, searchValue } = salesOrderState
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
@@ -51,8 +48,8 @@ const SaleOrderListingWrapper = () => {
     const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-    const { data, isFetching, isLoading } =
-        useGetPaginationSaleOrderByGroupQuery({
+    const { items } = useGetCustomListingData<SaleOrderListResponseTypes>({
+        useEndPointHook: useGetPaginationSaleOrderByGroupQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['soNumber', 'dealerLabel'],
@@ -67,17 +64,8 @@ const SaleOrderListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
+        }),
+    })
 
     const handleDelete = () => {
         setShowDropdown(false)
@@ -153,7 +141,6 @@ const SaleOrderListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -196,7 +183,6 @@ const SaleOrderListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'soNumber',
