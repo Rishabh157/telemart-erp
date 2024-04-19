@@ -21,7 +21,7 @@ import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import PurchaseOrderListing from './PurchaseOrderListing'
 
 // |-- Redux --|
-import { setFilterValue } from 'src/redux/slices/GRNSlice'
+import { setFilterValue } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
