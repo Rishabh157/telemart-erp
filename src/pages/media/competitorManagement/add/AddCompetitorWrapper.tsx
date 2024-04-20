@@ -35,7 +35,9 @@ export type FormInitialValues = {
     mobileNumber: string
     languageId: string
     productCategory: string
-    image: string[]
+    images: {
+        image: ''
+    }[]
 }
 
 const AddCompetitorWrapper = (props: Props) => {
@@ -73,7 +75,11 @@ const AddCompetitorWrapper = (props: Props) => {
         mobileNumber: '',
         languageId: '',
         productCategory: '',
-        image: [''],
+        images: [
+            {
+                image: '',
+            },
+        ],
     }
 
     // Form Validation Schema
@@ -115,7 +121,7 @@ const AddCompetitorWrapper = (props: Props) => {
                 startTime: values.startTime || '',
                 endTime: values.endTime || '',
                 languageId: values.languageId || '',
-                image: values.image || [],
+                image: values?.images?.map((ele) => ele?.image) || [],
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

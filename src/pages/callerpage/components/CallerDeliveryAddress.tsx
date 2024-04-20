@@ -572,7 +572,7 @@ const CallerDeliveryAddress = ({
                         label="Customer Name"
                         labelSize="xxs"
                         size="xxs"
-                        extraClassField="mt-0"
+                        extraClassField="mt-2"
                         labelDirection="horizontal"
                         labelClass="text-slate-700 text-xs font-medium mt-2"
                         name="customerName"
@@ -675,7 +675,7 @@ const CallerDeliveryAddress = ({
 
                     <ATMTextField
                         disabled={isDisabled?.isHouseFlat}
-                        extraClassField="-mt-4"
+                        extraClassField="-mt-2"
                         label="House/Flat/Shop/Office No."
                         size="xxs"
                         labelSize="xxs"
@@ -694,7 +694,7 @@ const CallerDeliveryAddress = ({
                     />
                     <ATMTextField
                         disabled={isDisabled?.isStreetSector}
-                        extraClassField="mt-0"
+                        extraClassField="mt-1"
                         label="Street/Sector/Building/ Appartment"
                         size="xxs"
                         labelSize="xxs"
@@ -713,7 +713,7 @@ const CallerDeliveryAddress = ({
                     />
                     <ATMTextField
                         disabled={isDisabled?.isLandmark}
-                        extraClassField="mt-0"
+                        extraClassField="mt-1"
                         label="Landmark"
                         size="xxs"
                         labelSize="xxs"
@@ -732,7 +732,7 @@ const CallerDeliveryAddress = ({
                     />
 
                     <ATMTextField
-                        extraClassField="mt-0"
+                        extraClassField="mt-1"
                         label="Alternate Mobile No"
                         labelSize="xxs"
                         placeholder="enter alternate mobile number"
@@ -752,7 +752,7 @@ const CallerDeliveryAddress = ({
 
                     <ATMTextField
                         disabled={isDisabled?.isWhatsappNumber}
-                        extraClassField="mt-0"
+                        extraClassField="mt-1"
                         label="WhatsApp Number"
                         placeholder="enter whatsapp number"
                         value={values.whatsappNo}

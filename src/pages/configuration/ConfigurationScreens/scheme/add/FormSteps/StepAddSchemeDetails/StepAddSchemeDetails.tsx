@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddSchemeDeatils.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -57,17 +50,6 @@ const StepAddSchemeDetails = ({
     return (
         <div className="flex flex-col gap-5 py-6 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
-                {/* Scheme Code */}
-                {/* <ATMTextField
-                    name={'schemeCode'}
-                    value={values.schemeCode}
-                    onChange={(e) => {
-                        handleSetFieldValue('schemeCode', e.target.value)
-                    }}
-                    label="Scheme Code"
-                    placeholder="Scheme Code"
-                    className="bg-white rounded shadow"
-                /> */}
                 {/* Category */}
                 <div className="-mt-2">
                     <ATMSelectSearchable
@@ -99,6 +81,7 @@ const StepAddSchemeDetails = ({
                 {/* Scheme Name */}
                 <ATMTextField
                     required
+                    extraClassField="mt-3"
                     name={'schemeName'}
                     value={values.schemeName}
                     onChange={(e) => {

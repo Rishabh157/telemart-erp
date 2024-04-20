@@ -50,7 +50,7 @@ const ATMTimePicker = ({
     return (
         <div className="relative mt-4">
             {label && (
-                <label className="text-slate-700 font-medium">
+                <label className="text-slate-700 font-medium text-sm">
                     {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditProductSubCategory.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -123,23 +116,17 @@ const EditProductSubCategory = ({
                                 }
                                 className="mt-0 rounded"
                             />
-                            <div className="-mt-2 ">
-                                <ATMSelectSearchable
-                                    required
-                                    name="parentCategoryId"
-                                    value={values.parentCategoryId}
-                                    onChange={(e) => {
-                                        handleSetFieldValue(
-                                            'parentCategoryId',
-                                            e
-                                        )
-                                    }}
-                                    options={
-                                        dropdownOptions.parentCategoryOptions
-                                    }
-                                    label="Parent Category"
-                                />
-                            </div>
+
+                            <ATMSelectSearchable
+                                required
+                                name="parentCategoryId"
+                                value={values.parentCategoryId}
+                                onChange={(e) => {
+                                    handleSetFieldValue('parentCategoryId', e)
+                                }}
+                                options={dropdownOptions.parentCategoryOptions}
+                                label="Parent Category"
+                            />
 
                             {/* Field 3 */}
                             <ATMTextField

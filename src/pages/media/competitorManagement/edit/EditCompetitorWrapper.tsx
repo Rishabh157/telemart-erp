@@ -40,7 +40,11 @@ export type FormInitialValues = {
     ytLink: string
     languageId: string
     productCategory: string
-    image: string[]
+    images: [
+        {
+            image: ''
+        }
+    ]
 }
 
 const EditCompetitorWrapper = (props: Props) => {
@@ -85,7 +89,12 @@ const EditCompetitorWrapper = (props: Props) => {
         date: items?.date || '',
         languageId: items?.languageId ? items?.languageId : '',
         productCategory: items?.productCategory,
-        image: items?.image || [],
+        images:
+            items?.image?.map((ele: any) => {
+                return {
+                    image: ele?.image,
+                }
+            }) || [],
     }
 
     // Form Validation Schema
@@ -124,7 +133,7 @@ const EditCompetitorWrapper = (props: Props) => {
                     startTime: values.startTime,
                     endTime: values.endTime,
                     date: values.date,
-                    image: values.image,
+                    image: values.images?.map((ele) => ele?.image) || [],
                     mobileNumber: values.mobileNumber,
                     languageId: values.languageId,
                     companyId: userData?.companyId || '',

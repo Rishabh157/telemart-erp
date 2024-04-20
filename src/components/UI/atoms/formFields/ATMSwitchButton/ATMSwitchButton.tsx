@@ -44,7 +44,7 @@ const ATMSwitchButton = ({
     return (
         <div hidden={hidden} className="relative mt-4 ml-1">
             {label && (
-                <label className="text-slate-700 font-medium text-xs">
+                <label className="text-slate-700 font-medium text-sm">
                     {getLabelTextTransform(label, textTransform)}
                     {required && <span className="text-red-500"> * </span>}{' '}
                 </label>

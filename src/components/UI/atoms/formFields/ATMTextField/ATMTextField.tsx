@@ -52,7 +52,8 @@ const ATMTextField = ({
     value,
     onChange,
     label,
-    className = `shadow bg-white  rounded ${label && 'mt-2'} `,
+    className = `shadow bg-white  rounded`,
+    // className = `shadow bg-white  rounded ${label && 'mt-2'} `,
     required,
     onBlur,
     autoFocus = false,
@@ -82,7 +83,7 @@ const ATMTextField = ({
         }
     }
     return (
-        <div className={twMerge('relative mt-3', `${extraClassField}`)}>
+        <div className={twMerge('relative mt-5', `${extraClassField}`)}>
             <div
                 className={`  ${
                     labelDirection === 'horizontal'

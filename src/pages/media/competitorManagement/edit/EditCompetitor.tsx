@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
@@ -20,13 +20,14 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 // |-- MUI --|
-import { CircularProgress } from '@mui/material'
+// import { CircularProgress } from '@mui/material'
 import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import { getProductCategoryOptions } from 'src/utils/constants/customeTypes'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 
 // |-- Types --|
 type Props = {
@@ -52,14 +53,38 @@ const breadcrumbs: BreadcrumbType[] = [
 const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
 
+    // Upload File Mutation
+    const [uploadFile] = useAddFileUrlMutation()
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
 
-    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
-    const [fileUploader] = useFileUploaderMutation()
+    // const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    // const [fileUploader] = useFileUploaderMutation()
+
+    const handleFileUpload = (file: File, name: string) => {
+        let formData = new FormData()
+
+        // setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                // setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                // setImageApiStatus(false)
+            }
+        })
+    }
 
     return (
         <div>
@@ -256,7 +281,99 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 }}
                             />
                         </div>
-                        <FieldArray name="image">
+
+                        <FieldArray name="images">
+                            {({ push, remove }) => {
+                                return (
+                                    <div className="mt-8">
+                                        <div className="grid grid-cols-3 gap-4">
+                                            {values?.images?.map(
+                                                (item, index) => {
+                                                    return (
+                                                        <div
+                                                            key={index}
+                                                            className="flex gap-3 "
+                                                        >
+                                                            <div className="w-full">
+                                                                <ATMFilePickerWrapper
+                                                                    required={
+                                                                        true
+                                                                    }
+                                                                    name={`images[${index}].image`}
+                                                                    label=""
+                                                                    placeholder={
+                                                                        'Select image'
+                                                                    }
+                                                                    selectedFile={
+                                                                        item?.image
+                                                                    }
+                                                                    onSelect={(
+                                                                        newFile: any
+                                                                    ) => {
+                                                                        handleFileUpload(
+                                                                            newFile,
+                                                                            `images[${index}].image`
+                                                                        )
+                                                                    }}
+                                                                    // isSubmitting={false}
+                                                                />
+                                                                {/* {imageApiStatus ? (
+                                                                    <div className="mt-3">
+                                                                        <CircularProgress
+                                                                            size={
+                                                                                18
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                ) : null} */}
+                                                            </div>
+
+                                                            {/* BUTTON - Delete */}
+                                                            {values.images
+                                                                ?.length &&
+                                                                values.images
+                                                                    ?.length >
+                                                                    1 && (
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    index
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
+                                                        </div>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+
+                                        {/* BUTTON - Add More Product */}
+                                        <div className="flex justify-self-start py-9">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    push({
+                                                        image: '',
+                                                    })
+                                                }
+                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center"
+                                            >
+                                                <HiPlus size="20" /> Add More
+                                            </button>
+                                        </div>
+                                    </div>
+                                )
+                            }}
+                        </FieldArray>
+
+                        {/* <FieldArray name="image">
                             {({ push, remove }) => (
                                 <div className="">
                                     {values.image?.map((img, ind) => {
@@ -273,7 +390,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                                     <div className="text-primary-main text-lg pb-2 font-medium ">
                                                         image #{ind + 1}
                                                     </div>
-                                                    {/* Delete Button */}
+                                               
                                                     {values.image?.length >
                                                         1 && (
                                                         <button
@@ -358,7 +475,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                         )
                                     })}
 
-                                    {/* BUTTON- Edit More Script */}
+                                    
                                     <div className="flex justify-end p-5">
                                         <button
                                             type="button"
@@ -370,7 +487,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     </div>
                                 </div>
                             )}
-                        </FieldArray>
+                        </FieldArray> */}
                     </div>
                 </div>
             </div>
