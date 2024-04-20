@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
@@ -23,9 +23,10 @@ import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { CircularProgress } from '@mui/material'
-import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
+// import { CircularProgress } from '@mui/material'
 import { getProductCategoryOptions } from 'src/utils/constants/customeTypes'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 
 // |-- Types --|
 type Props = {
@@ -50,14 +51,37 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    // Upload File Mutation
+    const [uploadFile] = useAddFileUrlMutation()
+
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
 
-    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
-    const [fileUploader] = useFileUploaderMutation()
+    const handleFileUpload = (file: File, name: string) => {
+        let formData = new FormData()
+
+        // setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                // setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                // setImageApiStatus(false)
+            }
+        })
+    }
 
     return (
         <div className="">
@@ -83,8 +107,9 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
-                                    }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                    true ? 'disabled:opacity-25' : ''
+                                }`}
                             >
                                 Submit
                             </button>
@@ -136,6 +161,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     handleSetFieldValue('productCategory', e)
                                 }
                             />
+
                             <ATMSelectSearchable
                                 name="channelNameId"
                                 required
@@ -146,6 +172,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 options={dropdownOptions.channelNameOptions}
                                 label="Channel Name"
                             />
+
                             <ATMSelectSearchable
                                 name="languageId"
                                 required
@@ -157,6 +184,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 options={dropdownOptions.languageOptions}
                                 label="Language"
                             />
+
                             <ATMTextField
                                 name="schemePrice"
                                 type={'text'}
@@ -173,6 +201,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     }
                                 }}
                             />
+
                             <ATMTextField
                                 name="websiteLink"
                                 value={values.websiteLink}
@@ -203,7 +232,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 }}
                             />
 
-                            <div className="mt-3">
+                            <div className="mt-5">
                                 <ATMDatePicker
                                     name={`date`}
                                     required
@@ -229,6 +258,7 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                     }}
                                 />
                             </div>
+
                             <div className="mt-1">
                                 <ATMTimePicker
                                     name={`endTime`}
@@ -254,119 +284,96 @@ const AddCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 }}
                             />
                         </div>
-                        <FieldArray name="image">
-                            {({ push, remove }) => (
-                                <div className="">
-                                    {values.image?.map((img, ind) => {
-                                        return (
-                                            <div
-                                                key={ind}
-                                                className={`flex flex-col gap-2 py-6 px-7 ${ind !==
-                                                    values.image.length -
-                                                    1 && 'border-b'
-                                                    }  border-slate-300 `}
-                                            >
-                                                <div className="flex justify-between items-center">
-                                                    <div className="text-primary-main text-lg pb-2 font-medium ">
-                                                        Image #{ind + 1}
-                                                    </div>
-                                                    {/* Delete Button */}
-                                                    {values.image?.length >
-                                                        1 && (
-                                                            <button
-                                                                type="button"
-                                                                onClick={() =>
-                                                                    remove(ind)
-                                                                }
-                                                                className="p-1 bg-red-500 text-white rounded"
-                                                            >
-                                                                <MdDeleteOutline className="text-2xl" />
-                                                            </button>
-                                                        )}
-                                                </div>
 
-                                                <div className="grid grid-cols-4 gap-4 gap-y-5 my-3">
-                                                    <div className="mt-4">
-                                                        <ATMFilePickerWrapper
-                                                            name={`image[${ind}]`}
-                                                            label="Image"
-                                                            placeholder="Image"
-                                                            onSelect={(
-                                                                newFile
-                                                            ) => {
-                                                                const formData =
-                                                                    new FormData()
-                                                                formData.append(
-                                                                    'fileType',
-                                                                    'IMAGE'
-                                                                )
-                                                                formData.append(
-                                                                    'category',
-                                                                    'COMPITITOR'
-                                                                )
-                                                                formData.append(
-                                                                    'fileUrl',
-                                                                    newFile ||
-                                                                    ''
-                                                                )
-                                                                setImageApiStatus(
-                                                                    true
-                                                                )
-                                                                fileUploader(
-                                                                    formData
-                                                                ).then(
-                                                                    (res: any) => {
-                                                                        if (
-                                                                            'data' in
-                                                                            res
-                                                                        ) {
-                                                                            setImageApiStatus(
-                                                                                false
-                                                                            )
-                                                                            setFieldValue(
-                                                                                `image[${ind}]`,
-                                                                                res
-                                                                                    ?.data
-                                                                                    ?.data
-                                                                                    ?.fileUrl
-                                                                            )
-                                                                        }
-                                                                        setImageApiStatus(
-                                                                            false
-                                                                        )
+                        <FieldArray name="images">
+                            {({ push, remove }) => {
+                                return (
+                                    <div className="mt-8">
+                                        <div className="grid grid-cols-3 gap-4">
+                                            {values?.images?.map(
+                                                (item, index) => {
+                                                    return (
+                                                        <div
+                                                            key={index}
+                                                            className="flex gap-3 "
+                                                        >
+                                                            <div className="w-full">
+                                                                <ATMFilePickerWrapper
+                                                                    required={
+                                                                        true
                                                                     }
-                                                                )
-                                                            }}
-                                                            selectedFile={
-                                                                values.image[
-                                                                ind
-                                                                ]
-                                                            }
-                                                            disabled={false}
-                                                        />
-                                                        {imageApiStatus ? (
-                                                            <div className=" mt-3 flex justify-center  items-center w-full h-full">
-                                                                <CircularProgress />
+                                                                    name={`images[${index}].image`}
+                                                                    label=""
+                                                                    placeholder={
+                                                                        'Select image'
+                                                                    }
+                                                                    selectedFile={
+                                                                        item?.image
+                                                                    }
+                                                                    onSelect={(
+                                                                        newFile: any
+                                                                    ) => {
+                                                                        handleFileUpload(
+                                                                            newFile,
+                                                                            `images[${index}].image`
+                                                                        )
+                                                                    }}
+                                                                    // isSubmitting={false}
+                                                                />
+                                                                {/* {imageApiStatus ? (
+                                                                    <div className="mt-3">
+                                                                        <CircularProgress
+                                                                            size={
+                                                                                18
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                ) : null} */}
                                                             </div>
-                                                        ) : null}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
 
-                                    {/* BUTTON- Edit More Script */}
-                                    <div className="flex justify-end p-5">
-                                        <button
-                                            type="button"
-                                            onClick={() => push('')}
-                                            className="bg-primary-main px-3 py-1 text-white rounded"
-                                        >
-                                            <HiPlus />
-                                        </button>
+                                                            {/* BUTTON - Delete */}
+                                                            {values.images
+                                                                ?.length &&
+                                                                values.images
+                                                                    ?.length >
+                                                                    1 && (
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    index
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
+                                                        </div>
+                                                    )
+                                                }
+                                            )}
+                                        </div>
+
+                                        {/* BUTTON - Add More Product */}
+                                        <div className="flex justify-self-start py-9">
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    push({
+                                                        image: '',
+                                                    })
+                                                }
+                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center"
+                                            >
+                                                <HiPlus size="20" /> Add More
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )
+                            }}
                         </FieldArray>
                     </div>
                 </div>

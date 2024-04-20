@@ -71,9 +71,7 @@ const ATMDatePicker = ({
 
             <div
                 className={twMerge(
-                    `${label && 'mt-2'} ${getInputHeight(
-                        size
-                    )} flex items-center `,
+                    `${getInputHeight(size)} flex items-center `,
                     `${className}`
                 )}
             >

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditProductDetails.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -82,7 +75,7 @@ const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
 
                                         <div className="grid grid-cols-5 gap-4 gap-y-5">
                                             {/* Product Group */}
-                                            <div className="col-span-2 -mt-2">
+                                            <div className="col-span-2">
                                                 <ATMSelectSearchable
                                                     required
                                                     name={`productInformation[${productIndex}].productGroup`}
