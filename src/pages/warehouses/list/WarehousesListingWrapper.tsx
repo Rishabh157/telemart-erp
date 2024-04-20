@@ -1,40 +1,28 @@
-/// ==============================================
-// Filename:WarehouseListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-// import { useNavigate } from "react-router-dom";
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { WarehousesListResponse } from 'src/models/Warehouse.model'
-import WarehouseListing from './WarehousesListing'
 import {
     useDeleteWareHouseMutation,
     useGetPaginationWareHousesQuery,
 } from 'src/services/WareHouseService'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import WarehouseListing from './WarehousesListing'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/warehouseSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const DealersListingWrapper = () => {
     const navigate = useNavigate()
@@ -42,11 +30,10 @@ const DealersListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
     const wareHouseState: any = useSelector(
-        (state: RootState) => state.warehouse
+        (state: RootState) => state.listingPagination
     )
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -88,7 +75,6 @@ const DealersListingWrapper = () => {
                     }}
                 />
             ),
-            
         },
         {
             field: 'wareHouseCode',
@@ -146,39 +132,27 @@ const DealersListingWrapper = () => {
         },
     ]
 
-    const { page, rowsPerPage, searchValue, items } = wareHouseState
+    const { page, rowsPerPage, searchValue } = wareHouseState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate();
-    const { data, isFetching, isLoading } = useGetPaginationWareHousesQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['wareHouseName', 'country'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetPaginationWareHousesQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['wareHouseName', 'country'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
 
     const handleDelete = () => {
         setShowDropdown(false)

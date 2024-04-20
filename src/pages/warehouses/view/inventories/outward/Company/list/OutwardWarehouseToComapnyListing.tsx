@@ -1,9 +1,3 @@
-/// ==============================================
-// Filename:OutwardWarehouseToComapnyListing.tsx
-// Type: List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
@@ -16,13 +10,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
 import {
     setRowsPerPage,
     setPage,
-} from 'src/redux/slices/WarehouseToComapnySlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -34,10 +27,9 @@ type Props = {
 const OutwardWarehouseToComapnyListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const warehouseToCompanyState: any = useSelector(
-        (state: RootState) => state.warehouseToComapny
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const { page, rowsPerPage, isTableLoading } = warehouseToCompanyState
 

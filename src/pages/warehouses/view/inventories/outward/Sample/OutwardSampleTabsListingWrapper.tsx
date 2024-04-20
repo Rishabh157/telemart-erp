@@ -7,7 +7,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
@@ -17,38 +17,35 @@ import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 // import { OutwardRequestWarehouseToSampleListResponse } from 'src/models/OutwardRequest.model'
 // import OutwardRequestListing from './OutwardDealerTabs'
-import OutwardSampleTabs from './OutwardSampleTabs'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import OutwardSampleTabs from './OutwardSampleTabs'
 
 // |-- Internal Dependencies --|
-import { showToast } from 'src/utils'
+import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
+import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 import {
-    OutwardRequestWarehouseToSampleListResponse,
     BarcodeListResponseType,
+    OutwardRequestWarehouseToSampleListResponse,
 } from 'src/models'
 import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
-import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
+import { showToast } from 'src/utils'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 
 // |-- Redux --|
 import { useDispatch, useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/warehouseToSampleSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import {
-    useGetPaginationWarehouseToSampleByGroupQuery,
     useDispatchWarehouseToSampleBarcodeMutation,
+    useGetPaginationWarehouseToSampleByGroupQuery,
 } from 'src/services/WarehouseToSampleService'
 
 // |-- Types --|
@@ -59,6 +56,7 @@ export type Tabs = {
 }
 
 const OutwardSampleTabsListingWrapper = () => {
+    useUnmountCleanup()
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
@@ -69,59 +67,47 @@ const OutwardSampleTabsListingWrapper = () => {
     const params = useParams()
     const warehouseId = params.id
     const salesOrderState: any = useSelector(
-        (state: RootState) => state.warehouseToSample
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, items } = salesOrderState
+    const { page, rowsPerPage, searchValue } = salesOrderState
     const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
 
-    const {
-        data: sampleData,
-        isFetching: sampleIsFetching,
-        isLoading: sampleIsLoading,
-    } = useGetPaginationWarehouseToSampleByGroupQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['wtsNumber'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: 'fromWarehouseId',
-                value: warehouseId,
-            },
-            {
-                fieldName: 'firstApproved',
-                value: true,
-            },
-            {
-                fieldName: 'secondApproved',
-                value: true,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetPaginationWarehouseToSampleByGroupQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['wtsNumber'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: 'fromWarehouseId',
+                    value: warehouseId,
+                },
+                {
+                    fieldName: 'firstApproved',
+                    value: true,
+                },
+                {
+                    fieldName: 'secondApproved',
+                    value: true,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchWarehouseToSampleBarcodeMutation()
-
-    useEffect(() => {
-        if (!sampleIsFetching && !sampleIsLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(sampleData?.data || []))
-            dispatch(setTotalItems(sampleData?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [sampleIsLoading, sampleIsFetching, sampleData, dispatch])
 
     const columns: columnTypes[] = [
         {
@@ -135,7 +121,7 @@ const OutwardSampleTabsListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => { }}
+                        handleOnAction={() => {}}
                         moduleName={UserModuleNameTypes.saleOrder}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
@@ -153,7 +139,6 @@ const OutwardSampleTabsListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'wtsNumber',
@@ -495,7 +480,7 @@ const OutwardSampleTabsListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                            ''
+                                                                ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(

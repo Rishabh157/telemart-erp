@@ -14,7 +14,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/ProductReplacementSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -32,7 +32,7 @@ const ProductReplacementListing = ({
     const [selectedRows, setSelectedRows] = useState([])
     const dispatch = useDispatch<AppDispatch>()
     const productReplacementState: any = useSelector(
-        (state: RootState) => state.productReplacement
+        (state: RootState) => state.listingPagination
     )
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =

@@ -1,16 +1,9 @@
-/// ==============================================
-// Filename:WarehouseToSampleListingWrapper.tsx
-// Type: List Component
-// Last Updated: OCTOBER 25, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -19,19 +12,16 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { OutwardRequestWarehouseToSampleListResponse } from 'src/models'
 import { showToast } from 'src/utils'
+import { isAuthorized } from 'src/utils/authorization'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WarehouseTransferListing from './WarehouseToSampleListing'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/warehouseToSampleSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import {
     useDeleteWarehouseToSampleOrderMutation,
     useGetPaginationWarehouseToSampleByGroupQuery,
@@ -39,11 +29,11 @@ import {
 } from 'src/services/WarehouseToSampleService'
 
 const WarehouseToSampleListingWrapper = () => {
+    useUnmountCleanup()
     const WarehouseToSampleState: any = useSelector(
-        (state: RootState) => state.warehouseToSample
+        (state: RootState) => state.listingPagination
     )
-    const dispatch = useDispatch<AppDispatch>()
-    const { page, rowsPerPage, searchValue, items } = WarehouseToSampleState
+    const { page, rowsPerPage, searchValue } = WarehouseToSampleState
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
@@ -52,8 +42,8 @@ const WarehouseToSampleListingWrapper = () => {
         useUpdateWarehouseToSampleApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-    const { data, isFetching, isLoading } =
-        useGetPaginationWarehouseToSampleByGroupQuery({
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetPaginationWarehouseToSampleByGroupQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['wtsNumber'],
@@ -68,17 +58,8 @@ const WarehouseToSampleListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
+        }),
+    })
 
     const handleDelete = () => {
         setShowDropdown(false)
@@ -155,7 +136,6 @@ const WarehouseToSampleListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -191,7 +171,6 @@ const WarehouseToSampleListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'wtsNumber',

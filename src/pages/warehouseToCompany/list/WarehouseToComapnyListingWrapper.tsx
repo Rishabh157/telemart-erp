@@ -1,16 +1,9 @@
-/// ==============================================
-// Filename:WarehouseToComapnyListingWrapper.tsx
-// Type: List Component
-// Last Updated: OCTOBER 25, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -24,24 +17,20 @@ import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeForma
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import WarehouseToComapnyListing from './WarehouseToComapnyListing'
 
-// |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/WarehouseToComapnySlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import {
     useDeleteWarehouseToComapnyMutation,
     useGetPaginationWarehouseToComapnyByGroupQuery,
     useUpdateWarehouseToComapnyApprovalMutation,
 } from 'src/services/WarehouseToComapnyService'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const WarehouseToComapnyListingWrapper = () => {
+    useUnmountCleanup()
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
@@ -77,7 +66,6 @@ const WarehouseToComapnyListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'wtcNumber',
@@ -386,10 +374,9 @@ const WarehouseToComapnyListingWrapper = () => {
     ]
 
     const WarehouseToComapnyState: any = useSelector(
-        (state: RootState) => state.warehouseToComapny
+        (state: RootState) => state.listingPagination
     )
-    const dispatch = useDispatch<AppDispatch>()
-    const { page, rowsPerPage, searchValue, items } = WarehouseToComapnyState
+    const { page, rowsPerPage, searchValue } = WarehouseToComapnyState
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
@@ -398,8 +385,8 @@ const WarehouseToComapnyListingWrapper = () => {
         useUpdateWarehouseToComapnyApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-    const { data, isFetching, isLoading } =
-        useGetPaginationWarehouseToComapnyByGroupQuery({
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetPaginationWarehouseToComapnyByGroupQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['wtcNumber'],
@@ -418,17 +405,8 @@ const WarehouseToComapnyListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
+        }),
+    })
 
     const handleDelete = () => {
         setShowDropdown(false)

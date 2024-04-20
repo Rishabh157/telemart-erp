@@ -30,7 +30,6 @@ import { FormInitialValues } from './EditWarehouseToSampleWrapper'
 // import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
-// import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import {
     AppDispatch,
     //  RootState
@@ -79,7 +78,7 @@ const EditWarehouseToSample = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e:any) => e['value'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {

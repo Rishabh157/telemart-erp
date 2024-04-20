@@ -10,24 +10,13 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
-// import { HiDotsHorizontal } from 'react-icons/hi'
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { OutwardRequestEcomListResponse } from 'src/models/OutwardRequest.model'
-// import { useGetVendorsQuery } from "src/services/VendorServices";
 import OutwardRequestListing from './OutwardEcomTabs'
 import { HiDotsHorizontal } from 'react-icons/hi'
 
-// |-- Redux --|
-// import {
-//   setIsTableLoading,
-//   setItems,
-//   setTotalItems,
-// } from "src/redux/slices/OutwardRequestSlice";
-// import { AppDispatch, RootState } from "src/redux/store";
 
 // |-- Types --|
 export type Tabs = {

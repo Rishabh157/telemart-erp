@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:SaleOrderListing.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,12 +14,11 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 // |-- Redux --|
 import {
-    setRowsPerPage,
     setPage,
+    setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/warehouseTransferSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Types --|
 type Props = {
@@ -36,25 +27,18 @@ type Props = {
 }
 
 const OutwardWarehouseTransferListing = ({ columns, rows }: Props) => {
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
-
     const dispatch = useDispatch<AppDispatch>()
     const warehouseTransferState: any = useSelector(
-        (state: RootState) => state.warehouseTransfer
+        (state: RootState) => state.listingPagination
     )
     const { pathname } = useLocation()
     const path = pathname.split('/')[1]
-    // const isDealerPath = path === 'dealers'
-    // const navigate = useNavigate()
+
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         warehouseTransferState
-    useEffect(() => {
-        return () => {
-            dispatch(setSearchValue(''))
-        }
-    }, [])
+
     return (
         <div
             className={`px-4 ${

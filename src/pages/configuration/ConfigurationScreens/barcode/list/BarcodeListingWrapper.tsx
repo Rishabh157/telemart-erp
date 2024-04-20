@@ -1,16 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:BarcodeListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-//import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { IconType } from 'react-icons'
 import { MdOutbond } from 'react-icons/md'
@@ -21,7 +12,6 @@ import {
     BarcodeListResponseType,
     ProductBarcodeGroupResponse,
 } from 'src/models'
-
 
 import BarcodeListing from './BarcodeListing'
 import {
@@ -66,15 +56,14 @@ export type barcodecardType = {
 
 const BarcodeListingWrapper = () => {
     useUnmountCleanup()
-    const barcodeState: any = useSelector((state: RootState) => state.listingPagination)
+    const barcodeState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const [groupBarcode, setGroupBarcode] = useState('')
     const [activeTabIndex, setActiveTabIndex] = useState(0)
-    const { page, rowsPerPage, searchValue } =
-        barcodeState
+    const { page, rowsPerPage, searchValue } = barcodeState
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
-
-    // const navigate = useNavigate()
 
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetBarcodeQuery({
@@ -99,7 +88,6 @@ const BarcodeListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
-
 
     const productGroupState: any = useSelector(
         (state: RootState) => state.productGroupBarcode
@@ -274,10 +262,11 @@ const BarcodeListingWrapper = () => {
                                 setActiveTabIndex(index)
                             }}
                             key={tabIndex}
-                            className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${activeTabIndex === index
-                                ? 'bg-slate-100 text-primary-main '
-                                : 'text-slate-500'
-                                }`}
+                            className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${
+                                activeTabIndex === index
+                                    ? 'bg-slate-100 text-primary-main '
+                                    : 'text-slate-500'
+                            }`}
                         >
                             <div>
                                 {' '}
@@ -304,10 +293,7 @@ const BarcodeListingWrapper = () => {
                     rows={items}
                     selectedBarcodes={selectedBarcodes}
                     onBarcodeSelect={onBarcodeSelect}
-                    onBarcodeClick={() => { }}
-                // onBarcodeClick={(barcode: BarcodeListResponseType) =>
-                //     navigate(`${barcode._id}`)
-                //}
+                    onBarcodeClick={() => {}}
                 />
             ) : activeTabIndex === 1 ? (
                 <CartonBoxBarcodeListing />

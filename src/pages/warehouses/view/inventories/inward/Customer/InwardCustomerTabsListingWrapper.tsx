@@ -22,13 +22,7 @@ import { OutwardRequestCustomerListResponse } from 'src/models/OutwardRequest.mo
 import OutwardRequestListing from './InwardCustomerTabs'
 import { HiDotsHorizontal } from 'react-icons/hi'
 
-// |-- Redux --|
-// import {
-//   setIsTableLoading,
-//   setItems,
-//   setTotalItems,
-// } from "src/redux/slices/OutwardRequestSlice";
-// import { AppDispatch, RootState } from "src/redux/store";
+
 
 // |-- Types --|
 export type Tabs = {

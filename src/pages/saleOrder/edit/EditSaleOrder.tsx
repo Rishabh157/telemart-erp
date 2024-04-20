@@ -27,11 +27,11 @@ import { FormInitialValues } from './EditSaleOrderWrapper'
 import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
-import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { showToast } from 'src/utils'
 import { MdDeleteOutline } from 'react-icons/md'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {
@@ -71,40 +71,26 @@ const EditSaleOrder = ({
     const dispatch = useDispatch<AppDispatch>()
     const [productGroup, setProductGroup] = useState('')
 
-    const dealerWarehouse: any = useSelector(
-        (state: RootState) => state.warehouse
-    )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId = userData?.companyId
 
-    const { data, isLoading, isFetching } = useGetAllWareHouseByDealerIdQuery(
-        {
-            companyId,
-            dealerId: values?.dealerId,
-        },
-        {
-            skip: !values.dealerId,
-        }
-    )
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            dispatch(setDealerWarehouse(data?.data))
-        }
-    }, [data, isLoading, isFetching, dispatch])
-
-    const dealerWarehouseOptions = dealerWarehouse?.dealerWarehouse?.map(
-        (ele: any) => {
-            return {
-                label: ele.wareHouseName,
-                value: ele._id,
+    const { options: dealerWarehouseOptions } = useCustomOptions({
+        useEndPointHook: useGetAllWareHouseByDealerIdQuery(
+            {
+                companyId,
+                dealerId: values?.dealerId,
+            },
+            {
+                skip: !values.dealerId,
             }
-        }
-    )
+        ),
+        keyName: 'wareHouseName',
+        value: '_id',
+    })
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e:any) => e['value'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {

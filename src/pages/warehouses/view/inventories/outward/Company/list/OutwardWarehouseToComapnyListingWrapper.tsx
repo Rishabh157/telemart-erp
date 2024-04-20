@@ -7,45 +7,42 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
-import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import OutwardWarehouseToComapnyListing from './OutwardWarehouseToComapnyListing'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
-import { showToast } from 'src/utils'
-import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
-import {
-    OutwardRequestWarehouseToCompanyListResponse,
-    BarcodeListResponseType,
-} from 'src/models'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { AlertText } from 'src/pages/callerpage/components/constants'
-import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
+import {
+    BarcodeListResponseType,
+    OutwardRequestWarehouseToCompanyListResponse,
+} from 'src/models'
+import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
+import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
+import { AlertText } from 'src/pages/callerpage/components/constants'
+import { showToast } from 'src/utils'
+import OutwardWarehouseToComapnyListing from './OutwardWarehouseToComapnyListing'
 
 // |-- Redux --|
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/WarehouseToComapnySlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import {
-    useGetPaginationWarehouseToComapnyByGroupQuery,
     useDispatchWarehouseToCompanyBarcodeMutation,
+    useGetPaginationWarehouseToComapnyByGroupQuery,
 } from 'src/services/WarehouseToComapnyService'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Types --|
 export type Tabs = {
@@ -55,6 +52,7 @@ export type Tabs = {
 }
 
 const OutwardWarehouseToComapnyListingWrapper = () => {
+    useUnmountCleanup()
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
@@ -65,15 +63,14 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
     const params = useParams()
     const warehouseId = params.id
     const warehouseToCompanyState: any = useSelector(
-        (state: RootState) => state.warehouseToComapny
+        (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, items } = warehouseToCompanyState
+    const { page, rowsPerPage, searchValue } = warehouseToCompanyState
     const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
-
-    const { data, isFetching, isLoading } =
-        useGetPaginationWarehouseToComapnyByGroupQuery({
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetPaginationWarehouseToComapnyByGroupQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['wtcNumber'],
@@ -101,24 +98,14 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
+        }),
+    })
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchWarehouseToCompanyBarcodeMutation()
 
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Dispatch',
@@ -148,7 +135,6 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
                         }}
                     />
                 ),
-            
         },
         {
             field: 'wtcNumber',

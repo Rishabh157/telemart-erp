@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:AddWarehouseToSample.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -23,15 +15,12 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './AddWarehouseToSampleWrapper'
-// import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
-// import { setDealerWarehouse } from 'src/redux/slices/warehouseSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
-// import { useParams } from 'react-router-dom'
-import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { showToast } from 'src/utils'
 
 // |-- Types --|
@@ -51,8 +40,6 @@ const AddWarehouseToSample = ({
     apiStatus,
     productPriceOptions,
 }: Props) => {
-    // const params = useParams()
-    // Breadcrumbs
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Warehouse Sample',
@@ -66,13 +53,12 @@ const AddWarehouseToSample = ({
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch<AppDispatch>()
-    // const [dealerId, setDealerId] = useState('')
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e:any) => e['value'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {
@@ -80,6 +66,7 @@ const AddWarehouseToSample = ({
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {

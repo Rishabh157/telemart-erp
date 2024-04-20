@@ -1,42 +1,39 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { Chip, Stack } from '@mui/material'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { MoneybackListResponse } from 'src/models/Moneyback.model'
 
 // |-- Redux --|
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
 import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/ProductReplacementSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
+    useAddProductReplacementAccountApprovalMutation,
     useGetProductReplacementOrderQuery,
     useProductReplacementMangerFirstApprovalMutation,
-    useAddProductReplacementAccountApprovalMutation,
 } from 'src/services/ProductReplacementServices'
 import { showToast } from 'src/utils'
-import ProductReplacementListing from './ProductReplacementListing'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import Swal from 'sweetalert2'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddProductReplacementCustomerInfoFormWrapper from './AddCustomerInfoForm/AddProductReplacementCustomerInfoFormWrapper'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import Swal from 'sweetalert2'
+import AddProductReplacementCustomerInfoFormWrapper from './AddCustomerInfoForm/AddProductReplacementCustomerInfoFormWrapper'
+import ProductReplacementListing from './ProductReplacementListing'
 import StatusDialog from './ProductReplacementStatusDialog/StatusDialog'
 
 const ProductReplacementListingWrapper = () => {
+    useUnmountCleanup()
     // Hooks
     const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     // Dispatching State
 
     const [currentId, setCurrentId] = useState<string>()
@@ -51,43 +48,28 @@ const ProductReplacementListingWrapper = () => {
     )
 
     const productReplacementState: any = useSelector(
-        (state: RootState) => state.productReplacement
+        (state: RootState) => state.listingPagination
     )
 
     const [managerLevelApproval] =
         useProductReplacementMangerFirstApprovalMutation()
     const [accountApproval] = useAddProductReplacementAccountApprovalMutation()
 
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        items,
-        // totalItems,
-        // isTableLoading,
-    } = productReplacementState
+    const { page, rowsPerPage, searchValue } = productReplacementState
 
-    const { data, isFetching, isLoading } = useGetProductReplacementOrderQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['complaintNumber'],
-        page: page,
-        filterBy: [],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetProductReplacementOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['complaintNumber'],
+            page: page,
+            filterBy: [],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-    }, [isLoading, isFetching, data, dispatch])
 
     // Manager First Level Approval
     const handleManagerFirstLevelApprovalComplete = (
