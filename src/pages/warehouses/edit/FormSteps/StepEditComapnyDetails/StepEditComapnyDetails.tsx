@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditCompanyDetails.tsx
-// Type: Edit Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -73,6 +66,7 @@ const StepEditComapnyDetails = ({
                                     label={label}
                                     placeholder={placeholder}
                                     className="shadow bg-white rounded"
+                                    extraClassField="mt-3"
                                     isSubmitting={isSubmitting}
                                 />
                             )

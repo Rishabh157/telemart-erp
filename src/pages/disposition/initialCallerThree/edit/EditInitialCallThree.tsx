@@ -139,12 +139,13 @@ const EditInitialCallThree = ({
                             readOnly
                             disabled
                             name="initialCallName"
+                            extraClassField="mt-4"
                             value={values.initialCallDisplayName}
                             required
                             label="Initial Call Name"
                             placeholder="Name"
                             labelClass="text-slate-700 text-sm font-medium mt-1"
-                            className="mt-1 rounded"
+                            className="rounded"
                             onChange={(e) =>
                                 handleSetFieldValue(
                                     'initialCallName',

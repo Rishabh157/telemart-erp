@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditBankDeatils.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -166,7 +159,7 @@ const StepEditBankDetails = ({
 
                                                                             case 'select':
                                                                                 return (
-                                                                                    <div className="-mt-2">
+                                                                                    <div>
                                                                                         <ATMSelectSearchable
                                                                                             required={
                                                                                                 required

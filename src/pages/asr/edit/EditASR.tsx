@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditAsr.tsx
-// Type: Edit Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -21,10 +14,8 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './EditASRWrapper'
-// import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 
 // |-- Redux --|
-// import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
@@ -49,13 +40,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
     const { values, setFieldValue } = formikProps
-    // const { items }: any = useSelector(
-    //     (state: RootState) => state?.productGroup
-    // )
 
-    // const options = items?.map((ele: any) => {
-    //     return { id: ele?._id, label: ele?.groupName, value: ele?.groupName }
-    // })
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
@@ -101,8 +86,7 @@ const EditASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
                                 <div className="">
                                     {values?.asrDetails?.map(
                                         (asr: any, asrIndex: number) => {
-                                            const { productId, quantity } =
-                                                asr
+                                            const { productId, quantity } = asr
 
                                             return (
                                                 <div
@@ -135,7 +119,6 @@ const EditASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
 
                                                         <div className="grid grid-cols-3 gap-4 gap-y-5">
                                                             {/* Product Name */}
-                                                            {/* <div className="flex-1"> */}
                                                             <ATMSelectSearchable
                                                                 componentClass="mt-3"
                                                                 required
@@ -173,10 +156,8 @@ const EditASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
                                                                     )
                                                                 }}
                                                             />
-                                                            {/* </div> */}
 
                                                             {/* Quantity */}
-                                                            {/* <div className="flex-1"> */}
                                                             <ATMTextField
                                                                 required
                                                                 name={`asrDetails[${asrIndex}].quantity`}
@@ -188,6 +169,8 @@ const EditASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
                                                                 }
                                                                 label="Quantity"
                                                                 placeholder="Quantity"
+                                                                className="rounded"
+                                                                extraClassField="mt-3"
                                                                 onChange={(e) =>
                                                                     handleSetFieldValue(
                                                                         `asrDetails[${asrIndex}].quantity`,
@@ -195,9 +178,7 @@ const EditASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
                                                                             .value
                                                                     )
                                                                 }
-                                                                className="mt-0 rounded"
                                                             />
-                                                            {/* </div> */}
                                                         </div>
                                                     </div>
                                                 </div>

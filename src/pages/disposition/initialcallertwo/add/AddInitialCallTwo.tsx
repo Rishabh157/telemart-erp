@@ -115,9 +115,10 @@ const AddInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
                             name="initialCallName"
                             value={values.initialCallName}
                             placeholder="Name"
+                            extraClassField="mt-4"
                             label="Initial Call Name"
                             labelClass="text-slate-700 text-sm font-medium mt-1"
-                            className="mt-1 rounded"
+                            className="rounded"
                             onChange={(e: any) => {
                                 if (
                                     e.nativeEvent.inputType ===

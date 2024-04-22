@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddDocumentsWrapper.tsx
-// Type: Add Component
-// Last Updated: OCTOBER 10, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -49,12 +42,7 @@ const formFields: { sectionName: string; fields: Field<''>[] }[] = [
 
 const StepAddDocumentsWrapper = ({ formikProps }: Props) => {
     return (
-        <>
-            <StepAddDocuments
-                formikProps={formikProps}
-                formFields={formFields}
-            />
-        </>
+        <StepAddDocuments formikProps={formikProps} formFields={formFields} />
     )
 }
 

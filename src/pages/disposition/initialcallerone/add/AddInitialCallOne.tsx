@@ -89,12 +89,13 @@ const AddInitialCallOne = ({ formikProps, apiStatus }: Props) => {
                         <ATMTextField
                             required
                             name="initialCallName"
+                            extraClassField="mt-4"
                             value={values.initialCallName}
                             placeholder="Name"
                             label="Initial Call Name"
                             labelClass="text-slate-700 text-sm font-medium mt-1"
-                            className="mt-1 rounded"
-                            onChange={(e:any) => {
+                            className="rounded"
+                            onChange={(e: any) => {
                                 if (
                                     e.nativeEvent.inputType ===
                                     'deleteContentBackward'

@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:StepAddCompanyDetails.tsx
-// Type: ADD Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -63,13 +55,11 @@ const StepAddCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
     }
 
     return (
-        <>
-            <StepAddComapnyDetails
-                formikProps={formikProps}
-                dropdownOptions={dropdownOptions}
-                formFields={formFields}
-            />
-        </>
+        <StepAddComapnyDetails
+            formikProps={formikProps}
+            dropdownOptions={dropdownOptions}
+            formFields={formFields}
+        />
     )
 }
 

@@ -42,7 +42,6 @@ const breadcrumbs: BreadcrumbType[] = [
 const AddASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
     const { values, setFieldValue } = formikProps
 
-    console.log("formikProps",formikProps)
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
@@ -162,13 +161,15 @@ const AddASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
                                                             {/* </div> */}
 
                                                             {/* Quantity */}
-                                                            {/* <div className="flex-1"> */}
+
                                                             <ATMTextField
                                                                 required
                                                                 name={`asrDetails[${asrIndex}].quantity`}
                                                                 value={quantity}
                                                                 label="Quantity"
                                                                 placeholder="Quantity"
+                                                                className="rounded"
+                                                                extraClassField="mt-3"
                                                                 onChange={(
                                                                     e
                                                                 ) => {
@@ -190,9 +191,7 @@ const AddASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
                                                                         )
                                                                     }
                                                                 }}
-                                                                className="mt-0 rounded"
                                                             />
-                                                            {/* </div> */}
                                                         </div>
                                                     </div>
                                                 </div>

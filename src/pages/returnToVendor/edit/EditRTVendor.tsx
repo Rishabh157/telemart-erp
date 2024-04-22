@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditRTVendor.tsx
-// Type: Edit Component
-// Last Updated: JULY 30, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -72,7 +64,7 @@ const EditRTVendor = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e:any) => e['value'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {
@@ -80,6 +72,7 @@ const EditRTVendor = ({
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -124,7 +117,7 @@ const EditRTVendor = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
                             <ATMTextField
                                 disabled={true}
@@ -168,8 +161,9 @@ const EditRTVendor = ({
                                     name="remark"
                                     placeholder="enter remark"
                                     value={values.remark}
-                                    minRows={1}
-                                    className="rounded"
+                                    minRows={4}
+                                    className="rounded mt-0"
+                                    labelClass="text-slate-700 text-sm font-medium"
                                     onChange={(e) => {
                                         handleSetFieldValue('remark', e)
                                     }}

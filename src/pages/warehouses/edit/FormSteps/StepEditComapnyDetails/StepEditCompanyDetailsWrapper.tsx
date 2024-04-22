@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:StepEditCompanyDetailsWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -63,13 +55,11 @@ const StepEditCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
     }
 
     return (
-        <>
-            <StepEditComapnyDetails
-                formikProps={formikProps}
-                dropdownOptions={dropdownOptions}
-                formFields={formFields}
-            />
-        </>
+        <StepEditComapnyDetails
+            formikProps={formikProps}
+            dropdownOptions={dropdownOptions}
+            formFields={formFields}
+        />
     )
 }
 

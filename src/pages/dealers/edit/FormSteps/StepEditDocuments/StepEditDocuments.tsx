@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditDocuments.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -191,6 +184,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                     label={label}
                                                     placeholder={placeholder}
                                                     className="shadow bg-white rounded"
+                                                    extraClassField='mt-3'
                                                     isSubmitting={isSubmitting}
                                                 />
                                             </React.Fragment>

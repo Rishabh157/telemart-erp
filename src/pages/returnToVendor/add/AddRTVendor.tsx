@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -56,8 +55,6 @@ const AddRTVendor = ({
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
 
-
-
     useEffect(() => {
         const val: any = productPriceOptions?.find(
             (e: any) => e['value'] === productGroup
@@ -68,7 +65,7 @@ const AddRTVendor = ({
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -107,17 +104,18 @@ const AddRTVendor = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
                             <ATMTextField
                                 name="rtvNo"
                                 value={values.rtvNo}
                                 label="RTV No."
                                 placeholder="enter rtv number"
+                                className="rounded"
+                                extraClassField='mt-3'
                                 onChange={(e) =>
                                     handleSetFieldValue('rtvNo', e.target.value)
                                 }
-                                className="mt-0 rounded"
                             />
 
                             {/* Dealer */}
@@ -150,8 +148,9 @@ const AddRTVendor = ({
                                     name="remark"
                                     placeholder="enter remark"
                                     value={values.remark}
-                                    minRows={1}
-                                    className="rounded"
+                                    minRows={4}
+                                    className="rounded mt-0"
+                                    labelClass="text-slate-700 text-sm font-medium"
                                     onChange={(e) => {
                                         handleSetFieldValue('remark', e)
                                     }}

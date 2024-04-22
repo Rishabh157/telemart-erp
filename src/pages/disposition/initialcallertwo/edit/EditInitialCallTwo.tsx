@@ -114,11 +114,12 @@ const EditInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
                             readOnly
                             disabled
                             name="initialCallName"
+                            extraClassField="mt-4"
                             value={values.initialCallDisplayName}
                             placeholder=" Name"
                             label="Initial Call Name"
                             labelClass="text-slate-700 text-sm font-medium mt-1"
-                            className="mt-1 rounded"
+                            className="rounded"
                             onChange={(e) =>
                                 handleSetFieldValue(
                                     'initialCallName',

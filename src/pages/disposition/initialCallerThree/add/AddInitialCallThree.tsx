@@ -142,10 +142,11 @@ const AddInitialCallThree = ({
                             name="initialCallName"
                             required
                             value={values.initialCallName}
+                            extraClassField="mt-4"
                             label="Initial Call Name"
                             placeholder="Name"
                             labelClass="text-slate-700 text-sm font-medium mt-1"
-                            className="mt-1 rounded"
+                            className="rounded"
                             onChange={(e: any) => {
                                 if (
                                     e.nativeEvent.inputType ===

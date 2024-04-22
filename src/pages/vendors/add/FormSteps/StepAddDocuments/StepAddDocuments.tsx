@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddDocuments.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -85,6 +78,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                 label={label}
                                                 placeholder={placeholder}
                                                 className="bg-white rounded shadow"
+                                                extraClassField='mt-3'
                                                 isSubmitting={isSubmitting}
                                             />
                                         )

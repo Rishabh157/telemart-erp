@@ -58,7 +58,7 @@ const AddWarehouseTransfer = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e:any) => e['value'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {
@@ -110,23 +110,23 @@ const AddWarehouseTransfer = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
-                            <div className="mt-2">
-                                <ATMTextField
-                                    name="wtNumber"
-                                    value={values.wtNumber}
-                                    placeholder="WT Number"
-                                    label="Warehouse transfer No."
-                                    className="rounded"
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'wtNumber',
-                                            e.target.value
-                                        )
-                                    }
-                                />
-                            </div>
+
+                            <ATMTextField
+                                name="wtNumber"
+                                value={values.wtNumber}
+                                placeholder="WT Number"
+                                label="Warehouse transfer No."
+                                className="rounded"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'wtNumber',
+                                        e.target.value
+                                    )
+                                }
+                            />
+
                             {/* from Warehouse */}
                             <ATMSelectSearchable
                                 name="fromWarehouseId"
@@ -168,11 +168,12 @@ const AddWarehouseTransfer = ({
                             <div className="-mt-2">
                                 <ATMTextArea
                                     label="Remark"
-                                    minRows={1}
-                                    name="remark"
+                                    minRows={4}
                                     value={values.remark}
+                                    name="remark"
+                                    className="rounded mt-0"
+                                    labelClass="text-slate-700 text-sm font-medium"
                                     placeholder="enter remark"
-                                    className="rounded"
                                     onChange={(e) =>
                                         handleSetFieldValue('remark', e)
                                     }
