@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddCompanyDetails.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -76,6 +69,7 @@ const StepAddComapnyDetails = ({
                                     label={label}
                                     placeholder={placeholder}
                                     className="bg-white rounded shadow"
+                                    extraClassField="mt-[0.85rem]"
                                 />
                             )
 

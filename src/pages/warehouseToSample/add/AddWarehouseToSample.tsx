@@ -111,20 +111,20 @@ const AddWarehouseToSample = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
                             <ATMTextField
                                 name="wtsNumber"
                                 value={values.wtsNumber}
                                 label="Warehouse To Sample Transfer No."
                                 placeholder="enter wts number"
+                                className="rounded mt-0"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'wtsNumber',
                                         e.target.value
                                     )
                                 }
-                                className="mt-3 rounded"
                             />
 
                             {/* from Warehouse */}
@@ -144,22 +144,23 @@ const AddWarehouseToSample = ({
                                 value={values.toName}
                                 label="Receiver Name"
                                 placeholder="enter receiver name"
+                                className="rounded"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'toName',
                                         e.target.value
                                     )
                                 }
-                                className="mt-3 rounded"
                             />
 
                             <div className="-mt-1">
                                 <ATMTextArea
                                     label="Remark"
                                     name="remark"
-                                    placeholder="enter remark"
+                                    placeholder="Enter remark"
                                     value={values.remark}
-                                    minRows={1}
+                                    minRows={4}
+                                    labelClass="text-slate-700 text-sm font-medium"
                                     className="rounded"
                                     onChange={(e) => {
                                         handleSetFieldValue('remark', e)

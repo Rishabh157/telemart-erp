@@ -5,9 +5,7 @@ import { useEffect, useState } from 'react'
 import { FieldArray, FormikProps } from 'formik'
 import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
-import {
-    useDispatch
-} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
@@ -23,9 +21,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import {
-    AppDispatch
-} from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { showToast } from 'src/utils'
 
@@ -131,7 +127,7 @@ const EditWarehouseToComapny = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
                             <ATMTextField
                                 readOnly={true}
@@ -140,13 +136,13 @@ const EditWarehouseToComapny = ({
                                 value={values.wtcNumber}
                                 label="Warehouse transfer No."
                                 placeholder="WT Number"
+                                className="rounded"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'wtcNumber',
                                         e.target.value
                                     )
                                 }
-                                className="mt-2 rounded"
                             />
 
                             {/* from Warehouse */}
@@ -200,29 +196,16 @@ const EditWarehouseToComapny = ({
                                 <ATMTextArea
                                     label="Remark"
                                     placeholder="enter remark"
-                                    minRows={1}
+                                    minRows={4}
                                     name="remark"
+                                    className="rounded mt-0"
+                                    labelClass="text-slate-700 text-sm font-medium"
                                     value={values.remark}
                                     onChange={(e) =>
                                         handleSetFieldValue('remark', e)
                                     }
-                                    // options={dropdownOptions.warehouseOptions}
                                 />
                             </div>
-                            {/* Warehouse
-                            <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="companyWareHouseId"
-                                    value={values.companyWareHouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'companyWareHouseId',
-                                            e
-                                        )
-                                    }
-                                    options={dropdownOptions.warehouseOptions}
-                                    label="Warehouse"
-                                /> */}
                         </div>
                     </div>
                 </div>

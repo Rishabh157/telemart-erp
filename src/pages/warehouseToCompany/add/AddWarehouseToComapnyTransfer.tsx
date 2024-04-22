@@ -7,9 +7,7 @@ import { useEffect, useState } from 'react'
 import { FieldArray, FormikProps } from 'formik'
 import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
-import {
-    useDispatch
-} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { useParams } from 'react-router-dom'
@@ -23,9 +21,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import {
-    AppDispatch
-} from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { showToast } from 'src/utils'
 import { FormInitialValues } from './AddWarehouseToComapnyTransferWrapper'
@@ -77,7 +73,6 @@ const AddWarehouseToComapnyTransfer = ({
         keyName: 'wareHouseName',
         value: '_id',
     })
-
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
@@ -146,7 +141,7 @@ const AddWarehouseToComapnyTransfer = ({
                                         e.target.value
                                     )
                                 }
-                                className="mt-2 rounded"
+                                className="rounded"
                             />
 
                             {/* from Warehouse */}
@@ -203,8 +198,9 @@ const AddWarehouseToComapnyTransfer = ({
                                 <ATMTextArea
                                     label="Remark"
                                     placeholder="enter remark"
-                                    className="rounded"
-                                    minRows={1}
+                                    className="rounded mt-0"
+                                    labelClass="text-slate-700  text-sm font-medium"
+                                    minRows={4}
                                     name="remark"
                                     value={values.remark}
                                     onChange={(e) =>
@@ -213,20 +209,6 @@ const AddWarehouseToComapnyTransfer = ({
                                     // options={dropdownOptions.warehouseOptions}
                                 />
                             </div>
-                            {/* Warehouse
-                            <div className="-mt-2">
-                                <ATMSelectSearchable
-                                    name="companyWareHouseId"
-                                    value={values.companyWareHouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'companyWareHouseId',
-                                            e
-                                        )
-                                    }
-                                    options={dropdownOptions.warehouseOptions}
-                                    label="Warehouse"
-                                /> */}
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditPurchaseOrder.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -200,9 +193,10 @@ const EditPurchaseOrder = ({
                             </div>
 
                             {/* Est. Receiving Date */}
-                            <div className="flex-[3_3_0%]">
+                            <div className="flex-[3_3_0%] mt-4">
                                 <ATMDatePicker
                                     required
+                                    labelClass="text-slate-700  text-sm font-medium mb-1"
                                     name={`purchaseOrder.estReceivingDate`}
                                     value={
                                         values.purchaseOrder.estReceivingDate

@@ -1,5 +1,3 @@
-
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -259,9 +257,10 @@ const AddPurchaseOrder = ({
                                                             </div>
 
                                                             {/* Est. Receiving Date */}
-                                                            <div className="flex-[3_3_0%]">
+                                                            <div className="flex-[3_3_0%] mt-4">
                                                                 <ATMDatePicker
                                                                     required
+                                                                    labelClass="text-slate-700  text-sm font-medium mb-1"
                                                                     name={`purchaseOrder[${itemIndex}].estReceivingDate`}
                                                                     value={
                                                                         estReceivingDate

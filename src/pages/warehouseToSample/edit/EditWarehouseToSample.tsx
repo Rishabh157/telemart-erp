@@ -1,17 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditWarehouseToSample.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps, FieldArray } from 'formik'
-// import { MdDeleteOutline } from "react-icons/md";
 import {
     useDispatch,
     //  useSelector
@@ -27,7 +19,6 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './EditWarehouseToSampleWrapper'
-// import { useGetAllWareHouseByDealerIdQuery } from 'src/services/DealerWarehouseService'
 
 // |-- Redux --|
 import {
@@ -130,7 +121,7 @@ const EditWarehouseToSample = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
                             <ATMTextField
                                 disabled={true}
@@ -139,6 +130,7 @@ const EditWarehouseToSample = ({
                                 value={values.wtsNumber}
                                 label="Warehouse Transfer Number"
                                 placeholder="WT Number"
+                                className="rounded mt-0"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'wtsNumber',
@@ -158,28 +150,30 @@ const EditWarehouseToSample = ({
                                 label="From warehouse (company)"
                                 selectLabel="Select Warehouse"
                             />
+
                             {/* to Warehouse */}
                             <ATMTextField
                                 name="toName"
                                 value={values.toName}
                                 label="Receiver Name"
                                 placeholder="enter a reciver name"
+                                className="rounded"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'toName',
                                         e.target.value
                                     )
                                 }
-                                className="mt-3 rounded"
                             />
 
                             <div className="-mt-1">
                                 <ATMTextArea
                                     label="Remark"
-                                    minRows={1}
                                     placeholder="enter remark"
                                     name="remark"
                                     value={values.remark}
+                                    minRows={4}
+                                    labelClass="text-slate-700 text-sm font-medium"
                                     className="rounded"
                                     onChange={(e) =>
                                         handleSetFieldValue('remark', e)

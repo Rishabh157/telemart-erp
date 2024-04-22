@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditUser.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -283,21 +276,6 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 options={branchOptionList}
                                 label="Branch Name"
                             />
-
-                            {/* <ATMTextField
-                                name="password"
-                                type="password"
-                                value={values.password}
-                                label="Password"
-                                placeholder="Password"
-                                className="mt-2 rounded"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'password',
-                                        e.target.value
-                                    )
-                                }
-                            /> */}
 
                             {/* Mobile */}
                             <ATMTextField

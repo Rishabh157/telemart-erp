@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddUser.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -298,7 +291,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 value={values.password}
                                 label="Password"
                                 placeholder="Password"
-                                className="mt-2 rounded"
+                                className="rounded mt-0"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'password',

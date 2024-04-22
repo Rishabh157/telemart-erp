@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddBankDetails.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -166,7 +159,7 @@ const StepAddBankDetails = ({
                                                                             case 'select':
                                                                                 return (
                                                                                     <div
-                                                                                        className="-mt-[0.15rem]"
+                                                                                        className="mt-2"
                                                                                         key={
                                                                                             name
                                                                                         }

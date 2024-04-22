@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -284,14 +283,11 @@ const AddDealerWrapper = () => {
     }
 
     const dispatch = useDispatch<AppDispatch>()
-   const {options:dealerCategoryOptions}= useCustomOptions({
-        useEndPointHook: useGetAllDealerCategoryQuery(
-                userData?.companyId
-            ),
-            keyName:'dealersCategory',
-            value:"_id"
+    const { options: dealerCategoryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDealerCategoryQuery(userData?.companyId),
+        keyName: 'dealersCategory',
+        value: '_id',
     })
-
 
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {

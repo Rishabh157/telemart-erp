@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddAddress.tsx
-// Type: Add Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -158,6 +151,7 @@ const StepAddAddress = ({
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
+                                                extraClassField="mt-3"
                                                 className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />

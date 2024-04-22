@@ -152,6 +152,7 @@ const StepEditAddress = ({
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
+                                                extraClassField="mt-3"
                                                 className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
@@ -182,7 +183,7 @@ const StepEditAddress = ({
                                                         setImageApiStatus(true)
                                                         fileUploader(
                                                             formData
-                                                        ).then((res:any) => {
+                                                        ).then((res: any) => {
                                                             if ('data' in res) {
                                                                 setImageApiStatus(
                                                                     false

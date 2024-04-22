@@ -16,9 +16,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from './EditWarehouseTransferWrapper'
 
-import {
-    AppDispatch,
-} from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { showToast } from 'src/utils'
 import { MdDeleteOutline } from 'react-icons/md'
@@ -63,7 +61,7 @@ const EditWarehouseTransfer = ({
 
     useEffect(() => {
         const val: any = productPriceOptions?.find(
-            (e:any) => e['value'] === productGroup
+            (e: any) => e['value'] === productGroup
         )
 
         if (val) {
@@ -71,7 +69,7 @@ const EditWarehouseTransfer = ({
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -113,7 +111,7 @@ const EditWarehouseTransfer = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* SO Number */}
                             <ATMTextField
                                 readOnly={true}
@@ -168,14 +166,15 @@ const EditWarehouseTransfer = ({
                             />
                             <div className="-mt-[0.3rem]">
                                 <ATMTextArea
-                                    minRows={1}
+                                    minRows={4}
                                     name="remark"
-                                    className="rounded"
+                                    label="remark"
                                     value={values.remark}
+                                    className="rounded mt-0"
+                                    labelClass="text-slate-700 text-sm font-medium"
                                     onChange={(e) =>
                                         handleSetFieldValue('remark', e)
                                     }
-                                    label="remark"
                                 />
                             </div>
                         </div>
