@@ -81,7 +81,7 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                 />
 
                 {/* Table */}
-                <div className="grow">
+                <div className="grow overflow-auto">
                     <ATMTable
                         isLoading={isTableLoading}
                         columns={columns}

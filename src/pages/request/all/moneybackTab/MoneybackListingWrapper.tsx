@@ -103,23 +103,24 @@ const MoneybackListingWrapper = () => {
         return row?.managerFirstApproval === null
             ? 'Mang. First Pending'
             : row?.managerFirstApproval === false
-            ? 'Mang. First Rejected'
-            : row?.ccApproval === false
-            ? 'Cc Pending'
-            : row?.managerSecondApproval === null
-            ? 'Mang. Second Pending'
-            : row?.managerSecondApproval === false
-            ? 'Mang. Second Rejected'
-            : row?.accountApproval === null
-            ? 'Account Pending'
-            : row?.accountApproval === false
-            ? 'Account Rejected'
-            : 'Account Aaproved'
+                ? 'Mang. First Rejected'
+                : row?.ccApproval === false
+                    ? 'Cc Pending'
+                    : row?.managerSecondApproval === null
+                        ? 'Mang. Second Pending'
+                        : row?.managerSecondApproval === false
+                            ? 'Mang. Second Rejected'
+                            : row?.accountApproval === null
+                                ? 'Account Pending'
+                                : row?.accountApproval === false
+                                    ? 'Account Rejected'
+                                    : 'Account Aaproved'
     }
     const columns: columnTypes[] = [
         {
             field: 'actions',
             headerName: 'Actions',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: MoneybackListResponse) => (
                 <ActionPopup
@@ -143,8 +144,8 @@ const MoneybackListingWrapper = () => {
         {
             field: 'orderNumber',
             headerName: 'Order No.',
-            flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_ORDER_NUMBER,
             renderCell: (row: MoneybackListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
@@ -153,18 +154,18 @@ const MoneybackListingWrapper = () => {
         {
             field: 'complaintNumber',
             headerName: 'Complain No.',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_COMPLAIN_NUMBER,
             // renderCell: (row: MoneybackListResponse) => <span></span>,
         },
         {
             field: 'schemeLabel',
             headerName: 'Scheme Name',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_SCHEME_NAME,
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.schemeLabel || '-'}</span>
@@ -173,9 +174,9 @@ const MoneybackListingWrapper = () => {
         {
             field: 'schemePrice',
             headerName: 'Scheme Price',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_SCHEME_PRICE,
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.schemePrice || '-'}</span>
@@ -184,9 +185,9 @@ const MoneybackListingWrapper = () => {
         {
             field: 'requestCreatedByLabel',
             headerName: 'Request Created By',
+            extraClasses: 'min-w-[160px]',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_REQUEST_CREATED_BY,
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.requestCreatedByLabel || '-'}</span>
@@ -195,9 +196,9 @@ const MoneybackListingWrapper = () => {
         {
             field: 'customerName',
             headerName: 'Customer Name',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_CUSTOMER_NAME,
             renderCell: (row: MoneybackListResponse) => (
                 <span>{row?.customerName}</span>
@@ -207,6 +208,7 @@ const MoneybackListingWrapper = () => {
         {
             field: 'Approved',
             headerName: 'Approval',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_APPROVAL,
             align: 'center',
@@ -220,34 +222,34 @@ const MoneybackListingWrapper = () => {
                                 row?.managerFirstApproval === null
                                     ? 'warning'
                                     : row?.managerFirstApproval === false
-                                    ? 'error'
-                                    : row?.managerSecondApproval
-                                    ? 'success'
-                                    : row?.managerSecondApproval === null
-                                    ? 'warning'
-                                    : 'error'
+                                        ? 'error'
+                                        : row?.managerSecondApproval
+                                            ? 'success'
+                                            : row?.managerSecondApproval === null
+                                                ? 'warning'
+                                                : 'error'
                             }
                             chipLabel={
                                 row?.managerFirstApproval === null
                                     ? 'First Pending'
                                     : row?.managerFirstApproval === false
-                                    ? 'First Rejected'
-                                    : row?.managerSecondApproval
-                                    ? 'Second Approved'
-                                    : row?.managerSecondApproval === null
-                                    ? 'Second Pending'
-                                    : 'Second Rejected'
+                                        ? 'First Rejected'
+                                        : row?.managerSecondApproval
+                                            ? 'Second Approved'
+                                            : row?.managerSecondApproval === null
+                                                ? 'Second Pending'
+                                                : 'Second Rejected'
                             }
                             disabled={
                                 row?.managerFirstApproval === null
                                     ? false
                                     : row?.managerFirstApproval === false
-                                    ? true
-                                    : row?.ccApproval === false
-                                    ? true
-                                    : row?.managerSecondApproval === null
-                                    ? false
-                                    : true
+                                        ? true
+                                        : row?.ccApproval === false
+                                            ? true
+                                            : row?.managerSecondApproval === null
+                                                ? false
+                                                : true
                             }
                             input={'text'}
                             inputPlaceholder="remark"
@@ -287,9 +289,9 @@ const MoneybackListingWrapper = () => {
         {
             field: 'Addccinfo',
             headerName: 'CC Info',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_CC_INFO,
             hidden: false,
             renderCell: (row: MoneybackListResponse) =>
@@ -311,9 +313,9 @@ const MoneybackListingWrapper = () => {
         {
             field: 'accountApproval',
             headerName: 'Account Approval',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_ACCOUNT_APPROVAL,
             renderCell: (row: MoneybackListResponse) => {
                 return (
@@ -340,15 +342,15 @@ const MoneybackListingWrapper = () => {
                                             row?.accountApproval === null
                                                 ? 'Account Pending'
                                                 : row?.accountApproval
-                                                ? 'Account Approved'
-                                                : 'Account Rejected'
+                                                    ? 'Account Approved'
+                                                    : 'Account Rejected'
                                         }
                                         color={
                                             row?.accountApproval === null
                                                 ? 'warning'
                                                 : row?.accountApproval
-                                                ? 'success'
-                                                : 'error'
+                                                    ? 'success'
+                                                    : 'error'
                                         }
                                         variant="outlined"
                                         size="small"
@@ -364,9 +366,9 @@ const MoneybackListingWrapper = () => {
         {
             field: 'currentStatus',
             headerName: 'Current Status',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.MONEY_BACK_LIST_CURRENT_STATUS,
             renderCell: (row: MoneybackListResponse) => (
                 <span
