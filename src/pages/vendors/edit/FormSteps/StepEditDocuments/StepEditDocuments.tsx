@@ -15,7 +15,8 @@ import { Field } from 'src/models/FormField/FormField.model'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 
 // |-- Types --|
 type FieldType = Field<''>
@@ -29,7 +30,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
     const [loaderState, setLoaderState] = useState<string>('')
     const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
 
-    const [fileUploader] = useFileUploaderMutation()
+    const [uploadFile] = useAddFileUrlMutation()
 
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
@@ -44,6 +45,31 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+    // File Upload
+    const handleFileUpload = (file: File, name: string) => {
+        let formData = new FormData()
+        setLoaderState(name)
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                setLoaderState('')
+                setImageApiStatus(false)
+            }
+        })
+    }
+
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -79,7 +105,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                 label={label}
                                                 placeholder={placeholder}
                                                 className="shadow bg-white rounded"
-                                                extraClassField='mt-3'
+                                                extraClassField="mt-3"
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
@@ -93,40 +119,10 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                     label={label}
                                                     placeholder={placeholder}
                                                     onSelect={(newFile) => {
-                                                        setLoaderState(name)
-                                                        const formData =
-                                                            new FormData()
-                                                        formData.append(
-                                                            'fileType',
-                                                            'IMAGE'
+                                                        handleFileUpload(
+                                                            newFile,
+                                                            name
                                                         )
-                                                        formData.append(
-                                                            'category',
-                                                            'Dealer'
-                                                        )
-                                                        formData.append(
-                                                            'fileUrl',
-                                                            newFile || ''
-                                                        )
-                                                        setImageApiStatus(true)
-                                                        fileUploader(
-                                                            formData
-                                                        ).then((res: any) => {
-                                                            if ('data' in res) {
-                                                                setImageApiStatus(
-                                                                    false
-                                                                )
-                                                                handleSetFieldValue(
-                                                                    name,
-                                                                    res?.data
-                                                                        ?.data
-                                                                        ?.fileUrl
-                                                                )
-                                                            }
-                                                            setImageApiStatus(
-                                                                false
-                                                            )
-                                                        })
                                                     }}
                                                     selectedFile={values[name]}
                                                 />
