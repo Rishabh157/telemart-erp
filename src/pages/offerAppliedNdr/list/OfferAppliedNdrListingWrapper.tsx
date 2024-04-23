@@ -106,7 +106,7 @@ const OfferAppliedNdrListingWrapper = () => {
         },
         {
             field: 'firstCallApproval',
-            headerName: '1st Call Approval',
+            headerName: 'First Call Approval',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
@@ -147,7 +147,7 @@ const OfferAppliedNdrListingWrapper = () => {
         },
         {
             field: 'firstCallRemark',
-            headerName: '1st call remark',
+            headerName: 'First Call Remark',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
@@ -157,7 +157,7 @@ const OfferAppliedNdrListingWrapper = () => {
         },
         {
             field: 'firstCallState',
-            headerName: 'first Call State',
+            headerName: 'First Call State',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
@@ -167,7 +167,7 @@ const OfferAppliedNdrListingWrapper = () => {
         },
         {
             field: 'firstCallCallBackDate',
-            headerName: 'call back date',
+            headerName: 'CallBack Date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
@@ -222,7 +222,7 @@ const OfferAppliedNdrListingWrapper = () => {
         },
         {
             field: 'tehsilLabel',
-            headerName: 'Taluk',
+            headerName: 'Taluka',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
@@ -250,7 +250,7 @@ const OfferAppliedNdrListingWrapper = () => {
         },
         {
             field: 'shippingCharges',
-            headerName: 'Shippgig Charges',
+            headerName: 'Shipping charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
@@ -332,13 +332,6 @@ const OfferAppliedNdrListingWrapper = () => {
                 </div>
             ),
         },
-        // {
-        //     field: 'onBackVerifiedDate',
-        //     headerName: 'ONBACK Verifie Date',
-        //     flex: 'flex-[1_1_0%]',
-        //     extraClasses: 'min-w-[150px]',
-        //     renderCell: (row: OrderListResponse) => <div>-</div>,
-        // },
         {
             field: 'edpDate',
             headerName: 'EDP Date',
@@ -422,7 +415,7 @@ const OfferAppliedNdrListingWrapper = () => {
         },
         {
             field: 'callCenterLabel',
-            headerName: 'CC Name',
+            headerName: 'Call Center Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -456,15 +449,6 @@ const OfferAppliedNdrListingWrapper = () => {
                 <div className="py-0">{row?.agentName}</div>
             ),
         },
-        // {
-        //     field: 'agentIdl',
-        //     headerName: 'Agent ID',
-        //     flex: 'flex-[1_1_0%]',
-        //     extraClasses: 'min-w-[150px]',
-        //    renderCell: (row: OrderListResponse) => (
-        //         <div className="py-0">{row?.agentId}</div>
-        //     ),
-        // },
         {
             field: 'Shipping Charges',
             headerName: 'Delivery Charges',
@@ -482,7 +466,7 @@ const OfferAppliedNdrListingWrapper = () => {
             headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -501,7 +485,7 @@ const OfferAppliedNdrListingWrapper = () => {
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return row?.preffered_delivery_start_time &&
                     row?.preffered_delivery_end_time ? (
@@ -525,7 +509,8 @@ const OfferAppliedNdrListingWrapper = () => {
             field: 'orderMBKNumber',
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[250px]',
+            align: 'end',
+            // extraClasses: 'min-w-[250px]',
             renderCell: (row: any) => (
                 <span> {row.orderMBKNumber || '-'} </span>
             ),
