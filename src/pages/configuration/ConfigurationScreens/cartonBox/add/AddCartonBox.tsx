@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddCartonBoxWrapper.tsx
-// Type: Add Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -118,13 +111,13 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                 }}
                             />
                             <div className="mt-4">
-                                <label className="text-slate-700 font-medium">
+                                <label className="text-slate-700 text-sm font-medium">
                                     {' '}
                                     Dimensions (in cm){' '}
                                     <span className="ml-1 text-sm text-red-500">
                                         *
                                     </span>{' '}
-                                </label>
+                                </label>    
                                 <div className="flex gap-2 -mt-1">
                                     {/* Height */}
                                     <ATMTextField

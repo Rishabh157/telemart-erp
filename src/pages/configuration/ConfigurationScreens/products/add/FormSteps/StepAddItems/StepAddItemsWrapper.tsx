@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:StepAdditemsWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -39,12 +31,10 @@ const StepAddItemsWrapper = ({ formikProps, allItems }: Props) => {
     }
 
     return (
-        <>
-            <StepAddItems
-                formikProps={formikProps}
-                dropdownOptions={dropdownOptions}
-            />
-        </>
+        <StepAddItems
+            formikProps={formikProps}
+            dropdownOptions={dropdownOptions}
+        />
     )
 }
 

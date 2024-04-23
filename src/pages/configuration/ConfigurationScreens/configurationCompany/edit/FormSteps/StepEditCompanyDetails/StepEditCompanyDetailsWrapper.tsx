@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditCompanyDetailsWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -21,11 +14,7 @@ type Props = {
 }
 
 const StepEditCompanyDetailsWrapper = ({ formikProps }: Props) => {
-    return (
-        <>
-            <StepEditCompanyDetails formikProps={formikProps} />
-        </>
-    )
+    return <StepEditCompanyDetails formikProps={formikProps} />
 }
 
 export default StepEditCompanyDetailsWrapper

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddCompanyDetails.tsx
-// Type: ADD Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -19,7 +12,6 @@ import { FormInitialValues } from '../../AddCompanyWrapper'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-// import ATMFilePickerWrapper from "src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper";
 
 // |-- Types --|
 type Props = {
