@@ -192,6 +192,7 @@ const RTVListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: ReturnToVendorListResponse) =>
                 row?.firstApproved === null &&
@@ -202,10 +203,10 @@ const RTVListingWrapper = () => {
                         )}
                         isDelete={
                             row.firstApproved === null &&
-                            row.secondApproved === null
+                                row.secondApproved === null
                                 ? isAuthorized(
-                                      UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
-                                  )
+                                    UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
+                                )
                                 : false
                         }
                         handleEditActionButton={() => {
@@ -233,6 +234,7 @@ const RTVListingWrapper = () => {
         {
             field: 'rtvNo',
             headerName: 'RTV No.',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_RETURN_TO_VENDOR_NUMBER,
             renderCell: (row: ReturnToVendorListResponse) => (
@@ -242,6 +244,7 @@ const RTVListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_ITEM,
             align: 'center',
@@ -270,6 +273,7 @@ const RTVListingWrapper = () => {
         {
             field: 'firstApproved',
             headerName: 'First level Status',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED,
             align: 'center',
@@ -279,15 +283,16 @@ const RTVListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}{' '}
+                                ? 'Pending'
+                                : 'Rejected'}{' '}
                     </span>
                 )
             },
         },
         {
             field: 'firstApprovedActionBy',
-            headerName: 'Level first Approved By',
+            headerName: 'First Approved By',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED_ACTION_BY,
             align: 'center',
@@ -298,6 +303,7 @@ const RTVListingWrapper = () => {
         {
             field: 'firstApprovedAt',
             headerName: 'First Approved Date',
+            extraClasses: 'min-w-[160px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED_DATE,
             align: 'center',
@@ -308,6 +314,7 @@ const RTVListingWrapper = () => {
         {
             field: 'secondApproved',
             headerName: 'Second Level Status',
+            extraClasses: 'min-w-[160px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_LEVEL_STATUS,
             align: 'center',
@@ -318,15 +325,16 @@ const RTVListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
         },
         {
             field: 'secondApprovedActionBy',
-            headerName: 'Level Second Approved By',
+            headerName: 'Second Approved By',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_APPROVED_ACTION_BY,
             align: 'center',
@@ -337,6 +345,7 @@ const RTVListingWrapper = () => {
         {
             field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
+            extraClasses: 'min-w-[180px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_APPROVED_DATE,
             align: 'center',
@@ -347,6 +356,7 @@ const RTVListingWrapper = () => {
         {
             field: 'createdAt',
             headerName: 'Inserted Date',
+            extraClasses: 'min-w-[160px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_INSERTED_DATE,
             align: 'center',
@@ -357,6 +367,7 @@ const RTVListingWrapper = () => {
         {
             field: 'updatedAt',
             headerName: 'Updated Date',
+            extraClasses: 'min-w-[160px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_UPDATED_DATE,
             align: 'center',
@@ -367,6 +378,7 @@ const RTVListingWrapper = () => {
         {
             field: 'Approved',
             headerName: 'Approval Level',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_APPROVAL_LEVEL,
             align: 'center',

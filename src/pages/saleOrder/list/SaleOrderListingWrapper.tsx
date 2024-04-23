@@ -144,6 +144,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
+             extraClasses :'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: SaleOrderListResponseTypes) =>
                 row?.dhApproved === null &&
@@ -187,6 +188,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'soNumber',
             headerName: 'So Number',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
@@ -196,6 +198,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DEALER_NAME,
             align: 'center',
@@ -222,6 +225,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'warehouseStateLabel',
             headerName: 'State',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_STATE,
             align: 'center',
@@ -232,6 +236,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ITEM_QUANTITY,
             align: 'center',
@@ -260,6 +265,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedActionStatus',
             headerName: 'DH Status',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_STATUS,
             align: 'center',
@@ -278,6 +284,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedActionBy',
             headerName: 'DH Approved By',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
             align: 'center',
@@ -288,6 +295,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedAt',
             headerName: 'DH Approved Date',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
             align: 'center',
@@ -298,6 +306,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApprovedActionByStatus',
             headerName: 'Account Status',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS,
             align: 'center',
@@ -317,6 +326,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApprovedActionBy',
             headerName: 'Account Approved By',
+             extraClasses :'min-w-[160px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_BY,
             align: 'center',
@@ -327,6 +337,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'Approved',
             headerName: 'Approval',
+             extraClasses :'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_APPROVAL,
             align: 'center',

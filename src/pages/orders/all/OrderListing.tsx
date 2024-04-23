@@ -779,7 +779,7 @@ const OrderListing = ({
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_AREA_LABEL,
-            extraClasses: 'min-w-[30px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
             ),

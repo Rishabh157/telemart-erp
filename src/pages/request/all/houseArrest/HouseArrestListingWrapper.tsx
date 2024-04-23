@@ -276,7 +276,7 @@ const HouseArrestListingWrapper = () => {
             field: 'requestCreatedByLabel',
             headerName: 'Request Created By',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[160px]',
             name: UserModuleNameTypes.HOUSE_ARREST_LIST_REQUEST_CREATED_BY,
         },
         {
@@ -347,6 +347,7 @@ const HouseArrestListingWrapper = () => {
             field: 'managerFirstApproval',
             headerName: 'Manager Approval',
             flex: 'flex-[1.0_1.0_0%]',
+            extraClasses: 'min-w-[160px]',
             align: 'center',
             name: UserModuleNameTypes.HOUSE_ARREST_LIST_MANAGER_APPROVAL,
             renderCell: (row: HouseArrestListResponseType) => {

@@ -139,6 +139,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: OutwardRequestWarehouseToSampleListResponse) =>
                 row?.firstApproved === null &&
@@ -175,6 +176,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'wtsNumber',
             headerName: 'WTS Number',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
                 <span> {row?._id} </span> // this is a wtNumber we have to transform in _id
@@ -184,6 +186,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'fromWarehouseLabel',
             headerName: 'From Warehouse',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_FROM_WAREHOUSE,
             align: 'center',
@@ -194,6 +197,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'toName',
             headerName: 'Receiver Name',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_RECEIVER_NAME,
             align: 'center',
@@ -204,6 +208,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_ITEM_QUANTITY,
             align: 'center',
@@ -229,6 +234,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'firstApproved',
             headerName: 'First Status',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_FIRST_LEVEL_STATUS,
             align: 'center',
@@ -238,8 +244,8 @@ const WarehouseToSampleListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -247,6 +253,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'firstApprovedActionBy',
             headerName: 'First Approved By',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_FIRST_LEVEL_APPROVED_BY,
             align: 'center',
@@ -257,6 +264,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'firstApprovedAt',
             headerName: 'First Approved Date',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_FIRST_APPROVED_DATE,
             align: 'center',
@@ -267,6 +275,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'secondApproved',
             headerName: 'Second Status',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_SECOND_LEVEL_STATUS,
             align: 'center',
@@ -277,8 +286,8 @@ const WarehouseToSampleListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -286,6 +295,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'secondApprovedActionBy',
             headerName: 'Second Approved By',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_SECOND_LEVEL_APPROVED_BY,
             align: 'center',
@@ -296,6 +306,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
+            extraClasses: 'min-w-[180px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_SECOND_LEVEL_APPROVED_DATE,
             align: 'center',
@@ -306,6 +317,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'createdAt',
             headerName: 'Inserted Date',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_INSERTED_DATE,
             align: 'center',
@@ -316,6 +328,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'updatedAt',
             headerName: 'Updated Date',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_UPDATED_DATE,
             align: 'center',
@@ -326,6 +339,7 @@ const WarehouseToSampleListingWrapper = () => {
         {
             field: 'Approved',
             headerName: 'Approval',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_SAMPLE_LIST_APPROVAL_LEVEL,
             align: 'center',
