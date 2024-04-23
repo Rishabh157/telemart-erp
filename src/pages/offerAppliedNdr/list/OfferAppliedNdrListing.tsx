@@ -46,18 +46,6 @@ const OfferAppliedNdrListing = ({ columns, rows, setShowDropdown }: Props) => {
                 <ATMTableHeader
                     page={page}
                     searchValue={searchValue}
-                    // isAnotherSearch
-                    // anotherSearchValue={orderNumberSearch}
-                    // anotherSearchPlaceholder="Order No..."
-                    // onAnotherSearch={(newValue) => {
-                    //     dispatch(setOrderNumberSearch(newValue))
-                    // }}
-                    // isAnotherSearchTwo
-                    // anotherSearchTwoValue={complaintNumberSearch}
-                    // anotherSearchTwoPlaceholder="Complaint No..."
-                    // onAnotherSearchTwo={(newValue) => {
-                    //     dispatch(setComplaintNumberSearch(newValue))
-                    // }}
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}

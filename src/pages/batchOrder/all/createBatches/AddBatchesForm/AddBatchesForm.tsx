@@ -36,7 +36,7 @@ const AddBatchesForm = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat pb-4">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
-                        <div className="text-xl font-medium">Create Batche</div>
+                        <div className="text-xl font-medium">Create Batch</div>
 
                         {/* BUTTON */}
                         <div>
