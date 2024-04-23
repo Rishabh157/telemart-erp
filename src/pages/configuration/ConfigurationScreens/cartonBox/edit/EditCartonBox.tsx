@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditCartonBox.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -121,13 +114,12 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     }
                                 }}
                             />
-                            <div className="mt-4">
-                                <label className="font-medium text-slate-700">
-                                    {' '}
-                                    Dimensions (in cm){' '}
+                            <div className="mt-2">
+                                <label className="text-slate-700 text-sm font-medium">
+                                    Dimensions (in cm)
                                     <span className="ml-1 text-sm text-red-500">
                                         *
-                                    </span>{' '}
+                                    </span>
                                 </label>
                                 <div className="flex gap-2 -mt-1">
                                     {/* Height */}

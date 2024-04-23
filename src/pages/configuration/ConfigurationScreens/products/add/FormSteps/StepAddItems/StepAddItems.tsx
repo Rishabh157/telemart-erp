@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAdditems.tsx
-// Type: ADD Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -121,7 +114,7 @@ const StepAddItems = ({ formikProps, dropdownOptions }: Props) => {
                                             }}
                                             label="Item Quantity"
                                             placeholder="Item Quantity"
-                                            className="shadow bg-white rounded mt-2"
+                                            className="shadow bg-white rounded"
                                             isSubmitting={isSubmitting}
                                         />
                                     </div>

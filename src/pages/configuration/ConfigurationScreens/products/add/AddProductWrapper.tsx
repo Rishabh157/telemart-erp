@@ -173,7 +173,7 @@ const AddProductWrapper = () => {
         useEndPointHook: useGetAllItemsQuery(userData?.companyId),
     })
     // States
-    const [activeStep, setActiveStep] = React.useState(0)
+    const [activeStep, setActiveStep] = React.useState(1)
 
     // From Initial Values
     const initialValues: FormInitialValues = {

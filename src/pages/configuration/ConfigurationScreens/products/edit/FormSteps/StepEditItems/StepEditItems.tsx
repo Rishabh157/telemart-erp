@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditItems.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -116,7 +109,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
                                             }}
                                             label="Item Quantity"
                                             placeholder="Item Quantity"
-                                            className="mt-2 bg-white rounded shadow"
+                                            className="bg-white rounded shadow"
                                             isSubmitting={isSubmitting}
                                         />
                                     </div>

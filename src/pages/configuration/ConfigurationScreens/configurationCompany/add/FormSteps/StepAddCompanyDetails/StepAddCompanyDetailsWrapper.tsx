@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddCompanyDetailsWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -21,11 +14,7 @@ type Props = {
 }
 
 const StepAddCompanyDetailsWrapper = ({ formikProps }: Props) => {
-    return (
-        <>
-            <StepAddCompanyDetails formikProps={formikProps} />
-        </>
-    )
+    return <StepAddCompanyDetails formikProps={formikProps} />
 }
 
 export default StepAddCompanyDetailsWrapper

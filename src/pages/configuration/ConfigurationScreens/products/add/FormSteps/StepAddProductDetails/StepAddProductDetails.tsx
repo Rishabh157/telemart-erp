@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddProductDetails.tsx
-// Type: ADD Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -135,7 +128,8 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     }}
                     label="Product Weight (in gms)"
                     placeholder="Product Weight"
-                    className="mt-1 bg-white rounded shadow"
+                    extraClassField='mt-4'
+                    className="bg-white rounded shadow"
                     isSubmitting={isSubmitting}
                 />
 

@@ -59,7 +59,7 @@ const ATMFileUploader = ({
                 )} ${label} text-slate-400`}
             >
                 {selectedFile ? (
-                    <div className="overflow-x-auto py-2 text-slate-900 font-medium ">
+                    <div className="overflow-x-auto py-2 text-slate-900 font-medium text-sm truncate w-[90%]">
                         {getImageName(selectedFile as string) ||
                             'Uploaded file'}
                         {/* {selectedFile.name || 'Uploaded file'} */}
