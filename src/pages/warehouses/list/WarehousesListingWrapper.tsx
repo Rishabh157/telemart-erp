@@ -37,6 +37,7 @@ const DealersListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
@@ -79,6 +80,7 @@ const DealersListingWrapper = () => {
         {
             field: 'wareHouseCode',
             headerName: 'Warehouse Code',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_WAREHOUSE_CODE,
             renderCell: (row: WarehousesListResponse) => (
@@ -88,6 +90,7 @@ const DealersListingWrapper = () => {
         {
             field: 'wareHouseName',
             headerName: 'Warehouse Name',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_WAREHOUSE_NAME,
             renderCell: (row: WarehousesListResponse) => {
@@ -97,6 +100,7 @@ const DealersListingWrapper = () => {
         {
             field: 'wareHouseCountryName',
             headerName: 'Country',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_COUNTRY,
             renderCell: (row: WarehousesListResponse) => (
@@ -106,6 +110,7 @@ const DealersListingWrapper = () => {
         {
             field: 'registrationStateName',
             headerName: 'State',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_STATE,
             renderCell: (row: WarehousesListResponse) => {
@@ -115,6 +120,7 @@ const DealersListingWrapper = () => {
         {
             field: 'registrationDistrictName',
             headerName: 'District',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_DISTRICT,
             renderCell: (row: WarehousesListResponse) => {
@@ -124,6 +130,7 @@ const DealersListingWrapper = () => {
         {
             field: 'registrationPincodeName',
             headerName: 'Pincode',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_PINCODE,
             renderCell: (row: WarehousesListResponse) => {

@@ -133,7 +133,7 @@ const MultiOrderSearchListingWrapper = () => {
             headerName: 'Assigned Warehouse',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[190px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.assignWarehouseLabel || '-'}</span>
             ),
@@ -342,7 +342,7 @@ const MultiOrderSearchListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[30px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
             ),

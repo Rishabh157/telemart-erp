@@ -387,7 +387,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[30px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
             ),

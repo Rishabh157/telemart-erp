@@ -227,6 +227,7 @@ const ProductReplacementListingWrapper = () => {
             headerName: 'Manager Approval',
             flex: 'flex-[1.0_1.0_0%]',
             align: 'center',
+            extraClasses: 'min-w-[170px]',
             name: UserModuleNameTypes.PRODUCT_REPLACMENT_LIST_MANAGER_APPROVAL,
             renderCell: (row: MoneybackListResponse) => {
                 return (

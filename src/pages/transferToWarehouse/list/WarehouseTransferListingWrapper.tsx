@@ -138,6 +138,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) =>
                 row?.firstApproved === null &&
@@ -174,6 +175,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'wtsNumber',
             headerName: 'wt Number',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: GroupByWarehouseTransferResponseTypes) => (
                 <span> {row?._id} </span> // this is a wtNumber we have to transform in _id
@@ -183,6 +185,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'fromWarehouseLabel',
             headerName: 'From Warehouse',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_FROM_WAREHOUSE,
             align: 'center',
@@ -193,6 +196,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'toWarehouseLabel',
             headerName: 'To Warehouse',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_TO_WAREHOUSE,
             align: 'center',
@@ -203,6 +207,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_ITEM_QUANTITY,
             align: 'center',
@@ -231,6 +236,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'firstApproved',
             headerName: 'First Status',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_STATUS,
             align: 'center',
@@ -240,8 +246,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -249,6 +255,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'firstApprovedActionBy',
             headerName: 'First Approved By',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_APPROVED_BY,
             align: 'center',
@@ -259,6 +266,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'firstApprovedAt',
             headerName: 'First Approved Date',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_APPROVED_DATE,
             align: 'center',
@@ -269,6 +277,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'secondApproved',
             headerName: 'Second Status',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_STATUS,
             align: 'center',
@@ -279,8 +288,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -288,6 +297,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'secondApprovedActionBy',
             headerName: 'Second Approved By',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_APPROVED_BY,
             align: 'center',
@@ -298,6 +308,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
+            extraClasses: 'min-w-[180px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_APPROVED_DATE,
             align: 'center',
@@ -308,6 +319,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'createdAt',
             headerName: 'Inserted Date',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_INSERTED_DATE,
             align: 'center',
@@ -318,6 +330,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'updatedAt',
             headerName: 'Updated Date',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_UPDATED_DATE,
             align: 'center',
@@ -328,6 +341,7 @@ const WarehouseTransferListingWrapper = () => {
         {
             field: 'Approved',
             headerName: 'Approval',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_APPROVEL_LEVEL,
             align: 'center',
