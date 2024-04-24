@@ -62,8 +62,8 @@ const EditProductGroupWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        groupName: string().required('Required'),
-        dealerSalePrice: number(),
+        groupName: string().required('Group name is required'),
+        dealerSalePrice:number().required('Dealer sale price is required'),
         gst: number(),
         sgst: number(),
         cgst: number(),

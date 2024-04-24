@@ -70,8 +70,8 @@ const steps = [
                     accountNumber: number().required(
                         'Account number is required'
                     ),
-                    ifscNumber: string().required('Required'),
-                    accountType: string().required('Required'),
+                    ifscNumber: string().required('IFSC number is required'),
+                    accountType: string().required('Account type is required'),
                 })
             ),
         }),

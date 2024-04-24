@@ -60,10 +60,10 @@ const EditProductSubCategoryWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        subCategoryCode: string().required('Required'),
-        subCategoryName: string().required('Required'),
-        parentCategoryId: string().required('Required'),
-        hsnCode: string().required('Required'),
+        subCategoryCode: string().required('Sub category code is required'),
+        subCategoryName: string().required('Sub category name is required'),
+        parentCategoryId: string().required('Parents category id  is required'),
+        hsnCode: string().required('HSN code is required'),
     })
 
     //    Form Submit Handler

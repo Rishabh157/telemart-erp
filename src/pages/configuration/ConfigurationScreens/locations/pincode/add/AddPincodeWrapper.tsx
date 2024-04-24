@@ -52,8 +52,8 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
         preferredCourier: '',
     }
     const validationSchema = object({
-        pincode: string().required('Required'),
-        preferredCourier: string().required('Required'),
+        pincode: string().required('Pin code is required'),
+        preferredCourier: string().required('Preferred courier is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)

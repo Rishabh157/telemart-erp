@@ -46,7 +46,7 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
         districtName: '',
     }
     const validationSchema = object({
-        districtName: string().required('Required'),
+        districtName: string().required('District name is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
