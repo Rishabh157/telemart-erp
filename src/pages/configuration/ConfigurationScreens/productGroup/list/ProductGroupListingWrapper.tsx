@@ -25,7 +25,6 @@ import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 
 const ProductGroupListingWrapper = () => {
-
     useUnmountCleanup()
     const productGroupState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -54,7 +53,7 @@ const ProductGroupListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
     const handleDelete = () => {
         setShowDropdown(false)
@@ -75,7 +74,6 @@ const ProductGroupListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -109,14 +107,12 @@ const ProductGroupListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'groupName',
             headerName: 'Group Name ',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_PRODUCT_GROUP_NAME,
-
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.groupName} </span>
             },
@@ -126,47 +122,42 @@ const ProductGroupListingWrapper = () => {
             headerName: 'Dealer Sale Price ',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_DEALER_SALE_PRICE,
-
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.dealerSalePrice} </span>
             },
         },
         {
             field: 'sgst',
-            headerName: 'Sate GST',
+            headerName: 'State GST',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_SATE_GST,
-
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.sgst} </span>
             },
         },
         {
             field: 'cgst',
-            headerName: 'Center GST ',
+            headerName: 'Central GST ',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_CENTER_GST,
-
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.cgst} </span>
             },
         },
         {
             field: 'igst',
-            headerName: 'Integated GST ',
+            headerName: 'Integrated GST',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_INTEGRATED_GST,
-
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.igst} </span>
             },
         },
         {
             field: 'utgst',
-            headerName: 'Union Territory ',
+            headerName: 'Union Territory GST',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_UNION_TERRITORY,
-
             renderCell: (row: ProductGroupListResponse) => {
                 return <span> {row.utgst} </span>
             },
@@ -174,13 +165,11 @@ const ProductGroupListingWrapper = () => {
     ]
 
     return (
-        <>
-            <ProductGroupListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </>
+        <ProductGroupListing
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 
