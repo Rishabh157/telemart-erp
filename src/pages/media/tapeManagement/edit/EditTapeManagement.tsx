@@ -288,7 +288,7 @@ const EditTapeManagement = ({
                                     </div>
 
                                     {show ? (
-                                        <p className="font-poppins relative text-[14px] text-start mt-0 ml-24 text-red-500 col-span-3">
+                                        <p className="font-poppins relative text-[14px] text-start mt-0 text-red-500 col-span-3">
                                             Duration is Required
                                         </p>
                                     ) : (
@@ -307,7 +307,7 @@ const EditTapeManagement = ({
                             />
                         </div>
 
-                        <div className="px-3 py-8">
+                        <div className="py-8">
                             <div className="pb-2 text-lg font-medium  text-primary-main">
                                 Add Phone Number
                             </div>

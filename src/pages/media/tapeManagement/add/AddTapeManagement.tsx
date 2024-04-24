@@ -20,10 +20,7 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Redux --|
-import {
-    setFieldCustomized,
-    setFormSubmitting,
-} from 'src/redux/slices/authSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
@@ -52,9 +49,11 @@ const AddTapeManagement = ({
     apiStatus,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue } = formikProps
+    const { values, setFieldValue, errors } = formikProps
     const [show, setShow] = useState(false)
-
+    
+    console.log('errors: ', errors)
+    console.log('values: ', values);
     const dispatch = useDispatch<AppDispatch>()
 
     const { formSubmitting: isSubmitting } = useSelector(
@@ -105,7 +104,6 @@ const AddTapeManagement = ({
                                         formikProps.values.second === '00'
                                     ) {
                                         setShow(true)
-                                        dispatch(setFormSubmitting(true))
                                         if (
                                             formikProps.values.languageId
                                                 .length === 0 ||
@@ -116,11 +114,10 @@ const AddTapeManagement = ({
                                             formikProps.values.artistId
                                                 .length === 0
                                         ) {
-                                            dispatch(setFormSubmitting(true))
                                             formikProps.handleSubmit()
                                         }
                                     } else {
-                                        dispatch(setFormSubmitting(true))
+                                        setShow(true)
                                         formikProps.handleSubmit()
                                     }
                                 }}
@@ -291,7 +288,7 @@ const AddTapeManagement = ({
                                     </div>
 
                                     {show ? (
-                                        <p className="font-poppins relative text-[14px] text-start mt-0 ml-24 text-red-500 col-span-3">
+                                        <p className="font-poppins relative text-[14px] text-start mt-0 text-red-500 col-span-3">
                                             Duration is Required
                                         </p>
                                     ) : (
@@ -311,7 +308,7 @@ const AddTapeManagement = ({
                         </div>
                         <div className="grid grid-cols-3 gap-4 "></div>
                         {/*  Phone  */}
-                        <div className="px-3 py-8">
+                        <div className="py-8">
                             <div className=" text-lg pb-2 font-medium text-primary-main">
                                 Add Phone Number
                             </div>

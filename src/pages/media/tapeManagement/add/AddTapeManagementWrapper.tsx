@@ -86,7 +86,7 @@ const AddTapeManagementWrapper = () => {
         schemeId: '',
         languageId: [],
         duration: '',
-        artistId: [''],
+        artistId: [],
         remarks: '',
         phone: [
             {
@@ -105,24 +105,20 @@ const AddTapeManagementWrapper = () => {
     const validationSchema = object({
         tapeName: string().required('Required'),
         tapeType: string().required('Required'),
-        languageId: array()
-            .of(string().required('Required'))
-            .min(1, 'Please select atleast one language'),
+        schemeId: string(),
+        languageId: array().of(string()).required('Required'),
         hour: string().required('Required'),
         minute: string().required('Required'),
         second: string().required('Required'),
-        artistId: array().of(string().required('Required')),
+        artistId: array().of(string()).required('Required'),
         remarks: string(),
-        phone: array().of(
-            object().shape({
-                phoneNo: string()
-                    .required('required')
-                    .min(10, 'phone must be 10 digits')
-                    .max(10, 'phone must be 10 digits'),
-            })
-        ),
         webSiteLink: string(),
         youtubeLink: string(),
+        phone: array().of(
+            object().shape({
+                phoneNo: string().required('Please enter phone number'),
+            })
+        ),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {

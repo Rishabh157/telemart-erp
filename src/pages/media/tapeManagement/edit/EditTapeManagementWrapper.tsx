@@ -139,16 +139,13 @@ const EditTapeManagementWrapper = () => {
         second: string().required('Required'),
         artistId: array().of(string().required('Required')),
         remarks: string(),
-        phone: array().of(
-            object().shape({
-                phoneNo: string()
-                    .required('Required')
-                    .min(10, 'phone must be 10 digits')
-                    .max(10, 'phone must be 10 digits'),
-            })
-        ),
         webSiteLink: string(),
         youtubeLink: string(),
+        phone: array().of(
+            object().shape({
+                phoneNo: string().required('Please enter phone number'),
+            })
+        ),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
