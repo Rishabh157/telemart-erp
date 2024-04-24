@@ -1,9 +1,3 @@
-// Filename:EditProductGroupWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
