@@ -320,7 +320,7 @@ const AddTapeManagement = ({
                                 {({ push, remove }) => {
                                     return (
                                         <>
-                                            <div className="grid grid-cols-3 gap-9 ">
+                                            <div className="grid grid-cols-4 gap-4">
                                                 {values.phone?.map(
                                                     (
                                                         item: any,
@@ -331,10 +331,10 @@ const AddTapeManagement = ({
                                                         return (
                                                             <div
                                                                 key={itemIndex}
-                                                                className="flex "
+                                                                className="flex gap-3 items-end"
                                                             >
                                                                 {/* Phone */}
-                                                                <div className="flex">
+                                                                <div className="w-full">
                                                                     <ATMTextField
                                                                         type="text"
                                                                         required
@@ -344,6 +344,7 @@ const AddTapeManagement = ({
                                                                         }
                                                                         label="Phone"
                                                                         placeholder="Phone"
+                                                                        extraClassField="mt-0"
                                                                         onChange={(
                                                                             e
                                                                         ) => {
@@ -358,25 +359,28 @@ const AddTapeManagement = ({
                                                                             isSubmitting
                                                                         }
                                                                     />
+                                                                </div>
 
-                                                                    {/* BUTTON - Delete */}
-                                                                    {values
-                                                                        .phone
+                                                                {values?.phone
+                                                                    ?.length &&
+                                                                    values
+                                                                        ?.phone
                                                                         ?.length >
                                                                         1 && (
-                                                                        <button
-                                                                            type="button"
-                                                                            onClick={() => {
-                                                                                remove(
-                                                                                    itemIndex
-                                                                                )
-                                                                            }}
-                                                                            className="p-2 bg-red-500 text-white rounded my-[48px] mx-[10px]"
-                                                                        >
-                                                                            <MdDeleteOutline className="text-2xl" />
-                                                                        </button>
+                                                                        <div>
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => {
+                                                                                    remove(
+                                                                                        itemIndex
+                                                                                    )
+                                                                                }}
+                                                                                className="p-2 bg-red-500 text-white rounded h-[37px]"
+                                                                            >
+                                                                                <MdDeleteOutline />
+                                                                            </button>
+                                                                        </div>
                                                                     )}
-                                                                </div>
                                                             </div>
                                                         )
                                                     }
