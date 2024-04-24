@@ -94,8 +94,8 @@ const AddUserWrapper = (props: Props) => {
         firstName: string().required('First name is required'),
         lastName: string().required('Last name is required'),
         userName: string().required('User name is required'),
-        email: string().email(),
-        userRole: string().required('User role is required'),
+        email: string().email().required('User name is required'),
+        userRole: string().required('User email is required'),
         mySenior: string().when(['userRole'], (userRole, schema) => {
             return getSeniorValid(userRole, schema)
                 ? schema.required('Senior is required')
@@ -126,6 +126,7 @@ const AddUserWrapper = (props: Props) => {
         branchId: string().required('Branch name is required'),
         userDepartment: string().required('User department is required'),
         password: string().required('Password is required'),
+        mobile:string().required('Mobile number is required'),
     })
 
     //    Form Submit Handler

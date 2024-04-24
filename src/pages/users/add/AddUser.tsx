@@ -261,7 +261,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
                             {/* Email */}
                             <ATMTextField
-                                required={false}
+                                required={true}
                                 name="email"
                                 value={values.email}
                                 label="Email"
@@ -291,7 +291,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 value={values.password}
                                 label="Password"
                                 placeholder="Password"
-                                className="rounded mt-0"
+                                className="mt-0 rounded"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'password',
@@ -301,7 +301,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
                             {/* Mobile */}
                             <ATMTextField
-                                required={false}
+                                required={true}
                                 name="mobile"
                                 value={values.mobile}
                                 label="Mobile Number"
@@ -369,7 +369,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
 
                             <ATMSelectSearchable
-                                required={false}
+                                required={true}
                                 name="callCenterId"
                                 value={values.callCenterId}
                                 onChange={(e) =>
@@ -430,8 +430,8 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                                         allowedIp
                                                                     }
                                                                     textTransform=""
-                                                                    label="Allowed IPS"
-                                                                    placeholder="Allowed IPS"
+                                                                    label="Allowed IP"
+                                                                    placeholder="Allowed IP"
                                                                     onChange={(
                                                                         e
                                                                     ) => {
