@@ -8,7 +8,6 @@ import { filePickerSlice } from 'src/services/FilePickerServices'
 import { authMiddleware } from 'src/utils'
 import {
     barcodeSlice,
-    dealerSlice,
     sideNavLayoutSlice,
 } from './slices'
 import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
@@ -20,7 +19,6 @@ import areaSlice from './slices/areaSlice'
 import authSlice from './slices/authSlice'
 import countrySlice from './slices/countrySlice'
 import districtSlice from './slices/districtSlice'
-import inquirySlice from './slices/inquirySlice'
 import inboundCallerSlice from './slices/media/inboundCallerSlice'
 import orderSlice from './slices/orderSlice'
 import pincodeSlice from './slices/pincodeSlice'
@@ -39,7 +37,6 @@ const store = configureStore({
         dashboard: DashboardSlice,
         sideNavLayout: sideNavLayoutSlice,
         listingPagination: ListingPaginationSlice,
-        dealer: dealerSlice,
         states: statesSlice,
         district: districtSlice,
         areas: areaSlice,
@@ -52,7 +49,6 @@ const store = configureStore({
         websiteBlog: websiteBlogSlice,
         websitePage: websitePageSlice,
         order: orderSlice,
-        inquiry: inquirySlice,
         inboundCaller: inboundCallerSlice,
         complain: ComplainSlice,
         warehouseOrdersAssigned: warehouseAssignedOrderSlice,

@@ -1,29 +1,21 @@
-/// ==============================================
-// Filename:AddDealerLedgerModelWrapper.tsx
-// Type: Tab Add Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
-import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { CircularProgress } from '@mui/material'
+import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
+import { useGetDealerByIdQuery } from 'src/services/DealerServices'
 import AccordianAddress from './components/AccordianAddress'
 import AccordianContact from './components/AccordianContact'
 import AccordianDocument from './components/AccordianDocument'
 import AccordianGeneralInformation from './components/AccordianGeneralInformation'
 import DealerGeneralInformationTab from './DealerGeneralInformationTab'
-import { useGetDealerByIdQuery } from 'src/services/DealerServices'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
-import { setSelectedItem } from 'src/redux/slices/dealerSlice'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {}
@@ -35,15 +27,10 @@ export type AccordianType = {
 
 const DealerGeneralInformationTabWrapper = (props: Props) => {
     const params = useParams()
-    const dispatch = useDispatch<AppDispatch>()
     const Id = params.dealerId
-    const { data, isLoading, isFetching } = useGetDealerByIdQuery(Id)
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state?.dealer
-    )
-    useEffect(() => {
-        dispatch(setSelectedItem(data?.data))
-    }, [dispatch, data, isLoading, isFetching])
+    const { items: selectedItem } = useGetDataByIdCustomQuery({
+        useEndPointHook: useGetDealerByIdQuery(Id),
+    })
 
     const accordians: AccordianType[] = [
         {

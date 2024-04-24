@@ -37,7 +37,7 @@ type Props = {
 const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
     const [changeDealerStatus] = useChangeDealerStatusMutation()
     const { selectedItem }: any = useSelector(
-        (state: RootState) => state.dealer
+        (state: RootState) => state.listingPagination
     )
     const changeStatus = () => {
         showConfirmationDialog({

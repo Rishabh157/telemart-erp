@@ -11,7 +11,7 @@ type UseEndPointHook = {
     status: QueryStatus;
 };
 
-export const useCustomOptions = ({ useEndPointHook, keyName, value }: { useEndPointHook: UseEndPointHook, keyName: string, value: string }) => {
+export const useCustomOptions = ({ useEndPointHook, keyName, value }: { useEndPointHook: UseEndPointHook, keyName: string | string[], value: string }) => {
     const [options, setOptions] = useState<SelectOption[]>([])
     const { data, isLoading, isFetching } = useEndPointHook
 

@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import EditDealerToDealerOrder from './EditDealerToDealerOrder'
 import { useGetAllDealersQuery } from 'src/services/DealerServices'
 import {
     useGetDealerToDealerOrderByIdQuery,
@@ -17,10 +16,10 @@ import {
 } from 'src/services/DealerToDealerOrderService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'
+import EditDealerToDealerOrder from './EditDealerToDealerOrder'
 
 // |-- Redux--|
-import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
 
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
@@ -43,7 +42,6 @@ export type FormInitialValues = {
 
 const EditDealerToDealerOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [editSaleOrder, setEditSaleOrder] = useState<FormInitialValues>({
@@ -61,25 +59,11 @@ const EditDealerToDealerOrderWrapper = (props: Props) => {
         useEndPointHook: useGetDealerToDealerOrderByIdQuery(Id || ''),
     })
 
-    const {
-        data: dealerData,
-        isLoading: dealerIsLoading,
-        isFetching: dealerIsFetching,
-    } = useGetAllDealersQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state?.dealer)
-
-    const dealerOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.firstName + ' ' + ele.lastName,
-            value: ele._id,
-        }
+    const { options: dealerOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDealersQuery(userData?.companyId),
+        keyName: ['firstName', 'lastName'],
+        value: '_id',
     })
-
-    //Dealer
-    useEffect(() => {
-        dispatch(setAllItems(dealerData?.data))
-    }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
-
     const { options: productGroupOptions } = useCustomOptions({
         useEndPointHook: useGetAllProductGroupQuery(''),
         keyName: 'groupName',

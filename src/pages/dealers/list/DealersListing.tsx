@@ -1,9 +1,3 @@
-/// ==============================================
-// Filename:DealerListinggWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
@@ -19,16 +13,10 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import FilterDialogWarpper from '../components/FilterDialog/FilterDialogWarpper'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
-// import ATMBreadCrumbs, {
-//   BreadcrumbType,
-// } from "src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs";
-
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 
 // |-- Redux --|
-import { setRowsPerPage, setPage } from 'src/redux/slices/dealerSlice'
+import { setRowsPerPage, setPage ,setSearchValue} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { setSearchValue } from 'src/redux/slices/dealerSlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -42,7 +30,7 @@ type Props = {
 const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const dealerState: any = useSelector((state: RootState) => state.dealer)
+    const dealerState: any = useSelector((state: RootState) => state.listingPagination)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [selectedRows, setSelectedRows] = useState([])
 
