@@ -1,9 +1,3 @@
-// Filename:EditProductGroup.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -116,23 +110,12 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                             />
                         </div>
                         <div className="grid grid-cols-4 gap-4">
-                            {/* <ATMTextField
-                                name="gst"
-                                value={values.gst}
-                                label="Good Services Taxes"
-                                placeholder="GST Per(%)"
-                                onChange={(e) => {
-                                    const inputValue = e.target.value
-                                    if (!isNaN(Number(inputValue))) {
-                                        handleSetFieldValue('gst', e.target.value)
-                                    }
-                                }}
-                            /> */}
                             <ATMTextField
                                 name="cgst"
                                 value={values.cgst}
-                                label=" Central GST (%)"
+                                label="Central GST (%)"
                                 placeholder="CGST (%)"
+                                textTransform=""
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
@@ -148,6 +131,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 value={values.sgst}
                                 label="State GST (%)"
                                 placeholder="SGST (%)"
+                                textTransform=""
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
@@ -163,6 +147,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 value={values.utgst}
                                 label="Union Territory GST (%)"
                                 placeholder="UTGST (%)"
+                                textTransform=""
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
@@ -178,6 +163,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 value={values.igst}
                                 label="Integrated GST (%)"
                                 placeholder=" IGST (%)"
+                                textTransform=""
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
