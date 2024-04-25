@@ -9,8 +9,7 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { isAuthorized } from 'src/utils/authorization'
+
 interface tabsProps {
     label: string
     icon: IconType
@@ -19,6 +18,7 @@ interface tabsProps {
 }
 
 const ViewRequest = () => {
+
     const tabs: tabsProps[] = [
         {
             label: 'Moneyback',
@@ -39,6 +39,7 @@ const ViewRequest = () => {
             name: UserModuleNameTypes.ACTION_HOUSE_ARREST_TAB,
         },
     ]
+
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [activelabel, setActiveTabLabel] = useState<string>()
@@ -61,6 +62,7 @@ const ViewRequest = () => {
         navigate(`${allowedTabs[0]?.path}`)
         //eslint-disable-next-line
     }, [])
+    
     useEffect(() => {
         if (!activeTab) return
 
@@ -93,11 +95,9 @@ const ViewRequest = () => {
                             active={activeTabIndex}
                             navBtnContainerClassName="bg-red-500"
                         />
-                        {/* <div className="py-2 px-4">
-                            <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                        </div> */}
+
                         {/* Children */}
-                        <div className="h-[calc(100%-30px)] pt-4">
+                        <div className="pt-4">
                             <div className="h-full overflow-auto">
                                 <Outlet />
                             </div>

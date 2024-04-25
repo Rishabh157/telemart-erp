@@ -68,11 +68,11 @@ const steps = [
             category: string().required('Category is required'),
             subCategory: string().required('Sub category is required'),
             schemeName: string().required('Scheme Name is required'),
-            schemePrice: string().required('Required!'),
+            schemePrice: string().required('Scheme price is required!'),
             dimension: object().shape({
-                height: string().required('required'),
-                width: string().required('required'),
-                depth: string().required('required'),
+                height: string().required('Height is required'),
+                width: string().required('Width is required'),
+                depth: string().required('Depth is required'),
             }),
             weight: string()
                 .min(0, 'Weight must be positive')

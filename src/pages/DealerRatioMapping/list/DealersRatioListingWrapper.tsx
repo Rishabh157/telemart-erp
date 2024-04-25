@@ -6,13 +6,10 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, {
-    useEffect,
-    // useState
-} from 'react'
+import React from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -22,75 +19,47 @@ import { useGetInquiryQuery } from 'src/services/InquiryService'
 //import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-    //setFilterValue,
-} from 'src/redux/slices/inquirySlice'
-import DealerRatioListing from './DealerRatioListing'
-import { DealersRatioListResponse } from 'src/models'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddDealersRatioWapper from '../add/AddDealersRatioWapper'
 import { FaExclamation } from 'react-icons/fa'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { DealersRatioListResponse } from 'src/models'
+import { RootState } from 'src/redux/store'
+import AddDealersRatioWapper from '../add/AddDealersRatioWapper'
+import DealerRatioListing from './DealerRatioListing'
 
 const DealersRatioListingWrapper = () => {
-    // Hooks
-    // const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     const [isOpenDialog, setIsOpenDialog] = React.useState(false)
 
-    // States
-    // const [selectedRows, setSelectedRows] = useState([])
-    // const [currentId, setCurrentId] = useState('')
-    // const [showDropdown, setShowDropdown] = useState(false)
-
-    const inquiryState: any = useSelector((state: RootState) => state.inquiry)
+    const inquiryState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        // items,
-        filterValue,
-        // totalItems,
-        // isTableLoading,
-    } = inquiryState
+    const { page, rowsPerPage, searchValue, filterValue } = inquiryState
 
-    const { data, isLoading, isFetching } = useGetInquiryQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['inquiryNumber'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: 'dispositionLevelThreeId',
-                value: filterValue,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { items } = useGetCustomListingData<DealersRatioListResponse>({
+        useEndPointHook: useGetInquiryQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['inquiryNumber'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: 'dispositionLevelThreeId',
+                    value: filterValue,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
 
     const columns: columnTypes[] = [
         {
@@ -119,15 +88,6 @@ const DealersRatioListingWrapper = () => {
                 </>
             ),
         },
-
-        // {
-        //     field: 'action',
-        //     headerName: 'Action',
-        //     flex: 'flex-[1_5_0%]',
-        //     renderCell: (row: DealersRatioListResponse) => (
-        //         // <span> {row.mobileNo} </span>
-        //     ),
-        // },
     ]
 
     const rows: any = [
@@ -148,24 +108,6 @@ const DealersRatioListingWrapper = () => {
             dealerCount: '3',
         },
     ]
-
-    // const handleDelete = () => {
-    //     setShowDropdown(false)
-    //     // deleteOrdercurrentId).then((res) => {
-    //     //     if ('data' in res) {
-    //     //         if (res?.data?.status) {
-    //     //             showToast('success', 'Order deleted successfully!')
-    //     //         } else {
-    //     //             showToast('error', res?.data?.message)
-    //     //         }
-    //     //     } else {
-    //     //         showToast(
-    //     //             'error',
-    //     //             'Something went wrong, Please try again later'
-    //     //         )
-    //     //     }
-    //     // })
-    // }
 
     return (
         <>

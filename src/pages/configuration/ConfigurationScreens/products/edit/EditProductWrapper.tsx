@@ -76,18 +76,18 @@ const steps = [
         label: 'Product Details',
         component: StepEditProductDetailsWrapper,
         validationSchema: object({
-            product_code: string().required('Required'),
-            product_name: string().required('Required'),
-            product_category: string().required('Required'),
-            product_sub_category: string().required('Required'),
-            productGroup: string().required('Required'),
+            product_code: string().required('Product code is required'),
+            product_name: string().required('Product name is required'),
+            product_category: string().required('Product category is required'),
+            product_sub_category: string().required('Product sub category is required'),
+            productGroup: string().required('Product group is required'),
             product_weight: number()
                 .min(0, 'Weight must be positive')
-                .required('Required'),
+                .required('Product weight is required'),
             dimensions: object().shape({
-                height: number().required('Required'),
-                width: number().required('Required'),
-                depth: number().required('Required'),
+                height: number().required('Height is required'),
+                width: number().required('Width is required'),
+                depth: number().required('Depth is required'),
             }),
             description: string(),
         }),

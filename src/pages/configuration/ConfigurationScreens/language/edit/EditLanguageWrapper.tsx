@@ -47,7 +47,7 @@ const EditLanguageWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        languageName: string().required('Required'),
+        languageName: string().required('Language is required'),
     })
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {

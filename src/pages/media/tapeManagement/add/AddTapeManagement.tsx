@@ -20,10 +20,7 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Redux --|
-import {
-    setFieldCustomized,
-    setFormSubmitting,
-} from 'src/redux/slices/authSlice'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { RootState, AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
@@ -52,9 +49,11 @@ const AddTapeManagement = ({
     apiStatus,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue } = formikProps
+    const { values, setFieldValue, errors } = formikProps
     const [show, setShow] = useState(false)
-
+    
+    console.log('errors: ', errors)
+    console.log('values: ', values);
     const dispatch = useDispatch<AppDispatch>()
 
     const { formSubmitting: isSubmitting } = useSelector(
@@ -105,7 +104,6 @@ const AddTapeManagement = ({
                                         formikProps.values.second === '00'
                                     ) {
                                         setShow(true)
-                                        dispatch(setFormSubmitting(true))
                                         if (
                                             formikProps.values.languageId
                                                 .length === 0 ||
@@ -116,11 +114,10 @@ const AddTapeManagement = ({
                                             formikProps.values.artistId
                                                 .length === 0
                                         ) {
-                                            dispatch(setFormSubmitting(true))
                                             formikProps.handleSubmit()
                                         }
                                     } else {
-                                        dispatch(setFormSubmitting(true))
+                                        setShow(true)
                                         formikProps.handleSubmit()
                                     }
                                 }}
@@ -291,7 +288,7 @@ const AddTapeManagement = ({
                                     </div>
 
                                     {show ? (
-                                        <p className="font-poppins relative text-[14px] text-start mt-0 ml-24 text-red-500 col-span-3">
+                                        <p className="font-poppins relative text-[14px] text-start mt-0 text-red-500 col-span-3">
                                             Duration is Required
                                         </p>
                                     ) : (
@@ -311,7 +308,7 @@ const AddTapeManagement = ({
                         </div>
                         <div className="grid grid-cols-3 gap-4 "></div>
                         {/*  Phone  */}
-                        <div className="px-3 py-8">
+                        <div className="py-8">
                             <div className=" text-lg pb-2 font-medium text-primary-main">
                                 Add Phone Number
                             </div>
@@ -320,7 +317,7 @@ const AddTapeManagement = ({
                                 {({ push, remove }) => {
                                     return (
                                         <>
-                                            <div className="grid grid-cols-3 gap-9 ">
+                                            <div className="grid grid-cols-4 gap-4">
                                                 {values.phone?.map(
                                                     (
                                                         item: any,
@@ -331,10 +328,10 @@ const AddTapeManagement = ({
                                                         return (
                                                             <div
                                                                 key={itemIndex}
-                                                                className="flex "
+                                                                className="flex gap-3 items-end"
                                                             >
                                                                 {/* Phone */}
-                                                                <div className="flex">
+                                                                <div className="w-full">
                                                                     <ATMTextField
                                                                         type="text"
                                                                         required
@@ -344,6 +341,7 @@ const AddTapeManagement = ({
                                                                         }
                                                                         label="Phone"
                                                                         placeholder="Phone"
+                                                                        extraClassField="mt-0"
                                                                         onChange={(
                                                                             e
                                                                         ) => {
@@ -358,25 +356,28 @@ const AddTapeManagement = ({
                                                                             isSubmitting
                                                                         }
                                                                     />
+                                                                </div>
 
-                                                                    {/* BUTTON - Delete */}
-                                                                    {values
-                                                                        .phone
+                                                                {values?.phone
+                                                                    ?.length &&
+                                                                    values
+                                                                        ?.phone
                                                                         ?.length >
                                                                         1 && (
-                                                                        <button
-                                                                            type="button"
-                                                                            onClick={() => {
-                                                                                remove(
-                                                                                    itemIndex
-                                                                                )
-                                                                            }}
-                                                                            className="p-2 bg-red-500 text-white rounded my-[48px] mx-[10px]"
-                                                                        >
-                                                                            <MdDeleteOutline className="text-2xl" />
-                                                                        </button>
+                                                                        <div>
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => {
+                                                                                    remove(
+                                                                                        itemIndex
+                                                                                    )
+                                                                                }}
+                                                                                className="p-2 bg-red-500 text-white rounded h-[37px]"
+                                                                            >
+                                                                                <MdDeleteOutline />
+                                                                            </button>
+                                                                        </div>
                                                                     )}
-                                                                </div>
                                                             </div>
                                                         )
                                                     }

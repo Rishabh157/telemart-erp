@@ -38,7 +38,7 @@ const MoneybackListing = ({ columns, rows, setShowDropdown }: Props) => {
         moneybackState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)]">
+        <div className="px-4 h-[calc(100vh-40px)]">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading>Moneyback</ATMPageHeading>

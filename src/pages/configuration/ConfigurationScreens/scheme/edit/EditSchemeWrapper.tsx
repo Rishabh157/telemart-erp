@@ -81,7 +81,7 @@ const steps = [
                 .typeError('Please enter number')
                 .integer('Price must be positive')
                 .positive('Please enter positive digit')
-                .required('Required!'),
+                .required('scheme description is required'),
             dimension: object().shape({
                 height: string().required('Height is required'),
                 width: string().required('Width is required'),

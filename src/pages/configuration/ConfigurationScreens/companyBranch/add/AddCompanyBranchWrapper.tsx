@@ -45,7 +45,7 @@ const AddCompanyBranchWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        branchName: string().required('Required'),
+        branchName: string().required('Branch name is required'),
     })
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {

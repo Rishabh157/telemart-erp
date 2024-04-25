@@ -49,7 +49,7 @@ const EditCallCenterMasterWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        callCenterName: string().required('Required'),
+        callCenterName: string().required('Call cneter name is required'),
     })
 
     //    Form Submit Handler

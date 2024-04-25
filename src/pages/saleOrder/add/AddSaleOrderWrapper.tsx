@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
@@ -19,7 +19,6 @@ import AddSaleOrder from './AddSaleOrder'
 // |-- Redux--|
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { setAllItems } from 'src/redux/slices/dealerSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
@@ -45,18 +44,11 @@ const AddSaleOrderWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addSalesOrder] = useAddSalesOrderMutation()
 
-    const {
-        data: dealerData,
-        isLoading: dealerIsLoading,
-        isFetching: dealerIsFetching,
-    } = useGetAllDealersQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state?.dealer)
 
-    const dealerOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.firstName + ' ' + ele.lastName,
-            value: ele._id,
-        }
+    const { options: dealerOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDealersQuery(userData?.companyId),
+        keyName: ['firstName', 'lastName'],
+        value: '_id',
     })
 
     const { options: warehouseOptions } = useCustomOptions({
@@ -77,10 +69,7 @@ const AddSaleOrderWrapper = (props: Props) => {
         value: '_id',
     })
 
-    //Dealer
-    useEffect(() => {
-        dispatch(setAllItems(dealerData?.data))
-    }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
+    
 
     const dropdownOptions = {
         dealerOptions: dealerOptions,

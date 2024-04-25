@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:index.tsx
-// Type: Index Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
 
@@ -26,11 +18,12 @@ import DealerInfoCard from '../components/dealerInfoCard/DealerInfoCard'
 import ListItemCard from '../components/listItemCard/ListItemCard'
 
 // |-- Redux --|
-import { setItems, setSearchValue } from 'src/redux/slices/dealerSlice'
+import AccessDenied from 'src/AccessDenied'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { setSearchValue } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import AccessDenied from 'src/AccessDenied'
 
 const tabsData = [
     {
@@ -125,6 +118,7 @@ const ViewDealer = () => {
     useEffect(() => {
         const activeTab = window.location.pathname.split('/')[3]
         navigate(`/dealers/${dealerId}/${activeTab}`)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dealerId])
 
     const allowedTabs = tabsData
@@ -160,29 +154,28 @@ const ViewDealer = () => {
     const tabsRender = tabsData?.some((nav: any) => {
         return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
     })
-    const dealerState: any = useSelector((state: RootState) => state.dealer)
-    const { page, rowsPerPage, items } = dealerState
-    const { searchValue }: any = useSelector((state: RootState) => state.dealer)
-    const { data, isFetching, isLoading } = useGetDealersQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['firstName', 'lastName'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: false,
+    const dealerState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = dealerState
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetDealersQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['firstName', 'lastName'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: false,
+        }),
     })
-
-    useEffect(() => {
-        dispatch(setItems(data?.data || []))
-    }, [isFetching, isLoading, data, dispatch])
 
     const listData = items?.map((ele: any, index: any) => {
         return {
