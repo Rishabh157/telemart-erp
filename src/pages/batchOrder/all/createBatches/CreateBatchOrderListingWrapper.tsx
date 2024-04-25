@@ -321,7 +321,7 @@ const CreateBatchOrderListingWrapper = () => {
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.BATCH_ORDER_LIST_CUSTOMER_ADDRESS,
-            extraClasses: 'min-w-[30px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
             ),
@@ -403,11 +403,11 @@ const CreateBatchOrderListingWrapper = () => {
 
         {
             field: 'preffered_delivery_date',
-            headerName: 'Preffred Delivery Date Time',
+            headerName: 'Preffred Delivery Date',
             flex: 'flex-[3_3_0%]',
             name: UserModuleNameTypes.BATCH_ORDER_LIST_PREFFRED_DELIVERY_DATE,
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[180px]',
             // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -429,7 +429,7 @@ const CreateBatchOrderListingWrapper = () => {
             flex: 'flex-[3_3_0%]',
             name: UserModuleNameTypes.BATCH_ORDER_LIST_PREFFRED_DELIVERY_TIME,
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[180px]',
             renderCell: (row: OrderListResponse) => {
                 return row?.preffered_delivery_start_time &&
                     row?.preffered_delivery_end_time ? (

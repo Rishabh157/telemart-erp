@@ -29,9 +29,9 @@ const AddInitialCallTwoWrapper = () => {
         initialCallOneId: '',
     }
     const validationSchema = object({
-        initialCallName: string().required('Required'),
-        callType: string().required('Required'),
-        initialCallOneId: string().required('Required'),
+        initialCallName: string().required('Intial call name is required'),
+        callType: string().required('call type is required'),
+        initialCallOneId: string().required('Intial call one id is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
