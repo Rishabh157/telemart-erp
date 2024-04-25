@@ -39,8 +39,8 @@ const EditInitialCallOneWrapper = () => {
             selectedInitialOne?.initialCallDisplayName || '',
     }
     const validationSchema = object({
-        initialCallName: string().required('Required'),
-        callType: string().required('Required'),
+        initialCallName: string().required('Initial call name is required'),
+        callType: string().required('call type is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
