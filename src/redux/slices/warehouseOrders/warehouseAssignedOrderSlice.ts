@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:orderSlice.ts
-// Type: Slice Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- External Dependencies --|
 import { createSlice, Slice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
@@ -27,8 +20,10 @@ export type InitialStateType = {
     filterValue: string
     schemeValueFilter: string
     orderTypeValueFilter: string
+    orderStatusValueFilter: string
     stateValueFilter: string
     districtValueFilter: string
+    tehsilValueFilter: string
     callCenterManagerValueFilter: string
     langBarrierValueFilter: boolean
     pndOrderValueFilter: boolean
@@ -57,8 +52,10 @@ const initialState: InitialStateType = {
     filterValue: '',
     schemeValueFilter: '',
     orderTypeValueFilter: '',
+    orderStatusValueFilter: '',
     stateValueFilter: '',
     districtValueFilter: '',
+    tehsilValueFilter: '',
     callCenterManagerValueFilter: '',
     langBarrierValueFilter: false,
     pndOrderValueFilter: false,
@@ -130,11 +127,17 @@ const warehouseAssignedOrderSlice: Slice<InitialStateType> = createSlice({
         setOrderTypeFilterValue: (state, action: PayloadAction<string>) => {
             state.orderTypeValueFilter = action.payload
         },
+        setOrderStatusFilterValue: (state, action: PayloadAction<string>) => {
+            state.orderStatusValueFilter = action.payload
+        },
         setStateFilterValue: (state, action: PayloadAction<string>) => {
             state.stateValueFilter = action.payload
         },
         setDistrictFilterValue: (state, action: PayloadAction<string>) => {
             state.districtValueFilter = action.payload
+        },
+        setTehsilFilterValue: (state, action: PayloadAction<string>) => {
+            state.tehsilValueFilter = action.payload
         },
         setCallCenterManagerFilterValue: (
             state,
@@ -175,8 +178,10 @@ export const {
     // filter value
     setSchemeFilterValue,
     setOrderTypeFilterValue,
+    setOrderStatusFilterValue,
     setStateFilterValue,
     setDistrictFilterValue,
+    setTehsilFilterValue,
     setCallCenterManagerFilterValue,
     setLanguageBarrierFilterValue,
     setPndOrderFilterValue,

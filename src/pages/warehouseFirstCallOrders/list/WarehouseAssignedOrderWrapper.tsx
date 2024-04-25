@@ -551,7 +551,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
         {
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['didNo', 'mobileNo'],
+            params: ['didNo', 'mobileNo' , 'orderNumber'],
             page: page,
             filterBy: [
                 { fieldName: 'assignWarehouseId', value: warehouseId },

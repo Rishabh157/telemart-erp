@@ -57,7 +57,6 @@ const WarehouseAssignedOrdersListing = ({
     }
 
     return (
-        // <div className="px-4 h-full overflow-auto pt-3  bg-white ">
         <div className="px-4 h-[calc(100vh-55px)] bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
@@ -73,13 +72,6 @@ const WarehouseAssignedOrdersListing = ({
                     <span>Urgent</span>
                     <span className=" rounded h-[20px] w-[20px] bg-rose-300"></span>
                 </div>
-                {/* <button
-                    type="button"
-                    onClick={() => navigate('add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add 
-                </button> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
@@ -128,7 +120,6 @@ const WarehouseAssignedOrdersListing = ({
                 </div>
 
                 {/* Pagination */}
-
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}

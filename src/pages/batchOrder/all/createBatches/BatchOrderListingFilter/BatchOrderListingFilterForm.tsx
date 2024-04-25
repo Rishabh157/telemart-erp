@@ -1,20 +1,19 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { FormInitialValues } from './AssignedOrderListFilterFormDialogWrapper'
+import { FormInitialValues } from './BatchOrderListingFilterWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-
+import { getOrderStatusOptions } from 'src/utils/constants/customeTypes'
 // hooks
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 // models
-import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
-import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
-import { useGetAllStateQuery } from 'src/services/StateService'
+import { useGetAllDistrictQuery } from 'src/services/DistricService'
+import { useGetAllTehsilByDistrictQuery } from 'src/services/TehsilService'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -23,7 +22,7 @@ type Props = {
     onClose: () => void
 }
 
-const AssignedOrderListFilterFormDialog = ({
+const BatchOrderListingFilterForm = ({
     open,
     formikProps,
     onReset,
@@ -47,15 +46,17 @@ const AssignedOrderListFilterFormDialog = ({
         value: '_id',
     })
 
-    const { options: stateOptions } = useCustomOptions({
-        useEndPointHook: useGetAllStateQuery(''),
-        keyName: 'stateName',
+    const { options: districtOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDistrictQuery(''),
+        keyName: 'districtName',
         value: '_id',
     })
 
-    const { options: districtOptions } = useCustomOptions({
-        useEndPointHook: useGetAllDistrictByStateQuery(values.stateId),
-        keyName: 'districtName',
+    const { options: tehsilOptions } = useCustomOptions({
+        useEndPointHook: useGetAllTehsilByDistrictQuery(values.districtId, {
+            skip: !values.districtId,
+        }),
+        keyName: 'tehsilName',
         value: '_id',
     })
 
@@ -74,6 +75,32 @@ const AssignedOrderListFilterFormDialog = ({
             </div>
 
             <div className="grid grid-cols-2 gap-x-6">
+                {/* Order Status & Disposition */}
+                <ATMSelectSearchable
+                    label="Order Status"
+                    selectLabel="Select order status"
+                    name="orderStatus"
+                    value={values.orderStatus}
+                    options={getOrderStatusOptions()}
+                    // isLoading={isSchemesLoading}
+                    onChange={(e) => {
+                        setFieldValue('orderStatus', e || '')
+                    }}
+                />
+
+                <ATMSelectSearchable
+                    label="Disposition"
+                    isDisabled
+                    selectLabel="Select disposition"
+                    name="orderStatus"
+                    value={values.orderStatus}
+                    options={[]}
+                    onChange={(e) => {
+                        setFieldValue('orderStatus', e || '')
+                    }}
+                />
+
+                {/* Scheme & Order Type */}
                 <ATMSelectSearchable
                     label="Scheme"
                     selectLabel="Select scheme"
@@ -86,54 +113,43 @@ const AssignedOrderListFilterFormDialog = ({
                     }}
                 />
 
-                {/* Order Type */}
                 <ATMSelectSearchable
-                    label="Order Type"
                     isDisabled
-                    selectLabel="Select order type"
-                    name="orderType"
-                    value={values.orderType}
-                    options={[
-                        {
-                            label: 'amazone',
-                            value: '774909789',
-                        },
-                        {
-                            label: 'mg1',
-                            value: '767768976',
-                        },
-                    ]}
-                    // isLoading={isLoading}
+                    label="Delivery Boy"
+                    selectLabel="Select delivery boy"
+                    name="callCenterManagerId"
+                    textTransform="capitalize"
+                    value={values.callCenterManagerId}
+                    // isLoading={isCallCenterLoading}
+                    options={callCenterOptions}
                     onChange={(e) => {
-                        setFieldValue('orderType', e || '')
+                        setFieldValue('callCenterManagerId', e || '')
                     }}
                 />
 
-                <ATMSelectSearchable
-                    label="State"
-                    selectLabel="Select state"
-                    name="stateId"
-                    value={values.stateId}
-                    options={stateOptions}
-                    // isLoading={isLoading}
-                    onChange={(e) => {
-                        setFieldValue('stateId', e || '')
-                    }}
-                />
-
+                {/* District & Tehsil */}
                 <ATMSelectSearchable
                     label="District"
                     selectLabel="Select district"
                     name="districtId"
                     value={values.districtId}
                     options={districtOptions}
-                    // isLoading={isDataLoading}
                     onChange={(e) => {
                         setFieldValue('districtId', e || '')
                     }}
                 />
+                <ATMSelectSearchable
+                    label="Tehsil"
+                    selectLabel="Select tehsil"
+                    name="tehsilId"
+                    value={values.tehsilId}
+                    options={tehsilOptions}
+                    onChange={(e) => {
+                        setFieldValue('tehsilId', e || '')
+                    }}
+                />
 
-                {/* From */}
+                {/* Order Date From & To */}
                 <div className="mt-4">
                     <ATMDatePicker
                         label="Date From"
@@ -148,7 +164,6 @@ const AssignedOrderListFilterFormDialog = ({
                     />
                 </div>
 
-                {/* To */}
                 <div className="mt-4">
                     <ATMDatePicker
                         label="Date To"
@@ -163,10 +178,11 @@ const AssignedOrderListFilterFormDialog = ({
                         }
                     />
                 </div>
-                {/* Callback date */}
+
+                {/* Followup Date From & To */}
                 <div className="mt-4">
                     <ATMDatePicker
-                        label="Callback From"
+                        label="Folloup Date From"
                         name="callBackFrom"
                         textTransform="capitalize"
                         className="mt-0"
@@ -179,7 +195,7 @@ const AssignedOrderListFilterFormDialog = ({
                 </div>
                 <div className="mt-4">
                     <ATMDatePicker
-                        label="Callback To"
+                        label="Folloup Date To"
                         name="callBackTo"
                         textTransform="capitalize"
                         className="mt-0"
@@ -192,10 +208,42 @@ const AssignedOrderListFilterFormDialog = ({
                     />
                 </div>
 
-                {/* Order Type */}
+                {/* Order Statue Date & To */}
+                <div className="mt-4">
+                    <ATMDatePicker
+                        disabled
+                        label="Status From"
+                        name="callBackFrom"
+                        textTransform="capitalize"
+                        className="mt-0"
+                        dateTimeFormat="DD/MM/YYYY"
+                        value={values.callBackFrom}
+                        onChange={(newValue) =>
+                            setFieldValue('callBackFrom', newValue)
+                        }
+                    />
+                </div>
+                <div className="mt-4">
+                    <ATMDatePicker
+                        disabled
+                        label="Status To"
+                        name="callBackTo"
+                        textTransform="capitalize"
+                        className="mt-0"
+                        dateTimeFormat="DD/MM/YYYY"
+                        value={values.callBackTo}
+                        minDate={values?.callBackFrom}
+                        onChange={(newValue) =>
+                            setFieldValue('callBackTo', newValue)
+                        }
+                    />
+                </div>
+
+                {/* First Caller & ____ */}
                 <ATMSelectSearchable
-                    label="Call Center Manager"
-                    selectLabel="Select Call Center Manager"
+                    isDisabled
+                    label="First Caller"
+                    selectLabel="Select first caller"
                     name="callCenterManagerId"
                     textTransform="capitalize"
                     value={values.callCenterManagerId}
@@ -205,25 +253,6 @@ const AssignedOrderListFilterFormDialog = ({
                         setFieldValue('callCenterManagerId', e || '')
                     }}
                 />
-
-                <div className="flex gap-x-8">
-                    <ATMSwitchButton
-                        name="languageBarrier"
-                        value={values.languageBarrier}
-                        label="Language Barrier"
-                        onChange={(value: any) => {
-                            setFieldValue('languageBarrier', value)
-                        }}
-                    />
-                    <ATMSwitchButton
-                        name="isPnd"
-                        value={values.isPnd}
-                        label="Pnd Orders"
-                        onChange={(value: any) => {
-                            setFieldValue('isPnd', value)
-                        }}
-                    />
-                </div>
             </div>
 
             {/* Apply & Cancel Buttons */}
@@ -248,4 +277,4 @@ const AssignedOrderListFilterFormDialog = ({
     )
 }
 
-export default AssignedOrderListFilterFormDialog
+export default BatchOrderListingFilterForm
