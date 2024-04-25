@@ -1,48 +1,39 @@
-/// ==============================================
-// Filename:DealerListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { DealersListResponse } from 'src/models/Dealer.model'
-import DealersListing from './DealersListing'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
 import {
-    useDeleteDealerMutation,
-    useGetDealersQuery,
     useApproveDealerStatusMutation,
     useChangeDealerStatusMutation,
+    useDeleteDealerMutation,
+    useGetDealersQuery,
 } from 'src/services/DealerServices'
+import { showToast } from 'src/utils'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import DealersListing from './DealersListing'
 
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/dealerSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import { Chip } from '@mui/material'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import ChangePasswordWrapper from '../ChangePassword/ChangePasswordWrapper'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 
 const DealersListingWrapper = () => {
-    const dealerState: any = useSelector((state: RootState) => state.dealer)
+    const dealerState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [currentId, setCurrentId] = useState('')
     const [dealerCode, setDealerCode] = useState('')
@@ -55,8 +46,7 @@ const DealersListingWrapper = () => {
     const [approveDealer] = useApproveDealerStatusMutation()
     const [changeStatusActiveDeactive] = useChangeDealerStatusMutation()
 
-    const { page, rowsPerPage, items, searchValue } = dealerState
-    const dispatch = useDispatch<AppDispatch>()
+    const { page, rowsPerPage, searchValue } = dealerState
 
     const handleDeactive = (rowId: string) => {
         setShowDropdown(false)
@@ -94,13 +84,11 @@ const DealersListingWrapper = () => {
         })
     }
 
-    // const navigate = useNavigate();
     const columns: columnTypes[] = [
-        
         {
             field: 'actions',
             headerName: 'Actions',
-             extraClasses : 'min-w-[100px]',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
@@ -145,12 +133,11 @@ const DealersListingWrapper = () => {
                     }}
                 />
             ),
-            
         },
         {
             field: 'dealerCode',
             headerName: 'Dealer Code',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_LIST_VENDOR_CODE,
             renderCell: (row: DealersListResponse) => (
@@ -167,7 +154,7 @@ const DealersListingWrapper = () => {
         {
             field: 'firmName',
             headerName: 'Firm Name',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_FIRM_NAME,
             renderCell: (row: DealersListResponse) => {
@@ -177,7 +164,7 @@ const DealersListingWrapper = () => {
         {
             field: 'firstName',
             headerName: 'First Name',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_LIST_FIRST_NAME,
             renderCell: (row: DealersListResponse) => (
@@ -187,7 +174,7 @@ const DealersListingWrapper = () => {
         {
             field: 'lastName',
             headerName: 'Last Name',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_LAST_NAME,
             renderCell: (row: DealersListResponse) => {
@@ -197,7 +184,7 @@ const DealersListingWrapper = () => {
         {
             field: 'billingAddress',
             headerName: 'Phone',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_LIST_PHONE,
             renderCell: (row: any) => {
@@ -207,7 +194,7 @@ const DealersListingWrapper = () => {
         {
             field: 'billingAddressDistrictName',
             headerName: 'District',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_DISTRICT,
             renderCell: (row: DealersListResponse) => {
@@ -217,7 +204,7 @@ const DealersListingWrapper = () => {
         {
             field: 'billingAddressStateName',
             headerName: 'State',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_STATE,
             renderCell: (row: DealersListResponse) => {
@@ -227,7 +214,7 @@ const DealersListingWrapper = () => {
         {
             field: 'isApproved',
             headerName: 'Approval',
-             extraClasses : 'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_APPROVAL,
             renderCell: (row: any) => {
@@ -285,7 +272,7 @@ const DealersListingWrapper = () => {
         {
             field: 'status',
             headerName: 'Status',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_STATUS,
             renderCell: (row: any) => {
@@ -356,37 +343,26 @@ const DealersListingWrapper = () => {
                 )
             },
         },
-
     ]
 
-    const { data, isFetching, isLoading } = useGetDealersQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['firstName', 'firmName', 'dealerCode'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetDealersQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['firstName', 'firmName', 'dealerCode'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
     })
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
 
     const handleDelete = () => {
         setShowDropdown(false)

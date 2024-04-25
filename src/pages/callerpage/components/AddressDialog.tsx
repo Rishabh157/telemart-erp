@@ -6,10 +6,9 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -19,17 +18,12 @@ import ATMTable, {
 import { useGetInquiryUnAuthQuery } from 'src/services/InquiryService'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-    //setFilterValue,
-} from 'src/redux/slices/inquirySlice'
-import { DealersRatioListResponse } from 'src/models'
-import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import CallerButton from './CallerButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { DealersRatioListResponse } from 'src/models'
+import { RootState } from 'src/redux/store'
+import CallerButton from './CallerButton'
 
 type AddressDialogTypes = {
     isShow: boolean
@@ -37,59 +31,36 @@ type AddressDialogTypes = {
 }
 
 const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
-    // const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
 
-    // States
-    // const [selectedRows, setSelectedRows] = useState([])
-    // const [currentId, setCurrentId] = useState('')
-    // const [showDropdown, setShowDropdown] = useState(false)
-
-    const inquiryState: any = useSelector((state: RootState) => state.inquiry)
+    const inquiryState: any = useSelector((state: RootState) => state.listingPagination)
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        // items,
-        filterValue,
-        // totalItems,
-        // isTableLoading,
-    } = inquiryState
+    const { page, rowsPerPage, searchValue, filterValue } = inquiryState
 
-    const { data, isLoading, isFetching } = useGetInquiryUnAuthQuery({
-        limit: rowsPerPage,
-        searchValue: searchValue,
-        params: ['inquiryNumber'],
-        page: page,
-        filterBy: [
-            {
-                fieldName: 'companyId',
-                value: userData?.companyId as string,
-            },
-            {
-                fieldName: 'dispositionLevelThreeId',
-                value: filterValue,
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { items } = useGetCustomListingData<DealersRatioListResponse>({
+            useEndPointHook:  useGetInquiryUnAuthQuery({
+                limit: rowsPerPage,
+                searchValue: searchValue,
+                params: ['inquiryNumber'],
+                page: page,
+                filterBy: [
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId as string,
+                    },
+                    {
+                        fieldName: 'dispositionLevelThreeId',
+                        value: filterValue,
+                    },
+                ],
+                dateFilter: {},
+                orderBy: 'createdAt',
+                orderByValue: -1,
+                isPaginationRequired: true,
+            })
+        })
 
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data, dispatch])
 
     const columns: columnTypes[] = [
         {
@@ -161,23 +132,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
         },
     ]
 
-    // const handleDelete = () => {
-    //     setShowDropdown(false)
-    //     // deleteOrdercurrentId).then((res) => {
-    //     //     if ('data' in res) {
-    //     //         if (res?.data?.status) {
-    //     //             showToast('success', 'Order deleted successfully!')
-    //     //         } else {
-    //     //             showToast('error', res?.data?.message)
-    //     //         }
-    //     //     } else {
-    //     //         showToast(
-    //     //             'error',
-    //     //             'Something went wrong, Please try again later'
-    //     //         )
-    //     //     }
-    //     // })
-    // }
+
 
     return (
         <>

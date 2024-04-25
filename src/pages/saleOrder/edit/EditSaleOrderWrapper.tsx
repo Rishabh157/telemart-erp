@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { array, number, object, string } from 'yup'
 
@@ -24,9 +24,8 @@ import EditSaleOrder from './EditSaleOrder'
 
 // |-- Redux --|
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
-import { setAllItems } from 'src/redux/slices/dealerSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -56,7 +55,6 @@ export type FormInitialValues = {
 
 const EditSaleOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const [editSaleOrder, setEditSaleOrder] = useState<FormInitialValues>({
         soNumber: '',
@@ -83,20 +81,12 @@ const EditSaleOrderWrapper = (props: Props) => {
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetSalesOrderByIdQuery(Id || ''),
     })
-  
 
-    const {
-        data: dealerData,
-        isLoading: dealerIsLoading,
-        isFetching: dealerIsFetching,
-    } = useGetAllDealersQuery(userData?.companyId)
-    const { allItems }: any = useSelector((state: RootState) => state?.dealer)
 
-    const dealerOptions = allItems?.map((ele: any) => {
-        return {
-            label: ele.firstName + ' ' + ele.lastName,
-            value: ele._id,
-        }
+    const { options: dealerOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDealersQuery(userData?.companyId),
+        keyName: ['firstName', 'lastName'],
+        value: '_id',
     })
     const { options: warehouseOptions } = useCustomOptions({
         useEndPointHook: useGetWareHousesQuery(''),
@@ -116,10 +106,10 @@ const EditSaleOrderWrapper = (props: Props) => {
         value: '_id',
     })
 
-    //Dealer
-    useEffect(() => {
-        dispatch(setAllItems(dealerData?.data))
-    }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
+    // //Dealer
+    // useEffect(() => {
+    //     dispatch(setAllItems(dealerData?.data))
+    // }, [dealerData, dealerIsLoading, dealerIsFetching, dispatch])
 
     const dropdownOptions = {
         dealerOptions: dealerOptions,
