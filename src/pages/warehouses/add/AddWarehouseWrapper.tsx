@@ -60,8 +60,8 @@ const steps = [
         label: 'Company Details',
         component: StepAddCompanyDetailsWrapper,
         validationSchema: object({
-            warehouseName: string().required('name is required'),
-            country: string().required('please select country'),
+            warehouseName: string().required('Warehouse name is required'),
+            country: string().required('Please select country'),
             email: string()
                 .email('Invalid Email')
                 .required('Email is required')
@@ -83,7 +83,7 @@ const steps = [
                 country: string().required('Please select a country'),
                 state: string().required('Please select a state'),
                 district: string().required('Please select a district'),
-                pincode: string().required('Please select a pincode'),
+                pincode: string().required('Required!'),
             }),
             billing_address: object().shape({
                 phone: string()
@@ -102,7 +102,7 @@ const steps = [
                 country: string().required('Please select a country'),
                 state: string().required('Please select a state'),
                 district: string().required('Please select a district'),
-                pincode: string().required('Please select a pincode'),
+                pincode: string().required('Required!'),
             }),
         }),
     },
