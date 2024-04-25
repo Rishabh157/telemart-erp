@@ -54,23 +54,23 @@ const AddCartonBoxWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        boxName: string().required('Required'),
+        boxName: string().required('Box name is required'),
         innerItemsCount: number()
             .min(1, 'Item count should be greater than 0')
             .required('Please select a innerItemsCount'),
         boxWeight: number()
             .min(1, 'Box weight should be greater than 0')
-            .required('Required'),
+            .required('Box weight is required'),
         dimensions: object().shape({
             height: number()
                 .min(1, 'Height should be greter than 0')
-                .required('Required'),
+                .required('Dimensions is required'),
             width: number()
                 .min(1, 'Weight should be greater than 0')
-                .required('Required'),
+                .required('Width is required'),
             depth: number()
                 .min(1, 'depth should be greater than 0')
-                .required('Required'),
+                .required('Depth is required'),
         }),
     })
 

@@ -54,7 +54,7 @@ const AddAreaWrapper = ({ onClose }: Props) => {
         area: '',
     }
     const validationSchema = object({
-        area: string().required('Required'),
+        area: string().required('Area is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)

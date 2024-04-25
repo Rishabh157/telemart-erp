@@ -48,8 +48,8 @@ const AddProductCategoryWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        categoryCode: string().required('Required'),
-        categoryName: string().required('Required'),
+        categoryCode: string().required('Category code is required'),
+        categoryName: string().required('Category name is required'),
     })
 
     //    Form Submit Handler

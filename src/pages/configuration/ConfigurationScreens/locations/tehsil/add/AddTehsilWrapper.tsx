@@ -47,7 +47,7 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
         tehsilName: '',
     }
     const validationSchema = object({
-        tehsilName: string().required('State Name is required'),
+        tehsilName: string().required('Tehsil  Name is required'),
     })
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
