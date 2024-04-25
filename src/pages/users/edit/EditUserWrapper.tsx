@@ -122,6 +122,8 @@ const EditUserWrapper = (props: Props) => {
         lastName: string().required('Last Name is required'),
         userName: string().required('User Name is required'),
         userRole: string().required('User Role is required'),
+        mobile:string().required('Mobile number is required'),
+        email:string().required('Email is required'),
 
         isAgent: boolean(),
         teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
