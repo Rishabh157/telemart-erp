@@ -41,8 +41,8 @@ const EditInitialCallTwoWrapper = () => {
     }
 
     const validationSchema = object({
-        initialCallName: string().required('Name is required'),
-        initialCallOneId: string().required('Required'),
+        initialCallName: string().required('Intial call name is required'),
+        initialCallOneId: string().required('Intial call one id is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
