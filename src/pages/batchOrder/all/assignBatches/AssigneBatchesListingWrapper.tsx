@@ -18,11 +18,7 @@ const AssigneBatchesListingWrapper = () => {
         (state: RootState) => state.listingPagination
     )
 
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-    } = createBatchOrderState
+    const { page, rowsPerPage, searchValue } = createBatchOrderState
 
     // pagination api
     const { items } = useGetCustomListingData<any>({
@@ -41,8 +37,9 @@ const AssigneBatchesListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
+
     return (
         <AssignBatchesListing
             // columns={columns}

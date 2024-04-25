@@ -26,8 +26,24 @@ const CreateBatchOrderListingWrapper = () => {
         useState<boolean>(false)
     const [selectedRows, setSelectedRows] = useState([])
 
-    const createBatchOrderState: any = useSelector((state: RootState) => state.listingPagination)
+    const createBatchOrderState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, searchValue } = createBatchOrderState
+
+    const warehouseAssignedOrdersState: any = useSelector(
+        (state: RootState) => state.warehouseOrdersAssigned
+    )
+
+    const {
+        // filter value
+        schemeValueFilter,
+        orderStatusValueFilter,
+        districtValueFilter,
+        tehsilValueFilter,
+        dateFilter,
+        callbackDateFilter,
+    } = warehouseAssignedOrdersState
 
     // pagination api
     const { items } = useGetCustomListingData<OrderListResponse[]>({
@@ -43,7 +59,7 @@ const CreateBatchOrderListingWrapper = () => {
                 },
                 {
                     fieldName: 'status',
-                    value: 'FRESH',
+                    value: orderStatusValueFilter || 'FRESH',
                 },
                 {
                     fieldName: 'approved',
@@ -53,15 +69,18 @@ const CreateBatchOrderListingWrapper = () => {
                     fieldName: 'isOrderAssigned',
                     value: false,
                 },
+                { fieldName: 'schemeId', value: schemeValueFilter },
+                { fieldName: 'districtId', value: districtValueFilter },
+                { fieldName: 'tehsilId', value: tehsilValueFilter },
             ],
             getBatchData: true,
-            dateFilter: {},
+            dateFilter: dateFilter || {},
+            callbackDateFilter: callbackDateFilter || {},
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
-
 
     const columns: columnTypes[] = [
         {
@@ -396,8 +415,8 @@ const CreateBatchOrderListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                     </>
@@ -442,6 +461,8 @@ const CreateBatchOrderListingWrapper = () => {
         },
     ]
 
+    console.log('items', items)
+    
     return (
         <>
             <CreateBatchOrderListing

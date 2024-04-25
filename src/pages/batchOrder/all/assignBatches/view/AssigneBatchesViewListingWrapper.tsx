@@ -36,14 +36,10 @@ const AssigneBatchesViewListingWrapper = () => {
 
     const batchId = params?.id
 
-
     const { items } = useGetDataByIdCustomQuery<OrderListResponse>({
-        useEndPointHook: useGetSingleBatchesOrdersQuery(
-            batchId,
-            {
-                skip: !batchId,
-            }
-        ),
+        useEndPointHook: useGetSingleBatchesOrdersQuery(batchId, {
+            skip: !batchId,
+        }),
     })
 
     const columns: columnTypes[] = [
@@ -67,21 +63,20 @@ const AssigneBatchesViewListingWrapper = () => {
                             setIsOrderAssigneeFormOpen(true)
                             setSelectedOrder(row)
                         }}
-                    // children={
-                    //     <>
-                    //         <button
-                    //             onClick={() => {
-                    //                 navigate(`/orders/view/${row?._id}`)
-                    //             }}
-                    //             className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                    //         >
-                    //             View
-                    //         </button>
-                    //     </>
-                    // }
+                        // children={
+                        //     <>
+                        //         <button
+                        //             onClick={() => {
+                        //                 navigate(`/orders/view/${row?._id}`)
+                        //             }}
+                        //             className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                        //         >
+                        //             View
+                        //         </button>
+                        //     </>
+                        // }
                     />
                 ),
-
         },
         {
             field: 'orderNumber',
@@ -425,8 +420,8 @@ const AssigneBatchesViewListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -482,8 +477,6 @@ const AssigneBatchesViewListingWrapper = () => {
             <AssignBatchesViewListing
                 columns={columns}
                 rows={items as any}
-                // apiStatus={apiStatus}
-                setShowDropdown={setShowDropdown}
                 selectedRows={selectedRows}
                 setSelectedRows={(ele) => setSelectedRows(ele)}
             />
