@@ -96,7 +96,10 @@ const AddSlotManagementWrapper = () => {
         type: string().required('Required'),
         slotPrice: number().required('Required'),
         slotStartDate: string().required('Required'),
-        slotDay: array().of(string()).required('Required'),
+        slotDay: array()
+        .of(string())
+        .min(1, 'At least one day is required')
+        .required('Required'),
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
         slotContinueStatus: boolean().required('Required'),

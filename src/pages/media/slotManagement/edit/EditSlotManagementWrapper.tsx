@@ -101,19 +101,19 @@ const EditSlotManagementWrapper = () => {
     // Form Validation Schema
     const validationSchema = object({
         slotName: string().required('Required'),
-        channelGroupId: string().required('Required'),
+        channelGroup: string().required('Required'),
         type: string().required('Required'),
         slotPrice: number().required('Required'),
+        slotStartDate: string().required('Required'),
         slotDay: array()
             .of(string())
-            .min(1, 'At least one slot day is required')
+            .min(1, 'At least one day is required')
             .required('Required'),
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
         slotContinueStatus: boolean().required('Required'),
-        tapeNameId: string().required('Required'),
-        channelNameId: string().required('Required'),
-        slotStartDate: string().required('Required'),
+        tapeName: string().required('Required'),
+        channelName: string().required('Required'),
         channelTrp: string(),
         remarks: string(),
     })
@@ -141,7 +141,7 @@ const EditSlotManagementWrapper = () => {
                     companyId: values?.companyId,
                 },
                 id: id || '',
-            }).then((res:any) => {
+            }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Slot Updated successfully!')
