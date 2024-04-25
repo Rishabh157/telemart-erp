@@ -133,7 +133,7 @@ const EditUserWrapper = (props: Props) => {
         }),
         mySenior: string().when(['userRole'], (userRole, schema) => {
             return getSeniorValid(userRole, schema)
-                ? schema.required('Senioer is required')
+                ? schema.required('Senior is required')
                 : schema.notRequired()
         }),
         floorManagerId: string().when(['isAgent'], (isAgent, schema) => {
@@ -146,7 +146,7 @@ const EditUserWrapper = (props: Props) => {
             (userDepartment: any, schema: any) => {
                 return userDepartment.includes('SALES_DEPARTMENT')
                     ? schema.required(
-                          'Call Center ID is required for Sales department'
+                          'Call center is required for sales department'
                       )
                     : schema.notRequired()
             }

@@ -161,13 +161,13 @@ const StepAddAddress = ({
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
-                                                className="bg-white rounded shadow"
+                                                className="bg-white rounded shadow relative"
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-4" key={name}>
+                                            <div className="mt-5" key={name}>
                                                 <ATMFilePickerWrapper
                                                     name={name}
                                                     label={label}
@@ -417,7 +417,7 @@ const StepAddAddress = ({
                                         )
                                     case 'textarea':
                                         return (
-                                            <div className="-mt-4">
+                                            <div className="-mt-1 relative">
                                                 <ATMTextArea
                                                     required={required}
                                                     key={name}
