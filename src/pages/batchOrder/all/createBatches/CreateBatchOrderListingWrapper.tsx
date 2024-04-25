@@ -461,8 +461,6 @@ const CreateBatchOrderListingWrapper = () => {
         },
     ]
 
-    console.log('items', items)
-    
     return (
         <>
             <CreateBatchOrderListing

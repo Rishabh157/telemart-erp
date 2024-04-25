@@ -49,11 +49,8 @@ const AddTapeManagement = ({
     apiStatus,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue, errors } = formikProps
+    const { values, setFieldValue } = formikProps
     const [show, setShow] = useState(false)
-    
-    console.log('errors: ', errors)
-    console.log('values: ', values);
     const dispatch = useDispatch<AppDispatch>()
 
     const { formSubmitting: isSubmitting } = useSelector(
