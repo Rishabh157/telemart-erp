@@ -51,9 +51,9 @@ const AddTapeManagement = ({
 }: Props) => {
     const { values, setFieldValue, errors } = formikProps
     const [show, setShow] = useState(false)
-    
+
     console.log('errors: ', errors)
-    console.log('values: ', values);
+    console.log('values: ', values)
     const dispatch = useDispatch<AppDispatch>()
 
     const { formSubmitting: isSubmitting } = useSelector(
@@ -160,6 +160,7 @@ const AddTapeManagement = ({
                                 }
                             />
                             <ATMSelectSearchable
+                                required
                                 name="schemeId"
                                 value={values.schemeId}
                                 selectLabel="Select Scheme"
