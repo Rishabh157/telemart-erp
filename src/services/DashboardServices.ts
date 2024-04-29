@@ -35,7 +35,15 @@ export const customerComplainApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        getZMDealerStockStatus: builder.query({
+            providesTags: ['dashboard'],
+            query: (body: PaginationType) => ({
+                url: '/dashboard/zm-dashboard/dealer-stock',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
-export const { useGetAgentDataQuery, useGetOrderSummayQuery,useGetZMDealerStatusQuery } = customerComplainApi
+export const { useGetAgentDataQuery, useGetOrderSummayQuery, useGetZMDealerStatusQuery ,useGetZMDealerStockStatusQuery} = customerComplainApi
