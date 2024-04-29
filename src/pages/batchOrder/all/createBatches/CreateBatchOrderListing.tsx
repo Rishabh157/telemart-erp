@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,10 +10,10 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import BatchOrderListingFilterWrapper from './BatchOrderListingFilter/BatchOrderListingFilterWrapper'
 
 // |-- Redux --|
 import {
-    setFilterValue,
     setPage,
     setRowsPerPage,
     setSearchValue,
@@ -39,16 +39,14 @@ const CreateBatchOrderListing = ({
     onClick,
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const createBatchState: any = useSelector((state: RootState) => state.listingPagination)
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
+    const createBatchState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        items,
-        isTableLoading,
-        totalItems,
-    } = createBatchState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
+        createBatchState
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
@@ -57,15 +55,15 @@ const CreateBatchOrderListing = ({
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_CREATE_BATCH
                 ) && (
-                        <ATMLoadingButton
-                            disabled={!selectedRows.length}
-                            loadingText="Saving..."
-                            onClick={onClick}
-                            className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-60"
-                        >
-                            Create Selected Order Batch
-                        </ATMLoadingButton>
-                    )}
+                    <ATMLoadingButton
+                        disabled={!selectedRows.length}
+                        loadingText="Saving..."
+                        onClick={onClick}
+                        className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-60"
+                    >
+                        Create Selected Order Batch
+                    </ATMLoadingButton>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
@@ -80,17 +78,25 @@ const CreateBatchOrderListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // isRefresh
-                    onFilterDispatch={() => dispatch(setFilterValue([]))}
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <BatchOrderListingFilterWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                    />
+                )}
 
                 <div className="grow overflow-auto">
                     <ATMTable
                         isCheckbox
                         extraClasses="w-[200%]"
                         columns={columns}
-                        rows={items}
+                        rows={rows}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -103,7 +109,7 @@ const CreateBatchOrderListing = ({
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}
-                        rows={items}
+                        rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />

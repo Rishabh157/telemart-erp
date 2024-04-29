@@ -40,7 +40,6 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
         page,
         rowsPerPage,
         searchValue,
-        items,
         isTableLoading,
         totalItems,
     } = createBatchState
@@ -74,7 +73,7 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
                 <div className="h-[calc(100%-110px)] overflow-auto ">
                     {!isTableLoading ? (
                         <div className="grid grid-cols-3 gap-4 p-4">
-                            {items?.map(
+                            {rows?.map(
                                 (
                                     batch: BatchesListResponseTypes,
                                     ind: number
@@ -139,7 +138,7 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}
-                        rows={items}
+                        rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />

@@ -23,7 +23,6 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
     // apiStatus: boolean
     selectedRows: any[]
     setSelectedRows: (ele: any) => any
@@ -32,25 +31,17 @@ type Props = {
 
 const AssignBatchesViewListing = ({
     columns,
-    rows,
-    setShowDropdown,
+    rows = [],
     selectedRows,
     setSelectedRows,
-}:
-    Props) => {
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const createBatchState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
 
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        items,
-        isTableLoading,
-        totalItems,
-    } = createBatchState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
+        createBatchState
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
@@ -65,7 +56,7 @@ const AssignBatchesViewListing = ({
                     page={page}
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
-                    rows={rows}
+                    rows={rows || []}
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
@@ -79,7 +70,7 @@ const AssignBatchesViewListing = ({
                     <ATMTable
                         extraClasses="w-[200%]"
                         columns={columns}
-                        rows={items}
+                        rows={rows || []}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -92,7 +83,7 @@ const AssignBatchesViewListing = ({
                     <ATMPagination
                         page={page}
                         rowCount={totalItems}
-                        rows={items}
+                        rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
                     />

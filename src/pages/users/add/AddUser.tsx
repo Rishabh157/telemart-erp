@@ -201,9 +201,8 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -355,9 +354,9 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 hidden={
                                     !(
                                         values.userDepartment ===
-                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
+                                        GetHierarchByDeptProps.SALES_DEPARTMENT ||
                                         values.userDepartment ===
-                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+                                        GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
                                     )
                                 }
                                 label="Agent"
@@ -369,7 +368,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
 
                             <ATMSelectSearchable
-                                required={true}
+                                required={values?.userDepartment === "SALES_DEPARTMENT" ? true : false}
                                 name="callCenterId"
                                 value={values.callCenterId}
                                 onChange={(e) =>
@@ -449,18 +448,18 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                                     .allowedIps
                                                                     ?.length >
                                                                     1 && (
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                itemIndex
-                                                                            )
-                                                                        }}
-                                                                        className="p-1.5 bg-red-500 text-white rounded mt-[44px] ml-[10px] "
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl " />
-                                                                    </button>
-                                                                )}
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    itemIndex
+                                                                                )
+                                                                            }}
+                                                                            className="p-1.5 bg-red-500 text-white rounded mt-[44px] ml-[10px] "
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl " />
+                                                                        </button>
+                                                                    )}
                                                             </div>
                                                         </div>
                                                     )

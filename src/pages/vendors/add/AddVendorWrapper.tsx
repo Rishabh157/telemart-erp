@@ -103,7 +103,7 @@ const steps = [
                 country: string().required('Please select a country'),
                 state: string().required('Please select a state'),
                 district: string().required('Please select a district'),
-                pincode: string().required('Please select a pincode'),
+                pincode: string().required('Required!'),
             }),
             billing_address: object().shape({
                 phone: string()
@@ -116,7 +116,7 @@ const steps = [
                 country: string().required('Please select a country'),
                 state: string().required('Please select a state'),
                 district: string().required('Please select a district'),
-                pincode: string().required('Please select a pincode'),
+                pincode: string().required('Required!'),
             }),
         }),
     },
@@ -162,7 +162,7 @@ const steps = [
                 object().shape({
                     bankName: string().required('Bank name is required'),
                     bankBranchName: string().required(
-                        'bankBranchName name is required'
+                        'Branch name is required'
                     ),
                     accountHolderName: string().required(
                         'Account holder name is required'

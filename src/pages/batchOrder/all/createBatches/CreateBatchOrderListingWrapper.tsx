@@ -26,8 +26,24 @@ const CreateBatchOrderListingWrapper = () => {
         useState<boolean>(false)
     const [selectedRows, setSelectedRows] = useState([])
 
-    const createBatchOrderState: any = useSelector((state: RootState) => state.listingPagination)
+    const createBatchOrderState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, searchValue } = createBatchOrderState
+
+    const warehouseAssignedOrdersState: any = useSelector(
+        (state: RootState) => state.warehouseOrdersAssigned
+    )
+
+    const {
+        // filter value
+        schemeValueFilter,
+        orderStatusValueFilter,
+        districtValueFilter,
+        tehsilValueFilter,
+        dateFilter,
+        callbackDateFilter,
+    } = warehouseAssignedOrdersState
 
     // pagination api
     const { items } = useGetCustomListingData<OrderListResponse[]>({
@@ -43,7 +59,7 @@ const CreateBatchOrderListingWrapper = () => {
                 },
                 {
                     fieldName: 'status',
-                    value: 'FRESH',
+                    value: orderStatusValueFilter || 'FRESH',
                 },
                 {
                     fieldName: 'approved',
@@ -53,15 +69,18 @@ const CreateBatchOrderListingWrapper = () => {
                     fieldName: 'isOrderAssigned',
                     value: false,
                 },
+                { fieldName: 'schemeId', value: schemeValueFilter },
+                { fieldName: 'districtId', value: districtValueFilter },
+                { fieldName: 'tehsilId', value: tehsilValueFilter },
             ],
             getBatchData: true,
-            dateFilter: {},
+            dateFilter: dateFilter || {},
+            callbackDateFilter: callbackDateFilter || {},
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
-
 
     const columns: columnTypes[] = [
         {
@@ -302,7 +321,7 @@ const CreateBatchOrderListingWrapper = () => {
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.BATCH_ORDER_LIST_CUSTOMER_ADDRESS,
-            extraClasses: 'min-w-[30px]',
+            extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
             ),
@@ -384,11 +403,11 @@ const CreateBatchOrderListingWrapper = () => {
 
         {
             field: 'preffered_delivery_date',
-            headerName: 'Preffred Delivery Date Time',
+            headerName: 'Preffred Delivery Date',
             flex: 'flex-[3_3_0%]',
             name: UserModuleNameTypes.BATCH_ORDER_LIST_PREFFRED_DELIVERY_DATE,
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[180px]',
             // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -396,8 +415,8 @@ const CreateBatchOrderListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                     </>
@@ -410,7 +429,7 @@ const CreateBatchOrderListingWrapper = () => {
             flex: 'flex-[3_3_0%]',
             name: UserModuleNameTypes.BATCH_ORDER_LIST_PREFFRED_DELIVERY_TIME,
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[180px]',
             renderCell: (row: OrderListResponse) => {
                 return row?.preffered_delivery_start_time &&
                     row?.preffered_delivery_end_time ? (

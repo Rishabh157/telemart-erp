@@ -2,6 +2,63 @@ import { statusProps } from 'src/pages/orders'
 import { GetHierarchByDeptProps } from '../GetHierarchyByDept'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 
+// Get Order Status Options
+export const getOrderStatusOptions = () => {
+    let options = [
+        {
+            label: 'Prepaid',
+            value: statusProps.prepaid,
+        },
+        {
+            label: 'Delivered',
+            value: statusProps.delivered,
+        },
+        {
+            label: 'Door Cancelled',
+            value: statusProps.doorCancelled,
+        },
+        {
+            label: 'Hold',
+            value: statusProps.hold,
+        },
+        {
+            label: 'PSC',
+            value: statusProps.psc,
+        },
+        {
+            label: 'UNA',
+            value: statusProps.una,
+        },
+        {
+            label: 'PND',
+            value: statusProps.pnd,
+        },
+        {
+            label: 'Urgent',
+            value: statusProps.urgent,
+        },
+        {
+            label: 'Inquiry',
+            value: statusProps.inquiry,
+        },
+        {
+            label: 'In Transit',
+            value: statusProps.intransit,
+        },
+        {
+            label: 'NDR',
+            value: statusProps.ndr,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}
+
 // Filter Status Types
 enum FilterStatusType {
     active = 'ACTIVE',
