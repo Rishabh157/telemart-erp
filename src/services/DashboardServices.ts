@@ -19,7 +19,23 @@ export const customerComplainApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        getOrderSummay: builder.query({
+            providesTags: ['dashboard'],
+            query: (body: PaginationType) => ({
+                url: '/dashboard/zm-dashboard/order-summary',
+                method: 'POST',
+                body,
+            }),
+        }),
+        getZMDealerStatus: builder.query({
+            providesTags: ['dashboard'],
+            query: (body: PaginationType) => ({
+                url: '/dashboard/zm-dashboard/dealer-summary',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
-export const { useGetAgentDataQuery } = customerComplainApi
+export const { useGetAgentDataQuery, useGetOrderSummayQuery,useGetZMDealerStatusQuery } = customerComplainApi

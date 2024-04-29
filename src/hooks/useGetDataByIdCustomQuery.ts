@@ -16,6 +16,7 @@ const useGetDataByIdCustomQuery = <T>({ useEndPointHook }: UseCustomPaginationPr
     const [items, setItems] = useState<T | null>(null);
 
     const { data, isLoading, isFetching } = useEndPointHook;
+    console.log("data, isLoading, isFetching",data, isLoading, isFetching)
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -27,7 +28,7 @@ const useGetDataByIdCustomQuery = <T>({ useEndPointHook }: UseCustomPaginationPr
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data]);
 
-    return { items, isLoading };
+    return { items, isLoading ,isFetching};
 };
 
 export default useGetDataByIdCustomQuery;
