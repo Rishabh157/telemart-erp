@@ -25,7 +25,7 @@ const Dashboard = ({ columns, rows, columns2, rows2 }: Props) => {
                     {showTheDashboardGraphToDeparment(
                         userData?.userDepartment
                     ) && <CustomerDashboard />}
-                    {userData?.userDepartment === 'SALES_DEPARTMENT' && (
+                    {userData?.userDepartment === 'DISTRIBUTION_DEPARTMENT' && (
                         <div className="flex  gap-2 w-full h-full">
                             <div className="w-1/2">
                                 <OrderSummary />
