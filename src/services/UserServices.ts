@@ -1,18 +1,5 @@
-/// ==============================================
-// Filename:UserService.tsx
-// Type: Service Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
-import {
-    // AddUser,
-    AddNewUser,
-    // UpdateUser,
-    UpdateNewUser,
-    ChangeCompany,
-} from 'src/models'
+import { AddNewUser, UpdateNewUser, ChangeCompany } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 

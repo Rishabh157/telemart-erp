@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:GRNService.tsx
-// Type: Service Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { AddGRN, UpdateGRN } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'

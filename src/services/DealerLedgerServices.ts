@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DealerLedgerService.tsx
-// Type: Service Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { LedgerAdd, UpdateLedger } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'

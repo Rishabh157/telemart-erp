@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:TaxesService.tsx
-// Type: Service Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { AddTaxes, UpdateTaxes } from 'src/models/taxes.model'
 import { PaginationType } from 'src/models/common/paginationType'

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AreaService.tsx
-// Type: Service Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { AddArea, UpdateArea } from 'src/models/Area.model'
 import { PaginationType } from 'src/models/common/paginationType'

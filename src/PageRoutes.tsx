@@ -1,21 +1,10 @@
-/// ==============================================
-// Filename:PageRoutes.tsx
-// Type: Route component
-// Last Updated: JULY 30, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Built-in Dependencies --|
-
 // |-- External Dependencies --|
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { useDispatch } from 'react-redux'
-
 import { v4 as uuidv4 } from 'uuid'
 import Authorization from './Authorization'
-// import Authorization from './Authorization'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
@@ -288,6 +277,7 @@ import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiO
 import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
 import OutwardShipyaariOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/ShipyaariOrders/OutwardShipyaariOrdersTabListingWrapper'
 import DealerToDealerOrderListingWrapper from './pages/dealerTodealer/list/DealerToDealerOrderListingWrapper'
+import OrderDashboard from './pages/orders/OrderDashboard'
 // import AddDealerToDealerOrderWrapper from './pages/dealerTodealer/add/AddDealerToDealerOrderWrapper'
 // import EditDealerToDealerOrderWrapper from './pages/dealerTodealer/edit/EditDealerToDealerOrderWrapper'
 
@@ -1369,7 +1359,7 @@ const PageRoutes = () => {
                     }
                 ></Route>
 
-                {/* Orders */}
+                {/* Orders listing Dashboard and View */}
                 <Route
                     path="/orders"
                     element={
@@ -1378,7 +1368,16 @@ const PageRoutes = () => {
                             permission={UserModuleNameTypes.NAV_ORDER}
                         />
                     }
-                ></Route>
+                />
+                <Route
+                    path="/orders/overview"
+                    element={
+                        <Authorization
+                            children={<OrderDashboard />}
+                            permission={UserModuleNameTypes.NAV_ORDER}
+                        />
+                    }
+                />
                 <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
 
                 {/* Batch */}

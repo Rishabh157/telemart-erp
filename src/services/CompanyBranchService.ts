@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:CompanyBranchService.tsx
-// Type: Service Component
-// Last Updated: SEPTEMBER 11, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { AddCompanyBranch, UpdateCompanyBranch } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'

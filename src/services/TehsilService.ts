@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:TehsilService.tsx
-// Type: Service Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { AddTehsil, UpdateTehsil } from 'src/models/Tehsil.model'
 import { PaginationType } from 'src/models/common/paginationType'

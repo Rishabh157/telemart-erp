@@ -1,7 +1,5 @@
 import apiSlice from './ApiSlice'
 import { PaginationType } from 'src/models/common/paginationType'
-// import { UpdateCartonBoxBarcode } from 'src/models/CartonBoxBarcode.model'
-// import { CallerFormBody, UpdateCallerForm } from 'src/models'
 
 export const callerPageApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
