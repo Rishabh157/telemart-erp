@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:CartonBoxBarcodeSlice.ts
-// Type: Slice Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { CartonBoxBarcodeListResponseType } from '../../models/CartonBoxBarcode.model'
 
