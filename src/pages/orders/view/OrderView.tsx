@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:OrderView.tsx
-// Type: View Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -13,10 +6,13 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from '../../../components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from '../../../components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 
 // |-- Types --|
 type Props = {
     items: any
+    historyColumns: any
+    orderHistory: any
 }
 
 // Breadcrumbs
@@ -30,7 +26,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const OrderView = ({ items }: Props) => {
+const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
@@ -466,11 +462,25 @@ const OrderView = ({ items }: Props) => {
                             </p>
                         </div>
                     </div>
+
+                    {/*  History  */}
+                    <div className="grow px-3 py-2">
+                        <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
+                            Order History
+                        </div>
+
+                        <div className="grow overflow-auto  ">
+                            <ATMTable
+                                columns={historyColumns}
+                                rows={orderHistory}
+                                extraClasses="max-h-full overflow-auto"
+                                // isLoading={isTableLoading}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        // {items?.contactInformation  }
     )
 }
 
