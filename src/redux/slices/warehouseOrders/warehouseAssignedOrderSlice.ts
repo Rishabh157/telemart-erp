@@ -27,6 +27,7 @@ export type InitialStateType = {
     callCenterManagerValueFilter: string
     langBarrierValueFilter: boolean
     pndOrderValueFilter: boolean
+    isUrgentOrder: boolean
     dateFilter: {
         startDate: string
         endDate: string
@@ -59,6 +60,7 @@ const initialState: InitialStateType = {
     callCenterManagerValueFilter: '',
     langBarrierValueFilter: false,
     pndOrderValueFilter: false,
+    isUrgentOrder: false,
     dateFilter: {
         startDate: '',
         endDate: '',
@@ -154,6 +156,9 @@ const warehouseAssignedOrderSlice: Slice<InitialStateType> = createSlice({
         setPndOrderFilterValue: (state, action: PayloadAction<boolean>) => {
             state.pndOrderValueFilter = action.payload
         },
+        setIsUrgentOrderFilterValue: (state, action: PayloadAction<boolean>) => {
+            state.isUrgentOrder = action.payload
+        },
         setDateFilter: (state, action: PayloadAction<any>) => {
             state.dateFilter = action.payload
         },
@@ -185,6 +190,7 @@ export const {
     setCallCenterManagerFilterValue,
     setLanguageBarrierFilterValue,
     setPndOrderFilterValue,
+    setIsUrgentOrderFilterValue,
     setDateFilter,
     setCallbackDateFilter,
 } = warehouseAssignedOrderSlice.actions

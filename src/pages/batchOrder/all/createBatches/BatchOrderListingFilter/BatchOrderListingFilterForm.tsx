@@ -14,6 +14,7 @@ import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterSer
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { useGetAllDistrictQuery } from 'src/services/DistricService'
 import { useGetAllTehsilByDistrictQuery } from 'src/services/TehsilService'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -75,6 +76,33 @@ const BatchOrderListingFilterForm = ({
             </div>
 
             <div className="grid grid-cols-2 gap-x-6">
+                {/* First Caller & Urgent */}
+                <div>
+                    <ATMCheckbox
+                        label="Urgent"
+                        inputClasses="h-3 w-3"
+                        labelClasses="text-slate-700 text-sm font-medium pt-1 mb-1 select-none"
+                        checked={values.isUrgentOrder}
+                        onChange={(e) => {
+                            setFieldValue('isUrgentOrder', e)
+                        }}
+                    />
+                </div>
+
+                <ATMSelectSearchable
+                    isDisabled
+                    label="First Caller"
+                    selectLabel="Select first caller"
+                    name="callCenterManagerId"
+                    textTransform="capitalize"
+                    value={values.callCenterManagerId}
+                    // isLoading={isCallCenterLoading}
+                    options={callCenterOptions}
+                    onChange={(e) => {
+                        setFieldValue('callCenterManagerId', e || '')
+                    }}
+                />
+
                 {/* Order Status & Disposition */}
                 <ATMSelectSearchable
                     label="Order Status"
@@ -88,7 +116,7 @@ const BatchOrderListingFilterForm = ({
                     }}
                 />
 
-                <ATMSelectSearchable
+                {/* <ATMSelectSearchable
                     label="Disposition"
                     isDisabled
                     selectLabel="Select disposition"
@@ -98,7 +126,7 @@ const BatchOrderListingFilterForm = ({
                     onChange={(e) => {
                         setFieldValue('orderStatus', e || '')
                     }}
-                />
+                /> */}
 
                 {/* Scheme & Order Type */}
                 <ATMSelectSearchable
@@ -113,7 +141,7 @@ const BatchOrderListingFilterForm = ({
                     }}
                 />
 
-                <ATMSelectSearchable
+                {/* <ATMSelectSearchable
                     isDisabled
                     label="Delivery Boy"
                     selectLabel="Select delivery boy"
@@ -125,7 +153,7 @@ const BatchOrderListingFilterForm = ({
                     onChange={(e) => {
                         setFieldValue('callCenterManagerId', e || '')
                     }}
-                />
+                /> */}
 
                 {/* District & Tehsil */}
                 <ATMSelectSearchable
@@ -182,7 +210,7 @@ const BatchOrderListingFilterForm = ({
                 {/* Followup Date From & To */}
                 <div className="mt-4">
                     <ATMDatePicker
-                        label="Folloup Date From"
+                        label="Follow up Date From"
                         name="callBackFrom"
                         textTransform="capitalize"
                         className="mt-0"
@@ -195,7 +223,7 @@ const BatchOrderListingFilterForm = ({
                 </div>
                 <div className="mt-4">
                     <ATMDatePicker
-                        label="Folloup Date To"
+                        label="Follow up Date To"
                         name="callBackTo"
                         textTransform="capitalize"
                         className="mt-0"
@@ -212,7 +240,7 @@ const BatchOrderListingFilterForm = ({
                 <div className="mt-4">
                     <ATMDatePicker
                         disabled
-                        label="Status From"
+                        label="Status Date From"
                         name="callBackFrom"
                         textTransform="capitalize"
                         className="mt-0"
@@ -226,7 +254,7 @@ const BatchOrderListingFilterForm = ({
                 <div className="mt-4">
                     <ATMDatePicker
                         disabled
-                        label="Status To"
+                        label="Status Date To"
                         name="callBackTo"
                         textTransform="capitalize"
                         className="mt-0"
@@ -238,21 +266,6 @@ const BatchOrderListingFilterForm = ({
                         }
                     />
                 </div>
-
-                {/* First Caller & ____ */}
-                <ATMSelectSearchable
-                    isDisabled
-                    label="First Caller"
-                    selectLabel="Select first caller"
-                    name="callCenterManagerId"
-                    textTransform="capitalize"
-                    value={values.callCenterManagerId}
-                    // isLoading={isCallCenterLoading}
-                    options={callCenterOptions}
-                    onChange={(e) => {
-                        setFieldValue('callCenterManagerId', e || '')
-                    }}
-                />
             </div>
 
             {/* Apply & Cancel Buttons */}

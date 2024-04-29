@@ -43,6 +43,7 @@ const CreateBatchOrderListingWrapper = () => {
         tehsilValueFilter,
         dateFilter,
         callbackDateFilter,
+        isUrgentOrder,
     } = warehouseAssignedOrdersState
 
     // pagination api
@@ -60,6 +61,10 @@ const CreateBatchOrderListingWrapper = () => {
                 {
                     fieldName: 'status',
                     value: orderStatusValueFilter || 'FRESH',
+                },
+                {
+                    fieldName: 'isUrgentOrder',
+                    value: isUrgentOrder,
                 },
                 {
                     fieldName: 'approved',

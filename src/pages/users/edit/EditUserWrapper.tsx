@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useRef, useState } from 'react'
 
@@ -122,9 +121,8 @@ const EditUserWrapper = (props: Props) => {
         lastName: string().required('Last Name is required'),
         userName: string().required('User Name is required'),
         userRole: string().required('User Role is required'),
-        mobile:string().required('Mobile number is required'),
-        email:string().required('Email is required'),
-
+        // mobile: string().required('Mobile number is required'),
+        email: string().required('Email is required'),
         isAgent: boolean(),
         teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
             return isAgent[0]
@@ -151,18 +149,8 @@ const EditUserWrapper = (props: Props) => {
                     : schema.notRequired()
             }
         ),
-
         branchId: string().required('branch name is required'),
         userDepartment: string().required('User Department is required'),
-        // password: string().required('Password is required'),
-        // email: string().email('Invalid Email ID'),
-        // .required('Email is required'),
-        // mobile: string()
-        //     .required('Mobile No is required')
-        //     .max(10, 'Mobile number must be 10 digits')
-        //     .min(10, 'Mobile number must be 10 digits')
-        //     .trim()
-        //     .matches(regIndiaPhone, 'Invalid Mobile Number'),
     })
 
     //    Form Submit Handler

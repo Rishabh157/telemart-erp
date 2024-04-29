@@ -126,7 +126,7 @@ const AddUserWrapper = (props: Props) => {
         branchId: string().required('Branch name is required'),
         userDepartment: string().required('User department is required'),
         password: string().required('Password is required'),
-        mobile:string().required('Mobile number is required'),
+        // mobile:string().required('Mobile number is required'),
     })
 
     //    Form Submit Handler
