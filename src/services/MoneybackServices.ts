@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:MoneybackServices.tsx
-// Type: Service Component
-// Last Updated: March 14, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'

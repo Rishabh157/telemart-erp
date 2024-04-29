@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:SalesOrderService.tsx
-// Type: Service Component
-// Last Updated: OCTOBER 25, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import {
     AddSaleOrder,

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ReturnToVendorService.tsx
-// Type: Service Component
-// Last Updated: OCOTOBER 11, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import {
     // AddReturnToVendor,
@@ -13,16 +6,6 @@ import {
 } from 'src/models/ReturnToVendor.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
-// import { UpdateSaleOrderApproval } from 'src/models/ReturnToVendor.model'
-
-// type AddReturnToVendor = {
-//     soNumber: string
-//     dealerId: string
-//     dealerWareHouseId: string
-//     companyWareHouseId: string
-//     companyId: string
-//     productSalesOrder:
-// }
 
 // APPROVEL UPDATE TYPE
 type UpdateReturnToVendorApproval = {

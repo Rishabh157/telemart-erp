@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:WarehouseToSampleService.ts
-// Type: Service Component
-// Last Updated: OCOTOBER 12, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:App.tsx
-// Type: App Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- In - Built Dependencies --|
 import React, { createContext } from 'react'
 

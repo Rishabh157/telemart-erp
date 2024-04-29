@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DealerWarehouseService.ts
-// Type: Service Component
-// Last Updated: OCTOBER 5, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { AddDealerWarehouse, UpdateDealerWarehouse } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'

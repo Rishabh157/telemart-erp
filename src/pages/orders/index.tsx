@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:index.tsx
-// Type: Index Component
-// Last Updated: MARCH 1, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 import { IconType } from 'react-icons'
@@ -60,7 +53,6 @@ const ViewOrder = () => {
             path: '?orderStatus=global-search',
             name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
         },
-
         {
             label: 'Fresh Order',
             icon: MdOutbond,
@@ -156,30 +148,18 @@ const ViewOrder = () => {
 
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     const [activelabel, setActiveTabLabel] = useState<string>()
-    const {
-        search,
-        // pathname
-    } = useLocation()
+    const { search } = useLocation()
     const queryParams = new URLSearchParams(search)
-    // const navigate = useNavigate()
+
     // Access specific query parameters by their names
     const activeTab: keyof typeof statusProps | string | null =
         queryParams.get('orderStatus')
+
     const allowedTabs = tabs
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
         })
         ?.map((tab) => tab)
-    // useEffect(() => {
-    //     if (!activeTab) return
-    //     // const navigate = useNavigate()
-    //     // useEffect(() => {
-    //     //     if (!activeTab) return
-
-    //     navigate(`${pathname}?orderStatus=${activeTab}`)
-
-    //     //eslint-disable-next-line
-    // }, [activeTab])
 
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -210,16 +190,14 @@ const ViewOrder = () => {
         <SideNavLayout>
             <div className="h-[calc(100vh-55px)]">
                 <div className="w-full flex  h-[calc(100%)] bg-white">
-                    {/* Right Section */}
+                    {/* Tab Section */}
                     <div className="w-[100%] border-b border-r border-l rounded-r h-full overflow-x-scroll">
-                        {/* <div className='bg-stone-400 w-[100%]  overflow-x-scroll flex gap-x-4 items-center h-[35px]'> */}
-                        {/* <div className="h-[40px] border flex gap-x-4 items-center bg-stone-400  shadow rounded w-[100%] overflow-auto"> */}
                         <TabScrollable
                             tabs={allowedTabs}
                             active={activeTabIndex}
                             navBtnContainerClassName="bg-red-500"
                         />
-                        {/* </div> */}
+                        {/* Breadcrumb */}
                         <div className="py-2 px-4">
                             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                         </div>

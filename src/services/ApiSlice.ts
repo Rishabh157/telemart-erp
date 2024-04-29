@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ApiService.tsx
-// Type: Service Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 // import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
@@ -26,45 +19,6 @@ const tagTypes = [
     'ndr-disposition',
 ]
 
-// export const apiSlice = createApi({
-//     reducerPath: 'apiSlice',
-//     baseQuery: fetchBaseQuery({
-//         baseUrl: `${BASE_URL}`,
-
-//         prepareHeaders: (headers, { getState, endpoint }) => {
-//             const authToken =
-//                 (getState() as any)?.auth?.accessToken ||
-//                 localStorage.getItem('authToken')
-//             const deviceId = localStorage.getItem('device-id')
-
-//             if (authToken) {
-//                 headers.set('x-access-token', authToken)
-//             }
-//             if (deviceId) {
-//                 headers.set(
-//                     'device-id',
-//                     endpoint !== 'logoutFromAll' ? deviceId : ''
-//                 )
-//             }
-
-//             return headers
-//         },
-//     }),
-//     tagTypes: tagTypes,
-
-//     endpoints: () => ({}),
-// })
-
-// export default apiSlice
-
-// import {
-//   authTokenKeyName,
-//   clearLocalStorage,
-//   refreshTokenKeyName,
-// } from "src/utils/configs/authConfig";
-// import { BASE_URL } from "../utils/constants/index";
-
-// const tagTypes = ["project", "ticket", "chats"];
 const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
@@ -122,29 +76,6 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
                     api.dispatch(
                         setRefreshToken(refreshResult?.data?.data?.refreshToken)
                     )
-                    // let userData = {
-                    //     userId: userId,
-                    //     fullName: firstName + lastName,
-                    //     firstName: firstName,
-                    //     lastName: lastName,
-                    //     email: email,
-                    //     mobile: mobile,
-                    //     userName: userName,
-                    //     companyId: companyId,
-                    //     role: userType,
-                    //     userRole: userRole,
-                    //     branchId: branchId,
-                    // }
-                    // localStorage.setItem('userData', JSON.stringify(userData))
-                    // localStorage.setItem(
-                    //     "userData",
-                    //     JSON.stringify({
-                    //         name: refreshResult?.data?.data?.name,
-                    //         mobile: refreshResult?.data?.data?.mobile,
-                    //         email: refreshResult?.data?.data?.email,
-                    //         userId: refreshResult?.data?.data?.userId,
-                    //     })
-                    // );
                     result = await baseQuery(args, api, extraOptions)
                 } else {
                     localStorage.clear()

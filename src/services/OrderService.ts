@@ -74,6 +74,15 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        // GET ORDER DASHBOARD DATA
+        getOrderDashboardData: builder.query({
+            providesTags: ['order'],
+            query: () => ({
+                url: '/order-inquiry/get-all-order-status-count',
+                method: 'GET',
+            }),
+        }),
+
         //**** Get Single Order History
         getOrderHistory: builder.query({
             providesTags: ['order'],
@@ -208,11 +217,13 @@ export const OrderApi = apiSlice.injectEndpoints({
         }),
     }),
 })
+
 export const {
     useGetOrderQuery,
     useGetOrderByIdQuery,
     useGetWarehouseNdrOrderByPhoneNumberQuery,
     useUpdateCourierOrderDataMutation,
+    useGetOrderDashboardDataQuery,
     useGetAllOrderGlobalSearchQuery,
     useExportOrderDataMutation,
     useGetOrderHistoryQuery,
