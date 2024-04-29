@@ -1,63 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import Dashboard from './Dashboard'
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { useGetAgentDataQuery } from 'src/services/DashboardServices'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
-import moment from 'moment'
-
-type AgentOrdersData = {
-    label: string
-    y: number
-}
 
 type Props = {}
 
 const DashboardWrappper = (props: Props) => {
-    const { dateFilter } = useSelector((state: RootState) => state.dashboard)
-
-    const [agentOrdersData, setAgentOrdersData] = useState<AgentOrdersData[]>(
-        []
-    )
-
-    const { isLoading, isFetching, data } = useGetAgentDataQuery<any>({
-        dateFilter: {
-            startDate: dateFilter.start_date
-                ? moment(dateFilter?.start_date).format('YYYY-MM-DD')
-                : '',
-            endDate: dateFilter.end_date
-                ? moment(dateFilter?.end_date).format('YYYY-MM-DD')
-                : dateFilter.start_date
-                ? moment().format('YYYY-MM-DD')
-                : '',
-        },
-    })
-
-    useEffect(() => {
-        if (!isLoading && !isFetching) {
-            const dataPoints: AgentOrdersData[] = [
-                { y: data?.noOfOrdersCalls, label: 'Orders' },
-                { y: data?.noOfInquiryCalls, label: 'Inquiries' },
-                {
-                    y: data?.numberOfComplaintCalls,
-                    label: 'Total Complaints',
-                },
-                {
-                    y: data?.numberOfProductReplacementCase,
-                    label: 'House Arrest',
-                },
-                {
-                    y: data?.numberOfProductReplacementCase,
-                    label: 'Product Replacement',
-                },
-                { y: data?.numberOfMoneyBackCase, label: 'Money Back' },
-            ]
-
-            setAgentOrdersData(dataPoints)
-        }
-    }, [isLoading, isFetching, data])
-
     const columns: columnTypes[] = [
         {
             field: 'pincode',
@@ -411,7 +358,7 @@ const DashboardWrappper = (props: Props) => {
         <>
             <SideNavLayout>
                 <Dashboard
-                    dataPoints={agentOrdersData} // for orders of agent
+                    // dataPoints={agentOrdersData} // for orders of agent
                     columns={columns}
                     rows={rows}
                     columns2={columns2}

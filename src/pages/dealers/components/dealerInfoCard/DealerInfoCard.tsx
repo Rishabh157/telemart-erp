@@ -6,23 +6,25 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import React from 'react'
 
 // |-- External Dependencies --|
 import { Avatar } from '@mui/material'
 import { IconType } from 'react-icons'
-import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import { useChangeDealerStatusMutation } from 'src/services/DealerServices'
+import {
+    useChangeDealerStatusMutation,
+    useGetDealerByIdQuery,
+} from 'src/services/DealerServices'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
+// import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { UserModuleActionTypes } from 'src/models/userAccess/UserAccess.model'
+import { useParams } from 'react-router-dom'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
@@ -33,12 +35,16 @@ type Props = {
         onClick: () => void
         label: string
     }[]
+    selectedItem?: any
 }
 const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
     const [changeDealerStatus] = useChangeDealerStatusMutation()
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state.listingPagination
-    )
+    const params = useParams()
+    const Id = params.dealerId
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetDealerByIdQuery(Id),
+    })
+
     const changeStatus = () => {
         showConfirmationDialog({
             title: selectedItem?.isActive
