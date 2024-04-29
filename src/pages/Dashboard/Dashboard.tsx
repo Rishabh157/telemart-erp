@@ -25,17 +25,16 @@ const Dashboard = ({ columns, rows, columns2, rows2 }: Props) => {
                     {showTheDashboardGraphToDeparment(
                         userData?.userDepartment
                     ) && <CustomerDashboard />}
-                    {userData?.userRole === 'SR_MANAGER_DISTRIBUTION' ||
-                        (userData?.userRole === 'MANAGER_AREA' && (
-                            <div className="flex  gap-2 w-full h-full">
-                                <div className="w-1/2">
-                                    <OrderSummary />
-                                </div>
-                                <div className="w-1/2">
-                                    <ZMDealerStatus />
-                                </div>
+                    {userData?.userDepartment === 'SALES_DEPARTMENT' && (
+                        <div className="flex  gap-2 w-full h-full">
+                            <div className="w-1/2">
+                                <OrderSummary />
                             </div>
-                        ))}
+                            <div className="w-1/2">
+                                <ZMDealerStatus />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
