@@ -1,15 +1,17 @@
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
 // |-- External Dependencies --|
 import { Avatar } from '@mui/material'
 import { IconType } from 'react-icons'
-import { useDeactivateVendorMutation } from 'src/services/VendorServices'
+import {
+    useDeactivateVendorMutation,
+    useGetVendorByIdQuery,
+} from 'src/services/VendorServices'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { useParams } from 'react-router-dom'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {
@@ -22,9 +24,11 @@ type Props = {
 }
 
 const VendorInfoCard = ({ vendorData, actionIcons }: Props) => {
-    const { selectedItem }: any = useSelector(
-        (state: RootState) => state.listingPagination
-    )
+    const params = useParams()
+    const Id = params.vendorId
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetVendorByIdQuery(Id),
+    })
 
     const [changeVendorStatus] = useDeactivateVendorMutation()
 
