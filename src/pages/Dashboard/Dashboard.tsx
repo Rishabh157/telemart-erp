@@ -5,6 +5,7 @@ import OrderSummary from './OrderSummary'
 import { showTheDashboardGraphToDeparment } from 'src/utils/constants/customeTypes'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import ZMDealerStatus from './ZMDealerStatus'
+import ZMStockStatus from './ZMStockStatus'
 
 type Props = {
     columns: columnTypes[]
@@ -18,7 +19,7 @@ const Dashboard = ({ columns, rows, columns2, rows2 }: Props) => {
     const { userData } = useGetLocalStorage() || null
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] bg-white">
+        <div className="px-4 h-[calc(100vh-55px)] ">
             <div className="p-4 bg-white h-[calc(100vh-55px)] ">
                 <ATMPageHeading> Dashboard </ATMPageHeading>
                 <div>
@@ -26,12 +27,15 @@ const Dashboard = ({ columns, rows, columns2, rows2 }: Props) => {
                         userData?.userDepartment
                     ) && <CustomerDashboard />}
                     {userData?.userDepartment === 'DISTRIBUTION_DEPARTMENT' && (
-                        <div className="flex  gap-2 w-full h-full">
-                            <div className="w-1/2">
+                        <div className="grid grid-cols-2 gap-2 pb-10 h-full ">
+                            <div className="">
                                 <OrderSummary />
                             </div>
-                            <div className="w-1/2">
+                            <div className="">
                                 <ZMDealerStatus />
+                            </div>
+                            <div className="">
+                                <ZMStockStatus />
                             </div>
                         </div>
                     )}
