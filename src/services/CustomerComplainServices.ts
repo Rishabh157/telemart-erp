@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:CustomerComplainServices.tsx
-// Type: Service Component
-// Last Updated: FEB 05, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|import apiSlice from './ApiSlice'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'

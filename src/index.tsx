@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:index.tsx
-// Type: index Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- In - Built Dependencies --|
 import React from 'react'
 

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Navigatio'dealer'
-// Type: Nave Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- External Dependencies --|
 import { RxDashboard } from 'react-icons/rx'
 import { FiUsers, FiPhoneCall } from 'react-icons/fi'
@@ -159,7 +152,7 @@ export const navigation: NavItemType[] = [
     {
         label: 'Orders',
         icon: MdOutlineBorderColor,
-        path: '/orders',
+        path: '/orders/overview',
         name: UserModuleNameTypes.NAV_ORDER,
     },
 

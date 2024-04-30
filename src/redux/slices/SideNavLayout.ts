@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:SideNavLayout.ts
-// Type: Layout Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- External Dependencies --|
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'

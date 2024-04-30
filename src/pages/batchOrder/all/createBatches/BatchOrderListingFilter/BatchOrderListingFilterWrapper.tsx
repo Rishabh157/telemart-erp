@@ -14,8 +14,7 @@ import {
     setTehsilFilterValue,
     setDistrictFilterValue,
     setCallCenterManagerFilterValue,
-    setLanguageBarrierFilterValue,
-    setPndOrderFilterValue,
+    setIsUrgentOrderFilterValue,
 } from 'src/redux/slices/warehouseOrders/warehouseAssignedOrderSlice'
 
 type Props = {
@@ -24,6 +23,7 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    isUrgentOrder: boolean
     schemeId: string
     orderStatus: string
     districtId: string
@@ -33,8 +33,6 @@ export type FormInitialValues = {
     callBackFrom: string
     callBackTo: string
     callCenterManagerId: string
-    languageBarrier: boolean
-    isPnd: boolean
 }
 
 const BatchOrderListingFilterWrapper = ({ open, onClose }: Props) => {
@@ -48,13 +46,13 @@ const BatchOrderListingFilterWrapper = ({ open, onClose }: Props) => {
         districtValueFilter,
         tehsilValueFilter,
         callCenterManagerValueFilter,
-        langBarrierValueFilter,
-        pndOrderValueFilter,
         dateFilter,
         callbackDateFilter,
+        isUrgentOrder,
     } = userState
 
     const initialValues: FormInitialValues = {
+        isUrgentOrder: isUrgentOrder || false,
         schemeId: schemeValueFilter || '',
         orderStatus: orderStatusValueFilter || '',
         districtId: districtValueFilter || '',
@@ -64,9 +62,6 @@ const BatchOrderListingFilterWrapper = ({ open, onClose }: Props) => {
         callBackFrom: callbackDateFilter?.startDate || '',
         callBackTo: callbackDateFilter?.endDate || '',
         callCenterManagerId: callCenterManagerValueFilter,
-        languageBarrier: langBarrierValueFilter || false,
-        isPnd: pndOrderValueFilter || false,
-        // isActive: isActive,
     }
 
     const validationSchema: any = object({
@@ -92,10 +87,8 @@ const BatchOrderListingFilterWrapper = ({ open, onClose }: Props) => {
         dispatch(setTehsilFilterValue(values.tehsilId))
         // call center manager
         dispatch(setCallCenterManagerFilterValue(values.callCenterManagerId))
-        // language
-        dispatch(setLanguageBarrierFilterValue(values.languageBarrier))
-        // pnd
-        dispatch(setPndOrderFilterValue(values.isPnd))
+        // urgent order
+        dispatch(setIsUrgentOrderFilterValue(values.isUrgentOrder))
 
         // date FROM to TO
         dispatch(
@@ -137,10 +130,8 @@ const BatchOrderListingFilterWrapper = ({ open, onClose }: Props) => {
         dispatch(setTehsilFilterValue(''))
         // call center manager
         dispatch(setCallCenterManagerFilterValue(''))
-        // language
-        dispatch(setLanguageBarrierFilterValue(false))
-        // pnd
-        dispatch(setPndOrderFilterValue(false))
+        // urgent order
+        dispatch(setIsUrgentOrderFilterValue(false))
 
         // date FROM to TO
         await dispatch(

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:OrderService.tsx
-// Type: Service Component
-// Last Updated: JULY 30, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
@@ -27,16 +20,6 @@ export const OrderApi = apiSlice.injectEndpoints({
                 url: '/order-inquiry/warehouse-first-call',
                 method: 'POST',
                 body,
-            }),
-        }),
-
-        //***** GET *****/
-        getAllOrder: builder.query({
-            providesTags: ['order'],
-            query: () => ({
-                url: '/order-inquiry',
-                method: 'GET',
-                // body,
             }),
         }),
 
@@ -69,16 +52,6 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
-        // updateOrder: builder.mutation({
-        //     invalidatesTags: ['order'],
-        //     query: ({ body, id }: UpdateOrder) => ({
-        //         url: `/order-inquiry/${id}`,
-        //         method: 'PUT',
-        //         body,
-        //     }),
-        // }),
-
         // **** GET BY ID
         getOrderById: builder.query({
             providesTags: ['order'],
@@ -101,33 +74,21 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Status
-        updateOrderStatus: builder.mutation({
-            invalidatesTags: ['order'],
-            query: (id) => ({
-                url: `/order-inquiry/completed/${id}`,
-                method: 'PUT',
+        // GET ORDER DASHBOARD DATA
+        getOrderDashboardData: builder.query({
+            providesTags: ['order'],
+            query: () => ({
+                url: '/order-inquiry/get-all-order-status-count',
+                method: 'GET',
             }),
         }),
 
-        //**** Get Single Order Flow
-        getOrderFlow: builder.query({
+        //**** Get Single Order History
+        getOrderHistory: builder.query({
             providesTags: ['order'],
             query: (id) => ({
-                url: `/order-inquiry-flow/`,
+                url: `/order-inquiry-flow/${id}`,
                 method: 'GET',
-                params: {
-                    orderId: id,
-                },
-            }),
-        }),
-
-        // **** Delete
-        deleteOrder: builder.mutation({
-            invalidatesTags: ['order'],
-            query: (id) => ({
-                url: `/order-inquiry/${id}`,
-                method: 'DELETE',
             }),
         }),
 
@@ -256,17 +217,16 @@ export const OrderApi = apiSlice.injectEndpoints({
         }),
     }),
 })
+
 export const {
     useGetOrderQuery,
-    useUpdateOrderStatusMutation,
     useGetOrderByIdQuery,
     useGetWarehouseNdrOrderByPhoneNumberQuery,
     useUpdateCourierOrderDataMutation,
+    useGetOrderDashboardDataQuery,
     useGetAllOrderGlobalSearchQuery,
     useExportOrderDataMutation,
-    useDeleteOrderMutation,
-    useGetOrderFlowQuery,
-    useGetAllOrderQuery,
+    useGetOrderHistoryQuery,
     useDispatchedOrderBarcodeMutation,
     useGetDealerOfOrderQuery,
     useAssignOrderToDealerOrWarehouseMutation,
