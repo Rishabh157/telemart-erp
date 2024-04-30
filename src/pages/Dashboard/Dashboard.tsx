@@ -1,4 +1,4 @@
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+// import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import CustomerDashboard from './CustomerDashboard'
 import OrderSummary from './OrderSummary'
@@ -6,6 +6,9 @@ import { showTheDashboardGraphToDeparment } from 'src/utils/constants/customeTyp
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import ZMDealerStatus from './ZMDealerStatus'
 import ZMStockStatus from './ZMStockStatus'
+import WHInventory from './WHInventory'
+import WHInwardStock from './WHInwardStock'
+import WHOutwardStock from './WHOutwardStock'
 
 type Props = {
     columns: columnTypes[]
@@ -19,28 +22,36 @@ const Dashboard = ({ columns, rows, columns2, rows2 }: Props) => {
     const { userData } = useGetLocalStorage() || null
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] ">
-            <div className="p-4 bg-white h-[calc(100vh-55px)] ">
-                <ATMPageHeading> Dashboard </ATMPageHeading>
-                <div>
-                    {showTheDashboardGraphToDeparment(
-                        userData?.userDepartment
-                    ) && <CustomerDashboard />}
-                    {userData?.userDepartment === 'DISTRIBUTION_DEPARTMENT' && (
-                        <div className="grid grid-cols-2 gap-2 pb-10 h-full ">
-                            <div className="">
-                                <OrderSummary />
-                            </div>
-                            <div className="">
-                                <ZMDealerStatus />
-                            </div>
-                            <div className="">
-                                <ZMStockStatus />
-                            </div>
-                        </div>
-                    )}
+        <div className="px-2 h-[calc(100vh-55px)] ">
+            {showTheDashboardGraphToDeparment(userData?.userDepartment) && (
+                <CustomerDashboard />
+            )}
+            {userData?.userDepartment === 'DISTRIBUTION_DEPARTMENT' && (
+                <div className="grid grid-cols-2 gap-2 pb-10 h-full ">
+                    <div className="">
+                        <OrderSummary />
+                    </div>
+                    <div className="">
+                        <ZMDealerStatus />
+                    </div>
+                    <div className="">
+                        <ZMStockStatus />
+                    </div>
                 </div>
-            </div>
+            )}
+            {userData?.userDepartment === 'LOGISTIC_DEPARTMENT' && (
+                <div className="grid grid-cols-2 grid-rows-2 gap-3 h-full">
+                    <div className="row-span-2 col-span-1">
+                        <WHInventory />
+                    </div>
+                    <div className="col-span-1">
+                        <WHInwardStock />
+                    </div>
+                    <div className="col-span-1">
+                        <WHOutwardStock />
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
