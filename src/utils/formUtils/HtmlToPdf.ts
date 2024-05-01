@@ -31,19 +31,22 @@ export const generatePdf = async (contentRef: any) => {
         const pdfHeight = pdfWidth / aspectRatio
 
         // Calculate margin (e.g., 10 mm margin on all sides)
-        const margin = 10
-        const contentWidth = pdfWidth - 2 * margin
-        const contentHeight = pdfHeight - 2 * margin
+        // const margin = 10
+        // const contentWidth = pdfWidth - 2 * margin
+        // const contentHeight = pdfHeight - 2 * margin
 
         // Add image to PDF with margin
-        pdf.addImage(
-            imgData,
-            'JPEG',
-            margin,
-            margin,
-            contentWidth,
-            contentHeight
-        )
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight)
+        // pdf.addImage(
+        //     imgData,
+        //     'JPEG',
+        //     pdfWidth,
+        //     pdfHeight
+        //     // margin,
+        //     // margin,
+        //     // contentWidth,
+        //     // contentHeight
+        // ) as any
 
         // Save the PDF as a data URI
         const pdfDataUri: any = pdf.output('datauristring')
