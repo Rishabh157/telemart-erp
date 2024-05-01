@@ -106,8 +106,9 @@ const CreateBatchOrderListingWrapper = () => {
             callbackDateFilter: {
                 startDate: filter.callBackFrom.value,
                 endDate: filter.callBackTo.value,
-                dateFilterKey:'firstCallCallBackDate',
+                dateFilterKey: 'firstCallCallBackDate',
             },
+            callCenterId: filter.callCenterManagerId.value || null,
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
@@ -183,9 +184,7 @@ const CreateBatchOrderListingWrapper = () => {
             name: UserModuleNameTypes.BATCH_ORDER_LIST_STATUS_DATE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
-            // renderCell: (row: OrderListResponse) => (
-            //     <span>{row?.assignWarehouseLabel}</span>
-            // ),
+            
         },
         {
             field: 'status',
