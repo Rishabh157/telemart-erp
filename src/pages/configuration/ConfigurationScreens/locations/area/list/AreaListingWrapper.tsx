@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AreaListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
 
@@ -18,7 +11,7 @@ import { setItems } from 'src/redux/slices/areaSlice'
 
 // |-- Redux --|
 import { RootState, AppDispatch } from 'src/redux/store'
-import useGetAreaByPincode from 'src/hooks/useGetAreaByPincode'
+import { useGetAllAreaByPincodeQuery } from 'src/services/AreaService'
 
 const AreaListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -35,15 +28,21 @@ const AreaListingWrapper = () => {
         }
     })
 
-    const { AreaByPincode } = useGetAreaByPincode(selectedLocationPincode)
+    const { data: AreaByPincode } = useGetAllAreaByPincodeQuery(
+        selectedLocationPincode,
+        {
+            skip: !selectedLocationPincode,
+        }
+    )
+
     useEffect(() => {
-        if (AreaByPincode?.length && selectedLocationPincode) {
-            dispatch(setItems(AreaByPincode))
+        if (AreaByPincode?.data?.length && selectedLocationPincode) {
+            dispatch(setItems(AreaByPincode?.data))
         } else {
             dispatch(setItems(null))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [AreaByPincode, selectedLocationPincode])
+    }, [AreaByPincode?.data, selectedLocationPincode])
 
     return (
         <AreaListing

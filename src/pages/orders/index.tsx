@@ -18,6 +18,7 @@ import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import OrderListing from './all/OrderListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import OrderOverviewDashboard from './all/OrderOverviewDashboard'
 
 interface tabsProps {
     label: string
@@ -47,6 +48,12 @@ export enum statusProps {
 
 const ViewOrder = () => {
     const tabs: tabsProps[] = [
+        {
+            label: 'Overview',
+            icon: MdOutbond,
+            path: '?orderStatus=overview',
+            name: UserModuleNameTypes.ACTION_ORDER_OVERVIEW_TAB,
+        },
         {
             label: 'Global Order Search',
             icon: MdOutbond,
@@ -164,10 +171,10 @@ const ViewOrder = () => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Orders',
-            path: '/orders?orderStatus=all',
+            path: '/orders?orderStatus=overview',
         },
         {
-            label: `${activelabel ? activelabel : 'ALL'}`,
+            label: `${activelabel ? activelabel : 'overview'}`,
         },
     ]
     useEffect(() => {
@@ -204,13 +211,18 @@ const ViewOrder = () => {
 
                         {/* Children */}
                         <div className="h-[calc(100vh-155px)] w-full ">
-                            <OrderListing
-                                tabName={allowedTabs[activeTabIndex]?.name}
-                                orderStatus={activeTab as string}
-                                currentStatus={getStatus(
-                                    activeTab as keyof typeof statusProps
-                                )}
-                            />
+                            {allowedTabs[activeTabIndex]?.name ===
+                            UserModuleNameTypes.ACTION_ORDER_OVERVIEW_TAB ? (
+                                <OrderOverviewDashboard />
+                            ) : (
+                                <OrderListing
+                                    tabName={allowedTabs[activeTabIndex]?.name}
+                                    orderStatus={activeTab as string}
+                                    currentStatus={getStatus(
+                                        activeTab as keyof typeof statusProps
+                                    )}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
