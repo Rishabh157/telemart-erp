@@ -239,7 +239,7 @@ const SaleOrderListingWrapper = () => {
                         isDelete={isAuthorized(
                             UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
                         )}
-                        isCustomBtn={true}
+                        isCustomBtn={false}
                         customBtnText="Invoice"
                         handleCustomActionButton={() => {
                             navigate(`/sale-order/${row?._id}/invoice`)
