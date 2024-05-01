@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddDispositionComplaint.tsx
-// Type: Add Component
-// Last Updated: FEB 26, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 

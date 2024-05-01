@@ -1,11 +1,8 @@
 import React from 'react'
-import { FieldArray, FormikProps } from 'formik'
+import { FormikProps } from 'formik'
 import { FormInitialValues } from './AddCustomerComplaintDetailsWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import {
-    // CircularProgress,
-    Divider,
-} from '@mui/material'
+import { Divider } from '@mui/material'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { useGetAllInitialByCallType } from 'src/hooks/useGetAllInitialByCallType'
@@ -14,10 +11,6 @@ import { useGetAllInitialCallThreeByCallTypeAndTwoId } from 'src/hooks/useGetAll
 import { complaintTypeOptions } from 'src/utils/constants/customeTypes'
 import moment from 'moment'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
-import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
-import { MdDeleteOutline } from 'react-icons/md'
-import { HiPlus } from 'react-icons/hi'
 
 // |-- Types --|
 type Props = {
@@ -25,6 +18,9 @@ type Props = {
     apiStatus: boolean
     formType: 'ADD' | 'EDIT'
     complaintLogs?: any[]
+    complainImages?: any
+    onClickSetImage?: (newValue: any) => any[] | any
+    onClickRemoveImage?: (index: number) => number
 }
 
 const statusOption = [
@@ -60,13 +56,11 @@ const CustomerComplaintDetailsForm = ({
     apiStatus,
     formType,
     complaintLogs,
+    complainImages,
+    onClickSetImage = (newValue) => [],
+    onClickRemoveImage = (index) => index,
 }: Props) => {
-    // const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
-
     const { values, setFieldValue, handleSubmit } = formikProps
-
-    // Upload File Mutation
-    const [uploadFile] = useAddFileUrlMutation()
 
     // Get IC1 Option By Only Call Type
     const { initialCallOneByCallType, isDataLoading } =
@@ -89,28 +83,6 @@ const CustomerComplaintDetailsForm = ({
         values.initialCallTwo,
         values.callType
     )
-
-    const handleFileUpload = (file: File, name: string) => {
-        let formData = new FormData()
-
-        // setImageApiStatus(true)
-        formData.append(
-            'type',
-            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
-        )
-        formData.append('bucketName', 'SAPTEL_CRM')
-        formData.append('file', file || '', file?.name)
-
-        // call the file manager api
-        uploadFile(formData).then((res: any) => {
-            if ('data' in res) {
-                // setImageApiStatus(false)
-                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
-                setFieldValue(name, fileUrl)
-                // setImageApiStatus(false)
-            }
-        })
-    }
 
     return (
         <div className="p-4 h-[70vh]">
@@ -346,107 +318,56 @@ const CustomerComplaintDetailsForm = ({
                         </div>
                     </div>
 
+                    {/* FILE PICKER */}
                     {isShowImageUploadOptionInInitialCallerOneCase?.includes(
                         values.icOneLabel
                     ) && (
-                        <FieldArray name="images">
-                            {({ push, remove }) => {
-                                return (
-                                    <div className="flex flex-col px-2">
-                                        <div className="grid grid-cols-3 gap-4">
-                                            {values?.images?.map(
-                                                (item, index) => {
-                                                    const { image } = item
-                                                    return (
-                                                        <div
-                                                            key={index}
-                                                            className="flex gap-3 "
-                                                        >
-                                                            <div>
-                                                                <ATMFilePickerWrapper
-                                                                    required={
-                                                                        true
-                                                                    }
-                                                                    name={`images[${index}].image`}
-                                                                    label=""
-                                                                    placeholder={
-                                                                        'Upload Product Image'
-                                                                    }
-                                                                    selectedFile={
-                                                                        image
-                                                                    }
-                                                                    onSelect={(
-                                                                        newFile: any
-                                                                    ) => {
-                                                                        handleFileUpload(
-                                                                            newFile,
-                                                                            `images[${index}].image`
-                                                                        )
-                                                                    }}
-                                                                    // isSubmitting={false}
-                                                                />
-                                                                {/* {imageApiStatus ? (
-                                                                    <div className="mt-3">
-                                                                        <CircularProgress
-                                                                            size={
-                                                                                18
-                                                                            }
-                                                                        />
-                                                                    </div>
-                                                                ) : null} */}
-                                                            </div>
-
-                                                            {/* BUTTON - Delete */}
-                                                            {values.images
-                                                                ?.length &&
-                                                                values.images
-                                                                    ?.length >
-                                                                    1 && (
-                                                                    <div>
-                                                                        <button
-                                                                            type="button"
-                                                                            onClick={() => {
-                                                                                remove(
-                                                                                    index
-                                                                                )
-                                                                            }}
-                                                                            className="p-2 bg-red-500 text-white rounded"
-                                                                        >
-                                                                            <MdDeleteOutline
-                                                                            // className="text-2xl"
-                                                                            />
-                                                                        </button>
-                                                                    </div>
-                                                                )}
-                                                        </div>
-                                                    )
-                                                }
-                                            )}
-                                        </div>
-
-                                        {/* BUTTON - Add More Product */}
-                                        <div className="flex justify-self-start py-9">
-                                            <button
-                                                type="button"
-                                                onClick={() =>
-                                                    push({
-                                                        image: '',
-                                                    })
-                                                }
-                                                className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center"
-                                            >
-                                                <HiPlus size="20" /> Add More
-                                            </button>
-                                        </div>
-                                    </div>
-                                )
-                            }}
-                        </FieldArray>
+                        <div className="w-[25%] px-2">
+                            <ATMFilePickerWrapper
+                                isMultiple={true}
+                                required={true}
+                                name={'images'}
+                                label=""
+                                placeholder={'Select product images'}
+                                selectedFile={null}
+                                onSelect={(newFile: any) => {
+                                    onClickSetImage(newFile) as any
+                                }}
+                            />
+                        </div>
                     )}
 
-                    <div className="flex justify-center">
+                    <div className="grid grid-cols-4 gap-6 p-2">
+                        {Array.from(complainImages)?.map((file: any, index) => {
+                            return (
+                                <div className="border-b border-[1px] h-[200px] relative group cursor-pointer rounded">
+                                    <img
+                                        src={
+                                            typeof file === 'string'
+                                                ? file
+                                                : URL.createObjectURL(file)
+                                        }
+                                        alt=""
+                                        className="h-full w-full rounded"
+                                    />
+                                    <div className="absolute transition-all bg-black opacity-90 group-hover:h-[50%] h-[0%] w-full bottom-0 flex justify-center items-center">
+                                        <span
+                                            className="font-bold text-sm text-white opacity-0 group-hover:opacity-100 hover:text-red-500 hover:underline"
+                                            onClick={() => {
+                                                onClickRemoveImage(index)
+                                            }}
+                                        >
+                                            Remove
+                                        </span>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+
+                    <div className="flex justify-center mt-2">
                         <ATMLoadingButton
-                            className="w-24"
+                            className="w-28"
                             onClick={handleSubmit as any}
                             isLoading={apiStatus}
                             loadingText="Saving..."

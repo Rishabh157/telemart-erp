@@ -606,7 +606,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
                 endDate: filter.callBackTo.value,
                 dateFilterKey: 'firstCallCallBackDate',
             },
-            callCenterId: (filter.callCenterManagerId.value as string) || null,
+            callCenterId: (filter.callCenterManagerId.value as any) || null,
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
