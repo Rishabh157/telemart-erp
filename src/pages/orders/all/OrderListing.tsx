@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:OrderListing.tsx
-// Type: List Component
-// Last Updated: FEB 28, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -35,7 +28,6 @@ import {
 // |-- Redux --|
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import {
-    setFilterValue,
     setIsTableLoading,
     setItems,
     setPage,
@@ -61,7 +53,6 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
-import OrdersFilterFormDialogWrapper from './OrdersFilterFormDialog/OrdersFilterFormDialogWrapper'
 
 enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -99,9 +90,7 @@ const OrderListing = ({
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    // Dispatching State
-    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-        useState<boolean>(false)
+
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -1133,10 +1122,10 @@ const OrderListing = ({
         return barcodeQuantity === barcodeList?.length
     }
 
-    useEffect(() => {
-        navigate('/orders?orderStatus=all')
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    // useEffect(() => {
+    //     navigate('/orders?orderStatus=all')
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
@@ -1230,9 +1219,7 @@ const OrderListing = ({
                             setOrderMobSearchValue(newValue)
                         }}
                         isRefresh
-                        onFilterDispatch={() => dispatch(setFilterValue([]))}
                         // isFilter
-                        onFilterClick={() => setIsOpenFilterFormDialog(true)}
                     />
                 )}
 
@@ -1257,14 +1244,6 @@ const OrderListing = ({
                         isLoading={isTableLoading}
                     />
                 </div>
-
-                {/* Order Filter Form Dialog in All Orders Tab*/}
-                {isOpenFilterFormDialog && (
-                    <OrdersFilterFormDialogWrapper
-                        open
-                        onClose={() => setIsOpenFilterFormDialog(false)}
-                    />
-                )}
 
                 <DialogLogBox
                     maxWidth="md"

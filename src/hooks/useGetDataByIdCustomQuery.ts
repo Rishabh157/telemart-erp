@@ -16,7 +16,6 @@ const useGetDataByIdCustomQuery = <T>({ useEndPointHook }: UseCustomPaginationPr
     const [items, setItems] = useState<T | null>(null);
 
     const { data, isLoading, isFetching } = useEndPointHook;
-    console.log("data, isLoading, isFetching",data, isLoading, isFetching)
 
     useEffect(() => {
         if (!isFetching && !isLoading) {

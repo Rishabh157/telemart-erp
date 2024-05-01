@@ -45,6 +45,7 @@ export type SaleOrderListResponseTypes = {
         accApproved: boolean
         accApprovedActionBy: string
         accApprovedAt: string
+        invoice: string
         productSalesOrder: {
             productGroupId: string
             rate: number
@@ -134,6 +135,7 @@ export type UpdateSaleOrderApproval = {
         accApprovedActionBy?: string
         dhApproved?: boolean | null
         accApproved?: boolean | null
+        invoice?: string | null
     }
     id: string
 }

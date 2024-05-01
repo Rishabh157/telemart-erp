@@ -1,13 +1,22 @@
 import React from 'react'
 import logoImage from '../../../../assets/images/telemartLogo-print.png'
+import { SalesOrderInvoiceResponse } from './DispatchedInvoiceWrapper'
+import moment from 'moment'
+import { NumberToWordsConverter } from 'src/utils/numberToEnglishWord'
 
 type Props = {
     ref?: any
-    saleOrderData?: any
+    invoice: SalesOrderInvoiceResponse | null
 }
 
 const DispatchedInvoiceTemplate = React.forwardRef(
-    ({ saleOrderData }: Props, ref: any) => {
+    ({ invoice }: Props, ref: any) => {
+        // console.log('%c invoice from listing', 'color:orange;', invoice)
+
+        let TOTAL_QUANTITY: number = 0
+        let TOTAL_RATE_PER_UNIT: number = 0
+        let TOTAL_AMOUNT: number = 0
+
         return (
             <div
                 ref={ref}
@@ -67,7 +76,9 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                                         CUSTOMER PO NO.
                                     </span>
                                     <span className="mx-2">:</span>
-                                    <span className="text-[13px]">8896</span>
+                                    <span className="text-[13px]">
+                                        {invoice?.soNumber}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +90,11 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                                     DATE
                                 </span>
                                 <span className="mx-2">:</span>
-                                <span className="text-[13px]">11.07.2023</span>
+                                <span className="text-[13px]">
+                                    {moment(invoice?.createdAt).format(
+                                        'DD.MM.YYYY'
+                                    )}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -99,15 +114,16 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                             Billing Address:
                         </h2>
 
-                        <h2 className="font-bold text-[13px]">
-                            SHREE MAHAKAL ENTERPRISES,{' '}
+                        <h2 className="font-bold text-[13px] uppercase">
+                            {invoice?.companyWarehouseLabel},{' '}
                             <span className="ml-4">(UP/MRT/MJ)</span>
                         </h2>
 
-                        <h2 className="text-[13px]">
-                            OLD HNO-680 NEW 438 SHIV SHAKYI NAGAR DELHI ROAD
-                            MEERUT -250002 MOB NO-7053315228,Meerut , <br />
-                            Uttar Pradesh-250002{' '}
+                        <h2 className="text-[13px] capitalize">
+                            {invoice?.companyWarehouseBillingAddress?.address} -
+                            {invoice?.companyDistrictName} {'-'}
+                            {invoice?.companyPincodeName} MOB NO-
+                            {invoice?.companyWarehouseBillingAddress?.phone}
                         </h2>
 
                         <div>
@@ -115,7 +131,9 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                                 Phone No.
                             </span>
                             <span className="px-2">:</span>
-                            <span className="text-[13px]">7053315228</span>
+                            <span className="text-[13px]">
+                                {invoice?.companyWarehouseBillingAddress?.phone}
+                            </span>
                         </div>
 
                         <div>
@@ -123,7 +141,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                                 GSTIN{' '}
                             </span>
                             <span className="px-2">:</span>
-                            <span className="text-[13px]">7053315228</span>
+                            <span className="text-[13px]">-</span>
                         </div>
 
                         <div>
@@ -131,18 +149,18 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                                 STATE CODE
                             </span>
                             <span className="px-2">:</span>
-                            <span className="text-[13px]">7053315228</span>
+                            <span className="text-[13px]">-</span>
                         </div>
 
                         <div>
                             <span className="font-bold text-[13px]">PAN</span>
                             <span className="px-2">:</span>
-                            <span className="text-[13px]">7053315228</span>
+                            <span className="text-[13px]">-</span>
                         </div>
 
                         <div>
                             <span className="font-bold text-[13px]">
-                                EMAIL:ABC@GAMIL.COM
+                                EMAIL : {invoice?.companyEmail || '-'}
                             </span>
                         </div>
                     </div>
@@ -151,22 +169,28 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                             Delivery Address
                         </h2>
 
-                        <h2 className="text-[13px]">
-                            OLD HNO-680 NEW 438 SHIV SHAKYI NAGAR DELHI ROAD
-                            MEERUT -250002 MOB NO-7053315228
+                        <h2 className="text-[13px] capitalize">
+                            {invoice?.warehouseBillingAddress?.address} -
+                            {invoice?.dealerPincodeName} MOB NO-
+                            {invoice?.warehouseBillingAddress?.phone}
                         </h2>
 
                         <div>
-                            <span className="text-[13px]">Uttar Pradesh</span>
+                            <span className="text-[13px] capitalize">
+                                {invoice?.dealerStateName}
+                            </span>
                             <span className="px-1">-</span>
                             <span className="text-[13px]">
-                                250002 , Ph:- 7053315228
+                                {invoice?.dealerPincodeName} , Ph:-{' '}
+                                {invoice?.warehouseBillingAddress?.phone}
                             </span>
                         </div>
                         <div>
                             <span className="font-bold text-[13px]">EMAIL</span>
                             <span className="px-1">:</span>
-                            <span className="text-[13px]">abc@gmail.com</span>
+                            <span className="text-[13px]">
+                                {invoice?.warehouseEmail || '-'}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -218,45 +242,55 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                             </thead>
                             <tbody>
                                 {/* Table Items Row */}
-                                <tr>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        1
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        362325
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        Product A
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        1214
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        12
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        10.00
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        50.00
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        5.00
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        5.00
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        2.50
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        0.25
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        52.75
-                                    </td>
-                                </tr>
-                                <tr>
+                                {invoice?.productSalesOrder?.map(
+                                    (ele, index) => {
+                                        TOTAL_QUANTITY += ele?.quantity
+                                        TOTAL_RATE_PER_UNIT += ele?.rate
+                                        TOTAL_AMOUNT += ele?.rate
+                                        return (
+                                            <tr key={index}>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    {index + 1}
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    362325 -
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    Product A -
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    1214 -
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    {ele?.quantity}
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    {ele?.rate?.toFixed(2)}
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    50.00 -
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    {ele?.sgst?.toFixed(2)}
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    {ele?.cgst?.toFixed(2)}
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    {ele?.igst?.toFixed(2)}
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    0.25 -
+                                                </td>
+                                                <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                                    {ele?.quantity * ele?.rate}
+                                                    .00
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                )}
+                                {/* <tr>
                                     <td className="border-l border-r text-[14px] border-black text-center py-1">
                                         2
                                     </td>
@@ -293,45 +327,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                                     <td className="border-l border-r text-[14px] border-black text-center py-1">
                                         52.75
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        3
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        12345
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        Product C
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        1234
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        5
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        10.00
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        50.00
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        5.00
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        5.00
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        2.50
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        0.25
-                                    </td>
-                                    <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                        52.75
-                                    </td>
-                                </tr>
+                                </tr> */}
 
                                 {/* TOTAL AMOUNT SECTION ROW WITH SPAN DIVIDED  */}
                                 <tr className="border-t-[1px] border-black">
@@ -346,13 +342,13 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                                         className="text-[14px] font-bold text-center py-1"
                                         colSpan={1}
                                     >
-                                        22
+                                        {TOTAL_QUANTITY}
                                     </td>
                                     <td
                                         className=" text-[14px] text-center py-1"
                                         colSpan={2}
                                     >
-                                        112000.00
+                                        {TOTAL_RATE_PER_UNIT?.toFixed(2)}
                                     </td>
 
                                     <td className="text-[14px] text-center py-1">
@@ -368,7 +364,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                                         0
                                     </td>
                                     <td className="text-[14px] font-bold text-center py-1">
-                                        125440.0
+                                        {TOTAL_AMOUNT?.toFixed(2)}
                                     </td>
                                 </tr>
                             </tbody>
@@ -383,8 +379,11 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                             <span>TOTAL RUPEES (IN WORDS) </span>
                             <span className="pr-4 pl-1"> : </span>
                             <span>
-                                RUPEES ONE LAKHS TWENTY-FIVE THOUSAND FOUR
-                                HUNDRED FORTY ONLY
+                                {/* RUPEES ONE LAKHS TWENTY-FIVE THOUSAND FOUR
+                                HUNDRED FORTY ONLY */}
+                                RUPEE{' '}
+                                {NumberToWordsConverter.convert(TOTAL_AMOUNT)}{' '}
+                                ONLY
                             </span>
                         </h2>
                     </div>

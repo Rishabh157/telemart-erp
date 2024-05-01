@@ -13,5 +13,3 @@ export const getOptions = ({ data, keyName, value }: { data: any[], keyName: str
     
   });
 };
-
-

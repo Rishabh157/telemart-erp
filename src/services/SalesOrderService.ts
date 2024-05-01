@@ -39,6 +39,15 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET SALE ORDER INVOICE *****/
+        getInvoiceOfSaleOrderById: builder.query({
+            providesTags: ['SalesOrder'],
+            query: (soNumber) => ({
+                url: `/sales-order/get-dealer-invoice/${soNumber}`,
+                method: 'GET',
+            }),
+        }),
+
         //***** ADD *****/
         addSalesOrder: builder.mutation({
             invalidatesTags: ['SalesOrder'],
@@ -96,15 +105,6 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-
-        //  Sale Order Invoice
-        // getSalesOrderInvoice: builder.query({
-        //     providesTags: ['SalesOrder'],
-        //     query: (soNumber: string) => ({
-        //         url: `/sales-order/invoice/${soNumber}`,
-        //         method: 'GET',
-        //     }),
-        // }),
     }),
 })
 
@@ -114,9 +114,9 @@ export const {
     useGetSalesOrderByDealerIdQuery,
     useAddSalesOrderMutation,
     useUpdateSalesOrderMutation,
+    useGetInvoiceOfSaleOrderByIdQuery,
     useUpdateSalesOrderApprovalMutation,
     useGetSalesOrderByIdQuery,
     useDeleteSalesOrderMutation,
     useUpdateSoLevelMutation,
-    // useGetSalesOrderInvoiceQuery,
 } = SalesOrderApi

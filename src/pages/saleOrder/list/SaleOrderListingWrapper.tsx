@@ -1,12 +1,5 @@
-/// ==============================================
-// Filename:SaleOrderListingWrapper.tsx
-// Type: List Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
@@ -20,6 +13,7 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { SaleOrderListResponseTypes } from 'src/models/SaleOrder.model'
 import {
     useDeleteSalesOrderMutation,
+    useGetInvoiceOfSaleOrderByIdQuery,
     useGetPaginationSaleOrderByGroupQuery,
     useUpdateSalesOrderApprovalMutation,
 } from 'src/services/SalesOrderService'
@@ -34,19 +28,33 @@ import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { generatePdf } from 'src/utils/formUtils/HtmlToPdf'
+import DispatchedInvoiceTemplate from './components/DispatchedInvoiceTemplate'
+import { SalesOrderInvoiceResponse } from './components/DispatchedInvoiceWrapper'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 
 const SaleOrderListingWrapper = () => {
     useUnmountCleanup()
     const salesOrderState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
+
+    // useRef
+    const saleOrderInvoiceRef = useRef<any>(null)
     const { page, rowsPerPage, searchValue } = salesOrderState
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
+    const [invoiceSoNumber, setInvoiceSoNumber] = useState<string>('')
+    // console.log('currentId', currentId)
     const [showDropdown, setShowDropdown] = useState(false)
     const [deleteSaleOrder] = useDeleteSalesOrderMutation()
     const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
+
+    // Upload File Mutation
+    const [uploadFile] = useAddFileUrlMutation()
 
     const { items } = useGetCustomListingData<SaleOrderListResponseTypes>({
         useEndPointHook: useGetPaginationSaleOrderByGroupQuery({
@@ -66,6 +74,100 @@ const SaleOrderListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
+
+    const { items: invoiceData } =
+        useGetDataByIdCustomQuery<SalesOrderInvoiceResponse>({
+            useEndPointHook: useGetInvoiceOfSaleOrderByIdQuery(
+                invoiceSoNumber || ' ',
+                {
+                    skip: !invoiceSoNumber,
+                }
+            ),
+        })
+
+    const handleUpload = (
+        base64Data: any,
+        _id: string,
+        value: boolean,
+        message: string
+    ) => {
+        const binaryData = atob(base64Data.split(',')[1])
+        const arrayBuffer = new ArrayBuffer(binaryData.length)
+        const byteArray = new Uint8Array(arrayBuffer)
+
+        for (let i = 0; i < binaryData.length; i++) {
+            byteArray[i] = binaryData.charCodeAt(i)
+        }
+
+        const blob = new Blob([arrayBuffer], { type: 'application/pdf' })
+        const file = new File(
+            [blob],
+            invoiceSoNumber ? `so-${invoiceSoNumber}.pdf` : 'so-generated.pdf',
+            { type: 'application/pdf' }
+        )
+
+        let formData: any = new FormData()
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('file', file || '')
+        formData.append('bucketName', 'SAPTEL_CRM')
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                console.log('HERE res', res)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+
+                setTimeout(() => {
+                    const currentDate = new Date().toLocaleDateString('en-GB')
+                    updateSalesOrder({
+                        body: {
+                            accApproved: value,
+                            type: 'ACC',
+                            accApprovedById: userData?.userId,
+                            accApprovedAt: currentDate,
+                            accApprovedActionBy: userData?.userName,
+                            invoice: value
+                                ? fileUrl !== undefined
+                                    ? fileUrl
+                                    : ''
+                                : '',
+                        },
+                        id: _id,
+                    }).then((res: any) => {
+                        console.log('resresresresresres', res, value)
+                        if ('data' in res) {
+                            if (res?.data?.status) {
+                                showToast(
+                                    'success',
+                                    `Account ${message} is successfully!`
+                                )
+                            } else {
+                                showToast('error', res?.data?.message)
+                            }
+                        } else {
+                            showToast('error', 'Something went wrong')
+                        }
+                    })
+                }, 1500)
+            }
+        })
+    }
+
+    const handleClick = async (
+        _id: string,
+        value: boolean,
+        message: string
+    ) => {
+        try {
+            const pdfUri = await generatePdf(saleOrderInvoiceRef) // Generate the PDF
+            handleUpload(pdfUri, _id, value, message) // Upload the PDF
+        } catch (error) {
+            console.error('Error generating PDF and uploading:', error)
+        }
+    }
 
     const handleDelete = () => {
         setShowDropdown(false)
@@ -112,39 +214,20 @@ const SaleOrderListingWrapper = () => {
         })
     }
 
-    const handleAccComplete = (
-        _id: string,
-        value: boolean,
-        message: string
-    ) => {
-        const currentDate = new Date().toLocaleDateString('en-GB')
-        updateSalesOrder({
-            body: {
-                accApproved: value,
-                type: 'ACC',
-                accApprovedById: userData?.userId,
-                accApprovedAt: currentDate,
-                accApprovedActionBy: userData?.userName,
-            },
-            id: _id,
-        }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', `Account ${message} is successfully!`)
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-        })
-    }
+    // const handleAccComplete = async (
+    //     _id: string,
+    //     value: boolean,
+    //     message: string
+    // ) => {
+
+    // }
+    // console.log('invoiceUrl: ', invoiceUrl)
 
     const columns: columnTypes[] = [
         {
             field: 'actions',
             headerName: 'Actions',
-             extraClasses :'min-w-[100px]',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: SaleOrderListResponseTypes) =>
                 row?.dhApproved === null &&
@@ -156,12 +239,10 @@ const SaleOrderListingWrapper = () => {
                         isDelete={isAuthorized(
                             UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
                         )}
-                        isCustomBtn={false}
+                        isCustomBtn={true}
                         customBtnText="Invoice"
                         handleCustomActionButton={() => {
-                            navigate(
-                                `/sale-order/${row?.documents?.[0]?._id}/invoice`
-                            )
+                            navigate(`/sale-order/${row?._id}/invoice`)
                         }}
                         handleEditActionButton={() => {
                             navigate(`/sale-order/edit-sale-order/${row?._id}`)
@@ -188,7 +269,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'soNumber',
             headerName: 'So Number',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
@@ -198,7 +279,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DEALER_NAME,
             align: 'center',
@@ -225,7 +306,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'warehouseStateLabel',
             headerName: 'State',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_STATE,
             align: 'center',
@@ -236,7 +317,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ITEM_QUANTITY,
             align: 'center',
@@ -265,7 +346,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedActionStatus',
             headerName: 'DH Status',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_STATUS,
             align: 'center',
@@ -284,7 +365,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedActionBy',
             headerName: 'DH Approved By',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
             align: 'center',
@@ -295,7 +376,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedAt',
             headerName: 'DH Approved Date',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
             align: 'center',
@@ -306,7 +387,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApprovedActionByStatus',
             headerName: 'Account Status',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS,
             align: 'center',
@@ -326,7 +407,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApprovedActionBy',
             headerName: 'Account Approved By',
-             extraClasses :'min-w-[160px]',
+            extraClasses: 'min-w-[160px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_BY,
             align: 'center',
@@ -337,7 +418,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'Approved',
             headerName: 'Approval',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_APPROVAL,
             align: 'center',
@@ -407,6 +488,7 @@ const SaleOrderListingWrapper = () => {
                                         id="btn"
                                         className=" overflow-hidden cursor-pointer z-0"
                                         onClick={() => {
+                                            setInvoiceSoNumber(row?._id) // for genrating pdf
                                             showConfirmationDialog({
                                                 title: 'Account Approval',
                                                 text: 'Do you want to Approve ?',
@@ -415,18 +497,28 @@ const SaleOrderListingWrapper = () => {
                                                 denyButtonText: 'Reject',
                                                 next: (res) => {
                                                     if (res.isConfirmed) {
-                                                        return handleAccComplete(
+                                                        return handleClick(
                                                             row?._id,
                                                             res?.isConfirmed,
                                                             'Approval'
                                                         )
+                                                        // return handleAccComplete(
+                                                        //     row?._id,
+                                                        //     res?.isConfirmed,
+                                                        //     'Approval'
+                                                        // )
                                                     }
                                                     if (res.isDenied) {
-                                                        return handleAccComplete(
+                                                        return handleClick(
                                                             row?._id,
                                                             !res.isDenied,
                                                             'Rejected'
                                                         )
+                                                        // return handleAccComplete(
+                                                        //     row?._id,
+                                                        //     !res.isDenied,
+                                                        //     'Rejected'
+                                                        // )
                                                     }
                                                 },
                                             })
@@ -476,6 +568,25 @@ const SaleOrderListingWrapper = () => {
                 )
             },
         },
+        {
+            field: 'invoice',
+            headerName: 'Invoice',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return row?.documents?.[0]?.invoice ? (
+                    <a
+                        href={row.documents[0].invoice} // Provide the URL to the invoice file
+                        download={`Invoice_${row._id}.pdf`} // Set the filename for the downloaded file
+                        className="text-blue-500 hover:underline"
+                    >
+                        Invoice
+                    </a>
+                ) : null
+            },
+        },
     ]
 
     return (
@@ -485,8 +596,14 @@ const SaleOrderListingWrapper = () => {
                 rows={items}
                 setShowDropdown={setShowDropdown}
             />
+
+            <div className="opacity-0">
+                <DispatchedInvoiceTemplate
+                    ref={saleOrderInvoiceRef}
+                    invoice={invoiceData || null}
+                />
+            </div>
         </SideNavLayout>
     )
 }
-
 export default SaleOrderListingWrapper
