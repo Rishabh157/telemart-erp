@@ -9,7 +9,7 @@ export const dealerApi = apiSlice.injectEndpoints({
         getAllDealers: builder.query({
             providesTags: ['dealer'],
             query: (companyId) => ({
-                url: `/dealer/company/${companyId}`,
+                url: `/dealer`,
                 method: 'GET',
                 // body,
             }),

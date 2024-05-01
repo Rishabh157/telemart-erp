@@ -3,21 +3,21 @@ import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
+import { useDispatch } from 'react-redux'
 import { array, object, string } from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import AddDealerToSchemeMapping from './AddDealerToSchemeMapping'
-import { showToast } from 'src/utils'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import {
     useGetAllDealersQuery,
     useSaveMultipleSchemeToSingleDealerMutation,
 } from 'src/services/DealerServices'
+import { showToast } from 'src/utils'
+import AddDealerToSchemeMapping from './AddDealerToSchemeMapping'
 
 // |-- Redux --|
-import { RootState, AppDispatch } from 'src/redux/store'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -31,7 +31,6 @@ export type FormInitialValues = {
 const AddDealerToSchemeMappingWrapper = (props: Props) => {
     // Form Initial Values
     const dispatch = useDispatch<AppDispatch>()
-    const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [schemeListOptions, setSchemeListOptions] = React.useState<
         SelectOption[] | []
@@ -69,9 +68,7 @@ const AddDealerToSchemeMappingWrapper = (props: Props) => {
         data: dealerListData,
         isFetching: isDealerListFetching,
         isLoading: isDealerListLoading,
-    } = useGetAllDealersQuery(userData?.companyId, {
-        skip: !userData?.companyId,
-    })
+    } = useGetAllDealersQuery('')
 
     // Get Schemes by companyId
     useEffect(() => {

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import BarGraph from 'src/components/UI/atoms/ATMBarGraph/ATMBarGraph'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { setDateFilter } from 'src/redux/slices/DashboardSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -63,7 +62,7 @@ const CustomerDashboard = () => {
                 <div className="border-[1px] border-slate-400 rounded p-2">
                     <div className="text-start flex justify-between">
                         {/* Heading */}
-                        <ATMPageHeading> Agent </ATMPageHeading>
+                        {/* <ATMPageHeading> Agent </ATMPageHeading> */}
                         {/* Date Filter */}
                         <div className="flex gap-2  items-center">
                             <div className="min-w-[150px] max-w-[150px]">

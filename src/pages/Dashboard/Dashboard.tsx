@@ -22,7 +22,7 @@ const Dashboard = ({ columns, rows, columns2, rows2 }: Props) => {
     const { userData } = useGetLocalStorage() || null
 
     return (
-        <div className="px-2 h-[calc(100vh-55px)] ">
+        <div className=" h-[calc(100vh-55px)] p-5 ">
             {showTheDashboardGraphToDeparment(userData?.userDepartment) && (
                 <CustomerDashboard />
             )}

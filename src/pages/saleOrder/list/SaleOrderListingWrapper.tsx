@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useState, useRef } from 'react'
+import React ,{ useState, useRef } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
@@ -34,6 +34,7 @@ import { SalesOrderInvoiceResponse } from './components/DispatchedInvoiceWrapper
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { SalesOrderFormInitialValuesFilterWithLabel } from './filter/SalesOrderFilterWrapper'
 
 const SaleOrderListingWrapper = () => {
     useUnmountCleanup()
@@ -47,7 +48,27 @@ const SaleOrderListingWrapper = () => {
     const navigate = useNavigate()
     const [currentId, setCurrentId] = useState('')
     const [invoiceSoNumber, setInvoiceSoNumber] = useState<string>('')
-    // console.log('currentId', currentId)
+    const [filter, setFilter] =
+        React.useState<SalesOrderFormInitialValuesFilterWithLabel>({
+            dealerId: { fieldName: '', label: '', value: '' },
+            status: { fieldName: '', label: '', value: '' },
+            invoiceNo: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            IRNStatus: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            startDate: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endDate: { fieldName: '', label: '', value: '' },
+        })
     const [showDropdown, setShowDropdown] = useState(false)
     const [deleteSaleOrder] = useDeleteSalesOrderMutation()
     const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
@@ -67,8 +88,28 @@ const SaleOrderListingWrapper = () => {
                     fieldName: 'companyId',
                     value: userData?.companyId as string,
                 },
+                {
+                    fieldName: 'dealerId',
+                    value: filter.dealerId.value,
+                },
+                {
+                    fieldName: 'invoiceNo',
+                    value: filter.invoiceNo.value,
+                },
+                {
+                    fieldName: 'status',
+                    value: filter.status.value,
+                },
+                {
+                    fieldName: 'IRNStatus',
+                    value: filter.IRNStatus.value,
+                },
+                
             ],
-            dateFilter: {},
+            dateFilter: {
+                startDate: filter.startDate.value as string,
+                endDate: filter.endDate.value as string,
+            },
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
@@ -274,6 +315,36 @@ const SaleOrderListingWrapper = () => {
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?._id} </span>
+            ),
+        },
+        {
+            field: 'invoiceNo',
+            headerName: 'Invoice No',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
+            renderCell: (row: SaleOrderListResponseTypes) => (
+                <span> {row?.invoiceNo} </span>
+            ),
+        },
+        {
+            field: 'invoiceDate',
+            headerName: 'Invoice Date',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
+            renderCell: (row: SaleOrderListResponseTypes) => (
+                <span> {row?.invoiceDate} </span>
+            ),
+        },
+        {
+            field: 'totalInvoiceAmount',
+            headerName: 'Total Invoice Amount',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
+            renderCell: (row: SaleOrderListResponseTypes) => (
+                <span> {row?.totalInvoiceAmount} </span>
             ),
         },
         {
@@ -569,8 +640,19 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
+            field: 'status',
+            headerName: 'STATUS',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return <span> {row?.documents?.[0]?.status} </span>
+            },
+        },
+        {
             field: 'invoice',
-            headerName: 'Invoice',
+            headerName: 'PDF',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS,
@@ -582,9 +664,66 @@ const SaleOrderListingWrapper = () => {
                         download={`Invoice_${row._id}.pdf`} // Set the filename for the downloaded file
                         className="text-blue-500 hover:underline"
                     >
-                        Invoice
+                        PDF
                     </a>
                 ) : null
+            },
+        },
+
+        {
+            field: '',
+            headerName: 'Generate/Cancel IRN',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return <span> - </span>
+            },
+        },
+        {
+            field: '',
+            headerName: 'IRN Status',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return <span>- </span>
+            },
+        },
+        {
+            field: '',
+            headerName: 'ACK Date',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return <span> -</span>
+            },
+        },
+        {
+            field: '',
+            headerName: 'PRINT EWB',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return (
+                    <>
+                        {
+                            <span
+                                className="underline text-primary-main"
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => {}}
+                            >
+                                PRINT EWB
+                            </span>
+                        }
+                    </>
+                )
             },
         },
     ]
@@ -595,6 +734,8 @@ const SaleOrderListingWrapper = () => {
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
+                setFilter={setFilter}
+                filter={filter}
             />
 
             <div className="opacity-0">

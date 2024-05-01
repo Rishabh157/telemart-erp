@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import moment from 'moment'
 import { CircularProgress } from '@mui/material'
+import moment from 'moment'
+import { useState } from 'react'
 import BarGraph from 'src/components/UI/atoms/ATMBarGraph/ATMBarGraph'
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-import { useGetOrderDashboardDataQuery } from 'src/services/OrderService'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useGetOrderDashboardDataQuery } from 'src/services/OrderService'
 
 const OrderOverviewDashboard = () => {
     const [dateFilter, setDateFilter] = useState<any>({
@@ -60,87 +59,70 @@ const OrderOverviewDashboard = () => {
     }
 
     return (
-        <div className="w-full h-full">
-            <div className="p-2 h-full">
-                <div className="text-start">
-                    {/* Heading */}
-                    <div className="w-1/2 p-2 border-[1px] border-slate-400 rounded">
-                        {/* Date Filter */}
-                        <div className="flex justify-between">
-                            <ATMPageHeading> </ATMPageHeading>
-                            <div className="flex gap-2 items-center">
-                                <div className="min-w-[150px] max-w-[150px]">
-                                    <ATMDatePicker
-                                        name=""
-                                        value={dateFilter.start_date}
-                                        onChange={(value) => {
-                                            setDateFilter({
-                                                ...dateFilter,
-                                                start_date: value,
-                                            })
-                                        }}
-                                        label=""
-                                        dateTimeFormat="DD/MM/YYYY"
-                                    />
-                                </div>
+        <div className="border border-slate-400 rounded p-2 h-full flex flex-col">
+            <div className="flex gap-2 items-center justify-end">
+                <ATMDatePicker
+                    name=""
+                    value={dateFilter.start_date}
+                    onChange={(value) => {
+                        setDateFilter({
+                            ...dateFilter,
+                            start_date: value,
+                        })
+                    }}
+                    label=""
+                    dateTimeFormat="DD/MM/YYYY"
+                />
 
-                                <div className="min-w-[150px] max-w-[150px]">
-                                    <ATMDatePicker
-                                        name=""
-                                        value={dateFilter.end_date}
-                                        onChange={(value) => {
-                                            setDateFilter({
-                                                ...dateFilter,
-                                                end_date: value,
-                                            })
-                                        }}
-                                        label=""
-                                        dateTimeFormat="DD/MM/YYYY"
-                                        minDate={
-                                            dateFilter.start_date
-                                                ? new Date(
-                                                      dateFilter.start_date
-                                                  )
-                                                : undefined
-                                        }
-                                    />
-                                </div>
-                                {dateFilter?.start_date ||
-                                dateFilter?.end_date ? (
-                                    <div>
-                                        <button
-                                            type="button"
-                                            className={`rounded bg-primary-main text-white text-sm py-[0.40rem] px-2`}
-                                            onClick={() => {
-                                                setDateFilter({
-                                                    start_date: moment(
-                                                        new Date()
-                                                    ).format('YYYY-MM-DD'),
-                                                    end_date: moment(
-                                                        new Date()
-                                                    ).format('YYYY-MM-DD'),
-                                                })
-                                            }}
-                                        >
-                                            Clear
-                                        </button>
-                                    </div>
-                                ) : null}
-                            </div>
-                        </div>
-                        <div className="relative">
-                            {isFetching && (
-                                <div className="absolute w-[100%] h-[100%] flex justify-center items-center z-10 bg-slate-100 opacity-50">
-                                    <CircularProgress />
-                                </div>
-                            )}
-                            <BarGraph
-                                dataPoints={getData(items)}
-                                label="Orders"
-                                verticalLabel="Quantity"
-                            />
-                        </div>
+                <ATMDatePicker
+                    name=""
+                    value={dateFilter.end_date}
+                    onChange={(value) => {
+                        setDateFilter({
+                            ...dateFilter,
+                            end_date: value,
+                        })
+                    }}
+                    label=""
+                    dateTimeFormat="DD/MM/YYYY"
+                    minDate={
+                        dateFilter.start_date
+                            ? new Date(dateFilter.start_date)
+                            : undefined
+                    }
+                />
+
+                {(dateFilter.start_date || dateFilter.end_date) && (
+                    <button
+                        type="button"
+                        className="rounded bg-primary-main text-white text-sm py-1 px-2"
+                        onClick={() => {
+                            setDateFilter({
+                                start_date: moment(new Date()).format(
+                                    'YYYY-MM-DD'
+                                ),
+                                end_date: moment(new Date()).format(
+                                    'YYYY-MM-DD'
+                                ),
+                            })
+                        }}
+                    >
+                        Clear
+                    </button>
+                )}
+            </div>
+            <div className="relative flex-1 h-0">
+                {isFetching && (
+                    <div className="absolute inset-0 flex justify-center items-center z-10 bg-slate-100 opacity-50">
+                        <CircularProgress />
                     </div>
+                )}
+                <div className="h-full ">
+                    <BarGraph
+                        dataPoints={getData(items)}
+                        label={'Orders'}
+                        verticalLabel={'Quantity'}
+                    />
                 </div>
             </div>
         </div>
