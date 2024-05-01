@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { showToast } from 'src/utils'
@@ -8,9 +8,9 @@ import { FormInitialValues } from './DealerPinCodeTabWrapper'
 import { FormikProps } from 'formik'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetAllTehsilUnauthQuery } from 'src/services/TehsilService'
-import usePincodesByTehsil from 'src/hooks/usePincodesByTehsil'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllPincodeByTehsilQuery } from 'src/services/PinCodeService'
 
-// import { useGetPincodesByDistrictQuery } from 'src/services/DealerPincodeService'
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     itemIndex: any
@@ -27,60 +27,40 @@ const AddDealerLayout = ({
     districtOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
-    const [pincodeOptions, setPincodeOptions] = React.useState<SelectOption[]>(
-        []
-    )
-    const [tehsilOptions, setTehsilOptions] = useState([])
-    const { pincodesByTehsil } = usePincodesByTehsil(
-        values.pincodeDetail[itemIndex].tehsilId || ''
-    )
 
-    React.useEffect(() => {
-        if (pincodesByTehsil) {
-            const pincodeOption = pincodesByTehsil?.map((pincodes: any) => {
-                return {
-                    label: pincodes.pincode as string,
-                    value: pincodes.pincode as string,
-                }
-            })
-            setPincodeOptions(pincodeOption)
-        }
-    }, [pincodesByTehsil])
+    const { options: tehsilOptionsByDistrict } = useCustomOptions({
+        useEndPointHook: useGetAllTehsilUnauthQuery(
+            values.pincodeDetail[itemIndex].district || '',
+            {
+                skip: !values.pincodeDetail[itemIndex].district,
+            }
+        ),
+        keyName: 'tehsilName',
+        value: '_id',
+    })
 
-    // set Tehsil
-    const {
-        data: tehsilData,
-        isFetching: tehsilIsFetching,
-        isLoading: tehsilIsLoading,
-    } = useGetAllTehsilUnauthQuery(
-        values.pincodeDetail[itemIndex].district || '',
-        {
-            skip: !values.pincodeDetail[itemIndex].district,
-        }
-    )
-    React.useEffect(() => {
-        if (!tehsilIsFetching && !tehsilIsLoading) {
-            const tehsilOption = tehsilData?.data?.map((tehsil: any) => {
-                return {
-                    label: tehsil?.tehsilName as string,
-                    value: tehsil?._id as string,
-                }
-            })
-            setTehsilOptions(tehsilOption)
-        }
-    }, [tehsilData, tehsilIsFetching, tehsilIsLoading])
+    const { options: pincodeOptionByTehsil } = useCustomOptions({
+        useEndPointHook: useGetAllPincodeByTehsilQuery(
+            values.pincodeDetail[itemIndex].tehsilId || '',
+            {
+                skip: !values.pincodeDetail[itemIndex].tehsilId,
+            }
+        ),
+        keyName: 'pincode',
+        value: 'pincode',
+    })
 
     return (
         <div key={itemIndex} className="flex gap-3 items-end ">
             <div className="flex-[1_1_0%]">
                 <ATMSelectSearchable
                     name={`pincodeDetail[${itemIndex}].district`}
+                    label="District"
                     value={value.district}
+                    options={districtOptions}
                     onChange={(e) => {
                         setFieldValue(`pincodeDetail[${itemIndex}].district`, e)
                     }}
-                    options={districtOptions}
-                    label="District"
                 />
             </div>
             {/* TEHSIL */}
@@ -93,7 +73,7 @@ const AddDealerLayout = ({
                     label="Tehsil/Taluka"
                     name={`pincodeDetail[${itemIndex}].tehsilId`}
                     value={value.tehsilId || ''}
-                    options={tehsilOptions || []}
+                    options={tehsilOptionsByDistrict || []}
                     onChange={(e) => {
                         if (
                             !values?.pincodeDetail?.find(
@@ -129,7 +109,7 @@ const AddDealerLayout = ({
                             showToast('error', 'Pincode Already Added!')
                         }
                     }}
-                    options={pincodeOptions}
+                    options={pincodeOptionByTehsil}
                     label="Pincode"
                 />
             </div>

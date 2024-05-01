@@ -1,9 +1,3 @@
-// Filename:index.ts
-// Type: index Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- External Dependencies --|
 import { toast } from 'react-hot-toast'
 

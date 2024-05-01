@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useEffect } from 'react'
 
@@ -10,7 +9,6 @@ import PincodeListing from './PincodeListing'
 
 // |-- Redux --|
 import useAllInfoByPincode from 'src/hooks/useAllInfoByPincode'
-import usePincodesByTehsil from 'src/hooks/usePincodesByTehsil'
 import { setSelectedLocationCountry } from 'src/redux/slices/countrySlice'
 import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
 import {
@@ -20,6 +18,7 @@ import {
 import { setSelctedLocationState } from 'src/redux/slices/statesSlice'
 import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { useGetAllPincodeByTehsilQuery } from 'src/services/PinCodeService'
 
 const PincodeListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -33,17 +32,26 @@ const PincodeListingWrapper = () => {
     const { selectedLocationTehsil }: any = useSelector(
         (state: RootState) => state.tehsils
     )
-    const { pincodesByTehsil } = usePincodesByTehsil(selectedLocationTehsil)
+
+    const { data: pincodesByTehsil } = useGetAllPincodeByTehsilQuery(
+        selectedLocationTehsil,
+        {
+            skip: !selectedLocationTehsil,
+        }
+    )
+
     const { pincodeData } = useAllInfoByPincode(searchValue)
+
     useEffect(() => {
-        if (pincodesByTehsil?.length && selectedLocationTehsil) {
-            dispatch(setItems(pincodesByTehsil))
+        if (pincodesByTehsil?.data?.length && selectedLocationTehsil) {
+            dispatch(setItems(pincodesByTehsil?.data))
         } else {
             dispatch(setItems(null))
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pincodesByTehsil, selectedLocationTehsil])
+    }, [pincodesByTehsil?.data, selectedLocationTehsil])
+
     useEffect(() => {
         if (pincodeData) {
             dispatch(setSelectedLocationPincode(pincodeData?._id))
@@ -52,7 +60,7 @@ const PincodeListingWrapper = () => {
             dispatch(setSelectedLocationDistrict(pincodeData?.districtId))
             dispatch(setSelectedLocationTehsil(pincodeData?.tehsilId))
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pincodeData])
 
     return (

@@ -56,7 +56,6 @@ import {
     AddSlotManagementWrapper,
     AddTapeManagementWrapper,
     AddUserWrapper,
-    // AddVendorWarehouseWrapper,
     AddVendorWrapper,
     AddWarehouseWrapper,
     AddWebsiteBlogWrapper,
@@ -133,7 +132,6 @@ import {
     EditSlotManagementWrapper,
     EditTapeManagementWrapper,
     EditUserWrapper,
-    // EditVendorWarehouseWrapper,
     EditVendorWrapper,
     EditWarehouseWrapper,
     EditWebsiteBlogWrapper,
@@ -173,7 +171,6 @@ import {
     VendorGeneralInformationTabWrapper,
     VendorListLedgerTabWrapper,
     VendorPurchaseOrderTabWrapper,
-    // VendorWarehouseTabWrapper,
     VendorsListingWrapper,
     ViewBarcodeWrapper,
     ViewDealer,
@@ -267,7 +264,6 @@ import AssigneBatchesListingWrapper from './pages/batchOrder/all/assignBatches/A
 import AssigneBatchesViewListingWrapper from './pages/batchOrder/all/assignBatches/view/AssigneBatchesViewListingWrapper'
 import WarehouseFirstCallPageWrapper from './pages/warehouseFirstCallOrders/warehouseFirstCall/WarehouseFirstCallPageWrapper'
 import WarehouseFirstCallDialerPageWrapper from './pages/warehouseFirstCallDialerPage/WarehouseFirstCallDialerPageWrapper'
-// import WarehouseAssignedOrderListingWrapper from './pages/warehouses/view/warehouse-orders/assignedOrders/list/WarehouseAssignedOrderWrapper'
 import WarehouseAssignedOrderListingWrapper from './pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
 import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerNDRDetailsWrapper'
 import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
@@ -277,9 +273,7 @@ import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiO
 import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
 import OutwardShipyaariOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/ShipyaariOrders/OutwardShipyaariOrdersTabListingWrapper'
 import DealerToDealerOrderListingWrapper from './pages/dealerTodealer/list/DealerToDealerOrderListingWrapper'
-import OrderDashboard from './pages/orders/OrderDashboard'
-// import AddDealerToDealerOrderWrapper from './pages/dealerTodealer/add/AddDealerToDealerOrderWrapper'
-// import EditDealerToDealerOrderWrapper from './pages/dealerTodealer/edit/EditDealerToDealerOrderWrapper'
+// import OrderDashboard from './pages/orders/OrderDashboard'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -310,7 +304,8 @@ const PageRoutes = () => {
                     }
                 />
 
-                <Route path="/vender-invoice" element={<VenderInvoice />} />
+                <Route path="/vendor-invoice" element={<VenderInvoice />} />
+
                 {/* Login */}
                 <Route path="/" element={<Auth />} />
                 {/* Page not found */}
@@ -1365,15 +1360,6 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<Order />}
-                            permission={UserModuleNameTypes.NAV_ORDER}
-                        />
-                    }
-                />
-                <Route
-                    path="/orders/overview"
-                    element={
-                        <Authorization
-                            children={<OrderDashboard />}
                             permission={UserModuleNameTypes.NAV_ORDER}
                         />
                     }

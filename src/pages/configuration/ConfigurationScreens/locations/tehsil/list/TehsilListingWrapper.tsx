@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:TehsilListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect } from 'react'
 
@@ -15,10 +8,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import TehsilListing from './TehsilListing'
 
 // |-- Redux --|
-import useTehsilByDistrict from 'src/hooks/useTehsilByDistrict'
 import { AppDispatch, RootState } from 'src/redux/store'
 
 import { setItems } from 'src/redux/slices/tehsilSlice'
+import { useGetAllTehsilByDistrictQuery } from 'src/services/TehsilService'
 
 const TehsilListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -32,15 +25,22 @@ const TehsilListingWrapper = () => {
     const tehsil = items?.map((ele: any) => {
         return { label: ele.tehsilName, value: ele._id }
     })
-    const { tehsilBydistrict } = useTehsilByDistrict(selectedLocationDistrict)
+
+    const { data: tehsilBydistrict } = useGetAllTehsilByDistrictQuery(
+        selectedLocationDistrict,
+        {
+            skip: !selectedLocationDistrict,
+        }
+    )
+
     useEffect(() => {
-        if (tehsilBydistrict?.length && selectedLocationDistrict) {
-            dispatch(setItems(tehsilBydistrict))
+        if (tehsilBydistrict?.data?.length && selectedLocationDistrict) {
+            dispatch(setItems(tehsilBydistrict?.data))
         } else {
             dispatch(setItems(null))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [tehsilBydistrict, selectedLocationDistrict])
+    }, [tehsilBydistrict?.data, selectedLocationDistrict])
 
     return (
         <TehsilListing

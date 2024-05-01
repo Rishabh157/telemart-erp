@@ -197,6 +197,16 @@
             ]
         },
         {
+            "actionId": "ACTION_ORDER_OVERVIEW_TAB",
+            "actionUrl": "",
+            "actionName": "ORDER_OVERVIEW_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "LIST"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_ORDER_ALL_TAB_LIST",
             "actionUrl": "",
             "actionName": "ORDER_ALL_TAB",

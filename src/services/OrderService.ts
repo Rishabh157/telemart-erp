@@ -77,9 +77,10 @@ export const OrderApi = apiSlice.injectEndpoints({
         // GET ORDER DASHBOARD DATA
         getOrderDashboardData: builder.query({
             providesTags: ['order'],
-            query: () => ({
+            query: (body) => ({
                 url: '/order-inquiry/get-all-order-status-count',
-                method: 'GET',
+                method: 'POST',
+                body,
             }),
         }),
 
