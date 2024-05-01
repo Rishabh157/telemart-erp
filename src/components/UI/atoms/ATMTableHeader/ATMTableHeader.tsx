@@ -10,6 +10,7 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { BiFilter, BiSearch } from 'react-icons/bi'
+import { FcClearFilters } from 'react-icons/fc'
 import { IoReload } from 'react-icons/io5'
 
 // |-- Internal Dependencies --|
@@ -28,6 +29,8 @@ type Props = {
     isFilter?: boolean
     onFilterClick?: () => void
     onFilterDispatch?: () => void
+    isFilterRemover?: boolean
+    onFilterRemoverClick?: () => void
     onSearch?: (newValue: string) => void
     isRefresh?: boolean
     isDateFilter?: boolean
@@ -41,6 +44,7 @@ type Props = {
     anotherSearchTwoValue?: string
     anotherSearchTwoPlaceholder?: string
     onAnotherSearchTwo?: (newValue: string) => void
+    filterShow?: any
 }
 
 const ATMTableHeader = ({
@@ -52,22 +56,25 @@ const ATMTableHeader = ({
     placeholder = 'Search...',
     page,
     rowsPerPageOptions = [5, 10, 20, 50, 100],
-    onRowsPerPageChange = () => { },
+    onRowsPerPageChange = () => {},
     isFilter = false,
-    onFilterClick = () => { },
-    onFilterDispatch = () => { },
-    onSearch = () => { },
+    onFilterClick = () => {},
+    isFilterRemover = false,
+    onFilterRemoverClick = () => {},
+    onFilterDispatch = () => {},
+    onSearch = () => {},
     isDateFilter = false,
     IsDaterFilterLoading = false,
     onSubmitDateHandler,
     isAnotherSearch = false,
     anotherSearchValue = 'Search...',
     anotherSearchPlaceholder = 'Search...',
-    onAnotherSearch = () => { },
+    onAnotherSearch = () => {},
     isAnotherSearchTwo = false,
     anotherSearchTwoValue = 'Search...',
     anotherSearchTwoPlaceholder = 'Search...',
-    onAnotherSearchTwo = () => { },
+    onAnotherSearchTwo = () => {},
+    filterShow,
 }: Props) => {
     return (
         <div className="p-3 pb-5 border-b border-slate-300 grid grid-cols-3">
@@ -76,7 +83,9 @@ const ATMTableHeader = ({
                 <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
                     <BiSearch className="text-slate-600 text-xl" />
                     <input
-                        onFocus={(newValue: React.FocusEvent<HTMLInputElement>) => newValue.target.select()}
+                        onFocus={(
+                            newValue: React.FocusEvent<HTMLInputElement>
+                        ) => newValue.target.select()}
                         className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
                         value={searchValue}
                         onChange={(e) => {
@@ -122,6 +131,17 @@ const ATMTableHeader = ({
                         <BiFilter className="text-2xl text-slate-600" />
                     </button>
                 )}
+                {isFilterRemover && (
+                    <button
+                        onClick={() => onFilterRemoverClick()}
+                        className="bg-white shadow px-2 flex items-center rounded border"
+                    >
+                        <FcClearFilters
+                            color="red"
+                            className="text-2xl text-red-600"
+                        />
+                    </button>
+                )}
                 {isRefresh && (
                     <button
                         onClick={() => {
@@ -141,6 +161,7 @@ const ATMTableHeader = ({
                         <IoReload className="text-2xl text-slate-600" />
                     </button>
                 )}
+
                 {isDateFilter && (
                     <div className="-mt-1">
                         <DateFilterForm
@@ -158,7 +179,7 @@ const ATMTableHeader = ({
             {/* Right */}
             <div className="flex justify-end col-span-1 -mt-2">
                 <div className="xl:flex gap-3 items-center text-center">
-                    <div className='flex xl:mb-0 mb-1 gap-2 items-center'>
+                    <div className="flex xl:mb-0 mb-1 gap-2 items-center">
                         <div className="text-sm"> Rows per page : </div>
                         <select
                             value={rowsPerPage as number}
@@ -183,6 +204,8 @@ const ATMTableHeader = ({
                     </div>
                 </div>
             </div>
+
+            <div className="p-2">{filterShow}</div>
         </div>
     )
 }

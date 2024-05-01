@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormikProps } from 'formik'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { FormInitialValues } from './AssignedOrderListFilterFormDialogWrapper'
+import { FormInitialValuesFilterWithLabel } from './AssignedOrderListFilterFormDialogWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 
@@ -17,7 +17,7 @@ import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
 import { useGetAllStateQuery } from 'src/services/StateService'
 
 type Props = {
-    formikProps: FormikProps<FormInitialValues>
+    formikProps: FormikProps<FormInitialValuesFilterWithLabel>
     onReset: () => void
     open: boolean
     onClose: () => void
@@ -52,9 +52,10 @@ const AssignedOrderListFilterFormDialog = ({
         keyName: 'stateName',
         value: '_id',
     })
-
     const { options: districtOptions } = useCustomOptions({
-        useEndPointHook: useGetAllDistrictByStateQuery(values.stateId),
+        useEndPointHook: useGetAllDistrictByStateQuery(values?.stateId?.value, {
+            skip: !values?.stateId?.value,
+        }),
         keyName: 'districtName',
         value: '_id',
     })
@@ -78,21 +79,26 @@ const AssignedOrderListFilterFormDialog = ({
                     label="Scheme"
                     selectLabel="Select scheme"
                     name="schemeId"
-                    value={values.schemeId}
+                    value={values.schemeId.value}
                     options={schemeOptions}
+                    isValueWithLable
                     // isLoading={isSchemesLoading}
                     onChange={(e) => {
-                        setFieldValue('schemeId', e || '')
+                        setFieldValue('schemeId', {
+                            fieldName: 'Scheme',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
 
-                {/* Order Type */}
+                {/* Order Type
                 <ATMSelectSearchable
                     label="Order Type"
                     isDisabled
                     selectLabel="Select order type"
                     name="orderType"
-                    value={values.orderType}
+                    value={values.orderType.value}
                     options={[
                         {
                             label: 'amazone',
@@ -103,21 +109,24 @@ const AssignedOrderListFilterFormDialog = ({
                             value: '767768976',
                         },
                     ]}
-                    // isLoading={isLoading}
                     onChange={(e) => {
-                        setFieldValue('orderType', e || '')
+                        setFieldValuett('orderType', e || '')
                     }}
-                />
+                /> */}
 
                 <ATMSelectSearchable
                     label="State"
                     selectLabel="Select state"
                     name="stateId"
-                    value={values.stateId}
+                    value={values.stateId.value}
                     options={stateOptions}
-                    // isLoading={isLoading}
+                    isValueWithLable
                     onChange={(e) => {
-                        setFieldValue('stateId', e || '')
+                        setFieldValue('stateId', {
+                            fieldName: 'State',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
 
@@ -125,11 +134,15 @@ const AssignedOrderListFilterFormDialog = ({
                     label="District"
                     selectLabel="Select district"
                     name="districtId"
-                    value={values.districtId}
+                    value={values.districtId.value}
                     options={districtOptions}
-                    // isLoading={isDataLoading}
+                    isValueWithLable
                     onChange={(e) => {
-                        setFieldValue('districtId', e || '')
+                        setFieldValue('districtId', {
+                            fieldName: 'District',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
 
@@ -141,9 +154,13 @@ const AssignedOrderListFilterFormDialog = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.startDate}
-                        onChange={(newValue) =>
-                            setFieldValue('startDate', newValue)
+                        value={values.startDate.value}
+                        onChange={(e) =>
+                            setFieldValue('startDate', {
+                                fieldName: 'Date From',
+                                label: '',
+                                value: e,
+                            })
                         }
                     />
                 </div>
@@ -156,10 +173,14 @@ const AssignedOrderListFilterFormDialog = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.endDate}
+                        value={values.endDate.value}
                         minDate={values?.startDate}
                         onChange={(newValue) =>
-                            setFieldValue('endDate', newValue)
+                            setFieldValue('endDate', {
+                                fieldName: 'Date to',
+                                label: 'Date to',
+                                value: newValue,
+                            })
                         }
                     />
                 </div>
@@ -171,9 +192,13 @@ const AssignedOrderListFilterFormDialog = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.callBackFrom}
+                        value={values.callBackFrom.value}
                         onChange={(newValue) =>
-                            setFieldValue('callBackFrom', newValue)
+                            setFieldValue('callBackFrom', {
+                                fieldName: 'Callback From',
+                                label: 'Callback From',
+                                value: newValue,
+                            })
                         }
                     />
                 </div>
@@ -184,10 +209,14 @@ const AssignedOrderListFilterFormDialog = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.callBackTo}
+                        value={values.callBackTo.value}
                         minDate={values?.callBackFrom}
                         onChange={(newValue) =>
-                            setFieldValue('callBackTo', newValue)
+                            setFieldValue('callBackTo', {
+                                fieldName: 'Callback To',
+                                label: 'Callback To',
+                                value: newValue,
+                            })
                         }
                     />
                 </div>
@@ -198,29 +227,42 @@ const AssignedOrderListFilterFormDialog = ({
                     selectLabel="Select Call Center Manager"
                     name="callCenterManagerId"
                     textTransform="capitalize"
-                    value={values.callCenterManagerId}
+                    value={values.callCenterManagerId.value}
                     // isLoading={isCallCenterLoading}
+                    isValueWithLable
                     options={callCenterOptions}
                     onChange={(e) => {
-                        setFieldValue('callCenterManagerId', e || '')
+                        setFieldValue('callCenterManagerId', {
+                            fieldName: 'Call Center Manager',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
 
                 <div className="flex gap-x-8">
                     <ATMSwitchButton
                         name="languageBarrier"
-                        value={values.languageBarrier}
+                        value={values.languageBarrier.value}
                         label="Language Barrier"
                         onChange={(value: any) => {
-                            setFieldValue('languageBarrier', value)
+                            setFieldValue('languageBarrier', {
+                                fieldName: 'language Barrier',
+                                label: value ? 'Yes' : 'NO',
+                                value: value,
+                            })
                         }}
                     />
                     <ATMSwitchButton
                         name="isPnd"
-                        value={values.isPnd}
+                        value={values.isPnd.value}
                         label="Pnd Orders"
                         onChange={(value: any) => {
-                            setFieldValue('isPnd', value)
+                            setFieldValue('isPnd', {
+                                fieldName: 'PND',
+                                label: value ? 'Yes' : 'NO',
+                                value: value,
+                            })
                         }}
                     />
                 </div>

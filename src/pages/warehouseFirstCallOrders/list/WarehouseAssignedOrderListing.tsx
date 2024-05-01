@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -17,27 +18,36 @@ import {
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-import AssignedOrderListFilterFormDialogWrapper from './assignedOrderFilter/AssignedOrderListFilterFormDialogWrapper'
+import AssignedOrderListFilterFormDialogWrapper, {
+    FormInitialValuesFilterWithLabel,
+} from './assignedOrderFilter/AssignedOrderListFilterFormDialogWrapper'
 import { statusProps } from 'src/pages/orders'
 import { OrderListResponse } from 'src/models'
+import { Chip, Stack } from '@mui/material'
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    setFilter: React.Dispatch<
+        React.SetStateAction<FormInitialValuesFilterWithLabel>
+    >
+    filter: FormInitialValuesFilterWithLabel
 }
 
 const WarehouseAssignedOrdersListing = ({
     columns,
     rows,
     setShowDropdown,
+    setFilter,
+    filter,
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
         useState<boolean>(false)
     const warehouseAssignedOrdersState: any = useSelector(
-        (state: RootState) => state.warehouseOrdersAssigned
+        (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
@@ -55,7 +65,43 @@ const WarehouseAssignedOrdersListing = ({
             default:
         }
     }
+    const handleReset = () => {
+        setFilter((prev) => ({
+            ...prev,
+            schemeId: { fieldName: '', value: '', label: '' },
+            orderType: { fieldName: '', value: '', label: '' },
+            stateId: { fieldName: '', value: '', label: '' },
+            districtId: { fieldName: '', value: '', label: '' },
+            startDate: { fieldName: '', value: '', label: '' },
+            endDate: { fieldName: '', value: '', label: '' },
+            callBackFrom: { fieldName: '', value: '', label: '' },
+            callBackTo: { fieldName: '', value: '', label: '' },
+            callCenterManagerId: { fieldName: '', value: '', label: '' },
+            languageBarrier: { fieldName: '', value: '', label: '' },
+            isPnd: { fieldName: '', value: '', label: '' },
+        }))
+    }
+    // console.log("Object.values(filter).some(value => value !== '');",Object.values(filter).some(value => value !== ''))
 
+    const filterShow = (filter: FormInitialValuesFilterWithLabel) => {
+        return (
+            <span className="capitalize">
+                <Stack direction="row" spacing={1}>
+                    {Object.entries(filter).map(([key, value], index) => {
+                        return value.value ? (
+                            <Chip
+                                key={index}
+                                label={`${value.fieldName}: ${value.label}`}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : null
+                    })}
+                </Stack>
+            </span>
+        )
+    }
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white ">
             {/* Page Header */}
@@ -90,12 +136,17 @@ const WarehouseAssignedOrdersListing = ({
                     onFilterClick={() => {
                         setIsOpenFilterFormDialog(true)
                     }}
+                    isFilterRemover
+                    onFilterRemoverClick={handleReset}
+                    filterShow={filterShow(filter)}
                 />
 
                 {isOpenFilterFormDialog && (
                     <AssignedOrderListFilterFormDialogWrapper
                         open
                         onClose={() => setIsOpenFilterFormDialog(false)}
+                        setFilter={setFilter}
+                        filter={filter}
                     />
                 )}
 

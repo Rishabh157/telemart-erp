@@ -18,8 +18,8 @@ export type PaginationType = {
         value: any
     }[]
     dateFilter: {
-        start_date?: string
-        end_date?: string
+        startDate?: string
+        endDate?: string
         dateFilterKey?: string
     }
     orderBy: string
@@ -29,8 +29,8 @@ export type PaginationType = {
     getBatchData?: boolean
     callCenterId?: string
     callbackDateFilter?: {
-        start_date?: string
-        end_date?: string
+        startDate?: string
+        endDate?: string
         dateFilterKey?: string
     }
 }
