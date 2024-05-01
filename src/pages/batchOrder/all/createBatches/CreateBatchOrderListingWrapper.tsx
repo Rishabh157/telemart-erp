@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
@@ -18,6 +18,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import AddBatchesFormWrapper from './AddBatchesForm/AddBatchesFormWrapper'
 import CreateBatchOrderListing from './CreateBatchOrderListing'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { BatchFormInitialValuesFilterWithLabel } from './BatchOrderListingFilter/BatchOrderListingFilterWrapper'
 
 const CreateBatchOrderListingWrapper = () => {
     useUnmountCleanup()
@@ -31,20 +32,39 @@ const CreateBatchOrderListingWrapper = () => {
     )
     const { page, rowsPerPage, searchValue } = createBatchOrderState
 
-    const warehouseAssignedOrdersState: any = useSelector(
-        (state: RootState) => state.warehouseOrdersAssigned
-    )
-
-    const {
-        // filter value
-        schemeValueFilter,
-        orderStatusValueFilter,
-        districtValueFilter,
-        tehsilValueFilter,
-        dateFilter,
-        callbackDateFilter,
-        isUrgentOrder,
-    } = warehouseAssignedOrdersState
+    const [filter, setFilter] =
+        React.useState<BatchFormInitialValuesFilterWithLabel>({
+            schemeId: { fieldName: '', label: '', value: '' },
+            isUrgentOrder: { fieldName: '', label: '', value: '' },
+            orderStatus: { fieldName: '', label: '', value: '' },
+            tehsilId: { fieldName: '', label: '', value: '' },
+            districtId: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            callCenterManagerId: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            startDate: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endDate: { fieldName: '', label: '', value: '' },
+            callBackFrom: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            callBackTo: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+        })
 
     // pagination api
     const { items } = useGetCustomListingData<OrderListResponse[]>({
@@ -60,11 +80,11 @@ const CreateBatchOrderListingWrapper = () => {
                 },
                 {
                     fieldName: 'status',
-                    value: orderStatusValueFilter || 'FRESH',
+                    value: filter.orderStatus.value || 'FRESH',
                 },
                 {
                     fieldName: 'isUrgentOrder',
-                    value: isUrgentOrder,
+                    value: filter.isUrgentOrder.value,
                 },
                 {
                     fieldName: 'approved',
@@ -74,13 +94,20 @@ const CreateBatchOrderListingWrapper = () => {
                     fieldName: 'isOrderAssigned',
                     value: false,
                 },
-                { fieldName: 'schemeId', value: schemeValueFilter },
-                { fieldName: 'districtId', value: districtValueFilter },
-                { fieldName: 'tehsilId', value: tehsilValueFilter },
+                { fieldName: 'schemeId', value: filter.schemeId.value },
+                { fieldName: 'districtId', value: filter.districtId.value },
+                { fieldName: 'tehsilId', value: filter.tehsilId.value },
             ],
             getBatchData: true,
-            dateFilter: dateFilter || {},
-            callbackDateFilter: callbackDateFilter || {},
+            dateFilter: {
+                startDate: filter.startDate.value,
+                endDate: filter.endDate.value,
+            },
+            callbackDateFilter: {
+                startDate: filter.callBackFrom.value,
+                endDate: filter.callBackTo.value,
+                dateFilterKey:'firstCallCallBackDate',
+            },
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
@@ -474,6 +501,8 @@ const CreateBatchOrderListingWrapper = () => {
                 selectedRows={selectedRows}
                 setSelectedRows={(ele) => setSelectedRows(ele)}
                 onClick={() => setIsShowCreateBatchModel(true)}
+                filter={filter}
+                setFilter={setFilter}
             />
             {/* Create Batches Form */}
             <DialogLogBox

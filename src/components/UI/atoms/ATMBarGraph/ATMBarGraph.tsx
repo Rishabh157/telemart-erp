@@ -61,7 +61,7 @@ const BarGraph = (props: BarGraphProps) => {
     } as const // Use 'as const' to assert the exact type
 
     return (
-        <div>
+        <div className=' '>
             <Bar data={data} options={options} />
         </div>
     )

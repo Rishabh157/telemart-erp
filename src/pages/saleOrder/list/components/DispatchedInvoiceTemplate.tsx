@@ -138,7 +138,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(
 
                         <div>
                             <span className="font-bold text-[13px]">
-                                GSTIN{' '}
+                                GSTIN
                             </span>
                             <span className="px-2">:</span>
                             <span className="text-[13px]">-</span>

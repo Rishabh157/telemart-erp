@@ -10,7 +10,9 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import BatchOrderListingFilterWrapper from './BatchOrderListingFilter/BatchOrderListingFilterWrapper'
+import BatchOrderListingFilterWrapper, {
+    BatchFormInitialValuesFilterWithLabel,
+} from './BatchOrderListingFilter/BatchOrderListingFilterWrapper'
 
 // |-- Redux --|
 import {
@@ -21,6 +23,8 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { Stack } from 'rsuite'
+import { Chip } from '@mui/material'
 
 // |-- Types --|
 type Props = {
@@ -29,6 +33,10 @@ type Props = {
     selectedRows: any[]
     setSelectedRows: (ele: any) => any
     onClick: () => void
+    setFilter: React.Dispatch<
+        React.SetStateAction<BatchFormInitialValuesFilterWithLabel>
+    >
+    filter: BatchFormInitialValuesFilterWithLabel
 }
 
 const CreateBatchOrderListing = ({
@@ -37,6 +45,8 @@ const CreateBatchOrderListing = ({
     selectedRows,
     setSelectedRows,
     onClick,
+    setFilter,
+    filter,
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
@@ -47,6 +57,42 @@ const CreateBatchOrderListing = ({
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         createBatchState
+        const handleReset = () => {
+            setFilter((prev) => ({
+                ...prev,
+                isUrgentOrder: { fieldName: '', value: '', label: '' },
+                schemeId: { fieldName: '', value: '', label: '' },
+                orderStatus: { fieldName: '', value: '', label: '' },
+                districtId: { fieldName: '', value: '', label: '' },
+                tehsilId: { fieldName: '', value: '', label: '' },
+                startDate: { fieldName: '', value: '', label: '' },
+                endDate: { fieldName: '', value: '', label: '' },
+                callBackFrom: { fieldName: '', value: '', label: '' },
+                callBackTo: { fieldName: '', value: '', label: '' },
+                callCenterManagerId: { fieldName: '', value: '', label: '' },
+            }))
+        }
+        // console.log("Object.values(filter).some(value => value !== '');",Object.values(filter).some(value => value !== ''))
+    
+        const filterShow = (filter: BatchFormInitialValuesFilterWithLabel) => {
+            return (
+                <span className="capitalize">
+                    <Stack direction="row" spacing={1}>
+                        {Object.entries(filter).map(([key, value], index) => {
+                            return value.value ? (
+                                <Chip
+                                    key={index}
+                                    label={`${value.fieldName}: ${value.label}`}
+                                    color="primary"
+                                    variant="outlined"
+                                    size="small"
+                                />
+                            ) : null
+                        })}
+                    </Stack>
+                </span>
+            )
+        }
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
@@ -82,12 +128,17 @@ const CreateBatchOrderListing = ({
                     onFilterClick={() => {
                         setIsOpenFilterFormDialog(true)
                     }}
+                    isFilterRemover
+                    onFilterRemoverClick={handleReset}
+                    filterShow={filterShow(filter)}
                 />
 
                 {isOpenFilterFormDialog && (
                     <BatchOrderListingFilterWrapper
                         open
                         onClose={() => setIsOpenFilterFormDialog(false)}
+                        setFilter={setFilter}
+                        filter={filter}
                     />
                 )}
 

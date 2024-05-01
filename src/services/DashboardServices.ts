@@ -43,7 +43,34 @@ export const customerComplainApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // warehouse Dashbord inventory
+        getWHInventoryByWarehouseId: builder.query({
+            providesTags: ['dashboard'],
+            query: ({ warehousId }: { warehousId: string }) => ({
+                url: `/dashboard/warehouse-inventory/${warehousId}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
+        getWHInwardInventoryByWarehouseId: builder.query({
+            providesTags: ['dashboard'],
+            query: ({ warehousId, dateFilter }: { warehousId: string, dateFilter: PaginationType }) => ({
+                url: `/dashboard/warehouse-inward-stock/${warehousId}`,
+                method: 'POST',
+                body: { dateFilter: dateFilter },
+            }),
+        }),
+        getWHOutwardInventoryByWarehouseId: builder.query({
+            providesTags: ['dashboard'],
+            query: ({ warehousId, dateFilter }: { warehousId: string, dateFilter: PaginationType }) => ({
+                url: `/dashboard/warehouse-outward-stock/${warehousId}`,
+                method: 'POST',
+                body: { dateFilter: dateFilter },
+            }),
+        }),
     }),
 })
 
-export const { useGetAgentDataQuery, useGetOrderSummayQuery, useGetZMDealerStatusQuery ,useGetZMDealerStockStatusQuery} = customerComplainApi
+export const { useGetAgentDataQuery, useGetOrderSummayQuery, useGetZMDealerStatusQuery, useGetZMDealerStockStatusQuery, useGetWHInventoryByWarehouseIdQuery, useGetWHInwardInventoryByWarehouseIdQuery, useGetWHOutwardInventoryByWarehouseIdQuery } = customerComplainApi
