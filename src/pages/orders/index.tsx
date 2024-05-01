@@ -210,7 +210,7 @@ const ViewOrder = () => {
                         </div>
 
                         {/* Children */}
-                        <div className="h-[calc(100vh-155px)] w-full ">
+                        <div className="h-[calc(100vh-155px)] w-full px-2 ">
                             {allowedTabs[activeTabIndex]?.name ===
                             UserModuleNameTypes.ACTION_ORDER_OVERVIEW_TAB ? (
                                 <OrderOverviewDashboard />

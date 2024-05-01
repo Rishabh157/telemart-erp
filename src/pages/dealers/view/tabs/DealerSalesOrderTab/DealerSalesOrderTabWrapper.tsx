@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
@@ -15,6 +15,7 @@ import { useGetPaginationSaleOrderQuery } from 'src/services/SalesOrderService'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { SalesOrderFormInitialValuesFilterWithLabel } from 'src/pages/saleOrder/list/filter/SalesOrderFilterWrapper'
 
 // |-- Types --|
 type Props = {}
@@ -28,6 +29,27 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
     const salesOrderState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
+    const [filter, setFilter] =
+        React.useState<SalesOrderFormInitialValuesFilterWithLabel>({
+            dealerId: { fieldName: '', label: '', value: '' },
+            status: { fieldName: '', label: '', value: '' },
+            invoiceNo: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            IRNStatus: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            startDate: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endDate: { fieldName: '', label: '', value: '' },
+        })
     const { page, rowsPerPage, searchValue } = salesOrderState
     const { items } = useGetCustomListingData<SaleOrderListResponse>({
         useEndPointHook: useGetPaginationSaleOrderQuery({
@@ -40,8 +62,23 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
                     fieldName: 'dealerId',
                     value: dealerId,
                 },
+                {
+                    fieldName: 'invoiceNo',
+                    value: filter.invoiceNo.value,
+                },
+                {
+                    fieldName: 'status',
+                    value: filter.status.value,
+                },
+                {
+                    fieldName: 'IRNStatus',
+                    value: filter.IRNStatus.value,
+                },
             ],
-            dateFilter: {},
+            dateFilter: {
+                startDate: filter.startDate.value as string,
+                endDate: filter.endDate.value as string,
+            },
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
@@ -80,6 +117,8 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
             columns={columns}
             rows={items}
             setShowDropdown={setShowDropdown}
+            filter={filter}
+            setFilter={setFilter}
         />
     )
 }

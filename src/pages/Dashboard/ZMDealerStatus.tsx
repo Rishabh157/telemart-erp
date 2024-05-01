@@ -80,64 +80,57 @@ const ZMDealerStatus = () => {
     ]
 
     return (
-        <div className=" w-full">
             <div className="border-[1px] border-slate-400 rounded p-2">
-                <div className="text-start flex justify-between">
-                    {/* Heading */}
-                    <ATMPageHeading> ZM </ATMPageHeading>
-                    {/* Date Filter */}
-                    <div className="flex gap-2  items-center">
-                        <div className="min-w-[150px] max-w-[150px]">
-                            <ATMDatePicker
-                                name=""
-                                value={dateFilter.start_date}
-                                onChange={(value) => {
-                                    setDateFilter({
-                                        ...dateFilter,
-                                        start_date: value,
-                                    })
-                                }}
-                                label=""
-                                dateTimeFormat="DD/MM/YYYY"
-                            />
-                        </div>
+                <div className="flex gap-2  items-center justify-end">
+                      <div className="w-1/2">
+                    <ATMPageHeading> Dealer Status </ATMPageHeading>
+                </div>
+                    <ATMDatePicker
+                        name=""
+                        value={dateFilter.start_date}
+                        onChange={(value) => {
+                            setDateFilter({
+                                ...dateFilter,
+                                start_date: value,
+                            })
+                        }}
+                        label=""
+                        dateTimeFormat="DD/MM/YYYY"
+                    />
 
-                        <div className="min-w-[150px] max-w-[150px]">
-                            <ATMDatePicker
-                                name=""
-                                value={dateFilter.end_date}
-                                onChange={(value) => {
+                    <ATMDatePicker
+                        name=""
+                        value={dateFilter.end_date}
+                        onChange={(value) => {
+                            setDateFilter({
+                                ...dateFilter,
+                                end_date: value,
+                            })
+                        }}
+                        label=""
+                        dateTimeFormat="DD/MM/YYYY"
+                        minDate={
+                            dateFilter.start_date
+                                ? new Date(dateFilter.start_date)
+                                : undefined
+                        }
+                    />
+                    {dateFilter?.start_date || dateFilter?.end_date ? (
+                        <div>
+                            <button
+                                type="button"
+                                className={`rounded bg-primary-main text-white text-sm py-[0.40rem] px-2`}
+                                onClick={() => {
                                     setDateFilter({
-                                        ...dateFilter,
-                                        end_date: value,
+                                        start_date: null,
+                                        end_date: null,
                                     })
                                 }}
-                                label=""
-                                dateTimeFormat="DD/MM/YYYY"
-                                minDate={
-                                    dateFilter.start_date
-                                        ? new Date(dateFilter.start_date)
-                                        : undefined
-                                }
-                            />
+                            >
+                                Clear
+                            </button>
                         </div>
-                        {dateFilter?.start_date || dateFilter?.end_date ? (
-                            <div>
-                                <button
-                                    type="button"
-                                    className={`rounded bg-primary-main text-white text-sm py-[0.40rem] px-2`}
-                                    onClick={() => {
-                                        setDateFilter({
-                                            start_date: null,
-                                            end_date: null,
-                                        })
-                                    }}
-                                >
-                                    Clear
-                                </button>
-                            </div>
-                        ) : null}
-                    </div>
+                    ) : null}
                 </div>
                 <div className="relative">
                     {isFetching && (
@@ -145,7 +138,7 @@ const ZMDealerStatus = () => {
                             <CircularProgress />
                         </div>
                     )}
-                    <div className="grow overflow-auto  ">
+                    <div className="grow overflow-auto pt-2 ">
                         <ATMTable
                             isLoading={isFetching}
                             columns={columns || []}
@@ -155,7 +148,6 @@ const ZMDealerStatus = () => {
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
 

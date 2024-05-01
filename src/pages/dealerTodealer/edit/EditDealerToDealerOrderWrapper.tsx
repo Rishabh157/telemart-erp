@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { array, number, object, string } from 'yup'
 
@@ -19,7 +18,6 @@ import { showToast } from 'src/utils'
 import EditDealerToDealerOrder from './EditDealerToDealerOrder'
 
 // |-- Redux--|
-import { RootState } from 'src/redux/store'
 
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
@@ -43,7 +41,6 @@ export type FormInitialValues = {
 const EditDealerToDealerOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const [editSaleOrder, setEditSaleOrder] = useState<FormInitialValues>({
         dtdNumber: '',
         fromDealerId: '',
@@ -60,7 +57,7 @@ const EditDealerToDealerOrderWrapper = (props: Props) => {
     })
 
     const { options: dealerOptions } = useCustomOptions({
-        useEndPointHook: useGetAllDealersQuery(userData?.companyId),
+        useEndPointHook: useGetAllDealersQuery(''),
         keyName: ['firstName', 'lastName'],
         value: '_id',
     })

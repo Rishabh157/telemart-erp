@@ -25,13 +25,16 @@ function max(arr: any) {
         Math.ceil(maxValue / orderOfMagnitude) * orderOfMagnitude
     return roundedValue
 }
+
 const BarGraph = (props: BarGraphProps) => {
     const { dataPoints, label, verticalLabel } = props
     let maxrer = max(dataPoints)
 
     // Example usage:
     const data = {
-        labels: dataPoints.map((dataPoint) => dataPoint.label),
+        labels: dataPoints.map(
+            (dataPoint) => dataPoint.label + ' ( ' + dataPoint.y + ' )'
+        ),
 
         datasets: [
             {
@@ -58,10 +61,26 @@ const BarGraph = (props: BarGraphProps) => {
                 },
             },
         },
+        plugins: {
+            legend: { display: true }, // Add this line if you need to hide the legend
+            tooltip: { enabled: true }, // Add this line if you need to disable tooltips
+            datalabels: {
+                display: true,
+                color: 'black',
+                anchor: 'end', // Adjust the anchor as needed to place the labels properly
+                align: 'end', // Adjust the alignment as needed
+                formatter: function (value: any) {
+                    // Adjust the formatter as needed to format the labels
+                    return value
+                },
+                clamp: true, // Ensures labels are within the bars
+                offset: 4, // Adjust the offset to position labels properly
+            },
+        },
     } as const // Use 'as const' to assert the exact type
 
     return (
-        <div className=' '>
+        <div style={{ height: '100%' }}>
             <Bar data={data} options={options} />
         </div>
     )
