@@ -31,6 +31,7 @@ type Props = {
     name: string
     accept?: string
     disabled?: boolean
+    isMultiple?: boolean
     textTransform?: textTransform
     isVideo?: boolean
 }
@@ -44,6 +45,7 @@ const ATMFilePickerWrapper = ({
     onSelect,
     selectedFile,
     isSubmitting = true,
+    isMultiple = false,
     accept = 'image/*, video/*',
     disabled,
     textTransform = 'firstLetterCapitalonly',
@@ -61,6 +63,7 @@ const ATMFilePickerWrapper = ({
                 accept={accept}
                 disabled={disabled}
                 isVideo={isVideo}
+                multiple={isMultiple}
             />
 
             {name && isSubmitting && (

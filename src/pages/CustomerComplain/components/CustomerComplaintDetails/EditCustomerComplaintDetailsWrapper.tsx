@@ -2,8 +2,6 @@ import React from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import { object, string } from 'yup'
 import CustomerComplaintDetailsForm from './CustomerComplaintDetailsForm'
-// import { useGetOrderByIdQuery } from 'src/services/OrderService'
-// import { OrderListResponse } from 'src/models'
 import { CircularProgress } from '@mui/material'
 import {
     useGetComplaintByIdQuery,
@@ -11,28 +9,11 @@ import {
     useGetComplaintLogsByIdQuery,
 } from 'src/services/CustomerComplainServices'
 import { showToast } from 'src/utils'
+import { FormInitialValues } from './AddCustomerComplaintDetailsWrapper'
 
 type Props = {
     complaintId: string
     handleClose: () => void
-}
-
-export type FormInitialValues = {
-    complaintNumber: number
-    orderNo: number | string
-    schemeName: string
-    schemeCode: string
-    orderStatus: string
-    courierStatus: string
-    callType: string
-    initialCallOne: string
-    initialCallTwo: string
-    initialCallThree: string
-    status: string
-    remark: string
-    icOneLabel: string
-    icTwoLabel: string
-    icThreeLabel: string
 }
 
 const EditCustomerComplaintDetailsWrapper = ({
@@ -86,6 +67,7 @@ const EditCustomerComplaintDetailsWrapper = ({
         icOneLabel: complaintOrderDetails?.icOneLabel || '',
         icTwoLabel: complaintOrderDetails?.icTwoLabel || '',
         icThreeLabel: complaintOrderDetails?.icThreeLabel || '',
+        images: complaintOrderDetails?.images || [],
     }
 
     // Form Validation Schema

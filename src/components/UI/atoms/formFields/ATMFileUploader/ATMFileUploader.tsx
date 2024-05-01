@@ -22,6 +22,7 @@ type Props = {
     accept: string
     disabled?: boolean
     isSubmitting?: boolean
+    multiple?: boolean
     isVideo?: boolean
 }
 const ATMFileUploader = ({
@@ -34,6 +35,7 @@ const ATMFileUploader = ({
     accept,
     disabled = false,
     isSubmitting = true,
+    multiple = false,
     isVideo = false,
 }: Props) => {
     const inputRef = useRef<HTMLInputElement>(null)
@@ -99,8 +101,13 @@ const ATMFileUploader = ({
             <input
                 type="file"
                 ref={inputRef}
-                onChange={(e: any) => onSelect(e.target.files[0])}
+                onChange={(e: any) =>
+                    multiple
+                        ? onSelect(e.target.files)
+                        : onSelect(e.target.files[0])
+                }
                 className="hidden"
+                multiple={multiple}
                 accept={accept}
                 disabled={disabled}
             />
