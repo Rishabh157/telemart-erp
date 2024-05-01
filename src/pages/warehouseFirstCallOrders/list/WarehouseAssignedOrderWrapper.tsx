@@ -1,34 +1,32 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import WarehouseAssignedOrdersListing from './WarehouseAssignedOrderListing'
-import {
-    setIsTableLoading,
-    setItems,
-    setTotalItems,
-} from 'src/redux/slices/warehouseOrders/warehouseAssignedOrderSlice'
 import { OrderListResponse } from 'src/models/Order.model'
+import WarehouseAssignedOrdersListing from './WarehouseAssignedOrderListing'
 
 // |-- Redux --|
-import { AppDispatch, RootState } from 'src/redux/store'
-import {
-    useGetWHFristCallAssignedOrderQuery,
-    useApprovedWHFirstCallApprovalMutation,
-} from 'src/services/OrderService'
+import { Chip } from '@mui/material'
 import moment from 'moment'
 import { useParams } from 'react-router-dom'
-import { Chip } from '@mui/material'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-import { showToast } from 'src/utils'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { RootState } from 'src/redux/store'
+import {
+    useApprovedWHFirstCallApprovalMutation,
+    useGetWHFristCallAssignedOrderQuery,
+} from 'src/services/OrderService'
+import { showToast } from 'src/utils'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { FormInitialValuesFilterWithLabel } from './assignedOrderFilter/AssignedOrderListFilterFormDialogWrapper'
 
 export enum FirstCallApprovalStatus {
     'APPROVED' = 'APPROVED',
@@ -36,32 +34,58 @@ export enum FirstCallApprovalStatus {
 }
 
 const WarehouseAssignedOrderListingWrapper = () => {
-    const dispatch = useDispatch<AppDispatch>()
-
+    useUnmountCleanup()
+    const [filter, setFilter] =
+        React.useState<FormInitialValuesFilterWithLabel>({
+            schemeId: { fieldName: '', label: '', value: '' },
+            stateId: { fieldName: '', label: '', value: '' },
+            districtId: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            callCenterManagerId: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            startDate: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endDate: { fieldName: '', label: '', value: '' },
+            callBackFrom: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            callBackTo: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            orderType: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            languageBarrier: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            isPnd: { fieldName: '', label: '', value: false },
+        })
     const [, setShowDropdown] = useState(false)
     const params = useParams()
     const warehouseId = params.id
     const warehouseAssignedOrdersState: any = useSelector(
-        (state: RootState) => state.warehouseOrdersAssigned
+        (state: RootState) => state.listingPagination
     )
     const [warehousefirstCallApproval] =
         useApprovedWHFirstCallApprovalMutation()
-    const {
-        page,
-        rowsPerPage,
-        items,
-        searchValue,
-        // filter value
-        schemeValueFilter,
-        // orderTypeValueFilter,
-        stateValueFilter,
-        districtValueFilter,
-        callCenterManagerValueFilter,
-        langBarrierValueFilter,
-        pndOrderValueFilter,
-        dateFilter,
-        callbackDateFilter,
-    } = warehouseAssignedOrdersState
+    const { page, rowsPerPage, searchValue } = warehouseAssignedOrdersState
 
     const columns: columnTypes[] = [
         {
@@ -150,7 +174,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
                 <Link to={`/warehouse-first-call/${row?._id}`}>
                     <span className="text-primary-main">
                         # {row.orderNumber}
-                    </span>{' '}
+                    </span>
                 </Link>
             ),
         },
@@ -547,49 +571,47 @@ const WarehouseAssignedOrderListingWrapper = () => {
     }
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
-    const { data, isFetching, isLoading } = useGetWHFristCallAssignedOrderQuery(
-        {
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetWHFristCallAssignedOrderQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['didNo', 'mobileNo' , 'orderNumber'],
+            params: ['didNo', 'mobileNo', 'orderNumber'],
             page: page,
             filterBy: [
                 { fieldName: 'assignWarehouseId', value: warehouseId },
                 { fieldName: 'companyId', value: userData?.companyId },
                 { fieldName: 'firstCallApproval', value: false },
                 { fieldName: 'approved', value: true },
-                { fieldName: 'schemeId', value: schemeValueFilter },
-                // { fieldName: 'orderType', value: orderTypeValueFilter },
-                { fieldName: 'stateId', value: stateValueFilter },
-                { fieldName: 'districtId', value: districtValueFilter },
+                { fieldName: 'schemeId', value: filter.schemeId.value },
+                // { fieldName: 'orderType', value: filter.orderType },
+                { fieldName: 'stateId', value: filter.stateId.value },
+                { fieldName: 'districtId', value: filter.districtId.value },
                 {
                     fieldName: 'firstCallState',
-                    value: langBarrierValueFilter ? ['LANGUAGEBARRIER'] : '',
+                    value: filter.languageBarrier.value
+                        ? ['LANGUAGEBARRIER']
+                        : '',
                 },
                 {
                     fieldName: 'status',
-                    value: pndOrderValueFilter ? ['PND'] : '',
+                    value: filter.isPnd.value ? ['PND'] : '',
                 },
             ],
-            dateFilter: dateFilter || {},
-            callbackDateFilter: callbackDateFilter || {},
-            callCenterId: callCenterManagerValueFilter || null,
+            dateFilter: {
+                startDate: filter.startDate.value as string,
+                endDate: filter.endDate.value as string,
+            },
+            callbackDateFilter: {
+                startDate: filter.callBackFrom.value,
+                endDate: filter.callBackTo.value,
+                dateFilterKey: 'firstCallCallBackDate',
+            },
+            callCenterId: (filter.callCenterManagerId.value as string) || null,
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        }
-    )
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            dispatch(setIsTableLoading(false))
-            dispatch(setItems(data?.data || []))
-            dispatch(setTotalItems(data?.totalItem || 4))
-        } else {
-            dispatch(setIsTableLoading(true))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
+        }),
+    })
 
     return (
         <SideNavLayout>
@@ -597,6 +619,8 @@ const WarehouseAssignedOrderListingWrapper = () => {
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
+                setFilter={setFilter}
+                filter={filter}
             />
         </SideNavLayout>
     )

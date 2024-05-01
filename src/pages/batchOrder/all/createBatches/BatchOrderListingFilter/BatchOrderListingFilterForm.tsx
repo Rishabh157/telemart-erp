@@ -1,23 +1,22 @@
-import React from 'react'
 import { FormikProps } from 'formik'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { FormInitialValues } from './BatchOrderListingFilterWrapper'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { getOrderStatusOptions } from 'src/utils/constants/customeTypes'
+import { BatchFormInitialValuesFilterWithLabel } from './BatchOrderListingFilterWrapper'
 // hooks
-import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import { useGetSchemeQuery } from 'src/services/SchemeService'
 
 // models
-import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { useGetAllDistrictQuery } from 'src/services/DistricService'
 import { useGetAllTehsilByDistrictQuery } from 'src/services/TehsilService'
-import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 type Props = {
-    formikProps: FormikProps<FormInitialValues>
+    formikProps: FormikProps<BatchFormInitialValuesFilterWithLabel>
     onReset: () => void
     open: boolean
     onClose: () => void
@@ -54,9 +53,12 @@ const BatchOrderListingFilterForm = ({
     })
 
     const { options: tehsilOptions } = useCustomOptions({
-        useEndPointHook: useGetAllTehsilByDistrictQuery(values.districtId, {
-            skip: !values.districtId,
-        }),
+        useEndPointHook: useGetAllTehsilByDistrictQuery(
+            values.districtId.value,
+            {
+                skip: !values.districtId.value,
+            }
+        ),
         keyName: 'tehsilName',
         value: '_id',
     })
@@ -82,9 +84,13 @@ const BatchOrderListingFilterForm = ({
                         label="Urgent"
                         inputClasses="h-3 w-3"
                         labelClasses="text-slate-700 text-sm font-medium pt-1 mb-1 select-none"
-                        checked={values.isUrgentOrder}
+                        checked={values.isUrgentOrder.value}
                         onChange={(e) => {
-                            setFieldValue('isUrgentOrder', e)
+                            setFieldValue('isUrgentOrder', {
+                                fieldName: 'Urjent',
+                                label: e ? 'Yes' : 'NO',
+                                value: e,
+                            })
                         }}
                     />
                 </div>
@@ -95,11 +101,15 @@ const BatchOrderListingFilterForm = ({
                     selectLabel="Select first caller"
                     name="callCenterManagerId"
                     textTransform="capitalize"
-                    value={values.callCenterManagerId}
-                    // isLoading={isCallCenterLoading}
+                    value={values.callCenterManagerId.value}
+                    isValueWithLable
                     options={callCenterOptions}
                     onChange={(e) => {
-                        setFieldValue('callCenterManagerId', e || '')
+                        setFieldValue('callCenterManagerId', {
+                            fieldName: 'First Caller',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
 
@@ -108,72 +118,64 @@ const BatchOrderListingFilterForm = ({
                     label="Order Status"
                     selectLabel="Select order status"
                     name="orderStatus"
-                    value={values.orderStatus}
+                    value={values.orderStatus.value}
                     options={getOrderStatusOptions()}
-                    // isLoading={isSchemesLoading}
+                    isValueWithLable
                     onChange={(e) => {
-                        setFieldValue('orderStatus', e || '')
+                        setFieldValue('orderStatus', {
+                            fieldName: 'Order Status',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
-
-                {/* <ATMSelectSearchable
-                    label="Disposition"
-                    isDisabled
-                    selectLabel="Select disposition"
-                    name="orderStatus"
-                    value={values.orderStatus}
-                    options={[]}
-                    onChange={(e) => {
-                        setFieldValue('orderStatus', e || '')
-                    }}
-                /> */}
 
                 {/* Scheme & Order Type */}
                 <ATMSelectSearchable
                     label="Scheme"
                     selectLabel="Select scheme"
                     name="schemeId"
-                    value={values.schemeId}
+                    value={values.schemeId.value}
                     options={schemeOptions}
-                    // isLoading={isSchemesLoading}
+                    isValueWithLable
                     onChange={(e) => {
-                        setFieldValue('schemeId', e || '')
+                        setFieldValue('schemeId', {
+                            fieldName: 'Scheme',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
-
-                {/* <ATMSelectSearchable
-                    isDisabled
-                    label="Delivery Boy"
-                    selectLabel="Select delivery boy"
-                    name="callCenterManagerId"
-                    textTransform="capitalize"
-                    value={values.callCenterManagerId}
-                    // isLoading={isCallCenterLoading}
-                    options={callCenterOptions}
-                    onChange={(e) => {
-                        setFieldValue('callCenterManagerId', e || '')
-                    }}
-                /> */}
 
                 {/* District & Tehsil */}
                 <ATMSelectSearchable
                     label="District"
                     selectLabel="Select district"
                     name="districtId"
-                    value={values.districtId}
+                    value={values.districtId.value}
                     options={districtOptions}
+                    isValueWithLable
                     onChange={(e) => {
-                        setFieldValue('districtId', e || '')
+                        setFieldValue('districtId', {
+                            fieldName: 'District',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
                 <ATMSelectSearchable
                     label="Tehsil"
                     selectLabel="Select tehsil"
                     name="tehsilId"
-                    value={values.tehsilId}
+                    value={values.tehsilId.value}
+                    isValueWithLable
                     options={tehsilOptions}
                     onChange={(e) => {
-                        setFieldValue('tehsilId', e || '')
+                        setFieldValue('tehsilId', {
+                            fieldName: 'Tehsil',
+                            label: e.label,
+                            value: e.value,
+                        })
                     }}
                 />
 
@@ -185,9 +187,13 @@ const BatchOrderListingFilterForm = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.startDate}
-                        onChange={(newValue) =>
-                            setFieldValue('startDate', newValue)
+                        value={values.startDate.value}
+                        onChange={(e) =>
+                            setFieldValue('startDate', {
+                                fieldName: 'Date From',
+                                label: 'Date From',
+                                value: e,
+                            })
                         }
                     />
                 </div>
@@ -199,10 +205,14 @@ const BatchOrderListingFilterForm = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.endDate}
-                        minDate={values?.startDate}
+                        value={values.endDate.value}
+                        minDate={values?.startDate.value}
                         onChange={(newValue) =>
-                            setFieldValue('endDate', newValue)
+                            setFieldValue('endDate', {
+                                fieldName: 'Date To',
+                                label: 'Date To',
+                                value: newValue,
+                            })
                         }
                     />
                 </div>
@@ -215,9 +225,13 @@ const BatchOrderListingFilterForm = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.callBackFrom}
+                        value={values.callBackFrom.value}
                         onChange={(newValue) =>
-                            setFieldValue('callBackFrom', newValue)
+                            setFieldValue('callBackFrom', {
+                                fieldName: 'Date From',
+                                label: 'Date From',
+                                value: newValue,
+                            })
                         }
                     />
                 </div>
@@ -228,10 +242,14 @@ const BatchOrderListingFilterForm = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.callBackTo}
-                        minDate={values?.callBackFrom}
+                        value={values.callBackTo.value}
+                        minDate={values?.callBackFrom.value}
                         onChange={(newValue) =>
-                            setFieldValue('callBackTo', newValue)
+                            setFieldValue('callBackTo', {
+                                fieldName: 'Follow up Date To',
+                                label: 'Follow up Date To',
+                                value: newValue,
+                            })
                         }
                     />
                 </div>
@@ -245,9 +263,13 @@ const BatchOrderListingFilterForm = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.callBackFrom}
+                        value={values.callBackFrom.value}
                         onChange={(newValue) =>
-                            setFieldValue('callBackFrom', newValue)
+                            setFieldValue('callBackFrom', {
+                                fieldName: 'Follow up Date To',
+                                label: 'Follow up Date To',
+                                value: newValue,
+                            })
                         }
                     />
                 </div>
@@ -259,10 +281,14 @@ const BatchOrderListingFilterForm = ({
                         textTransform="capitalize"
                         className="mt-0"
                         dateTimeFormat="DD/MM/YYYY"
-                        value={values.callBackTo}
-                        minDate={values?.callBackFrom}
+                        value={values.callBackTo.value}
+                        minDate={values?.callBackTo}
                         onChange={(newValue) =>
-                            setFieldValue('callBackTo', newValue)
+                            setFieldValue('callBackFrom', {
+                                fieldName: 'Status Date To',
+                                label: 'Status Date To',
+                                value: newValue,
+                            })
                         }
                     />
                 </div>

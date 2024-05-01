@@ -91,7 +91,6 @@ const AttributesGroupListingWrapper = () => {
                 })
                 return (
                     <span className="capitalize">
-                        {' '}
                         <Stack direction="row" spacing={1}>
                             {attribute.map((ele, index) => {
                                 if (index < 9) {
@@ -119,7 +118,7 @@ const AttributesGroupListingWrapper = () => {
                                     return null
                                 }
                             })}
-                        </Stack>{' '}
+                        </Stack>
                     </span>
                 )
             },
