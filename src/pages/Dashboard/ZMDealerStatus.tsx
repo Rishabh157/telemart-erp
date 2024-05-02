@@ -80,74 +80,75 @@ const ZMDealerStatus = () => {
     ]
 
     return (
-            <div className="border-[1px] border-slate-400 rounded p-2">
-                <div className="flex gap-2  items-center justify-end">
-                      <div className="w-1/2">
+        <div className="border-[1px] border-slate-400 rounded p-2">
+            <div className="flex gap-2  items-center justify-end">
+                <div className="w-1/2">
                     <ATMPageHeading> Dealer Status </ATMPageHeading>
                 </div>
-                    <ATMDatePicker
-                        name=""
-                        value={dateFilter.start_date}
-                        onChange={(value) => {
-                            setDateFilter({
-                                ...dateFilter,
-                                start_date: value,
-                            })
-                        }}
-                        label=""
-                        dateTimeFormat="DD/MM/YYYY"
-                    />
+                <ATMDatePicker
+                    name=""
+                    minDate={moment().subtract(3, 'months').startOf('day')}
+                    value={dateFilter.start_date}
+                    onChange={(value) => {
+                        setDateFilter({
+                            ...dateFilter,
+                            start_date: value,
+                        })
+                    }}
+                    label=""
+                    dateTimeFormat="DD/MM/YYYY"
+                />
 
-                    <ATMDatePicker
-                        name=""
-                        value={dateFilter.end_date}
-                        onChange={(value) => {
-                            setDateFilter({
-                                ...dateFilter,
-                                end_date: value,
-                            })
-                        }}
-                        label=""
-                        dateTimeFormat="DD/MM/YYYY"
-                        minDate={
-                            dateFilter.start_date
-                                ? new Date(dateFilter.start_date)
-                                : undefined
-                        }
-                    />
-                    {dateFilter?.start_date || dateFilter?.end_date ? (
-                        <div>
-                            <button
-                                type="button"
-                                className={`rounded bg-primary-main text-white text-sm py-[0.40rem] px-2`}
-                                onClick={() => {
-                                    setDateFilter({
-                                        start_date: null,
-                                        end_date: null,
-                                    })
-                                }}
-                            >
-                                Clear
-                            </button>
-                        </div>
-                    ) : null}
-                </div>
-                <div className="relative">
-                    {isFetching && (
-                        <div className="absolute w-[100%] h-[100%] flex justify-center items-center z-10 bg-slate-100 opacity-50">
-                            <CircularProgress />
-                        </div>
-                    )}
-                    <div className="grow overflow-auto pt-2 ">
-                        <ATMTable
-                            isLoading={isFetching}
-                            columns={columns || []}
-                            rows={items || []}
-                            extraClasses="max-h-full overflow-auto"
-                        />
+                <ATMDatePicker
+                    name=""
+                    value={dateFilter.end_date}
+                    onChange={(value) => {
+                        setDateFilter({
+                            ...dateFilter,
+                            end_date: value,
+                        })
+                    }}
+                    label=""
+                    dateTimeFormat="DD/MM/YYYY"
+                    minDate={
+                        dateFilter.start_date
+                            ? new Date(dateFilter.start_date)
+                            : undefined
+                    }
+                />
+                {dateFilter?.start_date || dateFilter?.end_date ? (
+                    <div>
+                        <button
+                            type="button"
+                            className={`rounded bg-primary-main text-white text-sm py-[0.40rem] px-2`}
+                            onClick={() => {
+                                setDateFilter({
+                                    start_date: null,
+                                    end_date: null,
+                                })
+                            }}
+                        >
+                            Clear
+                        </button>
                     </div>
+                ) : null}
+            </div>
+            <div className="relative">
+                {isFetching && (
+                    <div className="absolute w-[100%] h-[100%] flex justify-center items-center z-10 bg-slate-100 opacity-50">
+                        <CircularProgress />
+                    </div>
+                )}
+                <div className="grow overflow-auto pt-2 ">
+                    <ATMTable
+                        isLoading={isFetching}
+                        columns={columns || []}
+                        rows={items || []}
+                        extraClasses="max-h-full overflow-auto"
+                    />
                 </div>
             </div>
+        </div>
     )
 }
 

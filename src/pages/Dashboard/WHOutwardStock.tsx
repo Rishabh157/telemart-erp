@@ -109,6 +109,7 @@ const WHOutwardStock = () => {
                 <div className="min-w-[150px] max-w-[150px]">
                     <ATMDatePicker
                         name=""
+                        minDate={moment().subtract(3, 'months').startOf('day')}
                         value={dateFilter.start_date}
                         onChange={(value) => {
                             setDateFilter({

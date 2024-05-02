@@ -47,11 +47,11 @@ const OrderSummary = () => {
     }
 
     return (
- 
         <div className="border border-slate-400 rounded p-2 h-full flex flex-col">
             <div className="flex gap-2 items-center justify-end">
                 <ATMDatePicker
                     name=""
+                    minDate={moment().subtract(3, 'months').startOf('day')}
                     value={dateFilter.start_date}
                     onChange={(value) => {
                         setDateFilter({

@@ -63,6 +63,7 @@ const OrderOverviewDashboard = () => {
             <div className="flex gap-2 items-center justify-end">
                 <ATMDatePicker
                     name=""
+                    minDate={moment().subtract(3, 'months').startOf('day')}
                     value={dateFilter.start_date}
                     onChange={(value) => {
                         setDateFilter({

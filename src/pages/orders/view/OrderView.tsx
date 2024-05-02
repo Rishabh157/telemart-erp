@@ -436,7 +436,61 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                         </div>
                     </div>
 
-                    {/*  Other Information  */}
+                    {/*  NDR Information  */}
+                    <div className="grow px-3 py-8">
+                        <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
+                            NDR Information
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2">
+                            <h1 className="text-gray-800"> Remark </h1>
+                            <p className="">-</p>
+                            <p className="text-slate-600">
+                                {items?.ndrRemark === ''
+                                    ? 'NA'
+                                    : items?.ndrRemark}
+                            </p>
+                            <h1 className="text-gray-800">
+                                Discount Applicable{' '}
+                            </h1>
+                            <p className="">-</p>
+                            <p className="text-slate-600">
+                                {items?.ndrDiscountApplicable ? 'YES' : 'NO'}
+                            </p>
+                            <h1 className="text-gray-800">Approved By </h1>
+                            <p className="">-</p>
+                            <p className="text-slate-600">
+                                {items?.ndrApprovedBy === ''
+                                    ? 'NA'
+                                    : items?.ndrApprovedBy}
+                            </p>
+
+                            <h1 className="text-gray-800">
+                                RTO Reattempt reason{' '}
+                            </h1>
+                            <p className="">-</p>
+                            <p className="text-slate-600">
+                                {items?.ndrRtoReattemptReason === null
+                                    ? 'NA'
+                                    : items?.ndrRtoReattemptReason}
+                            </p>
+                            <h1 className="text-gray-800">Call Disposition </h1>
+                            <p className="">-</p>
+                            <p className="text-slate-600">
+                                {items?.ndrCallDisposition === ''
+                                    ? 'NA'
+                                    : items?.ndrCallDisposition}
+                            </p>
+                            <h1 className="text-gray-800">Dealer Remark </h1>
+                            <p className="">-</p>
+                            <p className="text-slate-600">
+                                {items?.dealerValidRemark === ''
+                                    ? 'NA'
+                                    : items?.dealerValidRemark}
+                            </p>
+                        </div>
+                    </div>
+
                     <div className="grow px-3 py-8">
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             Other Information

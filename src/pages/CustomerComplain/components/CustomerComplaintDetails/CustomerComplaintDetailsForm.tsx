@@ -340,7 +340,10 @@ const CustomerComplaintDetailsForm = ({
                     <div className="grid grid-cols-4 gap-6 p-2">
                         {Array.from(complainImages)?.map((file: any, index) => {
                             return (
-                                <div className="border-b border-[1px] h-[200px] relative group cursor-pointer rounded">
+                                <div
+                                    key={index}
+                                    className="border-b border-[1px] h-[200px] relative group cursor-pointer rounded"
+                                >
                                     <img
                                         src={
                                             typeof file === 'string'
