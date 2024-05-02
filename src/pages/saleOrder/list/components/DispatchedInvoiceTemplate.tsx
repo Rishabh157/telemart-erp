@@ -11,8 +11,6 @@ type Props = {
 
 const DispatchedInvoiceTemplate = React.forwardRef(
     ({ invoice }: Props, ref: any) => {
-        // console.log('%c invoice from listing', 'color:orange;', invoice)
-
         let TOTAL_QUANTITY: number = 0
         let TOTAL_RATE_PER_UNIT: number = 0
         let TOTAL_AMOUNT: number = 0
@@ -137,9 +135,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                         </div>
 
                         <div>
-                            <span className="font-bold text-[13px]">
-                                GSTIN
-                            </span>
+                            <span className="font-bold text-[13px]">GSTIN</span>
                             <span className="px-2">:</span>
                             <span className="text-[13px]">-</span>
                         </div>

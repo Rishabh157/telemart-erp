@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React ,{ useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
@@ -104,7 +104,6 @@ const SaleOrderListingWrapper = () => {
                     fieldName: 'IRNStatus',
                     value: filter.IRNStatus.value,
                 },
-                
             ],
             dateFilter: {
                 startDate: filter.startDate.value as string,
@@ -730,15 +729,17 @@ const SaleOrderListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <SaleOrderListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-                setFilter={setFilter}
-                filter={filter}
-            />
+            <div className="z-50 relative">
+                <SaleOrderListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                    setFilter={setFilter}
+                    filter={filter}
+                />
+            </div>
 
-            <div className="opacity-0">
+            <div className="opacity-0 -z-10 absolute top-0">
                 <DispatchedInvoiceTemplate
                     ref={saleOrderInvoiceRef}
                     invoice={invoiceData || null}
@@ -747,4 +748,5 @@ const SaleOrderListingWrapper = () => {
         </SideNavLayout>
     )
 }
+
 export default SaleOrderListingWrapper
