@@ -591,13 +591,15 @@ const SaleOrderListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <SaleOrderListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
+            <div className="z-50">
+                <SaleOrderListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                />
+            </div>
 
-            <div className="opacity-0">
+            <div className="opacity-0 invisible z-0 absolute top-0 ">
                 <DispatchedInvoiceTemplate
                     ref={saleOrderInvoiceRef}
                     invoice={invoiceData || null}
