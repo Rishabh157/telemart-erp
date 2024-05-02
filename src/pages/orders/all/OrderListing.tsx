@@ -211,10 +211,6 @@ const OrderListing = ({
 
             case 'complaint':
                 let filtrComplaint = [
-                    // {
-                    //     fieldName: 'companyId',
-                    //     value: userData?.companyId,
-                    // },
                     {
                         fieldName: 'orderNumber',
                         value: orderNumberSearch,
@@ -1122,11 +1118,6 @@ const OrderListing = ({
         return barcodeQuantity === barcodeList?.length
     }
 
-    // useEffect(() => {
-    //     navigate('/orders?orderStatus=all')
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
-
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
             <div className="flex justify-between items-center h-[45px]">
@@ -1233,14 +1224,10 @@ const OrderListing = ({
                                 : columns
                         }
                         rows={items}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) => {
                             setSelectedRows(selectedRows)
                         }}
-                        // rowExtraClasses={(row) =>
-                        //     getBackGroundColorByStatus(row?.status)
-                        // }
                         isLoading={isTableLoading}
                     />
                 </div>

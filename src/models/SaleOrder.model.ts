@@ -14,7 +14,7 @@ export type productSalesOrder = {
     quantity: number
 }
 
-enum SaleOrderStatus {
+export enum SaleOrderStatus {
     not_dispatched = 'NOT_DISPATCHED',
     dispatched = 'DISPATCHED',
     complete = 'COMPLETE',
@@ -23,6 +23,9 @@ enum SaleOrderStatus {
 export type SaleOrderListResponseTypes = {
     _id: string
     dealerName: string
+    totalInvoiceAmount: string
+    invoiceNo: string
+    invoiceDate: string
     dhApproved: boolean
     dhApprovedActionBy: string
     dhApprovedAt: string

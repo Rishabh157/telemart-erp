@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
@@ -20,16 +19,29 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import SalesOrderFilterWrapper, {
+    SalesOrderFormInitialValuesFilterWithLabel,
+} from './filter/SalesOrderFilterWrapper'
+import { Chip, Stack } from '@mui/material'
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    setFilter: React.Dispatch<
+        React.SetStateAction<SalesOrderFormInitialValuesFilterWithLabel>
+    >
+    filter: SalesOrderFormInitialValuesFilterWithLabel
 }
 
-const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
-
+const SaleOrderListing = ({
+    columns,
+    rows,
+    setShowDropdown,
+    filter,
+    setFilter,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const saleOrderState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -39,10 +51,42 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
     const isDealerPath = path === 'dealers'
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         saleOrderState
+    const handleReset = () => {
+        setFilter((prev) => ({
+            ...prev,
+            dealerId: { fieldName: '', value: '', label: '' },
+            status: { fieldName: '', value: '', label: '' },
+            invoiceNo: { fieldName: '', value: '', label: '' },
+            IRNStatus: { fieldName: '', value: '', label: '' },
+            startDate: { fieldName: '', value: '', label: '' },
+            endDate: { fieldName: '', value: '', label: '' },
+        }))
+    }
 
+    const filterShow = (filter: SalesOrderFormInitialValuesFilterWithLabel) => {
+        return (
+            <span className="capitalize">
+                <Stack direction="row" spacing={1}>
+                    {Object.entries(filter).map(([key, value], index) => {
+                        return value.value ? (
+                            <Chip
+                                key={index}
+                                label={`${value.fieldName}: ${value.label}`}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : null
+                    })}
+                </Stack>
+            </span>
+        )
+    }
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
             {/* Page Header */}
@@ -76,10 +120,20 @@ const SaleOrderListing = ({ columns, rows, setShowDropdown }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                    isFilter
+                    onFilterClick={() => setIsOpenFilterFormDialog(true)}
+                    isFilterRemover
+                    onFilterRemoverClick={handleReset}
+                    filterShow={filterShow(filter)}
                 />
-
+                {isOpenFilterFormDialog && (
+                    <SalesOrderFilterWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                        setFilter={setFilter}
+                        filter={filter}
+                    />
+                )}
                 {/* Table */}
                 <div className="grow overflow-auto">
                     <ATMTable

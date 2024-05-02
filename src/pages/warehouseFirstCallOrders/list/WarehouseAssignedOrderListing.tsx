@@ -14,7 +14,7 @@ import {
     setPage,
     setRowsPerPage,
     setSearchValue,
-} from 'src/redux/slices/warehouseOrders/warehouseAssignedOrderSlice'
+} from 'src/redux/slices/ListingPaginationSlice'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'

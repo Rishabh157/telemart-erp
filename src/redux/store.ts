@@ -25,7 +25,6 @@ import pincodeSlice from './slices/pincodeSlice'
 import ProductGroupBarcodeSlice from './slices/productGroupBarcodeSlice'
 import statesSlice from './slices/statesSlice'
 import tehsilSlice from './slices/tehsilSlice'
-import warehouseAssignedOrderSlice from './slices/warehouseOrders/warehouseAssignedOrderSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
 
@@ -51,7 +50,6 @@ const store = configureStore({
         order: orderSlice,
         inboundCaller: inboundCallerSlice,
         complain: ComplainSlice,
-        warehouseOrdersAssigned: warehouseAssignedOrderSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
         [filePickerSlice.reducerPath]: filePickerSlice.reducer,
     },

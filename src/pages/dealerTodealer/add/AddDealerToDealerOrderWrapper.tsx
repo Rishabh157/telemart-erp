@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { array, number, object, string } from 'yup'
 
@@ -18,7 +18,7 @@ import AddDealerToDealerOrder from './AddDealerToDealerOrder'
 // |-- Redux--|
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
@@ -39,7 +39,6 @@ const AddDealerToDealerOrderWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const [addDealerToDealer] = useAddDealerToDealerOrderMutation()
    
     const { options: productGroupOptions } = useCustomOptions({
@@ -53,7 +52,7 @@ const AddDealerToDealerOrderWrapper = (props: Props) => {
         value: '_id',
     })
     const { options: dealerOptions } = useCustomOptions({
-        useEndPointHook: useGetAllDealersQuery(userData?.companyId),
+        useEndPointHook: useGetAllDealersQuery(''),
         keyName: ['firstName', 'lastName'],
         value: '_id',
     })
