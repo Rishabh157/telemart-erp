@@ -48,10 +48,10 @@ const WHInventory = () => {
         <div className="border-[1px] border-slate-400 rounded p-2 w-full h-fit">
             <div className="text-start flex justify-between w-full">
                 {/* Heading */}
-                <div className="w-1/2">
+                <div>
                     <ATMPageHeading> Warehouse Inventory </ATMPageHeading>
                 </div>
-                <div className="w-1/2 pb-6">
+                <div className="pb-6">
                     <ATMSelectSearchable
                         componentClass="z-[10001]"
                         name=""

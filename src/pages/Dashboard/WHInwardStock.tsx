@@ -89,7 +89,7 @@ const WHInwardStock = () => {
                 <ATMPageHeading> Warehouse inwaord </ATMPageHeading>
                 {/* Date Filter */}
             </div>
-            <div className="flex gap-2 justify-end items-center">
+            <div className="flex flex-wrap gap-2 justify-end items-center">
                 <div className="min-w-[150px] max-w-[150px]">
                     <ATMSelectSearchable
                         size="xs"
