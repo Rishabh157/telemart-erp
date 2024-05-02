@@ -62,6 +62,7 @@ const ZMStockStatus = () => {
 
                 <ATMDatePicker
                     name=""
+                    minDate={moment().subtract(3, 'months').startOf('day')}
                     value={dateFilter.start_date}
                     onChange={(value) => {
                         setDateFilter({
