@@ -19,7 +19,6 @@ import {
 } from 'src/services/SalesOrderService'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-// import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import SaleOrderListing from './SaleOrderListing'
 
 // |-- Redux --|
@@ -146,6 +145,17 @@ const SaleOrderListingWrapper = () => {
             { type: 'application/pdf' }
         )
 
+        // This is for commented code preview of embeded
+        // const [pdfFile, setPdfFile] = useState<any>() // state
+        // if (file) {
+        //     const reader = new FileReader()
+        //     reader.onloadend = () => {
+        //         setPdfFile(reader.result)
+        //         // setPdfPreview();
+        //     }
+        //     reader.readAsDataURL(file)
+        // }
+
         let formData: any = new FormData()
         formData.append(
             'type',
@@ -154,7 +164,7 @@ const SaleOrderListingWrapper = () => {
         formData.append('file', file || '')
         formData.append('bucketName', 'SAPTEL_CRM')
 
-        // call the file manager api
+        // // call the file manager api
         uploadFile(formData).then((res: any) => {
             if ('data' in res) {
                 console.log('HERE res', res)
@@ -668,7 +678,6 @@ const SaleOrderListingWrapper = () => {
                 ) : null
             },
         },
-
         {
             field: '',
             headerName: 'Generate/Cancel IRN',
@@ -738,13 +747,24 @@ const SaleOrderListingWrapper = () => {
                     filter={filter}
                 />
             </div>
-
             <div className="opacity-0 -z-10 absolute top-0">
                 <DispatchedInvoiceTemplate
                     ref={saleOrderInvoiceRef}
                     invoice={invoiceData || null}
                 />
             </div>
+
+            {/* Do Not Delete This */}
+            {/* {pdfFile && (
+                <div className="absolute z-[100000] w-full h-screen">
+                    <embed
+                        src={pdfFile}
+                        type="application/pdf"
+                        width="100%"
+                        height="600px"
+                    />
+                </div>
+            )} */}
         </SideNavLayout>
     )
 }
