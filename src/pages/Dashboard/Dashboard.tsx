@@ -9,6 +9,7 @@ import ZMStockStatus from './ZMStockStatus'
 import WHInventory from './WHInventory'
 import WHInwardStock from './WHInwardStock'
 import WHOutwardStock from './WHOutwardStock'
+import SaleDepartmentDashboard from './SaleDepartmentDashboard'
 
 type Props = {
     columns: columnTypes[]
@@ -50,6 +51,11 @@ const Dashboard = ({ columns, rows, columns2, rows2 }: Props) => {
                     <div className="col-span-1">
                         <WHOutwardStock />
                     </div>
+                </div>
+            )}
+            {userData?.userDepartment === 'SALES_DEPARTMENT' && (
+                <div className="grid grid-cols-1 h-full">
+                    <SaleDepartmentDashboard />
                 </div>
             )}
         </div>
