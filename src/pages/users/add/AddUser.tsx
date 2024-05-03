@@ -26,7 +26,6 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
-import { CompanyBranchListResponse } from 'src/models'
 import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import {
@@ -35,6 +34,7 @@ import {
     useGetTeamLeadrUserByCallCenterIdQuery,
 } from 'src/services/UserServices'
 import { RootState } from 'src/redux/store'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {
@@ -59,123 +59,81 @@ const breadcrumbs: BreadcrumbType[] = [
 const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const { values, setFieldValue } = formikProps
     const [userRole, setuserRole] = useState<any[]>([])
-    const [userSeniorOptions, setSenoirRole] = useState<any[]>([])
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const [branchOptionList, setBranchOptionList] = useState([])
-
-    const [florManagerOptionList, setFlorManagerOptionList] = useState([])
-    const [teamLeadOptionList, setTeamLeadOptionList] = useState([])
-
-    const { data, isFetching, isLoading } = useGetAllCompaniesBranchQuery('')
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            const companyBranchList = data?.data?.map(
-                (ele: CompanyBranchListResponse) => {
-                    return {
-                        label: ele?.branchName,
-                        value: ele?._id,
-                    }
-                }
-            )
-            setBranchOptionList(companyBranchList)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data])
-
-    useEffect(() => {
-        const departmentroles = getHierarchyByDept({
-            department: values?.userDepartment as GetHierarchByDeptProps,
-        })
-
-        setuserRole(departmentroles)
-    }, [values])
     const dispatch = useDispatch()
+
     const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
 
-    const {
-        data: floorMangers,
-        isFetching: floorManagerIsFetching,
-        isLoading: floorManagerIsLoading,
-    } = useGetFloorMangerUserByCallCenterIdQuery(
-        {
-            companyId: userData?.companyId as string,
-            callCenterId: values?.callCenterId as any,
-            departmentId: values?.userDepartment as any,
-        },
-        {
-            skip: !values?.callCenterId,
-        }
-    )
-    React.useEffect(() => {
-        if (!floorManagerIsFetching && !floorManagerIsLoading) {
-            const filteredFloor = floorMangers?.data?.map((ele: any) => {
-                return {
-                    label: ele?.userName,
-                    value: ele?._id,
-                }
-            })
-            setFlorManagerOptionList(filteredFloor)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [floorManagerIsFetching, floorManagerIsLoading, floorMangers])
+    // Get Company Branch
+    const { options: branchOptionList } = useCustomOptions({
+        useEndPointHook: useGetAllCompaniesBranchQuery(''),
+        keyName: 'branchName',
+        value: '_id',
+    })
 
-    const {
-        data: teamLeadData,
-        isFetching: teamLeadIsFetching,
-        isLoading: teamLeadIsLoading,
-    } = useGetTeamLeadrUserByCallCenterIdQuery(
-        {
-            companyId: userData?.companyId as string,
-            callCenterId: values?.callCenterId as any,
-            departmentId: values?.userDepartment as any,
-        },
-        {
-            skip: !values?.callCenterId,
-        }
-    )
-    React.useEffect(() => {
-        if (!teamLeadIsFetching && !teamLeadIsLoading) {
-            const filteredFloor = teamLeadData?.data?.map((ele: any) => {
-                return {
-                    label: ele?.userName,
-                    value: ele?._id,
-                }
-            })
-            setTeamLeadOptionList(filteredFloor)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [teamLeadIsFetching, teamLeadIsLoading, floorMangers])
+    // Get Seniors
+    const { options: userSeniorOptions } = useCustomOptions({
+        useEndPointHook: useGetSeniorUsersQuery(
+            {
+                userrole: values?.userRole,
+                body: {
+                    department: values.userDepartment,
+                    callCenterId: values.callCenterId,
+                },
+            },
+            {
+                skip:
+                    !values?.userRole ||
+                    !values?.userDepartment ||
+                    !values?.callCenterId, // Skip the query if userRole, userDepartment, or callCenterId is not available
+            }
+        ),
+        keyName: 'userName',
+        value: '_id',
+    })
 
-    // senior Apidata
-    const {
-        data: seniorData,
-        isFetching: seniorIsFetching,
-        isLoading: seniorIsLoading,
-    } = useGetSeniorUsersQuery(
-        {
-            userrole: values?.userRole,
-        },
-        {
-            skip: !values?.userRole,
-        }
-    )
-    React.useEffect(() => {
-        if (!seniorIsLoading && !seniorIsFetching) {
-            const senoirOptions = seniorData?.data?.map((ele: any) => {
-                return {
-                    label: ele?.userName,
-                    value: ele?._id,
-                }
-            })
-            setSenoirRole(senoirOptions)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [seniorIsLoading, seniorIsFetching, seniorData])
+    // Get Florr Manager
+    const { options: florManagerOptionList } = useCustomOptions({
+        useEndPointHook: useGetFloorMangerUserByCallCenterIdQuery(
+            {
+                companyId: userData?.companyId as string,
+                callCenterId: values?.callCenterId as any,
+                departmentId: values?.userDepartment as any,
+            },
+            {
+                skip: !values?.isAgent || !values?.callCenterId, // Skip the query if isAgent is false or callCenterId is not available
+            }
+        ),
+        keyName: 'userName',
+        value: '_id',
+    })
+
+    // Get Team Lead
+    const { options: teamLeadOptionList } = useCustomOptions({
+        useEndPointHook: useGetTeamLeadrUserByCallCenterIdQuery(
+            {
+                companyId: userData?.companyId as string,
+                callCenterId: values?.callCenterId as any,
+                departmentId: values?.userDepartment as any,
+            },
+            {
+                skip: !values?.isAgent || !values?.callCenterId, // Skip the query if isAgent is false or callCenterId is not available
+            }
+        ),
+        keyName: 'userName',
+        value: '_id',
+    })
+
+    useEffect(() => {
+        const departmentroles = getHierarchyByDept({
+            department: values?.userDepartment as GetHierarchByDeptProps,
+        })
+        setuserRole(departmentroles)
+    }, [values])
 
     return (
         <MainLayout>
@@ -201,8 +159,9 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
-                                    }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                    apiStatus ? 'opacity-50' : ''
+                                }`}
                             >
                                 Submit
                             </button>
@@ -298,6 +257,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                     )
                                 }
                             />
+
                             {/* Mobile */}
                             <ATMTextField
                                 required={true}
@@ -315,6 +275,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                     }
                                 }}
                             />
+
                             <ATMSelectSearchable
                                 required
                                 name="userDepartment"
@@ -326,6 +287,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 fontSizePlaceHolder="14px"
                                 label="User Department"
                             />
+
                             <ATMSelectSearchable
                                 required
                                 name="userRole"
@@ -337,15 +299,40 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 fontSizePlaceHolder="14px"
                                 label="User Role"
                             />
+
+                            <ATMSelectSearchable
+                                required={
+                                    values?.userDepartment ===
+                                    'SALES_DEPARTMENT'
+                                        ? true
+                                        : false
+                                }
+                                name="callCenterId"
+                                value={values.callCenterId}
+                                onChange={(e) =>
+                                    handleSetFieldValue('callCenterId', e)
+                                }
+                                options={dropDownOption.callCenterOptions}
+                                label="Call Center"
+                            />
+
                             <ATMSelectSearchable
                                 required
+                                isHidden={
+                                    !(
+                                        values.userDepartment ===
+                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
+                                        values.userDepartment ===
+                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+                                    )
+                                }
                                 name="mySenior"
                                 value={values.mySenior || ''}
                                 onChange={(e) =>
                                     handleSetFieldValue('mySenior', e)
                                 }
                                 options={userSeniorOptions}
-                                label="senior"
+                                label="Senior"
                             />
 
                             {/* user admin  */}
@@ -354,9 +341,9 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 hidden={
                                     !(
                                         values.userDepartment ===
-                                        GetHierarchByDeptProps.SALES_DEPARTMENT ||
+                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
                                         values.userDepartment ===
-                                        GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
                                     )
                                 }
                                 label="Agent"
@@ -367,16 +354,6 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 }
                             />
 
-                            <ATMSelectSearchable
-                                required={values?.userDepartment === "SALES_DEPARTMENT" ? true : false}
-                                name="callCenterId"
-                                value={values.callCenterId}
-                                onChange={(e) =>
-                                    handleSetFieldValue('callCenterId', e)
-                                }
-                                options={dropDownOption.callCenterOptions}
-                                label="Call Center"
-                            />
                             {/* Floor Manager Name */}
                             <ATMSelectSearchable
                                 isHidden={!values.isAgent}
@@ -448,18 +425,18 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                                     .allowedIps
                                                                     ?.length >
                                                                     1 && (
-                                                                        <button
-                                                                            type="button"
-                                                                            onClick={() => {
-                                                                                remove(
-                                                                                    itemIndex
-                                                                                )
-                                                                            }}
-                                                                            className="p-1.5 bg-red-500 text-white rounded mt-[44px] ml-[10px] "
-                                                                        >
-                                                                            <MdDeleteOutline className="text-2xl " />
-                                                                        </button>
-                                                                    )}
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => {
+                                                                            remove(
+                                                                                itemIndex
+                                                                            )
+                                                                        }}
+                                                                        className="p-1.5 bg-red-500 text-white rounded mt-[44px] ml-[10px] "
+                                                                    >
+                                                                        <MdDeleteOutline className="text-2xl " />
+                                                                    </button>
+                                                                )}
                                                             </div>
                                                         </div>
                                                     )
