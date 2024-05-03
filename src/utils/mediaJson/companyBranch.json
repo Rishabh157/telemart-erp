@@ -19,6 +19,11 @@
                     "fieldId": "COMPANY_BRANCH_LIST_BRANCH_NAME",
                     "fieldName": "Branch Name",
                     "fieldValue": "branchName"
+                },
+                {
+                    "fieldId": "COMPANY_BRANCH_LIST_BRANCH_CODE",
+                    "fieldName": "Branch Code",
+                    "fieldValue": "branchCode"
                 }
             ]
         },

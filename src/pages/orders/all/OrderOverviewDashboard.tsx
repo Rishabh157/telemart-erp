@@ -63,13 +63,32 @@ const OrderOverviewDashboard = () => {
             <div className="flex gap-2 items-center justify-end">
                 <ATMDatePicker
                     name=""
-                    minDate={moment().subtract(3, 'months').startOf('day')}
                     value={dateFilter.start_date}
                     onChange={(value) => {
-                        setDateFilter({
-                            ...dateFilter,
-                            start_date: value,
-                        })
+                        const endDate = moment(value)
+                            .add(3, 'months')
+                            .endOf('day')
+                        const threeMonthsLater = moment()
+                            .add(3, 'months')
+                            .endOf('day')
+
+                        // Check if the selected start date is less than 3 months from the current date
+                        if (moment(value).isBefore(threeMonthsLater)) {
+                            // If yes, set the end date to 3 months from the selected start date
+                            setDateFilter({
+                                ...dateFilter,
+                                start_date: value,
+                                end_date: endDate.isBefore(threeMonthsLater)
+                                    ? endDate
+                                    : threeMonthsLater,
+                            })
+                        } else {
+                            // Otherwise, keep the end date unchanged
+                            setDateFilter({
+                                ...dateFilter,
+                                start_date: value,
+                            })
+                        }
                     }}
                     label=""
                     dateTimeFormat="DD/MM/YYYY"
@@ -86,11 +105,10 @@ const OrderOverviewDashboard = () => {
                     }}
                     label=""
                     dateTimeFormat="DD/MM/YYYY"
-                    minDate={
-                        dateFilter.start_date
-                            ? new Date(dateFilter.start_date)
-                            : undefined
-                    }
+                    minDate={dateFilter.start_date}
+                    maxDate={moment(dateFilter.start_date)
+                        .add(3, 'months')
+                        .endOf('day')}
                 />
 
                 {(dateFilter.start_date || dateFilter.end_date) && (

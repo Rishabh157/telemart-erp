@@ -1,12 +1,3 @@
-/// ==============================================
-// Filename:SaleOrder.model.ts
-// Type: Model Component
-// Last Updated: OCTOBER 23, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// import { SaleOrderStatus } from "./OutwardRequest.model"
-
 // |-- Types --|
 export type productSalesOrder = {
     productGroupId: string
@@ -24,7 +15,6 @@ export type SaleOrderListResponseTypes = {
     _id: string
     dealerName: string
     totalInvoiceAmount: string
-    invoiceNo: string
     invoiceDate: string
     dhApproved: boolean
     dhApprovedActionBy: string
@@ -46,6 +36,7 @@ export type SaleOrderListResponseTypes = {
         dhApprovedAt: string
         accApprovedById: string
         accApproved: boolean
+        invoiceNumber: string
         accApprovedActionBy: string
         accApprovedAt: string
         invoice: string

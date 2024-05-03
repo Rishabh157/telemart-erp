@@ -61,7 +61,7 @@ const SaleOrderListing = ({
             ...prev,
             dealerId: { fieldName: '', value: '', label: '' },
             status: { fieldName: '', value: '', label: '' },
-            invoiceNo: { fieldName: '', value: '', label: '' },
+            invoiceNumber: { fieldName: '', value: '', label: '' },
             IRNStatus: { fieldName: '', value: '', label: '' },
             startDate: { fieldName: '', value: '', label: '' },
             endDate: { fieldName: '', value: '', label: '' },
