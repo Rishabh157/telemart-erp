@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditCompanyBranchWrapper.tsx
-// Type: Edit Component
-// Last Updated: SEPTEMBER 11, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -33,6 +26,7 @@ type Props = {}
 
 export type FormInitialValues = {
     branchName: string
+    branchCode: string
     company: string
 }
 
@@ -44,19 +38,21 @@ const EditCompanyBranchWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-   const {items:selectedItem}= useGetDataByIdCustomQuery<any>({
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetCompanyBranchByIdQuery(Id),
     })
     const [updateCompanyBranch] = useUpdateCompanyBranchMutation()
     // Form Initial Values
     const initialValues: FormInitialValues = {
         branchName: selectedItem?.branchName,
+        branchCode: selectedItem?.branchCode,
         company: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         branchName: string().required('Branch name is required'),
+        branchCode: string().required('Branch code is required'),
     })
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -65,6 +61,7 @@ const EditCompanyBranchWrapper = (props: Props) => {
         updateCompanyBranch({
             body: {
                 branchName: values.branchName,
+                branchCode: values.branchCode,
                 companyId: userData?.companyId || '',
             },
             id: Id || '',
@@ -82,7 +79,7 @@ const EditCompanyBranchWrapper = (props: Props) => {
             setApiStatus(false)
         })
     }
-   
+
     return (
         <Formik
             enableReinitialize

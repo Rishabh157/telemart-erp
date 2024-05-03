@@ -15,7 +15,7 @@ type LabelValuePair = {
 // Define the type for FormInitialValuesFilter
 export type SalesOrderFormInitialValuesFilterWithLabel = {
     dealerId: LabelValuePair
-    invoiceNo: LabelValuePair
+    invoiceNumber: LabelValuePair
     startDate: LabelValuePair
     endDate: LabelValuePair
     status: LabelValuePair
@@ -38,7 +38,7 @@ const SalesOrderFilterWrapper = ({
 }: Props) => {
     const initialValues: SalesOrderFormInitialValuesFilterWithLabel = {
         dealerId: filter.dealerId,
-        invoiceNo: filter.invoiceNo,
+        invoiceNumber: filter.invoiceNumber,
         startDate: filter.startDate,
         endDate: filter.endDate,
         status: filter.status,
@@ -63,7 +63,7 @@ const SalesOrderFilterWrapper = ({
         setFilter((prev) => ({
             ...prev,
             dealerId: values.dealerId,
-            invoiceNo: values.invoiceNo,
+            invoiceNumber: values.invoiceNumber,
             status: values.status,
             IRNStatus: values.IRNStatus,
             startDate: values?.startDate.value
@@ -96,7 +96,7 @@ const SalesOrderFilterWrapper = ({
         setFilter((prev) => ({
             ...prev,
             dealerId: { fieldName: '', value: '', label: '' },
-            invoiceNo: { fieldName: '', value: '', label: '' },
+            invoiceNumber: { fieldName: '', value: '', label: '' },
             status: { fieldName: '', value: '', label: '' },
             IRNStatus: { fieldName: '', value: '', label: '' },
             startDate: { fieldName: '', value: '', label: '' },

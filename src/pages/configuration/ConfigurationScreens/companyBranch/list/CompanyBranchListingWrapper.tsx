@@ -53,7 +53,7 @@ const CompanyBranchListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -108,7 +108,6 @@ const CompanyBranchListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'companyLabel',
@@ -128,15 +127,22 @@ const CompanyBranchListingWrapper = () => {
                 <span> {row.branchName} </span>
             ),
         },
+        {
+            field: 'branchCode',
+            headerName: 'Branch Code',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.COMPANY_BRANCH_LIST_BRANCH_CODE,
+            renderCell: (row: CompanyBranchListResponse) => (
+                <span> {row.branchCode} </span>
+            ),
+        },
     ]
     return (
-        <>
-            <CompanyBranch
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </>
+        <CompanyBranch
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 

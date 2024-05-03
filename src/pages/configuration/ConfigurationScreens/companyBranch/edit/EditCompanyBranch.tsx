@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditCompanyBranch.tsx
-// Type: Edit Component
-// Last Updated: SEPTEMBER 11, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -45,6 +38,7 @@ const EditCompanyBranch = ({ formikProps, apiStatus }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+    console.log('values: ', values)
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="flex flex-col gap-2 p-4 ">
@@ -90,6 +84,20 @@ const EditCompanyBranch = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'branchName',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            <ATMTextField
+                                // disabled
+                                required
+                                name="branchCode"
+                                value={values.branchCode}
+                                label="Branch Code"
+                                placeholder="Branch Code"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'branchCode',
                                         e.target.value
                                     )
                                 }

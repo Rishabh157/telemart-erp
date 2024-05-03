@@ -51,7 +51,7 @@ const SaleOrderListingWrapper = () => {
         React.useState<SalesOrderFormInitialValuesFilterWithLabel>({
             dealerId: { fieldName: '', label: '', value: '' },
             status: { fieldName: '', label: '', value: '' },
-            invoiceNo: {
+            invoiceNumber: {
                 fieldName: '',
                 label: '',
                 value: '',
@@ -92,8 +92,8 @@ const SaleOrderListingWrapper = () => {
                     value: filter.dealerId.value,
                 },
                 {
-                    fieldName: 'invoiceNo',
-                    value: filter.invoiceNo.value,
+                    fieldName: 'invoiceNumber',
+                    value: filter.invoiceNumber.value,
                 },
                 {
                     fieldName: 'status',
@@ -327,13 +327,13 @@ const SaleOrderListingWrapper = () => {
             ),
         },
         {
-            field: 'invoiceNo',
+            field: 'invoiceNumber',
             headerName: 'Invoice No',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
-                <span> {row?.invoiceNo} </span>
+                <span className='min-w-[100px] truncate'> {row?.documents?.[0]?.invoiceNumber} </span>
             ),
         },
         {

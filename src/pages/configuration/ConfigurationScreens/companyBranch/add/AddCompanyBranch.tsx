@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddCompanyBranch.tsx
-// Type: Add Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -91,6 +84,19 @@ const AddCompanyBranch = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'branchName',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            <ATMTextField
+                                required
+                                name="branchCode"
+                                value={values.branchCode}
+                                label="Branch Code"
+                                placeholder="Branch Code"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'branchCode',
                                         e.target.value
                                     )
                                 }
