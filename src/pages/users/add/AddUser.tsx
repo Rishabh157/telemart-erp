@@ -86,10 +86,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                 },
             },
             {
-                skip:
-                    !values?.userRole ||
-                    !values?.userDepartment ||
-                    !values?.callCenterId, // Skip the query if userRole, userDepartment, or callCenterId is not available
+                skip: !values?.userRole,
             }
         ),
         keyName: 'userName',
@@ -301,6 +298,14 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
 
                             <ATMSelectSearchable
+                                isHidden={
+                                    !(
+                                        values.userDepartment ===
+                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
+                                        values.userDepartment ===
+                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+                                    )
+                                }
                                 required={
                                     values?.userDepartment ===
                                     'SALES_DEPARTMENT'
@@ -318,14 +323,6 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
                             <ATMSelectSearchable
                                 required
-                                isHidden={
-                                    !(
-                                        values.userDepartment ===
-                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
-                                        values.userDepartment ===
-                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
-                                    )
-                                }
                                 name="mySenior"
                                 value={values.mySenior || ''}
                                 onChange={(e) =>
