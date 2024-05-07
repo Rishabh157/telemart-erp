@@ -1,3 +1,4 @@
+/*** Order Status ****/
 export enum orderStatusEnum {
     fresh = 'FRESH',
     all = 'ALL',
@@ -19,6 +20,7 @@ export enum orderStatusEnum {
     closed = 'CLOSED',
 }
 
+/*** Barcode Status ****/
 export enum barcodeStatusEnum {
     atWarehouse = 'AT_WAREHOUSE',
     atDealerWarehouse = 'AT_DEALER_WAREHOUSE',
