@@ -32,6 +32,7 @@ import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/Ba
 import { useGetPaginationWarehouseToSampleByGroupQuery } from 'src/services/WarehouseToSampleService'
 import { useInwardWarehouseToWarehouseBarcodeMutation } from 'src/services/WarehouseTransferService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 export type Tabs = {
@@ -232,7 +233,7 @@ const InwardSampleTabsListingWrapper = () => {
         getBarCode({
             id: barcodeNumber,
             groupId: productGroupId,
-            status: 'WTS',
+            status: barcodeStatusEnum.wts,
             companyId: userData?.companyId as string,
         })
             .then((res: any) => {

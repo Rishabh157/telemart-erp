@@ -35,6 +35,7 @@ import {
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
 } from 'src/services/BarcodeService'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 export type Tabs = {
@@ -248,7 +249,7 @@ const OutwardDealerTabsListingWrapper = () => {
         getBarCode({
             id: barcodeNumber,
             groupId: productGroupId,
-            status: 'AT_WAREHOUSE',
+            status: barcodeStatusEnum.atWarehouse,
             companyId: userData?.companyId as string,
         })
             .then((res: any) => {

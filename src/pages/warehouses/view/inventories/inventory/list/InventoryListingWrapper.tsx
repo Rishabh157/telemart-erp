@@ -1,13 +1,12 @@
-
 // |-- External Dependencies --|
 import { BsArrowRepeat } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
-
 
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { WareHouseInventory } from 'src/models/Inventory.model'
 import InventoryListing from './InventoryListing'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Redux --|
 import { format } from 'date-fns'
@@ -80,7 +79,6 @@ const columns: columnTypes[] = [
             </span>
         ),
     },
-
     // {
     //     field: 'actions',
     //     headerName: 'Actions',
@@ -104,7 +102,6 @@ const tabs = [
         icon: BsArrowRepeat,
         path: 'inventories',
     },
-  
 ]
 
 const InventoryListingWrapper = () => {
@@ -139,7 +136,7 @@ const InventoryListingWrapper = () => {
             },
             companyId: userData?.companyId as string,
             warehouseId: wareHouseId as string,
-            status: 'AT_WAREHOUSE',
+            status: barcodeStatusEnum.atWarehouse,
         }),
     })
 
