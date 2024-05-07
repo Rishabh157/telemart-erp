@@ -1,28 +1,20 @@
-/// ==============================================
-// Filename:CartonBoxBarcodeListing.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-// import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-// // |-- Internal Dependencies --|
-// import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-// import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-// import {
-//     setRowsPerPage,
-//     setPage,
-//     setSearchValue,
-// } from 'src/redux/slices/CartonBoxBarcodeSlice'
-// import CartonBoxBarcodeDetailCard from './CartonBoxBarcodeDetailCard'
+// |-- Internal Dependencies --|
+import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import CartonBoxBarcodeDetailCard from './CartonBoxBarcodeDetailCard'
 
 // |-- Redux --|
-// import { AppDispatch, RootState } from 'src/redux/store'
+import { RootState } from 'src/redux/store'
+import { useGetBarcodeByOuterBoxNumberQuery } from 'src/services/BarcodeService'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { BsPrinter } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Types --|
 export type barcodecardType = {
@@ -34,12 +26,28 @@ export type barcodecardType = {
 
 const CartonBoxBarcodeListing = () => {
     // Hooks
-    // const dispatch = useDispatch<AppDispatch>()
-    // const cartonBoxBarcodeState: any = useSelector(
-    //     (state: RootState) => state.cartonBoxBarcode
-    // )
+    const [searchValue, setSearchValue] = useState<string>('')
+    const navigate = useNavigate()
 
-    // const { page, rowsPerPage, totalItems, searchValue } = cartonBoxBarcodeState
+    const cartonBoxBarcodeState: any = useSelector(
+        (state: RootState) => state.cartonBoxBarcode
+    )
+
+    const { page, rowsPerPage, totalItems } = cartonBoxBarcodeState
+
+    // pagination api
+    const { items } = useGetCustomListingData<any[]>({
+        useEndPointHook: useGetBarcodeByOuterBoxNumberQuery(searchValue, {
+            skip: !searchValue.length,
+        }),
+    })
+
+    const datas = items?.map((ele: any, index: any) => {
+        return {
+            barcodenumber: ele.barcodeNumber,
+            label: ele.cartonboxLabel,
+        }
+    })
 
     return (
         <div className="px-4  h-[calc(100%-55px)]  flex flex-col gap-3 pt-4">
@@ -48,28 +56,54 @@ const CartonBoxBarcodeListing = () => {
             <div className="border flex flex-col h-[calc(100%-55px)] rounded bg-white ">
                 {/* Header */}
 
-                {/* <ATMTableHeader
+                <ATMTableHeader
                     searchValue={searchValue}
                     page={page}
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
-                    rows={rows}
-                    onRowsPerPageChange={(newValue) =>
-                        dispatch(setRowsPerPage(newValue))
-                    }
+                    rows={1 as any}
+                    // rows={rows}
+                    onRowsPerPageChange={(newValue) => {
+                        // dispatch(setRowsPerPage(newValue))
+                    }}
                     // isFilter
-                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                /> */}
+                    onSearch={(newValue) => {
+                        // handleValidNumber(newValue) &&
+                        setSearchValue(newValue)
+                    }}
+                />
 
                 {/* Barcode Detail Cards */}
-                {/* <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto  ">
                     <CartonBoxBarcodeDetailCard
-                        barcodeList={datas}
-                        selectedCartonBoxBarcodes={selectedCartonBoxBarcodes}
-                        onCartonBoxBarcodeSelect={onCartonBoxBarcodeSelect}
+                        barcodeList={datas as any}
+                        onCartonBoxBarcodeSelect={() => {}}
                         onBarcodeClick={() => {}}
                     />
-                </div> */}
+                </div>
+
+                {datas?.length && (
+                    <div className="flex justify-end">
+                        <ATMLoadingButton
+                            className="w-24"
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                if (items?.length) {
+                                    navigate('/barcodes', {
+                                        state: {
+                                            path: '/configurations/barcode',
+                                        },
+                                    })
+                                }
+                                // setGroupId(barcode?._id)
+                            }}
+                        >
+                            <div className="flex gap-2 items-center justify-center">
+                                <BsPrinter className="text-xl" /> Print
+                            </div>
+                        </ATMLoadingButton>
+                    </div>
+                )}
 
                 {/* Pagination */}
                 {/* <div className="h-[60px] flex items-center justify-end border-t border-slate-300">

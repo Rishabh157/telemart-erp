@@ -5,7 +5,6 @@ import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import SalesOrderFilterForm from './SalesOrderFilterForm'
 import moment from 'moment'
 
-
 type LabelValuePair = {
     fieldName: string
     label: string
@@ -59,7 +58,7 @@ const SalesOrderFilterWrapper = ({
         }: FormikHelpers<SalesOrderFormInitialValuesFilterWithLabel>
     ) => {
         setSubmitting(false)
-        console.log('values', values)
+
         setFilter((prev) => ({
             ...prev,
             dealerId: values.dealerId,

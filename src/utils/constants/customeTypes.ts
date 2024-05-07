@@ -1289,3 +1289,29 @@ export const getProductCategoryOptions = () => {
         }
     })
 }
+
+// Tape Type Options
+enum CustomerInwardBarcodeType {
+    damage = 'DAMAGE',
+    ok = 'AT_WAREHOUSE',
+}
+
+export const getCustomerInwardBarcodeOptionTypes = () => {
+    let options = [
+        {
+            label: 'OK',
+            value: CustomerInwardBarcodeType.ok,
+        },
+        {
+            label: 'Damage',
+            value: CustomerInwardBarcodeType.damage,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}

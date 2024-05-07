@@ -18,12 +18,6 @@ import {
     useGetBarcodeQuery,
     useGetProductGroupBarcodeQuery,
 } from 'src/services/BarcodeService'
-import { useGetCartonBoxBarcodeQuery } from 'src/services/CartonBoxBarcodeService'
-import {
-    setIsTableLoading as cbsetIsTableLoading,
-    setItems as cbsetItems,
-    setTotalItems as cbsetTotalItems,
-} from 'src/redux/slices/CartonBoxBarcodeSlice'
 import {
     setIsTableLoading as pgSetIsTableLoading,
     setItems as pgSetItems,
@@ -132,51 +126,6 @@ const BarcodeListingWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pgIsLoading, pgIsFetching, pgData])
-
-    // carton box api
-    const CartonBoxBarcodeState: any = useSelector(
-        (state: RootState) => state.cartonBoxBarcode
-    )
-
-    const {
-        page: cbPage,
-        rowsPerPage: cbrowsPerPage,
-        searchValue: cbsearchValue,
-        // items: cbitems,
-    } = CartonBoxBarcodeState
-
-    const {
-        data: cbdata,
-        isFetching: cbisFetching,
-        isLoading: cbisLoading,
-    } = useGetCartonBoxBarcodeQuery({
-        limit: cbrowsPerPage,
-        searchValue: cbsearchValue,
-        params: ['barcodeNumber', 'cartonboxLabel'],
-        page: cbPage,
-        filterBy: [
-            {
-                fieldName: '',
-                value: [],
-            },
-        ],
-        dateFilter: {},
-        orderBy: 'createdAt',
-        orderByValue: -1,
-        isPaginationRequired: true,
-    })
-
-    useEffect(() => {
-        if (!cbisFetching && !cbisLoading) {
-            dispatch(cbsetIsTableLoading(false))
-            dispatch(cbsetItems(cbdata?.data || []))
-            dispatch(cbsetTotalItems(cbdata?.totalItem || 4))
-        } else {
-            dispatch(cbsetIsTableLoading(true))
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cbisLoading, cbisFetching, cbdata])
 
     const [selectedBarcodes, setSelectedBarcodes] = React.useState<
         BarcodeListResponseType[]
