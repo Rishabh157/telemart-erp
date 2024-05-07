@@ -167,7 +167,6 @@ const SaleOrderListingWrapper = () => {
         // // call the file manager api
         uploadFile(formData).then((res: any) => {
             if ('data' in res) {
-                console.log('HERE res', res)
                 let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
 
                 setTimeout(() => {
@@ -187,7 +186,6 @@ const SaleOrderListingWrapper = () => {
                         },
                         id: _id,
                     }).then((res: any) => {
-                        console.log('resresresresresres', res, value)
                         if ('data' in res) {
                             if (res?.data?.status) {
                                 showToast(
@@ -264,15 +262,6 @@ const SaleOrderListingWrapper = () => {
         })
     }
 
-    // const handleAccComplete = async (
-    //     _id: string,
-    //     value: boolean,
-    //     message: string
-    // ) => {
-
-    // }
-    // console.log('invoiceUrl: ', invoiceUrl)
-
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -333,7 +322,10 @@ const SaleOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
-                <span className='min-w-[100px] truncate'> {row?.documents?.[0]?.invoiceNumber} </span>
+                <span className="min-w-[100px] truncate">
+                    {' '}
+                    {row?.documents?.[0]?.invoiceNumber}{' '}
+                </span>
             ),
         },
         {

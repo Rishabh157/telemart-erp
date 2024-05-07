@@ -195,6 +195,25 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // Get Barocode by outerBox barcode number
+        getBarcodeByOuterBoxNumber: builder.query({
+            providesTags: ['Barcode'],
+            query: (barcodeNumber) => ({
+                url: `/bar-code/outer-box-barcode/${barcodeNumber}`,
+                method: 'GET',
+            }),
+        }),
+
+        // Customer Inward Barcode
+        addCustomerInwardBarcodes: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({ id, condition, warehouseId, body }) => ({
+                url: `/bar-code/courier-return-product/${id}/condition/${condition}/warehouse/${warehouseId}`,
+                method: 'PUT',
+                body,
+            }),
+        }),
     }),
 })
 export const {
@@ -213,4 +232,6 @@ export const {
     useGetInventoriesByBarcodeQuery,
     useDispatchDealerBarcodeMutation,
     useGetDealersInventoryQuery,
+    useGetBarcodeByOuterBoxNumberQuery,
+    useAddCustomerInwardBarcodesMutation
 } = barcodeApi

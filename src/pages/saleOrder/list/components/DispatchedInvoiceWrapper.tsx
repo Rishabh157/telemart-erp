@@ -116,7 +116,6 @@ const DispatchedInvoiceWrapper = () => {
             items?.soNumber ? `${items?.soNumber}.pdf` : 'generated.pdf',
             { type: 'application/pdf' }
         )
-        console.log('file => : ', file)
 
         let formData: any = new FormData()
         formData.append(
@@ -130,8 +129,7 @@ const DispatchedInvoiceWrapper = () => {
         uploadFile(formData).then((res: any) => {
             if ('data' in res) {
                 let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
-                console.log('%c fileUrl: ', 'color:red;', fileUrl)
-                // setFieldValue(name, fileUrl)
+                return fileUrl
             }
         })
     }

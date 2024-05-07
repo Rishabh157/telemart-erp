@@ -1,5 +1,5 @@
-
 // |-- External Dependencies --|
+import React, { useState } from 'react'
 import { IconType } from 'react-icons'
 import { useSelector } from 'react-redux'
 
@@ -33,6 +33,11 @@ const OutwardCustomerTabsListingWrapper = () => {
     const params = useParams()
     const warehouseId = params?.id
 
+    const [orderSearchValue, setOrderSearchValue] = useState<string>()
+    const [barcodeSearchValue, setBarcodeSearchValue] = useState<string>()
+    // orderSearchValue
+    // barcodeSearchValue
+
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
     const outwardCustomerState: any = useSelector(
@@ -55,6 +60,8 @@ const OutwardCustomerTabsListingWrapper = () => {
             ],
             dateFilter: dateFilter,
             orderBy: 'createdAt',
+            orderNumber: (orderSearchValue as any) || '',
+            barcodeNumber: barcodeSearchValue || '',
             orderByValue: -1,
             isPaginationRequired: true,
         }),
@@ -479,7 +486,20 @@ const OutwardCustomerTabsListingWrapper = () => {
         },
     ]
 
-    return <OutwardRequestListing columns={columns} rows={items} />
+    return (
+        <OutwardRequestListing
+            columns={columns}
+            rows={items}
+            orderSearchValue={orderSearchValue as any}
+            barcodeSearchValue={barcodeSearchValue}
+            onChangeOrderSearchValue={(newValue) =>
+                setOrderSearchValue(newValue)
+            }
+            onChangeBarcodeSearchValue={(newValue) =>
+                setBarcodeSearchValue(newValue)
+            }
+        />
+    )
 }
 
 export default OutwardCustomerTabsListingWrapper
