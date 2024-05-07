@@ -108,12 +108,14 @@ const AddPurchaseOrder = ({
                                 labelClass="pt-1 text-slate-700 text-sm font-medium"
                                 name="poCode"
                                 value={values.poCode}
-                                label="PO Code"
-                                placeholder="PO Code"
+                                label="PO"
+                                placeholder="PO"
+                                textTransform="uppercase"
                                 onChange={(e) =>
                                     setFieldValue('poCode', e.target.value)
                                 }
                             />
+
                             {/* Vendor */}
                             <ATMSelectSearchable
                                 name="vendorId"
@@ -122,6 +124,7 @@ const AddPurchaseOrder = ({
                                 onChange={(e) => setFieldValue('vendorId', e)}
                                 options={dropdownOptions.vendorOptions}
                                 label="Vendor"
+                                componentClass="mt-1"
                             />
 
                             {/* Warehouse */}
@@ -133,6 +136,7 @@ const AddPurchaseOrder = ({
                                 }
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
+                                componentClass="mt-1"
                             />
                         </div>
                     </div>
