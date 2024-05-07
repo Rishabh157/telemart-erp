@@ -45,6 +45,7 @@ import {
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 export type Tabs = {
@@ -518,7 +519,7 @@ const InwardDealerTabsListingWrapper = () => {
         barcodeDispatch({
             barcodedata: [...filterValue],
             wId: [...(wId as string[])],
-            from: 'DTW',
+            from: barcodeStatusEnum.dtw,
         })
             .then((res: any) => {
                 if (res?.data?.status) {

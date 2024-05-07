@@ -37,6 +37,7 @@ import {
     useGetPaginationWarehouseTransferByGroupQuery,
     useInwardWarehouseToWarehouseBarcodeMutation,
 } from 'src/services/WarehouseTransferService'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 export type Tabs = {
@@ -251,7 +252,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         getBarCode({
             id: barcodeNumber,
             groupId: productGroupId,
-            status: 'WTW',
+            status: barcodeStatusEnum.wtw,
             companyId: userData?.companyId as string,
         })
             .then((res: any) => {

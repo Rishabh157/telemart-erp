@@ -27,22 +27,12 @@ import {
     BarcodeFlowDataListResponsee,
 } from 'src/models'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 type Props = {
     items: BarcodeFlowListResponse[] | any
     onBarcodeClick: (barcode: any) => void
-}
-
-enum BarcodeStatusEnum {
-    atWarehouse = 'AT_WAREHOUSE',
-    atDealerWarehouse = 'AT_DEALER_WAREHOUSE',
-    inTransit = 'IN_TRANSIT',
-    delivered = 'DELIVERED',
-    rtv = 'RTV',
-    wtc = 'WTC',
-    wts = 'WTS',
-    wtw = 'WTW',
 }
 
 const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
@@ -66,27 +56,27 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
         companyLabel: string
     ) => {
         switch (status) {
-            case BarcodeStatusEnum.atWarehouse:
+            case barcodeStatusEnum.atWarehouse:
                 return `Barcode is Inwarding in ${capitalizeFirstLetter(
                     wareHouseLabel
                 )} warehouse of ${capitalizeFirstLetter(companyLabel)} company`
-            case BarcodeStatusEnum.atDealerWarehouse:
+            case barcodeStatusEnum.atDealerWarehouse:
                 return `Barcode is in dealer ${capitalizeFirstLetter(
                     wareHouseLabel
                 )} warehouse`
-            case BarcodeStatusEnum.inTransit:
+            case barcodeStatusEnum.inTransit:
                 return 'Barcode is in In Transit'
-            case BarcodeStatusEnum.delivered:
+            case barcodeStatusEnum.delivered:
                 return 'Barcode is delivered'
-            case BarcodeStatusEnum.rtv:
+            case barcodeStatusEnum.rtv:
                 return 'Barcode is in return to vendor'
-            case BarcodeStatusEnum.wtc:
+            case barcodeStatusEnum.wtc:
                 return `Barcode is transfer to ${capitalizeFirstLetter(
                     companyLabel
                 )} company`
-            case BarcodeStatusEnum.wts:
+            case barcodeStatusEnum.wts:
                 return `Barcode is in warehouse and go to Sample`
-            case BarcodeStatusEnum.wtw:
+            case barcodeStatusEnum.wtw:
                 return 'Barcode is WTW outward'
             default:
                 return `Barcode is created in ${capitalizeFirstLetter(

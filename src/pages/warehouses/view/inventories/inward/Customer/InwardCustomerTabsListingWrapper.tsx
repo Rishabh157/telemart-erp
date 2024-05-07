@@ -31,6 +31,7 @@ import { useGetOrderQuery } from 'src/services/OrderService'
 import moment from 'moment'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { getCustomerInwardBarcodeOptionTypes } from 'src/utils/constants/customeTypes'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 export type Tabs = {
@@ -116,7 +117,7 @@ const InwardCustomerTabsListingWrapper = () => {
         getBarCode({
             id: barcodeNumber,
             groupId: productGroupId,
-            status: 'RTV',
+            status: barcodeStatusEnum.rtv,
             companyId: userData?.companyId as string,
         })
             .then((res: any) => {

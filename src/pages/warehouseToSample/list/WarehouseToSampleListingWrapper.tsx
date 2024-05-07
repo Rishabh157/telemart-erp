@@ -244,8 +244,8 @@ const WarehouseToSampleListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -286,8 +286,8 @@ const WarehouseToSampleListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
