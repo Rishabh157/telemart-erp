@@ -93,6 +93,7 @@ export type OrderListResponse = {
     pincodeLabel: string
     areaLabel: string
     wareHouseLabel: string
+    productGroupLabel: string
     dealerLabel: string
     dealerCode: string
     dealerStatus: string

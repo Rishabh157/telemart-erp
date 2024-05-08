@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React ,{ useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
@@ -19,7 +19,6 @@ import {
 } from 'src/services/SalesOrderService'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
-// import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import SaleOrderListing from './SaleOrderListing'
 
 // |-- Redux --|
@@ -52,7 +51,7 @@ const SaleOrderListingWrapper = () => {
         React.useState<SalesOrderFormInitialValuesFilterWithLabel>({
             dealerId: { fieldName: '', label: '', value: '' },
             status: { fieldName: '', label: '', value: '' },
-            invoiceNo: {
+            invoiceNumber: {
                 fieldName: '',
                 label: '',
                 value: '',
@@ -93,8 +92,8 @@ const SaleOrderListingWrapper = () => {
                     value: filter.dealerId.value,
                 },
                 {
-                    fieldName: 'invoiceNo',
-                    value: filter.invoiceNo.value,
+                    fieldName: 'invoiceNumber',
+                    value: filter.invoiceNumber.value,
                 },
                 {
                     fieldName: 'status',
@@ -104,7 +103,6 @@ const SaleOrderListingWrapper = () => {
                     fieldName: 'IRNStatus',
                     value: filter.IRNStatus.value,
                 },
-                
             ],
             dateFilter: {
                 startDate: filter.startDate.value as string,
@@ -147,6 +145,17 @@ const SaleOrderListingWrapper = () => {
             { type: 'application/pdf' }
         )
 
+        // This is for commented code preview of embeded
+        // const [pdfFile, setPdfFile] = useState<any>() // state
+        // if (file) {
+        //     const reader = new FileReader()
+        //     reader.onloadend = () => {
+        //         setPdfFile(reader.result)
+        //         // setPdfPreview();
+        //     }
+        //     reader.readAsDataURL(file)
+        // }
+
         let formData: any = new FormData()
         formData.append(
             'type',
@@ -155,10 +164,9 @@ const SaleOrderListingWrapper = () => {
         formData.append('file', file || '')
         formData.append('bucketName', 'SAPTEL_CRM')
 
-        // call the file manager api
+        // // call the file manager api
         uploadFile(formData).then((res: any) => {
             if ('data' in res) {
-                console.log('HERE res', res)
                 let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
 
                 setTimeout(() => {
@@ -178,7 +186,6 @@ const SaleOrderListingWrapper = () => {
                         },
                         id: _id,
                     }).then((res: any) => {
-                        console.log('resresresresresres', res, value)
                         if ('data' in res) {
                             if (res?.data?.status) {
                                 showToast(
@@ -255,15 +262,6 @@ const SaleOrderListingWrapper = () => {
         })
     }
 
-    // const handleAccComplete = async (
-    //     _id: string,
-    //     value: boolean,
-    //     message: string
-    // ) => {
-
-    // }
-    // console.log('invoiceUrl: ', invoiceUrl)
-
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -318,13 +316,16 @@ const SaleOrderListingWrapper = () => {
             ),
         },
         {
-            field: 'invoiceNo',
+            field: 'invoiceNumber',
             headerName: 'Invoice No',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
-                <span> {row?.invoiceNo} </span>
+                <span className="min-w-[100px] truncate">
+                    {' '}
+                    {row?.documents?.[0]?.invoiceNumber}{' '}
+                </span>
             ),
         },
         {
@@ -669,7 +670,6 @@ const SaleOrderListingWrapper = () => {
                 ) : null
             },
         },
-
         {
             field: '',
             headerName: 'Generate/Cancel IRN',
@@ -730,21 +730,35 @@ const SaleOrderListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <SaleOrderListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-                setFilter={setFilter}
-                filter={filter}
-            />
-
-            <div className="opacity-0">
+            <div className="z-50 relative">
+                <SaleOrderListing
+                    columns={columns}
+                    rows={items}
+                    setShowDropdown={setShowDropdown}
+                    setFilter={setFilter}
+                    filter={filter}
+                />
+            </div>
+            <div className="opacity-0 -z-10 absolute top-0">
                 <DispatchedInvoiceTemplate
                     ref={saleOrderInvoiceRef}
                     invoice={invoiceData || null}
                 />
             </div>
+
+            {/* Do Not Delete This */}
+            {/* {pdfFile && (
+                <div className="absolute z-[100000] w-full h-screen">
+                    <embed
+                        src={pdfFile}
+                        type="application/pdf"
+                        width="100%"
+                        height="600px"
+                    />
+                </div>
+            )} */}
         </SideNavLayout>
     )
 }
+
 export default SaleOrderListingWrapper

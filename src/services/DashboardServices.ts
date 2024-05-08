@@ -56,7 +56,13 @@ export const customerComplainApi = apiSlice.injectEndpoints({
 
         getWHInwardInventoryByWarehouseId: builder.query({
             providesTags: ['dashboard'],
-            query: ({ warehousId, dateFilter }: { warehousId: string, dateFilter: PaginationType }) => ({
+            query: ({
+                warehousId,
+                dateFilter,
+            }: {
+                warehousId: string
+                dateFilter: PaginationType
+            }) => ({
                 url: `/dashboard/warehouse-inward-stock/${warehousId}`,
                 method: 'POST',
                 body: { dateFilter: dateFilter },
@@ -64,13 +70,37 @@ export const customerComplainApi = apiSlice.injectEndpoints({
         }),
         getWHOutwardInventoryByWarehouseId: builder.query({
             providesTags: ['dashboard'],
-            query: ({ warehousId, dateFilter }: { warehousId: string, dateFilter: PaginationType }) => ({
+            query: ({
+                warehousId,
+                dateFilter,
+            }: {
+                warehousId: string
+                dateFilter: PaginationType
+            }) => ({
                 url: `/dashboard/warehouse-outward-stock/${warehousId}`,
                 method: 'POST',
                 body: { dateFilter: dateFilter },
             }),
         }),
+
+        getSalesDepartmentData: builder.query({
+            providesTags: ['dashboard'],
+            query: (body: any) => ({
+                url: 'dashboard/sales-dashboard',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
-export const { useGetAgentDataQuery, useGetOrderSummayQuery, useGetZMDealerStatusQuery, useGetZMDealerStockStatusQuery, useGetWHInventoryByWarehouseIdQuery, useGetWHInwardInventoryByWarehouseIdQuery, useGetWHOutwardInventoryByWarehouseIdQuery } = customerComplainApi
+export const {
+    useGetAgentDataQuery,
+    useGetOrderSummayQuery,
+    useGetZMDealerStatusQuery,
+    useGetZMDealerStockStatusQuery,
+    useGetWHInventoryByWarehouseIdQuery,
+    useGetWHInwardInventoryByWarehouseIdQuery,
+    useGetWHOutwardInventoryByWarehouseIdQuery,
+    useGetSalesDepartmentDataQuery,
+} = customerComplainApi

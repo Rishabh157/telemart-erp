@@ -1,13 +1,7 @@
-/// ==============================================
-// Filename:CompanyBranch.model.ts
-// Type: Model Component
-// Last Updated: SEPTEMBER 11, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type CompanyBranchListResponse = {
     branchName: string
+    branchCode: string
     companyId: string
     companyLabel: string
     createdAt: string
@@ -20,12 +14,14 @@ export type CompanyBranchListResponse = {
 
 export type AddCompanyBranch = {
     branchName: string
+    branchCode: string
     companyId: string
 }
 
 export type UpdateCompanyBranch = {
     body: {
         branchName: string
+        branchCode: string
         companyId: string
     }
     id: string

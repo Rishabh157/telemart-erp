@@ -79,7 +79,7 @@ const AssignedOrderListFilterFormDialogWrapper = ({
         { setSubmitting }: FormikHelpers<FormInitialValuesFilterWithLabel>
     ) => {
         setSubmitting(false)
-        console.log('values', values)
+
         setFilter((prev) => ({
             ...prev,
             schemeId: values.schemeId,

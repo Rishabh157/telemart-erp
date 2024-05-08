@@ -11,8 +11,6 @@ type Props = {
 
 const DispatchedInvoiceTemplate = React.forwardRef(
     ({ invoice }: Props, ref: any) => {
-        // console.log('%c invoice from listing', 'color:orange;', invoice)
-
         let TOTAL_QUANTITY: number = 0
         let TOTAL_RATE_PER_UNIT: number = 0
         let TOTAL_AMOUNT: number = 0
@@ -20,10 +18,10 @@ const DispatchedInvoiceTemplate = React.forwardRef(
         return (
             <div
                 ref={ref}
-                className="bg-white border-[1px] border-black py-2 m-4"
+                className="bg-white border-[1px] border-black m-4 p-2"
             >
                 {/* Top Header With Logo */}
-                <div className="grid grid-cols-12 border-b-[1px] border-black">
+                <div className="grid grid-cols-12 border-b-[1px] pb-2 border-black">
                     <div className="col-span-5 px-2 py-2">
                         <img
                             src={logoImage}
@@ -33,7 +31,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                     </div>
                     <div className="col-span-7">
                         <h1 className="text-[15px]">
-                            Subject to Indore Jurisdiction
+                            Subject to Indore Jurisdiction HELLO
                         </h1>
                         <div>
                             <h1 className="font-bold">Telemart</h1>
@@ -137,9 +135,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                         </div>
 
                         <div>
-                            <span className="font-bold text-[13px]">
-                                GSTIN
-                            </span>
+                            <span className="font-bold text-[13px]">GSTIN</span>
                             <span className="px-2">:</span>
                             <span className="text-[13px]">-</span>
                         </div>
@@ -202,40 +198,40 @@ const DispatchedInvoiceTemplate = React.forwardRef(
                             {/* table head */}
                             <thead>
                                 <tr>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         SR. NO.
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         ITEM CODE NO.
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         ITEM DESCRIPTION
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         HSN CODE
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         QTY
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         RATE PER UNITS(RS.)
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         TAXABLE VALUE
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         S-GST
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         C-GST
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         I-GST
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         CESS
                                     </th>
-                                    <th className="border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                    <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                         AMOUNT(RS.)
                                     </th>
                                 </tr>

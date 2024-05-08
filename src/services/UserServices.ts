@@ -166,9 +166,19 @@ export const userApi = apiSlice.injectEndpoints({
         // ****  get senior api
         getSeniorUsers: builder.query({
             providesTags: ['user', 'newUser'],
-            query: ({ userrole }: { userrole: string }) => ({
+            query: ({
+                userrole,
+                body,
+            }: {
+                userrole: string
+                body: {
+                    department: string
+                    callCenterId: string
+                }
+            }) => ({
                 url: `/user/get-all-users/user-role/${userrole}`,
-                method: 'GET',
+                method: 'POST',
+                body,
             }),
         }),
 

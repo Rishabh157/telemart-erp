@@ -1,6 +1,7 @@
 import { statusProps } from 'src/pages/orders'
 import { GetHierarchByDeptProps } from '../GetHierarchyByDept'
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { barcodeStatusEnum } from './enums'
 
 // Get Order Status Options
 export const getOrderStatusOptions = () => {
@@ -1279,6 +1280,28 @@ export const getProductCategoryOptions = () => {
         {
             label: 'Other',
             value: ProductCategoryOptions.other,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}
+
+// Tape Type Options
+
+export const getCustomerInwardBarcodeOptionTypes = () => {
+    let options = [
+        {
+            label: 'OK',
+            value: barcodeStatusEnum.atWarehouse,
+        },
+        {
+            label: 'Damage',
+            value: barcodeStatusEnum.damage,
         },
     ]
 

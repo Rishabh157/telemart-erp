@@ -22,9 +22,20 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    orderSearchValue?: string
+    onChangeOrderSearchValue?: (newValue: string) => void
+    barcodeSearchValue?: string
+    onChangeBarcodeSearchValue?: (newValue: string) => void
 }
 
-const OutwardCustomerTabs = ({ columns, rows }: Props) => {
+const OutwardCustomerTabs = ({
+    columns,
+    rows,
+    orderSearchValue,
+    barcodeSearchValue,
+    onChangeOrderSearchValue = () => {},
+    onChangeBarcodeSearchValue = () => {},
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
 
     const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
@@ -52,6 +63,19 @@ const OutwardCustomerTabs = ({ columns, rows }: Props) => {
                     }
                     searchValue={searchValue}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    isAnotherSearch
+                    anotherSearchValue={orderSearchValue}
+                    anotherSearchPlaceholder="Order No.."
+                    onAnotherSearch={(newValue) => {
+                        onChangeOrderSearchValue(newValue)
+                    }}
+                    isAnotherSearchTwo
+                    anotherSearchTwoValue={barcodeSearchValue}
+                    anotherSearchTwoPlaceholder="Barcode No.."
+                    onAnotherSearchTwo={(newValue) => {
+                        onChangeBarcodeSearchValue(newValue)
+                        // dispatch(setComplaintNumberSearch(newValue))
+                    }}
                     isFilter
                     onFilterClick={() => setIsOpenFilterFormDialog(true)}
                 />

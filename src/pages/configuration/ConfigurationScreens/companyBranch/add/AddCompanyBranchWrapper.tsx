@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddCompanyBranchWrapper.tsx
-// Type: Add Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -30,6 +23,7 @@ type Props = {}
 
 export type FormInitialValues = {
     branchName: string
+    branchCode: string
 }
 
 const AddCompanyBranchWrapper = (props: Props) => {
@@ -41,11 +35,13 @@ const AddCompanyBranchWrapper = (props: Props) => {
     // Form Initial Values
     const initialValues: FormInitialValues = {
         branchName: '',
+        branchCode: '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
         branchName: string().required('Branch name is required'),
+        branchCode: string().required('Branch code is required'),
     })
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -54,6 +50,7 @@ const AddCompanyBranchWrapper = (props: Props) => {
 
         addCompanyBranch({
             branchName: values.branchName,
+            branchCode: values.branchCode,
             companyId: userData?.companyId || '',
         }).then((res) => {
             if ('data' in res) {

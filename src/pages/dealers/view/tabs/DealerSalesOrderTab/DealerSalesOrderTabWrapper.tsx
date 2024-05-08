@@ -33,7 +33,7 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
         React.useState<SalesOrderFormInitialValuesFilterWithLabel>({
             dealerId: { fieldName: '', label: '', value: '' },
             status: { fieldName: '', label: '', value: '' },
-            invoiceNo: {
+            invoiceNumber: {
                 fieldName: '',
                 label: '',
                 value: '',
@@ -63,8 +63,8 @@ const DealerSaleOrderTabWrapper = (props: Props) => {
                     value: dealerId,
                 },
                 {
-                    fieldName: 'invoiceNo',
-                    value: filter.invoiceNo.value,
+                    fieldName: 'invoiceNumber',
+                    value: filter.invoiceNumber.value,
                 },
                 {
                     fieldName: 'status',

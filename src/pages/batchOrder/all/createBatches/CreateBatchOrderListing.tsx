@@ -72,7 +72,6 @@ const CreateBatchOrderListing = ({
                 callCenterManagerId: { fieldName: '', value: '', label: '' },
             }))
         }
-        // console.log("Object.values(filter).some(value => value !== '');",Object.values(filter).some(value => value !== ''))
     
         const filterShow = (filter: BatchFormInitialValuesFilterWithLabel) => {
             return (

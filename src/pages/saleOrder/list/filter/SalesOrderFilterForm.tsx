@@ -65,10 +65,10 @@ const SalesOrderFilterForm = ({
 
                 <ATMTextField
                     label="Invoice No"
-                    name="invoiceNo"
-                    value={values.invoiceNo.value}
+                    name="invoiceNumber"
+                    value={values.invoiceNumber.value}
                     onChange={(e) => {
-                        setFieldValue('invoiceNo', {
+                        setFieldValue('invoiceNumber', {
                             fieldName: 'Invoice NO',
                             label: e.target.value,
                             value: e.target.value,

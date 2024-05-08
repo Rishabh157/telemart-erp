@@ -5,7 +5,6 @@ import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import SalesOrderFilterForm from './SalesOrderFilterForm'
 import moment from 'moment'
 
-
 type LabelValuePair = {
     fieldName: string
     label: string
@@ -15,7 +14,7 @@ type LabelValuePair = {
 // Define the type for FormInitialValuesFilter
 export type SalesOrderFormInitialValuesFilterWithLabel = {
     dealerId: LabelValuePair
-    invoiceNo: LabelValuePair
+    invoiceNumber: LabelValuePair
     startDate: LabelValuePair
     endDate: LabelValuePair
     status: LabelValuePair
@@ -38,7 +37,7 @@ const SalesOrderFilterWrapper = ({
 }: Props) => {
     const initialValues: SalesOrderFormInitialValuesFilterWithLabel = {
         dealerId: filter.dealerId,
-        invoiceNo: filter.invoiceNo,
+        invoiceNumber: filter.invoiceNumber,
         startDate: filter.startDate,
         endDate: filter.endDate,
         status: filter.status,
@@ -59,11 +58,11 @@ const SalesOrderFilterWrapper = ({
         }: FormikHelpers<SalesOrderFormInitialValuesFilterWithLabel>
     ) => {
         setSubmitting(false)
-        console.log('values', values)
+
         setFilter((prev) => ({
             ...prev,
             dealerId: values.dealerId,
-            invoiceNo: values.invoiceNo,
+            invoiceNumber: values.invoiceNumber,
             status: values.status,
             IRNStatus: values.IRNStatus,
             startDate: values?.startDate.value
@@ -96,7 +95,7 @@ const SalesOrderFilterWrapper = ({
         setFilter((prev) => ({
             ...prev,
             dealerId: { fieldName: '', value: '', label: '' },
-            invoiceNo: { fieldName: '', value: '', label: '' },
+            invoiceNumber: { fieldName: '', value: '', label: '' },
             status: { fieldName: '', value: '', label: '' },
             IRNStatus: { fieldName: '', value: '', label: '' },
             startDate: { fieldName: '', value: '', label: '' },

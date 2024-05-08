@@ -4,108 +4,71 @@ import { useState } from 'react'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-import { useGetWHOutwardInventoryByWarehouseIdQuery } from 'src/services/DashboardServices'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
+import { useGetSalesDepartmentDataQuery } from 'src/services/DashboardServices'
 import React from 'react'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import BarGraph from 'src/components/UI/atoms/ATMBarGraph/ATMBarGraph'
 
-type OutwardStockProps = {
-    label: string
-    y: number
-}
-const WHOutwardStock = () => {
+const SaleDepartmentDashboard = () => {
     const [dateFilter, setDateFilter] = useState<any>({
         start_date: `${moment().format('YYYY-MM-DD')}`,
         end_date: `${moment().format('YYYY-MM-DD')}`,
     })
-    const [warehouseId, setWarehouseId] = useState<string>()
-    const [outwardStock, setOutwardStock] = useState<OutwardStockProps[]>([])
 
-    const {
-        items: data,
-        isFetching,
-        isLoading,
-    } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetWHOutwardInventoryByWarehouseIdQuery(
-            {
-                warehousId: warehouseId,
-                dateFilter: {
-                    startDate: dateFilter.start_date
-                        ? moment(dateFilter?.start_date).format('YYYY-MM-DD')
-                        : '',
-                    endDate: dateFilter.end_date
-                        ? moment(dateFilter?.end_date).format('YYYY-MM-DD')
-                        : dateFilter.end_date
-                        ? moment().format('YYYY-MM-DD')
-                        : '',
-                },
+    const { items, isFetching } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetSalesDepartmentDataQuery({
+            dateFilter: {
+                startDate: dateFilter.start_date
+                    ? moment(dateFilter?.start_date).format('YYYY-MM-DD')
+                    : '',
+                endDate: dateFilter.end_date
+                    ? moment(dateFilter?.end_date).format('YYYY-MM-DD')
+                    : dateFilter.end_date
+                    ? moment().format('YYYY-MM-DD')
+                    : '',
             },
-            { skip: !warehouseId }
-        ),
+        }),
     })
 
-    const { options } = useCustomOptions({
-        useEndPointHook: useGetWareHousesQuery(''),
-        keyName: 'wareHouseName',
-        value: '_id',
-    })
+    const getData = (items: any) => {
+        return [
+            { y: items?.allOrders, label: 'All' },
+            { y: items?.freshOrders, label: 'Fresh' },
+            { y: items?.holdOrders, label: 'Hold' },
+            { y: items?.inquiryOrders, label: 'Inquiry' },
+            { y: items?.prepaidOrders, label: 'Prepaid' },
+            { y: items?.deliveredOrders, label: 'Delivered' },
+            { y: items?.pscOrders, label: 'PSC' },
+            { y: items?.unaOrders, label: 'UNA' },
+            { y: items?.urgentOrders, label: 'Urgent' },
+            { y: items?.rtoOrders, label: 'RTO' },
+            { y: items?.reattemptOrders, label: 'Reattempt' },
+            { y: items?.intransitOrders, label: 'Intransit' },
+            { y: items?.ndrOrders, label: 'NDR' },
+            { y: items?.pndOrders, label: 'PND' },
+            {
+                y: items?.nonActionOrders,
+                label: 'Non-Action',
+            },
+            {
+                y: items?.doorCancelledOrders,
+                label: 'Door Cancelled',
+            },
+            {
+                y: items?.deliveryOutOfNetworkOrders,
+                label: 'Delivery Out Of Network',
+            },
+        ]
+    }
 
-    React.useEffect(() => {
-        if (options?.length) {
-            setWarehouseId(options[0]?.value as string)
-        }
-    }, [options])
-
-    React.useEffect(() => {
-        if (!isLoading && !isFetching) {
-            const dataPoints: OutwardStockProps[] = [
-                { y: data?.company, label: 'Company' },
-                { y: data?.customer, label: 'Customer' },
-                {
-                    y: data?.dealer,
-                    label: 'Dealer',
-                },
-                {
-                    y: data?.eCom,
-                    label: 'E-commerce',
-                },
-                {
-                    y: data?.rtv,
-                    label: 'RTV',
-                },
-                {
-                    y: data?.sample,
-                    label: 'Sample',
-                },
-                { y: data?.warehouse, label: 'Warehouse' },
-            ]
-
-            setOutwardStock(dataPoints)
-        }
-    }, [isLoading, isFetching, data])
     return (
-        <div className=" w-full border-[1px] border-slate-400 rounded h-full p-3">
+        <div className="border-[1px] border-slate-400 rounded p-3 h-full">
             <div className="text-start flex justify-between">
                 {/* Heading */}
-                <ATMPageHeading> Warehouse Outward </ATMPageHeading>
+                <ATMPageHeading> Sales Department </ATMPageHeading>
                 {/* Date Filter */}
             </div>
             <div className="flex flex-wrap gap-2 justify-end items-center">
-                <div className="min-w-[150px] max-w-[150px]">
-                    <ATMSelectSearchable
-                        size="xs"
-                        fontSizeOptionsClass="12px"
-                        componentClass="z-[10001]"
-                        name=""
-                        value={warehouseId}
-                        onChange={(e) => setWarehouseId(e)}
-                        options={options || []}
-                        // label="Wareouse"
-                    />
-                </div>
                 <div className="min-w-[150px] max-w-[150px]">
                     <ATMDatePicker
                         name=""
@@ -118,7 +81,7 @@ const WHOutwardStock = () => {
                             const threeMonthsLater = moment()
                                 .add(3, 'months')
                                 .endOf('day')
-
+    
                             // Check if the selected start date is less than 3 months from the current date
                             if (moment(value).isBefore(threeMonthsLater)) {
                                 // If yes, set the end date to 3 months from the selected start date
@@ -187,10 +150,10 @@ const WHOutwardStock = () => {
                         <CircularProgress />
                     </div>
                 )}
-                <div className="p-2 h-full">
+                <div className="p-2">
                     <BarGraph
-                        dataPoints={outwardStock}
-                        label={'Outward stock'}
+                        dataPoints={getData(items)}
+                        label={'Orders'}
                         verticalLabel={'Quantity'}
                     />
                 </div>
@@ -199,4 +162,4 @@ const WHOutwardStock = () => {
     )
 }
 
-export default WHOutwardStock
+export default SaleDepartmentDashboard

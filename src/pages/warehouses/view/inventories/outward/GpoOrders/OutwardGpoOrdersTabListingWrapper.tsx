@@ -30,7 +30,8 @@ enum FirstCallApprovalStatus {
 
 const OutwardGpoOrdersTabListingWrapper = () => {
     const { userData }: any = useSelector((state: RootState) => state?.auth)
-    const { id } = useParams()
+    const params = useParams()
+    const warehouseId = params?.id
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
@@ -45,7 +46,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             filterBy: [
                 { fieldName: 'isGPO', value: true },
                 { fieldName: 'companyId', value: userData?.companyId },
-                { fieldName: 'assignWarehouseId', value: id },
+                { fieldName: 'assignWarehouseId', value: warehouseId },
             ],
             dateFilter: dateFilter,
             orderBy: 'createdAt',

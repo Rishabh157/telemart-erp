@@ -41,6 +41,7 @@ import {
     useGetPaginationReturnToVendorByGroupQuery,
 } from 'src/services/ReturnToVendorService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 export type Tabs = {
@@ -243,7 +244,7 @@ const OutwardRTVTabsListingWrapper = () => {
         getBarCode({
             id: barcodeNumber,
             groupId: productGroupId,
-            status: 'AT_WAREHOUSE',
+            status: barcodeStatusEnum.atWarehouse,
             companyId: userData?.companyId as string,
         })
             .then((res: any) => {

@@ -58,78 +58,98 @@ const CustomerDashboard = () => {
 
     return (
         <div className="grid grid-cols-2 gap-1">
-            
-                <div className="border-[1px] border-slate-400 rounded p-2">
-                    <div className="text-start flex justify-between">
-                        {/* Heading */}
-                        {/* <ATMPageHeading> Agent </ATMPageHeading> */}
-                        {/* Date Filter */}
-                        <div className="flex gap-2  items-center">
-                            <div className="min-w-[150px] max-w-[150px]">
-                                <ATMDatePicker
-                                    name=""
-                                    value={dateFilter.start_date}
-                                    onChange={(value) => {
-                                        dispatch(
-                                            setDateFilter({
-                                                ...dateFilter,
-                                                start_date: value,
-                                            })
-                                        )
-                                    }}
-                                    label=""
-                                    dateTimeFormat="DD/MM/YYYY"
-                                />
-                            </div>
+            <div className="border-[1px] border-slate-400 rounded p-2">
+                <div className="text-start flex justify-between">
+                    {/* Heading */}
+                    {/* <ATMPageHeading> Agent </ATMPageHeading> */}
+                    {/* Date Filter */}
+                    <div className="flex gap-2  items-center">
+                        <div className="min-w-[150px] max-w-[150px]">
+                            <ATMDatePicker
+                                name=""
+                                value={dateFilter.start_date}
+                                onChange={(value) => {
+                                    const endDate = moment(value)
+                                        .add(3, 'months')
+                                        .endOf('day')
+                                    const threeMonthsLater = moment()
+                                        .add(3, 'months')
+                                        .endOf('day')
 
-                            <div className="min-w-[150px] max-w-[150px]">
-                                <ATMDatePicker
-                                    name=""
-                                    value={dateFilter.end_date}
-                                    onChange={(value) => {
-                                        dispatch(
-                                            setDateFilter({
-                                                ...dateFilter,
-                                                end_date: value,
-                                            })
-                                        )
-                                    }}
-                                    label=""
-                                    dateTimeFormat="DD/MM/YYYY"
-                                    minDate={
-                                        dateFilter.start_date
-                                            ? new Date(dateFilter.start_date)
-                                            : undefined
-                                    }
-                                />
-                            </div>
-                            {dateFilter?.start_date || dateFilter?.end_date ? (
-                                <div>
-                                    <button
-                                        type="button"
-                                        className={`rounded bg-primary-main text-white text-sm py-[0.40rem] px-2`}
-                                        onClick={() => {
-                                            dispatch(
-                                                setDateFilter({
-                                                    start_date: null,
-                                                    end_date: null,
-                                                })
+                                    // Check if the selected start date is less than 3 months from the current date
+                                    if (
+                                        moment(value).isBefore(threeMonthsLater)
+                                    ) {
+                                        // If yes, set the end date to 3 months from the selected start date
+                                        setDateFilter({
+                                            ...dateFilter,
+                                            start_date: value,
+                                            end_date: endDate.isBefore(
+                                                threeMonthsLater
                                             )
-                                        }}
-                                    >
-                                        Clear
-                                    </button>
-                                </div>
-                            ) : null}
+                                                ? endDate
+                                                : threeMonthsLater,
+                                        })
+                                    } else {
+                                        // Otherwise, keep the end date unchanged
+                                        setDateFilter({
+                                            ...dateFilter,
+                                            start_date: value,
+                                        })
+                                    }
+                                }}
+                                label=""
+                                dateTimeFormat="DD/MM/YYYY"
+                            />
                         </div>
-                    </div>
 
-                    <BarGraph
-                        dataPoints={agentOrdersData}
-                        label={'Order Inquiry & Complaints'}
-                        verticalLabel={'Quantity'}
-                    />
+                        <div className="min-w-[150px] max-w-[150px]">
+                            <ATMDatePicker
+                                name=""
+                                value={dateFilter.end_date}
+                                onChange={(value) => {
+                                    dispatch(
+                                        setDateFilter({
+                                            ...dateFilter,
+                                            end_date: value,
+                                        })
+                                    )
+                                }}
+                                label=""
+                                dateTimeFormat="DD/MM/YYYY"
+                                minDate={dateFilter.start_date}
+                                maxDate={moment(dateFilter.start_date)
+                                    .add(3, 'months')
+                                    .endOf('day')}
+                            />
+                        </div>
+                        {dateFilter?.start_date || dateFilter?.end_date ? (
+                            <div>
+                                <button
+                                    type="button"
+                                    className={`rounded bg-primary-main text-white text-sm py-[0.40rem] px-2`}
+                                    onClick={() => {
+                                        dispatch(
+                                            setDateFilter({
+                                                start_date: null,
+                                                end_date: null,
+                                            })
+                                        )
+                                    }}
+                                >
+                                    Clear
+                                </button>
+                            </div>
+                        ) : null}
+                    </div>
                 </div>
+
+                <BarGraph
+                    dataPoints={agentOrdersData}
+                    label={'Order Inquiry & Complaints'}
+                    verticalLabel={'Quantity'}
+                />
+            </div>
         </div>
     )
 }
