@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:LocationListView.tsx
-// Type: Shared Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -13,6 +6,7 @@ import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { CiEdit } from 'react-icons/ci'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -27,6 +21,8 @@ type Props = {
     onListItemClick?: (item: any) => void
     disabled: boolean
     isAddButton: boolean
+    isEditButton?: boolean
+    onEditListItemClick?: (item: any) => void
 }
 
 const LocationListView = ({
@@ -38,6 +34,8 @@ const LocationListView = ({
     onListItemClick = (item: any) => {},
     disabled = false,
     isAddButton = true,
+    isEditButton = false,
+    onEditListItemClick = (item: any) => {},
 }: Props) => {
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state.country
@@ -89,7 +87,7 @@ const LocationListView = ({
                 />
             </div>
 
-            <div className="max-h-[calc(100%-100px)]  overflow-hidden hover:overflow-auto">
+            <div className="max-h-[calc(100%-100px)] overflow-hidden hover:overflow-auto">
                 {listData?.map((listItem, listItemIndex) => {
                     return (
                         <div
@@ -97,7 +95,7 @@ const LocationListView = ({
                             onClick={() => {
                                 onListItemClick(listItem)
                             }}
-                            className={`border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm ${
+                            className={`flex justify-between items-center border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm group ${
                                 listItem.value !== undefined &&
                                 (selectedLocationCountries === listItem.value ||
                                     selectedLocationState === listItem.value ||
@@ -112,6 +110,17 @@ const LocationListView = ({
                             }`}
                         >
                             {listItem.label}
+
+                            {isEditButton && (
+                                <span
+                                    onClick={() => {
+                                        onEditListItemClick(listItem)
+                                    }}
+                                    className="transition-all opacity-0 group-hover:opacity-100 hover:bg-gray-200 rounded flex-shrink-0 overflow-hidden cursor-pointer p-1"
+                                >
+                                    <CiEdit size={18} />
+                                </span>
+                            )}
                         </div>
                     )
                 })}

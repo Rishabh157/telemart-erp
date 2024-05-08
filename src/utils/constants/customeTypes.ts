@@ -926,27 +926,6 @@ export const orderStatusOptionsType = () => {
     })
 }
 
-// Courier Types
-enum CourierTypes {
-    shipyaari = 'SHIPYAARI',
-}
-
-export const courierOptionsType = () => {
-    let options = [
-        {
-            value: CourierTypes.shipyaari,
-            label: 'Shipyaari',
-        },
-    ]
-
-    return options?.map((item: any) => {
-        return {
-            value: item.value,
-            label: item.label,
-        }
-    })
-}
-
 // Dealer Reason Types Accroding to Status
 enum DealerReasonStatus {
     DELIVEREDSUCCESSFULLY = 'DELIVEREDSUCCESSFULLY',
@@ -1302,6 +1281,32 @@ export const getCustomerInwardBarcodeOptionTypes = () => {
         {
             label: 'Damage',
             value: barcodeStatusEnum.damage,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}
+
+// Tape Type Options
+enum CourierOptions {
+    shipyari = 'SHIPYAARI',
+    gpo = 'GPO',
+}
+
+export const getCourierOptions = () => {
+    let options = [
+        {
+            label: 'Shipyaari',
+            value: CourierOptions.shipyari,
+        },
+        {
+            label: 'Gpo',
+            value: CourierOptions.gpo,
         },
     ]
 

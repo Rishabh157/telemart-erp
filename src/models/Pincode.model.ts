@@ -24,6 +24,7 @@ export type PincodeListResponse = {
 export type AddPincode = {
     pincode: string
     preferredCourier: string
+    isFixed: boolean
     tehsilId: string
     districtId: string
     stateId: string
@@ -33,13 +34,14 @@ export type AddPincode = {
 
 export type UpdatePincode = {
     body: {
-        pincode: string
+        // pincode: string
         preferredCourier: string
-        tehsilId: string
-        districtId: string
-        stateId: string
-        companyId: string
-        countryId: string
+        isFixed: boolean
+        // tehsilId: string
+        // districtId: string
+        // stateId: string
+        // companyId: string
+        // countryId: string
     }
     id: string
 }

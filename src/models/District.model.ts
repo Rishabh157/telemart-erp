@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:District.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type DistrictListResponse = {
     districtName: string
@@ -22,16 +15,19 @@ export type DistrictListResponse = {
 export type AddDistrict = {
     districtName: string
     stateId: string
+    preferredCourier: string
     companyId: string
     countryId: string
 }
 
 export type UpdateDistrict = {
     body: {
-        districtName: string
-        stateId: string
-        companyId: string
-        countryId: string
+        // districtName: string
+        // stateId: string
+        preferredCourier: string
+        isFixed: boolean
+        // companyId: string
+        // countryId: string
     }
     id: string
 }

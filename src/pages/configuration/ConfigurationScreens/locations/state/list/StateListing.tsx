@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StateListing.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -21,21 +14,15 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setSearchValue,
     setSelctedLocationState,
+    setSelctedStatePreffredCourier,
 } from 'src/redux/slices/statesSlice'
-import // setFilterValue,
-// setSelectedLocationDistrict,
-'src/redux/slices/districtSlice'
 import { setSelectedLocationDistrict } from 'src/redux/slices/districtSlice'
 import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
-// import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
-// import { setFilterValue as setAreaFilterValue } from 'src/redux/slices/areaSlice'
-// import { setFilterValue as setPincodeFilterValue } from 'src/redux/slices/pincodeSlice'
-// import { setFilterValue as setTehsilFilterValue } from 'src/redux/slices/tehsilSlice'
+import EditStateWrapper from '../add/EditStateWrapper'
 
 // |-- Types --|
 type Props = {
@@ -44,6 +31,7 @@ type Props = {
 
 const StateListing = ({ states }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+    const [editStateId, setEditStateId] = useState<string>('')
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
     const { searchValue }: any = useSelector((state: RootState) => state.states)
     const { selectedLocationCountries }: any = useSelector(
@@ -56,8 +44,10 @@ const StateListing = ({ states }: Props) => {
     function handleCountryClick(newValue: any) {
         if (selectedLocationState === newValue.value) {
             dispatch(setSelctedLocationState(null))
+            dispatch(setSelctedStatePreffredCourier(null))
         } else {
             dispatch(setSelctedLocationState(newValue.value))
+            dispatch(setSelctedStatePreffredCourier(newValue.preferredCourier))
         }
         dispatch(setSelectedLocationDistrict(null))
         dispatch(setSelectedLocationTehsil(null))
@@ -87,12 +77,26 @@ const StateListing = ({ states }: Props) => {
                     }
                 }}
                 disabled={false}
-                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_STATE_ADD) as boolean}
-
+                isAddButton={
+                    isAuthorized(
+                        UserModuleNameTypes.ACTION_STATE_ADD
+                    ) as boolean
+                }
+                isEditButton
+                onEditListItemClick={(newValue) => {
+                    setEditStateId(newValue?.value)
+                }}
             />
 
             {isOpenAddForm && (
                 <AddStateWrapper onClose={() => setisOpenAddForm(false)} />
+            )}
+
+            {editStateId && (
+                <EditStateWrapper
+                    id={editStateId}
+                    onClose={() => setEditStateId('')}
+                />
             )}
         </>
     )

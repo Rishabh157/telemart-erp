@@ -11,6 +11,7 @@ export interface TehsilSliceStateType {
     allTehsils: TehsilListResponse[] | []
     selectedTehsil: TehsilListResponse | null
     selectedLocationTehsil: LocationSelectType | null
+    preffredCourier: string | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -25,6 +26,7 @@ const initialState: TehsilSliceStateType = {
     items: [],
     selectedTehsil: null,
     selectedLocationTehsil: null,
+    preffredCourier: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -84,6 +86,12 @@ const tehsilSlice: any = createSlice({
         ) => {
             state.selectedLocationTehsil = action.payload
         },
+        setSelctedTehsilPreffredCourier: (
+            state,
+            action: PayloadAction<string | null>
+        ) => {
+            state.preffredCourier = action.payload
+        },
         setFilterValue: (state, action: PayloadAction<string>) => {
             state.filterValue = action.payload
         },
@@ -104,6 +112,7 @@ export const {
     setSelectedId,
     setSelectedTehsil,
     setSelectedLocationTehsil,
+    setSelctedTehsilPreffredCourier,
     setFilterValue,
     setAllTehsils,
 } = tehsilSlice.actions

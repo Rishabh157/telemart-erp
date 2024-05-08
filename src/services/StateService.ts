@@ -58,9 +58,8 @@ export const stateApi = apiSlice.injectEndpoints({
         //***** Update *****/
         updateState: builder.mutation({
             invalidatesTags: ['State'],
-            query: ({ body, id }: UpdateState) => ({
+            query: ({ id, body }: UpdateState) => ({
                 url: `/state/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -71,7 +70,6 @@ export const stateApi = apiSlice.injectEndpoints({
             providesTags: ['State'],
             query: (id) => ({
                 url: `/state/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -80,7 +78,6 @@ export const stateApi = apiSlice.injectEndpoints({
         exportStateData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
