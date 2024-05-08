@@ -1,4 +1,3 @@
-
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
 import { useSelector } from 'react-redux'
@@ -6,7 +5,7 @@ import { useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import OutwardGpoOrdersTabListing from './OutwardGpoOrdersTabListing'
-// import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 // |-- Redux --|
 import { Chip } from '@mui/material'
@@ -31,6 +30,7 @@ enum FirstCallApprovalStatus {
 
 const OutwardGpoOrdersTabListingWrapper = () => {
     const { userData }: any = useSelector((state: RootState) => state?.auth)
+    const { id } = useParams()
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
@@ -45,6 +45,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             filterBy: [
                 { fieldName: 'isGPO', value: true },
                 { fieldName: 'companyId', value: userData?.companyId },
+                { fieldName: 'assignWarehouseId', value: id },
             ],
             dateFilter: dateFilter,
             orderBy: 'createdAt',

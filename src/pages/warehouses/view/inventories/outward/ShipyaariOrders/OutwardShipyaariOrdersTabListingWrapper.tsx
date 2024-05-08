@@ -5,19 +5,25 @@ import { IconType } from 'react-icons'
 import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
+import { useParams } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import OutwardShipyaariOrdersTabListing from './OutwardShipyaariOrdersTabListing'
-// import { useParams } from 'react-router-dom'
 
 // |-- Redux --|
 import { Chip } from '@mui/material'
 import moment from 'moment'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { OrderListResponse } from 'src/models'
 import { RootState } from 'src/redux/store'
-import { useGetOrderQuery } from 'src/services/OrderService'
+import {
+    useGetGenerateCouriorLabelByAwbNumberMutation,
+    useGetGenerateInvoiceByAwbNumberMutation,
+    useGetOrderQuery,
+} from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { FaRegFilePdf } from 'react-icons/fa'
+import { MdLabelImportantOutline } from 'react-icons/md'
 
 // |-- Types --|
 export type Tabs = {
@@ -33,6 +39,7 @@ enum FirstCallApprovalStatus {
 
 const OutwardShipyaariOrdersTabListingWrapper = () => {
     useUnmountCleanup()
+    const { id } = useParams()
     const { userData }: any = useSelector((state: RootState) => state?.auth)
 
     const outwardCustomerState: any = useSelector(
@@ -42,13 +49,12 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const {
         page,
         rowsPerPage,
-        items,
         searchValue,
 
         dateFilter,
     } = outwardCustomerState
 
-    useGetCustomListingData({
+    const { items } = useGetCustomListingData({
         useEndPointHook: useGetOrderQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
@@ -57,6 +63,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             filterBy: [
                 { fieldName: 'orderAssignedToCourier', value: 'SHIPYAARI' },
                 { fieldName: 'companyId', value: userData?.companyId },
+                { fieldName: 'assignWarehouseId', value: id },
             ],
             dateFilter: dateFilter,
             orderBy: 'createdAt',
@@ -64,8 +71,87 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
+    const [getGenerateCouriorLabel] =
+        useGetGenerateCouriorLabelByAwbNumberMutation()
+    const [getGenerateInvoice] = useGetGenerateInvoiceByAwbNumberMutation()
+
+    function base64ToBlob(base64Data: any) {
+        // Extract base64 content without the data URL prefix
+        const base64Content = base64Data.split(';base64,').pop()
+
+        // Convert base64 to ArrayBuffer
+        const arrayBuffer = Uint8Array.from(atob(base64Content), (c) =>
+            c.charCodeAt(0)
+        ).buffer
+
+        // Create Blob from ArrayBuffer
+        return new Blob([arrayBuffer], { type: 'application/pdf' })
+    }
+
+    const handleGenerateCourierLabel = (row: any) => {
+        getGenerateCouriorLabel({ awbNumber: row.awbNumber }).then(
+            (res: any) => {
+                console.log(res.data?.data)
+                if (res.data?.data) {
+                    const pdfBlob = base64ToBlob(res.data?.data)
+                    console.log('pdfBlob', pdfBlob)
+                    if (pdfBlob) {
+                        const pdfUrl = URL.createObjectURL(pdfBlob)
+                        window.open(pdfUrl, '_blank')
+                    }
+                }
+            }
+        )
+    }
+
+    const handleGenerateInvoice = (row: any) => {
+        getGenerateInvoice({ awbNumber: row.awbNumber }).then((res: any) => {
+            console.log(res.data?.data)
+            if (res.data?.data) {
+                const pdfBlob = base64ToBlob(res.data?.data)
+                console.log('pdfBlob', pdfBlob)
+                if (pdfBlob) {
+                    const pdfUrl = URL.createObjectURL(pdfBlob)
+                    window.open(pdfUrl, '_blank')
+                }
+            }
+        })
+    }
 
     const columns: columnTypes[] = [
+        {
+            field: 'awbBill',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
+            headerName: 'Download Label/Invoice',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <>
+                        {row.awbNumber ? (
+                            <div className="flex gap-2">
+                                <MdLabelImportantOutline
+                                    title="Print label"
+                                    size={25}
+                                    color="blue"
+                                    onClick={() =>
+                                        handleGenerateCourierLabel(row)
+                                    }
+                                />
+                                <FaRegFilePdf
+                                    title="Print Invoice"
+                                    color="red"
+                                    size={22}
+                                    onClick={() => handleGenerateInvoice(row)}
+                                />
+                            </div>
+                        ) : null}
+                    </>
+                )
+            },
+        },
+
         {
             field: 'firstCallApproval',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
@@ -106,6 +192,16 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                     </span>
                 )
             },
+        },
+        {
+            field: 'awbNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER,
+            headerName: 'AWB Number',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-primary-main ">{row.awbNumber}</span>
+            ),
         },
         {
             field: 'orderNumber',
