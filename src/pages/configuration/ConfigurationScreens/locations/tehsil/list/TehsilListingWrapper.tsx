@@ -23,7 +23,11 @@ const TehsilListingWrapper = () => {
         (state: RootState) => state.district
     )
     const tehsil = items?.map((ele: any) => {
-        return { label: ele.tehsilName, value: ele._id }
+        return {
+            label: ele.tehsilName,
+            value: ele._id,
+            preferredCourier: ele.preferredCourier,
+        }
     })
 
     const { data: tehsilBydistrict } = useGetAllTehsilByDistrictQuery(

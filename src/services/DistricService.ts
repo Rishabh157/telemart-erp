@@ -59,7 +59,6 @@ export const districtApi = apiSlice.injectEndpoints({
             invalidatesTags: ['District'],
             query: ({ body, id }: UpdateDistrict) => ({
                 url: `/district/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -70,7 +69,6 @@ export const districtApi = apiSlice.injectEndpoints({
             providesTags: ['District'],
             query: (id) => ({
                 url: `/district/${id}`,
-
                 method: 'GET',
             }),
         }),

@@ -11,6 +11,7 @@ export interface DistrictSliceStateType {
     allDistricts: DistrictListResponse[] | []
     selectedDistrict: DistrictListResponse | null
     selectedLocationDistrict: LocationSelectType | null
+    preffredCourier: string | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -26,6 +27,7 @@ const initialState: DistrictSliceStateType = {
     allDistricts: [],
     selectedDistrict: null,
     selectedLocationDistrict: null,
+    preffredCourier: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -87,6 +89,12 @@ const districtSlice: any = createSlice({
         ) => {
             state.selectedLocationDistrict = action.payload
         },
+        setSelctedDistrictPreffredCourier: (
+            state,
+            action: PayloadAction<string | null>
+        ) => {
+            state.preffredCourier = action.payload
+        },
         setFilterValue: (state, action: PayloadAction<string>) => {
             state.filterValue = action.payload
         },
@@ -110,6 +118,7 @@ export const {
     setSelectedId,
     setSelectedDistrict,
     setSelectedLocationDistrict,
+    setSelctedDistrictPreffredCourier,
     setFilterValue,
     setAllDistrict,
 } = districtSlice.actions

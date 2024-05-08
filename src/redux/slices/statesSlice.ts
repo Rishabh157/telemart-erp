@@ -11,6 +11,7 @@ export interface StateSliceStateType {
     allStates: StateListResponse[] | []
     selectedState: StateListResponse | null
     selectedLocationState: LocationSelectType | null
+    preffredCourier: string | null
     totalItems: number
     isTableLoading: boolean
     page: number
@@ -26,6 +27,7 @@ const initialState: StateSliceStateType = {
     allStates: [],
     selectedState: null,
     selectedLocationState: null,
+    preffredCourier: null,
     totalItems: 0,
     isTableLoading: false,
     page: 1,
@@ -84,6 +86,12 @@ const stateSlice: Slice<StateSliceStateType> = createSlice({
         ) => {
             state.selectedLocationState = action.payload
         },
+        setSelctedStatePreffredCourier: (
+            state,
+            action: PayloadAction<string | null>
+        ) => {
+            state.preffredCourier = action.payload
+        },
         setFilterValue: (state, action: PayloadAction<string>) => {
             state.filterValue = action.payload
         },
@@ -107,6 +115,7 @@ export const {
     setSelectedId,
     setSelectedState,
     setSelctedLocationState,
+    setSelctedStatePreffredCourier,
     setFilterValue,
     setAllStates,
 } = stateSlice.actions

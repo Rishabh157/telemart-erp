@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Tehsil.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type TehsilListResponse = {
     tehsilName: string
@@ -23,6 +16,7 @@ export type TehsilListResponse = {
 export type AddTehsil = {
     tehsilName: string
     districtId: string
+    preferredCourier: string
     stateId: string
     companyId: string
     countryId: string
@@ -30,11 +24,13 @@ export type AddTehsil = {
 
 export type UpdateTehsil = {
     body: {
-        tehsilName: string
-        districtId: string
-        stateId: string
-        companyId: string
-        countryId: string
+        // tehsilName: string
+        // districtId: string
+        // stateId: string
+        preferredCourier: string
+        isFixed: boolean
+        // companyId: string
+        // countryId: string
     }
     id: string
 }

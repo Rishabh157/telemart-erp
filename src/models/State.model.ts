@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:State.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type StateListResponse = {
     stateName: string
@@ -19,17 +12,22 @@ export type StateListResponse = {
 }
 
 export type AddState = {
-    isUnion: boolean
     stateName: string
+    preferredCourier: string
+    isUnion: boolean
+    isFixed: boolean
     companyId: string
     countryId: string
 }
 
 export type UpdateState = {
     body: {
-        stateName: string
-        companyId: string
-        countryId: string
+        // stateName: string
+        preferredCourier: string
+        isUnion: boolean
+        isFixed: boolean
+        // companyId: string
+        // countryId: string
     }
     id: string
 }

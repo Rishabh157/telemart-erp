@@ -4,78 +4,76 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { object, string } from 'yup'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddPincodeDialog from './AddPincodeDialog'
-import { useAddPincodeMutation } from 'src/services/PinCodeService'
+import {
+    useGetPincodeByIdQuery,
+    useUpdatePincodeMutation,
+} from 'src/services/PinCodeService'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {
+    id: string
     onClose: () => void
 }
+
 export type FormInitialValues = {
     pincode: string
     preferredCourier: string
     isFixed: boolean
 }
 
-const AddPincodeWrapper = ({ onClose }: Props) => {
-    const [AddPincode] = useAddPincodeMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedLocationCountries }: any = useSelector(
-        (state: RootState) => state?.country
-    )
-    const { selectedLocationState }: any = useSelector(
-        (state: RootState) => state?.states
-    )
-    const { selectedLocationTehsil, preffredCourier }: any = useSelector(
-        (state: RootState) => state?.tehsils
-    )
-    const { selectedLocationDistrict }: any = useSelector(
-        (state: RootState) => state?.district
-    )
-
+const EditPincodeWrapper = ({ id, onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
+    const [updatePincode] = useUpdatePincodeMutation()
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetPincodeByIdQuery(id || '', {
+            skip: !id,
+        }),
+    })
+
     const initialValues: FormInitialValues = {
-        pincode: '',
-        preferredCourier: preffredCourier,
-        isFixed: false,
+        pincode: selectedItem?.[0]?.pincode,
+        preferredCourier: selectedItem?.[0]?.preferredCourier,
+        isFixed: selectedItem?.[0]?.isFixed,
     }
 
     const validationSchema = object({
-        pincode: string().required('Pincode is required'),
         preferredCourier: string().required('Preferred courier is required'),
     })
 
-    const onSubmitHandler = (values: FormInitialValues) => {
+    const onSubmitHandler: any = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddPincode({
-                pincode: values.pincode,
-                stateId: selectedLocationState || '',
-                preferredCourier: values.preferredCourier,
-                isFixed: values.isFixed,
-                tehsilId: selectedLocationTehsil || '',
-                districtId: selectedLocationDistrict || '',
-                countryId: selectedLocationCountries || '',
-                companyId: userData?.companyId || '',
+            updatePincode({
+                id,
+                body: {
+                    // stateName: values.stateName,
+                    preferredCourier: values.preferredCourier,
+                    isFixed: values.isFixed,
+                    // countryId: selectedLocationCountries || '',
+                    // companyId: userData?.companyId || '',
+                },
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Added successfully!')
+                        showToast('success', 'State added successfully!')
                         onClose()
+                        setApiStatus(false)
                     } else {
                         showToast('error', res?.data?.message)
+                        setApiStatus(false)
                     }
                 } else {
                     showToast('error', 'Something went wrong')
+                    setApiStatus(false)
                 }
-                setApiStatus(false)
             })
         }, 1000)
     }
@@ -93,7 +91,7 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
                         onClose={onClose}
                         apiStatus={apiStatus}
                         formikProps={formikProps}
-                        formType="ADD"
+                        formType="EDIT"
                     />
                 )
             }}
@@ -101,4 +99,4 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
     )
 }
 
-export default AddPincodeWrapper
+export default EditPincodeWrapper

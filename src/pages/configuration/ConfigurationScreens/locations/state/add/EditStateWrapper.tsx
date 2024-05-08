@@ -2,20 +2,23 @@
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useSelector } from 'react-redux'
 import { object, string } from 'yup'
 import { Formik } from 'formik'
 
 // |-- Internal Dependencies --|
 import AddStateDialog from './AddStateDialog'
-import { useAddStateMutation } from 'src/services/StateService'
+import {
+    useGetStateByIdQuery,
+    useUpdateStateMutation,
+} from 'src/services/StateService'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {
+    id: string
     onClose: () => void
 }
 
@@ -26,20 +29,21 @@ export type FormInitialValues = {
     isFixed: boolean
 }
 
-const AddStateWrapper = ({ onClose }: Props) => {
-    const [AddState] = useAddStateMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedLocationCountries }: any = useSelector(
-        (state: RootState) => state?.country
-    )
-
+const EditStateWrapper = ({ id, onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
+    const [updateState] = useUpdateStateMutation()
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetStateByIdQuery(id || '', {
+            skip: !id,
+        }),
+    })
 
     const initialValues: FormInitialValues = {
-        stateName: '',
-        preferredCourier: '',
-        isUnion: false,
-        isFixed: false,
+        stateName: selectedItem?.stateName,
+        preferredCourier: selectedItem?.preferredCourier,
+        isUnion: selectedItem?.isUnion,
+        isFixed: selectedItem?.isFixed,
     }
 
     const validationSchema = object({
@@ -50,13 +54,16 @@ const AddStateWrapper = ({ onClose }: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddState({
-                stateName: values.stateName,
-                preferredCourier: values.preferredCourier,
-                isUnion: values.isUnion,
-                isFixed: values.isFixed,
-                countryId: selectedLocationCountries || '',
-                companyId: userData?.companyId || '',
+            updateState({
+                id,
+                body: {
+                    // stateName: values.stateName,
+                    preferredCourier: values.preferredCourier,
+                    isUnion: values.isUnion,
+                    isFixed: values.isFixed,
+                    // countryId: selectedLocationCountries || '',
+                    // companyId: userData?.companyId || '',
+                },
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -77,6 +84,7 @@ const AddStateWrapper = ({ onClose }: Props) => {
 
     return (
         <Formik
+            enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmitHandler}
@@ -87,7 +95,7 @@ const AddStateWrapper = ({ onClose }: Props) => {
                         onClose={onClose}
                         apiStatus={apiStatus}
                         formikProps={formikProps}
-                        formType="ADD"
+                        formType="EDIT"
                     />
                 )
             }}
@@ -95,4 +103,4 @@ const AddStateWrapper = ({ onClose }: Props) => {
     )
 }
 
-export default AddStateWrapper
+export default EditStateWrapper

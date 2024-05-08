@@ -2,77 +2,78 @@
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useSelector } from 'react-redux'
 import { object, string } from 'yup'
 import { Formik } from 'formik'
 
 // |-- Internal Dependencies --|
-import AddTehsilDialog from './AddTehsilDialog'
-import { useAddTehsilMutation } from 'src/services/TehsilService'
+import AddDistrictDialog from './AddDistrictDialog'
+import {
+    useGetDistictByIdQuery,
+    useUpdateDistrictMutation,
+} from 'src/services/DistricService'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import { RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 type Props = {
+    id: string
     onClose: () => void
 }
 
 export type FormInitialValues = {
-    tehsilName: string
+    districtName: string
     preferredCourier: string
     isFixed: boolean
 }
 
-const AddTehsilWrapper = ({ onClose }: Props) => {
-    const [addTehsil] = useAddTehsilMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const { selectedLocationCountries }: any = useSelector(
-        (state: RootState) => state?.country
-    )
-    const { selectedLocationState }: any = useSelector(
-        (state: RootState) => state?.states
-    )
-    const { selectedLocationDistrict, preffredCourier }: any = useSelector(
-        (state: RootState) => state?.district
-    )
-
+const EditDistrictWrapper = ({ id, onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
+    const [updateDistrict] = useUpdateDistrictMutation()
+
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetDistictByIdQuery(id || '', {
+            skip: !id,
+        }),
+    })
 
     const initialValues: FormInitialValues = {
-        tehsilName: '',
-        preferredCourier: preffredCourier,
-        isFixed: false,
+        districtName: selectedItem?.districtName,
+        preferredCourier: selectedItem?.preferredCourier,
+        isFixed: selectedItem?.isFixed,
     }
 
     const validationSchema = object({
-        tehsilName: string().required('Tehsil  Name is required'),
-        preferredCourier: string().required('Preferred Courier is required'),
+        preferredCourier: string().required('Preferred courier is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            addTehsil({
-                tehsilName: values.tehsilName,
-                countryId: selectedLocationCountries || '',
-                stateId: selectedLocationState || '',
-                preferredCourier: values.preferredCourier || '',
-                districtId: selectedLocationDistrict || '',
-                companyId: userData?.companyId || '',
+            updateDistrict({
+                id,
+                body: {
+                    // stateName: values.stateName,
+                    preferredCourier: values.preferredCourier,
+                    isFixed: values.isFixed,
+                    // countryId: selectedLocationCountries || '',
+                    // companyId: userData?.companyId || '',
+                },
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Tehsil added successfully!')
+                        showToast('success', 'District Updated successfully!')
                         onClose()
+                        setApiStatus(false)
                     } else {
                         showToast('error', res?.data?.message)
+                        setApiStatus(false)
                     }
                 } else {
                     showToast('error', 'Something went wrong')
+                    setApiStatus(false)
                 }
-                setApiStatus(false)
             })
         }, 1000)
     }
@@ -86,11 +87,11 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
         >
             {(formikProps) => {
                 return (
-                    <AddTehsilDialog
+                    <AddDistrictDialog
                         onClose={onClose}
                         apiStatus={apiStatus}
                         formikProps={formikProps}
-                        formType="ADD"
+                        formType="EDIT"
                     />
                 )
             }}
@@ -98,4 +99,4 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
     )
 }
 
-export default AddTehsilWrapper
+export default EditDistrictWrapper

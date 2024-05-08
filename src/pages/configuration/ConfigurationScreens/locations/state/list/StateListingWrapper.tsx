@@ -1,11 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:StateListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect } from 'react'
 
@@ -14,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import StateListing from './StateListing'
-// import { useGetStateQuery } from 'src/services/StateService'
 
 // |-- Redux --|
 import useStatesByCountry from 'src/hooks/useStatesByCountry'
@@ -31,9 +23,15 @@ const StateListingWrapper = () => {
     const { searchValue: searchValueState }: any = useSelector(
         (state: RootState) => state.states
     )
+
     const states = items?.map((ele: any) => {
-        return { label: ele.stateName, value: ele._id }
+        return {
+            label: ele.stateName,
+            value: ele._id,
+            preferredCourier: ele.preferredCourier,
+        }
     })
+
     useEffect(() => {
         if (stateByCountry?.length && selectedLocationCountries) {
             dispatch(setItems(stateByCountry))

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DistrictListing.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -21,12 +14,14 @@ import { RootState, AppDispatch } from 'src/redux/store'
 import {
     setSearchValue,
     setSelectedLocationDistrict,
+    setSelctedDistrictPreffredCourier,
 } from 'src/redux/slices/districtSlice'
 import { setSelectedLocationTehsil } from 'src/redux/slices/tehsilSlice'
 import { setSelectedLocationPincode } from 'src/redux/slices/pincodeSlice'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import EditDistrictWrapper from '../add/EditDistrictWrapper'
 
 // |-- Types --|
 type Props = {
@@ -35,6 +30,7 @@ type Props = {
 
 const DistrictListing = ({ districts }: Props) => {
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
+    const [editDistrictId, setEditDistrictId] = useState<string>('')
     const dispatch = useDispatch<AppDispatch>()
     const { searchValue }: any = useSelector(
         (state: RootState) => state.district
@@ -49,8 +45,12 @@ const DistrictListing = ({ districts }: Props) => {
     function handleCountryClick(newValue: any) {
         if (selectedLocationDistrict === newValue.value) {
             dispatch(setSelectedLocationDistrict(null))
+            dispatch(setSelctedDistrictPreffredCourier(null))
         } else {
             dispatch(setSelectedLocationDistrict(newValue.value))
+            dispatch(
+                setSelctedDistrictPreffredCourier(newValue.preferredCourier)
+            )
         }
         dispatch(setSelectedLocationTehsil(null))
         dispatch(setSelectedLocationPincode(null))
@@ -79,11 +79,26 @@ const DistrictListing = ({ districts }: Props) => {
                     }
                 }}
                 disabled={false}
-                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_DISTRICTS_ADD) as boolean}
+                isAddButton={
+                    isAuthorized(
+                        UserModuleNameTypes.ACTION_DISTRICTS_ADD
+                    ) as boolean
+                }
+                isEditButton
+                onEditListItemClick={(newValue) => {
+                    setEditDistrictId(newValue?.value)
+                }}
             />
 
             {isOpenAddForm && (
                 <AddDistrictWrapper onClose={() => setisOpenAddForm(false)} />
+            )}
+
+            {editDistrictId && (
+                <EditDistrictWrapper
+                    id={editDistrictId}
+                    onClose={() => setEditDistrictId('')}
+                />
             )}
         </>
     )

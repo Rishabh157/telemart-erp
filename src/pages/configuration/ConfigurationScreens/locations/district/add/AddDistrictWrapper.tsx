@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddDistrictWrapper.tsx
-// Type: Add Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -28,15 +21,17 @@ type Props = {
 
 export type FormInitialValues = {
     districtName: string
+    preferredCourier: string
+    isFixed: boolean
 }
 
 const AddDistrictWrapper = ({ onClose }: Props) => {
-    const [AddDistrict] = useAddDistrictMutation()
+    const [addDistrict] = useAddDistrictMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
     )
-    const { selectedLocationState }: any = useSelector(
+    const { selectedLocationState, preffredCourier }: any = useSelector(
         (state: RootState) => state?.states
     )
 
@@ -44,15 +39,21 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
 
     const initialValues: FormInitialValues = {
         districtName: '',
+        preferredCourier: preffredCourier,
+        isFixed: false,
     }
+
     const validationSchema = object({
         districtName: string().required('District name is required'),
+        preferredCourier: string().required('Preferred Courier is required'),
     })
+
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddDistrict({
+            addDistrict({
                 districtName: values.districtName,
+                preferredCourier: values.preferredCourier,
                 stateId: selectedLocationState || '',
                 countryId: selectedLocationCountries || '',
                 companyId: userData?.companyId || '',
@@ -73,24 +74,23 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
     }
 
     return (
-        <>
-            {' '}
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmitHandler}
-            >
-                {(formikProps) => {
-                    return (
-                        <AddDistrictDialog
-                            onClose={onClose}
-                            apiStatus={apiStatus}
-                            formikProps={formikProps}
-                        />
-                    )
-                }}
-            </Formik>
-        </>
+        <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmitHandler}
+        >
+            {(formikProps) => {
+                return (
+                    <AddDistrictDialog
+                        onClose={onClose}
+                        apiStatus={apiStatus}
+                        formikProps={formikProps}
+                        formType="ADD"
+                    />
+                )
+            }}
+        </Formik>
     )
 }
 

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:PicodeListing.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -25,6 +18,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { setSelectedLocationArea } from 'src/redux/slices/areaSlice'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import EditPincodeWrapper from '../add/EditPincodeWrapper'
 
 // |-- Types --|
 type Props = {
@@ -33,6 +27,7 @@ type Props = {
 
 const PincodeListing = ({ pincodes }: Props) => {
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
+    const [editPincodeId, setEditPincodeId] = useState<string>('')
     const dispatch = useDispatch<AppDispatch>()
     const { searchValue }: any = useSelector(
         (state: RootState) => state.pincode
@@ -80,9 +75,22 @@ const PincodeListing = ({ pincodes }: Props) => {
                         UserModuleNameTypes.ACTION_PINCODES_ADD
                     ) as boolean
                 }
+                isEditButton
+                onEditListItemClick={(newValue) => {
+                    setEditPincodeId(newValue?.value)
+                    // editPincodeId,
+                }}
             />
+
             {isOpenAddForm && (
                 <AddPincodeWrapper onClose={() => setisOpenAddForm(false)} />
+            )}
+
+            {editPincodeId && (
+                <EditPincodeWrapper
+                    id={editPincodeId}
+                    onClose={() => setEditPincodeId('')}
+                />
             )}
         </>
     )

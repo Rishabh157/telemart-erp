@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DistrictListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect } from 'react'
 
@@ -30,7 +23,11 @@ const DistrictListingWrapper = () => {
     )
 
     const districts = items?.map((ele: any) => {
-        return { label: ele.districtName, value: ele._id }
+        return {
+            label: ele.districtName,
+            value: ele._id,
+            preferredCourier: ele?.preferredCourier,
+        }
     })
 
     const { stateDistricts } = useStateDistricts(selectedLocationState)

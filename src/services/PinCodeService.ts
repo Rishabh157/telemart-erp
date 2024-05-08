@@ -80,7 +80,6 @@ export const pincodeApi = apiSlice.injectEndpoints({
             invalidatesTags: ['pincode'],
             query: ({ body, id }: UpdatePincode) => ({
                 url: `/pincode/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -91,7 +90,6 @@ export const pincodeApi = apiSlice.injectEndpoints({
             providesTags: ['pincode'],
             query: (id) => ({
                 url: `/pincode/${id}`,
-
                 method: 'GET',
             }),
         }),
