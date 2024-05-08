@@ -23,8 +23,8 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import { Stack } from 'rsuite'
-import { Chip } from '@mui/material'
+import { Chip, Stack } from '@mui/material'
+
 
 // |-- Types --|
 type Props = {

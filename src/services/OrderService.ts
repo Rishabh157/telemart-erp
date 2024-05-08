@@ -216,6 +216,24 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        // get Couirier Label
+        getGenerateCouriorLabelByAwbNumber: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (body) => ({
+                url: `/order-inquiry/get-order-label`,
+                method: 'POST',
+                body,
+            }),
+        }),
+        // get Invoice
+        getGenerateInvoiceByAwbNumber: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (body) => ({
+                url: `/order-inquiry/generate-order-invoice`,
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
@@ -242,4 +260,6 @@ export const {
     useUpdateNdrDealerDialerMutation,
     useUpdateOfferAppliedNdrOrderMutation,
     useGetMultiSearchOrderByMobAndOrderNoMutation,
+    useGetGenerateCouriorLabelByAwbNumberMutation,
+    useGetGenerateInvoiceByAwbNumberMutation
 } = OrderApi

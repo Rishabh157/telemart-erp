@@ -273,6 +273,8 @@ import MultiOrderSearchListingWrapper from './pages/multiOrderSearch/list/MultiO
 import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
 import OutwardShipyaariOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/ShipyaariOrders/OutwardShipyaariOrdersTabListingWrapper'
 import DealerToDealerOrderListingWrapper from './pages/dealerTodealer/list/DealerToDealerOrderListingWrapper'
+import PreferenceCourierListingWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/list/PreferenceCourierListingWrapper'
+import EditPreferenceCourierWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/edit/EditPreferenceCourierWrapper'
 // import OrderDashboard from './pages/orders/OrderDashboard'
 
 const PageRoutes = () => {
@@ -1852,6 +1854,24 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<ViewBarcodeWrapper />}
                                 permission={UserModuleNameTypes.NAV_BARCODE}
+                            />
+                        }
+                    />
+                         <Route
+                        path="prefrence-courier/edit/:id"
+                        element={
+                            <Authorization
+                                children={<EditPreferenceCourierWrapper />}
+                                permission={UserModuleNameTypes.NAV_LOCATION}
+                            />
+                        }
+                    />
+                    <Route
+                        path="prefrence-courier"
+                        element={
+                            <Authorization
+                                children={<PreferenceCourierListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_LOCATION}
                             />
                         }
                     />
