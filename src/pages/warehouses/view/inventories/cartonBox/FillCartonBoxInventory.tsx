@@ -1,5 +1,12 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
+/// ==============================================
+// Filename:InwardInventory.tsx
+// Type: Add Component
+// Last Updated: NOVEMBER 30, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -12,8 +19,8 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-import { useGetByBarcodeMutation } from 'src/services/BarcodeService'
-import { SelectBoxOption } from './InwardInventoryWrapper'
+import { useGetBarcodeOfWarehouseMutation } from 'src/services/BarcodeService'
+import { SelectBoxOption } from './FillCartonBoxInventoryWrapper'
 import MoveToCartonDrawer from './MoveToCartonDrawer/MoveToCartonDrawer'
 
 // |-- Types --|
@@ -46,7 +53,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
         React.useState(false)
     // const { data, isLoading, isFetching } = useGetAllBarcodeQuery('')
-    const [getBarcodeById] = useGetByBarcodeMutation()
+    const [getBarcodeById] = useGetBarcodeOfWarehouseMutation()
     const handleBarCode = (barcodeId: string) => {
         getBarcodeById(barcodeId).then((res: any) => {
             if (res?.data?.data) {
@@ -113,7 +120,33 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         options={cartonBoxOption}
                         label="Packaging"
                     />
-         
+                    {/* 
+                    <ATMSelect
+                        name=""
+                        value={status}
+                        onChange={(e) => {
+                            setStatus(e.target.value)
+                        }}
+                        options={[
+                            { label: 'Select' },
+                            { label: 'Available', value: 'AVAILABLE' },
+                            { label: 'Out Of Stock', value: 'OUT OF STOCK' },
+                        ]}
+                        label="Status"
+                    />
+                    <ATMSelect
+                        name=""
+                        value={condition}
+                        onChange={(e) => {
+                            setCondition(e.target.value)
+                        }}
+                        options={[
+                            { label: 'Select' },
+                            { label: 'Good', value: 'GOOD' },
+                            { label: 'Defective', value: 'DEFECTIVE' },
+                        ]}
+                        label="Condition"
+                    /> */}
 
                     <ATMTextField
                         name=""

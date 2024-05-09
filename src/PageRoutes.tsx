@@ -275,6 +275,7 @@ import {
     setUserData,
 } from './redux/slices/authSlice'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
+import FillCartonBoxInventoryWrapper from './pages/warehouses/view/inventories/cartonBox/FillCartonBoxInventoryWrapper'
 // import OrderDashboard from './pages/orders/OrderDashboard'
 
 const PageRoutes = () => {
@@ -737,6 +738,17 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<InwardInventoryWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD
+                                }
+                            />
+                        }
+                    />
+                             <Route
+                        path="inventories/inward-inventory/cartonbox"
+                        element={
+                            <Authorization
+                                children={<FillCartonBoxInventoryWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD
                                 }
