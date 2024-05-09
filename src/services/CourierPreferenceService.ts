@@ -2,10 +2,10 @@
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
-export const PreferenceService = apiSlice.injectEndpoints({
+export const CourierPreferenceService = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //***** GET *****/
-    getPrefernceCourier: builder.query({
+    getCourierPreference: builder.query({
       providesTags: ['courierprefrence'],
       query: (body: PaginationType) => ({
         url: '/courier-preference',
@@ -18,7 +18,7 @@ export const PreferenceService = apiSlice.injectEndpoints({
 
 
     //***** Update *****/
-    updatePrefernceCourier: builder.mutation({
+    updateCourierPrefernce: builder.mutation({
       invalidatesTags: ['courierprefrence'],
       query: ({ body, id }: any) => ({
         url: `/courier-preference/${id}`,
@@ -30,6 +30,6 @@ export const PreferenceService = apiSlice.injectEndpoints({
   }),
 })
 export const {
-  useGetPrefernceCourierQuery,
-  useUpdatePrefernceCourierMutation,
-} = PreferenceService
+  useGetCourierPreferenceQuery,
+  useUpdateCourierPrefernceMutation,
+} = CourierPreferenceService

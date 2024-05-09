@@ -6,17 +6,17 @@ import { useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 
-import PrefrenceCourierListing from './PrefrenceCourierListing'
+import CourierPreferenceListing from './CourierPreferenceListing'
 // |-- Redux --|
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { RootState } from 'src/redux/store'
-import { useGetPrefernceCourierQuery } from 'src/services/PreferenceService'
+import { useGetCourierPreferenceQuery } from 'src/services/CourierPreferenceService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 // import { useNavigate } from 'react-router-dom'
 
-const PreferenceCourierListingWrapper = () => {
+const CourierPreferenceListingWrapper = () => {
     useUnmountCleanup()
     // const navigate = useNavigate()
     const attributeState: any = useSelector(
@@ -60,17 +60,12 @@ const PreferenceCourierListingWrapper = () => {
         },
     ]
     const { items } = useGetCustomListingData<any>({
-        useEndPointHook: useGetPrefernceCourierQuery({
+        useEndPointHook: useGetCourierPreferenceQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['courierName'],
             page: page,
-            filterBy: [
-                // {
-                //     fieldName: 'companyId',
-                //     value: userData?.companyId,
-                // },
-            ],
+            filterBy: [],
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,
@@ -80,9 +75,9 @@ const PreferenceCourierListingWrapper = () => {
 
     return (
         <>
-            <PrefrenceCourierListing columns={columns} rows={items} />
+            <CourierPreferenceListing columns={columns} rows={items} />
         </>
     )
 }
 
-export default PreferenceCourierListingWrapper
+export default CourierPreferenceListingWrapper
