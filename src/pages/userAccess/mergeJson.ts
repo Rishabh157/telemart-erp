@@ -68,6 +68,7 @@ import { default as offerAppliedNdrJson } from '../../utils/mediaJson/offerAppli
 import { default as dealersInventoryJson } from '../../utils/mediaJson/dealersInventory.json'
 import { default as multiOrderSearchJson } from '../../utils/mediaJson/multiOrderSearch.json'
 import { default as dealerToDealerRequestJson } from '../../utils/mediaJson/dealerToDealerJson.json'
+import { default as courierPreferenceJson } from '../../utils/mediaJson/CourierPreference.json'
 
 export const mergeUserModules = [
     { ...dashboardJson },
@@ -108,6 +109,7 @@ export const mergeUserModules = [
     { ...companyJson },
     { ...companyBranchJson },
     { ...barcodeJson },
+    { ...courierPreferenceJson },
     { ...locationJson },
     { ...languageJson },
     { ...dealerCategoriesJson },

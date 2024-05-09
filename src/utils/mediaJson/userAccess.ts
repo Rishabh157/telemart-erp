@@ -1153,6 +1153,13 @@ export enum multiOrderSearchUserAccessType {
     NAV_DEALERS_INVENTORY = 'NAV_DEALERS_INVENTORY',
 }
 
+
+export enum courierPreferenceUserAccessType {
+    NAV_COURIER_PREFERENCE = 'NAV_COURIER_PREFERENCE',
+    COURIER_PREFERENCE_LIST_COURIER_NAME = 'COURIER_PREFERENCE_LIST_COURIER_NAME',
+    COURIER_PREFERENCE_LIST_COURIER_PRIORITY = 'COURIER_PREFERENCE_LIST_COURIER_PRIORITY',
+
+}
 export const UserModuleNameTypes = {
     ...AttributeUserAccessType,
     ...AttributeGroupUserAccessType,
@@ -1201,6 +1208,7 @@ export const UserModuleNameTypes = {
     ...UsersUserAccessTypes,
     ...WarehouseUserAccessTypes,
     ...barcodeUserAccessType,
+    ...courierPreferenceUserAccessType,
     ...cartonBoxUserAccessType,
     ...companyUserAccessType,
     ...companyBranchUserAccessType,

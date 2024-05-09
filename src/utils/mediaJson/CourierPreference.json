@@ -1,45 +1,28 @@
 {
-    "moduleId": "NAV_ATTRIBUTE",
-    "moduleName": "NAV_ATTRIBUTE",
-    "parentGroup": ["NAV_CONFIGURATION"],
+    "moduleId": "NAV_COURIER_PREFERENCE",
+    "moduleName": "NAV_COURIER_PREFERENCE",
+    "parentGroup": [
+        "NAV_CONFIGURATION"
+    ],
     "moduleAction": [
         {
-            "actionId": "ACTION_ATTRIBUTE_LIST",
+            "actionId": "ACTION_COURIER_PREFERENCE_LIST",
             "actionUrl": "",
             "actionName": "LIST",
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": [
                 {
-                    "fieldId": "ATTRIBUTE_LIST_ATTRIBUTE_NAME",
-                    "fieldName": "Attribute Name",
-                    "fieldValue": "attributeName"
+                    "fieldId": "COURIER_PREFERENCE_LIST_COURIER_NAME",
+                    "fieldName": "COURIER NAME",
+                    "fieldValue": "courierName"
+                },
+                {
+                    "fieldId": "COURIER_PREFERENCE_LIST_COURIER_PRIORITY",
+                    "fieldName": "COURIER PRIORITY",
+                    "fieldValue": "priority"
                 }
             ]
-        },
-        {
-            "actionId": "ACTION_ATTRIBUTE_ADD",
-            "actionUrl": "",
-            "actionName": "ADD",
-            "compulsoryFields": [],
-            "parentGroup": ["LIST"],
-            "fields": []
-        },
-        {
-            "actionId": "ACTION_ATTRIBUTE_EDIT",
-            "actionUrl": "",
-            "actionName": "EDIT",
-            "compulsoryFields": [],
-            "parentGroup": ["LIST"],
-            "fields": []
-        },
-        {
-            "actionId": "ACTION_ATTRIBUTE_DELETE",
-            "actionUrl": "",
-            "actionName": "DELETE",
-            "compulsoryFields": [],
-            "parentGroup": ["LIST"],
-            "fields": []
         }
     ]
 }
