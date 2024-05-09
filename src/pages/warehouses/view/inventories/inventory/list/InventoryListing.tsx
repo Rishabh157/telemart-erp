@@ -56,6 +56,19 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[78px]  p-1">
                     <ATMPageHeading> Inventories </ATMPageHeading>
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_FILL_CARTON_BOX
+                    ) && (
+                        <button
+                            type="button"
+                            onClick={() =>
+                                navigate('inward-inventory/cartonbox')
+                            }
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            Craete New Carton Box
+                        </button>
+                    )}
 
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD
