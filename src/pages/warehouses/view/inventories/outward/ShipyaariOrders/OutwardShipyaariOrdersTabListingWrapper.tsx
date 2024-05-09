@@ -91,10 +91,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const handleGenerateCourierLabel = (row: any) => {
         getGenerateCouriorLabel({ awbNumber: row.awbNumber }).then(
             (res: any) => {
-                console.log(res.data?.data)
                 if (res.data?.data) {
                     const pdfBlob = base64ToBlob(res.data?.data)
-                    console.log('pdfBlob', pdfBlob)
                     if (pdfBlob) {
                         const pdfUrl = URL.createObjectURL(pdfBlob)
                         window.open(pdfUrl, '_blank')
@@ -106,10 +104,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
 
     const handleGenerateInvoice = (row: any) => {
         getGenerateInvoice({ awbNumber: row.awbNumber }).then((res: any) => {
-            console.log(res.data?.data)
             if (res.data?.data) {
                 const pdfBlob = base64ToBlob(res.data?.data)
-                console.log('pdfBlob', pdfBlob)
                 if (pdfBlob) {
                     const pdfUrl = URL.createObjectURL(pdfBlob)
                     window.open(pdfUrl, '_blank')

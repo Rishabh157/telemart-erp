@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { object, string } from 'yup'
 import { Formik } from 'formik'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddStateDialog from './AddStateDialog'
@@ -15,6 +16,8 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AppDispatch } from 'src/redux/store'
+import { setSelctedStatePreffredCourier } from 'src/redux/slices/statesSlice'
 
 // |-- Types --|
 type Props = {
@@ -32,6 +35,7 @@ export type FormInitialValues = {
 const EditStateWrapper = ({ id, onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
     const [updateState] = useUpdateStateMutation()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetStateByIdQuery(id || '', {
@@ -70,6 +74,11 @@ const EditStateWrapper = ({ id, onClose }: Props) => {
                         showToast('success', 'State added successfully!')
                         onClose()
                         setApiStatus(false)
+                        dispatch(
+                            setSelctedStatePreffredCourier(
+                                res?.data?.data?.preferredCourier
+                            )
+                        )
                     } else {
                         showToast('error', res?.data?.message)
                         setApiStatus(false)

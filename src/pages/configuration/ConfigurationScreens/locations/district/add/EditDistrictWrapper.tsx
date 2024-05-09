@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { object, string } from 'yup'
 import { Formik } from 'formik'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddDistrictDialog from './AddDistrictDialog'
@@ -15,6 +16,8 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AppDispatch } from 'src/redux/store'
+import { setSelctedDistrictPreffredCourier } from 'src/redux/slices/districtSlice'
 
 // |-- Types --|
 type Props = {
@@ -31,6 +34,7 @@ export type FormInitialValues = {
 const EditDistrictWrapper = ({ id, onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
     const [updateDistrict] = useUpdateDistrictMutation()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetDistictByIdQuery(id || '', {
@@ -66,6 +70,11 @@ const EditDistrictWrapper = ({ id, onClose }: Props) => {
                         showToast('success', 'District Updated successfully!')
                         onClose()
                         setApiStatus(false)
+                        dispatch(
+                            setSelctedDistrictPreffredCourier(
+                                res?.data?.data?.preferredCourier
+                            )
+                        )
                     } else {
                         showToast('error', res?.data?.message)
                         setApiStatus(false)
