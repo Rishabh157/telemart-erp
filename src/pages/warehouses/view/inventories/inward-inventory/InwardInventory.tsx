@@ -1,12 +1,5 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:InwardInventory.tsx
-// Type: Add Component
-// Last Updated: NOVEMBER 30, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
