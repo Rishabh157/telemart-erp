@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { object, string } from 'yup'
 import { Formik } from 'formik'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddTehsilDialog from './AddTehsilDialog'
@@ -15,6 +16,8 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { AppDispatch } from 'src/redux/store'
+import { setSelctedTehsilPreffredCourier } from 'src/redux/slices/tehsilSlice'
 
 // |-- Types --|
 type Props = {
@@ -31,6 +34,7 @@ export type FormInitialValues = {
 const EditTehsiltWrapper = ({ id, onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
     const [updateTehsil] = useUpdateTehsilMutation()
+    const dispatch = useDispatch<AppDispatch>()
 
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetTehsilByIdQuery(id || '', {
@@ -66,6 +70,11 @@ const EditTehsiltWrapper = ({ id, onClose }: Props) => {
                         showToast('success', 'District Updated successfully!')
                         onClose()
                         setApiStatus(false)
+                        dispatch(
+                            setSelctedTehsilPreffredCourier(
+                                res?.data?.data?.preferredCourier
+                            )
+                        )
                     } else {
                         showToast('error', res?.data?.message)
                         setApiStatus(false)

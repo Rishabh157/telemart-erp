@@ -27,13 +27,12 @@ export type FormInitialValues = {
 }
 
 const AddStateWrapper = ({ onClose }: Props) => {
-    const [AddState] = useAddStateMutation()
+    const [apiStatus, setApiStatus] = useState(false)
+    const [addState] = useAddStateMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
     )
-
-    const [apiStatus, setApiStatus] = useState(false)
 
     const initialValues: FormInitialValues = {
         stateName: '',
@@ -50,7 +49,7 @@ const AddStateWrapper = ({ onClose }: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddState({
+            addState({
                 stateName: values.stateName,
                 preferredCourier: values.preferredCourier,
                 isUnion: values.isUnion,

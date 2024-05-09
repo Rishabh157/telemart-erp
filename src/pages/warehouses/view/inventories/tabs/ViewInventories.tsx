@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
 import { BsArrowRepeat } from 'react-icons/bs'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
@@ -50,16 +50,12 @@ const ViewInventories = (props: Props) => {
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(0)
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const { pathname } = useLocation()
-    console.log(pathname, 'pathname')
 
     const allowedTabs = tabs
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
         })
         ?.map((tab) => tab)
-
-
 
     useEffect(() => {
         const activeTab = window.location.pathname.split('/')[4]

@@ -37,7 +37,7 @@ const AddTehsilDialog = ({
     return (
         <Dialog open={true} onClose={onClose} fullWidth>
             <DialogTitle className="text-primary-main">
-                {formType === 'EDIT' ? 'Add' : 'Edit'} Tehsil
+                {formType === 'EDIT' ? 'Edit' : 'Add'} Tehsil
             </DialogTitle>
             <DialogContent>
                 <ATMTextField
