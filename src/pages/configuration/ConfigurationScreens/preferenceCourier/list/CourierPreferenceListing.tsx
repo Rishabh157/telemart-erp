@@ -28,7 +28,7 @@ type Props = {
     rows: any[]
 }
 
-const PrefrenceCourierListing = ({ columns, rows }: Props) => {
+const CourierPreferenceListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
     const attributesState: any = useSelector(
@@ -43,7 +43,7 @@ const PrefrenceCourierListing = ({ columns, rows }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Preference Courier',
+            label: ' Courier Preference ',
         },
     ]
 
@@ -56,7 +56,7 @@ const PrefrenceCourierListing = ({ columns, rows }: Props) => {
 
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Preference Courier </ATMPageHeading>
+                <ATMPageHeading> Courier Preference  </ATMPageHeading>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
@@ -103,4 +103,4 @@ const PrefrenceCourierListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default PrefrenceCourierListing
+export default CourierPreferenceListing
