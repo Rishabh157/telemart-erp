@@ -44,7 +44,7 @@ const CourierPreferenceListingWrapper = () => {
             field: 'courierName',
             headerName: 'Courier Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ATTRIBUTE_LIST_ATTRIBUTE_NAME,
+            name: UserModuleNameTypes.COURIER_PREFERENCE_LIST_COURIER_NAME,
             renderCell: (row: any) => (
                 <span className="capitalize"> {row.courierName} </span>
             ),
@@ -53,7 +53,7 @@ const CourierPreferenceListingWrapper = () => {
             field: 'priority',
             headerName: 'Priority',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ATTRIBUTE_LIST_ATTRIBUTE_NAME,
+            name: UserModuleNameTypes.COURIER_PREFERENCE_LIST_COURIER_PRIORITY,
             renderCell: (row: any) => (
                 <span className="capitalize"> {row.priority} </span>
             ),

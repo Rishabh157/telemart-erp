@@ -1862,7 +1862,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditPreferenceCourierWrapper />}
-                                permission={UserModuleNameTypes.NAV_LOCATION}
+                                permission={UserModuleNameTypes.NAV_COURIER_PREFERENCE}
                             />
                         }
                     />
@@ -1871,7 +1871,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<CourierPreferenceListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_LOCATION}
+                                permission={UserModuleNameTypes.NAV_COURIER_PREFERENCE}
                             />
                         }
                     />
