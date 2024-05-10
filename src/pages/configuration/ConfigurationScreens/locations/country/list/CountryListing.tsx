@@ -66,8 +66,7 @@ const CountryListing = ({ contries, items }: Props) => {
                     dispatch(setSearchValue(newValue))
                 }}
                 onAddClick={() => {
-                     
-                        setisOpenAddForm(true)
+                    setisOpenAddForm(true)
                 }}
                 onListItemClick={(newValue) => {
                     handleCountryClick(newValue)

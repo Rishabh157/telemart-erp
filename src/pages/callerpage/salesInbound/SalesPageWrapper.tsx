@@ -67,6 +67,7 @@ export type FormInitialValues = {
     orderForOther?: string | null
     paymentMode: string
     productGroupId: string | null
+    productGroupLabel?: string | null
     remark: string
     shcemeQuantity: number
     socialMedia: {
@@ -80,7 +81,9 @@ export type FormInitialValues = {
     deliveryCharges: number
     totalAmount: number
     dispositionLevelTwoId: string | null
+    dispositionLevelTwoLabel?: string | null
     dispositionLevelThreeId: string | null
+    dispositionLevelThreeLabel?: string | null
     status: string
 }
 
@@ -149,7 +152,7 @@ const SalesPageWrapper = () => {
             skip: !didNumber,
         }),
     })
-
+    
     const {
         data: callerListingData,
         isFetching: isCallerFetching,
@@ -409,8 +412,8 @@ const SalesPageWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -582,6 +585,7 @@ const SalesPageWrapper = () => {
         didNo: didNumber as string,
         flagStatus: '',
         productGroupId: didItems?.schemeProductGroup?.[0]?.productGroup || null,
+        productGroupLabel: '',
         schemeId: didItems?.schemeId || null,
         schemeName: '',
         shcemeQuantity: 1,
@@ -628,7 +632,9 @@ const SalesPageWrapper = () => {
         paymentMode: 'COD',
         remark: '',
         dispositionLevelTwoId: null,
+        dispositionLevelTwoLabel: '',
         dispositionLevelThreeId: null,
+        dispositionLevelThreeLabel: '',
         alternateNo: orderData?.alternateNo || '',
         status: statusProps.fresh,
     }
