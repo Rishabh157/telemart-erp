@@ -1,0 +1,50 @@
+{
+    "moduleId": "NAV_TRANSPORT",
+    "moduleName": "NAV_TRANSPORT",
+    "parentGroup": ["NAV_CONFIGURATION"],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_TRANSPORT_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "TRANSPORT_LIST_TRANSPORT_NAME",
+                    "fieldName": "Transport Name",
+                    "fieldValue": "transportName"
+                },
+                {
+                    "fieldId": "TRANSPORT_LIST_GST",
+                    "fieldName": "GST",
+                    "fieldValue": "gst"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_TRANSPORT_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_TRANSPORT_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_TRANSPORT_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        }
+    ]
+}

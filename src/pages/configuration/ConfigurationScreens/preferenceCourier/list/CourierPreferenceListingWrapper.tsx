@@ -11,35 +11,23 @@ import CourierPreferenceListing from './CourierPreferenceListing'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { RootState } from 'src/redux/store'
-import { useGetCourierPreferenceQuery } from 'src/services/CourierPreferenceService'
+import {
+    useGetCourierPreferenceQuery,
+    useUpdateCourierPrefernceMutation,
+} from 'src/services/CourierPreferenceService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-// import { useNavigate } from 'react-router-dom'
+import { CircularProgress } from '@mui/material'
 
 const CourierPreferenceListingWrapper = () => {
     useUnmountCleanup()
-    // const navigate = useNavigate()
     const attributeState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
     const { page, rowsPerPage, searchValue } = attributeState
+    const [updateCourierPreference, updateCourierInfo] =
+        useUpdateCourierPrefernceMutation()
 
     const columns: columnTypes[] = [
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: any) => (
-        //         <ActionPopup
-        //             isEdit
-        //             handleEditActionButton={() => {
-        //                 navigate(`/configurations/attributes/${row._id}`)
-        //             }}
-        //             handleOnAction={() => {}}
-        //         />
-        //     ),
-        // },
-
         {
             field: 'courierName',
             headerName: 'Courier Name',
@@ -72,10 +60,30 @@ const CourierPreferenceListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
+    const handleUpdatePriority = (rows: any) => {
+        let updateCourier = rows.map((items: any) => {
+            return { courierName: items.courierName, priority: items.priority }
+        })
+        updateCourierPreference({ body: updateCourier }).then((res) => {
+            console.log('res', res)
+        })
+    }
+
+    if (updateCourierInfo.isLoading) {
+        return (
+            <div className="absolute w-[100%] h-[100%] flex justify-center items-center z-10 bg-slate-100 opacity-50">
+                <CircularProgress />
+            </div>
+        )
+    }
 
     return (
         <>
-            <CourierPreferenceListing columns={columns} rows={items} />
+            <CourierPreferenceListing
+                columns={columns}
+                rows={items}
+                handleUpdatePriority={handleUpdatePriority}
+            />
         </>
     )
 }

@@ -20,11 +20,10 @@ export const CourierPreferenceService = apiSlice.injectEndpoints({
     //***** Update *****/
     updateCourierPrefernce: builder.mutation({
       invalidatesTags: ['courierprefrence'],
-      query: ({ body, id }: any) => ({
-        url: `/courier-preference/${id}`,
-
+      query: ({ body }: any) => ({
+        url: `/courier-preference`,
         method: 'PUT',
-        body,
+        body: { data: body },
       }),
     }),
   }),

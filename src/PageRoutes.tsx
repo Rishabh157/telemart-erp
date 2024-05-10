@@ -276,6 +276,9 @@ import {
 } from './redux/slices/authSlice'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
 import FillCartonBoxInventoryWrapper from './pages/warehouses/view/inventories/cartonBox/FillCartonBoxInventoryWrapper'
+import AddTransportWrapper from './pages/configuration/ConfigurationScreens/transport/add/AddTransportWrapper'
+import EditTransportWrapper from './pages/configuration/ConfigurationScreens/transport/edit/EditTransportWrapper'
+import TransportListingWrapper from './pages/configuration/ConfigurationScreens/transport/list/TransportListingWrapper'
 // import OrderDashboard from './pages/orders/OrderDashboard'
 
 const PageRoutes = () => {
@@ -744,7 +747,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                             <Route
+                    <Route
                         path="inventories/inward-inventory/cartonbox"
                         element={
                             <Authorization
@@ -1874,7 +1877,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<EditPreferenceCourierWrapper />}
-                                permission={UserModuleNameTypes.NAV_COURIER_PREFERENCE}
+                                permission={
+                                    UserModuleNameTypes.NAV_COURIER_PREFERENCE
+                                }
                             />
                         }
                     />
@@ -1883,7 +1888,43 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<CourierPreferenceListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_COURIER_PREFERENCE}
+                                permission={
+                                    UserModuleNameTypes.NAV_COURIER_PREFERENCE
+                                }
+                            />
+                        }
+                    />
+{/* transport */}
+<Route
+                        path="transport/add"
+                        element={
+                            <Authorization
+                                children={<AddTransportWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_TRANSPORT_ADD
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="transport/:id"
+                        element={
+                            <Authorization
+                                children={<EditTransportWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_TRANSPORT_EDIT
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="transport"
+                        element={
+                            <Authorization
+                                children={<TransportListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_TRANSPORT
+                                }
                             />
                         }
                     />
