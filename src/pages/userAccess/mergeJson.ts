@@ -4,6 +4,7 @@ import { default as WebsiteBlogJson } from '../../utils/mediaJson/websiteBlogcop
 import { default as artistJson } from '../../utils/mediaJson/artist.json'
 import { default as assetsRequestJson } from '../../utils/mediaJson/assetsRequest.json'
 import { default as attributeJson } from '../../utils/mediaJson/attribute.json'
+import { default as transportJson } from '../../utils/mediaJson/transport.json'
 import { default as attributeGroupJson } from '../../utils/mediaJson/attributeGroup.json'
 import { default as barcodeJson } from '../../utils/mediaJson/barcode.json'
 import { default as callJson } from '../../utils/mediaJson/call.json'
@@ -119,6 +120,7 @@ export const mergeUserModules = [
     { ...channelManagementJson },
     { ...didManagementJson },
     { ...artistJson },
+    { ...transportJson },
     { ...tapeManagementJson },
     { ...competitorJson },
     { ...slotManagementJson },
