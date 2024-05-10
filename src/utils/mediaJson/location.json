@@ -45,6 +45,17 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_STATE_EDIT",
+            "actionUrl": "",
+            "actionName": "STATE_EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "COUNTRY_LIST",
+                "STATE_LIST"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_DISTRICTS_LIST",
             "actionUrl": "",
             "actionName": "DISTRICTS_LIST",
@@ -59,6 +70,18 @@
             "actionId": "ACTION_DISTRICTS_ADD",
             "actionUrl": "",
             "actionName": "DISTRICTS_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "COUNTRY_LIST",
+                "STATE_LIST",
+                "DISTRICTS_LIST"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DISTRICTS_EDIT",
+            "actionUrl": "",
+            "actionName": "DISTRICTS_EDIT",
             "compulsoryFields": [],
             "parentGroup": [
                 "COUNTRY_LIST",
@@ -93,6 +116,19 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_TEHSILS_EDIT",
+            "actionUrl": "",
+            "actionName": "TEHSILS_EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "COUNTRY_LIST",
+                "STATE_LIST",
+                "DISTRICTS_LIST",
+                "TEHSILS_LIST"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_PINCODES_LIST",
             "actionUrl": "",
             "actionName": "PINCODES_LIST",
@@ -109,6 +145,19 @@
             "actionId": "ACTION_PINCODES_ADD",
             "actionUrl": "",
             "actionName": "PINCODES_ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "COUNTRY_LIST",
+                "STATE_LIST",
+                "DISTRICTS_LIST",
+                "TEHSILS_LIST"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_PINCODES_EDIT",
+            "actionUrl": "",
+            "actionName": "PINCODES_EDIT",
             "compulsoryFields": [],
             "parentGroup": [
                 "COUNTRY_LIST",
