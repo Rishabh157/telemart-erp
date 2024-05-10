@@ -75,7 +75,7 @@ const PincodeListing = ({ pincodes }: Props) => {
                         UserModuleNameTypes.ACTION_PINCODES_ADD
                     ) as boolean
                 }
-                isEditButton
+                isEditButton={isAuthorized(UserModuleNameTypes.ACTION_TEHSILS_EDIT)}
                 onEditListItemClick={(newValue) => {
                     setEditPincodeId(newValue?.value)
                     // editPincodeId,

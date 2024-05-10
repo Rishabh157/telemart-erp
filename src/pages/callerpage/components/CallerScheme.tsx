@@ -107,10 +107,12 @@ const CallerScheme = ({
                             selectLabel="select product"
                             value={values?.productGroupId || ''}
                             options={productsGroupOptions || []}
+                            isValueWithLable
                             onChange={(e) => {
                                 setSchemeListOptions([])
                                 setFieldValue('schemeId', '')
-                                setFieldValue('productGroupId', e)
+                                setFieldValue('productGroupId', e.value)
+                                setFieldValue('productGroupLabel', e.label)
                                 setSchemeDetails({
                                     ...schemeDetails,
                                     schemeName: '',
