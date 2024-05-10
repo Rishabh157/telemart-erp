@@ -81,6 +81,17 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_FILL_CARTON_BOX",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_CARTON_BOX",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_INVENTORIES"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_ADD",

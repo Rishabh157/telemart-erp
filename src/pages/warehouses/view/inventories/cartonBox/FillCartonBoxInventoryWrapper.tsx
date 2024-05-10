@@ -1,3 +1,10 @@
+/// ==============================================
+// Filename:InventoryListing.tsx
+// Type: List Component
+// Last Updated: JUNE 27, 2023
+// Project: TELIMART - Front End
+// ==============================================
+
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 
@@ -6,7 +13,7 @@ import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 // import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import InwardInventory from './InwardInventory'
+import FillCartonBoxInventory from './FillCartonBoxInventory'
 import { useGetAllCartonBoxQuery } from 'src/services/CartonBoxService'
 import { CartonBoxListResponse, WarehousesListResponse } from 'src/models'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
@@ -22,7 +29,7 @@ export type SelectBoxOption = {
     value: string | number
     itemCount: number
 }
-const InwardInventoryWrapper = (props: Props) => {
+const FillCartonBoxInventoryWrapper = (props: Props) => {
     const [cartonBoxOption, setCartonBoxOption] = useState<
         SelectBoxOption[] | []
     >([])
@@ -66,11 +73,11 @@ const InwardInventoryWrapper = (props: Props) => {
         }
     }, [whData, whIsLoading, whIsFetching])
     return (
-        <InwardInventory
+        <FillCartonBoxInventory
             cartonBoxOption={cartonBoxOption}
             wareHouseOption={wareHouseOption}
         />
     )
 }
 
-export default InwardInventoryWrapper
+export default FillCartonBoxInventoryWrapper

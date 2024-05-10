@@ -214,6 +214,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        //warehouse barcode insert in Carton box
+        getBarcodeOfWarehouse: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: (barcodeId: string) => ({
+                url: `/bar-code/get-warehouse-barcode/${barcodeId}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
     }),
 })
 export const {
@@ -233,5 +243,6 @@ export const {
     useDispatchDealerBarcodeMutation,
     useGetDealersInventoryQuery,
     useGetBarcodeByOuterBoxNumberQuery,
-    useAddCustomerInwardBarcodesMutation
+    useAddCustomerInwardBarcodesMutation,
+    useGetBarcodeOfWarehouseMutation
 } = barcodeApi
