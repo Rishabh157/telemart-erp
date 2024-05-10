@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Header.tsx
-// Type: Utils Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect, useContext } from 'react'
 
@@ -13,6 +6,7 @@ import { BsMoon, BsSun } from 'react-icons/bs'
 import { FormControl, MenuItem, Select } from '@mui/material'
 import { IoNotifications } from 'react-icons/io5'
 import { useDispatch, useSelector } from 'react-redux'
+import { FaRegBuilding } from 'react-icons/fa'
 
 // |-- Internal Dependencies --|
 import UserProfileCard from '../UserProfileCard/UserProfileCard'
@@ -25,54 +19,58 @@ import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { setDeviceId, setUserData } from 'src/redux/slices/authSlice'
 import { ThemeContext } from 'src/App'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const Header = () => {
-    const dispatch = useDispatch<AppDispatch>()
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
     const [isShowNotification, setIsShowNotification] = useState(false)
-    const deviceIditem = localStorage.getItem('device-id') || ''
+
     const { theme, toggleTheme } = useContext(ThemeContext)
+    const dispatch = useDispatch<AppDispatch>()
+    const [updaeCompany] = useUpdateCompanyByAdminMutation()
+    const { deviceId } = useGetLocalStorage()
+
     useEffect(() => {
-        dispatch(setDeviceId(deviceIditem))
-    }, [deviceIditem, dispatch])
+        dispatch(setDeviceId(deviceId))
+    }, [deviceId, dispatch])
+
     const { userData } = useSelector((state: RootState) => state?.auth)
+
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
         useState(true)
+
     const [company, setCompany] = useState(userData?.companyId || '')
 
     const [companyName, setCompanyName] = useState('')
-    const { data, isFetching, isLoading } = useGetAllCompaniesQuery('', {
-        skip: !userData?.companyId,
+
+    const {
+        items: data,
+        isLoading,
+        isFetching,
+    } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetAllCompaniesQuery('', {
+            skip: !userData?.companyId,
+        }),
     })
+
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            if (data?.data?.status) {
-                const companyName = data?.data?.find(
-                    (com: any) => com?._id === company
-                ).companyName
-                setCompanyName(companyName)
-            }
+            const companyName = data?.find(
+                (com: any) => com?._id === company
+            ).companyName
+            setCompanyName(companyName)
         }
-
         // eslint-disable-next-line
     }, [data, isLoading, isFetching])
 
-    const [updaeCompany] = useUpdateCompanyByAdminMutation()
     // const dispatch = useDispatch()
     const handleUpdate = (companyId: string) => {
         if (!companyId) return
         const update = {
             companyId: companyId,
-            firstName: userData?.firstName,
-            lastName: userData?.lastName,
-            userName: userData?.userName,
-            email: userData?.email,
-            mobile: userData?.mobile,
-            userDepartment: 'ADMIN',
-            userRole: userData?.userRole,
-            branchId: userData?.branchId,
         }
-        updaeCompany({ body: update, id: userData?.userId || '' }).then(
+        updaeCompany({ id: userData?.userId || '', body: update }).then(
             (updateCompanyInfo: any) => {
                 if (updateCompanyInfo?.data?.status) {
                     const {
@@ -178,7 +176,7 @@ const Header = () => {
                             <MenuItem value="" disabled>
                                 <em>Select Company</em>
                             </MenuItem>
-                            {data?.data?.map((ele: any) => {
+                            {data?.map((ele: any) => {
                                 return (
                                     <MenuItem key={ele._id} value={ele?._id}>
                                         {ele?.companyName}
@@ -188,7 +186,10 @@ const Header = () => {
                         </Select>
                     </FormControl>
                 ) : (
-                    <span>{companyName}</span>
+                    <span className="rounded px-2 py-2 text-black font-normal border-[1px] border-gray-300 flex gap-x-4 items-center capitalize">
+                        <FaRegBuilding size={20} color="#4d3838" />
+                        {companyName}
+                    </span>
                 )}
 
                 <button
@@ -222,12 +223,6 @@ const Header = () => {
                             ? userData?.fullName[0].toUpperCase()
                             : ''}
                     </div>
-
-                    {/* <div className='flex flex-col gap-1 justify-start items-start' >
-                        <div className='text-primary-main text-[13px]' > Administrator </div>
-                        <div className='flex gap-1 items-center font-bold text-slate-500 text-sm' > Himanshu Jain  <BiChevronDown className='text-lg font-bold' />  </div>
-
-                    </div> */}
                 </button>
                 {isShowProfileCard && (
                     <UserProfileCard

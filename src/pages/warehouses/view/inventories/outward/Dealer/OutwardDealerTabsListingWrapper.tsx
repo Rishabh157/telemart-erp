@@ -3,6 +3,8 @@ import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
+import { Formik, FormikProps } from 'formik'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import { useNavigate, useParams } from 'react-router-dom'
@@ -36,6 +38,15 @@ import {
 } from 'src/services/BarcodeService'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetTransportQuery } from 'src/services/transportServiceses'
+import { getTransportTypeOptions } from 'src/utils/constants/customeTypes'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { CircularProgress } from '@mui/material'
 
 // |-- Types --|
 export type Tabs = {
@@ -44,12 +55,33 @@ export type Tabs = {
     path?: string
 }
 
+type FormInitialValues = {
+    transportnameId: string
+    transporterGST: string
+    mode: string
+    distance: string
+    vehicleNumber: string
+    vehicleType: string
+    transportDocNo: string
+    documnetDate: string
+    roadPermitNumber: string
+    lrNo: string
+    totalWeight: string
+    totalPackages: string
+    fileUrl: string
+}
+
 const OutwardDealerTabsListingWrapper = () => {
     useUnmountCleanup()
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+
+    // Upload File Mutation
+    const [uploadFile] = useAddFileUrlMutation()
+
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<OutwardRequestDealerListResponse | null>(null)
     const dispatch = useDispatch<AppDispatch>()
@@ -97,9 +129,53 @@ const OutwardDealerTabsListingWrapper = () => {
         }
     )
 
+    const { options: transportNameOptions } = useCustomOptions({
+        useEndPointHook: useGetTransportQuery(userData?.companyId),
+        keyName: 'transportName',
+        value: '_id',
+    })
+
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchDealerBarcodeMutation()
+
+    // Form Initial Values
+    const initialValues: FormInitialValues = {
+        transportnameId: '',
+        transporterGST: '',
+        mode: '',
+        distance: '',
+        vehicleNumber: '',
+        vehicleType: 'REGULAR',
+        transportDocNo: '',
+        documnetDate: '',
+        roadPermitNumber: '',
+        lrNo: '',
+        totalWeight: '',
+        totalPackages: '',
+        fileUrl: '',
+    }
+
+    // Form Validation Schema
+    const validationSchema = object({
+        transportnameId: string().required('Please select a transportname'),
+        transporterGST: string().required('Please select a transporter GST'),
+        mode: string().required('Please select a mode'),
+        distance: string().required('Please select a distance'),
+        vehicleNumber: string().required('Please select a vehicle no.'),
+        vehicleType: string().required(
+            'Please select a transport document no.'
+        ),
+        transportDocNo: string().required(
+            'Please select a transport document no.'
+        ),
+        documnetDate: string().required('Please select a documnet date'),
+        roadPermitNumber: string(),
+        lrNo: string(),
+        totalWeight: string(),
+        totalPackages: string(),
+        fileUrl: string(),
+    })
 
     const columns: columnTypes[] = [
         {
@@ -284,7 +360,7 @@ const OutwardDealerTabsListingWrapper = () => {
             .catch((err) => console.error(err))
     }
 
-    const handleDispatchBarcode = () => {
+    const onSubmitHandler = (values: FormInitialValues) => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
             if (!ele) return ele
 
@@ -311,6 +387,7 @@ const OutwardDealerTabsListingWrapper = () => {
         barcodeDispatch({
             barcodedata: [...filterValue],
             soId: [...(soid as string[])] as string[],
+            ...values,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -328,6 +405,33 @@ const OutwardDealerTabsListingWrapper = () => {
 
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
+    }
+
+    const handleFileUpload = async (file: File, setFieldValue: any) => {
+        let fileUrl = ''
+        let formData = new FormData()
+
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        try {
+            // call the file manager api
+            const res = await uploadFile(formData)
+            if ('data' in res) {
+                setImageApiStatus(false)
+                fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue('fileUrl', fileUrl)
+                return fileUrl
+            }
+        } catch (error) {
+            console.error('Error uploading file:', error)
+            // Handle error here if needed
+        }
     }
 
     return (
@@ -359,7 +463,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">Dealer Name</div>
                                     {':'}
-                                    <div className="">
+                                    <div className="capitalize">
                                         {selectedItemsTobeDispatch?.dealerName}
                                     </div>
                                 </div>
@@ -493,19 +597,272 @@ const OutwardDealerTabsListingWrapper = () => {
                             }
                         )}
 
-                        <div className="flex justify-end items-end ">
-                            <div>
-                                <ATMLoadingButton
-                                    disabled={!handleDisableDispatchButton()}
-                                    isLoading={barcodeDispatchInfo?.isLoading}
-                                    loadingText="Dispatching"
-                                    onClick={() => handleDispatchBarcode()}
-                                    className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
-                                >
-                                    Dispatch
-                                </ATMLoadingButton>
-                            </div>
-                        </div>
+                        <Formik
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={onSubmitHandler}
+                        >
+                            {(formikProps: FormikProps<FormInitialValues>) => {
+                                const { values, setFieldValue, handleSubmit } =
+                                    formikProps
+
+                                return (
+                                    <>
+                                        <div>
+                                            <div className="text-lg pb-2 font-medium text-primary-main">
+                                                Transport Details
+                                            </div>
+
+                                            <div className="grid grid-cols-4 gap-x-8">
+                                                <ATMSelectSearchable
+                                                    required
+                                                    label="Transport Name"
+                                                    name="transportnameId"
+                                                    value={
+                                                        values.transportnameId
+                                                    }
+                                                    options={
+                                                        transportNameOptions
+                                                    }
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'transportnameId',
+                                                            e
+                                                        )
+                                                    }}
+                                                />
+
+                                                <ATMTextField
+                                                    required
+                                                    name="transporterGST"
+                                                    value={
+                                                        values.transporterGST
+                                                    }
+                                                    label="Transporter GST"
+                                                    placeholder="transporter GST"
+                                                    className="mt-0 rounded"
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'transporterGST',
+                                                            e?.target?.value
+                                                        )
+                                                    }}
+                                                />
+
+                                                <ATMSelectSearchable
+                                                    required
+                                                    label="Mode"
+                                                    name="mode"
+                                                    value={values.mode}
+                                                    options={getTransportTypeOptions()}
+                                                    onChange={(e) => {
+                                                        setFieldValue('mode', e)
+                                                    }}
+                                                />
+
+                                                <ATMTextField
+                                                    required
+                                                    name="distance"
+                                                    value={values.distance}
+                                                    label="Distance"
+                                                    placeholder="Distance"
+                                                    className="mt-0 rounded"
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'distance',
+                                                            e?.target?.value
+                                                        )
+                                                    }}
+                                                />
+
+                                                <ATMTextField
+                                                    required
+                                                    name="vehicleNumber"
+                                                    value={values.vehicleNumber}
+                                                    label="Vehicle No."
+                                                    placeholder="Distance"
+                                                    className="mt-0 rounded"
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'vehicleNumber',
+                                                            e?.target?.value
+                                                        )
+                                                    }}
+                                                />
+
+                                                <ATMSelectSearchable
+                                                    required
+                                                    label="Vehicle Type"
+                                                    name="vehicleType"
+                                                    value={values.vehicleType}
+                                                    options={[
+                                                        {
+                                                            label: 'Regular',
+                                                            value: 'REGULAR',
+                                                        },
+                                                    ]}
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'vehicleType',
+                                                            e
+                                                        )
+                                                    }}
+                                                />
+
+                                                <ATMTextField
+                                                    required
+                                                    name="transportDocNo"
+                                                    value={
+                                                        values.transportDocNo
+                                                    }
+                                                    label="Transport document no."
+                                                    placeholder="Distance"
+                                                    className="mt-0 rounded"
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'transportDocNo',
+                                                            e?.target?.value
+                                                        )
+                                                    }}
+                                                />
+
+                                                <div className="mt-5">
+                                                    <ATMDatePicker
+                                                        required
+                                                        label="Document Date"
+                                                        name="documnetDate"
+                                                        textTransform="capitalize"
+                                                        className="mt-0"
+                                                        dateTimeFormat="DD/MM/YYYY"
+                                                        value={
+                                                            values.documnetDate
+                                                        }
+                                                        minDate={
+                                                            'values?.callBackFrom.value'
+                                                        }
+                                                        onChange={(
+                                                            newValue
+                                                        ) => {
+                                                            setFieldValue(
+                                                                'documnetDate',
+                                                                newValue
+                                                            )
+                                                        }}
+                                                    />
+                                                </div>
+
+                                                <ATMTextField
+                                                    name=""
+                                                    value={values.totalWeight}
+                                                    label="Total weight"
+                                                    placeholder="Total weight"
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'totalWeight',
+                                                            e?.target?.value
+                                                        )
+                                                    }}
+                                                    className="mt-0 rounded"
+                                                />
+
+                                                <ATMTextField
+                                                    name=""
+                                                    value={
+                                                        values.roadPermitNumber
+                                                    }
+                                                    label="Road Permit No."
+                                                    placeholder="Road permin no."
+                                                    className="mt-0 rounded"
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'roadPermitNumber',
+                                                            e?.target?.value
+                                                        )
+                                                    }}
+                                                />
+
+                                                <ATMTextField
+                                                    name=""
+                                                    value={values.lrNo}
+                                                    label="LR No."
+                                                    placeholder="Lr no."
+                                                    className="mt-0 rounded"
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'lrNo',
+                                                            e?.target?.value
+                                                        )
+                                                    }}
+                                                />
+
+                                                <ATMTextField
+                                                    name=""
+                                                    value={values.totalPackages}
+                                                    label="Total packages"
+                                                    placeholder="Total packages"
+                                                    className="mt-0 rounded"
+                                                    onChange={(e) => {
+                                                        setFieldValue(
+                                                            'totalPackages',
+                                                            e?.target?.value
+                                                        )
+                                                    }}
+                                                />
+
+                                                <div className="w-ful mt-5">
+                                                    <ATMFilePickerWrapper
+                                                        name=""
+                                                        label="File Upload"
+                                                        placeholder={
+                                                            'Select File'
+                                                        }
+                                                        selectedFile={
+                                                            values.fileUrl
+                                                        }
+                                                        onSelect={(
+                                                            newFile: any
+                                                        ) => {
+                                                            handleFileUpload(
+                                                                newFile,
+                                                                setFieldValue
+                                                            )
+                                                        }}
+                                                        // isSubmitting={false}
+                                                    />
+                                                    {imageApiStatus ? (
+                                                        <div className="mt-3">
+                                                            <CircularProgress
+                                                                size={18}
+                                                            />
+                                                        </div>
+                                                    ) : null}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex justify-end items-end mt-4">
+                                            <div>
+                                                <ATMLoadingButton
+                                                    disabled={
+                                                        !handleDisableDispatchButton()
+                                                    }
+                                                    isLoading={
+                                                        barcodeDispatchInfo?.isLoading
+                                                    }
+                                                    loadingText="Dispatching"
+                                                    onClick={
+                                                        handleSubmit as any
+                                                    }
+                                                    className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
+                                                >
+                                                    Dispatch
+                                                </ATMLoadingButton>
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                            }}
+                        </Formik>
                     </div>
                 }
             />
