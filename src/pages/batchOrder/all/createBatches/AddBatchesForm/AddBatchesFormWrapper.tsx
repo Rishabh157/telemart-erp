@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -14,6 +14,7 @@ import {
     useAddBatchesMutation,
     useGetUsersByDistributeDepartmentQuery,
 } from 'src/services/BatchesServices'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {
@@ -29,7 +30,6 @@ export type FormInitialValues = {
 const AddBatchesFormWrapper = ({ selectedRows, handleClose }: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addBatch] = useAddBatchesMutation()
-    const [assignUsers, setAssignUsers] = useState<any[]>()
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
@@ -43,19 +43,15 @@ const AddBatchesFormWrapper = ({ selectedRows, handleClose }: Props) => {
         ),
     })
 
-    const { isLoading, isFetching, data } =
-        useGetUsersByDistributeDepartmentQuery('')
-
-    useEffect(() => {
-        if (!isFetching && !isLoading) {
-            setAssignUsers(data?.data)
-        }
-    }, [isLoading, isFetching, data])
+    const { options } = useCustomOptions({
+        useEndPointHook: useGetUsersByDistributeDepartmentQuery(''),
+        keyName: 'userName',
+        value: '_id',
+    })
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-
         setTimeout(() => {
             addBatch({
                 orders: selectedRows?.map((ele: any) => ele?._id),
@@ -78,13 +74,7 @@ const AddBatchesFormWrapper = ({ selectedRows, handleClose }: Props) => {
 
     //  selected option dropdowns options
     const dropdownOptions = {
-        assignUserOptions:
-            assignUsers?.map((ele: any) => {
-                return {
-                    label: ele?.firstName?.concat(' ', ele?.lastName),
-                    value: ele?._id,
-                }
-            }) || [],
+        assignUserOptions: options || [],
     }
 
     return (

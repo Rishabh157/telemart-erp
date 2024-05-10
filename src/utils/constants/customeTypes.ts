@@ -1317,3 +1317,29 @@ export const getCourierOptions = () => {
         }
     })
 }
+
+// Transport Type Options
+enum TransportType {
+    road = 'ROAD',
+    air = 'AIR',
+}
+
+export const getTransportTypeOptions = () => {
+    let options = [
+        {
+            label: 'Road',
+            value: TransportType.road,
+        },
+        {
+            label: 'Air',
+            value: TransportType.air,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}

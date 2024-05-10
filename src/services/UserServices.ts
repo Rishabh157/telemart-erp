@@ -97,15 +97,16 @@ export const userApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update New User *****/
+        //***** Update User Company *****/
         updateCompanyByAdmin: builder.mutation({
             invalidatesTags: ['newUser'],
-            query: ({ body, id }: ChangeCompany) => ({
-                url: `/user/${id}`,
+            query: ({ id, body }: ChangeCompany) => ({
+                url: `/user/update-user-company/${id}`,
                 method: 'PUT',
                 body,
             }),
         }),
+
         //***** Update  User deactive *****/
         deactiveUser: builder.mutation({
             invalidatesTags: ['newUser'],
