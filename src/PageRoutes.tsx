@@ -23,7 +23,6 @@ import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationS
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
 import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
-import EditPreferenceCourierWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/edit/EditPreferenceCourierWrapper'
 import CourierPreferenceListingWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/list/CourierPreferenceListingWrapper'
 import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
 import DealerToDealerOrderListingWrapper from './pages/dealerTodealer/list/DealerToDealerOrderListingWrapper'
@@ -279,7 +278,7 @@ import FillCartonBoxInventoryWrapper from './pages/warehouses/view/inventories/c
 import AddTransportWrapper from './pages/configuration/ConfigurationScreens/transport/add/AddTransportWrapper'
 import EditTransportWrapper from './pages/configuration/ConfigurationScreens/transport/edit/EditTransportWrapper'
 import TransportListingWrapper from './pages/configuration/ConfigurationScreens/transport/list/TransportListingWrapper'
-// import OrderDashboard from './pages/orders/OrderDashboard'
+import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1873,12 +1872,12 @@ const PageRoutes = () => {
                         }
                     />
                     <Route
-                        path="courier-preference/edit/:id"
+                        path="courier-preference/add"
                         element={
                             <Authorization
-                                children={<EditPreferenceCourierWrapper />}
+                                children={<AddCourierPreferenceWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_COURIER_PREFERENCE
+                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
                                 }
                             />
                         }
@@ -1894,8 +1893,8 @@ const PageRoutes = () => {
                             />
                         }
                     />
-{/* transport */}
-<Route
+                    {/* transport */}
+                    <Route
                         path="transport/add"
                         element={
                             <Authorization
@@ -1922,9 +1921,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<TransportListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_TRANSPORT
-                                }
+                                permission={UserModuleNameTypes.NAV_TRANSPORT}
                             />
                         }
                     />
