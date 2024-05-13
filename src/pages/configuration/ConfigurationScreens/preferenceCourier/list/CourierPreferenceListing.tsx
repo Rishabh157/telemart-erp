@@ -8,9 +8,13 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
-
 // |-- Redux --|
-import CourierPreferenceDragListing, { CourierProps } from './CourierPreferenceDragListing'
+import CourierPreferenceDragListing, {
+    CourierProps,
+} from './CourierPreferenceDragListing'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { useNavigate } from 'react-router-dom'
 
 // |-- Types --|
 type Props = {
@@ -19,9 +23,11 @@ type Props = {
     handleUpdatePriority: (rows: CourierProps[]) => void
 }
 
-const CourierPreferenceListing = ({ columns, rows ,handleUpdatePriority }: Props) => {
-  
-
+const CourierPreferenceListing = ({
+    columns,
+    rows,
+    handleUpdatePriority,
+}: Props) => {
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: 'Configuration',
@@ -31,8 +37,7 @@ const CourierPreferenceListing = ({ columns, rows ,handleUpdatePriority }: Props
             label: ' Courier Preference ',
         },
     ]
-
-
+const navigate=useNavigate()
     return (
         <div className="px-4 h-full pt-3">
             {/* Breadcrumbs */}
@@ -43,6 +48,18 @@ const CourierPreferenceListing = ({ columns, rows ,handleUpdatePriority }: Props
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Courier Preference </ATMPageHeading>
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                ) && (
+                    <button
+                        onClick={() =>
+                            navigate('/configurations/courier-preference/add')
+                        }
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add
+                    </button>
+                )}
             </div>
 
             <CourierPreferenceDragListing

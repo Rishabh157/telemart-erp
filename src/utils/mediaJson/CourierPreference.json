@@ -23,6 +23,16 @@
                     "fieldValue": "priority"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_COURIER_PREFERENCE_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "LIST"
+            ],
+            "fields": []
         }
     ]
 }

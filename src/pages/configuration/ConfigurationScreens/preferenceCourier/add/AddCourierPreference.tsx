@@ -12,7 +12,7 @@ import ATMBreadCrumbs, {
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './EditPreferenceCourierWrapper'
+import { FormInitialValues } from './AddCourierPreferenceWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -26,15 +26,15 @@ type Props = {
 // Breadcrumbs
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: 'Attributes',
-        path: '/configurations/attributes',
+        label: 'Courier preference',
+        path: '/configurations/courier-preference',
     },
     {
-        label: 'Edit ',
+        label: 'Add',
     },
 ]
 
-const EditAttribute = ({ formikProps, apiStatus }: Props) => {
+const AddCourierPreference = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
@@ -51,7 +51,7 @@ const EditAttribute = ({ formikProps, apiStatus }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading>Edit</ATMPageHeading>
+                    <ATMPageHeading>Add</ATMPageHeading>
                 </div>
 
                 <div className="max-h-full bg-white bg-no-repeat bg-cover border rounded shadow grow bg-1 bg-form-bg">
@@ -69,7 +69,7 @@ const EditAttribute = ({ formikProps, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                                Update
+                            Save
                             </button>
                         </div>
                     </div>
@@ -82,13 +82,26 @@ const EditAttribute = ({ formikProps, apiStatus }: Props) => {
                             {/* Field 3 */}
                             <ATMTextField
                                 required
-                                name="attributeName"
-                                value={values.attributeName}
-                                label="Attribute Name"
-                                placeholder="Attribute Name"
+                                name="courierName"
+                                value={values.courierName}
+                                label="Courier Name"
+                                placeholder="Courier Name"
                                 onChange={(e) =>
                                     handleSetFieldValue(
-                                        'attributeName',
+                                        'courierName',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                              <ATMTextField
+                                required
+                                name="priority"
+                                value={values.priority}
+                                label="Priority"
+                                placeholder="priority"
+                                onChange={(e) =>
+                                    handleSetFieldValue(
+                                        'priority',
                                         e.target.value
                                     )
                                 }
@@ -101,4 +114,4 @@ const EditAttribute = ({ formikProps, apiStatus }: Props) => {
     )
 }
 
-export default EditAttribute
+export default AddCourierPreference
