@@ -1,11 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditDealerWarehouseWrapper.tsx
-// Type: Edit Component
-// Last Updated: OCTOBER 13, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 

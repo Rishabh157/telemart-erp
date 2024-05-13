@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddDealerWarehouse.tsx
-// Type: ADD Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
