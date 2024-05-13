@@ -234,6 +234,15 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+            // get Invoice
+            dispatchGPOOrdersToWarehouse: builder.mutation({
+                invalidatesTags: ['order'],
+                query: (body) => ({
+                    url: `/order-inquiry/warehouse-order-dispatch`,
+                    method: 'PUT',
+                    body,
+                }),
+            }),
     }),
 })
 
@@ -261,5 +270,6 @@ export const {
     useUpdateOfferAppliedNdrOrderMutation,
     useGetMultiSearchOrderByMobAndOrderNoMutation,
     useGetGenerateCouriorLabelByAwbNumberMutation,
-    useGetGenerateInvoiceByAwbNumberMutation
+    useGetGenerateInvoiceByAwbNumberMutation,
+    useDispatchGPOOrdersToWarehouseMutation
 } = OrderApi
