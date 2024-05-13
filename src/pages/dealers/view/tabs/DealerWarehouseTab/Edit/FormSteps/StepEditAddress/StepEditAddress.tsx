@@ -11,12 +11,14 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../EditDealerWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
+// import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -58,22 +60,49 @@ const StepEditAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    // Upload File Mutation
+    const [uploadFile] = useAddFileUrlMutation()
     const [imageApiStatus, setImageApiStatus] = useState(false)
-    const [fileUploader] = useFileUploaderMutation()
+    // const [fileUploader] = useFileUploaderMutation()
     const dispatch = useDispatch()
+
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+    const handleFileUpload: any = (file: File, name: string) => {
+        let formData = new FormData()
+
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                // setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                setImageApiStatus(false)
+            }
+        })
+    }
+
     return (
-        <div className="">
+        <div>
             {formFields?.map((formField, index) => {
                 const { sectionName, fields } = formField
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${index !== formFields?.length - 1 && 'border-b'
-                            }  border-slate-300`}
+                        className={`py-9 px-7 ${
+                            index !== formFields?.length - 1 && 'border-b'
+                        }  border-slate-300`}
                     >
                         <div className="text-primary-main text-lg pb-2 font-medium">
                             {sectionName}
@@ -95,7 +124,7 @@ const StepEditAddress = ({
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
-                                                        name ===
+                                                    name ===
                                                         'billing_address.phone'
                                                         ? 10
                                                         : 100
@@ -105,16 +134,16 @@ const StepEditAddress = ({
                                                 value={
                                                     name.includes('.')
                                                         ? values[
-                                                        name.split('.')[0]
-                                                        ][name.split('.')[1]]
+                                                              name.split('.')[0]
+                                                          ][name.split('.')[1]]
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
                                                     if (
                                                         name ===
-                                                        'regd_address.phone' ||
+                                                            'regd_address.phone' ||
                                                         name ===
-                                                        'billing_address.phone'
+                                                            'billing_address.phone'
                                                     ) {
                                                         const inputValue =
                                                             e.target.value
@@ -152,40 +181,13 @@ const StepEditAddress = ({
                                                     name={name}
                                                     label={label}
                                                     placeholder={placeholder}
-                                                    onSelect={(newFile) => {
-                                                        const formData =
-                                                            new FormData()
-                                                        formData.append(
-                                                            'fileType',
-                                                            'IMAGE'
+                                                    onSelect={(
+                                                        newFile: any
+                                                    ) => {
+                                                        handleFileUpload(
+                                                            newFile,
+                                                            name
                                                         )
-                                                        formData.append(
-                                                            'category',
-                                                            'WAREHOUSEGSTCERTIFICATE'
-                                                        )
-                                                        formData.append(
-                                                            'fileUrl',
-                                                            newFile || ''
-                                                        )
-                                                        setImageApiStatus(true)
-                                                        fileUploader(
-                                                            formData
-                                                        ).then((res: any) => {
-                                                            if ('data' in res) {
-                                                                setImageApiStatus(
-                                                                    false
-                                                                )
-                                                                handleSetFieldValue(
-                                                                    name,
-                                                                    res?.data
-                                                                        ?.data
-                                                                        ?.fileUrl
-                                                                )
-                                                            }
-                                                            setImageApiStatus(
-                                                                false
-                                                            )
-                                                        })
                                                     }}
                                                     selectedFile={
                                                         values?.billing_address
@@ -203,39 +205,28 @@ const StepEditAddress = ({
 
                                     case 'select':
                                         return (
-                                            <div className="-mt-2">
-                                                <ATMSelectSearchable
-                                                    label={label}
-                                                    selectLabel={label}
-                                                    name={name}
-                                                    value={
-                                                        name.includes('.')
-                                                            ? values[
-                                                            name.split(
-                                                                '.'
-                                                            )[0]
-                                                            ][
-                                                            name.split(
-                                                                '.'
-                                                            )[1]
-                                                            ]
-                                                            : values[name]
-                                                    }
-                                                    onChange={(e: any) => {
-                                                        handleSetFieldValue(
-                                                            name,
-                                                            e
-                                                        )
-                                                    }}
-                                                    options={
-                                                        dropdownOptions[
+                                            <ATMSelectSearchable
+                                                label={label}
+                                                selectLabel={label}
+                                                name={name}
+                                                value={
+                                                    name.includes('.')
+                                                        ? values[
+                                                              name.split('.')[0]
+                                                          ][name.split('.')[1]]
+                                                        : values[name]
+                                                }
+                                                onChange={(e: any) => {
+                                                    handleSetFieldValue(name, e)
+                                                }}
+                                                options={
+                                                    dropdownOptions[
                                                         field.optionAccessKey ||
-                                                        'counrtyOptions'
-                                                        ]
-                                                    }
-                                                    isSubmitting={isSubmitting}
-                                                />
-                                            </div>
+                                                            'counrtyOptions'
+                                                    ]
+                                                }
+                                                isSubmitting={isSubmitting}
+                                            />
                                         )
 
                                     default:

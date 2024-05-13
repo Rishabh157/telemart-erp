@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddCompanyDetails.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -72,29 +65,28 @@ const StepAddComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <div className="-mt-2" key={name}>
-                                    <ATMSelectSearchable
-                                        selectLabel={label}
-                                        label={label}
-                                        name={name}
-                                        value={
-                                            name.includes('.')
-                                                ? values[name.split('.')[0]][
-                                                      name.split('.')[1]
-                                                  ]
-                                                : values[name]
-                                        }
-                                        onChange={(e: any) => {
-                                            handleSetFieldValue(name, e)
-                                        }}
-                                        options={
-                                            dropdownOptions[
-                                                field.optionAccessKey ||
-                                                    'countryOptions'
-                                            ]
-                                        }
-                                    />
-                                </div>
+                                <ATMSelectSearchable
+                                    key={name}
+                                    selectLabel={label}
+                                    label={label}
+                                    name={name}
+                                    value={
+                                        name.includes('.')
+                                            ? values[name.split('.')[0]][
+                                                  name.split('.')[1]
+                                              ]
+                                            : values[name]
+                                    }
+                                    onChange={(e: any) => {
+                                        handleSetFieldValue(name, e)
+                                    }}
+                                    options={
+                                        dropdownOptions[
+                                            field.optionAccessKey ||
+                                                'countryOptions'
+                                        ]
+                                    }
+                                />
                             )
 
                         default:

@@ -73,29 +73,27 @@ const StepEditComapnyDetails = ({
 
                         case 'select':
                             return (
-                                <div className="-mt-2">
-                                    <ATMSelectSearchable
-                                        selectLabel={label}
-                                        label={label}
-                                        name={name}
-                                        value={
-                                            name.includes('.')
-                                                ? values[name.split('.')[0]][
-                                                      name.split('.')[1]
-                                                  ]
-                                                : values[name]
-                                        }
-                                        onChange={(e: any) => {
-                                            handleSetFieldValue(name, e)
-                                        }}
-                                        options={
-                                            dropdownOptions[
-                                                field.optionAccessKey ||
-                                                    'countryOptions'
-                                            ]
-                                        }
-                                    />
-                                </div>
+                                <ATMSelectSearchable
+                                    selectLabel={label}
+                                    label={label}
+                                    name={name}
+                                    value={
+                                        name.includes('.')
+                                            ? values[name.split('.')[0]][
+                                                  name.split('.')[1]
+                                              ]
+                                            : values[name]
+                                    }
+                                    onChange={(e: any) => {
+                                        handleSetFieldValue(name, e)
+                                    }}
+                                    options={
+                                        dropdownOptions[
+                                            field.optionAccessKey ||
+                                                'countryOptions'
+                                        ]
+                                    }
+                                />
                             )
 
                         default:

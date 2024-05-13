@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddAddress.tsx
-// Type: Add Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -26,10 +19,11 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 
 import { RootState } from 'src/redux/store'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import { CiSearch } from 'react-icons/ci'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -79,9 +73,32 @@ const StepAddAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+    // Upload File Mutation
+    const [uploadFile] = useAddFileUrlMutation()
     const [imageApiStatus, setImageApiStatus] = useState(false)
-    const [fileUploader] = useFileUploaderMutation()
+    // const [fileUploader] = useFileUploaderMutation()
     const dispatch = useDispatch()
+
+    const handleFileUpload: any = (file: File, name: string) => {
+        let formData = new FormData()
+
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                setImageApiStatus(false)
+            }
+        })
+    }
 
     return (
         <div className="">
@@ -171,41 +188,13 @@ const StepAddAddress = ({
                                                     name={name}
                                                     label={label}
                                                     placeholder={placeholder}
-                                                    onSelect={(newFile) => {
-                                                        const formData =
-                                                            new FormData()
-                                                        formData.append(
-                                                            'fileType',
-                                                            'IMAGE'
+                                                    onSelect={(
+                                                        newFile: any
+                                                    ) => {
+                                                        handleFileUpload(
+                                                            newFile,
+                                                            name
                                                         )
-                                                        formData.append(
-                                                            'category',
-                                                            'WAREHOUSEGSTCERTIFICATE'
-                                                        )
-                                                        formData.append(
-                                                            'fileUrl',
-                                                            newFile || ''
-                                                        )
-                                                        setImageApiStatus(true)
-                                                        fileUploader(
-                                                            formData
-                                                        ).then((res:any) => {
-                                                            if ('data' in res) {
-                                                                setImageApiStatus(
-                                                                    false
-                                                                )
-
-                                                                setFieldValue(
-                                                                    name,
-                                                                    res?.data
-                                                                        ?.data
-                                                                        ?.fileUrl
-                                                                )
-                                                            }
-                                                            setImageApiStatus(
-                                                                false
-                                                            )
-                                                        })
                                                     }}
                                                     selectedFile={
                                                         values.billing_address
@@ -223,44 +212,34 @@ const StepAddAddress = ({
                                     case 'select':
                                         return (
                                             <>
-                                                <div
-                                                    className="-mt-2"
-                                                    key={name}
-                                                >
-                                                    <ATMSelectSearchable
-                                                        label={label}
-                                                        selectLabel={label}
-                                                        name={name}
-                                                        value={
-                                                            name.includes('.')
-                                                                ? values[
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[0]
-                                                                  ][
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[1]
-                                                                  ]
-                                                                : values[name]
-                                                        }
-                                                        onChange={(e: any) => {
-                                                            setFieldValue(
-                                                                name,
-                                                                e
-                                                            )
-                                                        }}
-                                                        options={
-                                                            dropdownOptions[
-                                                                field.optionAccessKey ||
-                                                                    'counrtyOptions'
-                                                            ]
-                                                        }
-                                                        isSubmitting={
-                                                            isSubmitting
-                                                        }
-                                                    />
-                                                </div>
+                                                <ATMSelectSearchable
+                                                    label={label}
+                                                    selectLabel={label}
+                                                    name={name}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[0]
+                                                              ][
+                                                                  name.split(
+                                                                      '.'
+                                                                  )[1]
+                                                              ]
+                                                            : values[name]
+                                                    }
+                                                    onChange={(e: any) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    options={
+                                                        dropdownOptions[
+                                                            field.optionAccessKey ||
+                                                                'counrtyOptions'
+                                                        ]
+                                                    }
+                                                    isSubmitting={isSubmitting}
+                                                />
 
                                                 {label === 'Pincode' && (
                                                     <>
