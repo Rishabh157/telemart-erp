@@ -3,53 +3,48 @@ import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import EditAttribute from './EditPreferenceCourier'
+import AddPreferenceCourier from './AddCourierPreference'
 
-import {
-    useGetattributesByIdQuery,
-    useUpdateattributesMutation,
-} from 'src/services/AttributeService'
+import { useAddCourierPrefernceMutation } from 'src/services/CourierPreferenceService'
 import { showToast } from 'src/utils'
 
 // |-- Redux --|
-import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-import { AttributesListResponse } from 'src/models'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
-    attributeName: string
+    courierName: string
+    priority:string
 }
 
-const EditPreferenceCourierWrapper = (props: Props) => {
+const AddCourierPreferenceWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const Id = params.id
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    // const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
-    const [EditAttributes] = useUpdateattributesMutation()
-    const { items } = useGetDataByIdCustomQuery<AttributesListResponse>({
-        useEndPointHook: useGetattributesByIdQuery(Id),
-    })
+    const [AddCourierPreferenceApi] = useAddCourierPrefernceMutation()
+   
     const initialValues: FormInitialValues = {
-        attributeName: items?.attributeName || '',
+        courierName: '',
+        priority:  '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        attributeName: string().required('Attribute name is required'),
+        courierName: string().required('Courier name is required'),
     })
 
     //    Form Submit Handler
@@ -57,17 +52,18 @@ const EditPreferenceCourierWrapper = (props: Props) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
-            EditAttributes({
+            AddCourierPreferenceApi({
                 body: {
-                    attributeName: values.attributeName,
-                    companyId: userData?.companyId || '',
+                    courierName: values.courierName,
+                    priority: values.priority,
+                    // companyId: userData?.companyId || '',
                 },
                 id: Id || '',
-            }).then((res) => {
+            }).then((res:any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Updated successfully!')
-                        navigate('/configurations/attributes')
+                        showToast('success', 'Added successfully!')
+                        navigate('/configurations/courier-preference')
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -88,7 +84,7 @@ const EditPreferenceCourierWrapper = (props: Props) => {
         >
             {(formikProps) => {
                 return (
-                    <EditAttribute
+                    <AddPreferenceCourier
                         apiStatus={apiStatus}
                         formikProps={formikProps}
                     />
@@ -98,4 +94,4 @@ const EditPreferenceCourierWrapper = (props: Props) => {
     )
 }
 
-export default EditPreferenceCourierWrapper
+export default AddCourierPreferenceWrapper
