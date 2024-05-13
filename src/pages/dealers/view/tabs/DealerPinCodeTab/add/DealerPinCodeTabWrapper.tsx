@@ -1,11 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:DealerPincodeTabWrapper.tsx
-// Type: Tab  Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
