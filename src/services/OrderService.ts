@@ -139,6 +139,15 @@ export const OrderApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        //***** Get Old Order By Order Number *****/
+        getInvoiceByOrderNumber: builder.query({
+            // providesTags: ['order'],
+            query: (orderNumber: any) => ({
+                url: `/order-inquiry/get-by-order-number-for-invoice/${orderNumber}`,
+                method: 'GET',
+            }),
+        }),
+
 
         //***** update first call id *****/
         updateWarehouseFirstCall: builder.mutation({
@@ -234,15 +243,15 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-            // get Invoice
-            dispatchGPOOrdersToWarehouse: builder.mutation({
-                invalidatesTags: ['order'],
-                query: (body) => ({
-                    url: `/order-inquiry/warehouse-order-dispatch`,
-                    method: 'PUT',
-                    body,
-                }),
+        // get Invoice
+        dispatchGPOOrdersToWarehouse: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (body) => ({
+                url: `/order-inquiry/warehouse-order-dispatch`,
+                method: 'PUT',
+                body,
             }),
+        }),
     }),
 })
 
@@ -259,6 +268,7 @@ export const {
     useGetDealerOfOrderQuery,
     useAssignOrderToDealerOrWarehouseMutation,
     useApprovedOrderStatusMutation,
+    useGetInvoiceByOrderNumberQuery,
     useGetOldOrderDetailsByOrderNumberQuery,
     useUpdateWarehouseFirstCallMutation,
     useApprovedWHFirstCallApprovalMutation,
