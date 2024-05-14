@@ -4,7 +4,7 @@ import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { OrderListResponse } from 'src/models'
 import { useGetInvoiceByOrderNumberQuery } from 'src/services/OrderService'
 
-const RetailInvoiceSecond = () => {
+const ReatailInvoiceLabel = () => {
     const tableHead = 'border-r border-black p-2 text-start'
     const tableCell = 'border-r border-black p-2'
     const location = useLocation()
@@ -296,4 +296,4 @@ const RetailInvoiceSecond = () => {
     )
 }
 
-export default RetailInvoiceSecond
+export default ReatailInvoiceLabel

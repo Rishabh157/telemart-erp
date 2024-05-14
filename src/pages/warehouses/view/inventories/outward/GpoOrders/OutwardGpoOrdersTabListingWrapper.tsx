@@ -11,6 +11,8 @@ import OutwardGpoOrdersTabListing from './OutwardGpoOrdersTabListing'
 // |-- Redux --|
 import { Chip } from '@mui/material'
 import moment from 'moment'
+import { FaRegFilePdf } from 'react-icons/fa'
+import { MdLabelImportantOutline } from 'react-icons/md'
 import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -24,7 +26,10 @@ import { AlertText } from 'src/pages/callerpage/components/constants'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
-import { useDispatchGPOOrdersToWarehouseMutation, useGetOrderQuery } from 'src/services/OrderService'
+import {
+    useDispatchGPOOrdersToWarehouseMutation,
+    useGetOrderQuery,
+} from 'src/services/OrderService'
 import { showToast } from 'src/utils'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -50,6 +55,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
+
 
     const { page, rowsPerPage, searchValue, dateFilter } = outwardCustomerState
     const { items } = useGetCustomListingData({
@@ -101,6 +107,43 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                     />
                 ),
         },
+        {
+            field: 'invoice',
+            headerName: 'Download Label/Invoice',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <>
+                        {row?.orderStatus === SaleOrderStatus.dispatched ? (
+                            <div className="flex gap-2">
+                                <MdLabelImportantOutline
+                                    title="Print label"
+                                    size={25}
+                                    color="blue"
+                                    onClick={() =>
+                                        window.open(`/gpo/label?orderNumber=${row.orderNumber}`, '_blank')
+                                    }
+                                />
+                                <FaRegFilePdf
+                                    title="Print Invoice"
+                                    color="red"
+                                    size={22}
+                                    onClick={() =>
+                                        window.open(
+                                            `/gpo/invoice?orderNumber=${row.orderNumber}`,
+                                            '_blank'
+                                        )
+                                    }
+                                />
+                            </div>
+                        ) : null}
+                    </>
+                )
+            },
+        },
+
         {
             field: 'firstCallApproval',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_FIRST_CALL_APPROVAL,
@@ -542,7 +585,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
     ]
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
-    useDispatchGPOOrdersToWarehouseMutation()
+        useDispatchGPOOrdersToWarehouseMutation()
 
     const handleReload = () => {
         if (customized) {
@@ -619,16 +662,19 @@ const OutwardGpoOrdersTabListingWrapper = () => {
 
     const handleDispatchBarcode = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
-        
             return ele?._id
         })
-      
+
         barcodeDispatch({
             barcodes: [...filterValue],
             orderId: selectedItemsTobeDispatch?._id,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
+                    window.open(
+                        `/gpo/label-invoice?orderNumber=${selectedItemsTobeDispatch.orderNumber}`,
+                        '_blank'
+                    )
                     showToast('success', 'dispatched successfully')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))

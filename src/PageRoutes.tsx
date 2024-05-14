@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import Authorization from './Authorization'
+import ReatailInvoiceLabel from './Receipt/ReatailInvoiceLabel'
+import { default as RetailInvoice, default as RetailLabel } from './Receipt/RetailILabel'
 import ComplainListingWrapper from './pages/Complain/List/ComplainListingWrapper'
 import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
@@ -23,7 +25,11 @@ import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationS
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
 import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
+import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
 import CourierPreferenceListingWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/list/CourierPreferenceListingWrapper'
+import AddTransportWrapper from './pages/configuration/ConfigurationScreens/transport/add/AddTransportWrapper'
+import EditTransportWrapper from './pages/configuration/ConfigurationScreens/transport/edit/EditTransportWrapper'
+import TransportListingWrapper from './pages/configuration/ConfigurationScreens/transport/list/TransportListingWrapper'
 import DealerInventoryListingWrapper from './pages/dealerInventory/list/DealerInventoryListingWrapper'
 import DealerToDealerOrderListingWrapper from './pages/dealerTodealer/list/DealerToDealerOrderListingWrapper'
 import DispositionLayout from './pages/disposition/DispositionLayout'
@@ -246,6 +252,7 @@ import WarehouseToComapnyListingWrapper from './pages/warehouseToCompany/list/Wa
 import AddWarehouseToSampleWrapper from './pages/warehouseToSample/add/AddWarehouseToSampleWrapper'
 import EditWarehouseToSampleWrapper from './pages/warehouseToSample/edit/EditWarehouseToSampleWrapper'
 import WarehouseToSampleListingWrapper from './pages/warehouseToSample/list/WarehouseToSampleListingWrapper'
+import FillCartonBoxInventoryWrapper from './pages/warehouses/view/inventories/cartonBox/FillCartonBoxInventoryWrapper'
 import InwardsTabs from './pages/warehouses/view/inventories/inward'
 import InwardCompanyTabsListingWrapper from './pages/warehouses/view/inventories/inward/Company/InwardCompanyTabsListingWrapper'
 import InwardCustomerTabsListingWrapper from './pages/warehouses/view/inventories/inward/Customer/InwardCustomerTabsListingWrapper'
@@ -274,11 +281,6 @@ import {
     setUserData,
 } from './redux/slices/authSlice'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
-import FillCartonBoxInventoryWrapper from './pages/warehouses/view/inventories/cartonBox/FillCartonBoxInventoryWrapper'
-import AddTransportWrapper from './pages/configuration/ConfigurationScreens/transport/add/AddTransportWrapper'
-import EditTransportWrapper from './pages/configuration/ConfigurationScreens/transport/edit/EditTransportWrapper'
-import TransportListingWrapper from './pages/configuration/ConfigurationScreens/transport/list/TransportListingWrapper'
-import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -870,6 +872,7 @@ const PageRoutes = () => {
                                 />
                             }
                         />
+
                         <Route
                             path="shipyaari-orders"
                             element={
@@ -3262,6 +3265,40 @@ const PageRoutes = () => {
                 />
 
                 <Route path="/barcodes" element={<BarcodeGenerator />} />
+                {/* gpo invoice */}
+                <Route
+                    path="gpo/label"
+                    element={
+                        <Authorization
+                            children={<RetailLabel />}
+                            permission={
+                                UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO
+                            }
+                        />
+                    }
+                />
+                <Route
+                    path="gpo/label-invoice"
+                    element={
+                        <Authorization
+                            children={<ReatailInvoiceLabel />}
+                            permission={
+                                UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO
+                            }
+                        />
+                    }
+                />
+                <Route
+                    path="gpo/invoice"
+                    element={
+                        <Authorization
+                            children={<RetailInvoice />}
+                            permission={
+                                UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO
+                            }
+                        />
+                    }
+                />
 
                 <Route
                     path="influencers-management"
