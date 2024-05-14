@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import Authorization from './Authorization'
 import ReatailInvoiceLabel from './Receipt/ReatailInvoiceLabel'
-import { default as RetailInvoice, default as RetailLabel } from './Receipt/RetailILabel'
 import ComplainListingWrapper from './pages/Complain/List/ComplainListingWrapper'
 import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
@@ -281,6 +280,8 @@ import {
     setUserData,
 } from './redux/slices/authSlice'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
+import RetailInvoice from './Receipt/RetailInvoice'
+import RetailLabel from './Receipt/RetailILabel'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -329,6 +330,7 @@ const PageRoutes = () => {
                 />
                 {/* Profile */}
                 <Route path="/profile" element={<ProfileWrappper />} />
+                <Route path="/retail-lebel" element={<RetailLabel />} />
 
                 {/* Vendor */}
                 <Route

@@ -9,9 +9,9 @@
 export type OrderListResponse = {
     _id: string
     orderNumber: number | string
-    orderAssignedToCourier:string
+    orderAssignedToCourier: string
     inquiryNumber: string
-    awbNumber:string
+    awbNumber: string
     assignDealerId: string | null
     assignWarehouseId: string | null
     assignDealerLabel: string
@@ -19,6 +19,8 @@ export type OrderListResponse = {
     agentId: string
     agentName: string
     companyId: string
+    companyAddress: string
+    hsnCode: string
     approved: boolean
     didNo: string
     ageGroup: string

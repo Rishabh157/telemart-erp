@@ -100,7 +100,6 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
                             setIsShow(true)
-
                             setBarcodeQuantity(row.shcemeQuantity)
                             setSelectedItemsTobeDispatch(row)
                         }}
