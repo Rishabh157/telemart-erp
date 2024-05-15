@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditSchemeWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -56,6 +49,7 @@ export type FormInitialValues = {
     schemeDescription: string
     productInformation: {
         productGroup: string
+        productGroupName: string
         productQuantity: number
         mrp: number
         pop: number
@@ -172,16 +166,17 @@ const EditSchemeWrapper = () => {
 
     const [UpdateScheme] = useUpdateSchemeMutation()
 
-    const { items: selectedItem } =
-        useGetDataByIdCustomQuery<any>({
-            useEndPointHook: useGetSchemeByIdQuery(Id),
-        })
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetSchemeByIdQuery(Id),
+    })
 
     useEffect(() => {
         if (selectedItem !== null) {
             setSelectedCategory(selectedItem?.category)
         }
     }, [selectedItem])
+
+    console.log('selectedItem', selectedItem)
 
     // From Initial Values
     const initialValues: FormInitialValues = {
@@ -205,6 +200,7 @@ const EditSchemeWrapper = () => {
             (ele: any) => {
                 return {
                     productGroup: ele.productGroup,
+                    productGroupName: ele?.productGroupName,
                     productQuantity: ele.productQuantity,
                     mrp: ele.mrp,
                     pop: ele.pop,

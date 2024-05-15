@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -47,6 +46,7 @@ export type FormInitialValues = {
     schemeDescription: string
     productInformation: {
         productGroup: string
+        productGroupName: string
         productQuantity: number
         mrp: number
         pop: number
@@ -174,6 +174,7 @@ const AddSchemeWrapper = () => {
         productInformation: [
             {
                 productGroup: '',
+                productGroupName: '',
                 productQuantity: 0,
                 mrp: 0,
                 pop: 0,
@@ -241,8 +242,7 @@ const AddSchemeWrapper = () => {
         }
     }
 
-
-    const { options:productGroupOptions} = useCustomOptions({
+    const { options: productGroupOptions } = useCustomOptions({
         useEndPointHook: useGetAllProductGroupQuery(''),
         keyName: 'groupName',
         value: '_id',

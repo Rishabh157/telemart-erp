@@ -45,6 +45,7 @@ type Props = {
     anotherSearchTwoPlaceholder?: string
     onAnotherSearchTwo?: (newValue: string) => void
     filterShow?: any
+    children?: any
 }
 
 const ATMTableHeader = ({
@@ -75,6 +76,7 @@ const ATMTableHeader = ({
     anotherSearchTwoPlaceholder = 'Search...',
     onAnotherSearchTwo = () => {},
     filterShow,
+    children,
 }: Props) => {
     return (
         <div className="p-3 pb-5 border-b border-slate-300 grid grid-cols-3">
@@ -94,6 +96,8 @@ const ATMTableHeader = ({
                         placeholder={placeholder}
                     />
                 </div>
+
+                {children && <div>{children}</div>}
 
                 {isAnotherSearch && (
                     <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">

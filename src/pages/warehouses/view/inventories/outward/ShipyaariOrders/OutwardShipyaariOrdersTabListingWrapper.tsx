@@ -20,7 +20,7 @@ import {
     useGetGenerateCouriorLabelByAwbNumberMutation,
     useGetGenerateInvoiceByAwbNumberMutation,
     useGetOrderQuery,
-    useDispatchGPOOrdersToWarehouseMutation
+    useDispatchGPOOrdersToWarehouseMutation,
 } from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FaRegFilePdf } from 'react-icons/fa'
@@ -59,7 +59,9 @@ enum FirstCallApprovalStatus {
 const OutwardShipyaariOrdersTabListingWrapper = () => {
     useUnmountCleanup()
     const { id } = useParams()
-    const { userData,customized }: any = useSelector((state: RootState) => state?.auth)
+    const { userData, customized }: any = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -144,6 +146,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
+            hidden: true,
             renderCell: (row: OrderListResponse) =>
                 row?.orderStatus === SaleOrderStatus.complete ? (
                     'Dispatched'
@@ -648,7 +651,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     ]
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
-    useDispatchGPOOrdersToWarehouseMutation()
+        useDispatchGPOOrdersToWarehouseMutation()
 
     const handleReload = () => {
         if (customized) {
@@ -725,10 +728,9 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
 
     const handleDispatchBarcode = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
-        
             return ele?._id
         })
-      
+
         barcodeDispatch({
             barcodes: [...filterValue],
             orderId: selectedItemsTobeDispatch?._id,
@@ -750,11 +752,10 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
-    return <>
-    
-    
-    <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
-    <DialogLogBox
+    return (
+        <>
+            <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
+            <DialogLogBox
                 isOpen={isShow}
                 fullScreen={true}
                 buttonClass="cursor-pointer"
@@ -895,7 +896,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                     </div>
                 }
             />
-    </>
+        </>
+    )
 }
 
 export default OutwardShipyaariOrdersTabListingWrapper

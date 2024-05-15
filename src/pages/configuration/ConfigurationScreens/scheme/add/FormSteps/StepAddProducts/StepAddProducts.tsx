@@ -80,10 +80,15 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                     required
                                                     name={`productInformation[${productIndex}].productGroup`}
                                                     value={productGroup}
+                                                    isValueWithLable
                                                     onChange={(e) => {
                                                         setFieldValue(
                                                             `productInformation[${productIndex}].productGroup`,
-                                                            e
+                                                            e.value
+                                                        )
+                                                        setFieldValue(
+                                                            `productInformation[${productIndex}].productGroupName`,
+                                                            e.label
                                                         )
                                                     }}
                                                     label="Product Group"

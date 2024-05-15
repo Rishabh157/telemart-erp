@@ -72,8 +72,7 @@ const WarehouseListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                   
                 />
 
                 {/* Table */}
@@ -81,7 +80,6 @@ const WarehouseListing = ({
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

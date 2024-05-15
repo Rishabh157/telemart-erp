@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 
 // |-- Internal Dependencies --|
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
@@ -21,9 +22,14 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    onDispatchClick: () => void
 }
 
-const OutwardGpoOrdersTabListing = ({ columns, rows }: Props) => {
+const OutwardGpoOrdersTabListing = ({
+    columns,
+    rows,
+    onDispatchClick,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
 
     const outwardCustomerState: any = useSelector(
@@ -38,6 +44,7 @@ const OutwardGpoOrdersTabListing = ({ columns, rows }: Props) => {
         <div className=" h-[calc(100vh-150px)]  bg-white ">
             <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
                 {/*Table Header */}
+
                 <ATMTableHeader
                     page={page}
                     rowCount={rows.length}
@@ -48,6 +55,16 @@ const OutwardGpoOrdersTabListing = ({ columns, rows }: Props) => {
                     }
                     searchValue={searchValue}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    children={
+                        <ATMLoadingButton
+                            // disabled={values.status ? false : true}
+                            loadingText="Opening...."
+                            onClick={onDispatchClick}
+                            className="text-white flex items-center py-1 px-1 rounded w-28 bg-primary-main"
+                        >
+                            Dispatch
+                        </ATMLoadingButton>
+                    }
                     // isFilter
                     // onFilterClick={() => setIsOpenFilterFormDialog(true)}
                 />

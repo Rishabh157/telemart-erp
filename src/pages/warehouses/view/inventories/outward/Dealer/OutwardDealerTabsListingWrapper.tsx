@@ -243,9 +243,9 @@ const OutwardDealerTabsListingWrapper = () => {
             renderCell: (row: OutwardRequestDealerListResponse) => {
                 return (
                     <div className="w-full">
-                        {row?.documents?.map((item) => {
+                        {row?.documents?.map((item, ind) => {
                             return (
-                                <div className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                <div  key={ind} className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
