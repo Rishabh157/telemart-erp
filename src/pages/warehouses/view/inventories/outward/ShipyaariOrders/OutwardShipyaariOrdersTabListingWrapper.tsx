@@ -20,7 +20,7 @@ import {
     useGetGenerateCouriorLabelByAwbNumberMutation,
     useGetGenerateInvoiceByAwbNumberMutation,
     useGetOrderQuery,
-    useDispatchGPOOrdersToWarehouseMutation
+    useDispatchGPOOrdersToWarehouseMutation,
 } from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FaRegFilePdf } from 'react-icons/fa'
@@ -59,7 +59,9 @@ enum FirstCallApprovalStatus {
 const OutwardShipyaariOrdersTabListingWrapper = () => {
     useUnmountCleanup()
     const { id } = useParams()
-    const { userData,customized }: any = useSelector((state: RootState) => state?.auth)
+    const { userData, customized }: any = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -100,35 +102,27 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         useGetGenerateCouriorLabelByAwbNumberMutation()
     const [getGenerateInvoice] = useGetGenerateInvoiceByAwbNumberMutation()
 
-    function base64ToBlob(base64Data: any) {
-        // Extract base64 content without the data URL prefix
-        const base64Content = base64Data.split(';base64,').pop()
-
-        // Convert base64 to ArrayBuffer
+    const handleGenerateCourierLabel = (awbNumber: string) => {
+        getGenerateCouriorLabel({ awbNumber: awbNumber }).then((res: any) => {
+            if (res.data?.data) {
+                const pdfBlob = base64ToBlob(res.data?.data)
+                if (pdfBlob) {
+                    const pdfUrl = URL.createObjectURL(pdfBlob)
+                    window.open(pdfUrl, '_blank')
+                }
+            }
+        })
+    }
+    function base64ToBlob(base64Data: string) {
+        const base64Content:any = base64Data.split(';base64,').pop()
         const arrayBuffer = Uint8Array.from(atob(base64Content), (c) =>
             c.charCodeAt(0)
         ).buffer
-
-        // Create Blob from ArrayBuffer
         return new Blob([arrayBuffer], { type: 'application/pdf' })
     }
 
-    const handleGenerateCourierLabel = (row: any) => {
-        getGenerateCouriorLabel({ awbNumber: row.awbNumber }).then(
-            (res: any) => {
-                if (res.data?.data) {
-                    const pdfBlob = base64ToBlob(res.data?.data)
-                    if (pdfBlob) {
-                        const pdfUrl = URL.createObjectURL(pdfBlob)
-                        window.open(pdfUrl, '_blank')
-                    }
-                }
-            }
-        )
-    }
-
-    const handleGenerateInvoice = (row: any) => {
-        getGenerateInvoice({ awbNumber: row.awbNumber }).then((res: any) => {
+    const handleGenerateInvoice = (awbNumber: string) => {
+        getGenerateInvoice({ awbNumber: awbNumber }).then((res: any) => {
             if (res.data?.data) {
                 const pdfBlob = base64ToBlob(res.data?.data)
                 if (pdfBlob) {
@@ -168,7 +162,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
             headerName: 'Download Label/Invoice',
             flex: 'flex-[1_1_0%]',
-            align: 'start',
+            align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -180,14 +174,18 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                                     size={25}
                                     color="blue"
                                     onClick={() =>
-                                        handleGenerateCourierLabel(row)
+                                        handleGenerateCourierLabel(
+                                            row.awbNumber
+                                        )
                                     }
                                 />
                                 <FaRegFilePdf
                                     title="Print Invoice"
                                     color="red"
                                     size={22}
-                                    onClick={() => handleGenerateInvoice(row)}
+                                    onClick={() =>
+                                        handleGenerateInvoice(row.awbNumber)
+                                    }
                                 />
                             </div>
                         ) : null}
@@ -648,7 +646,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     ]
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
-    useDispatchGPOOrdersToWarehouseMutation()
+        useDispatchGPOOrdersToWarehouseMutation()
 
     const handleReload = () => {
         if (customized) {
@@ -725,16 +723,20 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
 
     const handleDispatchBarcode = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
-        
             return ele?._id
         })
-      
+
         barcodeDispatch({
             barcodes: [...filterValue],
             orderId: selectedItemsTobeDispatch?._id,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
+                    handleGenerateCourierLabel(
+                        selectedItemsTobeDispatch.awbNumber
+                    )
+                    handleGenerateInvoice(selectedItemsTobeDispatch.awbNumber)
+
                     showToast('success', 'dispatched successfully')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))
@@ -750,11 +752,10 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
-    return <>
-    
-    
-    <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
-    <DialogLogBox
+    return (
+        <>
+            <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
+            <DialogLogBox
                 isOpen={isShow}
                 fullScreen={true}
                 buttonClass="cursor-pointer"
@@ -895,7 +896,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                     </div>
                 }
             />
-    </>
+        </>
+    )
 }
 
 export default OutwardShipyaariOrdersTabListingWrapper

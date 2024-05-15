@@ -8,7 +8,7 @@ const RetailLabel = () => {
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search)
     const orderNumber = queryParams.get('orderNumber')
-    console.log(location, 'location')
+    // console.log(location, 'location')
 
     const { items } = useGetDataByIdCustomQuery<OrderListResponse>({
         useEndPointHook: useGetInvoiceByOrderNumberQuery(orderNumber, {
@@ -16,6 +16,9 @@ const RetailLabel = () => {
         }),
     })
     console.log('items ===>', items)
+
+    const totalPrice: number =
+        (items?.shcemeQuantity || 0) * (items?.price || 0)
 
     // React.useEffect(() => {
     //     const printFunc = setTimeout(() => {
@@ -50,8 +53,8 @@ const RetailLabel = () => {
                     <span className="font-medium">To</span>
                     <span className="font-medium">{items?.customerName}</span>
                     <span className="font-medium">
-                        ADDPOST + VILL VIRNORA NEAR BY BUS STAND PERNEM,, PINCOD
-                        403512MOB NO ,9209162825, NEAR BY COLLEGE,,,
+                        {items?.houseNumber},, PINCOD 403512MOB NO ,9209162825,
+                        NEAR BY COLLEGE,,,
                     </span>
                     <div>
                         <span className="font-medium">
@@ -69,10 +72,10 @@ const RetailLabel = () => {
                     </div>
                     <span className="font-medium">MOBILE : 9209162825</span>
                 </div>
-                <div className="flex items-center flex-col font-bold text-[22px]">
+                <div className="flex items-center flex-col font-bold text-[19px] p-2">
                     <span> CASH ON DELIVERY</span>
                     <span>AMOUNT TO COLLECT</span>
-                    <span>Rs 2500.00</span>
+                    <span>Rs {totalPrice?.toFixed(2)}</span>
                 </div>
             </div>
 
@@ -95,10 +98,10 @@ const RetailLabel = () => {
 
                 <div className="flex flex-col justify-center items-center">
                     <div className="ml-32">
-                        <span className="font-bold text-xl">
+                        <span className="font-bold text-lg">
                             Maersk Courier
                         </span>
-                        <span className="pl-32 text-xl font-bold">
+                        <span className="pl-32 text-lg font-bold">
                             - Delhivery
                         </span>
                         <img
@@ -106,8 +109,8 @@ const RetailLabel = () => {
                             src="https://static.vecteezy.com/system/resources/thumbnails/008/506/948/small/abstract-digital-code-scanner-barcode-template-for-social-media-payment-market-and-design-png.png"
                             alt=""
                         />
-                        <p className="font-bold text-center text-xl mt-1">
-                            AWB No. : 11751110761445
+                        <p className="font-bold text-center text-lg mt-1">
+                            AWB No. : {items?.awbNumber || '-'}
                         </p>
                     </div>
                 </div>
@@ -145,26 +148,25 @@ const RetailLabel = () => {
                         <tbody>
                             <tr>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    SC00147
+                                    -SC00147-
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    FSD Drink Stop Ayurvedic 0.00 Rs. 2500.00
-                                    Drops - 2500
+                                    {items?.schemeName}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    1
+                                    {items?.shcemeQuantity}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    1 2500.00
+                                    {totalPrice?.toFixed(2)}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    0.00
+                                    -
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    0.00
+                                    {items?.deliveryCharges}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    Rs. 2500.00
+                                    Rs. {items?.totalAmount?.toFixed(2)}
                                 </td>
                             </tr>
                         </tbody>
@@ -173,10 +175,10 @@ const RetailLabel = () => {
                     <div className="flex justify-between gap-4 border-t-[1px] border-b-[1px] border-gray-400 ">
                         <div className="flex justify-between items-end border-r-[1px] border-gray-400 w-1/2">
                             <div>
-                                <span className="font-bold text-lg">
+                                <span className="font-bold text-md">
                                     Total Pieces :{' '}
                                 </span>
-                                <span className="font-bold text-lg">1</span>
+                                <span className="font-bold text-md">1</span>
                             </div>
                         </div>
 
@@ -187,8 +189,8 @@ const RetailLabel = () => {
                                     src="https://static.vecteezy.com/system/resources/thumbnails/008/506/948/small/abstract-digital-code-scanner-barcode-template-for-social-media-payment-market-and-design-png.png"
                                     alt=""
                                 />
-                                <p className="font-bold text-center text-xl mt-1">
-                                    Order No. : 2066028
+                                <p className="font-bold text-start text-xl mt-1">
+                                    Order No. : {items?.orderNumber}
                                 </p>
                             </div>
                         </div>
@@ -196,24 +198,24 @@ const RetailLabel = () => {
 
                     <div className="flex justify-between gap-4 border-t-[1px] border-b-[1px] border-gray-400 ">
                         <div className="flex flex-col ">
-                            <span className="text-lg font-semibold">
+                            <span className="text-md font-semibold">
                                 If undelivered then return to :
                             </span>
-                            <span className="text-lg font-semibold">
+                            <span className="text-md font-semibold">
                                 Telemart
                             </span>
-                            <span className="text-lg font-semibold">
+                            <span className="text-md font-semibold">
                                 Godown Address: 188 Gayatri Nagar, Palda, Near
                                 Goyal Flour Mill,,Indore
                             </span>
-                            <span className="text-lg font-semibold">
+                            <span className="text-md font-semibold">
                                 Madhya Pradesh,India-452020
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="text-end text-lg font-semibold">
+            <div className="text-end text-md font-semibold">
                 Madhya Pradesh,India-452020
             </div>
         </div>

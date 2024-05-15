@@ -12,7 +12,7 @@ import OutwardGpoOrdersTabListing from './OutwardGpoOrdersTabListing'
 import { Chip } from '@mui/material'
 import moment from 'moment'
 import { FaRegFilePdf } from 'react-icons/fa'
-import { MdLabelImportantOutline } from 'react-icons/md'
+// import { MdLabelImportantOutline } from 'react-icons/md'
 import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -108,23 +108,23 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         },
         {
             field: 'invoice',
-            headerName: 'Download Label/Invoice',
+            headerName: 'Invoice',
             flex: 'flex-[1_1_0%]',
-            align: 'start',
+            align: 'center',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
                     <>
                         {row?.orderStatus === SaleOrderStatus.dispatched ? (
                             <div className="flex gap-2">
-                                <MdLabelImportantOutline
+                                {/* <MdLabelImportantOutline
                                     title="Print label"
                                     size={25}
                                     color="blue"
                                     onClick={() =>
                                         window.open(`/gpo/label?orderNumber=${row.orderNumber}`, '_blank')
                                     }
-                                />
+                                /> */}
                                 <FaRegFilePdf
                                     title="Print Invoice"
                                     color="red"
@@ -142,7 +142,6 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                 )
             },
         },
-
         {
             field: 'firstCallApproval',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_FIRST_CALL_APPROVAL,
@@ -670,10 +669,10 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         })
             .then((res: any) => {
                 if (res?.data?.status) {
-                    window.open(
-                        `/gpo/label-invoice?orderNumber=${selectedItemsTobeDispatch.orderNumber}`,
-                        '_blank'
-                    )
+                    // window.open(
+                    //     `/gpo/label-invoice?orderNumber=${selectedItemsTobeDispatch.orderNumber}`,
+                    //     '_blank'
+                    // )
                     showToast('success', 'dispatched successfully')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))

@@ -51,14 +51,16 @@ const MultiOrderSearchListingWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         // dispatch(setFieldCustomized(false))
+        // console.log('values: ', values)
         const formatedValues = {
             orderNumbers: values.orderNumbers?.length
-                ? values.orderNumbers?.split(',')
-                : [],
+            ? values.orderNumbers?.split(',')
+            : [],
             mobileNumbers: values.mobileNumbers?.length
-                ? values.mobileNumbers?.split(',')
-                : [],
+            ? values.mobileNumbers?.split(',')
+            : [],
         }
+        console.log('formatedValues: ', formatedValues)
 
         setTimeout(() => {
             getMultiOrderSearch(formatedValues).then((res: any) => {
