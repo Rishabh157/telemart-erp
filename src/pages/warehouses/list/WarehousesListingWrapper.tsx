@@ -84,7 +84,16 @@ const DealersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_WAREHOUSE_CODE,
             renderCell: (row: WarehousesListResponse) => (
-                <span> {row.wareHouseCode} </span>
+                <span
+                    className="text-primary-main cursor-pointer"
+                    onClick={() => {
+                        navigate(
+                            `/warehouse/view/${row?._id}/warehouse-details`
+                        )
+                    }}
+                >
+                    {row?.wareHouseCode}
+                </span>
             ),
         },
         {

@@ -124,7 +124,7 @@ const OutwardTabs = (props: Props) => {
         <div className="w-full flex  h-[calc(100vh-95px)] bg-white">
             {/* Right Section */}
             {tabsRender ? (
-                <div className="w-[100%] border-b border-r border-l rounded-r h-full p-1  ">
+                <div className="w-[100%]   rounded-r h-full p-1  ">
                     <div className="py-1">
                         <div className="h-[40px] border flex gap-x-4 items-center bg-orange-300    shadow rounded  ">
                             <TabScrollable

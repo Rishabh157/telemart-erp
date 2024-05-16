@@ -1,9 +1,9 @@
 // |-- Built-in Dependencies --|
+import { Chip, Stack } from '@mui/material'
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 
 // |-- Internal Dependencies --|
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
@@ -17,21 +17,42 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import OutwardGpoOrderFilterFormWrapper from './Filters/OutwardGpoOrderFilterFormWrapper'
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
-    onDispatchClick: () => void
+    setFilter: React.Dispatch<
+        React.SetStateAction<FormInitialValuesFilterWithLabel>
+    >
+    filter: FormInitialValuesFilterWithLabel
+}
+
+type LabelValuePair = {
+    fieldName: string
+    label: string
+    value: any
+}
+
+// Define the type for FormInitialValuesFilter
+type FormInitialValuesFilterWithLabel = {
+    orderStatus: LabelValuePair
+    startDate: LabelValuePair
+    endDate: LabelValuePair
+    startTime: LabelValuePair
+    endTime: LabelValuePair
 }
 
 const OutwardGpoOrdersTabListing = ({
     columns,
     rows,
-    onDispatchClick,
+    setFilter,
+    filter,
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
@@ -40,11 +61,41 @@ const OutwardGpoOrdersTabListing = ({
     const { page, rowsPerPage, isTableLoading, searchValue } =
         outwardCustomerState
 
-    return (
-        <div className=" h-[calc(100vh-150px)]  bg-white ">
-            <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
-                {/*Table Header */}
+    const handleReset = () => {
+        setFilter((prev) => ({
+            ...prev,
+            startDate: { fieldName: '', value: '', label: '' },
+            endDate: { fieldName: '', value: '', label: '' },
+            startTime: { fieldName: '', value: '', label: '' },
+            endTime: { fieldName: '', value: '', label: '' },
+            orderStatus: { fieldName: '', value: '', label: '' },
+        }))
+    }
 
+    const filterShow = (filter: FormInitialValuesFilterWithLabel) => {
+        return (
+            <span className="capitalize">
+                <Stack direction="row" spacing={1}>
+                    {Object.entries(filter).map(([key, value], index) => {
+                        return value.value ? (
+                            <Chip
+                                key={index}
+                                label={`${value.fieldName}: ${value.label}`}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : null
+                    })}
+                </Stack>
+            </span>
+        )
+    }
+
+    return (
+        <div className="h-[calc(100vh-350px)] bg-white">
+            <div className="flex flex-col h-[calc(100%)] rounded bg-white">
+                {/*Table Header */}
                 <ATMTableHeader
                     page={page}
                     rowCount={rows.length}
@@ -55,29 +106,26 @@ const OutwardGpoOrdersTabListing = ({
                     }
                     searchValue={searchValue}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    children={
-                        <ATMLoadingButton
-                            // disabled={values.status ? false : true}
-                            loadingText="Opening...."
-                            onClick={onDispatchClick}
-                            className="text-white flex items-center py-1 px-1 rounded w-28 bg-primary-main"
-                        >
-                            Dispatch
-                        </ATMLoadingButton>
-                    }
-                    // isFilter
-                    // onFilterClick={() => setIsOpenFilterFormDialog(true)}
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
+                    isFilterRemover
+                    onFilterRemoverClick={handleReset}
+                    filterShow={filterShow(filter)}
                 />
 
-                {/* {isOpenFilterFormDialog && (
-                    <OutwardCustomerTabListFilterFormDialogWrapper
+                {isOpenFilterFormDialog && (
+                    <OutwardGpoOrderFilterFormWrapper
                         open
                         onClose={() => setIsOpenFilterFormDialog(false)}
+                        filter={filter}
+                        setFilter={setFilter}
                     />
-                )} */}
+                )}
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
                         columns={columns}
                         rows={rows}
@@ -86,7 +134,7 @@ const OutwardGpoOrdersTabListing = ({
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        extraClasses="max-h-[calc(100%-10px)] overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>
