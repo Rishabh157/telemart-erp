@@ -14,6 +14,7 @@ import VerticalNavBar from '../../UI/VerticalNavBar/VerticalNavBar'
 import { setIsCollapsed } from 'src/redux/slices/SideNavLayout'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { ThemeContext } from 'src/App'
+import classNames from 'classnames'
 
 // |-- Types --|
 type Props = {
@@ -27,30 +28,28 @@ const SideNavLayout = ({ children }: Props) => {
     )
 
     const { isCollapsed } = sideNavLayoutState
-
     const toggleCollapse = () => {
         dispatch(setIsCollapsed(!isCollapsed))
     }
 
     const location = useLocation()
     const currentPath = `/${location.pathname?.split('/')[1]}`
-    // const bgColorLocal = localStorage.getItem('themeColor')
     const { theme } = useContext(ThemeContext)
-    // const bgColor = bgColorLocal ? JSON.parse(bgColorLocal) : ''
+
     return (
         <div
-            className={`flex h-screen w-screen ${
-                theme === 'black' ? 'bg-invert' : ''
-            }`}
+            className={classNames('flex h-screen w-screen', {
+                'bg-invert': theme === 'black',
+            })}
         >
-            {/* Side Navigation Bar */}
-
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${
-                    isCollapsed
-                        ? 'min-w-[50px] w-[50px]'
-                        : 'min-w-[250px] w-[250px]'
-                }`}
+                className={classNames(
+                    'border-r border-slate-300 h-full transition-all duration-500 ease-in-out bg-white',
+                    {
+                        'min-w-[50px] w-[50px]': isCollapsed,
+                        'min-w-[250px] w-[250px]': !isCollapsed,
+                    }
+                )}
             >
                 <VerticalNavBar
                     toggleCollapse={toggleCollapse}
@@ -62,18 +61,15 @@ const SideNavLayout = ({ children }: Props) => {
                 />
             </div>
             <div
-                className={`h-full  ${
-                    isCollapsed
-                        ? 'min-w-[calc(100vw-50px)]'
-                        : 'min-w-[calc(100vw-250px)]'
-                }`}
+                className={classNames('h-full', {
+                    'min-w-[calc(100vw-50px)]': isCollapsed,
+                    'min-w-[calc(100vw-250px)]': !isCollapsed,
+                })}
             >
-                {/* Header */}
-                <div className="h-[55px] border-b border-slate-300 bg-white  ">
+                <div className="h-[45px] border-b border-slate-300 bg-white">
                     <Header />
                 </div>
-
-                <div className="grow w-full overflow-auto bg-slate-50  bg-transparent-body ">
+                <div className="grow w-full overflow-auto bg-slate-50 bg-transparent-body">
                     {children}
                 </div>
             </div>

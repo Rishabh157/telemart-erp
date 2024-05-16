@@ -202,3 +202,22 @@ body {
         }
     }
 }
+
+
+/* scroll thickness */
+/* Add this to your CSS file */
+
+
+.grow .overflow-auto::-webkit-scrollbar {
+    width: 6px !important;
+    height: 7px !important; /* or any other size */
+}
+
+.grow .overflow-auto::-webkit-scrollbar-thumb {
+    background-color: darkgrey !important;
+    border-radius: 20px !important;
+}
+
+.grow .overflow-auto::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+}

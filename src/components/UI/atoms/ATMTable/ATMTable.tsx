@@ -157,10 +157,10 @@ const ATMTable = <T extends {}>({
                     <div
                         onClick={() => onRowClick && onRowClick(row)}
                         key={row[idKey] || rowIndex}
-                        className={`flex items-center font-semibold text-grey-600  ${rowClassName}  ${
+                        className={`flex items-center font-semibold text-grey-800  ${rowClassName}  ${
                             onRowClick && 'cursor-pointer'
                         }  ${rowExtraClasses && rowExtraClasses(row)}  ${
-                            rowIndex !== rows.length - 1 && 'border-b'
+                            rowIndex !== rows.length - 1 && 'border-b border-slate-300'
                         } `}
                     >
                         {/* Checkbox */}

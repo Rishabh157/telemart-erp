@@ -144,7 +144,7 @@ const MediaLayout = ({ children }: Props) => {
 
             <div className="h-full grow ">
                 {/* Header */}
-                <div className="h-[55px] border-b border-slate-300 bg-white ">
+                <div className="h-[45px] border-b border-slate-300 bg-white ">
                     <Header />
                 </div>
 
