@@ -1,16 +1,10 @@
-/// ==============================================
-// Filename:DataFilterForm.tsx
-// Type: Utils Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 import { format } from 'date-fns'
 import { Form, Formik, FormikProps } from 'formik'
 import React from 'react'
 import { object, string } from 'yup'
 import ATMDatePicker from '../UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import * as yup from 'yup'
+
 interface FormInitialValues {
     startDate: string
     endDate: string
@@ -19,22 +13,27 @@ interface FormInitialValues {
 interface Props {
     onSubmitDateHandler: (values: any) => void
     IsDaterFilterLoading: boolean
+    values?: FormInitialValues
 }
 
 const DateFilterForm: React.FC<Props> = ({
     onSubmitDateHandler,
     IsDaterFilterLoading = false,
-}) => {
-    const initialValues: FormInitialValues = {
+    values = {
         startDate: '',
         endDate: '',
+    },
+}) => {
+    const initialValues: FormInitialValues = {
+        startDate: values?.startDate,
+        endDate: values?.endDate,
     }
 
     const validationSchema = object({
         startDate: string().required('Start date is required'),
         endDate: string().test(
             'is-valid-end-date',
-            'Should be less then Start Date',
+            'Should be less than Start Date',
             function (endDate) {
                 const startDate = this.resolve(yup.ref('startDate')) as string
                 return !startDate || !endDate || startDate <= endDate
@@ -48,6 +47,7 @@ const DateFilterForm: React.FC<Props> = ({
 
     return (
         <Formik
+            enableReinitialize
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmitHandler}
@@ -56,11 +56,9 @@ const DateFilterForm: React.FC<Props> = ({
                 const { setFieldValue, values } = formikProps
 
                 return (
-                    <Form className="flex gap-4 px-3 w-full ">
-                        <div className="flex gap-2">
-                            <div className="text-center text-xs items-center flex font-bold">
-                                From
-                            </div>
+                    <Form className="flex gap-4 px-3 w-full items-center">
+                        <div className="flex flex-row gap-2 items-center">
+                            <label className="text-xs font-bold">From</label>
                             <ATMDatePicker
                                 name="startDate"
                                 size="xs"
@@ -74,15 +72,13 @@ const DateFilterForm: React.FC<Props> = ({
                                 }
                             />
                         </div>
-                        <div className="flex gap-2  ">
-                            <div className="text-center text-xs items-center flex font-bold">
-                                To
-                            </div>
+                        <div className="flex flex-row gap-2 items-center">
+                            <label className="text-xs font-bold">To</label>
                             <ATMDatePicker
                                 name="endDate"
                                 size="xs"
                                 value={values.endDate}
-                                dateTimeFormat="DD/MM/YY "
+                                dateTimeFormat="DD/MM/YY"
                                 onChange={(e) =>
                                     setFieldValue(
                                         'endDate',
@@ -91,7 +87,7 @@ const DateFilterForm: React.FC<Props> = ({
                                 }
                             />
                         </div>
-                        <div className="flex justify-end  ">
+                        <div className="flex justify-end">
                             <button
                                 type="submit"
                                 disabled={
@@ -99,8 +95,10 @@ const DateFilterForm: React.FC<Props> = ({
                                     !(values.endDate && values.startDate)
                                 }
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 mt-1 -mb-1 px-2 text-white text-xs border hover:bg-blue-800 cursor border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
+                                className={`bg-primary-main rounded py-2 px-2 text-white text-xs border hover:bg-blue-800 cursor-pointer border-primary-main ${
+                                    IsDaterFilterLoading
+                                        ? 'opacity-50 cursor-not-allowed'
+                                        : ''
                                 }`}
                             >
                                 Submit

@@ -2,7 +2,7 @@ import React from 'react'
 import { Dialog } from '@mui/material'
 // import { object, string } from 'yup'
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
-import UserListFilterFormDialog from './AssignedOrderListFilterFormDialog'
+import AssignedOrderListFilterFormDialog from './AssignedOrderListFilterFormDialog'
 import moment from 'moment'
 
 export type FormInitialValuesFilter = {
@@ -167,7 +167,7 @@ const AssignedOrderListFilterFormDialogWrapper = ({
             >
                 {(formikProps) => (
                     <Form>
-                        <UserListFilterFormDialog
+                        <AssignedOrderListFilterFormDialog
                             open={open}
                             onClose={onClose}
                             formikProps={formikProps}
