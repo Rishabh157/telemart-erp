@@ -21,9 +21,14 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
+    onDispatchClick: () => void
 }
 
-const OutwardShipyaariOrdersTabListing = ({ columns, rows }: Props) => {
+const OutwardShipyaariOrdersTabListing = ({
+    columns,
+    rows,
+    onDispatchClick,
+}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
 
     const outwardCustomerState: any = useSelector(
@@ -35,7 +40,7 @@ const OutwardShipyaariOrdersTabListing = ({ columns, rows }: Props) => {
         outwardCustomerState
 
     return (
-        <div className=" h-[calc(100vh-150px)]  bg-white ">
+        <div className=" h-[calc(100vh-50px)]  bg-white ">
             <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
