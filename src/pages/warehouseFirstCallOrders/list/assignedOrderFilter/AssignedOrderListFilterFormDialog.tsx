@@ -92,27 +92,6 @@ const AssignedOrderListFilterFormDialog = ({
                     }}
                 />
 
-                {/* Order Type
-                <ATMSelectSearchable
-                    label="Order Type"
-                    isDisabled
-                    selectLabel="Select order type"
-                    name="orderType"
-                    value={values.orderType.value}
-                    options={[
-                        {
-                            label: 'amazone',
-                            value: '774909789',
-                        },
-                        {
-                            label: 'mg1',
-                            value: '767768976',
-                        },
-                    ]}
-                    onChange={(e) => {
-                        setFieldValuett('orderType', e || '')
-                    }}
-                /> */}
 
                 <ATMSelectSearchable
                     label="State"

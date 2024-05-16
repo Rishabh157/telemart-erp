@@ -148,7 +148,6 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
-
         //***** update first call id *****/
         updateWarehouseFirstCall: builder.mutation({
             invalidatesTags: ['order'],
@@ -252,6 +251,24 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // warehouse status
+        getGpoOrderStatus: builder.query({
+            providesTags: ['order'],
+            query: ({ warehouseId, dateFilter }) => ({
+                url: `order-inquiry/get-gpo-order-status/${warehouseId}`,
+                method: 'POST',
+                body: { dateFilter: dateFilter },
+            }),
+        }),
+        getShipayaariOrderStatus: builder.query({
+            providesTags: ['order'],
+            query: ({ warehouseId, dateFilter }) => ({
+                url: `order-inquiry/get-shipyaari-order-status/${warehouseId}`,
+                method: 'POST',
+                body: { dateFilter: dateFilter },
+            }),
+        }),
     }),
 })
 
@@ -281,5 +298,7 @@ export const {
     useGetMultiSearchOrderByMobAndOrderNoMutation,
     useGetGenerateCouriorLabelByAwbNumberMutation,
     useGetGenerateInvoiceByAwbNumberMutation,
-    useDispatchGPOOrdersToWarehouseMutation
+    useDispatchGPOOrdersToWarehouseMutation,
+    useGetGpoOrderStatusQuery,
+    useGetShipayaariOrderStatusQuery
 } = OrderApi

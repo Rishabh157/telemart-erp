@@ -282,6 +282,7 @@ import {
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
 import RetailInvoice from './Receipt/RetailInvoice'
 import RetailLabel from './Receipt/RetailILabel'
+import WarehouseOrderStatusOverviewWrapper from './pages/warehouses/view/inventories/outward/warehouseStatus/WarehouseOrderStatusOverviewWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -881,6 +882,19 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={
                                         <OutwardShipyaariOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
+                                    }
+                                />
+                            }
+                        />
+                             <Route
+                            path="warehouse-status"
+                            element={
+                                <Authorization
+                                    children={
+                                        <WarehouseOrderStatusOverviewWrapper />
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS

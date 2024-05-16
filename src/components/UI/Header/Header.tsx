@@ -38,7 +38,7 @@ const Header = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
-        useState(true)
+        useState(false)
 
     const [company, setCompany] = useState(userData?.companyId || '')
 
@@ -111,58 +111,44 @@ const Header = () => {
     }
 
     return (
-        <div
-            className={`rid grid-cols-2 w-full h-full shadow-lg borde bg-white`}
-        >
+        <div className="grid grid-cols-2 w-full h-full shadow-lg border bg-white">
             {/* Right Section */}
-            <div className="flex gap-4 col-start-2 justify-end items-center px-4 ">
-                <div>
-                    <div className="mt-1 mb-1 hover:outline-slate-200 cursor-pointer outline outline-offset-1 outline-slate-300 rounded-full ">
-                        <MouseOverPopover
-                            title=""
-                            children={
-                                <>
-                                    <div
-                                        onClick={toggleTheme}
-                                        className={` ${
-                                            theme === 'black' &&
-                                            'text-[#dd9c4c]'
-                                        } p-2 px-4 text-lg font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
-                                    >
-                                        <BsMoon /> Dark
-                                    </div>
-                                    <div
-                                        onClick={toggleTheme}
-                                        className={`${
-                                            theme === 'white' &&
-                                            'text-[#dd9c4c]'
-                                        } p-2 px-4 text-lg font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
-                                    >
-                                        <BsSun /> Light
-                                    </div>
-                                </>
-                            }
-                            buttonName={
-                                theme === 'black' ? (
-                                    <BsMoon
-                                        size={20}
-                                        className="cursor-pointer"
-                                    />
-                                ) : (
-                                    <BsSun
-                                        size={20}
-                                        className="cursor-pointer"
-                                    />
-                                )
-                            }
-                            extraClasses="p-2"
-                            isbuttonName
-                        />
-                    </div>
-                </div>
+            <div className="flex gap-4 col-start-2 justify-end items-center px-4 rounded-full ">
+                <MouseOverPopover
+                    title=""
+                    children={
+                        <>
+                            <div
+                                onClick={toggleTheme}
+                                className={`${
+                                    theme === 'black' ? 'text-[#dd9c4c]' : ''
+                                } p-1 px-2 text-sm font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
+                            >
+                                <BsMoon /> Dark
+                            </div>
+                            <div
+                                onClick={toggleTheme}
+                                className={`${
+                                    theme === 'white' ? 'text-[#dd9c4c]' : ''
+                                } p-1 px-2 text-sm font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
+                            >
+                                <BsSun /> Light
+                            </div>
+                        </>
+                    }
+                    buttonName={
+                        theme === 'black' ? (
+                            <BsMoon size={16} className="cursor-pointer" />
+                        ) : (
+                            <BsSun size={16} className="cursor-pointer" />
+                        )
+                    }
+                    extraClasses="p-1"
+                    isbuttonName
+                />
 
                 {userData?.userRole === 'ADMIN' ? (
-                    <FormControl sx={{ width: 150 }}>
+                    <FormControl sx={{ width: 150, height: 30 }}>
                         <Select
                             value={company}
                             onChange={(e) => {
@@ -170,19 +156,18 @@ const Header = () => {
                                 handleUpdate(e.target.value)
                             }}
                             displayEmpty
-                            inputProps={{ 'aria-label': 'Without label' }}
+                            inputProps={{ 'aria-label': 'Select Company' }}
                             size="small"
+                            sx={{ height: 30 }}
                         >
                             <MenuItem value="" disabled>
                                 <em>Select Company</em>
                             </MenuItem>
-                            {data?.map((ele: any) => {
-                                return (
-                                    <MenuItem key={ele._id} value={ele?._id}>
-                                        {ele?.companyName}
-                                    </MenuItem>
-                                )
-                            })}
+                            {data?.map((ele: any) => (
+                                <MenuItem key={ele._id} value={ele._id}>
+                                    {ele.companyName}
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                 ) : (
@@ -192,36 +177,27 @@ const Header = () => {
                     </span>
                 )}
 
-                <button
-                    onClick={() => {
-                        setIsShowNotification(
-                            (isShowNotification) => !isShowNotification
-                        )
-                        setIsNewNotificationsAvailable(false)
-                    }}
-                    className="hidden relative text-lg text-slate-700 transition-all duration-[800ms] hover:bg-slate-200 p-3 rounded-full"
+                {/* <button
+                    onClick={() => setIsShowNotification((prev) => !prev)}
+                    className="relative text-lg text-slate-700 transition-all duration-800 hover:bg-slate-200 p-3 rounded-full"
+                    aria-label="Toggle Notifications"
                 >
-                    <IoNotifications className="" />
-                    {isNewNotificationsAvailable ? (
-                        <span className="flex h-[7px] w-[7px] absolute top-[9px] right-[10px]">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-100"></span>
-                            <span className="relative inline-flex rounded-full h-[7px] w-[7px] bg-red-600"></span>
+                    {/* <IoNotifications /> */}
+                    {/* {isNewNotificationsAvailable && (
+                        <span className="flex h-2 w-2 absolute top-2 right-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
                         </span>
-                    ) : null}
-                </button>
+                    )} */}
+                {/* </button>  */}
 
                 <button
-                    onClick={() =>
-                        setIsShowProfileCard(
-                            (isShowProfileCard) => !isShowProfileCard
-                        )
-                    }
+                    onClick={() => setIsShowProfileCard((prev) => !prev)}
                     className="flex gap-5"
+                    aria-label="Toggle Profile Card"
                 >
-                    <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
-                        {!(userData === null)
-                            ? userData?.fullName[0].toUpperCase()
-                            : ''}
+                    <div className="h-8 w-8 flex justify-center items-center font-bold bg-primary-main text-white rounded-full">
+                        {userData?.fullName[0].toUpperCase()}
                     </div>
                 </button>
                 {isShowProfileCard && (
@@ -229,12 +205,11 @@ const Header = () => {
                         onClickAway={() => setIsShowProfileCard(false)}
                     />
                 )}
-
-                {isShowNotification && (
+                {/* {isShowNotification && (
                     <NotificationCard
                         onClickAway={() => setIsShowNotification(false)}
                     />
-                )}
+                )} */}
             </div>
         </div>
     )
