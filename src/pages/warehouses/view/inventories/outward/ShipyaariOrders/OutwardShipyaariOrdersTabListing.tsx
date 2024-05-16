@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 
 // |-- Internal Dependencies --|
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'

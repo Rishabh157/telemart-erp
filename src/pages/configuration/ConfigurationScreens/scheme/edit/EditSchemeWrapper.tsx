@@ -176,7 +176,7 @@ const EditSchemeWrapper = () => {
         }
     }, [selectedItem])
 
-    console.log('selectedItem', selectedItem)
+  
 
     // From Initial Values
     const initialValues: FormInitialValues = {

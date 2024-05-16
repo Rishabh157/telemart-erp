@@ -60,7 +60,6 @@ const ViewInventories = (props: Props) => {
 
     useEffect(() => {
         const activeTab = window.location.pathname.split('/')[4]
-        console.log('activeTab', activeTab)
         let activeIndex = allowedTabs?.findIndex(
             (tab: tabsProps) => tab.path.split('/')[0] === activeTab
         )
