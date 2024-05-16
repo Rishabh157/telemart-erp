@@ -12,17 +12,7 @@ import OutwardShipyaariOrdersTabListing from './OutwardShipyaariOrdersTabListing
 // |-- Redux --|
 import { Chip } from '@mui/material'
 import moment from 'moment'
-// import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
-// import { OrderListResponse } from 'src/models'
-// import { RootState } from 'src/redux/store'
-import {
-    useGetGenerateCouriorLabelByAwbNumberMutation,
-    useGetGenerateInvoiceByAwbNumberMutation,
-    useGetOrderQuery,
-    useDispatchGPOOrdersToWarehouseMutation
-} from 'src/services/OrderService'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FaRegFilePdf } from 'react-icons/fa'
 import { MdLabelImportantOutline } from 'react-icons/md'
 import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
@@ -30,7 +20,13 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-// import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
+import {
+    useDispatchGPOOrdersToWarehouseMutation,
+    useGetGenerateCouriorLabelByAwbNumberMutation,
+    useGetGenerateInvoiceByAwbNumberMutation,
+    useGetOrderQuery,
+} from 'src/services/OrderService'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { BarcodeListResponseType, OrderListResponse } from 'src/models'
 import { SaleOrderStatus } from 'src/models/SaleOrder.model'
@@ -38,11 +34,10 @@ import { AlertText } from 'src/pages/callerpage/components/constants'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
-// import { useDispatchGPOOrdersToWarehouseMutation, useGetOrderQuery } from 'src/services/OrderService'
+import { PDFDocument } from 'pdf-lib'
+import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 import { showToast } from 'src/utils'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
-import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -59,7 +54,9 @@ enum FirstCallApprovalStatus {
 const OutwardShipyaariOrdersTabListingWrapper = () => {
     useUnmountCleanup()
     const { id } = useParams()
-    const { userData,customized }: any = useSelector((state: RootState) => state?.auth)
+    const { userData, customized }: any = useSelector(
+        (state: RootState) => state?.auth
+    )
 
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -100,19 +97,6 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         useGetGenerateCouriorLabelByAwbNumberMutation()
     const [getGenerateInvoice] = useGetGenerateInvoiceByAwbNumberMutation()
 
-    function base64ToBlob(base64Data: any) {
-        // Extract base64 content without the data URL prefix
-        const base64Content = base64Data.split(';base64,').pop()
-
-        // Convert base64 to ArrayBuffer
-        const arrayBuffer = Uint8Array.from(atob(base64Content), (c) =>
-            c.charCodeAt(0)
-        ).buffer
-
-        // Create Blob from ArrayBuffer
-        return new Blob([arrayBuffer], { type: 'application/pdf' })
-    }
-
     const handleGenerateCourierLabel = (row: any) => {
         getGenerateCouriorLabel({ awbNumber: row.awbNumber }).then(
             (res: any) => {
@@ -137,6 +121,66 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                 }
             }
         })
+    }
+
+    const handleGenerateInvoiceDisaptch = (row: any) => {
+        const promises = []
+
+        // Fetch both PDFs
+        promises.push(getGenerateCouriorLabel({ awbNumber: row.awbNumber }))
+        promises.push(getGenerateInvoice({ awbNumber: row.awbNumber }))
+
+        // Wait for both promises to resolve
+        Promise.all(promises).then((responses) => {
+            const pdfBlobs: Blob[] = []
+
+            responses.forEach((res: any) => {
+                if (res.data?.data) {
+                    const pdfBlob = base64ToBlob(res.data?.data)
+                    if (pdfBlob) {
+                        pdfBlobs.push(pdfBlob)
+                    }
+                }
+            })
+
+            // Merge PDFs
+            mergePDFs(pdfBlobs)
+        })
+    }
+
+    const mergePDFs = async (pdfBlobs: Blob[]) => {
+        const pdfDoc = await PDFDocument.create()
+
+        for (const pdfBlob of pdfBlobs) {
+            const pdfBuffer = await pdfBlob.arrayBuffer()
+            const existingPdfDoc = await PDFDocument.load(pdfBuffer)
+            const copiedPages = await pdfDoc.copyPages(
+                existingPdfDoc,
+                existingPdfDoc.getPageIndices()
+            )
+            copiedPages.forEach((page) => {
+                pdfDoc.addPage(page)
+            })
+        }
+
+        const mergedPdfBytes = await pdfDoc.save()
+        const mergedPdfBlob = new Blob([mergedPdfBytes], {
+            type: 'application/pdf',
+        })
+
+        // Open the merged PDF in a new tab
+        const mergedPdfUrl = URL.createObjectURL(mergedPdfBlob)
+        window.open(mergedPdfUrl, '_blank')
+    }
+
+    const base64ToBlob = (base64Data: string): Blob => {
+        const byteCharacters = atob(base64Data)
+        const byteNumbers = new Array(byteCharacters.length)
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i)
+        }
+        const byteArray = new Uint8Array(byteNumbers)
+        return new Blob([byteArray], { type: 'application/pdf' })
     }
 
     const columns: columnTypes[] = [
@@ -179,9 +223,9 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                                     title="Print label"
                                     size={25}
                                     color="blue"
-                                    onClick={() =>
+                                    onClick={() => {
                                         handleGenerateCourierLabel(row)
-                                    }
+                                    }}
                                 />
                                 <FaRegFilePdf
                                     title="Print Invoice"
@@ -648,7 +692,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     ]
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
-    useDispatchGPOOrdersToWarehouseMutation()
+        useDispatchGPOOrdersToWarehouseMutation()
 
     const handleReload = () => {
         if (customized) {
@@ -725,19 +769,21 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
 
     const handleDispatchBarcode = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
-        
             return ele?._id
         })
-      
+        console.log(selectedItemsTobeDispatch)
         barcodeDispatch({
             barcodes: [...filterValue],
             orderId: selectedItemsTobeDispatch?._id,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
+                    handleGenerateInvoiceDisaptch(selectedItemsTobeDispatch)
                     showToast('success', 'dispatched successfully')
-                    setIsShow(false)
-                    dispatch(setFieldCustomized(false))
+                    setTimeout(() => {
+                        setIsShow(false)
+                        dispatch(setFieldCustomized(false))
+                    }, 500)
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -750,11 +796,10 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
-    return <>
-    
-    
-    <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
-    <DialogLogBox
+    return (
+        <>
+            <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
+            <DialogLogBox
                 isOpen={isShow}
                 fullScreen={true}
                 buttonClass="cursor-pointer"
@@ -895,7 +940,8 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                     </div>
                 }
             />
-    </>
+        </>
+    )
 }
 
 export default OutwardShipyaariOrdersTabListingWrapper
