@@ -3268,7 +3268,7 @@ const PageRoutes = () => {
 
                 <Route path="/barcodes" element={<BarcodeGenerator />} />
                 {/* gpo invoice */}
-                <Route
+                {/* <Route
                     path="gpo/label"
                     element={
                         <Authorization
@@ -3278,7 +3278,7 @@ const PageRoutes = () => {
                             }
                         />
                     }
-                />
+                /> */}
                 <Route
                     path="gpo/label-invoice"
                     element={

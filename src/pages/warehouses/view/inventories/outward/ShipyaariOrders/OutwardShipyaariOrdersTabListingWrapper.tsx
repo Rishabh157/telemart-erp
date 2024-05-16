@@ -158,7 +158,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                 existingPdfDoc,
                 existingPdfDoc.getPageIndices()
             )
-            copiedPages.forEach((page) => {
+            copiedPages.forEach((page:any) => {
                 pdfDoc.addPage(page)
             })
         }
