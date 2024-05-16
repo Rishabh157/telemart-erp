@@ -102,8 +102,7 @@ const OutwardTabs = (props: Props) => {
 
     React.useEffect(() => {
         localStorage.removeItem('hasExecuted')
-        if (userData?.userRole === 'SUPER_ADMIN') {
-            // navigate("open");
+        if (userData?.userRole === 'ADMIN') {
             return
         }
         const hasExecuted = localStorage.getItem('hasExecuted')

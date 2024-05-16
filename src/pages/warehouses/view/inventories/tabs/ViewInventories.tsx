@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
 import { BsArrowRepeat } from 'react-icons/bs'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 
@@ -50,6 +50,7 @@ const ViewInventories = (props: Props) => {
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(0)
     const { userData } = useSelector((state: RootState) => state?.auth)
+    const { pathname } = useLocation()
 
     const allowedTabs = tabs
         ?.filter((nav) => {
@@ -64,12 +65,12 @@ const ViewInventories = (props: Props) => {
         )
         activeIndex = activeIndex < 0 ? 0 : activeIndex
         setActiveTab(activeIndex)
-    }, [activeTab, allowedTabs])
+    }, [activeTab])
 
     React.useEffect(() => {
         localStorage.removeItem('hasExecuted')
-        if (userData?.userRole === 'SUPER_ADMIN') {
-            // navigate("open");
+        if (userData?.userRole === 'ADMIN') {
+            navigate(`${pathname}`)
             return
         }
         const hasExecuted = localStorage.getItem('hasExecuted')

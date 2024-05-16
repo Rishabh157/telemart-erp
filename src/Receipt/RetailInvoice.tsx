@@ -25,7 +25,10 @@ const RetailInvoice = () => {
             skip: !orderNumber,
         }),
     })
-    console.log(items, 'items')
+    
+    // console.log(items, 'items')
+
+
     return (
         <>
             <div className="bg-white h-screen w-full">

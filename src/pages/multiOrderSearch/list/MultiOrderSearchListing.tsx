@@ -8,7 +8,6 @@ import { FormikProps } from 'formik'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 
-
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { FormInitialValues } from './MultiOrderSearchListingWrapper'
@@ -51,14 +50,9 @@ const MultiOrderSearchListing = ({
                                 values.mobileNumbers.length ? true : false
                             }
                             onChange={(newValue) => {
-                                const formatedCommaValue = newValue?.replace(
-                                    /\s+/g,
-                                    ','
-                                ) // Replace spaces with commas
-                                setFieldValue(
-                                    'orderNumbers',
-                                    formatedCommaValue
-                                )
+                                let formatedCommaValue = newValue?.replace(/\D+/g, ','); // Replace non-digits with commas
+                                formatedCommaValue = formatedCommaValue.replace(/^,/, ''); // Remove leading comma, if any
+                                setFieldValue('orderNumbers', formatedCommaValue);
                             }}
                         />
                         <ATMTextArea

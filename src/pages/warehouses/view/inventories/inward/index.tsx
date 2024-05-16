@@ -75,7 +75,7 @@ const InwardsTabs = (props: Props) => {
 
     React.useEffect(() => {
         localStorage.removeItem('hasExecuted')
-        if (userData?.userRole === 'SUPER_ADMIN') {
+        if (userData?.userRole === 'ADMIN') {
             // navigate("open");
             return
         }

@@ -29,6 +29,7 @@ const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div className="">
             <FieldArray name="productInformation">
@@ -80,10 +81,15 @@ const StepEditProductDetail = ({ formikProps, dropdownOptions }: Props) => {
                                                     required
                                                     name={`productInformation[${productIndex}].productGroup`}
                                                     value={productGroup}
+                                                    isValueWithLable
                                                     onChange={(e) => {
                                                         handleSetFieldValue(
                                                             `productInformation[${productIndex}].productGroup`,
-                                                            e
+                                                            e?.value
+                                                        )
+                                                        handleSetFieldValue(
+                                                            `productInformation[${productIndex}].productGroupName`,
+                                                            e?.label
                                                         )
                                                     }}
                                                     label="Product Group"

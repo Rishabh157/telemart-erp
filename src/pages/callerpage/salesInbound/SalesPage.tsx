@@ -194,7 +194,6 @@ const SalesPage: React.FC<Props> = ({
                         options={dropdownOptions.dispositionTwoOptions || []}
                         menuPosition="absolute"
                         onChange={(e) => {
-                            console.log(e, "e")
                             setFieldValue('dispositionLevelTwoId', e?.value)
                             setFieldValue('dispositionLevelTwoLabel', e?.label)
                         }}
