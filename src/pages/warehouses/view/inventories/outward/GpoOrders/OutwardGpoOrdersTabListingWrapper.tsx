@@ -12,6 +12,8 @@ import OutwardGpoOrdersTabListing from './OutwardGpoOrdersTabListing'
 // |-- Redux --|
 import { Chip } from '@mui/material'
 import moment from 'moment'
+import { FaRegFilePdf } from 'react-icons/fa'
+// import { MdLabelImportantOutline } from 'react-icons/md'
 import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -54,7 +56,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-
+ 
     const { page, rowsPerPage, searchValue, dateFilter } = outwardCustomerState
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetOrderQuery({
@@ -109,6 +111,43 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                         }}
                     />
                 ),
+        },
+         {
+            field: 'invoice',
+            headerName: 'Invoice',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            hidden: true,
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <>
+                        {row?.orderStatus === SaleOrderStatus.dispatched ? (
+                            <div className="flex gap-2">
+                                {/* <MdLabelImportantOutline
+                                    title="Print label"
+                                    size={25}
+                                    color="blue"
+                                    onClick={() =>
+                                        window.open(`/gpo/label?orderNumber=${row.orderNumber}`, '_blank')
+                                    }
+                                /> */}
+                                <FaRegFilePdf
+                                    title="Print Invoice"
+                                    color="red"
+                                    size={22}
+                                    onClick={() =>
+                                        window.open(
+                                            `/gpo/invoice?orderNumber=${row.orderNumber}`,
+                                            '_blank'
+                                        )
+                                    }
+                                />
+                            </div>
+                        ) : null}
+                    </>
+                )
+            },
         },
         {
             field: 'firstCallApproval',
@@ -574,14 +613,13 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         productIndex: number
     ) => {
         // eslint-disable-next-line array-callback-return
-        // const filteredObj = products?.[productIndex]?.barcode?.filter(
+         // const filteredObj = products?.[productIndex]?.barcode?.filter(
         //     (item: any) => {
         //         if (item?.barcodeNumber !== barcodeNumber) {
         //             return item
         //         }
         //     }
         // )
-
         // console.log('filteredObj', filteredObj)
         // setProducts()
         // setBarcodeList(barcode)
@@ -652,8 +690,8 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         const filterValue = products?.map((ele: any) => {
             return ele?.barcode
         })
-
-        console.log('filterValue', filterValue)
+ 
+        // console.log('filterValue', filterValue)
 
         barcodeDispatch({
             barcodes: [
@@ -665,10 +703,14 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         })
             .then((res: any) => {
                 if (res?.data?.status) {
+                    // window.open(
+                    //     `/gpo/label-invoice?orderNumber=${selectedItemsTobeDispatch.orderNumber}`,
+                    //     '_blank'
+                    // )
                     showToast('success', 'dispatched successfully')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))
-                    navigate('')
+                     navigate(`/gpo/invoice?orderNumber=${orderNumber}`)
                 } else {
                     showToast('error', res?.data?.message)
                 }

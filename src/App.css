@@ -158,16 +158,47 @@ body {
     visibility: visible;
 }
 
-
-
 /* drag css */
 
 #courierTable tr:hover {
     background-color: #f2f2f2;
 }
 
-
 .react-draggable-listview-dragging {
     opacity: 0.5;
-    box-shadow: 0 0 10px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
+}
+
+@media print {
+    .bg-white {
+        page-break-after: always;
+    }
+    /* @page { */
+        /* margin-top: 50px; Adjust as needed */
+        /* margin-bottom: 50px; Adjust as needed */
+        /* @top-left {
+            content: 'Date/Time: ' counter(page) '/' counter(pages);
+        }
+        @top-right {
+            content: 'URL: ' url();
+        }
+    } */
+    @page {
+        margin-top: 0; /* Remove margin from top */
+        @top-left {
+            content: none; /* Remove date/time */
+        }
+        @top-right {
+            content: none; /* Remove URL */
+        }
+        @bottom-center {
+            content: none; /* Remove URL and page number */
+        }
+        @bottom-left {
+            content: none; /* Remove page number */
+        }
+        @bottom-right {
+            content: none; /* Remove page number */
+        }
+    }
 }
