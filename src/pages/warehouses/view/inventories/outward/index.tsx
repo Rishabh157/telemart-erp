@@ -97,7 +97,6 @@ const OutwardTabs = (props: Props) => {
     React.useEffect(() => {
         localStorage.removeItem('hasExecuted')
         if (userData?.userRole === 'ADMIN') {
-            // navigate("open");
             return
         }
         const hasExecuted = localStorage.getItem('hasExecuted')
@@ -128,7 +127,10 @@ const OutwardTabs = (props: Props) => {
                 <div className="w-[100%] border-b border-r border-l rounded-r h-full p-1  ">
                     <div className="py-1">
                         <div className="h-[40px] border flex gap-x-4 items-center bg-orange-300    shadow rounded  ">
-                            <TabScrollable tabs={allowedTabs} active={activeTab} />
+                            <TabScrollable
+                                tabs={allowedTabs}
+                                active={activeTab}
+                            />
                         </div>
                     </div>
 

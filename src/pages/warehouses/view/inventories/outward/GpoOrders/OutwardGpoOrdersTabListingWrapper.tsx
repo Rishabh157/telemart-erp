@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // |-- External Dependencies --|
 import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import OutwardGpoOrdersTabListing from './OutwardGpoOrdersTabListing'
 
@@ -25,13 +26,12 @@ import { SaleOrderStatus } from 'src/models/SaleOrder.model'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
+import { useGetWarehouseBarcodeMutation } from 'src/services/BarcodeService'
 import {
     useDispatchGPOOrdersToWarehouseMutation,
     useGetOrderQuery,
 } from 'src/services/OrderService'
 import { showToast } from 'src/utils'
-import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
@@ -51,12 +51,12 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         (state: RootState) => state?.auth
     )
     const params = useParams()
+    const navigate = useNavigate()
     const warehouseId = params?.id
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-
-
+ 
     const { page, rowsPerPage, searchValue, dateFilter } = outwardCustomerState
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetOrderQuery({
@@ -76,9 +76,14 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         }),
     })
     const [isShow, setIsShow] = useState<boolean>(false)
-    const [barcodeNumber, setBarcodeNumber] = useState<any>([])
+    const [barcodeNumber, setBarcodeNumber] = useState<any>()
     const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
-    const [barcodeList, setBarcodeList] = useState<any>([])
+    const [orderNumber, setOrderNumber] = useState<string | null>(null)
+    const [customerName, setCustomerName] = useState<string>()
+    const [address, setAddress] = useState<string>()
+
+    const [products, setProducts] = useState<any>([])
+    const [schemeQuantity, setSchemeQuantity] = useState<any>(0)
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<any>(null)
     const dispatch = useDispatch<AppDispatch>()
@@ -88,6 +93,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
+            hidden: true,
             renderCell: (row: OrderListResponse) =>
                 row?.orderStatus === SaleOrderStatus.complete ? (
                     'Dispatched'
@@ -106,11 +112,12 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                     />
                 ),
         },
-        {
+         {
             field: 'invoice',
             headerName: 'Invoice',
             flex: 'flex-[1_1_0%]',
             align: 'center',
+            hidden: true,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -581,7 +588,8 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             ),
         },
     ]
-    const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
+
+    const [getBarCode] = useGetWarehouseBarcodeMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchGPOOrdersToWarehouseMutation()
 
@@ -600,56 +608,76 @@ const OutwardGpoOrdersTabListingWrapper = () => {
     }
 
     // remove barcode
-    const handleRemoveBarcode = (barcodeNumber: string, ind: number) => {
+    const handleRemoveBarcode = (
+        barcodeNumber: string,
+        productIndex: number
+    ) => {
         // eslint-disable-next-line array-callback-return
-        const filteredObj = barcodeList[ind]?.filter((item: any) => {
-            if (item?.barcodeNumber !== barcodeNumber) {
-                return item
-            }
-        })
-        let barcode = [...barcodeList]
-        barcode[ind] = [...filteredObj]
-
-        setBarcodeList(barcode)
+         // const filteredObj = products?.[productIndex]?.barcode?.filter(
+        //     (item: any) => {
+        //         if (item?.barcodeNumber !== barcodeNumber) {
+        //             return item
+        //         }
+        //     }
+        // )
+        // console.log('filteredObj', filteredObj)
+        // setProducts()
+        // setBarcodeList(barcode)
     }
 
-    const handleBarcodeSubmit = (
-        barcodeNumber: string,
-        index: number,
-        productGroupId: string
-    ) => {
-        console.log('11000001', 'barcodeNumber', barcodeNumber, productGroupId)
-        dispatch(setFieldCustomized(true))
+    const handleBarcodeSubmit = (barcodeNumber: string, index: number) => {
+        // dispatch(setFieldCustomized(true))
         getBarCode({
-            id: barcodeNumber,
-            groupId: productGroupId,
-            status: barcodeStatusEnum.atWarehouse,
-            companyId: userData?.companyId,
+            warehouseId: (warehouseId as string) || '',
+            barcode: barcodeNumber,
+            status: 'GPO',
         })
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
-                        let newBarcode = [...barcodeList]
-                        if (!newBarcode[index]) {
-                            newBarcode[index] = [...res?.data?.data]
-                        } else {
-                            newBarcode[index] = [
-                                ...newBarcode[index],
-                                ...res?.data?.data,
-                            ]
-                            const uniqueArray = Array.from(
-                                new Set(
-                                    newBarcode[index].map((obj: any) => obj._id)
-                                )
-                            ).map((id) =>
-                                newBarcode[index].find(
-                                    (obj: any) => obj._id === id
-                                )
-                            )
-                            newBarcode[index] = [...uniqueArray]
-                        }
+                        let productsOfRes = [...res?.data?.data?.products]
+                        let barcodeOfRes = res?.data?.data?.barcode
+                        let orderNumberRes = res?.data?.data?.orderNumber
+                        let customerNameRes = res?.data?.data?.customerName
+                        let schemeQuantityRes = res?.data?.data?.schemeQuantity
+                        let addressRes = res?.data?.data?.address
 
-                        setBarcodeList([...newBarcode])
+                        if (orderNumber) {
+                            const newData = products?.map((ele: any) => {
+                                let prevBarcode = [...ele?.barcode] || []
+
+                                let barcodeObj =
+                                    ele?.productGroupId ===
+                                    barcodeOfRes.productGroupId
+                                        ? barcodeOfRes
+                                        : null
+
+                                return {
+                                    ...ele,
+                                    barcode: barcodeObj
+                                        ? [...prevBarcode, barcodeObj]
+                                        : [...prevBarcode],
+                                }
+                            })
+                            setProducts(newData)
+                        } else {
+                            const newData = productsOfRes?.map((ele: any) => {
+                                let barcodeObj =
+                                    ele?.productGroupId ===
+                                    barcodeOfRes.productGroupId
+                                        ? barcodeOfRes
+                                        : null
+                                return {
+                                    ...ele,
+                                    barcode: barcodeObj ? [barcodeObj] : [],
+                                }
+                            })
+                            setOrderNumber(orderNumberRes)
+                            setProducts(newData)
+                            setCustomerName(customerNameRes)
+                            setAddress(addressRes)
+                            setSchemeQuantity(schemeQuantityRes)
+                        }
                     }
                 } else {
                     // showToast('error', 'barcode number is not matched')
@@ -659,13 +687,19 @@ const OutwardGpoOrdersTabListingWrapper = () => {
     }
 
     const handleDispatchBarcode = () => {
-        const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
-            return ele?._id
+        const filterValue = products?.map((ele: any) => {
+            return ele?.barcode
         })
+ 
+        // console.log('filterValue', filterValue)
 
         barcodeDispatch({
-            barcodes: [...filterValue],
-            orderId: selectedItemsTobeDispatch?._id,
+            barcodes: [
+                ...filterValue
+                    ?.flat(1)
+                    ?.map((ele: BarcodeListResponseType) => ele?._id),
+            ],
+            orderNumber: orderNumber,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -676,6 +710,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                     showToast('success', 'dispatched successfully')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))
+                     navigate(`/gpo/invoice?orderNumber=${orderNumber}`)
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -686,11 +721,30 @@ const OutwardGpoOrdersTabListingWrapper = () => {
     }
 
     const handleDisableDispatchButton = () => {
-        return barcodeQuantity === barcodeList?.flat(1)?.length
+        let sum: number = 0
+
+        products?.forEach((ele: any) => {
+            console.log('ele?.barocode?.length', ele?.barcode?.length)
+            sum += ele?.barcode?.length
+        })
+
+        // console.log('000000', sum)
+        return schemeQuantity * products?.length === sum
     }
+
+    // console.log('products', products)
+
     return (
         <>
-            <OutwardGpoOrdersTabListing columns={columns} rows={items} />
+            <OutwardGpoOrdersTabListing
+                columns={columns}
+                rows={items}
+                onDispatchClick={() => {
+                    setIsShow(true)
+                    // setBarcodeQuantity(row.shcemeQuantity)
+                    // setSelectedItemsTobeDispatch(row)
+                }}
+            />
             <DialogLogBox
                 isOpen={isShow}
                 fullScreen={true}
@@ -701,76 +755,16 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                 }}
                 component={
                     <div className="px-4 pt-2 pb-6">
-                        {/* SO NO. & DEALER NAME */}
-                        <div className="grid grid-cols-4 pb-2 border-slate-300 border-b-[1px]">
-                            <div>
-                                <div className="flex gap-1 items-center">
-                                    <div className="font-bold">
-                                        Order Number
-                                    </div>
-                                    {':'}
-                                    <div className="">
-                                        {selectedItemsTobeDispatch?.orderNumber}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="flex gap-1 items-center">
-                                    <div className="font-bold">To GPO</div>
-                                    {':'}
-                                    <div className="">
-                                        {
-                                            selectedItemsTobeDispatch?.selectedItemsTobeDispatch
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div className="pb-6 border-b-slate-300 border-[1px] shadow p-4 my-4 rounded">
-                            <div className="grid grid-cols-4 mt-2">
-                                <div>
-                                    <div>
-                                        <span className="font-bold">
-                                            Item Name
-                                        </span>
-                                        <span className="px-4">:</span>
-                                        <span>
-                                            {
-                                                selectedItemsTobeDispatch?.schemeName
-                                            }
-                                        </span>
-                                    </div>
-
-                                    <div>
-                                        <span className="font-bold">
-                                            Quantity
-                                        </span>
-                                        <span className="pl-[2.23rem] pr-[1rem]">
-                                            :
-                                        </span>
-                                        <span>
-                                            {
-                                                selectedItemsTobeDispatch?.shcemeQuantity
-                                            }
-                                            {barcodeList[0]?.length ? (
-                                                <> / {barcodeList[0]?.length}</>
-                                            ) : (
-                                                ''
-                                            )}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
                             <div className="mt-2 grid grid-cols-4 gap-x-4">
                                 <ATMTextField
                                     disabled={
-                                        barcodeList[0]?.length ===
-                                        selectedItemsTobeDispatch?.shcemeQuantity
+                                        orderNumber
+                                            ? handleDisableDispatchButton()
+                                            : false
                                     }
                                     name=""
-                                    value={barcodeNumber[0]}
+                                    value={barcodeNumber}
                                     label="Barcode Number"
                                     placeholder="enter barcode number"
                                     className="shadow bg-white rounded w-[50%] "
@@ -778,56 +772,132 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                                         if (e.target.value?.length > 6) {
                                             handleBarcodeSubmit(
                                                 e.target.value,
-                                                0,
-                                                selectedItemsTobeDispatch?.productGroupId
+                                                0
                                             )
                                         }
-                                        setBarcodeNumber((prev: any) => {
-                                            const updatedArray = [...prev] // Create a copy of the previous array
-                                            updatedArray[0] = e.target.value // Set the value at the desired index
-                                            return updatedArray // Return the updated array
-                                        })
+                                        setBarcodeNumber(
+                                            e.target.value // Set the value at the desired index
+                                        )
+                                        // setBarcodeNumber((prev: any) => {
+                                        //     const updatedArray = [...prev] // Create a copy of the previous array
+                                        //     updatedArray[0] = e.target.value // Set the value at the desired index
+                                        //     return updatedArray // Return the updated array
+                                        // })
                                     }}
                                 />
                             </div>
-                            <div className="grid grid-cols-4 gap-x-4">
-                                {barcodeList[0]?.map(
-                                    (
-                                        barcode: BarcodeListResponseType,
-                                        barcodeIndex: number
-                                    ) => (
-                                        <BarcodeCard
-                                            key={barcodeIndex}
-                                            barcodeNumber={
-                                                barcode?.barcodeNumber
-                                            }
-                                            productGroupLabel={capitalizeFirstLetter(
-                                                barcode?.productGroupLabel || ''
-                                            )}
-                                            handleRemoveBarcode={() => {
-                                                handleRemoveBarcode(
-                                                    barcode?.barcodeNumber,
-                                                    0
-                                                )
-                                            }}
-                                        />
-                                    )
-                                )}
-                            </div>
+
+                            {orderNumber && (
+                                <div className="mt-4  ">
+                                    <div className="flex gap-x-6">
+                                        <span className="font-semibold text-sm">
+                                            Customer Name
+                                        </span>
+                                        {' : '}
+                                        <span className="font-semibold text-sm">
+                                            {customerName}
+                                        </span>
+                                    </div>
+
+                                    <div className="flex gap-x-6">
+                                        <span className="font-semibold text-sm">
+                                            Order Number
+                                        </span>
+                                        {' : '}
+                                        <span className="font-semibold text-sm">
+                                            {orderNumber}
+                                        </span>
+                                    </div>
+
+                                    <div className="flex gap-x-10">
+                                        <span className="font-semibold text-sm">
+                                            Address
+                                        </span>
+                                        {' : '}
+                                        <span className="font-semibold text-sm flex flex-wrap">
+                                            {address}
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+
+                            {products?.map((ele: any, productIndex: any) => {
+                                return (
+                                    <>
+                                        <div
+                                            key={productIndex}
+                                            className=" bg-white shadow-md rounded-md overflow-hidden border-[1px] border-gray-500 my-5"
+                                        >
+                                            <div className="p-4">
+                                                <div className="font-bold text-lg mb-2">
+                                                    {ele?.productGroupName}
+                                                </div>
+                                                <div className="flex gap-x-6 mb-2">
+                                                    <div className="text-gray-700">
+                                                        Quantity :
+                                                    </div>
+                                                    <div>
+                                                        {schemeQuantity} {' / '}
+                                                        {ele?.barcode?.length}
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-5 gap-x-4">
+                                                    {ele?.barcode?.map(
+                                                        (
+                                                            barcode: BarcodeListResponseType,
+                                                            barcodeIndex: number
+                                                        ) => (
+                                                            <BarcodeCard
+                                                                key={
+                                                                    barcodeIndex
+                                                                }
+                                                                barcodeNumber={
+                                                                    barcode?.barcodeNumber
+                                                                }
+                                                                productGroupLabel={capitalizeFirstLetter(
+                                                                    barcode?.productGroupLabel ||
+                                                                        ''
+                                                                )}
+                                                                handleRemoveBarcode={() => {
+                                                                    console.log(
+                                                                        'barcode: ',
+                                                                        barcode
+                                                                    )
+                                                                    // handleRemoveBarcode(
+                                                                    //     barcode?.barcodeNumber,
+                                                                    //     productIndex
+                                                                    // )
+                                                                }}
+                                                            />
+                                                        )
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                            })}
                         </div>
 
                         <div className="flex justify-end items-end ">
-                            <div>
-                                <ATMLoadingButton
-                                    disabled={!handleDisableDispatchButton()}
-                                    isLoading={barcodeDispatchInfo?.isLoading}
-                                    loadingText="Dispatching"
-                                    onClick={() => handleDispatchBarcode()}
-                                    className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
-                                >
-                                    Dispatch
-                                </ATMLoadingButton>
-                            </div>
+                            {products.length ? (
+                                <div>
+                                    <ATMLoadingButton
+                                        disabled={
+                                            !handleDisableDispatchButton()
+                                        }
+                                        isLoading={
+                                            barcodeDispatchInfo?.isLoading
+                                        }
+                                        loadingText="Dispatching"
+                                        onClick={() => handleDispatchBarcode()}
+                                        className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
+                                    >
+                                        Dispatch
+                                    </ATMLoadingButton>
+                                </div>
+                            ) : null}
                         </div>
                     </div>
                 }

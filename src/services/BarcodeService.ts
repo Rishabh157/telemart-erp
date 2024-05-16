@@ -224,6 +224,25 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+
+        //***** GET Warehouse barcode *****/
+        getWarehouseBarcode: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({
+                warehouseId,
+                barcode,
+                status,
+            }: {
+                warehouseId: string
+                barcode: string
+                status: string
+            }) => ({
+                url: `/bar-code/dispatch-warehouse-order-barcode/${warehouseId}/barcode/${barcode}/status/${status}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
+
     }),
 })
 export const {
@@ -244,5 +263,6 @@ export const {
     useGetDealersInventoryQuery,
     useGetBarcodeByOuterBoxNumberQuery,
     useAddCustomerInwardBarcodesMutation,
-    useGetBarcodeOfWarehouseMutation
+    useGetBarcodeOfWarehouseMutation,
+    useGetWarehouseBarcodeMutation
 } = barcodeApi

@@ -21,7 +21,7 @@ const BarcodeCard = ({
                     </div>
                     <div>{barcodeNumber}</div>
                 </div>
-                <div className="absolute -top-2 -right-2 cursor-    ointer">
+                <div className="absolute -top-2 -right-2 cursor-pointer">
                     <IoRemoveCircle
                         fill="red"
                         size={20}

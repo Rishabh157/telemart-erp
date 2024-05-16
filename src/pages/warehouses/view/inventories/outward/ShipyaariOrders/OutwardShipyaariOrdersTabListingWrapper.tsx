@@ -13,6 +13,15 @@ import OutwardShipyaariOrdersTabListing from './OutwardShipyaariOrdersTabListing
 import { Chip } from '@mui/material'
 import moment from 'moment'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+// import { OrderListResponse } from 'src/models'
+// import { RootState } from 'src/redux/store'
+import {
+    useGetGenerateCouriorLabelByAwbNumberMutation,
+    useGetGenerateInvoiceByAwbNumberMutation,
+    useGetOrderQuery,
+    useDispatchGPOOrdersToWarehouseMutation,
+} from 'src/services/OrderService'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FaRegFilePdf } from 'react-icons/fa'
 import { MdLabelImportantOutline } from 'react-icons/md'
 import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
@@ -20,13 +29,13 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import {
-    useDispatchGPOOrdersToWarehouseMutation,
-    useGetGenerateCouriorLabelByAwbNumberMutation,
-    useGetGenerateInvoiceByAwbNumberMutation,
-    useGetOrderQuery,
-} from 'src/services/OrderService'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+ // import {
+//     useDispatchGPOOrdersToWarehouseMutation,
+//     useGetGenerateCouriorLabelByAwbNumberMutation,
+//     useGetGenerateInvoiceByAwbNumberMutation,
+//     useGetOrderQuery,
+// } from 'src/services/OrderService'
+// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { BarcodeListResponseType, OrderListResponse } from 'src/models'
 import { SaleOrderStatus } from 'src/models/SaleOrder.model'
@@ -188,6 +197,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             field: 'actions',
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
+            hidden: true,
             renderCell: (row: OrderListResponse) =>
                 row?.orderStatus === SaleOrderStatus.complete ? (
                     'Dispatched'
@@ -771,8 +781,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
             return ele?._id
         })
-        console.log(selectedItemsTobeDispatch)
-        barcodeDispatch({
+         barcodeDispatch({
             barcodes: [...filterValue],
             orderId: selectedItemsTobeDispatch?._id,
         })
