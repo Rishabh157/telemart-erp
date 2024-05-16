@@ -74,6 +74,12 @@ const OutwardTabs = (props: Props) => {
             path: 'shipyaari-orders',
             name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
         },
+        {
+            label: 'Status',
+            icon: MdOutbond,
+            path: 'warehouse-status',
+            // name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
+        },
     ]
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(0)
@@ -128,7 +134,10 @@ const OutwardTabs = (props: Props) => {
                 <div className="w-[100%] border-b border-r border-l rounded-r h-full p-1  ">
                     <div className="py-1">
                         <div className="h-[40px] border flex gap-x-4 items-center bg-orange-300    shadow rounded  ">
-                            <TabScrollable tabs={allowedTabs} active={activeTab} />
+                            <TabScrollable
+                                tabs={allowedTabs}
+                                active={activeTab}
+                            />
                         </div>
                     </div>
 
