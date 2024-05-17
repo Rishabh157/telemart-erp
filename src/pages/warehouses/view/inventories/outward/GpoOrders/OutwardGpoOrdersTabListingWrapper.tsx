@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // |-- External Dependencies --|
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { IconType } from 'react-icons'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import OutwardGpoOrdersTabListing from './OutwardGpoOrdersTabListing'
 
@@ -48,7 +48,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
     const [orderNumber, setOrderNumber] = useState<string | null>(null)
     const [barcodeNumber, setBarcodeNumber] = useState<any>()
     const [products, setProducts] = useState<any>([])
-    // const [autoDispatch, setAutoDispatch] = useState<boolean>(false)
+    const { pathname } = useLocation()
 
     const [filter, setFilter] =
         React.useState<FormInitialValuesFilterWithLabel>({
@@ -694,7 +694,6 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         const filterValue = products?.map((ele: any) => {
             return ele?.barcode
         })
-
         barcodeDispatch({
             barcodes: [
                 ...filterValue
@@ -706,13 +705,18 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             .then((res: any) => {
                 if (res?.data?.status) {
                     // window.open(
-                    //     `/gpo/label-invoice?orderNumber=${orderNumber}`,
+                    //     `/gpo/invoice?orderNumber=${orderNumber}`,
                     //     '_blank'
                     // )
                     showToast('success', 'dispatched successfully')
                     dispatch(setFieldCustomized(false))
-                    navigate(`/gpo/invoice?orderNumber=${orderNumber}`)
-                    dispatch(setFieldCustomized(false))
+
+                    navigate(`/gpo/invoice?orderNumber=${orderNumber}`, {
+                        state: { pathname: pathname },
+                    })
+                    setOrderNumber(null)
+                    setBarcodeNumber(null)
+                    setProducts([])
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -730,16 +734,24 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             schemeQuantity += ele?.schemeQuantity
             barcodeLength += ele?.barcode?.length
         })
+
         return schemeQuantity === barcodeLength
     }
 
-    // useEffect(() => {
-    //     if (autoDispatch) {
-    //         handleDispatchBarcode()
-    //     }
-    // }, [autoDispatch])
-
-    // console.log('products', products)
+    useEffect(() => {
+        const schemeQ = products.reduce((sum: number, product: any) => {
+            return (sum += product.schemeQuantity)
+        }, 0)
+        const barcodeLength = products.reduce((sum: number, product: any) => {
+            return (sum += product?.barcode?.length)
+        }, 0)
+        // console.log('schemeQ', schemeQ, 'barcodeLength', barcodeLength)
+        if (schemeQ && barcodeLength) {
+            if (barcodeLength === schemeQ) {
+                handleDispatchBarcode()
+            }
+        }
+    }, [products])
 
     return (
         <>
