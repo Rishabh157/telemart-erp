@@ -42,11 +42,7 @@ const OutwardGpoOrderFilterFormWrapper = ({
         orderStatus: filter.orderStatus,
     }
 
-    // const validationSchema: any = object({
-    //     stateId: string(),
-    //     districtId: string(),
-    //     isActive: string(),
-    // })
+
 
     // Submit Handler
     const handleSubmit = async (

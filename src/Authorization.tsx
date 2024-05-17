@@ -24,7 +24,7 @@ const Authorization: ({ permission, children }: Props) => any = ({
     const { authToken, userData } = useGetLocalStorage()
 
     useEffect(() => {
-        if (!authToken) return navigate('/login')
+        if (!authToken) return navigate('/')
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [authToken])
 
