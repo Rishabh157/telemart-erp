@@ -43,7 +43,6 @@ const TransportListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: TransportListResponse) => (
                 <ActionPopup
-                    
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_TRANSPORT_EDIT
                     )}
@@ -129,13 +128,11 @@ const TransportListingWrapper = () => {
         })
     }
     return (
-        <>
-            <TransportListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </>
+        <TransportListing
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 

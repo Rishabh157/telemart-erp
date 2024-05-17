@@ -17,6 +17,7 @@ import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const CallListingWrapper = () => {
     useUnmountCleanup()
@@ -108,6 +109,7 @@ const CallListingWrapper = () => {
         //
         // },
     ]
+    const { userData } = useGetLocalStorage()
     const { items } = useGetCustomListingData<InbooundCallerListResponse>({
         useEndPointHook: useGetPaginationInboundCallerQuery({
             limit: rowsPerPage,
@@ -116,8 +118,8 @@ const CallListingWrapper = () => {
             page: page,
             filterBy: [
                 {
-                    fieldName: '',
-                    value: [],
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
                 },
             ],
             dateFilter: {},
@@ -126,45 +128,15 @@ const CallListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
-    // const { data, isFetching, isLoading } = useGetPaginationInboundCallerQuery({
-    //     limit: rowsPerPage,
-    //     searchValue: searchValue,
-    //     params: ['didNo'],
-    //     page: page,
-    //     filterBy: [
-    //         {
-    //             fieldName: '',
-    //             value: [],
-    //         },
-    //     ],
-    //     dateFilter: {},
-    //     orderBy: 'createdAt',
-    //     orderByValue: -1,
-    //     isPaginationRequired: true,
-    // })
-
-    // useEffect(() => {
-    //     if (!isFetching && !isLoading) {
-    //         dispatch(setIsTableLoading(false))
-    //         dispatch(setItems(data?.data || []))
-    //         dispatch(setTotalItems(data?.totalItem || 4))
-    //     } else {
-    //         dispatch(setIsTableLoading(true))
-    //     }
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [isLoading, isFetching, data])
 
     return (
-        <>
-            <SideNavLayout>
-                <CallListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <CallListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </SideNavLayout>
     )
 }
 
