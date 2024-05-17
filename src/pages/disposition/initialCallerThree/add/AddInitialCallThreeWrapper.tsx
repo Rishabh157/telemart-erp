@@ -27,7 +27,6 @@ const AddInitialCallThreeWrappper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-
     const initialValues: FormInitialValues = {
         initialCallName: '',
         initialCallOneId: '',
@@ -36,7 +35,7 @@ const AddInitialCallThreeWrappper = () => {
 
         emailType: '',
         smsType: '',
-        returnType: [''],
+        returnType: [],
         isPnd: false,
         cancelFlag: false,
     }
@@ -47,7 +46,10 @@ const AddInitialCallThreeWrappper = () => {
         initialCallTwoId: string().required('Initial Call Two is required'),
         emailType: string().required('Email Type is required'),
         smsType: string().required('SMS Type is required'),
-        returnType: array().of(string().required('Return Type is required')),
+        returnType: array()
+            .of(string())
+            .min(1, 'At least one return type is required')
+            .required('Return Type is required'),
         isPnd: boolean(),
         cancelFlag: boolean(),
     })

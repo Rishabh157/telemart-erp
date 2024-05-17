@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddCallCenterMasterWrapper.tsx
-// Type: Add Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -45,7 +38,7 @@ const AddCallCenterMasterWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        callCenterName: string().required('Call cneter name is required'),
+        callCenterName: string().required('Call center name is required'),
     })
 
     //    Form Submit Handler

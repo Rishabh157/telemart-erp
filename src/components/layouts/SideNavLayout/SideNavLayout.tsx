@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { ReactNode, useContext } from 'react'
+import { ReactNode, useContext } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,8 +26,8 @@ const SideNavLayout = ({ children }: Props) => {
     const sideNavLayoutState: any = useSelector(
         (state: RootState) => state.sideNavLayout
     )
-
     const { isCollapsed } = sideNavLayoutState
+
     const toggleCollapse = () => {
         dispatch(setIsCollapsed(!isCollapsed))
     }

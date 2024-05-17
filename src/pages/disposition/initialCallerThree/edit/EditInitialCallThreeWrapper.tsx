@@ -34,9 +34,10 @@ const EditInitialCallThreeWrapper = () => {
     const params = useParams()
     const Id = params.id
 
-    const { items: selectedInitialCallerThree } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetInitialCallerThreeByIdQuery(Id),
-    })
+    const { items: selectedInitialCallerThree } =
+        useGetDataByIdCustomQuery<any>({
+            useEndPointHook: useGetInitialCallerThreeByIdQuery(Id),
+        })
     const initialValues: FormInitialValues = {
         callType: selectedInitialCallerThree?.callType || '',
         initialCallName: selectedInitialCallerThree?.initialCallName || '',
@@ -58,7 +59,10 @@ const EditInitialCallThreeWrapper = () => {
         initialCallTwoId: string().required('Initial Call Two is required'),
         emailType: string().required('Email Type is required'),
         smsType: string().required('SMS Type is required'),
-        returnType: array().of(string().required('Return Type is required')),
+        returnType: array()
+            .of(string())
+            .min(1, 'At least one return type is required')
+            .required('Return Type is required'),
         isPnd: boolean(),
         cancelFlag: boolean(),
     })
@@ -98,7 +102,7 @@ const EditInitialCallThreeWrapper = () => {
     }
 
     const dropdownoptions = {
-        initialCallOneOptions: []
+        initialCallOneOptions: [],
     }
 
     return (

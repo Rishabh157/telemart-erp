@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DealerRatioListing.tsx
-// Type: List Component
-// Last Updated: JULY 10, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 import { IconType } from 'react-icons'
@@ -15,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+// import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 // import TabScrollable from 'src/components/utilsComponent/TabScrollable'
@@ -23,7 +16,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 // |-- Redux --|
 import {
     setRowsPerPage,
-    setPage,
+    // setPage,
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -89,7 +82,7 @@ const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
 
                     {/* Pagination */}
 
-                    <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
+                    {/* <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                         <ATMPagination
                             page={page}
                             rowCount={totalItems}
@@ -99,7 +92,7 @@ const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
                                 dispatch(setPage(newPage))
                             }
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

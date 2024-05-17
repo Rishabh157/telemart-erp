@@ -52,6 +52,7 @@ type Props = {
     isValueWithLable?: boolean
     menuPosition?: 'fixed' | 'absolute'
     isHidden?: boolean
+    isClearable?: boolean
     minHeight?: string
     fontSizePlaceHolder?: string
     fontSizeOptionsClass?: string
@@ -88,6 +89,7 @@ const ATMSelectSearchable = ({
     maxMenuHeight = 180,
     menuPosition = 'fixed',
     isHidden = false,
+    isClearable = true,
     minHeight = '36px',
     fontSizePlaceHolder = '13px',
     fontSizeOptionsClass = '16px',
@@ -146,7 +148,7 @@ const ATMSelectSearchable = ({
             textColor: 'rgb(51 65 85,0)',
             paddingLeft: '4px',
             paddingTop: '-5px',
-            margin:'0px'
+            margin: '0px',
         }),
 
         indicatorSeparator: (provided: any) => ({
@@ -276,7 +278,7 @@ const ATMSelectSearchable = ({
                     styles={selectStyles}
                     isMulti={isMulti}
                     isDisabled={isDisabled}
-                    isClearable
+                    isClearable={isClearable}
                     isLoading={isLoading}
                     isOptionDisabled={(options: any) => options.value === ''}
                     placeholder={getLabelTextTransform(
@@ -294,8 +296,7 @@ const ATMSelectSearchable = ({
                     {(errMsg) => (
                         <p className="font-poppins absolute text-[14px] text-start mt-0 text-red-500">
                             <span>
-                                {errMsg.charAt(0).toUpperCase() +
-                                    errMsg.slice(1).toLowerCase()}
+                                {errMsg}
                             </span>
                         </p>
                     )}

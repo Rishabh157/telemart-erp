@@ -21,14 +21,9 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    onDispatchClick: () => void
 }
 
-const OutwardShipyaariOrdersTabListing = ({
-    columns,
-    rows,
-    onDispatchClick,
-}: Props) => {
+const OutwardShipyaariOrdersTabListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
 
     const outwardCustomerState: any = useSelector(
@@ -40,7 +35,7 @@ const OutwardShipyaariOrdersTabListing = ({
         outwardCustomerState
 
     return (
-        <div className=" h-[calc(100vh-50px)]  bg-white ">
+        <div className="h-[calc(100vh-350px)] bg-white">
             <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
@@ -56,7 +51,7 @@ const OutwardShipyaariOrdersTabListing = ({
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
                         columns={columns}
                         rows={rows}
@@ -65,7 +60,7 @@ const OutwardShipyaariOrdersTabListing = ({
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        extraClasses="max-h-[calc(100%-10px)] overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

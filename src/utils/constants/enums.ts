@@ -35,3 +35,9 @@ export enum barcodeStatusEnum {
     damage = 'DAMAGE',
     missing = 'MISSING',
 }
+
+/*** Courier Company Enum ****/
+export enum courierCompanyEnum {
+    shipyaari = 'SHIPYAARI',
+    gpo = 'GPO',
+}

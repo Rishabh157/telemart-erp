@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Order.model.ts
-// Type: Model Component
-// Last Updated: OCTOBER 18, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type OrderListResponse = {
     _id: string
@@ -103,4 +96,10 @@ export type OrderListResponse = {
     callCenterId: string
     callCenterLabel: string
     orderReferenceNumber: string
+    orderMBKNumber: string | null
+    barcodeData: {
+        barcodeId: string
+        barcode: string
+        _id: string
+    }[]
 }

@@ -116,8 +116,9 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                             required
                             options={smstypeOptions()}
                             name="smsType"
+                            textTransform=""
                             value={values.smsType}
-                            label="Sms Type"
+                            label="SMS Type"
                             onChange={(e) => handleSetFieldValue('smsType', e)}
                         />
 
@@ -145,7 +146,8 @@ const AddNdrDisposition = ({ formikProps, apiStatus }: Props) => {
                             options={rtoAttemptTypeOptions()}
                             name="rtoAttempt"
                             value={values.rtoAttempt}
-                            label="Rto Attempt"
+                            label="RTO Attempt"
+                            textTransform=""
                             onChange={(e) =>
                                 handleSetFieldValue('rtoAttempt', e)
                             }

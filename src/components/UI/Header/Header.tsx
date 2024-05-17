@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from 'react'
 
 // |-- External Dependencies --|
 import { BsMoon, BsSun } from 'react-icons/bs'
-import { FormControl, MenuItem, Select } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { FaRegBuilding } from 'react-icons/fa'
 
@@ -19,6 +18,7 @@ import { setDeviceId, setUserData } from 'src/redux/slices/authSlice'
 import { ThemeContext } from 'src/App'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import ATMSelectSearchable from '../atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 const Header = () => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
@@ -35,7 +35,6 @@ const Header = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const [company, setCompany] = useState(userData?.companyId || '')
-
     const [companyName, setCompanyName] = useState('')
 
     const {
@@ -107,6 +106,7 @@ const Header = () => {
     return (
         <div className="grid grid-cols-2 w-full h-full shadow-lg border bg-white">
             {/* Right Section */}
+
             <div className="flex gap-4 col-start-2 justify-end items-center px-4 rounded-full ">
                 <MouseOverPopover
                     title=""
@@ -142,28 +142,25 @@ const Header = () => {
                 />
 
                 {userData?.userRole === 'ADMIN' ? (
-                    <FormControl sx={{ width: 150, height: 30 }}>
-                        <Select
-                            value={company}
-                            onChange={(e) => {
-                                setCompany(e.target.value)
-                                handleUpdate(e.target.value)
-                            }}
-                            displayEmpty
-                            inputProps={{ 'aria-label': 'Select Company' }}
-                            size="small"
-                            sx={{ height: 30 }}
-                        >
-                            <MenuItem value="" disabled>
-                                <em>Select Company</em>
-                            </MenuItem>
-                            {data?.map((ele: any) => (
-                                <MenuItem key={ele._id} value={ele._id}>
-                                    {ele.companyName}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                    <ATMSelectSearchable
+                        name=""
+                        fontSizeOptionsClass="13px"
+                        minHeight="25px"
+                        size="xxs"
+                        fontSizePlaceHolder="14px"
+                        componentClass="mt-0"
+                        selectLabel="Comapny Name"
+                        isClearable={false}
+                        value={company || ''}
+                        options={data?.map((ele: any) => ({
+                            label: ele?.companyName?.toUpperCase(),
+                            value: ele?._id,
+                        }))}
+                        onChange={(newValue) => {
+                            setCompany(newValue)
+                            handleUpdate(newValue)
+                        }}
+                    />
                 ) : (
                     <span className="rounded px-2 py-2 text-black font-normal border-[1px] border-gray-300 flex gap-x-4 items-center capitalize">
                         <FaRegBuilding size={20} color="#4d3838" />
