@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MdOutbond } from 'react-icons/md'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import AccessDenied from 'src/AccessDenied'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { Tabs } from 'src/models/common/paginationType'
@@ -14,6 +14,12 @@ type Props = {}
 
 const OutwardTabs = (props: Props) => {
     const tabs: Tabs[] = [
+        {
+            label: 'Status',
+            icon: MdOutbond,
+            path: 'warehouse-status',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_STATUS,
+        },
         {
             label: 'Dealer',
             icon: MdOutbond,
@@ -50,12 +56,7 @@ const OutwardTabs = (props: Props) => {
             path: 'ecom',
             name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE,
         },
-        // {
-        //     label: 'Replacements/Repackaging',
-        //     icon: MdOutbond,
-        //     path: 'replacement',
-        // name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER,
-        // },
+
         {
             label: 'Company',
             icon: MdOutbond,
@@ -74,17 +75,12 @@ const OutwardTabs = (props: Props) => {
             path: 'shipyaari-orders',
             name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
         },
-        {
-            label: 'Status',
-            icon: MdOutbond,
-            path: 'warehouse-status',
-            // name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
-        },
+      
     ]
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(0)
     const { userData } = useSelector((state: RootState) => state?.auth)
-
+    const { pathname } = useLocation()
     const allowedTabs = tabs
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
@@ -110,15 +106,24 @@ const OutwardTabs = (props: Props) => {
         if (hasExecuted) {
             return // Exit early if the function has been executed
         }
-
+        const activeTabIndex = window.location.pathname.split('/')[5]
+        const findPath = tabs?.find((ele: any) => activeTabIndex === ele?.path)
         for (const nav of tabs as any) {
+            const isRefPath = isAuthorized(
+                findPath?.name as keyof typeof UserModuleNameTypes
+            )
             const isValue = isAuthorized(
                 nav?.name as keyof typeof UserModuleNameTypes
             )
             localStorage.setItem('hasExecuted', 'true')
-            if (isValue) {
-                navigate(nav.path)
+            if (isRefPath) {
+                navigate(`${pathname}`)
                 break
+            } else {
+                if (isValue) {
+                    navigate(nav?.path)
+                    break
+                }
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -20,7 +20,6 @@ import {
     OutwardRequestDealerListResponse,
 } from 'src/models'
 import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import { showToast } from 'src/utils'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
@@ -47,6 +46,7 @@ import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUplo
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 import { CircularProgress } from '@mui/material'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -190,7 +190,6 @@ const OutwardDealerTabsListingWrapper = () => {
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.saleOrder}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -212,6 +211,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'soNumber',
             headerName: 'So Number',
             flex: 'flex-[0.6_0.6_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_SO_NUMBER,
             renderCell: (row: OutwardRequestDealerListResponse) => (
                 <span> {row?._id} </span>
             ),
@@ -220,6 +220,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
             flex: 'flex-[0.6_0.6_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_DEALER_NAME,
             align: 'center',
             renderCell: (row: OutwardRequestDealerListResponse) => (
                 <span
@@ -239,13 +240,17 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'items',
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_ITEMS,
             align: 'center',
             renderCell: (row: OutwardRequestDealerListResponse) => {
                 return (
                     <div className="w-full">
                         {row?.documents?.map((item, ind) => {
                             return (
-                                <div  key={ind} className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                <div
+                                    key={ind}
+                                    className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center"
+                                >
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
@@ -263,6 +268,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_INSERTED_DATE,
             align: 'center',
             renderCell: (row: OutwardRequestDealerListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.createdAt)} </span>
@@ -272,6 +278,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'updatedAt',
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_UPDATED_DATE,
             align: 'center',
             renderCell: (row: OutwardRequestDealerListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
@@ -281,6 +288,7 @@ const OutwardDealerTabsListingWrapper = () => {
             field: 'status',
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_STATUS,
             align: 'center',
             renderCell: (row: OutwardRequestDealerListResponse) => (
                 <span>{row?.documents[0]?.status}</span>

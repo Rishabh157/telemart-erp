@@ -936,7 +936,6 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                                                         handleBarcodeSubmit(
                                                             e.target.value,
                                                             0,
-                                                            selectedItemsTobeDispatch?.productGroupId
                                                         )
                                                     }
                                                     setBarcodeNumber(
@@ -970,7 +969,6 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                                                         handleBarcodeSubmit(
                                                             e.target.value,
                                                             0,
-                                                            selectedItemsTobeDispatch?.productGroupId
                                                         )
                                                     }
                                                     setBarcodeNumber(

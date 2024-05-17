@@ -85,7 +85,8 @@ const ViewInventories = (props: Props) => {
             )
             localStorage.setItem('hasExecuted', 'true')
             if (isValue) {
-                navigate(nav.path)
+                navigate(`${pathname}`)
+                // navigate(nav.path)
                 break
             }
         }

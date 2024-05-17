@@ -84,15 +84,24 @@ const InwardsTabs = (props: Props) => {
         if (hasExecuted) {
             return // Exit early if the function has been executed
         }
-
+        const activeTabIndex = window.location.pathname.split('/')[5]
+        const findPath = tabs?.find((ele: any) => activeTabIndex === ele?.path)
         for (const nav of tabs as any) {
+            const isRefPath = isAuthorized(
+                findPath?.name as keyof typeof UserModuleNameTypes
+            )
             const isValue = isAuthorized(
                 nav?.name as keyof typeof UserModuleNameTypes
             )
             localStorage.setItem('hasExecuted', 'true')
-            if (isValue) {
-                navigate(nav.path)
+            if (isRefPath) {
+                navigate(`${window.location.pathname}`)
                 break
+            } else {
+                if (isValue) {
+                    navigate(nav?.path)
+                    break
+                }
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -108,7 +117,10 @@ const InwardsTabs = (props: Props) => {
                 <div className="w-[100%] border-b border-r border-l rounded-r h-full p-1  ">
                     <div className="py-1">
                         <div className="h-[40px] border flex gap-x-4 items-center    shadow rounded  ">
-                            <TabScrollable tabs={allowedTabs} active={activeTab} />
+                            <TabScrollable
+                                tabs={allowedTabs}
+                                active={activeTab}
+                            />
                         </div>
                     </div>
 
