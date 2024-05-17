@@ -4,13 +4,11 @@ import React, { useState, useEffect, useContext } from 'react'
 // |-- External Dependencies --|
 import { BsMoon, BsSun } from 'react-icons/bs'
 import { FormControl, MenuItem, Select } from '@mui/material'
-import { IoNotifications } from 'react-icons/io5'
 import { useDispatch, useSelector } from 'react-redux'
 import { FaRegBuilding } from 'react-icons/fa'
 
 // |-- Internal Dependencies --|
 import UserProfileCard from '../UserProfileCard/UserProfileCard'
-import NotificationCard from './NotificationCard/NotificationCard'
 import { useGetAllCompaniesQuery } from 'src/services/CompanyServices'
 import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 import { useUpdateCompanyByAdminMutation } from 'src/services/UserServices'
@@ -24,7 +22,6 @@ import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const Header = () => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
-    const [isShowNotification, setIsShowNotification] = useState(false)
 
     const { theme, toggleTheme } = useContext(ThemeContext)
     const dispatch = useDispatch<AppDispatch>()
@@ -36,9 +33,6 @@ const Header = () => {
     }, [deviceId, dispatch])
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-
-    const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] =
-        useState(false)
 
     const [company, setCompany] = useState(userData?.companyId || '')
 
@@ -183,7 +177,7 @@ const Header = () => {
                     aria-label="Toggle Notifications"
                 >
                     {/* <IoNotifications /> */}
-                    {/* {isNewNotificationsAvailable && (
+                {/* {isNewNotificationsAvailable && (
                         <span className="flex h-2 w-2 absolute top-2 right-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
