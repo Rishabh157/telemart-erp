@@ -141,7 +141,9 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_START_TIME,
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {moment(row.slotStartTime).format('hh:mm a')} </span>
+                <span>
+                    {moment(row.slotStartTime, 'hh:mm A').format('hh:mm A')}
+                </span>
             ),
         },
         {
@@ -150,7 +152,9 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_END_TIME,
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {moment(row.slotEndTime).format('hh:mm a')} </span>
+                <span>
+                    {moment(row.slotEndTime, 'hh:mm A').format('hh:mm A')}
+                </span>
             ),
         },
         {

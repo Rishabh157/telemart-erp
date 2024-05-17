@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -49,7 +48,7 @@ const EditCallCenterMasterWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        callCenterName: string().required('Call cneter name is required'),
+        callCenterName: string().required('Call center name is required'),
     })
 
     //    Form Submit Handler
@@ -78,7 +77,6 @@ const EditCallCenterMasterWrapper = (props: Props) => {
             })
         }, 1000)
     }
-
 
     return (
         <Formik

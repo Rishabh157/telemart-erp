@@ -69,13 +69,7 @@ const ATMTable = <T extends {}>({
     })
 
     if (!tabsRender) {
-        return (
-            <>
-                <div>
-                    <AccessDenied />
-                </div>{' '}
-            </>
-        )
+        return <AccessDenied />
     }
 
     return (
@@ -160,7 +154,8 @@ const ATMTable = <T extends {}>({
                         className={`flex items-center font-semibold text-grey-800  ${rowClassName}  ${
                             onRowClick && 'cursor-pointer'
                         }  ${rowExtraClasses && rowExtraClasses(row)}  ${
-                            rowIndex !== rows.length - 1 && 'border-b border-slate-300'
+                            rowIndex !== rows.length - 1 &&
+                            'border-b border-slate-300'
                         } `}
                     >
                         {/* Checkbox */}

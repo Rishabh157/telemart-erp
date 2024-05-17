@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { useParams } from 'react-router-dom'
@@ -18,25 +17,18 @@ import {
     useGetGenerateCouriorLabelByAwbNumberMutation,
     useGetGenerateInvoiceByAwbNumberMutation,
     useGetOrderQuery,
-    useDispatchGPOOrdersToWarehouseMutation,
 } from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FaRegFilePdf } from 'react-icons/fa'
 import { MdLabelImportantOutline } from 'react-icons/md'
-import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
-import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
-import { BarcodeListResponseType, OrderListResponse } from 'src/models'
+import { OrderListResponse } from 'src/models'
 import { SaleOrderStatus } from 'src/models/SaleOrder.model'
-import { AlertText } from 'src/pages/callerpage/components/constants'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
-import { useGetWarehouseBarcodeMutation } from 'src/services/BarcodeService'
+import { RootState } from 'src/redux/store'
 import { PDFDocument } from 'pdf-lib'
-import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
-import { showToast } from 'src/utils'
+import DispatchingBarcodes from '../GpoOrders/DispatchingBarcodes/DispatchingBarcodes'
+import { courierCompanyEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 export type Tabs = {
@@ -53,35 +45,15 @@ enum FirstCallApprovalStatus {
 const OutwardShipyaariOrdersTabListingWrapper = () => {
     useUnmountCleanup()
     const { id } = useParams()
-    const { userData, customized }: any = useSelector(
-        (state: RootState) => state?.auth
-    )
+    const { userData }: any = useSelector((state: RootState) => state?.auth)
 
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [isShow, setIsShow] = useState<boolean>(false)
-    const [barcodeNumber, setBarcodeNumber] = useState<any>([])
-    const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
-    const [barcodeList, setBarcodeList] = useState<any>([])
-    const [orderNumber, setOrderNumber] = useState<string | null>(null)
-    const [customerName, setCustomerName] = useState<string>()
-    const [address, setAddress] = useState<string>()
 
-    const [products, setProducts] = useState<any>([])
-    const [schemeQuantity, setSchemeQuantity] = useState<any>(0)
+    const [, setSelectedItemsTobeDispatch] = useState<any>(null)
 
-    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
-        useState<any>(null)
-    const dispatch = useDispatch<AppDispatch>()
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-
-        dateFilter,
-    } = outwardCustomerState
+    const { page, rowsPerPage, searchValue, dateFilter } = outwardCustomerState
 
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetOrderQuery({
@@ -90,7 +62,10 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             params: ['didNo', 'mobileNo'],
             page: page,
             filterBy: [
-                { fieldName: 'orderAssignedToCourier', value: 'SHIPYAARI' },
+                {
+                    fieldName: 'orderAssignedToCourier',
+                    value: courierCompanyEnum.shipyaari,
+                },
                 { fieldName: 'companyId', value: userData?.companyId },
                 { fieldName: 'assignWarehouseId', value: id },
             ],
@@ -100,6 +75,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
+
     const [getGenerateCouriorLabel] =
         useGetGenerateCouriorLabelByAwbNumberMutation()
     const [getGenerateInvoice] = useGetGenerateInvoiceByAwbNumberMutation()
@@ -130,6 +106,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         })
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleGenerateInvoiceDisaptch = (row: any) => {
         const promises = []
 
@@ -157,7 +134,6 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
 
     const mergePDFs = async (pdfBlobs: Blob[]) => {
         const pdfDoc = await PDFDocument.create()
-
         for (const pdfBlob of pdfBlobs) {
             const pdfBuffer = await pdfBlob.arrayBuffer()
             const existingPdfDoc = await PDFDocument.load(pdfBuffer)
@@ -169,12 +145,10 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                 pdfDoc.addPage(page)
             })
         }
-
         const mergedPdfBytes = await pdfDoc.save()
         const mergedPdfBlob = new Blob([mergedPdfBytes], {
             type: 'application/pdf',
         })
-
         // Open the merged PDF in a new tab
         const mergedPdfUrl = URL.createObjectURL(mergedPdfBlob)
         window.open(mergedPdfUrl, '_blank')
@@ -207,9 +181,6 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
-                            setIsShow(true)
-
-                            setBarcodeQuantity(row.shcemeQuantity)
                             setSelectedItemsTobeDispatch(row)
                         }}
                     />
@@ -218,10 +189,10 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         {
             field: 'awbBill',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
-            headerName: 'Download Label/Invoice',
+            headerName: 'Label & Invoice',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => {
                 return (
                     <>
@@ -231,12 +202,14 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                                     title="Print label"
                                     size={25}
                                     color="blue"
+                                    className="cursor-pointer"
                                     onClick={() => {
                                         handleGenerateCourierLabel(row)
                                     }}
                                 />
                                 <FaRegFilePdf
                                     title="Print Invoice"
+                                    className="cursor-pointer"
                                     color="red"
                                     size={22}
                                     onClick={() => handleGenerateInvoice(row)}
@@ -254,7 +227,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: '1st Call Approval',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
@@ -294,7 +267,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER,
             headerName: 'AWB Number',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main ">{row.awbNumber}</span>
             ),
@@ -304,7 +277,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER,
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
@@ -314,7 +287,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_REF_NUMBER,
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderReferenceNumber || '-'}</span>
             ),
@@ -325,7 +298,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
@@ -334,7 +307,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: '1st call remark',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.firstCallRemark || '-'}</span>
             ),
@@ -345,7 +318,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'first Call State',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.firstCallState || '-'}</span>
             ),
@@ -356,7 +329,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'call back date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.firstCallCallBackDate || '-'}</span>
             ),
@@ -367,7 +340,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.assignWarehouseLabel || '-'}</span>
             ),
@@ -378,7 +351,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => <span>-</span>,
         },
         {
@@ -387,7 +360,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.tehsilLabel}</span>
             ),
@@ -398,7 +371,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
         },
         {
             field: 'status',
@@ -406,7 +379,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
         },
         {
@@ -415,7 +388,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.deliveryCharges}</span>
             ),
@@ -426,7 +399,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.schemeName} </span>
             ),
@@ -437,7 +410,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.schemeCode} </span>
             ),
@@ -448,7 +421,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.shcemeQuantity} </span>
             ),
@@ -459,7 +432,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
         },
         {
@@ -468,7 +441,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.pincodeLabel} </span>
             ),
@@ -479,7 +452,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.paymentMode} </span>
             ),
@@ -489,7 +462,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_DATE,
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
                     <div className="text-[12px] text-slate-700 font-medium">
@@ -507,7 +480,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_EDP_DATE,
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => <div>-</div>,
         },
         {
@@ -515,7 +488,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DISTRICT_LABEL,
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.districtLabel}</div>
             ),
@@ -525,7 +498,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DISPOSITION_LEVEL_THREE,
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dispositionLevelThree}</div>
             ),
@@ -535,7 +508,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DEALER_STATUS,
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
                     {/* {row?.dealerStatus === true ? 'Active' : 'DeActive'} */}
@@ -547,7 +520,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DEALER_CODE,
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dealerCode || '-'}</div>
             ),
@@ -557,7 +530,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CUSTOMER_NAME,
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.customerName || '-'}</div>
             ),
@@ -567,7 +540,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AREA_LABEL,
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[30px]',
+            extraClasses: 'min-w-[30px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
             ),
@@ -577,7 +550,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_MOBILE_NO,
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.mobileNo}</div>
             ),
@@ -587,7 +560,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CHANNEL_NAME,
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.channelLabel?.[0]}</div>
             ),
@@ -597,7 +570,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CALL_CENTER_LABEL,
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.callCenterLabel}</div>
             ),
@@ -607,7 +580,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AREA,
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
             ),
@@ -617,7 +590,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_REMARK,
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.remark}</div>
             ),
@@ -627,7 +600,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AGENT,
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.agentName}</div>
             ),
@@ -692,353 +665,32 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_MBK_NUMBER,
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[250px]',
-            renderCell: (row: any) => (
+            extraClasses: 'min-w-[250px] text-xs',
+            renderCell: (row: OrderListResponse) => (
                 <span> {row.orderMBKNumber || '-'} </span>
             ),
         },
+        {
+            field: 'barcodeData',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_MBK_NUMBER,
+            headerName: 'Barcodes',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs min-w-[200px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>
+                    {row.barcodeData?.map((ele) => ele?.barcode)?.join(' , ') ||
+                        '-'}
+                </span>
+            ),
+        },
     ]
-    const [getBarCode] = useGetWarehouseBarcodeMutation()
-    const [barcodeDispatch, barcodeDispatchInfo] =
-        useDispatchGPOOrdersToWarehouseMutation()
 
-    // const handleReload = () => {
-    //     if (customized) {
-    //         const confirmValue: boolean = window.confirm(AlertText)
-    //         if (confirmValue) {
-    //             dispatch(setFieldCustomized(false))
-    //             setIsShow(!isShow)
-    //             setSelectedItemsTobeDispatch(null)
-    //         }
-    //     } else {
-    //         setIsShow(!isShow)
-    //         setSelectedItemsTobeDispatch(null)
-    //     }
-    // }
-
-    // remove barcode
-    // const handleRemoveBarcode = (barcodeNumber: string, ind: number) => {
-    //     // eslint-disable-next-line array-callback-return
-    //     const filteredObj = barcodeList[ind]?.filter((item: any) => {
-    //         if (item?.barcodeNumber !== barcodeNumber) {
-    //             return item
-    //         }
-    //     })
-    //     let barcode = [...barcodeList]
-    //     barcode[ind] = [...filteredObj]
-
-    //     setBarcodeList(barcode)
-    // }
-
-    const handleBarcodeSubmit = (barcodeNumber: string, index: number) => {
-        // dispatch(setFieldCustomized(true))
-        getBarCode({
-            warehouseId: (id as string) || '',
-            barcode: barcodeNumber,
-            status: 'SHIPYAARI',
-        })
-            .then((res: any) => {
-                if (res?.data?.status) {
-                    if (res?.data?.data) {
-                        let productsOfRes = [...res?.data?.data?.products]
-                        let barcodeOfRes = res?.data?.data?.barcode
-                        let orderNumberRes = res?.data?.data?.orderNumber
-                        let customerNameRes = res?.data?.data?.customerName
-                        let schemeQuantityRes = res?.data?.data?.schemeQuantity
-                        let addressRes = res?.data?.data?.address
-
-                        if (orderNumber) {
-                            const newData = products?.map((ele: any) => {
-                                let prevBarcode = [...ele?.barcode] || []
-
-                                let barcodeObj =
-                                    ele?.productGroupId ===
-                                    barcodeOfRes.productGroupId
-                                        ? barcodeOfRes
-                                        : null
-
-                                return {
-                                    ...ele,
-                                    barcode: barcodeObj
-                                        ? [...prevBarcode, barcodeObj]
-                                        : [...prevBarcode],
-                                }
-                            })
-                            setProducts(newData)
-                        } else {
-                            const newData = productsOfRes?.map((ele: any) => {
-                                let barcodeObj =
-                                    ele?.productGroupId ===
-                                    barcodeOfRes.productGroupId
-                                        ? barcodeOfRes
-                                        : null
-                                return {
-                                    ...ele,
-                                    barcode: barcodeObj ? [barcodeObj] : [],
-                                }
-                            })
-                            setOrderNumber(orderNumberRes)
-                            setProducts(newData)
-                            setCustomerName(customerNameRes)
-                            setAddress(addressRes)
-                            setSchemeQuantity(schemeQuantityRes)
-                        }
-                    }
-                } else {
-                    // showToast('error', 'barcode number is not matched')
-                }
-            })
-            .catch((err) => console.error(err))
-    }
-
-    const handleDispatchBarcode = () => {
-        const filterValue = products?.map((ele: any) => {
-            return ele?.barcode
-        })
-        barcodeDispatch({
-            barcodes: [
-                ...filterValue
-                    ?.flat(1)
-                    ?.map((ele: BarcodeListResponseType) => ele?._id),
-            ],
-            orderId: orderNumber,
-        })
-            .then((res: any) => {
-                if (res?.data?.status) {
-                    handleGenerateInvoiceDisaptch(selectedItemsTobeDispatch)
-                    showToast('success', 'dispatched successfully')
-                    setTimeout(() => {
-                        setIsShow(false)
-                        dispatch(setFieldCustomized(false))
-                    }, 500)
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            })
-            .catch((err: any) => {
-                console.error(err)
-            })
-    }
-
-    const handleDisableDispatchButton = () => {
-        return barcodeQuantity === barcodeList?.flat(1)?.length
-    }
+    // handleGenerateInvoiceDisaptch(selectedItemsTobeDispatch)
     return (
-        <>
-            <OutwardShipyaariOrdersTabListing
-                columns={columns}
-                rows={items}
-                onDispatchClick={() => {
-                    setIsShow(true)
-                }}
-            />
-
-            <div className="px-4 pt-2 pb-6">
-                <div className="pb-6 border-b-slate-300 border-[1px] shadow p-4 my-4 rounded">
-                    <div className="mt-2 grid grid-cols-4 gap-x-4">
-                        <ATMTextField
-                            disabled={
-                                orderNumber
-                                    ? handleDisableDispatchButton()
-                                    : false
-                            }
-                            name=""
-                            value={barcodeNumber}
-                            label="Barcode Number"
-                            placeholder="enter barcode number"
-                            className="shadow bg-white rounded w-[50%] "
-                            onChange={(e) => {
-                                if (e.target.value?.length > 6) {
-                                    handleBarcodeSubmit(e.target.value, 0)
-                                }
-                                setBarcodeNumber(
-                                    e.target.value // Set the value at the desired index
-                                )
-                                // setBarcodeNumber((prev: any) => {
-                                //     const updatedArray = [...prev] // Create a copy of the previous array
-                                //     updatedArray[0] = e.target.value // Set the value at the desired index
-                                //     return updatedArray // Return the updated array
-                                // })
-                            }}
-                        />
-                    </div>
-
-                    {orderNumber && (
-                        <div className="mt-4  ">
-                            <div className="flex gap-x-6">
-                                <span className="font-semibold text-sm">
-                                    Customer Name
-                                </span>
-                                {' : '}
-                                <span className="font-semibold text-sm">
-                                    {customerName}
-                                </span>
-                            </div>
-
-                            <div className="flex gap-x-6">
-                                <span className="font-semibold text-sm">
-                                    Order Number
-                                </span>
-                                {' : '}
-                                <span className="font-semibold text-sm">
-                                    {orderNumber}
-                                </span>
-                            </div>
-
-                            <div className="flex gap-x-10">
-                                <span className="font-semibold text-sm">
-                                    Address
-                                </span>
-                                {' : '}
-                                <span className="font-semibold text-sm flex flex-wrap">
-                                    {address}
-                                </span>
-                            </div>
-                        </div>
-                    )}
-
-                    {products?.map((ele: any, productIndex: any) => {
-                        return (
-                            <>
-                                <div
-                                    key={productIndex}
-                                    className=" bg-white shadow-md rounded-md overflow-hidden border-[1px] border-gray-500 my-5"
-                                >
-                                    <div className="p-4">
-                                        <div className="font-bold text-lg mb-2">
-                                            {ele?.productGroupName}
-                                        </div>
-                                        <div className="flex gap-x-6 mb-2">
-                                            <div className="text-gray-700">
-                                                Quantity :
-                                            </div>
-                                            <div>
-                                                {schemeQuantity} {' / '}
-                                                {ele?.barcode?.length}
-                                            </div>
-                                        </div>
-                                        <div className="mt-2 grid grid-cols-4 gap-x-4">
-                                            <ATMTextField
-                                                disabled={
-                                                    barcodeList[0]?.length ===
-                                                    selectedItemsTobeDispatch?.shcemeQuantity
-                                                }
-                                                name=""
-                                                value={barcodeNumber[0]}
-                                                label="Barcode Number"
-                                                placeholder="enter barcode number"
-                                                className="shadow bg-white rounded w-[50%] "
-                                                onChange={(e) => {
-                                                    if (
-                                                        e.target.value?.length >
-                                                        6
-                                                    ) {
-                                                        handleBarcodeSubmit(
-                                                            e.target.value,
-                                                            0,
-                                                        )
-                                                    }
-                                                    setBarcodeNumber(
-                                                        (prev: any) => {
-                                                            const updatedArray =
-                                                                [...prev] // Create a copy of the previous array
-                                                            updatedArray[0] =
-                                                                e.target.value // Set the value at the desired index
-                                                            return updatedArray // Return the updated array
-                                                        }
-                                                    )
-                                                }}
-                                            />
-                                        </div>
-                                        <div className="mt-2 grid grid-cols-4 gap-x-4">
-                                            <ATMTextField
-                                                disabled={
-                                                    barcodeList[0]?.length ===
-                                                    selectedItemsTobeDispatch?.shcemeQuantity
-                                                }
-                                                name=""
-                                                value={barcodeNumber[0]}
-                                                label="Barcode Number"
-                                                placeholder="enter barcode number"
-                                                className="shadow bg-white rounded w-[50%] "
-                                                onChange={(e) => {
-                                                    if (
-                                                        e.target.value?.length >
-                                                        6
-                                                    ) {
-                                                        handleBarcodeSubmit(
-                                                            e.target.value,
-                                                            0,
-                                                        )
-                                                    }
-                                                    setBarcodeNumber(
-                                                        (prev: any) => {
-                                                            const updatedArray =
-                                                                [...prev] // Create a copy of the previous array
-                                                            updatedArray[0] =
-                                                                e.target.value // Set the value at the desired index
-                                                            return updatedArray // Return the updated array
-                                                        }
-                                                    )
-                                                }}
-                                            />
-                                        </div>
-
-                                        <div className="grid grid-cols-5 gap-x-4">
-                                            {ele?.barcode?.map(
-                                                (
-                                                    barcode: BarcodeListResponseType,
-                                                    barcodeIndex: number
-                                                ) => (
-                                                    <BarcodeCard
-                                                        key={barcodeIndex}
-                                                        barcodeNumber={
-                                                            barcode?.barcodeNumber
-                                                        }
-                                                        productGroupLabel={capitalizeFirstLetter(
-                                                            barcode?.productGroupLabel ||
-                                                                ''
-                                                        )}
-                                                        handleRemoveBarcode={() => {
-                                                            console.log(
-                                                                'barcode: ',
-                                                                barcode
-                                                            )
-                                                            // handleRemoveBarcode(
-                                                            //     barcode?.barcodeNumber,
-                                                            //     productIndex
-                                                            // )
-                                                        }}
-                                                    />
-                                                )
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        )
-                    })}
-                </div>
-
-                <div className="flex justify-end items-end ">
-                    {products.length ? (
-                        <div>
-                            <ATMLoadingButton
-                                disabled={!handleDisableDispatchButton()}
-                                isLoading={barcodeDispatchInfo?.isLoading}
-                                loadingText="Dispatching"
-                                onClick={() => handleDispatchBarcode()}
-                                className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
-                            >
-                                Dispatch
-                            </ATMLoadingButton>
-                        </div>
-                    ) : null}
-                </div>
-            </div>
-            {/* //     }
-            // /> */}
-        </>
+        <React.Fragment>
+            <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
+            <DispatchingBarcodes courierType={courierCompanyEnum.shipyaari} />
+        </React.Fragment>
     )
 }
 

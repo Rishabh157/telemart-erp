@@ -64,6 +64,7 @@ const DispositionOneListingWrapper = () => {
             field: 'actions',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
+            hidden: true,
             renderCell: (row: any) => (
                 <ActionPopup
                     isEdit={isAuthorized(
@@ -106,7 +107,6 @@ const DispositionOneListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.DISPOSITION_ONE_LIST_STATUS,
-
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">

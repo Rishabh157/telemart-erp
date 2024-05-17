@@ -49,12 +49,9 @@ const AddInitialCallThree = ({
     ]
 
     const { options: initialCalleOneOption } = useCustomOptions({
-        useEndPointHook: useGetAllinitialCallerOneQuery(
-            values.callType,
-            {
-                skip: !values.callType,
-            }
-        ),
+        useEndPointHook: useGetAllinitialCallerOneQuery(values.callType, {
+            skip: !values.callType,
+        }),
         keyName: 'initialCallDisplayName',
         value: '_id',
     })
@@ -78,7 +75,7 @@ const AddInitialCallThree = ({
 
     dropdownoptions = {
         ...dropdownoptions,
-        initialCallTwoOptions: options
+        initialCallTwoOptions: options,
     }
 
     const handleSetFieldValue = (name: string, value: string) => {
@@ -111,8 +108,9 @@ const AddInitialCallThree = ({
                             onClick={() => {
                                 formikProps.handleSubmit()
                             }}
-                            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
-                                }`}
+                            className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                apiStatus ? 'opacity-50' : ''
+                            }`}
                         >
                             Submit
                         </button>

@@ -42,17 +42,6 @@ const CompetitorManagementListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteCompetitor] = useDeletegetCompetitorMutation()
 
-    // const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate()
-    // const [currentId, setCurrentId] = useState('')
-    // const [showDropdown, setShowDropdown] = useState(false)
-    // const competitorManagementState: any = useSelector(
-    //     (state: RootState) => state.competitor
-    // )
-
-    // const { page, rowsPerPage, searchValue, items } = competitorManagementState
-    // const { userData } = useSelector((state: RootState) => state?.auth)
-
     // pagination api
     const { items } = useGetCustomListingData<any[]>({
         useEndPointHook: useGetPaginationcompetitorQuery({
@@ -177,43 +166,8 @@ const CompetitorManagementListingWrapper = () => {
         },
     ]
 
-    // const { data, isFetching, isLoading } = useGetPaginationcompetitorQuery({
-    //     limit: rowsPerPage,
-    //     searchValue: searchValue,
-    //     params: ['competitorName'],
-    //     page: page,
-    //     filterBy: [
-    //         {
-    //             fieldName: 'companyId',
-    //             value: userData?.companyId as string,
-    //         },
-    //         {
-    //             fieldName: '',
-    //             value: [],
-    //         },
-    //     ],
-    //     dateFilter: {},
-    //     orderBy: 'createdAt',
-    //     orderByValue: -1,
-    //     isPaginationRequired: true,
-    // })
-
-    // useEffect(() => {
-    //     if (!isFetching && !isLoading) {
-    //         dispatch(setIsTableLoading(false))
-    //         dispatch(setItems(data?.data || []))
-    //         dispatch(setTotalItems(data?.totalItem || 4))
-    //     } else {
-    //         dispatch(setIsTableLoading(true))
-    //     }
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [isLoading, isFetching, data])
-
-    function formatTimeTo12Hour(timeString: string) {
-        const time = moment(timeString)
-        return time.format('h:mm A')
-    }
+    const formatTimeTo12Hour = (timeString: string) =>
+        moment(timeString, 'h:mm A').format('h:mm A')
 
     const handleDelete = () => {
         deleteCompetitor(currentId).then((res: any) => {

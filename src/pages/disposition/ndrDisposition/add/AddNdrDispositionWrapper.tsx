@@ -33,10 +33,10 @@ const AddNdrDispositionWrapper = () => {
     }
 
     const validationSchema = object({
-        ndrDisposition: string().required('NDR Disposition is required'),
+        ndrDisposition: string().required('NDR disposition is required'),
         priority: string().required('Priority is required'),
-        smsType: string().required('SMS Type is required'),
-        emailType: string().required('Email Type is required'),
+        smsType: string().required('SMS type is required'),
+        emailType: string().required('Email type is required'),
         subDispositions: array()
             .of(string())
             .test(
@@ -48,7 +48,7 @@ const AddNdrDispositionWrapper = () => {
             )
             .nullable()
             .default([]),
-        rtoAttempt: string().required('RTO Attempt is required'),
+        rtoAttempt: string().required('RTO attempt is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {

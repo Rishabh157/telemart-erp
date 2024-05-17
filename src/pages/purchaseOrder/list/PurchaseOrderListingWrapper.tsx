@@ -68,7 +68,7 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-             extraClasses :'min-w-[100px]',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
@@ -142,7 +142,7 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'poCode',
             headerName: 'PO Code',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_PO_CODE,
             renderCell: (row: PurchaseOrderListResponse) => (
@@ -152,7 +152,7 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'purchaseOrder',
             headerName: 'Item Name',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_ITEM_NAME,
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -162,7 +162,7 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'purchaseOrder',
             headerName: 'Quantity',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_QUANTITY,
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -172,7 +172,7 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'purchaseOrder',
             headerName: 'Recieved Quantity',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_RECIEVED_QUANTITY,
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -182,7 +182,7 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'purchaseOrder',
             headerName: 'rate',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_RATE,
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -192,7 +192,7 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'vendorLabel',
             headerName: 'Vendor',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_VENDOR,
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -202,7 +202,7 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'warehouseLabel',
             headerName: 'ware house',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_WAREHOUSE,
             renderCell: (row: PurchaseOrderListResponse) => {
@@ -212,25 +212,26 @@ const PurchaseOrderListingWrapper = () => {
         {
             field: 'purchaseOrder',
             headerName: 'Est. Delivery Date',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_ESTIMATION_DELIVERY_DATE,
             renderCell: (row: PurchaseOrderListResponse) => {
                 return (
                     <span>
-                        {' '}
-                        {moment(row.purchaseOrder.estReceivingDate).format(
-                            'DD/MM/YYYY'
-                        )}{' '}
+                        {row?.purchaseOrder?.estReceivingDate
+                            ? moment(
+                                  row?.purchaseOrder?.estReceivingDate,
+                                  'YYYY/MM/DD'
+                              ).format('DD-MM-YYYY')
+                            : '-'}
                     </span>
                 )
             },
         },
-
         {
             field: 'isConfirmed',
             headerName: 'Approval level',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_APPROVAL_LEVEL,
             renderCell: (row: PurchaseOrderListResponse) => {
