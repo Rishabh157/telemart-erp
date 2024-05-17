@@ -7,11 +7,20 @@ export const callerPageApi = apiSlice.injectEndpoints({
         getPaginationInboundCaller: builder.query({
             providesTags: ['call'],
             query: (body: PaginationType) => ({
-                url: 'call/unauth-call',
+                url: '/call',
                 method: 'POST',
                 body,
             }),
         }),
+
+        // getPaginationInboundCaller: builder.query({
+        //     providesTags: ['call'],
+        //     query: (body: PaginationType) => ({
+        //         url: 'call/unauth-call',
+        //         method: 'POST',
+        //         body,
+        //     }),
+        // }),
 
         //***** ADD *****/
         addCallerForm: builder.mutation({

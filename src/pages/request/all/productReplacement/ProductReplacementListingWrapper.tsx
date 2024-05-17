@@ -29,6 +29,7 @@ import Swal from 'sweetalert2'
 import AddProductReplacementCustomerInfoFormWrapper from './AddCustomerInfoForm/AddProductReplacementCustomerInfoFormWrapper'
 import ProductReplacementListing from './ProductReplacementListing'
 import StatusDialog from './ProductReplacementStatusDialog/StatusDialog'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const ProductReplacementListingWrapper = () => {
     useUnmountCleanup()
@@ -46,6 +47,7 @@ const ProductReplacementListingWrapper = () => {
     const [productReplacementData, setProductReplacementData] = useState<any>(
         []
     )
+    const { userData } = useGetLocalStorage()
 
     const productReplacementState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -63,7 +65,12 @@ const ProductReplacementListingWrapper = () => {
             searchValue: searchValue,
             params: ['complaintNumber'],
             page: page,
-            filterBy: [],
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,

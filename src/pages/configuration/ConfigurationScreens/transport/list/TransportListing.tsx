@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:TransportListing.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -29,7 +22,6 @@ import {
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
-// import FilterDialogWarpper from "../components/FilterDialog/FilterDialogWarpper";
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 
@@ -48,7 +40,6 @@ const TransportListing = ({ columns, rows, setShowDropdown }: Props) => {
     const TransportState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    // const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         TransportState
@@ -97,8 +88,6 @@ const TransportListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -128,12 +117,6 @@ const TransportListing = ({ columns, rows, setShowDropdown }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
         </div>
     )
 }

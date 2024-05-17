@@ -16,6 +16,7 @@ import SingleComplaintListingLogsWrapper from 'src/pages/CustomerComplain/compon
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const ComplainListingWrapper = () => {
     useUnmountCleanup()
@@ -26,6 +27,7 @@ const ComplainListingWrapper = () => {
     const complainState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
+    const { userData } = useGetLocalStorage()
 
     const {
         page,
@@ -42,6 +44,10 @@ const ComplainListingWrapper = () => {
             params: ['customerNumber'],
             page: page,
             filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
                 {
                     fieldName: 'orderNumber',
                     value: orderNumberSearch,
