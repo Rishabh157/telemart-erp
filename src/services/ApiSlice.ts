@@ -79,7 +79,7 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
                     result = await baseQuery(args, api, extraOptions)
                 } else {
                     localStorage.clear()
-                    window.location.replace('/login')
+                    window.location.replace('/')
                 }
             } finally {
                 release()

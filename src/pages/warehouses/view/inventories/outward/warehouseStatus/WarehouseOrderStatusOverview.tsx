@@ -7,10 +7,14 @@ type Props = {
     setDateFilter: Dispatch<
         SetStateAction<{ startDate: string; endDate: string }>
     >
-    dateFilter:{ startDate: string; endDate: string }
+    dateFilter: { startDate: string; endDate: string }
 }
 
-const WarehouseOrderStatusOverview = ({ cardData, setDateFilter,dateFilter }: Props) => {
+const WarehouseOrderStatusOverview = ({
+    cardData,
+    setDateFilter,
+    dateFilter,
+}: Props) => {
     const onSubmitDateHandler = (values: any) => {
         setDateFilter(values)
     }
@@ -37,10 +41,11 @@ const WarehouseOrderStatusOverview = ({ cardData, setDateFilter,dateFilter }: Pr
                                 {card.orders.map((status) => (
                                     <div
                                         key={status._id}
-                                        className={`text-gray-700 text-sm flex-1 md:flex-none md:w-1/3 `}
+                                        className={`text-gray-700 text-sm flex-1 md:flex-none md:w-1/4 `}
                                     >
                                         <strong>
-                                           ORDER {status._id.replace('_', ' ')}:
+                                            ORDER {status._id.replace('_', ' ')}
+                                            :
                                         </strong>{' '}
                                         <span
                                             className={`font-normal text-lg ${
@@ -53,6 +58,15 @@ const WarehouseOrderStatusOverview = ({ cardData, setDateFilter,dateFilter }: Pr
                                         </span>
                                     </div>
                                 ))}
+                                <div className="text-gray-700 text-sm flex-1 md:flex-none md:w-1/4">
+                                    <strong>Total:</strong>{' '}
+                                    <span className="font-normal text-lg">
+                                        {card.orders.reduce(
+                                            (acc, curr) => acc + curr.count,
+                                            0
+                                        )}
+                                    </span>
+                                </div>
                             </div>
                             <div className="mt-2 w-full overflow-y-auto max-h-full">
                                 <div className="flex flex-wrap justify-start">
@@ -69,7 +83,10 @@ const WarehouseOrderStatusOverview = ({ cardData, setDateFilter,dateFilter }: Pr
                                                                 : 'text-red-500'
                                                         }`}
                                                     >
-                                                        {group._id.replace('_', ' ')    }
+                                                        {group._id.replace(
+                                                            '_',
+                                                            ' '
+                                                        )}
                                                     </span>
                                                 </p>
                                                 <p className="text-gray-600 text-lg">

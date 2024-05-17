@@ -165,8 +165,8 @@ const Header = () => {
                         </Select>
                     </FormControl>
                 ) : (
-                    <span className="rounded px-2 py-2 text-black font-normal border-[1px] border-gray-300 flex gap-x-4 items-center capitalize">
-                        <FaRegBuilding size={20} color="#4d3838" />
+                    <span className="rounded px-1 py-1 text-black font-normal border-[1px] border-gray-300 flex gap-x-4 items-center capitalize">
+                        <FaRegBuilding size={15} color="#4d3838" />
                         {companyName}
                     </span>
                 )}
