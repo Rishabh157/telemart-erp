@@ -112,10 +112,9 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
 
                                     case 'file-picker':
                                         return (
-                                            <div className="mt-3">
+                                            <div className="mt-3" key={name}>
                                                 <ATMFilePickerWrapper
                                                     name={name}
-                                                    key={name}
                                                     label={label}
                                                     placeholder={placeholder}
                                                     onSelect={(newFile) => {

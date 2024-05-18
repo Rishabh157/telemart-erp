@@ -155,7 +155,12 @@ export const navigation: NavItemType[] = [
         path: '/orders',
         name: UserModuleNameTypes.NAV_ORDER,
     },
-
+    {
+        label: 'Order Cancel Request',
+        icon: FiPhoneCall,
+        path: '/order-cancel-request',
+        name: UserModuleNameTypes.NAV_ORDER,
+    },
     {
         label: 'Batch',
         icon: MdOutlineBatchPrediction,

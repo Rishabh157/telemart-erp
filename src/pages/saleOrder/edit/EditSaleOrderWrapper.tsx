@@ -1,6 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-useless-escape */
-/* eslint-disable react-hooks/exhaustive-deps */
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -37,8 +34,8 @@ export type FormInitialValues = {
     productSalesOrder: {
         soId: string
         productGroupId: string
-        rate: number | 0
-        quantity: number | 0
+        rate: number
+        quantity: number
     }[]
     id: string
     dhApproved: string
@@ -59,7 +56,14 @@ const EditSaleOrderWrapper = (props: Props) => {
         dealerId: '',
         dealerWareHouseId: '',
         companyWareHouseId: '',
-        productSalesOrder: [],
+        productSalesOrder: [
+            {
+                soId: '',
+                productGroupId: '',
+                rate: 0,
+                quantity: 0,
+            },
+        ],
         companyId: '',
         id: '',
         dhApproved: '',
@@ -78,7 +82,6 @@ const EditSaleOrderWrapper = (props: Props) => {
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetSalesOrderByIdQuery(Id || ''),
     })
-
 
     const { options: dealerOptions } = useCustomOptions({
         useEndPointHook: useGetAllDealersQuery(''),
@@ -134,7 +137,7 @@ const EditSaleOrderWrapper = (props: Props) => {
                 accApprovedById: '',
             }
 
-            selectedItem?.map((ele: any) => {
+            selectedItem?.forEach((ele: any) => {
                 product = {
                     ...product,
                     soNumber: ele?.soNumber,
@@ -230,7 +233,7 @@ const EditSaleOrderWrapper = (props: Props) => {
         }
 
         const finalValues: any = []
-        values.productSalesOrder.map((ele) => {
+        values.productSalesOrder.forEach((ele) => {
             finalValues.push({
                 ...newValues,
                 id: ele.soId ? ele.soId : '',

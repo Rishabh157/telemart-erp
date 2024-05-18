@@ -101,8 +101,8 @@ const StepAddAddress = ({
                                     case 'text':
                                         return (
                                             <ATMTextField
+                                                key={name}
                                                 required={required}
-                                                key={name || index}
                                                 name={name}
                                                 value={
                                                     name.includes('.')
@@ -142,17 +142,14 @@ const StepAddAddress = ({
                                                 label={label}
                                                 placeholder={placeholder}
                                                 className="shadow bg-white rounded"
-                                                extraClassField='mt-2'
+                                                extraClassField="mt-2"
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
                                     case 'select':
                                         return (
-                                            <>
-                                                <div
-                                                    className="-mt-4"
-                                                    key={name || index}
-                                                >
+                                            <React.Fragment key={name}>
+                                                <div className="-mt-4">
                                                     <ATMSelectSearchable
                                                         required={required}
                                                         label={label}
@@ -265,14 +262,11 @@ const StepAddAddress = ({
                                                         />
                                                     </>
                                                 )}
-                                            </>
+                                            </React.Fragment>
                                         )
                                     case 'checkbox':
                                         return (
-                                            <div
-                                                className="-mt-2"
-                                                key={name || index}
-                                            >
+                                            <div className="-mt-2" key={name}>
                                                 <ATMCheckbox
                                                     name={name}
                                                     label={label}
@@ -353,10 +347,9 @@ const StepAddAddress = ({
                                         )
                                     case 'textarea':
                                         return (
-                                            <div className="-mt-4">
+                                            <div className="-mt-4" key={name}>
                                                 <ATMTextArea
                                                     required={required}
-                                                    key={name}
                                                     name={name}
                                                     minRows={5}
                                                     value={

@@ -282,7 +282,9 @@ import {
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
 import RetailInvoice from './Receipt/RetailInvoice'
 import RetailLabel from './Receipt/RetailILabel'
-import WarehouseOrderStatusOverviewWrapper from './pages/warehouses/view/inventories/outward/warehouseStatus/WarehouseOrderStatusOverviewWrapper'
+import OrderCancelRequestListingWrapper from './pages/orderCancelRequest/list/OrderCancelRequestListingWrapper'
+import AddOrderCancelRequestWrapper from './pages/orderCancelRequest/add/AddOrderCancelRequestWrapper'
+import EditOrderCancelRequestWrapper from './pages/orderCancelRequest/edit/EditOrderCancelRequestWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -889,19 +891,6 @@ const PageRoutes = () => {
                                 />
                             }
                         />
-                             <Route
-                            path="warehouse-status"
-                            element={
-                                <Authorization
-                                    children={
-                                        <WarehouseOrderStatusOverviewWrapper />
-                                    }
-                                    permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
-                                    }
-                                />
-                            }
-                        />
                     </Route>
 
                     <Route
@@ -1399,7 +1388,38 @@ const PageRoutes = () => {
                         />
                     }
                 />
+
                 <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
+
+                {/* Orders Cancel Request */}
+                <Route
+                    path="/order-cancel-request"
+                    element={
+                        <Authorization
+                            children={<OrderCancelRequestListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_ORDER}
+                        />
+                    }
+                />
+
+                <Route
+                    path="/order-cancel-request/add"
+                    element={
+                        <Authorization
+                            children={<AddOrderCancelRequestWrapper />}
+                            permission={UserModuleNameTypes.NAV_ORDER}
+                        />
+                    }
+                />
+                <Route
+                    path="/order-cancel-request/:id"
+                    element={
+                        <Authorization
+                            children={<EditOrderCancelRequestWrapper />}
+                            permission={UserModuleNameTypes.NAV_ORDER}
+                        />
+                    }
+                />
 
                 {/* Batch */}
                 <Route

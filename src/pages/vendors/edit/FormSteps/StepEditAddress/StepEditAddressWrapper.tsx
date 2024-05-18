@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -156,7 +155,7 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     const [billingDistrictData, setBillingDistrictData] = useState<any>()
     const [billingPincodeData, setBillingPincodeData] = useState<any>()
 
-    const { country:allCountry } = useCountries()
+    const { country: allCountry } = useCountries()
 
     //registraion
 
@@ -194,36 +193,38 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
         (state: RootState) => state.pincode
     )
 
-
     //registration
 
     useEffect(() => {
         if (stateByCountry) {
             dispatch(setAllStates(stateByCountry))
         }
-    }, [stateByCountry, dispatch])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stateByCountry])
     //billing state
     useEffect(() => {
         if (StateDataB) {
             setBillingStateData(StateDataB)
         }
-    }, [StateDataB, dispatch])
+    }, [StateDataB])
 
     //registration
     useEffect(() => {
         if (stateDistricts) {
             dispatch(setAllDistrict(stateDistricts))
         }
-    }, [stateDistricts, dispatch])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stateDistricts])
     //billing
     useEffect(() => {
         if (districtDataB) {
             setBillingDistrictData(districtDataB)
         }
-    }, [districtDataB, dispatch])
+    }, [districtDataB])
     //registration
     useEffect(() => {
         dispatch(setAllPincodes(pincodeByDistrict))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pincodeByDistrict])
     //billing
     useEffect(() => {
@@ -266,13 +267,11 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     }
 
     return (
-        <>
-            <StepEditAddress
-                formikProps={formikProps}
-                formFields={formFields}
-                dropdownOptions={dropdownOptions}
-            />
-        </>
+        <StepEditAddress
+            formikProps={formikProps}
+            formFields={formFields}
+            dropdownOptions={dropdownOptions}
+        />
     )
 }
 

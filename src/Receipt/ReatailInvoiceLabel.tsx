@@ -10,7 +10,7 @@ const ReatailInvoiceLabel = () => {
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search)
     const orderNumber = queryParams.get('orderNumber')
-    console.log(location, 'location')
+
     React.useEffect(() => {
         const printFunc = setTimeout(() => {
             window?.print()
@@ -25,7 +25,7 @@ const ReatailInvoiceLabel = () => {
             skip: !orderNumber,
         }),
     })
-    console.log(items, 'items')
+
     return (
         <>
             <div className="bg-white p-4 h-screen w-full">

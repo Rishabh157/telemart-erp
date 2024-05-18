@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:EditSaleOrder.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -96,8 +88,9 @@ const EditSaleOrder = ({
         if (val) {
             setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
         } else {
-            setFieldValue(`productSalesOrder[${i}].rate`, '')
+            setFieldValue(`productSalesOrder[${i}].rate`, 0)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -340,8 +333,8 @@ const EditSaleOrder = ({
                                                 onClick={() =>
                                                     push({
                                                         productGroupId: '',
-                                                        rate: null,
-                                                        quantity: null,
+                                                        rate: 0,
+                                                        quantity: 0,
                                                     })
                                                 }
                                                 className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "

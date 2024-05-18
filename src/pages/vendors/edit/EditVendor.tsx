@@ -130,7 +130,7 @@ const EditVendor = ({
 
                     {/* Form */}
                     <div className="grow">
-                        {steps[activeStep]?.component({ formikProps })}
+                        {steps[activeStep]?.component({ formikProps ,dispatch })}
                     </div>
                 </div>
             </div>
