@@ -32,6 +32,7 @@ import moment from 'moment'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { getCustomerInwardBarcodeOptionTypes } from 'src/utils/constants/customeTypes'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -181,6 +182,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'orderNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_NUMBER,
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -190,6 +192,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'orderReferenceNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_REF_NUMBER,
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -199,6 +202,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'inquiryNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_INQUIRY_NUMBER,
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -207,6 +211,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'firstCallRemark',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_FIRSTCALL_REMARK,
             headerName: '1st call remark',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -217,6 +222,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'firstCallState',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_FIRSTCALL_STATUS,
             headerName: 'first Call State',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -227,6 +233,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'firstCallCallBackDate',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_FIRSTCALL_CALLBACK_DATE,
             headerName: 'call back date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -237,6 +244,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'assignWarehouseLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ASSIGNED_WAREHOUSE,
             headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -247,6 +255,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'trackingNo',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_TRACKING_NUMBER,
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -255,6 +264,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'tehsilLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_TEHSIL_LABEL,
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -265,6 +275,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'statusDate',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_STATUS_DATE,
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -272,6 +283,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_STATUS,
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -280,6 +292,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'shippingCharges',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_SHIPPING_CHARGES,
             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -290,6 +303,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'schemeName',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_NAME,
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -300,6 +314,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'schemeCode',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_CODE,
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -310,6 +325,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'shcemeQuantity',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_QUANTITY,
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -320,6 +336,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'price',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PRICE,
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -328,6 +345,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'pincodeLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PINCODE_LABEl,
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -338,6 +356,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'paymentMode',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_PAYMENT_MODE,
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -348,6 +367,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'createdAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CREATE_ORDER_DATE,
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -365,6 +385,7 @@ const InwardCustomerTabsListingWrapper = () => {
 
         {
             field: 'edpDate',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_EDP_DATE,
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -372,6 +393,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'districtLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DISTRICT_LABEL,
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -381,6 +403,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'dispositionLevelThree',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DISPOSITION_LEVEL_THREE,
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -390,6 +413,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'dealerStatus',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DEALER_STATUS,
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -401,6 +425,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'dealerCode',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DEALER_CODE,
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -410,6 +435,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'customerName',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CUSTOMER_NAME,
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -419,6 +445,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'areaLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_AREA_LABEL,
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[30px]',
@@ -428,6 +455,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'mobileNo',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_MOBILE_NO,
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -437,6 +465,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'channelName',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CHHANEL_NAME,
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -446,6 +475,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'callCenterLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CALLCENTER_LABEL,
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -453,17 +483,10 @@ const InwardCustomerTabsListingWrapper = () => {
                 <div className="py-0">{row?.callCenterLabel}</div>
             ),
         },
-        {
-            field: 'areaLabel',
-            headerName: 'Area',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.areaLabel}</div>
-            ),
-        },
+
         {
             field: 'remark',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_REMARK,
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -473,6 +496,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'agent',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_AGENT_NAME,
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
@@ -480,27 +504,13 @@ const InwardCustomerTabsListingWrapper = () => {
                 <div className="py-0">{row?.agentName}</div>
             ),
         },
-
-        {
-            field: 'Shipping Charges',
-            headerName: 'Delivery Charges',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main ">
-                    &#8377; {row.deliveryCharges}
-                </span>
-            ),
-        },
-
         {
             field: 'preffered_delivery_date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_DATE,
             headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
                     <>
@@ -511,18 +521,13 @@ const InwardCustomerTabsListingWrapper = () => {
                                   )
                                 : '-'}
                         </span>
-                        {/* <span>
-                                {' '}
-                                {moment(row?.preffered_delivery_date).format(
-                                    'hh:mm:ss A'
-                                )}
-                            </span>, */}
                     </>
                 )
             },
         },
         {
             field: 'preffered_delivery_date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_TIME,
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
@@ -548,6 +553,8 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'orderMBKNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_MBK_NUMBER,
+
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px]',

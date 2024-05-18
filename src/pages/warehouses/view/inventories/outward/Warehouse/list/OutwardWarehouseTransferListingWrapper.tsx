@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -11,7 +10,6 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 // |-- Internal Dependencies --|
 import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
@@ -39,6 +37,7 @@ import {
     useGetPaginationWarehouseTransferByGroupQuery,
 } from 'src/services/WarehouseTransferService'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -115,7 +114,6 @@ const OutwardWarehouseTransferListingWrapper = () => {
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.wareHouse}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -135,6 +133,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
         },
         {
             field: 'wtNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_WT_NUMBER,
             headerName: 'WT Number',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OutwardRequestWarehouseListResponse) => (
@@ -143,6 +142,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
         },
         {
             field: 'fromWarehouse',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_FROMWAREHOUSE_LABEL,
             headerName: 'From Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -152,6 +152,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
         },
         {
             field: 'toWarehouse',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_TOWAREHOUSE_LABEL,
             headerName: 'To Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -161,6 +162,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
         },
         {
             field: 'items',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_ITEMS,
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -188,6 +190,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
         },
         {
             field: 'createdAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_INSERTED_DATE,
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -197,6 +200,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
         },
         {
             field: 'updatedAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_UPDATED_DATE,
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -206,6 +210,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
         },
         {
             field: 'status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_STATUS,
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',

@@ -434,6 +434,7 @@ const OutwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'preffered_delivery_date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_DATE,
             headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
@@ -454,6 +455,7 @@ const OutwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'preffered_delivery_date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_TIME,
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
@@ -479,6 +481,8 @@ const OutwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'orderMBKNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_LIST_ORDER_MBK_NUMBER,
+
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px]',

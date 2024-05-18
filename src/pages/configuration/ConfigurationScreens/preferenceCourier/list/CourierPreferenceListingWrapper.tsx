@@ -17,6 +17,8 @@ import {
 } from 'src/services/CourierPreferenceService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { CircularProgress } from '@mui/material'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import { showToast } from 'src/utils'
 
 const CourierPreferenceListingWrapper = () => {
     useUnmountCleanup()
@@ -47,13 +49,19 @@ const CourierPreferenceListingWrapper = () => {
             ),
         },
     ]
+    const { userData } = useGetLocalStorage()
     const { items } = useGetCustomListingData<any>({
         useEndPointHook: useGetCourierPreferenceQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['courierName'],
             page: page,
-            filterBy: [],
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
+            ],
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,
@@ -62,10 +70,14 @@ const CourierPreferenceListingWrapper = () => {
     })
     const handleUpdatePriority = (rows: any) => {
         let updateCourier = rows.map((items: any) => {
-            return { courierName: items.courierName, priority: items.priority }
+            return {
+                courierName: items.courierName,
+                priority: items.priority,
+                companyId: userData?.companyId,
+            }
         })
-        updateCourierPreference({ body: updateCourier }).then((res) => {
-            console.log('res', res)
+        updateCourierPreference({ body: updateCourier }).then((res: any) => {
+            showToast('success', res?.data?.message)
         })
     }
 

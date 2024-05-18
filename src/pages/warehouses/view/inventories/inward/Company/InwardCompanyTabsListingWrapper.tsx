@@ -20,7 +20,6 @@ import {
     OutwardRequestWarehouseToCompanyListResponse,
 } from 'src/models'
 import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import { showToast } from 'src/utils'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
@@ -34,6 +33,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import { useGetPaginationWarehouseToComapnyByGroupQuery } from 'src/services/WarehouseToComapnyService'
 import { useInwardWarehouseToWarehouseBarcodeMutation } from 'src/services/WarehouseTransferService'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -103,7 +103,6 @@ const InwardCompanyTabsListingWrapper = () => {
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.saleOrder}
                         isCustomBtn={true}
                         customBtnText="Inward"
                         handleCustomActionButton={() => {
@@ -122,7 +121,8 @@ const InwardCompanyTabsListingWrapper = () => {
                 ),
         },
         {
-            field: 'wtNumber',
+            field: 'wtcNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_WTC_NUMBER,
             headerName: 'WTC Number',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
@@ -130,7 +130,8 @@ const InwardCompanyTabsListingWrapper = () => {
             ),
         },
         {
-            field: 'fromWarehouse',
+            field: 'fromWarehouseLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_FROMWAREHOUSE_LABEL,
             headerName: 'From Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -139,7 +140,18 @@ const InwardCompanyTabsListingWrapper = () => {
             ),
         },
         {
-            field: 'toWarehouse',
+            field: 'toCompanyLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_TOCOMPANY,
+            headerName: 'Company Name',
+            flex: 'flex-[0.6_0.6_0%]',
+            align: 'center',
+            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
+                <span> {row?.toCompanyLabel} </span>
+            ),
+        },
+        {
+            field: 'toWarehouseLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_TOWAREHOUSE_LABEL,
             headerName: 'To Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -149,6 +161,7 @@ const InwardCompanyTabsListingWrapper = () => {
         },
         {
             field: 'items',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_ITEMS,
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -176,6 +189,7 @@ const InwardCompanyTabsListingWrapper = () => {
         },
         {
             field: 'createdAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_INSERTED_DATE,
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -185,6 +199,7 @@ const InwardCompanyTabsListingWrapper = () => {
         },
         {
             field: 'updatedAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_UPDATED_DATE,
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -194,6 +209,7 @@ const InwardCompanyTabsListingWrapper = () => {
         },
         {
             field: 'status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_STATUS,
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',

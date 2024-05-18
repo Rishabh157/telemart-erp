@@ -23,6 +23,7 @@ import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const TransportListingWrapper = () => {
     useUnmountCleanup()
@@ -34,7 +35,7 @@ const TransportListingWrapper = () => {
     const { page, rowsPerPage, searchValue } = Transporttate
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
-    // const { userData } = useSelector((state: RootState) => state?.auth)
+    const { userData } = useGetLocalStorage()
 
     const columns: columnTypes[] = [
         {
@@ -98,10 +99,10 @@ const TransportListingWrapper = () => {
             params: ['transportName'],
             page: page,
             filterBy: [
-                // {
-                //     fieldName: 'companyId',
-                //     value: userData?.companyId,
-                // },
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId,
+                },
             ],
             dateFilter: {},
             orderBy: 'createdAt',

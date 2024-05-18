@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:OutwardSampleTabsListingWrapper.tsx
-// Type: List Component
-// Last Updated: OCTOBER 25, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -15,12 +7,10 @@ import { IconType } from 'react-icons'
 // |-- Internal Dependencies --|
 import { useParams } from 'react-router-dom'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-// import { OutwardRequestWarehouseToSampleListResponse } from 'src/models/OutwardRequest.model'
-// import OutwardRequestListing from './OutwardDealerTabs'
+
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import OutwardSampleTabs from './OutwardSampleTabs'
 
 // |-- Internal Dependencies --|
@@ -48,6 +38,7 @@ import {
     useGetPaginationWarehouseToSampleByGroupQuery,
 } from 'src/services/WarehouseToSampleService'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -123,7 +114,6 @@ const OutwardSampleTabsListingWrapper = () => {
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.saleOrder}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -143,6 +133,7 @@ const OutwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'wtsNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_WTS_NUMBER,
             headerName: 'WTS Number',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
@@ -151,6 +142,7 @@ const OutwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'dealerLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_DEALER_LABEL,
             headerName: 'Receiver Name',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -160,6 +152,7 @@ const OutwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'items',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_ITEMS,
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -187,6 +180,7 @@ const OutwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'createdAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_INSERTED_DATE,
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -196,6 +190,7 @@ const OutwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'updatedAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_UPDATED_DATE,
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -205,6 +200,7 @@ const OutwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_STATUS,
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',

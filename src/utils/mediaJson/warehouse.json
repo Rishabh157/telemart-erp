@@ -325,10 +325,24 @@
                     "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_LIST_AGENT_NAME",
                     "fieldName": "Agent Name",
                     "fieldValue": "agentName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_DATE",
+                    "fieldName": "PREFFERED DELIVERY DATE",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_TIME",
+                    "fieldName": "PREFFERED DELIVERY TIME",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_LIST_ORDER_MBK_NUMBER",
+                    "fieldName": "MBK NUMBER",
+                    "fieldValue": "orderMBKNumber"
                 }
             ]
         },
-        
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_RTV",
             "actionUrl": "",
@@ -339,7 +353,38 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_OUTWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_RTV_NUMBER",
+                    "fieldName": "RTV Number",
+                    "fieldValue": "rtvNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_VENDOR_LABEL",
+                    "fieldName": "Vendor Label",
+                    "fieldValue": "vendorLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_ITEMS",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "documents"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_STATUS",
@@ -363,7 +408,43 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_OUTWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_WT_NUMBER",
+                    "fieldName": "WT Number",
+                    "fieldValue": "row?._id"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_FROMWAREHOUSE_LABEL",
+                    "fieldName": "From Warehouse",
+                    "fieldValue": "fromWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_TOWAREHOUSE_LABEL",
+                    "fieldName": "To Warehouse",
+                    "fieldValue": "toWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_ITEMS",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "documents"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_WAREHOUSE_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE",
@@ -375,7 +456,38 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_OUTWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_WTS_NUMBER",
+                    "fieldName": "WTS Number",
+                    "fieldValue": "row?._id"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_DEALER_LABEL",
+                    "fieldName": "Receiver Name",
+                    "fieldValue": "dealerLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_ITEMS",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "documents"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SAMPLE_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE",
@@ -399,7 +511,48 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_OUTWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_WTC_NUMBER",
+                    "fieldName": "WTC Number",
+                    "fieldValue": "row?._id"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_FROMWAREHOUSE_LABEL",
+                    "fieldName": "From Warehouse",
+                    "fieldValue": "fromWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_TOCOMPANY",
+                    "fieldName": "To Company",
+                    "fieldValue": "toCompanyLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_TOWAREHOUSE_LABEL",
+                    "fieldName": "To Warehouse",
+                    "fieldValue": "toWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_ITEMS",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "documents"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO",
@@ -802,7 +955,68 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_INWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_DTW_NUMBER",
+                    "fieldName": "DTW Number",
+                    "fieldValue": "row?._id"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_TOWAREHOUSE_LABEL",
+                    "fieldName": "To Warehouse",
+                    "fieldValue": "toWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_ITEMS",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "documents"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_FIRST_APPROVAL",
+                    "fieldName": "First Status",
+                    "fieldValue": "firstApproved"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_FIRST_APPROVAL_BY",
+                    "fieldName": "First Approved By",
+                    "fieldValue": "firstApprovedActionBy"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_FIRST_APPROVAL_DATE",
+                    "fieldName": "First Approved Date",
+                    "fieldValue": "firstApprovedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_SECOND_APPROVAL",
+                    "fieldName": "Second Status",
+                    "fieldValue": "secondApproved"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_SECOND_APPROVAL_BY",
+                    "fieldName": "Second Approved By",
+                    "fieldValue": "secondApprovedActionBy"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_SECOND_APPROVAL_DATE",
+                    "fieldName": "Second Approved Date",
+                    "fieldValue": "secondApprovedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER",
@@ -814,7 +1028,179 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_INWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+          
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_NUMBER",
+                    "fieldName": "Order Number",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_REF_NUMBER",
+                    "fieldName": "Order Ref No.",
+                    "fieldValue": "orderReferenceNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_INQUIRY_NUMBER",
+                    "fieldName": "inquiry Number",
+                    "fieldValue": "inquiryNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_FIRSTCALL_REMARK",
+                    "fieldName": "first Call Remark",
+                    "fieldValue": "firstCallRemark"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_FIRSTCALL_STATUS",
+                    "fieldName": "first Call State",
+                    "fieldValue": "firstCallState"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_FIRSTCALL_CALLBACK_DATE",
+                    "fieldName": "first Call CallBack Date",
+                    "fieldValue": "firstCallCallBackDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ASSIGNED_WAREHOUSE",
+                    "fieldName": "Warehouse",
+                    "fieldValue": "assignWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_TRACKING_NUMBER",
+                    "fieldName": "tracking No",
+                    "fieldValue": "trackingNo"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_TEHSIL_LABEL",
+                    "fieldName": "tehsil Label",
+                    "fieldValue": "tehsilLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_STATUS_DATE",
+                    "fieldName": "status Date",
+                    "fieldValue": "statusDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_SHIPPING_CHARGES",
+                    "fieldName": "shipping Charges",
+                    "fieldValue": "deliveryCharges"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_NAME",
+                    "fieldName": "Scheme Name",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_CODE",
+                    "fieldName": "scheme Code",
+                    "fieldValue": "schemeCode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_QUANTITY",
+                    "fieldName": "shceme Quantity",
+                    "fieldValue": "shcemeQuantity"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PINCODE_LABEl",
+                    "fieldName": "pincode",
+                    "fieldValue": "pincodeLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_PAYMENT_MODE",
+                    "fieldName": "paymentMode",
+                    "fieldValue": "paymentMode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CREATE_ORDER_DATE",
+                    "fieldName": "Create Order Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_EDP_DATE",
+                    "fieldName": "EDP Date",
+                    "fieldValue": "edpDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DISTRICT_LABEL",
+                    "fieldName": "district Label",
+                    "fieldValue": "districtLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DISPOSITION_LEVEL_THREE",
+                    "fieldName": "disposition Level Three",
+                    "fieldValue": "dispositionLevelThree"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DEALER_STATUS",
+                    "fieldName": "dealer Status",
+                    "fieldValue": "dealerStatus"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DEALER_CODE",
+                    "fieldName": "dealer Code",
+                    "fieldValue": "dealerCode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CUSTOMER_NAME",
+                    "fieldName": "customer Name",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_AREA_LABEL",
+                    "fieldName": "area",
+                    "fieldValue": "areaLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_MOBILE_NO",
+                    "fieldName": "mobile No",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CHHANEL_NAME",
+                    "fieldName": "channel Name",
+                    "fieldValue": "channelName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CALLCENTER_LABEL",
+                    "fieldName": "call Center",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_REMARK",
+                    "fieldName": "remark",
+                    "fieldValue": "remark"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_AGENT_NAME",
+                    "fieldName": "Agent Name",
+                    "fieldValue": "agentName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_DATE",
+                    "fieldName": "PREFFERED DELIVERY DATE",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_TIME",
+                    "fieldName": "PREFFERED DELIVERY TIME",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_MBK_NUMBER",
+                    "fieldName": "MBK NUMBER",
+                    "fieldValue": "orderMBKNumber"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE",
@@ -826,7 +1212,43 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_INWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_WT_NUMBER",
+                    "fieldName": "WT Number",
+                    "fieldValue": "row?._id"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_FROMWAREHOUSE_LABEL",
+                    "fieldName": "From Warehouse",
+                    "fieldValue": "fromWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_TOWAREHOUSE_LABEL",
+                    "fieldName": "To Warehouse",
+                    "fieldValue": "toWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_ITEMS",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "documents"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_SAMPLE",
@@ -838,7 +1260,38 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_INWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_WTS_NUMBER",
+                    "fieldName": "WTS Number",
+                    "fieldValue": "row?._id"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_DEALER_LABEL",
+                    "fieldName": "Receiver Name",
+                    "fieldValue": "dealerLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_ITEMS",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "documents"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE",
@@ -862,7 +1315,48 @@
                 "TAB_WAREHOUSE_DETAILS",
                 "TAB_WAREHOUSE_INWARD_INVENTORIES"
             ],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_WTC_NUMBER",
+                    "fieldName": "WTC Number",
+                    "fieldValue": "row?._id"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_FROMWAREHOUSE_LABEL",
+                    "fieldName": "From Warehouse",
+                    "fieldValue": "fromWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_TOCOMPANY",
+                    "fieldName": "To Company",
+                    "fieldValue": "toCompanyLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_TOWAREHOUSE_LABEL",
+                    "fieldName": "To Warehouse",
+                    "fieldValue": "toWarehouseLabel"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_ITEMS",
+                    "fieldName": "Items / Quantity",
+                    "fieldValue": "documents"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_INSERTED_DATE",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_STATUS",
+                    "fieldName": "status",
+                    "fieldValue": "status"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_ORDERS",
