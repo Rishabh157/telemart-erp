@@ -42,8 +42,6 @@ const OutwardGpoOrderFilterFormWrapper = ({
         orderStatus: filter.orderStatus,
     }
 
-
-
     // Submit Handler
     const handleSubmit = async (
         values: FormInitialValuesFilterWithLabel,

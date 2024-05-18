@@ -60,7 +60,6 @@ const AddSaleOrder = ({
     ]
 
     const { values, setFieldValue } = formikProps
-
     const dispatch = useDispatch<AppDispatch>()
     const [productGroup, setProductGroup] = useState('')
     const [i, setI] = useState(0)
@@ -90,7 +89,7 @@ const AddSaleOrder = ({
         if (val) {
             setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
         } else {
-            setFieldValue(`productSalesOrder[${i}].rate`, '')
+            setFieldValue(`productSalesOrder[${i}].rate`, 0)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
@@ -99,8 +98,9 @@ const AddSaleOrder = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
-        <div className=" h-[calc(100vh-55px)] overflow-auto">
+        <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div className="">
@@ -328,8 +328,8 @@ const AddSaleOrder = ({
                                                 onClick={() =>
                                                     push({
                                                         productGroupId: '',
-                                                        rate: null,
-                                                        quantity: null,
+                                                        rate: 0,
+                                                        quantity: 0,
                                                     })
                                                 }
                                                 className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "

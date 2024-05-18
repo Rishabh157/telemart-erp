@@ -198,8 +198,6 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
         return schemeQ === barcodeLength
     }
 
-    console.log('handleDisableDispatchButton', handleDisableDispatchButton())
-
     useEffect(() => {
         const schemeQ = products.reduce((sum: number, product: any) => {
             return (sum += product.schemeQuantity)
@@ -207,7 +205,7 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
         const barcodeLength = products.reduce((sum: number, product: any) => {
             return (sum += product?.barcode?.length)
         }, 0)
-        // console.log('schemeQ', schemeQ, 'barcodeLength', barcodeLength)
+
         if (schemeQ && barcodeLength) {
             if (barcodeLength === schemeQ) {
                 handleDispatchBarcode()

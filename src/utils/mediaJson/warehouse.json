@@ -774,6 +774,11 @@
                     "fieldValue": "orderNumber"
                 },
                 {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_STATUS",
+                    "fieldName": "ORDER STATUS",
+                    "fieldValue": "orderStatus"
+                },
+                {
                     "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_REF_NUMBER",
                     "fieldName": "ORDER REF NUMBER",
                     "fieldValue": "orderReferenceNumber"

@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -44,8 +43,6 @@ const AddPurchaseOrderWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addPurchaseOrder] = useAddPurchaseOrderMutation()
-
-
 
     const { options: itemOptions } = useCustomOptions({
         useEndPointHook: useGetAllItemsQuery(userData?.companyId),
@@ -106,9 +103,10 @@ const AddPurchaseOrderWrapper = (props: Props) => {
         const purchaseOrder = values.purchaseOrder.map((ele: any) => {
             return {
                 ...ele,
-                estReceivingDate: moment(ele.estReceivingDate).format(
-                    'YYYY/MM/D'
-                ),
+                estReceivingDate: moment(
+                    ele.estReceivingDate,
+                    'YYYY/MM/DD'
+                ).format('YYYY/MM/D'),
             }
         })
 

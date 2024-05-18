@@ -97,8 +97,8 @@ const StepEditAddress = ({
                                     case 'text':
                                         return (
                                             <ATMTextField
-                                                required={required}
                                                 key={name}
+                                                required={required}
                                                 name={name}
                                                 value={
                                                     name.includes('.')
@@ -256,10 +256,9 @@ const StepEditAddress = ({
                                         )
                                     case 'textarea':
                                         return (
-                                            <div className="-mt-4">
+                                            <div className="-mt-4" key={name}>
                                                 <ATMTextArea
                                                     required={required}
-                                                    key={name}
                                                     name={name}
                                                     minRows={5}
                                                     value={
