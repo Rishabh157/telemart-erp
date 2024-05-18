@@ -24,7 +24,6 @@ import {
     BarcodeListResponseType,
     OutwardRequestRTVListResponse,
 } from 'src/models'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import { showToast } from 'src/utils'
 import OutwardRTVTabs from './OutwardRTVTabs'
@@ -42,6 +41,7 @@ import {
 } from 'src/services/ReturnToVendorService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -116,7 +116,6 @@ const OutwardRTVTabsListingWrapper = () => {
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.saleOrder}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -136,6 +135,7 @@ const OutwardRTVTabsListingWrapper = () => {
         },
         {
             field: 'rtvNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_RTV_NUMBER,
             headerName: 'RTV Number',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OutwardRequestRTVListResponse) => (
@@ -144,6 +144,7 @@ const OutwardRTVTabsListingWrapper = () => {
         },
         {
             field: 'vendorLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_VENDOR_LABEL,
             headerName: 'Vendor Name',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -153,6 +154,7 @@ const OutwardRTVTabsListingWrapper = () => {
         },
         {
             field: 'items',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_ITEMS,
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -180,6 +182,7 @@ const OutwardRTVTabsListingWrapper = () => {
         },
         {
             field: 'createdAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_INSERTED_DATE,
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -189,6 +192,7 @@ const OutwardRTVTabsListingWrapper = () => {
         },
         {
             field: 'updatedAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_UPDATED_DATE,
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -198,6 +202,7 @@ const OutwardRTVTabsListingWrapper = () => {
         },
         {
             field: 'status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_RTV_STATUS,
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',

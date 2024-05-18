@@ -1,11 +1,3 @@
-/* eslint-disable array-callback-return */
-/// ==============================================
-// Filename:OutwardDealerTabsListingWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -27,7 +19,6 @@ import {
     BarcodeListResponseType,
     InwardDealerRequstListResponse,
 } from 'src/models'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { showToast } from 'src/utils'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
@@ -46,6 +37,7 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -111,7 +103,6 @@ const InwardDealerTabsListingWrapper = () => {
                 ) : (
                     <>
                         <ActionPopup
-                            moduleName={UserModuleNameTypes.dealer}
                             isCustomBtn={true}
                             customBtnText="Inward"
                             handleOnAction={() => {}}
@@ -135,6 +126,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'dtwNumber',
             headerName: 'DTW Number',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_DTW_NUMBER,
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: InwardDealerRequstListResponse) => (
                 <span> {row?._id} </span>
@@ -143,6 +135,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'toWarehouseLabel',
             headerName: 'To Warehouse',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_TOWAREHOUSE_LABEL,
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => (
@@ -152,6 +145,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_ITEMS,
             flex: 'flex-[1_1_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -177,8 +171,9 @@ const InwardDealerTabsListingWrapper = () => {
             },
         },
         {
-            field: 'firstApprovedActionStatus',
+            field: 'firstApproved',
             headerName: 'First Status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_FIRST_APPROVAL,
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -196,6 +191,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'firstApprovedActionBy',
             headerName: 'First Approved By',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_FIRST_APPROVAL_BY,
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -205,6 +201,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'firstApprovedAt',
             headerName: 'First Approved Date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_FIRST_APPROVAL_DATE,
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -214,6 +211,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'secondApprovedActionByStatus',
             headerName: 'Second Status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_SECOND_APPROVAL,
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -232,6 +230,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'secondApprovedActionBy',
             headerName: 'Second Approved By',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_SECOND_APPROVAL_BY,
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -241,6 +240,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_SECOND_APPROVAL_DATE,
             flex: 'flex-[0.5_0.5_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -250,6 +250,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'createdAt',
             headerName: 'Inserted Date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_INSERTED_DATE,
             flex: 'flex-[1_1_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -263,6 +264,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'updatedAt',
             headerName: 'Updated Date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_UPDATED_DATE,
             flex: 'flex-[1_1_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {
@@ -279,6 +281,7 @@ const InwardDealerTabsListingWrapper = () => {
         {
             field: 'status',
             headerName: 'Status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER_LIST_STATUS,
             flex: 'flex-[1_1_0%]',
             align: 'center',
             renderCell: (row: InwardDealerRequstListResponse) => {

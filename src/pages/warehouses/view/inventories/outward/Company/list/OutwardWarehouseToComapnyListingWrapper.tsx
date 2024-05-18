@@ -1,12 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:OutwardWarehouseToComapnyListingWrapper.tsx
-// Type: List Component
-// Last Updated: OCTOBER 25, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
-// |-- Built-in Dependencies --|
 import { useState } from 'react'
 
 // |-- External Dependencies --|
@@ -27,7 +19,6 @@ import {
     OutwardRequestWarehouseToCompanyListResponse,
 } from 'src/models'
 import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import { showToast } from 'src/utils'
 import OutwardWarehouseToComapnyListing from './OutwardWarehouseToComapnyListing'
@@ -44,6 +35,7 @@ import {
 } from 'src/services/WarehouseToComapnyService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -119,7 +111,6 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.saleOrder}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -139,6 +130,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         },
         {
             field: 'wtcNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_WTC_NUMBER,
             headerName: 'WTC Number',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
@@ -147,6 +139,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         },
         {
             field: 'fromWarehouseLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_FROMWAREHOUSE_LABEL,
             headerName: 'From Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -156,6 +149,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         },
         {
             field: 'toCompanyLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_TOCOMPANY,
             headerName: 'Company Name',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -165,6 +159,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         },
         {
             field: 'toWarehouseLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_TOWAREHOUSE_LABEL,
             headerName: 'To Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -174,6 +169,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         },
         {
             field: 'items',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_ITEMS,
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -201,6 +197,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         },
         {
             field: 'createdAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_INSERTED_DATE,
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -210,6 +207,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         },
         {
             field: 'updatedAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_UPDATED_DATE,
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -219,6 +217,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         },
         {
             field: 'status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY_LIST_STATUS,
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',

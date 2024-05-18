@@ -17,7 +17,6 @@ import {
     OutwardRequestWarehouseToSampleListResponse,
 } from 'src/models'
 import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
-import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import { showToast } from 'src/utils'
 import InwardSampleTabs from './InwardSampleTabs'
@@ -33,6 +32,7 @@ import { useGetPaginationWarehouseToSampleByGroupQuery } from 'src/services/Ware
 import { useInwardWarehouseToWarehouseBarcodeMutation } from 'src/services/WarehouseTransferService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 export type Tabs = {
@@ -108,7 +108,7 @@ const InwardSampleTabsListingWrapper = () => {
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
-                        moduleName={UserModuleNameTypes.saleOrder}
+                     
                         isCustomBtn={true}
                         customBtnText="Inward"
                         handleCustomActionButton={() => {
@@ -128,6 +128,7 @@ const InwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'wtsNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_WTS_NUMBER,
             headerName: 'WTS Number',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OutwardRequestWarehouseToSampleListResponse) => (
@@ -136,6 +137,7 @@ const InwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'dealerLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_DEALER_LABEL,
             headerName: 'Receiver Name',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -145,6 +147,7 @@ const InwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'items',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_ITEMS,
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -169,6 +172,7 @@ const InwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'createdAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_INSERTED_DATE,
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -178,6 +182,7 @@ const InwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'updatedAt',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_UPDATED_DATE,
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -187,6 +192,7 @@ const InwardSampleTabsListingWrapper = () => {
         },
         {
             field: 'status',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_SAMPLE_STATUS,
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',
