@@ -65,7 +65,7 @@ const CourierPreferenceListingWrapper = () => {
             return { courierName: items.courierName, priority: items.priority }
         })
         updateCourierPreference({ body: updateCourier }).then((res) => {
-            console.log('res', res)
+            return res
         })
     }
 

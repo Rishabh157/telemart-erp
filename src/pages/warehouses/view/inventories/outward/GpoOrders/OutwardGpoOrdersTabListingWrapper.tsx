@@ -598,6 +598,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                 filter={filter}
                 setFilter={setFilter}
             />
+
             <DispatchingBarcodes courierType={courierCompanyEnum.gpo} />
         </>
     )

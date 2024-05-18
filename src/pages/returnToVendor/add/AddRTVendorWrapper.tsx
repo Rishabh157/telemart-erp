@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable react-hooks/exhaustive-deps */
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -34,8 +32,8 @@ export type FormInitialValues = {
     companyId: string
     productSalesOrder: {
         productGroupId: string
-        rate: number | 0
-        quantity: number | 0
+        rate: number
+        quantity: number
     }[]
 }
 
@@ -96,6 +94,7 @@ const AddRTVendorWrapper = (props: Props) => {
         rtvNo: string()
             .required('return to vendor number is required')
             .matches(
+                // eslint-disable-next-line no-useless-escape
                 /^[a-zA-Z]+[^\/\\]*$/,
                 'Only alphabetical characters are allowed, except / and \\'
             ),

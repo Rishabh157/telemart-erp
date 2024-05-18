@@ -8,14 +8,12 @@ const RetailLabel = () => {
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search)
     const orderNumber = queryParams.get('orderNumber')
-    // console.log(location, 'location')
 
     const { items } = useGetDataByIdCustomQuery<OrderListResponse>({
         useEndPointHook: useGetInvoiceByOrderNumberQuery(orderNumber, {
             skip: !orderNumber,
         }),
     })
-    console.log('items ===>', items)
 
     const totalPrice: number =
         (items?.shcemeQuantity || 0) * (items?.price || 0)

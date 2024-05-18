@@ -1343,3 +1343,39 @@ export const getTransportTypeOptions = () => {
         }
     })
 }
+
+// Cancel Order Reason Options
+enum CancelOrderReasonType {
+    wrongScheme = 'WRONG_SCHEME',
+    wrongPaymentMode = 'WRONG_PAYMENT_MODE',
+    stockUnavailability = 'STOCK_UNAVAILABILITY',
+    other = 'OTHER',
+}
+
+export const getCancelOrderReasonTypeOptions = () => {
+    let options = [
+        {
+            label: 'Wrong Scheme',
+            value: CancelOrderReasonType.wrongScheme,
+        },
+        {
+            label: 'Wrong Payment Mode',
+            value: CancelOrderReasonType.wrongPaymentMode,
+        },
+        {
+            label: 'Stock Mode',
+            value: CancelOrderReasonType.stockUnavailability,
+        },
+        {
+            label: 'Other',
+            value: CancelOrderReasonType.other,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}

@@ -24,7 +24,6 @@ const RetailInvoice = () => {
 
         const handleCancelPrint = () => {
             navigate(state.pathname)
-            console.log('Print dialog cancelled by the user')
             // Your custom logic when the print dialog is cancelled
         }
 

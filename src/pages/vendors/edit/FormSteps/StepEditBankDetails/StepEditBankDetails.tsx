@@ -45,7 +45,7 @@ const StepEditBankDetails = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-   
+
     const dispatch = useDispatch()
     const handleSetFieldValue = (
         name: string,
@@ -187,49 +187,51 @@ const StepEditBankDetails = ({
 
                                                                             case 'select':
                                                                                 return (
-                                                                                    <div>
-                                                                                        <ATMSelectSearchable
-                                                                                            required={
-                                                                                                required
-                                                                                            }
-                                                                                            name={`bank_informations[${bankInformationIndex}].${name}`}
-                                                                                            value={
-                                                                                                bankInformation[
-                                                                                                    name
-                                                                                                ]
-                                                                                            }
-                                                                                            onChange={(
+                                                                                    <ATMSelectSearchable
+                                                                                        key={
+                                                                                            name
+                                                                                        }
+                                                                                        required={
+                                                                                            required
+                                                                                        }
+                                                                                        name={`bank_informations[${bankInformationIndex}].${name}`}
+                                                                                        value={
+                                                                                            bankInformation[
+                                                                                                name
+                                                                                            ]
+                                                                                        }
+                                                                                        onChange={(
+                                                                                            newValue
+                                                                                        ) => {
+                                                                                            handleSetFieldValue(
+                                                                                                `bank_informations[${bankInformationIndex}].${name}`,
                                                                                                 newValue
-                                                                                            ) => {
-                                                                                                handleSetFieldValue(
-                                                                                                    `bank_informations[${bankInformationIndex}].${name}`,
-                                                                                                    newValue
-                                                                                                )
-                                                                                            }}
-                                                                                            options={
-                                                                                                dropdownOptions[
-                                                                                                    field.optionAccessKey ||
-                                                                                                        'accountTypeOptions'
-                                                                                                ]
-                                                                                            }
-                                                                                            label={
-                                                                                                label
-                                                                                            }
-                                                                                            isSubmitting={
-                                                                                                isSubmitting
-                                                                                            }
-                                                                                        />
-                                                                                    </div>
+                                                                                            )
+                                                                                        }}
+                                                                                        options={
+                                                                                            dropdownOptions[
+                                                                                                field.optionAccessKey ||
+                                                                                                    'accountTypeOptions'
+                                                                                            ]
+                                                                                        }
+                                                                                        label={
+                                                                                            label
+                                                                                        }
+                                                                                        isSubmitting={
+                                                                                            isSubmitting
+                                                                                        }
+                                                                                    />
                                                                                 )
 
                                                                             case 'file-picker':
                                                                                 return (
-                                                                                    <div>
+                                                                                    <div
+                                                                                        key={
+                                                                                            name
+                                                                                        }
+                                                                                    >
                                                                                         <ATMFilePickerWrapper
                                                                                             name={`bank_informations[${bankInformationIndex}].${name}`}
-                                                                                            key={
-                                                                                                name
-                                                                                            }
                                                                                             label={
                                                                                                 label
                                                                                             }

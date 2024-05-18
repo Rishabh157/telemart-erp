@@ -29,6 +29,7 @@ import { RootState } from 'src/redux/store'
 import { PDFDocument } from 'pdf-lib'
 import DispatchingBarcodes from '../GpoOrders/DispatchingBarcodes/DispatchingBarcodes'
 import { courierCompanyEnum } from 'src/utils/constants/enums'
+import { FormInitialValuesFilterWithLabel } from '../GpoOrders/Filters/OutwardGpoOrderFilterFormWrapper'
 
 // |-- Types --|
 export type Tabs = {
@@ -46,14 +47,35 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     useUnmountCleanup()
     const { id } = useParams()
     const { userData }: any = useSelector((state: RootState) => state?.auth)
+    const [, setSelectedItemsTobeDispatch] = useState<any>(null)
 
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
 
-    const [, setSelectedItemsTobeDispatch] = useState<any>(null)
+    // filter state
+    const [filter, setFilter] =
+        React.useState<FormInitialValuesFilterWithLabel>({
+            startDate: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endDate: { fieldName: '', label: '', value: '' },
+            startTime: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endTime: { fieldName: '', label: '', value: '' },
+            orderStatus: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+        })
 
-    const { page, rowsPerPage, searchValue, dateFilter } = outwardCustomerState
+    const { page, rowsPerPage, searchValue } = outwardCustomerState
 
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetOrderQuery({
@@ -68,8 +90,12 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                 },
                 { fieldName: 'companyId', value: userData?.companyId },
                 { fieldName: 'assignWarehouseId', value: id },
+                { fieldName: 'orderStatus', value: filter?.orderStatus?.value },
             ],
-            dateFilter: dateFilter,
+            dateFilter: {
+                startDate: filter.startDate.value as string,
+                endDate: filter.endDate.value as string,
+            },
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
@@ -220,7 +246,6 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                 )
             },
         },
-
         {
             field: 'firstCallApproval',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
@@ -263,6 +288,24 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             },
         },
         {
+            field: 'orderStatus',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_STATUS,
+            headerName: 'Order Status',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px] text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span
+                    className={
+                        row?.orderStatus === 'DISPATCHED'
+                            ? 'text-green-600'
+                            : 'text-red-600'
+                    }
+                >
+                    {row.orderStatus.replaceAll('_', ' ')}
+                </span>
+            ),
+        },
+        {
             field: 'awbNumber',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER,
             headerName: 'AWB Number',
@@ -274,7 +317,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         },
         {
             field: 'orderNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_STATUS,
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -687,10 +730,16 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
 
     // handleGenerateInvoiceDisaptch(selectedItemsTobeDispatch)
     return (
-        <React.Fragment>
-            <OutwardShipyaariOrdersTabListing columns={columns} rows={items} />
+        <>
+            <OutwardShipyaariOrdersTabListing
+                columns={columns}
+                rows={items}
+                filter={filter}
+                setFilter={setFilter}
+            />
+
             <DispatchingBarcodes courierType={courierCompanyEnum.shipyaari} />
-        </React.Fragment>
+        </>
     )
 }
 

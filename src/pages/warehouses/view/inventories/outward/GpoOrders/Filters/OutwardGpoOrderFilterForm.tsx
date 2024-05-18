@@ -98,7 +98,6 @@ const OutwardGpoOrderFilterForm = ({
                     placeholder="Enter Start Time"
                     className="shadow bg-white rounded w-[50%] "
                     onChange={(e) => {
-                        console.log('e: ===>', e.target.value)
                         setFieldValue('startTime', {
                             fieldName: 'Time from',
                             label: 'Time from',
@@ -115,7 +114,6 @@ const OutwardGpoOrderFilterForm = ({
                     placeholder="Enter End Time"
                     className="shadow bg-white rounded w-[50%] "
                     onChange={(e) => {
-                        console.log('e: ', e)
                         setFieldValue('endTime', {
                             fieldName: 'Time to',
                             label: 'Time to',

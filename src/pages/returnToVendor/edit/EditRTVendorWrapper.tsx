@@ -1,11 +1,3 @@
-/* eslint-disable array-callback-return */
-/// ==============================================
-// Filename:EditRTVendorWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -65,7 +57,14 @@ const EditRTVendorWrapper = (props: Props) => {
         vendorId: '',
         warehouseId: '',
         remark: '',
-        productSalesOrder: [],
+        productSalesOrder: [
+            {
+                soId: '',
+                productGroupId: '',
+                rate: 0,
+                quantity: 0,
+            },
+        ],
         companyId: '',
         id: '',
         firstApproved: false,
@@ -135,7 +134,7 @@ const EditRTVendorWrapper = (props: Props) => {
                 secondApprovedAt: '',
             }
 
-            selectedItem?.map((ele: any) => {
+            selectedItem?.forEach((ele: any) => {
                 product = {
                     ...product,
                     rtvNo: ele?.rtvNumber,
@@ -235,7 +234,7 @@ const EditRTVendorWrapper = (props: Props) => {
 
         const finalValues: any = []
 
-        values.productSalesOrder.map((ele) => {
+        values.productSalesOrder.forEach((ele) => {
             finalValues.push({
                 ...newValues,
                 id: ele.soId ? ele.soId : '',

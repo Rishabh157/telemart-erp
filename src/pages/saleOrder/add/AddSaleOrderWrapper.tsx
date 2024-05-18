@@ -69,8 +69,6 @@ const AddSaleOrderWrapper = (props: Props) => {
         value: '_id',
     })
 
-    
-
     const dropdownOptions = {
         dealerOptions: dealerOptions,
         warehouseOptions: warehouseOptions,

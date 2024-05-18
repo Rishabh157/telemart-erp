@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux'
 import ATMBreadCrumbs from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import { FormInitialValues } from './EditDealerWrapper'
-//import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 // |-- Redux --|
 import { AppDispatch } from 'src/redux/store'
@@ -56,7 +55,7 @@ const EditDealers = ({
         <div className="h-[calc(100vh-55px)] overflow-auto px-4 mt-3">
             <div className="flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div>
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -69,8 +68,7 @@ const EditDealers = ({
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium">
-                            {' '}
-                            {steps[activeStep]?.label}{' '}
+                            {steps[activeStep]?.label}
                         </div>
 
                         {/* Buttons - Previous / Next */}
@@ -96,7 +94,7 @@ const EditDealers = ({
                                 }`}
                                 disabled={apiStatus}
                             >
-                                {activeStep === steps.length - 1
+                                {activeStep === steps?.length - 1
                                     ? 'Submit'
                                     : 'Next'}
                             </button>
@@ -106,7 +104,7 @@ const EditDealers = ({
                     <div className="py-5 px-16 border-b border-slate-300">
                         {/* Steps */}
                         <Stepper activeStep={activeStep}>
-                            {steps.map((step, index) => {
+                            {steps.map((step) => {
                                 const stepProps: { completed?: boolean } = {}
                                 const labelProps: {
                                     optional?: React.ReactNode

@@ -63,7 +63,7 @@ const AddRTVendor = ({
         if (val) {
             setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
         } else {
-            setFieldValue(`productSalesOrder[${i}].rate`, '')
+            setFieldValue(`productSalesOrder[${i}].rate`, 0)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
@@ -306,8 +306,8 @@ const AddRTVendor = ({
                                                 onClick={() =>
                                                     push({
                                                         productGroupId: '',
-                                                        rate: null,
-                                                        quantity: null,
+                                                        rate: 0,
+                                                        quantity: 0,
                                                     })
                                                 }
                                                 className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "
