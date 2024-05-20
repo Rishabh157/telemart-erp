@@ -1333,7 +1333,7 @@
                 },
                 {
                     "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_TOCOMPANY",
-                    "fieldName": "To Company",
+                    "fieldName": "To Company ",
                     "fieldValue": "toCompanyLabel"
                 },
                 {
@@ -1343,7 +1343,7 @@
                 },
                 {
                     "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_ITEMS",
-                    "fieldName": "Items / Quantity",
+                    "fieldName": "Items / Quantity ",
                     "fieldValue": "documents"
                 },
                 {
