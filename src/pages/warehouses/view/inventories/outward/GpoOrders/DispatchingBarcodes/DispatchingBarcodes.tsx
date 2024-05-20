@@ -161,6 +161,7 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
 
         barcodeDispatch({
             orderNumber: orderNumber,
+            type: courierType,
             barcodes: [
                 ...filterValue
                     ?.flat(1)

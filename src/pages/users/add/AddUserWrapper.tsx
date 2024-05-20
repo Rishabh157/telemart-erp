@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
@@ -16,7 +16,7 @@ import AddUser from './AddUser'
 // |-- Redux --|
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { RootState } from 'src/redux/store'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { getHierarchyByDeptWithRole } from 'src/utils/GetHierarchyByDept'
 
@@ -31,7 +31,7 @@ export type FormInitialValues = {
     email: string
     branchId: string
     password: string
-    userDepartment: string
+    userDepartment: any
     userRole: string
     companyId: string
     allowedIps: { allowedIp: string }[]
@@ -47,11 +47,14 @@ export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
 const AddUserWrapper = (props: Props) => {
     // Form Initial Values
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addNewUser] = useAddNewUserMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const ref = useRef<any>(null)
+
+    const ref: React.RefObject<FormikProps<FormInitialValues>> =
+        useRef<FormikProps<FormInitialValues>>(null)
+
     const initialValues: FormInitialValues = {
         firstName: '',
         lastName: '',
@@ -78,7 +81,7 @@ const AddUserWrapper = (props: Props) => {
 
     const getSeniorValid = (userRole: any, schema: any) => {
         const position = getHierarchyByDeptWithRole({
-            department: ref?.current?.values?.userDepartment as any,
+            department: ref?.current?.values?.userDepartment,
         })
 
         if (userRole[0] === position) {

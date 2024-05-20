@@ -568,6 +568,11 @@
                 {
                     "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_REF_NUMBER",
                     "fieldName": "ORDER REF NUMBER",
+                    "fieldValue": "awbNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_AWB_NUMBER",
+                    "fieldName": "AWB NUMBER",
                     "fieldValue": "orderReferenceNumber"
                 },
                 {

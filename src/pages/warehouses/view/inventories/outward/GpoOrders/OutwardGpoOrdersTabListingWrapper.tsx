@@ -207,6 +207,16 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             ),
         },
         {
+            field: 'awbNumber',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_AWB_NUMBER,
+            headerName: 'AWB Number',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px] text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-primary-main ">{row?.awbNumber}</span>
+            ),
+        },
+        {
             field: 'inquiryNumber',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ENQUIRY_NUMBER,
             headerName: 'Enquiry No.',

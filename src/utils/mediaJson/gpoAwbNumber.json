@@ -1,0 +1,44 @@
+{
+    "moduleId": "NAV_GPO_AWB_NUMBER",
+    "moduleName": "NAV_GPO_AWB_NUMBER",
+    "parentGroup": ["NAV_CONFIGURATION"],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_GPO_AWB_NUMBER_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "GPO_AWB_NUMBER_LIST_AWB_NUMBER",
+                    "fieldName": "AWB Number",
+                    "fieldValue": "awbNumber"
+                },
+                {
+                    "fieldId": "GPO_AWB_NUMBER_LIST_IS_USED",
+                    "fieldName": "Used",
+                    "fieldValue": "isUsed"
+                },
+                {
+                    "fieldId": "GPO_AWB_NUMBER_LIST_ORDER_NUMBER",
+                    "fieldName": "Order Number",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "GPO_AWB_NUMBER_LIST_CREATED_DATE",
+                    "fieldName": "Created Date",
+                    "fieldValue": "createdAt"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_GPO_AWB_NUMBER_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        }
+    ]
+}

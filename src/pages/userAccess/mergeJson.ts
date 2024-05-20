@@ -70,6 +70,7 @@ import { default as dealersInventoryJson } from '../../utils/mediaJson/dealersIn
 import { default as multiOrderSearchJson } from '../../utils/mediaJson/multiOrderSearch.json'
 import { default as dealerToDealerRequestJson } from '../../utils/mediaJson/dealerToDealerJson.json'
 import { default as courierPreferenceJson } from '../../utils/mediaJson/CourierPreference.json'
+import { default as gpoAwbNumber } from '../../utils/mediaJson/gpoAwbNumber.json'
 
 export const mergeUserModules = [
     { ...dashboardJson },
@@ -121,6 +122,7 @@ export const mergeUserModules = [
     { ...didManagementJson },
     { ...artistJson },
     { ...transportJson },
+    { ...gpoAwbNumber },
     { ...tapeManagementJson },
     { ...competitorJson },
     { ...slotManagementJson },
