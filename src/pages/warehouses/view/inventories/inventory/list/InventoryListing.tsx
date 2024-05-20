@@ -56,7 +56,7 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[78px]  p-1">
                     <ATMPageHeading> Inventories </ATMPageHeading>
-                    <div className='flex gap-x-4'>
+                    <div className="flex gap-x-4">
                         {isAuthorized(
                             UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_FILL_CARTON_BOX
                         ) && (

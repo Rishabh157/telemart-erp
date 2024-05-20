@@ -82,7 +82,9 @@ const TehsilListing = ({ tehsils }: Props) => {
                         UserModuleNameTypes.ACTION_TEHSILS_ADD
                     ) as boolean
                 }
-                isEditButton={isAuthorized(UserModuleNameTypes.ACTION_TEHSILS_EDIT)}
+                isEditButton={isAuthorized(
+                    UserModuleNameTypes.ACTION_TEHSILS_EDIT
+                )}
                 onEditListItemClick={(newValue) => {
                     setEditTehsilId(newValue?.value)
                 }}

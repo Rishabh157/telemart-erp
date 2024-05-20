@@ -47,7 +47,9 @@ const BarcodeListing = ({
     // Hooks
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const barcodeState: any = useSelector((state: RootState) => state.listingPagination)
+    const barcodeState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
     const { page, rowsPerPage, totalItems, searchValue } = barcodeState
 

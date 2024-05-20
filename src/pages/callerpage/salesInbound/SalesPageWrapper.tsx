@@ -152,7 +152,7 @@ const SalesPageWrapper = () => {
             skip: !didNumber,
         }),
     })
-    
+
     const {
         data: callerListingData,
         isFetching: isCallerFetching,
@@ -412,8 +412,8 @@ const SalesPageWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                         {/* <span>

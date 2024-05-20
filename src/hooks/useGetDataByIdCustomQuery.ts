@@ -1,33 +1,34 @@
-import { QueryStatus } from '@reduxjs/toolkit/query';
-import { useEffect, useState } from 'react';
-
+import { QueryStatus } from '@reduxjs/toolkit/query'
+import { useEffect, useState } from 'react'
 
 type UseCustomPaginationPropsType<T> = {
     useEndPointHook: {
-        data?: any | T;
-        isLoading: boolean;
-        isFetching: boolean;
-        error?: any;
-        status: QueryStatus;
+        data?: any | T
+        isLoading: boolean
+        isFetching: boolean
+        error?: any
+        status: QueryStatus
     }
-};
+}
 
-const useGetDataByIdCustomQuery = <T>({ useEndPointHook }: UseCustomPaginationPropsType<T>) => {
-    const [items, setItems] = useState<T | null>(null);
+const useGetDataByIdCustomQuery = <T>({
+    useEndPointHook,
+}: UseCustomPaginationPropsType<T>) => {
+    const [items, setItems] = useState<T | null>(null)
 
-    const { data, isLoading, isFetching } = useEndPointHook;
+    const { data, isLoading, isFetching } = useEndPointHook
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
             if (data) {
-                setItems(data?.data);
+                setItems(data?.data)
             }
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoading, isFetching, data]);
+    }, [isLoading, isFetching, data])
 
-    return { items, isLoading ,isFetching};
-};
+    return { items, isLoading, isFetching }
+}
 
-export default useGetDataByIdCustomQuery;
+export default useGetDataByIdCustomQuery

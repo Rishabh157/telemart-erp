@@ -54,7 +54,7 @@ export const channelManagementApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        
+
         //***** DELETE *****/
         deleteChannel: builder.mutation({
             invalidatesTags: ['channel'],

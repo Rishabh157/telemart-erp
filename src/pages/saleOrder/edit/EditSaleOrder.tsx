@@ -90,7 +90,7 @@ const EditSaleOrder = ({
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, 0)
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {

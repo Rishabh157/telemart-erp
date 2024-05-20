@@ -12,9 +12,9 @@ export interface ListingPaginationSliceStateType {
     selectedId: string
     filterValue: string
     dateFilter: {
-        startDate: string,
-        endDate: string,
-    },
+        startDate: string
+        endDate: string
+    }
     filterBy: any
     filterkeysValue: any
     isActive: string | boolean
@@ -148,7 +148,7 @@ export const {
     setOrderNumberSearch,
     setComplaintNumberSearch,
     setDateFilter,
-    setSelectedDealerFilter
+    setSelectedDealerFilter,
 } = ListingPaginationSlice.actions
 
 export default ListingPaginationSlice.reducer

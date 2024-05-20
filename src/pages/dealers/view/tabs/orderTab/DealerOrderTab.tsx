@@ -23,7 +23,6 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { UserModuleNameTypes } from 'src/models/userAccess/UserAccess.model'
 
 const columns: columnTypes[] = [
-    
     {
         field: 'actions',
         headerName: 'Actions',
@@ -39,7 +38,6 @@ const columns: columnTypes[] = [
                 <></>
             </ActionPopup>
         ),
-        
     },
     {
         field: 'order_no',

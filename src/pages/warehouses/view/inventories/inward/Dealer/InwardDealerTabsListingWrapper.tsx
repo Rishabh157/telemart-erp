@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -62,7 +63,6 @@ const InwardDealerTabsListingWrapper = () => {
         (state: RootState) => state.listingPagination
     )
     const { page, rowsPerPage, searchValue } = inwardDealerState
-
     const { customized, userData } = useSelector(
         (state: RootState) => state?.auth
     )
@@ -101,25 +101,23 @@ const InwardDealerTabsListingWrapper = () => {
                 return row?.documents[0].status !== 'DISPATCHED' ? (
                     ''
                 ) : (
-                    <>
-                        <ActionPopup
-                            isCustomBtn={true}
-                            customBtnText="Inward"
-                            handleOnAction={() => {}}
-                            handleCustomActionButton={() => {
-                                setIsShow(true)
-                                const totalQuantity = row?.documents?.reduce(
-                                    (sum, ele) => {
-                                        return (sum +=
-                                            ele?.productSalesOrder?.quantity)
-                                    },
-                                    0
-                                )
-                                setBarcodeQuantity(totalQuantity)
-                                setSelectedItemsTobeDispatch(row)
-                            }}
-                        />
-                    </>
+                    <ActionPopup
+                        isCustomBtn={true}
+                        customBtnText="Inward"
+                        handleOnAction={() => {}}
+                        handleCustomActionButton={() => {
+                            setIsShow(true)
+                            const totalQuantity = row?.documents?.reduce(
+                                (sum, ele) => {
+                                    return (sum +=
+                                        ele?.productSalesOrder?.quantity)
+                                },
+                                0
+                            )
+                            setBarcodeQuantity(totalQuantity)
+                            setSelectedItemsTobeDispatch(row)
+                        }}
+                    />
                 )
             },
         },
@@ -586,7 +584,7 @@ const InwardDealerTabsListingWrapper = () => {
                         </div>
 
                         {selectedItemsTobeDispatch?.documents?.map(
-                            (document, docIndex) => {
+                            (document: any, docIndex: number) => {
                                 return (
                                     <div
                                         className="pb-6 border-b-slate-300 border-[1px] shadow p-4 my-4 rounded"

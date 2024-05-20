@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -12,7 +11,7 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { DealerToDealerListResponseTypes } from 'src/models/DealerToDealer.model'
 import {
     useApprovealDealerToDealerOrderMutation,
-    useGetDealerToDealerOrderQuery
+    useGetDealerToDealerOrderQuery,
 } from 'src/services/DealerToDealerOrderService'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
@@ -53,8 +52,6 @@ const DealerToDealerOrderListingWrapper = () => {
         }),
     })
 
-  
-
     const handleFirstComplete = (
         _id: string,
         value: boolean,
@@ -79,13 +76,11 @@ const DealerToDealerOrderListingWrapper = () => {
         })
     }
 
-    
     const columns: columnTypes[] = [
-      
         {
             field: '_id',
             headerName: 'Dealer To Dealer Number',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_D_To_D_NUMBER,
             renderCell: (row: DealerToDealerListResponseTypes) => (
@@ -95,7 +90,7 @@ const DealerToDealerOrderListingWrapper = () => {
         {
             field: 'fromDealerLabelLabel',
             headerName: 'From Dealer',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_DEALER_FROM_DEALER,
             align: 'center',
@@ -114,7 +109,7 @@ const DealerToDealerOrderListingWrapper = () => {
         {
             field: 'toDealerLabelLabel',
             headerName: 'To Dealer',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_TO_DEALER,
             align: 'center',
@@ -133,7 +128,7 @@ const DealerToDealerOrderListingWrapper = () => {
         {
             field: 'requestCreatedByLabel',
             headerName: 'Request Created By',
-             extraClasses :'min-w-[160px]',
+            extraClasses: 'min-w-[160px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_REQUEST_CREATED_BY,
             align: 'center',
@@ -144,7 +139,7 @@ const DealerToDealerOrderListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_ITEM_AND_QUANTITY,
             align: 'center',
@@ -173,7 +168,7 @@ const DealerToDealerOrderListingWrapper = () => {
         {
             field: 'requestApproved',
             headerName: 'First Status',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_FIRST_STATUS,
             align: 'center',
@@ -192,7 +187,7 @@ const DealerToDealerOrderListingWrapper = () => {
         {
             field: 'requestApprovedByLabel',
             headerName: 'First Approved By',
-             extraClasses :'min-w-[160px]',
+            extraClasses: 'min-w-[160px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_DH_FIRST_APPROVED_BY,
             align: 'center',
@@ -203,7 +198,7 @@ const DealerToDealerOrderListingWrapper = () => {
         {
             field: 'Approved',
             headerName: 'Approval',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.DEALER_TO_DEALER_LIST_ACCOUNT_APPROVAL,
             align: 'center',

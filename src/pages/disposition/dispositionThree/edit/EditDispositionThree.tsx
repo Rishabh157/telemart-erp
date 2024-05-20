@@ -43,14 +43,17 @@ const EditDispositionThree = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
-  
-    dropdownOptions = {  ...dropdownOptions, }
+
+    dropdownOptions = { ...dropdownOptions }
     const dispatch = useDispatch()
 
-    const { options  :dispositionTwoOptions} = useCustomOptions({
-        useEndPointHook:  useGetDispostionTwoByOneQuery(values.dispositionOneId, {
-            skip: !values.dispositionOneId,
-        }),
+    const { options: dispositionTwoOptions } = useCustomOptions({
+        useEndPointHook: useGetDispostionTwoByOneQuery(
+            values.dispositionOneId,
+            {
+                skip: !values.dispositionOneId,
+            }
+        ),
         keyName: 'dispositionDisplayName',
         value: '_id',
     })

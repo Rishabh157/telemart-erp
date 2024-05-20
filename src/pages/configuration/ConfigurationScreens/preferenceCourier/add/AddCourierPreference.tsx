@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -69,7 +68,7 @@ const AddCourierPreference = ({ formikProps, apiStatus }: Props) => {
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
                             >
-                            Save
+                                Save
                             </button>
                         </div>
                     </div>
@@ -93,7 +92,7 @@ const AddCourierPreference = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
-                              <ATMTextField
+                            <ATMTextField
                                 required
                                 name="priority"
                                 value={values.priority}

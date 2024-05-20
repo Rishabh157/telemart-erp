@@ -31,36 +31,36 @@ type AddressDialogTypes = {
 }
 
 const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
-
-    const inquiryState: any = useSelector((state: RootState) => state.listingPagination)
+    const inquiryState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
     const { page, rowsPerPage, searchValue, filterValue } = inquiryState
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { items } = useGetCustomListingData<DealersRatioListResponse>({
-            useEndPointHook:  useGetInquiryUnAuthQuery({
-                limit: rowsPerPage,
-                searchValue: searchValue,
-                params: ['inquiryNumber'],
-                page: page,
-                filterBy: [
-                    {
-                        fieldName: 'companyId',
-                        value: userData?.companyId as string,
-                    },
-                    {
-                        fieldName: 'dispositionLevelThreeId',
-                        value: filterValue,
-                    },
-                ],
-                dateFilter: {},
-                orderBy: 'createdAt',
-                orderByValue: -1,
-                isPaginationRequired: true,
-            })
-        })
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { items } = useGetCustomListingData<DealersRatioListResponse>({
+        useEndPointHook: useGetInquiryUnAuthQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['inquiryNumber'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: 'dispositionLevelThreeId',
+                    value: filterValue,
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
+    })
 
     const columns: columnTypes[] = [
         {
@@ -131,8 +131,6 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
             dealerCount: '3',
         },
     ]
-
-
 
     return (
         <>

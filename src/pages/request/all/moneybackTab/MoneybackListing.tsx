@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -18,7 +17,6 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-
 
 // |-- Types --|
 type Props = {

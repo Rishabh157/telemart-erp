@@ -33,10 +33,11 @@ const EditDispositionTwoWrapper = () => {
     const [updatedispositionTwo] = useUpdatedispositionTwoMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
-   
-    const { items: selectedDispostion } = useGetDataByIdCustomQuery<DispositionTwoListResponse>({
-        useEndPointHook: useGetdispositionTwoByIdQuery(Id),
-    })
+
+    const { items: selectedDispostion } =
+        useGetDataByIdCustomQuery<DispositionTwoListResponse>({
+            useEndPointHook: useGetdispositionTwoByIdQuery(Id),
+        })
 
     const { options } = useCustomOptions({
         useEndPointHook: useGetAlldispositionOneQuery(''),
@@ -89,7 +90,7 @@ const EditDispositionTwoWrapper = () => {
     }
 
     const dropdownOptions = {
-        DispotionOneOptions: options
+        DispotionOneOptions: options,
     }
 
     return (

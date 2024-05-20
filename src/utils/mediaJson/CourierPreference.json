@@ -1,9 +1,7 @@
 {
     "moduleId": "NAV_COURIER_PREFERENCE",
     "moduleName": "NAV_COURIER_PREFERENCE",
-    "parentGroup": [
-        "NAV_CONFIGURATION"
-    ],
+    "parentGroup": ["NAV_CONFIGURATION"],
     "moduleAction": [
         {
             "actionId": "ACTION_COURIER_PREFERENCE_LIST",
@@ -29,9 +27,7 @@
             "actionUrl": "",
             "actionName": "ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         }
     ]

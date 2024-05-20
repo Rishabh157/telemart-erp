@@ -50,9 +50,18 @@ const MultiOrderSearchListing = ({
                                 values.mobileNumbers.length ? true : false
                             }
                             onChange={(newValue) => {
-                                let formatedCommaValue = newValue?.replace(/\D+/g, ','); // Replace non-digits with commas
-                                formatedCommaValue = formatedCommaValue.replace(/^,/, ''); // Remove leading comma, if any
-                                setFieldValue('orderNumbers', formatedCommaValue);
+                                let formatedCommaValue = newValue?.replace(
+                                    /\D+/g,
+                                    ','
+                                ) // Replace non-digits with commas
+                                formatedCommaValue = formatedCommaValue.replace(
+                                    /^,/,
+                                    ''
+                                ) // Remove leading comma, if any
+                                setFieldValue(
+                                    'orderNumbers',
+                                    formatedCommaValue
+                                )
                             }}
                         />
                         <ATMTextArea

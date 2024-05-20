@@ -203,10 +203,10 @@ const RTVListingWrapper = () => {
                         )}
                         isDelete={
                             row.firstApproved === null &&
-                                row.secondApproved === null
+                            row.secondApproved === null
                                 ? isAuthorized(
-                                    UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
-                                )
+                                      UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
+                                  )
                                 : false
                         }
                         handleEditActionButton={() => {
@@ -283,8 +283,8 @@ const RTVListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}{' '}
+                            ? 'Pending'
+                            : 'Rejected'}{' '}
                     </span>
                 )
             },
@@ -325,8 +325,8 @@ const RTVListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },

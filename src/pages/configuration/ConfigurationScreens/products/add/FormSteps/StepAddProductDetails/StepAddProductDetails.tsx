@@ -128,7 +128,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                     }}
                     label="Product Weight (in gms)"
                     placeholder="Product Weight"
-                    extraClassField='mt-4'
+                    extraClassField="mt-4"
                     className="bg-white rounded shadow"
                     isSubmitting={isSubmitting}
                 />

@@ -61,7 +61,7 @@ const ProductCategoryListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -81,7 +81,7 @@ const ProductCategoryListingWrapper = () => {
             }
         })
     }
-    
+
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -118,7 +118,6 @@ const ProductCategoryListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'categoryCode',

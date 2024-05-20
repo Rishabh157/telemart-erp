@@ -285,7 +285,6 @@ const CustomerNDRDetailsForm = ({
                                 setFieldValue('callDisposition', e)
                             }}
                         />
-                       
                     </div>
 
                     <div className="flex items-center p-2 gap-x-4">

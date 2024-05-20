@@ -70,7 +70,7 @@ const VendorsListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-             extraClasses : 'min-w-[100px]',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
@@ -109,7 +109,7 @@ const VendorsListingWrapper = () => {
             field: 'vendorCode',
             headerName: 'Vendor Code',
             flex: 'flex-[1_1_0%]',
-            extraClasses : 'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             name: UserModuleNameTypes.VENDOR_LIST_VENDOR_CODE,
             renderCell: (row: VendorsListResponse) => (
                 <span
@@ -125,7 +125,7 @@ const VendorsListingWrapper = () => {
         {
             field: 'companyName',
             headerName: 'Company Name',
-             extraClasses : 'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.VENDOR_LIST_COMPANY_NAME,
             renderCell: (row: VendorsListResponse) => (
@@ -135,7 +135,7 @@ const VendorsListingWrapper = () => {
         {
             field: 'companyType',
             headerName: 'Company Type',
-             extraClasses : 'min-w-[180px]',
+            extraClasses: 'min-w-[180px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.VENDOR_LIST_COMPANY_TYPE,
             renderCell: (row: VendorsListResponse) => (
@@ -145,7 +145,7 @@ const VendorsListingWrapper = () => {
         {
             field: 'registrationDistrictName',
             headerName: 'District',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.VENDOR_LIST_DISTRICT,
             renderCell: (row: VendorsListResponse) => (
@@ -155,7 +155,7 @@ const VendorsListingWrapper = () => {
         {
             field: 'registrationStateName',
             headerName: 'State',
-             extraClasses : 'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.VENDOR_LIST_STATE,
             renderCell: (row: VendorsListResponse) => (

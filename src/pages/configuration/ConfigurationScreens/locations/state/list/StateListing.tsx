@@ -82,7 +82,9 @@ const StateListing = ({ states }: Props) => {
                         UserModuleNameTypes.ACTION_STATE_ADD
                     ) as boolean
                 }
-                isEditButton={isAuthorized(UserModuleNameTypes.ACTION_STATE_EDIT)}
+                isEditButton={isAuthorized(
+                    UserModuleNameTypes.ACTION_STATE_EDIT
+                )}
                 onEditListItemClick={(newValue) => {
                     setEditStateId(newValue?.value)
                 }}

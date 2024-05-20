@@ -37,11 +37,14 @@ type Props = {
 
 const SchemeListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const schemeState: any = useSelector((state: RootState) => state.listingPagination)
+    const schemeState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } = schemeState
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
+        schemeState
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] ">

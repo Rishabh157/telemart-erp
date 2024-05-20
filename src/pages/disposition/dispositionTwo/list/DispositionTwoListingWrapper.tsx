@@ -28,7 +28,7 @@ const DispositionTwoListingWrapper = () => {
         (state: RootState) => state.listingPagination
     )
     const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
-    
+
     // initiate method
     const navigate = useNavigate()
     const [deleteDispositonTwo] = useDeletedispositionTwoMutation()

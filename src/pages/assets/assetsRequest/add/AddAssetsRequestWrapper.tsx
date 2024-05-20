@@ -47,9 +47,7 @@ const AddAssetsRequestWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { options: allItems } = useCustomOptions({
-        useEndPointHook: useGetAllAssetsCategoryQuery(
-            userData?.companyId
-        ),
+        useEndPointHook: useGetAllAssetsCategoryQuery(userData?.companyId),
         keyName: 'assetCategoryName',
         value: '_id',
     })
@@ -103,7 +101,7 @@ const AddAssetsRequestWrapper = (props: Props) => {
     }
 
     const dropdownOptions = {
-        assetCategoryOptions: allItems
+        assetCategoryOptions: allItems,
     }
     return (
         <>

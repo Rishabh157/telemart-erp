@@ -117,7 +117,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                     <span className="ml-1 text-sm text-red-500">
                                         *
                                     </span>{' '}
-                                </label>    
+                                </label>
                                 <div className="flex gap-2 -mt-1">
                                     {/* Height */}
                                     <ATMTextField

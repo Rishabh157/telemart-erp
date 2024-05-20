@@ -34,7 +34,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-             extraClasses :'min-w-[100px]',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) =>
                 row?.firstApproved === null &&
@@ -71,7 +71,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'wtcNumber',
             headerName: 'WTC Number',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_WAREHOUSE_TO_COMPANY_NUMBER,
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => (
@@ -81,7 +81,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'fromWarehouseLabel',
             headerName: 'From Warehouse',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FROM_WAREHOUSE,
             align: 'center',
@@ -92,7 +92,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'toCompanyLabel',
             headerName: 'Company Name',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_COMPANY_NAME,
             align: 'center',
@@ -103,7 +103,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'toWarehouseLabel',
             headerName: 'To Warehouse',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_TO_WAREHOUSE,
             align: 'center',
@@ -114,7 +114,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_ITEM_QUANTITY,
             align: 'center',
@@ -143,7 +143,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'firstApproved',
             headerName: 'First Status',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED,
             align: 'center',
@@ -162,7 +162,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'firstApprovedActionBy',
             headerName: 'First Approved By',
-             extraClasses :'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_BY,
             align: 'center',
@@ -173,7 +173,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'firstApprovedAt',
             headerName: 'First Approved Date',
-             extraClasses :'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_DATE,
             align: 'center',
@@ -184,7 +184,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'secondApproved',
             headerName: 'Second Status',
-             extraClasses :'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_STATUS,
             align: 'center',
@@ -204,7 +204,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'secondApprovedActionBy',
             headerName: 'Second Approved By',
-             extraClasses :'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_BY,
             align: 'center',
@@ -215,7 +215,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'secondApprovedAt',
             headerName: 'Second Approved Date',
-             extraClasses :'min-w-[180px]',
+            extraClasses: 'min-w-[180px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_DATE,
             align: 'center',
@@ -226,7 +226,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'createdAt',
             headerName: 'Inserted Date',
-             extraClasses :'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_INSERTED_DATE,
             align: 'center',
@@ -237,7 +237,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'updatedAt',
             headerName: 'Updated Date',
-             extraClasses :'min-w-[170px]',
+            extraClasses: 'min-w-[170px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_UPDATE_DATE,
             align: 'center',
@@ -248,7 +248,7 @@ const WarehouseToComapnyListingWrapper = () => {
         {
             field: 'Approved',
             headerName: 'Approval',
-             extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_APPROVAL_LEVEL,
             align: 'center',

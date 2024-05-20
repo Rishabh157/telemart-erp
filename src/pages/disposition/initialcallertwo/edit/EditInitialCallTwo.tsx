@@ -36,13 +36,10 @@ const EditInitialCallTwo = ({ formikProps, apiStatus }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-    const { options :initicalCallOneOptions } = useCustomOptions({
-        useEndPointHook: useGetAllinitialCallerOneQuery(
-            values.callType,
-            {
-                skip: !values.callType,
-            }
-        ),
+    const { options: initicalCallOneOptions } = useCustomOptions({
+        useEndPointHook: useGetAllinitialCallerOneQuery(values.callType, {
+            skip: !values.callType,
+        }),
         keyName: 'initialCallDisplayName',
         value: '_id',
     })

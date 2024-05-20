@@ -32,7 +32,6 @@ const columns: columnTypes[] = [
                 <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
             </button>
         ),
-        
     },
     {
         field: 'order_no',
@@ -77,7 +76,6 @@ const columns: columnTypes[] = [
             <span className="text-slate-800"> &#8377; {row.total} </span>
         ),
     },
-    
 ]
 
 const rows = [

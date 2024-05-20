@@ -174,9 +174,9 @@ body {
         page-break-after: always;
     }
     /* @page { */
-        /* margin-top: 50px; Adjust as needed */
-        /* margin-bottom: 50px; Adjust as needed */
-        /* @top-left {
+    /* margin-top: 50px; Adjust as needed */
+    /* margin-bottom: 50px; Adjust as needed */
+    /* @top-left {
             content: 'Date/Time: ' counter(page) '/' counter(pages);
         }
         @top-right {
@@ -203,10 +203,8 @@ body {
     }
 }
 
-
 /* scroll thickness */
 /* Add this to your CSS file */
-
 
 .grow .overflow-auto::-webkit-scrollbar {
     width: 6px !important;

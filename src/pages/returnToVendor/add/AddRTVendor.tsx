@@ -112,7 +112,7 @@ const AddRTVendor = ({
                                 label="RTV No."
                                 placeholder="enter rtv number"
                                 className="rounded"
-                                extraClassField='mt-3'
+                                extraClassField="mt-3"
                                 onChange={(e) =>
                                     handleSetFieldValue('rtvNo', e.target.value)
                                 }

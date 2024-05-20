@@ -64,7 +64,6 @@ const VendorRtvListing = ({ columns, rows }: Props) => {
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                   
                 />
 
                 {/* Table */}

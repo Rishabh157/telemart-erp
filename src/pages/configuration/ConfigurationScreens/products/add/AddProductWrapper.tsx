@@ -73,8 +73,12 @@ const steps = [
             product_code: string().required('Product code is required'),
             product_name: string().required('Product name is required'),
             product_category: string().required('Product category is required'),
-            product_sub_category: string().required('Product sub category is required'),
-            product_weight: number().min(0, 'Required').required('Product weight is required'),
+            product_sub_category: string().required(
+                'Product sub category is required'
+            ),
+            product_weight: number()
+                .min(0, 'Required')
+                .required('Product weight is required'),
             productGroup: string().required('Product group is required'),
             dimensions: object().shape({
                 height: number().required('Height is required'),

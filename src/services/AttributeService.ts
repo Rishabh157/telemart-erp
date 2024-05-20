@@ -1,5 +1,3 @@
-
-
 // |-- Internal Dependencies --|
 import { AddAttributes, UpdateAttributes } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'

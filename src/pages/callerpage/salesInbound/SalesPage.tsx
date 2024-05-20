@@ -80,7 +80,6 @@ const SalesPage: React.FC<Props> = ({
 
     const { values, setFieldValue } = formikProps
 
-
     // GET SINGLE SCHEME BY ID
     const {
         data: singleSchemeData,
@@ -100,7 +99,7 @@ const SalesPage: React.FC<Props> = ({
                 deliveryCharges: singleSchemeData?.data?.deliveryCharges || 0,
                 totalAmount:
                     singleSchemeData?.data?.schemePrice +
-                    singleSchemeData?.data?.deliveryCharges || 0,
+                        singleSchemeData?.data?.deliveryCharges || 0,
             }))
         }
     }, [
@@ -120,7 +119,6 @@ const SalesPage: React.FC<Props> = ({
         // eslint-disable-next-line
     }, [schemeDetails])
 
-
     // Disposition Three Data
 
     const { options: allDispositionItems } = useCustomOptions({
@@ -139,7 +137,6 @@ const SalesPage: React.FC<Props> = ({
         keyName: 'dispositionDisplayName',
         value: '_id',
     })
-
 
     const dropdownOptions = {
         dispositionThreeOptions: allDispositionItems,
@@ -218,7 +215,10 @@ const SalesPage: React.FC<Props> = ({
                         options={dropdownOptions.dispositionThreeOptions || []}
                         onChange={(e) => {
                             setFieldValue('dispositionLevelThreeId', e?.value)
-                            setFieldValue('dispositionLevelThreeLabel', e?.label)
+                            setFieldValue(
+                                'dispositionLevelThreeLabel',
+                                e?.label
+                            )
                         }}
                     />
                 </div>
@@ -238,10 +238,11 @@ const SalesPage: React.FC<Props> = ({
             {/* TABS */}
             <div className="flex gap-x-4 mt-2 mb-1">
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.history
-                        ? 'bg-[#87527c] text-white'
-                        : 'bg-slate-200'
-                        }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
+                        TabTypes[activeTab] === TabTypes.history
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
                     onClick={() => setActiveTab(TabTypes.history)}
                 >
                     <div className=" text-xs mr-2">
@@ -250,10 +251,11 @@ const SalesPage: React.FC<Props> = ({
                     <div className="text-xs">History</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.order
-                        ? 'bg-[#87527c] text-white'
-                        : 'bg-slate-200'
-                        }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
+                        TabTypes[activeTab] === TabTypes.order
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
                     onClick={() => setActiveTab(TabTypes.order)}
                 >
                     <div className=" text-xs mr-2">
@@ -262,10 +264,11 @@ const SalesPage: React.FC<Props> = ({
                     <div className="text-xs">Order</div>
                 </div>
                 <div
-                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.complaint
-                        ? 'bg-[#87527c] text-white'
-                        : 'bg-slate-200'
-                        }`}
+                    className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${
+                        TabTypes[activeTab] === TabTypes.complaint
+                            ? 'bg-[#87527c] text-white'
+                            : 'bg-slate-200'
+                    }`}
                     onClick={() => setActiveTab(TabTypes.complaint)}
                 >
                     <div className=" text-xs mr-2">
