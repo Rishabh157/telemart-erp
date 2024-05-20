@@ -285,6 +285,7 @@ import RetailLabel from './Receipt/RetailILabel'
 import OrderCancelRequestListingWrapper from './pages/orderCancelRequest/list/OrderCancelRequestListingWrapper'
 import AddOrderCancelRequestWrapper from './pages/orderCancelRequest/add/AddOrderCancelRequestWrapper'
 import EditOrderCancelRequestWrapper from './pages/orderCancelRequest/edit/EditOrderCancelRequestWrapper'
+import WarehouseOrderStatusOverviewWrapper from './pages/warehouses/view/inventories/outward/warehouseStatus/WarehouseOrderStatusOverviewWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -776,6 +777,19 @@ const PageRoutes = () => {
                             />
                         }
                     >
+                        <Route
+                            path="warehouse-status"
+                            element={
+                                <Authorization
+                                    children={
+                                        <WarehouseOrderStatusOverviewWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_STATUS
+                                    }
+                                />
+                            }
+                        />
                         <Route
                             path="dealer"
                             element={
