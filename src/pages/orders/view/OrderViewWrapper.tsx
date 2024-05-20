@@ -20,6 +20,7 @@ import SideNavLayout from '../../../components/layouts/SideNavLayout/SideNavLayo
 import OrderView from './OrderView'
 import { OrderListResponse } from 'src/models'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 const OrderViewWrapper = () => {
     const params = useParams()
@@ -380,25 +381,8 @@ const OrderViewWrapper = () => {
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <>
-                        <span>
-                            {row?.preffered_delivery_date
-                                ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
-                                : '-'}
-                        </span>
-                        {/* <span>
-                            {' '}
-                            {moment(row?.preffered_delivery_date).format(
-                                'hh:mm:ss A'
-                            )}
-                        </span>, */}
-                    </>
-                )
-            },
+            renderCell: (row: OrderListResponse) =>
+                formatedDateTimeIntoIst(row?.preffered_delivery_date) || '-',
         },
         {
             field: 'preffered_delivery_date',

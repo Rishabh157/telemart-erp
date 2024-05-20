@@ -1,5 +1,4 @@
 // |-- External Dependencies --|
-import { format } from 'date-fns'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -14,6 +13,7 @@ import VendorLedgerListing from './VendorLedgerListing'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { RootState } from 'src/redux/store'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 const VendorListLedgerTabWrapper = () => {
     useUnmountCleanup()
@@ -55,11 +55,7 @@ const VendorListLedgerTabWrapper = () => {
             headerName: 'Date',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => {
-                return (
-                    <span>
-                        {format(new Date(row.createdAt), 'yyyy-MM-dd HH:mm')}
-                    </span>
-                )
+                return formatedDateTimeIntoIst(row?.createdAt)
             },
         },
         {

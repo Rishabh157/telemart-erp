@@ -9,11 +9,11 @@ import InventoryListing from './InventoryListing'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Redux --|
-import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
 import { useGetInventoriesByBarcodeQuery } from 'src/services/BarcodeService'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 const columns: columnTypes[] = [
     {
@@ -69,31 +69,9 @@ const columns: columnTypes[] = [
         field: 'date',
         headerName: 'created date',
         flex: 'flex-[1_1_0%]',
-        renderCell: (row: WareHouseInventory) => (
-            <span>
-                {' '}
-                {format(
-                    new Date(row.firstDocument?.createdAt),
-                    'yyyy-MM-dd HH:mm'
-                )}
-            </span>
-        ),
+        renderCell: (row: WareHouseInventory) =>
+            formatedDateTimeIntoIst(row?.firstDocument?.createdAt),
     },
-    // {
-    //     field: 'actions',
-    //     headerName: 'Actions',
-    //     flex: 'flex-[0.5_0.5_0%]',
-    //     renderCell: (row: any) => (
-    //         <ActionPopup
-    //             handleOnAction={() => {
-    //                 // setShowDropdown(!showDropdown)
-    //                 // setCurrentId(row?._id)
-    //             }}
-    //         />
-
-    //     ),
-    //
-    // },
 ]
 
 const tabs = [
@@ -140,11 +118,7 @@ const InventoryListingWrapper = () => {
         }),
     })
 
-    return (
-        <>
-            <InventoryListing columns={columns} rows={items} tabs={tabs} />
-        </>
-    )
+    return <InventoryListing columns={columns} rows={items} tabs={tabs} />
 }
 
 export default InventoryListingWrapper
