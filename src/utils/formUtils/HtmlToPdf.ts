@@ -1,7 +1,7 @@
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
-export const generatePdf = async (contentRef:any) => {
+export const generatePdf = async (contentRef: any) => {
     const contentRefNode = contentRef.current
 
     // Check if contentRefNode exists before proceeding

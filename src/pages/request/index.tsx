@@ -18,7 +18,6 @@ interface tabsProps {
 }
 
 const ViewRequest = () => {
-
     const tabs: tabsProps[] = [
         {
             label: 'Moneyback',
@@ -62,7 +61,7 @@ const ViewRequest = () => {
         navigate(`${allowedTabs[0]?.path}`)
         //eslint-disable-next-line
     }, [])
-    
+
     useEffect(() => {
         if (!activeTab) return
 

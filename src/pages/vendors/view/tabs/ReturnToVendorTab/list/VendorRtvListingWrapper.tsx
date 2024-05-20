@@ -1,4 +1,3 @@
-
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -7,9 +6,7 @@ import { useParams } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import VendorRtvListing from './VendorRtvListing'
 
-import {
-    useGetPaginationReturnToVendorByGroupQuery,
-} from 'src/services/ReturnToVendorService'
+import { useGetPaginationReturnToVendorByGroupQuery } from 'src/services/ReturnToVendorService'
 
 // |-- Redux --|
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
@@ -102,9 +99,6 @@ const VendorRtvListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
-
- 
-
 
     const columns: columnTypes[] = [
         {

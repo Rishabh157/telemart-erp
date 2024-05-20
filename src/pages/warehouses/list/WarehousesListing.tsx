@@ -72,7 +72,6 @@ const WarehouseListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                   
                 />
 
                 {/* Table */}

@@ -25,7 +25,6 @@ import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { Chip, Stack } from '@mui/material'
 
-
 // |-- Types --|
 type Props = {
     columns: any[]
@@ -57,41 +56,41 @@ const CreateBatchOrderListing = ({
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         createBatchState
-        const handleReset = () => {
-            setFilter((prev) => ({
-                ...prev,
-                isUrgentOrder: { fieldName: '', value: '', label: '' },
-                schemeId: { fieldName: '', value: '', label: '' },
-                orderStatus: { fieldName: '', value: '', label: '' },
-                districtId: { fieldName: '', value: '', label: '' },
-                tehsilId: { fieldName: '', value: '', label: '' },
-                startDate: { fieldName: '', value: '', label: '' },
-                endDate: { fieldName: '', value: '', label: '' },
-                callBackFrom: { fieldName: '', value: '', label: '' },
-                callBackTo: { fieldName: '', value: '', label: '' },
-                callCenterManagerId: { fieldName: '', value: '', label: '' },
-            }))
-        }
-    
-        const filterShow = (filter: BatchFormInitialValuesFilterWithLabel) => {
-            return (
-                <span className="capitalize">
-                    <Stack direction="row" spacing={1}>
-                        {Object.entries(filter).map(([key, value], index) => {
-                            return value.value ? (
-                                <Chip
-                                    key={index}
-                                    label={`${value.fieldName}: ${value.label}`}
-                                    color="primary"
-                                    variant="outlined"
-                                    size="small"
-                                />
-                            ) : null
-                        })}
-                    </Stack>
-                </span>
-            )
-        }
+    const handleReset = () => {
+        setFilter((prev) => ({
+            ...prev,
+            isUrgentOrder: { fieldName: '', value: '', label: '' },
+            schemeId: { fieldName: '', value: '', label: '' },
+            orderStatus: { fieldName: '', value: '', label: '' },
+            districtId: { fieldName: '', value: '', label: '' },
+            tehsilId: { fieldName: '', value: '', label: '' },
+            startDate: { fieldName: '', value: '', label: '' },
+            endDate: { fieldName: '', value: '', label: '' },
+            callBackFrom: { fieldName: '', value: '', label: '' },
+            callBackTo: { fieldName: '', value: '', label: '' },
+            callCenterManagerId: { fieldName: '', value: '', label: '' },
+        }))
+    }
+
+    const filterShow = (filter: BatchFormInitialValuesFilterWithLabel) => {
+        return (
+            <span className="capitalize">
+                <Stack direction="row" spacing={1}>
+                    {Object.entries(filter).map(([key, value], index) => {
+                        return value.value ? (
+                            <Chip
+                                key={index}
+                                label={`${value.fieldName}: ${value.label}`}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : null
+                    })}
+                </Stack>
+            </span>
+        )
+    }
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">

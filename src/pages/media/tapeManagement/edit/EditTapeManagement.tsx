@@ -158,7 +158,7 @@ const EditTapeManagement = ({
                             />
 
                             <ATMSelectSearchable
-                            required
+                                required
                                 name="schemeId"
                                 value={values.schemeId}
                                 selectLabel="Select Scheme"

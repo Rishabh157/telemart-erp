@@ -59,7 +59,7 @@ const WebsiteTagListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -119,7 +119,6 @@ const WebsiteTagListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'metaKeyword',
@@ -157,7 +156,6 @@ const WebsiteTagListingWrapper = () => {
                 <span> {row.metaTwitterCard} </span>
             ),
         },
-
     ]
     return (
         <WebsiteTagListing

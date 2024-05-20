@@ -54,10 +54,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_DETAILS",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "TAB_WAREHOUSE_DETAILS"
-            ],
+            "parentGroup": ["VIEW", "TAB_WAREHOUSE_DETAILS"],
             "fields": []
         },
         {
@@ -65,9 +62,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INVENTORIES",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -75,9 +70,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -85,10 +78,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_CARTON_BOX",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "TAB_WAREHOUSE_INVENTORIES"
-            ],
+            "parentGroup": ["VIEW", "TAB_WAREHOUSE_INVENTORIES"],
             "fields": []
         },
         {
@@ -96,10 +86,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "TAB_WAREHOUSE_INVENTORIES"
-            ],
+            "parentGroup": ["VIEW", "TAB_WAREHOUSE_INVENTORIES"],
             "fields": []
         },
         {
@@ -107,9 +94,7 @@
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -1034,7 +1019,6 @@
                 "TAB_WAREHOUSE_INWARD_INVENTORIES"
             ],
             "fields": [
-          
                 {
                     "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_NUMBER",
                     "fieldName": "Order Number",

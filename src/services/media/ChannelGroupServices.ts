@@ -45,7 +45,7 @@ export const channelGroupApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-        
+
         //***** DELETE *****/
         deleteChannelGroup: builder.mutation({
             invalidatesTags: ['channel-group'],

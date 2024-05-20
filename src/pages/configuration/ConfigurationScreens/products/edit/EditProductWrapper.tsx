@@ -79,7 +79,9 @@ const steps = [
             product_code: string().required('Product code is required'),
             product_name: string().required('Product name is required'),
             product_category: string().required('Product category is required'),
-            product_sub_category: string().required('Product sub category is required'),
+            product_sub_category: string().required(
+                'Product sub category is required'
+            ),
             productGroup: string().required('Product group is required'),
             product_weight: number()
                 .min(0, 'Weight must be positive')
@@ -179,10 +181,9 @@ const EditProductWrapper = () => {
     const { items: allItems } = useGetDataByIdCustomQuery({
         useEndPointHook: useGetAllItemsQuery(''),
     })
-    const { items: selectedItem } =
-        useGetDataByIdCustomQuery<any>({
-            useEndPointHook: useGetProductByIdQuery(Id),
-        })
+    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetProductByIdQuery(Id),
+    })
 
     // States
     const [activeStep, setActiveStep] = React.useState(0)

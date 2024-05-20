@@ -22,7 +22,11 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 
 // |-- Redux --|
-import { setRowsPerPage, setPage, setSearchValue } from 'src/redux/slices/ListingPaginationSlice'
+import {
+    setRowsPerPage,
+    setPage,
+    setSearchValue,
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
@@ -40,7 +44,9 @@ const ConfigurationCompanyListing = ({
     setShowDropdown,
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const company: any = useSelector((state: RootState) => state.listingPagination)
+    const company: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const [selectedRows, setSelectedRows] = useState([])
 
     const navigate = useNavigate()
@@ -92,8 +98,8 @@ const ConfigurationCompanyListing = ({
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                // isFilter
-                // onFilterClick={() => setIsFilterOpen(true)}
+                    // isFilter
+                    // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

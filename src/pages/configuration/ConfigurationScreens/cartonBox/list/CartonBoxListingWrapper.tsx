@@ -32,14 +32,15 @@ import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const CartonBoxListingWrapper = () => {
-    
     useUnmountCleanup()
     const navigate = useNavigate()
     const [deleteCartonBox] = useDeleteCartonBoxMutation()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const cartonBoxState: any = useSelector((state: RootState) => state.listingPagination)
+    const cartonBoxState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, searchValue } = cartonBoxState
 
     const { items } = useGetCustomListingData<CartonBoxListResponse>({
@@ -58,7 +59,7 @@ const CartonBoxListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -114,7 +115,6 @@ const CartonBoxListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'boxName',
@@ -158,7 +158,6 @@ const CartonBoxListingWrapper = () => {
                 return <span> {row?.boxWeight} </span>
             },
         },
-
     ]
     return (
         <>

@@ -6,10 +6,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { apiSlice } from 'src/services'
 import { filePickerSlice } from 'src/services/FilePickerServices'
 import { authMiddleware } from 'src/utils'
-import {
-    barcodeSlice,
-    sideNavLayoutSlice,
-} from './slices'
+import { barcodeSlice, sideNavLayoutSlice } from './slices'
 import CartonBoxBarcodeSlice from './slices/CartonBoxBarcodeSlice'
 import ComplainSlice from './slices/ComplainSlice'
 import DashboardSlice from './slices/DashboardSlice'
@@ -27,7 +24,6 @@ import statesSlice from './slices/statesSlice'
 import tehsilSlice from './slices/tehsilSlice'
 import websiteBlogSlice from './slices/website/websiteBlogSlice'
 import websitePageSlice from './slices/website/websitePageSlice'
-
 
 const store = configureStore({
     reducer: {

@@ -184,7 +184,7 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
                                                     label={label}
                                                     placeholder={placeholder}
                                                     className="shadow bg-white rounded"
-                                                    extraClassField='mt-3'
+                                                    extraClassField="mt-3"
                                                     isSubmitting={isSubmitting}
                                                 />
                                             </React.Fragment>

@@ -37,7 +37,7 @@ const CourierPreferenceListing = ({
             label: ' Courier Preference ',
         },
     ]
-const navigate=useNavigate()
+    const navigate = useNavigate()
     return (
         <div className="px-4 h-full pt-3">
             {/* Breadcrumbs */}

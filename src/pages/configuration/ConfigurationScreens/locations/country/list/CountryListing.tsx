@@ -72,7 +72,11 @@ const CountryListing = ({ contries, items }: Props) => {
                     handleCountryClick(newValue)
                 }}
                 disabled={false}
-                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_COUNTRY_ADD) as boolean}
+                isAddButton={
+                    isAuthorized(
+                        UserModuleNameTypes.ACTION_COUNTRY_ADD
+                    ) as boolean
+                }
             />
             {isOpenAddForm && (
                 <AddCountryWrapper onClose={() => setisOpenAddForm(false)} />

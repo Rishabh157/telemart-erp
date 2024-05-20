@@ -26,7 +26,6 @@ const AddDispositionTwoWrapper = () => {
 
     const [adddispositionTwo] = useAdddispositionTwoMutation()
 
-
     const { options } = useCustomOptions({
         useEndPointHook: useGetAlldispositionOneQuery(''),
         keyName: 'dispositionDisplayName',
@@ -69,7 +68,7 @@ const AddDispositionTwoWrapper = () => {
     }
 
     const dropdownOptions = {
-        DispotionOneOptions: options
+        DispotionOneOptions: options,
     }
 
     return (

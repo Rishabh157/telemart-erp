@@ -39,7 +39,6 @@ const WebsitePageListingWrapper = () => {
 
     const { page, rowsPerPage, searchValue, filterValue } = WebsitePageState
 
-
     // pagination api
     const { items } = useGetCustomListingData<WebsitePageListResponse[]>({
         useEndPointHook: useGetPaginationWebsitePageQuery({
@@ -61,7 +60,7 @@ const WebsitePageListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {

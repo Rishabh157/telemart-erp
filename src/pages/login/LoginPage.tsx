@@ -59,7 +59,8 @@ const LoginPage = ({ pathName }: any) => {
                                     companyId: res?.data?.data?.companyId,
                                     role: res?.data?.data?.userType,
                                     userRole: res?.data?.data?.userRole,
-                                    userDepartment: res?.data?.data?.userDepartment,
+                                    userDepartment:
+                                        res?.data?.data?.userDepartment,
                                     firstName: res?.data?.data?.firstName,
                                     lastName: res?.data?.data?.lastName,
                                     branchId: res?.data?.data?.branchId,

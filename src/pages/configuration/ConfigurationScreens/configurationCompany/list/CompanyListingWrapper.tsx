@@ -32,24 +32,25 @@ const ConfigurationCompanyListingWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const [deleteCompany] = useDeleteCompanyMutation()
 
-
     const { page, rowsPerPage, searchValue }: any = useSelector(
         (state: RootState) => state.listingPagination
     )
 
-    const { items } = useGetCustomListingData<ConfigurationCompanyListResponse>({
-        useEndPointHook: useGetCompaniesQuery({
-            limit: rowsPerPage,
-            searchValue: searchValue,
-            params: ['companyName', 'phoneNo'],
-            page: page,
-            filterBy: [],
-            dateFilter: {},
-            orderBy: 'createdAt',
-            orderByValue: -1,
-            isPaginationRequired: true,
-        })
-    })
+    const { items } = useGetCustomListingData<ConfigurationCompanyListResponse>(
+        {
+            useEndPointHook: useGetCompaniesQuery({
+                limit: rowsPerPage,
+                searchValue: searchValue,
+                params: ['companyName', 'phoneNo'],
+                page: page,
+                filterBy: [],
+                dateFilter: {},
+                orderBy: 'createdAt',
+                orderByValue: -1,
+                isPaginationRequired: true,
+            }),
+        }
+    )
     const handleDelete = () => {
         setShowDropdown(false)
         deleteCompany(currentId).then((res) => {
@@ -68,7 +69,6 @@ const ConfigurationCompanyListingWrapper = () => {
         })
     }
     const columns: columnTypes[] = [
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -103,7 +103,6 @@ const ConfigurationCompanyListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'companyName',

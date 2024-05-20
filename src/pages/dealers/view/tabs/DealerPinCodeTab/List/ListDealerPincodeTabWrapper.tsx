@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 // |-- External Dependencies --|
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -54,7 +54,7 @@ const ListDealerPincodeTabWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDeletePincode = (id: string, pincode: string) => {
@@ -123,7 +123,6 @@ const ListDealerPincodeTabWrapper = () => {
                     </button> */}
                 </ActionPopup>
             ),
-
         },
         {
             field: 'Pincode',
@@ -144,9 +143,7 @@ const ListDealerPincodeTabWrapper = () => {
         },
     ]
 
-    return (
-        <DealerPincodeListing columns={columns} rows={items} />
-    )
+    return <DealerPincodeListing columns={columns} rows={items} />
 }
 
 export default ListDealerPincodeTabWrapper

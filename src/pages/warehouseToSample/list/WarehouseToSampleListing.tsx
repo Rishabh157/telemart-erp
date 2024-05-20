@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -34,7 +33,6 @@ const WarehouseToSampleListing = ({
     rows,
     setShowDropdown,
 }: Props) => {
-
     const dispatch = useDispatch<AppDispatch>()
     const WarehouseTransferState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -90,7 +88,6 @@ const WarehouseToSampleListing = ({
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                   
                 />
 
                 {/* Table */}

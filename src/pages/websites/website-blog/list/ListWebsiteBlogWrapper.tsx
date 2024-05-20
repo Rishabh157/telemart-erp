@@ -60,7 +60,7 @@ const ListWebsiteBlogWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -81,7 +81,6 @@ const ListWebsiteBlogWrapper = () => {
         })
     }
     const columns: columnTypes[] = [
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -121,7 +120,6 @@ const ListWebsiteBlogWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'blogName',
@@ -150,7 +148,6 @@ const ListWebsiteBlogWrapper = () => {
                 <span> {row.blogSubtitle} </span>
             ),
         },
-
     ]
     return (
         <ListWebsiteBlog

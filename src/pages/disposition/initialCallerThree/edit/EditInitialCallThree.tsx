@@ -35,7 +35,7 @@ const EditInitialCallThree = ({
     dropdownoptions,
 }: Props) => {
     const { values, setFieldValue } = formikProps
-    
+
     const dispatch = useDispatch()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -48,12 +48,9 @@ const EditInitialCallThree = ({
     ]
 
     const { options: initialCalleOneOption } = useCustomOptions({
-        useEndPointHook: useGetAllinitialCallerOneQuery(
-            values.callType,
-            {
-                skip: !values.callType,
-            }
-        ),
+        useEndPointHook: useGetAllinitialCallerOneQuery(values.callType, {
+            skip: !values.callType,
+        }),
         keyName: 'initialCallDisplayName',
         value: '_id',
     })
@@ -77,7 +74,7 @@ const EditInitialCallThree = ({
 
     dropdownoptions = {
         ...dropdownoptions,
-        initialCallTwoOptions:options
+        initialCallTwoOptions: options,
     }
 
     const handleSetFieldValue = (name: string, value: string) => {

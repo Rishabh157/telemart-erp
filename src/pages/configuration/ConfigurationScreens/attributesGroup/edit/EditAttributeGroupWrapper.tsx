@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -114,7 +113,6 @@ const EditAttributeGroupWrapper = (props: Props) => {
                     <EditAttributeGroup
                         apiStatus={apiStatus}
                         formikProps={formikProps}
-                       
                         attributeOptions={options}
                     />
                 )

@@ -31,7 +31,9 @@ const AssetsLocationWrapper = () => {
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
-    const assetLocationState: any = useSelector((state: RootState) => state.listingPagination)
+    const assetLocationState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
     const { page, rowsPerPage, searchValue } = assetLocationState
 
@@ -52,7 +54,7 @@ const AssetsLocationWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {

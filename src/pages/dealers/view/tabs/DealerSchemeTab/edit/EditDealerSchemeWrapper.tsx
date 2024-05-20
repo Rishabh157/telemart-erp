@@ -1,5 +1,3 @@
-
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -16,7 +14,7 @@ import {
 } from 'src/models/DealerScheme.model'
 import {
     useGetDealerSchemeByIdQuery,
-    useUpdateDealerSchemeMutation
+    useUpdateDealerSchemeMutation,
 } from 'src/services/DealerSchemeService'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { showToast } from 'src/utils'
@@ -35,7 +33,7 @@ const EditDealerSchemeWrapper = () => {
     const dealerId = params.dealerId
     const { userData } = useSelector((state: RootState) => state?.auth)
     const companyId: any = userData?.companyId
-   
+
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const { items: schemeData } =
@@ -44,7 +42,7 @@ const EditDealerSchemeWrapper = () => {
         })
     const [updateScheme] = useUpdateDealerSchemeMutation()
 
-   const { options: schemeOptions } = useCustomOptions({
+    const { options: schemeOptions } = useCustomOptions({
         useEndPointHook: useGetSchemeQuery({
             companyId: userData?.companyId,
         }),

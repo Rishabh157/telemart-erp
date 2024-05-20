@@ -48,7 +48,7 @@ export const dealerToDealerApi = apiSlice.injectEndpoints({
             query: ({ dtdData, id }) => ({
                 url: `/dtd-transfer/update-dtd`,
                 method: 'PUT',
-                body: { dtdData: dtdData }
+                body: { dtdData: dtdData },
             }),
         }),
 
@@ -69,5 +69,5 @@ export const {
     useAddDealerToDealerOrderMutation,
     useApprovealDealerToDealerOrderMutation,
     useDeleteDealerToDealerOrderMutation,
-    useUpdateDealerToDealerOrderMutation
+    useUpdateDealerToDealerOrderMutation,
 } = dealerToDealerApi

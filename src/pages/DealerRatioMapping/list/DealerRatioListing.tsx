@@ -47,7 +47,6 @@ const DealerRatioListing = ({ columns, rows, tabs }: Props) => {
                 {/* Page Header */}
                 <div className="flex justify-between items-center h-[45px]  p-1">
                     <ATMPageHeading> Dealer's Raito </ATMPageHeading>
-                    
                 </div>
 
                 <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">

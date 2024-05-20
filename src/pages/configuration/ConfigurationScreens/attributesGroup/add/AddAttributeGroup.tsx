@@ -26,7 +26,7 @@ type Props = {
     formikProps: FormikProps<FormInitialValues>
     // allItems: any
     apiStatus: boolean
-    attributeOptions:  [] | any
+    attributeOptions: [] | any
 }
 
 // Breadcrumbs
@@ -46,7 +46,7 @@ const AddAttributeGroup = ({
     apiStatus,
     attributeOptions = [],
 }: Props) => {
-    const [allOptions, setAllOtions] = useState< []>([])
+    const [allOptions, setAllOtions] = useState<[]>([])
     const [flag, setFlag] = useState(true)
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const AddAttributeGroup = ({
 
     const transferListProps = {
         name: 'attributes',
-        options:allOptions,
+        options: allOptions,
         right: values.attributes,
         setRight: (newValue: { label: string; value: string }[]) =>
             setFieldValue('attributes', newValue),
