@@ -40,7 +40,9 @@ type Props = {
 
 const ProductsListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const productsState: any = useSelector((state: RootState) => state.listingPagination)
+    const productsState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])

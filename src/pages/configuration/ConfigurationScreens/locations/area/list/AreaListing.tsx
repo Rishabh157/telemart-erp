@@ -71,7 +71,9 @@ const AreaListing = ({ areas }: Props) => {
                     }
                 }}
                 disabled={false}
-                isAddButton={isAuthorized(UserModuleNameTypes.ACTION_AREA_ADD) as boolean}
+                isAddButton={
+                    isAuthorized(UserModuleNameTypes.ACTION_AREA_ADD) as boolean
+                }
             />
 
             {isOpenAddForm && (

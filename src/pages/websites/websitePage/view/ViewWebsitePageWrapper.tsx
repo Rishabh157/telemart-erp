@@ -7,7 +7,6 @@ import { useGetWebsitePageByIdQuery } from 'src/services/websites/WebsitePageSer
 import ViewWebsitePage from './ViewWebsitePage'
 
 const ViewWebsitePageWrapper = () => {
-
     const params = useParams()
     const Id = params.id
 

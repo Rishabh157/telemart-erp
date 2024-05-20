@@ -246,8 +246,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },
@@ -288,8 +288,8 @@ const WarehouseTransferListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
+                            ? 'Pending'
+                            : 'Rejected'}
                     </span>
                 )
             },

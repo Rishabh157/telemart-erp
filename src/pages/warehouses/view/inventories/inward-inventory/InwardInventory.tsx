@@ -113,7 +113,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         options={cartonBoxOption}
                         label="Packaging"
                     />
-         
 
                     <ATMTextField
                         name=""

@@ -1,5 +1,3 @@
-
-
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -114,10 +112,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
 
     return (
         <div className="px-2 h-full shadow rounded border ">
-            <PurchaseOrderListing
-                columns={columns}
-                rows={items}
-            />
+            <PurchaseOrderListing columns={columns} rows={items} />
         </div>
     )
 }

@@ -41,7 +41,9 @@ type Props = {
 
 const ItemListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const itemState: any = useSelector((state: RootState) => state.listingPagination)
+    const itemState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =

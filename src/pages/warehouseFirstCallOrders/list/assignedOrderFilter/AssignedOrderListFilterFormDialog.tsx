@@ -92,7 +92,6 @@ const AssignedOrderListFilterFormDialog = ({
                     }}
                 />
 
-
                 <ATMSelectSearchable
                     label="State"
                     selectLabel="Select state"

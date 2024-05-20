@@ -184,7 +184,6 @@ const CreateBatchOrderListingWrapper = () => {
             name: UserModuleNameTypes.BATCH_ORDER_LIST_STATUS_DATE,
             align: 'start',
             extraClasses: 'min-w-[150px]',
-            
         },
         {
             field: 'status',

@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -168,7 +167,6 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             isPaginationRequired: true,
         }),
     })
-    
 
     const handleDelete = () => {
         const id = currentId

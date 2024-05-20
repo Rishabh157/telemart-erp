@@ -132,7 +132,7 @@ const EditWebsiteTagWrapper = (props: Props) => {
 
     const dropdownOptions = {
         WebsiteOptions: websiteItems,
-        WebsitePageOptions: websitePageItems
+        WebsitePageOptions: websitePageItems,
     }
 
     return (

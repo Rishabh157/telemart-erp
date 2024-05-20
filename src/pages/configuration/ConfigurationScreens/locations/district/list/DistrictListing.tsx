@@ -84,7 +84,9 @@ const DistrictListing = ({ districts }: Props) => {
                         UserModuleNameTypes.ACTION_DISTRICTS_ADD
                     ) as boolean
                 }
-                isEditButton={isAuthorized(UserModuleNameTypes.ACTION_DISTRICTS_EDIT)}
+                isEditButton={isAuthorized(
+                    UserModuleNameTypes.ACTION_DISTRICTS_EDIT
+                )}
                 onEditListItemClick={(newValue) => {
                     setEditDistrictId(newValue?.value)
                 }}

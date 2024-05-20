@@ -8,6 +8,5 @@ export const useGetLocalStorage = () => {
         refreshToken,
         userData,
         deviceId,
-        
     }
 }

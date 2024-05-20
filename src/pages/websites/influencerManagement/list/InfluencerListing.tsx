@@ -31,7 +31,9 @@ type Props = {
 
 const InfluencerListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const WebsiteState: any = useSelector((state: RootState) => state.listingPagination)
+    const WebsiteState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         WebsiteState

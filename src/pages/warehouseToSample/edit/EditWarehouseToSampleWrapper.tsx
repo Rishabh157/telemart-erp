@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -76,7 +75,6 @@ const EditWarehouseToSampleWrapper = (props: Props) => {
     const Id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [updateWarehouseToSample] = useUpdateWarehouseToSampleOrderMutation()
-
 
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetWarehouseToSampleByIdQuery(Id || ''),

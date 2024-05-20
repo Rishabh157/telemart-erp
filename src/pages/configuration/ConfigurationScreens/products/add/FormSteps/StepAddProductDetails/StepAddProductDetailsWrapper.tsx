@@ -27,9 +27,12 @@ const StepAddProductDetailsWrapper = ({ formikProps }: Props) => {
         value: '_id',
     })
     const { options: productSubCategoryOPtions } = useCustomOptions({
-        useEndPointHook: useGetSubCategoryByParentQuery(formikProps?.values?.product_category,{
-            skip:!formikProps?.values?.product_category
-        }),
+        useEndPointHook: useGetSubCategoryByParentQuery(
+            formikProps?.values?.product_category,
+            {
+                skip: !formikProps?.values?.product_category,
+            }
+        ),
         keyName: 'subCategoryName',
         value: '_id',
     })

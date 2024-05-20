@@ -27,7 +27,9 @@ import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 const AssetsRequestWrapper = () => {
     useUnmountCleanup()
     const navigate = useNavigate()
-    const assetsRequest = useSelector((state: RootState) => state.listingPagination)
+    const assetsRequest = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteAsset] = useDeleteAssetsRequestMutation()
@@ -51,7 +53,7 @@ const AssetsRequestWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {

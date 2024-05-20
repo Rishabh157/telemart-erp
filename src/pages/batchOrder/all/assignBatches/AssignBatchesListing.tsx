@@ -36,13 +36,8 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
     )
     const navigate = useNavigate()
 
-    const {
-        page,
-        rowsPerPage,
-        searchValue,
-        isTableLoading,
-        totalItems,
-    } = createBatchState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
+        createBatchState
 
     return (
         <div className="px-4 h-[calc(100vh-110px)]">

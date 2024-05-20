@@ -1,5 +1,3 @@
-
-
 // |-- Built-in Dependencies --|
 import { useRef, useState } from 'react'
 
@@ -172,17 +170,16 @@ const AddUserWrapper = (props: Props) => {
         }, 1000)
     }
 
-
-   const {options}= useCustomOptions({
+    const { options } = useCustomOptions({
         useEndPointHook: useGetAllCallCenterMasterQuery(userData?.companyId, {
             skip: !userData?.companyId,
         }),
         keyName: 'callCenterName',
         value: '_id',
     })
- 
+
     const dropDownOption = {
-        callCenterOptions: options
+        callCenterOptions: options,
     }
 
     return (

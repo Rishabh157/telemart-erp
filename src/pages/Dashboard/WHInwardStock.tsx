@@ -114,7 +114,7 @@ const WHInwardStock = () => {
                             const threeMonthsLater = moment()
                                 .add(3, 'months')
                                 .endOf('day')
-    
+
                             // Check if the selected start date is less than 3 months from the current date
                             if (moment(value).isBefore(threeMonthsLater)) {
                                 // If yes, set the end date to 3 months from the selected start date

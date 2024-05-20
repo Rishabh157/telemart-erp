@@ -25,7 +25,9 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const LanguageListingWrapper = () => {
     const navigate = useNavigate()
-    const languageState: any = useSelector((state: RootState) => state.listingPagination)
+    const languageState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, searchValue } = languageState
     const [deleteLanguage] = useDeleteLanguageMutation()
     const [currentId, setCurrentId] = useState('')
@@ -47,7 +49,7 @@ const LanguageListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -101,7 +103,6 @@ const LanguageListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'languageName',

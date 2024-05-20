@@ -58,7 +58,9 @@ const AddDealersCategoryWrapper = (props: Props) => {
         dealersCategory: string().required('Deal seller category is required'),
         investAmount: number().required(' Invest amount is required'),
         numberOfOrders: number().required('Number of offers is required'),
-        deliveryPercentage: number().required('Delivery percentage is required'),
+        deliveryPercentage: number().required(
+            'Delivery percentage is required'
+        ),
     })
 
     //    Form Submit Handler

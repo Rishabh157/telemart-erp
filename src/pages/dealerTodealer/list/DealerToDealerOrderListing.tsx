@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -46,7 +45,6 @@ const DealerToDealerOrderListing = ({
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Dealer To Dealer Orders </ATMPageHeading>
-      
             </div>
 
             <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
@@ -63,7 +61,6 @@ const DealerToDealerOrderListing = ({
                     onSearch={(newValue) => {
                         dispatch(setSearchValue(newValue))
                     }}
-                  
                 />
 
                 {/* Table */}

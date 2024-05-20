@@ -28,12 +28,14 @@ const EditDispositionOneWrappper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { items: selectedDispositionOne } = useGetDataByIdCustomQuery<DispositionOneListResponse>({
-        useEndPointHook: useGetdispositionOneByIdQuery(Id),
-    })
+    const { items: selectedDispositionOne } =
+        useGetDataByIdCustomQuery<DispositionOneListResponse>({
+            useEndPointHook: useGetdispositionOneByIdQuery(Id),
+        })
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispositionOne?.dispositionName || '',
-        dispositionDisplayName: selectedDispositionOne?.dispositionDisplayName || '',
+        dispositionDisplayName:
+            selectedDispositionOne?.dispositionDisplayName || '',
     }
 
     const validationSchema = object({

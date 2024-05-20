@@ -33,9 +33,10 @@ import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const ProductsListingWrapper = () => {
-
     useUnmountCleanup()
-    const productState: any = useSelector((state: RootState) => state.listingPagination)
+    const productState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, searchValue } = productState
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
@@ -59,7 +60,7 @@ const ProductsListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -113,7 +114,6 @@ const ProductsListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'productCode',

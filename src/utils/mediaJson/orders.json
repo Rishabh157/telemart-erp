@@ -201,9 +201,7 @@
             "actionUrl": "",
             "actionName": "ORDER_OVERVIEW_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -211,9 +209,7 @@
             "actionUrl": "",
             "actionName": "ORDER_ALL_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -221,9 +217,7 @@
             "actionUrl": "",
             "actionName": "ORDER_FRESH_ORDER_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -231,9 +225,7 @@
             "actionUrl": "",
             "actionName": "ORDER_FRESH_ORDER_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -241,9 +233,7 @@
             "actionUrl": "",
             "actionName": "ORDER_APPROVAL_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -251,9 +241,7 @@
             "actionUrl": "",
             "actionName": "ORDER_DELIVERED_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -261,9 +249,7 @@
             "actionUrl": "",
             "actionName": "ORDER_DOOR_CANCELLED_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -271,9 +257,7 @@
             "actionUrl": "",
             "actionName": "ORDER_HOLD_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -281,9 +265,7 @@
             "actionUrl": "",
             "actionName": "ORDER_PSC_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -291,9 +273,7 @@
             "actionUrl": "",
             "actionName": "ORDER_UNA_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -301,9 +281,7 @@
             "actionUrl": "",
             "actionName": "ORDER_PND_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -311,9 +289,7 @@
             "actionUrl": "",
             "actionName": "ORDER_URGENT_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -321,9 +297,7 @@
             "actionUrl": "",
             "actionName": "ORDER_NON_ACTION_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -331,9 +305,7 @@
             "actionUrl": "",
             "actionName": "ORDER_GLOBAL_ORDER_SEARCH_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -341,9 +313,7 @@
             "actionUrl": "",
             "actionName": "ACTION_ORDER_INQUIRY_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -395,9 +365,7 @@
             "actionUrl": "",
             "actionName": "ACTION_ORDER_REATTEMPT_TAB",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         }
     ]

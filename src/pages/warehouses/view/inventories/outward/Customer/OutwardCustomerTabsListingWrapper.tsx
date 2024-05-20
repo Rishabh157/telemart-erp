@@ -440,7 +440,8 @@ const OutwardCustomerTabsListingWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => formatedDateTimeIntoIst(row?.createdAt),
+            renderCell: (row: OrderListResponse) =>
+                formatedDateTimeIntoIst(row?.createdAt),
         },
         {
             field: 'preffered_delivery_date',

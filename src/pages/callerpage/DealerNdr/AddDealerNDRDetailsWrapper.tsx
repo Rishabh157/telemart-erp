@@ -133,7 +133,7 @@ const AddDealerNDRDetailsWrapper = () => {
             ndrRtoReattemptReason: values?.ndrRtoReattemptReason || '',
             mobileNo: phoneNumber,
         }
-        
+
         updateOrderNdrDealer({
             id: orderDetails?._id,
             body: formatedValues,

@@ -41,9 +41,7 @@
             "actionUrl": "",
             "actionName": "VIEW",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -51,9 +49,7 @@
             "actionUrl": "",
             "actionName": "GENERAL_INFORMATION",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -61,9 +57,7 @@
             "actionUrl": "",
             "actionName": "PURCHASE_ORDER",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -71,10 +65,7 @@
             "actionUrl": "",
             "actionName": "PURCHASE_ORDER_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "PURCHASE_ORDER"
-            ],
+            "parentGroup": ["VIEW", "PURCHASE_ORDER"],
             "fields": []
         },
         {
@@ -82,9 +73,7 @@
             "actionUrl": "",
             "actionName": "RETURN_TO_VENDOR",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -92,9 +81,7 @@
             "actionUrl": "",
             "actionName": "VENDOR_LEDGER",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -102,10 +89,7 @@
             "actionUrl": "",
             "actionName": "VENDOR_LEDGER_CREDIT_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "VENDOR_LEDGER"
-            ],
+            "parentGroup": ["VIEW", "VENDOR_LEDGER"],
             "fields": []
         },
         {
@@ -113,10 +97,7 @@
             "actionUrl": "",
             "actionName": "VENDOR_LEDGER_DEBIT_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW",
-                "VENDOR_LEDGER"
-            ],
+            "parentGroup": ["VIEW", "VENDOR_LEDGER"],
             "fields": []
         },
         {
@@ -124,9 +105,7 @@
             "actionUrl": "",
             "actionName": "VENDOR_ACTIVITY",
             "compulsoryFields": [],
-            "parentGroup": [
-                "VIEW"
-            ],
+            "parentGroup": ["VIEW"],
             "fields": []
         },
         {
@@ -142,9 +121,7 @@
             "actionUrl": "",
             "actionName": "EDIT",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -152,9 +129,7 @@
             "actionUrl": "",
             "actionName": "DELETE",
             "compulsoryFields": [],
-            "parentGroup": [
-                "LIST"
-            ],
+            "parentGroup": ["LIST"],
             "fields": []
         }
     ]

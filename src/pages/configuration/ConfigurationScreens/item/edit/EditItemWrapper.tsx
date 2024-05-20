@@ -47,9 +47,11 @@ const EditItemWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { items: selectedItem } = useGetDataByIdCustomQuery<ItemListResponse>({
-        useEndPointHook: useGetItemsByIdQuery(Id),
-    })
+    const { items: selectedItem } = useGetDataByIdCustomQuery<ItemListResponse>(
+        {
+            useEndPointHook: useGetItemsByIdQuery(Id),
+        }
+    )
     // Form Initial Values
     const initialValues: FormInitialValues = {
         itemCode: selectedItem?.itemCode || '',
@@ -90,7 +92,6 @@ const EditItemWrapper = (props: Props) => {
             setApiStatus(false)
         })
     }
-
 
     return (
         <Formik

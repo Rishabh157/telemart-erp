@@ -85,7 +85,7 @@ const UsersListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
@@ -109,7 +109,7 @@ const UsersListingWrapper = () => {
         {
             field: 'userName',
             headerName: 'User Name',
-            extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_USER_NAME,
             renderCell: (row: UsersListResponse) => (
@@ -119,7 +119,7 @@ const UsersListingWrapper = () => {
         {
             field: 'firstName',
             headerName: 'Name',
-            extraClasses :'min-w-[150px] capitalize',
+            extraClasses: 'min-w-[150px] capitalize',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_NAME,
             renderCell: (row: UsersListResponse) => (
@@ -129,7 +129,7 @@ const UsersListingWrapper = () => {
         {
             field: 'email',
             headerName: 'Email',
-            extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.USER_LIST_EMAIL,
             renderCell: (row: UsersListResponse) => {
@@ -139,21 +139,21 @@ const UsersListingWrapper = () => {
         {
             field: 'mobile',
             headerName: 'Mobile no.',
-            extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_MOBILE_NUMBER,
         },
         {
             field: 'branchLabel',
             headerName: 'Branch Name',
-            extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_BRANCH_NAME,
         },
         {
             field: 'isAgennt',
             headerName: 'Agent',
-            extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: UsersListResponse) => {
                 return row?.isAgent ? <FaCheck color="#438a47" /> : null
@@ -162,7 +162,7 @@ const UsersListingWrapper = () => {
         {
             field: 'userDepartment',
             headerName: 'User Department',
-            extraClasses :'min-w-[200px]',
+            extraClasses: 'min-w-[200px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_USER_DEPARTMENT,
             renderCell: (row: UsersListResponse) => {
@@ -172,7 +172,7 @@ const UsersListingWrapper = () => {
         {
             field: 'userRole',
             headerName: 'User Role',
-            extraClasses :'min-w-[200px]',
+            extraClasses: 'min-w-[200px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.USER_LIST_USER_ROLE,
             renderCell: (row: UsersListResponse) =>
@@ -199,7 +199,7 @@ const UsersListingWrapper = () => {
         {
             field: 'status',
             headerName: 'Status',
-            extraClasses :'min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.USER_LIST_STATUS,
             renderCell: (row: any) => {

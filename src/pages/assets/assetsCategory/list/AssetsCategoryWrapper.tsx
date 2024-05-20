@@ -32,7 +32,9 @@ const AssetsCategoryWrapper = () => {
     const [currentId, setCurrentId] = useState('')
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const assetCategoryState: any = useSelector((state: RootState) => state.listingPagination)
+    const assetCategoryState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, searchValue } = assetCategoryState
 
     // pagination api
@@ -52,7 +54,7 @@ const AssetsCategoryWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {

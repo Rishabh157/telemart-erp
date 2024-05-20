@@ -25,7 +25,6 @@ import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 
 const ProductSubCategoryListingWrapper = () => {
-
     useUnmountCleanup()
     const navigate = useNavigate()
     const [deleteProductSubCategory] = useDeleteProductSubCategoryMutation()
@@ -41,7 +40,11 @@ const ProductSubCategoryListingWrapper = () => {
         useEndPointHook: useGetProductSubCategoryQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['subCategoryName', 'subCategoryCode', 'parentCategoryLabel'],
+            params: [
+                'subCategoryName',
+                'subCategoryCode',
+                'parentCategoryLabel',
+            ],
             page: page,
             filterBy: [
                 {
@@ -53,7 +56,7 @@ const ProductSubCategoryListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
     const handleDelete = () => {
         setShowDropdown(false)
@@ -111,14 +114,13 @@ const ProductSubCategoryListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'subCategoryCode',
             headerName: 'Sub Category Code',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_CODE,
-            extraClasses :'min-w-[200px]',
+            extraClasses: 'min-w-[200px]',
             renderCell: (row: ProductSubCategoryListResponse) => (
                 <span> {row.subCategoryCode} </span>
             ),
@@ -127,7 +129,7 @@ const ProductSubCategoryListingWrapper = () => {
             field: 'subCategoryName',
             headerName: 'Sub Category Name ',
             flex: 'flex-[1.5_1.5_0%]',
-            extraClasses :'min-w-[200px]',
+            extraClasses: 'min-w-[200px]',
             name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_NAME,
             renderCell: (row: ProductSubCategoryListResponse) => {
                 return <span> {row.subCategoryName} </span>
@@ -137,7 +139,7 @@ const ProductSubCategoryListingWrapper = () => {
             field: 'parentCategoryLabel',
             headerName: 'Parent Category ',
             flex: 'flex-[1.5_1.5_0%]',
-            extraClasses :'min-w-[200px]',
+            extraClasses: 'min-w-[200px]',
             name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PARENT_CATEGORY,
             renderCell: (row: ProductSubCategoryListResponse) => {
                 return <span> {row.parentCategoryLabel} </span>

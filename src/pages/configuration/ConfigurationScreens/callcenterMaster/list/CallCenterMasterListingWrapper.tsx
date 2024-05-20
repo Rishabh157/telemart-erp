@@ -52,7 +52,7 @@ const CallCenterMasterListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
     const handleDelete = () => {
         setShowDropdown(false)
@@ -73,7 +73,6 @@ const CallCenterMasterListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -109,7 +108,6 @@ const CallCenterMasterListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'callCenterName',

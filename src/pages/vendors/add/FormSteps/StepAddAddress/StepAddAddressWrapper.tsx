@@ -158,7 +158,7 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
     const [billingDistrictData, setBillingDistrictData] = useState<any>()
     const [billingPincodeData, setBillingPincodeData] = useState<any>()
 
-    const { country:allCountry } = useCountries()
+    const { country: allCountry } = useCountries()
 
     //registraion
 
@@ -196,7 +196,6 @@ const StepAddAddressWrapper = ({ formikProps }: Props) => {
     const { allPincodes }: any = useSelector(
         (state: RootState) => state.pincode
     )
-
 
     //registration
 

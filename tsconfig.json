@@ -13,7 +13,7 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
+        "noEmit": false, // Change to false to allow TypeScript to emit output
         "jsx": "react-jsx",
         "baseUrl": "./"
     },

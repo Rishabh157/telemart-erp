@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -59,7 +58,7 @@ const EditAttributeGroup = ({
             })
             setFilteredOptions(result || [])
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [values.attributes, flag])
 
     const transferListProps = {

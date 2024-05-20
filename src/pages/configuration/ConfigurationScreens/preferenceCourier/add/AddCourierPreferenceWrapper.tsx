@@ -22,7 +22,7 @@ type Props = {}
 
 export type FormInitialValues = {
     courierName: string
-    priority:string
+    priority: string
 }
 
 const AddCourierPreferenceWrapper = (props: Props) => {
@@ -36,10 +36,10 @@ const AddCourierPreferenceWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [AddCourierPreferenceApi] = useAddCourierPrefernceMutation()
-   
+
     const initialValues: FormInitialValues = {
         courierName: '',
-        priority:  '',
+        priority: '',
     }
 
     // Form Validation Schema
@@ -59,7 +59,7 @@ const AddCourierPreferenceWrapper = (props: Props) => {
                     // companyId: userData?.companyId || '',
                 },
                 id: Id || '',
-            }).then((res:any) => {
+            }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'Added successfully!')

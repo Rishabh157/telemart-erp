@@ -20,7 +20,9 @@ export type FormInitialValues = {
 
 const ComplainListFilterFormDialogWrapper = ({ open, onClose }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const complain: any = useSelector((state: RootState) => state.listingPagination)
+    const complain: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { dateFilter } = complain
 
     const initialValues: FormInitialValues = {

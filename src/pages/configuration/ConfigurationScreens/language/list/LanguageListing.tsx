@@ -43,7 +43,9 @@ const LanguageListing = ({ columns, rows, setShowDropdown }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [selectedRows, setSelectedRows] = useState([])
 
-    const languageState: any = useSelector((state: RootState) => state.listingPagination)
+    const languageState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const navigate = useNavigate()
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =

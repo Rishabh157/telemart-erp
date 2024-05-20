@@ -1,4 +1,3 @@
-
 // |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
 import { useGetHouseArrestByIdQuery } from 'src/services/HouseArrestServices'

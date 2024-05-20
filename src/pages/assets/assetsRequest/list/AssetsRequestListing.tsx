@@ -51,7 +51,9 @@ const AssetsRequestListing = ({ columns, rows, setShowDropdown }: Props) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const assetsRequest = useSelector((state: RootState) => state.listingPagination)
+    const assetsRequest = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         assetsRequest
     return (

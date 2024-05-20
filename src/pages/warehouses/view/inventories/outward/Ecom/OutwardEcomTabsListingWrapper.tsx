@@ -17,7 +17,6 @@ import { OutwardRequestEcomListResponse } from 'src/models/OutwardRequest.model'
 import OutwardRequestListing from './OutwardEcomTabs'
 import { HiDotsHorizontal } from 'react-icons/hi'
 
-
 // |-- Types --|
 export type Tabs = {
     label: string
@@ -26,7 +25,6 @@ export type Tabs = {
 }
 
 const columns: columnTypes[] = [
-    
     {
         field: 'actions',
         headerName: 'Actions',
@@ -37,7 +35,6 @@ const columns: columnTypes[] = [
                 <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
             </button>
         ),
-        
     },
     {
         field: 'ecomName',

@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -15,7 +14,11 @@ import FilterDialogWarpper from '../components/FilterDialog/FilterDialogWarpper'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 // |-- Redux --|
-import { setRowsPerPage, setPage ,setSearchValue} from 'src/redux/slices/ListingPaginationSlice'
+import {
+    setRowsPerPage,
+    setPage,
+    setSearchValue,
+} from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
@@ -30,7 +33,9 @@ type Props = {
 const DealersListing = ({ columns, rows, setShowDropdown }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const dealerState: any = useSelector((state: RootState) => state.listingPagination)
+    const dealerState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const [isFilterOpen, setIsFilterOpen] = useState(false)
     const [selectedRows, setSelectedRows] = useState([])
 

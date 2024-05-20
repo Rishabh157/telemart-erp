@@ -146,5 +146,4 @@ export const {
     useDeleteInventoryManagementMutation,
 
     useGetByIdInventoryManagementQuery,
-
 } = inventoryManagementApi

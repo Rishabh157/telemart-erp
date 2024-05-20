@@ -35,9 +35,10 @@ const EditDispositionComplaintWrappper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { items: selectedDispositionCompalint } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetdispositionComplaintByIdQuery(Id),
-    })
+    const { items: selectedDispositionCompalint } =
+        useGetDataByIdCustomQuery<any>({
+            useEndPointHook: useGetdispositionComplaintByIdQuery(Id),
+        })
     const initialValues: FormInitialValues = {
         dispositionName: selectedDispositionCompalint?.displayName || '',
         priority: selectedDispositionCompalint?.priority || '',

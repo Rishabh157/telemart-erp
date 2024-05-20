@@ -37,7 +37,7 @@ const DealersCategoryListingWrapper = () => {
 
     const { page, rowsPerPage, searchValue } = dealersCategoryState
     const { userData } = useSelector((state: RootState) => state?.auth)
-  
+
     const { items } = useGetCustomListingData<DealersCategoryListResponse>({
         useEndPointHook: useGetDealerCategoryQuery({
             limit: rowsPerPage,
@@ -58,7 +58,7 @@ const DealersCategoryListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
     const handleDelete = () => {
         setShowDropdown(false)
@@ -77,7 +77,7 @@ const DealersCategoryListingWrapper = () => {
             }
         })
     }
-     const columns: columnTypes[] = [
+    const columns: columnTypes[] = [
         {
             field: 'actions',
             headerName: 'Actions',
@@ -113,7 +113,6 @@ const DealersCategoryListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'dealersCategory',

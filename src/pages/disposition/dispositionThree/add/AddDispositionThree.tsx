@@ -50,14 +50,16 @@ const AddDispositionThree = ({
     }
     const dispatch = useDispatch()
 
-    const { options  :dispositionTwoOptions} = useCustomOptions({
-        useEndPointHook: useGetDispostionTwoByOneQuery(values.dispositionOneId, {
-            skip: !values.dispositionOneId,
-        }),
+    const { options: dispositionTwoOptions } = useCustomOptions({
+        useEndPointHook: useGetDispostionTwoByOneQuery(
+            values.dispositionOneId,
+            {
+                skip: !values.dispositionOneId,
+            }
+        ),
         keyName: 'dispositionDisplayName',
         value: '_id',
     })
-
 
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)

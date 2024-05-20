@@ -52,7 +52,7 @@ const formFields: {
                 placeholder: 'Account Type',
                 type: 'select',
                 optionAccessKey: 'accountTypeOptions',
-            }
+            },
         ],
     },
 ]

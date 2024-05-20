@@ -42,7 +42,7 @@ const EditWebsiteBlogWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
 
     const [updateWebsiteBlog] = useUpdateWebsiteBlogMutation()
-  
+
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetWebsiteBlogByIdQuery(Id),
     })

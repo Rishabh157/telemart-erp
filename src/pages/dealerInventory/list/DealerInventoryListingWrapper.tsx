@@ -16,9 +16,8 @@ import DealerInventoryListing from './DealerInventoryListing'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 
 const DealerInventoryListingWrapper = () => {
-    // Hooks    
+    // Hooks
     useUnmountCleanup()
-
 
     const dealerInventoryState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -49,7 +48,7 @@ const DealerInventoryListingWrapper = () => {
             {
                 skip: !selectedDealer,
             }
-        )
+        ),
     })
     const columns: columnTypes[] = [
         {

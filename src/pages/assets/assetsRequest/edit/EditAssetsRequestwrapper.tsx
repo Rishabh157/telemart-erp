@@ -44,14 +44,11 @@ const EditAssetsRequestwrapper = (props: Props) => {
     const [editAsset] = useUpdateAssetsRequestMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetAssetsRequestByIdQuery(Id),
     })
     const { options: allItems } = useCustomOptions({
-        useEndPointHook: useGetAllAssetsCategoryQuery(
-            userData?.companyId
-        ),
+        useEndPointHook: useGetAllAssetsCategoryQuery(userData?.companyId),
         keyName: 'assetCategoryName',
         value: '_id',
     })
@@ -108,7 +105,7 @@ const EditAssetsRequestwrapper = (props: Props) => {
     }
 
     const dropdownOptions = {
-        assetCategoryOptions: allItems
+        assetCategoryOptions: allItems,
     }
     return (
         <>

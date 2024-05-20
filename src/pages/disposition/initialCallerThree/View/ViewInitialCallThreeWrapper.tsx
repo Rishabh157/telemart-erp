@@ -1,4 +1,3 @@
-
 import { Formik, FormikProps } from 'formik'
 import { useParams } from 'react-router-dom'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
@@ -22,9 +21,10 @@ const ViewInitialCallThreeWrappper = () => {
     const params = useParams()
     const Id = params.id
 
-    const { items: selectedInitialCallerThree } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetInitialCallerThreeByIdQuery(Id),
-    })
+    const { items: selectedInitialCallerThree } =
+        useGetDataByIdCustomQuery<any>({
+            useEndPointHook: useGetInitialCallerThreeByIdQuery(Id),
+        })
 
     const initialValues: FormInitialValues = {
         initialCallName: selectedInitialCallerThree?.initialCallName || '',
@@ -49,7 +49,7 @@ const ViewInitialCallThreeWrappper = () => {
         returnType: array().of(string().required('Required')),
     })
 
-    const onSubmitHandler = (values: FormInitialValues) => { }
+    const onSubmitHandler = (values: FormInitialValues) => {}
 
     return (
         <Formik

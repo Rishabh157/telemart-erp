@@ -108,7 +108,6 @@ const InwardSampleTabsListingWrapper = () => {
                 ) : (
                     <ActionPopup
                         handleOnAction={() => {}}
-                     
                         isCustomBtn={true}
                         customBtnText="Inward"
                         handleCustomActionButton={() => {

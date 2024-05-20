@@ -39,7 +39,7 @@ const ChannelCategoryListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteChannelCategory] = useDeleteChannelCategoryMutation()
 
- // pagination api
+    // pagination api
     const { items } = useGetCustomListingData<any[]>({
         useEndPointHook: useGetPaginationChannelCategoryQuery({
             limit: rowsPerPage,
@@ -61,7 +61,7 @@ const ChannelCategoryListingWrapper = () => {
             orderByValue: -1,
             isPaginationRequired: true,
         }),
-    })   
+    })
 
     const columns: columnTypes[] = [
         {

@@ -134,7 +134,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         },
         {
             field: 'wtNumber',
-           name:UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_WT_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_WT_NUMBER,
             headerName: 'WT Number',
             flex: 'flex-[0.6_0.6_0%]',
             renderCell: (row: OutwardRequestWarehouseListResponse) => (
@@ -143,7 +143,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         },
         {
             field: 'fromWarehouse',
-           name:UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_FROMWAREHOUSE_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_FROMWAREHOUSE_LABEL,
             headerName: 'From Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -153,7 +153,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         },
         {
             field: 'toWarehouse',
-           name:UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_TOWAREHOUSE_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_TOWAREHOUSE_LABEL,
             headerName: 'To Warehouse',
             flex: 'flex-[0.6_0.6_0%]',
             align: 'center',
@@ -163,7 +163,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         },
         {
             field: 'items',
-           name:UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_ITEMS,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_ITEMS,
             headerName: 'Items / Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -191,7 +191,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         },
         {
             field: 'createdAt',
-           name:UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_INSERTED_DATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_INSERTED_DATE,
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -201,7 +201,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         },
         {
             field: 'updatedAt',
-           name:UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_UPDATED_DATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_UPDATED_DATE,
             headerName: 'Updated Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -211,7 +211,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         },
         {
             field: 'status',
-           name:UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_STATUS,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_WAREHOUSE_STATUS,
             headerName: 'status',
             flex: 'flex-[1_1_0%]',
             align: 'center',

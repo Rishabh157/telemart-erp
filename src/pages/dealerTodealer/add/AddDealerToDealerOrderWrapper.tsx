@@ -40,7 +40,7 @@ const AddDealerToDealerOrderWrapper = (props: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [addDealerToDealer] = useAddDealerToDealerOrderMutation()
-   
+
     const { options: productGroupOptions } = useCustomOptions({
         useEndPointHook: useGetAllProductGroupQuery(''),
         keyName: 'groupName',
@@ -56,7 +56,6 @@ const AddDealerToDealerOrderWrapper = (props: Props) => {
         keyName: ['firstName', 'lastName'],
         value: '_id',
     })
- 
 
     const dropdownOptions = {
         dealerOptions: dealerOptions,

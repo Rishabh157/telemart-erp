@@ -28,9 +28,10 @@ const EditInitialCallOneWrapper = () => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
-    const { items: selectedInitialOne } = useGetDataByIdCustomQuery<InitialCallerOneListResponse>({
-        useEndPointHook: useGetinitialCallerOneByIdQuery(Id),
-    })
+    const { items: selectedInitialOne } =
+        useGetDataByIdCustomQuery<InitialCallerOneListResponse>({
+            useEndPointHook: useGetinitialCallerOneByIdQuery(Id),
+        })
 
     const initialValues: FormInitialValues = {
         initialCallName: selectedInitialOne?.initialCallName || '',

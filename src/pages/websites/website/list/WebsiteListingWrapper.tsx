@@ -35,7 +35,9 @@ const WebstieListingWrapper = () => {
     const [deleteWebsite] = useDeletegetWebsiteMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteState: any = useSelector((state: RootState) => state.listingPagination)
+    const WebsiteState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { page, rowsPerPage, searchValue } = WebsiteState
@@ -61,7 +63,7 @@ const WebstieListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -170,7 +172,6 @@ const WebstieListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-
         },
         {
             field: 'productName',

@@ -90,4 +90,4 @@
 //     useDeleteDealerMutation,
 //     useChangeDealerStatusMutation,
 // } = dealerRatioApi
-export { }
+export {}

@@ -25,12 +25,13 @@ import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const SchemeListingWrapper = () => {
-
     useUnmountCleanup()
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
     const [deleteScheme] = useDeleteSchemeMutation()
-    const schemeState: any = useSelector((state: RootState) => state.listingPagination)
+    const schemeState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, searchValue } = schemeState
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
@@ -56,7 +57,7 @@ const SchemeListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -110,7 +111,6 @@ const SchemeListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'schemeCode',
@@ -160,7 +160,6 @@ const SchemeListingWrapper = () => {
                 return <span> {row.schemePrice} </span>
             },
         },
-
     ]
     return (
         <SchemeListing

@@ -7,7 +7,7 @@
 
 // |-- Types --|
 export type ASRListResponse = {
-    asrDetails: AsrDetailsType[] 
+    asrDetails: AsrDetailsType[]
     companyId: string
     completed: boolean
     isActive: boolean

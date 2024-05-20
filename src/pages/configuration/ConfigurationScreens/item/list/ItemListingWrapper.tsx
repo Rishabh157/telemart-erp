@@ -29,7 +29,9 @@ const ItemListingWrapper = () => {
     useUnmountCleanup()
 
     const navigate = useNavigate()
-    const itemState: any = useSelector((state: RootState) => state.listingPagination)
+    const itemState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
     const { page, rowsPerPage, searchValue } = itemState
     const [showDropdown, setShowDropdown] = useState(false)
     const [currentId, setCurrentId] = useState('')
@@ -52,7 +54,7 @@ const ItemListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
     const handleDelete = () => {
         setShowDropdown(false)
@@ -73,7 +75,6 @@ const ItemListingWrapper = () => {
     }
 
     const columns: columnTypes[] = [
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -105,7 +106,6 @@ const ItemListingWrapper = () => {
                     }}
                 />
             ),
-
         },
         {
             field: 'itemCode',
@@ -135,7 +135,6 @@ const ItemListingWrapper = () => {
                 return <span> {row.itemWeight} </span>
             },
         },
-
     ]
     return (
         <>

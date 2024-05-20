@@ -1,4 +1,3 @@
-
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 
@@ -159,7 +158,7 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     )
 
     //hooks call
-    const { country:allCountry } = useCountries()
+    const { country: allCountry } = useCountries()
     //REGSITRATION state hook
     const { stateByCountry } = useStatesByCountry(
         formikProps.values.registrationAddress.countryId
@@ -185,7 +184,6 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     const { pincodeByDistrict: pincodeDataB } = usePincodesByDistrict(
         formikProps.values.billingAddress.districtId
     )
-
 
     useEffect(() => {
         if (stateByCountry) {

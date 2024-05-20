@@ -37,7 +37,7 @@ const AddDispositionThreeWrappper = () => {
         keyName: 'dispositionDisplayName',
         value: '_id',
     })
-    
+
     const initialValues: FormInitialValues = {
         dispositionName: '',
         dispositionOneId: '',
@@ -52,10 +52,18 @@ const AddDispositionThreeWrappper = () => {
 
     // Form Validation Schema
     const validationSchema = object({
-        dispositionName: string().required('Disposition three name is required'),
-        dispositionOneId: string().required('Please select disposition one name'),
-        dispositionTwoId: string().required('Please select disposition two name'),
-        applicableCriteria: string().required('Please select applicable criteria'),
+        dispositionName: string().required(
+            'Disposition three name is required'
+        ),
+        dispositionOneId: string().required(
+            'Please select disposition one name'
+        ),
+        dispositionTwoId: string().required(
+            'Please select disposition two name'
+        ),
+        applicableCriteria: string().required(
+            'Please select applicable criteria'
+        ),
         smsType: string(),
         emailType: string(),
         whatsApp: string(),

@@ -1,9 +1,7 @@
 {
     "moduleId": "NAV_LOCATION",
     "moduleName": "NAV_LOCATION",
-    "parentGroup": [
-        "NAV_CONFIGURATION"
-    ],
+    "parentGroup": ["NAV_CONFIGURATION"],
     "moduleAction": [
         {
             "actionId": "ACTION_COUNTRY_LIST",
@@ -18,9 +16,7 @@
             "actionUrl": "",
             "actionName": "COUNTRY_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "COUNTRY_LIST"
-            ],
+            "parentGroup": ["COUNTRY_LIST"],
             "fields": []
         },
         {
@@ -28,9 +24,7 @@
             "actionUrl": "",
             "actionName": "STATE_LIST",
             "compulsoryFields": [],
-            "parentGroup": [
-                "COUNTRY_LIST"
-            ],
+            "parentGroup": ["COUNTRY_LIST"],
             "fields": []
         },
         {
@@ -38,10 +32,7 @@
             "actionUrl": "",
             "actionName": "STATE_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "COUNTRY_LIST",
-                "STATE_LIST"
-            ],
+            "parentGroup": ["COUNTRY_LIST", "STATE_LIST"],
             "fields": []
         },
         {
@@ -49,10 +40,7 @@
             "actionUrl": "",
             "actionName": "STATE_EDIT",
             "compulsoryFields": [],
-            "parentGroup": [
-                "COUNTRY_LIST",
-                "STATE_LIST"
-            ],
+            "parentGroup": ["COUNTRY_LIST", "STATE_LIST"],
             "fields": []
         },
         {
@@ -60,10 +48,7 @@
             "actionUrl": "",
             "actionName": "DISTRICTS_LIST",
             "compulsoryFields": [],
-            "parentGroup": [
-                "COUNTRY_LIST",
-                "STATE_LIST"
-            ],
+            "parentGroup": ["COUNTRY_LIST", "STATE_LIST"],
             "fields": []
         },
         {
@@ -71,11 +56,7 @@
             "actionUrl": "",
             "actionName": "DISTRICTS_ADD",
             "compulsoryFields": [],
-            "parentGroup": [
-                "COUNTRY_LIST",
-                "STATE_LIST",
-                "DISTRICTS_LIST"
-            ],
+            "parentGroup": ["COUNTRY_LIST", "STATE_LIST", "DISTRICTS_LIST"],
             "fields": []
         },
         {
@@ -83,11 +64,7 @@
             "actionUrl": "",
             "actionName": "DISTRICTS_EDIT",
             "compulsoryFields": [],
-            "parentGroup": [
-                "COUNTRY_LIST",
-                "STATE_LIST",
-                "DISTRICTS_LIST"
-            ],
+            "parentGroup": ["COUNTRY_LIST", "STATE_LIST", "DISTRICTS_LIST"],
             "fields": []
         },
         {
@@ -95,11 +72,7 @@
             "actionUrl": "",
             "actionName": "TEHSILS_LIST",
             "compulsoryFields": [],
-            "parentGroup": [
-                "COUNTRY_LIST",
-                "STATE_LIST",
-                "DISTRICTS_LIST"
-            ],
+            "parentGroup": ["COUNTRY_LIST", "STATE_LIST", "DISTRICTS_LIST"],
             "fields": []
         },
         {

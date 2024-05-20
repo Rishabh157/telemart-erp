@@ -32,7 +32,9 @@ const InfluencerListingWrapper = () => {
     const [deleteWebsite] = useDeletegetWebsiteMutation()
     const [currentId, setCurrentId] = useState('')
     const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteState: any = useSelector((state: RootState) => state.listingPagination)
+    const WebsiteState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
 
     const { page, rowsPerPage, searchValue } = WebsiteState
 
@@ -53,7 +55,7 @@ const InfluencerListingWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const handleDelete = () => {
@@ -74,7 +76,6 @@ const InfluencerListingWrapper = () => {
         })
     }
     const columns: columnTypes[] = [
-
         {
             field: 'actions',
             headerName: 'Actions',
@@ -174,7 +175,6 @@ const InfluencerListingWrapper = () => {
                     </>
                 </ActionPopup>
             ),
-
         },
         {
             field: 'productName',

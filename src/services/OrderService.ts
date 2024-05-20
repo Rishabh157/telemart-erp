@@ -300,5 +300,5 @@ export const {
     useGetGenerateInvoiceByAwbNumberMutation,
     useDispatchGPOOrdersToWarehouseMutation,
     useGetGpoOrderStatusQuery,
-    useGetShipayaariOrderStatusQuery
+    useGetShipayaariOrderStatusQuery,
 } = OrderApi

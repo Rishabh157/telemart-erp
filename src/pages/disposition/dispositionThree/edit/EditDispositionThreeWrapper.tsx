@@ -39,9 +39,10 @@ const EditDispositionThreeWrappper = () => {
 
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { items: selectedDispostionThree } = useGetDataByIdCustomQuery<DispositionThreeListResponse>({
-        useEndPointHook: useGetDispositionThreeByIdQuery(Id),
-    })
+    const { items: selectedDispostionThree } =
+        useGetDataByIdCustomQuery<DispositionThreeListResponse>({
+            useEndPointHook: useGetDispositionThreeByIdQuery(Id),
+        })
 
     const { options } = useCustomOptions({
         useEndPointHook: useGetAlldispositionOneQuery(''),
@@ -53,21 +54,31 @@ const EditDispositionThreeWrappper = () => {
         dispositionName: selectedDispostionThree?.dispositionName || '',
         dispositionOneId: selectedDispostionThree?.dispositionOneId || '',
         dispositionTwoId: selectedDispostionThree?.dispositionTwoId || '',
-        dispositionDisplayName: selectedDispostionThree?.dispositionDisplayName || '',
+        dispositionDisplayName:
+            selectedDispostionThree?.dispositionDisplayName || '',
         smsType: selectedDispostionThree?.smsType || '',
         emailType: selectedDispostionThree?.emailType || '',
         whatsApp: selectedDispostionThree?.whatsApp || '',
         priority: selectedDispostionThree?.priority || '',
-        applicableCriteria: selectedDispostionThree?.applicableCriteria[0] || '',
+        applicableCriteria:
+            selectedDispostionThree?.applicableCriteria[0] || '',
         companyId: userData?.companyId || '',
     }
 
     // Form Validation Schema
     const validationSchema = object({
-        dispositionName: string().required('Disposition three name is required'),
-        dispositionOneId: string().required('Please select disposition one name'),
-        dispositionTwoId: string().required('Please select disposition two name'),
-        applicableCriteria: string().required('Please select applicable criteria'),
+        dispositionName: string().required(
+            'Disposition three name is required'
+        ),
+        dispositionOneId: string().required(
+            'Please select disposition one name'
+        ),
+        dispositionTwoId: string().required(
+            'Please select disposition two name'
+        ),
+        applicableCriteria: string().required(
+            'Please select applicable criteria'
+        ),
         smsType: string(),
         emailType: string(),
         whatsApp: string(),

@@ -68,7 +68,7 @@ const StepAddDealerDetails = ({
                                         label={label}
                                         placeholder={placeholder}
                                         className="bg-white rounded shadow"
-                                        extraClassField='mt-3'
+                                        extraClassField="mt-3"
                                         isSubmitting={isSubmitting}
                                     />
                                 </div>

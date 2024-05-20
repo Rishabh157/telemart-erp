@@ -44,7 +44,6 @@ const AddSaleOrderWrapper = (props: Props) => {
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [addSalesOrder] = useAddSalesOrderMutation()
 
-
     const { options: dealerOptions } = useCustomOptions({
         useEndPointHook: useGetAllDealersQuery(''),
         keyName: ['firstName', 'lastName'],
