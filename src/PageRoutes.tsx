@@ -286,6 +286,7 @@ import OrderCancelRequestListingWrapper from './pages/orderCancelRequest/list/Or
 import AddOrderCancelRequestWrapper from './pages/orderCancelRequest/add/AddOrderCancelRequestWrapper'
 import EditOrderCancelRequestWrapper from './pages/orderCancelRequest/edit/EditOrderCancelRequestWrapper'
 import WarehouseOrderStatusOverviewWrapper from './pages/warehouses/view/inventories/outward/warehouseStatus/WarehouseOrderStatusOverviewWrapper'
+import GpoAwbListingWrapper from './pages/configuration/ConfigurationScreens/gpoAwb/list/GpoAwbListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1975,6 +1976,17 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<TransportListingWrapper />}
                                 permission={UserModuleNameTypes.NAV_TRANSPORT}
+                            />
+                        }
+                    />
+
+                    {/* Gpo Awb */}
+                    <Route
+                        path="gpo-awb"
+                        element={
+                            <Authorization
+                                children={<GpoAwbListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_GPO_AWB_NUMBER}
                             />
                         }
                     />

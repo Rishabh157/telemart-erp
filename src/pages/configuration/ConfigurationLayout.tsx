@@ -19,12 +19,14 @@ import {
 import { MdOutlineCategory } from 'react-icons/md'
 import { BsBox, BsBoxes, BsBoxSeam } from 'react-icons/bs'
 import { TbAppsFilled } from 'react-icons/tb'
-import { FaObjectGroup } from 'react-icons/fa'
+import { FaObjectGroup,FaLanguage } from 'react-icons/fa'
 import { CgOrganisation } from 'react-icons/cg'
 import { CiBarcode, CiFaceSmile, CiLocationOn } from 'react-icons/ci'
 import { TbBinaryTree2 } from 'react-icons/tb'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { TfiLayoutMediaOverlayAlt2 } from 'react-icons/tfi'
+import { PiHandTapBold } from 'react-icons/pi'
+import { MdEmojiTransportation } from 'react-icons/md'
 
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
@@ -96,7 +98,7 @@ const configurationNavigation: NavItemType[] = [
     },
     {
         label: 'Company Branch',
-        icon: CgOrganisation,
+        icon: CiFaceSmile,
         path: 'company-branch',
         name: UserModuleNameTypes.NAV_COMPANY_BRANCH,
     },
@@ -114,9 +116,15 @@ const configurationNavigation: NavItemType[] = [
     },
     {
         label: 'Transport',
-        icon: CiLocationOn,
+        icon: MdEmojiTransportation,
         path: 'transport',
-        name: UserModuleNameTypes.NAV_COURIER_PREFERENCE,
+        name: UserModuleNameTypes.NAV_TRANSPORT,
+    },
+    {
+        label: 'GPO AWB',
+        icon: PiHandTapBold,
+        path: 'gpo-awb',
+        name: UserModuleNameTypes.NAV_GPO_AWB_NUMBER,
     },
     {
         label: 'Location',
@@ -126,7 +134,7 @@ const configurationNavigation: NavItemType[] = [
     },
     {
         label: 'Language',
-        icon: CiFaceSmile,
+        icon: FaLanguage,
         path: 'language',
         name: UserModuleNameTypes.NAV_LANGUAGE,
     },

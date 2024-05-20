@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
@@ -45,6 +45,7 @@ interface UserData {
     teamLeadId: string | null
     mySenior: string | null
 }
+
 export type FormInitialValues = {
     firstName: string
     lastName: string
@@ -53,7 +54,7 @@ export type FormInitialValues = {
     email: string
     branchId: string
     password: string
-    userDepartment: string
+    userDepartment: any
     userRole: string
     companyId: string
     allowedIps: { allowedIp: string }[]
@@ -85,6 +86,7 @@ const EditUserWrapper = (props: Props) => {
     selectedItem?.allowedIp?.map((val: any) => {
         return allowedIps.push({ allowedIp: val })
     })
+
     const initialValues: FormInitialValues = {
         firstName: selectedItem?.firstName || '',
         lastName: selectedItem?.lastName || '',
@@ -103,10 +105,11 @@ const EditUserWrapper = (props: Props) => {
         teamLeadId: selectedItem?.teamLeadId,
         mySenior: selectedItem?.mySenior,
     }
-    const ref = useRef<any>(null)
+    const ref: React.RefObject<FormikProps<FormInitialValues>> =
+        useRef<FormikProps<FormInitialValues>>(null)
     const getSeniorValid = (userRole: any, schema: any) => {
         const position = getHierarchyByDeptWithRole({
-            department: ref?.current?.values?.userDepartment as any,
+            department: ref?.current?.values?.userDepartment,
         })
 
         if (userRole[0] === position) {
