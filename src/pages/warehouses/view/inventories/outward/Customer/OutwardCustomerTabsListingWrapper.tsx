@@ -17,6 +17,7 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { OrderListResponse } from 'src/models'
 import { useGetOrderQuery } from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Types --|
 export type Tabs = {
@@ -439,19 +440,7 @@ const OutwardCustomerTabsListingWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <>
-                        <span>
-                            {row?.preffered_delivery_date
-                                ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
-                                : '-'}
-                        </span>
-                    </>
-                )
-            },
+            renderCell: (row: OrderListResponse) => formatedDateTimeIntoIst(row?.createdAt),
         },
         {
             field: 'preffered_delivery_date',

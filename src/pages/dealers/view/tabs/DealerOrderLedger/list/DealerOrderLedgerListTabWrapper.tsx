@@ -1,7 +1,6 @@
 // |-- Built-in Dependencies --|
 
 // |-- External Dependencies --|
-import { format } from 'date-fns'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -9,7 +8,6 @@ import { useParams } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { LedgerListResponse } from 'src/models/Ledger.model'
 import DealerOrderLedgerListing from './DealerOrderLedgerListing'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { useGetDealerOrderLedgerQuery } from 'src/services/DealerOrderLedgerService'
 import { ledgerNoteType } from 'src/utils'
 
@@ -17,6 +15,7 @@ import { ledgerNoteType } from 'src/utils'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 const DealerOrderLedgerTabWrapper = () => {
     useUnmountCleanup()
@@ -29,8 +28,7 @@ const DealerOrderLedgerTabWrapper = () => {
     const dealerOrderLedgerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, filterBy } =
-        dealerOrderLedgerState
+    const { page, rowsPerPage, searchValue, filterBy } = dealerOrderLedgerState
 
     // pagination api
     const { items } = useGetCustomListingData<LedgerListResponse[]>({
@@ -53,7 +51,7 @@ const DealerOrderLedgerTabWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
 
     const columns: columnTypes[] = [
@@ -62,11 +60,7 @@ const DealerOrderLedgerTabWrapper = () => {
             headerName: 'Date',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => {
-                return (
-                    <span>
-                        {format(new Date(row.createdAt), 'yyyy-MM-dd HH:mm')}
-                    </span>
-                )
+                return formatedDateTimeIntoIst(row?.createdAt)
             },
         },
         {
@@ -111,11 +105,7 @@ const DealerOrderLedgerTabWrapper = () => {
         },
     ]
 
-    return (
-        <>
-            <DealerOrderLedgerListing columns={columns} rows={items} />
-        </>
-    )
+    return <DealerOrderLedgerListing columns={columns} rows={items} />
 }
 
 export default DealerOrderLedgerTabWrapper

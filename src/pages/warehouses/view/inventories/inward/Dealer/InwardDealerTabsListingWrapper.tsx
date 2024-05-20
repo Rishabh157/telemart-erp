@@ -24,6 +24,7 @@ import { showToast } from 'src/utils'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import OutwardRequestListing from './InwardDealerTabs'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -36,7 +37,6 @@ import {
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
-import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
@@ -434,6 +434,7 @@ const InwardDealerTabsListingWrapper = () => {
 
     // remove barcode
     const handleRemoveBarcode = (barcodeNumber: string, ind: number) => {
+        // eslint-disable-next-line array-callback-return
         const filteredObj = barcodeList[ind]?.filter((item: any) => {
             if (item?.barcodeNumber !== barcodeNumber) {
                 return item
@@ -454,7 +455,7 @@ const InwardDealerTabsListingWrapper = () => {
         getBarCode({
             id: barcodeNumber,
             groupId: productGroupId,
-            status: 'DTW',
+            status: barcodeStatusEnum.dtw,
             companyId: userData?.companyId as string,
         })
             .then((res: any) => {

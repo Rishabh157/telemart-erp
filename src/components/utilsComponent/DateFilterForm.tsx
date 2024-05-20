@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import moment from 'moment'
 import { Form, Formik, FormikProps } from 'formik'
 import React from 'react'
 import { object, string } from 'yup'
@@ -64,12 +64,12 @@ const DateFilterForm: React.FC<Props> = ({
                                 size="xs"
                                 value={values.startDate}
                                 dateTimeFormat="DD/MM/YY"
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     setFieldValue(
                                         'startDate',
-                                        format(new Date(e), 'yyyy-MM-dd')
+                                        moment(e).format('YYYY-MM-DD')
                                     )
-                                }
+                                }}
                             />
                         </div>
                         <div className="flex flex-row gap-2 items-center">
@@ -79,12 +79,12 @@ const DateFilterForm: React.FC<Props> = ({
                                 size="xs"
                                 value={values.endDate}
                                 dateTimeFormat="DD/MM/YY"
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     setFieldValue(
                                         'endDate',
-                                        format(new Date(e), 'yyyy-MM-dd')
+                                        moment(e).format('YYYY-MM-DD')
                                     )
-                                }
+                                }}
                             />
                         </div>
                         <div className="flex justify-end">

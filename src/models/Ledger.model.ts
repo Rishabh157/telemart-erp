@@ -22,8 +22,8 @@ export type LedgerListResponse = {
     companyId: string
     isActive: boolean
     isDeleted: boolean
-    createdAt: Date | number
-    updatedAt: Date | number
+    createdAt: string
+    updatedAt: string
     taxAmount: number
     _id: string
     __v: number

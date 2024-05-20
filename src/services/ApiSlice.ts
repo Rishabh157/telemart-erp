@@ -1,9 +1,7 @@
 // |-- Internal Dependencies --|
-// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 import { setAccessToken, setRefreshToken } from 'src/redux/slices/authSlice'
-// import { setAccessToken, setRefreshToken } from "src/redux/slices/AuthSlice";
 import { BASE_URL } from 'src/utils/constants/index'
 const tagTypes = [
     'dashboard',

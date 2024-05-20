@@ -9,7 +9,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-import { format } from 'date-fns'
+import moment from 'moment'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
@@ -416,7 +416,7 @@ const WarehouseFirstCallDialerPage: React.FC<Props> = ({
                             onChange={(e) => {
                                 setFieldValue(
                                     'callbackDate',
-                                    format(new Date(e), 'yyyy-MM-dd')
+                                    moment(e).format('YYYY-MM-DD')
                                 )
                             }}
                         />

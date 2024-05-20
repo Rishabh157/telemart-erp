@@ -1,5 +1,4 @@
 // |-- External Dependencies --|
-import { format } from 'date-fns'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -8,13 +7,13 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { LedgerListResponse } from 'src/models/Ledger.model'
 import { useGetDealerLedgerQuery } from 'src/services/DealerLedgerServices'
 import DealerLedgerListing from './DealerLedgerListing'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { ledgerNoteType } from 'src/utils'
 
 // |-- Redux --|
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { RootState } from 'src/redux/store'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 const DealerListLedgerTabWrapper = () => {
     useUnmountCleanup()
@@ -26,8 +25,7 @@ const DealerListLedgerTabWrapper = () => {
     const dealerLedgerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, filterBy } =
-        dealerLedgerState
+    const { page, rowsPerPage, searchValue, filterBy } = dealerLedgerState
 
     // pagination api
     const { items } = useGetCustomListingData<LedgerListResponse[]>({
@@ -50,7 +48,7 @@ const DealerListLedgerTabWrapper = () => {
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
-        })
+        }),
     })
     const columns: columnTypes[] = [
         {
@@ -58,11 +56,7 @@ const DealerListLedgerTabWrapper = () => {
             headerName: 'Date',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => {
-                return (
-                    <span>
-                        {format(new Date(row.createdAt), 'yyyy-MM-dd HH:mm')}
-                    </span>
-                )
+                return formatedDateTimeIntoIst(row?.createdAt)
             },
         },
         {
@@ -70,16 +64,15 @@ const DealerListLedgerTabWrapper = () => {
             headerName: 'Remark',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => {
-                return <span> {row.remark} </span>
+                return <span> {row?.remark} </span>
             },
         },
-
         {
             field: 'debitAmount',
             headerName: 'Debit Amount',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
-                <span> {row.debitAmount} </span>
+                <span> {row?.debitAmount} </span>
             ),
         },
         {
@@ -87,7 +80,7 @@ const DealerListLedgerTabWrapper = () => {
             headerName: 'Credit Amount',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
-                <span> {row.creditAmount} </span>
+                <span> {row?.creditAmount} </span>
             ),
         },
         {
@@ -95,7 +88,7 @@ const DealerListLedgerTabWrapper = () => {
             headerName: 'Tax Amount',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
-                <span>{row.taxAmount} </span>
+                <span>{row?.taxAmount} </span>
             ),
         },
         {
@@ -103,24 +96,19 @@ const DealerListLedgerTabWrapper = () => {
             headerName: 'Balance',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
-                <span> {row.balance} </span>
+                <span> {row?.balance} </span>
             ),
         },
-
         {
             field: 'noteType',
             headerName: 'Note Type',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: LedgerListResponse) => (
-                <span> {ledgerNoteType[row.noteType]} </span>
+                <span> {ledgerNoteType[row?.noteType]} </span>
             ),
         },
     ]
-    return (
-        <>
-            <DealerLedgerListing columns={columns} rows={items} />
-        </>
-    )
+    return <DealerLedgerListing columns={columns} rows={items} />
 }
 
 export default DealerListLedgerTabWrapper

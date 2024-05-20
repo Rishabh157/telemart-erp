@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import moment from 'moment'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
@@ -34,8 +34,8 @@ export type CardData = {
 
 const WarehouseOrderStatusOverviewWrapper = (props: Props) => {
     const [dateFilter, setDateFilter] = React.useState({
-        startDate: format(new Date(), 'yyyy-MM-dd'),
-        endDate: format(new Date(), 'yyyy-MM-dd'),
+        startDate: moment().format('YYYY-MM-DD'),
+        endDate: moment().format('YYYY-MM-DD'),
     })
     const params = useParams()
     const warehouseId = params?.id
