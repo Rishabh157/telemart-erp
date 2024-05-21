@@ -37,29 +37,18 @@ const WarehouseOrderStatusOverview = ({
                             <div className="font-bold text-lg mb-1 text-center w-full">
                                 {card.title}
                             </div>
-                            <div className="mb-2 flex flex-wrap justify-between items-start gap-2 w-full px-2">
-                                {card.orders.map((status) => (
-                                    <div
-                                        key={status._id}
-                                        className={`text-gray-700 text-sm flex-1 md:flex-none md:w-1/4 `}
+                            <div className="mb-2 flex flex-col justify-start items-start gap-1 w-full px-2">
+                                <strong className="uppercase pl-4 underline">
+                                    Orders Summary
+                                </strong>
+                                <div className="text-gray-700 text-xs flex flex-1 justify-between items-around w-full px-6">
+                                    <strong
+                                        className="uppercase"
+                                        style={{ minWidth: '150px' }}
                                     >
-                                        <strong>
-                                            ORDER {status._id.replace('_', ' ')}
-                                            :
-                                        </strong>{' '}
-                                        <span
-                                            className={`font-normal text-lg ${
-                                                status._id === 'DISPATCHED'
-                                                    ? 'text-green-500'
-                                                    : 'text-red-500'
-                                            }`}
-                                        >
-                                            {status.count}
-                                        </span>
-                                    </div>
-                                ))}
-                                <div className="text-gray-700 text-sm flex-1 md:flex-none md:w-1/4">
-                                    <strong>Total:</strong>{' '}
+                                        Total no of orders
+                                    </strong>
+                                    <span className="font-normal ">-</span>
                                     <span className="font-normal text-lg">
                                         {card.orders.reduce(
                                             (acc, curr) => acc + curr.count,
@@ -67,13 +56,41 @@ const WarehouseOrderStatusOverview = ({
                                         )}
                                     </span>
                                 </div>
+                                {card.orders.map((status) => (
+                                    <div
+                                        key={status._id}
+                                        className="text-gray-700 text-xs flex flex-1 justify-between items-around w-full  px-6"
+                                    >
+                                        <div style={{ minWidth: '150px' }}>
+                                            <strong>{`ORDER ${status._id.replace(
+                                                '_',
+                                                ' '
+                                            )}`}</strong>
+                                        </div>
+                                        <span className="font-normal ">-</span>
+                                        <div>
+                                            <span
+                                                className={`font-normal text-lg ${
+                                                    status._id === 'DISPATCHED'
+                                                        ? 'text-green-500'
+                                                        : 'text-red-500'
+                                                }`}
+                                            >
+                                                {status.count}
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                             <div className="mt-2 w-full overflow-y-auto max-h-full">
                                 <div className="flex flex-wrap justify-start">
+                                    <strong className="uppercase pl-4 underline">
+                                        Products Summary
+                                    </strong>
                                     {card.products.map((group, index) => (
                                         <div key={index} className="w-full p-1">
                                             <div className="p-2 rounded mb-1 shadow">
-                                                <p className="text-sm font-semibold">
+                                                <p className="text-xs font-normal">
                                                     Product Status:{' '}
                                                     <span
                                                         className={`${
@@ -89,33 +106,53 @@ const WarehouseOrderStatusOverview = ({
                                                         )}
                                                     </span>
                                                 </p>
-                                                <p className="text-gray-600 text-lg">
-                                                    Count: {group.count}
+                                                <p className="text-gray-600 text-xs font-normal">
+                                                    Product Count: {group.count}
                                                 </p>
-                                                <div className="flex flex-wrap justify-start mt-1">
-                                                    {group.products.map(
-                                                        (product, idx) => (
-                                                            <div
-                                                                key={idx}
-                                                                className="w-1/3 p-1"
-                                                            >
-                                                                <div className="bg-blue-200 p-2 rounded mb-1 shadow">
-                                                                    <p className="text-gray-800 font-semibold text-sm">
-                                                                        {
-                                                                            product.productGroupName
-                                                                        }
-                                                                    </p>
-                                                                    <p className="text-gray-600 text-xs">
-                                                                        Quantity:{' '}
-                                                                        {
-                                                                            product.quantity
-                                                                        }
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    )}
-                                                </div>
+                                                <table
+                                                    className="w-full"
+                                                    style={{
+                                                        margin: '0',
+                                                        padding: '0',
+                                                        borderSpacing: '0',
+                                                    }}
+                                                >
+                                                    <thead>
+                                                        <tr className="bg-gray-200 text-center">
+                                                            <th className="p-0">
+                                                                Product Name
+                                                            </th>
+                                                            <th className="p-0">
+                                                                Quantity
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {group.products.map(
+                                                            (product, idx) => (
+                                                                <tr
+                                                                    key={idx}
+                                                                    className="border-b font-normal border-gray-200 text-center"
+                                                                >
+                                                                    <td className="p-1">
+                                                                        <p className="text-gray-800  text-sm">
+                                                                            {
+                                                                                product.productGroupName
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+                                                                    <td className="p-1">
+                                                                        <p className="text-gray-600 text-xs">
+                                                                            {
+                                                                                product.quantity
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            )
+                                                        )}
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     ))}
