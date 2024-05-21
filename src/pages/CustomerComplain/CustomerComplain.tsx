@@ -69,9 +69,6 @@ const CustomerComplain: React.FC<Props> = ({
                     component={
                         <CustomerComplainOrderDetailsWrapper
                             orderId={selectedOrderId}
-                            // setIsOpenCustomerOrderModel={
-                            //     setIsOpenCustomerComplaitDetailModel
-                            // }
                             setIsOpenCustomerOrderModel={() =>
                                 setIsOpenCreateComplaitModel(true)
                             }
