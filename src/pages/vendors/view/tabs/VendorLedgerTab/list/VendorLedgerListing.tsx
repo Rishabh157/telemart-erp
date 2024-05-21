@@ -61,7 +61,7 @@ const VendorLedgerListing = ({ columns, rows }: Props) => {
                                     <div className="px-4 py-1 border flex justify-between">
                                         <div className="p-2 text-sm font-normal flex gap-1 ">
                                             <h1 className="font-bold">
-                                                Credit Amouunt :
+                                                Credit Amount :
                                             </h1>
                                             <p className="text-green-400">
                                                 4000

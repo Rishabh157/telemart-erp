@@ -322,9 +322,11 @@ const SaleOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
-                <span className="min-w-[100px] truncate">
-                    {' '}
-                    {row?.documents?.[0]?.invoiceNumber}{' '}
+                <span
+                    title={row?.documents?.[0]?.invoiceNumber}
+                    className="min-w-[100px] truncate"
+                >
+                    {row?.documents?.[0]?.invoiceNumber}
                 </span>
             ),
         },
@@ -675,10 +677,23 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Generate/Cancel IRN',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> - </span>
+            },
+        },
+        {
+            field: '',
+            headerName: 'Expected Delivery Date',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return (
+                    <span> {row?.documents?.[0]?.expectedDeliveryDate} </span>
+                )
             },
         },
         {

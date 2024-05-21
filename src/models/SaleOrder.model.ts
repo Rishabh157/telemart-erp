@@ -40,6 +40,7 @@ export type SaleOrderListResponseTypes = {
         accApprovedActionBy: string
         accApprovedAt: string
         invoice: string
+        expectedDeliveryDate: string
         productSalesOrder: {
             productGroupId: string
             rate: number
@@ -94,6 +95,7 @@ export type AddSaleOrder = {
     dealerId: string
     dealerWareHouseId: string
     companyWareHouseId: string
+    expectedDeliveryDate: string
     companyId: string
     productSalesOrder: productSalesOrder[]
 }

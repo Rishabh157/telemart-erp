@@ -15,6 +15,7 @@ import { useAddSalesOrderMutation } from 'src/services/SalesOrderService'
 import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { showToast } from 'src/utils'
 import AddSaleOrder from './AddSaleOrder'
+import moment from 'moment'
 
 // |-- Redux--|
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
@@ -30,6 +31,7 @@ export type FormInitialValues = {
     dealerWareHouseId: string
     companyWareHouseId: string
     companyId: string
+    expectedDeliveryDate: string
     productSalesOrder: {
         productGroupId: string
         rate: number | 0
@@ -87,6 +89,7 @@ const AddSaleOrderWrapper = (props: Props) => {
             },
         ],
         companyId: '',
+        expectedDeliveryDate: '',
     }
 
     // Form Validation Schema
@@ -96,6 +99,9 @@ const AddSaleOrderWrapper = (props: Props) => {
             'Please select a  Dealer Warehouse'
         ),
         companyWareHouseId: string().required('Please select a warehouse'),
+        expectedDeliveryDate: string().required(
+            'Please select a delivery date'
+        ),
         productSalesOrder: array().of(
             object().shape({
                 productGroupId: string().required(
@@ -111,16 +117,23 @@ const AddSaleOrderWrapper = (props: Props) => {
         ),
     })
 
+    function formatDate(date: Date) {
+        return moment(date).format('DD-MMM-YYYY').toLowerCase()
+    }
+
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
+        const formatedDate = formatDate(new Date(values.expectedDeliveryDate))
+
         setTimeout(() => {
             addSalesOrder({
                 // soNumber: values.soNumber,
                 dealerId: values.dealerId,
                 dealerWareHouseId: values.dealerWareHouseId,
                 companyWareHouseId: values.companyWareHouseId,
+                expectedDeliveryDate: formatedDate,
                 productSalesOrder: values.productSalesOrder,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
