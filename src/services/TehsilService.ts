@@ -73,21 +73,7 @@ export const tehsilApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-
-        //**** Export
-        exportTehsilData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
+        
         // **** Delete
         deleteTehsil: builder.mutation({
             invalidatesTags: ['Tehsil', 'areaGroup'],
@@ -104,7 +90,6 @@ export const {
     useAddTehsilMutation,
     useUpdateTehsilMutation,
     useGetTehsilByIdQuery,
-    useExportTehsilDataMutation,
     useDeleteTehsilMutation,
     useGetAllTehsilQuery,
     useGetAllTehsilUnauthQuery,

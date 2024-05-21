@@ -6,14 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-// import ATMBreadCrumbs, {
-//     BreadcrumbType,
-// } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Redux --|
 import {
@@ -22,8 +20,6 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 type Props = {
@@ -54,12 +50,16 @@ const OrderCancelRequestListing = ({
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Orders Cancel Request </ATMPageHeading>
 
-                <button
-                    onClick={() => navigate('/order-cancel-request/add')}
-                    className="bg-primary-main text-white rounded py-1 px-3"
-                >
-                    + Add
-                </button>
+                {isAuthorized(
+                    UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_ADD
+                ) && (
+                    <button
+                        onClick={() => navigate('/order-cancel-request/add')}
+                        className="bg-primary-main text-white rounded py-1 px-3"
+                    >
+                        + Add
+                    </button>
+                )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">

@@ -77,13 +77,11 @@ export const districtApi = apiSlice.injectEndpoints({
         exportDistrictData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
                 },
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -92,7 +90,6 @@ export const districtApi = apiSlice.injectEndpoints({
             invalidatesTags: ['District', 'areaGroup'],
             query: (id) => ({
                 url: `/district/${id}`,
-
                 method: 'DELETE',
             }),
         }),

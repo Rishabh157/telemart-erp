@@ -225,12 +225,6 @@ const CustomerNDRDetailsForm = ({
                                 },
                             ]}
                             onChange={(e) => {
-                                // setFieldValue('callType', e)
-                                // if (e === 'COMPLAINT') {
-                                //     setFieldValue('status', 'OPEN')
-                                // } else if (e === 'INQUIRY') {
-                                //     setFieldValue('status', 'CLOSE')
-                                // }
                                 setFieldValue('pincode', e)
                             }}
                         />

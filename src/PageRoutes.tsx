@@ -1412,7 +1412,7 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<OrderCancelRequestListingWrapper />}
-                            permission={UserModuleNameTypes.NAV_ORDER}
+                            permission={UserModuleNameTypes.NAV_ORDER_CANCEL_REQUEST}
                         />
                     }
                 />
@@ -1422,7 +1422,7 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<AddOrderCancelRequestWrapper />}
-                            permission={UserModuleNameTypes.NAV_ORDER}
+                            permission={UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_ADD}
                         />
                     }
                 />
@@ -1431,7 +1431,7 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<EditOrderCancelRequestWrapper />}
-                            permission={UserModuleNameTypes.NAV_ORDER}
+                            permission={UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_EDIT}
                         />
                     }
                 />
@@ -1986,7 +1986,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<GpoAwbListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_GPO_AWB_NUMBER}
+                                permission={
+                                    UserModuleNameTypes.NAV_GPO_AWB_NUMBER
+                                }
                             />
                         }
                     />

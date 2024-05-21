@@ -21,7 +21,6 @@ export const itemsApi = apiSlice.injectEndpoints({
             query: (companyId) => ({
                 url: `/item`,
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -56,26 +55,11 @@ export const itemsApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportItemsData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
         // **** Delete
         deleteItems: builder.mutation({
             invalidatesTags: ['Items'],
             query: (id) => ({
                 url: `/item/${id}`,
-
                 method: 'DELETE',
             }),
         }),
@@ -86,7 +70,6 @@ export const {
     useAddItemsMutation,
     useUpdateItemsMutation,
     useGetItemsByIdQuery,
-    useExportItemsDataMutation,
     useDeleteItemsMutation,
     useGetAllItemsQuery,
 } = itemsApi

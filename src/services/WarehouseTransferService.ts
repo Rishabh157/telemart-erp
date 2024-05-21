@@ -11,7 +11,6 @@ import { UpdateWarehouseTransferApproval } from 'src/models/WarehouseTransfer.mo
 export const WarehouseTransferApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
-
         getPaginationWarehouseTransfer: builder.query({
             providesTags: ['WarehouseTransfer'],
             query: (body: PaginationType) => ({
@@ -22,7 +21,6 @@ export const WarehouseTransferApi = apiSlice.injectEndpoints({
         }),
 
         //***** GET PAGINATION DATA WITH PRODUCT GROUP *****/
-
         getPaginationWarehouseTransferByGroup: builder.query({
             providesTags: ['WarehouseTransfer'],
             query: (body: PaginationType) => ({

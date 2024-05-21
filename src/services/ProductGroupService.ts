@@ -67,20 +67,6 @@ export const productGroupApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportProductGroupData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
         // **** Delete
         deleteProductGroup: builder.mutation({
             invalidatesTags: ['productGroup'],
@@ -99,5 +85,4 @@ export const {
     useUpdateProductGroupMutation,
     useGetProductGroupByIdQuery,
     useDeleteProductGroupMutation,
-    useExportProductGroupDataMutation,
 } = productGroupApi

@@ -54,21 +54,7 @@ export const productApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-
-        //**** Export
-        exportProductData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
+        
         // **** Delete
         deleteProduct: builder.mutation({
             invalidatesTags: ['product'],
@@ -86,5 +72,4 @@ export const {
     useUpdateProductMutation,
     useGetProductByIdQuery,
     useDeleteProductMutation,
-    useExportProductDataMutation,
 } = productApi

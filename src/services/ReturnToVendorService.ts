@@ -1,9 +1,5 @@
 // |-- Internal Dependencies --|
-import {
-    // AddReturnToVendor,
-    UpdateSaleOrder,
-    // UpdateSOApprovalLevel,
-} from 'src/models/ReturnToVendor.model'
+import { UpdateSaleOrder } from 'src/models/ReturnToVendor.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
@@ -83,16 +79,6 @@ export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //*****  DISPATCHED BARCODE *****/
-        // getAllBarcodeOfRTVOutWardDispatch: builder.mutation({
-        //     invalidatesTags: ['Barcode'],
-        //     query: ({ id, groupId }: { id: string; groupId: string }) => ({
-        //         url: `/bar-code/barcode/${id}/productgroupid/${groupId}`,
-        //         method: 'GET',
-        //         // body,
-        //     }),
-        // }),
-
         //***** Dispached Barcode *****/
         dispatchReturnToVendorBarcode: builder.mutation({
             invalidatesTags: ['rtv-master'],
@@ -124,12 +110,12 @@ export const ReturnToVendorServiceApi = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetPaginationReturnToVendorByGroupQuery, // get group by data
-    useAddReturnToVendorMutation, // add return to vendor
-    useUpdateReturnToVendorOrderMutation, // update or edit for return to vendor
-    useUpdateReturnToVendorApprovalMutation, // first and second level approveed
-    useGetReturnToOrderByIdQuery, // find by rtv no.
-    useDeleteReturnToVendorOrderMutation, // delete
-    useDispatchReturnToVendorBarcodeMutation, // dispatch
+    useGetPaginationReturnToVendorByGroupQuery,
+    useAddReturnToVendorMutation,
+    useUpdateReturnToVendorOrderMutation,
+    useUpdateReturnToVendorApprovalMutation,
+    useGetReturnToOrderByIdQuery,
+    useDeleteReturnToVendorOrderMutation,
+    useDispatchReturnToVendorBarcodeMutation,
     useGetVendorRTVByBarcodeStatusQuery,
 } = ReturnToVendorServiceApi

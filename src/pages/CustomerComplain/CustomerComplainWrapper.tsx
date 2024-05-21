@@ -149,15 +149,6 @@ const CustomerComplainWrapper = () => {
             extraClasses: 'text-xs',
             renderCell: (row: any) => <span> - </span>,
         },
-        // {
-        //     field: 'amount',
-        //     headerName: 'Amount',
-        //     flex: 'flex-[3_3_0%]',
-        //     align: 'center',
-        //     extraClasses: 'text-xs',
-        //     hidden: true,
-        //     renderCell: (row: any) => <span> {row.totalAmount} </span>,
-        // },
         {
             field: 'remark',
             headerName: 'Remark',

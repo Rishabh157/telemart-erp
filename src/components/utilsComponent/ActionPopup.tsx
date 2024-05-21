@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ActionPopup.tsx
-// Type: Utils Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { ReactNode } from 'react'
 
@@ -46,77 +39,75 @@ const ActionPopup: React.FC<ActionPopupProps> = ({
     className = 'block w-full text-left px-4 py-2 hover:bg-gray-100',
 }) => {
     return (
-        <>
-            <PopupState variant="popover" popupId="demo-popup-popover">
-                {(popupState) => (
-                    <div onClick={handleOnAction}>
-                        <button
-                            {...bindTrigger(popupState)}
-                            className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
-                        >
-                            <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />
-                        </button>
-                        <Popover
-                            {...bindPopover(popupState)}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'center',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'center',
-                            }}
-                        >
-                            <>
-                                {isView && (
-                                    <button
-                                        onClick={handleViewActionButton}
-                                        className={className}
+        <PopupState variant="popover" popupId="demo-popup-popover">
+            {(popupState) => (
+                <div onClick={handleOnAction}>
+                    <button
+                        {...bindTrigger(popupState)}
+                        className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full"
+                    >
+                        <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />
+                    </button>
+                    <Popover
+                        {...bindPopover(popupState)}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                        }}
+                    >
+                        <>
+                            {isView && (
+                                <button
+                                    onClick={handleViewActionButton}
+                                    className={className}
+                                >
+                                    View
+                                </button>
+                            )}
+                            {isEdit && (
+                                <button
+                                    onClick={handleEditActionButton}
+                                    className={className}
+                                >
+                                    Edit
+                                </button>
+                            )}
+                            {children}
+                            {isCustomBtn && (
+                                <button
+                                    onClick={popupState.close}
+                                    className="block w-full text-left  hover:bg-gray-100"
+                                >
+                                    <div
+                                        className="block px-4 py-2"
+                                        onClick={handleCustomActionButton}
                                     >
-                                        View
-                                    </button>
-                                )}
-                                {isEdit && (
-                                    <button
-                                        onClick={handleEditActionButton}
-                                        className={className}
+                                        {customBtnText}
+                                    </div>
+                                </button>
+                            )}
+                            {isDelete && (
+                                <button
+                                    onClick={popupState.close}
+                                    className="block w-full text-left  hover:bg-gray-100"
+                                >
+                                    <div
+                                        className="block px-4 py-2"
+                                        onClick={handleDeleteActionButton}
                                     >
-                                        Edit
-                                    </button>
-                                )}
-                                {children}
-                                {isCustomBtn && (
-                                    <button
-                                        onClick={popupState.close}
-                                        className="block w-full text-left  hover:bg-gray-100"
-                                    >
-                                        <div
-                                            className="block px-4 py-2"
-                                            onClick={handleCustomActionButton}
-                                        >
-                                            {customBtnText}
-                                        </div>
-                                    </button>
-                                )}
-                                {isDelete && (
-                                    <button
-                                        onClick={popupState.close}
-                                        className="block w-full text-left  hover:bg-gray-100"
-                                    >
-                                        <div
-                                            className="block px-4 py-2"
-                                            onClick={handleDeleteActionButton}
-                                        >
-                                            Delete
-                                        </div>
-                                    </button>
-                                )}
-                            </>
-                        </Popover>
-                    </div>
-                )}
-            </PopupState>
-        </>
+                                        Delete
+                                    </div>
+                                </button>
+                            )}
+                        </>
+                    </Popover>
+                </div>
+            )}
+        </PopupState>
     )
 }
 

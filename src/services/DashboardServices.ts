@@ -1,5 +1,4 @@
 // |-- Internal Dependencies --|
-
 import apiSlice from './ApiSlice'
 
 type PaginationType = {

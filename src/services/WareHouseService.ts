@@ -6,21 +6,19 @@ import apiSlice from './ApiSlice'
 export const wareHouseApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET *****/
-
-        //dealer warehouse
         getDealerWareHouses: builder.query({
             providesTags: ['WareHouse'],
             query: (companyId) => ({
                 url: `/warehouse/company/${companyId}/dealer-warehouse`,
-
                 method: 'GET',
                 // body,
             }),
         }),
+
         // company warehouse
         getWareHouses: builder.query({
             providesTags: ['WareHouse'],
-            query: (companyId) => ({
+            query: () => ({
                 url: `/warehouse`,
                 method: 'GET',
                 // body,
@@ -43,7 +41,6 @@ export const wareHouseApi = apiSlice.injectEndpoints({
             query: (body: AddWarehouse) => ({
                 url: '/warehouse/add',
                 method: 'POST',
-
                 body,
             }),
         }),
@@ -53,17 +50,16 @@ export const wareHouseApi = apiSlice.injectEndpoints({
             invalidatesTags: ['WareHouse'],
             query: ({ body, id }: UpdateWarehouse) => ({
                 url: `/warehouse/${id}`,
-
                 method: 'PUT',
                 body,
             }),
         }),
+
         //***** Delete *****/
         deleteWareHouse: builder.mutation({
             invalidatesTags: ['WareHouse'],
             query: (id) => ({
                 url: `/warehouse/${id}`,
-
                 method: 'DELETE',
             }),
         }),
@@ -73,7 +69,6 @@ export const wareHouseApi = apiSlice.injectEndpoints({
             providesTags: ['WareHouse'],
             query: (id) => ({
                 url: `/warehouse/${id}`,
-
                 method: 'GET',
             }),
         }),
