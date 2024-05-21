@@ -11,7 +11,6 @@ import { UpdateWarehouseToComapnyApproval } from 'src/models/WarehouseToComapny.
 export const WarehouseToComapnyApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
-
         getPaginationWarehouseToComapny: builder.query({
             providesTags: ['WarehouseToComapny'],
             query: (body: PaginationType) => ({
@@ -22,7 +21,6 @@ export const WarehouseToComapnyApi = apiSlice.injectEndpoints({
         }),
 
         //***** GET PAGINATION DATA WITH PRODUCT GROUP *****/
-
         getPaginationWarehouseToComapnyByGroup: builder.query({
             providesTags: ['WarehouseToComapny'],
             query: (body: PaginationType) => ({

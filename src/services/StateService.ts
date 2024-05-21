@@ -74,19 +74,6 @@ export const stateApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportStateData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
         // **** Delete
         deleteState: builder.mutation({
             invalidatesTags: ['State', 'areaGroup'],
@@ -103,7 +90,6 @@ export const {
     useAddStateMutation,
     useUpdateStateMutation,
     useGetStateByIdQuery,
-    useExportStateDataMutation,
     useDeleteStateMutation,
     useGetAllStateQuery,
     useGetAllStateByCountryQuery,

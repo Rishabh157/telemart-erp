@@ -15,16 +15,6 @@ export const asrApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // //***** GET *****/
-        // getAllAsr: builder.query({
-        //     providesTags: ['Asr'],
-        //     query: () => ({
-        //         url: '/asr',
-        //         method: 'GET',
-        //         // body,
-        //     }),
-        // }),
-
         //***** ADD *****/
         addAsr: builder.mutation({
             invalidatesTags: ['Asr'],

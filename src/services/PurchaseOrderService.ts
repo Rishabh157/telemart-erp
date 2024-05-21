@@ -37,25 +37,6 @@ export const purchaseOrderApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
-        //***** GET BY PARENT CATEGORY*****/
-        //   getSubCategoryByParent: builder.query({
-        //     providesTags: ["PurchaseOrder"],
-        //     query: (id) => ({
-        //       url: `/product-orxder/get-by-parent-category/${id}`,
-        //       method: "GET",
-        //       // body,
-        //     }),
-        //   }),
-
-        //selection by productCategoryId
-        //   getProductCategoryIdSubCategory: builder.query({
-        //     providesTags: ["PurchaseOrder"],
-        //     query: (id) => ({
-        //       url: `product-sub-category/get-by-parent-category/${id}`,
-
-        //       method: "GET",
-        //     }),
-        //   }),
 
         //***** ADD *****/
         addPurchaseOrder: builder.mutation({
@@ -96,21 +77,7 @@ export const purchaseOrderApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-
-        //**** Export
-        exportPurchaseOrderData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
+        
         // **** Delete
         deletePurchaseOrder: builder.mutation({
             invalidatesTags: ['PurchaseOrder'],
@@ -119,14 +86,6 @@ export const purchaseOrderApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
-        // getByPoCode: builder.query({
-        //     providesTags: ['PurchaseOrder'],
-        //     query: (poCode) => ({
-        //         url: `/purchase-order/get-by-po/${poCode}`,
-        //         query:{poCode:poCode},
-        //         method: 'get',
-        //     }),
-        // }),
 
         getByIdPurchaseOrder: builder.query({
             providesTags: ['PurchaseOrder'],
@@ -145,7 +104,6 @@ export const {
     useGetPurchaseOrderByIdQuery,
     useGetPurchaseOrderByVendorIdQuery,
     useDeletePurchaseOrderMutation,
-    useExportPurchaseOrderDataMutation,
     useGetByIdPurchaseOrderQuery,
     useUpdatePoLevelMutation,
 } = purchaseOrderApi

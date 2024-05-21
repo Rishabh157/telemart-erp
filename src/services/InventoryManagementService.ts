@@ -19,15 +19,6 @@ export const inventoryManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET PURCHASEORDER BY VENDOR-ID DATA *****/
-        // getInventoryManagementByVendorId: builder.query({
-        //     providesTags: ['inventoryManagement'],
-        //     query: (vendorId) => ({
-        //         url: `/purchase-order/get-by-vendor/${vendorId}`,
-        //         method: 'GET',
-        //     }),
-        // }),
-
         //***** GET *****/
         getAllInventoryManagement: builder.query({
             providesTags: ['inventoryManagement'],
@@ -37,25 +28,6 @@ export const inventoryManagementApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
-        //***** GET BY PARENT CATEGORY*****/
-        //   getSubCategoryByParent: builder.query({
-        //     providesTags: ["inventoryManagement"],
-        //     query: (id) => ({
-        //       url: `/product-order/get-by-parent-category/${id}`,
-        //       method: "GET",
-        //       // body,
-        //     }),
-        //   }),
-
-        //selection by productCategoryId
-        //   getProductCategoryIdSubCategory: builder.query({
-        //     providesTags: ["inventoryManagement"],
-        //     query: (id) => ({
-        //       url: `product-sub-category/get-by-parent-category/${id}`,
-
-        //       method: "GET",
-        //     }),
-        //   }),
 
         //***** ADD *****/
         addInventoryManagement: builder.mutation({
@@ -78,17 +50,6 @@ export const inventoryManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
-        // updatePoLevel: builder.mutation({
-        //     invalidatesTags: ['inventoryManagement'],
-        //     query: ({ body, id }: UpdatePOApprovalLevel) => ({
-        //         url: `/purchase-order/approval-level/${id}`,
-
-        //         method: 'PUT',
-        //         body,
-        //     }),
-        // }),
-
         // **** GET BY ID
         getInventoryManagementById: builder.query({
             providesTags: ['inventoryManagement'],
@@ -98,20 +59,6 @@ export const inventoryManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        // exportinventoryManagementData: builder.mutation({
-        //     query: (body: PaginationType) => ({
-        //         url: '',
-
-        //         params: {
-        //             _page: body.page,
-        //             _limit: body.limit,
-        //         },
-        //         method: 'GET',
-        //         // body,
-        //     }),
-        // }),
-
         // **** Delete
         deleteInventoryManagement: builder.mutation({
             invalidatesTags: ['inventoryManagement'],
@@ -120,13 +67,6 @@ export const inventoryManagementApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
-        // getByPoCode: builder.query({
-        //     providesTags: ['inventoryManagement'],
-        //     query: (poCode) => ({
-        //         url: `/purchase-order/get-by-po/${poCode}`,
-        //         method: 'get',
-        //     }),
-        // }),
 
         getByIdInventoryManagement: builder.query({
             providesTags: ['inventoryManagement'],
@@ -144,6 +84,5 @@ export const {
     useUpdateInventoryManagementMutation,
     useGetInventoryManagementByIdQuery,
     useDeleteInventoryManagementMutation,
-
     useGetByIdInventoryManagementQuery,
 } = inventoryManagementApi

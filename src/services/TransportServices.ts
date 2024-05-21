@@ -1,5 +1,4 @@
 // |-- Internal Dependencies --|
-// import { AddTransport, UpdateTransport } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
@@ -57,20 +56,6 @@ export const transportApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportTransportData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
         // **** Delete
         deleteTransport: builder.mutation({
             invalidatesTags: ['Transport'],
@@ -86,7 +71,6 @@ export const {
     useAddTransportMutation,
     useUpdateTransportMutation,
     useGetTransportByIdQuery,
-    useExportTransportDataMutation,
     useDeleteTransportMutation,
     useGetAllTransportQuery,
 } = transportApi

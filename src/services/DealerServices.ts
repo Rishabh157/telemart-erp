@@ -20,10 +20,6 @@ export const dealerApi = apiSlice.injectEndpoints({
             providesTags: ['dealer'],
             query: (body: PaginationType) => ({
                 url: '/dealer',
-                // params: {
-                //   _page: body.page,
-                //   _limit: body.limit,
-                // },
                 method: 'POST',
                 body,
             }),

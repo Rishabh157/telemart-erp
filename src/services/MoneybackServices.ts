@@ -85,5 +85,4 @@ export const {
     useMangerFirstApprovalMutation,
     useAddCustomerInfoMutation,
     useAddAccountApprovalMutation,
-    // useDeleteOrderMutation,
 } = moneybackApi

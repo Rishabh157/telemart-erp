@@ -103,20 +103,6 @@ export const pincodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportPincodeData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
         // **** Delete
         deletePincode: builder.mutation({
             invalidatesTags: ['pincode', 'areaGroup'],
@@ -142,7 +128,6 @@ export const {
     useAddPincodeMutation,
     useUpdatePincodeMutation,
     useGetPincodeByIdQuery,
-    useExportPincodeDataMutation,
     useDeletePincodeMutation,
     useGetAllPincodeQuery,
     useGetAllPincodeByTehsilQuery,
