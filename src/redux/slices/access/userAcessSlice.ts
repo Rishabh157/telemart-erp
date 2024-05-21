@@ -47,6 +47,7 @@ export interface userAccesTypes {
 export type InitialStateType = {
     userAccessItems: userAccesTypes
     checkUserAccess: userAccesTypes
+    searchValue: string
 }
 
 const initialState: InitialStateType = {
@@ -66,6 +67,7 @@ const initialState: InitialStateType = {
         userName: '',
         modules: [],
     },
+    searchValue: '',
 }
 
 const userAccesSlice: Slice<InitialStateType> = createSlice({
@@ -81,14 +83,20 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
         setUserAccess: (state, action: PayloadAction<ModulesTypes[]>) => {
             state.userAccessItems.modules = action.payload
         },
-
         setCheckUserAccess: (state, action: PayloadAction<ModulesTypes[]>) => {
             state.checkUserAccess.modules = action.payload
+        },
+        setUserAccessModuleSearchValue: (state, action: PayloadAction<string>) => {
+            state.searchValue = action.payload
         },
     },
 })
 
-export const { setUserModule, setUserAccess, setCheckUserAccess } =
-    userAccesSlice.actions
+export const {
+    setUserModule,
+    setUserAccess,
+    setCheckUserAccess,
+    setUserAccessModuleSearchValue,
+} = userAccesSlice.actions
 
 export default userAccesSlice.reducer

@@ -71,6 +71,7 @@ import { default as multiOrderSearchJson } from '../../utils/mediaJson/multiOrde
 import { default as dealerToDealerRequestJson } from '../../utils/mediaJson/dealerToDealerJson.json'
 import { default as courierPreferenceJson } from '../../utils/mediaJson/CourierPreference.json'
 import { default as gpoAwbNumber } from '../../utils/mediaJson/gpoAwbNumber.json'
+import { default as orderCancelRequest } from '../../utils/mediaJson/orderCancelRequest.json'
 
 export const mergeUserModules = [
     { ...dashboardJson },
@@ -94,6 +95,7 @@ export const mergeUserModules = [
     { ...warehouseFirstCallOrdersjson },
     // { ...inquiryJson },
     { ...ordersJson },
+    { ...orderCancelRequest },
     { ...batchOrdersJson },
     { ...offerAppliedNdrJson },
     { ...complainJson },

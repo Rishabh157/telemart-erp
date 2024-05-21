@@ -1,0 +1,69 @@
+{
+    "moduleId": "NAV_ORDER_CANCEL_REQUEST",
+    "moduleName": "NAV_ORDER_CANCEL_REQUEST",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_ORDER_CANCEL_REQUEST_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "ORDER_CANCEL_REQUEST_LIST_ORDER_NUMBER",
+                    "fieldName": "Order Number",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "ORDER_CANCEL_REQUEST_LIST_CREATED_BY_REQUEST",
+                    "fieldName": "Request By",
+                    "fieldValue": "requestCreatedByLabel"
+                },
+                {
+                    "fieldId": "ORDER_CANCEL_REQUEST_LIST_CREATED_DATE",
+                    "fieldName": "Created Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "ORDER_CANCEL_REQUEST_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "ORDER_CANCEL_REQUEST_LIST_CANCEL_REASON",
+                    "fieldName": "Cancel Reason",
+                    "fieldValue": "cancelReason"
+                },
+                {
+                    "fieldId": "ORDER_CANCEL_REQUEST_LIST_REMARK",
+                    "fieldName": "Remark",
+                    "fieldValue": "remark"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_ORDER_CANCEL_REQUEST_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ORDER_CANCEL_REQUEST_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_ORDER_CANCEL_REQUEST_DELETE",
+            "actionUrl": "",
+            "actionName": "DELETE",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

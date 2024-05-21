@@ -111,10 +111,10 @@ const OrderCancelRequestListingWrapper = () => {
                 row?.status === 'PENDING' && (
                     <ActionPopup
                         isEdit={isAuthorized(
-                            UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_EDIT
+                            UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_EDIT
                         )}
                         isDelete={isAuthorized(
-                            UserModuleNameTypes.ACTION_PRODUCT_SUB_CATEGORY_DELETE
+                            UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_DELETE
                         )}
                         handleOnAction={() => {
                             setShowDropdown(!showDropdown)
@@ -142,7 +142,7 @@ const OrderCancelRequestListingWrapper = () => {
             field: 'orderNumber',
             headerName: 'Order Number',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_CODE,
+            name: UserModuleNameTypes.ORDER_CANCEL_REQUEST_LIST_ORDER_NUMBER,
             extraClasses: 'min-w-[200px]',
             renderCell: (row: OrderCancelRequestListResponse) => (
                 <span className="text-primary-main "># {row?.orderNumber}</span>
@@ -153,7 +153,7 @@ const OrderCancelRequestListingWrapper = () => {
             headerName: 'Request By',
             flex: 'flex-[1.5_1.5_0%]',
             extraClasses: 'min-w-[200px]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PRODUCT_SUB_CATEGORY_NAME,
+            name: UserModuleNameTypes.ORDER_CANCEL_REQUEST_LIST_CREATED_BY_REQUEST,
             renderCell: (row: OrderCancelRequestListResponse) => {
                 return <span>{row?.requestCreatedByLabel}</span>
             },
@@ -162,7 +162,7 @@ const OrderCancelRequestListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Create Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CREATED_AT,
+            name: UserModuleNameTypes.ORDER_CANCEL_REQUEST_LIST_CREATED_DATE,
             extraClasses: 'min-w-[150px] text-[14px]',
             renderCell: (row: OrderCancelRequestListResponse) => (
                 <div className="py-0">
@@ -180,7 +180,7 @@ const OrderCancelRequestListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[1.5_1.5_0%]',
             extraClasses: 'min-w-[200px]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PARENT_CATEGORY,
+            name: UserModuleNameTypes.ORDER_CANCEL_REQUEST_LIST_STATUS,
             renderCell: (row: OrderCancelRequestListResponse) => {
                 return (
                     <Stack direction="row" spacing={1}>
@@ -233,7 +233,7 @@ const OrderCancelRequestListingWrapper = () => {
             headerName: 'Reason',
             flex: 'flex-[1.5_1.5_0%]',
             extraClasses: 'min-w-[200px]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PARENT_CATEGORY,
+            name: UserModuleNameTypes.ORDER_CANCEL_REQUEST_LIST_CANCEL_REASON,
             renderCell: (row: OrderCancelRequestListResponse) => {
                 return cancelReasonOptions?.find(
                     (ele) => ele?.value === row?.cancelReason
@@ -245,7 +245,7 @@ const OrderCancelRequestListingWrapper = () => {
             headerName: 'Remark',
             flex: 'flex-[1.5_1.5_0%]',
             extraClasses: 'min-w-[200px]',
-            name: UserModuleNameTypes.PRODUCT_SUB_CATEGORY_LIST_PARENT_CATEGORY,
+            name: UserModuleNameTypes.ORDER_CANCEL_REQUEST_LIST_REMARK,
             renderCell: (row: OrderCancelRequestListResponse) => {
                 return <span>{row?.remark}</span>
             },

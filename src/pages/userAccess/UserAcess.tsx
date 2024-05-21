@@ -19,13 +19,12 @@ import ATMBreadCrumbs, {
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
 import { mergeUserModules } from './mergeJson'
-
-// import { default as user } from 'src/defaultData/user.json'
 import {
     moduleActionTypes,
     ModulesTypes,
     setUserModule,
     fieldTypes,
+    setUserAccessModuleSearchValue,
 } from 'src/redux/slices/access/userAcessSlice'
 import { RootState } from 'src/redux/store'
 import {
@@ -68,10 +67,9 @@ const UserAcess = ({
 }: Props) => {
     const modules = [...mergeUserModules]
     const dispatch = useDispatch()
-    const { userAccessItems } = useSelector(
+    const { userAccessItems, searchValue } = useSelector(
         (state: RootState) => state.userAccess
     )
-    const [searchModuleValue, setSearchModuleValue] = React.useState<string>('')
     const { modules: moduleList } = userAccessItems
     const handleUserModuleAccess = (
         module: ModulesTypes,
@@ -363,18 +361,22 @@ const UserAcess = ({
                             </div>
                         </div>
                         <ATMTextField
-                            label=""
                             size="xs"
-                            labelClass=""
                             extraClassField="mt-0"
-                            labelDirection="horizontal"
                             autoFocus={true}
                             className="mt-0 rounded"
                             name=""
                             placeholder="Search Module..."
-                            value={searchModuleValue}
-                            onChange={(e) => {
-                                setSearchModuleValue(e.target.value)
+                            onFocus={(newValue) => {
+                                newValue.target.select()
+                            }}
+                            value={searchValue}
+                            onChange={(newValue) => {
+                                dispatch(
+                                    setUserAccessModuleSearchValue(
+                                        newValue.target.value
+                                    )
+                                )
                             }}
                         />
                     </div>
@@ -388,7 +390,7 @@ const UserAcess = ({
                                             ?.toLocaleLowerCase()
                                             ?.replaceAll('_', ' ')
                                             ?.includes(
-                                                searchModuleValue?.toLocaleLowerCase()
+                                                searchValue?.toLocaleLowerCase()
                                             )
                                     )
                                     ?.map((module: any, ind: number) => {
