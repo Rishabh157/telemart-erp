@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Formik, FormikProps } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { array, number, object, string } from 'yup'
+import moment from 'moment'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -46,6 +47,7 @@ export type FormInitialValues = {
     accApprovedAt: string
     dhApprovedById: string
     accApprovedById: string
+    expectedDeliveryDate: string
 }
 
 const EditSaleOrderWrapper = (props: Props) => {
@@ -74,6 +76,7 @@ const EditSaleOrderWrapper = (props: Props) => {
         accApprovedAt: '',
         dhApprovedById: '',
         accApprovedById: '',
+        expectedDeliveryDate: '',
     })
     const Id = params.id
     const [apiStatus, setApiStatus] = useState<boolean>(false)
@@ -135,6 +138,7 @@ const EditSaleOrderWrapper = (props: Props) => {
                 accApprovedAt: '',
                 dhApprovedById: '',
                 accApprovedById: '',
+                expectedDeliveryDate: '',
             }
 
             selectedItem?.forEach((ele: any) => {
@@ -153,6 +157,7 @@ const EditSaleOrderWrapper = (props: Props) => {
                     accApprovedAt: ele?.accApprovedAt,
                     dhApprovedById: ele?.dhApprovedById,
                     accApprovedById: ele?.accApprovedById,
+                    expectedDeliveryDate: ele?.expectedDeliveryDate,
                     productSalesOrder: [
                         ...product.productSalesOrder,
                         {
@@ -187,6 +192,7 @@ const EditSaleOrderWrapper = (props: Props) => {
         accApprovedAt: editSaleOrder.accApprovedAt,
         dhApprovedById: editSaleOrder.dhApprovedById,
         accApprovedById: editSaleOrder.accApprovedById,
+        expectedDeliveryDate: editSaleOrder.expectedDeliveryDate,
     }
 
     // Form Validation Schema
@@ -212,8 +218,14 @@ const EditSaleOrderWrapper = (props: Props) => {
         ),
     })
 
+    function formatDate(date: Date) {
+        return moment(date).format('DD-MMM-YYYY').toLowerCase()
+    }
+
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
+        setApiStatus(true)
+        const formatedDate = formatDate(new Date(values.expectedDeliveryDate))
         let newValues = {
             soNumber: values?.soNumber || '',
             dealerId: values?.dealerId || '',
@@ -230,6 +242,7 @@ const EditSaleOrderWrapper = (props: Props) => {
             accApprovedAt: values.accApprovedAt,
             dhApprovedById: values.dhApprovedById,
             accApprovedById: values.accApprovedById,
+            expectedDeliveryDate: formatedDate,
         }
 
         const finalValues: any = []
@@ -245,7 +258,6 @@ const EditSaleOrderWrapper = (props: Props) => {
             })
         })
 
-        setApiStatus(true)
         setTimeout(() => {
             updateSaleOrder({
                 body: finalValues,

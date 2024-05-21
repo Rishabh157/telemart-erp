@@ -24,6 +24,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 import { useParams } from 'react-router-dom'
 import { showToast } from 'src/utils'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 
 // |-- Types --|
 type Props = {
@@ -134,8 +135,6 @@ const AddSaleOrder = ({
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-3">
-                            {/* SO Number */}
-
                             {/* Dealer */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
@@ -178,6 +177,18 @@ const AddSaleOrder = ({
                                     label="Warehouse"
                                 />
                             </div>
+                           
+                            <ATMDatePicker
+                                name="expectedDeliveryDate"
+                                value={values.expectedDeliveryDate}
+                                label="Expected Delivery Date"
+                                onChange={(newValue) => {
+                                    handleSetFieldValue(
+                                        'expectedDeliveryDate',
+                                        newValue
+                                    )
+                                }}
+                            />
                         </div>
                     </div>
 

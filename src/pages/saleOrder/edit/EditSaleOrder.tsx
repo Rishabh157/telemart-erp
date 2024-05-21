@@ -24,6 +24,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { showToast } from 'src/utils'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 
 // |-- Types --|
 type Props = {
@@ -182,6 +183,17 @@ const EditSaleOrder = ({
                                 options={dropdownOptions.warehouseOptions}
                                 label="Warehouse"
                                 selectLabel="Select Warehouse"
+                            />
+                            <ATMDatePicker
+                                name="expectedDeliveryDate"
+                                value={values.expectedDeliveryDate}
+                                label="Expected Delivery Date"
+                                onChange={(newValue) => {
+                                    handleSetFieldValue(
+                                        'expectedDeliveryDate',
+                                        newValue
+                                    )
+                                }}
                             />
                         </div>
                     </div>

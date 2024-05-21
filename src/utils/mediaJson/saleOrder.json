@@ -45,6 +45,11 @@
                     "fieldValue": "dhApprovedAt"
                 },
                 {
+                    "fieldId": "SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE",
+                    "fieldName": "Expected Delivery Date",
+                    "fieldValue": "expectedDeliveryDate"
+                },
+                {
                     "fieldId": "SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS",
                     "fieldName": "Acc Approved Status",
                     "fieldValue": "accApproved"
