@@ -19,7 +19,7 @@ import {
 import { MdOutlineCategory } from 'react-icons/md'
 import { BsBox, BsBoxes, BsBoxSeam } from 'react-icons/bs'
 import { TbAppsFilled } from 'react-icons/tb'
-import { FaObjectGroup,FaLanguage } from 'react-icons/fa'
+import { FaObjectGroup, FaLanguage } from 'react-icons/fa'
 import { CgOrganisation } from 'react-icons/cg'
 import { CiBarcode, CiFaceSmile, CiLocationOn } from 'react-icons/ci'
 import { TbBinaryTree2 } from 'react-icons/tb'

@@ -1986,7 +1986,9 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<GpoAwbListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_GPO_AWB_NUMBER}
+                                permission={
+                                    UserModuleNameTypes.NAV_GPO_AWB_NUMBER
+                                }
                             />
                         }
                     />
