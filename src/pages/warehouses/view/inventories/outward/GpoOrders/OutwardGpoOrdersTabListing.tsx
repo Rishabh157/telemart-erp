@@ -27,6 +27,8 @@ type Props = {
         React.SetStateAction<FormInitialValuesFilterWithLabel>
     >
     filter: FormInitialValuesFilterWithLabel
+    orderNumberSearchValue: string
+    setOrderNumberSearchValue: (newValue: string) => void
 }
 
 type LabelValuePair = {
@@ -49,6 +51,8 @@ const OutwardGpoOrdersTabListing = ({
     rows,
     setFilter,
     filter,
+    orderNumberSearchValue,
+    setOrderNumberSearchValue,
 }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
@@ -113,6 +117,12 @@ const OutwardGpoOrdersTabListing = ({
                     isFilterRemover
                     onFilterRemoverClick={handleReset}
                     filterShow={filterShow(filter)}
+                    isAnotherSearch
+                    anotherSearchValue={orderNumberSearchValue}
+                    anotherSearchPlaceholder="Order No..."
+                    onAnotherSearch={(newValue) =>
+                        setOrderNumberSearchValue(newValue)
+                    }
                 />
 
                 {isOpenFilterFormDialog && (

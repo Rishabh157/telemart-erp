@@ -48,6 +48,7 @@ export type InitialStateType = {
     userAccessItems: userAccesTypes
     checkUserAccess: userAccesTypes
     searchValue: string
+    accordionNumber: number | null
 }
 
 const initialState: InitialStateType = {
@@ -68,6 +69,7 @@ const initialState: InitialStateType = {
         modules: [],
     },
     searchValue: '',
+    accordionNumber: null,
 }
 
 const userAccesSlice: Slice<InitialStateType> = createSlice({
@@ -86,8 +88,17 @@ const userAccesSlice: Slice<InitialStateType> = createSlice({
         setCheckUserAccess: (state, action: PayloadAction<ModulesTypes[]>) => {
             state.checkUserAccess.modules = action.payload
         },
-        setUserAccessModuleSearchValue: (state, action: PayloadAction<string>) => {
+        setUserAccessModuleSearchValue: (
+            state,
+            action: PayloadAction<string>
+        ) => {
             state.searchValue = action.payload
+        },
+        setAccordionNumberValue: (
+            state,
+            action: PayloadAction<number | null>
+        ) => {
+            state.accordionNumber = action.payload
         },
     },
 })
@@ -97,6 +108,7 @@ export const {
     setUserAccess,
     setCheckUserAccess,
     setUserAccessModuleSearchValue,
+    setAccordionNumberValue,
 } = userAccesSlice.actions
 
 export default userAccesSlice.reducer

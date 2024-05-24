@@ -1,11 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/// ==============================================
-// Filename:UserAccessWrapper.tsx
-// Type: Access Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react' //  { useState, useEffect } // ,
 import { useLocation, useNavigate } from 'react-router-dom'

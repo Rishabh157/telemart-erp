@@ -1,48 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { OrderListResponse } from 'src/models'
-import { useGetInvoiceByOrderNumberQuery } from 'src/services/OrderService'
 
-const RetailInvoice = () => {
+const RetailInvoice = ({ items }: { items: OrderListResponse }) => {
     const tableHead = 'border-r border-black p-2 text-start'
     const tableCell = 'border-r border-black p-2'
-    const { search, state } = useLocation()
-    const navigate = useNavigate()
-    const queryParams = new URLSearchParams(search)
-    const orderNumber = queryParams.get('orderNumber')
-    React.useEffect(() => {
-        const printFunc = setTimeout(() => {
-            window?.print()
-        }, 1000)
-
-        const handleAfterPrint = () => {
-            navigate(state.pathname)
-            // Your custom logic after print dialog is closed
-        }
-
-        const handleCancelPrint = () => {
-            navigate(state.pathname)
-            // Your custom logic when the print dialog is cancelled
-        }
-
-        window.addEventListener('afterprint', handleAfterPrint)
-        window.addEventListener('beforeprint', handleCancelPrint) // Listen for beforeprint event
-
-        return () => {
-            clearInterval(printFunc)
-            window.removeEventListener('afterprint', handleAfterPrint)
-            window.removeEventListener('beforeprint', handleCancelPrint)
-        }
-    }, [])
-
-    const { items } = useGetDataByIdCustomQuery<OrderListResponse>({
-        useEndPointHook: useGetInvoiceByOrderNumberQuery(orderNumber, {
-            skip: !orderNumber,
-        }),
-    })
-
+    
+    console.log('items: ', items)
     return (
         <>
             <div className="bg-white h-screen w-full">
@@ -96,7 +59,7 @@ const RetailInvoice = () => {
                                         src="https://static.vecteezy.com/system/resources/thumbnails/008/506/948/small/abstract-digital-code-scanner-barcode-template-for-social-media-payment-market-and-design-png.png"
                                         alt=""
                                     />
-                                    <span>11751110761445</span>
+                                    <span>{items?.awbNumber}</span>
                                 </div>
                             </div>
                         </div>

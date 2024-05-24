@@ -223,7 +223,7 @@
         {
             "actionId": "ACTION_ORDER_ASSIGN_ORDER_TAB_LIST",
             "actionUrl": "",
-            "actionName": "ORDER_FRESH_ORDER_TAB",
+            "actionName": "ORDER_ASSIGN_ORDER_TAB",
             "compulsoryFields": [],
             "parentGroup": ["LIST"],
             "fields": []

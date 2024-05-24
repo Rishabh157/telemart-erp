@@ -130,7 +130,7 @@ const ViewOrder = () => {
             label: 'Inquiry',
             icon: MdOutbond,
             path: '?orderStatus=inquiry',
-            name: UserModuleNameTypes.ACTION_ORDER_GLOBAL_ORDER_SEARCH_TAB,
+            name: UserModuleNameTypes.ACTION_ORDER_INQUIRY_TAB,
         },
 
         {

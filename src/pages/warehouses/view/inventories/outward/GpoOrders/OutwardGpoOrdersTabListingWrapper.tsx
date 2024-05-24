@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // |-- External Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 import { IconType } from 'react-icons'
 import { useSelector } from 'react-redux'
 
@@ -22,6 +22,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FormInitialValuesFilterWithLabel } from './Filters/OutwardGpoOrderFilterFormWrapper'
 import DispatchingBarcodes from './DispatchingBarcodes/DispatchingBarcodes'
 import { courierCompanyEnum } from 'src/utils/constants/enums'
+import { MdLabelImportantOutline } from 'react-icons/md'
 
 // |-- Types --|
 export type Tabs = {
@@ -36,6 +37,10 @@ enum FirstCallApprovalStatus {
 }
 
 const OutwardGpoOrdersTabListingWrapper = () => {
+    // order number search
+    const [orderNumberSearchValue, setOrderNumberSearchValue] =
+        useState<string>('')
+
     // filter state
     const [filter, setFilter] =
         React.useState<FormInitialValuesFilterWithLabel>({
@@ -75,13 +80,17 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         useEndPointHook: useGetOrderQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['didNo', 'mobileNo'],
+            params: ['didNo', 'mobileNo', 'awbNumber', 'barcodeData.barcode'],
             page: page,
             filterBy: [
                 { fieldName: 'isGPO', value: true },
                 { fieldName: 'companyId', value: userData?.companyId },
                 { fieldName: 'assignWarehouseId', value: warehouseId },
                 { fieldName: 'orderStatus', value: filter?.orderStatus?.value },
+                {
+                    fieldName: 'orderNumber',
+                    value: [orderNumberSearchValue],
+                },
             ],
             dateFilter: {
                 startDate: filter.startDate.value as string,
@@ -103,14 +112,18 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             renderCell: (row: OrderListResponse) => {
                 return row?.orderStatus === SaleOrderStatus.dispatched ? (
                     <div className="flex gap-2">
-                        {/* <MdLabelImportantOutline
-                                    title="Print label"
-                                    size={25}
-                                    color="blue"
-                                    onClick={() =>
-                                        window.open(`/gpo/label?orderNumber=${row.orderNumber}`, '_blank')
-                                    }
-                                /> */}
+                        <MdLabelImportantOutline
+                            title="Print label"
+                            size={25}
+                            color="blue"
+                            className="cursor-pointer"
+                            onClick={() =>
+                                window.open(
+                                    `/gpo/label?orderNumber=${row.orderNumber}`,
+                                    '_blank'
+                                )
+                            }
+                        />
                         <FaRegFilePdf
                             title="Print Invoice"
                             color="red"
@@ -607,6 +620,10 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                 rows={items}
                 filter={filter}
                 setFilter={setFilter}
+                orderNumberSearchValue={orderNumberSearchValue}
+                setOrderNumberSearchValue={(newValue) => {
+                    setOrderNumberSearchValue(newValue)
+                }}
             />
 
             <DispatchingBarcodes courierType={courierCompanyEnum.gpo} />

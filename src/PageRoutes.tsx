@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import Authorization from './Authorization'
-import ReatailInvoiceLabel from './Receipt/ReatailInvoiceLabel'
 import ComplainListingWrapper from './pages/Complain/List/ComplainListingWrapper'
 import CustomerComplainWrapper from './pages/CustomerComplain/CustomerComplainWrapper'
 import DealersRatioListingWrapper from './pages/DealerRatioMapping/list/DealersRatioListingWrapper'
@@ -280,13 +279,13 @@ import {
     setUserData,
 } from './redux/slices/authSlice'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
-import RetailInvoice from './Receipt/RetailInvoice'
-import RetailLabel from './Receipt/RetailILabel'
 import OrderCancelRequestListingWrapper from './pages/orderCancelRequest/list/OrderCancelRequestListingWrapper'
 import AddOrderCancelRequestWrapper from './pages/orderCancelRequest/add/AddOrderCancelRequestWrapper'
 import EditOrderCancelRequestWrapper from './pages/orderCancelRequest/edit/EditOrderCancelRequestWrapper'
 import WarehouseOrderStatusOverviewWrapper from './pages/warehouses/view/inventories/outward/warehouseStatus/WarehouseOrderStatusOverviewWrapper'
 import GpoAwbListingWrapper from './pages/configuration/ConfigurationScreens/gpoAwb/list/GpoAwbListingWrapper'
+import GpoInvoiceAndLabelWrapper from './Receipt/GpoInvoiceAndLabelWrapper'
+import MenifestFormat from './Receipt/MenifestFormat'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -335,7 +334,6 @@ const PageRoutes = () => {
                 />
                 {/* Profile */}
                 <Route path="/profile" element={<ProfileWrappper />} />
-                <Route path="/retail-lebel" element={<RetailLabel />} />
 
                 {/* Vendor */}
                 <Route
@@ -997,6 +995,19 @@ const PageRoutes = () => {
                                 />
                             }
                         />
+                        <Route
+                            path="courier-return"
+                            element={
+                                <Authorization
+                                    children={
+                                        <InwardCompanyTabsListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY
+                                    }
+                                />
+                            }
+                        />
                     </Route>
 
                     <Route
@@ -1412,7 +1423,9 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<OrderCancelRequestListingWrapper />}
-                            permission={UserModuleNameTypes.NAV_ORDER_CANCEL_REQUEST}
+                            permission={
+                                UserModuleNameTypes.NAV_ORDER_CANCEL_REQUEST
+                            }
                         />
                     }
                 />
@@ -1422,7 +1435,9 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<AddOrderCancelRequestWrapper />}
-                            permission={UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_ADD}
+                            permission={
+                                UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_ADD
+                            }
                         />
                     }
                 />
@@ -1431,7 +1446,9 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<EditOrderCancelRequestWrapper />}
-                            permission={UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_EDIT}
+                            permission={
+                                UserModuleNameTypes.ACTION_ORDER_CANCEL_REQUEST_EDIT
+                            }
                         />
                     }
                 />
@@ -3330,22 +3347,13 @@ const PageRoutes = () => {
 
                 <Route path="/barcodes" element={<BarcodeGenerator />} />
                 {/* gpo invoice */}
-                {/* <Route
+                <Route
                     path="gpo/label"
                     element={
                         <Authorization
-                            children={<RetailLabel />}
-                            permission={
-                                UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO
+                            children={
+                                <GpoInvoiceAndLabelWrapper type="LABEL" />
                             }
-                        />
-                    }
-                /> */}
-                <Route
-                    path="gpo/label-invoice"
-                    element={
-                        <Authorization
-                            children={<ReatailInvoiceLabel />}
                             permission={
                                 UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO
                             }
@@ -3356,13 +3364,28 @@ const PageRoutes = () => {
                     path="gpo/invoice"
                     element={
                         <Authorization
-                            children={<RetailInvoice />}
+                            children={
+                                <GpoInvoiceAndLabelWrapper type="INVOICE" />
+                            }
                             permission={
                                 UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO
                             }
                         />
                     }
                 />
+
+                <Route
+                    path="gpo/label-invoice"
+                    element={
+                        <Authorization
+                            children={<GpoInvoiceAndLabelWrapper type="BOTH" />}
+                            permission={
+                                UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO
+                            }
+                        />
+                    }
+                />
+                <Route path="/menifest-ui" element={<MenifestFormat />} />
 
                 <Route
                     path="influencers-management"

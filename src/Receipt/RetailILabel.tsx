@@ -1,31 +1,10 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
-import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { OrderListResponse } from 'src/models'
-import { useGetInvoiceByOrderNumberQuery } from 'src/services/OrderService'
 
-const RetailLabel = () => {
-    const location = useLocation()
-    const queryParams = new URLSearchParams(location.search)
-    const orderNumber = queryParams.get('orderNumber')
-
-    const { items } = useGetDataByIdCustomQuery<OrderListResponse>({
-        useEndPointHook: useGetInvoiceByOrderNumberQuery(orderNumber, {
-            skip: !orderNumber,
-        }),
-    })
-
+const RetailILabel = ({ items }: { items: OrderListResponse }) => {
     const totalPrice: number =
         (items?.shcemeQuantity || 0) * (items?.price || 0)
 
-    // React.useEffect(() => {
-    //     const printFunc = setTimeout(() => {
-    //         window?.print()
-    //     }, 1000)
-    //     return () => {
-    //         clearInterval(printFunc)
-    //     }
-    // }, [])
     return (
         <div className="bg-white p-4 py-2">
             <div className="flex py-6 items-center border-b border-gray-400 gap-x-8">
@@ -70,7 +49,7 @@ const RetailLabel = () => {
                     </div>
                     <span className="font-medium">MOBILE : 9209162825</span>
                 </div>
-                <div className="flex items-center flex-col font-bold text-[19px] p-2">
+                <div className="flex items-center flex-col font-bold text-[17px] p-2">
                     <span> CASH ON DELIVERY</span>
                     <span>AMOUNT TO COLLECT</span>
                     <span>Rs {totalPrice?.toFixed(2)}</span>
@@ -91,15 +70,15 @@ const RetailLabel = () => {
                             <span className="font-semibold">14-Dec-2023</span>
                         </div>
                     </div>
-                    <span className="font-bold text-lg">CASH ON DELIVERY</span>
+                    <span className="font-bold text-md">CASH ON DELIVERY</span>
                 </div>
 
                 <div className="flex flex-col justify-center items-center">
                     <div className="ml-32">
-                        <span className="font-bold text-lg">
+                        <span className="font-bold text-md">
                             Maersk Courier
                         </span>
-                        <span className="pl-32 text-lg font-bold">
+                        <span className="pl-32 text-md font-bold">
                             - Delhivery
                         </span>
                         <img
@@ -107,7 +86,7 @@ const RetailLabel = () => {
                             src="https://static.vecteezy.com/system/resources/thumbnails/008/506/948/small/abstract-digital-code-scanner-barcode-template-for-social-media-payment-market-and-design-png.png"
                             alt=""
                         />
-                        <p className="font-bold text-center text-lg mt-1">
+                        <p className="font-bold text-center text-md mt-1">
                             AWB No. : {items?.awbNumber || '-'}
                         </p>
                     </div>
@@ -187,7 +166,7 @@ const RetailLabel = () => {
                                     src="https://static.vecteezy.com/system/resources/thumbnails/008/506/948/small/abstract-digital-code-scanner-barcode-template-for-social-media-payment-market-and-design-png.png"
                                     alt=""
                                 />
-                                <p className="font-bold text-start text-xl mt-1">
+                                <p className="font-bold text-start text-md mt-1">
                                     Order No. : {items?.orderNumber}
                                 </p>
                             </div>
@@ -220,4 +199,4 @@ const RetailLabel = () => {
     )
 }
 
-export default RetailLabel
+export default RetailILabel

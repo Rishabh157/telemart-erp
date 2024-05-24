@@ -174,12 +174,12 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
             .then((res: any) => {
                 if (res?.data?.status) {
                     dispatch(setFieldCustomized(false))
-                    navigate(`/gpo/invoice?orderNumber=${orderNumber}`, {
-                        state: { pathname: pathname },
-                    })
                     setOrderNumber(null)
                     setBarcodeNumber('')
                     setProducts([])
+                    navigate(`/gpo/label-invoice?orderNumber=${orderNumber}`, {
+                        state: { pathname: pathname },
+                    })
                 } else {
                     showToast('error', res?.data?.message)
                 }
