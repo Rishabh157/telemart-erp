@@ -44,11 +44,16 @@ const tabs: Tabs[] = [
         path: 'ecom',
         name: UserModuleNameTypes.ACTION_WAREHOUSE_INWARD_INVENTORIES_E_COMMERCE,
     },
-
     {
         label: 'Company',
         icon: MdOutbond,
         path: 'company',
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY,
+    },
+    {
+        label: 'Courier Return',
+        icon: MdOutbond,
+        path: 'courier-return',
         name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY,
     },
 ]

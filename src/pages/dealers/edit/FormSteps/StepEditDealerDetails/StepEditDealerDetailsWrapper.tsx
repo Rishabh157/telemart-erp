@@ -74,6 +74,12 @@ const formFields: FieldType[] = [
     //     type: 'switch-button',
     // },
     {
+        name: 'firstName',
+        label: 'First Name',
+        placeholder: 'First Name',
+        required: true,
+    },
+    {
         name: 'lastName',
         label: 'Last Name',
         placeholder: 'Last Name',

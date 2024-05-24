@@ -1,9 +1,10 @@
 // |-- Built-in Dependencies --|
+import React, { useState, useEffect } from 'react'
 import { Chip, Stack } from '@mui/material'
-import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams, useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
@@ -18,6 +19,8 @@ import {
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import OutwardGpoOrderFilterFormWrapper from './Filters/OutwardGpoOrderFilterFormWrapper'
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { courierCompanyEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 type Props = {
@@ -27,6 +30,8 @@ type Props = {
         React.SetStateAction<FormInitialValuesFilterWithLabel>
     >
     filter: FormInitialValuesFilterWithLabel
+    orderNumberSearchValue: string
+    setOrderNumberSearchValue: (newValue: string) => void
 }
 
 type LabelValuePair = {
@@ -49,10 +54,16 @@ const OutwardGpoOrdersTabListing = ({
     rows,
     setFilter,
     filter,
+    orderNumberSearchValue,
+    setOrderNumberSearchValue,
 }: Props) => {
-    const dispatch = useDispatch<AppDispatch>()
-    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
-        useState<boolean>(false)
+    const { id: warehouseId } = useParams()
+    const navigate = useNavigate()
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] = useState({
+        isFilterOpen: false,
+        isMenifest: false,
+    })
+    const [isRedirect, setIsRedirect] = useState<boolean>(false)
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
@@ -60,6 +71,7 @@ const OutwardGpoOrdersTabListing = ({
 
     const { page, rowsPerPage, isTableLoading, searchValue } =
         outwardCustomerState
+    const dispatch = useDispatch<AppDispatch>()
 
     const handleReset = () => {
         setFilter((prev) => ({
@@ -91,6 +103,28 @@ const OutwardGpoOrdersTabListing = ({
             </span>
         )
     }
+    const isFilterApplied = (isMenifest: boolean, isRedirect: boolean) => {
+        let keys: string = ''
+        for (keys in filter) {
+            if (
+                filter[keys as keyof typeof filter].value !== '' &&
+                isMenifest === true &&
+                isRedirect === true
+            )
+                return true
+        }
+        return false
+    }
+
+    useEffect(() => {
+        return () => {
+            setIsOpenFilterFormDialog({
+                isFilterOpen: false,
+                isMenifest: false,
+            })
+            setIsRedirect(false)
+        }
+    }, [])
 
     return (
         <div className="h-[calc(100vh-350px)] bg-white">
@@ -108,21 +142,63 @@ const OutwardGpoOrdersTabListing = ({
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     isFilter
                     onFilterClick={() => {
-                        setIsOpenFilterFormDialog(true)
+                        setIsOpenFilterFormDialog((prev) => ({
+                            ...prev,
+                            isFilterOpen: true,
+                        }))
+                        setIsRedirect(false)
                     }}
                     isFilterRemover
                     onFilterRemoverClick={handleReset}
                     filterShow={filterShow(filter)}
+                    isAnotherSearch
+                    anotherSearchValue={orderNumberSearchValue}
+                    anotherSearchPlaceholder="Order No..."
+                    onAnotherSearch={(newValue) =>
+                        setOrderNumberSearchValue(newValue)
+                    }
+                    children={
+                        <ATMLoadingButton
+                            type="submit"
+                            className="h-[40px] hover:bg-blue-600"
+                            onClick={() => {
+                                setIsOpenFilterFormDialog({
+                                    isFilterOpen: true,
+                                    isMenifest: true,
+                                })
+                                setIsRedirect(true)
+                            }}
+                        >
+                            Get Manifest
+                        </ATMLoadingButton>
+                    }
                 />
 
-                {isOpenFilterFormDialog && (
-                    <OutwardGpoOrderFilterFormWrapper
-                        open
-                        onClose={() => setIsOpenFilterFormDialog(false)}
-                        filter={filter}
-                        setFilter={setFilter}
-                    />
-                )}
+                <OutwardGpoOrderFilterFormWrapper
+                    open={isOpenFilterFormDialog}
+                    filter={filter}
+                    setFilter={setFilter}
+                    onClose={() => {
+                        setIsOpenFilterFormDialog((prev) => ({
+                            ...prev,
+                            isFilterOpen: false,
+                        }))
+                        if (
+                            isFilterApplied(
+                                isOpenFilterFormDialog.isMenifest,
+                                isRedirect
+                            )
+                        ) {
+                            navigate('/menifest-invoice-orders', {
+                                state: {
+                                    filter,
+                                    warehouseId,
+                                    providerName: courierCompanyEnum.gpo,
+                                },
+                            })
+                        }
+                    }}
+                />
 
                 {/* Table */}
                 <div className="grow overflow-auto">

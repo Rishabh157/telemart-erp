@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:UserAccess.tsx
-// Type: Access Component
-// Last Updated: JULY 14, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,6 +18,7 @@ import {
     setUserModule,
     fieldTypes,
     setUserAccessModuleSearchValue,
+    setAccordionNumberValue,
 } from 'src/redux/slices/access/userAcessSlice'
 import { RootState } from 'src/redux/store'
 import {
@@ -42,13 +36,7 @@ type Props = {
     handleUserAccessSubmit: () => void
 }
 
-// export type AccordianType = {
-//     summary: React.ReactNode
-//     component: any
-// }
-
-// Breadcrumbs
-
+// Breadcrumbs 
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'Hierarchy',
@@ -65,9 +53,11 @@ const UserAcess = ({
     userRole,
     handleUserAccessSubmit,
 }: Props) => {
+
+    const [expanded0, setExpanded0] = React.useState<number | false>(false)
     const modules = [...mergeUserModules]
     const dispatch = useDispatch()
-    const { userAccessItems, searchValue } = useSelector(
+    const { userAccessItems, searchValue, accordionNumber } = useSelector(
         (state: RootState) => state.userAccess
     )
     const { modules: moduleList } = userAccessItems
@@ -292,15 +282,11 @@ const UserAcess = ({
         }
     }
 
-    // States
-    const [expanded, setExpanded] = React.useState<number | false>(false)
     const handleChange =
-        (panel: number) =>
-        (event: React.SyntheticEvent, isExpanded: boolean) => {
-            setExpanded(isExpanded ? panel : false)
-        }
+        (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) =>
+            dispatch(setAccordionNumberValue(isExpanded ? panel : null))
 
-    const [expanded0, setExpanded0] = React.useState<number | false>(false)
+
     const handleChange0 =
         (panel: number) =>
         (event: React.SyntheticEvent, isExpanded0: boolean) => {
@@ -398,8 +384,12 @@ const UserAcess = ({
                                             <Accordion
                                                 key={ind}
                                                 className="shadow-lg border "
-                                                expanded={expanded === ind}
-                                                onChange={handleChange(ind)}
+                                                expanded={
+                                                    accordionNumber === ind
+                                                }
+                                                onChange={
+                                                    handleChange(ind) as any
+                                                }
                                             >
                                                 <AccordionSummary
                                                     expandIcon={

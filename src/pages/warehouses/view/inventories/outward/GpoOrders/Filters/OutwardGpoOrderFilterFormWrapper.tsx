@@ -20,7 +20,10 @@ export type FormInitialValuesFilterWithLabel = {
 }
 
 type Props = {
-    open: boolean
+    open: {
+        isFilterOpen: boolean
+        isMenifest: boolean
+    }
     onClose: () => void
     filter: FormInitialValuesFilterWithLabel
     setFilter: React.Dispatch<
@@ -120,7 +123,12 @@ const OutwardGpoOrderFilterFormWrapper = ({
     }
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
+        <Dialog
+            open={open.isFilterOpen}
+            onClose={onClose}
+            maxWidth="md"
+            fullWidth
+        >
             <Formik
                 enableReinitialize
                 initialValues={initialValues}
@@ -130,7 +138,6 @@ const OutwardGpoOrderFilterFormWrapper = ({
                 {(formikProps) => (
                     <Form>
                         <OutwardGpoOrderFilterForm
-                            open={open}
                             onClose={onClose}
                             formikProps={formikProps}
                             onReset={() => handleReset(formikProps)}

@@ -46,6 +46,7 @@ enum FirstCallApprovalStatus {
 const OutwardShipyaariOrdersTabListingWrapper = () => {
     useUnmountCleanup()
     const { id } = useParams()
+
     const { userData }: any = useSelector((state: RootState) => state?.auth)
     const [, setSelectedItemsTobeDispatch] = useState<any>(null)
 

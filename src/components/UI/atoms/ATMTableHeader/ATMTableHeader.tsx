@@ -34,6 +34,9 @@ type Props = {
     onSearch?: (newValue: string) => void
     isRefresh?: boolean
     isDateFilter?: boolean
+    isSearchSideBtn?: boolean
+    isSearchSideText?: string
+    onClickSearchSideBtn?: () => void
     onSubmitDateHandler?: (values: any) => void
     IsDaterFilterLoading?: boolean
     isAnotherSearch?: boolean
@@ -69,6 +72,9 @@ const ATMTableHeader = ({
     onSubmitDateHandler,
     isAnotherSearch = false,
     anotherSearchValue = '',
+    isSearchSideBtn = false,
+    isSearchSideText = 'Add',
+    onClickSearchSideBtn = () => {},
     anotherSearchPlaceholder = 'Search...',
     onAnotherSearch = () => {},
     isAnotherSearchTwo = false,
@@ -96,8 +102,6 @@ const ATMTableHeader = ({
                         placeholder={placeholder}
                     />
                 </div>
-
-                {children && <div>{children}</div>}
 
                 {isAnotherSearch && (
                     <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
@@ -178,6 +182,7 @@ const ATMTableHeader = ({
                         />
                     </div>
                 )}
+                {children && <div>{children}</div>}
             </div>
 
             {/* Right */}
