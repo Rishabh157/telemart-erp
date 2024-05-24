@@ -9,7 +9,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 type Props = {
     formikProps: FormikProps<FormInitialValuesFilterWithLabel>
     onReset: () => void
-    open: boolean
+
     onClose: () => void
 }
 
@@ -29,7 +29,6 @@ const orderStatus = [
 ]
 
 const OutwardGpoOrderFilterForm = ({
-    open,
     formikProps,
     onReset,
     onClose,

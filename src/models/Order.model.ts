@@ -2,7 +2,6 @@
 export type OrderListResponse = {
     _id: string
     orderNumber: number | string
-    orderAssignedToCourier: string
     inquiryNumber: string
     awbNumber: string
     assignDealerId: string | null
@@ -69,6 +68,8 @@ export type OrderListResponse = {
     dispositionLevelTwoId: string
     dispositionLevelThreeId: string
     preShipCancelationDate: string
+    secondaryCourierPartner: string
+    orderAssignedToCourier: string
     preffered_delivery_start_time: string
     preffered_delivery_end_time: string
     preffered_delivery_date: string
@@ -83,7 +84,6 @@ export type OrderListResponse = {
     dispositionLevelTwo: string
     dispositionLevelThree: string
     stateLabel: string
-    schemeLabel: string
     districtLabel: string
     tehsilLabel: string
     pincodeLabel: string

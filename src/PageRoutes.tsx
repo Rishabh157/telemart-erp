@@ -3385,7 +3385,8 @@ const PageRoutes = () => {
                         />
                     }
                 />
-                <Route path="/menifest-ui" element={<MenifestFormat />} />
+
+                <Route path="/menifest-invoice-orders" element={<MenifestFormat />} />
 
                 <Route
                     path="influencers-management"
