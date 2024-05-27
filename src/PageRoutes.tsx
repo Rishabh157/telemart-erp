@@ -286,6 +286,8 @@ import WarehouseOrderStatusOverviewWrapper from './pages/warehouses/view/invento
 import GpoAwbListingWrapper from './pages/configuration/ConfigurationScreens/gpoAwb/list/GpoAwbListingWrapper'
 import GpoInvoiceAndLabelWrapper from './Receipt/GpoInvoiceAndLabelWrapper'
 import MenifestFormat from './Receipt/MenifestFormat'
+import CourierReturnabsListingWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/list/CourierReturnabsListingWrapper'
+import AddCourierReturnWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/add/AddCourierReturnWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -1000,8 +1002,19 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={
-                                        <InwardCompanyTabsListingWrapper />
+                                        <CourierReturnabsListingWrapper />
                                     }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="courier-return/add"
+                            element={
+                                <Authorization
+                                    children={<AddCourierReturnWrapper />}
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY
                                     }
@@ -3386,7 +3399,10 @@ const PageRoutes = () => {
                     }
                 />
 
-                <Route path="/menifest-invoice-orders" element={<MenifestFormat />} />
+                <Route
+                    path="/menifest-invoice-orders"
+                    element={<MenifestFormat />}
+                />
 
                 <Route
                     path="influencers-management"
