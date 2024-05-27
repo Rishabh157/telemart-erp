@@ -1,17 +1,19 @@
 // |-- Types --|
-export type CompaniesListResponse = {
-    companyName: string
-    websiteUrl: string
-    address: string
-    gstNo: string
-    phoneNo: string
-    isActive: boolean
+export type CourierReturnListResponse = {
+    _id: string
+    shippingProvider: string
+    requestStatus: string
+    orderNumber: number
+    warehouseId: string
+    companyId: string
+    comment: string
     isDeleted: boolean
+    isActive: boolean
     createdAt: string
     updatedAt: string
-    _id: string
     __v: number
 }
+
 export type bankDetails = {
     bankName: string
     branchName: string

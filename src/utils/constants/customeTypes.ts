@@ -1379,3 +1379,38 @@ export const getCancelOrderReasonTypeOptions = () => {
         }
     })
 }
+// Cancel Order Reason Options
+enum CourierRtoTypeRequestStatus {
+    fresh = 'FRESH/REUSEALE',
+    damage = 'DAMAGE',
+    fake = 'FAKE',
+    lost = 'LOST',
+}
+
+export const getCourierRtoRequestStatusOptions = () => {
+    let options = [
+        {
+            label: 'Fresh / Reusable',
+            value: CourierRtoTypeRequestStatus.fresh,
+        },
+        {
+            label: 'Damage',
+            value: CourierRtoTypeRequestStatus.damage,
+        },
+        {
+            label: 'Fake',
+            value: CourierRtoTypeRequestStatus.fake,
+        },
+        {
+            label: 'Lost',
+            value: CourierRtoTypeRequestStatus.lost,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}

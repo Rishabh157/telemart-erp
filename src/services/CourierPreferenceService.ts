@@ -14,6 +14,15 @@ export const CourierPreferenceService = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET ALL *****/
+        getAllCourierPreference: builder.query({
+            providesTags: ['courierprefrence'],
+            query: () => ({
+                url: '/courier-preference',
+                method: 'POST',
+            }),
+        }),
+
         //***** Update *****/
         AddCourierPrefernce: builder.mutation({
             invalidatesTags: ['courierprefrence'],
@@ -37,6 +46,7 @@ export const CourierPreferenceService = apiSlice.injectEndpoints({
 })
 export const {
     useAddCourierPrefernceMutation,
+    useGetAllCourierPreferenceQuery,
     useGetCourierPreferenceQuery,
     useUpdateCourierPrefernceMutation,
 } = CourierPreferenceService

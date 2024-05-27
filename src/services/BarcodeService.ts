@@ -158,7 +158,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
         }),
 
         getInventoriesByBarcode: builder.query({
-            providesTags: ['Barcode'],
+            providesTags: ['Barcode', 'courier-return'],
             query: ({
                 body,
                 companyId,
