@@ -161,16 +161,14 @@ export const barcodeApi = apiSlice.injectEndpoints({
             providesTags: ['Barcode', 'courier-return'],
             query: ({
                 body,
-                companyId,
                 warehouseId,
                 status,
             }: {
                 body: PaginationType
-                companyId: string
                 warehouseId: string
                 status: string
             }) => ({
-                url: `bar-code/inventory/companyid/${companyId}/warehouseid/${warehouseId}/status/${status}`,
+                url: `bar-code/inventory/warehouseid/${warehouseId}/status/${status}`,
                 method: 'Post',
                 body,
             }),

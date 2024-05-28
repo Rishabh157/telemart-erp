@@ -1019,7 +1019,7 @@ const PageRoutes = () => {
                                         <CourierReturnabsListingWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN
                                     }
                                 />
                             }
@@ -1030,7 +1030,7 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={<AddCourierReturnWrapper />}
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_ADD
                                     }
                                 />
                             }

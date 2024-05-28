@@ -63,7 +63,33 @@
             "actionName": "TAB_WAREHOUSE_INVENTORIES",
             "compulsoryFields": [],
             "parentGroup": ["VIEW"],
-            "fields": []
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_PRODUCT_GROUP_NAME",
+                    "fieldName": "Product Group Name",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FRESH_COUNT",
+                    "fieldName": "Fresh Count",
+                    "fieldValue": "totalFreshCount"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_DAMAGE_COUNT",
+                    "fieldName": "Damage Count",
+                    "fieldValue": "totalDamageCount"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_MISSING_COUNT",
+                    "fieldName": "Missing Count",
+                    "fieldValue": "totalMissingCount"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CREATED_DATE",
+                    "fieldName": "Created Date",
+                    "fieldValue": "createdAt"
+                }
+            ]
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES",
@@ -743,6 +769,18 @@
             ]
         },
         {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_GET_MENIFEST",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_GET_MENIFEST",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_INVENTORIES",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS",
@@ -939,6 +977,18 @@
                     "fieldValue": "orderMBKNumber"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_GET_MENIFEST",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_GET_MENIFEST",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_INVENTORIES",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS"
+            ],
+            "fields": []
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_DEALER",
@@ -1351,6 +1401,68 @@
                     "fieldValue": "status"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_DETAILS",
+                "TAB_WAREHOUSE_INWARD_INVENTORIES"
+            ],
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_LIST_SHIPPING_PROVIDER_NAME",
+                    "fieldName": "Shipping Provider Name",
+                    "fieldValue": "shippingProvider"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_LIST_SHIPPING_REQUEST_STATUS",
+                    "fieldName": "Request Status",
+                    "fieldValue": "requestStatus"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_LIST_ORDER_NUMBER",
+                    "fieldName": "Order Number",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_LIST_COMMENT",
+                    "fieldName": "Comment",
+                    "fieldValue": "comment"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_CREATE_DATE",
+                    "fieldName": "Create Date",
+                    "fieldValue": "createdAt"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_ADD",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_BULK_UPLOAD",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_BULK_UPLOAD",
+            "compulsoryFields": [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_CHANGE_STATUS",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_CHANGE_STATUS",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_ORDERS",

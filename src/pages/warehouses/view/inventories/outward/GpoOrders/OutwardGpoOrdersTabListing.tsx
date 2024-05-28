@@ -21,6 +21,8 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import OutwardGpoOrderFilterFormWrapper from './Filters/OutwardGpoOrderFilterFormWrapper'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { courierCompanyEnum } from 'src/utils/constants/enums'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Types --|
 type Props = {
@@ -158,19 +160,23 @@ const OutwardGpoOrdersTabListing = ({
                         setOrderNumberSearchValue(newValue)
                     }
                     children={
-                        <ATMLoadingButton
-                            type="submit"
-                            className="h-[40px] hover:bg-blue-600"
-                            onClick={() => {
-                                setIsOpenFilterFormDialog({
-                                    isFilterOpen: true,
-                                    isMenifest: true,
-                                })
-                                setIsRedirect(true)
-                            }}
-                        >
-                            Get Manifest
-                        </ATMLoadingButton>
+                        isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_GET_MENIFEST
+                        ) && (
+                            <ATMLoadingButton
+                                type="submit"
+                                className="h-[40px] hover:bg-blue-600"
+                                onClick={() => {
+                                    setIsOpenFilterFormDialog({
+                                        isFilterOpen: true,
+                                        isMenifest: true,
+                                    })
+                                    setIsRedirect(true)
+                                }}
+                            >
+                                Get Manifest
+                            </ATMLoadingButton>
+                        )
                     }
                 />
 
