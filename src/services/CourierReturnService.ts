@@ -23,6 +23,16 @@ export const courierReturnApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET ALL INWARD INVETORIES STATUS *****/
+        getInwardInventrioesStatus: builder.query({
+            providesTags: ['courier-return'],
+            query: ({ warehouseId, body }) => ({
+                url: `/courier-rto/get-courier-return-status/${warehouseId}`,
+                method: 'POST',
+                body,
+            }),
+        }),
+
         //***** ADD *****/
         addCourierReturn: builder.mutation({
             invalidatesTags: ['courier-return'],
@@ -67,6 +77,7 @@ export const courierReturnApi = apiSlice.injectEndpoints({
 export const {
     useGetCourierReturnQuery,
     useGetAllCourierReturnQuery,
+    useGetInwardInventrioesStatusQuery,
     useAddCourierReturnMutation,
     useAddCourierReturnExcelSheetMutation,
     useChangeRequestStatusMutation,

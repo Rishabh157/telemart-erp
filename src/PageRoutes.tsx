@@ -288,6 +288,7 @@ import GpoInvoiceAndLabelWrapper from './Receipt/GpoInvoiceAndLabelWrapper'
 import MenifestFormat from './Receipt/MenifestFormat'
 import CourierReturnabsListingWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/list/CourierReturnabsListingWrapper'
 import AddCourierReturnWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/add/AddCourierReturnWrapper'
+import InwardInventoryOverview from './pages/warehouses/view/inventories/inward/overView/InwardInventoryOverview'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -919,6 +920,19 @@ const PageRoutes = () => {
                             />
                         }
                     >
+                        <Route
+                            path="inventory-overview"
+                            element={
+                                <Authorization
+                                    children={
+                                        <InwardInventoryOverview />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_DEALER
+                                    }
+                                />
+                            }
+                        />
                         <Route
                             path="dealer"
                             element={
