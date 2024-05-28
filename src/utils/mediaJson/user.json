@@ -35,6 +35,11 @@
                     "fieldValue": "branchLabel"
                 },
                 {
+                    "fieldId": "USER_LIST_AGENT",
+                    "fieldName": "Agent",
+                    "fieldValue": "isAgent"
+                },
+                {
                     "fieldId": "USER_LIST_USER_DEPARTMENT",
                     "fieldName": "User Department",
                     "fieldValue": "userDepartment"
@@ -64,7 +69,15 @@
             "actionUrl": "",
             "actionName": "EDIT",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_USER_CHANGE_PASSWORD",
+            "actionUrl": "",
+            "actionName": "CHANGE_PASSWORD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
             "fields": []
         }
     ]

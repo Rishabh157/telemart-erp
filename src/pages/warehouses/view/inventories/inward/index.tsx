@@ -54,7 +54,7 @@ const tabs: Tabs[] = [
         label: 'Courier Return',
         icon: MdOutbond,
         path: 'courier-return',
-        name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY,
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN,
     },
 ]
 const InwardsTabs = (props: Props) => {

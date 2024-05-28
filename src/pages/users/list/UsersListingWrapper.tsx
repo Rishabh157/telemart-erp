@@ -94,7 +94,9 @@ const UsersListingWrapper = () => {
                     handleEditActionButton={() => {
                         navigate(`/users/${row?._id}`)
                     }}
-                    isCustomBtn
+                    isCustomBtn={isAuthorized(
+                        UserModuleNameTypes.ACTION_USER_CHANGE_PASSWORD
+                    )}
                     customBtnText="Change Password"
                     handleCustomActionButton={() => {
                         setChangePasswordDialogOpen(true)
@@ -155,6 +157,7 @@ const UsersListingWrapper = () => {
             headerName: 'Agent',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.USER_LIST_AGENT,
             renderCell: (row: UsersListResponse) => {
                 return row?.isAgent ? <FaCheck color="#438a47" /> : null
             },

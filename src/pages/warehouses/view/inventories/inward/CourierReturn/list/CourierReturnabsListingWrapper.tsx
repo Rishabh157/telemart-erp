@@ -22,6 +22,7 @@ import { RootState } from 'src/redux/store'
 import { CourierReturnListResponse } from 'src/models/CourierReturn.model'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import ChangeCourierRequestStatusWrapper from './changeRequestStatus/ChangeCourierRequestStatusWrapper'
+import { isAuthorized } from 'src/utils/authorization'
 
 // |-- Types --|
 export type Tabs = {
@@ -69,7 +70,9 @@ const CourierReturnabsListingWrapper = () => {
             renderCell: (row: CourierReturnListResponse) => (
                 <ActionPopup
                     handleOnAction={() => {}}
-                    isCustomBtn
+                    isCustomBtn={isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_CHANGE_STATUS
+                    )}
                     customBtnText="Change Status"
                     handleCustomActionButton={() => {
                         setSetCurrentId(row?._id)
@@ -79,7 +82,7 @@ const CourierReturnabsListingWrapper = () => {
         },
         {
             field: 'shippingProvider',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_WTC_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_LIST_SHIPPING_PROVIDER_NAME,
             headerName: 'Shipping Provider Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: CourierReturnListResponse) => (
@@ -88,7 +91,7 @@ const CourierReturnabsListingWrapper = () => {
         },
         {
             field: 'requestStatus',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_FROMWAREHOUSE_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_LIST_SHIPPING_REQUEST_STATUS,
             headerName: 'Request Status',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -104,7 +107,7 @@ const CourierReturnabsListingWrapper = () => {
         },
         {
             field: 'orderNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_TOCOMPANY,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_LIST_ORDER_NUMBER,
             headerName: 'Order Number',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -114,7 +117,7 @@ const CourierReturnabsListingWrapper = () => {
         },
         {
             field: 'comment',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_TOWAREHOUSE_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_LIST_COMMENT,
             headerName: 'Comment',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -124,7 +127,7 @@ const CourierReturnabsListingWrapper = () => {
         },
         {
             field: 'createdAt',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COMPANY_LIST_INSERTED_DATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_CREATE_DATE,
             headerName: 'Create Date',
             flex: 'flex-[1_1_0%]',
             align: 'center',

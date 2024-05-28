@@ -78,23 +78,29 @@ const CourierReturnabsListingTabs = ({ columns, rows }: Props) => {
                     onChange={handleFileChange} // Assuming addExcelFile can handle the file input change event
                 />
 
-                {isAuthorized(UserModuleNameTypes.ACTION_SALE_ORDER_ADD) && (
-                    <div className="flex gap-x-4">
+                <div className="flex gap-x-4">
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_BULK_UPLOAD
+                    ) && (
                         <button
                             onClick={() => fileInputRef?.current?.click()}
                             className="bg-primary-main text-white rounded py-1 px-3"
                         >
                             + Bulk Upload
                         </button>
+                    )}
 
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COURIER_RETURN_ADD
+                    ) && (
                         <button
                             onClick={() => navigate('add')}
                             className="bg-primary-main text-white rounded py-1 px-3"
                         >
                             + Add
                         </button>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
 
             <div className="border flex flex-col h-[calc(100%)] rounded bg-white">

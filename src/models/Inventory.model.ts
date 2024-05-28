@@ -49,6 +49,11 @@ export type UpdateInventory = {
 
 export type WareHouseInventory = {
     count: string
+    productGroupLabel: string
+    wareHouseLabel: string
+    totalFreshCount: number
+    totalDamageCount: number
+    totalMissingCount: number
     firstDocument: {
         barcodeGroupNumber: string
         barcodeNumber: string

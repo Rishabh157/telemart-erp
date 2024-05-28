@@ -14,61 +14,50 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
 import { useGetInventoriesByBarcodeQuery } from 'src/services/BarcodeService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const columns: columnTypes[] = [
     {
         field: 'productName',
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_PRODUCT_GROUP_NAME,
         renderCell: (row: WareHouseInventory) => (
             <span> {row?.firstDocument?.productGroupLabel} </span>
         ),
     },
     {
-        field: 'quantity',
-        headerName: 'Quantity',
+        field: 'totalFreshCount',
+        headerName: 'Fresh Count',
         flex: 'flex-[1_1_0%]',
-
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FRESH_COUNT,
         renderCell: (row: WareHouseInventory) => (
-            <span className="p-1"> {row.count} </span>
+            <span className="p-1"> {row.totalFreshCount} </span>
         ),
     },
     {
-        field: 'warehouse',
-        headerName: 'Warehouse',
+        field: 'totalDamageCount',
+        headerName: 'Damage Count',
         flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_DAMAGE_COUNT,
         renderCell: (row: WareHouseInventory) => (
-            <span> {row?.firstDocument?.wareHouseLabel} </span>
-        ),
-    },
-    // {
-    //     field: 'lotNumber',
-    //     headerName: 'lotNumber',
-    //     flex: 'flex-[1_1_0%]',
-    //     renderCell: (row: WareHouseInventory) => (
-    //         <span> {row?.firstDocument?.lotNumber} </span>
-    //     ),
-    // },
-    // {
-    //     field: 'outerBoxbarCodeNumber',
-    //     headerName: 'outerbox code',
-    //     flex: 'flex-[1_1_0%]',
-    //     renderCell: (row: WareHouseInventory) => (
-    //         <span> {row?.firstDocument?.outerBoxbarCodeNumber} </span>
-    //     ),
-    // },
-    {
-        field: 'status',
-        headerName: 'status',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: WareHouseInventory) => (
-            <span> {row?.firstDocument?.status} </span>
+            <span className="p-1"> {row.totalDamageCount} </span>
         ),
     },
     {
-        field: 'date',
-        headerName: 'created date',
+        field: 'totalMissingCount',
+        headerName: 'Missing Count',
         flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_MISSING_COUNT,
+        renderCell: (row: WareHouseInventory) => (
+            <span className="p-1"> {row.totalMissingCount} </span>
+        ),
+    },
+    {
+        field: 'createdAt',
+        headerName: 'Created date',
+        flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CREATED_DATE,
         renderCell: (row: WareHouseInventory) =>
             formatedDateTimeIntoIst(row?.firstDocument?.createdAt),
     },
@@ -112,7 +101,6 @@ const InventoryListingWrapper = () => {
                 orderByValue: -1,
                 isPaginationRequired: true,
             },
-            companyId: userData?.companyId as string,
             warehouseId: wareHouseId as string,
             status: barcodeStatusEnum.atWarehouse,
         }),
