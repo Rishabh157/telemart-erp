@@ -13,6 +13,12 @@ import AccessDenied from 'src/AccessDenied'
 type Props = {}
 
 const tabs: Tabs[] = [
+     {
+        label: 'Inventory overview',
+        icon: MdOutbond,
+        path: 'inventory-overview',
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY,
+    },
     {
         label: 'Dealer',
         icon: MdOutbond,

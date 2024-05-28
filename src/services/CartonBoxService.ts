@@ -31,7 +31,6 @@ export const cartonBoxApi = apiSlice.injectEndpoints({
             query: (body: AddCartonBox) => ({
                 url: '/carton-box/add',
                 method: 'POST',
-
                 body,
             }),
         }),
@@ -41,7 +40,6 @@ export const cartonBoxApi = apiSlice.injectEndpoints({
             invalidatesTags: ['CartonBox'],
             query: ({ body, id }: UpdateCartonBox) => ({
                 url: `/carton-box/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -52,7 +50,6 @@ export const cartonBoxApi = apiSlice.injectEndpoints({
             providesTags: ['CartonBox'],
             query: (id) => ({
                 url: `/carton-box/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -61,7 +58,6 @@ export const cartonBoxApi = apiSlice.injectEndpoints({
         exportCartonBoxData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
