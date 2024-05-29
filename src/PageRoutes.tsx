@@ -1227,7 +1227,7 @@ const PageRoutes = () => {
                         <Authorization
                             children={<WarehouseTransferListingWrapper />}
                             permission={
-                                UserModuleNameTypes.NAV_WAREHOUSE_TO_COMPANY_TRANSFER
+                                UserModuleNameTypes.NAV_WAREHOUSE_TRANSFER
                             }
                         />
                     }

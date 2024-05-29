@@ -55,7 +55,7 @@ const OrderViewWrapper = () => {
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
                         {row?.assignWarehouseId ? (
                             row?.firstCallApproval ? (
                                 <Chip
@@ -176,7 +176,7 @@ const OrderViewWrapper = () => {
         },
         {
             field: 'shippingCharges',
-            headerName: 'Shippgig Charges',
+            headerName: 'shipping Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',

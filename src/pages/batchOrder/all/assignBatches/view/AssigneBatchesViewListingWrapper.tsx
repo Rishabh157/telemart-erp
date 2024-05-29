@@ -69,7 +69,7 @@ const AssigneBatchesViewListingWrapper = () => {
                         //             onClick={() => {
                         //                 navigate(`/orders/view/${row?._id}`)
                         //             }}
-                        //             className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                        //             className="w-full px-4 py-2 text-left hover:bg-gray-100"
                         //         >
                         //             View
                         //         </button>
@@ -171,7 +171,7 @@ const AssigneBatchesViewListingWrapper = () => {
         },
         {
             field: 'shippingCharges',
-            headerName: 'Shippgig Charges',
+            headerName: 'shipping Charges',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ASSIGN_BATCH_LIST_SHIPPING_CHARGES,
             align: 'start',
