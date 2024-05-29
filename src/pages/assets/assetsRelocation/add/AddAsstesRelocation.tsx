@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddAssetsRelocation.tsx
-// Type: Add Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -47,7 +40,6 @@ const AddAsstesRelocation = () => {
                         <div>
                             <button
                                 type="button"
-                                // onClick={() => formikProps.handleSubmit()}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
                                     true ? 'disabled:opacity-25' : ''
                                 }`}
@@ -60,9 +52,6 @@ const AddAsstesRelocation = () => {
                     {/* Form */}
                     <div className="grow pt-2 pb-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
-                            {/* Field1 */}
-
-                            {/* Field 3 */}
                             <ATMTextField
                                 name=""
                                 value={''}

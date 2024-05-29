@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // |-- Built-in Dependencies --|
-import React, { useState, useEffect } from 'react' //  { useState, useEffect } // ,
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 // |-- External Dependencies --|
 
@@ -11,9 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     useAddUserAccessMutation,
     useGetUserAccessQuery,
-    useIsUserExistsQuery,
-    useUpdateUserAccessByUserIdMutation,
-    useUpdateUserAccessMutation,
+    // useIsUserExistsQuery,
 } from 'src/services/useraccess/UserAccessServices'
 import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
@@ -21,16 +18,14 @@ import { setUserAccess } from 'src/redux/slices/access/userAcessSlice'
 
 const UserAccessWrapper = () => {
     const [apiStatus, setApiStatus] = useState(false)
-    const { state } = useLocation()
-    const { dept, userRole } = state
-    const userId = state?.userId
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const dept = queryParams.get('dept')
+    const userRole = queryParams.get('userRole')
+    const userId = queryParams.get('userId')
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [buttonValue, setButtonValue] = useState('save')
-    const [isUserExists, setIsUserIxists] = useState(false)
     const [addUserAccess] = useAddUserAccessMutation()
-    const [updateUserAccess] = useUpdateUserAccessMutation()
-    const [updateByUserId] = useUpdateUserAccessByUserIdMutation()
+
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const { data, isLoading, isFetching } = useGetUserAccessQuery(
@@ -43,21 +38,9 @@ const UserAccessWrapper = () => {
         }
     )
 
-    // iue => if user exists
-    const {
-        data: iueData,
-        isLoading: iueIsLoading,
-        isFetching: iueIsFetching,
-    } = useIsUserExistsQuery(userId, { skip: !userId })
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
-
-    useEffect(() => {
-        if (iueData?.data) {
-            setIsUserIxists(iueData?.data)
-        }
-    }, [iueData, iueIsLoading, iueIsFetching])
 
     const handleUserAccessSubmit = () => {
         setApiStatus(true)
@@ -72,15 +55,14 @@ const UserAccessWrapper = () => {
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        setButtonValue('update')
                         showToast('success', 'User Access successfully!')
-                        navigate(`/configurations/user-access`, {
-                            state: {
-                                dept: dept,
-                                userRole: userRole,
-                                userId: userId,
-                            },
-                        })
+                        // navigate(`/configurations/user-access`, {
+                        //     state: {
+                        //         dept: dept,
+                        //         userRole: userRole,
+                        //         userId: userId,
+                        //     },
+                        // })
                     } else {
                         showToast('error', res?.data?.message)
                     }
@@ -95,10 +77,8 @@ const UserAccessWrapper = () => {
     useEffect(() => {
         if (!isLoading && !isFetching && data) {
             if (data?.data) {
-                setButtonValue('update')
                 dispatch(setUserAccess(data?.data?.module))
             } else {
-                setButtonValue('save')
                 dispatch(setUserAccess([]))
             }
         }

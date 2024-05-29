@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AssetsRelocationListing.tsx
-// Type: List Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -24,7 +17,7 @@ import { isAuthorized } from 'src/utils/authorization'
 
 const AssetsRelocationListing = () => {
     const breadcrumbs: BreadcrumbType[] = [
-        {
+        { 
             label: 'Assets',
             path: '/dashboard',
         },
@@ -50,8 +43,7 @@ const AssetsRelocationListing = () => {
                         onClick={() => navigate('add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
-                        {' '}
-                        + Add{' '}
+                        + Add
                     </button>
                 )}
             </div>
@@ -85,12 +77,6 @@ const AssetsRelocationListing = () => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-   <FilterDialogWarpper
-   onClose={()=> setIsFilterOpen(false)}
-   />
-  )} */}
         </div>
     )
 }

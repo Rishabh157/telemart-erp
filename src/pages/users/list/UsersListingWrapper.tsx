@@ -184,13 +184,9 @@ const UsersListingWrapper = () => {
                         className="underline text-primary-main"
                         style={{ cursor: 'pointer' }}
                         onClick={() =>
-                            navigate(`/configurations/user-access`, {
-                                state: {
-                                    dept: row?.userDepartment,
-                                    userRole: row?.userRole,
-                                    userId: row?._id,
-                                },
-                            })
+                            navigate(
+                                `/configurations/user-access?dept=${row?.userDepartment}&userRole=${row?.userRole}&userId=${row?._id}`
+                            )
                         }
                     >
                         {row.userRole.replaceAll('_', ' ')}

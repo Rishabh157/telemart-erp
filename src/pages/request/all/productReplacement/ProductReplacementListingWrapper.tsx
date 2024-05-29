@@ -113,13 +113,15 @@ const ProductReplacementListingWrapper = () => {
         _id: string,
         approve: boolean,
         remark: string,
-        orderReferenceNumber: number
+        orderReferenceNumber: number,
+        complaintNumber: string
     ) => {
         accountApproval({
             id: _id,
             accountApproval: approve,
             accountRemark: remark,
             orderReferenceNumber,
+            complaintNumber: complaintNumber,
         }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -657,7 +659,8 @@ const ProductReplacementListingWrapper = () => {
                                                         res?.value,
                                                         parseInt(
                                                             row?.orderNumber
-                                                        )
+                                                        ),
+                                                        row?.complaintNumber
                                                     )
                                                 }
                                                 if (res.isDenied) {
@@ -667,7 +670,8 @@ const ProductReplacementListingWrapper = () => {
                                                         res?.value,
                                                         parseInt(
                                                             row?.orderNumber
-                                                        )
+                                                        ),
+                                                        row?.complaintNumber
                                                     )
                                                 }
                                             })

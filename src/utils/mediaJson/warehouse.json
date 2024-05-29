@@ -991,6 +991,18 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_INVENTORY_OVERVIEW",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_INVENTORY_OVERVIEW",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_DETAILS",
+                "TAB_WAREHOUSE_INWARD_INVENTORIES"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_DEALER",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_DEALER",
