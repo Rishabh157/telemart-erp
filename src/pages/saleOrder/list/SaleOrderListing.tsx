@@ -99,7 +99,7 @@ const SaleOrderListing = ({
                 ) && (
                     <button
                         onClick={() => navigate('add-sale-order')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
+                        className="px-3 py-1 text-white rounded bg-primary-main"
                     >
                         + Add Sale Order
                     </button>
@@ -135,7 +135,7 @@ const SaleOrderListing = ({
                     />
                 )}
                 {/* Table */}
-                <div className="grow overflow-auto">
+                <div className="overflow-auto grow">
                     <ATMTable
                         isLoading={isTableLoading}
                         columns={columns}

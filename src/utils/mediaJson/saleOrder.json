@@ -15,6 +15,22 @@
                     "fieldValue": "soNumber"
                 },
                 {
+                    "fieldId": "SALE_ORDER_LIST_INVOICE_NUMBER",
+                    "fieldName": "Invoice Number",
+                    "fieldValue": "invoiceDate"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_INVOICE_DATE",
+                    "fieldName": "Invoice Date",
+                    "fieldValue": "invoiceDate"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_TOTAL_INVOICE_AMOUNT",
+                    "fieldName": "Total Invoice Amount",
+                    "fieldValue": "totalInvoiceAmount"
+                },
+
+                {
                     "fieldId": "SALE_ORDER_LIST_DEALER_NAME",
                     "fieldName": "Dealer",
                     "fieldValue": "dealerLabel"
@@ -45,7 +61,7 @@
                     "fieldValue": "dhApprovedAt"
                 },
                 {
-                    "fieldId": "SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE",
+                    "fieldId": "SALE_ORDER_LIST_DH_EXPECTED_DELIVERY_DATE",
                     "fieldName": "Expected Delivery Date",
                     "fieldValue": "expectedDeliveryDate"
                 },
@@ -63,6 +79,36 @@
                     "fieldId": "SALE_ORDER_LIST_APPROVAL",
                     "fieldName": "APPROVAL",
                     "fieldValue": "accApproved"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_INVOICE_PDF",
+                    "fieldName": "PDF",
+                    "fieldValue": "invoice"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_GENERATE_CANCEL_IRN",
+                    "fieldName": "Generate/Cancel IRN",
+                    "fieldValue": ""
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_DH_IRN_STATUS",
+                    "fieldName": "IRN Status",
+                    "fieldValue": ""
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_ACK_DATE",
+                    "fieldName": "'ACK Date",
+                    "fieldValue": ""
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_PRINT_EWB",
+                    "fieldName": "'Print EWB",
+                    "fieldValue": ""
                 }
             ]
         },

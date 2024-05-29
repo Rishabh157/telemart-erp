@@ -195,7 +195,7 @@ const MultiOrderSearchListingWrapper = () => {
         },
         {
             field: 'shippingCharges',
-            headerName: 'Shippgig Charges',
+            headerName: 'shipping Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',

@@ -48,7 +48,7 @@ const InwardCustomerTabs = ({ columns, rows }: Props) => {
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="overflow-auto grow ">
                     <ATMTable
                         columns={columns}
                         rows={rows}

@@ -335,7 +335,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Invoice Date',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_DATE,
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?.invoiceDate} </span>
             ),
@@ -345,7 +345,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Total Invoice Amount',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_TOTAL_INVOICE_AMOUNT,
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?.totalInvoiceAmount} </span>
             ),
@@ -402,12 +402,12 @@ const SaleOrderListingWrapper = () => {
                             return (
                                 <div
                                     key={ind}
-                                    className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center"
+                                    className="grid grid-cols-3 mb-1 text-center border rounded border-slate-400"
                                 >
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
-                                    <div className="col-span-1 py-1 px-2">
+                                    <div className="col-span-1 px-2 py-1">
                                         {item?.productSalesOrder?.quantity}
                                     </div>
                                 </div>
@@ -504,7 +504,7 @@ const SaleOrderListingWrapper = () => {
                                 {row?.dhApproved === null ? (
                                     <button
                                         id="btn"
-                                        className=" overflow-hidden cursor-pointer z-0"
+                                        className="z-0 overflow-hidden cursor-pointer "
                                         onClick={() => {
                                             showConfirmationDialog({
                                                 title: 'DH Approve',
@@ -560,7 +560,7 @@ const SaleOrderListingWrapper = () => {
                                 {row?.accApproved === null ? (
                                     <button
                                         id="btn"
-                                        className=" overflow-hidden cursor-pointer z-0"
+                                        className="z-0 overflow-hidden cursor-pointer "
                                         onClick={() => {
                                             setInvoiceSoNumber(row?._id) // for genrating pdf
                                             showConfirmationDialog({
@@ -647,7 +647,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'STATUS',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_STATUS,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> {row?.documents?.[0]?.status} </span>
@@ -658,7 +658,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'PDF',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_PDF,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return row?.documents?.[0]?.invoice ? (
@@ -677,7 +677,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Generate/Cancel IRN',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_GENERATE_CANCEL_IRN,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> - </span>
@@ -688,7 +688,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Expected Delivery Date',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_EXPECTED_DELIVERY_DATE,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
@@ -701,7 +701,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'IRN Status',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_IRN_STATUS,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span>- </span>
@@ -712,7 +712,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'ACK Date',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_ACK_DATE,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span> -</span>
@@ -723,7 +723,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'PRINT EWB',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_PRINT_EWB,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
@@ -745,7 +745,7 @@ const SaleOrderListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <div className="z-50 relative">
+            <div className="relative z-50">
                 <SaleOrderListing
                     columns={columns}
                     rows={items}
@@ -754,7 +754,7 @@ const SaleOrderListingWrapper = () => {
                     filter={filter}
                 />
             </div>
-            <div className="opacity-0 -z-10 absolute top-0">
+            <div className="absolute top-0 opacity-0 -z-10">
                 <DispatchedInvoiceTemplate
                     ref={saleOrderInvoiceRef}
                     invoice={invoiceData || null}

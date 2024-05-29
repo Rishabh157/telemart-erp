@@ -77,7 +77,7 @@ const OutwardCustomerTabsListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
                         {row.firstCallApproval ? (
                             <Chip
                                 className="cursor-pointer"
@@ -222,7 +222,7 @@ const OutwardCustomerTabsListingWrapper = () => {
         {
             field: 'shippingCharges',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_SHIPPING_CHARGES,
-            headerName: 'Shippgig Charges',
+            headerName: 'Shipping Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
@@ -370,6 +370,16 @@ const OutwardCustomerTabsListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.customerName || '-'}</div>
+            ),
+        },
+        {
+            field: 'areaLabel',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_AREA,
+            headerName: 'Area',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px] text-xs',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.areaLabel}</div>
             ),
         },
         {
