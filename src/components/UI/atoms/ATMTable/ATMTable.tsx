@@ -61,12 +61,13 @@ const ATMTable = <T extends {}>({
     noDataFoundText = `${NOT_DATA_FOUND}`,
     noDataFoundClass = 'text-slate-500',
 }: ATMTablePropTypes<T>) => {
+
     const tabsRender = columns?.some((nav) => {
         if (nav.field === 'action') {
             return false
         }
         return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
-    })
+    })    
 
     if (!tabsRender) {
         return <AccessDenied />
