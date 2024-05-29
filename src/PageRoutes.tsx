@@ -1229,7 +1229,7 @@ const PageRoutes = () => {
                         <Authorization
                             children={<WarehouseTransferListingWrapper />}
                             permission={
-                                UserModuleNameTypes.NAV_WAREHOUSE_TO_COMPANY_TRANSFER
+                                UserModuleNameTypes.NAV_WAREHOUSE_TRANSFER
                             }
                         />
                     }
@@ -1240,7 +1240,7 @@ const PageRoutes = () => {
                         <Authorization
                             children={<AddWarehouseTransferWrapper />}
                             permission={
-                                UserModuleNameTypes.NAV_WAREHOUSE_TO_COMPANY_TRANSFER
+                                UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_ADD
                             }
                         />
                     }
@@ -1251,7 +1251,7 @@ const PageRoutes = () => {
                         <Authorization
                             children={<EditWarehouseTransferWrapper />}
                             permission={
-                                UserModuleNameTypes.NAV_WAREHOUSE_TO_COMPANY_TRANSFER
+                                UserModuleNameTypes.ACTION_WAREHOUSE_TRANSFER_EDIT
                             }
                         />
                     }
@@ -2686,7 +2686,7 @@ const PageRoutes = () => {
                         <Authorization
                             children={<WarehouseFirstCallPageWrapper />}
                             permission={
-                                UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN
+                                UserModuleNameTypes.NAV_WAREHOUSE_FIRST_CALL_ORDERS
                             }
                         />
                     }

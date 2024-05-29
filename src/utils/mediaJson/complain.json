@@ -22,7 +22,7 @@
                 },
                 {
                     "fieldId": "COMPLAIN_LIST_COMPLAINT_LABEL",
-                    "fieldName": "Scheme",
+                    "fieldName": "Complaint Label",
                     "fieldValue": "complaintbyLabel"
                 },
                 {
