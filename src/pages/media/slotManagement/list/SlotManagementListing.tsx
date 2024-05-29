@@ -48,7 +48,7 @@ const SlotManagementListing = ({ columns, rows }: Props) => {
             path: '/dashboard',
         },
         {
-            label: 'Slot Defination',
+            label: 'Slot Definition',
         },
     ]
 

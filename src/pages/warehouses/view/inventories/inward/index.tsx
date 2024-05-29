@@ -17,7 +17,7 @@ const tabs: Tabs[] = [
         label: 'Inventory overview',
         icon: MdOutbond,
         path: 'inventory-overview',
-        name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_COMPANY,
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_INVENTORY_OVERVIEW,
     },
     {
         label: 'Dealer',

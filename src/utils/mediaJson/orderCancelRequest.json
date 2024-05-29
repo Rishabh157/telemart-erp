@@ -54,7 +54,7 @@
             "actionUrl": "",
             "actionName": "EDIT",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -62,7 +62,7 @@
             "actionUrl": "",
             "actionName": "DELETE",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": ["LIST"],
             "fields": []
         }
     ]

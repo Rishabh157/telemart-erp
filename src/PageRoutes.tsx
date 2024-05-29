@@ -924,9 +924,7 @@ const PageRoutes = () => {
                             path="inventory-overview"
                             element={
                                 <Authorization
-                                    children={
-                                        <InwardInventoryOverview />
-                                    }
+                                    children={<InwardInventoryOverview />}
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_DEALER
                                     }
@@ -2631,6 +2629,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
+                    
                     <Route
                         path="assets-relocation/add"
                         element={

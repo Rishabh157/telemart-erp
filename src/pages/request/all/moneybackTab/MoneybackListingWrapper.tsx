@@ -29,7 +29,6 @@ import AddAccountApprovedFormWrapper from './AddAccountApprovedForm/AddAccountAp
 import AddCustomerInfoFormWrapper from './AddCustomerInfoForm/AddCustomerInfoFormWrapper'
 import StatusDialog from './MoneyBackStatusDialog/statusDialog'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
-import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const MoneybackListingWrapper = () => {
     useUnmountCleanup()
@@ -52,7 +51,7 @@ const MoneybackListingWrapper = () => {
     const moneybackState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    const { userData } = useGetLocalStorage()
+
     const [managerLevelApproval] = useMangerFirstApprovalMutation()
 
     const { page, rowsPerPage, searchValue } = moneybackState
@@ -63,12 +62,7 @@ const MoneybackListingWrapper = () => {
             searchValue: searchValue,
             params: ['complaintNumber', 'orderNumber'],
             page: page,
-            filterBy: [
-                {
-                    fieldName: 'companyId',
-                    value: userData?.companyId,
-                },
-            ],
+            filterBy: [],
             dateFilter: {},
             orderBy: 'createdAt',
             orderByValue: -1,
