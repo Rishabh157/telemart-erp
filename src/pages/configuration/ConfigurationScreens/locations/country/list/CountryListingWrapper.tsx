@@ -19,10 +19,11 @@ const CountryListingWrapper = () => {
         (state: RootState) => state.country
     )
 
+    console.log('searchValue', searchValue)
+
     return (
         <CountryListing
-            contries={contries}
-            items={contries.filter((countryItems: any) =>
+            contries={contries.filter((countryItems: any) =>
                 countryItems?.label
                     ?.toLocaleLowerCase()
                     ?.includes(searchValue?.toLocaleLowerCase())

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:CountryListing.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -33,10 +26,9 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 // |-- Types --|
 type Props = {
     contries: any[]
-    items: any
 }
 
-const CountryListing = ({ contries, items }: Props) => {
+const CountryListing = ({ contries }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
     const { selectedLocationCountries, searchValue }: any = useSelector(
