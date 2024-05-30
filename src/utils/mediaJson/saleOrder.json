@@ -15,6 +15,21 @@
                     "fieldValue": "soNumber"
                 },
                 {
+                    "fieldId": "SALE_ORDER_LIST_INVOICE_NUMBER",
+                    "fieldName": "Invoice Number",
+                    "fieldValue": "invoiceNumber"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_INVOICE_DATE",
+                    "fieldName": "Invoice Date",
+                    "fieldValue": "invoiceDate"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_TOTAL_AMOUNT_INVOICE",
+                    "fieldName": "Total Amount Invoice",
+                    "fieldValue": "totalAmountInvoice"
+                },
+                {
                     "fieldId": "SALE_ORDER_LIST_DEALER_NAME",
                     "fieldName": "Dealer",
                     "fieldValue": "dealerLabel"
@@ -45,11 +60,6 @@
                     "fieldValue": "dhApprovedAt"
                 },
                 {
-                    "fieldId": "SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE",
-                    "fieldName": "Expected Delivery Date",
-                    "fieldValue": "expectedDeliveryDate"
-                },
-                {
                     "fieldId": "SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS",
                     "fieldName": "Acc Approved Status",
                     "fieldValue": "accApproved"
@@ -61,8 +71,38 @@
                 },
                 {
                     "fieldId": "SALE_ORDER_LIST_APPROVAL",
-                    "fieldName": "APPROVAL",
+                    "fieldName": "Approval",
                     "fieldValue": "accApproved"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_PDF",
+                    "fieldName": "PDF",
+                    "fieldValue": "PDF"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_GENERATE_CANCEL_IRN",
+                    "fieldName": "Generate/Cancel IRN",
+                    "fieldValue": "generateCancelIRN"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE",
+                    "fieldName": "Expected Delivery Date",
+                    "fieldValue": "expectedDeliveryDate"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_IRN_STATUS",
+                    "fieldName": "IRN Status",
+                    "fieldValue": "irnStatus"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_ACK_DATE",
+                    "fieldName": "ACK Date",
+                    "fieldValue": "ackDate"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_PRINT_WEB",
+                    "fieldName": "PRINT EWB",
+                    "fieldValue": "printWeb"
                 }
             ]
         },
@@ -79,7 +119,7 @@
             "actionUrl": "",
             "actionName": "EDIT",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": ["LIST"],
             "fields": []
         },
         {
@@ -87,7 +127,7 @@
             "actionUrl": "",
             "actionName": "DELETE",
             "compulsoryFields": [],
-            "parentGroup": [],
+            "parentGroup": ["LIST"],
             "fields": []
         }
     ]

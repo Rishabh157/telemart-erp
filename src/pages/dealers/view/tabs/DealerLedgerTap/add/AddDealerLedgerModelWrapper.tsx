@@ -30,6 +30,7 @@ export type FormInitialValues = {
     dealerId: string
     companyId: string
     taxAmount: number
+    itemId: string
 }
 
 const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({
@@ -52,11 +53,13 @@ const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({
         dealerId: '',
         companyId: '',
         taxAmount: 0,
+        itemId: '',
     }
 
     const validationSchema = object({
         creditAmount: number(),
         debitAmount: number(),
+        itemId: string().required('Please select item'),
         remark: string().required('Required'),
     })
     //    Form Submit Handler
@@ -72,6 +75,7 @@ const AddDealerLedgerModelWrapper: React.FC<PropsType> = ({
                 companyId: companyId || '',
                 dealerId: dealerId,
                 taxAmount: values.taxAmount,
+                itemId: values.itemId,
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

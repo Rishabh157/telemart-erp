@@ -222,7 +222,7 @@ const OutwardCustomerTabsListingWrapper = () => {
         {
             field: 'shippingCharges',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_SHIPPING_CHARGES,
-            headerName: 'Shippgig Charges',
+            headerName: 'Shipping Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
