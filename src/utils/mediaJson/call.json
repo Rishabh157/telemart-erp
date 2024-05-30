@@ -16,9 +16,9 @@
                     "fieldValue": "didNo"
                 },
                 {
-                    "fieldId": "CALL_LIST_",
+                    "fieldId": "CALL_LIST_MOBILE_NUMBER",
                     "fieldName": "Mobile Number",
-                    "fieldValue": "incomingCallerNo"
+                    "fieldValue": "mobileNo"
                 },
                 {
                     "fieldId": "CALL_LIST_DISPOSITION_LEBEL_TWO",

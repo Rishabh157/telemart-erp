@@ -32,7 +32,7 @@
                 },
                 {
                     "fieldId": "NDR_DISPOSITION_LIST_SUB_DISPOSITION",
-                    "fieldName": "Rto Attempt",
+                    "fieldName": "Sub Disposition",
                     "fieldValue": "rtoAttempt"
                 },
                 {

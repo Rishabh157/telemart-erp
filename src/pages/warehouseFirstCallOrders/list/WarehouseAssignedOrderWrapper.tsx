@@ -96,7 +96,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
                         {row.firstCallApproval ? (
                             <Chip
                                 className="cursor-pointer"

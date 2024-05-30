@@ -38,7 +38,7 @@ const MultiOrderSearchListing = ({
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
                 {/*Table Header */}
-                <div className="flex justify-between mb-3 px-2">
+                <div className="flex justify-between px-2 mb-3">
                     <div className="w-[80%] flex gap-x-4">
                         <ATMTextArea
                             name=""
@@ -92,7 +92,7 @@ const MultiOrderSearchListing = ({
                             }
                             loadingText="Searching..."
                             onClick={handleSubmit as any}
-                            className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-30 mt-4"
+                            className="flex items-center px-2 py-1 mt-4 text-white rounded bg-primary-main w-30"
                         >
                             Search
                         </ATMLoadingButton>
@@ -100,7 +100,7 @@ const MultiOrderSearchListing = ({
                 </div>
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="overflow-auto grow ">
                     <ATMTable
                         columns={columns}
                         rows={rows}

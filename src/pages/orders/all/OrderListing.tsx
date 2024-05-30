@@ -384,7 +384,7 @@ const OrderListing = ({
                                 onClick={() => {
                                     navigate(`/orders/view/${row?._id}`)
                                 }}
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                                className="w-full px-4 py-2 text-left hover:bg-gray-100"
                             >
                                 View
                             </button>
@@ -432,7 +432,7 @@ const OrderListing = ({
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
                         {row?.assignWarehouseId ? (
                             row?.firstCallApproval ? (
                                 <Chip
@@ -800,7 +800,7 @@ const OrderListing = ({
             extraClasses: 'min-w-[150px]',
             renderCell: (row: any) => {
                 return (
-                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
                         {row?.approved ? (
                             <Chip
                                 className="cursor-pointer"
@@ -979,9 +979,9 @@ const OrderListing = ({
             <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
                 {/*Table Header */}
                 {orderStatus === 'global-search' ? (
-                    <div className="flex gap-x-4 py-2 px-2">
-                        <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
-                            <BiSearch className="text-slate-600 text-xl" />
+                    <div className="flex px-2 py-2 gap-x-4">
+                        <div className="flex items-center p-1 border rounded shadow w-fit hover:border-primary-main">
+                            <BiSearch className="text-xl text-slate-600" />
                             <input
                                 className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
                                 value={orderNumberSearchValue}
@@ -995,8 +995,8 @@ const OrderListing = ({
                                 }}
                             />
                         </div>
-                        <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
-                            <BiSearch className="text-slate-600 text-xl" />
+                        <div className="flex items-center p-1 border rounded shadow w-fit hover:border-primary-main">
+                            <BiSearch className="text-xl text-slate-600" />
                             <input
                                 className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
                                 value={mobileNumberSearchValue}
@@ -1067,7 +1067,7 @@ const OrderListing = ({
                 )}
 
                 {/* Table */}
-                <div className="grow overflow-auto">
+                <div className="overflow-auto grow">
                     <ATMTable
                         extraClasses="w-[200%]"
                         columns={

@@ -256,7 +256,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <span className="block w-full text-left px-2 py-1 cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
                         {row.firstCallApproval ? (
                             <Chip
                                 className="cursor-pointer"
@@ -429,7 +429,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         {
             field: 'shippingCharges',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHIPPING_CHARGES,
-            headerName: 'Shipping Charges',
+             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px] text-xs',

@@ -218,12 +218,12 @@ const WarehouseTransferListingWrapper = () => {
                             return (
                                 <div
                                     key={ind}
-                                    className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center"
+                                    className="grid grid-cols-3 mb-1 text-center border rounded border-slate-400"
                                 >
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
-                                    <div className="col-span-1 py-1 px-2">
+                                    <div className="col-span-1 px-2 py-1">
                                         {item?.productSalesOrder?.quantity}
                                     </div>
                                 </div>
@@ -353,7 +353,7 @@ const WarehouseTransferListingWrapper = () => {
                                 {row?.firstApproved === null ? (
                                     <button
                                         id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
+                                        className="z-0 overflow-hidden cursor-pointer"
                                         onClick={() => {
                                             showConfirmationDialog({
                                                 title: 'First Approve',
@@ -409,7 +409,7 @@ const WarehouseTransferListingWrapper = () => {
                                 {row?.secondApproved === null ? (
                                     <button
                                         id="btn"
-                                        className=" overflow-hidden cursor-pointer z-0"
+                                        className="z-0 overflow-hidden cursor-pointer "
                                         onClick={() => {
                                             showConfirmationDialog({
                                                 title: 'Second Approval',

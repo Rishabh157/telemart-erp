@@ -580,7 +580,7 @@ const InwardCustomerTabsListingWrapper = () => {
                         {/* SO NO. & DEALER NAME */}
                         <div className="grid grid-cols-4 pb-2 border-slate-300 border-b-[1px]">
                             <div>
-                                <div className="flex gap-1 items-center">
+                                <div className="flex items-center gap-1">
                                     <div className="font-bold">
                                         Order Number
                                     </div>
@@ -626,7 +626,7 @@ const InwardCustomerTabsListingWrapper = () => {
                                 </div>
                             </div>
 
-                            <div className="mt-2 grid grid-cols-4 gap-x-4">
+                            <div className="grid grid-cols-4 mt-2 gap-x-4">
                                 <ATMTextField
                                     name=""
                                     disabled={
@@ -685,14 +685,14 @@ const InwardCustomerTabsListingWrapper = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-end items-end ">
+                        <div className="flex items-end justify-end ">
                             <div>
                                 <ATMLoadingButton
                                     disabled={!handleDisableDispatchButton()}
                                     isLoading={barcodeDispatchInfo?.isLoading}
                                     loadingText="Dispatching"
                                     onClick={() => handleDispatchBarcode()}
-                                    className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
+                                    className="flex items-center px-4 py-1 text-white rounded bg-primary-main"
                                 >
                                     Dispatch
                                 </ATMLoadingButton>
