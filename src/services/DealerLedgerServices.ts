@@ -31,7 +31,6 @@ export const dealerLedgerApi = apiSlice.injectEndpoints({
             query: (body: LedgerAdd) => ({
                 url: '/ledger/add',
                 method: 'POST',
-
                 body,
             }),
         }),
@@ -45,6 +44,7 @@ export const dealerLedgerApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
         //***** delete *****/
         deleteDealerLedger: builder.mutation({
             invalidatesTags: ['ledger'],
@@ -53,6 +53,7 @@ export const dealerLedgerApi = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+
         //***** deactive *****/
         deactiveDealerLedger: builder.mutation({
             invalidatesTags: ['ledger'],

@@ -264,7 +264,7 @@ const InwardCustomerTabsListingWrapper = () => {
         },
         {
             field: 'tehsilLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_TEHSIL_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_TALUK,
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -293,7 +293,7 @@ const InwardCustomerTabsListingWrapper = () => {
         {
             field: 'shippingCharges',
             name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_SHIPPING_CHARGES,
-            headerName: 'shipping Charges',
+            headerName: 'Shipping Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',

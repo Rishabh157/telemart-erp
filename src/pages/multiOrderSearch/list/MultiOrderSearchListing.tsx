@@ -73,15 +73,11 @@ const MultiOrderSearchListing = ({
                             }
                             placeholder="Enter Mobile number... "
                             className="rounded"
-                            onChange={(newValue) => {
-                                let formatedCommaValue = newValue?.replace(
+                            onChange={(event: string) => {
+                                let formatedCommaValue = event?.replace(
                                     /\D+/g,
                                     ','
                                 ) // Replace non-digits with commas
-                                formatedCommaValue = formatedCommaValue.replace(
-                                    /^,/,
-                                    ''
-                                ) // Remove leading comma, if any
                                 setFieldValue(
                                     'mobileNumbers',
                                     formatedCommaValue
@@ -90,7 +86,10 @@ const MultiOrderSearchListing = ({
                         />
 
                         <ATMLoadingButton
-                            disabled={apiStatus}
+                            disabled={
+                                !values.orderNumbers.length &&
+                                !values.mobileNumbers.length
+                            }
                             loadingText="Searching..."
                             onClick={handleSubmit as any}
                             className="flex items-center px-2 py-1 mt-4 text-white rounded bg-primary-main w-30"

@@ -562,7 +562,7 @@ const OrderListing = ({
         },
         {
             field: 'shippingCharges',
-            headerName: 'shipping Charges',
+            headerName: 'Shipping Charges',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SHIPPING_CHARGES,
             align: 'start',
