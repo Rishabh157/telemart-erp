@@ -80,6 +80,11 @@
                     "fieldValue": "totalDamageCount"
                 },
                 {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_RTV_COUNT",
+                    "fieldName": "RTV Count",
+                    "fieldValue": "totalRtvCount"
+                },
+                {
                     "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_MISSING_COUNT",
                     "fieldName": "Missing Count",
                     "fieldValue": "totalMissingCount"
