@@ -40,9 +40,8 @@ const AssignBatchesViewListing = ({
         (state: RootState) => state.listingPagination
     )
 
-    const { searchValue, isTableLoading } = createBatchState
+    const { isTableLoading } = createBatchState
 
-    console.log('searchValue: ', searchValue)
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
             <div className="flex justify-between items-center h-[45px]">

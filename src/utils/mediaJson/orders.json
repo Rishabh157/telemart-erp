@@ -229,9 +229,9 @@
             "fields": []
         },
         {
-            "actionId": "ACTION_ORDER_APPROVAL_TAB_LIST",
+            "actionId": "ACTION_ORDER_PREPAID_ORDER_TAB_LIST",
             "actionUrl": "",
-            "actionName": "ORDER_APPROVAL_TAB",
+            "actionName": "PREPAID_ORDER_TAB",
             "compulsoryFields": [],
             "parentGroup": ["LIST"],
             "fields": []
