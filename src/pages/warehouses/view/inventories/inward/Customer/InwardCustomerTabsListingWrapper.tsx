@@ -16,23 +16,23 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { useParams } from 'react-router-dom'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import {
-    useGetAllBarcodeOfDealerOutWardDispatchMutation,
+    useGetCustomerReturnBarcodeMutation,
     useAddCustomerInwardBarcodesMutation,
 } from 'src/services/BarcodeService'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { showToast } from 'src/utils'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { BarcodeListResponseType, OrderListResponse } from 'src/models'
+import { BarcodeListResponseType } from 'src/models'
 import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import { useGetOrderQuery } from 'src/services/OrderService'
-import moment from 'moment'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { getCustomerInwardBarcodeOptionTypes } from 'src/utils/constants/customeTypes'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { useGetCustomerWarehouseReturnQuery } from 'src/services/WareHouseService'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 // |-- Types --|
 export type Tabs = {
@@ -41,15 +41,41 @@ export type Tabs = {
     path?: string
 }
 
+type CustomerWarehouseReturnOrders = {
+    ccRemark: string
+    companyId: string
+    createdAt: string
+    schemeName: string
+    schemeQuantity: number
+    isActive: boolean
+    isCompleted: boolean
+    isDeleted: boolean
+    orderNumber: number
+    requestType: string
+    updatedAt: string
+    warehouseId: string
+    barcodeData: {
+        barcodeId: string
+        barcode: string
+        _id: string
+    }[]
+    productInfo: {
+        productGroupName: string
+        quantity: number
+        _id: string
+    }[]
+    __v: number
+    _id: string
+}
+
 const InwardCustomerTabsListingWrapper = () => {
     useUnmountCleanup()
     const [isShow, setIsShow] = useState<boolean>(false)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeCondition, setBarcodeCondition] = useState<string>()
-    const [barcodeQuantity, setBarcodeQuantity] = useState<number>(0)
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
-        useState<OrderListResponse | null>(null)
+        useState<CustomerWarehouseReturnOrders | null>(null)
     const dispatch = useDispatch<AppDispatch>()
     const params = useParams()
     const warehouseId = params.id
@@ -61,15 +87,15 @@ const InwardCustomerTabsListingWrapper = () => {
         (state: RootState) => state?.auth
     )
 
-    const { items } = useGetCustomListingData<OrderListResponse>({
-        useEndPointHook: useGetOrderQuery({
+    const { items } = useGetCustomListingData<CustomerWarehouseReturnOrders>({
+        useEndPointHook: useGetCustomerWarehouseReturnQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['didNo', 'mobileNo'],
+            params: ['orderNumber', 'requestStatus', 'ccRemark', 'requestType'],
             page: page,
             filterBy: [
-                { fieldName: 'status', value: 'RTO' },
-                { fieldName: 'assignWarehouseId', value: warehouseId },
+                { fieldName: 'warehouseId', value: warehouseId },
+                { fieldName: 'companyId', value: userData?.companyId },
             ],
             dateFilter: {},
             orderBy: 'createdAt',
@@ -78,7 +104,7 @@ const InwardCustomerTabsListingWrapper = () => {
         }),
     })
 
-    const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
+    const [getBarCode] = useGetCustomerReturnBarcodeMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useAddCustomerInwardBarcodesMutation()
 
@@ -110,21 +136,29 @@ const InwardCustomerTabsListingWrapper = () => {
         }
     }
 
-    const handleBarcodeSubmit = (
-        barcodeNumber: string,
-        productGroupId: string
-    ) => {
+    const handleBarcodeSubmit = (barcodeNumber: string) => {
         dispatch(setFieldCustomized(true))
         getBarCode({
             id: barcodeNumber,
-            groupId: productGroupId,
-            status: barcodeStatusEnum.rtv,
-            companyId: userData?.companyId as string,
+            status: barcodeStatusEnum.delivered,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
-                        setBarcodeList([...res?.data?.data])
+                        const isExist = barcodeList?.some((ele: any) => {
+                            return (
+                                ele.barcodeNumber ===
+                                res?.data?.data?.[0]?.barcodeNumber
+                            )
+                        })
+                        if (!isExist) {
+                            setBarcodeList((prev: any) => [
+                                ...prev,
+                                ...res?.data?.data,
+                            ])
+                        } else {
+                            showToast('error', 'Already existed barcode')
+                        }
                     }
                 }
             })
@@ -141,7 +175,10 @@ const InwardCustomerTabsListingWrapper = () => {
             id: selectedItemsTobeDispatch?._id,
             condition: barcodeCondition,
             warehouseId: warehouseId,
-            body: { barcode: filterValue || [] },
+            body: {
+                barcode: filterValue || [],
+                orderNumber: selectedItemsTobeDispatch?.orderNumber,
+            },
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -155,10 +192,6 @@ const InwardCustomerTabsListingWrapper = () => {
             .catch((err: any) => {
                 console.error(err)
             })
-    }
-
-    const handleDisableDispatchButton = () => {
-        return barcodeQuantity === barcodeList?.flat(1)?.length
     }
 
     const columns: columnTypes[] = [
@@ -175,7 +208,6 @@ const InwardCustomerTabsListingWrapper = () => {
                     handleCustomActionButton={() => {
                         setIsShow(true)
                         setSelectedItemsTobeDispatch(row)
-                        setBarcodeQuantity(row?.shcemeQuantity)
                     }}
                 />
             ),
@@ -185,384 +217,73 @@ const InwardCustomerTabsListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_NUMBER,
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
+            extraClasses: 'min-w-[200px]',
+            renderCell: (row: CustomerWarehouseReturnOrders) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
         },
         {
-            field: 'orderReferenceNumber',
+            field: 'requestType',
             name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_REF_NUMBER,
-            headerName: 'Order Ref No.',
+            headerName: 'Request Type',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row.orderReferenceNumber || '-'}</span>
-            ),
-        },
-        {
-            field: 'inquiryNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_INQUIRY_NUMBER,
-            headerName: 'Enquiry No.',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            // renderCell: (row: OrderListResponse) => <span></span>,
-        },
-        {
-            field: 'firstCallRemark',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_FIRSTCALL_REMARK,
-            headerName: '1st call remark',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.firstCallRemark || '-'}</span>
-            ),
-        },
-        {
-            field: 'firstCallState',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_FIRSTCALL_STATUS,
-            headerName: 'first Call State',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.firstCallState || '-'}</span>
-            ),
-        },
-        {
-            field: 'firstCallCallBackDate',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_FIRSTCALL_CALLBACK_DATE,
-            headerName: 'call back date',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.firstCallCallBackDate || '-'}</span>
-            ),
-        },
-        {
-            field: 'assignWarehouseLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ASSIGNED_WAREHOUSE,
-            headerName: 'Warehouse',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.assignWarehouseLabel || '-'}</span>
-            ),
-        },
-        {
-            field: 'trackingNo',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_TRACKING_NUMBER,
-            headerName: 'Tracking No.',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <span>-</span>,
-        },
-        {
-            field: 'tehsilLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_TALUK,
-            headerName: 'Taluk',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.tehsilLabel}</span>
-            ),
-        },
-        {
-            field: 'statusDate',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_STATUS_DATE,
-            headerName: 'Status Date',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-        },
-        {
-            field: 'status',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_STATUS,
-            headerName: 'Status',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
-        },
-        {
-            field: 'shippingCharges',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_SHIPPING_CHARGES,
-            headerName: 'Shipping Charges',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.deliveryCharges}</span>
+            renderCell: (row: CustomerWarehouseReturnOrders) => (
+                <span>{row.requestType || '-'}</span>
             ),
         },
         {
             field: 'schemeName',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_NAME,
-            headerName: 'Scheme Name',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_REF_NUMBER,
+            headerName: 'Barcode Quantity',
             flex: 'flex-[1_1_0%]',
-            align: 'center',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.schemeName} </span>
+            renderCell: (row: CustomerWarehouseReturnOrders) => (
+                <span>{row.schemeName || '-'}</span>
             ),
         },
         {
-            field: 'schemeCode',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_CODE,
-            headerName: 'Scheme Code',
+            field: 'ccRemark',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_INQUIRY_NUMBER,
+            headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
-            align: 'center',
+            align: 'start',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.schemeCode} </span>
-            ),
-        },
-        {
-            field: 'shcemeQuantity',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_SCHEME_QUANTITY,
-            headerName: 'Quantity',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.shcemeQuantity} </span>
-            ),
-        },
-        {
-            field: 'price',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PRICE,
-            headerName: 'Price',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
-        },
-        {
-            field: 'pincodeLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PINCODE_LABEl,
-            headerName: 'Pincode',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.pincodeLabel} </span>
-            ),
-        },
-        {
-            field: 'paymentMode',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_PAYMENT_MODE,
-            headerName: 'Payment Mode',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.paymentMode} </span>
+            renderCell: (row: CustomerWarehouseReturnOrders) => (
+                <span>{row?.ccRemark}</span>
             ),
         },
         {
             field: 'createdAt',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CREATE_ORDER_DATE,
-            headerName: 'Order Date',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_FIRSTCALL_REMARK,
+            headerName: 'Created Date',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
-        },
-
-        {
-            field: 'edpDate',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_EDP_DATE,
-            headerName: 'EDP Date',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <div>-</div>,
-        },
-        {
-            field: 'districtLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DISTRICT_LABEL,
-            headerName: 'District',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.districtLabel}</div>
-            ),
-        },
-        {
-            field: 'dispositionLevelThree',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DISPOSITION_LEVEL_THREE,
-            headerName: 'Disposition',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dispositionLevelThree}</div>
-            ),
-        },
-        {
-            field: 'dealerStatus',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DEALER_STATUS,
-            headerName: 'Dealer Status',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    {/* {row?.dealerStatus === true ? 'Active' : 'DeActive'} */}
-                </div>
-            ),
-        },
-        {
-            field: 'dealerCode',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_DEALER_CODE,
-            headerName: 'Dealer Code',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dealerCode || '-'}</div>
-            ),
-        },
-        {
-            field: 'customerName',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CUSTOMER_NAME,
-            headerName: 'Customer Name',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.customerName || '-'}</div>
-            ),
-        },
-        {
-            field: 'areaLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_AREA_LABEL,
-            headerName: 'Customer Address',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[30px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.areaLabel}</div>
-            ),
-        },
-        {
-            field: 'mobileNo',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_MOBILE_NO,
-            headerName: 'Contact No.',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.mobileNo}</div>
-            ),
-        },
-        {
-            field: 'channelName',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CHHANEL_NAME,
-            headerName: 'Channel Name',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.channelLabel?.[0]}</div>
-            ),
-        },
-        {
-            field: 'callCenterLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_CALLCENTER_LABEL,
-            headerName: 'CC Name',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.callCenterLabel}</div>
-            ),
-        },
-
-        {
-            field: 'remark',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_REMARK,
-            headerName: 'Remark',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.remark}</div>
-            ),
-        },
-        {
-            field: 'agent',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_AGENT_NAME,
-            headerName: 'Agent',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.agentName}</div>
-            ),
-        },
-        {
-            field: 'preffered_delivery_date',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_DATE,
-            headerName: 'Preffred Delivery Date Time',
-            flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <>
-                        <span>
-                            {row?.preffered_delivery_date
-                                ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
-                                : '-'}
-                        </span>
-                    </>
-                )
-            },
-        },
-        {
-            field: 'preffered_delivery_date',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_PREFFERED_DELIVERY_TIME,
-            headerName: 'Preffred Delivery Time',
-            flex: 'flex-[3_3_0%]',
-            align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => {
-                return row?.preffered_delivery_start_time &&
-                    row?.preffered_delivery_end_time ? (
-                    <span className="flex gap-1">
-                        {(row?.preffered_delivery_start_time).replaceAll(
-                            '_',
-                            ' '
-                        ) || '-'}{' '}
-                        -{' '}
-                        {(row?.preffered_delivery_end_time).replaceAll(
-                            '_',
-                            ' '
-                        ) || '-'}
-                    </span>
-                ) : (
-                    '-'
-                )
-            },
-        },
-        {
-            field: 'orderMBKNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_INWARD_INVENTORIES_CUSTOMER_LIST_ORDER_MBK_NUMBER,
-
-            headerName: 'MBK Number',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[250px]',
-            renderCell: (row: any) => (
-                <span> {row.orderMBKNumber || '-'} </span>
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: CustomerWarehouseReturnOrders) => (
+                <span>{formatedDateTimeIntoIst(row?.createdAt)}</span>
             ),
         },
     ]
+
+    const getActualInwardingBarcodeLenght = (
+        schemeQuantity: number,
+        productInfo: any
+    ) => {
+        let totalProductBarcode = productInfo?.reduce(
+            (acc: number, ele: any) => {
+                return (acc += schemeQuantity * ele?.quantity)
+            },
+            0
+        )
+        return totalProductBarcode
+    }
+
+    // total barcode of product5
+    const totalBarcodeOfProducts = getActualInwardingBarcodeLenght(
+        selectedItemsTobeDispatch?.schemeQuantity || 0,
+        selectedItemsTobeDispatch?.productInfo
+    )
 
     return (
         <>
@@ -599,9 +320,9 @@ const InwardCustomerTabsListingWrapper = () => {
                                     <span className="font-bold">Item Name</span>
                                     <span className="px-4">:</span>
                                     <span>
-                                        {
-                                            selectedItemsTobeDispatch?.productGroupLabel
-                                        }
+                                        {selectedItemsTobeDispatch?.productInfo?.map(
+                                            (ele: any) => ele?.productGroupName
+                                        )}
                                     </span>
                                     {/* </div> */}
 
@@ -613,9 +334,7 @@ const InwardCustomerTabsListingWrapper = () => {
                                             :
                                         </span>
                                         <span>
-                                            {
-                                                selectedItemsTobeDispatch?.shcemeQuantity
-                                            }
+                                            {totalBarcodeOfProducts}
                                             {barcodeList?.length ? (
                                                 <> / {barcodeList?.length}</>
                                             ) : (
@@ -630,8 +349,8 @@ const InwardCustomerTabsListingWrapper = () => {
                                 <ATMTextField
                                     name=""
                                     disabled={
-                                        barcodeList?.length ===
-                                        selectedItemsTobeDispatch?.shcemeQuantity
+                                        totalBarcodeOfProducts ===
+                                        barcodeList?.length
                                     }
                                     value={barcodeNumber}
                                     label="Barcode Number"
@@ -639,11 +358,7 @@ const InwardCustomerTabsListingWrapper = () => {
                                     className="shadow bg-white rounded w-[50%] "
                                     onChange={(e) => {
                                         if (e.target.value?.length > 6) {
-                                            handleBarcodeSubmit(
-                                                e.target.value,
-                                                selectedItemsTobeDispatch?.productGroupId ||
-                                                    ''
-                                            )
+                                            handleBarcodeSubmit(e.target.value)
                                         }
                                         setBarcodeNumber(e.target.value)
                                     }}
@@ -688,7 +403,12 @@ const InwardCustomerTabsListingWrapper = () => {
                         <div className="flex items-end justify-end ">
                             <div>
                                 <ATMLoadingButton
-                                    disabled={!handleDisableDispatchButton()}
+                                    disabled={
+                                        !(
+                                            totalBarcodeOfProducts ===
+                                            barcodeList?.length
+                                        )
+                                    }
                                     isLoading={barcodeDispatchInfo?.isLoading}
                                     loadingText="Dispatching"
                                     onClick={() => handleDispatchBarcode()}
