@@ -15,6 +15,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 import {
     setRowsPerPage,
     setPage,
+    setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
@@ -40,7 +41,8 @@ const CourierReturnabsListingTabs = ({ columns, rows }: Props) => {
         (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, isTableLoading } = inwardRequestState
+    const { page, rowsPerPage, isTableLoading, searchValue } =
+        inwardRequestState
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files
@@ -113,6 +115,8 @@ const CourierReturnabsListingTabs = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
+                    searchValue={searchValue}
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                 />

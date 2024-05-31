@@ -13,6 +13,7 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        
         // for warehouse first call
         getWHFristCallAssignedOrder: builder.query({
             providesTags: ['order', 'batch-order'],

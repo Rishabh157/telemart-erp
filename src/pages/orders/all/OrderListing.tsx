@@ -194,12 +194,12 @@ const OrderListing = ({
                 ]
                 setFilterBy([...filterAssignedOrders])
                 return
-            case 'approved':
+            case 'prepaid':
                 let filterApproval = [
                     ...filter,
                     {
-                        fieldName: 'approved',
-                        value: false,
+                        fieldName: 'status',
+                        value: 'PREPAID',
                     },
                 ]
                 setFilterBy([...filterApproval])
@@ -424,6 +424,17 @@ const OrderListing = ({
             ),
         },
         {
+            field: 'assignWarehouseLabel',
+            headerName: 'Assigned Warehouse',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            align: 'start',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignWarehouseLabel || '-'}</span>
+            ),
+        },
+        {
             field: 'firstCallApproval',
             headerName: '1st Call Approval',
             flex: 'flex-[1_1_0%]',
@@ -499,17 +510,6 @@ const OrderListing = ({
             ),
         },
         {
-            field: 'assignWarehouseLabel',
-            headerName: 'Assigned Warehouse',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.assignWarehouseLabel || '-'}</span>
-            ),
-        },
-        {
             field: 'orderReferenceNumber',
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
@@ -562,7 +562,7 @@ const OrderListing = ({
         },
         {
             field: 'shippingCharges',
-            headerName: 'shipping Charges',
+            headerName: 'Shipping Charges',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SHIPPING_CHARGES,
             align: 'start',
@@ -828,8 +828,8 @@ const OrderListing = ({
                                     })
                                 }}
                                 className="cursor-pointer"
-                                label="Disapproved"
-                                color="error"
+                                label="Pending"
+                                color="warning"
                                 variant="outlined"
                                 size="small"
                             />

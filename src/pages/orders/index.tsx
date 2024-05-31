@@ -73,10 +73,10 @@ const ViewOrder = () => {
             name: UserModuleNameTypes.ACTION_ORDER_ASSIGN_ORDER_TAB_LIST,
         },
         {
-            label: 'Order Approval',
+            label: 'Prepaid Order',
             icon: MdOutbond,
-            path: '?orderStatus=approved',
-            name: UserModuleNameTypes.ACTION_ORDER_APPROVAL_TAB_LIST,
+            path: '?orderStatus=prepaid',
+            name: UserModuleNameTypes.ACTION_ORDER_PREPAID_ORDER_TAB_LIST,
         },
         {
             label: 'Delivered',

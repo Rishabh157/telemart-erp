@@ -320,7 +320,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Invoice No',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span
                     title={row?.documents?.[0]?.invoiceNumber}
@@ -345,7 +345,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'Total Invoice Amount',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_TOTAL_INVOICE_AMOUNT,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_TOTAL_AMOUNT_INVOICE,
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?.totalInvoiceAmount} </span>
             ),
@@ -658,7 +658,7 @@ const SaleOrderListingWrapper = () => {
             headerName: 'PDF',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_PDF,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_PDF,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return row?.documents?.[0]?.invoice ? (
@@ -673,7 +673,7 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
-            field: '',
+            field: 'generateCancelGrn',
             headerName: 'Generate/Cancel IRN',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
@@ -684,11 +684,11 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
-            field: '',
+            field: 'expectedDeliveryDate',
             headerName: 'Expected Delivery Date',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_EXPECTED_DELIVERY_DATE,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
@@ -697,18 +697,18 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
-            field: '',
+            field: 'irnStatus',
             headerName: 'IRN Status',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_IRN_STATUS,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_IRN_STATUS,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return <span>- </span>
             },
         },
         {
-            field: '',
+            field: 'ackDate',
             headerName: 'ACK Date',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
@@ -719,11 +719,11 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
-            field: '',
+            field: 'printWeb',
             headerName: 'PRINT EWB',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_PRINT_EWB,
+            name: UserModuleNameTypes.SALE_ORDER_LIST_PRINT_WEB,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (

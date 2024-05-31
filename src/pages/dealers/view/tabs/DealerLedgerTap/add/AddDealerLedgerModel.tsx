@@ -10,6 +10,9 @@ import { FormInitialValues } from './AddDealerLedgerModelWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import { NoteType } from 'src/models/Ledger.model'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
 
 // |-- Types --|
 type Props = {
@@ -20,6 +23,13 @@ type Props = {
 
 const AddDealerLedgerModel = ({ formikProps, apiStatus, addType }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    const { options: productGroupOptions } = useCustomOptions({
+        useEndPointHook: useGetAllProductGroupQuery(''),
+        keyName: 'groupName',
+        value: '_id',
+    })
+
     return (
         <div className="p-2 px-4">
             <div className="flex justify-between items-center py-2">
@@ -69,32 +79,42 @@ const AddDealerLedgerModel = ({ formikProps, apiStatus, addType }: Props) => {
                             }}
                         />
                     </div>
-                    <div>
-                        <ATMTextField
-                            name={'taxAmount'}
-                            value={values.taxAmount}
-                            label="Tax Amount"
-                            placeholder="Tax Amount"
-                            onChange={(e) => {
-                                const inputValue = e.target.value
-                                if (!isNaN(Number(inputValue))) {
-                                    setFieldValue('taxAmount', e.target.value)
-                                }
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <ATMTextArea
-                            name={'remark'}
-                            value={values.remark}
-                            onChange={(newValue) => {
-                                setFieldValue('remark', newValue)
-                            }}
-                            label="Remark"
-                            placeholder="Remark"
-                            className="shadow bg-white rounded"
-                        />
-                    </div>
+
+                    {/* <ATMTextField
+                        name={'taxAmount'}
+                        value={values.taxAmount}
+                        label="Tax Amount"
+                        placeholder="Tax Amount"
+                        onChange={(e) => {
+                            const inputValue = e.target.value
+                            if (!isNaN(Number(inputValue))) {
+                                setFieldValue('taxAmount', e.target.value)
+                            }
+                        }}
+                    /> */}
+
+                    <ATMSelectSearchable
+                        required
+                        name={`itemId`}
+                        value={values.itemId}
+                        onChange={(newValue) => {
+                            setFieldValue('itemId', newValue)
+                        }}
+                        label="Product Group"
+                        selectLabel="Select Product Group"
+                        options={productGroupOptions}
+                    />
+
+                    <ATMTextArea
+                        name={'remark'}
+                        value={values.remark}
+                        onChange={(newValue) => {
+                            setFieldValue('remark', newValue)
+                        }}
+                        label="Remark"
+                        placeholder="Remark"
+                        className="shadow bg-white rounded"
+                    />
                 </div>
             </div>
 

@@ -74,6 +74,21 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** Get Customer Return Barcode *****/
+        getCustomerReturnBarcode: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({
+                id,
+                status,
+            }: {
+                id: string
+                status: string
+            }) => ({
+                url: `/bar-code/customer-return/barcode/${id}/status/${status}`,
+                method: 'GET',
+            }),
+        }),
+
         //***** GET *****/
         getAllByGroup: builder.query({
             providesTags: ['Barcode'],
@@ -110,7 +125,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
             providesTags: ['Barcode'],
             query: (id) => ({
                 url: `/bar-code/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -119,7 +133,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
         exportBarcodeData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
@@ -207,11 +220,12 @@ export const barcodeApi = apiSlice.injectEndpoints({
         addCustomerInwardBarcodes: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: ({ id, condition, warehouseId, body }) => ({
-                url: `/bar-code/courier-return-product/${id}/condition/${condition}/warehouse/${warehouseId}`,
+                url: `/bar-code/customer-return-product/${id}/condition/${condition}/warehouse/${warehouseId}`,
                 method: 'PUT',
                 body,
             }),
         }),
+
         //warehouse barcode insert in Carton box
         getBarcodeOfWarehouse: builder.mutation({
             invalidatesTags: ['Barcode'],
@@ -249,6 +263,7 @@ export const {
     useExportBarcodeDataMutation,
     useDeleteBarcodeMutation,
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
+    useGetCustomerReturnBarcodeMutation,
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,
     useGetAllByGroupQuery,

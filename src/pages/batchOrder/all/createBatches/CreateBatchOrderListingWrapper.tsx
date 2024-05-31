@@ -196,7 +196,7 @@ const CreateBatchOrderListingWrapper = () => {
         },
         {
             field: 'shippingCharges',
-            headerName: 'shipping Charges',
+            headerName: 'Shipping Charges',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.BATCH_ORDER_LIST_SHIPPING_CHARGES,
             align: 'start',

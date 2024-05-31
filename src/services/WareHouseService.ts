@@ -35,6 +35,16 @@ export const wareHouseApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** Get Customer Warehouse Return *****/
+        getCustomerWarehouseReturn: builder.query({
+            providesTags: ['WareHouse'],
+            query: (body: PaginationType) => ({
+                url: '/customer-wh-return',
+                method: 'POST',
+                body,
+            }),
+        }),
+
         //***** ADD *****/
         addWareHouse: builder.mutation({
             invalidatesTags: ['WareHouse'],
@@ -80,6 +90,7 @@ export const {
     useUpdateWareHouseMutation,
     useGetWareHouseByIdQuery,
     useGetPaginationWareHousesQuery,
+    useGetCustomerWarehouseReturnQuery,
     useDeleteWareHouseMutation,
     useGetDealerWareHousesQuery,
 } = wareHouseApi

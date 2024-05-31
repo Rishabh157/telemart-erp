@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Ledger.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export enum NoteType {
     CREDIT_NOTE_CREATED = 'CREDIT_NOTE_CREATED',
@@ -38,6 +31,7 @@ export type LedgerAdd = {
     companyId: string
     dealerId: string
     taxAmount: number
+    itemId: string
 }
 
 export type UpdateLedger = {
