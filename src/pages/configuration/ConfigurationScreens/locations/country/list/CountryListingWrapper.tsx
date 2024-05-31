@@ -19,8 +19,6 @@ const CountryListingWrapper = () => {
         (state: RootState) => state.country
     )
 
-    console.log('searchValue', searchValue)
-
     return (
         <CountryListing
             contries={contries.filter((countryItems: any) =>

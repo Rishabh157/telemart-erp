@@ -54,6 +54,15 @@ const columns: columnTypes[] = [
         ),
     },
     {
+        field: 'totalRtvCount',
+        headerName: 'RTV Count',
+        flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_RTV_COUNT,
+        renderCell: (row: WareHouseInventory) => (
+            <span className="p-1"> {row.totalRtvCount} </span>
+        ),
+    },
+    {
         field: 'createdAt',
         headerName: 'Created date',
         flex: 'flex-[1_1_0%]',
