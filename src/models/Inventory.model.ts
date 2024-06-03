@@ -53,6 +53,7 @@ export type WareHouseInventory = {
     wareHouseLabel: string
     totalFreshCount: number
     totalDamageCount: number
+    totalRtvCount: number
     totalMissingCount: number
     firstDocument: {
         barcodeGroupNumber: string
