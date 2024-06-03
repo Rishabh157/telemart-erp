@@ -54,6 +54,8 @@ export type WareHouseInventory = {
     totalFreshCount: number
     totalDamageCount: number
     totalRtvCount: number
+    expiredCount:number
+    totalFakeCount:number
     totalMissingCount: number
     firstDocument: {
         barcodeGroupNumber: string

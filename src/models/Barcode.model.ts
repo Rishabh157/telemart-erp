@@ -36,10 +36,9 @@ export type ProductBarcodeGroupResponse = {
 export type AddBarcode = {
     productGroupId: string
     barcodeGroupNumber: string
-    // wareHouseId: string | null
     lotNumber: string
     quantity: number
-    companyId: string
+    expiryDate: string
 }
 
 export type UpdateBarcode = {

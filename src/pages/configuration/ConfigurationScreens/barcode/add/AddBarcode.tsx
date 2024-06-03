@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddBarcode.tsx
-// Type: ADD Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -23,13 +16,14 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { useDispatch } from 'react-redux'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import moment from 'moment'
 
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
     productGroupOption: SelectOption[]
-    wareHouseOption: SelectOption[] | []
 }
 
 // Breadcrumbs
@@ -43,12 +37,7 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const AddBarcode = ({
-    formikProps,
-    apiStatus,
-    productGroupOption,
-    wareHouseOption,
-}: Props) => {
+const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
     const { values, setFieldValue } = formikProps
 
     const dispatch = useDispatch()
@@ -111,17 +100,7 @@ const AddBarcode = ({
                                     }
                                 }}
                             />
-                            {/* Warehouse 
-                            <ATMSelectSearchable
-                                name="wareHouseId"
-                                value={values.wareHouseId}
-                                label="Warehouse"
-                                onChange={(e) =>
-                                    handleSetFieldValue('wareHouseId', e)
-                                }
-                                options={wareHouseOption}
-                            /> */}
-                            {/* Product Group  */}
+
                             <ATMSelectSearchable
                                 required
                                 name="productGroup"
@@ -133,7 +112,6 @@ const AddBarcode = ({
                                 options={productGroupOption}
                             />
 
-                            {/* Quantity  */}
                             <ATMTextField
                                 required
                                 name="quantity"
@@ -148,6 +126,20 @@ const AddBarcode = ({
                                             e.target.value
                                         )
                                     }
+                                }}
+                            />
+
+                            <ATMDatePicker
+                                label="Expiry Date"
+                                name="expiryDate"
+                                // size="xs"
+                                value={values.expiryDate}
+                                dateTimeFormat="DD/MM/YY"
+                                onChange={(e) => {
+                                    setFieldValue(
+                                        'expiryDate',
+                                        moment(e).format('YYYY-MM-DD')
+                                    )
                                 }}
                             />
                         </div>

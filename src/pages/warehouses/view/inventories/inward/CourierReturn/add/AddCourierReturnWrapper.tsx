@@ -50,7 +50,7 @@ const AddCourierReturnWrapper = (props: Props) => {
         shippingProvider: string().required('Shipping provider is required'),
         requestStatus: string().required('Please select status'),
         orderNumber: string().required('Enter a order number'),
-        comment: string(),
+        comment: string().required(),
     })
 
     //    Form Submit Handler
@@ -72,10 +72,14 @@ const AddCourierReturnWrapper = (props: Props) => {
                         )
                         dispatch(setFieldCustomized(false))
                     } else {
-                        showToast('error', res?.data?.message)
+                        if (!res?.error?.data?.status) {
+                            showToast('error', res?.error?.data?.message)
+                        } else {
+                            showToast('error', res?.data?.message)
+                        }
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error',  res?.error?.data?.message)
                 }
                 setApiStatus(false)
             })

@@ -34,7 +34,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
         //********* GET PRODUCT BARCODE GROUP *********//
-
         getProductGroupBarcode: builder.query({
             providesTags: ['Barcode'],
             query: (body: PaginationType) => ({
@@ -77,13 +76,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
         //***** Get Customer Return Barcode *****/
         getCustomerReturnBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
-            query: ({
-                id,
-                status,
-            }: {
-                id: string
-                status: string
-            }) => ({
+            query: ({ id, status }: { id: string; status: string }) => ({
                 url: `/bar-code/customer-return/barcode/${id}/status/${status}`,
                 method: 'GET',
             }),
@@ -98,13 +91,13 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+
         //***** ADD *****/
         addBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: (body: AddBarcode) => ({
                 url: '/bar-code/add',
                 method: 'POST',
-
                 body,
             }),
         }),
@@ -253,6 +246,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+
+        // /customer-return-order-barcodes/:orderno
+        getBarcodeByOrderNumber: builder.query({
+            providesTags: ['Barcode-get'],
+            query: ({ orderNumber }: { orderNumber: number }) => ({
+                url: `/bar-code/customer-return-order-barcodes/${orderNumber}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
     }),
 })
 export const {
@@ -276,4 +279,5 @@ export const {
     useAddCustomerInwardBarcodesMutation,
     useGetBarcodeOfWarehouseMutation,
     useGetWarehouseBarcodeMutation,
+    useGetBarcodeByOrderNumberQuery,
 } = barcodeApi

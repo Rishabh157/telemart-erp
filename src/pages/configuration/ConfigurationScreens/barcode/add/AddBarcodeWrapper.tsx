@@ -1,72 +1,38 @@
-/// ==============================================
-// Filename:AddBarcodeWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-
-import { WarehousesListResponse } from 'src/models'
-import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useAddBarcodeMutation } from 'src/services/BarcodeService'
 import { useGetAllProductGroupQuery } from 'src/services/ProductGroupService'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 import { showToast } from 'src/utils'
 import AddBarcode from './AddBarcode'
 
 // |-- Redux --|
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import { AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {}
 
 export type FormInitialValues = {
     productGroup: string
-    // wareHouseId: string
     quantity: string
     lotNumber: string
+    expiryDate: string
 }
 
 const AddBarcodeWrapper = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const [apiStatus, setApiStatus] = useState(false)
-    const { userData } = useSelector((state: RootState) => state?.auth)
-
-    const [wareHouseOption, setWareHouseOption] = useState<SelectOption[] | []>(
-        []
-    )
-
-    const {
-        data: whData,
-        isLoading: whIsLoading,
-        isFetching: whIsFetching,
-    } = useGetWareHousesQuery(userData?.companyId)
-
-    useEffect(() => {
-        if (!whIsFetching && !whIsLoading) {
-            const options = whData?.data?.map((ele: WarehousesListResponse) => {
-                return {
-                    label: ele?.wareHouseName,
-                    value: ele?._id,
-                }
-            })
-            setWareHouseOption(options)
-        }
-    }, [whData, whIsLoading, whIsFetching])
 
     const [addBarcode] = useAddBarcodeMutation()
 
@@ -75,6 +41,7 @@ const AddBarcodeWrapper = (props: Props) => {
         productGroup: '',
         quantity: '',
         lotNumber: '',
+        expiryDate: '',
     }
 
     // Form Validation Schema
@@ -84,7 +51,7 @@ const AddBarcodeWrapper = (props: Props) => {
             .moreThan(0, 'Quantity must be greater than 0')
             .required('Quantity is required'),
         lotNumber: string().required('Batch number is required'),
-        // wareHouseId: string().required('Warehouse is required'),
+        expiryDate: string().required('Expiry date is required'),
     })
 
     //    Form Submit Handler
@@ -99,7 +66,7 @@ const AddBarcodeWrapper = (props: Props) => {
             barcodeGroupNumber: uniqueGrouId,
             quantity: Number(values?.quantity),
             lotNumber: values.lotNumber,
-            companyId: userData?.companyId || '',
+            expiryDate: values.expiryDate,
         }).then((res) => {
             if ('data' in res) {
                 if (res?.data?.status) {
@@ -133,7 +100,6 @@ const AddBarcodeWrapper = (props: Props) => {
                         formikProps={formikProps}
                         apiStatus={apiStatus}
                         productGroupOption={productGroupOption}
-                        wareHouseOption={wareHouseOption}
                     />
                 )
             }}

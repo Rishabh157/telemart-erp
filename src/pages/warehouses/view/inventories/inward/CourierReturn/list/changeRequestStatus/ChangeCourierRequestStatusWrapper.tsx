@@ -36,14 +36,22 @@ const ChangeCourierRequestStatusWrapper = ({
                 body: values,
             })
                 .then((res: any) => {
+                    console.error(res)
+
                     if (res?.data?.status) {
                         showToast('success', 'Assigned successfully')
                         setIsShow(false)
                     } else {
-                        showToast('error', res?.data?.message)
+                        if (!res?.error?.data?.status) {
+                            showToast('error', res?.error?.data?.message)
+                        }else{
+
+                            showToast('error', res?.data?.message)
+                        }
                     }
                 })
                 .catch((err: any) => {
+                    showToast('error', err?.data?.message)
                     console.error(err)
                 })
         }, 1000)
