@@ -57,7 +57,7 @@ export const courierReturnApi = apiSlice.injectEndpoints({
         changeRequestStatus: builder.mutation({
             invalidatesTags: ['courier-return'],
             query: ({ _id, body }) => ({
-                url: `/courier-rto/chnage-request-status/${_id}`,
+                url: `/courier-rto/change-request-status/${_id}`,
                 method: 'PUT',
                 body,
             }),

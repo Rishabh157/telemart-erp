@@ -18,6 +18,7 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import {
     useGetCustomerReturnBarcodeMutation,
     useAddCustomerInwardBarcodesMutation,
+    useGetBarcodeByOrderNumberQuery,
 } from 'src/services/BarcodeService'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { showToast } from 'src/utils'
@@ -33,6 +34,7 @@ import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { useGetCustomerWarehouseReturnQuery } from 'src/services/WareHouseService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 export type Tabs = {
@@ -71,6 +73,7 @@ type CustomerWarehouseReturnOrders = {
 const InwardCustomerTabsListingWrapper = () => {
     useUnmountCleanup()
     const [isShow, setIsShow] = useState<boolean>(false)
+    // const [orderNumber, setOrderNumber] = useState<boolean>(null)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
     const [barcodeCondition, setBarcodeCondition] = useState<string>()
     const [barcodeList, setBarcodeList] = useState<any>([])
@@ -103,6 +106,19 @@ const InwardCustomerTabsListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
+    const { items: orderBarcodes } = useGetDataByIdCustomQuery<any>({
+        useEndPointHook: useGetBarcodeByOrderNumberQuery(
+            {
+                orderNumber: selectedItemsTobeDispatch?.orderNumber as number,
+            },
+            { skip: !selectedItemsTobeDispatch?.orderNumber      }
+        ),
+    })
+    React.useEffect(() => {
+        if (orderBarcodes?.length) {
+            setBarcodeList([...orderBarcodes])
+        }
+    }, [orderBarcodes])
 
     const [getBarCode] = useGetCustomerReturnBarcodeMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =

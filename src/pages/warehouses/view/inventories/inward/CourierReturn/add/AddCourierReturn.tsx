@@ -89,7 +89,8 @@ const AddCourierReturn = ({ formikProps, apiStatus }: Props) => {
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             <ATMSelectSearchable
-                                name="shippingProvider"
+                              required
+                              name="shippingProvider"
                                 label="Shipping Provider"
                                 value={values?.shippingProvider}
                                 componentClass="mt-0"
@@ -100,7 +101,8 @@ const AddCourierReturn = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMSelectSearchable
-                                name="requestStatus"
+                              required
+                              name="requestStatus"
                                 label="Request Status"
                                 value={values?.requestStatus}
                                 componentClass="mt-0"
@@ -111,7 +113,8 @@ const AddCourierReturn = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMTextField
-                                name="orderNumber"
+                              required
+                              name="orderNumber"
                                 value={values?.orderNumber}
                                 label="Order Number"
                                 placeholder="Enter order number"
@@ -128,6 +131,7 @@ const AddCourierReturn = ({ formikProps, apiStatus }: Props) => {
 
                             <ATMTextArea
                                 label="Comment"
+                              required
                                 name="comment"
                                 placeholder="Enter Remark"
                                 value={values?.comment}

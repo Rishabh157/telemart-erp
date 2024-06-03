@@ -63,6 +63,24 @@ const columns: columnTypes[] = [
         ),
     },
     {
+        field: 'totalFakeCount',
+        headerName: 'Fake Count',
+        flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FAKE_COUNT,
+        renderCell: (row: WareHouseInventory) => (
+            <span className="p-1"> {row.totalFakeCount} </span>
+        ),
+    },
+    {
+        field: 'expiredCount',
+        headerName: 'Expired Count',
+        flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_EXPIRED_COUNT,
+        renderCell: (row: WareHouseInventory) => (
+            <span className="p-1"> {row?.expiredCount} </span>
+        ),
+    },
+    {
         field: 'createdAt',
         headerName: 'Created date',
         flex: 'flex-[1_1_0%]',

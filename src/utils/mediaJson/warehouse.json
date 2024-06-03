@@ -80,6 +80,16 @@
                     "fieldValue": "totalDamageCount"
                 },
                 {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FAKE_COUNT",
+                    "fieldName": "Fake Count",
+                    "fieldValue": "totalFakeCount"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_EXPIRED_COUNT",
+                    "fieldName": "Expired Count",
+                    "fieldValue": "totalFakeCount"
+                },
+                {
                     "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_RTV_COUNT",
                     "fieldName": "RTV Count",
                     "fieldValue": "totalRtvCount"
