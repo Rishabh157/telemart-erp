@@ -54,7 +54,7 @@ import InwardInventoryWrapper from './warehouses/view/inventories/inward-invento
 import InventoryListingWrapper from './warehouses/view/inventories/inventory/list/InventoryListingWrapper'
 import LoginPage from './login/LoginPage'
 import Order from './orders'
-import OrderListing from './orders/all/OrderListing'
+import OrderListing from './orders/OrderListing'
 import AddSaleOrderWrapper from './saleOrder/add/AddSaleOrderWrapper'
 import EditSaleOrderWrapper from './saleOrder/edit/EditSaleOrderWrapper'
 import SaleOrderListingWrapper from './saleOrder/list/SaleOrderListingWrapper'

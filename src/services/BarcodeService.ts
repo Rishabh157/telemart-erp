@@ -60,16 +60,29 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 id,
                 groupId,
                 status,
-                companyId,
             }: {
                 id: string
                 groupId: string
                 status: string
-                companyId: string
             }) => ({
                 url: `/bar-code/productgroupid/${groupId}/barcode/${id}/status/${status}`,
                 method: 'GET',
                 // body,
+            }),
+        }),
+
+        //*** barcode status change ***/
+        updateBarcodeFreezeStatus: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({
+                barcodeNumber,
+                status,
+            }: {
+                barcodeNumber: string
+                status: boolean
+            }) => ({
+                url: `/bar-code/freeze-barcode/${barcodeNumber}/status/${status}`,
+                method: 'PUT',
             }),
         }),
 
@@ -225,7 +238,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
             query: (barcodeId: string) => ({
                 url: `/bar-code/get-warehouse-barcode/${barcodeId}`,
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -243,7 +255,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }) => ({
                 url: `/bar-code/dispatch-warehouse-order-barcode/${warehouseId}/barcode/${barcode}/status/${status}`,
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -258,6 +269,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
         }),
     }),
 })
+
 export const {
     useGetBarcodeQuery,
     useAddBarcodeMutation,
@@ -266,6 +278,7 @@ export const {
     useExportBarcodeDataMutation,
     useDeleteBarcodeMutation,
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
+    useUpdateBarcodeFreezeStatusMutation,
     useGetCustomerReturnBarcodeMutation,
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,

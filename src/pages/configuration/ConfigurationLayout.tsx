@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ConfigurationLayout.tsx
-// Type: Layout Component
-// Last Updated: JUNE 22, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useContext, useState } from 'react'
 
@@ -89,7 +82,6 @@ const configurationNavigation: NavItemType[] = [
         path: 'carton-box',
         name: UserModuleNameTypes.NAV_CARTON_BOX,
     },
-
     {
         label: 'Company',
         icon: CgOrganisation,

@@ -27,7 +27,7 @@ import {
     BarcodeFlowDataListResponsee,
 } from 'src/models'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-import { barcodeStatusEnum } from 'src/utils/constants/enums'
+// import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 type Props = {
@@ -50,40 +50,40 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
 
     const dispatch = useDispatch<AppDispatch>()
 
-    const showBarcodeStatusText = (
-        status: string,
-        wareHouseLabel: string,
-        companyLabel: string
-    ) => {
-        switch (status) {
-            case barcodeStatusEnum.atWarehouse:
-                return `Barcode is Inwarding in ${capitalizeFirstLetter(
-                    wareHouseLabel
-                )} warehouse of ${capitalizeFirstLetter(companyLabel)} company`
-            case barcodeStatusEnum.atDealerWarehouse:
-                return `Barcode is in dealer ${capitalizeFirstLetter(
-                    wareHouseLabel
-                )} warehouse`
-            case barcodeStatusEnum.inTransit:
-                return 'Barcode is in In Transit'
-            case barcodeStatusEnum.delivered:
-                return 'Barcode is delivered'
-            case barcodeStatusEnum.rtv:
-                return 'Barcode is in return to vendor'
-            case barcodeStatusEnum.wtc:
-                return `Barcode is transfer to ${capitalizeFirstLetter(
-                    companyLabel
-                )} company`
-            case barcodeStatusEnum.wts:
-                return `Barcode is in warehouse and go to Sample`
-            case barcodeStatusEnum.wtw:
-                return 'Barcode is WTW outward'
-            default:
-                return `Barcode is created in ${capitalizeFirstLetter(
-                    companyLabel
-                )} company`
-        }
-    }
+    // const showBarcodeStatusText = (
+    //     status: string,
+    //     wareHouseLabel: string,
+    //     companyLabel: string
+    // ) => {
+    //     switch (status) {
+    //         case barcodeStatusEnum.atWarehouse:
+    //             return `Barcode is Inwarding in ${capitalizeFirstLetter(
+    //                 wareHouseLabel
+    //             )} warehouse of ${capitalizeFirstLetter(companyLabel)} company`
+    //         case barcodeStatusEnum.atDealerWarehouse:
+    //             return `Barcode is in dealer ${capitalizeFirstLetter(
+    //                 wareHouseLabel
+    //             )} warehouse`
+    //         case barcodeStatusEnum.inTransit:
+    //             return 'Barcode is in In Transit'
+    //         case barcodeStatusEnum.delivered:
+    //             return 'Barcode is delivered'
+    //         case barcodeStatusEnum.rtv:
+    //             return 'Barcode is in return to vendor'
+    //         case barcodeStatusEnum.wtc:
+    //             return `Barcode is transfer to ${capitalizeFirstLetter(
+    //                 companyLabel
+    //             )} company`
+    //         case barcodeStatusEnum.wts:
+    //             return `Barcode is in warehouse and go to Sample`
+    //         case barcodeStatusEnum.wtw:
+    //             return 'Barcode is WTW outward'
+    //         default:
+    //             return `Barcode is created in ${capitalizeFirstLetter(
+    //                 companyLabel
+    //             )} company`
+    //     }
+    // }
 
     return (
         <div className="px-4 h-[calc(100vh-55px)]  ">
@@ -204,12 +204,13 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                                                     )}
                                                 </div>
                                                 <div className="font-semibold text-[16px]">
-                                                    {showBarcodeStatusText(
+                                                    {ele?.barcodeLog}
+                                                    {/* {showBarcodeStatusText(
                                                         ele?.status,
                                                         ele?.wareHouseLabel ||
                                                             '',
                                                         ele?.companyLabel
-                                                    )}
+                                                    )} */}
                                                 </div>
                                             </Timeline.Item>
                                         )

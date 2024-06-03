@@ -22,7 +22,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FormInitialValuesFilterWithLabel } from './Filters/OutwardGpoOrderFilterFormWrapper'
 import DispatchingBarcodes from './DispatchingBarcodes/DispatchingBarcodes'
 import { courierCompanyEnum } from 'src/utils/constants/enums'
-import { MdLabelImportantOutline } from 'react-icons/md'
+// import { MdLabelImportantOutline } from 'react-icons/md'
 
 // |-- Types --|
 export type Tabs = {
@@ -112,7 +112,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             renderCell: (row: OrderListResponse) => {
                 return row?.orderStatus === SaleOrderStatus.dispatched ? (
                     <div className="flex gap-2">
-                        <MdLabelImportantOutline
+                        {/* <MdLabelImportantOutline
                             title="Print label"
                             size={25}
                             color="blue"
@@ -123,17 +123,23 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                                     '_blank'
                                 )
                             }
-                        />
+                        /> */}
                         <FaRegFilePdf
                             title="Print Invoice"
                             color="red"
                             size={22}
                             className="cursor-pointer"
-                            onClick={() =>
-                                window.open(
-                                    `/gpo/invoice?orderNumber=${row.orderNumber}`,
-                                    '_blank'
-                                )
+                            onClick={() =>{
+
+                                // window.open(
+                                    //     `/gpo/invoice?orderNumber=${row.orderNumber}`,
+                                    //     '_blank'
+                                    // )
+                                    window.open(
+                                        `/gpo/label-invoice?orderNumber=${row.orderNumber}`,
+                                        '_blank'
+                                    )
+                                }
                             }
                         />
                     </div>

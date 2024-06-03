@@ -258,7 +258,6 @@ const OutwardWarehouseTransferListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
-            companyId: userData?.companyId,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
