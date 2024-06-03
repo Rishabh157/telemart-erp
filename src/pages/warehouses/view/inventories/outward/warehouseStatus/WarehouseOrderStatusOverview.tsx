@@ -118,7 +118,7 @@ const WarehouseOrderStatusOverview = ({
                                                     }}
                                                 >
                                                     <thead>
-                                                        <tr className="bg-gray-200 text-center">
+                                                        <tr className="bg-gray-400 text-center">
                                                             <th className="p-0">
                                                                 Product Name
                                                             </th>

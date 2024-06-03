@@ -250,7 +250,6 @@ const OutwardRTVTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
-            companyId: userData?.companyId as string,
         })
             .then((res: any) => {
                 if (res?.data?.status) {

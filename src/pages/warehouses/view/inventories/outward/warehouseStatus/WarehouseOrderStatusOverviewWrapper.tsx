@@ -109,8 +109,52 @@ const WarehouseOrderStatusOverviewWrapper = (props: Props) => {
                     if (card.title === 'GPO') {
                         return {
                             ...card,
-                            products: gpo.products || [],
-                            orders: gpo.orders || [],
+                            products: [
+                                {
+                                    _id: 'DISPATCHED',
+                                    count:
+                                        gpo?.products?.find(
+                                            (item: any) =>
+                                                item?._id === 'DISPATCHED'
+                                        )?.count || 0,
+                                    products:
+                                        gpo?.products?.find(
+                                            (item: any) =>
+                                                item?._id === 'DISPATCHED'
+                                        )?.products ||[],
+                                },
+                                {
+                                    _id: 'NOT_DISPATCHED',
+                                    count:
+                                        gpo?.products?.find(
+                                            (item: any) =>
+                                                item?._id === 'NOT_DISPATCHED'
+                                        )?.count || 0,
+                                    products:
+                                        gpo?.products?.find(
+                                            (item: any) =>
+                                                item?._id === 'NOT_DISPATCHED'
+                                        )?.products || [],
+                                },
+                            ],
+                            orders: [
+                                {
+                                    _id: 'DISPATCHED',
+                                    count:
+                                        gpo?.orders?.find(
+                                            (item: any) =>
+                                                item?._id === 'DISPATCHED'
+                                        )?.count || 0,
+                                },
+                                {
+                                    _id: 'NOT_DISPATCHED',
+                                    count:
+                                        gpo?.orders?.find(
+                                            (item: any) =>
+                                                item?._id === 'NOT_DISPATCHED'
+                                        )?.count || 0,
+                                },
+                            ],
                         }
                     }
                     return card
@@ -123,8 +167,53 @@ const WarehouseOrderStatusOverviewWrapper = (props: Props) => {
                     if (card.title === 'SHIPYAARI') {
                         return {
                             ...card,
-                            products: shipyaari.products || [],
-                            orders: shipyaari.orders || [],
+                            products: [
+                                {
+                                    _id: 'DISPATCHED',
+                                    count:
+                                        shipyaari?.products?.find(
+                                            (item: any) =>
+                                                item?._id === 'DISPATCHED'
+                                        )?.count || 0,
+                                    products:
+                                        shipyaari?.products?.find(
+                                            (item: any) =>
+                                                item?._id === 'DISPATCHED'
+                                        )?.products ||[],
+                                },
+                                {
+                                    _id: 'NOT_DISPATCHED',
+                                    count:
+                                        shipyaari?.products?.find(
+                                            (item: any) =>
+                                                item?._id === 'NOT_DISPATCHED'
+                                        )?.count || 0,
+                                    products:
+                                        shipyaari?.products?.find(
+                                            (item: any) =>
+                                                item?._id === 'NOT_DISPATCHED'
+                                        )?.products || [],
+                                },
+                            ],
+                            orders: [
+                                {
+                                    _id: 'DISPATCHED',
+                                    count:
+                                        shipyaari?.orders?.find(
+                                            (item: any) =>
+                                                item?._id === 'DISPATCHED'
+                                        )?.count || 0,
+                                },
+                                {
+                                    _id: 'NOT_DISPATCHED',
+                                    count:
+                                        shipyaari?.orders?.find(
+                                            (item: any) =>
+                                                item?._id === 'NOT_DISPATCHED'
+                                        )?.count || 0,
+                                },
+                            ],
+                            // orders: { _id:shipyaari.orders }|| [],
                         }
                     }
                     return card

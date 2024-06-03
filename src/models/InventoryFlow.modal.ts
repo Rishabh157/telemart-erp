@@ -10,6 +10,7 @@
 export type BarcodeFlowDataListResponsee = {
     _id: string
     productGroupId: string
+    barcodeLog: string
     barcodeNumber: string
     outerBoxbarCodeNumber: string | null
     cartonBoxId: string | null

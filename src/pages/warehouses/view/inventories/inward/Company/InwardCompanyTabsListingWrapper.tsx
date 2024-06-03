@@ -33,6 +33,7 @@ import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/Ba
 import { useGetPaginationWarehouseToComapnyByGroupQuery } from 'src/services/WarehouseToComapnyService'
 import { useInwardWarehouseToWarehouseBarcodeMutation } from 'src/services/WarehouseTransferService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 export type Tabs = {
@@ -255,8 +256,7 @@ const InwardCompanyTabsListingWrapper = () => {
         getBarCode({
             id: barcodeNumber,
             groupId: productGroupId,
-            status: 'WTC',
-            companyId: userData?.companyId,
+            status: barcodeStatusEnum.wtc,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
