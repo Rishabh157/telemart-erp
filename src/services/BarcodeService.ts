@@ -61,12 +61,10 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 id,
                 groupId,
                 status,
-                companyId,
             }: {
                 id: string
                 groupId: string
                 status: string
-                companyId: string
             }) => ({
                 url: `/bar-code/productgroupid/${groupId}/barcode/${id}/status/${status}`,
                 method: 'GET',
@@ -74,16 +72,25 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //*** barcode status change ***/
+        updateBarcodeFreezeStatus: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({
+                barcodeNumber,
+                status,
+            }: {
+                barcodeNumber: string
+                status: boolean
+            }) => ({
+                url: `/bar-code/freeze-barcode/${barcodeNumber}/status/${status}`,
+                method: 'PUT',
+            }),
+        }),
+
         //***** Get Customer Return Barcode *****/
         getCustomerReturnBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
-            query: ({
-                id,
-                status,
-            }: {
-                id: string
-                status: string
-            }) => ({
+            query: ({ id, status }: { id: string; status: string }) => ({
                 url: `/bar-code/customer-return/barcode/${id}/status/${status}`,
                 method: 'GET',
             }),
@@ -232,7 +239,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
             query: (barcodeId: string) => ({
                 url: `/bar-code/get-warehouse-barcode/${barcodeId}`,
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -250,11 +256,11 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }) => ({
                 url: `/bar-code/dispatch-warehouse-order-barcode/${warehouseId}/barcode/${barcode}/status/${status}`,
                 method: 'GET',
-                // body,
             }),
         }),
     }),
 })
+
 export const {
     useGetBarcodeQuery,
     useAddBarcodeMutation,
@@ -263,6 +269,7 @@ export const {
     useExportBarcodeDataMutation,
     useDeleteBarcodeMutation,
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
+    useUpdateBarcodeFreezeStatusMutation,
     useGetCustomerReturnBarcodeMutation,
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,

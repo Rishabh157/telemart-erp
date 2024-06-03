@@ -32,8 +32,9 @@ import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useDispatchDealerBarcodeMutation,
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
+    useUpdateBarcodeFreezeStatusMutation,
+    useDispatchDealerBarcodeMutation,
 } from 'src/services/BarcodeService'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
@@ -136,6 +137,8 @@ const OutwardDealerTabsListingWrapper = () => {
     })
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
+    const [updateBarcodeStatus] = useUpdateBarcodeFreezeStatusMutation()
+
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchDealerBarcodeMutation()
 
@@ -316,6 +319,15 @@ const OutwardDealerTabsListingWrapper = () => {
         const filteredObj = barcodeList[ind]?.filter((item: any) => {
             if (item?.barcodeNumber !== barcodeNumber) {
                 return item
+            } else {
+                updateBarcodeStatus({
+                    barcodeNumber,
+                    status: false,
+                })
+                    .then((res) => {
+                        // console.log('object from remove', res)
+                    })
+                    .catch((err) => console.error(err))
             }
         })
         let barcode = [...barcodeList]
@@ -334,7 +346,6 @@ const OutwardDealerTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
-            companyId: userData?.companyId as string,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -361,6 +372,14 @@ const OutwardDealerTabsListingWrapper = () => {
 
                         setBarcodeList([...newBarcode])
                     }
+                    updateBarcodeStatus({
+                        barcodeNumber,
+                        status: true,
+                    })
+                        .then((res) => {
+                            // console.log('object', res)
+                        })
+                        .catch((err) => console.error(err))
                 } else {
                     // showToast('error', 'barcode number is not matched')
                 }

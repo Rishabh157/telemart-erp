@@ -259,7 +259,6 @@ const InwardWarehouseTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.wtw,
-            companyId: userData?.companyId as string,
         })
             .then((res: any) => {
                 if (res?.data?.status) {

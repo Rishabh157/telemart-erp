@@ -239,7 +239,6 @@ const InwardSampleTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.wts,
-            companyId: userData?.companyId as string,
         })
             .then((res: any) => {
                 if (res?.data?.status) {

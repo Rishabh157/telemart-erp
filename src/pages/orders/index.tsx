@@ -15,10 +15,11 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
-import OrderListing from './all/OrderListing'
+// import OrderListing from './OrderListing'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
-import OrderOverviewDashboard from './all/OrderOverviewDashboard'
+import OrderOverviewDashboard from './OrderOverviewDashboard'
+import AllOrdersListingWrapper from './allOrders/AllOrdersListingWrapper'
 
 interface tabsProps {
     label: string
@@ -215,7 +216,7 @@ const ViewOrder = () => {
                             UserModuleNameTypes.ACTION_ORDER_OVERVIEW_TAB ? (
                                 <OrderOverviewDashboard />
                             ) : (
-                                <OrderListing
+                                <AllOrdersListingWrapper
                                     tabName={allowedTabs[activeTabIndex]?.name}
                                     orderStatus={activeTab as string}
                                     currentStatus={getStatus(
