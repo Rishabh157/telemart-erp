@@ -324,9 +324,7 @@ const OutwardDealerTabsListingWrapper = () => {
                     barcodeNumber,
                     status: false,
                 })
-                    .then((res) => {
-                        // console.log('object from remove', res)
-                    })
+                    .then((res) => {})
                     .catch((err) => console.error(err))
             }
         })
@@ -376,12 +374,10 @@ const OutwardDealerTabsListingWrapper = () => {
                         barcodeNumber,
                         status: true,
                     })
-                        .then((res) => {
-                            // console.log('object', res)
-                        })
+                        .then((res) => {})
                         .catch((err) => console.error(err))
                 } else {
-                    // showToast('error', 'barcode number is not matched')
+                    showToast('error', res?.data?.message)
                 }
             })
             .catch((err) => console.error(err))
@@ -403,6 +399,8 @@ const OutwardDealerTabsListingWrapper = () => {
                 cartonBoxId,
                 status,
                 __v,
+                isFreezed,
+                expiryDate,
                 ...rest
             } = ele
             return rest

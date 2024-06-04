@@ -10,10 +10,36 @@ import { useGetDealersInventoryQuery } from 'src/services/BarcodeService'
 
 // |-- Redux --|
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
-import { DealersInventoryListResponse } from 'src/models/Barcode.model'
 import { RootState } from 'src/redux/store'
 import DealerInventoryListing from './DealerInventoryListing'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+
+type DealersInventoryListResponse = {
+    count: number
+    firstDocument: {
+        _id: string
+        productGroupId: string
+        barcodeNumber: string
+        outerBoxbarCodeNumber: string | null
+        cartonBoxId: string | null
+        barcodeGroupNumber: string
+        lotNumber: string
+        isUsed: boolean
+        wareHouseId: string
+        vendorId: string | null
+        dealerId: string
+        status: string
+        companyId: string
+        isDeleted: boolean
+        isActive: boolean
+        __v: number
+        createdAt: string
+        updatedAt: string
+        productGroupLabel: string
+        wareHouseLabel: string
+    }
+    productGroupId: string
+}
 
 const DealerInventoryListingWrapper = () => {
     // Hooks
@@ -50,6 +76,7 @@ const DealerInventoryListingWrapper = () => {
             }
         ),
     })
+
     const columns: columnTypes[] = [
         {
             field: 'productGroupLabel',

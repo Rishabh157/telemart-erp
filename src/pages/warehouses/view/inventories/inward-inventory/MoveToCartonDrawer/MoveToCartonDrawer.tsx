@@ -105,10 +105,7 @@ const MoveToCartonDrawer = ({
                             </div>
                         </ATMLoadingButton>
                     </div>
-                    <div className="py-2">
-                        {/* {' '} */}
-                        {/* {productGroupName} */}({productDetail?.length})
-                    </div>
+                    <div className="py-2">({productDetail?.length})</div>
                 </div>
             </div>
         </ATMDrawer>

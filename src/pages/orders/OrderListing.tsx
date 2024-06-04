@@ -63,8 +63,6 @@ const OrderListing = ({
     currentStatus: string
     columns: any
 }) => {
-    // console.log(' tabName,', { tabName, orderStatus, currentStatus }) // Hooks
-
     // Hooks
     // const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()

@@ -24,7 +24,7 @@ type DispatchBarcodeBody = {
 
 export const barcodeApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        //***** GET *****/
+        //*** GET
         getBarcode: builder.query({
             providesTags: ['Barcode'],
             query: (body: PaginationType) => ({
@@ -33,7 +33,8 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        //********* GET PRODUCT BARCODE GROUP *********//
+
+        //*** GET PRODUCT BARCODE GROUP
         getProductGroupBarcode: builder.query({
             providesTags: ['Barcode'],
             query: (body: PaginationType) => ({
@@ -43,17 +44,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET *****/
+        //*** GET
         getAllBarcode: builder.query({
             providesTags: ['Barcode'],
             query: () => ({
                 url: `/bar-code`,
                 method: 'GET',
-                // body,
             }),
         }),
 
-        //***** GET DEALER OUTWARD DISPATCHED BARCODE *****/
+        //*** GET DEALER OUTWARD DISPATCHED BARCODE
         getAllBarcodeOfDealerOutWardDispatch: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: ({
@@ -67,11 +67,10 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }) => ({
                 url: `/bar-code/productgroupid/${groupId}/barcode/${id}/status/${status}`,
                 method: 'GET',
-                // body,
             }),
         }),
 
-        //*** barcode status change ***/
+        //*** barcode status change
         updateBarcodeFreezeStatus: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: ({
@@ -86,7 +85,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Get Customer Return Barcode *****/
+        //*** Get Customer Return Barcode
         getCustomerReturnBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: ({ id, status }: { id: string; status: string }) => ({
@@ -95,7 +94,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET *****/
+        //*** GET
         getAllByGroup: builder.query({
             providesTags: ['Barcode'],
             query: (id) => ({
@@ -105,7 +104,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** ADD *****/
+        //*** ADD
         addBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: (body: AddBarcode) => ({
@@ -115,18 +114,17 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
+        //*** Update
         updateBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: ({ body, id }: UpdateBarcode) => ({
                 url: `/bar-code/${id}`,
-
                 method: 'PUT',
                 body,
             }),
         }),
 
-        // **** GET BY ID
+        // *** GET BY ID
         getBarcodeById: builder.query({
             providesTags: ['Barcode'],
             query: (id) => ({
@@ -135,38 +133,25 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportBarcodeData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
-        // **** Delete
+        //*** Delete
         deleteBarcode: builder.mutation({
             invalidatesTags: ['Barcode', 'bar-codeGroup'],
             query: (id) => ({
                 url: `/bar-code/${id}`,
-
                 method: 'DELETE',
             }),
         }),
+
+        //*** get barcode by id
         getByBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: (barcodeId: string) => ({
                 url: `/bar-code/getby-barcode/${barcodeId}`,
                 method: 'GET',
-                // body,
             }),
         }),
 
-        //***** Update *****/
+        //*** Update
         inwardInventoryBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: (body: InwardInventoryBarcode) => ({
@@ -176,6 +161,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //*** get inventory by barcode
         getInventoriesByBarcode: builder.query({
             providesTags: ['Barcode', 'courier-return'],
             query: ({
@@ -193,7 +179,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // Diapatch Dealer Outward Barcode
+        //*** Diapatch Dealer Outward Barcode
         dispatchDealerBarcode: builder.mutation({
             invalidatesTags: ['Barcode', 'bar-codeGroup', 'SalesOrder'],
             query: (body: DispatchBarcodeBody) => ({
@@ -203,7 +189,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // Get dealers inventory
+        //*** Get dealers inventory
         getDealersInventory: builder.query({
             providesTags: ['Barcode'],
             query: (body: PaginationType) => ({
@@ -213,7 +199,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // Get Barocode by outerBox barcode number
+        //*** Get Barocode by outerBox barcode number
         getBarcodeByOuterBoxNumber: builder.query({
             providesTags: ['Barcode'],
             query: (barcodeNumber) => ({
@@ -222,17 +208,17 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // Customer Inward Barcode
+        //*** Customer Inward Barcode
         addCustomerInwardBarcodes: builder.mutation({
             invalidatesTags: ['Barcode'],
-            query: ({ id, condition, warehouseId, body }) => ({
-                url: `/bar-code/customer-return-product/${id}/condition/${condition}/warehouse/${warehouseId}`,
+            query: ({ id, warehouseId, body }) => ({
+                url: `/bar-code/customer-return-product/${id}/warehouse/${warehouseId}`,
                 method: 'PUT',
                 body,
             }),
         }),
 
-        //warehouse barcode insert in Carton box
+        //*** warehouse barcode insert in Carton box
         getBarcodeOfWarehouse: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: (barcodeId: string) => ({
@@ -241,7 +227,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET Warehouse barcode *****/
+        //*** GET Warehouse barcode
         getWarehouseBarcode: builder.mutation({
             invalidatesTags: ['Barcode'],
             query: ({
@@ -258,13 +244,12 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // /customer-return-order-barcodes/:orderno
+        //*** customer return order barcodes
         getBarcodeByOrderNumber: builder.query({
             providesTags: ['Barcode-get'],
             query: ({ orderNumber }: { orderNumber: number }) => ({
                 url: `/bar-code/customer-return-order-barcodes/${orderNumber}`,
                 method: 'GET',
-                // body,
             }),
         }),
     }),
@@ -275,7 +260,6 @@ export const {
     useAddBarcodeMutation,
     useUpdateBarcodeMutation,
     useGetBarcodeByIdQuery,
-    useExportBarcodeDataMutation,
     useDeleteBarcodeMutation,
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
     useUpdateBarcodeFreezeStatusMutation,
