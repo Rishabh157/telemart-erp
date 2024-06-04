@@ -1,19 +1,13 @@
-/// ==============================================
-// Filename:Barcode.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 
 export type BarcodeListResponseType = {
     _id: string
     productGroupId: string
-    productGroupLabel: string
     barcodeNumber: string
     barcodeGroupNumber: string
+    outerBoxbarCodeNumber: string | null
     lotNumber: string
+    condition: string
     isUsed: boolean
     wareHouseId: string
     dealerId: string | null
@@ -21,9 +15,11 @@ export type BarcodeListResponseType = {
     companyId: string
     isDeleted: boolean
     isActive: boolean
+    isFreezed: boolean
     __v: number
     createdAt: string
     updatedAt: string
+    productGroupLabel: string
 }
 
 export type ProductBarcodeGroupResponse = {
@@ -33,6 +29,7 @@ export type ProductBarcodeGroupResponse = {
     createdAt: string
     productGroupLabel: string
 }
+
 export type AddBarcode = {
     productGroupId: string
     barcodeGroupNumber: string
@@ -42,13 +39,13 @@ export type AddBarcode = {
 }
 
 export type UpdateBarcode = {
+    id: string
     body: {
         productGroupId: string
         wareHouseId: string
         barcodeGroupNumber: string
         companyId: string
     }
-    id: string
 }
 
 export type InwardInventoryBarcode = {
@@ -63,31 +60,4 @@ export type InwardInventoryBarcode = {
         cartonBoxId: string
         _id: string
     }[]
-}
-
-export type DealersInventoryListResponse = {
-    count: number
-    firstDocument: {
-        _id: string
-        productGroupId: string
-        barcodeNumber: string
-        outerBoxbarCodeNumber: string | null
-        cartonBoxId: string | null
-        barcodeGroupNumber: string
-        lotNumber: string
-        isUsed: boolean
-        wareHouseId: string
-        vendorId: string | null
-        dealerId: string
-        status: string
-        companyId: string
-        isDeleted: boolean
-        isActive: boolean
-        __v: number
-        createdAt: string
-        updatedAt: string
-        productGroupLabel: string
-        wareHouseLabel: string
-    }
-    productGroupId: string
 }

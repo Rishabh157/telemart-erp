@@ -504,6 +504,8 @@ const InwardDealerTabsListingWrapper = () => {
                 cartonBoxId,
                 status,
                 __v,
+                expiryDate,
+                isFreezed,
                 ...rest
             } = ele
             return {

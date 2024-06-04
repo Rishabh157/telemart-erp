@@ -1282,6 +1282,10 @@ export const getCustomerInwardBarcodeOptionTypes = () => {
             label: 'Damage',
             value: barcodeStatusEnum.damage,
         },
+        {
+            label: 'Destroyed',
+            value: barcodeStatusEnum.destroyed,
+        },
     ]
 
     return options?.map((item: any) => {

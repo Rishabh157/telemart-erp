@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-// import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Redux --|
@@ -63,13 +61,6 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px] p-1">
                 <ATMPageHeading> Dealer's Inventory </ATMPageHeading>
-                {/* <button
-                        type="button"
-                        onClick={() => navigate('inward-inventory/add')}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Inward Inventory
-                    </button> */}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
@@ -135,7 +126,6 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
                 </div>
 
                 {/* Pagination */}
-
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
