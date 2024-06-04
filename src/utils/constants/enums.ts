@@ -34,6 +34,7 @@ export enum barcodeStatusEnum {
     delivered = 'DELIVERED',
     damage = 'DAMAGE',
     missing = 'MISSING',
+    destroyed = 'DESTROYED',
 }
 
 /*** Courier Company Enum ****/

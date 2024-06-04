@@ -89,8 +89,8 @@ const AddCourierReturn = ({ formikProps, apiStatus }: Props) => {
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
                             <ATMSelectSearchable
-                              required
-                              name="shippingProvider"
+                                required
+                                name="shippingProvider"
                                 label="Shipping Provider"
                                 value={values?.shippingProvider}
                                 componentClass="mt-0"
@@ -101,8 +101,8 @@ const AddCourierReturn = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMSelectSearchable
-                              required
-                              name="requestStatus"
+                                required
+                                name="requestStatus"
                                 label="Request Status"
                                 value={values?.requestStatus}
                                 componentClass="mt-0"
@@ -113,11 +113,11 @@ const AddCourierReturn = ({ formikProps, apiStatus }: Props) => {
                             />
 
                             <ATMTextField
-                              required
-                              name="orderNumber"
+                                required
+                                name="orderNumber"
                                 value={values?.orderNumber}
-                                label="Order Number"
-                                placeholder="Enter order number"
+                                label="(Order / Awb / Barcode) Number "
+                                placeholder="Enter (order / awb / barcode) number"
                                 className="rounded"
                                 extraClassField="m-0"
                                 onChange={(e) => {
@@ -131,7 +131,7 @@ const AddCourierReturn = ({ formikProps, apiStatus }: Props) => {
 
                             <ATMTextArea
                                 label="Comment"
-                              required
+                                required
                                 name="comment"
                                 placeholder="Enter Remark"
                                 value={values?.comment}

@@ -75,7 +75,7 @@ const InwardCustomerTabsListingWrapper = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     // const [orderNumber, setOrderNumber] = useState<boolean>(null)
     const [barcodeNumber, setBarcodeNumber] = useState<any>([])
-    const [barcodeCondition, setBarcodeCondition] = useState<string>()
+    // const [barcodeCondition, setBarcodeCondition] = useState<string>()
     const [barcodeList, setBarcodeList] = useState<any>([])
     const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] =
         useState<CustomerWarehouseReturnOrders | null>(null)
@@ -106,18 +106,25 @@ const InwardCustomerTabsListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
+
     const { items: orderBarcodes } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetBarcodeByOrderNumberQuery(
             {
                 orderNumber: selectedItemsTobeDispatch?.orderNumber as number,
             },
-            { skip: !selectedItemsTobeDispatch?.orderNumber      }
+            { skip: !selectedItemsTobeDispatch?.orderNumber }
         ),
     })
+
+    // set initial barcode
     React.useEffect(() => {
-        if (orderBarcodes?.length) {
-            setBarcodeList([...orderBarcodes])
-        }
+        orderBarcodes?.length &&
+            setBarcodeList(
+                orderBarcodes?.map((ele: BarcodeListResponseType) => ({
+                    ...ele,
+                    condition: barcodeStatusEnum.atWarehouse,
+                }))
+            )
     }, [orderBarcodes])
 
     const [getBarCode] = useGetCustomerReturnBarcodeMutation()
@@ -126,16 +133,12 @@ const InwardCustomerTabsListingWrapper = () => {
 
     // remove barcode
     const handleRemoveBarcode = (barcodeNumber: string) => {
-        // eslint-disable-next-line array-callback-return
-        const filteredObj = barcodeList?.filter((item: any) => {
-            if (item?.barcodeNumber !== barcodeNumber) {
-                return item
-            }
-        })
-        let barcode = [...barcodeList]
-        barcode = [...filteredObj]
-
-        setBarcodeList(barcode)
+        setBarcodeList(
+            barcodeList?.filter(
+                (item: BarcodeListResponseType) =>
+                    item.barcodeNumber !== barcodeNumber && item
+            )
+        )
     }
 
     const handleReload = () => {
@@ -182,14 +185,16 @@ const InwardCustomerTabsListingWrapper = () => {
     }
 
     const handleDispatchBarcode = () => {
-        const filterValue = barcodeList?.map((ele: any) => {
+        const filterValue = barcodeList?.map((ele: BarcodeListResponseType) => {
             if (!ele) return ele
-            return ele?.barcodeNumber
+            return {
+                barcode: ele?.barcodeNumber,
+                condition: ele?.condition,
+            }
         })
 
         barcodeDispatch({
             id: selectedItemsTobeDispatch?._id,
-            condition: barcodeCondition,
             warehouseId: warehouseId,
             body: {
                 barcode: filterValue || [],
@@ -379,16 +384,6 @@ const InwardCustomerTabsListingWrapper = () => {
                                         setBarcodeNumber(e.target.value)
                                     }}
                                 />
-                                <ATMSelectSearchable
-                                    name=""
-                                    label="Barcode Condition"
-                                    selectLabel="Select barcode condition"
-                                    value={barcodeCondition}
-                                    options={getCustomerInwardBarcodeOptionTypes()}
-                                    onChange={(e) => {
-                                        setBarcodeCondition(e)
-                                    }}
-                                />
                             </div>
 
                             <div className="grid grid-cols-4 gap-x-4">
@@ -397,20 +392,71 @@ const InwardCustomerTabsListingWrapper = () => {
                                         barcode: BarcodeListResponseType,
                                         barcodeIndex: number
                                     ) => (
-                                        <BarcodeCard
-                                            key={barcodeIndex}
-                                            barcodeNumber={
-                                                barcode?.barcodeNumber
-                                            }
-                                            productGroupLabel={capitalizeFirstLetter(
-                                                barcode?.productGroupLabel || ''
-                                            )}
-                                            handleRemoveBarcode={() => {
-                                                handleRemoveBarcode(
+                                        <div key={barcodeIndex}>
+                                            <BarcodeCard
+                                                barcodeNumber={
                                                     barcode?.barcodeNumber
-                                                )
-                                            }}
-                                        />
+                                                }
+                                                productGroupLabel={capitalizeFirstLetter(
+                                                    barcode?.productGroupLabel ||
+                                                        ''
+                                                )}
+                                                handleRemoveBarcode={() => {
+                                                    handleRemoveBarcode(
+                                                        barcode?.barcodeNumber
+                                                    )
+                                                }}
+                                            />
+                                            <ATMSelectSearchable
+                                                name=""
+                                                componentClass="mt-0"
+                                                label="Barcode Condition"
+                                                selectLabel="Select barcode condition"
+                                                value={barcode.condition}
+                                                options={getCustomerInwardBarcodeOptionTypes()}
+                                                onChange={(newValue) => {
+                                                    // Make a copy of barcodeList
+                                                    const updatedBarcodeList = [
+                                                        ...barcodeList,
+                                                    ]
+                                                    // Ensure barcodeIndex is defined and within bounds
+                                                    if (
+                                                        barcodeIndex !==
+                                                            undefined &&
+                                                        barcodeIndex >= 0 &&
+                                                        barcodeIndex <
+                                                            updatedBarcodeList.length
+                                                    ) {
+                                                        // Retrieve the object at barcodeIndex
+                                                        const updatedBarcodeObj =
+                                                            {
+                                                                ...updatedBarcodeList[
+                                                                    barcodeIndex
+                                                                ],
+                                                            }
+
+                                                        // Update the 'condition' property of the object
+                                                        updatedBarcodeObj.condition =
+                                                            newValue
+
+                                                        // Update the object at barcodeIndex in the copied array
+                                                        updatedBarcodeList[
+                                                            barcodeIndex
+                                                        ] = updatedBarcodeObj
+
+                                                        // Update state with the modified array
+                                                        setBarcodeList(
+                                                            updatedBarcodeList
+                                                        )
+                                                    } else {
+                                                        showToast(
+                                                            'error',
+                                                            'Invalid barcode'
+                                                        )
+                                                    }
+                                                }}
+                                            />
+                                        </div>
                                     )
                                 )}
                             </div>
@@ -419,12 +465,12 @@ const InwardCustomerTabsListingWrapper = () => {
                         <div className="flex items-end justify-end ">
                             <div>
                                 <ATMLoadingButton
-                                    disabled={
-                                        !(
-                                            totalBarcodeOfProducts ===
-                                            barcodeList?.length
-                                        )
-                                    }
+                                    // disabled={
+                                    //     !(
+                                    //         totalBarcodeOfProducts ===
+                                    //         barcodeList?.length
+                                    //     )
+                                    // }
                                     isLoading={barcodeDispatchInfo?.isLoading}
                                     loadingText="Dispatching"
                                     onClick={() => handleDispatchBarcode()}

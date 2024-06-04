@@ -63,8 +63,6 @@ const OrderListing = ({
     currentStatus: string
     columns: any
 }) => {
-    // console.log(' tabName,', { tabName, orderStatus, currentStatus }) // Hooks
-
     // Hooks
     // const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -1073,8 +1071,6 @@ const OrderListing = ({
                         isLoading={isTableLoading}
                     />
                 </div>
-
-        
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
