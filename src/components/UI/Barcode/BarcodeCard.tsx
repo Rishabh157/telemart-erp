@@ -16,7 +16,7 @@ const BarcodeCard = ({
         <div className="flex flex-col gap-2 my-4 shadow rounded-lg relative p-2">
             <div className="flex justify-between">
                 <div>
-                    <div className="text-[12px] text-slate-500">
+                    <div className="text-[10px] text-slate-500">
                         Barcode No.
                     </div>
                     <div>{barcodeNumber}</div>

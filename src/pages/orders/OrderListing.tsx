@@ -917,8 +917,7 @@ const OrderListing = ({
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_COMPLAINT_LABEL,
             renderCell: (row: any) => (
                 <span>
-                    {' '}
-                    {row.complaintbyLabel ? row.complaintbyLabel : 'NA'}
+                 {row.complaintbyLabel ? row.complaintbyLabel : 'NA'}
                 </span>
             ),
         },

@@ -126,9 +126,10 @@ export const OrderApi = apiSlice.injectEndpoints({
         //***** Approved Order Status *****/
         approvedOrderStatus: builder.mutation({
             invalidatesTags: ['order'],
-            query: (orderId: any) => ({
+            query: ({orderId,transactionId}:{orderId: string,transactionId:string}) => ({
                 url: `/order-inquiry/approve-order/${orderId}`,
                 method: 'PUT',
+                body:{transactionId:transactionId}
             }),
         }),
 
