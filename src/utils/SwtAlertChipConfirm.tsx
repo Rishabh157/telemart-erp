@@ -29,6 +29,7 @@ type PropsChips = {
     preDeny?: (result: SweetAlertResult<any>) => void
     disabled?: boolean
     html?: any
+    errorMessage?: string
 }
 const SwtAlertChipConfirm = ({
     color = 'default',
@@ -49,6 +50,7 @@ const SwtAlertChipConfirm = ({
     preConfirm,
     preDeny,
     disabled = false,
+    errorMessage = 'Please enter a remark',
     html,
 }: PropsChips) => {
     return (
@@ -75,13 +77,11 @@ const SwtAlertChipConfirm = ({
                         html,
                         preConfirm: (inputValue) => {
                             if (!inputValue) {
-                                Swal.showValidationMessage(
-                                    'Please enter a remark'
-                                )
+                                Swal.showValidationMessage(errorMessage)
                             }
                         },
                         preDeny: (res) => {
-                            Swal.showValidationMessage('Please enter a remark')
+                            Swal.showValidationMessage(errorMessage)
 
                             if (!Swal.getInput()?.value) {
                                 return res

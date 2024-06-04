@@ -25,7 +25,7 @@ function Barcode({ value }: { value: string }) {
         },
     })
 
-    return <canvas ref={inputRef} />
+    return <canvas ref={inputRef} className="h-[55px]" />
 }
 
 function AllBarcodes() {
@@ -58,16 +58,18 @@ function AllBarcodes() {
                     Back
                 </button>
             </div>
-            {outerBoxCode !== null ? (
-                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1  gap-5 py-2 px-3">
+            {outerBoxCode ? (
+                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1  gap-3 ">
                     <div className={`flex flex-col gap-2 shadow relative   `}>
                         <Barcode value={outerBoxCode} />
-                        <span>{outerBoxCode}</span>
+                        <div className="w-full flex justify-center p-0 tracking-[.25em] ">
+                            {outerBoxCode}
+                        </div>
                     </div>
                 </div>
             ) : null}
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3  gap-5 py-2 px-3">
+            {/* <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3  gap-5 py-2 px-3">
                 {barcodeValues?.map((value: string, index: number) => (
                     <div
                         key={index}
@@ -75,6 +77,19 @@ function AllBarcodes() {
                     >
                         <Barcode key={index} value={value} />
                         <span>{value}</span>
+                    </div>
+                ))}
+            </div> */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 ">
+                {barcodeValues?.map((value: string, index: number) => (
+                    <div
+                        key={index}
+                        className={`flex flex-col gap-x-2 shadow relative w-full`}
+                    >
+                        <Barcode key={index} value={value} />
+                        <div className="w-full flex justify-center p-0 tracking-[.25em] ">
+                            {value}
+                        </div>
                     </div>
                 ))}
             </div>

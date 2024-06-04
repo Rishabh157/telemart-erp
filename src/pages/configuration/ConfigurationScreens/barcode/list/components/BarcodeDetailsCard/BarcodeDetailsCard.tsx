@@ -85,8 +85,8 @@ const BarcodeDetailsCard = ({
                                             Used
                                         </span>
                                     )}
-                                    <div className="text-[12px] text-slate-500">
-                                        Barcode No.
+                                    <div className="text-[10px] text-slate-500">
+                                        Barcode No. 
                                     </div>
                                     <div>{barcode?.barcodeNumber} </div>
                                 </div>

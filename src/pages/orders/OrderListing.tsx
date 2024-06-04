@@ -919,8 +919,7 @@ const OrderListing = ({
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_COMPLAINT_LABEL,
             renderCell: (row: any) => (
                 <span>
-                    {' '}
-                    {row.complaintbyLabel ? row.complaintbyLabel : 'NA'}
+                 {row.complaintbyLabel ? row.complaintbyLabel : 'NA'}
                 </span>
             ),
         },
@@ -1073,8 +1072,6 @@ const OrderListing = ({
                         isLoading={isTableLoading}
                     />
                 </div>
-
-        
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination

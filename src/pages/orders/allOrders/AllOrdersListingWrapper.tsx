@@ -5,7 +5,7 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { OrderListResponse } from 'src/models'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { Chip } from '@mui/material'
-import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+// import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { FirstCallApprovalStatus } from 'src/pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
 import moment from 'moment'
 import { useApprovedOrderStatusMutation } from 'src/services/OrderService'
@@ -13,6 +13,7 @@ import { showToast } from 'src/utils'
 // import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 // import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 import { useNavigate } from 'react-router-dom'
+import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 
 type Props = {
     tabName: string
@@ -52,7 +53,6 @@ const AllOrdersListingWrapper = ({
                     //     setIsOrderAssigneeFormOpen(true)
                     //     setSelectedOrder(row)
                     // }}
-               
                 />
             ),
         },
@@ -115,28 +115,109 @@ const AllOrdersListingWrapper = ({
                                 size="small"
                             />
                         ) : (
-                            <Chip
-                                onClick={() => {
-                                    showConfirmationDialog({
-                                        title: 'Approved',
-                                        text: `Do you want to ${
-                                            row?.approved
-                                                ? 'Disapprove this order'
-                                                : 'Approval this order'
-                                        }`,
-                                        showCancelButton: true,
-                                        next: (res) => {
-                                            return res.isConfirmed
-                                                ? handleDeactive(row?._id)
-                                                : setShowDropdown(false)
-                                        },
-                                    })
-                                }}
-                                className="cursor-pointer"
-                                label="Pending"
+                            // <Chip
+                            //     onClick={() => {
+                            //         showConfirmationDialog({
+                            //             title: 'Approved',
+                            //             text: `Do you want to ${
+                            //                 row?.approved
+                            //                     ? 'Disapprove this order'
+                            //                     : 'Approval this order'
+                            //             }`,
+                            //             showCancelButton: true,
+                            //             input={'text'},
+                            //             inputPlaceholder="transaction id",
+
+                            //             next: (res) => {
+                            //                 console.log(res)
+                            //                 return res.isConfirmed
+                            //                     ? handleDeactive(row?._id)
+                            //                     : setShowDropdown(false)
+                            //             },
+                            //         })
+                            //     }}
+                            //     className="cursor-pointer"
+                            //     label="Pending"
+                            //     color="warning"
+                            //     variant="outlined"
+                            //     size="small"
+                            // />
+                            <SwtAlertChipConfirm
+                                title="Approval"
+                                text="Do you want to Approve ?"
                                 color="warning"
-                                variant="outlined"
-                                size="small"
+                                chipLabel="pending"
+                                errorMessage="please enter transaction id"
+                                // color={
+                                //     row?.managerFirstApproval === null
+                                //         ? 'warning'
+                                //         : row?.managerFirstApproval === false
+                                //         ? 'error'
+                                //         : row?.managerSecondApproval
+                                //         ? 'success'
+                                //         : row?.managerSecondApproval === null
+                                //         ? 'warning'
+                                //         : 'error'
+                                // }
+                                // chipLabel={
+                                //     row?.managerFirstApproval === null
+                                //         ? 'First Pending'
+                                //         : row?.managerFirstApproval === false
+                                //         ? 'First Rejected'
+                                //         : row?.managerSecondApproval
+                                //         ? 'Second Approved'
+                                //         : row?.managerSecondApproval === null
+                                //         ? 'Second Pending'
+                                //         : 'Second Rejected'
+                                // }
+                                // disabled={
+                                //     row?.managerFirstApproval === null
+                                //         ? false
+                                //         : row?.managerFirstApproval === false
+                                //         ? true
+                                //         : row?.ccApproval === false
+                                //         ? true
+                                //         : row?.managerSecondApproval === null
+                                //         ? false
+                                //         : true
+                                // }
+                                input={'text'}
+                                inputPlaceholder="transaction id"
+                                showCancelButton
+                                showDenyButton={false}
+                                icon="warning"
+                                confirmButtonColor="#3085d6"
+                                cancelButtonColor="#dc3741"
+                                confirmButtonText="Yes"
+                                next={(res) => {
+                                    console.log(res, 'res')
+                                    if (res.isConfirmed || res?.isDenied) {
+                                        return res.isConfirmed
+                                            ? handleDeactive(
+                                                  row?._id,
+                                                  res?.value
+                                              )
+                                            : setShowDropdown(false)
+                                        // if (!row?.managerFirstApproval) {
+                                        //     return handleManagerFirstLevelApprovalComplete(
+                                        //         row?._id,
+                                        //         'FIRST',
+                                        //         res?.isConfirmed,
+                                        //         res?.value,
+                                        //         row?.complaintNumber
+                                        //     )
+                                        // }
+                                        // if (row?.managerSecondApproval === null) {
+                                        //     return handleManagerFirstLevelApprovalComplete(
+                                        //         row?._id,
+                                        //         'SECOND',
+                                        //         res?.isConfirmed,
+                                        //         res?.value,
+                                        //         row?.complaintNumber
+                                        //     )
+                                        // }
+                                    }
+                                }}
                             />
                         )}
                     </span>
@@ -558,9 +639,9 @@ const AllOrdersListingWrapper = ({
         },
     ]
 
-    const handleDeactive = (rowId: string) => {
+    const handleDeactive = (orderId: string, transactionId: string) => {
         setShowDropdown(false)
-        approvedOrderStatus(rowId).then((res: any) => {
+        approvedOrderStatus({ orderId, transactionId }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Status changed successfully!')
