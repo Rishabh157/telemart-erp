@@ -307,6 +307,8 @@ const OutwardWarehouseTransferListingWrapper = () => {
                 cartonBoxId,
                 status,
                 __v,
+                expiryDate,
+                isFreezed,
                 ...rest
             } = ele
             return rest
@@ -393,11 +395,9 @@ const OutwardWarehouseTransferListingWrapper = () => {
                                                         :
                                                     </span>
                                                     <span>
-                                                        {
-                                                            document
+                                                        {document
                                                                 ?.productSalesOrder
-                                                                ?.groupName
-                                                        }
+                                                                ?.groupName}
                                                     </span>
                                                 </div>
 

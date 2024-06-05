@@ -13,55 +13,7 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { RootState } from 'src/redux/store'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-
-interface ProductSalesOrder {
-    productGroupId: string
-    rate: number
-    quantity: number
-    _id: string
-    groupName: string
-}
-
-interface ReturnToVendorDocument {
-    _id: string
-    rtvNumber: string
-    vendorId: string
-    warehouseId: string
-    firstApprovedById: string | null
-    firstApproved: boolean | null
-    firstApprovedActionBy: string
-    firstApprovedAt: string
-    secondApprovedById: string | null
-    secondApproved: boolean | null
-    secondApprovedActionBy: string
-    secondApprovedAt: string
-    productSalesOrder: ProductSalesOrder
-    remark: string
-    status: string
-    companyId: string
-    isDeleted: boolean
-    isActive: boolean
-    __v: number
-    createdAt: string
-    updatedAt: string
-    vendorLabel: string
-    warehouseLabel: string
-}
-
-interface ReturnToVendorListResponse {
-    _id: string
-    warehouseLabel: string
-    vendorLabel: string
-    firstApproved: boolean | null
-    firstApprovedActionBy: string
-    firstApprovedAt: string
-    secondApprovedActionBy: string
-    secondApprovedAt: string
-    secondApproved: boolean | null
-    createdAt: string
-    updatedAt: string
-    documents: ReturnToVendorDocument[]
-}
+import { ReturnToVendorListResponse } from 'src/models/Vendors.model'
 
 const VendorRtvListingWrapper = () => {
     useUnmountCleanup()

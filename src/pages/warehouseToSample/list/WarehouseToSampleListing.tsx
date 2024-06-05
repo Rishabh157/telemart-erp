@@ -61,7 +61,7 @@ const WarehouseToSampleListing = ({
                 ) && (
                     <button
                         onClick={() => navigate('/warehouse-to-sample/add')}
-                        className="bg-primary-main text-white round ed py-1 px-3"
+                        className="bg-primary-main text-white round ed py-1 px-3 rounded"
                     >
                         + Add Sample
                     </button>

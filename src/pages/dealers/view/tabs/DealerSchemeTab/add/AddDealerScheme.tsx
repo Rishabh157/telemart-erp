@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddDealerScheme.tsx
-// Type: Tab Add Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 

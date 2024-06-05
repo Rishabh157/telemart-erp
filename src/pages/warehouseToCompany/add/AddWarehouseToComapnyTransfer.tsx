@@ -22,7 +22,7 @@ import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
+import { useGetWareHousesByCompanyIdQuery } from 'src/services/WareHouseService'
 import { showToast } from 'src/utils'
 import { FormInitialValues } from './AddWarehouseToComapnyTransferWrapper'
 
@@ -67,7 +67,7 @@ const AddWarehouseToComapnyTransfer = ({
     const [i, setI] = useState(0)
 
     const { options: selectedCompanyWarehouseOption } = useCustomOptions({
-        useEndPointHook: useGetWareHousesQuery(values?.toCompanyId, {
+        useEndPointHook: useGetWareHousesByCompanyIdQuery(values?.toCompanyId, {
             skip: !values?.toCompanyId,
         }),
         keyName: 'wareHouseName',
@@ -90,6 +90,7 @@ const AddWarehouseToComapnyTransfer = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div className=" h-[calc(100vh-55px)] overflow-auto">
             <div className="flex flex-col gap-2 p-4 ">
@@ -163,6 +164,7 @@ const AddWarehouseToComapnyTransfer = ({
                                 label="From warehouse (company)"
                                 selectLabel="Select Warehouse"
                             />
+
                             <ATMSelectSearchable
                                 required
                                 name="toCompanyId"
