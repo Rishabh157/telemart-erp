@@ -5,13 +5,10 @@ import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { OrderListResponse } from 'src/models'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { Chip } from '@mui/material'
-// import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { FirstCallApprovalStatus } from 'src/pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
 import moment from 'moment'
 import { useApprovedOrderStatusMutation } from 'src/services/OrderService'
 import { showToast } from 'src/utils'
-// import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-// import AddOrderAssigneeFormWrapper from '../OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 import { useNavigate } from 'react-router-dom'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 
@@ -129,7 +126,6 @@ const AllOrdersListingWrapper = ({
                             //             inputPlaceholder="transaction id",
 
                             //             next: (res) => {
-                            //                 console.log(res)
                             //                 return res.isConfirmed
                             //                     ? handleDeactive(row?._id)
                             //                     : setShowDropdown(false)
@@ -190,7 +186,6 @@ const AllOrdersListingWrapper = ({
                                 cancelButtonColor="#dc3741"
                                 confirmButtonText="Yes"
                                 next={(res) => {
-                                    console.log(res, 'res')
                                     if (res.isConfirmed || res?.isDenied) {
                                         return res.isConfirmed
                                             ? handleDeactive(

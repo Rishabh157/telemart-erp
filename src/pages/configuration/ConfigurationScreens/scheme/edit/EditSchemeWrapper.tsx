@@ -42,7 +42,7 @@ export type FormInitialValues = {
         depth: string
     }
     weight: string
-    deliveryCharges: string
+    deliveryCharges: number
     comboPacking: boolean
     startDate: string | null
     endDate: string | null
@@ -189,7 +189,7 @@ const EditSchemeWrapper = () => {
             depth: selectedItem?.dimension.depth || '',
         },
         weight: selectedItem?.weight || '',
-        deliveryCharges: selectedItem?.deliveryCharges || '',
+        deliveryCharges: selectedItem?.deliveryCharges || 0,
         comboPacking: selectedItem?.comboPacking || false,
         startDate: selectedItem?.startDate || null,
         endDate: selectedItem?.endDate || null,

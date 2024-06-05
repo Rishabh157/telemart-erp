@@ -11,17 +11,24 @@ export const wareHouseApi = apiSlice.injectEndpoints({
             query: (companyId) => ({
                 url: `/warehouse/company/${companyId}/dealer-warehouse`,
                 method: 'GET',
-                // body,
             }),
         }),
 
-        // company warehouse
+        // Company warehouse
         getWareHouses: builder.query({
             providesTags: ['WareHouse'],
             query: () => ({
                 url: `/warehouse`,
                 method: 'GET',
-                // body,
+            }),
+        }),
+
+        // Get Company warehouse by companyId
+        getWareHousesByCompanyId: builder.query({
+            providesTags: ['WareHouse'],
+            query: (companyId: string) => ({
+                url: `/warehouse/get-warehouse-by-company/${companyId}`,
+                method: 'GET',
             }),
         }),
 
@@ -89,6 +96,7 @@ export const {
     useAddWareHouseMutation,
     useUpdateWareHouseMutation,
     useGetWareHouseByIdQuery,
+    useGetWareHousesByCompanyIdQuery,
     useGetPaginationWareHousesQuery,
     useGetCustomerWarehouseReturnQuery,
     useDeleteWareHouseMutation,
