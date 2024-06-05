@@ -81,6 +81,15 @@ const columns: columnTypes[] = [
         ),
     },
     {
+        field: 'closedCount',
+        headerName: 'Closed Count',
+        flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CLOSED_COUNT,
+        renderCell: (row: WareHouseInventory) => (
+            <span className="p-1"> {row?.closedCount} </span>
+        ),
+    },
+    {
         field: 'createdAt',
         headerName: 'Created date',
         flex: 'flex-[1_1_0%]',

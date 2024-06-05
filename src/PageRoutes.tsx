@@ -289,6 +289,7 @@ import MenifestFormat from './Receipt/MenifestFormat'
 import CourierReturnabsListingWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/list/CourierReturnabsListingWrapper'
 import AddCourierReturnWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/add/AddCourierReturnWrapper'
 import InwardInventoryOverview from './pages/warehouses/view/inventories/inward/overView/InwardInventoryOverview'
+import BarcodeDestroySearchListingWrapper from './pages/warehouses/view/inventories/barcodedestroy/list/BarcodeDestroySearchListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -742,6 +743,17 @@ const PageRoutes = () => {
                                 permission={
                                     UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INVENTORIES
                                 }
+                            />
+                        }
+                    />
+                    <Route
+                        path="abort-barcode"
+                        element={
+                            <Authorization
+                                children={
+                                    <BarcodeDestroySearchListingWrapper />
+                                }
+                                permission={UserModuleNameTypes.NAV_BARCODE}
                             />
                         }
                     />
@@ -1967,6 +1979,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
+
                     <Route
                         path="courier-preference/add"
                         element={
@@ -2629,7 +2642,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                    
+
                     <Route
                         path="assets-relocation/add"
                         element={

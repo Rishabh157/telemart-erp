@@ -55,6 +55,7 @@ export type WareHouseInventory = {
     totalDamageCount: number
     totalRtvCount: number
     expiredCount:number
+    closedCount:number
     totalFakeCount:number
     totalMissingCount: number
     firstDocument: {

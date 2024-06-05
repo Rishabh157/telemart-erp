@@ -34,6 +34,12 @@ const tabs = [
         name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INVENTORIES,
     },
     {
+        label: 'Expiry Barcode',
+        icon: BsArrowRepeat,
+        path: 'abort-barcode',
+        name: UserModuleNameTypes.NAV_BARCODE,
+    },
+    {
         label: 'Outward Inventories',
         icon: BsArrowRepeat,
         path: 'outward-inventories/dealer',

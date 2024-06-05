@@ -85,9 +85,14 @@
                     "fieldValue": "totalFakeCount"
                 },
                 {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CLOSED_COUNT",
+                    "fieldName": "Closed Count",
+                    "fieldValue": "closedCount"
+                },
+                {
                     "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_EXPIRED_COUNT",
                     "fieldName": "Expired Count",
-                    "fieldValue": "totalFakeCount"
+                    "fieldValue": "expiredCount"
                 },
                 {
                     "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_RTV_COUNT",

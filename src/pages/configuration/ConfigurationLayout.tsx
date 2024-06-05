@@ -100,6 +100,7 @@ const configurationNavigation: NavItemType[] = [
         path: 'barcode',
         name: UserModuleNameTypes.NAV_BARCODE,
     },
+
     {
         label: 'Courier Preference',
         icon: CiLocationOn,
