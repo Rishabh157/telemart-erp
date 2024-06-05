@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux'
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddSchemeWrapper'
-//import { DropdownOptions } from "./StepAddSchemeDetailsWrapper";
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
@@ -22,7 +21,6 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 type DropdownOptions = {
     productCategoryoption: SelectOption[]
     productSubCategoryOption: SelectOption[]
-    //productGroupOptions:SelectOption[];
 }
 type FieldType = Field<'productCategoryoption' | 'productSubCategoryOption'>
 

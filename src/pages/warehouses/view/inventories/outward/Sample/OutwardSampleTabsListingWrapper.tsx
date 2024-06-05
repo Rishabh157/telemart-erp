@@ -297,6 +297,8 @@ const OutwardSampleTabsListingWrapper = () => {
                 cartonBoxId,
                 status,
                 __v,
+                expiryDate,
+                isFreezed,
                 ...rest
             } = ele
             return rest

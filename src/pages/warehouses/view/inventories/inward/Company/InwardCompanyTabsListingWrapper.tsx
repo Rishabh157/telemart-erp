@@ -308,6 +308,8 @@ const InwardCompanyTabsListingWrapper = () => {
                 updatedAt,
                 status,
                 __v,
+                expiryDate,
+                isFreezed,
                 ...rest
             } = ele
             return {
@@ -324,7 +326,7 @@ const InwardCompanyTabsListingWrapper = () => {
         barcodeDispatch({
             barcodedata: [...filterValue],
             wId: [...(wId as string[])],
-            from: 'WTC',
+            from: barcodeStatusEnum.wtc,
         })
             .then((res: any) => {
                 if (res?.data?.status) {

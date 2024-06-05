@@ -310,6 +310,8 @@ const InwardWarehouseTabsListingWrapper = () => {
                 updatedAt,
                 status,
                 __v,
+                expiryDate,
+                isFreezed,
                 ...rest
             } = ele
             return {
@@ -326,8 +328,7 @@ const InwardWarehouseTabsListingWrapper = () => {
         barcodeDispatch({
             barcodedata: [...filterValue],
             wId: [...(wId as string[])],
-            from: 'WTW',
-            //     companyId: userData?.companyId as string,
+            from: barcodeStatusEnum.wtw,
         })
             .then((res: any) => {
                 if (res?.data?.status) {

@@ -22,7 +22,7 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
-import { useGetWareHousesQuery } from 'src/services/WareHouseService'
+import { useGetWareHousesByCompanyIdQuery } from 'src/services/WareHouseService'
 import { showToast } from 'src/utils'
 
 // |-- Types --|
@@ -66,7 +66,7 @@ const EditWarehouseToComapny = ({
     const [i, setI] = useState(0)
 
     const { options: selectedCompanyWarehouseOption } = useCustomOptions({
-        useEndPointHook: useGetWareHousesQuery(values?.toCompanyId, {
+        useEndPointHook: useGetWareHousesByCompanyIdQuery(values?.toCompanyId, {
             skip: !values?.toCompanyId,
         }),
         keyName: 'wareHouseName',

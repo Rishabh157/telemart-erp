@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditAddress.tsx
-// Type: Edit Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -18,13 +11,14 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../EditWarehouseWrapper'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
-import { useFileUploaderMutation } from 'src/services/media/SlotDefinitionServices'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -61,18 +55,46 @@ const StepEditAddress = ({
     formFields,
     dropdownOptions,
 }: Props) => {
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    const [loaderState, setLoaderState] = useState<string>('')
+
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
         formikProps
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
-    const [imageApiStatus, setImageApiStatus] = useState(false)
-    const [fileUploader] = useFileUploaderMutation()
+
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+    const [uploadFile] = useAddFileUrlMutation()
+
+    const handleFileUpload = (file: File, name: string) => {
+        let formData = new FormData()
+        setLoaderState(name)
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                setLoaderState('')
+                setImageApiStatus(false)
+            }
+        })
+    }
+
     return (
         <div className="">
             {formFields?.map((formField, index) => {
@@ -166,39 +188,10 @@ const StepEditAddress = ({
                                                     label={label}
                                                     placeholder={placeholder}
                                                     onSelect={(newFile) => {
-                                                        const formData =
-                                                            new FormData()
-                                                        formData.append(
-                                                            'fileType',
-                                                            'IMAGE'
+                                                        handleFileUpload(
+                                                            newFile,
+                                                            name
                                                         )
-                                                        formData.append(
-                                                            'category',
-                                                            'WAREHOUSEGSTCERTIFICATE'
-                                                        )
-                                                        formData.append(
-                                                            'fileUrl',
-                                                            newFile || ''
-                                                        )
-                                                        setImageApiStatus(true)
-                                                        fileUploader(
-                                                            formData
-                                                        ).then((res: any) => {
-                                                            if ('data' in res) {
-                                                                setImageApiStatus(
-                                                                    false
-                                                                )
-                                                                handleSetFieldValue(
-                                                                    name,
-                                                                    res?.data
-                                                                        ?.data
-                                                                        ?.fileUrl
-                                                                )
-                                                            }
-                                                            setImageApiStatus(
-                                                                false
-                                                            )
-                                                        })
                                                     }}
                                                     selectedFile={
                                                         values.billing_address
@@ -206,9 +199,12 @@ const StepEditAddress = ({
                                                     }
                                                     disabled={false}
                                                 />
-                                                {imageApiStatus ? (
-                                                    <div className="flex items-center justify-center w-full h-full mt-3 ">
-                                                        <CircularProgress />
+                                                {loaderState === name &&
+                                                imageApiStatus ? (
+                                                    <div className="mt-3">
+                                                        <CircularProgress
+                                                            size={18}
+                                                        />
                                                     </div>
                                                 ) : null}
                                             </div>

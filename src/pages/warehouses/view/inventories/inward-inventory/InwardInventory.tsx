@@ -129,6 +129,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                             }
                             //setShouldPrint(true)
                         }}
+                        extraClassField="mt-3"
                         label="Barcode"
                         placeholder="Barcode"
                         className="mt-0 rounded"

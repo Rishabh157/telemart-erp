@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
 // |-- Internal Dependencies --|
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
@@ -29,28 +29,20 @@ const VendorRtvListing = ({ columns, rows }: Props) => {
     const saleOrderState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    const { pathname } = useLocation()
-    const path = pathname.split('/')[1]
+
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
         saleOrderState
 
     return (
-        <div
-            className={`px-4 ${
-                path === 'dealers'
-                    ? 'h-[calc(100vh-185px)]'
-                    : 'h-[calc(100vh-55px)]'
-            }`}
-        >
-            <div
-                className={` border flex flex-col  rounded bg-white ${
-                    path === 'dealers'
-                        ? 'h-[calc(100%-50px)]'
-                        : 'h-[calc(100%-75px)]'
-                }`}
-            >
+        <div className="px-4 h-[calc(100vh-190px)]">
+            {/* Page Header */}
+            <div className="flex justify-between items-center h-[45px]">
+                <ATMPageHeading> Return To Vendor </ATMPageHeading>
+            </div>
+
+            <div className="border flex flex-col rounded bg-white h-[calc(100%-75px)]">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}
