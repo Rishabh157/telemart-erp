@@ -252,6 +252,35 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        // /bar-code/get-damage-expire-barcode/:barcode
+
+        getBarcodeDamageAndExpiry: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({ barcodeNumber, wareHouseId }: { barcodeNumber: string, wareHouseId: string }) => ({
+                url: `/bar-code/get-damage-expire-barcode/${barcodeNumber}/warehouse/${wareHouseId}`,
+                method: 'GET',
+            }),
+        }),
+
+        updateExipyBarcodes: builder.mutation({
+            invalidatesTags: ['Barcode'],
+            query: ({ wareHouseId, barcodes }) => ({
+                url: `/bar-code/barcode-close/${wareHouseId}`,
+                method: 'PUT',
+                body: { barcodes },
+            }),
+        }),
+
+        //***** BULK ADD *****/
+        uploadBulkBarcodeFile: builder.mutation({
+            invalidatesTags: ['courier-return'],
+            query: ({ warehouseId, body }) => ({
+                url: `/bar-code/bulk-upload/barcode-to-close/${warehouseId}`,
+                method: 'POST',
+                body,
+            }),
+        }),
+
     }),
 })
 
@@ -277,4 +306,7 @@ export const {
     useGetBarcodeOfWarehouseMutation,
     useGetWarehouseBarcodeMutation,
     useGetBarcodeByOrderNumberQuery,
+    useGetBarcodeDamageAndExpiryMutation,
+    useUpdateExipyBarcodesMutation,
+    useUploadBulkBarcodeFileMutation
 } = barcodeApi
