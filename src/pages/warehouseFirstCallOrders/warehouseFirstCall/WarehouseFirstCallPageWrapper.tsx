@@ -45,6 +45,11 @@ export interface OrderDetailsPropsTypes {
 
 const WarehouseFirstCallPageWrapper = () => {
     const [apiStatus, setApiStatus] = React.useState<boolean>(false)
+    const [paymentMode, setPaymentMode] = React.useState<string>('')
+    const [txnId, setTxnId] = React.useState<string>('')
+    const [assignedWarehouseId, setAssignedWarehouseId] =
+        React.useState<string>('')
+    const [productData, setProductData] = React.useState<string[]>([])
     const params = useParams()
     const orderId = params?.id
     //  showing initial order details
@@ -101,6 +106,12 @@ const WarehouseFirstCallPageWrapper = () => {
                 deliveryCharges: orderData?.deliveryCharges || 0,
                 discount: orderData?.deliveryCharges || 0,
             })
+            setPaymentMode(orderData?.status)
+            setTxnId(orderData?.transactionId)
+            setAssignedWarehouseId(orderData?.assignWarehouseId)
+            setProductData(
+                orderData?.schemeProducts?.map((ele) => ele?.productGroupId)
+            )
         }
     }, [isLoading, isFetching, data])
 
@@ -183,10 +194,16 @@ const WarehouseFirstCallPageWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         setApiStatus(true)
 
+        const formatedValue = {
+            ...values,
+            warehouseId: assignedWarehouseId,
+            productData,
+        }
+
         setTimeout(() => {
             updateWarehouseFirstCall({
                 id: orderId,
-                body: values,
+                body: formatedValue,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -198,7 +215,7 @@ const WarehouseFirstCallPageWrapper = () => {
                         setApiStatus(false)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                     setApiStatus(false)
                 }
                 setApiStatus(false)
@@ -221,6 +238,8 @@ const WarehouseFirstCallPageWrapper = () => {
                             orderDetails={orderDetails}
                             column={columns}
                             apiStatus={apiStatus}
+                            paymentMode={paymentMode}
+                            txnId={txnId}
                         />
                     )
                 }}
