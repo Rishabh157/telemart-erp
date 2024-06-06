@@ -747,13 +747,13 @@ const PageRoutes = () => {
                         }
                     />
                     <Route
-                        path="abort-barcode"
+                        path="expiry-barcode"
                         element={
                             <Authorization
                                 children={
                                     <BarcodeDestroySearchListingWrapper />
                                 }
-                                permission={UserModuleNameTypes.NAV_BARCODE}
+                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_EXPIRY_BARCODE}
                             />
                         }
                     />

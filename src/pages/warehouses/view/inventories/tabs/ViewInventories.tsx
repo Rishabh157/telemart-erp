@@ -36,8 +36,8 @@ const tabs = [
     {
         label: 'Expiry Barcode',
         icon: BsArrowRepeat,
-        path: 'abort-barcode',
-        name: UserModuleNameTypes.NAV_BARCODE,
+        path: 'expiry-barcode',
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_EXPIRY_BARCODE,
     },
     {
         label: 'Outward Inventories',

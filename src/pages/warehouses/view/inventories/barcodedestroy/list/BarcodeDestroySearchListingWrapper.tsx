@@ -23,7 +23,6 @@ const BarcodeDestroySearchListingWrapper = () => {
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
-                        console.log(res?.data?.data, 'res?.data?.data')
                         let barcode = barcodes?.find(
                             (barcode: any) =>
                                 barcode?.barcodeNumber ===
@@ -33,7 +32,6 @@ const BarcodeDestroySearchListingWrapper = () => {
                         } else {
                             let newBarcode = [...barcodes]
                             newBarcode.push(res?.data?.data)
-                            console.log(newBarcode, 'newBarcode')
                             setBarcodes([...newBarcode])
                         }
                     }
@@ -50,8 +48,6 @@ const BarcodeDestroySearchListingWrapper = () => {
         setBarcodes([...removeBarcode])
     }
     const handleSubmit = () => {
-        console.log('herer', wareHouseId)
-        console.log(barcodes)
         let barcodesNumbers = barcodes?.map((barcode: any) => {
             return barcode?.barcodeNumber
         })

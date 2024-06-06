@@ -15,6 +15,7 @@ export enum UserModuleOrderTabsTypes {
 
 export enum UserModuleWarehouseTabsTypes {
     inventories = 'TAB_WAREHOUSE_INVENTORIES',
+    expiryBarcode = 'TAB_WAREHOUSE_EXPIRY_BARCODE',
     //OUTWARD-INVENTORIES Sub Tabs
     outwardInventories = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES',
     outwardInventoriesDealer = 'TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER',

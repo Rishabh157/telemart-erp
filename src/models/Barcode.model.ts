@@ -4,6 +4,9 @@ export type BarcodeListResponseType = {
     _id: string
     productGroupId: string
     barcodeNumber: string
+    wareHouseLabel: string
+    vendorId: string
+    cartonBoxId: string
     barcodeGroupNumber: string
     outerBoxbarCodeNumber: string | null
     lotNumber: string
@@ -16,6 +19,7 @@ export type BarcodeListResponseType = {
     isDeleted: boolean
     isActive: boolean
     isFreezed: boolean
+    expiryDate: boolean
     __v: number
     createdAt: string
     updatedAt: string
