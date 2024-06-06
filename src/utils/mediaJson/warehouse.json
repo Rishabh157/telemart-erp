@@ -112,7 +112,7 @@
             ]
         },
         {
-            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_EXPIRY_BARCODE",
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_BARCODE_ACTION",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_EXPIRY_BARCODE",
             "compulsoryFields": [],

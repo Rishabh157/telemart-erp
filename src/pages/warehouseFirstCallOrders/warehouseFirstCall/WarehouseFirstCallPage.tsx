@@ -19,6 +19,8 @@ type Props = {
     column?: any[]
     rows?: any[]
     apiStatus: boolean
+    paymentMode: string
+    txnId: string
 }
 
 const WarehouseFirstCallPage: React.FC<Props> = ({
@@ -26,6 +28,8 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
     orderDetails,
     column,
     apiStatus,
+    paymentMode,
+    txnId,
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
     const {
@@ -416,6 +420,23 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                                 setFieldValue('callbackDate', e)
                             }}
                         />
+                        {/* TXN ID */}
+                        <div className="flex gap-x-8 flex-col mt-2">
+                            <h1 className="text-sm">
+                                Payment Mode :{' '}
+                                <span className="font-semibold text-green-500">
+                                    {paymentMode}
+                                </span>
+                            </h1>
+                            {paymentMode === 'PREPAID' ? (
+                                <h2 className="text-sm">
+                                    Transaction ID :{' '}
+                                    <span className="font-semibold text-blue-400">
+                                        {txnId}
+                                    </span>
+                                </h2>
+                            ) : null}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -492,6 +513,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     Cancel
                 </ATMLoadingButton>
             </div>
+
             <div className="flex justify-end">
                 {/* BACK */}
                 <ATMLoadingButton

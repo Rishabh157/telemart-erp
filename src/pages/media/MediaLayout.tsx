@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:MediaLayout.tsx
-// Type: Layout Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 

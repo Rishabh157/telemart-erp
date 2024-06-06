@@ -127,6 +127,19 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                                     ? 'Disapprove '
                                                     : 'Approval '
                                             }`,
+                                            html: `<div className='flex gap-x-8'>
+                                            <h1>Payment Mode: ${
+                                                row?.status
+                                            }</h1>
+                                            ${
+                                                row?.status === 'PREPAID'
+                                                    ? `<h2>
+                                                        Transaction ID:
+                                                        ${row?.transactionId}
+                                                    </h2>`
+                                                    : ``
+                                            }
+                                          </div>`,
                                             showCancelButton: true,
                                             showDenyButton: true,
                                             confirmButtonText: 'Order approval',
@@ -139,7 +152,12 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                                     return res.isConfirmed
                                                         ? handleApproval(
                                                               row?._id,
-                                                              FirstCallApprovalStatus.APPROVED
+                                                              FirstCallApprovalStatus.APPROVED,
+                                                              row?.assignWarehouseId,
+                                                              row?.schemeProducts?.map(
+                                                                  (ele) =>
+                                                                      ele?.productGroupId
+                                                              )
                                                           )
                                                         : setShowDropdown(false)
                                                 }
@@ -147,7 +165,12 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                                     return res.isDenied
                                                         ? handleApproval(
                                                               row?._id,
-                                                              FirstCallApprovalStatus.CANCEL
+                                                              FirstCallApprovalStatus.CANCEL,
+                                                              row?.assignWarehouseId,
+                                                              row?.schemeProducts?.map(
+                                                                  (ele) =>
+                                                                      ele?.productGroupId
+                                                              )
                                                           )
                                                         : setShowDropdown(false)
                                                 }
@@ -547,24 +570,27 @@ const WarehouseAssignedOrderListingWrapper = () => {
         },
     ]
 
-    const handleApproval = (rowId: string, status: string) => {
+    const handleApproval = (
+        rowId: string,
+        status: string,
+        warehouseId: string,
+        productData: string[]
+    ) => {
         setShowDropdown(false)
         let body = {
             status,
+            warehouseId,
+            productData,
         }
+
         warehousefirstCallApproval({ body: body, id: rowId }).then(
             (res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'Approvaled successfully!')
-                    } else {
-                        showToast('error', res?.data?.message)
+                        showToast('success', 'Approved successfully!')
                     }
                 } else {
-                    showToast(
-                        'error',
-                        'Something went wrong, Please try again later'
-                    )
+                    showToast('error', res?.error?.data?.message)
                 }
             }
         )

@@ -38,7 +38,7 @@ const BarcodeDestroySearchListing = ({
         <div className="h-[calc(100vh-95px)] px-4">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px] p-1">
-                <ATMPageHeading>Exipry Brcode searching</ATMPageHeading>
+                <ATMPageHeading>Barcode Status Update (Expired/Damage)</ATMPageHeading>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-95px)] rounded bg-white ">

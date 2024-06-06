@@ -215,8 +215,8 @@ const AddSchemeWrapper = () => {
                     weight: Number(values.weight),
                     deliveryCharges: Number(values.deliveryCharges),
                     comboPacking: values.comboPacking,
-                    startDate: moment(values.startDate).format('YYYY/MM/D'),
-                    endDate: moment(values.endDate).format('YYYY/MM/D'),
+                    startDate: moment(values.startDate).format('YYYY/MM/DD'),
+                    endDate: moment(values.endDate).format('YYYY/MM/DD'),
                     faq: values.faq,
                     schemeDescription: values.schemeDescription,
                     productInformation: values.productInformation,
@@ -226,7 +226,7 @@ const AddSchemeWrapper = () => {
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'Scheme added successfully!')
-                            navigate('/configurations/Scheme')
+                            navigate('/configurations/scheme')
                         } else {
                             showToast('error', res?.data?.message)
                         }

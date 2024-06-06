@@ -228,33 +228,15 @@ const AllOrdersListingWrapper = ({
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left">
                         {row?.assignWarehouseId ? (
                             row?.firstCallApproval ? (
-                                <Chip
-                                    className="cursor-pointer"
-                                    label="Approved"
-                                    color="success"
-                                    variant="outlined"
-                                    size="small"
-                                />
+                                <p className="text-green-500"> Approved </p>
                             ) : row?.firstCallState ===
                               FirstCallApprovalStatus.CANCEL ? (
-                                <Chip
-                                    className="cursor-pointer"
-                                    label="Cancled"
-                                    color="warning"
-                                    variant="outlined"
-                                    size="small"
-                                />
+                                <p className="text-red-500"> Cancelled </p>
                             ) : (
-                                <Chip
-                                    className="cursor-pointer"
-                                    label="Pending"
-                                    color="error"
-                                    variant="outlined"
-                                    size="small"
-                                />
+                                <p className="text-orange-500"> Pending </p>
                             )
                         ) : null}
                     </span>

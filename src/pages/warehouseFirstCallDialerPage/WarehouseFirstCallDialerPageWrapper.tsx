@@ -19,6 +19,7 @@ export type FormInitialValues = {
     status: string
     approvedBy: string
     alternateNo: string
+    mobileNo: string
 }
 
 export interface OrderDetailsPropsTypes {
@@ -47,6 +48,12 @@ export interface OrderDetailsPropsTypes {
 const WarehouseFirstCallDialerPageWrapper = () => {
     const [orderId, setOrderId] = useState<string>()
     const [apiStatus, setApiStatus] = React.useState<boolean>(false)
+    const [paymentMode, setPaymentMode] = React.useState<string>('')
+    const [txnId, setTxnId] = React.useState<string>('')
+    const [assignedWarehouseId, setAssignedWarehouseId] =
+        React.useState<string>('')
+    const [productData, setProductData] = React.useState<string[]>([])
+
     const location = useLocation()
     const searchParams = new URLSearchParams(location.search)
     const phoneNumber = searchParams.get('phone') || ''
@@ -111,6 +118,12 @@ const WarehouseFirstCallDialerPageWrapper = () => {
                 deliveryCharges: orderData?.deliveryCharges || 0,
                 discount: orderData?.deliveryCharges || 0,
             })
+            setPaymentMode(orderData?.status)
+            setTxnId(orderData?.transactionId)
+            setAssignedWarehouseId(orderData?.assignWarehouseId)
+            setProductData(
+                orderData?.schemeProducts?.map((ele) => ele?.productGroupId)
+            )
         }
     }, [isLoading, isFetching, data])
 
@@ -178,6 +191,7 @@ const WarehouseFirstCallDialerPageWrapper = () => {
         status: '',
         approvedBy: userName,
         alternateNo: orderDetails?.alternateNumber,
+        mobileNo: phoneNumber,
     }
 
     const validationSchema = object({
@@ -194,22 +208,25 @@ const WarehouseFirstCallDialerPageWrapper = () => {
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         setApiStatus(true)
 
+        const formatedValue = {
+            ...values,
+            warehouseId: assignedWarehouseId,
+            productData,
+        }
+
         setTimeout(() => {
             updateWarehouseFirstCall({
                 id: orderId,
-                body: values,
+                body: formatedValue,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', res?.data?.message)
                         setApiStatus(false)
                         navigate(`/success`)
-                    } else {
-                        showToast('error', res?.data?.message)
-                        setApiStatus(false)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                     setApiStatus(false)
                 }
                 setApiStatus(false)
@@ -231,6 +248,8 @@ const WarehouseFirstCallDialerPageWrapper = () => {
                         orderDetails={orderDetails}
                         column={columns}
                         apiStatus={apiStatus}
+                        paymentMode={paymentMode}
+                        txnId={txnId}
                     />
                 )
             }}
