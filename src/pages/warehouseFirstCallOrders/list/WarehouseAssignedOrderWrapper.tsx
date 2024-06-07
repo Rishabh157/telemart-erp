@@ -393,12 +393,12 @@ const WarehouseAssignedOrderListingWrapper = () => {
             ),
         },
         {
-            field: 'dispositionLevelThree',
+            field: 'dispositionLevelThreeLabel',
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dispositionLevelThree}</div>
+                <div className="py-0">{row?.dispositionLevelThreeLabel}</div>
             ),
         },
         {
@@ -418,7 +418,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dealerCode || '-'}</div>
+                <div className="py-0">{row?.assignDealerCode || '-'}</div>
             ),
         },
         {

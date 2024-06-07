@@ -177,6 +177,7 @@ import {
     ListWebstieBlogWrapper,
     Locations,
     Order,
+    OrderOutlet,
     OrderViewWrapper,
     OrganisationHierarchy,
     PageNotFound,
@@ -290,6 +291,23 @@ import CourierReturnabsListingWrapper from './pages/warehouses/view/inventories/
 import AddCourierReturnWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/add/AddCourierReturnWrapper'
 import InwardInventoryOverview from './pages/warehouses/view/inventories/inward/overView/InwardInventoryOverview'
 import BarcodeDestroySearchListingWrapper from './pages/warehouses/view/inventories/barcodedestroy/list/BarcodeDestroySearchListingWrapper'
+import AllOrdersListingWrapper from './pages/ordersOutlet/wrappers/AllOrdersListingWrapper'
+import FreshOrdersListingWrapper from './pages/ordersOutlet/wrappers/FreshOrdersListingWrapper'
+import AssignOrdersListingWrapper from './pages/ordersOutlet/wrappers/AssignOrdersListingWrapper'
+import PrepaidOrdersListingWrapper from './pages/ordersOutlet/wrappers/PrepaidOrdersListingWrapper'
+import DeliveredOrdersListingWrapper from './pages/ordersOutlet/wrappers/DeliveredOrdersListingWrapper'
+import DoorCancelledOrdersListingWrapper from './pages/ordersOutlet/wrappers/DoorCancelledOrdersListingWrapper'
+import HoldOrdersListingWrapper from './pages/ordersOutlet/wrappers/HoldOrdersListingWrapper'
+import PscOrdersListingWrapper from './pages/ordersOutlet/wrappers/PscOrdersListingWrapper'
+import UnaOrdersListingWrapper from './pages/ordersOutlet/wrappers/UnaOrdersListingWrapper'
+import PndOrdersListingWrapper from './pages/ordersOutlet/wrappers/PndOrdersListingWrapper'
+import UrgentOrdersListingWrapper from './pages/ordersOutlet/wrappers/UrgentOrdersListingWrapper'
+import NonActionsOrdersListingWrapper from './pages/ordersOutlet/wrappers/NonActionsOrdersListingWrapper'
+import InquiryOrdersListingWrapper from './pages/ordersOutlet/wrappers/InquiryOrdersListingWrapper'
+import ReattemptOrdersListingWrapper from './pages/ordersOutlet/wrappers/ReattemptOrdersListingWrapper'
+import ComplaintTabListingWrapper from './pages/ordersOutlet/wrappers/ComplaintTabListingWrapper'
+import OrderOverviewDashboardWrapper from './pages/ordersOutlet/wrappers/OrderOverviewDashboardWrapper'
+import GlobalSearchOrdersListingWrapper from './pages/ordersOutlet/wrappers/GlobalSearchOrdersListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -753,7 +771,9 @@ const PageRoutes = () => {
                                 children={
                                     <BarcodeDestroySearchListingWrapper />
                                 }
-                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_BARCODE_ACTION}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_BARCODE_ACTION
+                                }
                             />
                         }
                     />
@@ -1451,6 +1471,179 @@ const PageRoutes = () => {
                         />
                     }
                 />
+
+                <Route
+                    path="/orders-new"
+                    element={
+                        <Authorization
+                            children={<OrderOutlet />}
+                            permission={UserModuleNameTypes.NAV_ORDER}
+                        />
+                    }
+                >
+                    <Route
+                        path="overview"
+                        element={
+                            <Authorization
+                                children={<OrderOverviewDashboardWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="global-search"
+                        element={
+                            <Authorization
+                                children={<GlobalSearchOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="all"
+                        element={
+                            <Authorization
+                                children={<AllOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="fresh"
+                        element={
+                            <Authorization
+                                children={<FreshOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="assign"
+                        element={
+                            <Authorization
+                                children={<AssignOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="prepaid"
+                        element={
+                            <Authorization
+                                children={<PrepaidOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="delivered"
+                        element={
+                            <Authorization
+                                children={<DeliveredOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="doorCancelled"
+                        element={
+                            <Authorization
+                                children={<DoorCancelledOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="hold"
+                        element={
+                            <Authorization
+                                children={<HoldOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="psc"
+                        element={
+                            <Authorization
+                                children={<PscOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="una"
+                        element={
+                            <Authorization
+                                children={<UnaOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="pnd"
+                        element={
+                            <Authorization
+                                children={<PndOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="urgent"
+                        element={
+                            <Authorization
+                                children={<UrgentOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="non-action"
+                        element={
+                            <Authorization
+                                children={<NonActionsOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="inquiry"
+                        element={
+                            <Authorization
+                                children={<InquiryOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="complaint"
+                        element={
+                            <Authorization
+                                children={<ComplaintTabListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="reattempt"
+                        element={
+                            <Authorization
+                                children={<ReattemptOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="global-search"
+                        element={
+                            <Authorization
+                                children={<AssignOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                </Route>
 
                 <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
 

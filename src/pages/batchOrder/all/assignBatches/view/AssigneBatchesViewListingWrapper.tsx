@@ -280,13 +280,13 @@ const AssigneBatchesViewListingWrapper = () => {
             ),
         },
         {
-            field: 'dispositionLevelThree',
+            field: 'dispositionLevelThreeLabel',
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DISPOSITION,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dispositionLevelThree}</div>
+                <div className="py-0">{row?.dispositionLevelThreeLabel}</div>
             ),
         },
         {
@@ -302,13 +302,13 @@ const AssigneBatchesViewListingWrapper = () => {
             ),
         },
         {
-            field: 'dealerCode',
+            field: 'assignDealerCode',
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DEALER_CODE,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dealerCode || '-'}</div>
+                <div className="py-0">{row?.assignDealerCode || '-'}</div>
             ),
         },
         {

@@ -331,13 +331,13 @@ const OutwardCustomerTabsListingWrapper = () => {
             ),
         },
         {
-            field: 'dispositionLevelThree',
+            field: 'dispositionLevelThreeLabel',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER_LIST_DISPOSITION_LEVEL_THREE,
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dispositionLevelThree}</div>
+                <div className="py-0">{row?.dispositionLevelThreeLabel}</div>
             ),
         },
         {
@@ -359,7 +359,7 @@ const OutwardCustomerTabsListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dealerCode || '-'}</div>
+                <div className="py-0">{row?.assignDealerCode || '-'}</div>
             ),
         },
         {

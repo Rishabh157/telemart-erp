@@ -232,7 +232,7 @@ const CustomerCarePageWrapper = () => {
             extraClasses: 'text-xs  min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
-                <span> {row.dispositionLevelThree} </span>
+                <span> {row.dispositionLevelThreeLabel} </span>
             ),
         },
         {
@@ -327,7 +327,7 @@ const CustomerCarePageWrapper = () => {
             extraClasses: 'text-xs  min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
-                <span> {row?.dealerCode} </span>
+                <span> {row?.assignDealerCode} </span>
             ),
         },
         {

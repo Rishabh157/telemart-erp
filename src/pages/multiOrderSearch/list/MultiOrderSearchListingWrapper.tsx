@@ -327,7 +327,7 @@ const MultiOrderSearchListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dealerCode || '-'}</div>
+                <div className="py-0">{row?.assignDealerCode || '-'}</div>
             ),
         },
         {

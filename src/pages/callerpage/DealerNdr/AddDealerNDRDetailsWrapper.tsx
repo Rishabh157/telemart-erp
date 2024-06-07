@@ -68,7 +68,7 @@ const AddDealerNDRDetailsWrapper = () => {
         state: orderDetails?.stateLabel || '',
         remark: orderDetails?.remark || '',
         dealerName: orderDetails?.dealerLabel || '',
-        dalerCode: orderDetails?.dealerCode || '',
+        dalerCode: orderDetails?.assignDealerCode || '',
         //editable
         ndrDiscountApplicable: false,
         ndrRemark: '',

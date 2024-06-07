@@ -15,6 +15,8 @@ export type InitialStateType = {
     page: number
     rowsPerPage: number
     searchValue: string
+    mobileNumberSearchValue: string
+    complaintNumberSearchValue: string
     sortValue: { field: string; value: 'DESC' | 'ASC' }
     selectedDealerId: string
     filterValue: string
@@ -51,6 +53,8 @@ const initialState: InitialStateType = {
     page: 1,
     rowsPerPage: 10,
     searchValue: '',
+    mobileNumberSearchValue: '',
+    complaintNumberSearchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedDealerId: '',
     filterValue: '',
@@ -97,6 +101,17 @@ const orderSlice: Slice<InitialStateType> = createSlice({
         },
         setSearchValue: (state, action: PayloadAction<string>) => {
             state.searchValue = action.payload
+            state.page = 1
+        },
+        setMobileNumberSearchValue: (state, action: PayloadAction<string>) => {
+            state.mobileNumberSearchValue = action.payload
+            state.page = 1
+        },
+        setComplaintNumberSearchValue: (
+            state,
+            action: PayloadAction<string>
+        ) => {
+            state.complaintNumberSearchValue = action.payload
             state.page = 1
         },
         setSortValue: (
@@ -167,6 +182,8 @@ export const {
     setPage,
     setRowsPerPage,
     setSearchValue,
+    setMobileNumberSearchValue,
+    setComplaintNumberSearchValue,
     setSortValue,
     setTotalItems,
     setIsTableLoading,

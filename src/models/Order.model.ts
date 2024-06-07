@@ -70,9 +70,12 @@ export type OrderListResponse = {
     whatsappNo: string
     price: number
     deliveryCharges: number
+    dispositionLevelThree  : string
     totalAmount: number
     dispositionLevelTwoId: string
     dispositionLevelThreeId: string
+    dispositionLevelTwoLabel: string
+    dispositionLevelThreeLabel: string
     preShipCancelationDate: string
     secondaryCourierPartner: string
     orderAssignedToCourier: string
@@ -87,8 +90,6 @@ export type OrderListResponse = {
     createdAt: string
     updatedAt: string
     __v: number
-    dispositionLevelTwo: string
-    dispositionLevelThree: string
     stateLabel: string
     districtLabel: string
     tehsilLabel: string
@@ -97,7 +98,7 @@ export type OrderListResponse = {
     wareHouseLabel: string
     productGroupLabel: string
     dealerLabel: string
-    dealerCode: string
+    assignDealerCode: string
     dealerStatus: string
     callCenterId: string
     callCenterLabel: string
