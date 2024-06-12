@@ -112,6 +112,14 @@
             ]
         },
         {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_BARCODE_ACTION",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_EXPIRY_BARCODE",
+            "compulsoryFields": [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES",

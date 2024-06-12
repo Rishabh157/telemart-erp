@@ -73,15 +73,10 @@ export const barcodeApi = apiSlice.injectEndpoints({
         //*** barcode status change
         updateBarcodeFreezeStatus: builder.mutation({
             invalidatesTags: ['Barcode'],
-            query: ({
-                barcodeNumber,
-                status,
-            }: {
-                barcodeNumber: string
-                status: boolean
-            }) => ({
-                url: `/bar-code/freeze-barcode/${barcodeNumber}/status/${status}`,
+            query: ({ status, body }) => ({
+                url: `/bar-code/freeze-barcode/status/${status}`,
                 method: 'PUT',
+                body,
             }),
         }),
 
@@ -256,7 +251,13 @@ export const barcodeApi = apiSlice.injectEndpoints({
 
         getBarcodeDamageAndExpiry: builder.mutation({
             invalidatesTags: ['Barcode'],
-            query: ({ barcodeNumber, wareHouseId }: { barcodeNumber: string, wareHouseId: string }) => ({
+            query: ({
+                barcodeNumber,
+                wareHouseId,
+            }: {
+                barcodeNumber: string
+                wareHouseId: string
+            }) => ({
                 url: `/bar-code/get-damage-expire-barcode/${barcodeNumber}/warehouse/${wareHouseId}`,
                 method: 'GET',
             }),
@@ -280,7 +281,6 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-
     }),
 })
 
@@ -308,5 +308,5 @@ export const {
     useGetBarcodeByOrderNumberQuery,
     useGetBarcodeDamageAndExpiryMutation,
     useUpdateExipyBarcodesMutation,
-    useUploadBulkBarcodeFileMutation
+    useUploadBulkBarcodeFileMutation,
 } = barcodeApi

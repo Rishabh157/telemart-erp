@@ -272,8 +272,8 @@ const EditSchemeWrapper = () => {
                         weight: Number(values.weight),
                         deliveryCharges: Number(values.deliveryCharges),
                         comboPacking: values.comboPacking,
-                        startDate: moment(values.startDate).format('YYYY/MM/D'),
-                        endDate: moment(values.endDate).format('YYYY/MM/D'),
+                        startDate: moment(values.startDate).format('YYYY/MM/DD'),
+                        endDate: moment(values.endDate).format('YYYY/MM/DD'),
                         faq: faqData,
                         schemeDescription: values.schemeDescription,
                         productInformation: productInformationData,
@@ -285,7 +285,7 @@ const EditSchemeWrapper = () => {
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'Scheme Updated successfully!')
-                            navigate('/configurations/Scheme')
+                            navigate('/configurations/scheme')
                         } else {
                             showToast('error', res?.data?.message)
                         }

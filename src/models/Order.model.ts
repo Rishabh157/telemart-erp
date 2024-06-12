@@ -5,7 +5,7 @@ export type OrderListResponse = {
     inquiryNumber: string
     awbNumber: string
     assignDealerId: string | null
-    assignWarehouseId: string | null
+    assignWarehouseId: string
     assignDealerLabel: string
     assignWarehouseLabel: string
     agentId: string
@@ -44,6 +44,7 @@ export type OrderListResponse = {
     medicalIssue: string[]
     orderFor: string[]
     orderForOther: string
+    transactionId: string
     orderStatus: string
     paymentMode: string
     productGroupId: string
@@ -59,6 +60,11 @@ export type OrderListResponse = {
         _id: string
     }
     channelLabel: string[]
+    schemeProducts: {
+        productGroupId: string
+        productGroupName: string
+        _id: string
+    }[]
     streetNumber: string
     typeOfAddress: string
     whatsappNo: string

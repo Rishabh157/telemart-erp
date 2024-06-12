@@ -217,6 +217,7 @@ const StepEditScheme = ({
                 <ATMDatePicker
                     name={'startDate'}
                     value={values.startDate}
+                    dateTimeFormat="DD/MM/YYYY"
                     onChange={(newValue) => {
                         handleSetFieldValue('startDate', newValue)
                     }}
@@ -225,6 +226,7 @@ const StepEditScheme = ({
                 {/* End Date */}
                 <ATMDatePicker
                     name={'endDate'}
+                    dateTimeFormat="DD/MM/YYYY"
                     value={values.endDate}
                     onChange={(newValue) => {
                         handleSetFieldValue('endDate', newValue)

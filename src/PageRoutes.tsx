@@ -747,13 +747,13 @@ const PageRoutes = () => {
                         }
                     />
                     <Route
-                        path="abort-barcode"
+                        path="barcode-action"
                         element={
                             <Authorization
                                 children={
                                     <BarcodeDestroySearchListingWrapper />
                                 }
-                                permission={UserModuleNameTypes.NAV_BARCODE}
+                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_BARCODE_ACTION}
                             />
                         }
                     />

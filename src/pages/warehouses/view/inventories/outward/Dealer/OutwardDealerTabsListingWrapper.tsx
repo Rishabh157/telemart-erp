@@ -321,8 +321,10 @@ const OutwardDealerTabsListingWrapper = () => {
                 return item
             } else {
                 updateBarcodeStatus({
-                    barcodeNumber,
                     status: false,
+                    body: {
+                        bcode: [barcodeNumber],
+                    },
                 })
                     .then((res) => {})
                     .catch((err) => console.error(err))
@@ -371,8 +373,10 @@ const OutwardDealerTabsListingWrapper = () => {
                         setBarcodeList([...newBarcode])
                     }
                     updateBarcodeStatus({
-                        barcodeNumber,
                         status: true,
+                        body: {
+                            bcode: [barcodeNumber],
+                        },
                     })
                         .then((res) => {})
                         .catch((err) => console.error(err))
@@ -384,31 +388,42 @@ const OutwardDealerTabsListingWrapper = () => {
     }
 
     const onSubmitHandler = (values: FormInitialValues) => {
-        const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
-            if (!ele) return ele
+        const filterValue = barcodeList
+            ?.flat(1)
+            ?.map((ele: BarcodeListResponseType) => {
+                if (!ele) return ele
 
-            const {
-                // barcodeNumber,
-                wareHouseLabel,
-                productGroupLabel,
-                vendorId,
-                createdAt,
-                isActive,
-                isDeleted,
-                updatedAt,
-                cartonBoxId,
-                status,
-                __v,
-                isFreezed,
-                expiryDate,
-                ...rest
-            } = ele
-            return rest
-        })
+                const {
+                    // barcodeNumber,
+                    wareHouseLabel,
+                    productGroupLabel,
+                    vendorId,
+                    createdAt,
+                    isActive,
+                    isDeleted,
+                    updatedAt,
+                    cartonBoxId,
+                    status,
+                    __v,
+                    isFreezed,
+                    expiryDate,
+                    ...rest
+                } = ele
+                return rest
+            })
+
+        const dispatchBarcodeList = barcodeList
+            ?.flat(1)
+            ?.map((ele: BarcodeListResponseType) => {
+                if (!ele) return ele
+
+                return ele?.barcodeNumber
+            })
 
         const soid = selectedItemsTobeDispatch?.documents?.map(
             (ele: any) => ele?._id as string
         )
+
         barcodeDispatch({
             barcodedata: [...filterValue],
             soId: [...(soid as string[])] as string[],
@@ -419,6 +434,14 @@ const OutwardDealerTabsListingWrapper = () => {
                     showToast('success', 'dispatched successfully')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))
+                    updateBarcodeStatus({
+                        status: true,
+                        body: {
+                            bcode: dispatchBarcodeList,
+                        },
+                    })
+                        .then((res) => {})
+                        .catch((err) => console.error(err))
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -630,7 +653,6 @@ const OutwardDealerTabsListingWrapper = () => {
                             {(formikProps: FormikProps<FormInitialValues>) => {
                                 const { values, setFieldValue, handleSubmit } =
                                     formikProps
-
                                 return (
                                     <>
                                         <div>

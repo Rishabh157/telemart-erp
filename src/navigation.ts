@@ -195,6 +195,7 @@ export const navigation: NavItemType[] = [
         label: 'WH First Call',
         icon: FiPhoneCall,
         path: '/warehouse-first-call-orders',
+        // http://localhost:3000/calling-outcall?phone=9006666665&username=admin2 -> for dialar page
         name: UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST,
     },
     {
