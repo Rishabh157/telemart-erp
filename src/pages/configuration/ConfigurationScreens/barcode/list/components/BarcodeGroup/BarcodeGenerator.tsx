@@ -11,7 +11,9 @@ import { useEffect } from 'react'
 // |-- External Dependencies --|
 import { useBarcode } from '@createnextapp/react-barcode'
 import { useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation,
+    //  useNavigate
+     } from 'react-router-dom'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -25,13 +27,15 @@ function Barcode({ value }: { value: string }) {
         },
     })
 
-    return <canvas ref={inputRef} className="h-[55px]" />
+    return <canvas ref={inputRef} className="h-[30px]" />
 }
 
 function AllBarcodes() {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const location = useLocation()
-    const { path, outerBoxCode } = location.state
+    const {
+        //  path,
+         outerBoxCode } = location.state
     const { barcodesToPrint }: any = useSelector(
         (state: RootState) => state?.barcode
     )
@@ -47,8 +51,7 @@ function AllBarcodes() {
 
     return (
         <div className=" bg-white">
-            <div className="flex justify-between items-center h-[45px]">
-                {/* <ATMPageHeading> Barcode </ATMPageHeading> */}
+            {/* <div className="flex justify-between items-center h-[45px]">
                 <button
                     onClick={() => {
                         navigate(path)
@@ -57,10 +60,13 @@ function AllBarcodes() {
                 >
                     Back
                 </button>
-            </div>
+            </div> */}
             {outerBoxCode ? (
-                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1  gap-3 ">
-                    <div className={`flex flex-col gap-2 shadow relative   `}>
+                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 gap-2 mt-2 ">
+                    <div className={`flex flex-col gap-x-4 shadow relative`}>
+                        <p className="flex justify-center font-normal text-[0.6rem]  tracking-[.25em]">
+                            PJ0039282
+                        </p>
                         <Barcode value={outerBoxCode} />
                         <div className="w-full flex justify-center p-0 tracking-[.25em] ">
                             {outerBoxCode}
@@ -80,14 +86,17 @@ function AllBarcodes() {
                     </div>
                 ))}
             </div> */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 ">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-2 mt-2 ">
                 {barcodeValues?.map((value: string, index: number) => (
                     <div
                         key={index}
-                        className={`flex flex-col gap-x-2 shadow relative w-full`}
+                        className={`flex flex-col gap-x-4 shadow relative w-full py-4 px-4 `}
                     >
+                        <p className="flex justify-center font-normal text-[0.6rem] tracking-[.25em]">
+                            PJ0039282
+                        </p>
                         <Barcode key={index} value={value} />
-                        <div className="w-full flex justify-center p-0 tracking-[.25em] ">
+                        <div className="w-full flex justify-center p-0 tracking-[.25em] text-[0.6rem] ">
                             {value}
                         </div>
                     </div>
