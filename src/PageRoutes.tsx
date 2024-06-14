@@ -290,6 +290,7 @@ import CourierReturnabsListingWrapper from './pages/warehouses/view/inventories/
 import AddCourierReturnWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/add/AddCourierReturnWrapper'
 import InwardInventoryOverview from './pages/warehouses/view/inventories/inward/overView/InwardInventoryOverview'
 import BarcodeDestroySearchListingWrapper from './pages/warehouses/view/inventories/barcodedestroy/list/BarcodeDestroySearchListingWrapper'
+import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward-inventory/MoveToCartonDrawer/BarcodeGeneratorOuterBox'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -3385,6 +3386,7 @@ const PageRoutes = () => {
                 />
 
                 <Route path="/barcodes" element={<BarcodeGenerator />} />
+                <Route path="/barcodes-outerbox" element={<BarcodeGeneratorOuterBox />} />
                 {/* gpo invoice */}
                 {/* <Route
                     path="gpo/label"
