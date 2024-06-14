@@ -129,10 +129,10 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                             }`,
                                             html: `<div className='flex gap-x-8'>
                                             <h1>Payment Mode: ${
-                                                row?.status
+                                                row?.paymentMode
                                             }</h1>
                                             ${
-                                                row?.status === 'PREPAID'
+                                                row?.paymentMode === 'PREPAID'
                                                     ? `<h2>
                                                         Transaction ID:
                                                         ${row?.transactionId}
