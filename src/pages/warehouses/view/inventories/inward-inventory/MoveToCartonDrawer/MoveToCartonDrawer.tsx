@@ -74,11 +74,14 @@ const MoveToCartonDrawer = ({
                             'Product-category added successfully!'
                         )
                     }, 2000)
-                    navigate('/barcodes', {
+                    navigate(`/barcodes-outerbox`, {
                         state: {
                             path: `/warehouse/view/${wareHouse}/inventories`,
                             outerBoxCode:
                                 res?.data?.data?.outerBoxbarCodeNumber,
+                            productGroupLabel:
+                                productDetail[0].productGroupLabel,
+                            productCode: productDetail[0].productCode,
                         },
                     })
                 } else {
