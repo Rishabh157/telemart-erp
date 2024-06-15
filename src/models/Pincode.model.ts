@@ -28,7 +28,6 @@ export type AddPincode = {
     tehsilId: string
     districtId: string
     stateId: string
-    companyId: string
     countryId: string
 }
 

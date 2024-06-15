@@ -21,7 +21,6 @@ export const countryApi = apiSlice.injectEndpoints({
             query: () => ({
                 url: `/country`,
                 method: 'GET',
-                // body,
             }),
         }),
         getAllCountryUnauth: builder.query({
@@ -29,7 +28,6 @@ export const countryApi = apiSlice.injectEndpoints({
             query: () => ({
                 url: '/country/inbound',
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -39,7 +37,6 @@ export const countryApi = apiSlice.injectEndpoints({
             query: (body: AddCountry) => ({
                 url: '/country/add',
                 method: 'POST',
-
                 body,
             }),
         }),
@@ -49,7 +46,6 @@ export const countryApi = apiSlice.injectEndpoints({
             invalidatesTags: ['country'],
             query: ({ body, id }: UpdateCountry) => ({
                 url: `/country/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -60,7 +56,6 @@ export const countryApi = apiSlice.injectEndpoints({
             providesTags: ['Country'],
             query: (id) => ({
                 url: `/country/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -69,7 +64,6 @@ export const countryApi = apiSlice.injectEndpoints({
         exportCountryData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
@@ -84,7 +78,6 @@ export const countryApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Country'],
             query: (id) => ({
                 url: `/country/${id}`,
-
                 method: 'DELETE',
             }),
         }),

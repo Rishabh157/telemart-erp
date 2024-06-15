@@ -16,7 +16,6 @@ export type AddState = {
     preferredCourier: string
     isUnion: boolean
     isFixed: boolean
-    companyId: string
     countryId: string
 }
 

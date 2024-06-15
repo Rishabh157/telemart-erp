@@ -16,7 +16,6 @@ export type AddDistrict = {
     districtName: string
     stateId: string
     preferredCourier: string
-    companyId: string
     countryId: string
 }
 

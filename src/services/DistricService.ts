@@ -14,13 +14,13 @@ export const districtApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        
         //***** GET ALL BY STATE*****/
         getAllDistrict: builder.query({
             providesTags: ['District'],
             query: () => ({
                 url: `/district`,
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -29,7 +29,6 @@ export const districtApi = apiSlice.injectEndpoints({
             query: (id: string) => ({
                 url: `/district/get-state-district/unauth/${id}`,
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -39,7 +38,6 @@ export const districtApi = apiSlice.injectEndpoints({
             query: (id) => ({
                 url: `/district/get-state-district/${id}`,
                 method: 'GET',
-                // body,
             }),
         }),
 
@@ -49,7 +47,6 @@ export const districtApi = apiSlice.injectEndpoints({
             query: (body: AddDistrict) => ({
                 url: '/district/add',
                 method: 'POST',
-
                 body,
             }),
         }),

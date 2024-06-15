@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddAreaWrapper.tsx
-// Type: ADD Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -32,7 +25,6 @@ export type FormInitialValues = {
 
 const AddAreaWrapper = ({ onClose }: Props) => {
     const [AddArea] = useAddAreaMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
@@ -66,7 +58,6 @@ const AddAreaWrapper = ({ onClose }: Props) => {
                 districtId: selectedLocationDistrict || '',
                 stateId: selectedLocationState || '',
                 countryId: selectedLocationCountries || '',
-                companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
