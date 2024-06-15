@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ProductGroupBarcodeListing.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect } from 'react'
 
@@ -16,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { Divider } from '@mui/material'
+import moment from 'moment'
 
 function Barcode({ value }: { value: string }) {
     const { inputRef } = useBarcode({
@@ -26,19 +20,21 @@ function Barcode({ value }: { value: string }) {
         },
     })
 
-    return <canvas ref={inputRef} className="h-[30px]" />
+    return <canvas ref={inputRef} className="h-[25px]" />
 }
 
 function BarcodeGeneratorOuterBox() {
     const navigate = useNavigate()
     const location = useLocation()
     const {
-         path,
+        path,
         outerBoxCode,
         productCode,
-        productGroupLabel
+        productGroupLabel,
+        expiryDate,
+        lotNumber,
     } = location.state
-   
+
     const { barcodesToPrint }: any = useSelector(
         (state: RootState) => state?.barcode
     )
@@ -64,7 +60,7 @@ function BarcodeGeneratorOuterBox() {
                     Back
                 </button>
             </div>
-     
+
             {outerBoxCode ? (
                 <div className="flex justify-between items-center text-xs gap-3 mt-4 w-full pb-2 ">
                     <div className="pl-2 w-full">
@@ -73,12 +69,22 @@ function BarcodeGeneratorOuterBox() {
                             <span>651</span>
                         </div>
                         <div className="flex gap-4">
-                            <span>product Code:  </span>
+                            <span>product Code: </span>
                             <span>{productCode}</span>
                         </div>
                         <div className="flex gap-4">
                             <span> product Name: </span>
                             <span>{productGroupLabel}</span>
+                        </div>
+                        <div className="flex gap-4">
+                            <span> Lot Number: </span>
+                            <span>{lotNumber}</span>
+                        </div>
+                        <div className="flex gap-4">
+                            <span> Expiry Date: </span>
+                            <span>
+                                {moment(expiryDate).format('DD-MM-YYYY')}
+                            </span>
                         </div>
                     </div>
                     <div
@@ -104,15 +110,14 @@ function BarcodeGeneratorOuterBox() {
                 ))}
             </div> */}
             <Divider className="mt-3" />
-            <div className="grid grid-cols-3 md:grid-cols-3 gap-x-3 gap-y-2 mt-5 ">
+            <div className="grid grid-cols-4 md:grid-cols-4 gap-x-3 gap-y-1 mt-5 ">
                 {barcodeValues?.map((value: string, index: number) => (
                     <div
                         key={index}
-                        className={`flex flex-col gap-x-4 shadow relative w-full py-3 px-4 custom-border border-2 border-indigo-500 `}
+                        className={`flex flex-col gap-x-4 shadow relative w-full py-4 px-4 custom-border border-2 border-indigo-500 `}
                     >
-                      
                         <Barcode key={index} value={value} />
-                        <div className="w-full flex justify-center p-0 tracking-[.90em] text-[0.90rem] ">
+                        <div className="w-full flex justify-center p-0 tracking-[.60em] text-[0.60rem] ">
                             {value}
                         </div>
                     </div>
@@ -121,4 +126,5 @@ function BarcodeGeneratorOuterBox() {
         </div>
     )
 }
+
 export default BarcodeGeneratorOuterBox

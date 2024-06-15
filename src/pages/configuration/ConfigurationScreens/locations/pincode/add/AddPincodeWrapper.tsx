@@ -26,7 +26,6 @@ export type FormInitialValues = {
 
 const AddPincodeWrapper = ({ onClose }: Props) => {
     const [AddPincode] = useAddPincodeMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
     )
@@ -63,7 +62,6 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
                 tehsilId: selectedLocationTehsil || '',
                 districtId: selectedLocationDistrict || '',
                 countryId: selectedLocationCountries || '',
-                companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

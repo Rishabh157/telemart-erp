@@ -70,7 +70,6 @@ export const pincodeApi = apiSlice.injectEndpoints({
             query: (body: AddPincode) => ({
                 url: '/pincode/add',
                 method: 'POST',
-
                 body,
             }),
         }),

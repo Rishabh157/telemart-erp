@@ -50,7 +50,6 @@ export const stateApi = apiSlice.injectEndpoints({
             query: (body: AddState) => ({
                 url: '/state/add',
                 method: 'POST',
-
                 body,
             }),
         }),
