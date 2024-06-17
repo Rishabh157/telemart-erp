@@ -50,7 +50,7 @@ function AllBarcodes() {
     }, [])
 
     return (
-        <div className=" bg-white">
+        <div className=" bg-[#fff]">
             {/* <div className="flex justify-between items-center h-[45px]">
                 <button
                     onClick={() => {
