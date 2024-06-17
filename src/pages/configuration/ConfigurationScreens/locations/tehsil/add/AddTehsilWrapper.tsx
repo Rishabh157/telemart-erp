@@ -27,7 +27,6 @@ export type FormInitialValues = {
 
 const AddTehsilWrapper = ({ onClose }: Props) => {
     const [addTehsil] = useAddTehsilMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
     )
@@ -60,7 +59,6 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
                 stateId: selectedLocationState || '',
                 preferredCourier: values.preferredCourier || '',
                 districtId: selectedLocationDistrict || '',
-                companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

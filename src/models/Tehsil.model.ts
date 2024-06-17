@@ -18,7 +18,6 @@ export type AddTehsil = {
     districtId: string
     preferredCourier: string
     stateId: string
-    companyId: string
     countryId: string
 }
 

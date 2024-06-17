@@ -29,7 +29,6 @@ export type FormInitialValues = {
 const AddStateWrapper = ({ onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
     const [addState] = useAddStateMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
     )
@@ -55,7 +54,6 @@ const AddStateWrapper = ({ onClose }: Props) => {
                 isUnion: values.isUnion,
                 isFixed: values.isFixed,
                 countryId: selectedLocationCountries || '',
-                companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

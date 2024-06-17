@@ -27,7 +27,6 @@ export type FormInitialValues = {
 
 const AddDistrictWrapper = ({ onClose }: Props) => {
     const [addDistrict] = useAddDistrictMutation()
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
     )
@@ -56,7 +55,6 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
                 preferredCourier: values.preferredCourier,
                 stateId: selectedLocationState || '',
                 countryId: selectedLocationCountries || '',
-                companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

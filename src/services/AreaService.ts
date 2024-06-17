@@ -24,6 +24,7 @@ export const areaApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+
         getAllAreaUnauth: builder.query({
             providesTags: ['Area'],
             query: (id) => ({
@@ -48,7 +49,6 @@ export const areaApi = apiSlice.injectEndpoints({
             query: (body: AddArea) => ({
                 url: '/area/add',
                 method: 'POST',
-
                 body,
             }),
         }),
@@ -58,7 +58,6 @@ export const areaApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Area'],
             query: ({ body, id }: UpdateArea) => ({
                 url: `/area/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -69,7 +68,6 @@ export const areaApi = apiSlice.injectEndpoints({
             providesTags: ['Area'],
             query: (id) => ({
                 url: `/area/${id}`,
-
                 method: 'GET',
             }),
         }),
@@ -78,7 +76,6 @@ export const areaApi = apiSlice.injectEndpoints({
         exportAreaData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,

@@ -308,6 +308,7 @@ import ReattemptOrdersListingWrapper from './pages/ordersOutlet/wrappers/Reattem
 import ComplaintTabListingWrapper from './pages/ordersOutlet/wrappers/ComplaintTabListingWrapper'
 import OrderOverviewDashboardWrapper from './pages/ordersOutlet/wrappers/OrderOverviewDashboardWrapper'
 import GlobalSearchOrdersListingWrapper from './pages/ordersOutlet/wrappers/GlobalSearchOrdersListingWrapper'
+import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward-inventory/MoveToCartonDrawer/BarcodeGeneratorOuterBox'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -3578,6 +3579,7 @@ const PageRoutes = () => {
                 />
 
                 <Route path="/barcodes" element={<BarcodeGenerator />} />
+                <Route path="/barcodes-outerbox" element={<BarcodeGeneratorOuterBox />} />
                 {/* gpo invoice */}
                 {/* <Route
                     path="gpo/label"
