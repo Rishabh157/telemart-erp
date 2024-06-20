@@ -116,10 +116,6 @@ const CartonBoxBarcodeListing = () => {
                     />
                 </div> */}
             </div>
-
-            {/* {isFilterOpen && (
-        <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
-      )} */}
         </div>
     )
 }

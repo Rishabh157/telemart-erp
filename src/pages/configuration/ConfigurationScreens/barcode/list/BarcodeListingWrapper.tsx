@@ -32,6 +32,7 @@ import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import ReprintOuterBoxBarcode from './components/ReprintOuterBoxBarcode/ReprintOuterBoxBarcode'
 
 // |-- Types --|
 export type Tabs = {
@@ -192,6 +193,12 @@ const BarcodeListingWrapper = () => {
             index: 2,
             name: UserModuleNameTypes.ACTION_BARCODE_GROUP_TAB,
         },
+        {
+            label: 'Reprint Outerbox Barcode',
+            icon: MdOutbond,
+            index: 3,
+            name: UserModuleNameTypes.ACTION_BARCODE_GROUP_TAB,
+        },
     ]
     const allowedTabs = tabs
         ?.filter((nav) => {
@@ -237,6 +244,7 @@ const BarcodeListingWrapper = () => {
                     )
                 })}
             </div>
+
             {activeTabIndex === 0 ? (
                 <BarcodeListing
                     rows={items}
@@ -246,8 +254,18 @@ const BarcodeListingWrapper = () => {
                 />
             ) : activeTabIndex === 1 ? (
                 <CartonBoxBarcodeListing />
-            ) : (
+            ) : activeTabIndex === 2 ? (
                 <ProductGroupListing
+                    rows={pgItems}
+                    selectedProductGroupcodes={selectedProductGroup}
+                    onProductGroupcodeSelect={onProductGroupSelect}
+                    onBarcodeClick={(barcode: ProductBarcodeGroupResponse) => {
+                        setGroupBarcode(barcode._id)
+                        setActiveTabIndex(0)
+                    }}
+                />
+            ) : (
+                <ReprintOuterBoxBarcode
                     rows={pgItems}
                     selectedProductGroupcodes={selectedProductGroup}
                     onProductGroupcodeSelect={onProductGroupSelect}

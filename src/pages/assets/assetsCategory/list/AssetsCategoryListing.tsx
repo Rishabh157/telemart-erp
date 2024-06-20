@@ -101,7 +101,7 @@ const AssetsLocationListing = ({ columns, rows, setShowDropdown }: Props) => {
                         isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
+                        
                         extraClasses="h-full overflow-auto"
                         setShowDropdown={setShowDropdown}
                     />

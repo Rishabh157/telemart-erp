@@ -86,12 +86,6 @@ const AssetsAllocationListing = () => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-   <FilterDialogWarpper
-   onClose={()=> setIsFilterOpen(false)}
-   />
-  )} */}
         </div>
     )
 }

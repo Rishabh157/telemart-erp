@@ -108,10 +108,6 @@ const BarcodeListing = ({
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-        <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
-      )} */}
         </div>
     )
 }
