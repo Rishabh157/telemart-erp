@@ -220,7 +220,7 @@ const AddressDialog = ({ isShow, onClose }: AddressDialogTypes) => {
                             <ATMTable
                                 columns={columns}
                                 rows={rows}
-                                // isCheckbox={true}
+                                
                                 // selectedRows={selectedRows}
                                 // onRowSelect={(selectedRows) =>
                                 //     setSelectedRows(selectedRows)

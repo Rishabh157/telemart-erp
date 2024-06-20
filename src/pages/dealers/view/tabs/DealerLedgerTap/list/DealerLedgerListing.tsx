@@ -159,7 +159,7 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
+                        
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -180,10 +180,6 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-                <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
-            )} */}
 
             <DialogLogBox
                 isOpen={isOpenModel}

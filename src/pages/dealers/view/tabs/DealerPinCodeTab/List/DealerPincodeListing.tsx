@@ -89,7 +89,7 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
+                        
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -110,12 +110,6 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-       <FilterDialogWarpper
-       onClose={()=> setIsFilterOpen(false)}
-       />
-      )} */}
         </div>
     )
 }

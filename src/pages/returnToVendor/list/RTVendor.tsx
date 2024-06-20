@@ -81,7 +81,7 @@ const RTVendor = ({ columns, rows, setShowDropdown }: Props) => {
                         isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
+                        
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

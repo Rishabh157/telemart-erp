@@ -12,10 +12,28 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { ProductBarcodeGroupResponse } from 'src/models'
-import ProductGroupDetailCard from './ProductGroupDetailCard'
+import ReprintProductGroupDetailCard from './ReprintProductGroupDetailCard'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import { useGetReprintOuterBoxBarcodeQuery } from 'src/services/BarcodeService'
+
+export type ReprintOuterboxBarcodeListResponse = {
+    _id: string
+    serialNo: number
+    outerBoxNumber: string
+    innerBarcodes: string[]
+    createdBy: string
+    batchNumber: string
+    productId: string
+    isDeleted: boolean
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    __v: number
+    productLabel: string
+}
 
 // |-- Types --|
 type Props = {
@@ -29,7 +47,7 @@ type Props = {
     onBarcodeClick: (barcode: ProductBarcodeGroupResponse) => void
 }
 
-const ProductGroupListing = ({
+const ReprintOuterBoxBarcode = ({
     rows,
     selectedProductGroupcodes,
     onProductGroupcodeSelect,
@@ -41,6 +59,29 @@ const ProductGroupListing = ({
         (state: RootState) => state.listingPagination
     )
     const { page, rowsPerPage, totalItems, searchValue } = ProductGroupcodeState
+
+    // pagination api
+    const { items } = useGetCustomListingData<
+        ReprintOuterboxBarcodeListResponse[]
+    >({
+        useEndPointHook: useGetReprintOuterBoxBarcodeQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: [
+                'serialNo',
+                'outerBoxNumber',
+                'createdBy',
+                'batchNumber',
+                'productLabel',
+            ],
+            page: page,
+            filterBy: [],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
+    })
 
     return (
         <div className="px-4  h-[calc(100%-55px)] flex flex-col gap-3 pt-4">
@@ -62,11 +103,11 @@ const ProductGroupListing = ({
 
                 {/* Barcode Detail Cards */}
                 <div className="grow overflow-auto">
-                    <ProductGroupDetailCard
-                        cardBoxBarcodeList={rows}
+                    <ReprintProductGroupDetailCard
+                        cardBoxBarcodeList={items as any}
                         selectedProductGroupBarcodes={selectedProductGroupcodes}
                         onProductGroupBarcodeSelect={onProductGroupcodeSelect}
-                        onBarcodeClick={(barcode) => {
+                        onBarcodeClick={(barcode: any) => {
                             onBarcodeClick(barcode)
                         }}
                     />
@@ -87,4 +128,4 @@ const ProductGroupListing = ({
     )
 }
 
-export default ProductGroupListing
+export default ReprintOuterBoxBarcode
