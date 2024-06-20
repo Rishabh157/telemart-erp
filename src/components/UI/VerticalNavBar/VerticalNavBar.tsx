@@ -210,7 +210,7 @@ const VerticalNavBar = ({
                                     <navItem.icon />
                                 </div>
                                 {!isCollapsed && (
-                                    <div className=""> {navItem.label} </div>
+                                    <div > {navItem.label} </div>
                                 )}
                             </div>
                         )

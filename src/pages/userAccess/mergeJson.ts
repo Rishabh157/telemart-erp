@@ -37,6 +37,7 @@ import { default as itemsJson } from '../../utils/mediaJson/items.json'
 import { default as languageJson } from '../../utils/mediaJson/language.json'
 import { default as locationJson } from '../../utils/mediaJson/location.json'
 import { default as ordersJson } from '../../utils/mediaJson/orders.json'
+import { default as allOrdersJson } from '../../utils/mediaJson/allOrdersTab.json'
 import { default as productJson } from '../../utils/mediaJson/product.json'
 import { default as productCategoryJson } from '../../utils/mediaJson/productCategory.json'
 import { default as productGroupJson } from '../../utils/mediaJson/productGroup.json'
@@ -95,6 +96,7 @@ export const mergeUserModules = [
     { ...warehouseFirstCallOrdersjson },
     // { ...inquiryJson },
     { ...ordersJson },
+    { ...allOrdersJson },
     { ...orderCancelRequest },
     { ...batchOrdersJson },
     { ...offerAppliedNdrJson },

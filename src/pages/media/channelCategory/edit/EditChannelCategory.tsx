@@ -42,7 +42,7 @@ const EditChannelCategory = ({ formikProps, apiStatus }: Props) => {
     return (
         <div className="flex flex-col gap-2 p-4 ">
             {/* Breadcrumbs */}
-            <div className="">
+            <div >
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
 

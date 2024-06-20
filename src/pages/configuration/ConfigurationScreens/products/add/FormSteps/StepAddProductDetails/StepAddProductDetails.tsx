@@ -73,7 +73,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                 />
 
                 {/* Product Category */}
-                <div className="-mt-1">
+                <div className="mt-1">
                     <ATMSelectSearchable
                         required
                         name="product_category"
@@ -146,6 +146,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             required
                             name="dimensions.height"
                             value={values.dimensions.height}
+                            extraClassField='mt-3'
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
@@ -165,6 +166,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             required
                             name="dimensions.width"
                             value={values.dimensions.width}
+                            extraClassField='mt-3'
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
@@ -184,6 +186,7 @@ const StepAddProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             required
                             name="dimensions.depth"
                             value={values.dimensions.depth}
+                            extraClassField='mt-3'
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {

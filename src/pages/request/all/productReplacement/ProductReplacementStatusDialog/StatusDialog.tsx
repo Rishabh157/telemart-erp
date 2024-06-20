@@ -86,7 +86,7 @@ const StatusDialog = ({
                     : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {productReplacementData.managerFirstApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>
@@ -124,7 +124,7 @@ const StatusDialog = ({
                     : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {productReplacementData.ccApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>
@@ -162,7 +162,7 @@ const StatusDialog = ({
                     : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {productReplacementData.managerSecondApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>
@@ -200,7 +200,7 @@ const StatusDialog = ({
                     : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {productReplacementData.accountApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>

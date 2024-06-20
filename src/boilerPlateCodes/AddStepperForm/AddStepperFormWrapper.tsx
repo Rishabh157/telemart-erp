@@ -149,7 +149,7 @@ const AddStepperFormWrapper = () => {
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
+                    <Form >
                         <AddStepperForm
                             formikProps={formikProps}
                             steps={steps}

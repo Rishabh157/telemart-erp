@@ -20,6 +20,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { LanguageListResponse } from 'src/models'
 
 // |-- Types --|
 type Props = {}
@@ -37,11 +38,11 @@ const EditLanguageWrapper = (props: Props) => {
     const [apiStatus, setApiStatus] = useState<boolean>(false)
     const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
+    const { items: selectedItem } = useGetDataByIdCustomQuery<LanguageListResponse>({
         useEndPointHook: useGetLanguageByIdQuery(Id),
     })
     const initialValues: FormInitialValues = {
-        languageName: selectedItem?.languageName,
+        languageName: selectedItem?.languageName || '',
     }
 
     // Form Validation Schema

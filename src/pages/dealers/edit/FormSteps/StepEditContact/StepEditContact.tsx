@@ -41,11 +41,11 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="">
+        <div >
             <FieldArray name="contactInformation">
                 {({ push, remove }) => {
                     return (
-                        <div className="">
+                        <div >
                             {values?.contactInformation?.map(
                                 (
                                     contactInformation: any,

@@ -51,7 +51,7 @@ const AddASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
         <MainLayout>
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -84,7 +84,7 @@ const AddASR = ({ formikProps, apiStatus, dropDownOptions = [] }: Props) => {
                     <FieldArray name="asrDetails">
                         {({ push, remove }) => {
                             return (
-                                <div className="">
+                                <div >
                                     {values?.asrDetails?.map(
                                         (asr: any, asrIndex: number) => {
                                             const { quantity, productId } = asr

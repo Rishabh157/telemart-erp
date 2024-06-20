@@ -357,7 +357,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">WTW Number</div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {selectedItemsTobeDispatch?._id}
                                     </div>
                                 </div>
@@ -369,7 +369,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
                                         To Warehouse Name
                                     </div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {
                                             selectedItemsTobeDispatch?.toWarehouseLabel
                                         }

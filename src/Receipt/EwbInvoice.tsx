@@ -166,7 +166,7 @@ const EwbInvoice = () => {
                             Part - A
                         </p>
                         <div className="border border-t-0 mx-2 p-2">
-                            <table width="100%" className="">
+                            <table width="100%" >
                                 <thead className="border ">
                                     <tr>
                                         <th className={tableHead}>Mode</th>

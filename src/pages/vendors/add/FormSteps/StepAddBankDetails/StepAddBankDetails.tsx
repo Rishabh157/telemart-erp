@@ -74,7 +74,7 @@ const StepAddBankDetails = ({
             <FieldArray name="bank_informations">
                 {({ push, remove }) => {
                     return (
-                        <div className="">
+                        <div >
                             {values?.bank_informations?.map(
                                 (
                                     bankInformation: any,

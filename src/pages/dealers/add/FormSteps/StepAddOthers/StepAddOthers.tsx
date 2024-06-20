@@ -32,7 +32,7 @@ const StepAddOthers = ({ formikProps, dropDownOption }: Props) => {
         formikProps
 
     return (
-        <div className="">
+        <div >
             <div className={`py-9 px-7 border-b border-slate-400`}>
                 <div className="grid grid-cols-12 gap-4 gap-y-4 mb-4">
                     <div className="col-span-4">

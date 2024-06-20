@@ -44,8 +44,8 @@ const EditCompanyBranchWrapper = (props: Props) => {
     const [updateCompanyBranch] = useUpdateCompanyBranchMutation()
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        branchName: selectedItem?.branchName,
-        branchCode: selectedItem?.branchCode,
+        branchName: selectedItem?.branchName || '',
+        branchCode: selectedItem?.branchCode || '',
         company: userData?.companyId || '',
     }
 

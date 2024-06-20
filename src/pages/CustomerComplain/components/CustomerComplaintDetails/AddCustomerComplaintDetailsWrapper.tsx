@@ -117,7 +117,7 @@ const AddCustomerComplaintDetailsWrapper = ({
             )
         })
 
-        // Wait for all promises to resolve
+        // Wait for all promises to resolve and promies chainging
         Promise.all(uploadPromises)
             .then(() => {
                 const formatedValues = {

@@ -213,7 +213,7 @@ const CallerScheme = ({
                                         >
                                             -
                                         </button>
-                                        <span className="">
+                                        <span >
                                             {schemeDetails.quantity}
                                         </span>
                                         <button

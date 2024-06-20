@@ -45,10 +45,10 @@ const EditAsstesLocation = ({ formikProps, apiStatus }: Props) => {
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="">
+        <div >
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

@@ -73,7 +73,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                 />
 
                 {/* Product Category */}
-                <div className="-mt-2">
+                <div>
                     <ATMSelectSearchable
                         required
                         name="product_category"
@@ -136,11 +136,8 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                 {/* Dimensions */}
                 <div>
                     <label className="font-medium text-slate-700">
-                        {' '}
-                        Dimensions (in cm){' '}
-                        <span className="ml-1 text-sm text-red-500">
-                            *
-                        </span>{' '}
+                        Dimensions (in cm)
+                        <span className="ml-1 text-sm text-red-500">*</span>
                     </label>
                     <div className="flex gap-2 mb-6 -mt-2">
                         {/* Height */}
@@ -148,6 +145,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             required
                             name="dimensions.height"
                             value={values.dimensions.height}
+                            extraClassField='mt-3'
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
@@ -167,6 +165,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             required
                             name="dimensions.width"
                             value={values.dimensions.width}
+                            extraClassField='mt-3'
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
@@ -186,6 +185,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                             required
                             name="dimensions.depth"
                             value={values.dimensions.depth}
+                            extraClassField='mt-3'
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {

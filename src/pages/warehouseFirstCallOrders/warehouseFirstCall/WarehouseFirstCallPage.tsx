@@ -409,7 +409,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                 </div>
 
                 <div className="col-span-2">
-                    <div className="">
+                    <div >
                         <div className="text-sm mb-2">Callback Date Time</div>
                         <ATMDatePicker
                             name="callbackDate"

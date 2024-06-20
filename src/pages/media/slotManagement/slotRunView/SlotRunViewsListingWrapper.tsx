@@ -113,7 +113,7 @@ const SlotRunViewsListingWrapper = () => {
             headerName: 'Run Status',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
-                <div className="">
+                <div >
                     <button
                         onClick={(e) => {
                             setRunState(row._id)

@@ -13,7 +13,7 @@ const RetailILabel = ({ items }: { items: OrderListResponse }) => {
                 </div>
                 <div className="flex flex-col font-medium">
                     <p className="text-2xl font-bold text-center ">Telemart</p>
-                    <span className="">
+                    <span >
                         Regd. Office:701 Atulya IT Park, Khandwa Road, Near
                         Crystal IT Park,Indore,Madhya
                     </span>

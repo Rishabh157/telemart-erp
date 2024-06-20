@@ -2008,7 +2008,7 @@ const PageRoutes = () => {
                         }
                     />
                     <Route
-                        path="product/:id"
+                        path="products/:id"
                         element={
                             <Authorization
                                 children={<EditProductWrapper />}

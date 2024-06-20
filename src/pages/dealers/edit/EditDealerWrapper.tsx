@@ -361,7 +361,7 @@ const EditDealerWrapper = () => {
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
+                    <Form >
                         <EditDealers
                             formikProps={formikProps}
                             steps={steps}

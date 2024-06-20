@@ -16,14 +16,14 @@ const DEALERInvoice = () => {
                                     alt=""
                                 />
                             </div>
-                            <div className="">
-                                <p className="">
+                            <div >
+                                <p >
                                     Subject to Indore Jurisdiction
                                 </p>
                                 <p className="font-bold text-[16px]">
                                     Telemart
                                 </p>
-                                <p className="">
+                                <p >
                                     H.O.:701 Atulya IT Park, Khandwa Road, Near
                                     Crystal IT Park,Indore,Madhya Pradesh,Pin
                                     Code:452001,India
@@ -35,12 +35,12 @@ const DEALERInvoice = () => {
                                 <p className="font-bold ">
                                     BO: HYDERABAD tmhyd
                                 </p>
-                                <p className="">
+                                <p >
                                     MUNICIPAL NO. 1-11-251/4/B, 5TH FLOOR,
                                     TIRUMALA HEIGHTS, Hyderabad, TS,
                                     500016,Hyderabad,Telangana(36)-500016,
                                 </p>
-                                <p className="">GSTIN: 36AATFT1962F1ZS</p>
+                                <p >GSTIN: 36AATFT1962F1ZS</p>
                             </div>
                         </div>
                         <div className=" border-y border-black mt-1 pt-1">
@@ -51,18 +51,18 @@ const DEALERInvoice = () => {
                                 <div className="flex gap-5">
                                     <div className="flex gap-5">
                                         <p className="font-bold">Invoice no</p>
-                                        <p className="">: HYD-Y24-0001601</p>
+                                        <p >: HYD-Y24-0001601</p>
                                     </div>
                                     <div className="flex gap-5">
                                         <p className="font-bold">
                                             CUSTOMER PO NO{' '}
                                         </p>
-                                        <p className="">: 14129</p>
+                                        <p >: 14129</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-5">
                                     <p className="font-bold">Date</p>
-                                    <p className="">: 05.02.2024</p>
+                                    <p >: 05.02.2024</p>
                                 </div>
                             </div>
                         </div>
@@ -77,25 +77,25 @@ const DEALERInvoice = () => {
                                 <p className="font-extrabold">
                                     Bhavishya agencies, (TS/WAR/SR)
                                 </p>
-                                <p className="">
+                                <p >
                                     3-7-155 Gudibandal
                                     kumarpalli,Warangal,Telangana-506001
                                 </p>
                                 <div className="flex gap-1">
                                     <p className="font-bold">Phone No.</p>
-                                    <p className="">: 7093142867</p>
+                                    <p >: 7093142867</p>
                                 </div>
                                 <div className="flex gap-1">
                                     <p className="font-bold">GSTIN </p>
-                                    <p className="">: URP</p>
+                                    <p >: URP</p>
                                 </div>
                                 <div className="flex gap-1">
                                     <p className="font-bold">STATE CODE.</p>
-                                    <p className="">: 36</p>
+                                    <p >: 36</p>
                                 </div>
                                 <div className="flex gap-1">
                                     <p className="font-bold">PAN</p>
-                                    <p className="">: EDLPK2681D</p>
+                                    <p >: EDLPK2681D</p>
                                 </div>
                                 <a
                                     href="mailto:sravanthi101293@gmail.com"
@@ -108,11 +108,11 @@ const DEALERInvoice = () => {
                                 <p className="font-extrabold underline">
                                     Delivery Address::
                                 </p>
-                                <p className="">
+                                <p >
                                     3-7-155 Gudibandal kumarpalli ,
                                 </p>
-                                <p className="">Warangal ,</p>
-                                <p className="">
+                                <p >Warangal ,</p>
+                                <p >
                                     Telangana - 506001 , Ph:- 7093142867
                                 </p>
                                 <a
@@ -299,10 +299,10 @@ const DEALERInvoice = () => {
                             <div className="col.span-7 flex gap-4">
                                 <p className="ml-10"> 44</p>
                                 <p className="ml-16"> 90437.50</p>
-                                <p className=""> 5426.25</p>
-                                <p className=""> 5426.25</p>
-                                <p className=""> 0.00</p>
-                                <p className=""> 0.00</p>
+                                <p > 5426.25</p>
+                                <p > 5426.25</p>
+                                <p > 0.00</p>
+                                <p > 0.00</p>
                                 <p className="font-bold ml-3">2555.66</p>
                             </div>
                         </div>
@@ -321,12 +321,12 @@ const DEALERInvoice = () => {
                                 <p className="font-bold mb-2">
                                     GODOWN: HYDERABAD tmhyd
                                 </p>
-                                <p className="">
+                                <p >
                                     MUNICIPAL NO. 1-11-251/4/B, 5TH FLOOR,
                                     TIRUMALA HEIGHTS, Hyderabad, TS,
                                     500016,Hyderabad,Telangana(36)-500016
                                 </p>
-                                <p className="">
+                                <p >
                                     Contact No:7770884999,Gst No:36AATFT1962F1ZS
                                 </p>
                             </div>

@@ -72,10 +72,10 @@ const EditTapeManagement = ({
     }
 
     return (
-        <div className="">
+        <div >
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -228,7 +228,7 @@ const EditTapeManagement = ({
                                 </div>
 
                                 <div className="grid grid-cols-3  row-sapn-1 gap-x-2 -mt-9">
-                                    <div className="">
+                                    <div >
                                         <ATMTextField
                                             name="hour"
                                             required
@@ -248,7 +248,7 @@ const EditTapeManagement = ({
                                             }}
                                         />
                                     </div>
-                                    <div className="">
+                                    <div >
                                         <ATMSelectSearchable
                                             name="minute"
                                             required
@@ -267,7 +267,7 @@ const EditTapeManagement = ({
                                             }}
                                         />
                                     </div>
-                                    <div className="">
+                                    <div >
                                         <ATMSelectSearchable
                                             defaultValue="00"
                                             label="Second"

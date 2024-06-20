@@ -29,13 +29,13 @@ const Dashboard = ({ columns, rows, columns2, rows2 }: Props) => {
             )}
             {userData?.userDepartment === 'DISTRIBUTION_DEPARTMENT' && (
                 <div className="grid grid-cols-2 gap-2 pb-10 h-full ">
-                    <div className="">
+                    <div >
                         <OrderSummary />
                     </div>
-                    <div className="">
+                    <div >
                         <ZMDealerStatus />
                     </div>
-                    <div className="">
+                    <div >
                         <ZMStockStatus />
                     </div>
                 </div>

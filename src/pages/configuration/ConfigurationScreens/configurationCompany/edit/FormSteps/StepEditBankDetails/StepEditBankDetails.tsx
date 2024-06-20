@@ -44,11 +44,11 @@ const StepEditBankDetails = ({
     }
 
     return (
-        <div className="">
+        <div>
             <FieldArray name="bankDetails">
                 {({ push, remove }) => {
                     return (
-                        <div className="">
+                        <div>
                             {values?.bankDetails?.map(
                                 (
                                     bankInformation: any,
@@ -171,11 +171,12 @@ const StepEditBankDetails = ({
 
                                                                             case 'select':
                                                                                 return (
-                                                                                    <div>
+                                                                                    <div
+                                                                                        key={
+                                                                                            name
+                                                                                        }
+                                                                                    >
                                                                                         <ATMSelect
-                                                                                            key={
-                                                                                                name
-                                                                                            }
                                                                                             name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                             value={
                                                                                                 bankInformation[

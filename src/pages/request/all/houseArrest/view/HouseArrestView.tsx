@@ -27,7 +27,7 @@ const HouseArrestView = ({ items }: Props) => {
         <div className="px-4 h-[calc(100vh-10px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -466,7 +466,7 @@ const HouseArrestView = ({ items }: Props) => {
                                 <h1 className="text-gray-800">
                                     Dealer Approved By
                                 </h1>
-                                <p className="">-</p>
+                                <p >-</p>
                                 <p className="text-slate-600">
                                     {items?.dealerLabel === ''
                                         ? 'NA'
@@ -475,7 +475,7 @@ const HouseArrestView = ({ items }: Props) => {
                             </div>
                             <div className="grid grid-cols-3">
                                 <h1 className="text-gray-800">Dealer Remark</h1>
-                                <p className="">-</p>
+                                <p >-</p>
                                 <p className="text-slate-600">
                                     {items?.dealerRemark === ''
                                         ? 'NA'

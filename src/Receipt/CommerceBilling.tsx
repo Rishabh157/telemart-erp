@@ -13,9 +13,9 @@ const CommerceBilling = () => {
                                 <div className="text-[25px] font-extrabold w-[800px] mt-3">
                                     Commerce Billing
                                 </div>
-                                <div className="">
+                                <div >
                                     <p className="  ">Order No: SLDC11102PD4</p>
-                                    <p className="">
+                                    <p >
                                         Subject To Indore Jurisdiction Commerce
                                         Billing B-1,Block- C, 2nd Floor,
                                         Navlakha Square, B.C.M City, Navlakha

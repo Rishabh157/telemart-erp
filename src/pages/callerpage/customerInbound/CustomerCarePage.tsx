@@ -225,7 +225,7 @@ const CustomerCarePage: React.FC<Props> = ({
                         disabled={apiStatus}
                         text="Save"
                         type="submit"
-                        className=""
+                        
                         onClick={() => formikProps.handleSubmit()}
                     />
                 </div>

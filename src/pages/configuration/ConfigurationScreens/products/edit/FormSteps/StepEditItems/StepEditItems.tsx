@@ -39,7 +39,7 @@ const StepEditItems = ({ formikProps, dropdownOptions }: Props) => {
         <div className="py-6 ">
             <FieldArray name="items">
                 {({ push, remove }) => (
-                    <div className="">
+                    <div >
                         {values?.items?.map((item, itemIndex) => {
                             const { itemId, itemQuantity } = item
 

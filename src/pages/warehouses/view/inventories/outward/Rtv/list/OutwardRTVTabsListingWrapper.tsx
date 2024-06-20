@@ -353,7 +353,7 @@ const OutwardRTVTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">RTV Number</div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {selectedItemsTobeDispatch?._id}
                                     </div>
                                 </div>
@@ -363,7 +363,7 @@ const OutwardRTVTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">Vendor Name</div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {selectedItemsTobeDispatch?.vendorLabel}
                                     </div>
                                 </div>

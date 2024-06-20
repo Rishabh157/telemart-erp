@@ -153,7 +153,7 @@ export const navigation: NavItemType[] = [
         label: 'Orders Outlet',
         icon: MdOutlineBorderColor,
         path: '/orders-new/overview',
-        name: UserModuleNameTypes.NAV_ORDER,
+        name: UserModuleNameTypes.NAV_ALL_ORDER,
     },
     {
         label: 'Orders',

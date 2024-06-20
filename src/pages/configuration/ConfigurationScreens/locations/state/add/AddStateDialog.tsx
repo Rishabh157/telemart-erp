@@ -87,9 +87,9 @@ const AddStateDialog = ({
 
             <DialogActions>
                 <button
-                    className="px-3 py-2 border rounded border-primary-main text-primary-main hover:bg-gray-100"
                     type="button"
                     onClick={() => onClose()}
+                    className="border border-primary-main text-primary-main px-3 py-2 rounded hover:bg-gray-100"
                 >
                     Cancel
                 </button>

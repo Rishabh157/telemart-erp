@@ -59,7 +59,7 @@ const NotificationCard = ({ onClickAway }: NotificationCardPropTypes) => {
                                     'border-b'
                                 } border-slate-100`}
                             >
-                                <div className=""> {option.message} </div>
+                                <div > {option.message} </div>
                                 <div className="flex text-[13px] text-slate-400">
                                     <div> 03:20 PM </div>
                                 </div>

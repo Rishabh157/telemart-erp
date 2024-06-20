@@ -74,7 +74,6 @@ const MoveToCartonDrawer = ({
                             'Product-category added successfully!'
                         )
                     }, 2000)
-                    console.log('res' , res)                    
                     navigate(`/barcodes-outerbox`, {
                         state: {
                             path: `/warehouse/view/${wareHouse}/inventories`,

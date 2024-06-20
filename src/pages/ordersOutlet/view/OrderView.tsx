@@ -31,7 +31,7 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -281,7 +281,7 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                                     </p>
 
                                     {/* <h1 className="text-gray-800">Channel </h1>
-																		<p className="">-</p>
+																		<p >-</p>
                                     <p className="text-slate-600">
                                         {(items?.channelLabel === "")? "NA": items?.channelLabel}
                                     </p> */}
@@ -444,7 +444,7 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
 
                         <div className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2">
                             <h1 className="text-gray-800"> Remark </h1>
-                            <p className="">-</p>
+                            <p >-</p>
                             <p className="text-slate-600">
                                 {items?.ndrRemark === ''
                                     ? 'NA'
@@ -453,12 +453,12 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                             <h1 className="text-gray-800">
                                 Discount Applicable{' '}
                             </h1>
-                            <p className="">-</p>
+                            <p >-</p>
                             <p className="text-slate-600">
                                 {items?.ndrDiscountApplicable ? 'YES' : 'NO'}
                             </p>
                             <h1 className="text-gray-800">Approved By </h1>
-                            <p className="">-</p>
+                            <p >-</p>
                             <p className="text-slate-600">
                                 {items?.ndrApprovedBy === ''
                                     ? 'NA'
@@ -468,21 +468,21 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                             <h1 className="text-gray-800">
                                 RTO Reattempt reason{' '}
                             </h1>
-                            <p className="">-</p>
+                            <p >-</p>
                             <p className="text-slate-600">
                                 {items?.ndrRtoReattemptReason === null
                                     ? 'NA'
                                     : items?.ndrRtoReattemptReason}
                             </p>
                             <h1 className="text-gray-800">Call Disposition </h1>
-                            <p className="">-</p>
+                            <p >-</p>
                             <p className="text-slate-600">
                                 {items?.ndrCallDisposition === ''
                                     ? 'NA'
                                     : items?.ndrCallDisposition}
                             </p>
                             <h1 className="text-gray-800">Dealer Remark </h1>
-                            <p className="">-</p>
+                            <p >-</p>
                             <p className="text-slate-600">
                                 {items?.dealerValidRemark === ''
                                     ? 'NA'
@@ -499,7 +499,7 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                             <h1 className="text-gray-800">
                                 Disposition Level Two{' '}
                             </h1>
-                            <p className="">-</p>
+                            <p >-</p>
                             <p className="text-slate-600">
                                 {items?.dispositionLevelTwo === ''
                                     ? 'NA'
@@ -508,7 +508,7 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                             <h1 className="text-gray-800">
                                 Disposition Level Three{' '}
                             </h1>
-                            <p className="">-</p>
+                            <p >-</p>
                             <p className="text-slate-600">
                                 {items?.dispositionLevelThree === ''
                                     ? 'NA'

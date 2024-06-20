@@ -1,13 +1,5 @@
-/// ==============================================
-// Filename:ProductWrapper.tsx
-// Type: List Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
-// import { useDispatch, useSelector } from "react--ux";
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
@@ -98,7 +90,7 @@ const ProductsListingWrapper = () => {
                         setCurrentId(row?._id)
                     }}
                     handleEditActionButton={() => {
-                        navigate(`/configurations/product/${currentId}`)
+                        navigate(`/configurations/products/${currentId}`)
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({
@@ -162,13 +154,11 @@ const ProductsListingWrapper = () => {
         },
     ]
     return (
-        <>
-            <ProductsListing
-                columns={columns}
-                rows={items}
-                setShowDropdown={setShowDropdown}
-            />
-        </>
+        <ProductsListing
+            columns={columns}
+            rows={items}
+            setShowDropdown={setShowDropdown}
+        />
     )
 }
 

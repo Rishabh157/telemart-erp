@@ -562,7 +562,7 @@ const InwardDealerTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">DTW NUMBER</div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {selectedItemsTobeDispatch?._id}
                                     </div>
                                 </div>
@@ -574,7 +574,7 @@ const InwardDealerTabsListingWrapper = () => {
                                         From Warehouse
                                     </div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {capitalizeFirstLetter(
                                             selectedItemsTobeDispatch?.fromWarehouseLabel ||
                                                 ''

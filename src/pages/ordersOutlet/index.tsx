@@ -144,7 +144,7 @@ const ViewOrder = () => {
             label: 'All',
             icon: MdOutbond,
             path: 'all',
-            name: UserModuleNameTypes.ACTION_ORDER_ALL_TAB_LIST,
+            name: UserModuleNameTypes.ACTION_ALL_ORDER_LIST,
         },
     ]
 

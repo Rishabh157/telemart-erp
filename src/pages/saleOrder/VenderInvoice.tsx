@@ -33,7 +33,7 @@ const VenderInvoice = () => {
                                 <span className="font-bold">: 7-oct-23</span>
                             </div>
                         </div>
-                        <div className="">
+                        <div >
                             <img
                                 className="w-44 h-40"
                                 src="https://cdn.pixabay.com/photo/2021/12/12/16/10/qr-6865526_1280.png"
