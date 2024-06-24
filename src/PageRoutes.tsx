@@ -291,6 +291,7 @@ import AddCourierReturnWrapper from './pages/warehouses/view/inventories/inward/
 import InwardInventoryOverview from './pages/warehouses/view/inventories/inward/overView/InwardInventoryOverview'
 import BarcodeDestroySearchListingWrapper from './pages/warehouses/view/inventories/barcodedestroy/list/BarcodeDestroySearchListingWrapper'
 import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward-inventory/MoveToCartonDrawer/BarcodeGeneratorOuterBox'
+import OutwardManualMappingTabListingWrapper from './pages/warehouses/view/inventories/outward/ManualMapping/OutwardManualMappingTabListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -754,7 +755,9 @@ const PageRoutes = () => {
                                 children={
                                     <BarcodeDestroySearchListingWrapper />
                                 }
-                                permission={UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_BARCODE_ACTION}
+                                permission={
+                                    UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_BARCODE_ACTION
+                                }
                             />
                         }
                     />
@@ -913,6 +916,20 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={
                                         <OutwardShipyaariOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
+                                    }
+                                />
+                            }
+                        />
+
+                        <Route
+                            path="manual-mapping"
+                            element={
+                                <Authorization
+                                    children={
+                                        <OutwardManualMappingTabListingWrapper />
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
@@ -3386,7 +3403,10 @@ const PageRoutes = () => {
                 />
 
                 <Route path="/barcodes" element={<BarcodeGenerator />} />
-                <Route path="/barcodes-outerbox" element={<BarcodeGeneratorOuterBox />} />
+                <Route
+                    path="/barcodes-outerbox"
+                    element={<BarcodeGeneratorOuterBox />}
+                />
                 {/* gpo invoice */}
                 {/* <Route
                     path="gpo/label"

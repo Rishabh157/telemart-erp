@@ -16,10 +16,10 @@ import { AppDispatch } from 'src/redux/store'
 import { useGetWarehouseBarcodeMutation } from 'src/services/BarcodeService'
 import { useDispatchGPOOrdersToWarehouseMutation } from 'src/services/OrderService'
 import { showToast } from 'src/utils'
-import { courierCompanyEnum } from 'src/utils/constants/enums'
+import { barcodeStatusEnum, courierCompanyEnum } from 'src/utils/constants/enums'
 
 type Props = {
-    courierType: courierCompanyEnum
+    courierType: courierCompanyEnum | barcodeStatusEnum
 }
 
 const DispatchingBarcodes = ({ courierType }: Props) => {

@@ -75,6 +75,12 @@ const OutwardTabs = (props: Props) => {
             path: 'shipyaari-orders',
             name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
         },
+        {
+            label: 'Manual Mapping',
+            icon: MdOutbond,
+            path: 'manual-mapping',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
+        },
     ]
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(0)
