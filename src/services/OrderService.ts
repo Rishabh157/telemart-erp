@@ -13,7 +13,7 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-        
+
         // for warehouse first call
         getWHFristCallAssignedOrder: builder.query({
             providesTags: ['order', 'batch-order'],
@@ -31,6 +31,15 @@ export const OrderApi = apiSlice.injectEndpoints({
                 url: `/order-inquiry/get-warehouse-ndr/${phoneNo}`,
                 method: 'GET',
                 // body,
+            }),
+        }),
+
+        //***** Get order for manual mapping *****/
+        getOrderByOrderNumberManualMapping: builder.query({
+            providesTags: ['order'],
+            query: ({ orderNumber, warehouseId }) => ({
+                url: `/order-inquiry/get-by-order-number/manual-mapping/${orderNumber}/warehouseid/${warehouseId}`,
+                method: 'GET',
             }),
         }),
 
@@ -126,10 +135,16 @@ export const OrderApi = apiSlice.injectEndpoints({
         //***** Approved Order Status *****/
         approvedOrderStatus: builder.mutation({
             invalidatesTags: ['order'],
-            query: ({orderId,transactionId}:{orderId: string,transactionId:string}) => ({
+            query: ({
+                orderId,
+                transactionId,
+            }: {
+                orderId: string
+                transactionId: string
+            }) => ({
                 url: `/order-inquiry/approve-order/${orderId}`,
                 method: 'PUT',
-                body:{transactionId:transactionId}
+                body: { transactionId: transactionId },
             }),
         }),
 
@@ -244,11 +259,22 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
         // get Invoice
         dispatchGPOOrdersToWarehouse: builder.mutation({
             invalidatesTags: ['order'],
             query: (body) => ({
                 url: `/order-inquiry/warehouse-order-dispatch`,
+                method: 'PUT',
+                body,
+            }),
+        }),
+
+        // manual order dispatch
+        dispatchManualOrders: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (body) => ({
+                url: `/order-inquiry/warehouse-manual-order-dispatch`,
                 method: 'PUT',
                 body,
             }),
@@ -278,6 +304,7 @@ export const {
     useGetOrderQuery,
     useGetOrderByIdQuery,
     useGetWarehouseNdrOrderByPhoneNumberQuery,
+    useGetOrderByOrderNumberManualMappingQuery,
     useUpdateCourierOrderDataMutation,
     useGetOrderDashboardDataQuery,
     useGetAllOrderGlobalSearchQuery,
@@ -301,6 +328,7 @@ export const {
     useGetGenerateCouriorLabelByAwbNumberMutation,
     useGetGenerateInvoiceByAwbNumberMutation,
     useDispatchGPOOrdersToWarehouseMutation,
+    useDispatchManualOrdersMutation,
     useGetGpoOrderStatusQuery,
     useGetShipayaariOrderStatusQuery,
 } = OrderApi

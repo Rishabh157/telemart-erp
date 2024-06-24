@@ -18,12 +18,12 @@ import DateFilterForm from 'src/components/utilsComponent/DateFilterForm'
 
 // |-- Types --|
 type Props = {
-    rowsPerPage: number
+    rowsPerPage?: number
     searchValue?: string
     placeholder?: string
-    page: number
+    page?: number
     rows: any[]
-    rowCount: number
+    rowCount?: number
     rowsPerPageOptions?: number[]
     onRowsPerPageChange?: (newValue: number) => void
     isFilter?: boolean
@@ -55,10 +55,10 @@ const ATMTableHeader = ({
     isRefresh = false,
     rowCount,
     rows,
-    rowsPerPage,
+    rowsPerPage=10,
     searchValue,
     placeholder = 'Search...',
-    page,
+    page=1,
     rowsPerPageOptions = [5, 10, 20, 50, 100],
     onRowsPerPageChange = () => {},
     isFilter = false,
