@@ -42,16 +42,17 @@ const tabs = [
     {
         label: 'Outward Inventories',
         icon: BsArrowRepeat,
-        path: 'outward-inventories/dealer',
+        path: 'outward-inventories/warehouse-status',
         name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES,
     },
     {
         label: 'Inward Inventories',
         icon: BsArrowRepeat,
-        path: 'inward-inventories/dealer',
+        path: 'inward-inventories/inventory-overview',
         name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES,
     },
 ]
+
 const ViewInventories = (props: Props) => {
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(0)

@@ -197,9 +197,10 @@ const BarcodeListingWrapper = () => {
             label: 'Reprint Outerbox Barcode',
             icon: MdOutbond,
             index: 3,
-            name: UserModuleNameTypes.ACTION_BARCODE_GROUP_TAB,
+            name: UserModuleNameTypes.ACTION_REPRINT_OUTERBOX_BARCODE,
         },
     ]
+    
     const allowedTabs = tabs
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)

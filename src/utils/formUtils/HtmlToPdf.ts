@@ -6,7 +6,6 @@ export const generatePdf = async (contentRef: any) => {
 
     // Check if contentRefNode exists before proceeding
     if (!contentRefNode) {
-        console.error('Content reference node is not available.')
         return null // Return null if contentRefNode is not available
     }
 
