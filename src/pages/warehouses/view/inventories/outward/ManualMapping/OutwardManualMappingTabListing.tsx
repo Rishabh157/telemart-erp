@@ -3,7 +3,6 @@ import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
@@ -13,8 +12,7 @@ import { OrderListResponse } from 'src/models'
 import { setSearchValue } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-// import { isAuthorized } from 'src/utils/authorization'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { handleValidNumberForSearch } from 'src/utils/methods/numberMethods'
 
 // |-- Types --|
 type Props = {
@@ -28,12 +26,7 @@ const OutwardManualMappingTabListing = ({ orderInfo }: Props) => {
         (state: RootState) => state.listingPagination
     )
 
-    const {
-        // page,
-        //  rowsPerPage,
-        // isTableLoading,
-        searchValue,
-    } = outwardCustomerState
+    const { searchValue } = outwardCustomerState
 
     return (
         <div className="h-[calc(100vh-350px)] bg-white">
@@ -42,7 +35,12 @@ const OutwardManualMappingTabListing = ({ orderInfo }: Props) => {
                 <ATMTableHeader
                     rows={orderInfo as any}
                     searchValue={searchValue}
-                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    placeholder="Search Order No."
+                    onSearch={(newValue) => {
+                        handleValidNumberForSearch(newValue) &&
+                            dispatch(setSearchValue(newValue))
+                    }}
+                    isHiddenPagination={true}
                 />
 
                 {/* Table */}
@@ -161,17 +159,6 @@ const OutwardManualMappingTabListing = ({ orderInfo }: Props) => {
                         </div>
                     ) : null}
                 </div>
-
-                {/* Pagination */}
-                {/* <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
-                    <ATMPagination
-                        page={page}
-                        rowCount={rows.length}
-                        rows={rows}
-                        rowsPerPage={rowsPerPage}
-                        onPageChange={(newPage) => dispatch(setPage(newPage))}
-                    />
-                </div> */}
             </div>
         </div>
     )

@@ -19,19 +19,6 @@ type Props = {
     cartonBoxCode: string
 }
 
-// const timeLineItems = Array(50).fill({
-//   content: (
-//     <div className="flex gap-3">
-//       <div> 06 Feb 2023 </div>
-//       <div className="bg-slate-100 rounded-full text-[13px] px-2 flex justify-center items-center">
-//         {" "}
-//         10:00 AM{" "}
-//       </div>
-
-//       <div className="text-primary-main font-medium">Applied to the box</div>
-//     </div>
-//   ),
-// });
 export type barcodecardType = {
     _id?: string
     label: String

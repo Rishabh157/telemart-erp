@@ -1019,6 +1019,18 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MANUAL_MAPPING",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MANUAL_MAPPING",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_INVENTORIES",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_INVENTORY_OVERVIEW",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_INWARD_INVENTORIES_INVENTORY_OVERVIEW",

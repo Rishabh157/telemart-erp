@@ -932,7 +932,7 @@ const PageRoutes = () => {
                                         <OutwardManualMappingTabListingWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MANUAL_MAPPING
                                     }
                                 />
                             }
@@ -1954,7 +1954,10 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<BarcodeListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_LIST_TAB
+                                    UserModuleNameTypes.ACTION_BARCODE_LIST_TAB ||
+                                    UserModuleNameTypes.ACTION_REPRINT_BARCODE_OUTERBOX_TAB ||
+                                    UserModuleNameTypes.ACTION_BARCODE_GROUP_TAB ||
+                                    UserModuleNameTypes.ACTION_REPRINT_OUTERBOX_BARCODE
                                 }
                             />
                         }

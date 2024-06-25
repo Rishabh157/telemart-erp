@@ -79,7 +79,7 @@ const OutwardTabs = (props: Props) => {
             label: 'Manual Mapping',
             icon: MdOutbond,
             path: 'manual-mapping',
-            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MANUAL_MAPPING,
         },
     ]
     const navigate = useNavigate()

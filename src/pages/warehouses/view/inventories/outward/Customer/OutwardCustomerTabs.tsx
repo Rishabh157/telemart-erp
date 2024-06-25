@@ -17,6 +17,7 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { handleValidNumberForSearch } from 'src/utils/methods/numberMethods'
 
 // |-- Types --|
 type Props = {
@@ -67,14 +68,15 @@ const OutwardCustomerTabs = ({
                     anotherSearchValue={orderSearchValue}
                     anotherSearchPlaceholder="Order No.."
                     onAnotherSearch={(newValue) => {
-                        onChangeOrderSearchValue(newValue)
+                        handleValidNumberForSearch(newValue) &&
+                            onChangeOrderSearchValue(newValue)
                     }}
                     isAnotherSearchTwo
                     anotherSearchTwoValue={barcodeSearchValue}
                     anotherSearchTwoPlaceholder="Barcode No.."
                     onAnotherSearchTwo={(newValue) => {
-                        onChangeBarcodeSearchValue(newValue)
-                        // dispatch(setComplaintNumberSearch(newValue))
+                        handleValidNumberForSearch(newValue) &&
+                            onChangeBarcodeSearchValue(newValue)
                     }}
                     isFilter
                     onFilterClick={() => setIsOpenFilterFormDialog(true)}
@@ -92,7 +94,6 @@ const OutwardCustomerTabs = ({
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
