@@ -119,9 +119,15 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
     }
 
     const handleDisableDispatchButton = (): boolean => {
-        let totalBarcodeQuantity =
-            items?.schemeProducts.length * items.shcemeQuantity
-        return totalBarcodeQuantity === barcodeList?.flat(1)?.length
+        let totalBarcodeIn = barcodeList?.flat(1)?.length
+        const totalSchemeProducts = items?.schemeProducts?.reduce(
+            (sum, product) => {
+                const totalSum = product.productQuantity * items?.shcemeQuantity
+                return sum + totalSum
+            },
+            0
+        )
+        return totalSchemeProducts === totalBarcodeIn
     }
 
     useEffect(() => {
@@ -129,7 +135,7 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
             return {
                 productGroupId: product?.productGroupId,
                 productGroupName: product?.productGroupName,
-                quantity: 0,
+                productQuantity: product?.productQuantity,
             }
         })
 
@@ -140,6 +146,8 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
         <React.Fragment>
             <div className="border-b-slate-300 border-[1px] shadow  rounded">
                 {products?.map((ele: any, productIndex: number) => {
+                    const totalQuantity =
+                        items?.shcemeQuantity * ele?.productQuantity
                     return (
                         <div
                             key={productIndex}
@@ -147,15 +155,15 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
                         >
                             <div className="mt-2 grid grid-cols-4 gap-x-4">
                                 <ATMTextField
-                                    // disabled={
-                                    //     barcodeList[productIndex]?.length ===
-                                    //     document?.productSalesOrder?.quantity
-                                    // }
+                                    disabled={
+                                        barcodeList[productIndex]?.length ===
+                                        totalQuantity
+                                    }
                                     name=""
                                     value={barcodeNumber[productIndex]}
                                     label="Barcode Number"
                                     placeholder="enter barcode number"
-                                    className="shadow bg-white rounded w-[50%] "
+                                    className="shadow bg-white rounded w-[50%]"
                                     onChange={(e) => {
                                         if (e.target.value?.length > 6) {
                                             handleBarcodeSubmit(
@@ -174,18 +182,20 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
                                 />
                             </div>
                             <div className="pt-4">
-                                <div className="font-bold  mb-2">
+                                <div className="font-bold  mb-2 text-sm">
                                     {ele?.productGroupName}
                                 </div>
-                                {/* <div className="flex gap-x-6 mb-2">
+                                <div className="flex gap-x-6 mb-2">
                                     <div className="text-gray-700 text-sm">
-                                        Quantity :
+                                        Products Quantity :
                                     </div>
                                     <div>
-                                        {products?.[0]?.schemeQuantity} {' / '}
-                                        {ele?.barcode?.length}
+                                        {totalQuantity} {''}
+                                        {barcodeList[productIndex]?.length
+                                            ? ` / ${barcodeList[productIndex]?.length}`
+                                            : null}
                                     </div>
-                                </div> */}
+                                </div>
 
                                 <div className="grid grid-cols-5 gap-x-4">
                                     {barcodeList[productIndex]?.map(
