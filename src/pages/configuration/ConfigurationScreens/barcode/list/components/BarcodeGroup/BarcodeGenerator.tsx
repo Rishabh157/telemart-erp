@@ -11,9 +11,10 @@ import { useEffect } from 'react'
 // |-- External Dependencies --|
 import { useBarcode } from '@createnextapp/react-barcode'
 import { useSelector } from 'react-redux'
-import { useLocation,
+import {
+    useLocation,
     //  useNavigate
-     } from 'react-router-dom'
+} from 'react-router-dom'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -35,7 +36,8 @@ function AllBarcodes() {
     const location = useLocation()
     const {
         //  path,
-         outerBoxCode } = location.state
+        outerBoxCode,
+    } = location.state
     const { barcodesToPrint }: any = useSelector(
         (state: RootState) => state?.barcode
     )

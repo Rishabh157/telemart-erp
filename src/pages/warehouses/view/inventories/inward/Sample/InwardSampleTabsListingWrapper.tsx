@@ -155,7 +155,10 @@ const InwardSampleTabsListingWrapper = () => {
                     <div className="w-full">
                         {row?.documents?.map((item) => {
                             return (
-                                <div className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center">
+                                <div
+                                    key={item._id}
+                                    className="grid grid-cols-3 border border-slate-400 mb-1 rounded text-center"
+                                >
                                     <div className="col-span-2 border-r-[1px] border-slate-400 py-1 px-2">
                                         {item?.productSalesOrder?.groupName}
                                     </div>
@@ -373,7 +376,7 @@ const InwardSampleTabsListingWrapper = () => {
                                 return (
                                     <div
                                         className="pb-6 border-b-slate-300 border-[1px] shadow p-4 my-4 rounded"
-                                        key={docIndex}
+                                        key={document._id}
                                     >
                                         <div className="grid grid-cols-4 mt-2">
                                             <div>
@@ -470,7 +473,7 @@ const InwardSampleTabsListingWrapper = () => {
                                                     barcodeIndex: number
                                                 ) => (
                                                     <BarcodeCard
-                                                        key={barcodeIndex}
+                                                        key={barcode?._id}
                                                         barcodeNumber={
                                                             barcode?.barcodeNumber
                                                         }

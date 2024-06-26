@@ -12,6 +12,14 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_BARCODE_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["BARCODE_TAB"],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_REPRINT_BARCODE_OUTERBOX_TAB",
             "actionUrl": "",
             "actionName": "REPRINT_BARCODE_OUTERBOX",
@@ -28,11 +36,11 @@
             "fields": []
         },
         {
-            "actionId": "ACTION_BARCODE_ADD",
+            "actionId": "ACTION_REPRINT_OUTERBOX_BARCODE",
             "actionUrl": "",
-            "actionName": "ADD",
+            "actionName": "REPRINT_OUTERBOX_BARCODE",
             "compulsoryFields": [],
-            "parentGroup": ["LIST"],
+            "parentGroup": [],
             "fields": []
         }
     ]

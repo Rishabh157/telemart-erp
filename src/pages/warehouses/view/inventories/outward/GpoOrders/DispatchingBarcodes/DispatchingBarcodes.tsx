@@ -16,10 +16,13 @@ import { AppDispatch } from 'src/redux/store'
 import { useGetWarehouseBarcodeMutation } from 'src/services/BarcodeService'
 import { useDispatchGPOOrdersToWarehouseMutation } from 'src/services/OrderService'
 import { showToast } from 'src/utils'
-import { courierCompanyEnum } from 'src/utils/constants/enums'
+import {
+    barcodeStatusEnum,
+    courierCompanyEnum,
+} from 'src/utils/constants/enums'
 
 type Props = {
-    courierType: courierCompanyEnum
+    courierType: courierCompanyEnum | barcodeStatusEnum
 }
 
 const DispatchingBarcodes = ({ courierType }: Props) => {
@@ -109,9 +112,10 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
         newBarcode: BarcodeListResponseType
     ) => {
         const newData = products?.map((ele: any) => {
-            let prevBarcode = [...ele?.barcode] || []
+            const totalQuantityOfBarocde =
+                ele?.schemeQuantity * ele?.productQuantity
 
-            const isAlredyExist = prevBarcode?.some((barcode: any) => {
+            const isAlredyExist = ele?.barcode?.some((barcode: any) => {
                 return barcode?.barcodeNumber === newBarcode?.barcodeNumber
             })
 
@@ -126,9 +130,9 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                 barcode:
                     barcodeObj &&
                     isAlredyExist === false &&
-                    ele?.schemeQuantity !== ele?.barcode?.length
-                        ? [...prevBarcode, barcodeObj]
-                        : [...prevBarcode],
+                    totalQuantityOfBarocde !== ele?.barcode?.length
+                        ? [...ele?.barcode, barcodeObj]
+                        : [...ele?.barcode],
             }
         })
         setProducts(newData)
@@ -137,19 +141,15 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
     // remove barcode
     const handleRemoveBarcode = (barcodeNumber: string) => {
         const newData = products?.map((ele: any) => {
-            let prevBarcode = [...ele?.barcode] || []
-
-            const filteredObj = prevBarcode?.filter(
+            const filteredObj = ele?.barcode?.filter(
                 (item: any) => item?.barcodeNumber !== barcodeNumber
             )
-
             // remove the specific barcode and set the previouse barcode
             return {
                 ...ele,
                 barcode: [...filteredObj],
             }
         })
-
         setProducts(newData)
     }
 
@@ -189,19 +189,26 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
             })
     }
 
+    // for disable the input barcode number field and enable the dispatch button
     const handleDisableDispatchButton = () => {
-        const schemeQ = products.reduce((sum: number, product: any) => {
-            return (sum += product.schemeQuantity)
+        const schemeQ = products?.reduce((sum: number, product: any) => {
+            let totalQuantity =
+                product?.schemeQuantity * product?.productQuantity
+            return (sum += totalQuantity)
         }, 0)
-        const barcodeLength = products.reduce((sum: number, product: any) => {
+
+        const barcodeLength = products?.reduce((sum: number, product: any) => {
             return (sum += product?.barcode?.length)
         }, 0)
+
         return schemeQ === barcodeLength
     }
 
     useEffect(() => {
-        const schemeQ = products.reduce((sum: number, product: any) => {
-            return (sum += product.schemeQuantity)
+        const schemeQ = products?.reduce((sum: number, product: any) => {
+            let totalQuantity =
+                product?.schemeQuantity * product?.productQuantity
+            return (sum += totalQuantity)
         }, 0)
         const barcodeLength = products.reduce((sum: number, product: any) => {
             return (sum += product?.barcode?.length)
@@ -243,21 +250,31 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                     <div className="mt-4  ">
                         <div className="flex gap-x-6">
                             <span className="font-semibold text-sm">
-                                Customer Name
+                                Order Number
                             </span>
                             {' : '}
-                            <span className="font-semibold text-sm">
-                                {products?.[0]?.customerName}
+                            <span className="font-semibold text-primary-main text-sm">
+                                #{orderNumber}
                             </span>
                         </div>
 
                         <div className="flex gap-x-6">
                             <span className="font-semibold text-sm">
-                                Order Number
+                                Scheme Quantity
                             </span>
                             {' : '}
                             <span className="font-semibold text-sm">
-                                {orderNumber}
+                                {products?.[0]?.schemeQuantity}
+                            </span>
+                        </div>
+
+                        <div className="flex gap-x-6">
+                            <span className="font-semibold text-sm">
+                                Customer Name
+                            </span>
+                            {' : '}
+                            <span className="font-semibold text-sm">
+                                {products?.[0]?.customerName}
                             </span>
                         </div>
 
@@ -274,21 +291,31 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                 )}
 
                 {products?.map((ele: any, productIndex: any) => {
+                    let totalBarcodeQuantity =
+                        ele?.schemeQuantity * ele?.productQuantity
                     return (
                         <div
                             key={productIndex}
                             className="bg-white shadow-md rounded-md overflow-hidden border-[1px] border-gray-500 my-5"
                         >
                             <div className="p-4">
-                                <div className="font-bold text-lg mb-2">
+                                <div className="font-bold text-sm">
                                     {ele?.productGroupName}
                                 </div>
-                                <div className="flex gap-x-6 mb-2">
+
+                                <div className="flex gap-x-6 text-sm">
                                     <div className="text-gray-700">
-                                        Quantity :
+                                        Product Quantity :
+                                    </div>
+                                    <div>{ele?.productQuantity}</div>
+                                </div>
+
+                                <div className="flex gap-x-6 text-sm">
+                                    <div className="text-gray-700">
+                                        Total Quantity :
                                     </div>
                                     <div>
-                                        {products?.[0]?.schemeQuantity} {' / '}
+                                        {totalBarcodeQuantity} {' / '}
                                         {ele?.barcode?.length}
                                     </div>
                                 </div>

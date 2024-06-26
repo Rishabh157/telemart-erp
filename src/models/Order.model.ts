@@ -63,6 +63,7 @@ export type OrderListResponse = {
     schemeProducts: {
         productGroupId: string
         productGroupName: string
+        productQuantity: number
         _id: string
     }[]
     streetNumber: string

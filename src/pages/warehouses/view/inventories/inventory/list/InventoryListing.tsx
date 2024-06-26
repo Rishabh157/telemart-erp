@@ -100,7 +100,7 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                         <ATMTable
                             columns={columns}
                             rows={rows}
-                            // isCheckbox={true}
+                            
                             selectedRows={selectedRows}
                             onRowSelect={(selectedRows) =>
                                 setSelectedRows(selectedRows)

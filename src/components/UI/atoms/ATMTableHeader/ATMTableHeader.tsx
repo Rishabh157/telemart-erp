@@ -18,12 +18,12 @@ import DateFilterForm from 'src/components/utilsComponent/DateFilterForm'
 
 // |-- Types --|
 type Props = {
-    rowsPerPage: number
+    rowsPerPage?: number
     searchValue?: string
     placeholder?: string
-    page: number
+    page?: number
     rows: any[]
-    rowCount: number
+    rowCount?: number
     rowsPerPageOptions?: number[]
     onRowsPerPageChange?: (newValue: number) => void
     isFilter?: boolean
@@ -49,16 +49,17 @@ type Props = {
     onAnotherSearchTwo?: (newValue: string) => void
     filterShow?: any
     children?: any
+    isHiddenPagination?: boolean
 }
 
 const ATMTableHeader = ({
     isRefresh = false,
     rowCount,
     rows,
-    rowsPerPage,
+    rowsPerPage = 10,
     searchValue,
     placeholder = 'Search...',
-    page,
+    page = 1,
     rowsPerPageOptions = [5, 10, 20, 50, 100],
     onRowsPerPageChange = () => {},
     isFilter = false,
@@ -83,6 +84,7 @@ const ATMTableHeader = ({
     onAnotherSearchTwo = () => {},
     filterShow,
     children,
+    isHiddenPagination = false,
 }: Props) => {
     return (
         <div className="p-3 pb-5 border-b border-slate-300 grid grid-cols-3">
@@ -186,33 +188,38 @@ const ATMTableHeader = ({
             </div>
 
             {/* Right */}
-            <div className="flex justify-end col-span-1 -mt-2">
-                <div className="xl:flex gap-3 items-center text-center">
-                    <div className="flex xl:mb-0 mb-1 gap-2 items-center">
-                        <div className="text-sm"> Rows per page : </div>
-                        <select
-                            value={rowsPerPage as number}
-                            onChange={(e) =>
-                                onRowsPerPageChange(parseInt(e?.target?.value))
-                            }
-                            className={`rounded-lg p-1 outline-0 bg-slate-100 text-sm `}
-                        >
-                            {rowsPerPageOptions?.map((option) => {
-                                return (
-                                    <option key={option} value={option}>
-                                        {option}
-                                    </option>
-                                )
-                            })}
-                        </select>
-                    </div>
+            {!isHiddenPagination ? (
+                <div className="flex justify-end col-span-1 -mt-2">
+                    <div className="xl:flex gap-3 items-center text-center">
+                        <div className="flex xl:mb-0 mb-1 gap-2 items-center">
+                            <div className="text-sm"> Rows per page : </div>
+                            <select
+                                value={rowsPerPage as number}
+                                onChange={(e) =>
+                                    onRowsPerPageChange(
+                                        parseInt(e?.target?.value)
+                                    )
+                                }
+                                className={`rounded-lg p-1 outline-0 bg-slate-100 text-sm `}
+                            >
+                                {rowsPerPageOptions?.map((option) => {
+                                    return (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    )
+                                })}
+                            </select>
+                        </div>
 
-                    <div className="text-sm bg-slate-100 py-1 px-2 rounded-lg text-slate-600">
-                        Showing &nbsp; {rowsPerPage * (page - 1) + 1} -{' '}
-                        {rowsPerPage * (page - 1) + rows?.length} of {rowCount}
+                        <div className="text-sm bg-slate-100 py-1 px-2 rounded-lg text-slate-600">
+                            Showing &nbsp; {rowsPerPage * (page - 1) + 1} -{' '}
+                            {rowsPerPage * (page - 1) + rows?.length} of{' '}
+                            {rowCount}
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : null}
 
             <div className="p-2">{filterShow}</div>
         </div>

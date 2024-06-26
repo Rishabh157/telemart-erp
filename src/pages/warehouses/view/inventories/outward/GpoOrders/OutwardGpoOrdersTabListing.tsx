@@ -23,6 +23,7 @@ import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadin
 import { courierCompanyEnum } from 'src/utils/constants/enums'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { handleValidNumberForSearch } from 'src/utils/methods/numberMethods'
 
 // |-- Types --|
 type Props = {
@@ -156,9 +157,10 @@ const OutwardGpoOrdersTabListing = ({
                     isAnotherSearch
                     anotherSearchValue={orderNumberSearchValue}
                     anotherSearchPlaceholder="Order No..."
-                    onAnotherSearch={(newValue) =>
-                        setOrderNumberSearchValue(newValue)
-                    }
+                    onAnotherSearch={(newValue) => {
+                        handleValidNumberForSearch(newValue) &&
+                            setOrderNumberSearchValue(newValue)
+                    }}
                     children={
                         isAuthorized(
                             UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_GET_MENIFEST
@@ -211,7 +213,6 @@ const OutwardGpoOrdersTabListing = ({
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

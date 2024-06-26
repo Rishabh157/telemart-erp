@@ -309,6 +309,7 @@ import ComplaintTabListingWrapper from './pages/ordersOutlet/wrappers/ComplaintT
 import OrderOverviewDashboardWrapper from './pages/ordersOutlet/wrappers/OrderOverviewDashboardWrapper'
 import GlobalSearchOrdersListingWrapper from './pages/ordersOutlet/wrappers/GlobalSearchOrdersListingWrapper'
 import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward-inventory/MoveToCartonDrawer/BarcodeGeneratorOuterBox'
+import OutwardManualMappingTabListingWrapper from './pages/warehouses/view/inventories/outward/ManualMapping/OutwardManualMappingTabListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -936,6 +937,20 @@ const PageRoutes = () => {
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
+                                    }
+                                />
+                            }
+                        />
+
+                        <Route
+                            path="manual-mapping"
+                            element={
+                                <Authorization
+                                    children={
+                                        <OutwardManualMappingTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MANUAL_MAPPING
                                     }
                                 />
                             }
@@ -2130,7 +2145,10 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<BarcodeListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_BARCODE_LIST_TAB
+                                    UserModuleNameTypes.ACTION_BARCODE_LIST_TAB ||
+                                    UserModuleNameTypes.ACTION_REPRINT_BARCODE_OUTERBOX_TAB ||
+                                    UserModuleNameTypes.ACTION_BARCODE_GROUP_TAB ||
+                                    UserModuleNameTypes.ACTION_REPRINT_OUTERBOX_BARCODE
                                 }
                             />
                         }
@@ -3579,7 +3597,10 @@ const PageRoutes = () => {
                 />
 
                 <Route path="/barcodes" element={<BarcodeGenerator />} />
-                <Route path="/barcodes-outerbox" element={<BarcodeGeneratorOuterBox />} />
+                <Route
+                    path="/barcodes-outerbox"
+                    element={<BarcodeGeneratorOuterBox />}
+                />
                 {/* gpo invoice */}
                 {/* <Route
                     path="gpo/label"

@@ -3,14 +3,12 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-// import { useNavigate, useParams } from 'react-router'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-// import FilterDialogWarpper from 'src/pages/dealers/components/FilterDialog/FilterDialogWarpper'
 
 // |-- Redux --|
 import {
@@ -58,14 +56,11 @@ const DealerOrderLedgerListing = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    // isFilter
-                    // isRefresh
                     isDateFilter
                     IsDaterFilterLoading={isTableLoading}
                     onSubmitDateHandler={(values) => {
                         dispatch(setFilterBy(values))
                     }}
-                    // onFilterClick={() => setIsFilterOpen(true)}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
 
@@ -74,7 +69,6 @@ const DealerOrderLedgerListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        // isCheckbox={true}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
@@ -94,10 +88,6 @@ const DealerOrderLedgerListing = ({ columns, rows }: Props) => {
                     />
                 </div>
             </div>
-
-            {/* {isFilterOpen && (
-                <FilterDialogWarpper onClose={() => setIsFilterOpen(false)} />
-            )} */}
         </div>
     )
 }

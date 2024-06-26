@@ -44,9 +44,9 @@ const MoveToCartonDrawer = ({
 
         const barcodeProduct = productDetail.map((ele) => {
             const {
-                productGroupLabel,
+                // barcodeNumber,
                 vendorId,
-                barcodeNumber,
+                productGroupLabel,
                 outerBoxbarCodeNumber,
                 createdAt,
                 isActive,
@@ -74,6 +74,7 @@ const MoveToCartonDrawer = ({
                             'Product-category added successfully!'
                         )
                     }, 2000)
+
                     navigate(`/barcodes-outerbox`, {
                         state: {
                             path: `/warehouse/view/${wareHouse}/inventories`,

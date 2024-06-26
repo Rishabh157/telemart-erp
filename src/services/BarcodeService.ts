@@ -43,6 +43,16 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+      
+        //*** GET REPRINT OUTERBOX BARCODE
+        getReprintOuterBoxBarcode: builder.query({
+            providesTags: ['Barcode'],
+            query: (body: PaginationType) => ({
+                url: '/reprint-outerbox',
+                method: 'POST',
+                body,
+            }),
+        }),
 
         //*** GET
         getAllBarcode: builder.query({
@@ -288,6 +298,7 @@ export const {
     useGetBarcodeQuery,
     useAddBarcodeMutation,
     useUpdateBarcodeMutation,
+    useGetReprintOuterBoxBarcodeQuery,
     useGetBarcodeByIdQuery,
     useDeleteBarcodeMutation,
     useGetAllBarcodeOfDealerOutWardDispatchMutation,
