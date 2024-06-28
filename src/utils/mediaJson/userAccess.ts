@@ -1,3 +1,5 @@
+import { ordersOutletUserAccessTypes } from "./orders/orderAccess";
+
 export enum AttributeUserAccessType {
     NAV_ATTRIBUTE = 'NAV_ATTRIBUTE',
     ACTION_ATTRIBUTE_LIST = 'ACTION_ATTRIBUTE_LIST',
@@ -1485,6 +1487,7 @@ export const UserModuleNameTypes = {
     ...warehouseFirstCallOrdersType,
     ...InquiryUserAccessTypes,
     ...ordersUserAccessTypes,
+    ...ordersOutletUserAccessTypes,
     ...callUserAccessTypes,
     ...dispositionOneUserAccessTypes,
     ...dispositionTwoUserAccessTypes,

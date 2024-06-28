@@ -150,12 +150,6 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_MUILTI_ORDER_SEARCH,
     },
     {
-        label: 'Orders Outlet',
-        icon: MdOutlineBorderColor,
-        path: '/orders-new/overview',
-        name: UserModuleNameTypes.NAV_ALL_ORDER,
-    },
-    {
         label: 'Orders',
         icon: MdOutlineBorderColor,
         path: '/orders',

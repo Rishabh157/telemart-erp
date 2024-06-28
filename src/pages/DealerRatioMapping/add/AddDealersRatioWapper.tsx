@@ -1,23 +1,12 @@
-/// ==============================================
-// Filename:AddDealersRatioWapper.tsx
-// Type: Add Component
-// Last Updated: JULY 10, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik, FormikProps } from 'formik'
-// import { useNavigate } from 'react-router-dom'
-// import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-// import { showToast } from 'src/utils'
 import AddDealersRatio from './AddDealersRatio'
-// import { useAddChannelCategoryMutation } from 'src/services/media/ChannelCategoriesServices'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'

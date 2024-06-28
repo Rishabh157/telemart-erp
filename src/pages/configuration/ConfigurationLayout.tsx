@@ -143,7 +143,6 @@ const configurationNavigation: NavItemType[] = [
         path: 'callcenter-master',
         name: UserModuleNameTypes.NAV_CALL_CENTER,
     },
-
     {
         label: 'Hierarchy (Org..*)',
         icon: TbBinaryTree2,
@@ -167,7 +166,6 @@ const ConfigurationLayout = ({ children }: Props) => {
 
     const currentPath = `${location.pathname?.split('/')[2]}`
     const { theme } = useContext(ThemeContext)
-
     return (
         <div
             className={`flex h-screen w-screen relative ${

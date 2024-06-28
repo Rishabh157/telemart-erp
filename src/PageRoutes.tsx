@@ -176,7 +176,7 @@ import {
     ListDealerSchemeTabWrapper,
     ListWebstieBlogWrapper,
     Locations,
-    Order,
+    // Order,
     OrderOutlet,
     OrderViewWrapper,
     OrganisationHierarchy,
@@ -310,6 +310,8 @@ import OrderOverviewDashboardWrapper from './pages/ordersOutlet/wrappers/OrderOv
 import GlobalSearchOrdersListingWrapper from './pages/ordersOutlet/wrappers/GlobalSearchOrdersListingWrapper'
 import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward-inventory/MoveToCartonDrawer/BarcodeGeneratorOuterBox'
 import OutwardManualMappingTabListingWrapper from './pages/warehouses/view/inventories/outward/ManualMapping/OutwardManualMappingTabListingWrapper'
+import WebLeadsListingWrapper from './pages/websites/webLeads/list/WebLeadsListingWrapper'
+import useOnlineStatus from './hooks/useOnlineStatus'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -318,6 +320,7 @@ const PageRoutes = () => {
         localStorage.setItem('device-id', uniqueId)
     }
     const dispatch = useDispatch()
+    const onlineStatus = useOnlineStatus()
     const accessToken = localStorage.getItem('authToken')
     const refreshToken = localStorage.getItem('refreshToken')
     const userDataLs = localStorage.getItem('userData')
@@ -326,6 +329,16 @@ const PageRoutes = () => {
     dispatch(setRefreshToken(refreshToken))
     dispatch(setDeviceId(deviceId))
     dispatch(setUserData(userData ? userData : null))
+
+    if (!onlineStatus) {
+        return (
+            <div className="h-screen flex justify-center">
+                <h1 className="text-base font-bold mt-20">
+                    Please check your internet connection
+                </h1>
+            </div>
+        )
+    }
 
     return (
         <BrowserRouter>
@@ -1478,7 +1491,7 @@ const PageRoutes = () => {
                 ></Route>
 
                 {/* Orders listing Dashboard and View */}
-                <Route
+                {/* <Route
                     path="/orders"
                     element={
                         <Authorization
@@ -1486,10 +1499,11 @@ const PageRoutes = () => {
                             permission={UserModuleNameTypes.NAV_ORDER}
                         />
                     }
-                />
+                /> */}
+                <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
 
                 <Route
-                    path="/orders-new"
+                    path="/orders"
                     element={
                         <Authorization
                             children={<OrderOutlet />}
@@ -1660,8 +1674,6 @@ const PageRoutes = () => {
                         }
                     />
                 </Route>
-
-                <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
 
                 {/* Orders Cancel Request */}
                 <Route
@@ -2632,7 +2644,6 @@ const PageRoutes = () => {
                     />
 
                     {/* Media -> Slot */}
-                    {/* Orders */}
                     <Route
                         path="slot"
                         element={
@@ -3553,6 +3564,17 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<ViewWebsiteTagsWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_TAGS
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="web-leads"
+                        element={
+                            <Authorization
+                                children={<WebLeadsListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.NAV_WEBSITES_TAGS
                                 }

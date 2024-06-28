@@ -106,7 +106,7 @@ const AllOrdersListingWrapper = () => {
             field: 'inquiryNumber',
             headerName: 'Inquiry No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ENQUIRY_NUMBER,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
@@ -155,7 +155,7 @@ const AllOrdersListingWrapper = () => {
             field: 'isApproved',
             headerName: 'Approval',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_IS_APPROVED,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_APPROVAL,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: any) => {
                 return (
@@ -203,7 +203,7 @@ const AllOrdersListingWrapper = () => {
             field: 'mobileNo',
             headerName: 'Mobile No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_MOBILE_NO,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_MOBILE_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.mobileNo}</div>
@@ -289,7 +289,7 @@ const AllOrdersListingWrapper = () => {
             field: 'orderReferenceNumber',
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_REF_NUMBER,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_REFRENCE_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderReferenceNumber || '-'}</span>
@@ -386,7 +386,7 @@ const AllOrdersListingWrapper = () => {
             field: 'dispositionLevelTwo',
             headerName: 'Disposition (One/Two)',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DISPOSITION_LEVEL_THREE,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DISPOSITION_LEVELS,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div>
@@ -403,7 +403,7 @@ const AllOrdersListingWrapper = () => {
             field: 'districtLabel',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DISTRICT_LABEL,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DISTRICT,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.districtLabel}</div>
@@ -424,7 +424,7 @@ const AllOrdersListingWrapper = () => {
             field: 'pincodeLabel',
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PIN_CODE_LABEL,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PIN_CODE,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -435,7 +435,7 @@ const AllOrdersListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_AREA_LABEL,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_AREA,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
@@ -455,7 +455,7 @@ const AllOrdersListingWrapper = () => {
             field: 'callCenterLabel',
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CALL_CENTER_LABEL,
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CALL_CENTER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.callCenterLabel}</div>

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:WebsiteLayout.tsx
-// Type: Layout Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -12,17 +5,8 @@ import React, { useState } from 'react'
 import { NavItemType } from 'src/navigation'
 import {
     BiChevronsLeft,
-    // BiCategory,
-    // BiCheckboxSquare,
-    // BiCategoryAlt,
 } from 'react-icons/bi'
-// import { MdOutlineCategory } from 'react-icons/md'
-// import { BsBox, BsBoxes, BsBoxFill } from 'react-icons/bs'
 import { CgWebsite } from 'react-icons/cg'
-// import { FaObjectGroup } from 'react-icons/fa'
-// import { HiOutlineReceiptTax } from 'react-icons/hi'
-// import { CgOrganisation } from 'react-icons/cg'
-// import { CiBarcode, CiLocationOn } from 'react-icons/ci'
 import { RiPagesLine } from 'react-icons/ri'
 import { TbBrandBlogger } from 'react-icons/tb'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
@@ -52,11 +36,16 @@ const websitesNavigation: NavItemType[] = [
         path: 'website-page',
         name: UserModuleNameTypes.NAV_WEBSITES_PAGES,
     },
-
     {
         label: 'Websites Tags',
         icon: RiPagesLine,
         path: 'website-tags',
+        name: UserModuleNameTypes.NAV_WEBSITES_TAGS,
+    },
+    {
+        label: 'Web Leads',
+        icon: RiPagesLine,
+        path: 'web-leads',
         name: UserModuleNameTypes.NAV_WEBSITES_TAGS,
     },
 ]

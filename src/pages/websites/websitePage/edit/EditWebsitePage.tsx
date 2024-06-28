@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditWebsitePage.tsx
-// Type: Edit Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 

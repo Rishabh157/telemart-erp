@@ -112,7 +112,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'inquiryNumber',
             headerName: 'Inquiry No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ENQUIRY_NUMBER,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_INQUIRY_NUMBER,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
@@ -121,7 +121,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_ORDER_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main "># {row.orderNumber}</span>
@@ -131,7 +131,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'assignDealerLabel',
             headerName: 'Assigned Dealer',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_DEALER,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_ASSIGNED_DEALER,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) =>
@@ -150,7 +150,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'assignWarehouseLabel',
             headerName: 'Assigned Warehouse',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_ASSIGNED_WEARHOUSE,
             align: 'start',
             extraClasses: 'text-xs min-w-[200px]',
             renderCell: (row: OrderListResponse) => (
@@ -161,7 +161,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'isApproved',
             headerName: 'Approval',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_IS_APPROVED,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_APPROVAL,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: any) => {
                 return (
@@ -209,7 +209,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'mobileNo',
             headerName: 'Mobile No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_MOBILE_NO,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_MOBILE_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.mobileNo}</div>
@@ -219,7 +219,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CUSTOMER_NAME,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_CUSTOMER_NAME,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.customerName || '-'}</div>
@@ -229,7 +229,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_STATUS,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_STATUS,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
@@ -238,7 +238,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'firstCallApproval',
             headerName: '1st Call Approval',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_FIRST_CALL_APPROVAL,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_FIRST_CALL_APPROVAL,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
@@ -262,7 +262,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'firstCallRemark',
             headerName: '1st call remark',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_FIRST_CALL_REMARK,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_FIRST_CALL_REMARK,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -273,7 +273,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'firstCallState',
             headerName: 'first Call State',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_FIRST_CALL_STATE,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_FIRST_CALL_STATE,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -284,7 +284,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'firstCallCallBackDate',
             headerName: 'call back date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_FIRST_CALL_BACK_DATE,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_FIRST_CALL_BACK_DATE,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -295,7 +295,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'orderReferenceNumber',
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_REF_NUMBER,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_ORDER_REFRENCE_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderReferenceNumber || '-'}</span>
@@ -305,7 +305,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'trackingNo',
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_TRACKING_NUMBER,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_TRACKING_NUMBER,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>NA</span>,
@@ -314,7 +314,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'shippingCharges',
             headerName: 'Shipping Charges',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SHIPPING_CHARGES,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_SHIPPING_CHARGES,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -325,7 +325,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'schemeName',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SCHEME_NAME,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_SCHEME_NAME,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -336,7 +336,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'shcemeQuantity',
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_SHCEME_QUANTITY,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_SHCEME_QUANTITY,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -347,7 +347,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'price',
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PRICE,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_PRICE,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
@@ -356,7 +356,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'paymentMode',
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PAYMENT_MODE,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_PAYMENT_MODE,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -367,7 +367,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CREATED_AT,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_CREATED_AT,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
@@ -384,7 +384,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'edpDate',
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_EDP_DATE,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_EDP_DATE,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => <div>NA</div>,
         },
@@ -392,7 +392,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'dispositionLevelTwo',
             headerName: 'Disposition (One/Two)',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DISPOSITION_LEVEL_THREE,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_DISPOSITION_LEVELS,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div>
@@ -409,7 +409,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'districtLabel',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DISTRICT_LABEL,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_DISTRICT,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.districtLabel}</div>
@@ -419,7 +419,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'tehsilLabel',
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_TALUK,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_TALUK,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -430,7 +430,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'pincodeLabel',
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PIN_CODE_LABEL,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_PIN_CODE,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
@@ -441,7 +441,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'areaLabel',
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_AREA_LABEL,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_AREA,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.areaLabel}</div>
@@ -451,7 +451,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CHANNEL_NAME,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_CHANNEL_NAME,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.channelLabel?.[0]}</div>
@@ -461,7 +461,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'callCenterLabel',
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CALL_CENTER_LABEL,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_CALL_CENTER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.callCenterLabel}</div>
@@ -471,7 +471,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'remark',
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_REMARK,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_REMARK,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.remark}</div>
@@ -481,7 +481,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'agent',
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_AGENT,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_AGENT,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.agentName}</div>
@@ -491,7 +491,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PREFFERED_DELIVERY_DATE,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_PREFFERED_DELIVERY_DATE,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
@@ -510,7 +510,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PREFFERED_DELIVERY_TIME,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_PREFFERED_DELIVERY_TIME,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
@@ -536,7 +536,7 @@ const AssignOrdersListingWrapper = () => {
             field: 'orderMBKNumber',
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_MBK_NUMBER,
+            name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_ORDER_MBK_NUMBER,
             extraClasses: 'text-xs min-w-[250px]',
             renderCell: (row: any) => (
                 <span> {row.orderMBKNumber || '-'} </span>
