@@ -25,14 +25,14 @@ const WHInvoice = () => {
                                     </p>
                                 </div>
                                 <div className="flex gap-11">
-                                    <p className="">DC CODE .</p>
+                                    <p >DC CODE .</p>
                                     <p className="font-semibold">
                                         : TTEL-1-4627
                                     </p>
                                 </div>
                                 <div className="flex gap-14">
-                                    <p className="">DC Date</p>
-                                    <p className="">: 09-February-2023</p>
+                                    <p >DC Date</p>
+                                    <p >: 09-February-2023</p>
                                 </div>
                             </div>
                             <div className="mr-[70px] mt-4">
@@ -53,7 +53,7 @@ const WHInvoice = () => {
                         </div>
 
                         <div className=" flex gap-10 ml-5 mt-1 text-[14px]">
-                            <div className="">
+                            <div >
                                 <p className="font-semibold text-[11px] ">
                                     Ship From Good Warehouse
                                 </p>
@@ -61,15 +61,15 @@ const WHInvoice = () => {
                                     Ship From (Warehouse Address) :{' '}
                                 </p>
                                 <p className="font-extrabold mt-1">Telemart</p>
-                                <p className="">
+                                <p >
                                     Godown Address: 188 Gayatri Nagar, Palda,
                                     Near Goyal Flour Mill, Indore -452020,Madhya
                                     Pradesh
                                 </p>
-                                <p className="">STATE CODE :23</p>
-                                <p className="">GST NO. : 23AATFT1962F1ZZ</p>
+                                <p >STATE CODE :23</p>
+                                <p >GST NO. : 23AATFT1962F1ZZ</p>
                             </div>
-                            <div className="">
+                            <div >
                                 <p className="font-semibold text-[11px]">
                                     Ship To Good Warehouse
                                 </p>
@@ -77,13 +77,13 @@ const WHInvoice = () => {
                                     Ship To :{' '}
                                 </p>
                                 <p className="font-extrabold mt-1">Telemart</p>
-                                <p className="">
+                                <p >
                                     MUNICIPAL NO. 1-11-251/4/B, 5TH FLOOR,
                                     TIRUMALA HEIGHTS, Hyderabad, TS, 500016
                                     Hyderabad -500016,Telangana
                                 </p>
-                                <p className="">STATE CODE :36</p>
-                                <p className="">GST NO. : 36AATFT1962F1ZS</p>
+                                <p >STATE CODE :36</p>
+                                <p >GST NO. : 36AATFT1962F1ZS</p>
                             </div>
                         </div>
 
@@ -271,7 +271,7 @@ const WHInvoice = () => {
                         </div>
                         <p className="ml-[240px] mt-2 ">TELEMART</p>
                         <div className="flex justify-evenly mt-10  ">
-                            <p className="">09-02-2023 11:34:06</p>
+                            <p >09-02-2023 11:34:06</p>
                             <p className="mt-5 font-extrabold text-[14px]">
                                 Authorized Signatory:{' '}
                             </p>

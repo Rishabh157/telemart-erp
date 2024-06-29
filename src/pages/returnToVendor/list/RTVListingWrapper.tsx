@@ -384,7 +384,7 @@ const RTVListingWrapper = () => {
             align: 'center',
             renderCell: (row: ReturnToVendorListResponse) => {
                 return (
-                    <div className="">
+                    <div >
                         {!row?.firstApproved ? (
                             <Stack direction="row" spacing={1}>
                                 {row?.firstApproved === null ? (

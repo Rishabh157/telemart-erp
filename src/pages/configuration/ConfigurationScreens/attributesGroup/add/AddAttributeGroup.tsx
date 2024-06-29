@@ -78,7 +78,7 @@ const AddAttributeGroup = ({
         <div className="h-[calc(100%-55px)]">
             <div className="p-4 h-[calc(100%-55px)] flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

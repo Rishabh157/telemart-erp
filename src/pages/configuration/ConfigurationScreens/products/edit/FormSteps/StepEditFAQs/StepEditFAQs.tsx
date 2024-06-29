@@ -43,7 +43,7 @@ const StepEditFAQs = ({ formikProps }: Props) => {
         <div className=" ">
             <FieldArray name="FAQs">
                 {({ push, remove }) => (
-                    <div className="">
+                    <div >
                         {values.FAQs?.map((FAQ, FAQIndex) => {
                             const { question, answer } = FAQ
 

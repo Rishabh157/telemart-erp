@@ -313,7 +313,7 @@ const EditProductWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
-                <Form className="">
+                <Form >
                     <EditProduct
                         formikProps={formikProps}
                         steps={steps}

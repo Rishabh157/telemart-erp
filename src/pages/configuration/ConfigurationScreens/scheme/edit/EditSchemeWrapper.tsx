@@ -308,7 +308,7 @@ const EditSchemeWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
-                <Form className="">
+                <Form >
                     <EditScheme
                         formikProps={formikProps}
                         steps={steps}

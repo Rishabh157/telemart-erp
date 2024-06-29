@@ -25,36 +25,36 @@ const RtwInvoice = () => {
                         <div className="grid grid-flow-col grid-cols-12 gap-10 px-2 border-b border-slate-900 ">
                             <div className=" col-span-5 pt-1 pb-5">
                                 <p className="mb-2">To,</p>
-                                <p className="">Telemart,</p>
-                                <p className="">
+                                <p >Telemart,</p>
+                                <p >
                                     Godown Address: 188 Gayatri Nagar, Palda,
                                     Near Goyal Flour Mill,Indore,Madhya
                                     Pradesh(23)-452020
                                 </p>
-                                <p className="">Ph No.: 7770884999</p>
-                                <p className="">GSTIN No. :23AATFT1962F1ZZ</p>
+                                <p >Ph No.: 7770884999</p>
+                                <p >GSTIN No. :23AATFT1962F1ZZ</p>
                             </div>
                             <p className="col-span-6 border-l border-slate-900 pl-3  mt-1 ">
                                 <p className="text-center font-extrabold">
                                     Sales Return Invoice
                                 </p>
                                 <div className="flex gap-20 mt-2">
-                                    <p className="">SRN NO</p>
+                                    <p >SRN NO</p>
                                     <p className=" font-normal">: CN10-25599</p>
                                 </div>
                                 <div className="flex gap-10 mt-2">
-                                    <p className="">CREATED DATE</p>
+                                    <p >CREATED DATE</p>
                                     <p className=" font-normal">
                                         {' '}
                                         : 11-12-2023
                                     </p>
                                 </div>
                                 <div className="flex gap-10 mt-2">
-                                    <p className="">RECEIVED DATE</p>
+                                    <p >RECEIVED DATE</p>
                                     <p className=" font-normal">:</p>
                                 </div>
                                 <div className="flex gap-16 mt-2">
-                                    <p className="">Invoice No: </p>
+                                    <p >Invoice No: </p>
                                     <p className=" font-normal">:</p>
                                 </div>
                             </p>
@@ -119,17 +119,17 @@ const RtwInvoice = () => {
 
                         <div className="px-2  border-b border-black">
                             <div className="flex justify-between mt-1">
-                                <p className="">TOTAL RUPEES (IN FIGURES) :</p>
-                                <p className=""> 6440.00</p>
+                                <p >TOTAL RUPEES (IN FIGURES) :</p>
+                                <p > 6440.00</p>
                             </div>
                             <div className="flex justify-between mt-2">
-                                <p className="">ROUND OFF AMOUNT :</p>
-                                <p className="">0</p>
+                                <p >ROUND OFF AMOUNT :</p>
+                                <p >0</p>
                             </div>
                         </div>
                         <div className="pl-2  border-b border-black">
                             <div className="flex gap-20 py-2">
-                                <p className="">TOTAL RUPEES (IN WORDS) :</p>
+                                <p >TOTAL RUPEES (IN WORDS) :</p>
                                 <p className="font-normal">
                                     {' '}
                                     RUPEES SIX THOUSAND FOUR HUNDRED FORTY ONLY

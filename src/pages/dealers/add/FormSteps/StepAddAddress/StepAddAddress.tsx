@@ -71,7 +71,7 @@ const StepAddAddress = ({
         (state: RootState) => state?.auth
     )
     return (
-        <div className="">
+        <div >
             {formFields?.map((formField, index) => {
                 const { sectionName, fields } = formField
                 return (

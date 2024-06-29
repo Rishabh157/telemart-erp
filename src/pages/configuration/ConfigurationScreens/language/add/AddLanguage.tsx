@@ -50,7 +50,7 @@ const AddLanguage = ({ formikProps, apiStatus }: Props) => {
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

@@ -67,7 +67,7 @@ const StepAddAddress = ({
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="">
+        <div >
             {formFields?.map((formField, index) => {
                 const { sectionName, fields } = formField
                 return (

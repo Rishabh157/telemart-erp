@@ -36,11 +36,11 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
     )
 
     return (
-        <div className="">
+        <div >
             <FieldArray name="contact_informations">
                 {({ push, remove }) => {
                     return (
-                        <div className="">
+                        <div >
                             {values?.contact_informations?.map(
                                 (
                                     contactInformation: any,

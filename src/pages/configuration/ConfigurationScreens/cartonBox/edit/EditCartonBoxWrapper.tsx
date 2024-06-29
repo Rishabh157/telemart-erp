@@ -50,13 +50,13 @@ const EditCartonBoxWrapper = (props: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        boxName: selectedItem?.boxName,
-        innerItemsCount: selectedItem?.innerItemCount,
-        boxWeight: selectedItem?.boxWeight,
+        boxName: selectedItem?.boxName || '',
+        innerItemsCount: selectedItem?.innerItemCount || 0,
+        boxWeight: selectedItem?.boxWeight || 0,
         dimensions: {
-            height: selectedItem?.dimension?.height,
-            width: selectedItem?.dimension?.width,
-            depth: selectedItem?.dimension?.depth,
+            height: selectedItem?.dimension?.height || 0,
+            width: selectedItem?.dimension?.width || 0,
+            depth: selectedItem?.dimension?.depth || 0,
         },
     }
 
@@ -89,7 +89,6 @@ const EditCartonBoxWrapper = (props: Props) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Updated successfully!')
-
                     navigate('/configurations/carton-box')
                 } else {
                     showToast('error', res?.data?.message)

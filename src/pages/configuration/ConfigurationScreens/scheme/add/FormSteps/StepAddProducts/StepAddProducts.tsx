@@ -30,10 +30,10 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
     )
 
     return (
-        <div className="">
+        <div >
             <FieldArray name="productInformation">
                 {({ push, remove }) => (
-                    <div className="">
+                    <div >
                         {values.productInformation?.map(
                             (product, productIndex) => {
                                 const {

@@ -251,7 +251,7 @@ const AddDealerWarehouseWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
-                <Form className="">
+                <Form >
                     <AddDealerWarehouse
                         formikProps={formikProps}
                         steps={steps}

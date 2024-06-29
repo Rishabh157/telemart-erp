@@ -37,7 +37,7 @@ const StepEditVideo = ({ formikProps }: Props) => {
         <div className=" ">
             <FieldArray name="videos">
                 {({ push, remove }) => (
-                    <div className="">
+                    <div >
                         {values.videos?.map((video, videoIndex) => {
                             const { videoName, videoLink } = video
                             return (

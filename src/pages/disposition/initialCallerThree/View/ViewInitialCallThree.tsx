@@ -26,7 +26,7 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
     return (
         <div className="p-4 flex flex-col gap-2  ">
             {/* Breadcrumbs */}
-            <div className="">
+            <div >
                 <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
             </div>
 
@@ -50,7 +50,7 @@ const ViewInitialCallThree = ({ formikProps }: Props) => {
                             <label className="w-60 font-medium text-l">
                                 <span>Initialcall Name:</span>
                             </label>
-                            <span className="">{values?.initialCallName}</span>
+                            <span >{values?.initialCallName}</span>
                         </div>
                         <div className="flex mb-2">
                             <label className="w-60 font-medium text-l">

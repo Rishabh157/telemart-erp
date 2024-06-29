@@ -48,7 +48,7 @@ const RetailInvoice = ({ items }: { items: OrderListResponse }) => {
                             <span>Mode of Payment.: {items?.paymentMode}</span>
                         </div>
                         <div className="flex justify-center my-2">
-                            <div className="">
+                            <div >
                                 <span>{items?.orderAssignedToCourier}</span>
                                 <img
                                     className=" w-[300px] h-[60px]"
@@ -68,7 +68,7 @@ const RetailInvoice = ({ items }: { items: OrderListResponse }) => {
                 </div>
 
                 <div className="border border-black">
-                    <table width="100%" className="">
+                    <table width="100%" >
                         <thead className="border b">
                             <tr>
                                 <th className={tableHead}>S.NO</th>

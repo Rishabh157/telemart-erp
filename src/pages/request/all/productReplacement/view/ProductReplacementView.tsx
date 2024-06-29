@@ -27,7 +27,7 @@ const ProductReplacementView = ({ items }: Props) => {
         <div className="px-4 h-[calc(100vh-10px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -269,7 +269,7 @@ const ProductReplacementView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">
                                         First Level Approval{' '}
                                     </h1>
-                                    <p className="">-</p>
+                                    <p >-</p>
                                     <p className="text-slate-600">
                                         {items?.managerFirstRemark === ''
                                             ? 'NA'
@@ -278,7 +278,7 @@ const ProductReplacementView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">
                                         Customer Care{' '}
                                     </h1>
-                                    <p className="">-</p>
+                                    <p >-</p>
                                     <p className="text-slate-600">
                                         {items?.ccRemark === ''
                                             ? 'NA'
@@ -287,7 +287,7 @@ const ProductReplacementView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">
                                         Second Level Approval{' '}
                                     </h1>
-                                    <p className="">-</p>
+                                    <p >-</p>
                                     <p className="text-slate-600">
                                         {items?.managerSecondRemark === ''
                                             ? 'NA'
@@ -296,7 +296,7 @@ const ProductReplacementView = ({ items }: Props) => {
                                     <h1 className="text-gray-800">
                                         Account Level Approval{' '}
                                     </h1>
-                                    <p className="">-</p>
+                                    <p >-</p>
                                     <p className="text-slate-600">
                                         {items?.accountRemark === ''
                                             ? 'NA'

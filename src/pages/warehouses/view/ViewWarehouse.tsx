@@ -28,7 +28,7 @@ const ViewWarehouse = ({ items }: Props) => {
         <div className=" px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

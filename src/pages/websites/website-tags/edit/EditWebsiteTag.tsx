@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditWebsiteTagsWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -58,10 +51,10 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="">
+        <div >
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -108,7 +101,7 @@ const EditWebsiteTag = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 label="Website"
                             />
 
-                            <div className="">
+                            <div >
                                 <ATMSelectSearchable
                                     name="websitPageId"
                                     required

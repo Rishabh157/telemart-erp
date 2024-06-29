@@ -71,7 +71,7 @@ const AddPurchaseOrder = ({
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

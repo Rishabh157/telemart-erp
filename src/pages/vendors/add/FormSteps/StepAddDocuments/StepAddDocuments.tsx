@@ -63,7 +63,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
     }
 
     return (
-        <div className="">
+        <div >
             {formFields?.map((formField, index) => {
                 const { sectionName, fields } = formField
                 return (

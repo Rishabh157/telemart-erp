@@ -90,7 +90,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
         <div>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -375,7 +375,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
 
                         {/* <FieldArray name="image">
                             {({ push, remove }) => (
-                                <div className="">
+                                <div >
                                     {values.image?.map((img, ind) => {
                                         return (
                                             <div

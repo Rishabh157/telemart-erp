@@ -42,10 +42,10 @@ const AddInfluencer = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className="">
+        <div >
             <div className="p-4 flex flex-col gap-4  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

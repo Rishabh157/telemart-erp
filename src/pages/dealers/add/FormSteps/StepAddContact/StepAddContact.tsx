@@ -35,11 +35,11 @@ const StepAddContact = ({ formikProps, formFields }: Props) => {
         (state: RootState) => state?.auth
     )
     return (
-        <div className="">
+        <div >
             <FieldArray name="contactInformation">
                 {({ push, remove }) => {
                     return (
-                        <div className="">
+                        <div >
                             {values?.contactInformation?.map(
                                 (
                                     contactInformations: any,

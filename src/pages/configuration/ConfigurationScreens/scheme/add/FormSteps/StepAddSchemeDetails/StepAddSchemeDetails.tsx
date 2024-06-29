@@ -126,13 +126,10 @@ const StepAddSchemeDetails = ({
                     className="bg-white rounded shadow"
                 />
                 {/* Dimensions */}
-                <div className="mt-2">
+                <div className="mt-5">
                     <label className="font-medium text-slate-700">
-                        {' '}
                         Dimensions (in cm):
-                        <span className="ml-1 text-sm text-red-500">
-                            *
-                        </span>{' '}
+                        <span className="ml-1 text-sm text-red-500">*</span>
                     </label>
                     <div className="flex gap-2 ">
                         {/* Height */}
@@ -140,6 +137,7 @@ const StepAddSchemeDetails = ({
                             required
                             name="dimension.height"
                             value={values.dimension.height}
+                            extraClassField="mt-0"
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
@@ -150,13 +148,14 @@ const StepAddSchemeDetails = ({
                                 }
                             }}
                             placeholder="H"
-                            className="-mt-6 bg-white rounded shadow"
+                            className="bg-white rounded shadow"
                         />
                         {/* Weight */}
                         <ATMTextField
                             required
                             name="dimension.width"
                             value={values.dimension.width}
+                            extraClassField="mt-0"
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
@@ -167,13 +166,14 @@ const StepAddSchemeDetails = ({
                                 }
                             }}
                             placeholder="W"
-                            className="-mt-6 bg-white rounded shadow"
+                            className="bg-white rounded shadow"
                         />
                         {/* Depth */}
                         <ATMTextField
                             required
                             name="dimension.depth"
                             value={values.dimension.depth}
+                            extraClassField="mt-0"
                             onChange={(e) => {
                                 const inputValue = e.target.value
                                 if (!isNaN(Number(inputValue))) {
@@ -184,7 +184,7 @@ const StepAddSchemeDetails = ({
                                 }
                             }}
                             placeholder="D"
-                            className="-mt-6 bg-white rounded shadow"
+                            className="bg-white rounded shadow"
                         />
                     </div>
                 </div>

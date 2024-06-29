@@ -1,15 +1,3 @@
-/// ==============================================
-// Filename:Location.tsx
-// Type: Layout Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Built-in Dependencies --|
-// |-- External Dependencies --|
-// |-- Internal Dependencies --|
-// |-- Redux --|
-
 // |-- Types --|
 import React from 'react'
 

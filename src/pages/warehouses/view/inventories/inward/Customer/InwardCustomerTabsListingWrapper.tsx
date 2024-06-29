@@ -327,7 +327,7 @@ const InwardCustomerTabsListingWrapper = () => {
                                         Order Number
                                     </div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {selectedItemsTobeDispatch?.orderNumber}
                                     </div>
                                 </div>

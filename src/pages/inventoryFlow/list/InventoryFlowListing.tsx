@@ -149,7 +149,7 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                                                 Current Status
                                             </div>
                                             {' : '}
-                                            <div className="">
+                                            <div >
                                                 {barcode?.data[
                                                     barcode?.data?.length - 1
                                                 ]?.status === ''

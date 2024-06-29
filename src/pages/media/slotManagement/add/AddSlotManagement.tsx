@@ -69,10 +69,10 @@ const AddSlotManagement = ({
     }
 
     return (
-        <div className="">
+        <div >
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -128,7 +128,7 @@ const AddSlotManagement = ({
                                 options={dropdownOptions.channelGroupOptions}
                                 label="Channel Group"
                             />
-                            <div className="">
+                            <div >
                                 <ATMRadioButton
                                     name="type"
                                     label="Type"
@@ -140,7 +140,7 @@ const AddSlotManagement = ({
                                     required={true}
                                 />
                             </div>
-                            <div className="">
+                            <div >
                                 <ATMSelectSearchable
                                     name="channelName"
                                     required
@@ -221,7 +221,7 @@ const AddSlotManagement = ({
                                         }
                                     />
                                 </div>
-                                <div className="">
+                                <div >
                                     <ATMDatePicker
                                         required
                                         name={`slotStartDate`}
@@ -235,7 +235,7 @@ const AddSlotManagement = ({
                                         }}
                                     />
                                 </div>
-                                <div className="">
+                                <div >
                                     <ATMDatePicker
                                         name={`slotRenewal`}
                                         value={values.slotRenewal}
@@ -248,7 +248,7 @@ const AddSlotManagement = ({
                                         }}
                                     />
                                 </div>
-                                <div className="">
+                                <div >
                                     <ATMTimePicker
                                         required
                                         name={`slotStartTime`}
@@ -262,7 +262,7 @@ const AddSlotManagement = ({
                                         }}
                                     />
                                 </div>
-                                <div className="">
+                                <div >
                                     <ATMTimePicker
                                         required
                                         name={`slotEndTime`}

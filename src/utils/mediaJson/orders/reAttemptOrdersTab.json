@@ -1,0 +1,180 @@
+{
+    "moduleId": "NAV_REATTEMPT_ORDER",
+    "moduleName": "NAV_REATTEMPT_ORDER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_REATTEMPT_ORDER_TAB_LIST",
+            "actionUrl": "",
+            "actionName": "REATTEMPT_TAB_LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_INQUIRY_NUMBER",
+                    "fieldName": "Inquiry Number",
+                    "fieldValue": "inquiryNumber"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_ORDER_NUMBER",
+                    "fieldName": "Order Number",
+                    "fieldValue": "Order Number"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_ASSIGNED_DEALER",
+                    "fieldName": "Assigned Dealer",
+                    "fieldValue": "assignDealerLabel"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_ASSIGNED_WEARHOUSE",
+                    "fieldName": "Assigned Warehouse",
+                    "fieldValue": "assignWarehouseLabel"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_APPROVAL",
+                    "fieldName": "Approval",
+                    "fieldValue": "approval"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_MOBILE_NUMBER",
+                    "fieldName": "Mobile Number",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_CUSTOMER_NAME",
+                    "fieldName": "Customer Name",
+                    "fieldValue": "customerName"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_FIRST_CALL_APPROVAL",
+                    "fieldName": "First Call Approval",
+                    "fieldValue": "firstCallApproval"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_FIRST_CALL_REMARK",
+                    "fieldName": "First Call Remark",
+                    "fieldValue": "firstCallRemark"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_FIRST_CALL_STATE",
+                    "fieldName": "First Call State",
+                    "fieldValue": "firstCallState"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_FIRST_CALL_BACK_DATE",
+                    "fieldName": "First Call Back Date",
+                    "fieldValue": "firstCallBackDate"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_ORDER_REFRENCE_NUMBER",
+                    "fieldName": "Order Refrence Number",
+                    "fieldValue": "orderReferenceNumber"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_TRACKING_NUMBER",
+                    "fieldName": "Tracking Number",
+                    "fieldValue": "trackingNo"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_SHIPPING_CHARGES",
+                    "fieldName": "Shipping Charges",
+                    "fieldValue": "shippingCharges"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_SCHEME_NAME",
+                    "fieldName": "Scheme Name",
+                    "fieldValue": "schemeName"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_SHCEME_QUANTITY",
+                    "fieldName": "Scheme Quantity",
+                    "fieldValue": "shcemeQuantity"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_PAYMENT_MODE",
+                    "fieldName": "Payment Mode",
+                    "fieldValue": "paymentMode"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_CREATED_AT",
+                    "fieldName": "Order Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_EDP_DATE",
+                    "fieldName": "EDP Date",
+                    "fieldValue": "edpDate"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_DISPOSITION_LEVELS",
+                    "fieldName": "Dispositions",
+                    "fieldValue": "dispositionLevel"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_DISTRICT",
+                    "fieldName": "District",
+                    "fieldValue": "districtLabel"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_TALUK",
+                    "fieldName": "Taluk",
+                    "fieldValue": "tehsilLabel"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_PIN_CODE",
+                    "fieldName": "Pincode",
+                    "fieldValue": "pincodeLabel"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_AREA",
+                    "fieldName": "Area",
+                    "fieldValue": "areaLabel"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_CHANNEL_NAME",
+                    "fieldName": "Channel Name",
+                    "fieldValue": "channelName"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_CALL_CENTER",
+                    "fieldName": "Call Center Name",
+                    "fieldValue": "callCenterLabel"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_REMARK",
+                    "fieldName": "Remark",
+                    "fieldValue": "remark"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_AGENT",
+                    "fieldName": "Agent",
+                    "fieldValue": "agent"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_PREFFERED_DELIVERY_DATE",
+                    "fieldName": "Preffred Delivery Date",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_PREFFERED_DELIVERY_TIME",
+                    "fieldName": "Preffred Delivery Time",
+                    "fieldValue": "preffered_delivery_date"
+                },
+                {
+                    "fieldId": "ORDER_REATTEMPT_TAB_LIST_ORDER_MBK_NUMBER",
+                    "fieldName": "MBK Number",
+                    "fieldValue": "orderMBKNumber"
+                }
+            ]
+        }
+    ]
+}

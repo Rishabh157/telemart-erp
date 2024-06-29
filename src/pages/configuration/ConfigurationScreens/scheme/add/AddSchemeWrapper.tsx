@@ -255,7 +255,7 @@ const AddSchemeWrapper = () => {
             touch={false}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
-                <Form className="">
+                <Form >
                     <AddScheme
                         formikProps={formikProps}
                         steps={steps}

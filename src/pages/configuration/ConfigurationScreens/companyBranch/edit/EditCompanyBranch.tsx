@@ -38,11 +38,12 @@ const EditCompanyBranch = ({ formikProps, apiStatus }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div>
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

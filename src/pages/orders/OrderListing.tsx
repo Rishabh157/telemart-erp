@@ -750,7 +750,7 @@ const OrderListing = ({
     //         name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_DEALER_CODE,
     //         extraClasses: 'min-w-[150px]',
     //         renderCell: (row: OrderListResponse) => (
-    //             <div className="py-0">{row?.dealerCode || '-'}</div>
+    //             <div className="py-0">{row?.assignDealerCode || '-'}</div>
     //         ),
     //     },
     //     {

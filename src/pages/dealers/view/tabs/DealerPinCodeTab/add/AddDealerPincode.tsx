@@ -33,7 +33,7 @@ const AddDealerPincode = ({
     const { values } = formikProps
 
     return (
-        <div className="">
+        <div >
             <div className="p-4 flex flex-col gap-2  ">
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">

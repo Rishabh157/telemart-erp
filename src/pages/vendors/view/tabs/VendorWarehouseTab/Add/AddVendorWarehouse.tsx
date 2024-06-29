@@ -63,7 +63,7 @@ const AddVendorWarehouse = ({
         <div className=" h-[calc(100vh-190px)] overflow-auto ">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

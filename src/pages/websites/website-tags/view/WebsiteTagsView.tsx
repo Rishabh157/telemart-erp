@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:WebsiteTagsView.tsx
-// Type: View Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -35,7 +28,7 @@ const WebsiteTagsView = ({ items }: Props) => {
         <div className="mt-3 h-full  ">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

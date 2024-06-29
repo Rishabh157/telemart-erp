@@ -84,7 +84,7 @@ const StatusDialog = ({
                 houseArrestData.ccRemark ? houseArrestData?.ccRemark : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {houseArrestData.ccApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>
@@ -160,7 +160,7 @@ const StatusDialog = ({
                     : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {houseArrestData.dealerApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>
@@ -198,7 +198,7 @@ const StatusDialog = ({
                     : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {houseArrestData.managerSecondApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>
@@ -236,7 +236,7 @@ const StatusDialog = ({
                     : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {houseArrestData.accountApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>

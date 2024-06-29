@@ -316,7 +316,7 @@ const AddVendorWrapper = () => {
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps: FormikProps<FormInitialValues>) => (
-                    <Form className="">
+                    <Form >
                         <AddVendor
                             formikProps={formikProps}
                             steps={steps}

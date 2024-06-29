@@ -63,7 +63,7 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
                     <div className="h-[35px] w-[35px] flex justify-center items-center font-bold bg-primary-main text-white  rounded-full">
                         {fullName[0].toUpperCase()}
                     </div>
-                    <div className="">
+                    <div >
                         <div className="text-slate-700 capitalize  ">
                             {' '}
                             {fullName}{' '}
@@ -83,7 +83,7 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
                                 className="flex gap-3  text-slate-500 hover:text-primary-main cursor-pointer items-center"
                             >
                                 <option.icon className="text-xl" />
-                                <div className=""> {option.label} </div>
+                                <div > {option.label} </div>
                             </div>
                         )
                     })}
@@ -93,7 +93,7 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
                     <div className="flex gap-3  text-slate-500 items-center hover:text-primary-main cursor-pointer">
                         <MdOutlineLogout className="text-xl" />
                         <div
-                            className=""
+                            
                             onClick={() => {
                                 handleSignOut()
                             }}
@@ -106,7 +106,7 @@ const UserProfileCard = ({ onClickAway }: UserProfileCardPropTypes) => {
                     <div className="flex gap-3  text-slate-500 items-center hover:text-primary-main cursor-pointer">
                         <MdOutlineLogout className="text-xl" />
                         <div
-                            className=""
+                            
                             onClick={() => {
                                 signOutFromAllDevices()
                             }}

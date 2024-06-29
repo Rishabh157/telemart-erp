@@ -28,10 +28,10 @@ const ViewDispositionThree = ({ formikProps }: Props) => {
     // }
 
     return (
-        <div className="">
+        <div >
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -55,7 +55,7 @@ const ViewDispositionThree = ({ formikProps }: Props) => {
                                 <label className="w-60 font-medium text-l">
                                     <span>Disposition Name:</span>
                                 </label>
-                                <span className="">
+                                <span >
                                     {values.dispositionName}
                                 </span>
                             </div>

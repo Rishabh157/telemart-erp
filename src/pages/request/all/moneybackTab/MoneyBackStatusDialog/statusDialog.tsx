@@ -114,7 +114,7 @@ const StatusDialog = ({
             ),
             remark: `${moneyBackData.ccRemark ? moneyBackData?.ccRemark : '-'}`,
             date: (
-                <div className="">
+                <div >
                     {moneyBackData.ccApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>
@@ -152,7 +152,7 @@ const StatusDialog = ({
                     : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {moneyBackData.managerSecondApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>
@@ -188,7 +188,7 @@ const StatusDialog = ({
                 moneyBackData.accountRemark ? moneyBackData?.accountRemark : '-'
             }`,
             date: (
-                <div className="">
+                <div >
                     {moneyBackData.accountApprovalDate !== '' ? (
                         <div className="flex flex-col">
                             <span>

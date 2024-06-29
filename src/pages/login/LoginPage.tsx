@@ -113,7 +113,7 @@ const LoginPage = ({ pathName }: any) => {
                 </div>
             </div>
             <div className="flex flex-col h-full w-full justify-center items-center flex-1">
-                <div className="">
+                <div >
                     <div className="flex flex-col h-[100px] w-[250px] ">
                         <img src="telemartLogo.png" alt="" />
                     </div>
@@ -121,7 +121,7 @@ const LoginPage = ({ pathName }: any) => {
                         Login
                     </div>
                     <div className="mt-5 flex flex-col gap-7">
-                        <div className="">
+                        <div >
                             <ATMTextField
                                 autoFocus
                                 name=""
@@ -138,7 +138,7 @@ const LoginPage = ({ pathName }: any) => {
                                     : ''}
                             </span>
                         </div>
-                        <div className="">
+                        <div >
                             <ATMInputAdormant
                                 name=""
                                 type={isShowPassword ? 'text' : 'password'}
@@ -177,7 +177,7 @@ const LoginPage = ({ pathName }: any) => {
                                     : ''}
                             </span>
                         </div>
-                        <div className="">
+                        <div >
                             <span className="text-red-500 block mx-auto text-center">
                                 {apiError}
                             </span>

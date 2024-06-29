@@ -182,7 +182,7 @@ const EditCompanyWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
-                <Form className="">
+                <Form >
                     <EditCompany
                         formikProps={formikProps}
                         steps={steps}

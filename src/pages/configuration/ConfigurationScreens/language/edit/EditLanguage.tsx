@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditLanguage.tsx
-// Type: Edit Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -45,11 +38,12 @@ const EditLanguage = ({ formikProps, apiStatus }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div>
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

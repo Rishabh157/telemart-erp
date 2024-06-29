@@ -349,7 +349,7 @@ const InwardSampleTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">WTS Number</div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {selectedItemsTobeDispatch?._id}
                                     </div>
                                 </div>
@@ -361,7 +361,7 @@ const InwardSampleTabsListingWrapper = () => {
                                         Receiver Name
                                     </div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {
                                             selectedItemsTobeDispatch
                                                 ?.documents[0]?.toName

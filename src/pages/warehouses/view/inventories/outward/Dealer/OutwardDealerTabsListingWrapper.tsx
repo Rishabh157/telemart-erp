@@ -501,7 +501,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">So Number</div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {selectedItemsTobeDispatch?._id}
                                     </div>
                                 </div>

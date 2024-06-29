@@ -96,7 +96,7 @@ const ChangePassword = () => {
                         : ''}
                 </span>
             </div>
-            <div className="">
+            <div >
                 <span className="text-red-500 block mx-auto text-center">
                     {apiError}
                 </span>

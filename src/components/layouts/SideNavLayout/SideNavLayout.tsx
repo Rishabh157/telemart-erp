@@ -35,7 +35,7 @@ const SideNavLayout = ({ children }: Props) => {
     const location = useLocation()
     const currentPath = `/${location.pathname?.split('/')[1]}`
     const { theme } = useContext(ThemeContext)
-
+    
     return (
         <div
             className={classNames('flex h-screen w-screen', {

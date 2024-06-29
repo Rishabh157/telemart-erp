@@ -1,0 +1,14 @@
+{
+    "moduleId": "NAV_OVERVIEW_ORDER",
+    "moduleName": "NAV_OVERVIEW_ORDER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_OVERVIEW_ORDER_TAB_LIST",
+            "actionUrl": "",
+            "actionName": "OVERVIEW_TAB_LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

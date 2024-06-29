@@ -165,7 +165,7 @@ const AddCompanyWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
-                <Form className="">
+                <Form >
                     <AddCompany
                         formikProps={formikProps}
                         steps={steps}

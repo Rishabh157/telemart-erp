@@ -45,10 +45,10 @@ const AddForm = ({ formikProps, dropdownOptions }: Props) => {
     const { values, setFieldValue } = formikProps
 
     return (
-        <div className="">
+        <div >
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

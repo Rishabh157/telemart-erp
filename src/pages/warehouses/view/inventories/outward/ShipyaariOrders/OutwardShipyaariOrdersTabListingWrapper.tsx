@@ -544,7 +544,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dispositionLevelThree}</div>
+                <div className="py-0">{row?.dispositionLevelThreeLabel}</div>
             ),
         },
         {
@@ -566,7 +566,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.dealerCode || '-'}</div>
+                <div className="py-0">{row?.assignDealerCode || '-'}</div>
             ),
         },
         {

@@ -287,7 +287,7 @@ const AddProductWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
-                <Form className="">
+                <Form >
                     <AddProduct
                         formikProps={formikProps}
                         steps={steps}

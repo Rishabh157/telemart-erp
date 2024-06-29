@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditWebsitePage.tsx
-// Type: Edit Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -49,10 +42,10 @@ const EditWebsitePage = ({ formikProps, apiStatus }: Props) => {
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="">
+        <div >
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div className="">
+                <div >
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 

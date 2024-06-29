@@ -103,7 +103,7 @@ const StepAddAddress = ({
     }
 
     return (
-        <div className="">
+        <div >
             {formFields?.map((formField, index) => {
                 const { sectionName, fields } = formField
                 return (

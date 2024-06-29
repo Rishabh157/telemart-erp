@@ -263,7 +263,7 @@ const EditVendorWarehouseWrapper = () => {
             onSubmit={onSubmitHandler}
         >
             {(formikProps: FormikProps<FormInitialValues>) => (
-                <Form className="">
+                <Form >
                     <EditVendorWarehouse
                         formikProps={formikProps}
                         steps={steps}

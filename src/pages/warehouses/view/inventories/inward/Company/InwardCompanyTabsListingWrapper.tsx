@@ -365,7 +365,7 @@ const InwardCompanyTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">WTC Number</div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {selectedItemsTobeDispatch?._id}
                                     </div>
                                 </div>
@@ -377,7 +377,7 @@ const InwardCompanyTabsListingWrapper = () => {
                                         From Warehouse Name
                                     </div>
                                     {':'}
-                                    <div className="">
+                                    <div >
                                         {capitalizeFirstLetter(
                                             selectedItemsTobeDispatch?.fromWarehouseLabel ||
                                                 ''

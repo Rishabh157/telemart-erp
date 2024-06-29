@@ -45,7 +45,7 @@ const StepEditCallScript = ({ formikProps, dropdownOptions }: Props) => {
         <div className=" ">
             <FieldArray name="call_scripts">
                 {({ push, remove }) => (
-                    <div className="">
+                    <div >
                         {values.call_scripts?.map((script, scriptIndex) => {
                             const { language } = script
                             return (

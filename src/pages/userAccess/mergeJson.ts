@@ -1,3 +1,20 @@
+import { default as ordersJson } from '../../utils/mediaJson/orders.json'
+import { default as overviewOfOrdersJson } from '../../utils/mediaJson/orders/overviewOrdersTab.json'
+import { default as freshOrdersJson } from '../../utils/mediaJson/orders/freshlOrdersTab.json'
+import { default as globalOrdersJson } from '../../utils/mediaJson/orders/globalOrdersTab.json'
+import { default as assignOrdersJson } from '../../utils/mediaJson/orders/assignOrdersTab.json'
+import { default as prepaidOrdersJson } from '../../utils/mediaJson/orders/prepaidOrdersTab.json'
+import { default as deliveredOrdersJson } from '../../utils/mediaJson/orders/deliveredOrdersTab.json'
+import { default as doorCancelledOrdersJson } from '../../utils/mediaJson/orders/doorCancelledOrdersTab.json'
+import { default as holdOrdersJson } from '../../utils/mediaJson/orders/holdOrdersTab.json'
+import { default as pscOrdersJson } from '../../utils/mediaJson/orders/pscOrdersTab.json'
+import { default as unaOrdersJson } from '../../utils/mediaJson/orders/unaOrdersTab.json'
+import { default as pndOrdersJson } from '../../utils/mediaJson/orders/pndOrdersTab.json'
+import { default as urgentOrdersJson } from '../../utils/mediaJson/orders/urgentOrdersTab.json'
+import { default as nonActionOrdersJson } from '../../utils/mediaJson/orders/nonActionOrdersTab.json'
+import { default as inquiryOrdersJson } from '../../utils/mediaJson/orders/inquiryOrdersTab.json'
+import { default as reAttemptOrdersJson } from '../../utils/mediaJson/orders/reAttemptOrdersTab.json'
+import { default as allOrdersJson } from '../../utils/mediaJson/orders/allOrdersTab.json'
 import { default as ASRJson } from '../../utils/mediaJson/asr.json'
 import { default as NDRDispositionJson } from '../../utils/mediaJson/NDRDisposition.json'
 import { default as WebsiteBlogJson } from '../../utils/mediaJson/websiteBlogcopy.json'
@@ -36,7 +53,6 @@ import { default as inventoryFlowJson } from '../../utils/mediaJson/inventoryFlo
 import { default as itemsJson } from '../../utils/mediaJson/items.json'
 import { default as languageJson } from '../../utils/mediaJson/language.json'
 import { default as locationJson } from '../../utils/mediaJson/location.json'
-import { default as ordersJson } from '../../utils/mediaJson/orders.json'
 import { default as productJson } from '../../utils/mediaJson/product.json'
 import { default as productCategoryJson } from '../../utils/mediaJson/productCategory.json'
 import { default as productGroupJson } from '../../utils/mediaJson/productGroup.json'
@@ -73,6 +89,28 @@ import { default as courierPreferenceJson } from '../../utils/mediaJson/CourierP
 import { default as gpoAwbNumber } from '../../utils/mediaJson/gpoAwbNumber.json'
 import { default as orderCancelRequest } from '../../utils/mediaJson/orderCancelRequest.json'
 
+const orderTabsMerge = {
+    ...ordersJson,
+    moduleAction: [
+        ...overviewOfOrdersJson.moduleAction,
+        ...globalOrdersJson.moduleAction,
+        ...freshOrdersJson.moduleAction,
+        ...assignOrdersJson.moduleAction,
+        ...prepaidOrdersJson.moduleAction,
+        ...deliveredOrdersJson.moduleAction,
+        ...doorCancelledOrdersJson.moduleAction,
+        ...holdOrdersJson.moduleAction,
+        ...pscOrdersJson.moduleAction,
+        ...unaOrdersJson.moduleAction,
+        ...pndOrdersJson.moduleAction,
+        ...urgentOrdersJson.moduleAction,
+        ...nonActionOrdersJson.moduleAction,
+        ...inquiryOrdersJson.moduleAction,
+        ...reAttemptOrdersJson.moduleAction,
+        ...allOrdersJson.moduleAction,
+    ],
+}
+
 export const mergeUserModules = [
     { ...dashboardJson },
     { ...vendorJson },
@@ -94,7 +132,7 @@ export const mergeUserModules = [
     { ...multiOrderSearchJson },
     { ...warehouseFirstCallOrdersjson },
     // { ...inquiryJson },
-    { ...ordersJson },
+    { ...orderTabsMerge },
     { ...orderCancelRequest },
     { ...batchOrdersJson },
     { ...offerAppliedNdrJson },
