@@ -176,8 +176,7 @@ import {
     ListDealerSchemeTabWrapper,
     ListWebstieBlogWrapper,
     Locations,
-    // Order,
-    OrderOutlet,
+    Order,
     OrderViewWrapper,
     OrganisationHierarchy,
     PageNotFound,
@@ -291,23 +290,23 @@ import CourierReturnabsListingWrapper from './pages/warehouses/view/inventories/
 import AddCourierReturnWrapper from './pages/warehouses/view/inventories/inward/CourierReturn/add/AddCourierReturnWrapper'
 import InwardInventoryOverview from './pages/warehouses/view/inventories/inward/overView/InwardInventoryOverview'
 import BarcodeDestroySearchListingWrapper from './pages/warehouses/view/inventories/barcodedestroy/list/BarcodeDestroySearchListingWrapper'
-import AllOrdersListingWrapper from './pages/ordersOutlet/wrappers/AllOrdersListingWrapper'
-import FreshOrdersListingWrapper from './pages/ordersOutlet/wrappers/FreshOrdersListingWrapper'
-import AssignOrdersListingWrapper from './pages/ordersOutlet/wrappers/AssignOrdersListingWrapper'
-import PrepaidOrdersListingWrapper from './pages/ordersOutlet/wrappers/PrepaidOrdersListingWrapper'
-import DeliveredOrdersListingWrapper from './pages/ordersOutlet/wrappers/DeliveredOrdersListingWrapper'
-import DoorCancelledOrdersListingWrapper from './pages/ordersOutlet/wrappers/DoorCancelledOrdersListingWrapper'
-import HoldOrdersListingWrapper from './pages/ordersOutlet/wrappers/HoldOrdersListingWrapper'
-import PscOrdersListingWrapper from './pages/ordersOutlet/wrappers/PscOrdersListingWrapper'
-import UnaOrdersListingWrapper from './pages/ordersOutlet/wrappers/UnaOrdersListingWrapper'
-import PndOrdersListingWrapper from './pages/ordersOutlet/wrappers/PndOrdersListingWrapper'
-import UrgentOrdersListingWrapper from './pages/ordersOutlet/wrappers/UrgentOrdersListingWrapper'
-import NonActionsOrdersListingWrapper from './pages/ordersOutlet/wrappers/NonActionsOrdersListingWrapper'
-import InquiryOrdersListingWrapper from './pages/ordersOutlet/wrappers/InquiryOrdersListingWrapper'
-import ReattemptOrdersListingWrapper from './pages/ordersOutlet/wrappers/ReattemptOrdersListingWrapper'
-import ComplaintTabListingWrapper from './pages/ordersOutlet/wrappers/ComplaintTabListingWrapper'
-import OrderOverviewDashboardWrapper from './pages/ordersOutlet/wrappers/OrderOverviewDashboardWrapper'
-import GlobalSearchOrdersListingWrapper from './pages/ordersOutlet/wrappers/GlobalSearchOrdersListingWrapper'
+import AllOrdersListingWrapper from './pages/orders/wrappers/AllOrdersListingWrapper'
+import FreshOrdersListingWrapper from './pages/orders/wrappers/FreshOrdersListingWrapper'
+import AssignOrdersListingWrapper from './pages/orders/wrappers/AssignOrdersListingWrapper'
+import PrepaidOrdersListingWrapper from './pages/orders/wrappers/PrepaidOrdersListingWrapper'
+import DeliveredOrdersListingWrapper from './pages/orders/wrappers/DeliveredOrdersListingWrapper'
+import DoorCancelledOrdersListingWrapper from './pages/orders/wrappers/DoorCancelledOrdersListingWrapper'
+import HoldOrdersListingWrapper from './pages/orders/wrappers/HoldOrdersListingWrapper'
+import PscOrdersListingWrapper from './pages/orders/wrappers/PscOrdersListingWrapper'
+import UnaOrdersListingWrapper from './pages/orders/wrappers/UnaOrdersListingWrapper'
+import PndOrdersListingWrapper from './pages/orders/wrappers/PndOrdersListingWrapper'
+import UrgentOrdersListingWrapper from './pages/orders/wrappers/UrgentOrdersListingWrapper'
+import NonActionsOrdersListingWrapper from './pages/orders/wrappers/NonActionsOrdersListingWrapper'
+import InquiryOrdersListingWrapper from './pages/orders/wrappers/InquiryOrdersListingWrapper'
+import ReattemptOrdersListingWrapper from './pages/orders/wrappers/ReattemptOrdersListingWrapper'
+import ComplaintTabListingWrapper from './pages/orders/wrappers/ComplaintTabListingWrapper'
+import OrderOverviewDashboardWrapper from './pages/orders/wrappers/OrderOverviewDashboardWrapper'
+import GlobalSearchOrdersListingWrapper from './pages/orders/wrappers/GlobalSearchOrdersListingWrapper'
 import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward-inventory/MoveToCartonDrawer/BarcodeGeneratorOuterBox'
 import OutwardManualMappingTabListingWrapper from './pages/warehouses/view/inventories/outward/ManualMapping/OutwardManualMappingTabListingWrapper'
 import WebLeadsListingWrapper from './pages/websites/webLeads/list/WebLeadsListingWrapper'
@@ -1506,7 +1505,7 @@ const PageRoutes = () => {
                     path="/orders"
                     element={
                         <Authorization
-                            children={<OrderOutlet />}
+                            children={<Order />}
                             permission={UserModuleNameTypes.NAV_ORDER}
                         />
                     }
