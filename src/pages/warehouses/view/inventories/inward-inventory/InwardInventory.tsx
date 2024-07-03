@@ -58,6 +58,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     barc.push(res?.data?.data)
                 }
                 setBarcodes([...barc])
+                setBarcode('')
             }
         })
     }
