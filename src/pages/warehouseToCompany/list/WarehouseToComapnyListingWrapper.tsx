@@ -191,7 +191,6 @@ const WarehouseToComapnyListingWrapper = () => {
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
                     <span>
-                        {' '}
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
