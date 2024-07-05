@@ -40,7 +40,15 @@ const UsersListingWrapper = () => {
     const listingPaginationState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue, isActive } = listingPaginationState
+    const {
+        page,
+        rowsPerPage,
+        searchValue,
+        userDepartment,
+        branchId,
+        callCenterId,
+        isActive,
+    } = listingPaginationState
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const navigate = useNavigate()
@@ -60,6 +68,18 @@ const UsersListingWrapper = () => {
             ],
             page: page,
             filterBy: [
+                {
+                    fieldName: 'userDepartment',
+                    value: userDepartment,
+                },
+                {
+                    fieldName: 'branchId',
+                    value: branchId,
+                },
+                {
+                    fieldName: 'callCenterId',
+                    value: callCenterId,
+                },
                 {
                     fieldName: 'companyId',
                     value: userData?.companyId as string,

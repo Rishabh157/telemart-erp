@@ -68,7 +68,7 @@ const WebLeadsListingWrapper = () => {
     })
 
     const columns: columnTypes[] = [
-       {
+        {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
@@ -77,7 +77,16 @@ const WebLeadsListingWrapper = () => {
                 <span>{row.status}</span>
             ),
         },
-       {
+        {
+            field: 'idtag',
+            headerName: 'Id Tags',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_WEBSITES_NAME,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span>{row.idtag}</span>
+            ),
+        },
+        {
             field: 'name',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',

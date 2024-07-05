@@ -195,7 +195,6 @@ const ViewOrder = () => {
             label: `${activeTabLabel}`,
         },
     ]
-    console.log('activePath: ', activePath)
 
     return (
         <SideNavLayout>
