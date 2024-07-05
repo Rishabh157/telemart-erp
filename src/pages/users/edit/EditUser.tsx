@@ -81,7 +81,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                 userrole: values?.userRole,
                 body: {
                     department: values.userDepartment,
-                    callCenterId: values.callCenterId,
+                    callCenterId: values.callCenterId || "",
                 },
             },
             {
