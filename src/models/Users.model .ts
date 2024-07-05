@@ -31,6 +31,7 @@ export type UsersListResponse = {
     updatedAt: string
     __v: number
     branchLabel: string
+    callCenterName: string
 }
 
 export type AddUser = {
