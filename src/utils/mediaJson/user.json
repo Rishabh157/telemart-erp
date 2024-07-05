@@ -20,7 +20,7 @@
                     "fieldValue": "firstName"
                 },
                 {
-                    "fieldId": "USER_LIST_EMAIL",
+                    "fieldId": "USER_LIST_CALL_CENTER_NAME",
                     "fieldName": "Email",
                     "fieldValue": "email"
                 },

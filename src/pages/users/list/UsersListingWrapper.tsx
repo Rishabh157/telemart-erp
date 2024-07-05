@@ -129,13 +129,13 @@ const UsersListingWrapper = () => {
             ),
         },
         {
-            field: 'email',
-            headerName: 'Email',
+            field: 'callCenterName',
+            headerName: 'Call Center Name',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.USER_LIST_EMAIL,
+            name: UserModuleNameTypes.USER_LIST_CALL_CENTER_NAME,
             renderCell: (row: UsersListResponse) => {
-                return <span> {row.email} </span>
+                return <span> {row?.callCenterName} </span>
             },
         },
         {

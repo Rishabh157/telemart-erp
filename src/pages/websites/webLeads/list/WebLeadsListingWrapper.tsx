@@ -46,15 +46,11 @@ type WebLeadsListResponseType = {
 
 const WebLeadsListingWrapper = () => {
     useUnmountCleanup()
-    // const dispatch = useDispatch<AppDispatch>()
-    // const navigate = useNavigate()
-    // const [currentId, setCurrentId] = useState('')
-    // const [showDropdown, setShowDropdown] = useState(false)
-    const WebsiteState: any = useSelector(
+    const listState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
 
-    const { page, rowsPerPage, searchValue } = WebsiteState
+    const { page, rowsPerPage, searchValue } = listState
 
     // pagination api
     const { items } = useGetCustomListingData<WebLeadsListResponseType[]>({
@@ -72,30 +68,16 @@ const WebLeadsListingWrapper = () => {
     })
 
     const columns: columnTypes[] = [
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[1_1_0%]',
-        //     renderCell: (row: any) => (
-        //         <ActionPopup
-        //             isEdit={isAuthorized(
-        //                 UserModuleNameTypes.ACTION_WEBSITES_ONE_EDIT
-        //             )}
-
-        //             handleOnAction={() => {
-        //                 setShowDropdown(!showDropdown)
-        //                 setCurrentId(row?._id)
-        //             }}
-        //             handleEditActionButton={() => {
-        //                 navigate(`/all-websites/website/${currentId}`)
-        //             }}
-
-        //         >
-
-        //         </ActionPopup>
-        //     ),
-        // },
-        {
+       {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LIST_WEBSITES_NAME,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span>{row.status}</span>
+            ),
+        },
+       {
             field: 'name',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',

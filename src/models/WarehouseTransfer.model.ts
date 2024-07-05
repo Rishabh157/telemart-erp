@@ -1,12 +1,3 @@
-/// ==============================================
-// Filename:WarehouseTransfer.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// import { WarehouseTransferStatus } from "./OutwardRequest.model"
-
 // |-- Types --|
 export type productSalesOrder = {
     productGroupId: string
