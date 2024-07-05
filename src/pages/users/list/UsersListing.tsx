@@ -10,7 +10,7 @@ import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
-import FilterStatusFormDialogWrapper from 'src/filtersDialogs/filterStatusDialog/FilterStatusFormDialogWrapper'
+import UserFilterFormDialogWrapper from './flter/UserFilterFormDialogWrapper'
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -77,7 +77,7 @@ const UsersListing = ({ columns, rows }: Props) => {
 
                 {/* filter status form */}
                 {isOpenFilterForm && (
-                    <FilterStatusFormDialogWrapper
+                    <UserFilterFormDialogWrapper
                         open
                         onClose={() => setIsOpenFilterForm(false)}
                     />

@@ -17,6 +17,9 @@ export interface ListingPaginationSliceStateType {
     }
     filterBy: any
     filterkeysValue: any
+    userDepartment: string
+    branchId: string
+    callCenterId: string
     isActive: string | boolean
     selectedItem: null | any
     orderNumberSearch: any
@@ -36,6 +39,9 @@ const initialState: ListingPaginationSliceStateType = {
     filterValue: '',
     filterBy: {},
     selectedItem: null,
+    userDepartment: '',
+    branchId: '',
+    callCenterId: '',
     isActive: '',
     dateFilter: {
         startDate: '',
@@ -107,6 +113,15 @@ const ListingPaginationSlice: Slice<ListingPaginationSliceStateType> =
             setSelectedItem: (state, action: PayloadAction<any | null>) => {
                 state.selectedItem = action.payload
             },
+            setUserDepartment: (state, action: PayloadAction<string>) => {
+                state.userDepartment = action.payload
+            },
+            setBranchId: (state, action: PayloadAction<string>) => {
+                state.branchId = action.payload
+            },
+            setCallCenterId: (state, action: PayloadAction<string>) => {
+                state.callCenterId = action.payload
+            },
             setIsActivate: (state, action: PayloadAction<string>) => {
                 state.isActive = action.payload
             },
@@ -143,6 +158,9 @@ export const {
     setFilterValue,
     setFilterBy,
     setOrdersFilterKeysValue,
+    setUserDepartment,
+    setBranchId,
+    setCallCenterId,
     setIsActivate,
     setSelectedItem,
     setOrderNumberSearch,
