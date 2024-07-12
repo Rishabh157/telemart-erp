@@ -81,7 +81,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                 userrole: values?.userRole,
                 body: {
                     department: values.userDepartment,
-                    callCenterId: values.callCenterId || "",
+                    callCenterId: values.callCenterId || '',
                 },
             },
             {
@@ -236,7 +236,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
                             {/* Mobile */}
                             <ATMTextField
-                                required
+                                // required
                                 name="mobile"
                                 value={values.mobile}
                                 label="Mobile Number"
@@ -335,7 +335,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             {/* Team Lead Name */}
                             <ATMSelectSearchable
                                 isHidden={!values.isAgent}
-                                required
+                                // required
                                 name="teamLeadId"
                                 value={values.teamLeadId}
                                 onChange={(e) =>

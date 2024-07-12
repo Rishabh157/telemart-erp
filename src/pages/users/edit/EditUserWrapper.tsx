@@ -127,11 +127,11 @@ const EditUserWrapper = (props: Props) => {
         // mobile: string().required('Mobile number is required'),
         email: string().required('Email is required'),
         isAgent: boolean(),
-        teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
-            return isAgent[0]
-                ? schema.required('Team Lead ID is required')
-                : schema.notRequired()
-        }),
+        // teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
+        //     return isAgent[0]
+        //         ? schema.required('Team Lead ID is required')
+        //         : schema.notRequired()
+        // }),
         mySenior: string().when(['userRole'], (userRole, schema) => {
             return getSeniorValid(userRole, schema)
                 ? schema.required('Senior is required')
