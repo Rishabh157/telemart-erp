@@ -103,11 +103,11 @@ const AddUserWrapper = (props: Props) => {
                 : schema.notRequired()
         }),
         isAgent: boolean(),
-        teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
-            return isAgent[0]
-                ? schema.required('Team lead is required')
-                : schema.notRequired()
-        }),
+        // teamLeadId: string().when(['isAgent'], (isAgent, schema) => {
+        //     return isAgent[0]
+        //         ? schema.required('Team lead is required')
+        //         : schema.notRequired()
+        // }),
         floorManagerId: string().when(['isAgent'], (isAgent, schema) => {
             return isAgent[0]
                 ? schema.required('Floor manager is required')

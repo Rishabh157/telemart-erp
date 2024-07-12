@@ -257,7 +257,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
                             {/* Mobile */}
                             <ATMTextField
-                                required={true}
+                                // required={true}
                                 name="mobile"
                                 value={values.mobile}
                                 label="Mobile Number"
@@ -367,7 +367,7 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             {/* Team Lead Name */}
                             <ATMSelectSearchable
                                 isHidden={!values.isAgent}
-                                required
+                                // required
                                 name="teamLeadId"
                                 value={values.teamLeadId}
                                 onChange={(e) =>
