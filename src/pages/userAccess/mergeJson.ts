@@ -76,6 +76,7 @@ import { default as dashboardJson } from '../../utils/mediaJson/dashboard.json'
 import { default as websiteJson } from '../../utils/mediaJson/websitecopy.json'
 import { default as websitesPageJson } from '../../utils/mediaJson/websitesPagecopy.json'
 import { default as websitesTagsJson } from '../../utils/mediaJson/websitesTagscopy.json'
+import { default as websiteLeadsJson } from '../../utils/mediaJson/websiteLeads.json'
 import { default as complainJson } from '../../utils/mediaJson/complain.json'
 import { default as multiMappingJson } from '../../utils/mediaJson/multiMapping.json'
 import { default as requestJson } from '../../utils/mediaJson/request.json'
@@ -186,5 +187,6 @@ export const mergeUserModules = [
     { ...WebsiteBlogJson },
     { ...websitesPageJson },
     { ...websitesTagsJson },
+    { ...websiteLeadsJson },
     { ...multiMappingJson },
 ]

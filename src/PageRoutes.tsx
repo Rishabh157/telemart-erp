@@ -3575,7 +3575,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<WebLeadsListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_TAGS
+                                    UserModuleNameTypes.NAV_WEBSITES_LEADS
                                 }
                             />
                         }

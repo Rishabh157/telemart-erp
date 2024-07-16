@@ -46,7 +46,7 @@ const websitesNavigation: NavItemType[] = [
         label: 'Web Leads',
         icon: RiPagesLine,
         path: 'web-leads',
-        name: UserModuleNameTypes.NAV_WEBSITES_TAGS,
+        name: UserModuleNameTypes.NAV_WEBSITES_LEADS,
     },
 ]
 
