@@ -1,0 +1,61 @@
+{
+    "moduleId": "NAV_WEBSITES_LEADS",
+    "moduleName": "NAV_WEBSITES_LEADS",
+    "parentGroup": ["NAV_ALL_WEBSITE"],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_WEBSITES_LEADS_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_ID_TAGS",
+                    "fieldName": "ID Tags",
+                    "fieldValue": "idtag"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_CUSTOMER_NAME",
+                    "fieldName": "Customer Name",
+                    "fieldValue": "name"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_MOBILE_NUMBER",
+                    "fieldName": "Mobile No.",
+                    "fieldValue": "phone"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_EMAIL",
+                    "fieldName": "Email",
+                    "fieldValue": "email"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_PRODUCT_NAME",
+                    "fieldName": "Product Name",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_CITY",
+                    "fieldName": "City",
+                    "fieldValue": "city"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_STATE",
+                    "fieldName": "State",
+                    "fieldValue": "state"
+                }
+            ]
+        }
+    ]
+}
