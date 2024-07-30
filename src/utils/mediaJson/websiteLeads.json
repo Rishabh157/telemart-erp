@@ -11,6 +11,11 @@
             "parentGroup": [],
             "fields": [
                 {
+                    "fieldId": "WEBSITES_LEADS_LIST_CREATED_DATE",
+                    "fieldName": "date",
+                    "fieldValue": "createdAt"
+                },
+                {
                     "fieldId": "WEBSITES_LEADS_LIST_STATUS",
                     "fieldName": "Status",
                     "fieldValue": "status"

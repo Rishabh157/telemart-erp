@@ -10,8 +10,10 @@ import WebLeadsListing from './WebLeadsListing'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
 // import { isAuthorized } from 'src/utils/authorization'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import moment from 'moment'
+import React from 'react'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 type WebLeadsListResponseType = {
     _id: string
@@ -43,6 +45,17 @@ type WebLeadsListResponseType = {
     updatedAt: Date
     __v: number
 }
+type LabelValuePair = {
+    fieldName: string
+    label: string
+    value: any
+}
+export type WebLeadsFormInitialValuesFilterWithLabel = {
+    status: LabelValuePair
+    product_name: LabelValuePair
+    startDate: LabelValuePair
+    endDate: LabelValuePair
+}
 
 const WebLeadsListingWrapper = () => {
     useUnmountCleanup()
@@ -50,17 +63,39 @@ const WebLeadsListingWrapper = () => {
         (state: RootState) => state.listingPagination
     )
 
+
+    const [filter, setFilter] =
+        React.useState<WebLeadsFormInitialValuesFilterWithLabel>({
+            status: { fieldName: '', label: '', value: '' },
+            product_name: { fieldName: '', label: '', value: '' },
+            startDate: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endDate: { fieldName: '', label: '', value: '' },
+        })
     const { page, rowsPerPage, searchValue } = listState
 
     // pagination api
-    const { items } = useGetCustomListingData<WebLeadsListResponseType[]>({
+    const { items } = useGetCustomListingData<
+        WebLeadsListResponseType[]
+    >({
         useEndPointHook: useGetPaginationWebLeadsQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
             params: ['phone', 'email', 'product_name', 'leadStatus'],
             page: page,
-            filterBy: [],
-            dateFilter: {},
+            filterBy: [
+                {
+                    fieldName: 'status',
+                    value: filter.status.value || '',
+                },
+            ],
+            dateFilter: {
+                startDate: filter.startDate.value,
+                endDate: filter.endDate.value,
+            },
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
@@ -68,6 +103,23 @@ const WebLeadsListingWrapper = () => {
     })
 
     const columns: columnTypes[] = [
+        {
+            field: 'createdAt',
+            headerName: 'Date',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_CREATED_DATE,
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: WebLeadsListResponseType) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {moment(row?.createdAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(row?.createdAt).format('hh:mm A')}
+                    </div>
+                </div>
+            ),
+        },
         {
             field: 'status',
             headerName: 'Status',
@@ -151,7 +203,15 @@ const WebLeadsListingWrapper = () => {
         },
     ]
 
-    return <WebLeadsListing columns={columns} rows={items} />
+    return (
+        <WebLeadsListing
+            columns={columns}
+            rows={items}
+            filter={filter}
+            setFilter={setFilter}
+          
+        />
+    )
 }
 
 export default WebLeadsListingWrapper
