@@ -14,6 +14,7 @@ type UseCustomPaginationPropsType<T> = {
         isFetching: boolean
         error?: any
         status: QueryStatus
+        refetch:any
     }
 }
 
@@ -23,7 +24,7 @@ const useGetCustomListingData = <T>({
     const [items, setItems] = useState<T[]>([])
     const dispatch = useDispatch<AppDispatch>()
 
-    const { data, isLoading, isFetching } = useEndPointHook
+    const { data, isLoading, isFetching ,refetch} = useEndPointHook
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -39,7 +40,7 @@ const useGetCustomListingData = <T>({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
-    return { items }
+    return { items ,refetch}
 }
 
 export default useGetCustomListingData

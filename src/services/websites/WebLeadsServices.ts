@@ -13,7 +13,15 @@ export const WebsiteApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+        getAllWebLeads: builder.mutation({
+            // providesTags: ['website'],
+            query: (body: any) => ({
+                url: '/webleads',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
-export const { useGetPaginationWebLeadsQuery } = WebsiteApi
+export const { useGetPaginationWebLeadsQuery ,useGetAllWebLeadsMutation} = WebsiteApi

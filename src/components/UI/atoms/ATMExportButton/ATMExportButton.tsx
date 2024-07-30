@@ -72,7 +72,6 @@ const ATMExportButton = ({
                     </>
                 ) : (
                     <>
-                        {' '}
                         <TbFileExport className="text-lg" />{' '}
                         <span className="text-sm"> {btnName} </span>{' '}
                     </>
