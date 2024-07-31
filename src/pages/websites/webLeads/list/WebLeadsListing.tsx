@@ -24,6 +24,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import WebLeadsListingFilterWrapper from './WebLeadsListingFilter/WebLeadsListingFilterWrapper'
 import { WebLeadsFormInitialValuesFilterWithLabel } from './WebLeadsListingWrapper'
 import { useGetAllWebLeadsMutation } from 'src/services/websites/WebLeadsServices'
+import moment from 'moment'
 
 // |-- Types --|
 type Props = {
@@ -43,26 +44,31 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
         (state: RootState) => state.listingPagination
     )
     const headers = [
-        {
-            label: 'Status',
-            key: 'status',
-        },
-        {
-            label: 'name',
-            key: 'name',
-        },
-        {
-            label: 'Product Name',
-            key: 'product_name',
-        },
-        {
-            label: 'Date',
-            key: 'createdAt',
-        },
-        {
-            label: 'quantity',
-            key: 'quantity',
-        },
+        { label: 'Address', key: 'address' },
+        { label: 'Address1', key: 'address1' },
+        { label: 'City', key: 'city' },
+        { label: 'Country', key: 'country' },
+        { label: 'CreatedAt', key: 'createdAt' },
+        { label: 'Email', key: 'email' },
+        { label: 'Idtag', key: 'idtag' },
+
+        { label: 'Landmark', key: 'landmark' },
+        { label: 'LeadStatus', key: 'leadStatus' },
+        { label: 'Mode', key: 'mode' },
+        { label: 'Name', key: 'name' },
+        { label: 'OrderId', key: 'order_id' },
+        { label: 'PaymenyMode', key: 'paymeny_mode' },
+        { label: 'Phone', key: 'phone' },
+        { label: 'Price', key: 'price' },
+        { label: 'ProductName', key: 'product_name' },
+        { label: 'Quantity', key: 'quantity' },
+        { label: 'Remark', key: 'remark' },
+        { label: 'Sdate', key: 'sdate' },
+        { label: 'State', key: 'state' },
+        { label: 'Status', key: 'status' },
+        { label: 'UpdatedAt', key: 'updatedAt' },
+        { label: 'Url', key: 'url' },
+        { label: 'ZipCode', key: 'zip_code' },
     ]
 
     const [exportListing, exportListingInfo] = useGetAllWebLeadsMutation()
@@ -103,7 +109,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
             filterBy: [
                 {
                     fieldName: 'status',
-                    value: filter.status.value || '',
+                    value: ['PENDING'],
                 },
             ],
             dateFilter: {
@@ -144,6 +150,13 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
             </span>
         )
     }
+    const formatDates = (data:any) => {
+        return data.map((item:any) => ({
+            ...item,
+            createdAt: moment(item?.createdAt).format('DD MMM YYYY'),
+            updatedAt: moment(item?.updatedAt).format('DD MMM YYYY')
+        }));
+    };
 
     return (
         <div className="px-4 h-full overflow-auto pt-3 ">
@@ -176,7 +189,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
                     filterShow={filterShow(filter)}
                     children={
                         <ATMExportButton
-                            data={exportData}
+                            data={formatDates(exportData)}
                             isLoading={exportListingInfo.isLoading}
                             headers={headers}
                             fileName="webLeads"
