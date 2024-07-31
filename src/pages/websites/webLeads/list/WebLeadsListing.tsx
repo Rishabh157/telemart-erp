@@ -150,13 +150,13 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
             </span>
         )
     }
-    const formatDates = (data:any) => {
-        return data.map((item:any) => ({
+    const formatDates = (data: any) => {
+        return data.map((item: any) => ({
             ...item,
             createdAt: moment(item?.createdAt).format('DD MMM YYYY'),
-            updatedAt: moment(item?.updatedAt).format('DD MMM YYYY')
-        }));
-    };
+            updatedAt: moment(item?.updatedAt).format('DD MMM YYYY'),
+        }))
+    }
 
     return (
         <div className="px-4 h-full overflow-auto pt-3 ">
@@ -194,7 +194,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
                             headers={headers}
                             fileName="webLeads"
                             onClick={handleExport}
-                            btnName="csv"
+                            btnName="Download CSV"
                             loadingText="..."
                         />
                     }
