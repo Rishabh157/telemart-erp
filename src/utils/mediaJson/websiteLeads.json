@@ -36,6 +36,11 @@
                     "fieldValue": "phone"
                 },
                 {
+                    "fieldId": "WEBSITES_LEADS_LIST_MODE",
+                    "fieldName": "Mode",
+                    "fieldValue": "mode"
+                },
+                {
                     "fieldId": "WEBSITES_LEADS_LIST_EMAIL",
                     "fieldName": "Email",
                     "fieldValue": "email"
