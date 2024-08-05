@@ -102,9 +102,8 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'createdAt',
             headerName: 'Date',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.7_0.7_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_CREATED_DATE,
-            extraClasses: 'min-w-[150px]',
             renderCell: (row: WebLeadsListResponseType) => (
                 <div className="py-0">
                     <div className="text-[12px] text-slate-700 font-medium">
@@ -119,7 +118,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'leadStatus',
             headerName: 'Lead Status',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.7_0.7_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_STATUS,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span>{row.leadStatus}</span>
@@ -128,7 +127,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'idtag',
             headerName: 'Id Tags',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.7_0.7_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_ID_TAGS,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span>{row.idtag}</span>
@@ -146,7 +145,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'phone',
             headerName: 'Mobile No.',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_MOBILE_NUMBER,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.phone} </span>
@@ -155,17 +154,24 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'email',
             headerName: 'Email',
+            align: 'start',
             flex: 'flex-[1_1_0%]',
-            extraClasses : "max-w-[300px]",
+            extraClasses: 'max-w-[300px]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_EMAIL,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row.email || '-'} </span>
+                <span
+                    className="w-[250px] whitespace-nowrap text-ellipsis overflow-hidden"
+                    title={row.email}
+                >
+                    {row.email || '-'}
+                </span>
             ),
         },
         {
             field: 'productName',
             headerName: 'Product Name',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'max-w-[350px]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PRODUCT_NAME,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.product_name} </span>
@@ -174,7 +180,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'price',
             headerName: 'Price',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PRICE,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.price || '-'} </span>
@@ -183,7 +189,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'city',
             headerName: 'City',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_CITY,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.city || '-'} </span>
@@ -192,7 +198,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'state',
             headerName: 'State',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_STATE,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.state || '-'} </span>

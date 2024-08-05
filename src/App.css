@@ -206,7 +206,6 @@ body {
     }
 }
 
-
 /* scroll thickness */
 /* Add this to your CSS file */
 
@@ -223,8 +222,6 @@ body {
 .grow .overflow-auto::-webkit-scrollbar-track {
     background: #f1f1f1 !important;
 }
-
-
 
 .custom-border {
     position: relative;
@@ -278,3 +275,4 @@ body {
     border-top: none;
     border-left: none;
 }
+
