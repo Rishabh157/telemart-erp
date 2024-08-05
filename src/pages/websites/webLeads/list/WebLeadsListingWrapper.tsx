@@ -31,7 +31,6 @@ type WebLeadsListResponseType = {
     quantity: string
     remark: string
     sdate: string
-    status: string
     idtag: string
     product_name: string
     mode: string
@@ -51,7 +50,7 @@ type LabelValuePair = {
     value: any
 }
 export type WebLeadsFormInitialValuesFilterWithLabel = {
-    status: LabelValuePair
+    leadStatus: LabelValuePair
     product_name: LabelValuePair
     startDate: LabelValuePair
     endDate: LabelValuePair
@@ -63,10 +62,9 @@ const WebLeadsListingWrapper = () => {
         (state: RootState) => state.listingPagination
     )
 
-
     const [filter, setFilter] =
         React.useState<WebLeadsFormInitialValuesFilterWithLabel>({
-            status: { fieldName: '', label: '', value: '' },
+            leadStatus: { fieldName: '', label: '', value: '' },
             product_name: { fieldName: '', label: '', value: '' },
             startDate: {
                 fieldName: '',
@@ -78,9 +76,7 @@ const WebLeadsListingWrapper = () => {
     const { page, rowsPerPage, searchValue } = listState
 
     // pagination api
-    const { items } = useGetCustomListingData<
-        WebLeadsListResponseType[]
-    >({
+    const { items } = useGetCustomListingData<WebLeadsListResponseType[]>({
         useEndPointHook: useGetPaginationWebLeadsQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
@@ -88,8 +84,8 @@ const WebLeadsListingWrapper = () => {
             page: page,
             filterBy: [
                 {
-                    fieldName: 'status',
-                    value: filter.status.value || '',
+                    fieldName: 'leadStatus',
+                    value: filter.leadStatus.value || '',
                 },
             ],
             dateFilter: {
@@ -121,12 +117,12 @@ const WebLeadsListingWrapper = () => {
             ),
         },
         {
-            field: 'status',
-            headerName: 'Status',
+            field: 'leadStatus',
+            headerName: 'Lead Status',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_STATUS,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span>{row.status}</span>
+                <span>{row.leadStatus}</span>
             ),
         },
         {
@@ -160,6 +156,7 @@ const WebLeadsListingWrapper = () => {
             field: 'email',
             headerName: 'Email',
             flex: 'flex-[1_1_0%]',
+            extraClasses : "max-w-[300px]",
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_EMAIL,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.email || '-'} </span>
@@ -209,7 +206,6 @@ const WebLeadsListingWrapper = () => {
             rows={items}
             filter={filter}
             setFilter={setFilter}
-          
         />
     )
 }

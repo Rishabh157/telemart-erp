@@ -1,8 +1,6 @@
 import { FormikProps } from 'formik'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-// hooks
-
 // models
 import { WebLeadsFormInitialValuesFilterWithLabel } from '../WebLeadsListingWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
@@ -90,15 +88,15 @@ const WebLeadsOrderListingFilterForm = ({
                 {/* First Caller & Urgent */}
 
                 <ATMSelectSearchable
-                    label="status"
+                    label="Lead Status"
                     selectLabel="Select status"
-                    name="status"
-                    value={values.status.value}
+                    name="leadStatus"
+                    value={values?.leadStatus?.value}
                     isValueWithLable
                     options={statusOptions || []}
                     onChange={(e) => {
-                        setFieldValue('status', {
-                            fieldName: 'status',
+                        setFieldValue('leadStatus', {
+                            fieldName: 'leadStatus',
                             label: e.label,
                             value: e.value,
                         })

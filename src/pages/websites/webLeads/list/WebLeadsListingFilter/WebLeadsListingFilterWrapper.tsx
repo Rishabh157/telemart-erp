@@ -22,7 +22,7 @@ const WebLeadsListingFilterWrapper = ({
     filter,
 }: Props) => {
     const initialValues: WebLeadsFormInitialValuesFilterWithLabel = {
-        status: filter?.status,
+        leadStatus: filter?.leadStatus,
         product_name: filter?.product_name,
         startDate: filter?.startDate,
         endDate: filter?.endDate,
@@ -38,7 +38,7 @@ const WebLeadsListingFilterWrapper = ({
         setSubmitting(false)
         setFilter((prev) => ({
             ...prev,
-            status: values?.status,
+            leadStatus: values?.leadStatus,
             product_name: values?.product_name,
             startDate: values?.startDate.value
                 ? {
@@ -69,7 +69,7 @@ const WebLeadsListingFilterWrapper = ({
         // reset formik props
         setFilter((prev) => ({
             ...prev,
-            status: { fieldName: '', value: '', label: '' },
+            leadStatus: { fieldName: '', value: '', label: '' },
             product_name: { fieldName: '', value: '', label: '' },
 
             startDate: { fieldName: '', value: '', label: '' },
