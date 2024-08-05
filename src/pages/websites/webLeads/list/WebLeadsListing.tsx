@@ -168,7 +168,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
                 <ATMPageHeading> Web Leads </ATMPageHeading>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white ">
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
