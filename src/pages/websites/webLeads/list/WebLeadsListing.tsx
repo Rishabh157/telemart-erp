@@ -108,7 +108,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
             page: page,
             filterBy: [
                 {
-                    fieldName: 'status',
+                    fieldName: 'leadStatus',
                     value: ['PENDING'],
                 },
             ],
