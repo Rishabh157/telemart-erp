@@ -150,7 +150,7 @@ const SalesPageWrapper = () => {
     // get DID number by
     const { items: didItems } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetByDidNumberQuery(didNumber || createOrderState?.didNumber, {
-            skip: !didNumber || !createOrderState?.didNumber,
+            skip: !didNumber && !createOrderState?.didNumber,
         }),
     })
 
