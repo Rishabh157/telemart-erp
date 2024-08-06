@@ -81,6 +81,12 @@ const mediaNavigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_INBOUND,
     },
     {
+        label: 'Create Order',
+        icon: MdViewTimeline,
+        path: 'create-order',
+        name: UserModuleNameTypes.NAV_CREATE_ORDER,
+    },
+    {
         label: 'Customer Page',
         icon: MdViewTimeline,
         path: 'customer-care?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
