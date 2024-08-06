@@ -35,6 +35,7 @@ type WebLeadsListResponseType = {
     product_name: string
     mode: string
     paymeny_mode: string
+    transactionId: string
     url: string
     price: string
     leadStatus: string
@@ -122,6 +123,15 @@ const WebLeadsListingWrapper = () => {
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_STATUS,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span>{row.leadStatus}</span>
+            ),
+        },
+        {
+            field: 'transactionId',
+            headerName: 'Transaction ID',
+            flex: 'flex-[0.7_0.7_0%]',
+            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_TRANSACTION_ID,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span>{row?.transactionId}</span>
             ),
         },
         {

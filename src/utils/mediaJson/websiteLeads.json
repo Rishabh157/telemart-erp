@@ -21,6 +21,11 @@
                     "fieldValue": "status"
                 },
                 {
+                    "fieldId": "WEBSITES_LEADS_LIST_TRANSACTION_ID",
+                    "fieldName": "Transaction id",
+                    "fieldValue": "transactionId"
+                },
+                {
                     "fieldId": "WEBSITES_LEADS_LIST_ID_TAGS",
                     "fieldName": "ID Tags",
                     "fieldValue": "idtag"

@@ -210,7 +210,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
                 )}
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
                         columns={columns}
                         rows={rows}
@@ -218,7 +218,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full overflow-auto"
+                        extraClasses="h-full min-w-[120%] overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

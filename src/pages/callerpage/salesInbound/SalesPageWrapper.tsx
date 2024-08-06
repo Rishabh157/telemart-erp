@@ -130,6 +130,7 @@ const SalesPageWrapper = () => {
 
     const locationUrl = useLocation()
     const queryParams = new URLSearchParams(locationUrl.search)
+    const createOrderState = locationUrl.state
     const phoneNumber = queryParams.get('phone')
     const agentName = queryParams.get('username')
     const didNumber = queryParams.get('didnumber')
@@ -148,8 +149,8 @@ const SalesPageWrapper = () => {
 
     // get DID number by
     const { items: didItems } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetByDidNumberQuery(didNumber, {
-            skip: !didNumber,
+        useEndPointHook: useGetByDidNumberQuery(didNumber || createOrderState?.didNumber, {
+            skip: !didNumber || !createOrderState?.didNumber,
         }),
     })
 
@@ -158,7 +159,10 @@ const SalesPageWrapper = () => {
         isFetching: isCallerFetching,
         isLoading: isCallerLoading,
     } = useGetPaginationUnAuthCallerDataQuery(
-        { phoneNo: phoneNumber || '', type: activeTab },
+        {
+            phoneNo: phoneNumber || createOrderState?.mobileNumber || '',
+            type: activeTab,
+        },
         {
             skip: !phoneNumber,
         }
@@ -168,12 +172,16 @@ const SalesPageWrapper = () => {
         isFetching: singleIsCallerFetching,
         isLoading: singleIsCallerLoading,
     } = useGetOrderNumberUnAuthCallerDataQuery(
-        { phoneNo: phoneNumber || '' },
+        { phoneNo: phoneNumber || createOrderState?.mobileNumber || '' },
         {
             skip: !phoneNumber,
         }
     )
 
+    console.log(
+        'createOrderStatecreateOrderStatecreateOrderStatecreateOrderState',
+        createOrderState
+    )
     useEffect(() => {
         if (!isCallerFetching && !isCallerLoading) {
             dispatch(setIsTableLoading(false))
@@ -577,12 +585,12 @@ const SalesPageWrapper = () => {
     ]
 
     const initialValues: FormInitialValues = {
-        agentName: agentName,
-        campaign: campaignId as string,
-        callType: calltype as string,
+        agentName: agentName || createOrderState?.userName,
+        campaign: campaignId || (createOrderState?.campaignName as string),
+        callType: calltype || (createOrderState?.callType as string),
         incomingCallerNo: '',
         customerName: orderData?.customerName || '',
-        didNo: didNumber as string,
+        didNo: didNumber || (createOrderState?.didNumber as string),
         flagStatus: '',
         productGroupId: didItems?.schemeProductGroup?.[0]?.productGroup || null,
         productGroupLabel: '',
@@ -615,7 +623,7 @@ const SalesPageWrapper = () => {
         houseNumber: orderData?.houseNumber || '',
         streetNumber: orderData?.streetNumber || '',
         landmark: orderData?.landmark || '',
-        mobileNo: phoneNumber as string,
+        mobileNo: phoneNumber || (createOrderState?.mobileNumber as string),
         whatsappNo: orderData?.whatsappNo || '',
         autoFillingShippingAddress: orderData?.autoFillingShippingAddress || '',
         // isRecording: false,
@@ -638,6 +646,8 @@ const SalesPageWrapper = () => {
         alternateNo: orderData?.alternateNo || '',
         status: statusProps.fresh,
     }
+
+    console.log('initialValuesinitialValuesinitialValues', initialValues)
 
     // Form validation schema
     // eslint-disable-next-line

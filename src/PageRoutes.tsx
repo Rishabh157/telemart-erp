@@ -16,7 +16,7 @@ import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches
 import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerNDRDetailsWrapper'
 import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
 import CustomerCarePageWrapper from './pages/callerpage/customerInbound/CustomerCarePageWrapper'
-import CallerPageWrapper from './pages/callerpage/salesInbound/SalesPageWrapper'
+import SalesPageWrapper from './pages/callerpage/salesInbound/SalesPageWrapper'
 import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
 import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/list/CallCenterMasterListingWrapper'
@@ -311,6 +311,7 @@ import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward
 import OutwardManualMappingTabListingWrapper from './pages/warehouses/view/inventories/outward/ManualMapping/OutwardManualMappingTabListingWrapper'
 import WebLeadsListingWrapper from './pages/websites/webLeads/list/WebLeadsListingWrapper'
 import useOnlineStatus from './hooks/useOnlineStatus'
+import CreateOrder from './pages/media/createOrder/CreateOrder'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2607,6 +2608,18 @@ const PageRoutes = () => {
                         }
                     />
 
+                    <Route
+                        path="create-order"
+                        element={
+                            <Authorization
+                                children={<CreateOrder />}
+                                permission={
+                                    UserModuleNameTypes.NAV_CREATE_ORDER
+                                }
+                            />
+                        }
+                    />
+
                     {/* Media -> Competitor */}
                     <Route
                         path="competitor"
@@ -2715,7 +2728,7 @@ const PageRoutes = () => {
                 {/* Media -> Inbound Or Caller Page & Customer Page */}
                 <Route
                     path="/media/caller-page"
-                    element={<CallerPageWrapper />}
+                    element={<SalesPageWrapper />}
                 />
 
                 {/* Calling outcall Dialer page */}

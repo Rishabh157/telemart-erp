@@ -48,6 +48,7 @@ import { default as icOneJson } from '../../utils/mediaJson/icOne.json'
 import { default as icTwoJson } from '../../utils/mediaJson/icTwo.json'
 import { default as icThreeJson } from '../../utils/mediaJson/icThree.json'
 import { default as inboundJson } from '../../utils/mediaJson/inbound.json'
+import { default as createOrder } from '../../utils/mediaJson/createOrder.json'
 // import { default as inquiryJson } from "../../utils/mediaJson/inquiry.json";
 import { default as inventoryFlowJson } from '../../utils/mediaJson/inventoryFlow.json'
 import { default as itemsJson } from '../../utils/mediaJson/items.json'
@@ -168,6 +169,7 @@ export const mergeUserModules = [
     { ...competitorJson },
     { ...slotManagementJson },
     { ...inboundJson },
+    { ...createOrder },
     { ...requestJson },
     { ...customerPageJson },
     { ...assetsRequestJson },
