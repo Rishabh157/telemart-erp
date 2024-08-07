@@ -23,6 +23,15 @@ export const schemeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET ALL SCHEMES BY PRODUCT GROUP ID *****/
+        getAllSchemeListByPgiAuth: builder.query({
+            // providesTags: ['scheme'],
+            query: (productGroupId) => ({
+                url: `scheme/product-group/${productGroupId}`,
+                method: 'GET',
+            }),
+        }),
+
         //***** GET PAGINATION DATA *****/
         getAllScheme: builder.query({
             providesTags: ['scheme'],
@@ -39,7 +48,6 @@ export const schemeApi = apiSlice.injectEndpoints({
             query: (body: AddSchemes) => ({
                 url: '/scheme/add',
                 method: 'POST',
-
                 body,
             }),
         }),
@@ -56,6 +64,16 @@ export const schemeApi = apiSlice.injectEndpoints({
 
         // **** GET BY ID
         getSchemeById: builder.query({
+            providesTags: ['scheme'],
+            query: (id) => ({
+                url: `/scheme/${id}`,
+                method: 'GET',
+            }),
+        }),
+      
+
+        // **** GET BY ID
+        getSchemeByIdAuth: builder.query({
             providesTags: ['scheme'],
             query: (id) => ({
                 url: `/scheme/${id}`,
@@ -104,6 +122,8 @@ export const schemeApi = apiSlice.injectEndpoints({
 export const {
     useGetSchemeQuery,
     useGetAllSchemeListByPgiQuery,
+    useGetAllSchemeListByPgiAuthQuery,
+    useGetSchemeByIdAuthQuery,
     useAddSchemeMutation,
     useUpdateSchemeMutation,
     useGetSchemeByIdQuery,

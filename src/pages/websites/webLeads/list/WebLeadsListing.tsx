@@ -3,12 +3,10 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import { Chip, Stack } from '@mui/material'
-import ATMBreadCrumbs, {
-    BreadcrumbType,
-} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
@@ -22,7 +20,7 @@ import {
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import WebLeadsListingFilterWrapper from './WebLeadsListingFilter/WebLeadsListingFilterWrapper'
-import { WebLeadsFormInitialValuesFilterWithLabel } from './WebLeadsListingWrapper'
+import { WebLeadsFormInitialValuesFilterWithLabel } from './WebLeadsOnlineListingWrapper'
 import { useGetAllWebLeadsMutation } from 'src/services/websites/WebLeadsServices'
 import moment from 'moment'
 
@@ -37,12 +35,17 @@ type Props = {
 }
 
 const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
+    const exportCsvStatus = ['PREPAIDORDER', 'PENDING']
+
     const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
         useState<boolean>(false)
     const dispatch = useDispatch<AppDispatch>()
     const WebsiteState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
+
+    const location = useLocation()
+
     const headers = [
         { label: 'Address', key: 'address' },
         { label: 'Address1', key: 'address1' },
@@ -51,7 +54,6 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
         { label: 'CreatedAt', key: 'createdAt' },
         { label: 'Email', key: 'email' },
         { label: 'Idtag', key: 'idtag' },
-
         { label: 'Landmark', key: 'landmark' },
         { label: 'LeadStatus', key: 'leadStatus' },
         { label: 'Mode', key: 'mode' },
@@ -76,15 +78,9 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
     const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         WebsiteState
-    const breadcrumbs: BreadcrumbType[] = [
-        {
-            label: 'Web Leads',
-            path: '/all-websites/web-leads',
-        },
-        {
-            label: 'Web Leads',
-        },
-    ]
+
+    const tabName = location?.pathname?.split('/')
+    const tabStatus = tabName?.[tabName?.length - 1]
 
     const handleReset = () => {
         setFilter((prev: any) => ({
@@ -109,13 +105,15 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
             filterBy: [
                 {
                     fieldName: 'leadStatus',
-                    value: ['PENDING'],
+                    value:
+                        tabStatus === 'online' ? exportCsvStatus : ['PENDING'],
                 },
             ],
             dateFilter: {
                 startDate: filter.startDate.value,
                 endDate: filter.endDate.value,
             },
+            isPrepaid: tabStatus === 'online' ? true : false,
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: false,
@@ -160,9 +158,6 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
 
     return (
         <div className="px-4 h-full overflow-auto pt-3 ">
-            <div className="h-[30px]">
-                <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-            </div>
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Web Leads </ATMPageHeading>
@@ -218,7 +213,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full min-w-[120%] overflow-auto"
+                        extraClasses="h-full min-w-[130%] overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

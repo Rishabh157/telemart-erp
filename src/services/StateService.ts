@@ -35,12 +35,12 @@ export const stateApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        // Unauth
         getByAllStateUnauth: builder.query({
             providesTags: ['State'],
             query: () => ({
                 url: `/state/unauth-state`,
                 method: 'GET',
-                // body,
             }),
         }),
 

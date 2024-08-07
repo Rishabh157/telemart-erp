@@ -2,7 +2,7 @@ import { FormikProps } from 'formik'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 // models
-import { WebLeadsFormInitialValuesFilterWithLabel } from '../WebLeadsListingWrapper'
+import { WebLeadsFormInitialValuesFilterWithLabel } from '../WebLeadsOnlineListingWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
