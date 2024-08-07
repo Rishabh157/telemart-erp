@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DispositionThreeServices.tsx
-// Type: Service Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Internal Dependencies --|
 import {
     AddDispositionThree,
@@ -50,7 +43,6 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
             invalidatesTags: ['dispositionThree'],
             query: ({ body, id }: UpdateDispositionThree) => ({
                 url: `/disposition-three/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -61,7 +53,15 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
             providesTags: ['dispositionThree'],
             query: (id) => ({
                 url: `/disposition-three/${id}`,
-
+                method: 'GET',
+            }),
+        }),
+       
+        // **** GET All Disposition three BY dis two id
+        getAllDispositionThreeByDisTwoId: builder.query({
+            providesTags: ['dispositionThree'],
+            query: (id) => ({
+                url: `/disposition-three/get-all/${id}`,
                 method: 'GET',
             }),
         }),
@@ -70,7 +70,6 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
         exportdispositionThreeData: builder.mutation({
             query: (body: PaginationType) => ({
                 url: '',
-
                 params: {
                     _page: body.page,
                     _limit: body.limit,
@@ -85,7 +84,6 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
             invalidatesTags: ['dispositionThree'],
             query: (id) => ({
                 url: `/disposition-three/${id}`,
-
                 method: 'DELETE',
             }),
         }),
@@ -95,10 +93,10 @@ export const dispositionThreeApi = apiSlice.injectEndpoints({
             providesTags: ['dispositionThree'],
             query: (id) => ({
                 url: `/disposition-three/unauth/get-all/${id}`,
-
                 method: 'GET',
             }),
         }),
+
         deactiveDispositionThree: builder.mutation({
             invalidatesTags: ['dispositionThree'],
             query: (id: string) => ({
@@ -113,6 +111,7 @@ export const {
     useAdddispositionThreeMutation,
     useUpdatedispositionThreeMutation,
     useGetDispositionThreeByIdQuery,
+    useGetAllDispositionThreeByDisTwoIdQuery,
     useExportdispositionThreeDataMutation,
     useDeletedispositionThreeMutation,
     useGetAlldispositionThreeQuery,

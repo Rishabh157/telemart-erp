@@ -4,7 +4,7 @@ import apiSlice from '../ApiSlice'
 
 export const WebsiteApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        //***** GET PAGINATION DATA *****/
+        //***** GET PAGINATION DATA ONLINE LEADS *****/
         getPaginationWebLeads: builder.query({
             providesTags: ['website'],
             query: (body: PaginationType) => ({
@@ -13,6 +13,8 @@ export const WebsiteApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // Download
         getAllWebLeads: builder.mutation({
             // providesTags: ['website'],
             query: (body: any) => ({
@@ -24,4 +26,5 @@ export const WebsiteApi = apiSlice.injectEndpoints({
     }),
 })
 
-export const { useGetPaginationWebLeadsQuery ,useGetAllWebLeadsMutation} = WebsiteApi
+export const { useGetPaginationWebLeadsQuery, useGetAllWebLeadsMutation } =
+    WebsiteApi

@@ -4,12 +4,12 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { RootState } from 'src/redux/store'
 import CallerButton from './CallerButton'
 import { FormInitialValues } from '../salesInbound/SalesPageWrapper'
-// import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { endTimesOptions, startTimesOptions } from './constants'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-import AddressDialog from './AddressDialog'
+// import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+// import AddressDialog from './AddressDialog'
 import { useDispatch, useSelector } from 'react-redux'
 import { DisabledFieldsPropsTypes } from '../courierNdrDialer/CourierNdrDialerPage'
 
@@ -66,7 +66,9 @@ const CallerDeliveryAddress = ({
     values,
     isDisabled,
 }: Props) => {
-    const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false)
+
+    // address dialog modal open
+    // const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false)
     const [pinCodeSearch, setPinCodeSearch] = React.useState<string>('')
     const [endTimeOptionsList, setEndTimeOptionsList] = React.useState<
         SelectOption[] | []
@@ -412,17 +414,19 @@ const CallerDeliveryAddress = ({
                                         text="Search"
                                         type="button"
                                         className="text-[13px]"
-                                        onClick={() =>
-                                            pinCodeSearch === ''
-                                                ? setIsOpenDialog(true)
-                                                : handlePincodeSearch()
-                                        }
+                                        onClick={() => {
+                                            handlePincodeSearch()
+                                            // pinCodeSearch === ''
+                                            //     ? setIsOpenDialog(false)
+                                            //     : handlePincodeSearch()
+                                        }}
                                     />
                                 </div>
-                                <AddressDialog
+                                {/* MODEAL */}
+                                {/* <AddressDialog
                                     isShow={isOpenDialog}
                                     onClose={() => setIsOpenDialog(false)}
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>

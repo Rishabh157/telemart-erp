@@ -3,7 +3,7 @@ import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import React from 'react'
 // import { object, string } from 'yup'
 import moment from 'moment'
-import { WebLeadsFormInitialValuesFilterWithLabel } from '../WebLeadsListingWrapper'
+import { WebLeadsFormInitialValuesFilterWithLabel } from '../WebLeadsOnlineListingWrapper'
 import WebLeadsOrderListingFilterForm from './WebLeadsListingFilterForm'
 
 type Props = {

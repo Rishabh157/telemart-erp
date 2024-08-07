@@ -2,32 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-// |-- External Dependencies --|
-// import { FormikProps, FieldArray } from 'formik'
-// import { useDispatch, useSelector } from 'react-redux'
-
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-// import { FormInitialValues } from './AddUserWrapper'
-// import ATMBreadCrumbs, {
-//     BreadcrumbType,
-// } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-// import ATMSelectSearchable, {
-//     SelectOption,
-// } from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-// import { userDepartmentTypeOptions } from 'src/utils/constants/customeTypes'
-// import {
-//     GetHierarchByDeptProps,
-//     getHierarchyByDept,
-// } from 'src/utils/GetHierarchyByDept'
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 // |-- Redux --|
-// import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
-// import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type FormFields = {
@@ -58,8 +40,6 @@ const CreateOrder = () => {
         }))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    console.log('value', value)
 
     const callTypeOptions = [
         {
@@ -102,7 +82,7 @@ const CreateOrder = () => {
                                 type="button"
                                 disabled={false}
                                 onClick={() => {
-                                    navigate('/media/caller-page', {
+                                    navigate('/media/order-creation', {
                                         state: value,
                                     })
                                 }}
