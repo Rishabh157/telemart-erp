@@ -56,7 +56,7 @@ export const didManagementApi = apiSlice.injectEndpoints({
         //***** GET BY DID NUMBER AUTH *****/
         getByDidNumberByAuth: builder.query({
             providesTags: ['did'],
-            query: (id) => ({
+            query: (id:any) => ({
                 url: `/did-management/didno/${id}`,
                 method: 'GET',
             }),
@@ -65,8 +65,8 @@ export const didManagementApi = apiSlice.injectEndpoints({
         //***** GET BY DID NUMBER UNAUTH *****/
         getByDidNumber: builder.query({
             providesTags: ['did'],
-            query: (id) => ({
-                url: `/did-management/unauth/${id}`,
+            query: ({didNumber , companyId}:any) => ({
+                url: `/did-management/unauth/${didNumber}/company/${companyId}`,
                 method: 'GET',
             }),
         }),

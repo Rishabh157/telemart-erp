@@ -10,41 +10,10 @@ import WebLeadsListing from './WebLeadsListing'
 // |-- Redux --|
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
-// import { isAuthorized } from 'src/utils/authorization'
 import moment from 'moment'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-
-type WebLeadsListResponseType = {
-    _id: string
-    order_id: string | null
-    name: string
-    phone: string
-    email: string
-    address: string
-    address1: string
-    landmark: string
-    city: string
-    state: string
-    country: string
-    zip_code: string
-    quantity: string
-    remark: string
-    sdate: string
-    idtag: string
-    product_name: string
-    mode: string
-    paymeny_mode: string
-    transactionId: string
-    url: string
-    price: string
-    leadStatus: string
-    isDeleted: boolean
-    isActive: boolean
-    createdAt: Date
-    updatedAt: Date
-    __v: number
-}
+import { WebLeadsListResponseType } from 'src/models/website/WebLeads.model'
 
 type LabelValuePair = {
     fieldName: string
@@ -207,6 +176,42 @@ const WebLeadsCodListingWrapper = () => {
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PRICE,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.price || '-'} </span>
+            ),
+        },
+        {
+            field: 'leadType',
+            headerName: 'Lead Type',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_LEAD_TYPE,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span> {row?.leadType || '-'} </span>
+            ),
+        },
+        {
+            field: 'paymentGatewayName',
+            headerName: 'Payment Getway',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PAYMENT_GETWAY,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span> {row?.paymentGatewayName || '-'} </span>
+            ),
+        },
+        {
+            field: 'paymentMode',
+            headerName: 'Payment Mode',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PAYMENT_MODE,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span> {row?.paymentMode || '-'} </span>
+            ),
+        },
+        {
+            field: 'paymentStatus',
+            headerName: 'Payment Status',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PAYMENT_STATUS,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span> {row?.paymentStatus || '-'} </span>
             ),
         },
         {

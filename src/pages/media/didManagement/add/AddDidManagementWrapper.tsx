@@ -1,24 +1,25 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate } from 'react-router-dom'
-import { object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
+import { getDIDTypeOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Redux--|
-import { RootState } from 'src/redux/store'
-import AddDidManagements from './AddDidManagement'
-import { useAddDidMutation } from 'src/services/media/DidManagementServices'
-import { useGetSchemeQuery } from 'src/services/SchemeService'
-import { useGetSlotMangementQuery } from 'src/services/media/SlotDefinitionServices'
-import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { RootState } from 'src/redux/store'
+import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
+import { useAddDidMutation } from 'src/services/media/DidManagementServices'
+import { useGetSlotMangementQuery } from 'src/services/media/SlotDefinitionServices'
+import { useGetSchemeQuery } from 'src/services/SchemeService'
+import AddDidManagements from './AddDidManagement'
 
 // |-- Types--|
 export type FormInitialValues = {
@@ -27,6 +28,7 @@ export type FormInitialValues = {
     companyId: string
     schemeId: string
     channelId: string
+    didType: string
 }
 
 const AddDidManagementWrapper = () => {
@@ -42,6 +44,7 @@ const AddDidManagementWrapper = () => {
         schemeId: '',
         channelId: '',
         companyId: userData?.companyId || '',
+        didType: '',
     }
 
     // Form Validation Schema
@@ -50,6 +53,7 @@ const AddDidManagementWrapper = () => {
         slotId: string().required('Slot is required'),
         schemeId: string().required('Scheme is required'),
         channelId: string().required('Channel name is required'),
+        didType: string().required('DID type is required'),
     })
 
     // Hook
@@ -81,6 +85,7 @@ const AddDidManagementWrapper = () => {
                 schemeId: values.schemeId,
                 channelId: values.channelId,
                 companyId: values.companyId || '',
+                didType: values.didType,
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
@@ -101,6 +106,7 @@ const AddDidManagementWrapper = () => {
         schemeOptions,
         channelNameOptions,
         slotOptions,
+        didTypeOptions: getDIDTypeOptions(),
     }
 
     return (

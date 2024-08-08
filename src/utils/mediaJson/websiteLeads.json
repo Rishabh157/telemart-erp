@@ -61,6 +61,26 @@
                     "fieldValue": "price"
                 },
                 {
+                    "fieldId": "WEBSITES_LEADS_LIST_LEAD_TYPE",
+                    "fieldName": "Lead Type",
+                    "fieldValue": "leadType"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_PAYMENT_GETWAY",
+                    "fieldName": "Payment Getway",
+                    "fieldValue": "paymentGetway"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_PAYMENT_MODE",
+                    "fieldName": "Payment Mode",
+                    "fieldValue": "paymentMode"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_PAYMENT_STATUS",
+                    "fieldName": "Payment Status",
+                    "fieldValue": "paymentStatus"
+                },
+                {
                     "fieldId": "WEBSITES_LEADS_LIST_CITY",
                     "fieldName": "City",
                     "fieldValue": "city"

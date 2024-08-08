@@ -4,7 +4,11 @@ import { IconType } from 'react-icons'
 
 // |-- External Dependencies --|
 import { MdOutbond } from 'react-icons/md'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import {
+    Outlet,
+    useNavigate,
+    // useLocation,
+} from 'react-router-dom'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -35,7 +39,7 @@ const WebLeadsListingWrapper = () => {
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [activelabel, setActiveTabLabel] = useState<string>()
-    const { pathname } = useLocation()
+    // const { pathname } = useLocation()
 
     const navigate = useNavigate()
     // Access specific query parameters by their names
@@ -55,11 +59,11 @@ const WebLeadsListingWrapper = () => {
         //eslint-disable-next-line
     }, [])
 
-    useEffect(() => {
-        if (!activeTab) return
-        navigate(`${pathname}`)
-        //eslint-disable-next-line
-    }, [activeTab])
+    // useEffect(() => {
+    //     if (!activeTab) return
+    //     navigate(`${pathname}`)
+    //     //eslint-disable-next-line
+    // }, [activeTab])
 
     useEffect(() => {
         if (!activeTab) return

@@ -311,10 +311,10 @@ import GlobalSearchOrdersListingWrapper from './pages/orders/wrappers/GlobalSear
 import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward-inventory/MoveToCartonDrawer/BarcodeGeneratorOuterBox'
 import OutwardManualMappingTabListingWrapper from './pages/warehouses/view/inventories/outward/ManualMapping/OutwardManualMappingTabListingWrapper'
 import useOnlineStatus from './hooks/useOnlineStatus'
-import CreateOrder from './pages/media/createOrder/CreateOrder'
 import WebLeadsListingWrapper from './pages/websites/webLeads'
 import WebLeadsOnlineListingWrapper from './pages/websites/webLeads/list/WebLeadsOnlineListingWrapper'
 import WebLeadsCodListingWrapper from './pages/websites/webLeads/list/WebLeadsCodListingWrapper'
+import CreateOrderWrapper from './pages/media/createOrder/CreateOrderWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2615,7 +2615,7 @@ const PageRoutes = () => {
                         path="create-order"
                         element={
                             <Authorization
-                                children={<CreateOrder />}
+                                children={<CreateOrderWrapper />}
                                 permission={
                                     UserModuleNameTypes.NAV_CREATE_ORDER
                                 }

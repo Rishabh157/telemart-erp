@@ -139,6 +139,8 @@ const CourierNdrDialerPageWrapper = () => {
     const [updateCourierCaller] = useUpdateCourierOrderDataMutation()
 
     // get DID number by
+    // { didNumber, companyId: callerDataItem?.companyId },
+
     const { items: didItems } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetByDidNumberQuery(didNumber, {
             skip: !didNumber,

@@ -742,7 +742,6 @@ const CreateOrderPageWrapper = () => {
             {(formikProps: FormikProps<FormInitialValues>) => {
                 return (
                     <form autoComplete="off">
-                        <h1 className="text-lg">ORDER CREATION</h1>
                         <CreateOrderPage
                             formikProps={formikProps}
                             didItems={didItems}

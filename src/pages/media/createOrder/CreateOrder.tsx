@@ -1,6 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -9,37 +8,26 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 
 // |-- Redux --|
-import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import { FormInitialValues } from './CreateOrderWrapper'
+import { FormikProps } from 'formik'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
 
 // |-- Types --|
-type FormFields = {
-    userName: string
-    didNumber: string
-    campaignName: string
-    mobileNumber: string
-    callType: string
+type Props = {
+    formikProps: FormikProps<FormInitialValues>
+    apiStatus: boolean
 }
 
-const CreateOrder = () => {
-    const [value, setValue] = useState<FormFields>({
-        userName: '',
-        didNumber: '',
-        campaignName: '',
-        mobileNumber: '',
-        callType: '',
-    })
+const CreateOrder = ({ formikProps, apiStatus }: Props) => {
+    const { values, setFieldValue } = formikProps
+
+    const dispatch = useDispatch()
 
     // Hooks
-    const { userData } = useGetLocalStorage()
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        setValue((prev) => ({
-            ...prev,
-            userName: userData?.userName,
-        }))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    const handleSetFieldValue = (name: string, value: string | boolean) => {
+        setFieldValue(name, value)
+        dispatch(setFieldCustomized(true))
+    }
 
     const callTypeOptions = [
         {
@@ -80,15 +68,11 @@ const CreateOrder = () => {
                         <div>
                             <button
                                 type="button"
-                                disabled={false}
-                                onClick={() => {
-                                    navigate('/media/order-creation', {
-                                        state: value,
-                                    })
-                                }}
+                                disabled={apiStatus}
                                 className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    false ? 'opacity-50' : ''
+                                    apiStatus ? 'opacity-50' : ''
                                 }`}
+                                onClick={() => formikProps.handleSubmit()}
                             >
                                 Redirect
                             </button>
@@ -99,56 +83,60 @@ const CreateOrder = () => {
                     <div className="px-3 py-8 grow ">
                         <div className="grid grid-cols-3 gap-4 pb-3">
                             <ATMTextField
+                                required
                                 disabled
                                 readOnly
-                                name=""
+                                name="userName"
                                 InfoTitle="please Enter full name "
-                                value={userData?.userName}
+                                value={values?.userName}
                                 label="User Name"
                                 placeholder="Enter username"
                                 onChange={(e) => {}}
                             />
 
                             <ATMTextField
-                                name=""
+                                required
+                                name="didNumber"
                                 InfoTitle="please Enter full name "
-                                value={value?.didNumber}
+                                value={values?.didNumber}
                                 label="DID Number"
                                 placeholder="Enter Did Number"
                                 onChange={(e) => {
-                                    setValue((prev) => ({
-                                        ...prev,
-                                        didNumber: e.target.value,
-                                    }))
+                                    handleSetFieldValue(
+                                        'didNumber',
+                                        e.target.value
+                                    )
                                 }}
                             />
 
                             <ATMTextField
-                                name=""
+                                required
+                                name="campaignName"
                                 InfoTitle="please Enter full name "
-                                value={value?.campaignName}
+                                value={values?.campaignName}
                                 label="Campaign"
                                 placeholder="Campaign Name"
                                 onChange={(e) => {
-                                    setValue((prev) => ({
-                                        ...prev,
-                                        campaignName: e.target.value,
-                                    }))
+                                    handleSetFieldValue(
+                                        'campaignName',
+                                        e.target.value
+                                    )
                                 }}
                             />
 
                             <ATMTextField
-                                name=""
-                                value={value?.mobileNumber}
+                                required
+                                name="mobileNumber"
+                                value={values?.mobileNumber}
                                 label="Mobile Number"
                                 placeholder="Enter Mobile Number"
                                 onChange={(e) => {
                                     const inputValue = e.target.value
                                     if (!isNaN(Number(inputValue))) {
-                                        setValue((prev) => ({
-                                            ...prev,
-                                            mobileNumber: e.target.value,
-                                        }))
+                                        handleSetFieldValue(
+                                            'mobileNumber',
+                                            e.target.value
+                                        )
                                     }
                                 }}
                             />
@@ -156,15 +144,12 @@ const CreateOrder = () => {
                             {/* Branch Name */}
                             <ATMSelectSearchable
                                 required
-                                name=""
+                                name="callType"
                                 label="Calltype"
                                 options={callTypeOptions}
-                                value={value?.callType}
+                                value={values?.callType}
                                 onChange={(e) => {
-                                    setValue((prev) => ({
-                                        ...prev,
-                                        callType: e,
-                                    }))
+                                    handleSetFieldValue('callType', e)
                                 }}
                             />
                         </div>

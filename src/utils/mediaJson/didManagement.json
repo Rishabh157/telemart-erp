@@ -16,6 +16,11 @@
                     "fieldValue": "didNumber"
                 },
                 {
+                    "fieldId": "DID_MANAGEMENT_LIST_DID_TYPE",
+                    "fieldName": "DID TYPE",
+                    "fieldValue": "didType"
+                },
+                {
                     "fieldId": "DID_MANAGEMENT_LIST_DID_SCHEMA_NAME",
                     "fieldName": "SCHEMA_NAME",
                     "fieldValue": "schemeLabel"

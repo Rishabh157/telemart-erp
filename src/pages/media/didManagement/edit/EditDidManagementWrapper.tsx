@@ -1,22 +1,22 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useNavigate, useParams } from 'react-router-dom'
-import { object, string } from 'yup'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import { showToast } from 'src/utils'
 import { DidManagementListResponse } from 'src/models/Media.model'
+import { showToast } from 'src/utils'
 import EditDidManagements from './EditDidManagement'
 
 // |-- Redux --|
-import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
-import { AppDispatch, RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { useGetSchemeQuery } from 'src/services/SchemeService'
 import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServices'
 import {
@@ -24,6 +24,7 @@ import {
     useUpdateDidMutation,
 } from 'src/services/media/DidManagementServices'
 import { useGetSlotMangementQuery } from 'src/services/media/SlotDefinitionServices'
+import { getDIDTypeOptions } from 'src/utils/constants/customeTypes'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -32,6 +33,7 @@ export type FormInitialValues = {
     companyId: string
     schemeId: string
     channelId: string
+    didType: string
 }
 
 const EditDidManagementWrapper = () => {
@@ -75,6 +77,7 @@ const EditDidManagementWrapper = () => {
         schemeId: items?.schemeId || '',
         channelId: items?.channelId || '',
         companyId: userData?.companyId || '',
+        didType: items?.didType || '',
     }
 
     // Form Validation Schema
@@ -83,6 +86,7 @@ const EditDidManagementWrapper = () => {
         slotId: string().required('Did number is required'),
         schemeId: string().required('Scheme is required'),
         channelId: string().required('Cahnnel name is required'),
+        didType: string().required('DID type is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
@@ -96,6 +100,7 @@ const EditDidManagementWrapper = () => {
                     schemeId: values.schemeId,
                     channelId: values.channelId,
                     companyId: values.companyId || '',
+                    didType: values.didType,
                 },
                 id: id || '',
             }).then((res: any) => {
@@ -118,6 +123,7 @@ const EditDidManagementWrapper = () => {
         schemeOptions,
         channelNameOptions,
         slotOptions,
+        didTypeOptions: getDIDTypeOptions(),
     }
 
     return (
