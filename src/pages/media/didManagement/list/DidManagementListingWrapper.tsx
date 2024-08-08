@@ -42,8 +42,6 @@ const DidManagementListingWrapper = () => {
     const navigate = useNavigate()
     const [deleteDid] = useDeleteDidMutation()
 
-    const didTypeOptions = getDIDTypeOptions()
-
     // pagination api
     const { items } = useGetCustomListingData<any[]>({
         useEndPointHook: useGetPaginationDidQuery({
