@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { object, string } from 'yup'
+import { object, array } from 'yup'
 import { Formik } from 'formik'
 
 // |-- Internal Dependencies --|
@@ -24,7 +24,7 @@ type Props = {
 
 export type FormInitialValues = {
     pincode: string
-    preferredCourier: string
+    preferredCourier: any[]
     isFixed: boolean
 }
 
@@ -40,16 +40,24 @@ const EditPincodeWrapper = ({ id, onClose }: Props) => {
 
     const initialValues: FormInitialValues = {
         pincode: selectedItem?.[0]?.pincode,
-        preferredCourier: selectedItem?.[0]?.preferredCourier,
+        preferredCourier:
+            selectedItem?.[0]?.preferredCourier?.map((ele: any) => ({
+                label: ele?.courierName,
+                value: ele?.courierId,
+            })) || [],
         isFixed: selectedItem?.[0]?.isFixed,
     }
 
     const validationSchema = object({
-        preferredCourier: string().required('Preferred courier is required'),
+        preferredCourier: array()
+            .of(object())
+            .required('Preferred courier is required')
+            .min(1, 'At least one courier is required'),
     })
 
     const onSubmitHandler: any = (values: FormInitialValues) => {
         setApiStatus(true)
+
         setTimeout(() => {
             updatePincode({
                 id,

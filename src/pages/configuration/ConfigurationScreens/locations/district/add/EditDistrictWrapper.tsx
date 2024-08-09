@@ -1,23 +1,23 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { object, string } from 'yup'
 import { Formik } from 'formik'
 import { useDispatch } from 'react-redux'
+import { array, object } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddDistrictDialog from './AddDistrictDialog'
 import {
     useGetDistictByIdQuery,
     useUpdateDistrictMutation,
 } from 'src/services/DistricService'
 import { showToast } from 'src/utils'
+import AddDistrictDialog from './AddDistrictDialog'
 
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-import { AppDispatch } from 'src/redux/store'
 import { setSelctedDistrictPreffredCourier } from 'src/redux/slices/districtSlice'
+import { AppDispatch } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {
@@ -27,7 +27,7 @@ type Props = {
 
 export type FormInitialValues = {
     districtName: string
-    preferredCourier: string
+    preferredCourier: any[]
     isFixed: boolean
 }
 
@@ -44,22 +44,36 @@ const EditDistrictWrapper = ({ id, onClose }: Props) => {
 
     const initialValues: FormInitialValues = {
         districtName: selectedItem?.districtName,
-        preferredCourier: selectedItem?.preferredCourier,
+        preferredCourier:
+            selectedItem?.preferredCourier?.map((ele: any) => ({
+                label: ele?.courierName,
+                value: ele?.courierId,
+            })) || [],
         isFixed: selectedItem?.isFixed,
     }
 
     const validationSchema = object({
-        preferredCourier: string().required('Preferred courier is required'),
+        preferredCourier: array()
+            .of(object())
+            .required('Preferred courier is required')
+            .min(1, 'At least one courier is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        const formatedPriority = values?.preferredCourier?.map(
+            (ele: any, ind: number) => ({
+                courierId: ele?.value,
+                courierName: ele?.label,
+                priority: ind + 1,
+            })
+        )
         setTimeout(() => {
             updateDistrict({
                 id,
                 body: {
                     // stateName: values.stateName,
-                    preferredCourier: values.preferredCourier,
+                    preferredCourier: formatedPriority || [],
                     isFixed: values.isFixed,
                     // countryId: selectedLocationCountries || '',
                     // companyId: userData?.companyId || '',

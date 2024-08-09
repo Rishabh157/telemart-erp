@@ -14,9 +14,11 @@ import { FormikProps } from 'formik'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddDistrictWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import { getCourierOptions } from 'src/utils/constants/customeTypes'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllCourierMasterQuery } from 'src/services/CourierMasterService'
+import PrirorityTable from '../../PrirorityTable'
 
 // |-- Types --|
 type Props = {
@@ -33,6 +35,12 @@ const AddDistrictDialog = ({
     formType,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    const { options: couriersOptions } = useCustomOptions({
+        useEndPointHook: useGetAllCourierMasterQuery(''),
+        keyName: 'courierName',
+        value: '_id',
+    })
 
     return (
         <Dialog open={true} onClose={onClose} fullWidth>
@@ -57,8 +65,13 @@ const AddDistrictDialog = ({
                     required
                     label="Preferred Courier"
                     value={values.preferredCourier || ''}
-                    options={getCourierOptions()}
-                    onChange={(e) => setFieldValue('preferredCourier', e)}
+                    options={couriersOptions}
+                    isMulti
+                    isValueWithLable
+                    onChange={(e) => {
+                        console.log('e LOL ', e)
+                        setFieldValue('preferredCourier', e)
+                    }}
                 />
 
                 <ATMSwitchButton
@@ -71,6 +84,12 @@ const AddDistrictDialog = ({
                         setFieldValue('isFixed', e)
                     }}
                 />
+
+                {values?.preferredCourier?.length ? (
+                    <PrirorityTable
+                        preferredCourier={values?.preferredCourier}
+                    />
+                ) : null}
             </DialogContent>
 
             <DialogActions>
