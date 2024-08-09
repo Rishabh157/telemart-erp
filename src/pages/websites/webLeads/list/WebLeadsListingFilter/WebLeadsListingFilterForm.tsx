@@ -2,7 +2,7 @@ import { FormikProps } from 'formik'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 // models
-import { WebLeadsFormInitialValuesFilterWithLabel } from '../WebLeadsListingWrapper'
+import { WebLeadsFormInitialValuesFilterWithLabel } from '../WebLeadsOnlineListingWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 type Props = {
@@ -85,23 +85,6 @@ const WebLeadsOrderListingFilterForm = ({
             </div>
 
             <div className="grid grid-cols-2 gap-x-6">
-                {/* First Caller & Urgent */}
-
-                <ATMSelectSearchable
-                    label="Lead Status"
-                    selectLabel="Select status"
-                    name="leadStatus"
-                    value={values?.leadStatus?.value}
-                    isValueWithLable
-                    options={statusOptions || []}
-                    onChange={(e) => {
-                        setFieldValue('leadStatus', {
-                            fieldName: 'leadStatus',
-                            label: e.label,
-                            value: e.value,
-                        })
-                    }}
-                />
                 {/* Order Date From & To */}
                 <div className="mt-4">
                     <ATMDatePicker
@@ -139,6 +122,22 @@ const WebLeadsOrderListingFilterForm = ({
                         }
                     />
                 </div>
+
+                <ATMSelectSearchable
+                    label="Lead Status"
+                    selectLabel="Select status"
+                    name="leadStatus"
+                    value={values?.leadStatus?.value}
+                    isValueWithLable
+                    options={statusOptions || []}
+                    onChange={(e) => {
+                        setFieldValue('leadStatus', {
+                            fieldName: 'leadStatus',
+                            label: e.label,
+                            value: e.value,
+                        })
+                    }}
+                />
             </div>
 
             {/* Apply & Cancel Buttons */}

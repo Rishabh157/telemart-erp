@@ -16,7 +16,8 @@ import CreateBatchOrderListingWrapper from './pages/batchOrder/all/createBatches
 import AddDealerNDRDetailsWrapper from './pages/callerpage/DealerNdr/AddDealerNDRDetailsWrapper'
 import CourierNdrDialerPageWrapper from './pages/callerpage/courierNdrDialer/CourierNdrDialerPageWrapper'
 import CustomerCarePageWrapper from './pages/callerpage/customerInbound/CustomerCarePageWrapper'
-import CallerPageWrapper from './pages/callerpage/salesInbound/SalesPageWrapper'
+import SalesPageWrapper from './pages/callerpage/salesInbound/SalesPageWrapper'
+import CreateOrderPageWrapper from './pages/callerpage/CreateOrderPage/CreateOrderPageWrapper'
 import AddCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/add/AddCallCenterMasterWrapper'
 import EditCallCenterMasterWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/edit/EditCallCenterMasterWrapper'
 import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationScreens/callcenterMaster/list/CallCenterMasterListingWrapper'
@@ -309,11 +310,14 @@ import OrderOverviewDashboardWrapper from './pages/orders/wrappers/OrderOverview
 import GlobalSearchOrdersListingWrapper from './pages/orders/wrappers/GlobalSearchOrdersListingWrapper'
 import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward-inventory/MoveToCartonDrawer/BarcodeGeneratorOuterBox'
 import OutwardManualMappingTabListingWrapper from './pages/warehouses/view/inventories/outward/ManualMapping/OutwardManualMappingTabListingWrapper'
-import WebLeadsListingWrapper from './pages/websites/webLeads/list/WebLeadsListingWrapper'
 import useOnlineStatus from './hooks/useOnlineStatus'
 import AddCourierMasterWrapper from './pages/configuration/ConfigurationScreens/courierMaster/add/AddCourierMasterWrapper'
 import CourierListingWrapper from './pages/configuration/ConfigurationScreens/courierMaster/list/CourierListingWrapper'
 import EditCourierMasterWrapper from './pages/configuration/ConfigurationScreens/courierMaster/edit/EditCourierMasterWrapper'
+import CreateOrder from './pages/media/createOrder/CreateOrder'
+import WebLeadsListingWrapper from './pages/websites/webLeads'
+import WebLeadsOnlineListingWrapper from './pages/websites/webLeads/list/WebLeadsOnlineListingWrapper'
+import WebLeadsCodListingWrapper from './pages/websites/webLeads/list/WebLeadsCodListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2644,6 +2648,18 @@ const PageRoutes = () => {
                         }
                     />
 
+                    <Route
+                        path="create-order"
+                        element={
+                            <Authorization
+                                children={<CreateOrder />}
+                                permission={
+                                    UserModuleNameTypes.NAV_CREATE_ORDER
+                                }
+                            />
+                        }
+                    />
+
                     {/* Media -> Competitor */}
                     <Route
                         path="competitor"
@@ -2752,7 +2768,13 @@ const PageRoutes = () => {
                 {/* Media -> Inbound Or Caller Page & Customer Page */}
                 <Route
                     path="/media/caller-page"
-                    element={<CallerPageWrapper />}
+                    element={<SalesPageWrapper />}
+                />
+
+                {/* Media -> Create Order Caller Page */}
+                <Route
+                    path="/media/order-creation"
+                    element={<CreateOrderPageWrapper />}
                 />
 
                 {/* Calling outcall Dialer page */}
@@ -3606,17 +3628,52 @@ const PageRoutes = () => {
                             />
                         }
                     />
+
+                    {/* WebLeads */}
                     <Route
                         path="web-leads"
                         element={
                             <Authorization
                                 children={<WebLeadsListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_BATCH_ORDER}
+                            />
+                        }
+                    >
+                        <Route
+                            path="online"
+                            element={
+                                <Authorization
+                                    children={<WebLeadsOnlineListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_BATCH_ORDER_CREATE_BATCH_TAB
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="cod"
+                            element={
+                                <Authorization
+                                    children={<WebLeadsCodListingWrapper />}
+                                    permission={
+                                        UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB
+                                    }
+                                />
+                            }
+                        />
+                    </Route>
+
+                    {/* <Route
+                        path="web-leads"
+                        element={
+                            <Authorization
+                                children={<WebLeadsOnlineListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.NAV_WEBSITES_LEADS
                                 }
                             />
                         }
-                    />
+                    /> */}
                 </Route>
                 <Route path="/success" element={<Successfully />} />
 

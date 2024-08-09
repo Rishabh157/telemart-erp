@@ -53,7 +53,16 @@ export const didManagementApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET BY DID NUMBER *****/
+        //***** GET BY DID NUMBER AUTH *****/
+        getByDidNumberByAuth: builder.query({
+            providesTags: ['did'],
+            query: (id) => ({
+                url: `/did-management/didno/${id}`,
+                method: 'GET',
+            }),
+        }),
+
+        //***** GET BY DID NUMBER UNAUTH *****/
         getByDidNumber: builder.query({
             providesTags: ['did'],
             query: (id) => ({
@@ -70,5 +79,6 @@ export const {
     useAddDidMutation,
     useUpdateDidMutation,
     useGetByDidNumberQuery,
+    useGetByDidNumberByAuthQuery,
     useDeleteDidMutation,
 } = didManagementApi

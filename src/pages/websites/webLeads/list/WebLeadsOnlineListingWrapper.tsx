@@ -1,4 +1,5 @@
 // |-- External Dependencies --|
+import React from 'react'
 import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -11,7 +12,6 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
 // import { isAuthorized } from 'src/utils/authorization'
 import moment from 'moment'
-import React from 'react'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
@@ -35,6 +35,7 @@ type WebLeadsListResponseType = {
     product_name: string
     mode: string
     paymeny_mode: string
+    transactionId: string
     url: string
     price: string
     leadStatus: string
@@ -44,11 +45,13 @@ type WebLeadsListResponseType = {
     updatedAt: Date
     __v: number
 }
+
 type LabelValuePair = {
     fieldName: string
     label: string
     value: any
 }
+
 export type WebLeadsFormInitialValuesFilterWithLabel = {
     leadStatus: LabelValuePair
     product_name: LabelValuePair
@@ -56,7 +59,7 @@ export type WebLeadsFormInitialValuesFilterWithLabel = {
     endDate: LabelValuePair
 }
 
-const WebLeadsListingWrapper = () => {
+const WebLeadsOnlineListingWrapper = () => {
     useUnmountCleanup()
     const listState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -73,6 +76,7 @@ const WebLeadsListingWrapper = () => {
             },
             endDate: { fieldName: '', label: '', value: '' },
         })
+
     const { page, rowsPerPage, searchValue } = listState
 
     // pagination api
@@ -92,6 +96,7 @@ const WebLeadsListingWrapper = () => {
                 startDate: filter.startDate.value,
                 endDate: filter.endDate.value,
             },
+            isPrepaid: true,
             orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
@@ -102,9 +107,8 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'createdAt',
             headerName: 'Date',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.7_0.7_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_CREATED_DATE,
-            extraClasses: 'min-w-[150px]',
             renderCell: (row: WebLeadsListResponseType) => (
                 <div className="py-0">
                     <div className="text-[12px] text-slate-700 font-medium">
@@ -119,16 +123,34 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'leadStatus',
             headerName: 'Lead Status',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.7_0.7_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_STATUS,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span>{row.leadStatus}</span>
             ),
         },
         {
+            field: 'transactionId',
+            headerName: 'Transaction ID',
+            flex: 'flex-[0.7_0.7_0%]',
+            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_TRANSACTION_ID,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span>{row?.transactionId}</span>
+            ),
+        },
+        {
+            field: 'mode',
+            headerName: 'Mode',
+            flex: 'flex-[0.8_0.8_0%]',
+            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_MODE,
+            renderCell: (row: WebLeadsListResponseType) => (
+                <span> {row?.mode} </span>
+            ),
+        },
+        {
             field: 'idtag',
             headerName: 'Id Tags',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.7_0.7_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_ID_TAGS,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span>{row.idtag}</span>
@@ -146,7 +168,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'phone',
             headerName: 'Mobile No.',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_MOBILE_NUMBER,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.phone} </span>
@@ -155,17 +177,24 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'email',
             headerName: 'Email',
+            align: 'start',
             flex: 'flex-[1_1_0%]',
-            extraClasses : "max-w-[300px]",
+            extraClasses: 'max-w-[300px]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_EMAIL,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row.email || '-'} </span>
+                <span
+                    className="w-[250px] whitespace-nowrap text-ellipsis overflow-hidden"
+                    title={row.email}
+                >
+                    {row.email || '-'}
+                </span>
             ),
         },
         {
             field: 'productName',
             headerName: 'Product Name',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'max-w-[350px]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PRODUCT_NAME,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.product_name} </span>
@@ -174,7 +203,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'price',
             headerName: 'Price',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PRICE,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.price || '-'} </span>
@@ -183,7 +212,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'city',
             headerName: 'City',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_CITY,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.city || '-'} </span>
@@ -192,7 +221,7 @@ const WebLeadsListingWrapper = () => {
         {
             field: 'state',
             headerName: 'State',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_STATE,
             renderCell: (row: WebLeadsListResponseType) => (
                 <span> {row.state || '-'} </span>
@@ -210,4 +239,4 @@ const WebLeadsListingWrapper = () => {
     )
 }
 
-export default WebLeadsListingWrapper
+export default WebLeadsOnlineListingWrapper

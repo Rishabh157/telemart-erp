@@ -68,6 +68,12 @@ const mediaNavigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_SLOT_MANAGEMENT,
     },
     {
+        label: 'Create Order',
+        icon: MdViewTimeline,
+        path: 'create-order',
+        name: UserModuleNameTypes.NAV_CREATE_ORDER,
+    },
+    {
         label: 'Dealer Ndr',
         icon: MdViewTimeline,
         path: 'dealer-ndrcalling?phone=9009648665&username=rishabh.gour',

@@ -21,6 +21,11 @@
                     "fieldValue": "status"
                 },
                 {
+                    "fieldId": "WEBSITES_LEADS_LIST_TRANSACTION_ID",
+                    "fieldName": "Transaction id",
+                    "fieldValue": "transactionId"
+                },
+                {
                     "fieldId": "WEBSITES_LEADS_LIST_ID_TAGS",
                     "fieldName": "ID Tags",
                     "fieldValue": "idtag"
@@ -34,6 +39,11 @@
                     "fieldId": "WEBSITES_LEADS_LIST_MOBILE_NUMBER",
                     "fieldName": "Mobile No.",
                     "fieldValue": "phone"
+                },
+                {
+                    "fieldId": "WEBSITES_LEADS_LIST_MODE",
+                    "fieldName": "Mode",
+                    "fieldValue": "mode"
                 },
                 {
                     "fieldId": "WEBSITES_LEADS_LIST_EMAIL",

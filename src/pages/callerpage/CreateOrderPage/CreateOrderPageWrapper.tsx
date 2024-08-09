@@ -6,24 +6,24 @@ import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import {
-    useAddCallerFormMutation,
-    useUpdateCallerFormMutation,
-} from 'src/services/CallerService'
+    useAddOrderCreationFormMutation,
+    useUpdateOrderCreationCallerFormMutation,
+    useGetPaginationCallerDataQuery,
+    useGetOrderNumberCallerDataQuery,
+} from 'src/services/CreateOrderService'
+import { useGetByDidNumberByAuthQuery } from 'src/services/media/DidManagementServices'
+
+// redux slice
 import {
     setIsTableLoading,
     setItems,
     setTotalItems,
 } from 'src/redux/slices/media/inboundCallerSlice'
-import {
-    useGetOrderNumberUnAuthCallerDataQuery,
-    useGetPaginationUnAuthCallerDataQuery,
-} from 'src/services/CallerService'
 import { OrderListResponse } from 'src/models'
 import { useLocation } from 'react-router-dom'
-import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 import { statusProps } from '../../orders'
 import { useNavigate } from 'react-router-dom'
-import SalesPage from './SalesPage'
+import CreateOrderPage from './CreateOrderPage'
 import moment from 'moment'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
@@ -115,10 +115,10 @@ type LocalUserStorage = {
     mobileNo: string
     orderID: string
 }
-const SalesPageWrapper = () => {
+const CreateOrderPageWrapper = () => {
     const [orderData, setOrderData] = useState<any>({})
     const [customerReputationType, setCustomerReputationType] =
-        useState<string>()
+        useState<any>()
     const [activeTab, setActiveTab] = useState<TabTypes>(TabTypes.history)
     const [apiStatus, setApiStatus] = React.useState(false)
     const [productsGroupOptions, setProductsGroupOptions] = useState<
@@ -143,13 +143,12 @@ const SalesPageWrapper = () => {
     const navigate = useNavigate()
     const { items, isTableLoading } = inboundCallerState
     // Table Data with MobileNo filtered
-    const [AddCallerForm] = useAddCallerFormMutation()
-
-    const [UpdateCallerForm] = useUpdateCallerFormMutation()
+    const [addCallerForm] = useAddOrderCreationFormMutation()
+    const [updateCallerForm] = useUpdateOrderCreationCallerFormMutation()
 
     // get DID number by
     const { items: didItems } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetByDidNumberQuery(
+        useEndPointHook: useGetByDidNumberByAuthQuery(
             didNumber || createOrderState?.didNumber,
             {
                 skip: !didNumber && !createOrderState?.didNumber,
@@ -161,7 +160,7 @@ const SalesPageWrapper = () => {
         data: callerListingData,
         isFetching: isCallerFetching,
         isLoading: isCallerLoading,
-    } = useGetPaginationUnAuthCallerDataQuery(
+    } = useGetPaginationCallerDataQuery<any>(
         {
             phoneNo: phoneNumber || createOrderState?.mobileNumber || '',
             type: activeTab,
@@ -171,10 +170,10 @@ const SalesPageWrapper = () => {
         }
     )
     const {
-        data: singleCallerListingData,
+        data: singleCallerListingData ,
         isFetching: singleIsCallerFetching,
         isLoading: singleIsCallerLoading,
-    } = useGetOrderNumberUnAuthCallerDataQuery(
+    } = useGetOrderNumberCallerDataQuery<any>(
         { phoneNo: phoneNumber || createOrderState?.mobileNumber || '' },
         {
             skip: !phoneNumber,
@@ -202,7 +201,7 @@ const SalesPageWrapper = () => {
 
         if (!callDataItem && addApi) {
             // use object destructuring to remove the _id property
-            AddCallerForm({
+            addCallerForm({
                 ...rest,
                 preffered_delivery_date: preffered_delivery_date || '',
             }).then((res: any) => {
@@ -242,7 +241,7 @@ const SalesPageWrapper = () => {
         if (!singleIsCallerFetching && !singleIsCallerLoading) {
             setOrderData(singleCallerListingData?.data)
             setCustomerReputationType(
-                singleCallerListingData?.customerReputation
+                singleCallerListingData?.customerReputation 
             )
             setAddApi(true)
         }
@@ -697,7 +696,7 @@ const SalesPageWrapper = () => {
         let callerDataItem = JSON.parse(callerDetails)
         // setApiStatus(true)
         setTimeout(() => {
-            UpdateCallerForm({
+            updateCallerForm({
                 body: {
                     ...values,
                     companyId: callerDataItem?.companyId,
@@ -743,7 +742,8 @@ const SalesPageWrapper = () => {
             {(formikProps: FormikProps<FormInitialValues>) => {
                 return (
                     <form autoComplete="off">
-                        <SalesPage
+                        <h1 className="text-lg">ORDER CREATION</h1>
+                        <CreateOrderPage
                             formikProps={formikProps}
                             didItems={didItems}
                             customerReputationType={
@@ -767,4 +767,4 @@ const SalesPageWrapper = () => {
     )
 }
 
-export default SalesPageWrapper
+export default CreateOrderPageWrapper
