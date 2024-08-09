@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Media.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type DidManagementListResponse = {
     _id: string
@@ -14,6 +7,7 @@ export type DidManagementListResponse = {
     companyId: string
     slotLabel: string
     slotId: string
+    didType: string
     isDeleted: boolean
     isActive: boolean
     createdAt: string
@@ -30,6 +24,7 @@ export type AddDidManagement = {
     slotId: string
     schemeId: string
     channelId: string
+    didType: string
 }
 
 export type UpdateDidManagement = {
@@ -39,6 +34,7 @@ export type UpdateDidManagement = {
         slotId: string
         schemeId: string
         channelId: string
+        didType: string
     }
     id: string
 }

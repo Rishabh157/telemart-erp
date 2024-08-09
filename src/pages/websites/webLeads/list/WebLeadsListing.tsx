@@ -213,7 +213,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full min-w-[130%] overflow-auto"
+                        extraClasses="h-full min-w-[150%] overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

@@ -1,19 +1,16 @@
-// |-- Built-in Dependencies --|
-import React from 'react'
-
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
 import { useDispatch } from 'react-redux'
 
 // |-- Internal Dependencies --|
-import { FormInitialValues } from './AddDidManagementWrapper'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { SelectOption } from 'src/models/FormField/FormField.model'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import { FormInitialValues } from './AddDidManagementWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
@@ -26,11 +23,12 @@ type Props = {
         schemeOptions: SelectOption[]
         channelNameOptions: SelectOption[]
         slotOptions: SelectOption[]
+        didTypeOptions: SelectOption[]
     }
 }
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Did Management',
+        label: 'Did Management',
         path: '/media/did',
     },
     {
@@ -49,11 +47,12 @@ const AddDidManagements = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
-        <div >
+        <div>
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div >
+                <div>
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -85,8 +84,6 @@ const AddDidManagements = ({
                     {/* Form */}
                     <div className="grow py-8 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
-                            {/* FirstName */}
-
                             <ATMTextField
                                 required
                                 name="didNumber"
@@ -100,6 +97,7 @@ const AddDidManagements = ({
                                     )
                                 }
                             />
+
                             <ATMSelectSearchable
                                 required
                                 name="schemeId"
@@ -110,6 +108,7 @@ const AddDidManagements = ({
                                 options={dropdownOptions.schemeOptions}
                                 label="Scheme Name"
                             />
+
                             <ATMSelectSearchable
                                 required
                                 name="channelId"
@@ -120,6 +119,7 @@ const AddDidManagements = ({
                                 options={dropdownOptions.channelNameOptions}
                                 label="Channel Name"
                             />
+
                             <ATMSelectSearchable
                                 required
                                 name="slotId"
@@ -129,6 +129,17 @@ const AddDidManagements = ({
                                 }
                                 options={dropdownOptions.slotOptions}
                                 label="Slot Name"
+                            />
+
+                            <ATMSelectSearchable
+                                required
+                                name="didType"
+                                value={values.didType}
+                                onChange={(value) =>
+                                    handleSetFieldValue('didType', value)
+                                }
+                                options={dropdownOptions.didTypeOptions}
+                                label="DID Type"
                             />
                         </div>
                     </div>

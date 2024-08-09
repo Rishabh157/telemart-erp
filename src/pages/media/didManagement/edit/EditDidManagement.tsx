@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditDidManagement.tsx
-// Type: Edit Component
-// Last Updated: JULY 03, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -33,11 +26,13 @@ type Props = {
         schemeOptions: SelectOption[]
         channelNameOptions: SelectOption[]
         slotOptions: SelectOption[]
+        didTypeOptions: SelectOption[]
     }
 }
+
 const breadcrumbs: BreadcrumbType[] = [
     {
-        label: ' Did Management',
+        label: 'Did Management',
         path: '/media/did',
     },
     {
@@ -57,10 +52,10 @@ const EditDidManagements = ({
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div >
+        <div>
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
-                <div >
+                <div>
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -137,6 +132,16 @@ const EditDidManagements = ({
                                 }
                                 options={dropdownOptions.slotOptions}
                                 label="Slot Name"
+                            />
+                            <ATMSelectSearchable
+                                required
+                                name="didType"
+                                value={values.didType}
+                                onChange={(value) =>
+                                    handleSetFieldValue('didType', value)
+                                }
+                                options={dropdownOptions.didTypeOptions}
+                                label="DID Type"
                             />
                         </div>
                     </div>

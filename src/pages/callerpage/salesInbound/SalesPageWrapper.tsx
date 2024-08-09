@@ -116,6 +116,10 @@ type LocalUserStorage = {
     orderID: string
 }
 const SalesPageWrapper = () => {
+ 
+    const callerDetails: any = localStorage.getItem('callerPageData')
+    let callerDataItem = JSON.parse(callerDetails)
+    
     const [orderData, setOrderData] = useState<any>({})
     const [customerReputationType, setCustomerReputationType] =
         useState<string>()
@@ -150,9 +154,9 @@ const SalesPageWrapper = () => {
     // get DID number by
     const { items: didItems } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetByDidNumberQuery(
-            didNumber || createOrderState?.didNumber,
+            { didNumber, companyId: callerDataItem?.companyId },
             {
-                skip: !didNumber && !createOrderState?.didNumber,
+                skip: !didNumber,
             }
         ),
     })

@@ -25,6 +25,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { getDIDTypeOptions } from 'src/utils/constants/customeTypes'
 
 const DidManagementListingWrapper = () => {
     useUnmountCleanup()
@@ -71,9 +72,9 @@ const DidManagementListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_DID_MANAGEMENT_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DID_MANAGEMENT_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_DID_MANAGEMENT_DELETE
+                    // )}
                     handleOnAction={() => {
                         setCurrentId(row?._id)
                     }}
@@ -98,8 +99,18 @@ const DidManagementListingWrapper = () => {
             headerName: 'DID Number',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DID_MANAGEMENT_LIST_DID_NUMBER,
+        },
+        {
+            field: 'didType',
+            headerName: 'DID Type',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DID_MANAGEMENT_LIST_DID_TYPE,
             renderCell: (row: DidManagementListResponse) => (
-                <span> {row.didNumber} </span>
+                <span>
+                    {getDIDTypeOptions().find(
+                        (ele) => ele?.value === row.didType
+                    )?.label || '-'}
+                </span>
             ),
         },
         {
@@ -107,27 +118,18 @@ const DidManagementListingWrapper = () => {
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DID_MANAGEMENT_LIST_DID_SCHEMA_NAME,
-            renderCell: (row: DidManagementListResponse) => (
-                <span> {row.schemeLabel} </span>
-            ),
         },
         {
             field: 'channelLabel',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DID_MANAGEMENT_LIST_CHANNEL_NAME,
-            renderCell: (row: DidManagementListResponse) => (
-                <span> {row.channelLabel} </span>
-            ),
         },
         {
             field: 'slotLabel',
             headerName: 'Slot Name',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DID_MANAGEMENT_LIST_SLOT_NAME,
-            renderCell: (row: DidManagementListResponse) => (
-                <span> {row.slotLabel} </span>
-            ),
         },
     ]
 

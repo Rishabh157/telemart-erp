@@ -1420,6 +1420,32 @@ export const getCourierRtoRequestStatusOptions = () => {
     })
 }
 
+// Cancel Order Reason Options
+enum DIDTypeEnum {
+    web = 'WEB',
+    media = 'MEDIA',
+}
+
+export const getDIDTypeOptions = () => {
+    let options = [
+        {
+            label: 'Web',
+            value: DIDTypeEnum.web,
+        },
+        {
+            label: 'Damage',
+            value: DIDTypeEnum.media,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}
+
 // CourierType Options
 enum CourierTypeEnum {
     awb = 'AWB',
