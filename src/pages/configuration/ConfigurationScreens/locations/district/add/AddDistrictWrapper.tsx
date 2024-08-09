@@ -1,15 +1,15 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
-import { object, string } from 'yup'
+import { useSelector } from 'react-redux'
+import { array, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddDistrictDialog from './AddDistrictDialog'
-import { showToast } from 'src/utils'
 import { useAddDistrictMutation } from 'src/services/DistricService'
+import { showToast } from 'src/utils'
+import AddDistrictDialog from './AddDistrictDialog'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -21,7 +21,7 @@ type Props = {
 
 export type FormInitialValues = {
     districtName: string
-    preferredCourier: string
+    preferredCourier: any[]
     isFixed: boolean
 }
 
@@ -44,15 +44,25 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
 
     const validationSchema = object({
         districtName: string().required('District name is required'),
-        preferredCourier: string().required('Preferred Courier is required'),
+        preferredCourier: array()
+            .of(object())
+            .required('Preferred courier is required')
+            .min(1, 'At least one courier is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        const formatedPriority = values?.preferredCourier?.map(
+            (ele: any, ind: number) => ({
+                courierId: ele?.value,
+                courierName: ele?.label,
+                priority: ind + 1,
+            })
+        )
         setTimeout(() => {
             addDistrict({
                 districtName: values.districtName,
-                preferredCourier: values.preferredCourier,
+                preferredCourier: formatedPriority,
                 stateId: selectedLocationState || '',
                 countryId: selectedLocationCountries || '',
             }).then((res: any) => {

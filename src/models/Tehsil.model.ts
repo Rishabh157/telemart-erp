@@ -16,7 +16,7 @@ export type TehsilListResponse = {
 export type AddTehsil = {
     tehsilName: string
     districtId: string
-    preferredCourier: string
+    preferredCourier: any[]
     stateId: string
     countryId: string
 }
@@ -26,7 +26,7 @@ export type UpdateTehsil = {
         // tehsilName: string
         // districtId: string
         // stateId: string
-        preferredCourier: string
+        preferredCourier: any[]
         isFixed: boolean
         // companyId: string
         // countryId: string

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import { object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { Formik } from 'formik'
 
 // |-- Internal Dependencies --|
@@ -21,7 +21,7 @@ type Props = {
 
 export type FormInitialValues = {
     stateName: string
-    preferredCourier: string
+    preferredCourier: any[]
     isUnion: boolean
     isFixed: boolean
 }
@@ -35,22 +35,33 @@ const AddStateWrapper = ({ onClose }: Props) => {
 
     const initialValues: FormInitialValues = {
         stateName: '',
-        preferredCourier: '',
+        preferredCourier: [],
         isUnion: false,
         isFixed: false,
     }
 
     const validationSchema = object({
         stateName: string().required('State Name is required'),
-        preferredCourier: string().required('Preferred courier is required'),
+        preferredCourier: array()
+            .of(object())
+            .required('Preferred courier is required')
+            .min(1, 'At least one courier is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        const formatedPriority = values?.preferredCourier?.map(
+            (ele: any, ind: number) => ({
+                courierId: ele?.value,
+                courierName: ele?.label,
+                priority: ind + 1,
+            })
+        )
+
         setTimeout(() => {
             addState({
                 stateName: values.stateName,
-                preferredCourier: values.preferredCourier,
+                preferredCourier: formatedPriority,
                 isUnion: values.isUnion,
                 isFixed: values.isFixed,
                 countryId: selectedLocationCountries || '',

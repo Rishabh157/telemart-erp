@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
@@ -20,7 +20,7 @@ type Props = {
 }
 export type FormInitialValues = {
     pincode: string
-    preferredCourier: string
+    preferredCourier: any[]
     isFixed: boolean
 }
 
@@ -48,16 +48,26 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
 
     const validationSchema = object({
         pincode: string().required('Pincode is required'),
-        preferredCourier: string().required('Preferred courier is required'),
+        preferredCourier: array()
+            .of(object())
+            .required('Preferred courier is required')
+            .min(1, 'At least one courier is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        const formatedPriority = values?.preferredCourier?.map(
+            (ele: any, ind: number) => ({
+                courierId: ele?.value,
+                courierName: ele?.label,
+                priority: ind + 1,
+            })
+        )
         setTimeout(() => {
             AddPincode({
                 pincode: values.pincode,
                 stateId: selectedLocationState || '',
-                preferredCourier: values.preferredCourier,
+                preferredCourier: formatedPriority || [],
                 isFixed: values.isFixed,
                 tehsilId: selectedLocationTehsil || '',
                 districtId: selectedLocationDistrict || '',

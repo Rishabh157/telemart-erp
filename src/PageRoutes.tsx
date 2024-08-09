@@ -23,8 +23,8 @@ import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationS
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
 import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
-import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
-import CourierPreferenceListingWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/list/CourierPreferenceListingWrapper'
+// import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
+// import CourierPreferenceListingWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/list/CourierPreferenceListingWrapper'
 import AddTransportWrapper from './pages/configuration/ConfigurationScreens/transport/add/AddTransportWrapper'
 import EditTransportWrapper from './pages/configuration/ConfigurationScreens/transport/edit/EditTransportWrapper'
 import TransportListingWrapper from './pages/configuration/ConfigurationScreens/transport/list/TransportListingWrapper'
@@ -311,6 +311,9 @@ import BarcodeGeneratorOuterBox from './pages/warehouses/view/inventories/inward
 import OutwardManualMappingTabListingWrapper from './pages/warehouses/view/inventories/outward/ManualMapping/OutwardManualMappingTabListingWrapper'
 import WebLeadsListingWrapper from './pages/websites/webLeads/list/WebLeadsListingWrapper'
 import useOnlineStatus from './hooks/useOnlineStatus'
+import AddCourierMasterWrapper from './pages/configuration/ConfigurationScreens/courierMaster/add/AddCourierMasterWrapper'
+import CourierListingWrapper from './pages/configuration/ConfigurationScreens/courierMaster/list/CourierListingWrapper'
+import EditCourierMasterWrapper from './pages/configuration/ConfigurationScreens/courierMaster/edit/EditCourierMasterWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -2203,18 +2206,7 @@ const PageRoutes = () => {
                         }
                     />
 
-                    <Route
-                        path="courier-preference/add"
-                        element={
-                            <Authorization
-                                children={<AddCourierPreferenceWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
-                                }
-                            />
-                        }
-                    />
-                    <Route
+                    {/* <Route
                         path="courier-preference"
                         element={
                             <Authorization
@@ -2224,7 +2216,52 @@ const PageRoutes = () => {
                                 }
                             />
                         }
+                    /> */}
+                    {/* <Route
+                        path="courier-preference/add"
+                        element={
+                            <Authorization
+                                children={<AddCourierPreferenceWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                                }
+                            />
+                        }
+                    /> */}
+                    <Route
+                        path="courier"
+                        element={
+                            <Authorization
+                                children={<CourierListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                                }
+                            />
+                        }
                     />
+                    <Route
+                        path="courier/add"
+                        element={
+                            <Authorization
+                                children={<AddCourierMasterWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="courier/edit/:id"
+                        element={
+                            <Authorization
+                                children={<EditCourierMasterWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                                }
+                            />
+                        }
+                    />
+
                     {/* transport */}
                     <Route
                         path="transport/add"

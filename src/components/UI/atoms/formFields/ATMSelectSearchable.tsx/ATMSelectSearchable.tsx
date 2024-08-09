@@ -197,7 +197,12 @@ const ATMSelectSearchable = ({
             const values = selectedOption.map((multiValue: any) => {
                 return multiValue.value
             })
-            onChange(values.length ? values : [])
+            // onChange(values.length ? values : [])
+            if (isValueWithLable) {
+                onChange(selectedOption.length ? selectedOption : [])
+            } else {
+                onChange(values.length ? values : [])
+            }
         } else {
             if (isValueWithLable) {
                 onChange(selectedOption?.value ? selectedOption : '')
@@ -211,12 +216,19 @@ const ATMSelectSearchable = ({
         if (isMulti) {
             let selectedValues: SelectOption[] = []
             let FindSelectedValue: string[] = [...(value as string[])]
+            console.log('FindSelectedValue', FindSelectedValue)
+
+            if (isValueWithLable) {
+                return FindSelectedValue
+            }
+
             FindSelectedValue?.map((selecttedValue: string) => {
                 const singleValueFind =
                     selectOptions?.filter(
                         (option) => option.value === selecttedValue
                     ) || []
                 selectedValues = [...selectedValues, ...singleValueFind]
+                console.log('selectedValues', selectedValues)
                 return selectedValues
             })
             return selectedValues
