@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import { object, string } from 'yup'
+import { object, string, array } from 'yup'
 import { Formik } from 'formik'
 
 // |-- Internal Dependencies --|
@@ -21,7 +21,7 @@ type Props = {
 
 export type FormInitialValues = {
     tehsilName: string
-    preferredCourier: string
+    preferredCourier: any[]
     isFixed: boolean
 }
 
@@ -47,17 +47,27 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
 
     const validationSchema = object({
         tehsilName: string().required('Tehsil  Name is required'),
-        preferredCourier: string().required('Preferred Courier is required'),
+        preferredCourier: array()
+            .of(object())
+            .required('Preferred courier is required')
+            .min(1, 'At least one courier is required'),
     })
 
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+        const formatedPriority = values?.preferredCourier?.map(
+            (ele: any, ind: number) => ({
+                courierId: ele?.value,
+                courierName: ele?.label,
+                priority: ind + 1,
+            })
+        )
         setTimeout(() => {
             addTehsil({
                 tehsilName: values.tehsilName,
                 countryId: selectedLocationCountries || '',
                 stateId: selectedLocationState || '',
-                preferredCourier: values.preferredCourier || '',
+                preferredCourier: formatedPriority || [],
                 districtId: selectedLocationDistrict || '',
             }).then((res: any) => {
                 if ('data' in res) {

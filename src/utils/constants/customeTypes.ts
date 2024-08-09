@@ -1383,6 +1383,7 @@ export const getCancelOrderReasonTypeOptions = () => {
         }
     })
 }
+
 // Cancel Order Reason Options
 enum CourierRtoTypeRequestStatus {
     fresh = 'FRESH/REUSEALE',
@@ -1408,6 +1409,32 @@ export const getCourierRtoRequestStatusOptions = () => {
         {
             label: 'Lost',
             value: CourierRtoTypeRequestStatus.lost,
+        },
+    ]
+
+    return options?.map((item: any) => {
+        return {
+            value: item.value,
+            label: item.label,
+        }
+    })
+}
+
+// CourierType Options
+enum CourierTypeEnum {
+    awb = 'AWB',
+    api = 'API',
+}
+
+export const getCourierTypeOptions = () => {
+    let options = [
+        {
+            label: 'AWB',
+            value: CourierTypeEnum.awb,
+        },
+        {
+            label: 'API',
+            value: CourierTypeEnum.api,
         },
     ]
 

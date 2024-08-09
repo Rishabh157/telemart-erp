@@ -100,11 +100,16 @@ const configurationNavigation: NavItemType[] = [
         path: 'barcode',
         name: UserModuleNameTypes.NAV_BARCODE,
     },
-
+    // {
+    //     label: 'Courier Preference',
+    //     icon: CiLocationOn,
+    //     path: 'courier-preference',
+    //     name: UserModuleNameTypes.NAV_COURIER_PREFERENCE,
+    // },
     {
-        label: 'Courier Preference',
+        label: 'Courier Master',
         icon: CiLocationOn,
-        path: 'courier-preference',
+        path: 'courier',
         name: UserModuleNameTypes.NAV_COURIER_PREFERENCE,
     },
     {

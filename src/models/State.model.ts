@@ -13,7 +13,7 @@ export type StateListResponse = {
 
 export type AddState = {
     stateName: string
-    preferredCourier: string
+    preferredCourier: any[]
     isUnion: boolean
     isFixed: boolean
     countryId: string
@@ -22,7 +22,7 @@ export type AddState = {
 export type UpdateState = {
     body: {
         // stateName: string
-        preferredCourier: string
+        preferredCourier: any[]
         isUnion: boolean
         isFixed: boolean
         // companyId: string

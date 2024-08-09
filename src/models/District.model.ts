@@ -15,7 +15,7 @@ export type DistrictListResponse = {
 export type AddDistrict = {
     districtName: string
     stateId: string
-    preferredCourier: string
+    preferredCourier: any[]
     countryId: string
 }
 
@@ -23,7 +23,7 @@ export type UpdateDistrict = {
     body: {
         // districtName: string
         // stateId: string
-        preferredCourier: string
+        preferredCourier: any[]
         isFixed: boolean
         // companyId: string
         // countryId: string

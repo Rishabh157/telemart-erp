@@ -13,10 +13,12 @@ import { FormikProps } from 'formik'
 // |-- Internal Dependencies --|
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from './AddPincodeWrapper'
-import { getCourierOptions } from 'src/utils/constants/customeTypes'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllCourierMasterQuery } from 'src/services/CourierMasterService'
+import PrirorityTable from '../../PrirorityTable'
 
 // |-- Types --|
 type Props = {
@@ -33,6 +35,12 @@ const AddPincodeDialog = ({
     formType,
 }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    const { options: couriersOptions } = useCustomOptions({
+        useEndPointHook: useGetAllCourierMasterQuery(''),
+        keyName: 'courierName',
+        value: '_id',
+    })
 
     return (
         <Dialog open={true} onClose={onClose} fullWidth>
@@ -58,8 +66,12 @@ const AddPincodeDialog = ({
                         required
                         label="Preferred Courier"
                         value={values.preferredCourier || ''}
-                        options={getCourierOptions()}
-                        onChange={(e) => setFieldValue('preferredCourier', e)}
+                        options={couriersOptions}
+                        isMulti
+                        isValueWithLable
+                        onChange={(e) => {
+                            setFieldValue('preferredCourier', e)
+                        }}
                     />
 
                     <ATMSwitchButton
@@ -73,6 +85,11 @@ const AddPincodeDialog = ({
                         }}
                     />
                 </div>
+                {values?.preferredCourier?.length ? (
+                    <PrirorityTable
+                        preferredCourier={values?.preferredCourier}
+                    />
+                ) : null}
             </DialogContent>
 
             <DialogActions>

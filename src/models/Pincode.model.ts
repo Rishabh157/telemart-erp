@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Pincode.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type PincodeListResponse = {
     pincode: string
@@ -23,7 +16,7 @@ export type PincodeListResponse = {
 
 export type AddPincode = {
     pincode: string
-    preferredCourier: string
+    preferredCourier: any[]
     isFixed: boolean
     tehsilId: string
     districtId: string
@@ -34,7 +27,7 @@ export type AddPincode = {
 export type UpdatePincode = {
     body: {
         // pincode: string
-        preferredCourier: string
+        preferredCourier: any[]
         isFixed: boolean
         // tehsilId: string
         // districtId: string
