@@ -30,7 +30,7 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
     )
-    const { selectedLocationState, preffredCourier }: any = useSelector(
+    const { selectedLocationState }: any = useSelector(
         (state: RootState) => state?.states
     )
 
@@ -38,7 +38,7 @@ const AddDistrictWrapper = ({ onClose }: Props) => {
 
     const initialValues: FormInitialValues = {
         districtName: '',
-        preferredCourier: preffredCourier,
+        preferredCourier: [],
         isFixed: false,
     }
 

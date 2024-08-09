@@ -32,7 +32,10 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
     const { selectedLocationState }: any = useSelector(
         (state: RootState) => state?.states
     )
-    const { selectedLocationTehsil, preffredCourier }: any = useSelector(
+    const { 
+        selectedLocationTehsil, 
+        // preffredCourier
+     }: any = useSelector(
         (state: RootState) => state?.tehsils
     )
     const { selectedLocationDistrict }: any = useSelector(
@@ -42,7 +45,7 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
     const [apiStatus, setApiStatus] = useState(false)
     const initialValues: FormInitialValues = {
         pincode: '',
-        preferredCourier: preffredCourier,
+        preferredCourier: [],
         isFixed: false,
     }
 

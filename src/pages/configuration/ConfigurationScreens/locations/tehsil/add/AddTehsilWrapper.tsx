@@ -33,7 +33,9 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
     const { selectedLocationState }: any = useSelector(
         (state: RootState) => state?.states
     )
-    const { selectedLocationDistrict, preffredCourier }: any = useSelector(
+    const { selectedLocationDistrict, 
+        // preffredCourier
+     }: any = useSelector(
         (state: RootState) => state?.district
     )
 
@@ -41,7 +43,7 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
 
     const initialValues: FormInitialValues = {
         tehsilName: '',
-        preferredCourier: preffredCourier,
+        preferredCourier: [],
         isFixed: false,
     }
 
