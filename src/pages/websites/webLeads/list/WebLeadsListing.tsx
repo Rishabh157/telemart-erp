@@ -157,13 +157,13 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
     }
 
     return (
-        <div className="px-4 h-full overflow-auto pt-3 ">
+        <div className="px-4 h-[calc(100vh-150px)] pt-3">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Web Leads </ATMPageHeading>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
@@ -213,7 +213,7 @@ const WebLeadsListing = ({ columns, rows, filter, setFilter }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="h-full min-w-[150%] overflow-auto"
+                        extraClasses="w-[150%]"
                         isLoading={isTableLoading}
                     />
                 </div>
