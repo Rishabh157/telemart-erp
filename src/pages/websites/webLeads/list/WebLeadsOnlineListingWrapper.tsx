@@ -108,15 +108,6 @@ const WebLeadsOnlineListingWrapper = () => {
             ),
         },
         {
-            field: 'mode',
-            headerName: 'Mode',
-            flex: 'flex-[0.8_0.8_0%]',
-            name: UserModuleNameTypes.WEBSITES_LEADS_LIST_MODE,
-            renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row?.mode} </span>
-            ),
-        },
-        {
             field: 'idtag',
             headerName: 'Id Tags',
             flex: 'flex-[0.7_0.7_0%]',
@@ -193,7 +184,10 @@ const WebLeadsOnlineListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PAYMENT_GETWAY,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row?.paymentGatewayName || '-'} </span>
+                <span>
+                    {' '}
+                    {row?.paymentGatewayName?.replaceAll('_', '') || '-'}{' '}
+                </span>
             ),
         },
         {
