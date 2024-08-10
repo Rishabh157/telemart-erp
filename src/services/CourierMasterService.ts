@@ -51,6 +51,15 @@ export const CourierMasterService = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** Get AWB Couriers *****/
+        getAwbCouriers: builder.query({
+            providesTags: ['courierprefrence'],
+            query: () => ({
+                url: `/courier-preference/awb-courier`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -59,4 +68,5 @@ export const {
     useGetCourierMasterByIdQuery,
     useAddCourierMasterMutation,
     useUpdateCourierMasterMutation,
+    useGetAwbCouriersQuery,
 } = CourierMasterService

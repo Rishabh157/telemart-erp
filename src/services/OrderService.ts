@@ -14,6 +14,16 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET ORDER MUTATION *****/
+        getOrderForExport: builder.mutation({
+            invalidatesTags: ['order', 'batch-order'],
+            query: (body: PaginationType) => ({
+                url: '/order-inquiry',
+                method: 'POST',
+                body,
+            }),
+        }),
+
         // for warehouse first call
         getWHFristCallAssignedOrder: builder.query({
             providesTags: ['order', 'batch-order'],
@@ -302,6 +312,7 @@ export const OrderApi = apiSlice.injectEndpoints({
 
 export const {
     useGetOrderQuery,
+    useGetOrderForExportMutation,
     useGetOrderByIdQuery,
     useGetWarehouseNdrOrderByPhoneNumberQuery,
     useGetOrderByOrderNumberManualMappingQuery,

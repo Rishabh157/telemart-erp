@@ -19,6 +19,8 @@ import DateFilterForm from 'src/components/utilsComponent/DateFilterForm'
 // |-- Types --|
 type Props = {
     rowsPerPage?: number
+    isDisableSearch?: boolean
+    isChilderFirst?: boolean
     searchValue?: string
     placeholder?: string
     page?: number
@@ -57,6 +59,8 @@ const ATMTableHeader = ({
     rowCount,
     rows,
     rowsPerPage = 10,
+    isDisableSearch = false,
+    isChilderFirst = false,
     searchValue,
     placeholder = 'Search...',
     page = 1,
@@ -90,20 +94,23 @@ const ATMTableHeader = ({
         <div className="p-3 pb-5 border-b border-slate-300 grid grid-cols-3">
             {/* Left */}
             <div className="flex gap-1  col-span-2">
-                <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
-                    <BiSearch className="text-slate-600 text-xl" />
-                    <input
-                        onFocus={(
-                            newValue: React.FocusEvent<HTMLInputElement>
-                        ) => newValue.target.select()}
-                        className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
-                        value={searchValue}
-                        onChange={(e) => {
-                            onSearch(e.currentTarget.value)
-                        }}
-                        placeholder={placeholder}
-                    />
-                </div>
+                {children && isChilderFirst && <div>{children}</div>}
+                {!isDisableSearch && (
+                    <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
+                        <BiSearch className="text-slate-600 text-xl" />
+                        <input
+                            onFocus={(
+                                newValue: React.FocusEvent<HTMLInputElement>
+                            ) => newValue.target.select()}
+                            className="border-none rounded outline-none px-2 w-[200px] placeholder:text-slate-500"
+                            value={searchValue}
+                            onChange={(e) => {
+                                onSearch(e.currentTarget.value)
+                            }}
+                            placeholder={placeholder}
+                        />
+                    </div>
+                )}
 
                 {isAnotherSearch && (
                     <div className="border w-fit rounded flex shadow items-center p-1 hover:border-primary-main">
@@ -184,7 +191,7 @@ const ATMTableHeader = ({
                         />
                     </div>
                 )}
-                {children && <div>{children}</div>}
+                {children && !isChilderFirst && <div>{children}</div>}
             </div>
 
             {/* Right */}

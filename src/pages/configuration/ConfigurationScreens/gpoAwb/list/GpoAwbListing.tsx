@@ -52,7 +52,7 @@ Props) => {
             path: '/dashboard',
         },
         {
-            label: 'GPO AWB',
+            label: 'AWB Master',
         },
     ]
 
@@ -88,7 +88,7 @@ Props) => {
 
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> GPO AWB </ATMPageHeading>
+                <ATMPageHeading> AWB Master </ATMPageHeading>
                 <input
                     type="file"
                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"

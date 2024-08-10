@@ -119,9 +119,9 @@ const configurationNavigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_TRANSPORT,
     },
     {
-        label: 'GPO AWB',
+        label: 'AWB Master',
         icon: PiHandTapBold,
-        path: 'gpo-awb',
+        path: 'awb-master',
         name: UserModuleNameTypes.NAV_GPO_AWB_NUMBER,
     },
     {

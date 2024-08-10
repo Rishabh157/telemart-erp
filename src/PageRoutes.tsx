@@ -318,6 +318,7 @@ import WebLeadsListingWrapper from './pages/websites/webLeads'
 import WebLeadsOnlineListingWrapper from './pages/websites/webLeads/list/WebLeadsOnlineListingWrapper'
 import WebLeadsCodListingWrapper from './pages/websites/webLeads/list/WebLeadsCodListingWrapper'
 import CreateOrderWrapper from './pages/media/createOrder/CreateOrderWrapper'
+import OutwardOtherCourierOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/OtherCourier/OutwardOtherCourierOrdersTabListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -970,6 +971,20 @@ const PageRoutes = () => {
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MANUAL_MAPPING
+                                    }
+                                />
+                            }
+                        />
+
+                        <Route
+                            path="other-courier"
+                            element={
+                                <Authorization
+                                    children={
+                                        <OutwardOtherCourierOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
                                     }
                                 />
                             }
@@ -2301,7 +2316,7 @@ const PageRoutes = () => {
 
                     {/* Gpo Awb */}
                     <Route
-                        path="gpo-awb"
+                        path="awb-master"
                         element={
                             <Authorization
                                 children={<GpoAwbListingWrapper />}

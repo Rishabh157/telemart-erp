@@ -80,7 +80,7 @@ const WebLeadsListingWrapper = () => {
 
     return (
         <div className="h-[calc(100vh-55px)]">
-            <div className=" flex  h-[calc(100%)] bg-red-300">
+            <div className=" flex  h-[calc(100%)]">
                 {/* Right Section */}
                 <div className="w-[100%] border-b border-r border-l rounded-r h-full ">
                     <TabScrollable
