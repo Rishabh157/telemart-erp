@@ -24,6 +24,10 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 import { showToast } from 'src/utils'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAwbCouriersQuery } from 'src/services/CourierMasterService'
+import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
 
 // |-- Types --|
 type Props = {
@@ -31,11 +35,24 @@ type Props = {
     rows: any[]
 }
 
+const breadcrumbs: BreadcrumbType[] = [
+    {
+        label: 'Configuration',
+        path: '/dashboard',
+    },
+    {
+        label: 'AWB Master',
+    },
+]
+
 const GpoAwbListing = ({
     columns,
     rows,
 }: // addExcelFile,
-Props) => {
+    Props) => {
+
+    const [selectedCourier, setSelectedCourier] = React.useState<string>('');
+
     const fileInputRef = React.useRef<HTMLInputElement>(null)
     const dispatch = useDispatch<AppDispatch>()
     const [addGpoAwbSheet] = useAddGpoAwbExcelSheetMutation()
@@ -46,15 +63,14 @@ Props) => {
 
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         TransportState
-    const breadcrumbs: BreadcrumbType[] = [
-        {
-            label: 'Configuration',
-            path: '/dashboard',
-        },
-        {
-            label: 'AWB Master',
-        },
-    ]
+
+
+    const { options: courierAwbOptions } = useCustomOptions({
+        useEndPointHook: useGetAwbCouriersQuery(''),
+        keyName: 'courierName',
+        value: 'courierCode',
+    })
+
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files
@@ -66,15 +82,22 @@ Props) => {
             const formData = new FormData()
             // Append the file
             formData.append('file', file)
+            formData.append('courierCode', selectedCourier)
 
             addGpoAwbSheet(formData)
                 .then((res: any) => {
                     if ('data' in res) {
-                        showToast('success', 'added successfully')
+                        if (res?.data?.status) {
+                            showToast('success', 'added successfully')
+                        } else {
+                            showToast('error', res?.data?.message)
+                        }
+                    } else {
+                        showToast('error', res?.error?.data?.message)
                     }
                 })
                 .catch((err: any) => {
-                    console.error('error', err)
+                    console.error('err', err?.error);
                 })
         }
     }
@@ -99,16 +122,42 @@ Props) => {
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_GPO_AWB_NUMBER_ADD
                 ) && (
-                    <button
-                        onClick={() => fileInputRef?.current?.click()}
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + ADD CSV
-                    </button>
-                )}
+                        <div className='flex gap-x-4 justify-end z-50'>
+                            <ATMSelectSearchable
+                                name=""
+                                label=""
+                                value={selectedCourier}
+                                // value={selectedCourier}
+                                componentClass=""
+                                selectLabel="Select Courier"
+                                isLoading={false}
+                                options={courierAwbOptions?.map((ele) => ({
+                                    label: ele?.label?.replaceAll('_', ' '),
+                                    value: ele?.label,
+                                }))}
+                                onChange={(e) => {
+                                    setSelectedCourier(e)
+                                }}
+                            />
+
+                            <ATMExportButton
+                                isLoading={false}
+                                headers={[]}
+                                fileName=""
+                                btnName="Import AWB CSV"
+                                btnType='UPLOAD'
+                                loadingText="..."
+                                className='py-2 mt-[5px] h-[36px]'
+                                disabled={!selectedCourier ? true : false}
+                                onImport={() => {
+                                    fileInputRef?.current?.click()
+                                }}
+                            />
+                        </div>
+                    )}
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white">
+            <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white -z-0">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}
@@ -123,7 +172,7 @@ Props) => {
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto">
+                <div className="grow overflow-auto -z-0">
                     <ATMTable
                         isLoading={isTableLoading}
                         columns={columns}

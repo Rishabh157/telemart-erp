@@ -21,6 +21,11 @@
                     "fieldValue": "isUsed"
                 },
                 {
+                    "fieldId": "GPO_AWB_NUMBER_LIST_COURIER_CODE",
+                    "fieldName": "Used",
+                    "fieldValue": "isUsed"
+                },
+                {
                     "fieldId": "GPO_AWB_NUMBER_LIST_ORDER_NUMBER",
                     "fieldName": "Order Number",
                     "fieldValue": "orderNumber"

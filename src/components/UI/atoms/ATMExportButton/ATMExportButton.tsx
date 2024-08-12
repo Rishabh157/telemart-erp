@@ -10,30 +10,40 @@ import React, { useRef } from 'react'
 
 // |-- External Dependencies --|
 import { CSVLink } from 'react-csv'
-// import { Headers } from 'react-csv/components/CommonPropTypes'
+import { twMerge } from 'tailwind-merge';
 
 // |-- Internal Dependencies --|
-import { TbFileExport } from 'react-icons/tb'
+// import { TbFileExport } from 'react-icons/tb'
+import { FaCloudDownloadAlt } from "react-icons/fa";
+import { FaCloudUploadAlt } from "react-icons/fa";
 
 // |-- Types --|
 type Props = {
-    data: any[]
+    data?: any[]
     headers: any
     fileName: string
+    disabled?: boolean
     isLoading: boolean
-    onClick: (done: () => void) => void
+    onClick?: (done: () => void) => void
+    onImport?: () => void
     btnName?: string
     loadingText?: string
+    btnType?: string
+    className?: string
 }
 
 const ATMExportButton = ({
-    data,
+    data = [],
     headers,
     fileName,
+    disabled,
     isLoading,
-    onClick,
+    onClick = () => { },
+    onImport = () => { },
     btnName = 'Export',
+    btnType = 'DOWNLOAD' || 'UPLOAD',
     loadingText = 'Exporting...',
+    className
 }: Props) => {
     const exportRef = useRef<any>(null)
     return (
@@ -46,9 +56,15 @@ const ATMExportButton = ({
             ></CSVLink>
             <button
                 type="button"
-                onClick={() => onClick(() => exportRef?.current?.link?.click())}
-                className="border border-primary-main h-[34px] px-3 items-center rounded bg-white  text-primary-main flex gap-2"
-                disabled={isLoading}
+                onClick={() => {
+                    if (btnType === 'DOWNLOAD') {
+                        onClick(() => exportRef?.current?.link?.click())
+                    } else {
+                        onImport()
+                    }
+                }}
+                className={twMerge(`border border-primary-main h-[34px] px-3 items-center rounded bg-white  text-primary-main flex gap-2 ${disabled && 'opacity-70'}`, className)}
+                disabled={disabled}
             >
                 {isLoading ? (
                     <>
@@ -72,8 +88,8 @@ const ATMExportButton = ({
                     </>
                 ) : (
                     <>
-                        <TbFileExport className="text-lg" />{' '}
-                        <span className="text-sm"> {btnName} </span>{' '}
+                        {btnType === 'DOWNLOAD' ? <FaCloudDownloadAlt className="text-lg" /> : <FaCloudUploadAlt className="text-lg" />}{' '}
+                        <span className="text-sm"> {btnName} </span>
                     </>
                 )}
             </button>

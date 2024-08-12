@@ -30,6 +30,7 @@ import OutwardOtherOrderFilterFormWrapper, {
 import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
 import moment from 'moment'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import { showToast } from 'src/utils'
 
 // |-- Types --|
 type Props = {
@@ -171,7 +172,7 @@ const OutwardOtherCourierOrdersTabListing = ({
                 },
                 {
                     fieldName: 'awbNumber',
-                    value: '',
+                    value: 'NA',
                 },
             ],
             dateFilter: {
@@ -184,10 +185,14 @@ const OutwardOtherCourierOrdersTabListing = ({
         })
             .then((res: any) => {
                 if (res?.data?.status) {
-                    setExportData(res?.data?.data)
-                    setTimeout(() => {
-                        done()
-                    }, 500)
+                    if (res?.data?.data !== null || !res?.data?.data?.length) {
+                        setExportData(res?.data?.data)
+                        setTimeout(() => {
+                            done()
+                        }, 500)
+                    }
+                } else {
+                    showToast('error', 'No data to export')
                 }
             })
             .catch()
@@ -230,7 +235,7 @@ const OutwardOtherCourierOrdersTabListing = ({
                                     componentClass=""
                                     selectLabel="Select Courier"
                                     isLoading={false}
-                                    options={courierAwbOptions?.map((ele) => ({
+                                    options={courierAwbOptions?.filter(ele => ele.label !== 'GPO')?.map((ele) => ({
                                         label: ele?.label?.replaceAll('_', ' '),
                                         value: ele?.label,
                                     }))}
@@ -245,6 +250,7 @@ const OutwardOtherCourierOrdersTabListing = ({
                                         fileName="other-courier"
                                         onClick={handleExport}
                                         btnName="Download CSV"
+                                        btnType='DOWNLOAD'
                                         loadingText="..."
                                     />
                                 </div>

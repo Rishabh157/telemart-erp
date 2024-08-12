@@ -41,6 +41,12 @@ const GpoAwbListingWrapper = () => {
                 row?.isUsed && <FaCheck color="#059669" size={20} />,
         },
         {
+            field: 'courierCode',
+            headerName: 'Courier Code',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.GPO_AWB_NUMBER_LIST_COURIER_CODE,
+        },
+        {
             field: 'orderNumber',
             headerName: 'Order Number',
             flex: 'flex-[1_1_0%]',

@@ -69,7 +69,6 @@ const AddStateDialog = ({
                     isMulti
                     isValueWithLable
                     onChange={(e) => {
-                        console.log('e LOL ', e)
                         setFieldValue('preferredCourier', e)
                     }}
                 />
@@ -97,14 +96,14 @@ const AddStateDialog = ({
                         }}
                     />
                 </div>
-                
-                   
-                    {values?.preferredCourier?.length ? (
-                        <PrirorityTable
-                            preferredCourier={values?.preferredCourier}
-                        />
-                    ) : null}
-                
+
+
+                {values?.preferredCourier?.length ? (
+                    <PrirorityTable
+                        preferredCourier={values?.preferredCourier}
+                    />
+                ) : null}
+
             </DialogContent>
 
             <DialogActions>

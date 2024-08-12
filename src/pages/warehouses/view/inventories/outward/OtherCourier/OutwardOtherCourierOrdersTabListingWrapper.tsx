@@ -28,7 +28,7 @@ import { SaleOrderStatus } from 'src/models/SaleOrder.model'
 import { RootState } from 'src/redux/store'
 import { PDFDocument } from 'pdf-lib'
 import DispatchingBarcodes from '../GpoOrders/DispatchingBarcodes/DispatchingBarcodes'
-import { courierCompanyEnum } from 'src/utils/constants/enums'
+// import { courierCompanyEnum } from 'src/utils/constants/enums'
 
 type LabelValuePair = {
     fieldName: string
@@ -237,7 +237,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => {}}
+                        handleOnAction={() => { }}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -289,19 +289,19 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
             extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left cursor-default">
                         {row.firstCallApproval ? (
                             <Chip
-                                className="cursor-pointer"
+                                className="cursor-none"
                                 label="Approved"
                                 color="success"
                                 variant="outlined"
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
+                            FirstCallApprovalStatus.CANCEL ? (
                             <Chip
-                                className="cursor-pointer"
+                                className="cursor-default"
                                 label="Cancled"
                                 color="warning"
                                 variant="outlined"
@@ -309,8 +309,8 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => {}}
-                                className="cursor-pointer"
+                                onClick={() => { }}
+                                className="cursor-default"
                                 label="Pending"
                                 color="error"
                                 variant="outlined"
@@ -709,8 +709,8 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -774,7 +774,6 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
     ]
 
-    // handleGenerateInvoiceDisaptch(selectedItemsTobeDispatch)
     return (
         <>
             <OutwardOtherCourierOrdersTabListing
@@ -785,8 +784,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                 selectedCourier={selectedCourier}
                 onSelectCourier={(newValue) => setSelectedCourier(newValue)}
             />
-
-            <DispatchingBarcodes courierType={courierCompanyEnum.shipyaari} />
+            {selectedCourier ? <DispatchingBarcodes courierType={selectedCourier} /> : null}
         </>
     )
 }

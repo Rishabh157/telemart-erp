@@ -22,7 +22,7 @@ import {
 } from 'src/utils/constants/enums'
 
 type Props = {
-    courierType: courierCompanyEnum | barcodeStatusEnum
+    courierType: courierCompanyEnum | barcodeStatusEnum | any
 }
 
 const DispatchingBarcodes = ({ courierType }: Props) => {

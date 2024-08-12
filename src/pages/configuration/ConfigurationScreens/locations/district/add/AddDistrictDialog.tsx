@@ -69,7 +69,6 @@ const AddDistrictDialog = ({
                     isMulti
                     isValueWithLable
                     onChange={(e) => {
-                        console.log('e LOL ', e)
                         setFieldValue('preferredCourier', e)
                     }}
                 />

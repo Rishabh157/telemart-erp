@@ -22,7 +22,6 @@ type Props = {}
 
 export type FormInitialValues = {
     courierName: string
-    courierCode: string
     courierType: string
     transportType: string
     isApiAvailable: boolean
@@ -37,12 +36,10 @@ const AddCourierMasterWrapper = (props: Props) => {
 
     // const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState<boolean>(false)
-
     const [addCourierMaster] = useAddCourierMasterMutation()
 
     const initialValues: FormInitialValues = {
         courierName: '',
-        courierCode: '',
         courierType: '',
         transportType: '',
         isApiAvailable: false,
@@ -51,7 +48,6 @@ const AddCourierMasterWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         courierName: string().required('Courier name is required'),
-        courierCode: string().required('Courier code is required'),
         courierType: string().required('Courier type is required'),
         transportType: string().required('Transport type is required'),
         isApiAvailable: boolean().required('Courier name is required'),

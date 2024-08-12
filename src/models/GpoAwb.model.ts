@@ -5,6 +5,7 @@ export type GpoAwbListResponse = {
     isUsed: boolean
     orderNumber: number | null
     companyId: string
+    courierCode: string
     isDeleted: boolean
     isActive: boolean
     createdAt: string

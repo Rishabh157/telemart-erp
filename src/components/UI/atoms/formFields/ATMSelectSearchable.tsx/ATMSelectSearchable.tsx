@@ -105,10 +105,10 @@ const ATMSelectSearchable = ({
                 size === 'xxs'
                     ? ''
                     : size === 'xs'
-                    ? '28px'
-                    : size === 'small'
-                    ? '35px'
-                    : '',
+                        ? '28px'
+                        : size === 'small'
+                            ? '35px'
+                            : '',
 
             // height:
             //     size === 'xxs'
@@ -216,7 +216,6 @@ const ATMSelectSearchable = ({
         if (isMulti) {
             let selectedValues: SelectOption[] = []
             let FindSelectedValue: string[] = [...(value as string[])]
-            console.log('FindSelectedValue', FindSelectedValue)
 
             if (isValueWithLable) {
                 return FindSelectedValue
@@ -228,7 +227,6 @@ const ATMSelectSearchable = ({
                         (option) => option.value === selecttedValue
                     ) || []
                 selectedValues = [...selectedValues, ...singleValueFind]
-                console.log('selectedValues', selectedValues)
                 return selectedValues
             })
             return selectedValues
@@ -239,18 +237,16 @@ const ATMSelectSearchable = ({
     return (
         <div className={`${componentClass} relative`} hidden={isHidden}>
             <div
-                className={`  ${
-                    labelDirection === 'horizontal'
-                        ? `  gap-2 w-full  ${classDirection}`
-                        : ' '
-                }`}
+                className={`  ${labelDirection === 'horizontal'
+                    ? `  gap-2 w-full  ${classDirection}`
+                    : ' '
+                    }`}
             >
                 <div
-                    className={`flex gap-1 mb-1 ${
-                        labelDirection === 'horizontal'
-                            ? `  ${labelSpan} w-full h-full flex items-center `
-                            : ' '
-                    }`}
+                    className={`flex gap-1 mb-1 ${labelDirection === 'horizontal'
+                        ? `  ${labelSpan} w-full h-full flex items-center `
+                        : ' '
+                        }`}
                 >
                     {label && (
                         <label
@@ -270,10 +266,9 @@ const ATMSelectSearchable = ({
                     menuIsOpen={isMenuOpen}
                     maxMenuHeight={isMenuOpen ? 110 : maxMenuHeight}
                     className={twMerge(
-                        `border rounded border-slate-400  ${
-                            labelDirection === 'horizontal'
-                                ? `${inputSpan}`
-                                : ''
+                        `border rounded border-slate-400  ${labelDirection === 'horizontal'
+                            ? `${inputSpan}`
+                            : ''
                         }`,
                         `${selectClass}`
                     )}
@@ -298,11 +293,11 @@ const ATMSelectSearchable = ({
                         textTransform
                     )}
                     autoFocus={false}
-                    // menuPosition={menuPosition}
-                    // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
+                // menuPosition={menuPosition}
+                // onInputChange={(valueOp) => handleOnInputChange(valueOp)}
                 />
             </div>
-            {}
+            { }
             {name && isSubmitting && (
                 <ErrorMessage name={name}>
                     {(errMsg) => (

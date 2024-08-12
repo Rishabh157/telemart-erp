@@ -58,12 +58,20 @@ const EditPincodeWrapper = ({ id, onClose }: Props) => {
     const onSubmitHandler: any = (values: FormInitialValues) => {
         setApiStatus(true)
 
+        const formatedPriority = values?.preferredCourier?.map(
+            (ele: any, ind: number) => ({
+                courierId: ele?.value,
+                courierName: ele?.label,
+                priority: ind + 1,
+            })
+        )
+
         setTimeout(() => {
             updatePincode({
                 id,
                 body: {
                     // stateName: values.stateName,
-                    preferredCourier: values.preferredCourier,
+                    preferredCourier: formatedPriority || [],
                     isFixed: values.isFixed,
                     // countryId: selectedLocationCountries || '',
                     // companyId: userData?.companyId || '',

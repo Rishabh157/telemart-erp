@@ -17,7 +17,6 @@ import { FormInitialValues } from '../add/AddCourierMasterWrapper'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { getCourierTypeOptions } from 'src/utils/constants/customeTypes'
-// import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 
 // |-- Types --|
 type Props = {
@@ -82,9 +81,8 @@ const AddCourierMaster = ({ formikProps, apiStatus, formType }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -104,20 +102,6 @@ const AddCourierMaster = ({ formikProps, apiStatus, formType }: Props) => {
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'courierName',
-                                        e.target.value
-                                    )
-                                }
-                            />
-                            <ATMTextField
-                                required
-                                disabled={formType === 'EDIT'}
-                                name="courierCode"
-                                value={values.courierCode}
-                                label="Courier Code"
-                                placeholder="courierCode"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'courierCode',
                                         e.target.value
                                     )
                                 }
@@ -144,6 +128,7 @@ const AddCourierMaster = ({ formikProps, apiStatus, formType }: Props) => {
                                     }
                                 }}
                             />
+
                             <ATMSelectSearchable
                                 required
                                 options={transportTypeOptions}
