@@ -116,6 +116,7 @@ const StepAddBankDetails = ({
                                                                                         key={
                                                                                             name
                                                                                         }
+                                                                                        required
                                                                                         name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                         value={
                                                                                             bankInformation[
@@ -175,7 +176,9 @@ const StepAddBankDetails = ({
                                                                                             name
                                                                                         }
                                                                                     >
+                                                                                        
                                                                                         <ATMSelect
+                                                                                        required
                                                                                             name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                             value={
                                                                                                 bankInformation[

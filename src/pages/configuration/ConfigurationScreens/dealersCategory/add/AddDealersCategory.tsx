@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddDealerCategory.tsx
-// Type: ADD Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -70,9 +63,8 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -101,11 +93,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 required
                                 name="investAmount"
-                                value={
-                                    values.investAmount === 0
-                                        ? ''
-                                        : values.investAmount
-                                }
+                                value={values.investAmount}
                                 label="Invest Amount"
                                 placeholder="Invest Amount"
                                 onChange={(e) => {
@@ -123,11 +111,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 required
                                 name="numberOfOrders"
-                                value={
-                                    values.numberOfOrders === 0
-                                        ? ''
-                                        : values.numberOfOrders
-                                }
+                                value={values.numberOfOrders}
                                 label="Number Of Orders"
                                 placeholder="Number Of Orders"
                                 onChange={(e) => {
@@ -144,11 +128,7 @@ const AddDealersCategory = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 required
                                 name="deliveryPercentage"
-                                value={
-                                    values.deliveryPercentage === 0
-                                        ? ''
-                                        : values.deliveryPercentage
-                                }
+                                value={values.deliveryPercentage}
                                 label="Delivery Percentage"
                                 placeholder="Delivery Percentage"
                                 onChange={(e) => {

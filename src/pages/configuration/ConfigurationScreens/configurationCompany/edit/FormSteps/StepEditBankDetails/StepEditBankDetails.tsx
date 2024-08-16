@@ -80,18 +80,18 @@ const StepEditBankDetails = ({
                                                                     .bankDetails
                                                                     ?.length >
                                                                     1 && (
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() =>
-                                                                            remove(
-                                                                                bankInformationIndex
-                                                                            )
-                                                                        }
-                                                                        className="p-1 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                )}
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() =>
+                                                                                remove(
+                                                                                    bankInformationIndex
+                                                                                )
+                                                                            }
+                                                                            className="p-1 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    )}
                                                             </div>
 
                                                             <div className="grid grid-cols-3 gap-4 gap-y-5">
@@ -107,7 +107,7 @@ const StepEditBankDetails = ({
                                                                         } = field
 
                                                                         switch (
-                                                                            type
+                                                                        type
                                                                         ) {
                                                                             case 'text':
                                                                                 return (
@@ -115,10 +115,11 @@ const StepEditBankDetails = ({
                                                                                         key={
                                                                                             name
                                                                                         }
+                                                                                        required
                                                                                         name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                         value={
                                                                                             bankInformation[
-                                                                                                name
+                                                                                            name
                                                                                             ]
                                                                                         }
                                                                                         onChange={(
@@ -126,9 +127,9 @@ const StepEditBankDetails = ({
                                                                                         ) => {
                                                                                             if (
                                                                                                 name ===
-                                                                                                    'accountNumber' ||
+                                                                                                'accountNumber' ||
                                                                                                 name ===
-                                                                                                    'ifscNumber'
+                                                                                                'ifscNumber'
                                                                                             ) {
                                                                                                 const newValue =
                                                                                                     e
@@ -177,10 +178,11 @@ const StepEditBankDetails = ({
                                                                                         }
                                                                                     >
                                                                                         <ATMSelect
+                                                                                            required
                                                                                             name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                             value={
                                                                                                 bankInformation[
-                                                                                                    name
+                                                                                                name
                                                                                                 ]
                                                                                             }
                                                                                             onChange={(
@@ -195,8 +197,8 @@ const StepEditBankDetails = ({
                                                                                             }}
                                                                                             options={
                                                                                                 dropdownOptions[
-                                                                                                    field.optionAccessKey ||
-                                                                                                        'accountTypeOptions'
+                                                                                                field.optionAccessKey ||
+                                                                                                'accountTypeOptions'
                                                                                                 ]
                                                                                             }
                                                                                             label={
@@ -232,7 +234,7 @@ const StepEditBankDetails = ({
                                                                                         }
                                                                                         selectedFile={
                                                                                             bankInformation[
-                                                                                                name
+                                                                                            name
                                                                                             ]
                                                                                         }
                                                                                     />

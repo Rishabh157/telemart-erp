@@ -20,12 +20,15 @@ type Props = {
 export type FieldType = Field<
     'productSubCategoryOPtions' | 'productCategoryOPtions'
 >
+
 const StepEditProductDetailsWrapper = ({ formikProps }: Props) => {
+
     const { options: productCategoryOPtions } = useCustomOptions({
         useEndPointHook: useGetAllProductCategoryQuery(''),
         keyName: 'categoryName',
         value: '_id',
     })
+
     const { options: productSubCategoryOPtions } = useCustomOptions({
         useEndPointHook: useGetSubCategoryByParentQuery(
             formikProps?.values?.product_category,
@@ -36,11 +39,13 @@ const StepEditProductDetailsWrapper = ({ formikProps }: Props) => {
         keyName: 'subCategoryName',
         value: '_id',
     })
+
     const { options: productGroupOPtions } = useCustomOptions({
         useEndPointHook: useGetAllProductGroupQuery(''),
         keyName: 'groupName',
         value: '_id',
     })
+
     const dropdownOptions = {
         productSubCategoryOPtions,
         productCategoryOPtions,
@@ -48,12 +53,11 @@ const StepEditProductDetailsWrapper = ({ formikProps }: Props) => {
     }
 
     return (
-        <>
-            <StepEditProductDetails
-                formikProps={formikProps}
-                dropdownOptions={dropdownOptions}
-            />
-        </>
+        <StepEditProductDetails
+            formikProps={formikProps}
+            dropdownOptions={dropdownOptions}
+        />
+
     )
 }
 

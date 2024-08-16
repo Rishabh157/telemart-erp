@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
-
 import AddProductGroup from './AddProductGroup'
 import { useAddProductGroupMutation } from 'src/services/ProductGroupService'
 import { showToast } from 'src/utils'

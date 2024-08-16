@@ -72,9 +72,8 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -130,6 +129,7 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                             />
 
                             <ATMDatePicker
+                                required
                                 label="Expiry Date"
                                 name="expiryDate"
                                 // size="xs"

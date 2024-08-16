@@ -35,6 +35,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
             <div className="grid grid-cols-3 gap-4 gap-y-5">
                 {/* Company Name */}
                 <ATMTextField
+                    required
                     name="companyName"
                     value={values.companyName}
                     onChange={(e) => {
@@ -48,6 +49,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
 
                 {/* Website URL */}
                 <ATMTextField
+                    required
                     name="websiteUrl"
                     value={values.websiteUrl}
                     onChange={(e) => {
@@ -61,6 +63,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
 
                 {/* GST NO. */}
                 <ATMTextField
+                    required
                     name="gstNo"
                     value={values.gstNo}
                     onChange={(e) => {
@@ -74,6 +77,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
 
                 {/* Address */}
                 <ATMTextField
+                    required
                     name="address"
                     value={values.address}
                     onChange={(e) => {
@@ -87,6 +91,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
 
                 {/* Phone No. */}
                 <ATMTextField
+                    required
                     name="phoneNo"
                     value={values.phoneNo}
                     onChange={(e) => {

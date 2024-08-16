@@ -67,9 +67,8 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 onClick={() => {
                                     formikProps.handleSubmit()
                                 }}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -94,6 +93,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 }
                             />
                             <ATMTextField
+                                required
                                 name="dealerSalePrice"
                                 value={values.dealerSalePrice}
                                 label="Dealer Sale Price"

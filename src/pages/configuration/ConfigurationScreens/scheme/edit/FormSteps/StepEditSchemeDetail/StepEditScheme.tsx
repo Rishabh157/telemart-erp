@@ -215,6 +215,7 @@ const StepEditScheme = ({
                 </div>
                 {/* Start Date */}
                 <ATMDatePicker
+                    required
                     name={'startDate'}
                     value={values.startDate}
                     dateTimeFormat="DD/MM/YYYY"
@@ -225,6 +226,7 @@ const StepEditScheme = ({
                 />
                 {/* End Date */}
                 <ATMDatePicker
+                    required
                     name={'endDate'}
                     dateTimeFormat="DD/MM/YYYY"
                     value={values.endDate}

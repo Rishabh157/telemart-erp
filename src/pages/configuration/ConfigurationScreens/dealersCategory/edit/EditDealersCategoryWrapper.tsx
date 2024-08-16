@@ -55,7 +55,7 @@ const EditDealersCategoryWrapper = (props: Props) => {
     const validationSchema = object({
         dealersCategory: string().required('Deal seller category is required'),
         investAmount: number().required('Invest amount is required'),
-        numberOfOrders: number().required('Number of offers is required'),
+        numberOfOrders: number().required('Number of orders is required'),
         deliveryPercentage: number().required(
             'Delivery percentage is required'
         ),

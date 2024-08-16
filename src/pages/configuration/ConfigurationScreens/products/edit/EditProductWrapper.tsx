@@ -184,7 +184,8 @@ const EditProductWrapper = () => {
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetProductByIdQuery(Id),
     })
-
+    
+    console.log('selectedItem: ', selectedItem)
     // States
     const [activeStep, setActiveStep] = React.useState(0)
 
@@ -304,6 +305,9 @@ const EditProductWrapper = () => {
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     }
+
+
+    console.log('initialValues' , initialValues)    
 
     return (
         <Formik

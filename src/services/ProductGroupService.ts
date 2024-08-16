@@ -27,13 +27,12 @@ export const productGroupApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** GET *****/
+        //***** GET ALL *****/
         getAllProductGroup: builder.query({
             providesTags: ['productGroup'],
-            query: (companyId) => ({
+            query: () => ({
                 url: `/product-group`,
                 method: 'GET',
-                // body,
             }),
         }),
 

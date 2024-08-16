@@ -234,6 +234,7 @@ const StepAddSchemeDetails = ({
                 </div>
                 {/* Start Date */}
                 <ATMDatePicker
+                    required
                     name="startDate"
                     dateTimeFormat="DD/MM/YYYY"
                     value={values.startDate}
@@ -244,6 +245,7 @@ const StepAddSchemeDetails = ({
                 />
                 {/* End Date */}
                 <ATMDatePicker
+                    required
                     name="endDate"
                     dateTimeFormat="DD/MM/YYYY"
                     value={values.endDate}
