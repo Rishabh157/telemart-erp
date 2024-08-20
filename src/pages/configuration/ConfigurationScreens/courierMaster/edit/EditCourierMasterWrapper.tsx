@@ -64,7 +64,7 @@ const EditCourierMasterWrapper = (props: Props) => {
 
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
-        const { isApiAvailable, ...rest } = values
+        const { isApiAvailable, courierName, ...rest } = values
 
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
