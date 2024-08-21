@@ -183,6 +183,24 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+    
+        //*** get vendor inventory
+        getVendorInventoriesByBarcode: builder.query({
+            providesTags: ['Barcode', 'courier-return'],
+            query: ({
+                body,
+                vendorId,
+                status,
+            }: {
+                body: PaginationType
+                vendorId: string
+                status: string
+            }) => ({
+                url: `bar-code/inventory/vendorid/${vendorId}/status/${status}`,
+                method: 'Post',
+                body,
+            }),
+        }),
 
         //*** Diapatch Dealer Outward Barcode
         dispatchDealerBarcode: builder.mutation({
@@ -310,6 +328,7 @@ export const {
     useGetByBarcodeMutation,
     useInwardInventoryBarcodeMutation,
     useGetInventoriesByBarcodeQuery,
+    useGetVendorInventoriesByBarcodeQuery,
     useDispatchDealerBarcodeMutation,
     useGetDealersInventoryQuery,
     useGetBarcodeByOuterBoxNumberQuery,

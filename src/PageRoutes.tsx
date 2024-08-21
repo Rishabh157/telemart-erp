@@ -319,6 +319,7 @@ import WebLeadsOnlineListingWrapper from './pages/websites/webLeads/list/WebLead
 import WebLeadsCodListingWrapper from './pages/websites/webLeads/list/WebLeadsCodListingWrapper'
 import CreateOrderWrapper from './pages/media/createOrder/CreateOrderWrapper'
 import OutwardOtherCourierOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/OtherCourier/OutwardOtherCourierOrdersTabListingWrapper'
+import VendorInventoryListingWrapper from './pages/vendors/view/tabs/VendorInventory/VendorInventoryListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -458,6 +459,17 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<VendorRtvListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_VENDOR_VIEW_RETURN_TO_VENDOR
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="inventory"
+                        element={
+                            <Authorization
+                                children={<VendorInventoryListingWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_VENDOR_VIEW_RETURN_TO_VENDOR
                                 }

@@ -22,6 +22,7 @@ type Props = {
     productDetail: any[]
     wareHouse: string
     packaging: string
+    vendorId: string
 }
 
 const MoveToCartonDrawer = ({
@@ -29,7 +30,9 @@ const MoveToCartonDrawer = ({
     productDetail,
     wareHouse,
     packaging,
+    vendorId,
 }: Props) => {
+    console.log('vendorId UP' , vendorId)    
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -45,7 +48,6 @@ const MoveToCartonDrawer = ({
         const barcodeProduct = productDetail.map((ele) => {
             const {
                 // barcodeNumber,
-                vendorId,
                 productGroupLabel,
                 outerBoxbarCodeNumber,
                 createdAt,
@@ -62,8 +64,11 @@ const MoveToCartonDrawer = ({
                 cartonBoxId: packaging,
                 wareHouseId: wareHouse,
                 companyId: userData?.companyId,
+                vendorId: vendorId
             } // return the new object without the _id property
         })
+
+    console.log('vendorId DOWN' , vendorId)    
 
         await addInventory({ barcodedata: barcodeProduct }).then((res: any) => {
             if ('data' in res) {

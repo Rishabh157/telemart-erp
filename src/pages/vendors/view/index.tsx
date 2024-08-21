@@ -50,6 +50,12 @@ const tabsData = [
         name: UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_LEDGER,
     },
     {
+        label: 'Inventory',
+        icon: MdOutlinePeopleAlt,
+        path: 'inventory',
+        name: UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_LEDGER,
+    },
+    {
         label: 'Activity',
         icon: MdOutlinePeopleAlt,
         path: 'activities',

@@ -15,6 +15,8 @@ import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetByBarcodeMutation } from 'src/services/BarcodeService'
 import { SelectBoxOption } from './InwardInventoryWrapper'
 import MoveToCartonDrawer from './MoveToCartonDrawer/MoveToCartonDrawer'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetVendorsQuery } from 'src/services/VendorServices'
 
 // |-- Types --|
 type Props = {
@@ -30,6 +32,7 @@ export type renderBarcodType = {
 }
 const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [packaging, setPackaging] = React.useState('')
+    const [vendorId, setVendorId] = React.useState('')
     const { id: warehouseId } = useParams()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -45,8 +48,21 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [barcode, setBarcode] = React.useState('')
     const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
         React.useState(false)
+
+    // Get all vendors
+    const { options: vendorOptions } = useCustomOptions({
+        useEndPointHook: useGetVendorsQuery(''),
+        keyName: 'vendorCode',
+        value: '_id',
+    })
+
+    console.log('options', vendorOptions)
+
+
     // const { data, isLoading, isFetching } = useGetAllBarcodeQuery('')
     const [getBarcodeById] = useGetByBarcodeMutation()
+
+    // fetching the barcode
     const handleBarCode = (barcodeId: string) => {
         getBarcodeById(barcodeId).then((res: any) => {
             if (res?.data?.data) {
@@ -115,6 +131,17 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         label="Packaging"
                     />
 
+                    <ATMSelect
+                        required
+                        name=""
+                        value={vendorId}
+                        options={vendorOptions}
+                        label="Vendor"
+                        onChange={(e) => {
+                            setVendorId(e.target.value)
+                        }}
+                    />
+
                     <ATMTextField
                         name=""
                         disabled={
@@ -169,6 +196,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     productDetail={barcodes}
                     wareHouse={wareHouse as string}
                     packaging={packaging}
+                    vendorId={vendorId}
                     onClose={() => setIsOpenMoveToCartonDrawer(false)}
                 />
             )}
