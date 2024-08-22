@@ -82,6 +82,12 @@ const OutwardTabs = (props: Props) => {
             name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MANUAL_MAPPING,
         },
         {
+            label: 'Maersk Orders',
+            icon: MdOutbond,
+            path: 'maersk-orders',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
+        },
+        {
             label: 'Other Couriers',
             icon: MdOutbond,
             path: 'other-courier',
@@ -144,7 +150,7 @@ const OutwardTabs = (props: Props) => {
     const tabsRender = tabs?.some((nav: any) => {
         return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
     })
-    
+
     return (
         <div className="w-full flex  h-[calc(100vh-95px)] bg-white">
             {/* Right Section */}

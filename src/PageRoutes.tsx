@@ -320,6 +320,7 @@ import WebLeadsCodListingWrapper from './pages/websites/webLeads/list/WebLeadsCo
 import CreateOrderWrapper from './pages/media/createOrder/CreateOrderWrapper'
 import OutwardOtherCourierOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/OtherCourier/OutwardOtherCourierOrdersTabListingWrapper'
 import VendorInventoryListingWrapper from './pages/vendors/view/tabs/VendorInventory/VendorInventoryListingWrapper'
+import OutwardMaerskOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/MaerskOrders/OutwardMaerskOrdersTabListingWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -966,6 +967,20 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={
                                         <OutwardShipyaariOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
+                                    }
+                                />
+                            }
+                        />
+                      
+                        <Route
+                            path="maersk-orders"
+                            element={
+                                <Authorization
+                                    children={
+                                        <OutwardMaerskOrdersTabListingWrapper />
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
