@@ -21,7 +21,7 @@ const columns: columnTypes[] = [
         field: 'productName',
         headerName: 'Product Group Name',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_PRODUCT_GROUP_NAME,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_PRODUCT_GROUP_NAME,
         renderCell: (row: WareHouseInventory) => (
             <span> {row?.firstDocument?.productGroupLabel} </span>
         ),
@@ -30,7 +30,7 @@ const columns: columnTypes[] = [
         field: 'totalFreshCount',
         headerName: 'Fresh Count',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FRESH_COUNT,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_FRESH_COUNT,
         renderCell: (row: WareHouseInventory) => (
             <span className="p-1"> {row.totalFreshCount} </span>
         ),
@@ -39,7 +39,7 @@ const columns: columnTypes[] = [
         field: 'totalDamageCount',
         headerName: 'Damage Count',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_DAMAGE_COUNT,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_DAMAGE_COUNT,
         renderCell: (row: WareHouseInventory) => (
             <span className="p-1"> {row.totalDamageCount} </span>
         ),
@@ -48,7 +48,7 @@ const columns: columnTypes[] = [
         field: 'totalMissingCount',
         headerName: 'Missing Count',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_MISSING_COUNT,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_MISSING_COUNT,
         renderCell: (row: WareHouseInventory) => (
             <span className="p-1"> {row.totalMissingCount} </span>
         ),
@@ -57,7 +57,7 @@ const columns: columnTypes[] = [
         field: 'totalRtvCount',
         headerName: 'RTV Count',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_RTV_COUNT,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_RTV_COUNT,
         renderCell: (row: WareHouseInventory) => (
             <span className="p-1"> {row.totalRtvCount} </span>
         ),
@@ -66,7 +66,7 @@ const columns: columnTypes[] = [
         field: 'totalFakeCount',
         headerName: 'Fake Count',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FAKE_COUNT,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_FAKE_COUNT,
         renderCell: (row: WareHouseInventory) => (
             <span className="p-1"> {row.totalFakeCount} </span>
         ),
@@ -75,7 +75,7 @@ const columns: columnTypes[] = [
         field: 'expiredCount',
         headerName: 'Expired Count',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_EXPIRED_COUNT,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_EXPIRED_COUNT,
         renderCell: (row: WareHouseInventory) => (
             <span className="p-1"> {row?.expiredCount} </span>
         ),
@@ -84,7 +84,7 @@ const columns: columnTypes[] = [
         field: 'closedCount',
         headerName: 'Closed Count',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CLOSED_COUNT,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_CLOSED_COUNT,
         renderCell: (row: WareHouseInventory) => (
             <span className="p-1"> {row?.closedCount} </span>
         ),
@@ -93,7 +93,7 @@ const columns: columnTypes[] = [
         field: 'createdAt',
         headerName: 'Created date',
         flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CREATED_DATE,
+        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_CREATED_DATE,
         renderCell: (row: WareHouseInventory) =>
             formatedDateTimeIntoIst(row?.firstDocument?.createdAt),
     },

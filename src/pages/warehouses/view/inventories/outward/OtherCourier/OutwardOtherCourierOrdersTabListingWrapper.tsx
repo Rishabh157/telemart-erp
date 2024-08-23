@@ -248,7 +248,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'awbBill',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
             headerName: 'Label & Invoice',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -282,7 +282,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'firstCallApproval',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
             headerName: '1st Call Approval',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -341,7 +341,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'awbNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_ORDER_NUMBER,
             headerName: 'AWB Number',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -351,7 +351,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'orderAssignedToCourier',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_ORDER_NUMBER,
             headerName: 'Assigned Courier',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -363,7 +363,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'orderNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_STATUS,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_ORDER_STATUS,
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -373,7 +373,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'orderReferenceNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_REF_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_ORDER_REF_NUMBER,
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -383,7 +383,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'inquiryNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ENQUIRY_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_ENQUIRY_NUMBER,
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -392,7 +392,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'firstCallRemark',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_REMARK,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_FIRST_CALL_REMARK,
             headerName: '1st call remark',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -403,7 +403,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'firstCallState',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_STATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_FIRST_CALL_STATE,
             headerName: 'first Call State',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -414,7 +414,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'firstCallCallBackDate',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_FIRST_CALL_BACK_DATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_FIRST_CALL_BACK_DATE,
             headerName: 'call back date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -425,7 +425,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'assignWarehouseLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_ASSIGNED_WEARHOUSE,
             headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -436,7 +436,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'trackingNo',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_TRACKING_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_TRACKING_NUMBER,
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -445,7 +445,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'tehsilLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_TALUK,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_TALUK,
             headerName: 'Taluk',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -456,7 +456,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'statusDate',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_STATUS_DATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_STATUS_DATE,
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -464,7 +464,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'status',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_STATUS,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_STATUS,
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -473,7 +473,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'shippingCharges',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHIPPING_CHARGES,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_SHIPPING_CHARGES,
             headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
@@ -484,7 +484,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'schemeName',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SCHEME_NAME,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_SCHEME_NAME,
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -495,7 +495,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'schemeCode',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SCHEME_CODE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_SCHEME_CODE,
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -506,7 +506,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'shcemeQuantity',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHCEME_QUANTITY,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_SHCEME_QUANTITY,
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -517,7 +517,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'price',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PRICE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_PRICE,
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -526,7 +526,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'pincodeLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PIN_CODE_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_PIN_CODE_LABEL,
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -537,7 +537,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'paymentMode',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PAYMENT_MODE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_PAYMENT_MODE,
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
@@ -548,7 +548,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'createdAt',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_DATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_ORDER_DATE,
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -566,7 +566,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
 
         {
             field: 'edpDate',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_EDP_DATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_EDP_DATE,
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -574,7 +574,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'districtLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DISTRICT_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_DISTRICT_LABEL,
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -584,7 +584,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'dispositionLevelThree',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DISPOSITION_LEVEL_THREE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_DISPOSITION_LEVEL_THREE,
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -594,7 +594,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'dealerStatus',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DEALER_STATUS,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_DEALER_STATUS,
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -606,7 +606,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'dealerCode',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_DEALER_CODE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_DEALER_CODE,
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -616,7 +616,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'customerName',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CUSTOMER_NAME,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_CUSTOMER_NAME,
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -626,7 +626,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'areaLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AREA_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_AREA_LABEL,
             headerName: 'Customer Address',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[30px] text-xs',
@@ -636,7 +636,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'mobileNo',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_MOBILE_NO,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_MOBILE_NO,
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -646,7 +646,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'channelName',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CHANNEL_NAME,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_CHANNEL_NAME,
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -656,7 +656,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'callCenterLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_CALL_CENTER_LABEL,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_CALL_CENTER_LABEL,
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -666,7 +666,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'areaLabel',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AREA,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_AREA,
             headerName: 'Area',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -676,7 +676,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'remark',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_REMARK,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_REMARK,
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -686,7 +686,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'agent',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_AGENT,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_AGENT,
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
@@ -697,7 +697,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
 
         {
             field: 'preffered_delivery_date',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PREFFERED_DELIVERY_DATE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_PREFFERED_DELIVERY_DATE,
             headerName: 'Preffred Delivery Date Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
@@ -725,7 +725,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'preffered_delivery_date',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_PREFFERED_DELIVERY_TIME,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_PREFFERED_DELIVERY_TIME,
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
@@ -751,7 +751,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'orderMBKNumber',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_ORDER_MBK_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_ORDER_MBK_NUMBER,
             headerName: 'MBK Number',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px] text-xs',
@@ -761,7 +761,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         },
         {
             field: 'barcodeData',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO_TAB_LIST_ORDER_MBK_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_BARCODE_NUMBERS,
             headerName: 'Barcodes',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[200px]',

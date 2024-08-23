@@ -85,13 +85,13 @@ const OutwardTabs = (props: Props) => {
             label: 'Maersk Orders',
             icon: MdOutbond,
             path: 'maersk-orders',
-            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MAERSK_ORDERS,
         },
         {
             label: 'Other Couriers',
             icon: MdOutbond,
             path: 'other-courier',
-            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS,
         },
     ]
 

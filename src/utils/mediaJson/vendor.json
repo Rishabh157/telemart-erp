@@ -101,6 +101,60 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_VENDOR_VIEW_INVENTORIES",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_INVENTORIES",
+            "compulsoryFields": [],
+            "parentGroup": ["VIEW"],
+            "fields": [
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_PRODUCT_GROUP_NAME",
+                    "fieldName": "Product Group Name",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_FRESH_COUNT",
+                    "fieldName": "Fresh Count",
+                    "fieldValue": "totalFreshCount"
+                },
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_DAMAGE_COUNT",
+                    "fieldName": "Damage Count",
+                    "fieldValue": "totalDamageCount"
+                },
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_FAKE_COUNT",
+                    "fieldName": "Fake Count",
+                    "fieldValue": "totalFakeCount"
+                },
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_CLOSED_COUNT",
+                    "fieldName": "Closed Count",
+                    "fieldValue": "closedCount"
+                },
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_EXPIRED_COUNT",
+                    "fieldName": "Expired Count",
+                    "fieldValue": "expiredCount"
+                },
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_RTV_COUNT",
+                    "fieldName": "RTV Count",
+                    "fieldValue": "totalRtvCount"
+                },
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_MISSING_COUNT",
+                    "fieldName": "Missing Count",
+                    "fieldValue": "totalMissingCount"
+                },
+                {
+                    "fieldId": "TAB_VENDOR_VIEW_INVENTORIES_LIST_CREATED_DATE",
+                    "fieldName": "Created Date",
+                    "fieldValue": "createdAt"
+                }
+            ]
+        },
+        {
             "actionId": "ACTION_VENDOR_VIEW_ACTIVITY",
             "actionUrl": "",
             "actionName": "VENDOR_ACTIVITY",

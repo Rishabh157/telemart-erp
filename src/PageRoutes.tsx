@@ -467,23 +467,23 @@ const PageRoutes = () => {
                         }
                     />
                     <Route
-                        path="inventory"
-                        element={
-                            <Authorization
-                                children={<VendorInventoryListingWrapper />}
-                                permission={
-                                    UserModuleNameTypes.ACTION_VENDOR_VIEW_RETURN_TO_VENDOR
-                                }
-                            />
-                        }
-                    />
-                    <Route
                         path="ledger"
                         element={
                             <Authorization
                                 children={<VendorListLedgerTabWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_LEDGER
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="inventory"
+                        element={
+                            <Authorization
+                                children={<VendorInventoryListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_VENDOR_VIEW_INVENTORIES
                                 }
                             />
                         }
@@ -974,7 +974,7 @@ const PageRoutes = () => {
                                 />
                             }
                         />
-                      
+
                         <Route
                             path="maersk-orders"
                             element={
@@ -983,7 +983,7 @@ const PageRoutes = () => {
                                         <OutwardMaerskOrdersTabListingWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_MAERSK_ORDERS
                                     }
                                 />
                             }
@@ -1011,7 +1011,7 @@ const PageRoutes = () => {
                                         <OutwardOtherCourierOrdersTabListingWrapper />
                                     }
                                     permission={
-                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS
                                     }
                                 />
                             }

@@ -53,7 +53,7 @@ const tabsData = [
         label: 'Inventory',
         icon: MdOutlinePeopleAlt,
         path: 'inventory',
-        name: UserModuleNameTypes.ACTION_VENDOR_VIEW_VENDOR_LEDGER,
+        name: UserModuleNameTypes.ACTION_VENDOR_VIEW_INVENTORIES,
     },
     {
         label: 'Activity',
