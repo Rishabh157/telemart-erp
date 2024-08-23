@@ -14,19 +14,19 @@ import { Chip } from '@mui/material'
 import moment from 'moment'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import {
-    useGetGenerateCouriorLabelByAwbNumberMutation,
-    useGetGenerateInvoiceByAwbNumberMutation,
+    // useGetGenerateCouriorLabelByAwbNumberMutation,
+    // useGetGenerateInvoiceByAwbNumberMutation,
     useGetOrderQuery,
 } from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FaRegFilePdf } from 'react-icons/fa'
-import { MdLabelImportantOutline } from 'react-icons/md'
+// import { MdLabelImportantOutline } from 'react-icons/md'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { OrderListResponse } from 'src/models'
 import { SaleOrderStatus } from 'src/models/SaleOrder.model'
 import { RootState } from 'src/redux/store'
-import { PDFDocument } from 'pdf-lib'
+// import { PDFDocument } from 'pdf-lib'
 import DispatchingBarcodes from '../GpoOrders/DispatchingBarcodes/DispatchingBarcodes'
 import { courierCompanyEnum } from 'src/utils/constants/enums'
 import { FormInitialValuesFilterWithLabel } from '../GpoOrders/Filters/OutwardGpoOrderFilterFormWrapper'
@@ -87,7 +87,7 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
             filterBy: [
                 {
                     fieldName: 'orderAssignedToCourier',
-                    value: courierCompanyEnum.shipyaari,
+                    value: 'MAERSK',
                 },
                 { fieldName: 'companyId', value: userData?.companyId },
                 { fieldName: 'assignWarehouseId', value: id },
@@ -103,93 +103,93 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
         }),
     })
 
-    const [getGenerateCouriorLabel] =
-        useGetGenerateCouriorLabelByAwbNumberMutation()
-    const [getGenerateInvoice] = useGetGenerateInvoiceByAwbNumberMutation()
+    // const [getGenerateCouriorLabel] =
+    //     useGetGenerateCouriorLabelByAwbNumberMutation()
+    // const [getGenerateInvoice] = useGetGenerateInvoiceByAwbNumberMutation()
 
-    const handleGenerateCourierLabel = (row: any) => {
-        getGenerateCouriorLabel({ awbNumber: row.awbNumber }).then(
-            (res: any) => {
-                if (res.data?.data) {
-                    const pdfBlob = base64ToBlob(res.data?.data)
-                    if (pdfBlob) {
-                        const pdfUrl = URL.createObjectURL(pdfBlob)
-                        window.open(pdfUrl, '_blank')
-                    }
-                }
-            }
-        )
-    }
+    // const handleGenerateCourierLabel = (row: any) => {
+    //     getGenerateCouriorLabel({ awbNumber: row.awbNumber }).then(
+    //         (res: any) => {
+    //             if (res.data?.data) {
+    //                 const pdfBlob = base64ToBlob(res.data?.data)
+    //                 if (pdfBlob) {
+    //                     const pdfUrl = URL.createObjectURL(pdfBlob)
+    //                     window.open(pdfUrl, '_blank')
+    //                 }
+    //             }
+    //         }
+    //     )
+    // }
 
-    const handleGenerateInvoice = (row: any) => {
-        getGenerateInvoice({ awbNumber: row.awbNumber }).then((res: any) => {
-            if (res.data?.data) {
-                const pdfBlob = base64ToBlob(res.data?.data)
-                if (pdfBlob) {
-                    const pdfUrl = URL.createObjectURL(pdfBlob)
-                    window.open(pdfUrl, '_blank')
-                }
-            }
-        })
-    }
+    // const handleGenerateInvoice = (row: any) => {
+    //     getGenerateInvoice({ awbNumber: row.awbNumber }).then((res: any) => {
+    //         if (res.data?.data) {
+    //             const pdfBlob = base64ToBlob(res.data?.data)
+    //             if (pdfBlob) {
+    //                 const pdfUrl = URL.createObjectURL(pdfBlob)
+    //                 window.open(pdfUrl, '_blank')
+    //             }
+    //         }
+    //     })
+    // }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleGenerateInvoiceDisaptch = (row: any) => {
-        const promises = []
+    // const handleGenerateInvoiceDisaptch = (row: any) => {
+    //     const promises = []
 
-        // Fetch both PDFs
-        promises.push(getGenerateCouriorLabel({ awbNumber: row.awbNumber }))
-        promises.push(getGenerateInvoice({ awbNumber: row.awbNumber }))
+    //     // Fetch both PDFs
+    //     promises.push(getGenerateCouriorLabel({ awbNumber: row.awbNumber }))
+    //     promises.push(getGenerateInvoice({ awbNumber: row.awbNumber }))
 
-        // Wait for both promises to resolve
-        Promise.all(promises).then((responses) => {
-            const pdfBlobs: Blob[] = []
+    //     // Wait for both promises to resolve
+    //     Promise.all(promises).then((responses) => {
+    //         const pdfBlobs: Blob[] = []
 
-            responses.forEach((res: any) => {
-                if (res.data?.data) {
-                    const pdfBlob = base64ToBlob(res.data?.data)
-                    if (pdfBlob) {
-                        pdfBlobs.push(pdfBlob)
-                    }
-                }
-            })
+    //         responses.forEach((res: any) => {
+    //             if (res.data?.data) {
+    //                 const pdfBlob = base64ToBlob(res.data?.data)
+    //                 if (pdfBlob) {
+    //                     pdfBlobs.push(pdfBlob)
+    //                 }
+    //             }
+    //         })
 
-            // Merge PDFs
-            mergePDFs(pdfBlobs)
-        })
-    }
+    //         // Merge PDFs
+    //         mergePDFs(pdfBlobs)
+    //     })
+    // }
 
-    const mergePDFs = async (pdfBlobs: Blob[]) => {
-        const pdfDoc = await PDFDocument.create()
-        for (const pdfBlob of pdfBlobs) {
-            const pdfBuffer = await pdfBlob.arrayBuffer()
-            const existingPdfDoc = await PDFDocument.load(pdfBuffer)
-            const copiedPages = await pdfDoc.copyPages(
-                existingPdfDoc,
-                existingPdfDoc.getPageIndices()
-            )
-            copiedPages.forEach((page: any) => {
-                pdfDoc.addPage(page)
-            })
-        }
-        const mergedPdfBytes = await pdfDoc.save()
-        const mergedPdfBlob = new Blob([mergedPdfBytes], {
-            type: 'application/pdf',
-        })
-        // Open the merged PDF in a new tab
-        const mergedPdfUrl = URL.createObjectURL(mergedPdfBlob)
-        window.open(mergedPdfUrl, '_blank')
-    }
+    // const mergePDFs = async (pdfBlobs: Blob[]) => {
+    //     const pdfDoc = await PDFDocument.create()
+    //     for (const pdfBlob of pdfBlobs) {
+    //         const pdfBuffer = await pdfBlob.arrayBuffer()
+    //         const existingPdfDoc = await PDFDocument.load(pdfBuffer)
+    //         const copiedPages = await pdfDoc.copyPages(
+    //             existingPdfDoc,
+    //             existingPdfDoc.getPageIndices()
+    //         )
+    //         copiedPages.forEach((page: any) => {
+    //             pdfDoc.addPage(page)
+    //         })
+    //     }
+    //     const mergedPdfBytes = await pdfDoc.save()
+    //     const mergedPdfBlob = new Blob([mergedPdfBytes], {
+    //         type: 'application/pdf',
+    //     })
+    //     // Open the merged PDF in a new tab
+    //     const mergedPdfUrl = URL.createObjectURL(mergedPdfBlob)
+    //     window.open(mergedPdfUrl, '_blank')
+    // }
 
-    const base64ToBlob = (base64Data: string): Blob => {
-        const byteCharacters = atob(base64Data)
-        const byteNumbers = new Array(byteCharacters.length)
-        for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i)
-        }
-        const byteArray = new Uint8Array(byteNumbers)
-        return new Blob([byteArray], { type: 'application/pdf' })
-    }
+    // const base64ToBlob = (base64Data: string): Blob => {
+    //     const byteCharacters = atob(base64Data)
+    //     const byteNumbers = new Array(byteCharacters.length)
+    //     for (let i = 0; i < byteCharacters.length; i++) {
+    //         byteNumbers[i] = byteCharacters.charCodeAt(i)
+    //     }
+    //     const byteArray = new Uint8Array(byteNumbers)
+    //     return new Blob([byteArray], { type: 'application/pdf' })
+    // }
 
     const columns: columnTypes[] = [
         {
@@ -204,7 +204,7 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => {}}
+                        handleOnAction={() => { }}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -224,24 +224,15 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
                 return (
                     <>
                         {row.awbNumber ? (
-                            <div className="flex gap-2">
-                                <MdLabelImportantOutline
-                                    title="Print label"
-                                    size={25}
-                                    color="blue"
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        handleGenerateCourierLabel(row)
-                                    }}
-                                />
+                            <a href={row?.maerksResponse?.result?.label} target='blank'>
                                 <FaRegFilePdf
                                     title="Print Invoice"
                                     className="cursor-pointer"
                                     color="red"
                                     size={22}
-                                    onClick={() => handleGenerateInvoice(row)}
+                                    // onClick={() => handleGenerateInvoice(row)}
                                 />
-                            </div>
+                            </a>
                         ) : null}
                     </>
                 )
@@ -266,7 +257,7 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
+                            FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -276,7 +267,7 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => {}}
+                                onClick={() => { }}
                                 className="cursor-pointer"
                                 label="Pending"
                                 color="error"
@@ -429,7 +420,7 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
         {
             field: 'shippingCharges',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHIPPING_CHARGES,
-             headerName: 'Shippgig Charges',
+            headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px] text-xs',
@@ -664,8 +655,8 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -739,7 +730,7 @@ const OutwardMaerskOrdersTabListingWrapper = () => {
                 setFilter={setFilter}
             />
 
-            <DispatchingBarcodes courierType={courierCompanyEnum.shipyaari} />
+            <DispatchingBarcodes courierType={courierCompanyEnum.maersk} />
         </>
     )
 }

@@ -189,8 +189,7 @@ const OutwardMaerskOrdersTabListing = ({
                 <div className="grow overflow-auto">
                     <ATMTable
                         columns={columns}
-                        rows={[]}
-                        // rows={rows}
+                        rows={rows}
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

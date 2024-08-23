@@ -1,4 +1,27 @@
 // |-- Types --|
+interface MaerksResponseType {
+    result: {
+        reference_number: string
+        label: string
+        waybill: string
+        sort_code: string
+        courier_partner_id: number
+        courier_name: string
+        order_id: string
+        security_key: string
+        account_code: string
+    }
+    meta: {
+        status: number
+        success: boolean
+        message: string
+        reference_number: string
+        username: string
+    }
+    order_id: number
+    tracking_id: number
+}
+
 export type OrderListResponse = {
     _id: string
     orderNumber: number | string
@@ -71,7 +94,7 @@ export type OrderListResponse = {
     whatsappNo: string
     price: number
     deliveryCharges: number
-    dispositionLevelThree  : string
+    dispositionLevelThree: string
     totalAmount: number
     dispositionLevelTwoId: string
     dispositionLevelThreeId: string
@@ -110,4 +133,5 @@ export type OrderListResponse = {
         barcode: string
         _id: string
     }[]
+    maerksResponse?: MaerksResponseType
 }

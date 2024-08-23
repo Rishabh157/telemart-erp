@@ -41,4 +41,5 @@ export enum barcodeStatusEnum {
 export enum courierCompanyEnum {
     shipyaari = 'SHIPYAARI',
     gpo = 'GPO',
+    maersk = 'MAERSK',
 }
