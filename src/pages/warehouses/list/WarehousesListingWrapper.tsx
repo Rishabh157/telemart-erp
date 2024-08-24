@@ -47,9 +47,9 @@ const DealersListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_WAREHOUSE_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_WAREHOUSE_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_WAREHOUSE_DELETE
+                    // )}
                     handleViewActionButton={() => {
                         navigate(
                             `/warehouse/view/${currentId}/warehouse-details`
