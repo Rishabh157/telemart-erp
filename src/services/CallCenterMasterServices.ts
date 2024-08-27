@@ -21,7 +21,6 @@ export const CallCenterMasterApi = apiSlice.injectEndpoints({
             query: (companyId) => ({
                 url: `/call-center/company/${companyId}`,
                 method: 'GET',
-                // body,
             }),
         }),
 

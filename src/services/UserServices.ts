@@ -115,6 +115,7 @@ export const userApi = apiSlice.injectEndpoints({
                 method: 'PUT',
             }),
         }),
+
         //***** get Manager And Executive via Distribution department   *****/
         getDistributionsRole: builder.mutation({
             invalidatesTags: ['user'],
@@ -210,6 +211,15 @@ export const userApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
+        // **** Get ALL Agent
+        getAllAgents: builder.query({
+            providesTags: ['user', 'newUser'],
+            query: (callcenterid: string) => ({
+                url: `/user/get-agents/call-center/${callcenterid}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -231,4 +241,5 @@ export const {
     useChangeUserPasswordMutation,
     useGetSeniorExicutivesByZmIdQuery,
     useGetJuniorExicutivesByZeIdQuery,
+    useGetAllAgentsQuery,
 } = userApi

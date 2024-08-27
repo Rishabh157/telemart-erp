@@ -321,6 +321,9 @@ import CreateOrderWrapper from './pages/media/createOrder/CreateOrderWrapper'
 import OutwardOtherCourierOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/OtherCourier/OutwardOtherCourierOrdersTabListingWrapper'
 import VendorInventoryListingWrapper from './pages/vendors/view/tabs/VendorInventory/VendorInventoryListingWrapper'
 import OutwardMaerskOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/MaerskOrders/OutwardMaerskOrdersTabListingWrapper'
+import ReportsLayout from './pages/reports/ReportsLayout'
+import AgentDetails from './pages/reports/AgentDetails'
+import AgentOrderStatusWrapper from './pages/reports/AgentDetails/wrappers/AgentOrderStatusWrapper'
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -3717,6 +3720,336 @@ const PageRoutes = () => {
                         }
                     /> */}
                 </Route>
+
+                <Route
+                    path="/reports"
+                    element={
+                        <Authorization
+                            children={<ReportsLayout />}
+                            permission={UserModuleNameTypes.NAV_ALL_WEBSITE}
+                        />
+                    }
+                >
+                    <Route
+                        path="agent-details"
+                        element={
+                            <Authorization
+                                children={<AgentDetails />}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    >
+                        <Route
+                            path="agent-hierarchy"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="agent-order-status"
+                            element={
+                                <Authorization
+                                    children={<AgentOrderStatusWrapper />}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="agent-wise-complaint"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="agent-wise-enquiry"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="agent-wise-product"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="call-back"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="day-wise-agent-performance"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="detailed-performance"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="fm-scm-wise-performance"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="order-delivery-report"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+                        <Route
+                            path="shift-wise-agent"
+                            element={
+                                <Authorization
+                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                />
+                            }
+                        />
+
+                    </Route>
+
+                    <Route
+                        path="all-orders"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="carriers"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="dealer"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="dispatch"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="distribution-master"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="fcp"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="fcp-details"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="ndr"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="order-details"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="order-reports"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="others"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="sales-report"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="scm-report"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="stock"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="stock-report"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="system-report"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="warehouse-put-away"
+                        element={
+                            <Authorization
+                                children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                // children={<WebsitePageListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                }
+                            />
+                        }
+                    />
+                </Route>
+
                 <Route path="/success" element={<Successfully />} />
 
                 <Route

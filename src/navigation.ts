@@ -234,4 +234,10 @@ export const navigation: NavItemType[] = [
         path: '/all-websites/website',
         name: UserModuleNameTypes.NAV_ALL_WEBSITE,
     },
+    {
+        label: 'reports',
+        icon: MdWeb,
+        path: '/reports/agent-details',
+        name: UserModuleNameTypes.NAV_ALL_WEBSITE,
+    },
 ]
