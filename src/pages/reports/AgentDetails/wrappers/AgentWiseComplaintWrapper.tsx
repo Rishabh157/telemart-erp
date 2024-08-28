@@ -5,13 +5,12 @@ import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMD
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import { useGetAgentOrderStatusReportsQuery } from 'src/services/ReportsService'
-import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { useGetAllAgentsQuery } from 'src/services/UserServices'
 import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { useGetSchemeQuery } from 'src/services/SchemeService'
 
-const AgentOrderStatusWrapper = () => {
+const AgentWiseComplaintWrapper = () => {
 
     const [filters, setFilters] = useState<any>({
         start_date: `${moment().format('YYYY-MM-DD')}`,
@@ -19,8 +18,6 @@ const AgentOrderStatusWrapper = () => {
         callCenterId: '',
         agentId: ''
     })
-
-    const { userData } = useGetLocalStorage()
 
     const { items, isFetching } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetAgentOrderStatusReportsQuery({
@@ -39,17 +36,13 @@ const AgentOrderStatusWrapper = () => {
         }, { skip: !(filters.callCenterId && filters.agentId && filters.start_date && filters.end_date), }),
     })
 
-
-    // get call centers
-    const { options: callCenterOptions } = useCustomOptions({
-        useEndPointHook: useGetAllCallCenterMasterQuery(userData?.companyId, {
-            skip: !userData?.companyId,
-        }),
-        keyName: 'callCenterName',
+    // Hooks
+    const { options: schemeOptions } = useCustomOptions({
+        useEndPointHook: useGetSchemeQuery(''),
+        keyName: 'schemeName',
         value: '_id',
     })
 
-    // get agents by call center id
     const { options: agentsOptions } = useCustomOptions({
         useEndPointHook: useGetAllAgentsQuery(filters?.callCenterId, {
             skip: !filters?.callCenterId,
@@ -124,6 +117,7 @@ const AgentOrderStatusWrapper = () => {
         <div className="border border-slate-400 rounded p-2 h-full flex flex-col">
             <div className="flex gap-2 items-center justify-end z-50">
                 <ATMSelectSearchable
+                    isDisabled={true}
                     name=""
                     componentClass="m-0"
                     value={filters?.callCenterId}
@@ -131,13 +125,14 @@ const AgentOrderStatusWrapper = () => {
                         ...filters,
                         callCenterId: newValue
                     })}
-                    options={callCenterOptions}
-                    selectLabel="Select Call Center"
+                    options={schemeOptions}
+                    selectLabel="Select Scheme"
                     label=""
                 />
 
                 <ATMSelectSearchable
-                    isDisabled={filters?.callCenterId ? false : true}
+                    isDisabled={true}
+                    // isDisabled={filters?.callCenterId ? false : true}
                     name=""
                     componentClass="m-0"
                     value={filters?.agentId}
@@ -151,6 +146,7 @@ const AgentOrderStatusWrapper = () => {
                 />
 
                 <ATMDatePicker
+                    disabled
                     name=""
                     value={filters.start_date}
                     onChange={(value) => {
@@ -184,6 +180,7 @@ const AgentOrderStatusWrapper = () => {
                 />
 
                 <ATMDatePicker
+                    disabled
                     name=""
                     value={filters.end_date}
                     onChange={(value) => {
@@ -242,4 +239,4 @@ const AgentOrderStatusWrapper = () => {
     )
 }
 
-export default AgentOrderStatusWrapper
+export default AgentWiseComplaintWrapper

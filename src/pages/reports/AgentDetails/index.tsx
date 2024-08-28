@@ -64,30 +64,30 @@ const tabs: tabsProps[] = [
         path: 'day-wise-agent-performance',
         name: UserModuleNameTypes.ACTION_DOORCANCELLED_ORDER_TAB_LIST,
     },
-    {
-        label: 'Detailed Performance',
-        icon: MdOutbond,
-        path: 'detailed-performance',
-        name: UserModuleNameTypes.ACTION_HOLD_ORDER_TAB_LIST,
-    },
-    {
-        label: 'FM/SCM Wise Performance',
-        icon: MdOutbond,
-        path: 'fm-scm-wise-performance',
-        name: UserModuleNameTypes.ACTION_PSC_ORDER_TAB_LIST,
-    },
-    {
-        label: 'Order VS Delivery Report',
-        icon: MdOutbond,
-        path: 'order-delivery-report',
-        name: UserModuleNameTypes.ACTION_ORDER_UNA_TAB_LIST,
-    },
-    {
-        label: 'Shift Wise Agent',
-        icon: MdOutbond,
-        path: 'shift-wise-agent',
-        name: UserModuleNameTypes.ACTION_PND_ORDER_TAB_LIST,
-    },
+    // {
+    //     label: 'Detailed Performance',
+    //     icon: MdOutbond,
+    //     path: 'detailed-performance',
+    //     name: UserModuleNameTypes.ACTION_HOLD_ORDER_TAB_LIST,
+    // },
+    // {
+    //     label: 'FM/SCM Wise Performance',
+    //     icon: MdOutbond,
+    //     path: 'fm-scm-wise-performance',
+    //     name: UserModuleNameTypes.ACTION_PSC_ORDER_TAB_LIST,
+    // },
+    // {
+    //     label: 'Order VS Delivery Report',
+    //     icon: MdOutbond,
+    //     path: 'order-delivery-report',
+    //     name: UserModuleNameTypes.ACTION_ORDER_UNA_TAB_LIST,
+    // },
+    // {
+    //     label: 'Shift Wise Agent',
+    //     icon: MdOutbond,
+    //     path: 'shift-wise-agent',
+    //     name: UserModuleNameTypes.ACTION_PND_ORDER_TAB_LIST,
+    // },
 ]
 
 const AgentDetails = () => {
@@ -144,7 +144,7 @@ const AgentDetails = () => {
     return (
 
         <div className="h-[calc(100vh-55px)]">
-            <div className="w-full flex  h-[calc(100%)] bg-white">
+            <div className="w-full flex h-[calc(100%)] bg-white">
                 {/* Tab Section */}
                 <div className="w-[100%] border-b border-r border-l rounded-r h-full overflow-x-scroll">
                     <TabScrollable
@@ -152,6 +152,7 @@ const AgentDetails = () => {
                         active={activeTabIndex}
                         navBtnContainerClassName="bg-red-500"
                     />
+
                     {/* Breadcrumb */}
                     <div className="py-2 px-4">
                         <ATMBreadCrumbs breadcrumbs={breadcrumbs} />

@@ -321,9 +321,12 @@ import CreateOrderWrapper from './pages/media/createOrder/CreateOrderWrapper'
 import OutwardOtherCourierOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/OtherCourier/OutwardOtherCourierOrdersTabListingWrapper'
 import VendorInventoryListingWrapper from './pages/vendors/view/tabs/VendorInventory/VendorInventoryListingWrapper'
 import OutwardMaerskOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/MaerskOrders/OutwardMaerskOrdersTabListingWrapper'
+// Reports
 import ReportsLayout from './pages/reports/ReportsLayout'
 import AgentDetails from './pages/reports/AgentDetails'
 import AgentOrderStatusWrapper from './pages/reports/AgentDetails/wrappers/AgentOrderStatusWrapper'
+import AgentWiseComplaintWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseComplaintWrapper'
+
 
 const PageRoutes = () => {
     const deviceId = localStorage.getItem('device-id') || ''
@@ -3764,7 +3767,7 @@ const PageRoutes = () => {
                             path="agent-wise-complaint"
                             element={
                                 <Authorization
-                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    children={<AgentWiseComplaintWrapper />}
                                     permission={UserModuleNameTypes.NAV_ORDER}
                                 />
                             }

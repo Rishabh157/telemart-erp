@@ -125,7 +125,7 @@ const MediaLayout = ({ children }: Props) => {
         >
             {/* Side Navigation Bar */}
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${
+                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out bg-white ${
                     isCollapsed
                         ? 'min-w-[50px] w-[50px]'
                         : 'min-w-[250px] w-[250px]'
@@ -141,13 +141,13 @@ const MediaLayout = ({ children }: Props) => {
                 />
             </div>
 
-            <div className="h-full grow ">
+            <div className="h-full grow">
                 {/* Header */}
                 <div className="h-[45px] border-b border-slate-300 bg-white ">
                     <Header />
                 </div>
 
-                <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50  bg-transparent-body">
+                <div className="h-[calc(100%-55px)] w-full overflow-auto bg-slate-50 bg-transparent-body">
                     <Outlet />
                 </div>
             </div>

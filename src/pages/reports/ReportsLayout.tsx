@@ -7,15 +7,12 @@ import {
     BiChevronsLeft,
 } from 'react-icons/bi'
 import { CgWebsite } from 'react-icons/cg'
-// import { RiPagesLine } from 'react-icons/ri'
-// import { TbBrandBlogger } from 'react-icons/tb'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { ThemeContext } from 'src/App'
-// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const ReportsNavigation: NavItemType[] = [
     {
@@ -161,14 +158,12 @@ const ReportsLayout = ({ children }: Props) => {
 
     const currentPath = `${location.pathname?.split('/')[2]}`
     const { theme } = React.useContext(ThemeContext)
+    
     return (
-        <div
-            className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''
-                }`}
-        >
+        <div className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''}`}>
             {/* Side Navigation Bar */}
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${isCollapsed
+                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out bg-white ${isCollapsed
                     ? 'min-w-[50px] w-[50px]'
                     : 'min-w-[250px] w-[250px]'
                     }`}
@@ -183,13 +178,13 @@ const ReportsLayout = ({ children }: Props) => {
                 />
             </div>
 
-            <div className="h-full grow ">
+            <div className="h-full grow">
                 {/* Header */}
-                <div className="h-[45px] border-b border-slate-300 bg-white ">
+                <div className="h-[45px] border-b border-slate-300 bg-white">
                     <Header />
                 </div>
 
-                <div className="h-[calc(100%-55px)]  w-full overflow-auto bg-slate-50 ">
+                <div className="h-[calc(100%-55px)] w-full overflow-auto bg-slate-50 bg-transparent-body">
                     <Outlet />
                 </div>
             </div>
