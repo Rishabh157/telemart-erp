@@ -212,11 +212,20 @@ export const userApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        // **** Get ALL Agent
-        getAllAgents: builder.query({
+        // **** Get ALL Agent by call center
+        getAllAgentsByCallCenter: builder.query({
             providesTags: ['user', 'newUser'],
             query: (callcenterid: string) => ({
                 url: `/user/get-agents/call-center/${callcenterid}`,
+                method: 'GET',
+            }),
+        }),
+
+        // **** Get ALL Agent of Customer Care Department
+        getAllAgentsOfCustomerCareDepartment: builder.query({
+            providesTags: ['user', 'newUser'],
+            query: () => ({
+                url: `/user/get-customer-care-agent`,
                 method: 'GET',
             }),
         }),
@@ -241,5 +250,6 @@ export const {
     useChangeUserPasswordMutation,
     useGetSeniorExicutivesByZmIdQuery,
     useGetJuniorExicutivesByZeIdQuery,
-    useGetAllAgentsQuery,
+    useGetAllAgentsByCallCenterQuery,
+    useGetAllAgentsOfCustomerCareDepartmentQuery,
 } = userApi

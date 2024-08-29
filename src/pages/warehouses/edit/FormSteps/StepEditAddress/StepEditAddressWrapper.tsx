@@ -1,11 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:StepEditAddressWrapper.tsx
-// Type: Edit Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -58,12 +51,6 @@ const formFields: {
                 required: true,
             },
             {
-                name: 'regd_address.address',
-                label: 'Address',
-                placeholder: 'Address',
-                required: true,
-            },
-            {
                 name: 'regd_address.country',
                 label: 'Country',
                 placeholder: 'Country',
@@ -95,6 +82,13 @@ const formFields: {
                 optionAccessKey: 'pincodeOptions',
                 required: true,
             },
+            {
+                name: 'regd_address.address',
+                label: 'Address',
+                placeholder: 'Address',
+                type : 'textarea',
+                required: true,
+            },
         ],
     },
     {
@@ -115,12 +109,6 @@ const formFields: {
                 name: 'billing_address.phone',
                 label: 'Phone',
                 placeholder: 'Phone',
-                required: true,
-            },
-            {
-                name: 'billing_address.address',
-                label: 'Address',
-                placeholder: 'Address',
                 required: true,
             },
             {
@@ -165,6 +153,13 @@ const formFields: {
                 label: 'GST Certificate',
                 placeholder: 'GST Certificate',
                 type: 'file-picker',
+                required: true,
+            },
+            {
+                name: 'billing_address.address',
+                label: 'Address',
+                placeholder: 'Address',
+                type : 'textarea',
                 required: true,
             },
         ],

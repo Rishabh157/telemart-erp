@@ -20,14 +20,9 @@
                     "fieldValue": "firmName"
                 },
                 {
-                    "fieldId": "DEALER_LIST_FIRST_NAME",
-                    "fieldName": "First Name",
+                    "fieldId": "DEALER_LIST_NAME",
+                    "fieldName": "Name",
                     "fieldValue": "firstName"
-                },
-                {
-                    "fieldId": "DEALER_LIST_LAST_NAME",
-                    "fieldName": "Last Name",
-                    "fieldValue": "lastName"
                 },
                 {
                     "fieldId": "DEALER_LIST_PHONE",
@@ -43,6 +38,11 @@
                     "fieldId": "DEALER_LIST_STATE",
                     "fieldName": "State",
                     "fieldValue": "billingAddressStateName"
+                },
+                {
+                    "fieldId": "DEALER_LIST_IS_GST_VEEIFIED",
+                    "fieldName": "Gst Verified",
+                    "fieldValue": "document"
                 },
                 {
                     "fieldId": "DEALER_LIST_APPROVAL",

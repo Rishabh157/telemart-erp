@@ -77,10 +77,6 @@ const ViewWarehouse = ({ items }: Props) => {
                             Registered Address
                         </div>
                         <div className="grid grid-cols-4 gap-3 pl-6 py-6 border border-l-2">
-                            <h1 className="text-gray-800">Address </h1>
-                            <p className="text-slate-600">
-                                {items?.registrationAddress?.address}
-                            </p>
                             <h1 className="text-gray-800">Country</h1>
                             <p className="text-slate-600">
                                 {items?.registrationCountryName}
@@ -100,6 +96,10 @@ const ViewWarehouse = ({ items }: Props) => {
                             <h1 className="text-gray-800">State</h1>
                             <p className="text-slate-600">
                                 {items?.registrationStateName}
+                            </p>
+                            <h1 className="text-gray-800">Address </h1>
+                            <p className="text-slate-600">
+                                {items?.registrationAddress?.address}
                             </p>
                         </div>
                     </div>
@@ -148,6 +148,10 @@ const ViewWarehouse = ({ items }: Props) => {
                                     className="grid grid-cols-2 gap-3 pl-6  border border-l-2 grow py-6"
                                     key={item._id}
                                 >
+                                    <h1 className="text-gray-800">LandLine</h1>
+                                    <p className="text-slate-600">
+                                        {item.landLine}
+                                    </p>
                                     <h1 className="text-gray-800">Name</h1>
                                     <p className="text-slate-600">
                                         {item.name}
@@ -167,10 +171,6 @@ const ViewWarehouse = ({ items }: Props) => {
                                     <h1 className="text-gray-800">Email </h1>
                                     <p className="text-slate-600">
                                         {item.email}
-                                    </p>
-                                    <h1 className="text-gray-800">LandLine</h1>
-                                    <p className="text-slate-600">
-                                        {item.landLine}
                                     </p>
                                     <h1 className="text-gray-800">
                                         Mobile Number{' '}

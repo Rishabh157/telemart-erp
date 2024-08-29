@@ -18,8 +18,8 @@ import {
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DealersListing from './DealersListing'
-
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { FaCheck } from 'react-icons/fa'
 
 // |-- Redux --|
 import { Chip } from '@mui/material'
@@ -163,23 +163,13 @@ const DealersListingWrapper = () => {
         },
         {
             field: 'firstName',
-            headerName: 'First Name',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.DEALER_LIST_FIRST_NAME,
-            renderCell: (row: DealersListResponse) => (
-                <span> {row.firstName} </span>
-            ),
-        },
-        {
-            field: 'lastName',
-            headerName: 'Last Name',
+            headerName: 'Name',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.DEALER_LIST_LAST_NAME,
-            renderCell: (row: DealersListResponse) => {
-                return <span> {row.lastName} </span>
-            },
+            name: UserModuleNameTypes.DEALER_LIST_NAME,
+            renderCell: (row: DealersListResponse) => (
+                <span> {row.firstName.concat(' ' , row?.lastName)} </span>
+            ),
         },
         {
             field: 'billingAddress',
@@ -209,6 +199,16 @@ const DealersListingWrapper = () => {
             name: UserModuleNameTypes.DEALER_LIST_STATE,
             renderCell: (row: DealersListResponse) => {
                 return <span> {row.billingAddressStateName} </span>
+            },
+        },
+        {
+            field: 'document',
+            headerName: 'GST Verified',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_IS_GST_VEEIFIED,
+            renderCell: (row: DealersListResponse) => {
+                return row?.document.gstNumber ? <FaCheck color="#438a47" /> : null
             },
         },
         {

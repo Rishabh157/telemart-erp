@@ -19,6 +19,7 @@ import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -102,9 +103,8 @@ const StepEditAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${
-                            index !== formFields?.length - 1 && 'border-b'
-                        }  border-slate-300`}
+                        className={`py-9 px-7 ${index !== formFields?.length - 1 && 'border-b'
+                            }  border-slate-300`}
                     >
                         <div className="pb-2 text-lg font-medium text-primary-main">
                             {sectionName}
@@ -128,7 +128,7 @@ const StepEditAddress = ({
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
-                                                    name ===
+                                                        name ===
                                                         'billing_address.phone'
                                                         ? 10
                                                         : 100
@@ -138,16 +138,16 @@ const StepEditAddress = ({
                                                 value={
                                                     name.includes('.')
                                                         ? values[
-                                                              name.split('.')[0]
-                                                          ][name.split('.')[1]]
+                                                        name.split('.')[0]
+                                                        ][name.split('.')[1]]
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
                                                     if (
                                                         name ===
-                                                            'regd_address.phone' ||
+                                                        'regd_address.phone' ||
                                                         name ===
-                                                            'billing_address.phone'
+                                                        'billing_address.phone'
                                                     ) {
                                                         const inputValue =
                                                             e.target.value
@@ -200,7 +200,7 @@ const StepEditAddress = ({
                                                     disabled={false}
                                                 />
                                                 {loaderState === name &&
-                                                imageApiStatus ? (
+                                                    imageApiStatus ? (
                                                     <div className="mt-3">
                                                         <CircularProgress
                                                             size={18}
@@ -221,14 +221,14 @@ const StepEditAddress = ({
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     onChange={(e: any) => {
@@ -239,14 +239,65 @@ const StepEditAddress = ({
                                                     }}
                                                     options={
                                                         dropdownOptions[
-                                                            field.optionAccessKey ||
-                                                                'counrtyOptions'
+                                                        field.optionAccessKey ||
+                                                        'counrtyOptions'
                                                         ]
                                                     }
                                                     isSubmitting={isSubmitting}
                                                 />
                                             </div>
                                         )
+                                    case 'textarea':
+                                        return (
+                                            <div className="-mt-2" key={index}>
+                                                <ATMTextArea
+                                                    required
+                                                    minRows={4}
+                                                    placeholder="Enter remark"
+                                                    name={name}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                            name.split('.')[0]
+                                                            ][name.split('.')[1]]
+                                                            : values[name]
+                                                    }
+                                                    label="Address"
+                                                    className="rounded"
+                                                    onChange={(newValue: any) => {
+                                                        if (
+                                                            name ===
+                                                            'regd_address.phone' ||
+                                                            name ===
+                                                            'billing_address.phone'
+                                                        ) {
+                                                            const inputValue =
+                                                                newValue
+                                                            if (
+                                                                !isNaN(
+                                                                    Number(
+                                                                        inputValue
+                                                                    )
+                                                                )
+                                                            ) {
+                                                                handleSetFieldValue(
+                                                                    name,
+                                                                    String(
+                                                                        inputValue
+                                                                    )
+                                                                )
+                                                            }
+                                                        } else {
+                                                            handleSetFieldValue(
+                                                                name,
+                                                                newValue
+                                                            )
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+                                        )
+
                                     case 'checkbox':
                                         return (
                                             <div

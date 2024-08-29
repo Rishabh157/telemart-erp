@@ -1,13 +1,11 @@
 // |-- Internal Dependencies --|
-// import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
 export const reportsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        
         //***** Get Agent Order Status *****/
         getAgentOrderStatusReports: builder.query({
-            providesTags: ['DealerCategory'],
+            // providesTags: ['agent-report'],
             query: (body) => ({
                 url: `/report/agent-order-status`,
                 method: 'POST',
@@ -15,18 +13,18 @@ export const reportsApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** ADD *****/
-        // addDealerCategory: builder.mutation({
-        //     invalidatesTags: ['DealerCategory'],
-        //     query: (body: AddDealersCategory) => ({
-        //         url: '/dealers-category/add',
-        //         method: 'POST',
-        //         body,
-        //     }),
-        // }),
+        //***** Get Agent Order Status *****/
+        getAgentWiseComplaint: builder.query({
+            // providesTags: ['agent-report'],
+            query: (body) => ({
+                url: '/report/agent-wise-complaint',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 export const {
     useGetAgentOrderStatusReportsQuery,
-    // useAddDealerCategoryMutation
+    useGetAgentWiseComplaintQuery,
 } = reportsApi

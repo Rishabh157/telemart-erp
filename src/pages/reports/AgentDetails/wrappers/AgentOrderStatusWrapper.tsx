@@ -8,7 +8,7 @@ import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import { useGetAgentOrderStatusReportsQuery } from 'src/services/ReportsService'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
-import { useGetAllAgentsQuery } from 'src/services/UserServices'
+import { useGetAllAgentsByCallCenterQuery } from 'src/services/UserServices'
 import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 
 const AgentOrderStatusWrapper = () => {
@@ -51,7 +51,7 @@ const AgentOrderStatusWrapper = () => {
 
     // get agents by call center id
     const { options: agentsOptions } = useCustomOptions({
-        useEndPointHook: useGetAllAgentsQuery(filters?.callCenterId, {
+        useEndPointHook: useGetAllAgentsByCallCenterQuery(filters?.callCenterId, {
             skip: !filters?.callCenterId,
         }),
         keyName: 'userName',
