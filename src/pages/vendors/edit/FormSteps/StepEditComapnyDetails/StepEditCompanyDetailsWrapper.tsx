@@ -46,15 +46,15 @@ const formFields: Field<'companyTypeOptions' | 'ownershipTypeOptions'>[] = [
         label: 'Website Address',
         placeholder: 'Website Address',
     },
-    {
-        name: 'vendor_code',
-        label: 'Vendor Code',
-        placeholder: 'Vendor Code',
-        required: true,
-    },
+    // {
+    //     name: 'vendor_code',
+    //     label: 'Vendor Code',
+    //     placeholder: 'Vendor Code',
+    //     required: true,
+    // },
 ]
 
-const StepEditCompanyDetailsWrapper = ({ formikProps }: Props) => {
+const StepEditCompanyDetailsWrapper : any = ({ formikProps }: Props) => {
     const dropdownOptions = {
         companyTypeOptions: companyTypeOptions(),
         ownershipTypeOptions: ownershipTypeOptions(),

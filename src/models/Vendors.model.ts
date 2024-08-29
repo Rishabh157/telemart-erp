@@ -62,7 +62,7 @@ export type VendorsListResponse = {
 
 export type AddVendor = {
     companyName: string
-    vendorCode: string
+    // vendorCode: string
     companyType: string
     ownerShipType: string
     websiteAddress: string
@@ -111,7 +111,7 @@ export type AddVendor = {
 export type UpdateVendor = {
     body: {
         companyName: string
-        vendorCode: string
+        // vendorCode: string
         companyType: string
         ownerShipType: string
         websiteAddress: string

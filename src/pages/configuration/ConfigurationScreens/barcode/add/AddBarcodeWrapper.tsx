@@ -26,6 +26,7 @@ export type FormInitialValues = {
     productGroup: string
     quantity: string
     lotNumber: string
+    invoiceNumber: string
     expiryDate: string
 }
 
@@ -41,6 +42,7 @@ const AddBarcodeWrapper = (props: Props) => {
         productGroup: '',
         quantity: '',
         lotNumber: '',
+        invoiceNumber: '',
         expiryDate: '',
     }
 
@@ -51,6 +53,7 @@ const AddBarcodeWrapper = (props: Props) => {
             .moreThan(0, 'Quantity must be greater than 0')
             .required('Quantity is required'),
         lotNumber: string().required('Batch number is required'),
+        invoiceNumber: string().required('Invoice number is required'),
         expiryDate: string().required('Expiry date is required'),
     })
 
@@ -66,6 +69,7 @@ const AddBarcodeWrapper = (props: Props) => {
             barcodeGroupNumber: uniqueGrouId,
             quantity: Number(values?.quantity),
             lotNumber: values.lotNumber,
+            invoiceNumber: values.invoiceNumber,
             expiryDate: values.expiryDate,
         }).then((res) => {
             if ('data' in res) {

@@ -32,7 +32,7 @@ export type FormInitialValues = {
     company_type: string
     ownership_type: string
     website_address: string
-    vendor_code: string
+    // vendor_code: string
     regd_address: {
         phone: string
         address: string
@@ -85,7 +85,7 @@ const steps = [
             company_type: string().required('Please select company type'),
             ownership_type: string().required('Please select ownership type'),
             website_address: string().url('Invalid URL'),
-            vendor_code: string().required('Vendor code is required'),
+            // vendor_code: string().required('Vendor code is required'),
         }),
     },
     {
@@ -196,7 +196,7 @@ const AddVendorWrapper = () => {
         company_type: '',
         ownership_type: '',
         website_address: '',
-        vendor_code: '',
+        // vendor_code: '',
         regd_address: {
             phone: '',
             address: '',
@@ -260,7 +260,7 @@ const AddVendorWrapper = () => {
             setTimeout(() => {
                 addVendor({
                     companyName: values.company_name,
-                    vendorCode: values.vendor_code,
+                    // vendorCode: values.vendor_code,
                     companyType: values.company_type,
                     ownerShipType: values.ownership_type,
                     websiteAddress: values.website_address,

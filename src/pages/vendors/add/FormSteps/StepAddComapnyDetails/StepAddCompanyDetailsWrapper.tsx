@@ -47,12 +47,12 @@ const formFields: Field<'companyTypeOptions' | 'ownershipTypeOptions'>[] = [
         placeholder: 'Website Address',
         required: false,
     },
-    {
-        name: 'vendor_code',
-        label: 'Vendor Code',
-        placeholder: 'Vendor Code',
-        required: true,
-    },
+    // {
+    //     name: 'vendor_code',
+    //     label: 'Vendor Code',
+    //     placeholder: 'Vendor Code',
+    //     required: true,
+    // },
 ]
 
 const StepAddCompanyDetailsWrapper = ({ formikProps }: Props) => {

@@ -1,9 +1,3 @@
-/// ==============================================
-// Filename:EditVendorWrapper.tsx
-// Type: Edit Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
 
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
@@ -22,7 +16,6 @@ import StepEditBankDetailsWrapper from './FormSteps/StepEditBankDetails/StepEdit
 import StepEditCompanyDetailsWrapper from './FormSteps/StepEditComapnyDetails/StepEditCompanyDetailsWrapper'
 import StepEditContactWrapper from './FormSteps/StepEditContact/StepEditContactWrapper'
 import StepEditDocumentsWrapper from './FormSteps/StepEditDocuments/StepEditDocumentsWrapper'
-// import { useEditVendorMutation } from "src/services/VendorServices";
 import {
     useGetVendorByIdQuery,
     useUpdateVendorMutation,
@@ -43,7 +36,7 @@ export type FormInitialValues = {
     company_type: string
     ownership_type: string
     website_address: string
-    vendor_code: string
+    // vendor_code: string
     regd_address: {
         phone: string
         address: string
@@ -94,7 +87,7 @@ const steps = [
             company_type: string().required('Please select company type'),
             ownership_type: string().required('Please select ownership type'),
             website_address: string().url('Web Address must be valid URL'),
-            vendor_code: string().required('Vendor code is required'),
+            // vendor_code: string().required('Vendor code is required'),
         }),
     },
     {
@@ -151,11 +144,8 @@ const steps = [
                 validationofGst,
                 'gst number must be valid'
             ),
-            gst_certificate: string()
-                // .url('GST Certificate must be valid URL')
-                .required('GST certificate is required'),
+            gst_certificate: string(),
             declaration_form: string(),
-            // .url('Form must be valid URL'),
         }),
     },
     {
@@ -207,7 +197,7 @@ const EditVendorWrapper = () => {
         company_type: items?.companyType || '',
         ownership_type: items?.ownerShipType || '',
         website_address: items?.websiteAddress || '',
-        vendor_code: items?.vendorCode || '',
+        // vendor_code: items?.vendorCode || '',
         regd_address: {
             phone: items?.registrationAddress?.phone || '',
             address: items?.registrationAddress?.address || '',
@@ -256,7 +246,7 @@ const EditVendorWrapper = () => {
             editVendor({
                 body: {
                     companyName: values.company_name,
-                    vendorCode: values.vendor_code,
+                    // vendorCode: values.vendor_code,
                     companyType: values.company_type,
                     ownerShipType: values.ownership_type,
                     websiteAddress: values.website_address,

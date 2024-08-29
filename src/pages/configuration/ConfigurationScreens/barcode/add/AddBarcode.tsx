@@ -100,6 +100,23 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 }}
                             />
 
+                            <ATMTextField
+                                required
+                                name="invoiceNumber"
+                                value={values.invoiceNumber}
+                                label="Invoice Number"
+                                placeholder="Invoice Number"
+                                onChange={(e) => {
+                                    const inputValue = e.target.value
+                                    if (!isNaN(Number(inputValue))) {
+                                        handleSetFieldValue(
+                                            'invoiceNumber',
+                                            e.target.value
+                                        )
+                                    }
+                                }}
+                            />
+
                             <ATMSelectSearchable
                                 required
                                 name="productGroup"
@@ -128,20 +145,22 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 }}
                             />
 
-                            <ATMDatePicker
-                                required
-                                label="Expiry Date"
-                                name="expiryDate"
-                                // size="xs"
-                                value={values.expiryDate}
-                                dateTimeFormat="DD/MM/YY"
-                                onChange={(e) => {
-                                    setFieldValue(
-                                        'expiryDate',
-                                        moment(e).format('YYYY-MM-DD')
-                                    )
-                                }}
-                            />
+                            <div className='mt-4'>
+                                <ATMDatePicker
+                                    required
+                                    label="Expiry Date"
+                                    name="expiryDate"
+                                    // size="xs"
+                                    value={values.expiryDate}
+                                    dateTimeFormat="DD/MM/YY"
+                                    onChange={(e) => {
+                                        setFieldValue(
+                                            'expiryDate',
+                                            moment(e).format('YYYY-MM-DD')
+                                        )
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
