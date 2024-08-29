@@ -32,7 +32,6 @@ const MoveToCartonDrawer = ({
     packaging,
     vendorId,
 }: Props) => {
-    console.log('vendorId UP' , vendorId)    
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -67,8 +66,6 @@ const MoveToCartonDrawer = ({
                 vendorId: vendorId
             } // return the new object without the _id property
         })
-
-    console.log('vendorId DOWN' , vendorId)    
 
         await addInventory({ barcodedata: barcodeProduct }).then((res: any) => {
             if ('data' in res) {

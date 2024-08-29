@@ -37,12 +37,18 @@ const formFields: FieldType[] = [
         optionAccessKey: 'countryOptions',
         required: true,
     },
-
     {
         name: 'email',
         label: 'Email',
         placeholder: 'Email',
         required: true,
+    },
+    {
+        name: 'isDefault',
+        label: 'Is Primary Warehouse',
+        // placeholder: '',
+        type : 'checkbox',
+        required: false,
     },
 ]
 

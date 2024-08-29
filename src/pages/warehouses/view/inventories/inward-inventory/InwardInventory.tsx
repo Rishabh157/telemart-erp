@@ -56,9 +56,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         value: '_id',
     })
 
-    console.log('options', vendorOptions)
-
-
     // const { data, isLoading, isFetching } = useGetAllBarcodeQuery('')
     const [getBarcodeById] = useGetByBarcodeMutation()
 

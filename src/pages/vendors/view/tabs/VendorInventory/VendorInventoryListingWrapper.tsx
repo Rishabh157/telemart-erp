@@ -113,7 +113,7 @@ const VendorInventoryListingWrapper = () => {
     )
     const params = useParams()
     const vendorId = params?.vendorId
-    console.log('vendorId: ', vendorId)
+
     const { page, rowsPerPage, searchValue } = inventoriesState
     // const { userData } = useSelector((state: RootState) => state?.auth)
     const { items } = useGetCustomListingData({

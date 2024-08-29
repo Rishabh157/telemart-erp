@@ -24,6 +24,7 @@ export type FormInitialValues = {
     warehouseName: string
     country: string
     email: string
+    isDefault: boolean
     regd_address: {
         phone: string
         address: string
@@ -145,6 +146,7 @@ const AddWarehouseWrapper = () => {
     // From Initial Values
     const initialValues: FormInitialValues = {
         warehouseName: '',
+        isDefault: false,
         country: '',
         email: '',
         regd_address: {
@@ -193,6 +195,7 @@ const AddWarehouseWrapper = () => {
             setTimeout(() => {
                 addWareHouse({
                     wareHouseName: values.warehouseName,
+                    isDefault: values.isDefault,
                     country: values.country,
                     email: values.email,
                     registrationAddress: {

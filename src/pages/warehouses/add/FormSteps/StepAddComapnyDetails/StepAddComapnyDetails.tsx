@@ -14,6 +14,7 @@ import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSea
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
 
 // |-- Types --|
 type Props = {
@@ -82,8 +83,8 @@ const StepAddComapnyDetails = ({
                                         value={
                                             name.includes('.')
                                                 ? values[name.split('.')[0]][
-                                                      name.split('.')[1]
-                                                  ]
+                                                name.split('.')[1]
+                                                ]
                                                 : values[name]
                                         }
                                         onChange={(e: any) => {
@@ -91,10 +92,28 @@ const StepAddComapnyDetails = ({
                                         }}
                                         options={
                                             dropdownOptions[
-                                                field.optionAccessKey ||
-                                                    'countryOptions'
+                                            field.optionAccessKey ||
+                                            'countryOptions'
                                             ]
                                         }
+                                    />
+                                </div>
+                            )
+                        case 'checkbox':
+                            return (
+                                <div
+                                    className="-mt-2"
+                                    key={name}
+                                >
+                                    <ATMCheckbox
+                                        name={name}
+                                        label={label}
+                                        checked={Boolean(
+                                            values[name]
+                                        )}
+                                        onChange={(e) => {
+                                            setFieldValue(name, e)
+                                        }}
                                     />
                                 </div>
                             )

@@ -96,9 +96,8 @@ const AddWarehouse = ({
                                     dispatch(setFormSubmitting(true))
                                     formikProps.handleSubmit()
                                 }}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 {activeStep === steps.length - 1
                                     ? 'Submit'

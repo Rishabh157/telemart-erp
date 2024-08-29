@@ -58,6 +58,7 @@ export type AddWarehouse = {
     wareHouseName: string
     country: string
     email: string
+    isDefault: boolean
     registrationAddress: {
         phone: string
         address: string
@@ -92,6 +93,7 @@ export type UpdateWarehouse = {
         wareHouseName: string
         country: string
         email: string
+        isDefault: boolean
         registrationAddress: {
             phone: string
             address: string
