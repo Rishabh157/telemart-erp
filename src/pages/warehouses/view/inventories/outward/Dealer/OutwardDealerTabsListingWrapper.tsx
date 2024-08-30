@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
@@ -48,6 +48,8 @@ import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 import { CircularProgress } from '@mui/material'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { FormInitialValuesFilterWithLabel } from './Filters/OutwardDealerTabFilterFormWrapper';
+// import moment from 'moment'
 
 // |-- Types --|
 export type Tabs = {
@@ -97,6 +99,32 @@ const OutwardDealerTabsListingWrapper = () => {
         (state: RootState) => state?.auth
     )
 
+    // filter state
+    const [filter, setFilter] =
+        React.useState<FormInitialValuesFilterWithLabel>({
+            startDate: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endDate: {
+                fieldName: '',
+                label: '',
+                value: ''
+            },
+            startTime: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endTime: { fieldName: '', label: '', value: '' },
+            orderStatus: {
+                fieldName: 'orderStatus',
+                label: 'Not Dispatched',
+                value: 'NOT_DISPATCHED',
+            },
+        })
+
     const { items } = useGetCustomListingData<OutwardRequestDealerListResponse>(
         {
             useEndPointHook: useGetPaginationSaleOrderByGroupQuery({
@@ -121,8 +149,15 @@ const OutwardDealerTabsListingWrapper = () => {
                         fieldName: 'accApproved',
                         value: true,
                     },
+                    {
+                        fieldName: 'status',
+                        value: filter?.orderStatus?.value
+                    },
                 ],
-                dateFilter: {},
+                dateFilter: {
+                    startDate: filter.startDate.value as string,
+                    endDate: filter.endDate.value as string,
+                },
                 orderBy: 'createdAt',
                 orderByValue: -1,
                 isPaginationRequired: true,
@@ -162,7 +197,7 @@ const OutwardDealerTabsListingWrapper = () => {
     // Form Validation Schema
     const validationSchema = object({
         transportnameId: string().required('Please select a transportname'),
-        transporterGST: string().required('Please select a transporter GST'),
+        // transporterGST: string().required('Please select a transporter GST'),
         mode: string().required('Please select a mode'),
         distance: string().required('Please select a distance'),
         vehicleNumber: string().required('Please select a vehicle no.'),
@@ -192,7 +227,7 @@ const OutwardDealerTabsListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => {}}
+                        handleOnAction={() => { }}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -326,7 +361,7 @@ const OutwardDealerTabsListingWrapper = () => {
                         bcode: [barcodeNumber],
                     },
                 })
-                    .then((res) => {})
+                    .then((res) => { })
                     .catch((err) => console.error(err))
             }
         })
@@ -378,7 +413,7 @@ const OutwardDealerTabsListingWrapper = () => {
                             bcode: [barcodeNumber],
                         },
                     })
-                        .then((res) => {})
+                        .then((res) => { })
                         .catch((err) => console.error(err))
                 } else {
                     showToast('error', res?.data?.message)
@@ -440,7 +475,7 @@ const OutwardDealerTabsListingWrapper = () => {
                             bcode: dispatchBarcodeList,
                         },
                     })
-                        .then((res) => {})
+                        .then((res) => { })
                         .catch((err) => console.error(err))
                 } else {
                     showToast('error', res?.data?.message)
@@ -482,9 +517,15 @@ const OutwardDealerTabsListingWrapper = () => {
         }
     }
 
+
     return (
         <>
-            <OutwardRequestListing columns={columns} rows={items} />
+            <OutwardRequestListing
+                columns={columns}
+                rows={items}
+                filter={filter}
+                setFilter={setFilter}
+            />
             <DialogLogBox
                 isOpen={isShow}
                 fullScreen={true}
@@ -628,7 +669,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                                ''
+                                                            ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(
@@ -680,11 +721,9 @@ const OutwardDealerTabsListingWrapper = () => {
                                                 />
 
                                                 <ATMTextField
-                                                    required
+                                                    // required
                                                     name="transporterGST"
-                                                    value={
-                                                        values.transporterGST
-                                                    }
+                                                    value={values.transporterGST}
                                                     label="Transporter GST"
                                                     placeholder="transporter GST"
                                                     className="mt-0 rounded"
@@ -874,7 +913,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                                 setFieldValue
                                                             )
                                                         }}
-                                                        // isSubmitting={false}
+                                                    // isSubmitting={false}
                                                     />
                                                     {imageApiStatus ? (
                                                         <div className="mt-3">

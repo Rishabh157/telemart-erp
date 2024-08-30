@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
+import { Chip, Stack } from '@mui/material'
 
 // |-- Redux --|
 import {
@@ -15,21 +16,99 @@ import {
     setPage,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import OutwardGpoOrderFilterFormWrapper from '../GpoOrders/Filters/OutwardGpoOrderFilterFormWrapper'
+
+type LabelValuePair = {
+    fieldName: string
+    label: string
+    value: any
+}
+
+// Define the type for FormInitialValuesFilter
+type FormInitialValuesFilterWithLabel = {
+    orderStatus: LabelValuePair
+    startDate: LabelValuePair
+    endDate: LabelValuePair
+    startTime: LabelValuePair
+    endTime: LabelValuePair
+}
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
+    filter: FormInitialValuesFilterWithLabel
+    setFilter: React.Dispatch<React.SetStateAction<FormInitialValuesFilterWithLabel>>
 }
 
-const OutwardDealerTabs = ({ columns, rows }: Props) => {
+const OutwardDealerTabs = ({ columns, rows, filter, setFilter }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const outwardRequestState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] = useState({
+        isFilterOpen: false,
+        isMenifest: false,
+    })
     const [selectedRows, setSelectedRows] = useState([])
 
     const { page, rowsPerPage, isTableLoading } = outwardRequestState
+
+
+
+    const handleReset = () => {
+        setFilter((prev) => ({
+            ...prev,
+            startDate: { fieldName: '', value: '', label: '' },
+            endDate: { fieldName: '', value: '', label: '' },
+            startTime: { fieldName: '', value: '', label: '' },
+            endTime: { fieldName: '', value: '', label: '' },
+            orderStatus: { fieldName: '', value: '', label: '' },
+        }))
+    }
+
+    const filterShow = (filter: FormInitialValuesFilterWithLabel) => {
+        return (
+            <span className="capitalize">
+                <Stack direction="row" spacing={1}>
+                    {Object.entries(filter).map(([key, value], index) => {
+                        return value.value ? (
+                            <Chip
+                                key={index}
+                                label={`${value.fieldName}: ${value.label}`}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : null
+                    })}
+                </Stack>
+            </span>
+        )
+    }
+
+    // const isFilterApplied = (isMenifest: boolean, isRedirect: boolean) => {
+    //     let keys: string = ''
+    //     for (keys in filter) {
+    //         if (
+    //             filter[keys as keyof typeof filter].value !== '' &&
+    //             isMenifest === true &&
+    //             isRedirect === true
+    //         )
+    //             return true
+    //     }
+    //     return false
+    // }
+
+    useEffect(() => {
+        return () => {
+            setIsOpenFilterFormDialog({
+                isFilterOpen: false,
+                isMenifest: false,
+            })
+            // setIsRedirect(false)
+        }
+    }, [])
 
     return (
         // <div className="px-4 h-full flex flex-col gap-2 w-full">
@@ -44,8 +123,45 @@ const OutwardDealerTabs = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog((prev) => ({
+                            ...prev,
+                            isFilterOpen: true,
+                        }))
+                        // setIsRedirect(false)
+                    }}
+                    isFilterRemover
+                    onFilterRemoverClick={handleReset}
+                    filterShow={filterShow(filter)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
+                />
+
+                <OutwardGpoOrderFilterFormWrapper
+                    open={isOpenFilterFormDialog}
+                    filter={filter}
+                    setFilter={setFilter}
+                    onClose={() => {
+                        setIsOpenFilterFormDialog((prev) => ({
+                            ...prev,
+                            isFilterOpen: false,
+                        }))
+                        // if (
+                        //     isFilterApplied(
+                        //         isOpenFilterFormDialog.isMenifest,
+                        //         // isRedirect
+                        //     )
+                        // ) {
+                        //     navigate('/menifest-invoice-orders', {
+                        //         state: {
+                        //             filter,
+                        //             warehouseId,
+                        //             providerName: courierCompanyEnum.gpo,
+                        //         },
+                        //     })
+                        // }
+                    }}
                 />
 
                 {/* Table */}
@@ -53,7 +169,7 @@ const OutwardDealerTabs = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        
+
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

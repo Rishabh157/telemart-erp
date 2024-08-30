@@ -287,6 +287,19 @@ const OutwardOtherCourierOrdersTabListing = ({
                                         loadingText="..."
                                     />
                                 </div>
+
+                                <div className="mt-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            // formikProps.handleSubmit()
+                                            navigate('/configurations/awb-master')
+                                        }}
+                                        className={`mr-2 bg-primary-main rounded py-2 px-2 text-white text-xs border hover:bg-blue-800 cursor-pointer border-primary-main`}
+                                    >
+                                        Redirect AWB
+                                    </button>
+                                </div>
                             </div>
                         </>
                     }

@@ -106,6 +106,7 @@ const OutwardGpoOrdersTabListing = ({
             </span>
         )
     }
+    
     const isFilterApplied = (isMenifest: boolean, isRedirect: boolean) => {
         let keys: string = ''
         for (keys in filter) {
