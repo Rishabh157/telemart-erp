@@ -17,6 +17,7 @@ export type BarcodeListResponseType = {
     status: string
     companyId: string
     isDeleted: boolean
+    invoiceNumber : string
     isActive: boolean
     isFreezed: boolean
     expiryDate: boolean

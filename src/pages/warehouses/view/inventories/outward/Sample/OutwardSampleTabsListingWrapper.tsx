@@ -287,6 +287,7 @@ const OutwardSampleTabsListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                invoiceNumber,
                 wareHouseLabel,
                 productGroupLabel,
                 vendorId,

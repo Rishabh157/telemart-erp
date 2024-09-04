@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react'
 
 // |-- External Dependencies --|
-import { Chip, Stack } from '@mui/material'
+import { Chip, CircularProgress, Stack } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -74,7 +74,7 @@ const SaleOrderListingWrapper = () => {
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
     // Upload File Mutation
-    const [uploadFile] = useAddFileUrlMutation()
+    const [uploadFile, uploadFileInfo] = useAddFileUrlMutation()
 
     const { items } = useGetCustomListingData<SaleOrderListResponseTypes>({
         useEndPointHook: useGetPaginationSaleOrderByGroupQuery({
@@ -430,8 +430,8 @@ const SaleOrderListingWrapper = () => {
                         {row?.dhApproved
                             ? 'Done'
                             : row?.dhApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}{' '}
+                                ? 'Pending'
+                                : 'Rejected'}{' '}
                     </span>
                 )
             },
@@ -472,8 +472,8 @@ const SaleOrderListingWrapper = () => {
                         {row?.accApproved
                             ? 'Done'
                             : row?.accApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -732,7 +732,7 @@ const SaleOrderListingWrapper = () => {
                             <span
                                 className="underline text-primary-main"
                                 style={{ cursor: 'pointer' }}
-                                onClick={() => {}}
+                                onClick={() => { }}
                             >
                                 PRINT EWB
                             </span>
@@ -742,6 +742,9 @@ const SaleOrderListingWrapper = () => {
             },
         },
     ]
+
+
+    console.log('uploadFileInfo?.isLoading' , uploadFileInfo?.isLoading);    
 
     return (
         <SideNavLayout>
@@ -760,6 +763,11 @@ const SaleOrderListingWrapper = () => {
                     invoice={invoiceData || null}
                 />
             </div>
+
+            {uploadFileInfo?.isLoading ? <div className="absolute opacity-70 z-50 top-0 flex items-center justify-center h-[100vh] w-full bg-white">
+                <CircularProgress />
+            </div> : null}
+
 
             {/* Do Not Delete This */}
             {/* {pdfFile && (
