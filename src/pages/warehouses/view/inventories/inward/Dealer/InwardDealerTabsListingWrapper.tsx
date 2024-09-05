@@ -444,7 +444,7 @@ const InwardDealerTabsListingWrapper = () => {
         setBarcodeList(barcode)
     }
 
-    const handleBarcodeSubmit = (
+    const f = (
         barcodeNumber: string,
         index: number,
         productGroupId: string
@@ -490,6 +490,7 @@ const InwardDealerTabsListingWrapper = () => {
     const handleDispatchBarcode = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
             const {
+                invoiceNumber,
                 wareHouseLabel,
                 dtw,
                 companyId,
@@ -658,7 +659,7 @@ const InwardDealerTabsListingWrapper = () => {
                                                         e.target.value?.length >
                                                         6
                                                     ) {
-                                                        handleBarcodeSubmit(
+                                                        f(
                                                             e.target.value,
                                                             docIndex,
                                                             document

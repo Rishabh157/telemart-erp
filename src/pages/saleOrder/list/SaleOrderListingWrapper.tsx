@@ -743,9 +743,6 @@ const SaleOrderListingWrapper = () => {
         },
     ]
 
-
-    console.log('uploadFileInfo?.isLoading' , uploadFileInfo?.isLoading);    
-
     return (
         <SideNavLayout>
             <div className="relative z-50">

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:OutwardDealerTabs.tsx
-// Type: List Component
-// Last Updated: JUNE 27, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
 
@@ -58,7 +51,7 @@ const InwardDealerTabs = ({ columns, rows }: Props) => {
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
                         columns={columns}
                         rows={rows}
@@ -67,7 +60,7 @@ const InwardDealerTabs = ({ columns, rows }: Props) => {
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        extraClasses="overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

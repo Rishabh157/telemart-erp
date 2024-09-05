@@ -295,6 +295,7 @@ const InwardCompanyTabsListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                invoiceNumber,
                 wtwId,
                 companyId,
                 productGroupLabel,

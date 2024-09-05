@@ -430,6 +430,7 @@ const OutwardDealerTabsListingWrapper = () => {
 
                 const {
                     // barcodeNumber,
+                    invoiceNumber,
                     wareHouseLabel,
                     productGroupLabel,
                     vendorId,
@@ -516,7 +517,6 @@ const OutwardDealerTabsListingWrapper = () => {
             // Handle error here if needed
         }
     }
-
 
     return (
         <>

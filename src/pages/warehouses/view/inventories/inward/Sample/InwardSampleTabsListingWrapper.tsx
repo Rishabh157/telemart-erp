@@ -107,7 +107,7 @@ const InwardSampleTabsListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => {}}
+                        handleOnAction={() => { }}
                         isCustomBtn={true}
                         customBtnText="Inward"
                         handleCustomActionButton={() => {
@@ -280,6 +280,7 @@ const InwardSampleTabsListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                invoiceNumber,
                 productGroupLabel,
                 companyId,
                 outerBoxbarCodeNumber,
@@ -314,7 +315,7 @@ const InwardSampleTabsListingWrapper = () => {
         })
             .then((res: any) => {
                 if (res?.data?.status) {
-                    showToast('success', 'added successfully')
+                    showToast('success', 'inward successfully')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))
                 } else {
@@ -479,7 +480,7 @@ const InwardSampleTabsListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                                ''
+                                                            ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(

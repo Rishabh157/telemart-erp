@@ -326,6 +326,9 @@ import ReportsLayout from './pages/reports/ReportsLayout'
 import AgentDetails from './pages/reports/AgentDetails'
 import AgentOrderStatusWrapper from './pages/reports/AgentDetails/wrappers/AgentOrderStatusWrapper'
 import AgentWiseComplaintWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseComplaintWrapper'
+import EcomMasterListingWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/list/EcomMasterListingWrapper'
+import AddEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/add/AddEcomMasterWrapper'
+import EditEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/edit/EditEcomMasterWrapper'
 
 
 const PageRoutes = () => {
@@ -2199,6 +2202,41 @@ const PageRoutes = () => {
                                 children={<EditCompanyBranchWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_COMPANY_EDIT
+                                }
+                            />
+                        }
+                    />
+
+
+
+                    {/* Configuration -> E-Com Master */}
+                    <Route
+                        path="ecom-master"
+                        element={
+                            <Authorization
+                                children={<EcomMasterListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ATTRIBUTE}
+                            />
+                        }
+                    />
+                    <Route
+                        path="ecom-master/add"
+                        element={
+                            <Authorization
+                                children={<AddEcomMasterWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ATTRIBUTE_ADD
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="ecom-master/:id"
+                        element={
+                            <Authorization
+                                children={<EditEcomMasterWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_ATTRIBUTE_EDIT
                                 }
                             />
                         }

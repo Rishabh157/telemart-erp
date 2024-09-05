@@ -297,6 +297,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                invoiceNumber,
                 wareHouseLabel,
                 productGroupLabel,
                 vendorId,

@@ -109,7 +109,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => {}}
+                        handleOnAction={() => { }}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -302,6 +302,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                invoiceNumber,
                 wareHouseLabel,
                 productGroupLabel,
                 vendorId,
@@ -318,8 +319,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
             } = ele
             return {
                 ...rest,
-                toCompanyId:
-                    selectedItemsTobeDispatch?.documents[0]?.toCompanyId,
+                toCompanyId: selectedItemsTobeDispatch?.documents[0]?.toCompanyId,
             }
         })
 
@@ -382,7 +382,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
                                     <div >
                                         {capitalizeFirstLetter(
                                             selectedItemsTobeDispatch?.toWarehouseLabel ||
-                                                ''
+                                            ''
                                         )}
                                     </div>
                                 </div>
@@ -497,7 +497,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                                ''
+                                                            ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(
