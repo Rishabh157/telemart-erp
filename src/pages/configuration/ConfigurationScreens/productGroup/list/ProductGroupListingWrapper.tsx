@@ -118,6 +118,15 @@ const ProductGroupListingWrapper = () => {
             },
         },
         {
+            field: 'productGroupCode',
+            headerName: 'Product Group Code',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.PRODUCT_GROUP_LIST_PRODUCT_GROUP_CODE,
+            renderCell: (row: ProductGroupListResponse) => {
+                return <span> {row.productGroupCode} </span>
+            },
+        },
+        {
             field: 'dealerSalePrice',
             headerName: 'Dealer Sale Price ',
             flex: 'flex-[1.5_1.5_0%]',

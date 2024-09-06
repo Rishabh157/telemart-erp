@@ -1,13 +1,7 @@
-/// ==============================================
-// Filename:ProductGroup.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type ProductGroupListResponse = {
     companyId: string
+    productGroupCode: string
     groupName: string
     gst: number
     dealerSalePrice: number
@@ -25,6 +19,7 @@ export type ProductGroupListResponse = {
 
 export type AddProductGroup = {
     groupName: string
+    productGroupCode: string
     dealerSalePrice: number
     companyId: string
     gst: number
@@ -37,6 +32,7 @@ export type AddProductGroup = {
 export type UpdateProductGroup = {
     body: {
         dealerSalePrice: number
+        // productGroupCode: number
         groupName: string
         gst: number
         sgst: number

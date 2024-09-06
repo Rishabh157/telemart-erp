@@ -16,6 +16,11 @@
                     "fieldValue": "companyName"
                 },
                 {
+                    "fieldId": "COMPANY_LIST_COMAPNY_CODE",
+                    "fieldName": "Company Code",
+                    "fieldValue": "companyCode"
+                },
+                {
                     "fieldId": "COMPANY_LIST_WEBSITE_URL",
                     "fieldName": "Website Url",
                     "fieldValue": "websiteUrl"

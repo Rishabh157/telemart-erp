@@ -39,14 +39,20 @@ const MoveToCartonDrawer = ({
     const [addInventory] = useInwardInventoryBarcodeMutation()
     const handleSave = async () => {
         const barCodesToPrint = productDetail?.map((ele) => {
-            return ele?.barcodeNumber
+            return {
+                barcodeNumber: ele?.barcodeNumber,
+                upperBarcodeNumber: ele?.upperBarcodeNumber
+            }
+
         })
+
         setApiStatus(true)
         dispatch(setBarcodesToPrint(barCodesToPrint))
 
         const barcodeProduct = productDetail.map((ele) => {
             const {
                 // barcodeNumber,
+                upperBarcodeNumber,
                 productGroupLabel,
                 outerBoxbarCodeNumber,
                 createdAt,
@@ -84,7 +90,7 @@ const MoveToCartonDrawer = ({
                                 res?.data?.data?.outerBoxbarCodeNumber,
                             productGroupLabel:
                                 productDetail[0].productGroupLabel,
-                            productCode: productDetail[0].productCode,
+                            productGroupCode: productDetail[0].productGroupCode,
                             expiryDate: productDetail[0].expiryDate,
                             lotNumber: productDetail[0].lotNumber,
                         },

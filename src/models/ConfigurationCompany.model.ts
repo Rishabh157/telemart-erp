@@ -1,6 +1,7 @@
 // |-- Types --|
 export type ConfigurationCompanyListResponse = {
     companyName: string
+    companyCode: string
     websiteUrl: string
     address: string
     gstNo: string

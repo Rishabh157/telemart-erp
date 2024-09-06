@@ -24,7 +24,7 @@ type Props = {
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: 'Ecom Master',
-        path: '/configurations/ecom',
+        path: '/configurations/ecom-master',
     },
     {
         label: 'Add',

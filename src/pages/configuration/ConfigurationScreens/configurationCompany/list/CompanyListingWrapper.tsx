@@ -114,6 +114,15 @@ const ConfigurationCompanyListingWrapper = () => {
             },
         },
         {
+            field: 'companyCode',
+            headerName: 'Company Code',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.COMPANY_LIST_COMAPNY_CODE,
+            renderCell: (row: ConfigurationCompanyListResponse) => {
+                return <span> {row.companyCode} </span>
+            },
+        },
+        {
             field: 'websiteUrl',
             headerName: 'Website URL ',
             flex: 'flex-[1.5_1.5_0%]',

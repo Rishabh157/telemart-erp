@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ProductGroupBarcodeListing.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect } from 'react'
 
@@ -41,7 +34,9 @@ function AllBarcodes() {
     const { barcodesToPrint }: any = useSelector(
         (state: RootState) => state?.barcode
     )
+
     const barcodeValues = barcodesToPrint
+
     useEffect(() => {
         const printFunc = setTimeout(() => {
             window?.print()
@@ -66,7 +61,7 @@ function AllBarcodes() {
             {outerBoxCode ? (
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 gap-2 mt-2 ">
                     <div className={`flex flex-col gap-x-4 shadow relative`}>
-                        <p className="flex justify-center font-normal text-[0.6rem]  tracking-[.25em]">
+                        <p className="flex justify-center font-normal text-[0.6rem] tracking-[.25em]">
                             PJ0039282
                         </p>
                         <Barcode value={outerBoxCode} />
@@ -89,17 +84,20 @@ function AllBarcodes() {
                 ))}
             </div> */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-2 mt-2 ">
-                {barcodeValues?.map((value: string, index: number) => (
+                {barcodeValues?.map((barcode: {
+                    barcodeNumber: string
+                    upperBarcodeNumber: string
+                }, index: number) => (
                     <div
-                        key={index}
+                        key={barcode?.barcodeNumber}
                         className={`flex flex-col gap-x-4 shadow relative w-full py-4 px-4 `}
                     >
                         <p className="flex justify-center font-normal text-[0.6rem] tracking-[.25em]">
-                            PJ0039282
+                            {barcode?.upperBarcodeNumber}
                         </p>
-                        <Barcode key={index} value={value} />
+                        <Barcode key={index} value={barcode?.barcodeNumber} />
                         <div className="w-full flex justify-center p-0 tracking-[.25em] text-[0.6rem] ">
-                            {value}
+                            {barcode?.barcodeNumber}
                         </div>
                     </div>
                 ))}
@@ -107,4 +105,5 @@ function AllBarcodes() {
         </div>
     )
 }
+
 export default AllBarcodes

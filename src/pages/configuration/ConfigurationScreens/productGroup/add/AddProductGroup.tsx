@@ -15,6 +15,7 @@ import { FormInitialValues } from './AddProductGroupWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { handleValidCharchater } from 'src/utils/methods/charchterMethods'
 
 // |-- Types --|
 type Props = {
@@ -77,14 +78,14 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grid gap-4 px-3 pt-2 grow pb-9 ">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* Product Group Name  */}
                             <ATMTextField
                                 required
                                 name="groupName"
                                 value={values.groupName}
-                                label="Group Name"
-                                placeholder="Group Name"
+                                label="Product Group Name"
+                                placeholder="Product Group Name"
                                 onChange={(e) =>
                                     handleSetFieldValue(
                                         'groupName',
@@ -92,6 +93,29 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                     )
                                 }
                             />
+
+                            <ATMTextField
+                                required
+                                name="productGroupCode"
+                                value={values.productGroupCode}
+                                label="Product Group Code"
+                                placeholder="Product Group Code"
+                                onChange={(e: any) => {
+                                    if (!e.target?.value) {
+                                        handleSetFieldValue(
+                                            'productGroupCode',
+                                            e.target.value
+                                        )
+                                    } else {
+                                        handleValidCharchater(e) &&
+                                            handleSetFieldValue(
+                                                'productGroupCode',
+                                                e.target.value
+                                            )
+                                    }
+                                }}
+                            />
+
                             <ATMTextField
                                 required
                                 name="dealerSalePrice"
@@ -109,6 +133,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 }}
                             />
                         </div>
+
                         <div className="grid grid-cols-4 gap-4">
                             <ATMTextField
                                 name="cgst"

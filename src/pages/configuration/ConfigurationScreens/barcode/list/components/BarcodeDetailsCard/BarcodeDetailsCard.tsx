@@ -1,13 +1,6 @@
-/// ==============================================
-// Filename:BarcodeDetailsCard.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- External Dependencies --|
 import { BiCheck } from 'react-icons/bi'
-import { HiDotsVertical } from 'react-icons/hi'
+// import { HiDotsVertical } from 'react-icons/hi'
 import { BarcodeListResponseType } from 'src/models'
 
 // |-- Types --|
@@ -29,7 +22,7 @@ const BarcodeDetailsCard = ({
     onBarcodeClick,
 }: BarcodeCardProps) => {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-5 py-3 px-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-5 py-3 px-3">
             {barcodeList.map(
                 (barcode: BarcodeListResponseType, barcodeIndex: number) => {
                     const isBarcodeSeleted =
@@ -38,7 +31,7 @@ const BarcodeDetailsCard = ({
                         ) !== -1
                     return (
                         <div
-                            key={barcode._id}
+                            key={barcode?._id}
                             onClick={() => {
                                 onBarcodeClick(barcode)
                             }}
@@ -89,10 +82,15 @@ const BarcodeDetailsCard = ({
                                         Barcode No. 
                                     </div>
                                     <div>{barcode?.barcodeNumber} </div>
+                                   
+                                    <div className="text-[10px] text-slate-500 mt-2">
+                                        Upper Barcode No. 
+                                    </div>
+                                    <div>{barcode?.upperBarcodeNumber} </div>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <HiDotsVertical />
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className="text-primary-main font-medium grow flex items-end">

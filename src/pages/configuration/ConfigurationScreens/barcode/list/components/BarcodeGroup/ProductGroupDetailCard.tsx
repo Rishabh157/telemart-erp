@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { BiCheck } from 'react-icons/bi'
-import { HiDotsVertical } from 'react-icons/hi'
+// import { HiDotsVertical } from 'react-icons/hi'
 import { ProductBarcodeGroupResponse } from 'src/models'
 import moment from 'moment'
 import { BsPrinter } from 'react-icons/bs'
@@ -47,10 +47,16 @@ const ProductGroupDetailCard = ({
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
+            
             const allBarcodes = data?.data?.map((ele: any) => {
-                return ele?.barcodeNumber
+                return {
+                    barcodeNumber: ele?.barcodeNumber,
+                    upperBarcodeNumber: ele?.upperBarcodeNumber
+                }
             })
+
             dispatch(setBarcodesToPrint(allBarcodes))
+
             if (data?.data !== undefined) {
                 navigate('/barcodes', {
                     state: { path: '/configurations/barcode' },
@@ -77,11 +83,10 @@ const ProductGroupDetailCard = ({
                                 onClick={() => {
                                     //onBarcodeClick(barcode)
                                 }}
-                                className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
-                                    false
+                                className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${false
                                         ? ' border-red-500'
                                         : 'border-slate-200'
-                                }`}
+                                    }`}
                             >
                                 {/*Checkbox */}
                                 <button
@@ -107,9 +112,9 @@ ${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}`}
                                             </span>
                                         )}
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         <HiDotsVertical />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="flex justify-between">
                                     <div className=" text-slate-500 mr-10 w-34">

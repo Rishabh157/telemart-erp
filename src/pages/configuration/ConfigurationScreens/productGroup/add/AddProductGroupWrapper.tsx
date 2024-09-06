@@ -19,6 +19,7 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 // |-- Types --|
 export type FormInitialValues = {
     groupName: string
+    productGroupCode: string
     dealerSalePrice: number
     gst: number
     sgst: number
@@ -38,6 +39,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
 
     const initialValues: FormInitialValues = {
         groupName: '',
+        productGroupCode : '',
         dealerSalePrice: 0,
         gst: 0,
         sgst: 0,
@@ -49,6 +51,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
     // Form Validation Schema
     const validationSchema = object({
         groupName: string().required('Group name is required'),
+        productGroupCode: string().required('Product group code is required'),
         dealerSalePrice: number().required('Dealer sale price is required'),
         gst: number(),
         sgst: number(),
@@ -65,6 +68,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
         setTimeout(() => {
             addProductGroup({
                 dealerSalePrice: values.dealerSalePrice,
+                productGroupCode : values.productGroupCode,
                 groupName: values.groupName,
                 gst: values.gst,
                 sgst: values.sgst,

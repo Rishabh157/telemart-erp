@@ -16,6 +16,11 @@
                     "fieldValue": "groupName"
                 },
                 {
+                    "fieldId": "PRODUCT_GROUP_LIST_PRODUCT_GROUP_CODE",
+                    "fieldName": "Product Group Code",
+                    "fieldValue": "productGroupCode"
+                },
+                {
                     "fieldId": "PRODUCT_GROUP_LIST_DEALER_SALE_PRICE",
                     "fieldName": "Dealer Sale Price",
                     "fieldValue": "dealerSalePrice"

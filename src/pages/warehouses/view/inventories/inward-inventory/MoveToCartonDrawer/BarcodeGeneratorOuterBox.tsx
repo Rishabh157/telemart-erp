@@ -29,7 +29,7 @@ function BarcodeGeneratorOuterBox() {
     const {
         path,
         outerBoxCode,
-        productCode,
+        // productGroupCode,
         productGroupLabel,
         expiryDate,
         lotNumber,
@@ -68,10 +68,10 @@ function BarcodeGeneratorOuterBox() {
                             <span>Master Id: </span>
                             <span>651</span>
                         </div>
-                        <div className="flex gap-4">
+                        {/* <div className="flex gap-4">
                             <span>product Code: </span>
-                            <span>{productCode}</span>
-                        </div>
+                            <span>{productGroupCode}</span>
+                        </div> */}
                         <div className="flex gap-4">
                             <span> product Name: </span>
                             <span>{productGroupLabel}</span>
@@ -111,14 +111,20 @@ function BarcodeGeneratorOuterBox() {
             </div> */}
             <Divider className="mt-3" />
             <div className="grid grid-cols-4 md:grid-cols-4 gap-x-3 gap-y-1 mt-5 ">
-                {barcodeValues?.map((value: string, index: number) => (
+                {barcodeValues?.map((barcode: {
+                    barcodeNumber: string
+                    upperBarcodeNumber: string
+                }, index: number) => (
                     <div
-                        key={index}
+                        key={barcode?.barcodeNumber}
                         className={`flex flex-col gap-x-4 shadow relative w-full py-4 px-4 custom-border border-2 border-indigo-500 `}
                     >
-                        <Barcode key={index} value={value} />
+                        <p className="flex justify-center font-normal text-[0.6rem] tracking-[.25em]">
+                            {barcode?.upperBarcodeNumber}
+                        </p>
+                        <Barcode value={barcode?.barcodeNumber} />
                         <div className="w-full flex justify-center p-0 tracking-[.60em] text-[0.60rem] ">
-                            {value}
+                            {barcode?.barcodeNumber}
                         </div>
                     </div>
                 ))}
