@@ -221,8 +221,8 @@ const InwardCustomerTabsListingWrapper = () => {
             headerName: 'Action',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: any) => (
-                <ActionPopup
-                    handleOnAction={() => {}}
+                !row?.isCompleted && <ActionPopup
+                    handleOnAction={() => { }}
                     // moduleName={UserModuleNameTypes.saleOrder}
                     isCustomBtn={true}
                     customBtnText="Dispatch"
@@ -399,7 +399,7 @@ const InwardCustomerTabsListingWrapper = () => {
                                                 }
                                                 productGroupLabel={capitalizeFirstLetter(
                                                     barcode?.productGroupLabel ||
-                                                        ''
+                                                    ''
                                                 )}
                                                 handleRemoveBarcode={() => {
                                                     handleRemoveBarcode(
@@ -422,18 +422,18 @@ const InwardCustomerTabsListingWrapper = () => {
                                                     // Ensure barcodeIndex is defined and within bounds
                                                     if (
                                                         barcodeIndex !==
-                                                            undefined &&
+                                                        undefined &&
                                                         barcodeIndex >= 0 &&
                                                         barcodeIndex <
-                                                            updatedBarcodeList.length
+                                                        updatedBarcodeList.length
                                                     ) {
                                                         // Retrieve the object at barcodeIndex
                                                         const updatedBarcodeObj =
-                                                            {
-                                                                ...updatedBarcodeList[
-                                                                    barcodeIndex
-                                                                ],
-                                                            }
+                                                        {
+                                                            ...updatedBarcodeList[
+                                                            barcodeIndex
+                                                            ],
+                                                        }
 
                                                         // Update the 'condition' property of the object
                                                         updatedBarcodeObj.condition =

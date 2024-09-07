@@ -248,6 +248,7 @@ const OutwardSampleTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
+            isSendingToDealer: false
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -287,6 +288,8 @@ const OutwardSampleTabsListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                isUsedFresh,
+                upperBarcodeNumber,
                 invoiceNumber,
                 wareHouseLabel,
                 productGroupLabel,

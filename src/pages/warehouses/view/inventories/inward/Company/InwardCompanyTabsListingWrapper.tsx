@@ -257,6 +257,7 @@ const InwardCompanyTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.wtc,
+            isSendingToDealer: false
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -295,6 +296,8 @@ const InwardCompanyTabsListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                upperBarcodeNumber,
+                isUsedFresh,
                 invoiceNumber,
                 wtwId,
                 companyId,

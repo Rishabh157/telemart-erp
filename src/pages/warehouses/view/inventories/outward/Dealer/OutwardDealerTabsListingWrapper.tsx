@@ -381,6 +381,7 @@ const OutwardDealerTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
+            isSendingToDealer: true
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -404,9 +405,10 @@ const OutwardDealerTabsListingWrapper = () => {
                             )
                             newBarcode[index] = [...uniqueArray]
                         }
-
                         setBarcodeList([...newBarcode])
                     }
+
+                    // Freezed Api
                     updateBarcodeStatus({
                         status: true,
                         body: {
@@ -415,14 +417,25 @@ const OutwardDealerTabsListingWrapper = () => {
                     })
                         .then((res) => { })
                         .catch((err) => console.error(err))
-                } else {
+                }
+
+
+                // error messages
+                if (!res?.data?.status) {
                     showToast('error', res?.data?.message)
                 }
+
+                if (res?.error) {
+                    showToast('error', res?.error?.data?.message)
+                }
+
             })
             .catch((err) => console.error(err))
     }
 
     const onSubmitHandler = (values: FormInitialValues) => {
+
+        console.log('barcodeList', barcodeList);
         const filterValue = barcodeList
             ?.flat(1)
             ?.map((ele: BarcodeListResponseType) => {
@@ -430,6 +443,8 @@ const OutwardDealerTabsListingWrapper = () => {
 
                 const {
                     // barcodeNumber,
+                    isUsedFresh,
+                    upperBarcodeNumber,
                     invoiceNumber,
                     wareHouseLabel,
                     productGroupLabel,
@@ -445,7 +460,10 @@ const OutwardDealerTabsListingWrapper = () => {
                     expiryDate,
                     ...rest
                 } = ele
-                return rest
+                return {
+                    ...rest,
+                    dealerId: selectedItemsTobeDispatch?.documents[0]?.dealerId
+                }
             })
 
         const dispatchBarcodeList = barcodeList
@@ -490,6 +508,8 @@ const OutwardDealerTabsListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
+
+    console.log('handleDisableDispatchButton', handleDisableDispatchButton());
 
     const handleFileUpload = async (file: File, setFieldValue: any) => {
         let fileUrl = ''

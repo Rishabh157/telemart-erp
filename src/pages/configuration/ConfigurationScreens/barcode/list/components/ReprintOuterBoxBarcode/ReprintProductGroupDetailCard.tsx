@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { BiCheck } from 'react-icons/bi'
-import { HiDotsVertical } from 'react-icons/hi'
+// import { HiDotsVertical } from 'react-icons/hi'
 import { ProductBarcodeGroupResponse } from 'src/models'
 import moment from 'moment'
 import { BsPrinter } from 'react-icons/bs'
@@ -42,13 +42,12 @@ const ReprintProductGroupDetailCard = ({
     const [barcodes, setBarcodes] = useState<string[]>([])
     const [outerBarcode, setOuterBarcode] = useState<any>({})
 
+    // console.log('barcodes: ', barcodes)
     useEffect(() => {
         if (barcodes.length) {
             dispatch(setBarcodesToPrint(barcodes))
-            if (barcodes.length) {
-                // navigate('/barcodes-outerbox', {
-                //     state: { path: '/configurations/barcode' },
-                // })
+            if (barcodes?.length) {
+
                 navigate(`/barcodes-outerbox`, {
                     state: {
                         path: `/configurations/barcode`,
@@ -72,14 +71,16 @@ const ReprintProductGroupDetailCard = ({
                             selectedProductGroupBarcodes.findIndex(
                                 (selected) => selected._id === barcode._id
                             ) !== -1
+
+                        console.log('barcode', barcode)
+
                         return (
                             <div
                                 key={barcode?._id}
-                                className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${
-                                    false
+                                className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${false
                                         ? ' border-red-500'
                                         : 'border-slate-200'
-                                }`}
+                                    }`}
                             >
                                 {/*Checkbox */}
                                 <button
@@ -91,11 +92,10 @@ const ReprintProductGroupDetailCard = ({
                                         )
                                     }
                                     className={`flex justify-center items-center h-5 w-5 rounded-full border border-slate-400 shadow font-bold absolute -right-2 -top-2
-                                    ${
-                                        isBarcodeSeleted
+                                    ${isBarcodeSeleted
                                             ? 'bg-green-500 text-white'
                                             : 'bg-white'
-                                    }`}
+                                        }`}
                                 >
                                     {isBarcodeSeleted && <BiCheck />}
                                 </button>
@@ -109,9 +109,9 @@ const ReprintProductGroupDetailCard = ({
                                             </span>
                                         )}
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         <HiDotsVertical />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="flex justify-between">
                                     <div className=" text-slate-500 mr-10 w-34">

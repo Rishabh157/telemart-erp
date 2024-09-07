@@ -43,7 +43,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-      
+
         //*** GET REPRINT OUTERBOX BARCODE
         getReprintOuterBoxBarcode: builder.query({
             providesTags: ['Barcode'],
@@ -70,12 +70,14 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 id,
                 groupId,
                 status,
+                isSendingToDealer = false,
             }: {
                 id: string
                 groupId: string
                 status: string
+                isSendingToDealer: boolean
             }) => ({
-                url: `/bar-code/productgroupid/${groupId}/barcode/${id}/status/${status}`,
+                url: `/bar-code/productgroupid/${groupId}/barcode/${id}/status/${status}/${isSendingToDealer}`,
                 method: 'GET',
             }),
         }),
@@ -166,7 +168,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //*** get inventory by barcode
+        //*** AFTER USE get inventory by barcode
         getInventoriesByBarcode: builder.query({
             providesTags: ['Barcode', 'courier-return'],
             query: ({
@@ -183,7 +185,7 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-    
+
         //*** get vendor inventory
         getVendorInventoriesByBarcode: builder.query({
             providesTags: ['Barcode', 'courier-return'],

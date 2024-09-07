@@ -242,6 +242,7 @@ const InwardSampleTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.wts,
+            isSendingToDealer: false
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -280,6 +281,8 @@ const InwardSampleTabsListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                isUsedFresh,
+                upperBarcodeNumber,
                 invoiceNumber,
                 productGroupLabel,
                 companyId,

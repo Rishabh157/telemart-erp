@@ -116,10 +116,11 @@ type LocalUserStorage = {
     orderID: string
 }
 const SalesPageWrapper = () => {
- 
+
     const callerDetails: any = localStorage.getItem('callerPageData')
     let callerDataItem = JSON.parse(callerDetails)
-    
+
+    console.log('callerDataItem: ', callerDataItem)
     const [orderData, setOrderData] = useState<any>({})
     const [customerReputationType, setCustomerReputationType] =
         useState<string>()
@@ -151,12 +152,12 @@ const SalesPageWrapper = () => {
 
     const [UpdateCallerForm] = useUpdateCallerFormMutation()
 
-    // get DID number by
+    // Get DID number by
     const { items: didItems } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetByDidNumberQuery(
             { didNumber, companyId: callerDataItem?.companyId },
             {
-                skip: !didNumber,
+                skip: !(didNumber && callerDataItem?.companyId),
             }
         ),
     })
@@ -423,8 +424,8 @@ const SalesPageWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>

@@ -78,7 +78,7 @@ export const {
     useGetDidByIdQuery,
     useAddDidMutation,
     useUpdateDidMutation,
-    useGetByDidNumberQuery,
     useGetByDidNumberByAuthQuery,
+    useGetByDidNumberQuery,
     useDeleteDidMutation,
 } = didManagementApi

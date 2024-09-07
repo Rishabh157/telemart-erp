@@ -1,11 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:OutwardRTVTabsListingWrapper.tsx
-// Type: List Component
-// Last Updated: OCTOBER 12, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useState } from 'react'
 
@@ -250,6 +243,7 @@ const OutwardRTVTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
+            isSendingToDealer: false
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -289,6 +283,9 @@ const OutwardRTVTabsListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                isUsedFresh,
+                upperBarcodeNumber,
+                invoiceNumber,
                 wareHouseLabel,
                 productGroupLabel,
                 createdAt,

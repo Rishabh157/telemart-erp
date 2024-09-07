@@ -264,6 +264,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
+            isSendingToDealer: false
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -302,6 +303,8 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                upperBarcodeNumber,
+                isUsedFresh,
                 invoiceNumber,
                 wareHouseLabel,
                 productGroupLabel,

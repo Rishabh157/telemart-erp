@@ -52,6 +52,7 @@ const MoveToCartonDrawer = ({
         const barcodeProduct = productDetail.map((ele) => {
             const {
                 // barcodeNumber,
+                isUsedFresh,
                 upperBarcodeNumber,
                 productGroupLabel,
                 outerBoxbarCodeNumber,

@@ -34,6 +34,8 @@ export type Tabs = {
 const CourierReturnabsListingWrapper = () => {
     useUnmountCleanup()
     const [currentId, setSetCurrentId] = React.useState<string | null>(null)
+    const [currentStatus, setCurrentStatus] = React.useState<string>('')
+
     const listingPagination: any = useSelector(
         (state: RootState) => state.listingPagination
     )
@@ -76,6 +78,7 @@ const CourierReturnabsListingWrapper = () => {
                     customBtnText="Change Status"
                     handleCustomActionButton={() => {
                         setSetCurrentId(row?._id)
+                        setCurrentStatus(row?.requestStatus)
                     }}
                 />
             ),
@@ -149,6 +152,7 @@ const CourierReturnabsListingWrapper = () => {
                 component={
                     <ChangeCourierRequestStatusWrapper
                         requestId={currentId as string}
+                        currentStatus={currentStatus}
                         setIsShow={() => setSetCurrentId(null)}
                     />
                 }

@@ -1,6 +1,5 @@
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-import { IconType } from 'react-icons'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,33 +25,28 @@ import { AppDispatch, RootState } from 'src/redux/store'
 type Props = {
     columns: any[]
     rows: any[]
-    tabs: {
-        label: string
-        icon: IconType
-        path: string
-    }[]
+    isTableLoading: boolean
 }
 
-const InventoryListing = ({ columns, rows, tabs }: Props) => {
+const InventoryListing = ({ columns, rows, isTableLoading }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const inventoryState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
     const [selectedRows, setSelectedRows] = useState([])
-    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
+    const { page, rowsPerPage, totalItems, searchValue } =
         inventoryState
     const navigate = useNavigate()
 
     return (
-        <>
-            <div className="h-[calc(100vh-100px)] px-4">
-                {/* Page Header */}
-                <div className="flex justify-between items-center h-[78px]  p-1">
-                    <ATMPageHeading> Inventories </ATMPageHeading>
-                    <div className="flex gap-x-4">
-                        {isAuthorized(
-                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_FILL_CARTON_BOX
-                        ) && (
+        <div className="h-[calc(100vh-100px)] px-4">
+            {/* Page Header */}
+            <div className="flex justify-between items-center h-[78px]  p-1">
+                <ATMPageHeading> Inventories </ATMPageHeading>
+                <div className="flex gap-x-4">
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_FILL_CARTON_BOX
+                    ) && (
                             <button
                                 type="button"
                                 onClick={() =>
@@ -64,9 +58,9 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                             </button>
                         )}
 
-                        {isAuthorized(
-                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD
-                        ) && (
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_INWARD_INVENTORIES_ADD
+                    ) && (
                             <button
                                 type="button"
                                 onClick={() => navigate('inward-inventory/add')}
@@ -75,57 +69,55 @@ const InventoryListing = ({ columns, rows, tabs }: Props) => {
                                 + Inward Inventory
                             </button>
                         )}
-                    </div>
-                </div>
-
-                <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
-                    {/*Table Header */}
-                    <ATMTableHeader
-                        searchValue={searchValue}
-                        page={page}
-                        rowCount={totalItems}
-                        rowsPerPage={rowsPerPage}
-                        rows={rows}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        onSearch={(newValue) => {
-                            dispatch(setSearchValue(newValue))
-                        }}
-                        //  isFilter
-                    />
-
-                    {/* Table */}
-                    <div className="grow overflow-auto  ">
-                        <ATMTable
-                            columns={columns}
-                            rows={rows}
-                            
-                            selectedRows={selectedRows}
-                            onRowSelect={(selectedRows) =>
-                                setSelectedRows(selectedRows)
-                            }
-                            extraClasses="max-h-[calc(100%-150px)] overflow-auto"
-                            isLoading={isTableLoading}
-                        />
-                    </div>
-
-                    {/* Pagination */}
-
-                    <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
-                        <ATMPagination
-                            page={page}
-                            rowCount={totalItems}
-                            rows={rows}
-                            rowsPerPage={rowsPerPage}
-                            onPageChange={(newPage) =>
-                                dispatch(setPage(newPage))
-                            }
-                        />
-                    </div>
                 </div>
             </div>
-        </>
+
+            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
+                {/*Table Header */}
+                <ATMTableHeader
+                    searchValue={searchValue}
+                    page={page}
+                    rowCount={totalItems}
+                    rowsPerPage={rowsPerPage}
+                    rows={rows}
+                    onRowsPerPageChange={(newValue) =>
+                        dispatch(setRowsPerPage(newValue))
+                    }
+                    onSearch={(newValue) => {
+                        dispatch(setSearchValue(newValue))
+                    }}
+                //  isFilter
+                />
+
+                {/* Table */}
+                <div className="grow overflow-auto  ">
+                    <ATMTable
+                        columns={columns}
+                        rows={rows}
+                        selectedRows={selectedRows}
+                        onRowSelect={(selectedRows) =>
+                            setSelectedRows(selectedRows)
+                        }
+                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        isLoading={isTableLoading}
+                    />
+                </div>
+
+                {/* Pagination */}
+
+                <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
+                    <ATMPagination
+                        page={page}
+                        rowCount={totalItems}
+                        rows={rows}
+                        rowsPerPage={rowsPerPage}
+                        onPageChange={(newPage) =>
+                            dispatch(setPage(newPage))
+                        }
+                    />
+                </div>
+            </div>
+        </div>
     )
 }
 

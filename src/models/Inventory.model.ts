@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Inventory.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type InventoryListResponse = {
     groupBarcodeNumber: string
@@ -54,9 +47,9 @@ export type WareHouseInventory = {
     totalFreshCount: number
     totalDamageCount: number
     totalRtvCount: number
-    expiredCount:number
-    closedCount:number
-    totalFakeCount:number
+    expiredCount: number
+    closedCount: number
+    totalFakeCount: number
     totalMissingCount: number
     firstDocument: {
         barcodeGroupNumber: string
@@ -80,4 +73,27 @@ export type WareHouseInventory = {
         _id: string
     }
     productGroupId: string
+}
+
+export type WareHouseInventoryOfProductSummaryListResponse = {
+    _id: string
+    companyId: string
+    warehouseId: string
+    productGroupId: string
+    freezeQuantity: number
+    avaliableQuantity: number
+    avaliableUsedQuantity: number
+    damageQuantity: number
+    fakeQuantity: number
+    lostQuantity: number
+    expiredQuantity: number
+    closedQuantity: number
+    missingQuantity: number
+    rtvQuantity: number
+    isDeleted: boolean
+    isActive: boolean
+    createdAt: string
+    updatedAt: string
+    __v: number
+    productGroupLabel: string
 }

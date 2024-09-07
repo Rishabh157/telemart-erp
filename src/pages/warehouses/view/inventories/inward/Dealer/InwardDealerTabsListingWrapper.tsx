@@ -104,7 +104,7 @@ const InwardDealerTabsListingWrapper = () => {
                     <ActionPopup
                         isCustomBtn={true}
                         customBtnText="Inward"
-                        handleOnAction={() => {}}
+                        handleOnAction={() => { }}
                         handleCustomActionButton={() => {
                             setIsShow(true)
                             const totalQuantity = row?.documents?.reduce(
@@ -180,8 +180,8 @@ const InwardDealerTabsListingWrapper = () => {
                         {row?.firstApproved
                             ? 'Done'
                             : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -219,8 +219,8 @@ const InwardDealerTabsListingWrapper = () => {
                         {row?.secondApproved
                             ? 'Done'
                             : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
+                                ? 'Pending'
+                                : 'Rejected'}
                     </span>
                 )
             },
@@ -454,6 +454,7 @@ const InwardDealerTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.dtw,
+            isSendingToDealer: false
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -490,6 +491,8 @@ const InwardDealerTabsListingWrapper = () => {
     const handleDispatchBarcode = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
             const {
+                isUsedFresh,
+                upperBarcodeNumber,
                 invoiceNumber,
                 wareHouseLabel,
                 dtw,
@@ -578,7 +581,7 @@ const InwardDealerTabsListingWrapper = () => {
                                     <div >
                                         {capitalizeFirstLetter(
                                             selectedItemsTobeDispatch?.fromWarehouseLabel ||
-                                                ''
+                                            ''
                                         )}
                                     </div>
                                 </div>
@@ -693,7 +696,7 @@ const InwardDealerTabsListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                                ''
+                                                            ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(

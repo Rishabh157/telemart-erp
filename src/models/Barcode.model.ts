@@ -4,6 +4,7 @@ export type BarcodeListResponseType = {
     _id: string
     productGroupId: string
     upperBarcodeNumber: string
+    isUsedFresh: boolean
     barcodeNumber: string
     wareHouseLabel: string
     vendorId: string

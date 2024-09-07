@@ -44,11 +44,20 @@ export const wareHouseApi = apiSlice.injectEndpoints({
 
         //***** Get Customer Warehouse Return *****/
         getCustomerWarehouseReturn: builder.query({
-            providesTags: ['WareHouse'],
+            providesTags: ['WareHouse', 'Barcode'],
             query: (body: PaginationType) => ({
                 url: '/customer-wh-return',
                 method: 'POST',
                 body,
+            }),
+        }),
+
+        //*** GET THE WAREHOUSE INVENTORY BY PRODUCT SUMMERY
+        getInventoriesOfWarehouse: builder.query({
+            providesTags: ['Barcode', 'courier-return'],
+            query: (warehouseId: string) => ({
+                url: `productgroup-summary/warehouseid/${warehouseId}`,
+                method: 'GET',
             }),
         }),
 
@@ -97,6 +106,7 @@ export const {
     useUpdateWareHouseMutation,
     useGetWareHouseByIdQuery,
     useGetWareHousesByCompanyIdQuery,
+    useGetInventoriesOfWarehouseQuery,
     useGetPaginationWareHousesQuery,
     useGetCustomerWarehouseReturnQuery,
     useDeleteWareHouseMutation,

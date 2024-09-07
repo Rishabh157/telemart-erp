@@ -3,6 +3,7 @@ import { FormInitialValues } from './ChangeCourierRequestStatusWrapper'
 import { FormikProps } from 'formik'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { getCourierRtoRequestStatusOptions } from 'src/utils/constants/customeTypes'
+import { showToast } from 'src/utils'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -30,11 +31,10 @@ const ChangeCourierReturnRequestStatus = ({
                         <div>
                             <button
                                 type="button"
-                                disabled={apiStatus}
+                                disabled={values.requestStatus === values.currentStatus ? true : apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${values.requestStatus === values.currentStatus || apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -52,7 +52,11 @@ const ChangeCourierReturnRequestStatus = ({
                                 options={getCourierRtoRequestStatusOptions()}
                                 selectLabel="Select status"
                                 onChange={(e) => {
-                                    setFieldValue('requestStatus', e)
+                                    if (values.requestStatus !== e) {
+                                        setFieldValue('requestStatus', e)
+                                    } else {
+                                        showToast('error', 'Already Selected')
+                                    }
                                 }}
                             />
                         </div>
