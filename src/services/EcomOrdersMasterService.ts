@@ -43,6 +43,15 @@ export const EcomOrdersMasterService = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** SCAN ORDER *****/
+        getBarcodeOfEcomOrder: builder.mutation({
+            // invalidatesTags: ['amazon-order', 'flipkart-order'],
+            query: ({ barcodeNumber, type }) => ({
+                url: `/bar-code/dispatch-ecom-order-barcode/${barcodeNumber}/type/${type}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 export const {
@@ -50,4 +59,5 @@ export const {
     useAddAmzoneOrderSheetMutation,
     useGetFlipkartOrdersQuery,
     useAddFlipkartOrderSheetMutation,
+    useGetBarcodeOfEcomOrderMutation,
 } = EcomOrdersMasterService

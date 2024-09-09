@@ -43,3 +43,9 @@ export enum courierCompanyEnum {
     gpo = 'GPO',
     maersk = 'MAERSK',
 }
+
+/*** E-COM TYPE ****/
+export enum EcomTypesEnum {
+    amazon = 'AMAZON',
+    flipkart = 'FLIPKART',
+}

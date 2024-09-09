@@ -127,7 +127,6 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
                 {/* Table */}
                 <div className="overflow-auto grow">
                     <ATMTable
-                        // extraClasses="w-[100%]"
                         columns={columns}
                         rows={rows}
                         isLoading={isTableLoading}

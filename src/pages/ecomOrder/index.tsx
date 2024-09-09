@@ -102,7 +102,7 @@ const ViewEcomOrder = () => {
                         <TabScrollable
                             tabs={allowedTabs}
                             active={activeTabIndex}
-                            navBtnContainerClassName="bg-red-500"
+                            navBtnContainerClassName="bg-red-500 z-50"
                         />
                         {/* Breadcrumb */}
                         <div className="py-2 px-4">

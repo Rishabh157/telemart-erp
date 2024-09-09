@@ -12,6 +12,7 @@ import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 type AmazonOrderListingListResponse = {
     _id: string
     companyId: string
+    orderNumber: number
     amazonOrderId: string
     purchaseDate: string
     productName: string
@@ -42,7 +43,7 @@ const AmazonOrdersListingWrapper = () => {
         useEndPointHook: useGetAmzoneOrdersQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['amazonOrderId', 'productCode', 'productName', 'city', 'state', 'pincode'],
+            params: ['orderNumber', 'amazonOrderId', 'productCode', 'productName', 'city', 'state', 'pincode'],
             page: page,
             filterBy: [
                 {
@@ -58,6 +59,15 @@ const AmazonOrdersListingWrapper = () => {
     })
 
     const columns: columnTypes[] = [
+        {
+            field: 'orderNumber',
+            headerName: 'Order Number',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            renderCell: (row: AmazonOrderListingListResponse) => (
+                <span className="text-primary-main">#{row?.orderNumber}</span>
+            ),
+        },
         {
             field: 'amazonOrderId',
             headerName: 'Order Id',

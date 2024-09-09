@@ -263,7 +263,7 @@ import OutwardTabs from './pages/warehouses/view/inventories/outward'
 import OutwardWarehouseToComapnyListingWrapper from './pages/warehouses/view/inventories/outward/Company/list/OutwardWarehouseToComapnyListingWrapper'
 import OutwardCustomerTabsListingWrapper from './pages/warehouses/view/inventories/outward/Customer/OutwardCustomerTabsListingWrapper'
 import OutwardDealerTabsListingWrapper from './pages/warehouses/view/inventories/outward/Dealer/OutwardDealerTabsListingWrapper'
-import OutwardEcomTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/OutwardEcomTabsListingWrapper'
+import OutwardEcomTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Amazon/OutwardAmazonTabsListingWrapper'
 import OutwardGpoOrdersTabListingWrapper from './pages/warehouses/view/inventories/outward/GpoOrders/OutwardGpoOrdersTabListingWrapper'
 import OutwardRTVTabsListingWrapper from './pages/warehouses/view/inventories/outward/Rtv/list/OutwardRTVTabsListingWrapper'
 import OutwardSampleTabsListingWrapper from './pages/warehouses/view/inventories/outward/Sample/OutwardSampleTabsListingWrapper'
@@ -333,6 +333,8 @@ import EditEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ec
 import ViewEcomOrder from './pages/ecomOrder'
 import AmazonOrdersListingWrapper from './pages/ecomOrder/AmazonOrder/AmazonOrdersListingWrapper'
 import FlipkartOrdersListingWrapper from './pages/ecomOrder/FlipkartOrder/FlipkartOrdersListingWrapper'
+import OutwardEcomOrderTab from './pages/warehouses/view/inventories/outward/Ecom'
+import OutwardAmazonTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Amazon/OutwardAmazonTabsListingWrapper'
 
 
 const PageRoutes = () => {
@@ -936,17 +938,44 @@ const PageRoutes = () => {
                                 />
                             }
                         />
+
+                        {/* E-commerce Tabs */}
                         <Route
                             path="ecom"
                             element={
                                 <Authorization
-                                    children={<OutwardEcomTabsListingWrapper />}
+                                    children={<OutwardEcomOrderTab />}
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE
                                     }
                                 />
                             }
-                        />
+                        >
+                            <Route
+                                path="amazon"
+                                element={
+                                    <Authorization
+                                        children={<OutwardAmazonTabsListingWrapper />}
+                                        permission={
+                                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE
+                                        }
+                                    />
+                                }
+                            />
+
+                            <Route
+                                path="flipkart"
+                                element={
+                                    <Authorization
+                                        children={<>HELLO FLIPKART</>}
+                                        permission={
+                                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE
+                                        }
+                                    />
+                                }
+                            />
+                        </Route>
+
                         <Route
                             path="company"
                             element={
