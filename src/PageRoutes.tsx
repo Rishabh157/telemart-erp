@@ -329,6 +329,10 @@ import AgentWiseComplaintWrapper from './pages/reports/AgentDetails/wrappers/Age
 import EcomMasterListingWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/list/EcomMasterListingWrapper'
 import AddEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/add/AddEcomMasterWrapper'
 import EditEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/edit/EditEcomMasterWrapper'
+// Ecom Orders
+import ViewEcomOrder from './pages/ecomOrder'
+import AmazonOrdersListingWrapper from './pages/ecomOrder/AmazonOrder/AmazonOrdersListingWrapper'
+import FlipkartOrdersListingWrapper from './pages/ecomOrder/FlipkartOrder/FlipkartOrdersListingWrapper'
 
 
 const PageRoutes = () => {
@@ -1731,6 +1735,39 @@ const PageRoutes = () => {
                         }
                     />
                 </Route>
+
+
+
+                {/* E-COM ORDERS */}
+                <Route
+                    path="/ecom-orders"
+                    element={
+                        <Authorization
+                            children={<ViewEcomOrder />}
+                            permission={UserModuleNameTypes.NAV_ORDER}
+                        />
+                    }
+                >
+                    <Route
+                        path="amazon"
+                        element={
+                            <Authorization
+                                children={<AmazonOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="flipkart"
+                        element={
+                            <Authorization
+                                children={<FlipkartOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                </Route>
+
 
                 {/* Orders Cancel Request */}
                 <Route
