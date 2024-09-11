@@ -215,7 +215,7 @@ const CourierNdrDialerPage: React.FC<Props> = ({
                 CampaignName={values.campaign || ''}
                 CallType={values.callType}
                 IncomingNo={values.mobileNo}
-                CustomerName={'' || ''}
+                CustomerName={''}
                 DidNumber={values.didNo}
                 customerReputationType={customerReputationType}
             />
