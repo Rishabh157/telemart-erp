@@ -41,7 +41,7 @@ const ATMExportButton = ({
     onClick = () => { },
     onImport = () => { },
     btnName = 'Export',
-    btnType = 'DOWNLOAD' || 'UPLOAD',
+    btnType = 'UPLOAD',
     loadingText = 'Exporting...',
     className
 }: Props) => {
