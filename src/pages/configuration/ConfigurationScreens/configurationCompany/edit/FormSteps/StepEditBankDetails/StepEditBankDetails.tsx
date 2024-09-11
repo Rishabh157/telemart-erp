@@ -115,6 +115,7 @@ const StepEditBankDetails = ({
                                                                                         key={
                                                                                             name
                                                                                         }
+                                                                                        textTransform={name === 'ifscNumber' ? 'uppercase' : 'capitalize'}
                                                                                         required
                                                                                         name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                         value={

@@ -74,21 +74,6 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     isSubmitting={isSubmitting}
                 />
 
-                {/* Address */}
-                {/* <ATMTextField
-                    required
-                    name="address"
-                    value={values.address}
-                    onChange={(e) => {
-                        handleSetFieldValue('address', e.target.value)
-                    }}
-                    label="Address"
-                    placeholder="Address"
-                    className="shadow bg-white rounded"
-                    isSubmitting={isSubmitting}
-                /> */}
-
-
                 {/* Phone No. */}
                 <ATMTextField
                     required
@@ -106,18 +91,20 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     isSubmitting={isSubmitting}
                 />
 
-                <ATMTextArea
-                    required
-                    name="address"
-                    value={values.address}
-                    label="Address"
-                    minRows={4}
-                    className='rounded'
-                    labelClass='text-slate-700 text-sm font-medium mt-2'
-                    placeholder="Address"
-                    onChange={(newValue) => setFieldValue('address', newValue)}
-                />
+                <div className='mt-2'>
+                    <ATMTextArea
+                        required
+                        name="address"
+                        value={values.address}
+                        label="Address"
+                        minRows={4}
+                        className='rounded mt-0'
+                        labelClass='text-slate-700 text-sm font-medium mb-1'
+                        placeholder="Address"
+                        onChange={(newValue) => setFieldValue('address', newValue)}
+                    />
 
+                </div>
             </div>
         </div>
     )
