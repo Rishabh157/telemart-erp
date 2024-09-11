@@ -81,18 +81,18 @@ const StepAddBankDetails = ({
                                                                     .bankDetails
                                                                     ?.length >
                                                                     1 && (
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() =>
-                                                                            remove(
-                                                                                bankInformationIndex
-                                                                            )
-                                                                        }
-                                                                        className="p-1 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                )}
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() =>
+                                                                                remove(
+                                                                                    bankInformationIndex
+                                                                                )
+                                                                            }
+                                                                            className="p-1 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    )}
                                                             </div>
 
                                                             <div className="grid grid-cols-3 gap-4 gap-y-5">
@@ -108,19 +108,20 @@ const StepAddBankDetails = ({
                                                                         } = field
 
                                                                         switch (
-                                                                            type
+                                                                        type
                                                                         ) {
                                                                             case 'text':
                                                                                 return (
                                                                                     <ATMTextField
+                                                                                        textTransform={name === 'ifscNumber' ? 'uppercase' : 'capitalize'}
                                                                                         key={
                                                                                             name
                                                                                         }
-                                                                                        required
+                                                                                        // required
                                                                                         name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                         value={
                                                                                             bankInformation[
-                                                                                                name
+                                                                                            name
                                                                                             ]
                                                                                         }
                                                                                         onChange={(
@@ -176,13 +177,13 @@ const StepAddBankDetails = ({
                                                                                             name
                                                                                         }
                                                                                     >
-                                                                                        
+
                                                                                         <ATMSelect
-                                                                                        required
+                                                                                            // required
                                                                                             name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                             value={
                                                                                                 bankInformation[
-                                                                                                    name
+                                                                                                name
                                                                                                 ]
                                                                                             }
                                                                                             onChange={(
@@ -197,8 +198,8 @@ const StepAddBankDetails = ({
                                                                                             }}
                                                                                             options={
                                                                                                 dropdownOptions[
-                                                                                                    field.optionAccessKey ||
-                                                                                                        'accountTypeOptions'
+                                                                                                field.optionAccessKey ||
+                                                                                                'accountTypeOptions'
                                                                                                 ]
                                                                                             }
                                                                                             label={
@@ -234,7 +235,7 @@ const StepAddBankDetails = ({
                                                                                         }
                                                                                         selectedFile={
                                                                                             bankInformation[
-                                                                                                name
+                                                                                            name
                                                                                             ]
                                                                                         }
                                                                                     />

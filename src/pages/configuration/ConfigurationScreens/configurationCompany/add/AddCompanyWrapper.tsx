@@ -64,14 +64,12 @@ const steps = [
         validationSchema: object({
             bankDetails: array().of(
                 object().shape({
-                    bankName: string().required('Bank name is required'),
-                    branchName: string().required('Branch name is required'),
-                    accountHolderName: string().required('Required'),
-                    accountNumber: number().required(
-                        'Account number is required'
-                    ),
-                    ifscNumber: string().required('IFSC number is required'),
-                    accountType: string().required('Account type is required'),
+                    bankName: string(),
+                    branchName: string(),
+                    accountHolderName: string(),
+                    accountNumber: number(),
+                    ifscNumber: string(),
+                    accountType: string(),  
                 })
             ),
         }),
@@ -89,12 +87,12 @@ const AddCompanyWrapper = () => {
     const breadcrumbs = [
         {
             label: 'Company',
-            onClick: () => {},
+            onClick: () => { },
             path: '/configurations/company',
         },
         {
             label: 'Add Company',
-            onClick: () => {},
+            onClick: () => { },
         },
     ]
 

@@ -51,7 +51,7 @@ const Header = () => {
         if (!isLoading && !isFetching) {
             const companyName = data?.find(
                 (com: any) => com?._id === company
-            ).companyName
+            )?.companyName
             setCompanyName(companyName)
         }
         // eslint-disable-next-line

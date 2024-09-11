@@ -21,7 +21,7 @@ const CountryListingWrapper = () => {
 
     return (
         <CountryListing
-            contries={contries.filter((countryItems: any) =>
+            contries={contries?.filter((countryItems: any) =>
                 countryItems?.label
                     ?.toLocaleLowerCase()
                     ?.includes(searchValue?.toLocaleLowerCase())

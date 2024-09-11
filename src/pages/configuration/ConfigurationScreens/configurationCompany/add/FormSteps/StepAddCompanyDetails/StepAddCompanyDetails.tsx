@@ -12,6 +12,7 @@ import { FormInitialValues } from '../../AddCompanyWrapper'
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type Props = {
@@ -74,7 +75,7 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                 />
 
                 {/* Address */}
-                <ATMTextField
+                {/* <ATMTextField
                     required
                     name="address"
                     value={values.address}
@@ -85,7 +86,8 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     placeholder="Address"
                     className="shadow bg-white rounded"
                     isSubmitting={isSubmitting}
-                />
+                /> */}
+
 
                 {/* Phone No. */}
                 <ATMTextField
@@ -103,6 +105,19 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                     className="shadow bg-white rounded"
                     isSubmitting={isSubmitting}
                 />
+
+                <ATMTextArea
+                    required
+                    name="address"
+                    value={values.address}
+                    label="Address"
+                    minRows={4}
+                    className='rounded'
+                    labelClass='text-slate-700 text-sm font-medium mt-2'
+                    placeholder="Address"
+                    onChange={(newValue) => setFieldValue('address', newValue)}
+                />
+
             </div>
         </div>
     )
