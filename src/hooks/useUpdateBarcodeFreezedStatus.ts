@@ -13,13 +13,14 @@ export const useUpdateBarcodeFreezedStatus = () => {
         barcodes,
     }: UpdateBarcodeStatusParams) => {
         try {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const response = await updateBarcodeStatus({
                 status: status,
                 body: {
                     bcode: barcodes,
                 },
             })
-            console.log('HOOK', response)
+            // console.log('HOOK', response)
             // return response
         } catch (error) {
             console.error('Error updating barcode status:', error)

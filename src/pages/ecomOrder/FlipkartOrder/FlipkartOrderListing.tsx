@@ -60,7 +60,6 @@ const FlipkartOrderListing = ({ columns, rows }: Props) => {
 
             addFlipkartOrderShhet(formData)
                 .then((res: any) => {
-                    console.log('res: ', res);
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'imported successfully')
@@ -90,7 +89,6 @@ const FlipkartOrderListing = ({ columns, rows }: Props) => {
 
             updateStatusOrder(formData)
                 .then((res: any) => {
-                    console.log('res: ', res);
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'Updated successfully')

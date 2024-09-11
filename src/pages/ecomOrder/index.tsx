@@ -47,8 +47,6 @@ const ViewEcomOrder = () => {
     // Access specific query parameters by their names
     const activeTab = window.location.pathname.split('/')[2]
 
-    // console.log('window.location.pathname', window.location.pathname)
-
     const allowedTabs = tabs
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)

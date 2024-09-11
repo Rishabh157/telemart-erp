@@ -469,7 +469,7 @@ const OutwardDealerTabsListingWrapper = () => {
             ?.flat(1)
             ?.map((ele: BarcodeListResponseType) => {
                 if (!ele) return ele
-                
+
                 return ele?.barcodeNumber
             })
 
@@ -507,8 +507,6 @@ const OutwardDealerTabsListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
-
-    console.log('handleDisableDispatchButton', handleDisableDispatchButton());
 
     const handleFileUpload = async (file: File, setFieldValue: any) => {
         let fileUrl = ''

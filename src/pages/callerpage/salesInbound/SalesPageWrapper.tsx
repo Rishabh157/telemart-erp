@@ -120,7 +120,6 @@ const SalesPageWrapper = () => {
     const callerDetails: any = localStorage.getItem('callerPageData')
     let callerDataItem = JSON.parse(callerDetails)
 
-    console.log('callerDataItem: ', callerDataItem)
     const [orderData, setOrderData] = useState<any>({})
     const [customerReputationType, setCustomerReputationType] =
         useState<string>()

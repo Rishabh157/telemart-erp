@@ -59,7 +59,6 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
 
             addAmazonOrderSheet(formData)
                 .then((res: any) => {
-                    console.log('res: ', res);
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'imported successfully')
@@ -89,7 +88,6 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
 
             updateStatusOrder(formData)
                 .then((res: any) => {
-                    console.log('res: ', res);
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'Updated successfully')

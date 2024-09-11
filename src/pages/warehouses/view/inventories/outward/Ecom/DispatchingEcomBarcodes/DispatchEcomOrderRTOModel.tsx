@@ -80,10 +80,6 @@ const DispatchEcomOrderRTOModel = ({ open, onClose, orderDetails, ecomType }: Pr
   }
 
 
-
-  console.log('barcodeList', barcodeList)
-
-
   const handleDispatchBarcode = () => {
 
     const payloadData = {
@@ -221,7 +217,6 @@ const DispatchEcomOrderRTOModel = ({ open, onClose, orderDetails, ecomType }: Pr
 
                         // barcode?.barcode
                         // const isBarcodeExist = barcodeList?.find((ele: any) => ele.barcode === barcode?.barcode)
-                        // console.log('isBarcodeExist: ', isBarcodeExist)
 
                         const updatedBarcodeList = [...barcodeList]
 
@@ -235,8 +230,6 @@ const DispatchEcomOrderRTOModel = ({ open, onClose, orderDetails, ecomType }: Pr
                         setBarcodeList(
                           updatedBarcodeList
                         )
-
-                        // console.log('changeObj: ', updatedBarcodeObj)
 
                         // setBarcodeList((prev: any) => ({
                         //   ...prev,

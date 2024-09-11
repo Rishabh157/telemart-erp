@@ -42,7 +42,6 @@ const ReprintProductGroupDetailCard = ({
     const [barcodes, setBarcodes] = useState<string[]>([])
     const [outerBarcode, setOuterBarcode] = useState<any>({})
 
-    // console.log('barcodes: ', barcodes)
     useEffect(() => {
         if (barcodes.length) {
             dispatch(setBarcodesToPrint(barcodes))
@@ -71,8 +70,6 @@ const ReprintProductGroupDetailCard = ({
                             selectedProductGroupBarcodes.findIndex(
                                 (selected) => selected._id === barcode._id
                             ) !== -1
-
-                        console.log('barcode', barcode)
 
                         return (
                             <div
