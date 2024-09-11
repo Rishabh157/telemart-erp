@@ -435,7 +435,6 @@ const OutwardDealerTabsListingWrapper = () => {
 
     const onSubmitHandler = (values: FormInitialValues) => {
 
-        console.log('barcodeList', barcodeList);
         const filterValue = barcodeList
             ?.flat(1)
             ?.map((ele: BarcodeListResponseType) => {
@@ -470,7 +469,7 @@ const OutwardDealerTabsListingWrapper = () => {
             ?.flat(1)
             ?.map((ele: BarcodeListResponseType) => {
                 if (!ele) return ele
-
+                
                 return ele?.barcodeNumber
             })
 

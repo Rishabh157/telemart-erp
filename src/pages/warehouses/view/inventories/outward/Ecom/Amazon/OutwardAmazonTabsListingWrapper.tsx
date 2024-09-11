@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import OutwardAmazonTabs from './OutwardAmazonTabs'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -8,7 +8,10 @@ import { useGetAmzoneOrdersQuery } from 'src/services/EcomOrdersMasterService'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import DispatchingEcomBarcodes from '../DispatchingEcomBarcodes/DispatchingEcomBarcodes'
+import DispatchEcomOrderRTOModel from '../DispatchingEcomBarcodes/DispatchEcomOrderRTOModel'
+
 import { EcomTypesEnum } from 'src/utils/constants/enums'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 type AmazonOrderListingListResponse = {
     _id: string
@@ -24,8 +27,15 @@ type AmazonOrderListingListResponse = {
     state: string
     pincode: string
     label: string
+    status: string
+    isDispatched: boolean
     isDeleted: boolean,
     isActive: boolean,
+    barcodeData: {
+        barcodeId: string,
+        barcode: string,
+        _id: string
+    }[]
     createdAt: string,
     updatedAt: string,
     __v: number
@@ -34,6 +44,11 @@ type AmazonOrderListingListResponse = {
 const OutwardAmazonTabsListingWrapper = () => {
 
     useUnmountCleanup()
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] = useState<AmazonOrderListingListResponse | null>(null);
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const amazonOrderState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -61,9 +76,26 @@ const OutwardAmazonTabsListingWrapper = () => {
 
     const columns: columnTypes[] = [
         {
-            field: 'orderNumber',
-            headerName: 'Order Number',
+            field: 'action',
+            headerName: 'Action',
             flex: 'flex-[1_1_0%]',
+            renderCell: (row: AmazonOrderListingListResponse) => (
+                row?.status === 'RTO' ? <ActionPopup
+                    handleOnAction={() => { }}
+                    // moduleName={UserModuleNameTypes.saleOrder}
+                    isCustomBtn={true}
+                    customBtnText="Dispatch"
+                    handleCustomActionButton={() => {
+                        setIsOpen(true)
+                        setSelectedItemsTobeDispatch(row)
+                    }}
+                /> : null
+            ),
+        },
+        {
+            field: 'orderNumber',
+            headerName: 'Order No.',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
             renderCell: (row: AmazonOrderListingListResponse) => (
                 <span className="text-primary-main">#{row?.orderNumber}</span>
@@ -74,9 +106,33 @@ const OutwardAmazonTabsListingWrapper = () => {
             headerName: 'Order Id',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            // align : 'start',
+            extraClasses: 'min-w-[190px]',
             renderCell: (row: AmazonOrderListingListResponse) => (
                 <span className="text-primary-main"> {row?.amazonOrderId}</span>
             ),
+        },
+        {
+            field: 'isDispatched',
+            headerName: 'Dispatched',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            renderCell: (row: AmazonOrderListingListResponse) => (
+                <div>
+                    {row.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
+                </div>
+            ),
+        },
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            // renderCell: (row: AmazonOrderListingListResponse) => (
+            //     <span>{row?.status}</span>
+            // ),
         },
         {
             field: 'productName',
@@ -143,6 +199,17 @@ const OutwardAmazonTabsListingWrapper = () => {
     return <>
         <OutwardAmazonTabs columns={columns} rows={items} />
         <DispatchingEcomBarcodes ecomType={EcomTypesEnum.amazon} />
+
+        {/* RTO Dispatching */}
+        <DispatchEcomOrderRTOModel
+            ecomType={EcomTypesEnum.amazon}
+            open={isOpen}
+            orderDetails={selectedItemsTobeDispatch}
+            onClose={() => {
+                setSelectedItemsTobeDispatch(null)
+                setIsOpen(false)
+            }}
+        />
     </>
 }
 

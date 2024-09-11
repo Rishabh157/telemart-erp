@@ -334,6 +334,7 @@ import AmazonOrdersListingWrapper from './pages/ecomOrder/AmazonOrder/AmazonOrde
 import FlipkartOrdersListingWrapper from './pages/ecomOrder/FlipkartOrder/FlipkartOrdersListingWrapper'
 import OutwardEcomOrderTab from './pages/warehouses/view/inventories/outward/Ecom'
 import OutwardAmazonTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Amazon/OutwardAmazonTabsListingWrapper'
+import OutwardFlipkartTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Flipkart/OutwardFlipkartTabsListingWrapper'
 
 
 const PageRoutes = () => {
@@ -966,7 +967,7 @@ const PageRoutes = () => {
                                 path="flipkart"
                                 element={
                                     <Authorization
-                                        children={<>HELLO FLIPKART</>}
+                                        children={<OutwardFlipkartTabsListingWrapper />}
                                         permission={
                                             UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE
                                         }

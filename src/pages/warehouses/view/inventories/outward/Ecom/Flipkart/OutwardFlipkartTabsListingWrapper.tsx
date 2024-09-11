@@ -1,43 +1,76 @@
+
 import React from 'react'
-import AmazonOrderListing from './AmazonOrderListing'
+import OutwardFlipkartTabs from './OutwardFlipkartTabs'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
-import { useGetAmzoneOrdersQuery } from 'src/services/EcomOrdersMasterService'
+import { useGetFlipkartOrdersQuery } from 'src/services/EcomOrdersMasterService'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import DispatchingEcomBarcodes from '../DispatchingEcomBarcodes/DispatchingEcomBarcodes'
+import { EcomTypesEnum } from 'src/utils/constants/enums'
+import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 
 
-type AmazonOrderListingListResponse = {
-    _id: string
-    companyId: string
-    orderNumber: number
-    amazonOrderId: string
-    purchaseDate: string
-    productName: string
-    productCode: string
-    quantity: number
-    itemPrice: number
-    city: string
-    state: string
-    pincode: string
-    label: string
-    status: string
+type FlipkartOrderListingListResponse = {
+    _id: string,
+    companyId: string,
+    orderNumber: string,
+    order_item_id: string,
+    order_id: string,
+    fulfilment_source: string,
+    fulfilment_type: string,
+    order_date: string,
+    order_approval_date: string,
+    order_item_status: string,
+    sku: string,
+    fsn: string,
+    product_title: string,
+    quantity: number,
+    pickup_logistics_partner: string,
+    delivery_tracking_id: string,
+    forward_logistics_form: string,
+    forward_logistics_form_no: string,
+    order_cancellation_date: string,
+    cancellation_reason: string,
+    cancellation_sub_reason: string,
+    order_return_approval_date: string,
+    return_id: string,
+    return_reason: string,
+    return_sub_reason: string,
+    procurement_dispatch_sla: string,
+    dispatch_after_date: string,
+    dispatch_by_date: string,
+    order_ready_for_dispatch_on_date: string,
+    dispatched_date: string,
+    dispatch_sla_breached: string,
+    seller_pickup_reattempts: string,
+    delivery_sla: string,
+    deliver_by_date: string,
+    order_delivery_date: string,
+    delivery_sla_breached: string,
+    order_service_completion_date: string,
+    service_by_date: string,
+    service_completion_sla: string,
+    service_sla_breached: string,
+    productCode: string,
+    label: string,
     isDispatched: boolean
-    isDeleted: boolean,
-    isActive: boolean,
+    status: string
     barcodeData: {
         barcodeId: string,
         barcode: string,
         _id: string
     }[]
-    createdAt: string,
-    updatedAt: string,
+    isDeleted: boolean,
+    isActive: boolean,
+    createdAt: string
+    updatedAt: string
     __v: number
 }
 
-const AmazonOrdersListingWrapper = () => {
+const OutwardFlipkartTabsListingWrapper = () => {
 
     useUnmountCleanup()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -46,11 +79,11 @@ const AmazonOrdersListingWrapper = () => {
     )
     const { page, rowsPerPage, searchValue } = amazonOrderState
 
-    const { items } = useGetCustomListingData<AmazonOrderListingListResponse>({
-        useEndPointHook: useGetAmzoneOrdersQuery({
+    const { items } = useGetCustomListingData<FlipkartOrderListingListResponse>({
+        useEndPointHook: useGetFlipkartOrdersQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['orderNumber', 'amazonOrderId', 'productCode', 'productName', 'city', 'state', 'pincode'],
+            params: ['orderNumber', 'order_item_id', 'order_id', 'product_title', 'productCode'],
             page: page,
             filterBy: [
                 {
@@ -71,19 +104,17 @@ const AmazonOrdersListingWrapper = () => {
             headerName: 'Order No.',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
-            renderCell: (row: AmazonOrderListingListResponse) => (
+            renderCell: (row: FlipkartOrderListingListResponse) => (
                 <span className="text-primary-main">#{row?.orderNumber}</span>
             ),
         },
         {
-            field: 'amazonOrderId',
+            field: 'order_id',
             headerName: 'Order Id',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
-            // align : 'start',
-            extraClasses: 'min-w-[190px]',
-            renderCell: (row: AmazonOrderListingListResponse) => (
-                <span className="text-primary-main"> {row?.amazonOrderId}</span>
+            renderCell: (row: FlipkartOrderListingListResponse) => (
+                <span className="text-primary-main"> {row?.order_id}</span>
             ),
         },
         {
@@ -92,7 +123,7 @@ const AmazonOrdersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'center',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
-            renderCell: (row: AmazonOrderListingListResponse) => (
+            renderCell: (row: FlipkartOrderListingListResponse) => (
                 <div>
                     {row.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
                 </div>
@@ -104,20 +135,16 @@ const AmazonOrdersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'center',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
-            // renderCell: (row: AmazonOrderListingListResponse) => (
-            //     <span className='text-green-200'>INTRANSIT</span>
-            // ),
         },
         {
-            field: 'productName',
+            field: 'product_title',
             headerName: 'Product Name',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[2_2_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_DEALER,
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: AmazonOrderListingListResponse) => (
-                <span title={row?.productName} className="min-w-[100px] truncate">
-                    {row?.productName}
-                </span>
+            renderCell: (row: FlipkartOrderListingListResponse) => (
+                // eslint-disable-next-line no-useless-escape
+                <span title={row?.product_title} className="min-w-[100px] truncate"> {row?.product_title?.replace(/\"\"\"/g, '')}</span>
             ),
         },
         {
@@ -133,32 +160,14 @@ const AmazonOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
         },
         {
-            field: 'itemPrice',
-            headerName: 'Price',
+            field: 'order_date',
+            headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
         },
         {
-            field: 'purchaseDate',
-            headerName: 'Purchase Date',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
-        },
-        {
-            field: 'state',
-            headerName: 'State',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
-        },
-        {
-            field: 'city',
-            headerName: 'City',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
-        },
-        {
-            field: 'pincode',
-            headerName: 'Pincode',
+            field: 'deliver_by_date',
+            headerName: 'Deliver Date',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
         },
@@ -170,7 +179,13 @@ const AmazonOrdersListingWrapper = () => {
         },
     ]
 
-    return <AmazonOrderListing columns={columns} rows={items} />
+
+    return <>
+        <OutwardFlipkartTabs columns={columns} rows={items} />
+        <DispatchingEcomBarcodes ecomType={EcomTypesEnum.flipkart} />
+
+
+    </>
 }
 
-export default AmazonOrdersListingWrapper
+export default OutwardFlipkartTabsListingWrapper

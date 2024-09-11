@@ -1,26 +1,22 @@
 // |-- External Dependencies --|
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-// import {
-//      useParams,
-//      useNavigate,
-//       useLocation
-// } from 'react-router-dom'
-
-// |-- Redux --|
 import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 import { BarcodeListResponseType } from 'src/models'
-// import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { AppDispatch } from 'src/redux/store'
-// import { useGetWarehouseBarcodeMutation } from 'src/services/BarcodeService'
-import { useGetBarcodeOfEcomOrderMutation } from 'src/services/EcomOrdersMasterService'
 import { showToast } from 'src/utils'
-// import { showToast } from 'src/utils'
+
+// |-- Redux --|
+import { AppDispatch } from 'src/redux/store'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useGetBarcodeOfEcomOrderMutation, useDispatchBarcodeOfEcomOrderMutation } from 'src/services/EcomOrdersMasterService'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
+
 
 type Props = {
     ecomType: string
@@ -28,14 +24,9 @@ type Props = {
 
 const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
 
-    // state
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [orderNumber, setOrderNumber] = useState<number | null>(null)
     const [barcodeNumber, setBarcodeNumber] = useState<any>('')
-    const [products, setProducts] = useState<any>([])
-
     const [orderDetails, setOrderDetails] = useState({
-        orderNumber: '',
+        orderNumber: null,
         orderId: '',
         productCode: '',
         quantity: 0,
@@ -43,28 +34,21 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
         barcode: [],
     });
 
-    // const { pathname } = useLocation()
-
-    // warehouse id
-    // const params = useParams()
-    // const warehouseId = params?.id
-    // const navigate = useNavigate()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const dispatch = useDispatch<AppDispatch>()
-
+    const updateBarcodeStatus = useUpdateBarcodeFreezedStatus(); // Get the function from the hook
     const [getBarCode] = useGetBarcodeOfEcomOrderMutation()
+    const [barcodeDispatch, barcodeDispatchInfo] = useDispatchBarcodeOfEcomOrderMutation()
+    const dispatch = useDispatch<AppDispatch>();
 
-    // const [barcodeDispatch, barcodeDispatchInfo] =
-    //     useGetWarehouseBarcodeMutation()
+    const params = useParams()
+    const warehouseId = params.id
 
+    // Getting the barcode while scanned
     const handleBarcodeSubmit = (barcodeNumber: string, index: number) => {
 
         getBarCode({
             barcodeNumber,
             type: ecomType,
         }).then((res: any) => {
-
-            console.log('GETTING BARCODE', res)
 
             if (res?.data?.status) {
                 if (res?.data?.data) {
@@ -78,7 +62,7 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
                     } = res?.data?.data
 
                     // setting the data with previous data
-                    if (orderNumber) {
+                    if (!orderDetails?.orderNumber) {
                         handleNewData(
                             orderNumber,
                             orderId,
@@ -87,11 +71,9 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
                             itemPrice,
                             barcode,
                         )
+                    } else {
+                        handleExistingData(barcode)
                     }
-                    //  else {
-                    //     console.log('HERE &&&', orderNumber)
-                    //     // handleExistingData(products, barcode)
-                    // }
                 }
             } else {
                 showToast('error', res?.data?.message);
@@ -101,7 +83,7 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
     }
 
     // first time call the function
-    const handleNewData = (
+    const handleNewData = async (
         orderNumber: number,
         orderId: string,
         productCode: string,
@@ -109,179 +91,119 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
         itemPrice: number,
         barcode: any,
     ) => {
+        setOrderDetails((prev: any) => ({
+            ...prev,
+            orderNumber,
+            orderId,
+            productCode,
+            quantity,
+            itemPrice,
+            barcode: [{ ...barcode }]
+        }))
 
-        const { barcodeNumber } = barcode
-        console.log('barcodeNumber: &&& ', barcodeNumber);
+        dispatch(setFieldCustomized(true))
 
-        setOrderDetails((prev: any) => {
-
-            // const isAvailableBarcode = prev.barcode?.find((barcode: any) => barcode?.barcodeNumber === barcodeNumber)
-            // console.log('isAvailableBarcode: ', isAvailableBarcode);
-
-            return {
-                ...prev,
-                orderNumber,
-                orderId,
-                productCode,
-                quantity,
-                itemPrice,
-                barcode: [{ ...barcode }]
-            }
-        })
-
-        // console.log('******',
-        //     orderNumber,
-        //     orderId,
-        //     productCode,
-        //     quantity,
-        //     itemPrice,
-        //     barcode,
-        // )
-
-        // setOrderNumber(orderNumber)
-        // const newData = products?.map((ele: any) => {
-        //     let barcodeObj =
-        //         ele?.productGroupId === barcode?.productGroupId ? barcode : null
-        //     return {
-        //         ...ele,
-        //         barcode: barcodeObj ? [barcodeObj] : [],
-        //         // customerName,
-        //         schemeQuantity,
-        //         // address,
-        //     }
-        // })   
-        // setProducts(newData)
-        // dispatch(setFieldCustomized(true))
+        // freezed the barcode status
+        updateBarcodeStatus({
+            status: true,
+            barcodes: [barcode?.barcodeNumber]
+        });
     }
 
     // after set the order number then gettting the barcode
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleExistingData = (
-        products: any,
-        newBarcode: BarcodeListResponseType
+    const handleExistingData = async (
+        barcode: BarcodeListResponseType
     ) => {
-        const newData = products?.map((ele: any) => {
-            const totalQuantityOfBarocde =
-                ele?.schemeQuantity * ele?.productQuantity
+        const isBarcodeExist = orderDetails?.barcode?.some((ele: BarcodeListResponseType) => ele?.barcodeNumber === barcode?.barcodeNumber);
 
-            const isAlredyExist = ele?.barcode?.some((barcode: any) => {
-                return barcode?.barcodeNumber === newBarcode?.barcodeNumber
-            })
+        if (!isBarcodeExist) {
+            setOrderDetails((prev: any) => ({
+                ...prev,
+                barcode: [...prev.barcode, barcode]
+            }))
 
-            let barcodeObj =
-                ele?.productGroupId === newBarcode.productGroupId
-                    ? newBarcode
-                    : null
+            // freezed the barcode status
+            updateBarcodeStatus({
+                status: true,
+                barcodes: [barcode?.barcodeNumber]
+            });
 
-            return {
-                ...ele,
-                // set the barcode if barcode is founded , isAlredayExist is false and length is equal to schemeQuantity
-                barcode:
-                    barcodeObj &&
-                        isAlredyExist === false &&
-                        totalQuantityOfBarocde !== ele?.barcode?.length
-                        ? [...ele?.barcode, barcodeObj]
-                        : [...ele?.barcode],
-            }
-        })
-        setProducts(newData)
+        } else {
+            showToast('error', 'Barcode already scanned!');
+        }
     }
 
     // remove barcode
-    const handleRemoveBarcode = (barcodeNumber: string) => {
-        const newData = products?.map((ele: any) => {
-            const filteredObj = ele?.barcode?.filter(
-                (item: any) => item?.barcodeNumber !== barcodeNumber
-            )
-            // remove the specific barcode and set the previouse barcode
-            return {
-                ...ele,
-                barcode: [...filteredObj],
-            }
-        })
-        setProducts(newData)
+    const handleRemoveBarcode = async (barcodeNumber: string) => {
+        const isBarcodeExist = orderDetails?.barcode?.some((ele: BarcodeListResponseType) => ele?.barcodeNumber === barcodeNumber);
+
+        const filteredObj = orderDetails?.barcode?.filter(
+            (item: BarcodeListResponseType) => item?.barcodeNumber !== barcodeNumber
+        )
+
+        if (isBarcodeExist) {
+            setOrderDetails((prev: any) => ({
+                ...prev,
+                barcode: filteredObj
+            }))
+
+            // freezed the barcode status
+            updateBarcodeStatus({
+                status: false,
+                barcodes: [barcodeNumber]
+            });
+
+        }
     }
 
-    // final submitting
-    const handleDispatchBarcode = () => {
+    // FINAL DISPATCHING THE BARCODES
+    const handleDispatchBarcode = async () => {
 
-        // const filterValue = products?.map((ele: any) => {
-        //     return ele?.barcode
-        // })
+        const payloadValue = {
+            orderNumber: orderDetails.orderNumber,
+            type: ecomType,
+            warehouseId: warehouseId,
+            barcodes: orderDetails?.barcode?.map((ele: BarcodeListResponseType) => {
+                return {
+                    barcode: ele?.barcodeNumber,
+                    barcodeId: ele?._id
+                }
+            }),
+        }
 
-        // barcodeDispatch({
-        //     // orderNumber: orderNumber,
-        //     type: courierType,
-        //     barcodes: [
-        //         ...filterValue
-        //             ?.flat(1)
-        //             ?.map((ele: BarcodeListResponseType) => ({
-        //                 barcodeId: ele?._id,
-        //                 barcode: ele?.barcodeNumber,
-        //             })),
-        //     ],
-        // })
-        //     .then((res: any) => {
-        //         if (res?.data?.status) {
-        //             dispatch(setFieldCustomized(false))
-        //             setOrderNumber(null)
-        //             setBarcodeNumber('')
-        //             setProducts([])
-        //             navigate(`/gpo/label-invoice?orderNumber=${orderNumber}`, {
-        //                 state: { pathname: pathname },
-        //             })
-        //         } else {
-        //             showToast('error', res?.data?.message)
-        //         }
-        //     })
-        //     .catch((err: any) => {
-        //         console.error(err)
-        //     })
+        barcodeDispatch(payloadValue)
+            .then((res: any) => {
+                if (res?.data?.status) {
+                    dispatch(setFieldCustomized(false))
+                    // reset the state
+                    setBarcodeNumber('')
+                    setOrderDetails({
+                        orderNumber: null,
+                        orderId: '',
+                        productCode: '',
+                        quantity: 0,
+                        itemPrice: 0,
+                        barcode: [],
+                    })
+                    showToast('success', res?.data?.message)
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            })
+            .catch((err: any) => {
+                console.error(err)
+            })
     }
 
     // for disable the input barcode number field and enable the dispatch button
-    const handleDisableDispatchButton = () => {
-        const schemeQ = products?.reduce((sum: number, product: any) => {
-            let totalQuantity =
-                product?.schemeQuantity * product?.productQuantity
-            return (sum += totalQuantity)
-        }, 0)
-
-        const barcodeLength = products?.reduce((sum: number, product: any) => {
-            return (sum += product?.barcode?.length)
-        }, 0)
-
-        return schemeQ === barcodeLength
-    }
-
-    useEffect(() => {
-        const schemeQ = products?.reduce((sum: number, product: any) => {
-            let totalQuantity =
-                product?.schemeQuantity * product?.productQuantity
-            return (sum += totalQuantity)
-        }, 0)
-        const barcodeLength = products.reduce((sum: number, product: any) => {
-            return (sum += product?.barcode?.length)
-        }, 0)
-
-        if (schemeQ && barcodeLength) {
-            if (barcodeLength === schemeQ) {
-                handleDispatchBarcode()
-            }
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [products])
-
-    console.log('orderDetailsorderDetails', orderDetails);
+    const handleDisableDispatchButton = () => orderDetails?.quantity === orderDetails?.barcode?.length
 
     return (
         <React.Fragment>
             <div className="border-b-slate-300 border-[1px] shadow p-4 my-4 rounded">
                 <div className="mt-2 grid grid-cols-4 gap-x-4">
                     <ATMTextField
-                        disabled={
-                            orderNumber ? handleDisableDispatchButton() : false
-                        }
+                        disabled={orderDetails?.orderNumber ? handleDisableDispatchButton() : false}
                         name=""
                         value={barcodeNumber}
                         label="Barcode Number"
@@ -312,6 +234,26 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
 
                         <div className="flex gap-x-6">
                             <span className="font-semibold text-sm">
+                                Order ID
+                            </span>
+                            {' : '}
+                            <span className="font-semibold text-sm">
+                                {orderDetails?.orderId}
+                            </span>
+                        </div>
+
+                        <div className="flex gap-x-6">
+                            <span className="font-semibold text-sm">
+                                Product Code
+                            </span>
+                            {' : '}
+                            <span className="font-semibold text-sm">
+                                {orderDetails?.productCode}
+                            </span>
+                        </div>
+
+                        <div className="flex gap-x-6">
+                            <span className="font-semibold text-sm">
                                 Scheme Quantity
                             </span>
                             {' : '}
@@ -332,7 +274,6 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
                     </div>
                 )}
 
-
                 <div className="grid grid-cols-5 gap-x-4">
                     {orderDetails?.barcode?.map(
                         (
@@ -348,83 +289,26 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
                                     barcode?.productGroupLabel ||
                                     ''
                                 )}
-                                handleRemoveBarcode={() => {
-                                    handleRemoveBarcode(
-                                        barcode?.barcodeNumber
-                                    )
-                                }}
+                                handleRemoveBarcode={() => handleRemoveBarcode(barcode?.barcodeNumber)}
                             />
                         )
                     )}
                 </div>
-
-                {/* <div
-                    className="bg-white shadow-md rounded-md overflow-hidden border-[1px] border-gray-500 my-5"
-                >
-                    <div className="p-4">
-                        <div className="font-bold text-sm">
-                            {ele?.productGroupName}
-                        </div>
-
-                        <div className="flex gap-x-6 text-sm">
-                            <div className="text-gray-700">
-                                Product Quantity :
-                            </div>
-                            <div>{ele?.productQuantity}</div>
-                        </div>
-
-                        <div className="flex gap-x-6 text-sm">
-                            <div className="text-gray-700">
-                                Total Quantity :
-                            </div>
-                            <div>
-                                {totalBarcodeQuantity} {' / '}
-                                {ele?.barcode?.length}
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-5 gap-x-4">
-                            {orderDetails?.barcode?.map(
-                                (
-                                    barcode: BarcodeListResponseType,
-                                    barcodeIndex: number
-                                ) => (
-                                    <BarcodeCard
-                                        key={barcodeIndex}
-                                        barcodeNumber={
-                                            barcode?.barcodeNumber
-                                        }
-                                        productGroupLabel={capitalizeFirstLetter(
-                                            barcode?.productGroupLabel ||
-                                            ''
-                                        )}
-                                        handleRemoveBarcode={() => {
-                                            handleRemoveBarcode(
-                                                barcode?.barcodeNumber
-                                            )
-                                        }}
-                                    />
-                                )
-                            )}
-                        </div>
-                    </div>
-                </div> */}
-
             </div>
+
             <div className="flex justify-end items-end ">
-                {products.length ? (
-                    <div>
-                        <ATMLoadingButton
-                            disabled={!handleDisableDispatchButton()}
-                            // isLoading={barcodeDispatchInfo?.isLoading}
-                            loadingText="Dispatching"
-                            onClick={() => handleDispatchBarcode()}
-                            className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
-                        >
-                            Dispatch
-                        </ATMLoadingButton>
-                    </div>
-                ) : null}
+                <div>
+                    <ATMLoadingButton
+                        disabled={!handleDisableDispatchButton()}
+                        isLoading={barcodeDispatchInfo?.isLoading}
+                        loadingText="Dispatching"
+                        onClick={() => handleDispatchBarcode()}
+                        className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
+
+                    >
+                        Dispatch
+                    </ATMLoadingButton>
+                </div>
             </div>
         </React.Fragment>
     )

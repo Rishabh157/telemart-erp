@@ -4,12 +4,14 @@ import { IoRemoveCircle } from 'react-icons/io5'
 type BarcodeCardTypes = {
     barcodeNumber: string
     productGroupLabel: string
+    isRemoveBarcode?: boolean
     handleRemoveBarcode?: () => void
 }
 
 const BarcodeCard = ({
     barcodeNumber,
     productGroupLabel,
+    isRemoveBarcode = false,
     handleRemoveBarcode,
 }: BarcodeCardTypes) => {
     return (
@@ -21,13 +23,13 @@ const BarcodeCard = ({
                     </div>
                     <div>{barcodeNumber}</div>
                 </div>
-                <div className="absolute -top-2 -right-2 cursor-pointer">
+                {!isRemoveBarcode && <div className="absolute -top-2 -right-2 cursor-pointer">
                     <IoRemoveCircle
                         fill="red"
                         size={20}
                         onClick={handleRemoveBarcode}
                     />
-                </div>
+                </div>}
             </div>
 
             <div className="text-primary-main font-medium grow flex items-end">

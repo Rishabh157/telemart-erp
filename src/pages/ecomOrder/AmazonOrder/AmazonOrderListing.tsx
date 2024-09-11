@@ -20,7 +20,7 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useAddAmzoneOrderSheetMutation } from 'src/services/EcomOrdersMasterService'
+import { useAddAmzoneOrderSheetMutation, useUpdateEcomOrderSheetMutation } from 'src/services/EcomOrdersMasterService'
 
 type Props = {
     columns: columnTypes[]
@@ -39,8 +39,12 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } = amazonOrderState
 
     // Sheet Upload API
-    const [addAmazonOrderShhet] = useAddAmzoneOrderSheetMutation()
-    const fileInputRef = React.useRef<HTMLInputElement>(null)
+    const [addAmazonOrderSheet] = useAddAmzoneOrderSheetMutation()
+    // Update Order Status API 
+    const [updateStatusOrder] = useUpdateEcomOrderSheetMutation()
+
+    const fileInputUploadSheetRef = React.useRef<HTMLInputElement>(null)
+    const fileInputUpdateStatusSheetRef = React.useRef<HTMLInputElement>(null)
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files
@@ -52,9 +56,8 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
             const formData = new FormData()
             // Append the file
             formData.append('file', file)
-            // formData.append('courierCode', selectedCourier)
 
-            addAmazonOrderShhet(formData)
+            addAmazonOrderSheet(formData)
                 .then((res: any) => {
                     console.log('res: ', res);
                     if ('data' in res) {
@@ -73,23 +76,63 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
         }
     }
 
+    const handleUpdateStatus = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files
+
+        if (files && files[0]) {
+            const file = files[0]
+
+            // Create a new FormData instance
+            const formData = new FormData()
+            // Append the file
+            formData.append('file', file)
+
+            updateStatusOrder(formData)
+                .then((res: any) => {
+                    console.log('res: ', res);
+                    if ('data' in res) {
+                        if (res?.data?.status) {
+                            showToast('success', 'Updated successfully')
+                        } else {
+                            showToast('error', res?.data?.message)
+                        }
+                    } else {
+                        showToast('error', res?.error?.data?.message)
+                    }
+                })
+                .catch((err: any) => {
+                    console.error('err', err?.error);
+                })
+        }
+    }
+
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
 
             <div className='flex justify-between'>
                 <div className="flex justify-between items-center h-[45px]">
-                    <ATMPageHeading>Amzone Orders</ATMPageHeading>
+                    <ATMPageHeading>Amazon Orders</ATMPageHeading>
                 </div>
 
+                {/* For Upload File */}
                 <input
                     type="file"
                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                    ref={fileInputRef}
+                    ref={fileInputUploadSheetRef}
                     className="hidden"
                     onChange={handleFileChange} // Assuming addExcelFile can handle the file input change event
                 />
 
-                <div className="flex justify-between items-center h-[45px]">
+                {/* For Update Status */}
+                <input
+                    type="file"
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    ref={fileInputUpdateStatusSheetRef}
+                    className="hidden"
+                    onChange={handleUpdateStatus} // Assuming addExcelFile can handle the file input change event
+                />
+
+                <div className="flex justify-between gap-x-2 items-center h-[45px] ">
                     {/* Import Button */}
                     <ATMExportButton
                         isLoading={false}
@@ -101,9 +144,23 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
                         className='py-2 mt-[5px] h-[36px]'
                         // disabled={!selectedCourier ? true : false}
                         onImport={() => {
-                            fileInputRef?.current?.click()
+                            fileInputUploadSheetRef?.current?.click()
                         }}
                     />
+                    <ATMExportButton
+                        isLoading={false}
+                        headers={[]}
+                        fileName=""
+                        btnName="Update Status"
+                        btnType='UPLOAD'
+                        loadingText="..."
+                        className='py-2 mt-[5px] h-[36px]'
+                        // disabled={!selectedCourier ? true : false}
+                        onImport={() => {
+                            fileInputUpdateStatusSheetRef?.current?.click()
+                        }}
+                    />
+
                 </div>
             </div>
 

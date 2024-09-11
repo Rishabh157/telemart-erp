@@ -52,6 +52,8 @@ type FlipkartOrderListingListResponse = {
     service_sla_breached: string,
     productCode: string,
     label: string,
+    isDispatched: boolean
+    status: string
     isDeleted: boolean,
     isActive: boolean,
     createdAt: string
@@ -90,8 +92,8 @@ const FlipkartOrdersListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'orderNumber',
-            headerName: 'Order Number',
-            flex: 'flex-[1_1_0%]',
+            headerName: 'Order No.',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
             renderCell: (row: FlipkartOrderListingListResponse) => (
                 <span className="text-primary-main">#{row?.orderNumber}</span>
@@ -105,6 +107,25 @@ const FlipkartOrdersListingWrapper = () => {
             renderCell: (row: FlipkartOrderListingListResponse) => (
                 <span className="text-primary-main"> {row?.order_id}</span>
             ),
+        },
+        {
+            field: 'isDispatched',
+            headerName: 'Dispatched',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            renderCell: (row: FlipkartOrderListingListResponse) => (
+                <div>
+                    {row.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
+                </div>
+            ),
+        },
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
         },
         {
             field: 'product_title',

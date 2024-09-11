@@ -39,11 +39,13 @@ const WHInventory = () => {
             flex: 'flex-[1.5_1.5_0%]',
         },
     ]
+    
     useEffect(() => {
         if (options?.length) {
             setWarehouseId(options[0]?.value as string)
         }
     }, [options])
+
     return (
         <div className="border-[1px] border-slate-400 rounded p-2 w-full h-fit">
             <div className="text-start flex justify-between w-full">
