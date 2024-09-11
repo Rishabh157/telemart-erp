@@ -26,21 +26,15 @@ type PropType = {
 
 const DispatchEcomOrderRTOModel = ({ open, onClose, orderDetails, ecomType }: PropType) => {
 
-
   const {
     customized,
     // userData
   } = useSelector(
     (state: RootState) => state?.auth
   )
-
-
+  
   const params = useParams()
   const warehouseId = params.id
-
-  // const [barcodeNumber, setBarcodeNumber] = useState<any>('')
-
-  // const [barcodeCondition, setBarcodeCondition] = useState<string>()
 
   const [barcodeList, setBarcodeList] = useState<any[]>([])
 

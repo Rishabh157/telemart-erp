@@ -30,6 +30,7 @@ import { AppDispatch } from 'src/redux/store'
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
     companyName: string
+    panNumber: string
     websiteUrl: string
     gstNo: string
     address: string
@@ -118,6 +119,7 @@ const EditCompanyWrapper = () => {
     // From Initial Values
     const initialValues: FormInitialValues = {
         companyName: selectedCompany?.companyName || '',
+        panNumber: selectedCompany?.panNumber || '',
         websiteUrl: selectedCompany?.websiteUrl || '',
         gstNo: selectedCompany?.gstNo || '',
         address: selectedCompany?.address || '',
@@ -145,6 +147,7 @@ const EditCompanyWrapper = () => {
                     id: Id || '',
                     body: {
                         companyName: values.companyName,
+                        panNumber: values.panNumber,
                         websiteUrl: values.websiteUrl,
                         gstNo: values.gstNo,
                         address: values.address,

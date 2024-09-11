@@ -46,12 +46,11 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                 return (
                                     <div
                                         key={productIndex}
-                                        className={`flex flex-col gap-3 py-6 px-7 ${
-                                            productIndex !==
-                                                values.productInformation
-                                                    .length -
-                                                    1 && 'border-b'
-                                        }  border-slate-300 `}
+                                        className={`flex flex-col gap-3 py-6 px-7 ${productIndex !==
+                                            values.productInformation
+                                                .length -
+                                            1 && 'border-b'
+                                            }  border-slate-300 `}
                                     >
                                         <div className="flex items-center justify-between">
                                             <div className="pb-2 text-lg font-medium text-primary-main ">
@@ -61,16 +60,16 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                             {/* Delete Button */}
                                             {values.productInformation?.length >
                                                 1 && (
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        remove(productIndex)
-                                                    }
-                                                    className="p-1 text-white bg-red-500 rounded"
-                                                >
-                                                    <MdDeleteOutline className="text-2xl" />
-                                                </button>
-                                            )}
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            remove(productIndex)
+                                                        }
+                                                        className="p-1 text-white bg-red-500 rounded"
+                                                    >
+                                                        <MdDeleteOutline className="text-2xl" />
+                                                    </button>
+                                                )}
                                         </div>
 
                                         <div className="grid grid-cols-5 gap-4 gap-y-5">
@@ -106,7 +105,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                 name={`productInformation[${productIndex}].productQuantity`}
                                                 value={
                                                     productQuantity.toString() ===
-                                                    '0'
+                                                        '0'
                                                         ? ''
                                                         : productQuantity.toString()
                                                 }
@@ -184,7 +183,7 @@ const StepAddProducts = ({ formikProps, dropdownOptions }: Props) => {
                                                         )
                                                     }
                                                 }}
-                                                label="POP"
+                                                label="Product Offer Price (pop)"
                                                 placeholder="Product Offer Price"
                                                 className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MdOutbond } from 'react-icons/md'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useParams } from 'react-router-dom'
 import AccessDenied from 'src/AccessDenied'
 import TabScrollable from 'src/components/utilsComponent/TabScrollable'
 import { Tabs } from 'src/models/common/paginationType'
@@ -9,10 +9,14 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { RootState } from 'src/redux/store'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useGetWareHouseByIdQuery } from 'src/services/WareHouseService'
+import { WarehousesListResponse } from 'src/models'
 
 type Props = {}
 
 const OutwardTabs = (props: Props) => {
+
     const tabs: Tabs[] = [
         {
             label: 'Status',
@@ -56,7 +60,6 @@ const OutwardTabs = (props: Props) => {
             path: 'ecom',
             name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE,
         },
-
         {
             label: 'Company',
             icon: MdOutbond,
@@ -95,6 +98,14 @@ const OutwardTabs = (props: Props) => {
         },
     ]
 
+    const params = useParams()
+    const id: any = params.id
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { items } = useGetDataByIdCustomQuery<WarehousesListResponse>({
+        useEndPointHook: useGetWareHouseByIdQuery(id),
+    })
+
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(0)
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -124,8 +135,11 @@ const OutwardTabs = (props: Props) => {
         if (hasExecuted) {
             return // Exit early if the function has been executed
         }
+
         const activeTabIndex = window.location.pathname.split('/')[5]
+
         const findPath = tabs?.find((ele: any) => activeTabIndex === ele?.path)
+
         for (const nav of tabs as any) {
             const isRefPath = isAuthorized(
                 findPath?.name as keyof typeof UserModuleNameTypes
@@ -150,6 +164,14 @@ const OutwardTabs = (props: Props) => {
     const tabsRender = tabs?.some((nav: any) => {
         return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
     })
+
+
+    // Filter tabs based on isDefault value
+    // const filteredTabs = items?.isDefault
+    //     ? tabs.filter((tab) => tab?.path === 'ecom')
+    //     : tabs.filter((tab) => tab?.path !== 'ecom');
+
+    // console.log('isEcomTabAccessIfWarehouseIsDefault: ', filteredTabs)
 
     return (
         <div className="w-full flex  h-[calc(100vh-95px)] bg-white">

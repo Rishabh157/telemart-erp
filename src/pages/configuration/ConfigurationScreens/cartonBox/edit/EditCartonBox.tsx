@@ -141,7 +141,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                                 )
                                             }
                                         }}
-                                        placeholder="H"
+                                        placeholder="Height"
                                         className="bg-white rounded shadow"
                                     />
 
@@ -164,7 +164,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                                 )
                                             }
                                         }}
-                                        placeholder="W"
+                                        placeholder="Width"
                                         className="bg-white rounded shadow"
                                     />
 
@@ -187,7 +187,7 @@ const EditCartonBox = ({ formikProps, apiStatus }: Props) => {
                                                 )
                                             }
                                         }}
-                                        placeholder="D"
+                                        placeholder="Depth"
                                         className="bg-white rounded shadow"
                                     />
                                 </div>

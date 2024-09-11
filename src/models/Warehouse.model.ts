@@ -1,15 +1,9 @@
-/// ==============================================
-// Filename:Warehouse.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 export type WarehousesListResponse = {
     wareHouseCode: string
     wareHouseName: string
     country: string
     email: string
+    isDefault: boolean
     registrationAddress: {
         phone: string
         address: string

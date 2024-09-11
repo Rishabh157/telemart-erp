@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import OutwardFlipkartTabs from './OutwardFlipkartTabs'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -10,6 +10,8 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import DispatchingEcomBarcodes from '../DispatchingEcomBarcodes/DispatchingEcomBarcodes'
 import { EcomTypesEnum } from 'src/utils/constants/enums'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import DispatchEcomOrderRTOModel from '../DispatchingEcomBarcodes/DispatchEcomOrderRTOModel'
 // import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 
 
@@ -73,6 +75,11 @@ type FlipkartOrderListingListResponse = {
 const OutwardFlipkartTabsListingWrapper = () => {
 
     useUnmountCleanup()
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const [selectedItemsTobeDispatch, setSelectedItemsTobeDispatch] = useState<FlipkartOrderListingListResponse | null>(null);
+
     const { userData } = useSelector((state: RootState) => state?.auth)
     const amazonOrderState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -99,6 +106,23 @@ const OutwardFlipkartTabsListingWrapper = () => {
     })
 
     const columns: columnTypes[] = [
+        {
+            field: 'action',
+            headerName: 'Action',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: FlipkartOrderListingListResponse) => (
+                row?.status === 'RTO' ? <ActionPopup
+                    handleOnAction={() => { }}
+                    // moduleName={UserModuleNameTypes.saleOrder}
+                    isCustomBtn={true}
+                    customBtnText="Dispatch"
+                    handleCustomActionButton={() => {
+                        setIsOpen(true)
+                        setSelectedItemsTobeDispatch(row)
+                    }}
+                /> : null
+            ),
+        },
         {
             field: 'orderNumber',
             headerName: 'Order No.',
@@ -184,6 +208,16 @@ const OutwardFlipkartTabsListingWrapper = () => {
         <OutwardFlipkartTabs columns={columns} rows={items} />
         <DispatchingEcomBarcodes ecomType={EcomTypesEnum.flipkart} />
 
+        {/* RTO Dispatching */}
+        <DispatchEcomOrderRTOModel
+            ecomType={EcomTypesEnum.flipkart}
+            open={isOpen}
+            orderDetails={selectedItemsTobeDispatch}
+            onClose={() => {
+                setSelectedItemsTobeDispatch(null)
+                setIsOpen(false)
+            }}
+        />
 
     </>
 }

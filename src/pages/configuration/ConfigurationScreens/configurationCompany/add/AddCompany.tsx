@@ -25,7 +25,7 @@ type Props = {
     setActiveStep: React.Dispatch<React.SetStateAction<number>>
     steps: any[]
     pageHeading: string
-
+    apiStatus: boolean
     breadcrumbs: {
         label: string
         onClick?: () => void
@@ -40,6 +40,7 @@ const AddCompany = ({
     steps,
     pageHeading,
     breadcrumbs,
+    apiStatus
 }: Props) => {
     // Handle Previous
     const dispatch = useDispatch<AppDispatch>()
@@ -82,11 +83,14 @@ const AddCompany = ({
 
                             <button
                                 type="button"
+                                disabled={apiStatus}
                                 onClick={() => {
                                     dispatch(setFormSubmitting(true))
                                     formikProps.handleSubmit()
                                 }}
-                                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                    apiStatus ? 'opacity-25' : ''
+                                }`}
                             >
                                 {activeStep === steps.length - 1
                                     ? 'Submit'

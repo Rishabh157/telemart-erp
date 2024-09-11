@@ -137,7 +137,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                                 )
                                             }
                                         }}
-                                        placeholder="H"
+                                        placeholder="Height"
                                         className="shadow bg-white rounded"
                                     />
 
@@ -160,7 +160,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                                 )
                                             }
                                         }}
-                                        placeholder="W"
+                                        placeholder="Width"
                                         className="shadow bg-white rounded"
                                     />
 
@@ -183,7 +183,7 @@ const AddCartonBox = ({ formikProps, apiStatus }: Props) => {
                                                 )
                                             }
                                         }}
-                                        placeholder="D"
+                                        placeholder="Depth"
                                         className="shadow bg-white rounded"
                                     />
                                 </div>

@@ -92,6 +92,18 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                     isSubmitting={isSubmitting}
                 />
 
+                <ATMTextField
+                    name="panNumber"
+                    value={values.panNumber}
+                    onChange={(e) => {
+                        handleSetFieldValue('panNumber', e.target.value)
+                    }}
+                    label="PAN Number"
+                    placeholder="PAN Number"
+                    className="shadow bg-white rounded"
+                    isSubmitting={isSubmitting}
+                />
+
                 <div className='mt-2'>
                     <ATMTextArea
                         required

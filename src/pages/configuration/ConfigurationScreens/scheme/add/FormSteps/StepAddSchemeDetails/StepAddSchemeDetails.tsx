@@ -147,7 +147,7 @@ const StepAddSchemeDetails = ({
                                     )
                                 }
                             }}
-                            placeholder="H"
+                            placeholder="Height"
                             className="bg-white rounded shadow"
                         />
                         {/* Weight */}
@@ -165,7 +165,7 @@ const StepAddSchemeDetails = ({
                                     )
                                 }
                             }}
-                            placeholder="W"
+                            placeholder="Width"
                             className="bg-white rounded shadow"
                         />
                         {/* Depth */}
@@ -183,7 +183,7 @@ const StepAddSchemeDetails = ({
                                     )
                                 }
                             }}
-                            placeholder="D"
+                            placeholder="Depth"
                             className="bg-white rounded shadow"
                         />
                     </div>
@@ -199,7 +199,7 @@ const StepAddSchemeDetails = ({
                             handleSetFieldValue('weight', String(inputValue))
                         }
                     }}
-                    label="Weight"
+                    label="Weight (in gms.)"
                     placeholder="Weight"
                     className="bg-white rounded shadow"
                 />

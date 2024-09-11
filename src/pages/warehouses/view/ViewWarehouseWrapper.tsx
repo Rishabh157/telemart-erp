@@ -8,6 +8,7 @@ import { useGetWareHouseByIdQuery } from 'src/services/WareHouseService'
 
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { WarehousesListResponse } from 'src/models'
 
 const ViewWarehouseWrapper = () => {
     const params = useParams()
@@ -16,7 +17,7 @@ const ViewWarehouseWrapper = () => {
         useEndPointHook: useGetWareHouseByIdQuery(id),
     })
 
-    return <ViewWarehouse items={items} />
+    return <ViewWarehouse items={items as WarehousesListResponse} />
 }
 
 export default ViewWarehouseWrapper

@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Form, Formik, FormikProps } from 'formik'
@@ -31,6 +31,7 @@ export type FormInitialValues = {
     gstNo: string
     address: string
     phoneNo: string
+    panNumber: string
     bankDetails: {
         bankName: string
         branchName: string
@@ -49,6 +50,7 @@ const steps = [
         validationSchema: object({
             companyName: string().required('Company name is required'),
             websiteUrl: string().url().required('Website url is required'),
+            panNumber: string(),
             gstNo: string()
                 .matches(validationofGst, 'gst number must be valid')
                 .required('GST number is required'),
@@ -69,7 +71,7 @@ const steps = [
                     accountHolderName: string(),
                     accountNumber: number(),
                     ifscNumber: string(),
-                    accountType: string(),  
+                    accountType: string(),
                 })
             ),
         }),
@@ -97,6 +99,7 @@ const AddCompanyWrapper = () => {
     ]
 
     // States
+    const [apiStatus, setApiStatus] = useState<boolean>(false)
     const [company] = useAddCompanyMutation()
     const [activeStep, setActiveStep] = React.useState(0)
 
@@ -104,6 +107,7 @@ const AddCompanyWrapper = () => {
     const initialValues: FormInitialValues = {
         companyName: '',
         websiteUrl: '',
+        panNumber: '',
         gstNo: '',
         address: '',
         phoneNo: '',
@@ -128,10 +132,12 @@ const AddCompanyWrapper = () => {
     // On Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         if (activeStep === steps.length - 1) {
+            setApiStatus(true)
             dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 company({
                     companyName: values.companyName,
+                    panNumber: values.panNumber,
                     websiteUrl: values.websiteUrl,
                     gstNo: values.gstNo,
                     address: values.address,
@@ -148,6 +154,7 @@ const AddCompanyWrapper = () => {
                     } else {
                         showToast('error', 'Something went wrong')
                     }
+                    setApiStatus(false)
                 })
             }, 1000)
         } else {
@@ -171,6 +178,7 @@ const AddCompanyWrapper = () => {
                         setActiveStep={setActiveStep}
                         breadcrumbs={breadcrumbs}
                         pageHeading={pageHeading}
+                        apiStatus={apiStatus}
                     />
                 </Form>
             )}

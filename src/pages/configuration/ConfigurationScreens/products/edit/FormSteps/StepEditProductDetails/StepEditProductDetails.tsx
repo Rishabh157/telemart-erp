@@ -155,7 +155,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                                     )
                                 }
                             }}
-                            placeholder="H"
+                            placeholder="Height"
                             className="bg-white rounded shadow"
                             isSubmitting={isSubmitting}
                         />
@@ -175,7 +175,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                                     )
                                 }
                             }}
-                            placeholder="W"
+                            placeholder="Width"
                             className="bg-white rounded shadow"
                             isSubmitting={isSubmitting}
                         />
@@ -195,7 +195,7 @@ const StepEditProductDetails = ({ formikProps, dropdownOptions }: Props) => {
                                     )
                                 }
                             }}
-                            placeholder="D"
+                            placeholder="Depth"
                             className="bg-white rounded shadow"
                             isSubmitting={isSubmitting}
                         />

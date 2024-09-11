@@ -114,10 +114,7 @@ const StepAddBankDetails = ({
                                                                                 return (
                                                                                     <ATMTextField
                                                                                         textTransform={name === 'ifscNumber' ? 'uppercase' : 'capitalize'}
-                                                                                        key={
-                                                                                            name
-                                                                                        }
-                                                                                        // required
+                                                                                        key={name}
                                                                                         name={`bankDetails[${bankInformationIndex}].${name}`}
                                                                                         value={
                                                                                             bankInformation[
@@ -127,38 +124,31 @@ const StepAddBankDetails = ({
                                                                                         onChange={(
                                                                                             e
                                                                                         ) => {
-                                                                                            if (
-                                                                                                name ===
-                                                                                                'accountNumber'
-                                                                                            ) {
-                                                                                                const newValue =
-                                                                                                    e
-                                                                                                        .target
-                                                                                                        .value
-                                                                                                if (
-                                                                                                    !isNaN(
-                                                                                                        Number(
-                                                                                                            newValue
-                                                                                                        )
-                                                                                                    )
+                                                                                            if (name === 'accountNumber') {
+                                                                                                const newValue = e?.target?.value
+                                                                                                if (!isNaN(Number(newValue))
                                                                                                 ) {
                                                                                                     handleSetFieldValue(
                                                                                                         `bankDetails[${bankInformationIndex}].${name}`,
                                                                                                         newValue
                                                                                                     )
+
                                                                                                 }
                                                                                             } else {
-                                                                                                handleSetFieldValue(
-                                                                                                    `bankDetails[${bankInformationIndex}].${name}`,
-                                                                                                    e
-                                                                                                        .target
-                                                                                                        .value
-                                                                                                )
+
+                                                                                                if (name === 'ifscNumber') {
+                                                                                                    const regex = /^[A-Z0-9]+$/;
+                                                                                                    const value = e.target.value;
+                                                                                                    // Allow empty values or valid IFSC formats
+                                                                                                    if (!value || regex.test(value)) {
+                                                                                                        handleSetFieldValue(`bankDetails[${bankInformationIndex}].${name}`, value);
+                                                                                                    }
+                                                                                                } else {
+                                                                                                    handleSetFieldValue(`bankDetails[${bankInformationIndex}].${name}`, e.target.value)
+                                                                                                }
                                                                                             }
                                                                                         }}
-                                                                                        label={
-                                                                                            label
-                                                                                        }
+                                                                                        label={label}
                                                                                         placeholder={
                                                                                             placeholder
                                                                                         }
@@ -240,7 +230,6 @@ const StepAddBankDetails = ({
                                                                                         }
                                                                                     />
                                                                                 )
-
                                                                             default:
                                                                                 return null
                                                                         }

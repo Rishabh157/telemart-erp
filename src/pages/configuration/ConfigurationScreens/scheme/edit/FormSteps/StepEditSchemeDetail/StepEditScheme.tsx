@@ -143,7 +143,7 @@ const StepEditScheme = ({
                                     e.target.value
                                 )
                             }
-                            placeholder="H"
+                            placeholder="Height"
                             className="bg-white rounded shadow"
                         />
                         {/* Weight */}
@@ -158,7 +158,7 @@ const StepEditScheme = ({
                                     e.target.value
                                 )
                             }
-                            placeholder="W"
+                            placeholder="Width"
                             className="bg-white rounded shadow"
                         />
                         {/* Depth */}
@@ -173,7 +173,7 @@ const StepEditScheme = ({
                                     e.target.value
                                 )
                             }
-                            placeholder="D"
+                            placeholder="Depth"
                             className="bg-white rounded shadow"
                         />
                     </div>
@@ -186,7 +186,7 @@ const StepEditScheme = ({
                     onChange={(e) => {
                         handleSetFieldValue('weight', e.target.value)
                     }}
-                    label="Weight"
+                    label="Weight (in gms.)"
                     placeholder="Weight"
                     className="bg-white rounded shadow"
                 />

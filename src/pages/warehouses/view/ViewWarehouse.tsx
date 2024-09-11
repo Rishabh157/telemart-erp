@@ -6,10 +6,11 @@ import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
+import { WarehousesListResponse } from 'src/models'
 
 // |-- Types --|
 type Props = {
-    items: any
+    items: WarehousesListResponse
 }
 
 // Breadcrumbs
@@ -68,6 +69,11 @@ const ViewWarehouse = ({ items }: Props) => {
                             </p>
                             <h1 className="text-gray-800">Email </h1>
                             <p className="text-slate-600">{items?.email}</p>
+
+                            <h1 className="text-gray-800">Default Warehouse </h1>
+                            <p className={`${items?.isDefault ? 'text-green-500' : 'text-orange-400'} font-bold`}>
+                                {items?.isDefault ? 'YES' : 'NO'}
+                            </p>
                         </div>
                     </div>
 

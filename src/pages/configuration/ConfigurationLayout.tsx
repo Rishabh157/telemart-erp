@@ -10,7 +10,10 @@ import {
     BiCategoryAlt,
 } from 'react-icons/bi'
 import { MdOutlineCategory } from 'react-icons/md'
-import { BsBox, BsBoxes, BsBoxSeam } from 'react-icons/bs'
+import {
+    // BsBox, 
+    BsBoxes, BsBoxSeam
+} from 'react-icons/bs'
 import { TbAppsFilled } from 'react-icons/tb'
 import { FaObjectGroup, FaLanguage } from 'react-icons/fa'
 import { CgOrganisation } from 'react-icons/cg'
@@ -53,7 +56,7 @@ const configurationNavigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_PRODUCT_SUB_CATEGORY,
     },
     {
-        label: 'Product Group',
+        label: 'Product Master',
         icon: BsBoxes,
         path: 'product-group',
         name: UserModuleNameTypes.NAV_PRODUCT_GROUP,
@@ -70,12 +73,12 @@ const configurationNavigation: NavItemType[] = [
         path: 'item',
         name: UserModuleNameTypes.NAV_ITEMS,
     },
-    {
-        label: 'Products',
-        icon: BsBox,
-        path: 'products',
-        name: UserModuleNameTypes.NAV_PRODUCTS,
-    },
+    // {
+    //     label: 'Products',
+    //     icon: BsBox,
+    //     path: 'products',
+    //     name: UserModuleNameTypes.NAV_PRODUCTS,
+    // },
     {
         label: 'Carton Box',
         icon: BsBoxSeam,
@@ -185,8 +188,8 @@ const ConfigurationLayout = ({ children }: Props) => {
             {/* Side Navigation Bar */}
             <div
                 className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${isCollapsed
-                        ? 'min-w-[50px] w-[50px]'
-                        : 'min-w-[250px] w-[250px]'
+                    ? 'min-w-[50px] w-[50px]'
+                    : 'min-w-[250px] w-[250px]'
                     }`}
             >
                 <VerticalNavBar

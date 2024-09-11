@@ -1,6 +1,7 @@
 // |-- Types --|
 export type CompaniesListResponse = {
     companyName: string
+    panNumber: string
     websiteUrl: string
     address: string
     gstNo: string
@@ -23,6 +24,7 @@ export type bankDetails = {
 
 export type AddCompany = {
     companyName: string
+    panNumber: string
     websiteUrl: string
     gstNo: string
     address: string
@@ -31,6 +33,7 @@ export type AddCompany = {
 }
 export type SelectedCompany = {
     companyName: string
+    panNumber: string
     websiteUrl: string
     gstNo: string
     address: string
@@ -41,6 +44,7 @@ export type SelectedCompany = {
 export type UpdateCompany = {
     body: {
         companyName: string
+        panNumber: string
         websiteUrl: string
         address: string
         gstNo: string
