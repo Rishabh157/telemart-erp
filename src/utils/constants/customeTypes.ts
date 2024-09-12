@@ -1433,7 +1433,7 @@ export const getDIDTypeOptions = () => {
             value: DIDTypeEnum.web,
         },
         {
-            label: 'Damage',
+            label: 'Media',
             value: DIDTypeEnum.media,
         },
     ]

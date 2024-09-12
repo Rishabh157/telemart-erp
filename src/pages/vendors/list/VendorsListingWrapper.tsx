@@ -24,6 +24,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { VendorListFilterFormValues } from './VendorListingFilter/VendorListingFilterWrapper'
 
 const VendorsListingWrapper = () => {
     useUnmountCleanup()
@@ -35,6 +36,20 @@ const VendorsListingWrapper = () => {
     )
     const { page, rowsPerPage, searchValue } = listingPaginationState
     const { userData } = useSelector((state: RootState) => state?.auth)
+
+
+
+    // listing filters states
+    const [filter, setFilter] =
+        React.useState<VendorListFilterFormValues>({
+            stateId: { fieldName: '', label: '', value: '' },
+            districtId: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            companyType: { fieldName: '', label: '', value: '' },
+        })
 
     // initiate method
     const navigate = useNavigate()
@@ -57,6 +72,18 @@ const VendorsListingWrapper = () => {
                 {
                     fieldName: 'companyId',
                     value: userData?.companyId as string,
+                },
+                {
+                    fieldName: 'stateId',
+                    value: filter?.stateId?.value,
+                },
+                {
+                    fieldName: 'districtId',
+                    value: filter?.districtId?.value,
+                },
+                {
+                    fieldName: 'companyType',
+                    value: filter?.companyType?.value,
                 },
             ],
             dateFilter: {},
@@ -183,7 +210,12 @@ const VendorsListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <VendorsListing columns={columns} rows={items} />
+            <VendorsListing
+                columns={columns}
+                rows={items}
+                filter={filter}
+                setFilter={setFilter}
+            />
         </SideNavLayout>
     )
 }

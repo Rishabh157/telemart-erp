@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,16 +20,30 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+import VendorListingFilterWrapper, { VendorListFilterFormValues } from './VendorListingFilter/VendorListingFilterWrapper'
+import { Chip, Stack } from '@mui/material'
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
+    setFilter: React.Dispatch<React.SetStateAction<VendorListFilterFormValues>>
+    filter: VendorListFilterFormValues
 }
 
-const VendorsListing = ({ columns, rows }: Props) => {
+const VendorsListing = ({
+    columns,
+    rows,
+    setFilter,
+    filter,
+}: Props) => {
     // state
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
+
     const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
+
     const listingPaginationState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
@@ -37,7 +51,36 @@ const VendorsListing = ({ columns, rows }: Props) => {
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         listingPaginationState
 
-    const navigate = useNavigate()
+    // Filter Reset
+    const handleReset = () => {
+        setFilter((prev) => ({
+            ...prev,
+            companyType: { fieldName: '', value: '', label: '' },
+            stateId: { fieldName: '', value: '', label: '' },
+            districtId: { fieldName: '', value: '', label: '' },
+        }))
+    }
+
+    // For Showing UI Filter Applied 
+    const filterShow = (filter: VendorListFilterFormValues) => {
+        return (
+            <span className="capitalize">
+                <Stack direction="row" spacing={1}>
+                    {Object.entries(filter).map(([key, value], index) => {
+                        return value.value ? (
+                            <Chip
+                                key={index}
+                                label={`${value.fieldName}: ${value.label}`}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : null
+                    })}
+                </Stack>
+            </span>
+        )
+    }
 
     return (
         <div className="px-4 h-[calc(100vh-55px)]">
@@ -70,7 +113,23 @@ const VendorsListing = ({ columns, rows }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
+                    isFilterRemover
+                    onFilterRemoverClick={handleReset}
+                    filterShow={filterShow(filter)}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <VendorListingFilterWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                        setFilter={setFilter}
+                        filter={filter}
+                    />
+                )}
 
                 {/* Table */}
                 <div className={`grow overflow-auto `}>
