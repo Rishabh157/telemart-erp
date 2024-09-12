@@ -210,7 +210,7 @@ const EditDealerWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const navigate = useNavigate()
-    const [activeStep, setActiveStep] = React.useState(2)
+    const [activeStep, setActiveStep] = React.useState(0)
     const [apiStatus, setApiStatus] = useState(false)
     const [UpdateDealer] = useUpdateDealerMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
