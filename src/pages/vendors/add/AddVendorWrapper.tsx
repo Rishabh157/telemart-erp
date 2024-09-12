@@ -160,7 +160,7 @@ const steps = [
         validationSchema: object({
             bank_informations: array().of(
                 object().shape({
-                    bankName: string().required('Bank name is required'),
+                    bankName: string(),
                     bankBranchName: string(),
                     accountHolderName: string(),
                     accountNumber: string(),
