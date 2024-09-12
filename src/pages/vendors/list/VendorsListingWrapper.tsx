@@ -74,11 +74,11 @@ const VendorsListingWrapper = () => {
                     value: userData?.companyId as string,
                 },
                 {
-                    fieldName: 'stateId',
+                    fieldName: 'billingAddress.stateId',
                     value: filter?.stateId?.value,
                 },
                 {
-                    fieldName: 'districtId',
+                    fieldName: 'billingAddress.districtId',
                     value: filter?.districtId?.value,
                 },
                 {
