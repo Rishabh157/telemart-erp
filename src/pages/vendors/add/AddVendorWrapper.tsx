@@ -161,19 +161,11 @@ const steps = [
             bank_informations: array().of(
                 object().shape({
                     bankName: string().required('Bank name is required'),
-                    bankBranchName: string().required(
-                        'Branch name is required'
-                    ),
-                    accountHolderName: string().required(
-                        'Account holder name is required'
-                    ),
-                    accountNumber: string().required(
-                        'Account number is required'
-                    ),
-                    ifscNumber: string().required('IFSC code is required'),
-                    accountType: string().required(
-                        'Please select account type'
-                    ),
+                    bankBranchName: string(),
+                    accountHolderName: string(),
+                    accountNumber: string(),
+                    ifscNumber: string(),
+                    accountType: string(),
                     cancelledCheque: string(),
                 })
             ),

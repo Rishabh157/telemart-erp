@@ -106,18 +106,18 @@ const StepAddBankDetails = ({
                                                                     .bank_informations
                                                                     ?.length >
                                                                     1 && (
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() =>
-                                                                            remove(
-                                                                                bankInformationIndex
-                                                                            )
-                                                                        }
-                                                                        className="p-1 text-white bg-red-500 rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                )}
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() =>
+                                                                                remove(
+                                                                                    bankInformationIndex
+                                                                                )
+                                                                            }
+                                                                            className="p-1 text-white bg-red-500 rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    )}
                                                             </div>
 
                                                             <div className="grid grid-cols-3 gap-4 gap-y-5">
@@ -134,21 +134,18 @@ const StepAddBankDetails = ({
                                                                         } = field
 
                                                                         switch (
-                                                                            type
+                                                                        type
                                                                         ) {
                                                                             case 'text':
                                                                                 return (
                                                                                     <ATMTextField
-                                                                                        required={
-                                                                                            required
-                                                                                        }
                                                                                         key={
                                                                                             name
                                                                                         }
                                                                                         name={`bank_informations[${bankInformationIndex}].${name}`}
                                                                                         value={
                                                                                             bankInformation[
-                                                                                                name
+                                                                                            name
                                                                                             ]
                                                                                         }
                                                                                         onChange={(
@@ -189,7 +186,7 @@ const StepAddBankDetails = ({
                                                                                             name={`bank_informations[${bankInformationIndex}].${name}`}
                                                                                             value={
                                                                                                 bankInformation[
-                                                                                                    name
+                                                                                                name
                                                                                                 ]
                                                                                             }
                                                                                             onChange={(
@@ -204,8 +201,8 @@ const StepAddBankDetails = ({
                                                                                             }}
                                                                                             options={
                                                                                                 dropdownOptions[
-                                                                                                    field.optionAccessKey ||
-                                                                                                        'accountTypeOptions'
+                                                                                                field.optionAccessKey ||
+                                                                                                'accountTypeOptions'
                                                                                                 ]
                                                                                             }
                                                                                             label={
@@ -242,13 +239,13 @@ const StepAddBankDetails = ({
                                                                                             }}
                                                                                             selectedFile={
                                                                                                 bankInformation[
-                                                                                                    name
+                                                                                                name
                                                                                                 ]
                                                                                             }
                                                                                         />
                                                                                         {loaderState ===
                                                                                             name &&
-                                                                                        imageApiStatus ? (
+                                                                                            imageApiStatus ? (
                                                                                             <div className="mt-3 text-center">
                                                                                                 <CircularProgress
                                                                                                     size={
