@@ -130,7 +130,7 @@ const StepAddDealerDetails = ({
                                         }}
                                         label={label}
                                         placeholder={placeholder}
-                                        className="mt-2 bg-white rounded shadow"
+                                        className="bg-white rounded shadow"
                                         isSubmitting={isSubmitting}
                                     />
                                 </div>
