@@ -36,6 +36,18 @@ const formFields: { sectionName: string; fields: Field<''>[] }[] = [
                 type: 'file-picker',
                 required: false,
             },
+            {
+                name: 'panNumber',
+                label: 'Pan Number',
+                placeholder: 'Pan Number',
+            },
+            {
+                name: 'panCard',
+                label: 'Pan Card',
+                placeholder: 'Pan Card',
+                type: 'file-picker',
+                required: false,
+            },
         ],
     },
 ]

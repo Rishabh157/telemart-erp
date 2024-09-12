@@ -48,12 +48,6 @@ const formFields: {
                 required: true,
             },
             {
-                name: 'regd_address.address',
-                label: 'Address',
-                placeholder: 'Address',
-                required: true,
-            },
-            {
                 name: 'regd_address.country',
                 label: 'Country',
                 placeholder: 'Country',
@@ -85,6 +79,13 @@ const formFields: {
                 optionAccessKey: 'pincodeOptions',
                 required: true,
             },
+            {
+                name: 'regd_address.address',
+                label: 'Address',
+                placeholder: 'Address',
+                type: 'textarea',
+                required: true,
+            },
         ],
     },
     {
@@ -105,12 +106,6 @@ const formFields: {
                 name: 'billing_address.phone',
                 label: 'Phone',
                 placeholder: 'Phone',
-                required: true,
-            },
-            {
-                name: 'billing_address.address',
-                label: 'Address',
-                placeholder: 'Address',
                 required: true,
             },
             {
@@ -143,6 +138,13 @@ const formFields: {
                 placeholder: 'Pincode',
                 type: 'select',
                 optionAccessKey: 'billingPincodeOptions',
+                required: true,
+            },
+            {
+                name: 'billing_address.address',
+                label: 'Address',
+                placeholder: 'Address',
+                type: 'textarea',
                 required: true,
             },
         ],

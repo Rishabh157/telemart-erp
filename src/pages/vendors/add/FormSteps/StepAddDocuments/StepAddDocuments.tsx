@@ -72,7 +72,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                             {sectionName}
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4 gap-y-5">
+                        <div className="grid grid-cols-3 gap-4 gap-y-5">
                             {fields?.map((field: FieldType) => {
                                 const {
                                     type = 'text',

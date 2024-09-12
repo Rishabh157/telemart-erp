@@ -33,6 +33,8 @@ export type VendorsListResponse = {
         gstNumber: string
         gstCertificate: string
         declarationForm: string
+        panNumber: string
+        panCard: string
     }
     bankInformation: {
         bankName: string
@@ -95,6 +97,8 @@ export type AddVendor = {
         gstNumber: string
         gstCertificate: string
         declarationForm: string
+        panNumber: string
+        panCard: string
     }
     bankInformation: {
         bankName: string
@@ -144,6 +148,8 @@ export type UpdateVendor = {
             gstNumber: string
             gstCertificate: string
             declarationForm: string
+            panNumber: string
+            panCard: string
         }
         bankInformation: {
             bankName: string

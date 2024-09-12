@@ -168,7 +168,7 @@ const DealersListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_NAME,
             renderCell: (row: DealersListResponse) => (
-                <span> {row.firstName.concat(' ' , row?.lastName)} </span>
+                <span> {row.firstName.concat(' ', row?.lastName)} </span>
             ),
         },
         {
@@ -236,11 +236,10 @@ const DealersListingWrapper = () => {
                                     onClick={() => {
                                         showConfirmationDialog({
                                             title: 'Approved',
-                                            text: `Do you want to ${
-                                                row.isApproved
-                                                    ? 'Pending this dealer'
-                                                    : 'Approval this dealer'
-                                            }`,
+                                            text: `Do you want to ${row.isApproved
+                                                ? 'Pending this dealer'
+                                                : 'Approval this dealer'
+                                                }`,
                                             showCancelButton: true,
                                             next: (res) => {
                                                 return res.isConfirmed
@@ -286,11 +285,10 @@ const DealersListingWrapper = () => {
                                     onClick={() => {
                                         showConfirmationDialog({
                                             title: 'Deactive User',
-                                            text: `Do you want to ${
-                                                row.isActive
-                                                    ? 'Deactive'
-                                                    : 'Active'
-                                            }`,
+                                            text: `Do you want to ${row.isActive
+                                                ? 'Deactive'
+                                                : 'Active'
+                                                }`,
                                             showCancelButton: true,
                                             next: (res) => {
                                                 return res.isConfirmed
@@ -310,11 +308,10 @@ const DealersListingWrapper = () => {
                                     onClick={() => {
                                         showConfirmationDialog({
                                             title: 'Deactive Scheme',
-                                            text: `Do you want to ${
-                                                row.isActive
-                                                    ? 'Deactive'
-                                                    : 'Active'
-                                            }`,
+                                            text: `Do you want to ${row.isActive
+                                                ? 'Deactive'
+                                                : 'Active'
+                                                }`,
                                             showCancelButton: true,
                                             next: (res) => {
                                                 return res.isConfirmed

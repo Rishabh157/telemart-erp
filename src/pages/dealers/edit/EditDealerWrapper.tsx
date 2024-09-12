@@ -220,8 +220,7 @@ const EditDealerWrapper = () => {
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetDealerByIdQuery(Id),
     })
-    console.log('selectedItem: ', selectedItem)
-
+    
     // From Initial Values
     const initialValues: FormInitialValues = {
         dealerCode: selectedItem?.dealerCode || '',

@@ -35,6 +35,18 @@ const formFields: { sectionName: string; fields: Field<''>[] }[] = [
                 placeholder: 'GST Certificate',
                 type: 'file-picker',
             },
+            {
+                name: 'panNumber',
+                label: 'Pan Number',
+                placeholder: 'Pan Number',
+            },
+            {
+                name: 'panCard',
+                label: 'Pan Card',
+                placeholder: 'Pan Card',
+                type: 'file-picker',
+                required: false,
+            },
         ],
     },
 ]

@@ -18,6 +18,7 @@ import {
 } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheckbox'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -73,9 +74,8 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${
-                            index !== formFields.length - 1 && 'border-b'
-                        }  border-slate-300`}
+                        className={`py-9 px-7 ${index !== formFields.length - 1 && 'border-b'
+                            }  border-slate-300`}
                     >
                         <div className="pb-2 text-lg font-medium text-primary-main">
                             {sectionName}
@@ -99,7 +99,7 @@ const StepAddAddress = ({
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
-                                                    name ===
+                                                        name ===
                                                         'billing_address.phone'
                                                         ? 10
                                                         : 100
@@ -109,16 +109,16 @@ const StepAddAddress = ({
                                                 value={
                                                     name.includes('.')
                                                         ? values[
-                                                              name.split('.')[0]
-                                                          ][name.split('.')[1]]
+                                                        name.split('.')[0]
+                                                        ][name.split('.')[1]]
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
                                                     if (
                                                         name ===
-                                                            'regd_address.phone' ||
+                                                        'regd_address.phone' ||
                                                         name ===
-                                                            'billing_address.phone'
+                                                        'billing_address.phone'
                                                     ) {
                                                         const inputValue =
                                                             e.target.value
@@ -161,14 +161,14 @@ const StepAddAddress = ({
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
@@ -213,8 +213,8 @@ const StepAddAddress = ({
                                                     }}
                                                     options={
                                                         dropdownOptions[
-                                                            field.optionAccessKey ||
-                                                                'counrtyOptions'
+                                                        field.optionAccessKey ||
+                                                        'counrtyOptions'
                                                         ]
                                                     }
                                                     isSubmitting={isSubmitting}
@@ -297,7 +297,37 @@ const StepAddAddress = ({
                                                 }}
                                             />
                                         )
-
+                                    case 'textarea':
+                                        return (
+                                            <div key={name} className='-mt-1'>
+                                                <ATMTextArea
+                                                    required={required}
+                                                    name={name}
+                                                    minRows={5}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
+                                                            : values[name]
+                                                    }
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    className="shadow bg-white rounded mt-0"
+                                                    labelClass='text-slate-700 text-sm font-medium'
+                                                    isSubmitting={isSubmitting}
+                                                />
+                                            </div>
+                                        )
                                     default:
                                         return null
                                 }

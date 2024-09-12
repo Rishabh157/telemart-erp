@@ -43,12 +43,12 @@ const AddDealers = ({
     const breadcrumbs = [
         {
             label: 'Dealers',
-            onClick: () => {},
+            onClick: () => { },
             path: '/dealers',
         },
         {
             label: 'Add Dealer',
-            onClick: () => {},
+            onClick: () => { },
         },
     ]
 
@@ -92,7 +92,8 @@ const AddDealers = ({
                                     dispatch(setFormSubmitting(true))
                                     formikProps.handleSubmit()
                                 }}
-                                className="bg-primary-main rounded py-1 px-5 text-white border border-primary-main "
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 {activeStep === steps.length - 1
                                     ? 'Submit'

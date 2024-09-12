@@ -20,8 +20,6 @@ export const useUpdateBarcodeFreezedStatus = () => {
                     bcode: barcodes,
                 },
             })
-            // console.log('HOOK', response)
-            // return response
         } catch (error) {
             console.error('Error updating barcode status:', error)
             throw error

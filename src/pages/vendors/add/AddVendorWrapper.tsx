@@ -62,6 +62,8 @@ export type FormInitialValues = {
     gst_no: string
     gst_certificate: string
     declaration_form: string
+    panNumber: string
+    panCard: string
     bank_informations: {
         bankName: string
         bankBranchName: string
@@ -152,6 +154,8 @@ const steps = [
             ),
             gst_certificate: string(),
             declaration_form: string(),
+            panNumber: string(),
+            panCard: string()
         }),
     },
     {
@@ -220,6 +224,8 @@ const AddVendorWrapper = () => {
         gst_no: '',
         gst_certificate: '',
         declaration_form: '',
+        panNumber: '',
+        panCard: '',
         bank_informations: [
             {
                 bankName: '',
@@ -277,6 +283,8 @@ const AddVendorWrapper = () => {
                         gstNumber: values.gst_no,
                         gstCertificate: values.gst_certificate,
                         declarationForm: values.declaration_form,
+                        panNumber: values?.panNumber,
+                        panCard: values?.panCard,
                     },
                     bankInformation: values.bank_informations,
                     companyId: userData?.companyId || '',
