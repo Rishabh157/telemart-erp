@@ -48,18 +48,30 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
                 offset: 1,
                 required: true,
             },
+            {
+                name: 'document.panNumber',
+                label: 'Pan Number',
+                placeholder: 'Pan Number',
+                type: 'text',
+                required: false,
+            },
+            {
+                name: 'document.panCard',
+                label: 'Pan Card',
+                placeholder: 'Pan Card',
+                type: 'file-picker',
+                required: false,
+            },
         ],
     },
 ]
 
 const StepAddDocumentsWrapper = ({ formikProps }: Props) => {
     return (
-        <>
-            <StepAddDocuments
-                formikProps={formikProps}
-                formFields={formFields}
-            />
-        </>
+        <StepAddDocuments
+            formikProps={formikProps}
+            formFields={formFields}
+        />
     )
 }
 

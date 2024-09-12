@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { array, boolean, mixed, number, object, string } from 'yup'
+import { array, boolean, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -75,6 +75,8 @@ export type FormInitialValues = {
         gstCertificate: string
         adharCardNumber: string
         adharCard: string
+        panNumber: string,
+        panCard: string
     }
     otherDocument: {
         documentName: string
@@ -177,9 +179,10 @@ const steps = [
                 // gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')
-                    .max(14, 'maximum 12 digit')
-                    .required('Aadhar number  is required'),
-                adharCard: mixed().required('Declaration form is required'),
+                    .max(14, 'maximum 12 digit'),
+                adharCard: string(),
+                panNumber: string(),
+                panCard: string(),
             }),
             otherDocument: array().of(
                 object().shape({
@@ -207,7 +210,7 @@ const EditDealerWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const navigate = useNavigate()
-    const [activeStep, setActiveStep] = React.useState(0)
+    const [activeStep, setActiveStep] = React.useState(2)
     const [apiStatus, setApiStatus] = useState(false)
     const [UpdateDealer] = useUpdateDealerMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -217,6 +220,7 @@ const EditDealerWrapper = () => {
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetDealerByIdQuery(Id),
     })
+    console.log('selectedItem: ', selectedItem)
 
     // From Initial Values
     const initialValues: FormInitialValues = {
@@ -248,18 +252,21 @@ const EditDealerWrapper = () => {
             districtId: selectedItem?.billingAddress.districtId || '',
             pincodeId: selectedItem?.billingAddress.pincodeId || '',
         },
-        contactInformation: selectedItem?.contactInformation || '',
+        contactInformation: selectedItem?.contactInformation || [],
         document: {
             gstNumber: selectedItem?.document?.gstNumber || '',
             gstCertificate: selectedItem?.document?.gstCertificate || '',
             adharCardNumber: selectedItem?.document?.adharCardNumber || '',
             adharCard: selectedItem?.document?.adharCard || '',
+            panNumber: selectedItem?.document?.panNumber || '',
+            panCard: selectedItem?.document?.panCard || ''
         },
         otherDocument: selectedItem?.otherDocument || '',
         zonalManagerId: selectedItem?.zonalManagerId,
         zonalExecutiveId: selectedItem?.zonalExecutiveId,
         zonalExecutiveAreaId: selectedItem?.zonalExecutiveAreaId || [],
     }
+
     const getValidationSchema = (activeStep: number) => {
         return steps.find((_, stepIndex) => stepIndex === activeStep)
             ?.validationSchema
@@ -324,6 +331,8 @@ const EditDealerWrapper = () => {
                             gstCertificate: values.document.gstCertificate,
                             adharCardNumber: values.document.adharCardNumber,
                             adharCard: values.document.adharCard,
+                            panNumber: values?.document?.panNumber,
+                            panCard: values?.document?.panCard
                         },
                         otherDocument: otherDocument,
                         companyId: userData?.companyId || '',

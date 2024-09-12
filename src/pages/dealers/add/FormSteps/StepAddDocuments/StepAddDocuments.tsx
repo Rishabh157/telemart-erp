@@ -91,14 +91,14 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                     name,
                                     label,
                                     placeholder,
-                                    required,
+                                    // required,
                                 } = field
                                 switch (type) {
                                     case 'text':
                                         return (
                                             <React.Fragment key={name || index}>
                                                 <ATMTextField
-                                                    required={required}
+                                                    // required={required}
                                                     name={name}
                                                     value={
                                                         name.includes('.')
@@ -180,7 +180,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                 key={name || index}
                                             >
                                                 <ATMFilePickerWrapper
-                                                    required={required}
+                                                    // required={required}
                                                     name={name}
                                                     label={label}
                                                     placeholder={placeholder}

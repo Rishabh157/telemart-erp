@@ -71,7 +71,10 @@ export type document = {
     gstCertificate: string
     adharCardNumber: string
     adharCard: string
+    panNumber: string
+    panCard: string
 }
+
 export type otherDocument = {
     documentName: string
     documentFile: string

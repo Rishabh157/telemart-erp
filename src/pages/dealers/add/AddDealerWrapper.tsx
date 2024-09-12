@@ -5,7 +5,7 @@ import React from 'react'
 import { Form, Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { array, boolean, mixed, number, object, string } from 'yup'
+import { array, boolean, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -75,6 +75,8 @@ export type FormInitialValues = {
         gstCertificate: string
         adharCardNumber: string
         adharCard: string
+        panNumber: string
+        panCard: string
     }
     otherDocument: {
         documentName: string
@@ -184,9 +186,10 @@ const steps = [
                 // gstCertificate: mixed().required('GST certificate is required'),
                 adharCardNumber: string()
                     .min(14, 'Number should be 12 digits')
-                    .max(14, 'Number should be 12 digits')
-                    .required('Aadhar number  is required'),
-                adharCard: mixed().required('Aadhar certificate is required'),
+                    .max(14, 'Number should be 12 digits'),
+                adharCard: string(),
+                panNumber: string(),
+                panCard: string()
             }),
             otherDocument: array().of(
                 object().shape({
@@ -265,6 +268,8 @@ const AddDealerWrapper = () => {
             gstCertificate: '',
             adharCardNumber: '',
             adharCard: '',
+            panNumber: '',
+            panCard: ''
         },
         otherDocument: [
             {
@@ -331,6 +336,8 @@ const AddDealerWrapper = () => {
                         gstCertificate: values.document.gstCertificate,
                         adharCardNumber: values.document.adharCardNumber,
                         adharCard: values.document.adharCard,
+                        panNumber: values.document.panNumber,
+                        panCard: values.document.panCard
                     },
                     otherDocument: values.otherDocument,
                     companyId: userData?.companyId || '',
