@@ -50,28 +50,25 @@ const ATMSwitchButton = ({
                 </label>
             )}
 
-            <div className={`${label} h-[40px] flex items-center`}>
+            <div className='h-[40px] flex items-center'>
                 <button
                     type="button"
                     disabled={disabled}
                     onClick={() => onChange(!value)}
                     className="flex justify-between min-w-[150px]  rounded bg-slate-200 shadow"
                 >
-                    <div
-                        className={`${
-                            value
-                                ? 'bg-primary-main text-white rounded shadow-lg'
-                                : 'rounded-r'
+                    <div className={`${value
+                        ? 'bg-primary-main text-white rounded shadow-lg'
+                        : 'rounded-r'
                         } flex-1 py-1 h-full transition-all duration-500`}
                     >
                         {title1}
                     </div>
                     <div
-                        className={`${
-                            !value
-                                ? ' bg-primary-main text-white rounded shadow-lg'
-                                : 'rounded-r'
-                        } flex-1 py-1 h-full transition-all duration-500`}
+                        className={`${!value
+                            ? ' bg-primary-main text-white rounded shadow-lg'
+                            : 'rounded-r'
+                            } flex-1 py-1 h-full transition-all duration-500`}
                     >
                         {title2}
                     </div>

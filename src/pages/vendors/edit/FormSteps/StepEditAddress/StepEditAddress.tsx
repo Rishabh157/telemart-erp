@@ -303,7 +303,7 @@ const StepAddAddress = ({
                                                 <ATMTextArea
                                                     required={required}
                                                     name={name}
-                                                    minRows={5}
+                                                    minRows={3}
                                                     value={
                                                         name.includes('.')
                                                             ? values[

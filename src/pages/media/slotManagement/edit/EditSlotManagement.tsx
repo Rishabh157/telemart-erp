@@ -93,9 +93,8 @@ const EditSlotManagement = ({
                                 onClick={() => {
                                     formikProps.handleSubmit()
                                 }}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Update
                             </button>
@@ -178,12 +177,14 @@ const EditSlotManagement = ({
                             <ATMTextArea
                                 name="remarks"
                                 value={values.remarks}
-                                label="Remarks "
-                                placeholder="Remarks "
+                                label="Remark"
+                                placeholder="Remark"
+                                labelClass='text-slate-700 text-sm font-medium'
+                                className='rounded m-0'
                                 onChange={(newValue) =>
                                     handleSetFieldValue('remarks', newValue)
                                 }
-                            />{' '}
+                            />
                         </div>
                         <div className="px-3 pt-5">
                             <div className="pb-2 text-lg font-medium  text-primary-main">
@@ -307,10 +308,12 @@ const EditSlotManagement = ({
                                 </div>
                                 <div>
                                     <ATMSwitchButton
-                                        name="slotContinueStatus"
                                         required
+                                        name="slotContinueStatus"
                                         value={values.slotContinueStatus}
-                                        label="Continue slot"
+                                        // label="Continue slot"
+                                        title1='Start'
+                                        title2='Stop'
                                         onChange={(value) =>
                                             handleSetFieldValue(
                                                 'slotContinueStatus',

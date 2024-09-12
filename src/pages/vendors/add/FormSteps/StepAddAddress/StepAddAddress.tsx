@@ -17,6 +17,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import { CiSearch } from 'react-icons/ci'
+import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -79,11 +80,10 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${
-                            index !== formFields.length - 1 && 'border-b'
-                        }  border-slate-300`}
+                        className={`py-9 px-7 ${index !== formFields.length - 1 && 'border-b'
+                            }  border-slate-300`}
                     >
-                        <div className="pb-2 text-lg font-medium text-primary-main">
+                        <div className="mb-7 text-lg font-medium text-primary-main">
                             {sectionName}
                         </div>
 
@@ -105,7 +105,7 @@ const StepAddAddress = ({
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
-                                                    name ===
+                                                        name ===
                                                         'billing_address.phone'
                                                         ? 10
                                                         : 100
@@ -115,16 +115,16 @@ const StepAddAddress = ({
                                                 value={
                                                     name.includes('.')
                                                         ? values[
-                                                              name.split('.')[0]
-                                                          ][name.split('.')[1]]
+                                                        name.split('.')[0]
+                                                        ][name.split('.')[1]]
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
                                                     if (
                                                         name ===
-                                                            'regd_address.phone' ||
+                                                        'regd_address.phone' ||
                                                         name ===
-                                                            'billing_address.phone'
+                                                        'billing_address.phone'
                                                     ) {
                                                         const inputValue =
                                                             e.target.value
@@ -151,7 +151,7 @@ const StepAddAddress = ({
                                                 }}
                                                 label={label}
                                                 placeholder={placeholder}
-                                                extraClassField="mt-3"
+                                                extraClassField="-mt-2"
                                                 className="bg-white rounded shadow"
                                                 isSubmitting={isSubmitting}
                                             />
@@ -161,27 +161,25 @@ const StepAddAddress = ({
                                         return (
                                             <div
                                                 key={name}
-                                                className={`-mt-2 ${
-                                                    label === 'Pincode' &&
-                                                    'flex gap-x-4'
-                                                }`}
+                                                className={`-mt-2 ${label === 'Pincode' && 'flex gap-x-1'}`}
                                             >
                                                 <ATMSelectSearchable
                                                     required={required}
                                                     label={label}
                                                     selectLabel={`Select ${label}`}
+                                                    componentClass='w-full'
                                                     name={name}
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
@@ -189,8 +187,8 @@ const StepAddAddress = ({
                                                     }}
                                                     options={
                                                         dropdownOptions[
-                                                            field.optionAccessKey ||
-                                                                'counrtyOptions'
+                                                        field.optionAccessKey ||
+                                                        'counrtyOptions'
                                                         ]
                                                     }
                                                     isSubmitting={isSubmitting}
@@ -198,70 +196,51 @@ const StepAddAddress = ({
 
                                                 {label === 'Pincode' && (
                                                     <>
-                                                        <div
-                                                            className="flex items-center justify-center w-8 rounded cursor-pointer bg-slate-400 h-9 mt-11"
+                                                        <div className="flex items-center justify-center w-8 rounded cursor-pointer bg-slate-400 transition-all hover:bg-slate-300 h-9 mt-6"
                                                             onClick={() => {
-                                                                setIsOpenSearchPincode(
-                                                                    (
-                                                                        prev: any
-                                                                    ) => {
-                                                                        return {
-                                                                            ...prev,
-                                                                            [name]: true,
-                                                                        }
+                                                                setIsOpenSearchPincode((prev: any) => {
+                                                                    return {
+                                                                        ...prev,
+                                                                        [name]: true,
                                                                     }
-                                                                )
+                                                                })
                                                             }}
                                                         >
                                                             <CiSearch
                                                                 size={20}
-                                                                color="bg-blue-400"
+                                                                color="bg-blue-400 hover:bg-blue-500"
                                                             />
                                                         </div>
                                                         <DialogLogBox
+                                                            maxWidth='lg'
                                                             fullWidth={false}
-                                                            isOpen={
-                                                                isOpenSearchPincode[
-                                                                    name
-                                                                ]
-                                                            }
+                                                            isOpen={isOpenSearchPincode[name]}
                                                             handleClose={() =>
-                                                                setIsOpenSearchPincode(
-                                                                    (
-                                                                        prev: any
-                                                                    ) => {
-                                                                        return {
-                                                                            ...prev,
-                                                                            [name]: false,
-                                                                        }
+                                                                setIsOpenSearchPincode((prev: any) => {
+                                                                    return {
+                                                                        ...prev,
+                                                                        [name]: false,
                                                                     }
-                                                                )
+                                                                })
                                                             }
                                                             component={
-                                                                <div className="px-4 py-2">
+                                                                <div className="px-4 py-2 h-[136px]">
                                                                     <ATMTextField
+                                                                        autoFocus={true}
                                                                         required={
                                                                             required
                                                                         }
                                                                         name=""
                                                                         value={
-                                                                            name ===
-                                                                            'billing_address.pincode'
+                                                                            name === 'billing_address.pincode'
                                                                                 ? values[
-                                                                                      'billing_address.pincodeSearch'
-                                                                                  ]
+                                                                                'billing_address.pincodeSearch'
+                                                                                ]
                                                                                 : values[
-                                                                                      'regd_address.pincodeSearch'
-                                                                                  ]
+                                                                                'regd_address.pincodeSearch'
+                                                                                ]
                                                                         }
-                                                                        onChange={(
-                                                                            newValue
-                                                                        ) => {
-                                                                            handleAutoSearchPincode(
-                                                                                name,
-                                                                                newValue
-                                                                            )
-                                                                        }}
+                                                                        onChange={(newValue) => { handleAutoSearchPincode(name, newValue) }}
                                                                         label="Search Pincode"
                                                                         placeholder="Enter Pincode"
                                                                         className="bg-white rounded shadow"
@@ -280,6 +259,7 @@ const StepAddAddress = ({
                                                 name={name}
                                                 label={label}
                                                 checked={Boolean(values[name])}
+                                                extraClasses='m-0'
                                                 onChange={(e) => {
                                                     dispatch(
                                                         setFormSubmitting(false)
@@ -348,6 +328,37 @@ const StepAddAddress = ({
                                                     }
                                                 }}
                                             />
+                                        )
+                                    case 'textarea':
+                                        return (
+                                            <div key={name} className='-mt-5'>
+                                                <ATMTextArea
+                                                    required={required}
+                                                    name={name}
+                                                    minRows={3}
+                                                    value={
+                                                        name.includes('.')
+                                                            ? values[
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
+                                                            : values[name]
+                                                    }
+                                                    onChange={(e) => {
+                                                        setFieldValue(name, e)
+                                                    }}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    className="shadow bg-white rounded mt-0"
+                                                    labelClass='text-slate-700 text-sm font-medium'
+                                                    isSubmitting={isSubmitting}
+                                                />
+                                            </div>
                                         )
                                     default:
                                         return null

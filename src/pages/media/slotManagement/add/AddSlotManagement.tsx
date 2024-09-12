@@ -178,12 +178,14 @@ const AddSlotManagement = ({
                             <ATMTextArea
                                 name="remarks"
                                 value={values.remarks}
-                                label="Remarks "
-                                placeholder="Remarks "
+                                label="Remark"
+                                placeholder="Remark"
+                                labelClass='text-slate-700 text-sm font-medium'
+                                className='rounded m-0'
                                 onChange={(newValue) =>
                                     handleSetFieldValue('remarks', newValue)
                                 }
-                            />{' '}
+                            />
                         </div>
                         <div className="px-3 pt-5">
                             <div className="pb-2 text-lg font-medium  text-primary-main">
@@ -278,10 +280,12 @@ const AddSlotManagement = ({
                                 </div>
                                 <div>
                                     <ATMSwitchButton
-                                        name="slotContinueStatus"
                                         required
+                                        name="slotContinueStatus"
                                         value={values.slotContinueStatus}
-                                        label="Continue slot"
+                                        // label="Continue slot"
+                                        title1='Start'
+                                        title2='Stop'
                                         onChange={(value) =>
                                             handleSetFieldValue(
                                                 'slotContinueStatus',
