@@ -37,8 +37,8 @@ export type FormInitialValues = {
     allowedIps: { allowedIp: string }[]
     isAgent: boolean
     callCenterId: string
-    floorManagerId: string
-    teamLeadId: string
+    floorManagerId: string | any
+    teamLeadId: string | any
     mySenior: string | null
 }
 
@@ -72,10 +72,9 @@ const AddUserWrapper = (props: Props) => {
             },
         ],
         isAgent: false,
-
         callCenterId: '',
-        floorManagerId: '',
-        teamLeadId: '',
+        floorManagerId: null,
+        teamLeadId: null,
         mySenior: null,
     }
 
@@ -93,7 +92,7 @@ const AddUserWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         firstName: string().required('First name is required'),
-        lastName: string().required('Last name is required'),
+        lastName: string(),
         userName: string().required('User name is required'),
         email: string().email().required('User email is required'),
         userRole: string().required('User role is required'),

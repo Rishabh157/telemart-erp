@@ -56,12 +56,15 @@ const StyledNode = ({
                             {
                                 label: 'Add Policy',
                                 onClick: () => {
-                                    navigate(`/configurations/user-access`, {
-                                        state: {
-                                            dept: dept,
-                                            userRole: userRole,
-                                        },
-                                    })
+                                    navigate(
+                                        `/configurations/user-access?dept=${dept}&userRole=${userRole}`
+                                    )
+                                    // navigate(`/configurations/user-access`, {
+                                    //     state: {
+                                    //         dept: dept,
+                                    //         userRole: userRole,
+                                    //     },
+                                    // })
                                 },
                             },
                         ]}
@@ -100,8 +103,8 @@ const OrganisationHierarchy = () => {
                             Root
                         </StyledNode>
                     }
-                    // nodePadding={'50px'} // Set the padding between nodes
-                    // direction={'horizontal'} // Set the direction to horizontal
+                // nodePadding={'50px'} // Set the padding between nodes
+                // direction={'horizontal'} // Set the direction to horizontal
                 >
                     {/*  Sales */}
                     <TreeNode
