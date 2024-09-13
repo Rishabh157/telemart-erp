@@ -63,13 +63,12 @@ const CourierListing = ({ columns, rows, setShowDropdown }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Courier Master </ATMPageHeading>
-                {isAuthorized(UserModuleNameTypes.ACTION_LANGUAGE_ADD) && (
+                {isAuthorized(UserModuleNameTypes.ACTION_COURIER_MASTER_ADD) && (
                     <button
                         onClick={() => navigate('/configurations/courier/add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
-                        {' '}
-                        + Add{' '}
+                        + Add
                     </button>
                 )}
             </div>
@@ -86,8 +85,8 @@ const CourierListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}

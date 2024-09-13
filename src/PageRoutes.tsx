@@ -24,8 +24,6 @@ import CallCenterMasterListingWrapper from './pages/configuration/ConfigurationS
 import AddCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/add/AddCompanyBranchWrapper'
 import EditCompanyBranchWrapper from './pages/configuration/ConfigurationScreens/companyBranch/edit/EditCompanyBranchWrapper'
 import CompanyBranchListingWrapper from './pages/configuration/ConfigurationScreens/companyBranch/list/CompanyBranchListingWrapper'
-// import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
-// import CourierPreferenceListingWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/list/CourierPreferenceListingWrapper'
 import AddTransportWrapper from './pages/configuration/ConfigurationScreens/transport/add/AddTransportWrapper'
 import EditTransportWrapper from './pages/configuration/ConfigurationScreens/transport/edit/EditTransportWrapper'
 import TransportListingWrapper from './pages/configuration/ConfigurationScreens/transport/list/TransportListingWrapper'
@@ -335,6 +333,10 @@ import FlipkartOrdersListingWrapper from './pages/ecomOrder/FlipkartOrder/Flipka
 import OutwardEcomOrderTab from './pages/warehouses/view/inventories/outward/Ecom'
 import OutwardAmazonTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Amazon/OutwardAmazonTabsListingWrapper'
 import OutwardFlipkartTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Flipkart/OutwardFlipkartTabsListingWrapper'
+
+// NOT USED ROUTE AND MODULE
+// import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
+// import CourierPreferenceListingWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/list/CourierPreferenceListingWrapper'
 
 
 const PageRoutes = () => {
@@ -2390,7 +2392,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<CourierListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                                    UserModuleNameTypes.NAV_COURIER_MASTER
                                 }
                             />
                         }
@@ -2401,7 +2403,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<AddCourierMasterWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                                    UserModuleNameTypes.ACTION_COURIER_MASTER_ADD
                                 }
                             />
                         }
@@ -2412,7 +2414,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<EditCourierMasterWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                                    UserModuleNameTypes.ACTION_COURIER_MASTER_EDIT
                                 }
                             />
                         }

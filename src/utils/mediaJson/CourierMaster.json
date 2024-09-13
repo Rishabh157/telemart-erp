@@ -1,0 +1,57 @@
+{
+    "moduleId": "NAV_COURIER_MASTER",
+    "moduleName": "NAV_COURIER_MASTER",
+    "parentGroup": ["NAV_CONFIGURATION"],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_COURIER_MASTER_LIST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "COURIER_MASTER_LIST_COURIER_NAME",
+                    "fieldName": "Courier Name",
+                    "fieldValue": "courierName"
+                },
+                {
+                    "fieldId": "COURIER_MASTER_LIST_COURIER_CODE",
+                    "fieldName": "Courier Code",
+                    "fieldValue": "courierCode"
+                },
+                {
+                    "fieldId": "COURIER_MASTER_LIST_COURIER_TYPE",
+                    "fieldName": "Courier Type",
+                    "fieldValue": "courierType"
+                },
+                {
+                    "fieldId": "COURIER_MASTER_LIST_COURIER_TRANSPORT_TYPE",
+                    "fieldName": "Transport Type",
+                    "fieldValue": "transportType"
+                },
+                {
+                    "fieldId": "COURIER_MASTER_LIST_COURIER_API_AVAILABLE",
+                    "fieldName": "Api Available",
+                    "fieldValue": "isApiAvailable"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_COURIER_MASTER_ADD",
+            "actionUrl": "",
+            "actionName": "ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_COURIER_MASTER_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        }
+    ]
+}

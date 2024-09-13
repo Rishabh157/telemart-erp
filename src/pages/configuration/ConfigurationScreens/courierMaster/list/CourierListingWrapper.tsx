@@ -56,7 +56,7 @@ const CourierListingWrapper = () => {
             renderCell: (row: any) => (
                 <ActionPopup
                     isEdit={isAuthorized(
-                        UserModuleNameTypes.ACTION_LANGUAGE_EDIT
+                        UserModuleNameTypes.ACTION_COURIER_MASTER_EDIT
                     )}
                     handleOnAction={() => {
                         setShowDropdown(!showDropdown)
@@ -65,18 +65,18 @@ const CourierListingWrapper = () => {
                     handleEditActionButton={() => {
                         navigate(`/configurations/courier/edit/${currentId}`)
                     }}
-                    // handleDeleteActionButton={() => {
-                    //     showConfirmationDialog({
-                    //         title: 'Delete Language',
-                    //         text: 'Do you want to delete',
-                    //         showCancelButton: true,
-                    //         next: (res) => {
-                    //             return res.isConfirmed
-                    //                 ? handleDelete()
-                    //                 : setShowDropdown(false)
-                    //         },
-                    //     })
-                    // }}
+                // handleDeleteActionButton={() => {
+                //     showConfirmationDialog({
+                //         title: 'Delete Language',
+                //         text: 'Do you want to delete',
+                //         showCancelButton: true,
+                //         next: (res) => {
+                //             return res.isConfirmed
+                //                 ? handleDelete()
+                //                 : setShowDropdown(false)
+                //         },
+                //     })
+                // }}
                 />
             ),
         },
@@ -84,31 +84,31 @@ const CourierListingWrapper = () => {
             field: 'courierName',
             headerName: 'Courier Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.LANGUAGE_LIST_LANGUAGE,
+            name: UserModuleNameTypes.COURIER_MASTER_LIST_COURIER_NAME,
         },
         {
             field: 'courierCode',
             headerName: 'Courier Code',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.LANGUAGE_LIST_LANGUAGE,
+            name: UserModuleNameTypes.COURIER_MASTER_LIST_COURIER_CODE,
         },
         {
             field: 'courierType',
             headerName: 'Courier Type',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.LANGUAGE_LIST_LANGUAGE,
+            name: UserModuleNameTypes.COURIER_MASTER_LIST_COURIER_TYPE,
         },
         {
             field: 'transportType',
             headerName: 'Transport Type',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.LANGUAGE_LIST_LANGUAGE,
+            name: UserModuleNameTypes.COURIER_MASTER_LIST_COURIER_TRANSPORT_TYPE,
         },
         {
             field: 'isApiAvailable',
             headerName: 'Api Available',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.LANGUAGE_LIST_LANGUAGE,
+            name: UserModuleNameTypes.COURIER_MASTER_LIST_COURIER_API_AVAILABLE,
             renderCell: (row: CourierMasterListResponse) => {
                 return row?.isApiAvailable ? <FaCheck color="#438a47" /> : null
             },

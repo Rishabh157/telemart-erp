@@ -49,7 +49,7 @@ const CourierPreferenceListing = ({
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Courier Preference </ATMPageHeading>
                 {isAuthorized(
-                    UserModuleNameTypes.ACTION_COURIER_PREFERENCE_ADD
+                    UserModuleNameTypes.ACTION_COURIER_MASTER_EDIT
                 ) && (
                     <button
                         onClick={() =>

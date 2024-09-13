@@ -119,7 +119,7 @@ const configurationNavigation: NavItemType[] = [
         label: 'Courier Master',
         icon: CiLocationOn,
         path: 'courier',
-        name: UserModuleNameTypes.NAV_COURIER_PREFERENCE,
+        name: UserModuleNameTypes.NAV_COURIER_MASTER,
     },
     {
         label: 'Transport',
@@ -182,8 +182,7 @@ const ConfigurationLayout = ({ children }: Props) => {
     const { theme } = useContext(ThemeContext)
     return (
         <div
-            className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''
-                }`}
+            className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''}`}
         >
             {/* Side Navigation Bar */}
             <div

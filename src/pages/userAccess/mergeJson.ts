@@ -87,7 +87,7 @@ import { default as offerAppliedNdrJson } from '../../utils/mediaJson/offerAppli
 import { default as dealersInventoryJson } from '../../utils/mediaJson/dealersInventory.json'
 import { default as multiOrderSearchJson } from '../../utils/mediaJson/multiOrderSearch.json'
 import { default as dealerToDealerRequestJson } from '../../utils/mediaJson/dealerToDealerJson.json'
-import { default as courierPreferenceJson } from '../../utils/mediaJson/CourierPreference.json'
+import { default as courierMasterJson } from '../../utils/mediaJson/CourierMaster.json'
 import { default as gpoAwbNumber } from '../../utils/mediaJson/gpoAwbNumber.json'
 import { default as orderCancelRequest } from '../../utils/mediaJson/orderCancelRequest.json'
 
@@ -153,7 +153,7 @@ export const mergeUserModules = [
     { ...companyJson },
     { ...companyBranchJson },
     { ...barcodeJson },
-    { ...courierPreferenceJson },
+    { ...courierMasterJson },
     { ...locationJson },
     { ...languageJson },
     { ...dealerCategoriesJson },

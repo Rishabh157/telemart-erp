@@ -34,7 +34,7 @@ const CourierPreferenceListingWrapper = () => {
             field: 'courierName',
             headerName: 'Courier Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.COURIER_PREFERENCE_LIST_COURIER_NAME,
+            name: UserModuleNameTypes.COURIER_MASTER_LIST_COURIER_NAME,
             renderCell: (row: any) => (
                 <span className="capitalize"> {row.courierName} </span>
             ),
@@ -43,12 +43,13 @@ const CourierPreferenceListingWrapper = () => {
             field: 'priority',
             headerName: 'Priority',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.COURIER_PREFERENCE_LIST_COURIER_PRIORITY,
+            name: UserModuleNameTypes.COURIER_MASTER_LIST_COURIER_NAME,
             renderCell: (row: any) => (
                 <span className="capitalize"> {row.priority} </span>
             ),
         },
     ]
+
     const { userData } = useGetLocalStorage()
     const { items } = useGetCustomListingData<any>({
         useEndPointHook: useGetCourierPreferenceQuery({
@@ -68,6 +69,7 @@ const CourierPreferenceListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
+
     const handleUpdatePriority = (rows: any) => {
         let updateCourier = rows.map((items: any) => {
             return {
