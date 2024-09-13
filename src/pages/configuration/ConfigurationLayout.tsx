@@ -91,12 +91,12 @@ const configurationNavigation: NavItemType[] = [
         path: 'company',
         name: UserModuleNameTypes.NAV_COMPANY,
     },
-    {
-        label: 'Ecom Master',
-        icon: CgOrganisation,
-        path: 'ecom-master',
-        name: UserModuleNameTypes.NAV_COMPANY,
-    },
+    // {
+    //     label: 'Ecom Master',
+    //     icon: CgOrganisation,
+    //     path: 'ecom-master',
+    //     name: UserModuleNameTypes.NAV_COMPANY,
+    // },
     {
         label: 'Company Branch',
         icon: CiFaceSmile,

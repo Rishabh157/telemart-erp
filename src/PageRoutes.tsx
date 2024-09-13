@@ -323,9 +323,7 @@ import ReportsLayout from './pages/reports/ReportsLayout'
 import AgentDetails from './pages/reports/AgentDetails'
 import AgentOrderStatusWrapper from './pages/reports/AgentDetails/wrappers/AgentOrderStatusWrapper'
 import AgentWiseComplaintWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseComplaintWrapper'
-import EcomMasterListingWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/list/EcomMasterListingWrapper'
-import AddEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/add/AddEcomMasterWrapper'
-import EditEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/edit/EditEcomMasterWrapper'
+
 // Ecom Orders
 import ViewEcomOrder from './pages/ecomOrder'
 import AmazonOrdersListingWrapper from './pages/ecomOrder/AmazonOrder/AmazonOrdersListingWrapper'
@@ -337,6 +335,9 @@ import OutwardFlipkartTabsListingWrapper from './pages/warehouses/view/inventori
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
 // import CourierPreferenceListingWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/list/CourierPreferenceListingWrapper'
+// import EcomMasterListingWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/list/EcomMasterListingWrapper'
+// import AddEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/add/AddEcomMasterWrapper'
+// import EditEcomMasterWrapper from './pages/configuration/ConfigurationScreens/ecomMaster/edit/EditEcomMasterWrapper'
 
 
 const PageRoutes = () => {
@@ -2278,7 +2279,7 @@ const PageRoutes = () => {
 
 
                     {/* Configuration -> E-Com Master */}
-                    <Route
+                    {/* <Route
                         path="ecom-master"
                         element={
                             <Authorization
@@ -2308,7 +2309,7 @@ const PageRoutes = () => {
                                 }
                             />
                         }
-                    />
+                    /> */}
 
                     {/* Configurations -> Barcode */}
                     <Route
