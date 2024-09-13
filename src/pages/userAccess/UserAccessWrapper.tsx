@@ -1,6 +1,6 @@
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 // |-- External Dependencies --|
 
@@ -24,6 +24,7 @@ const UserAccessWrapper = () => {
     const userRole = queryParams.get('userRole')
     const userId = queryParams.get('userId')
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [addUserAccess] = useAddUserAccessMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
@@ -41,7 +42,7 @@ const UserAccessWrapper = () => {
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
-
+        
     const handleUserAccessSubmit = () => {
         setApiStatus(true)
         setTimeout(() => {
@@ -55,14 +56,12 @@ const UserAccessWrapper = () => {
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'User Access successfully!')
-                        // navigate(`/configurations/user-access`, {
-                        //     state: {
-                        //         dept: dept,
-                        //         userRole: userRole,
-                        //         userId: userId,
-                        //     },
-                        // })
+                        showToast('success', 'Add User Access successfully!')
+                        if (userId) {
+                            navigate('/users')
+                        } else {
+                            navigate('/configurations/hierarchy')
+                        }
                     } else {
                         showToast('error', res?.data?.message)
                     }

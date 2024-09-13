@@ -1,6 +1,6 @@
 {
     "moduleId": "NAV_PRODUCT_GROUP",
-    "moduleName": "NAV_PRODUCT_GROUP",
+    "moduleName": "NAV_PRODUCT_MASTER",
     "parentGroup": ["NAV_CONFIGURATION"],
     "moduleAction": [
         {
