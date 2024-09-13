@@ -60,8 +60,8 @@ export type FormInitialValues = {
     allowedIps: { allowedIp: string }[]
     isAgent: boolean
     callCenterId: string
-    floorManagerId: string
-    teamLeadId: string
+    floorManagerId: string | any
+    teamLeadId: string | any
     mySenior: string | null
 }
 
@@ -121,7 +121,7 @@ const EditUserWrapper = (props: Props) => {
     // Form Validation Schema
     const validationSchema = object({
         firstName: string().required('First Name is required'),
-        lastName: string().required('Last Name is required'),
+        lastName: string(),
         userName: string().required('User Name is required'),
         userRole: string().required('User Role is required'),
         // mobile: string().required('Mobile number is required'),

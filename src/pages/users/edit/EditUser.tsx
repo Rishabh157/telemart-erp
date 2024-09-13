@@ -59,10 +59,11 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const { values, setFieldValue } = formikProps
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [userRole, setuserRole] = useState<any[]>([])
+    console.log(' values EDIT : ', values)
 
     const dispatch = useDispatch()
 
-    const handleSetFieldValue = (name: string, value: string | boolean) => {
+    const handleSetFieldValue = (name: string, value: string | boolean | null) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
@@ -156,9 +157,8 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -186,7 +186,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             />
                             {/* Last Name */}
                             <ATMTextField
-                                required
+                                // required
                                 name="lastName"
                                 value={values.lastName}
                                 label="Last Name"
@@ -275,14 +275,14 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 isHidden={
                                     !(
                                         values.userDepartment ===
-                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
+                                        GetHierarchByDeptProps.SALES_DEPARTMENT ||
                                         values.userDepartment ===
-                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+                                        GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
                                     )
                                 }
                                 required={
                                     values?.userDepartment ===
-                                    'SALES_DEPARTMENT'
+                                        'SALES_DEPARTMENT'
                                         ? true
                                         : false
                                 }
@@ -294,6 +294,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 options={dropDownOption.callCenterOptions}
                                 label="Call Center"
                             />
+
                             <ATMSelectSearchable
                                 required
                                 name="mySenior"
@@ -308,24 +309,28 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 hidden={
                                     !(
                                         values.userDepartment ===
-                                            GetHierarchByDeptProps.SALES_DEPARTMENT ||
+                                        GetHierarchByDeptProps.SALES_DEPARTMENT ||
                                         values.userDepartment ===
-                                            GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+                                        GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
                                     )
                                 }
                                 label="Agent"
                                 name="isAgent"
                                 value={values.isAgent}
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     handleSetFieldValue('isAgent', e)
-                                }
+                                    if (e === false) {
+                                        handleSetFieldValue('floorManagerId', null)
+                                        handleSetFieldValue('teamLeadId', null)
+                                    }
+                                }}
                             />
                             {/* Floor Manager Name */}
                             <ATMSelectSearchable
-                                isHidden={!values.isAgent}
                                 required
+                                isHidden={!values.isAgent}
                                 name="floorManagerId"
-                                value={values.floorManagerId}
+                                value={values?.floorManagerId}
                                 onChange={(e) =>
                                     handleSetFieldValue('floorManagerId', e)
                                 }
@@ -337,7 +342,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                 isHidden={!values.isAgent}
                                 // required
                                 name="teamLeadId"
-                                value={values.teamLeadId}
+                                value={values?.teamLeadId}
                                 onChange={(e) =>
                                     handleSetFieldValue('teamLeadId', e)
                                 }
@@ -387,18 +392,18 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                                                                     .allowedIps
                                                                     ?.length >
                                                                     1 && (
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                itemIndex
-                                                                            )
-                                                                        }}
-                                                                        className="p-1.5 bg-red-500 text-white rounded mt-[44px] ml-[10px] "
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                )}
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    itemIndex
+                                                                                )
+                                                                            }}
+                                                                            className="p-1.5 bg-red-500 text-white rounded mt-[44px] ml-[10px] "
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    )}
                                                             </div>
                                                         </div>
                                                     )
