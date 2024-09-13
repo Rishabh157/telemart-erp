@@ -193,9 +193,9 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_CALL,
     },
     {
-        label: 'Customer Complaint',
+        label: 'Create Complaint',
         icon: RiCustomerServiceLine,
-        path: '/customer-complain',
+        path: '/create-complain',
         name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
     },
     {

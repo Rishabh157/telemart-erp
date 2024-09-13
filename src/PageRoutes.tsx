@@ -3133,7 +3133,7 @@ const PageRoutes = () => {
                 </Route>
                 {/* Customer Complain */}
                 <Route
-                    path="/customer-complain"
+                    path="/create-complain"
                     element={
                         <Authorization
                             children={<CustomerComplainWrapper />}
