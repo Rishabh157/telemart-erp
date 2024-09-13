@@ -45,12 +45,15 @@ const EditDidManagements = ({
     apiStatus,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue } = formikProps
+
+    const { values, errors, setFieldValue } = formikProps
     const dispatch = useDispatch()
+
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <div>
             <div className="flex flex-col gap-2 p-4 ">
@@ -75,9 +78,8 @@ const EditDidManagements = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Update
                             </button>
@@ -87,20 +89,24 @@ const EditDidManagements = ({
                     {/* Form */}
                     <div className="px-3 py-8 grow ">
                         <div className="grid grid-cols-3 gap-4">
-                            {/* FirstName */}
-                            <ATMTextField
-                                required
-                                name="didNumber"
-                                value={values.didNumber}
-                                label="Did Number"
-                                placeholder="Did Number"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'didNumber',
-                                        e.target.value
-                                    )
-                                }
-                            />
+                            <div>
+                                <ATMTextField
+                                    required
+                                    name="didNumber"
+                                    value={values.didNumber}
+                                    label="Did Number"
+                                    placeholder="Did Number"
+                                    onChange={(e) =>
+                                        handleSetFieldValue(
+                                            'didNumber',
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                                {!errors?.didNumber && <span className="font-poppins flex text-[14px] text-start text-orange-400 text-wrap">
+                                    Caution: The DID number should be the same as the dialer DID definition.
+                                </span>}
+                            </div>
 
                             <ATMSelectSearchable
                                 required

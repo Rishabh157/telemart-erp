@@ -94,7 +94,7 @@ const FlipkartOrdersListingWrapper = () => {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.FLIPKART_LIST_ORDER_NUMBER,
             renderCell: (row: FlipkartOrderListingListResponse) => (
                 <span className="text-primary-main">#{row?.orderNumber}</span>
             ),
@@ -103,7 +103,7 @@ const FlipkartOrdersListingWrapper = () => {
             field: 'order_id',
             headerName: 'Order Id',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.FLIPKART_LIST_ORDER_ID,
             renderCell: (row: FlipkartOrderListingListResponse) => (
                 <span className="text-primary-main"> {row?.order_id}</span>
             ),
@@ -113,7 +113,7 @@ const FlipkartOrdersListingWrapper = () => {
             headerName: 'Dispatched',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.FLIPKART_LIST_DISPATCHED,
             renderCell: (row: FlipkartOrderListingListResponse) => (
                 <div>
                     {row.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
@@ -125,13 +125,13 @@ const FlipkartOrdersListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.FLIPKART_LIST_STATUS,
         },
         {
             field: 'product_title',
             headerName: 'Product Name',
             flex: 'flex-[2_2_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_DEALER,
+            name: UserModuleNameTypes.FLIPKART_LIST_PRODUCT_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: FlipkartOrderListingListResponse) => (
                 // eslint-disable-next-line no-useless-escape
@@ -142,31 +142,31 @@ const FlipkartOrdersListingWrapper = () => {
             field: 'productCode',
             headerName: 'Product Code',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.FLIPKART_LIST_PRODUCT_CODE,
         },
         {
             field: 'quantity',
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.FLIPKART_LIST_PRODUCT_QUANTITY,
         },
         {
             field: 'order_date',
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.FLIPKART_LIST_ORDER_DATE,
         },
         {
             field: 'deliver_by_date',
             headerName: 'Deliver Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.FLIPKART_LIST_DELIVER_DATE,
         },
         {
             field: 'label',
             headerName: 'Label',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.FLIPKART_LIST_LABEL,
         },
     ]
 

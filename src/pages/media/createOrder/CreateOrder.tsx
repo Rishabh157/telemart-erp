@@ -87,7 +87,6 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
                                 disabled
                                 readOnly
                                 name="userName"
-                                InfoTitle="please Enter full name "
                                 value={values?.userName}
                                 label="User Name"
                                 placeholder="Enter username"
@@ -97,7 +96,6 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 required
                                 name="didNumber"
-                                InfoTitle="please Enter full name "
                                 value={values?.didNumber}
                                 label="DID Number"
                                 placeholder="Enter Did Number"
@@ -112,7 +110,6 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
                             <ATMTextField
                                 required
                                 name="campaignName"
-                                InfoTitle="please Enter full name "
                                 value={values?.campaignName}
                                 label="Campaign"
                                 placeholder="Campaign Name"

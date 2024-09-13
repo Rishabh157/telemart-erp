@@ -27,13 +27,13 @@ const tabs: tabsProps[] = [
         label: 'Amazon',
         icon: MdOutbond,
         path: 'amazon',
-        name: UserModuleNameTypes.ACTION_FRESH_ORDER_TAB_LIST,
+        name: UserModuleNameTypes.ACTION_AMAZON_ORDER_TAB,
     },
     {
         label: 'Flipkart',
         icon: MdOutbond,
         path: 'flipkart',
-        name: UserModuleNameTypes.ACTION_ASSIGN_ORDER_TAB_LIST,
+        name: UserModuleNameTypes.ACTION_FLIPKART_ORDER_TAB,
     },
 ]
 

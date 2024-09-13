@@ -171,8 +171,6 @@ const AddUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
                             <ATMTextField
                                 required
                                 name="firstName"
-                                isInfo
-                                InfoTitle="please Enter full name "
                                 value={values.firstName}
                                 label="First Name"
                                 placeholder="First Name"

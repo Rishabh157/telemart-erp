@@ -21,6 +21,8 @@ import {
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { useAddAmzoneOrderSheetMutation, useUpdateEcomOrderSheetMutation } from 'src/services/EcomOrdersMasterService'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 type Props = {
     columns: columnTypes[]
@@ -130,35 +132,42 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
                     onChange={handleUpdateStatus} // Assuming addExcelFile can handle the file input change event
                 />
 
-                <div className="flex justify-between gap-x-2 items-center h-[45px] ">
-                    {/* Import Button */}
-                    <ATMExportButton
-                        isLoading={false}
-                        headers={[]}
-                        fileName=""
-                        btnName="Import"
-                        btnType='UPLOAD'
-                        loadingText="..."
-                        className='py-2 mt-[5px] h-[36px]'
-                        // disabled={!selectedCourier ? true : false}
-                        onImport={() => {
-                            fileInputUploadSheetRef?.current?.click()
-                        }}
-                    />
-                    <ATMExportButton
-                        isLoading={false}
-                        headers={[]}
-                        fileName=""
-                        btnName="Update Status"
-                        btnType='UPLOAD'
-                        loadingText="..."
-                        className='py-2 mt-[5px] h-[36px]'
-                        // disabled={!selectedCourier ? true : false}
-                        onImport={() => {
-                            fileInputUpdateStatusSheetRef?.current?.click()
-                        }}
-                    />
+                <div className="flex justify-between gap-x-2 items-center h-[45px]">
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_AMAZON_ORDER_IMPORT_SHEET_BUTTON
+                    ) && (
+                            < ATMExportButton
+                                isLoading={false}
+                                headers={[]}
+                                fileName=""
+                                btnName="Import"
+                                btnType='UPLOAD'
+                                loadingText="..."
+                                className='py-2 mt-[5px] h-[36px]'
+                                // disabled={!selectedCourier ? true : false}
+                                onImport={() => {
+                                    fileInputUploadSheetRef?.current?.click()
+                                }}
+                            />
+                        )}
 
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_AMAZON_ORDER_UPDATE_ORDER_SHEET_BUTTON
+                    ) && (
+                            <ATMExportButton
+                                isLoading={false}
+                                headers={[]}
+                                fileName=""
+                                btnName="Update Status"
+                                btnType='UPLOAD'
+                                loadingText="..."
+                                className='py-2 mt-[5px] h-[36px]'
+                                // disabled={!selectedCourier ? true : false}
+                                onImport={() => {
+                                    fileInputUpdateStatusSheetRef?.current?.click()
+                                }}
+                            />
+                        )}
                 </div>
             </div>
 

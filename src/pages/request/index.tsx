@@ -17,28 +17,28 @@ interface tabsProps {
     name?: string
 }
 
-const ViewRequest = () => {
-    const tabs: tabsProps[] = [
-        {
-            label: 'Moneyback',
-            icon: MdOutbond,
-            path: 'moneyback',
-            name: UserModuleNameTypes.ACTION_MONEY_BACK_TAB,
-        },
-        {
-            label: 'Product Replacement',
-            icon: MdOutbond,
-            path: 'product-replacement',
-            name: UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_TAB,
-        },
-        {
-            label: 'House Arrest',
-            icon: MdOutbond,
-            path: 'house-arrest',
-            name: UserModuleNameTypes.ACTION_HOUSE_ARREST_TAB,
-        },
-    ]
+const tabs: tabsProps[] = [
+    {
+        label: 'Moneyback',
+        icon: MdOutbond,
+        path: 'moneyback',
+        name: UserModuleNameTypes.ACTION_MONEY_BACK_TAB,
+    },
+    {
+        label: 'Product Replacement',
+        icon: MdOutbond,
+        path: 'product-replacement',
+        name: UserModuleNameTypes.ACTION_PRODUCT_REPLACMENT_TAB,
+    },
+    {
+        label: 'House Arrest',
+        icon: MdOutbond,
+        path: 'house-arrest',
+        name: UserModuleNameTypes.ACTION_HOUSE_ARREST_TAB,
+    },
+]
 
+const ViewRequest = () => {
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [activelabel, setActiveTabLabel] = useState<string>()
@@ -64,9 +64,7 @@ const ViewRequest = () => {
 
     useEffect(() => {
         if (!activeTab) return
-
         navigate(`${pathname}`)
-
         //eslint-disable-next-line
     }, [activeTab])
 

@@ -86,6 +86,7 @@ import { default as requestJson } from '../../utils/mediaJson/request.json'
 import { default as batchOrdersJson } from '../../utils/mediaJson/batchOrders.json'
 import { default as warehouseFirstCallOrdersjson } from '../../utils/mediaJson/warehouseFirstCallOrders.json'
 import { default as offerAppliedNdrJson } from '../../utils/mediaJson/offerAppliedNdr.json'
+import { default as ecomsOrderJson } from '../../utils/mediaJson/EcomOrders.json'
 import { default as dealersInventoryJson } from '../../utils/mediaJson/dealersInventory.json'
 import { default as multiOrderSearchJson } from '../../utils/mediaJson/multiOrderSearch.json'
 import { default as dealerToDealerRequestJson } from '../../utils/mediaJson/dealerToDealerJson.json'
@@ -140,6 +141,7 @@ export const mergeUserModules = [
     { ...orderCancelRequest },
     { ...batchOrdersJson },
     { ...offerAppliedNdrJson },
+    { ...ecomsOrderJson },
     { ...complainJson },
     { ...callJson },
     { ...customerComplainJson },

@@ -1777,7 +1777,7 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<ViewEcomOrder />}
-                            permission={UserModuleNameTypes.NAV_ORDER}
+                            permission={UserModuleNameTypes.NAV_ECOMS_ORDER}
                         />
                     }
                 >
@@ -1786,7 +1786,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<AmazonOrdersListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_ORDER}
+                                permission={UserModuleNameTypes.ACTION_AMAZON_ORDER_TAB}
                             />
                         }
                     />
@@ -1795,7 +1795,7 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<FlipkartOrdersListingWrapper />}
-                                permission={UserModuleNameTypes.NAV_ORDER}
+                                permission={UserModuleNameTypes.ACTION_FLIPKART_ORDER_TAB}
                             />
                         }
                     />

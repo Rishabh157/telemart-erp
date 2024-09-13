@@ -4,13 +4,6 @@
     "parentGroup": [],
     "moduleAction": [
         {
-            "actionId": "ACTION_REQUEST_LIST",
-            "actionUrl": "",
-            "actionName": "LIST",
-            "parentGroup": [],
-            "fields": []
-        },
-        {
             "actionId": "ACTION_MONEY_BACK_TAB",
             "actionUrl": "",
             "actionName": "MONEY_BACK_TAB",

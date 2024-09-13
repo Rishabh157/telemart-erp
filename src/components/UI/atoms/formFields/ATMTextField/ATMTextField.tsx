@@ -15,7 +15,6 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { twMerge } from 'tailwind-merge'
 
 // |-- Internal Dependencies --|
-import MouseOverPopover from 'src/components/utilsComponent/MouseOverPopover'
 import {
     getInputHeight,
     getLabelFont,
@@ -36,9 +35,6 @@ export type ATMTextFieldPropTypes = {
     extraClassField?: string
     labelClass?: string
     disabled?: boolean
-    isInfo?: boolean
-    InfoChildren?: React.ReactNode
-    InfoTitle?: string
     isPassWordVisible?: boolean
     labelDirection?: 'horizontal' | 'vertical'
     classDirection?: string
@@ -63,9 +59,6 @@ const ATMTextField = ({
     isSubmitting = true,
     extraClassField = 'w-full',
     disabled = false,
-    isInfo = false,
-    InfoChildren = null,
-    InfoTitle = 'Info',
     labelClass = 'font-medium mb-1',
     labelDirection = 'vertical',
     classDirection = 'grid grid-cols-12',
@@ -84,20 +77,8 @@ const ATMTextField = ({
     }
     return (
         <div className={twMerge('relative mt-5', `${extraClassField}`)}>
-            <div
-                className={`  ${
-                    labelDirection === 'horizontal'
-                        ? `  gap-2 w-full  ${classDirection}`
-                        : ' '
-                }`}
-            >
-                <div
-                    className={`flex gap-1 ${
-                        labelDirection === 'horizontal'
-                            ? `col-span-4 w-full h-full flex items-center `
-                            : ' '
-                    }`}
-                >
+            <div className={`${labelDirection === 'horizontal' ? `gap-2 w-full  ${classDirection}` : ''}`}>
+                <div className={`flex gap-1 ${labelDirection === 'horizontal' ? `col-span-4 w-full h-full flex items-center` : ''}`}>
                     {label && (
                         <label
                             className={`text-slate-700  ${getLabelFont(
@@ -109,12 +90,6 @@ const ATMTextField = ({
                                 <span className="text-red-500"> * </span>
                             )}{' '}
                         </label>
-                    )}
-                    {isInfo && (
-                        <MouseOverPopover
-                            title={InfoTitle}
-                            children={InfoChildren}
-                        />
                     )}
                 </div>
 
@@ -134,11 +109,9 @@ const ATMTextField = ({
                     }}
                     className={`${getInputHeight(
                         size
-                    )}  w-full px-2 text-slate-700 border text-[13px] ${
-                        disabled ? 'bg-blue-100' : ''
-                    } border-slate-400 outline-blue-400   ${
-                        labelDirection === 'horizontal' ? 'col-span-8' : ''
-                    } ${className}`}
+                    )}  w-full px-2 text-slate-700 border text-[13px] ${disabled ? 'bg-blue-100' : ''
+                        } border-slate-400 outline-blue-400   ${labelDirection === 'horizontal' ? 'col-span-8' : ''
+                        } ${className}`}
                     {...rest}
                     onBlur={onBlur}
                     autoComplete="off"

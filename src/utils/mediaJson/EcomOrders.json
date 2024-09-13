@@ -1,0 +1,167 @@
+{
+    "moduleId": "NAV_ECOMS_ORDER",
+    "moduleName": "NAV_ECOMS_ORDER",
+    "parentGroup": [],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_AMAZON_ORDER_TAB",
+            "actionUrl": "",
+            "actionName": "AMAZON_ORDER_TAB",
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "AMAZON_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_ORDER_ID",
+                    "fieldName": "Order Id",
+                    "fieldValue": "amazonOrderId"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_DISPATCHED",
+                    "fieldName": "Dispatched",
+                    "fieldValue": "isDispatched"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_PRODUCT_NAME",
+                    "fieldName": "Product Name",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_PRODUCT_CODE",
+                    "fieldName": "Order Id",
+                    "fieldValue": "amazonOrderId"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_PRODUCT_QUANTITY",
+                    "fieldName": "Quantity",
+                    "fieldValue": "quantity"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_PURCHASE_DATE",
+                    "fieldName": "Purchase Date",
+                    "fieldValue": "purchaseDate"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_STATE",
+                    "fieldName": "State",
+                    "fieldValue": "state"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_CITY",
+                    "fieldName": "City",
+                    "fieldValue": "city"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_PINCODE",
+                    "fieldName": "Pincode",
+                    "fieldValue": "pincode"
+                },
+                {
+                    "fieldId": "AMAZON_LIST_LABEL",
+                    "fieldName": "Label",
+                    "fieldValue": "label"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_AMAZON_ORDER_IMPORT_SHEET_BUTTON",
+            "actionUrl": "",
+            "actionName": "AMAZON ORDER IMPORT SHEET BUTTON",
+            "parentGroup": ["AMAZON_ORDER_TAB"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_AMAZON_ORDER_UPDATE_ORDER_SHEET_BUTTON",
+            "actionUrl": "",
+            "actionName": "AMAZON ORDER UPDATE ORDER STATUS SHEET BUTTON",
+            "parentGroup": ["AMAZON_ORDER_TAB"],
+            "fields": []
+        },
+
+        {
+            "actionId": "ACTION_FLIPKART_ORDER_TAB",
+            "actionUrl": "",
+            "actionName": "FLIPKART_ORDER_TAB",
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "FLIPKART_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_ORDER_ID",
+                    "fieldName": "Order Id",
+                    "fieldValue": "amazonOrderId"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_DISPATCHED",
+                    "fieldName": "Dispatched",
+                    "fieldValue": "isDispatched"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_PRODUCT_NAME",
+                    "fieldName": "Product Name",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_PRODUCT_CODE",
+                    "fieldName": "Order Id",
+                    "fieldValue": "amazonOrderId"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_PRODUCT_QUANTITY",
+                    "fieldName": "Quantity",
+                    "fieldValue": "quantity"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_ORDER_DATE",
+                    "fieldName": "Order Date",
+                    "fieldValue": "orderDate"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_DELIVER_DATE",
+                    "fieldName": "Deliver Date",
+                    "fieldValue": "deliverDate"
+                },
+                {
+                    "fieldId": "FLIPKART_LIST_LABEL",
+                    "fieldName": "Label",
+                    "fieldValue": "label"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_FLIPKART_ORDER_IMPORT_SHEET_BUTTON",
+            "actionUrl": "",
+            "actionName": "FLIPKART ORDER IMPORT SHEET BUTTON",
+            "parentGroup": ["FLIPKART_ORDER_TAB"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_FLIPKART_ORDER_UPDATE_ORDER_SHEET_BUTTON",
+            "actionUrl": "",
+            "actionName": "FLIPKART ORDER UPDATE ORDER STATUS SHEET BUTTON",
+            "parentGroup": ["FLIPKART_ORDER_TAB"],
+            "fields": []
+        }
+    ]
+}

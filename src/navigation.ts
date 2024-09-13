@@ -178,7 +178,7 @@ export const navigation: NavItemType[] = [
         label: 'Ecom Orders',
         icon: MdOutlineBorderColor,
         path: '/ecom-orders',
-        name: UserModuleNameTypes.NAV_ORDER,
+        name: UserModuleNameTypes.NAV_ECOMS_ORDER,
     },
     {
         label: 'Complaint',
