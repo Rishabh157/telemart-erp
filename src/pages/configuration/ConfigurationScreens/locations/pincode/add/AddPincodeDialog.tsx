@@ -47,7 +47,7 @@ const AddPincodeDialog = ({
             <DialogTitle className="text-primary-main">
                 {formType === 'EDIT' ? 'Edit' : 'Add'} Pincode
             </DialogTitle>
-            <DialogContent>
+            <DialogContent className='h-[50vh]'>
                 <div>
                     <ATMTextField
                         required

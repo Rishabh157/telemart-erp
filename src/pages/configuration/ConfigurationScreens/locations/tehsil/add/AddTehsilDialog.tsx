@@ -47,7 +47,8 @@ const AddTehsilDialog = ({
             <DialogTitle className="text-primary-main">
                 {formType === 'EDIT' ? 'Edit' : 'Add'} Tehsil
             </DialogTitle>
-            <DialogContent>
+
+            <DialogContent className='h-[50vh]'>
                 <ATMTextField
                     required
                     disabled={formType === 'EDIT'}

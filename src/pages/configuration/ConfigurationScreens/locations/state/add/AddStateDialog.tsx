@@ -47,7 +47,7 @@ const AddStateDialog = ({
             <DialogTitle className="text-lg pb-2 font-medium text-primary-main">
                 {formType === 'ADD' ? 'Add' : 'Edit'} State
             </DialogTitle>
-            <DialogContent>
+            <DialogContent className='h-[50vh]'>
                 <ATMTextField
                     required
                     disabled={formType === 'EDIT'}

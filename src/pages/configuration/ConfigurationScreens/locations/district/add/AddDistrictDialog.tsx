@@ -47,7 +47,7 @@ const AddDistrictDialog = ({
             <DialogTitle className="text-primary-main">
                 {formType === 'ADD' ? 'Add' : 'Edit'} District
             </DialogTitle>
-            <DialogContent>
+            <DialogContent className='h-[50vh]'>
                 <ATMTextField
                     disabled={formType === 'EDIT'}
                     required
