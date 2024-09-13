@@ -52,6 +52,7 @@ export enum UserModuleOtherActionTypes {
     slotDefinition = 'SLOT_DEFINITION',
     slots = 'SLOTS',
 }
+
 export enum UserModuleTabsTypes {
     generalInformation = 'GENERAL_INFORMATION',
     purchaseOrder = 'PURCHASE_ORDER',

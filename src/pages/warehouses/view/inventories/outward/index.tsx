@@ -110,6 +110,7 @@ const OutwardTabs = (props: Props) => {
     const [activeTab, setActiveTab] = useState(0)
     const { userData } = useSelector((state: RootState) => state?.auth)
     const { pathname } = useLocation()
+
     const allowedTabs = tabs
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
@@ -121,7 +122,6 @@ const OutwardTabs = (props: Props) => {
         const tabindex = allowedTabs.findIndex(
             (tab: any) => tab.path === activeTabIndex
         )
-
         setActiveTab(tabindex)
     }, [allowedTabs])
 
@@ -167,9 +167,9 @@ const OutwardTabs = (props: Props) => {
 
 
     // Filter tabs based on isDefault value
-    // const filteredTabs = items?.isDefault
-    //     ? tabs.filter((tab) => tab?.path === 'ecom')
-    //     : tabs.filter((tab) => tab?.path !== 'ecom');
+    // const filteredTabs = items?.isDefault ? allowedTabs : allowedTabs?.filter((tab: Tabs) => tab?.path !== 'ecom')
+    // console.log('filteredTabs: ', filteredTabs);
+
 
     return (
         <div className="w-full flex  h-[calc(100vh-95px)] bg-white">
@@ -180,6 +180,7 @@ const OutwardTabs = (props: Props) => {
                         <div className="h-[40px] border flex gap-x-4 items-center bg-orange-300    shadow rounded  ">
                             <TabScrollable
                                 tabs={allowedTabs}
+                                // Show all tabs if items.isDefault is true // Exclude 'ecom' tab if items.isDefault is false
                                 active={activeTab}
                             />
                         </div>

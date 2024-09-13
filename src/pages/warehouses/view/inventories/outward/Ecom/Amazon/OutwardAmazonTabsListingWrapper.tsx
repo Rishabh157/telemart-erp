@@ -12,6 +12,7 @@ import DispatchEcomOrderRTOModel from '../DispatchingEcomBarcodes/DispatchEcomOr
 
 import { EcomTypesEnum } from 'src/utils/constants/enums'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { isAuthorized } from 'src/utils/authorization'
 
 type AmazonOrderListingListResponse = {
     _id: string
@@ -80,7 +81,9 @@ const OutwardAmazonTabsListingWrapper = () => {
             headerName: 'Action',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: AmazonOrderListingListResponse) => (
-                row?.status === 'RTO' ? <ActionPopup
+                isAuthorized(
+                    UserModuleNameTypes.ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_ORDER_DISPATCH
+                ) && row?.status === 'RTO' ? <ActionPopup
                     handleOnAction={() => { }}
                     // moduleName={UserModuleNameTypes.saleOrder}
                     isCustomBtn={true}
@@ -96,7 +99,7 @@ const OutwardAmazonTabsListingWrapper = () => {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_ORDER_NUMBER,
             renderCell: (row: AmazonOrderListingListResponse) => (
                 <span className="text-primary-main">#{row?.orderNumber}</span>
             ),
@@ -105,7 +108,7 @@ const OutwardAmazonTabsListingWrapper = () => {
             field: 'amazonOrderId',
             headerName: 'Order Id',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_ORDER_ID,
             // align : 'start',
             extraClasses: 'min-w-[190px]',
             renderCell: (row: AmazonOrderListingListResponse) => (
@@ -117,7 +120,7 @@ const OutwardAmazonTabsListingWrapper = () => {
             headerName: 'Dispatched',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_DISPATCHED,
             renderCell: (row: AmazonOrderListingListResponse) => (
                 <div>
                     {row.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
@@ -129,7 +132,7 @@ const OutwardAmazonTabsListingWrapper = () => {
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_STATUS,
             // renderCell: (row: AmazonOrderListingListResponse) => (
             //     <span>{row?.status}</span>
             // ),
@@ -138,7 +141,7 @@ const OutwardAmazonTabsListingWrapper = () => {
             field: 'productName',
             headerName: 'Product Name',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_DEALER,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PRODUCT_NAME,
             extraClasses: 'min-w-[150px]',
             renderCell: (row: AmazonOrderListingListResponse) => (
                 <span title={row?.productName} className="min-w-[100px] truncate">
@@ -150,49 +153,49 @@ const OutwardAmazonTabsListingWrapper = () => {
             field: 'productCode',
             headerName: 'Product Code',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PRODUCT_CODE,
         },
         {
             field: 'quantity',
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PRODUCT_QUANTITY,
         },
         {
             field: 'itemPrice',
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PRICE,
         },
         {
             field: 'purchaseDate',
             headerName: 'Purchase Date',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PURCHASE_DATE,
         },
         {
             field: 'state',
             headerName: 'State',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_STATE,
         },
         {
             field: 'city',
             headerName: 'City',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_CITY,
         },
         {
             field: 'pincode',
             headerName: 'Pincode',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PINCODE,
         },
         {
             field: 'label',
             headerName: 'Label',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ASSIGNED_WEARHOUSE,
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_LABEL,
         },
     ]
 

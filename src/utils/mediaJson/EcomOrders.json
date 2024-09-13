@@ -90,7 +90,6 @@
             "parentGroup": ["AMAZON_ORDER_TAB"],
             "fields": []
         },
-
         {
             "actionId": "ACTION_FLIPKART_ORDER_TAB",
             "actionUrl": "",

@@ -19,13 +19,13 @@ const OutwardEcomOrderTab = (props: Props) => {
             label: 'Amazon',
             icon: MdOutbond,
             path: 'amazon',
-            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_ORDER,
         },
         {
             label: 'Flipkart',
             icon: MdOutbond,
             path: 'flipkart',
-            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_CUSTOMER,
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_ORDER,
         },
     ]
 

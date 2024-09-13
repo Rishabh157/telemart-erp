@@ -961,7 +961,7 @@ const PageRoutes = () => {
                                     <Authorization
                                         children={<OutwardAmazonTabsListingWrapper />}
                                         permission={
-                                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE
+                                            UserModuleNameTypes.ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_ORDER
                                         }
                                     />
                                 }
@@ -973,7 +973,7 @@ const PageRoutes = () => {
                                     <Authorization
                                         children={<OutwardFlipkartTabsListingWrapper />}
                                         permission={
-                                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE
+                                            UserModuleNameTypes.ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_ORDER
                                         }
                                     />
                                 }

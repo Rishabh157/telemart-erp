@@ -541,6 +541,167 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_ORDER",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_ORDER_TAB",
+            "compulsoryFields": [],
+            "parentGroup": ["TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE"],
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_ORDER_ID",
+                    "fieldName": "Order Id",
+                    "fieldValue": "amazonOrderId"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_DISPATCHED",
+                    "fieldName": "Dispatched",
+                    "fieldValue": "isDispatched"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PRODUCT_NAME",
+                    "fieldName": "Product Name",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PRODUCT_CODE",
+                    "fieldName": "Order Id",
+                    "fieldValue": "amazonOrderId"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PRODUCT_QUANTITY",
+                    "fieldName": "Quantity",
+                    "fieldValue": "quantity"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PRICE",
+                    "fieldName": "Price",
+                    "fieldValue": "price"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PURCHASE_DATE",
+                    "fieldName": "Purchase Date",
+                    "fieldValue": "purchaseDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_STATE",
+                    "fieldName": "State",
+                    "fieldValue": "state"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_CITY",
+                    "fieldName": "City",
+                    "fieldValue": "city"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_PINCODE",
+                    "fieldName": "Pincode",
+                    "fieldValue": "pincode"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_LIST_LABEL",
+                    "fieldName": "Label",
+                    "fieldValue": "label"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_ORDER_DISPATCH",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_RTO_ORDER_DISPATCH",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_DETAILS",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_AMAZON_ORDER_TAB"
+            ],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_ORDER",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_ORDER_TAB",
+            "compulsoryFields": [],
+            "parentGroup": ["TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE"],
+            "fields": [
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_ORDER_NUMBER",
+                    "fieldName": "Order No.",
+                    "fieldValue": "orderNumber"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_ORDER_ID",
+                    "fieldName": "Order Id",
+                    "fieldValue": "amazonOrderId"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_DISPATCHED",
+                    "fieldName": "Dispatched",
+                    "fieldValue": "isDispatched"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_PRODUCT_NAME",
+                    "fieldName": "Product Name",
+                    "fieldValue": "productName"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_PRODUCT_CODE",
+                    "fieldName": "Order Id",
+                    "fieldValue": "amazonOrderId"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_PRODUCT_QUANTITY",
+                    "fieldName": "Quantity",
+                    "fieldValue": "quantity"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_ORDER_DATE",
+                    "fieldName": "Order Date",
+                    "fieldValue": "orderDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_DELIVER_DATE",
+                    "fieldName": "Deliver Date",
+                    "fieldValue": "deliverDate"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_LIST_LABEL",
+                    "fieldName": "Label",
+                    "fieldValue": "label"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_ORDER_DISPATCH",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_RTO_ORDER_DISPATCH",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_DETAILS",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_E_COMMERCE_FLIPKART_ORDER_TAB"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_COMPANY",
