@@ -171,8 +171,6 @@ const OutwardTabs = (props: Props) => {
     //     ? tabs.filter((tab) => tab?.path === 'ecom')
     //     : tabs.filter((tab) => tab?.path !== 'ecom');
 
-    // console.log('isEcomTabAccessIfWarehouseIsDefault: ', filteredTabs)
-
     return (
         <div className="w-full flex  h-[calc(100vh-95px)] bg-white">
             {/* Right Section */}

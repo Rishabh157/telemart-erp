@@ -1183,6 +1183,10 @@ export enum configurationUserAccessType {
     NAV_CONFIGURATION = 'NAV_CONFIGURATION',
 }
 
+export enum pageMasterUserAccessType {
+    NAV_PAGE_MASTER = 'NAV_PAGE_MASTER',
+}
+
 export enum mediaUserAccessType {
     NAV_MEDIA = 'NAV_MEDIA',
 }
@@ -1323,16 +1327,24 @@ export enum competitorUserAccessType {
     COMPETITOR_LIST_COMPETITOR_NAME = 'COMPETITOR_LIST_COMPETITOR_NAME',
 }
 
+// CALLING PAGES
 export enum customerPageUserAccessType {
-    NAV_CUSTOMER_PAGE = 'NAV_CUSTOMER_PAGE',
+    NAV_CUSTOMER_CARE_PAGE = 'NAV_CUSTOMER_CARE_PAGE',
 }
 
-export enum inboundUserAccessType {
-    NAV_INBOUND = 'NAV_INBOUND',
+export enum salesPageUserAccessType {
+    NAV_SALES_PAGE = 'NAV_SALES_PAGE',
 }
-export enum dealerNDRUserAccessType {
-    NAV_DEALER_NDR = 'NAV_DEALER_NDR',
+
+export enum courierNdrPagePageUserAccessType {
+    NAV_COURIER_NDR_PAGE = 'NAV_COURIER_NDR_PAGE',
 }
+
+export enum dealerNDRPageUserAccessType {
+    NAV_DEALER_NDR_PAGE = 'NAV_DEALER_NDR_PAGE',
+}
+// CALLING PAGES
+
 export enum assetsUserAccessType {
     NAV_ASSETS = 'NAV_ASSETS',
 }
@@ -1647,14 +1659,16 @@ export const UserModuleNameTypes = {
     ...channelManagementUserAccessType,
     ...competitorUserAccessType,
     ...customerPageUserAccessType,
-    ...inboundUserAccessType,
-    ...dealerNDRUserAccessType,
+    ...salesPageUserAccessType,
+    ...courierNdrPagePageUserAccessType,
+    ...dealerNDRPageUserAccessType,
     ...didManagementUserAccessType,
     ...slotManagementUserAccessType,
     ...createOrderUserAccessType,
     ...tapeManagementUserAccessType,
     ...barcodeUserAccessType,
     ...configurationUserAccessType,
+    ...pageMasterUserAccessType,
     ...mediaUserAccessType,
     ...assetsUserAccessType,
     ...dispositionUserAccessType,

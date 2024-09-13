@@ -58,7 +58,8 @@ const Authorization: ({ permission, children }: Props) => any = ({
         location === 'media' ||
         location === 'assets' ||
         location === 'dispositions' ||
-        location === 'all-websites'
+        location === 'all-websites' ||
+        location === 'page-master'
     ) {
         return <AccessDenied />
     } else {

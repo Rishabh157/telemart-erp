@@ -24,6 +24,7 @@ import { RiCustomerServiceLine } from 'react-icons/ri'
 import { GrCompliance, GrMultiple } from 'react-icons/gr'
 import { GiRadarCrossSection } from 'react-icons/gi'
 import { IoIosGitPullRequest } from 'react-icons/io'
+import { RiPagesLine } from 'react-icons/ri'
 import { UserModuleNameTypes } from './utils/mediaJson/userAccess'
 
 // |-- Types --|
@@ -221,6 +222,12 @@ export const navigation: NavItemType[] = [
         icon: MdPermMedia,
         path: '/media/channel-group',
         name: UserModuleNameTypes.NAV_MEDIA,
+    },
+    {
+        label: 'Page Master',
+        icon: RiPagesLine,
+        path: '/page-master/create-order',
+        name: UserModuleNameTypes.NAV_PAGE_MASTER,
     },
     {
         label: 'Assets',

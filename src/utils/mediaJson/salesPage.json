@@ -1,0 +1,6 @@
+{
+    "moduleId": "NAV_SALES_PAGE",
+    "moduleName": "NAV_SALES_PAGE",
+    "parentGroup": ["NAV_PAGE_MASTER"],
+    "moduleAction": []
+}

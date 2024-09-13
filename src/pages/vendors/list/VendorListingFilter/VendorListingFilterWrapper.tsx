@@ -39,9 +39,6 @@ const VendorListingFilterWrapper = ({
         values: VendorListFilterFormValues,
         { setSubmitting }: FormikHelpers<VendorListFilterFormValues>
     ) => {
-
-        console.log('SUBMIT', values)
-
         setSubmitting(false)
         setFilter((prev) => ({
             ...prev,

@@ -331,6 +331,7 @@ import FlipkartOrdersListingWrapper from './pages/ecomOrder/FlipkartOrder/Flipka
 import OutwardEcomOrderTab from './pages/warehouses/view/inventories/outward/Ecom'
 import OutwardAmazonTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Amazon/OutwardAmazonTabsListingWrapper'
 import OutwardFlipkartTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Flipkart/OutwardFlipkartTabsListingWrapper'
+import PageMasterLayout from './pages/pageMaster/PageMasterLayout'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -2803,18 +2804,6 @@ const PageRoutes = () => {
                         }
                     />
 
-                    <Route
-                        path="create-order"
-                        element={
-                            <Authorization
-                                children={<CreateOrderWrapper />}
-                                permission={
-                                    UserModuleNameTypes.NAV_CREATE_ORDER
-                                }
-                            />
-                        }
-                    />
-
                     {/* Media -> Competitor */}
                     <Route
                         path="competitor"
@@ -2920,37 +2909,64 @@ const PageRoutes = () => {
                     </Route>
                 </Route>
 
-                {/* Media -> Inbound Or Caller Page & Customer Page */}
+                {/* Page Master */}
                 <Route
-                    path="/media/caller-page"
-                    element={<SalesPageWrapper />}
-                />
+                    path="/page-master"
+                    element={
+                        <Authorization
+                            children={<PageMasterLayout />}
+                            permission={UserModuleNameTypes.NAV_PAGE_MASTER}
+                        />
+                    }
+                >
+                    {/* Page Master -> Create Order */}
+                    <Route
+                        path="create-order"
+                        element={
+                            <Authorization
+                                children={<CreateOrderWrapper />}
+                                permission={
+                                    UserModuleNameTypes.NAV_CREATE_ORDER
+                                }
+                            />
+                        }
+                    />
+                </Route>
 
-                {/* Media -> Create Order Caller Page */}
+
+                {/* Page Master -> Order Creation page from redirect /page-master/create-order page */}
                 <Route
-                    path="/media/order-creation"
+                    path="/order-creation"
                     element={<CreateOrderPageWrapper />}
                 />
 
-                {/* Calling outcall Dialer page */}
+                {/* Page Master -> Caller Pages */}
+                <Route
+                    path="/caller-page"
+                    element={<SalesPageWrapper />}
+                />
+
+                {/* Page Master -> Calling outcall Dialer page */}
                 <Route
                     path="/calling-outcall"
                     element={<WarehouseFirstCallDialerPageWrapper />}
                 />
 
-                {/* Dealer NDR Page */}
+                {/* Page Master -> Dealer NDR Page */}
                 <Route
-                    path="media/dealer-ndrcalling"
+                    path="/dealer-ndrcalling"
                     element={<AddDealerNDRDetailsWrapper />}
                 />
 
+                {/* Page Master -> Customer Care Page */}
                 <Route
-                    path="/media/customer-care"
+                    path="/customer-care"
                     element={<CustomerCarePageWrapper />}
                 />
 
+                {/* Page Master ->Courier Ndr Page */}
                 <Route
-                    path="/media/courier-ndr"
+                    path="/courier-ndr"
                     element={<CourierNdrDialerPageWrapper />}
                 />
 

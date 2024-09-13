@@ -59,7 +59,6 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const { values, setFieldValue } = formikProps
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [userRole, setuserRole] = useState<any[]>([])
-    console.log(' values EDIT : ', values)
 
     const dispatch = useDispatch()
 

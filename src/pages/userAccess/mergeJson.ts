@@ -47,7 +47,9 @@ import { default as grnJson } from '../../utils/mediaJson/grn.json'
 import { default as icOneJson } from '../../utils/mediaJson/icOne.json'
 import { default as icTwoJson } from '../../utils/mediaJson/icTwo.json'
 import { default as icThreeJson } from '../../utils/mediaJson/icThree.json'
-import { default as inboundJson } from '../../utils/mediaJson/inbound.json'
+import { default as salesPageJson } from '../../utils/mediaJson/salesPage.json'
+import { default as dealerNdrPage } from '../../utils/mediaJson/dealerNdrPage.json'
+import { default as courierNdrPage } from '../../utils/mediaJson/courierNdrPage.json'
 import { default as createOrder } from '../../utils/mediaJson/createOrder.json'
 // import { default as inquiryJson } from "../../utils/mediaJson/inquiry.json";
 import { default as inventoryFlowJson } from '../../utils/mediaJson/inventoryFlow.json'
@@ -168,7 +170,9 @@ export const mergeUserModules = [
     { ...tapeManagementJson },
     { ...competitorJson },
     { ...slotManagementJson },
-    { ...inboundJson },
+    { ...salesPageJson },
+    { ...dealerNdrPage },
+    { ...courierNdrPage },
     { ...createOrder },
     { ...requestJson },
     { ...customerPageJson },

@@ -62,7 +62,7 @@ const CreateOrderWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             setApiStatus(false)
-            navigate('/media/order-creation', {
+            navigate('/page-master/order-creation', {
                 state: values,
             })
         }, 1000)

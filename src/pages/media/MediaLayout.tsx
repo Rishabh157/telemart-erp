@@ -67,38 +67,38 @@ const mediaNavigation: NavItemType[] = [
         path: 'slot',
         name: UserModuleNameTypes.NAV_SLOT_MANAGEMENT,
     },
-    {
-        label: 'Create Order',
-        icon: MdViewTimeline,
-        path: 'create-order',
-        name: UserModuleNameTypes.NAV_CREATE_ORDER,
-    },
-    {
-        label: 'Dealer Ndr',
-        icon: MdViewTimeline,
-        path: 'dealer-ndrcalling?phone=9009648665&username=rishabh.gour',
-        // ?phone={{PHONENUMBER}}&user={{USERLOGIN}}&postalcode={{postalcode}}&verve=111&dstphone={{dnis}}&campaignId={{CAMPNAME}}
-        name: UserModuleNameTypes.NAV_DEALER_NDR,
-    },
-    {
-        label: 'Inbound',
-        icon: MdViewTimeline,
-        path: 'caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
-        name: UserModuleNameTypes.NAV_INBOUND,
-    },
-    {
-        label: 'Customer Page',
-        icon: MdViewTimeline,
-        path: 'customer-care?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
-        // https://out.onetelemart.com:445/calling/default.aspx?phone={{PHONENUMBER}}\&userlogin={{USERLOGIN}}\&postalcode=111\&dstphone={{dnis}}\&campaignId={{CAMPNAME}}
-        name: UserModuleNameTypes.NAV_CUSTOMER_PAGE,
-    },
-    {
-        label: 'Courier NDR',
-        icon: MdViewTimeline,
-        path: 'courier-ndr?phone=9009648665&username=rishabh.gour&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR',
-        name: UserModuleNameTypes.NAV_INBOUND,
-    },
+    // {
+    //     label: 'Create Order',
+    //     icon: MdViewTimeline,
+    //     path: 'create-order',
+    //     name: UserModuleNameTypes.NAV_CREATE_ORDER,
+    // },
+    // {
+    //     label: 'Dealer Ndr',
+    //     icon: MdViewTimeline,
+    //     path: 'dealer-ndrcalling?phone=9009648665&username=rishabh.gour',
+    //     // ?phone={{PHONENUMBER}}&user={{USERLOGIN}}&postalcode={{postalcode}}&verve=111&dstphone={{dnis}}&campaignId={{CAMPNAME}}
+    //     name: UserModuleNameTypes.NAV_DEALER_NDR_PAGE,
+    // },
+    // {
+    //     label: 'Inbound',
+    //     icon: MdViewTimeline,
+    //     path: 'caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
+    //     name: UserModuleNameTypes.NAV_SALES_PAGE,
+    // },
+    // {
+    //     label: 'Customer Page',
+    //     icon: MdViewTimeline,
+    //     path: 'customer-care?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
+    //     // https://out.onetelemart.com:445/calling/default.aspx?phone={{PHONENUMBER}}\&userlogin={{USERLOGIN}}\&postalcode=111\&dstphone={{dnis}}\&campaignId={{CAMPNAME}}
+    //     name: UserModuleNameTypes.NAV_CUSTOMER_CARE_PAGE,
+    // },
+    // {
+    //     label: 'Courier NDR',
+    //     icon: MdViewTimeline,
+    //     path: 'courier-ndr?phone=9009648665&username=rishabh.gour&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR',
+    //     name: UserModuleNameTypes.NAV_SALES_PAGE,
+    // },
 ]
 
 type Props = {
@@ -119,17 +119,15 @@ const MediaLayout = ({ children }: Props) => {
 
     return (
         <div
-            className={`flex h-screen w-screen relative ${
-                theme === 'black' ? 'bg-invert' : ''
-            }`}
+            className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''
+                }`}
         >
             {/* Side Navigation Bar */}
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out bg-white ${
-                    isCollapsed
-                        ? 'min-w-[50px] w-[50px]'
-                        : 'min-w-[250px] w-[250px]'
-                }`}
+                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out bg-white ${isCollapsed
+                    ? 'min-w-[50px] w-[50px]'
+                    : 'min-w-[250px] w-[250px]'
+                    }`}
             >
                 <VerticalNavBar
                     toggleCollapse={toggleCollapse}
@@ -156,9 +154,8 @@ const MediaLayout = ({ children }: Props) => {
             <button
                 type="button"
                 onClick={() => navigate('/welcome')}
-                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${
-                    isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
-                }`}
+                className={`bg-primary-main absolute bottom-0 left-0 text-white py-1 flex px-3 gap-4 w-[250px] items-center text-sm ${isCollapsed ? 'w-[50px]' : 'min-w-[250px]'
+                    }`}
             >
                 <BiChevronsLeft className="text-2xl" />{' '}
                 {!isCollapsed && <div> BACK TO MAIN MENU </div>}
