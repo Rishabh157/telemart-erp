@@ -16,29 +16,29 @@
                     "fieldValue": "didNo"
                 },
                 {
-                    "fieldId": "CALL_LIST_MOBILE_NUMBER",
+                    "fieldId": "CALL_LIST_CALL_TYPE",
                     "fieldName": "Mobile Number",
                     "fieldValue": "mobileNo"
                 },
                 {
-                    "fieldId": "CALL_LIST_DISPOSITION_LEBEL_TWO",
+                    "fieldId": "CALL_LIST_CAMPAIGN",
                     "fieldName": "Disposition Two",
                     "fieldValue": "dispositionTwoLabel"
                 },
                 {
-                    "fieldId": "CALL_LIST_DISPOSITION_LEBEL_THREE",
-                    "fieldName": "Disposition Three Label",
-                    "fieldValue": "dispositionThreeLabel"
+                    "fieldId": "CALL_LIST_MOBILE",
+                    "fieldName": "Mobile Number",
+                    "fieldValue": "mobileNo"
+                },
+                {
+                    "fieldId": "CALL_LIST_DISPOSITION",
+                    "fieldName": "Dispositions",
+                    "fieldValue": "dispositionLevelTwoLabel"
                 },
                 {
                     "fieldId": "CALL_LIST_SCHEME",
                     "fieldName": "Scheme",
                     "fieldValue": "schemeLabel"
-                },
-                {
-                    "fieldId": "CALL_LIST_CHANNEL",
-                    "fieldName": "Channel",
-                    "fieldValue": "channel"
                 }
             ]
         }

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import CallListing from './CallListing'
 
-import { InbooundCallerListResponse } from 'src/models/configurationModel/InboundCaller.model'
+// import { OrderListResponse } from 'src/models/configurationModel/InboundCaller.model'
 import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
@@ -18,6 +18,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+import { OrderListResponse } from 'src/models'
 
 const CallListingWrapper = () => {
     useUnmountCleanup()
@@ -28,89 +29,59 @@ const CallListingWrapper = () => {
     )
 
     const { page, rowsPerPage, searchValue } = inboundCallerState
+
     const columns: columnTypes[] = [
         {
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.didNo} </span>
-            ),
             name: UserModuleNameTypes.CALL_LIST_DID_NUMBER,
+        },
+        {
+            field: 'callType',
+            headerName: 'Call Type',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_CALL_TYPE,
+        },
+        {
+            field: 'campaign',
+            headerName: 'Campaign',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_CAMPAIGN,
         },
         {
             field: 'mobileNo',
             headerName: 'Mobile Number',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.CALL_LIST_MOBILE_NUMBER,
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row?.mobileNo} </span>
-            ),
+            name: UserModuleNameTypes.CALL_LIST_MOBILE,
         },
         {
-            field: 'dispositionTwoLabel',
-            headerName: 'Disposition Two',
+            field: 'dispositionLevelTwoLabel',
+            headerName: 'Disposition (One/Two)',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.CALL_LIST_DISPOSITION_LEBEL_TWO,
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span>
-                    {' '}
-                    {row.dispositionTwoLabel ? row.dispositionTwoLabel : 'NA'}
-                </span>
+            name: UserModuleNameTypes.CALL_LIST_DISPOSITION,
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div>
+                    <div className="text-sm text-slate-700 font-medium">
+                        {row?.dispositionLevelTwoLabel || '-'}
+                    </div>
+                    <div className="text-sm text-primary-main font-medium">
+                        {row?.dispositionLevelThreeLabel}
+                    </div>
+                </div>
             ),
         },
         {
-            field: 'dispositionThreeLabel',
-            headerName: 'Disposition Three Label',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.CALL_LIST_DISPOSITION_LEBEL_THREE,
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span>
-                    {' '}
-                    {row.dispositionThreeLabel
-                        ? row.dispositionThreeLabel
-                        : 'NA'}{' '}
-                </span>
-            ),
-        },
-        {
-            field: 'schemeLabel',
+            field: 'schemeName',
             headerName: 'Scheme',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.CALL_LIST_SCHEME,
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.schemeLabel} </span>
-            ),
-        },
-        {
-            field: 'channelId',
-            headerName: 'Channel',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.CALL_LIST_CHANNEL,
-            renderCell: (row: InbooundCallerListResponse) => (
-                <span> {row.channel} </span>
-            ),
-        },
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: any) => (
-        //         <ActionPopup
-        //             handleOnAction={() => {
-        //                 // e.stopPropagation()
-        //                 // setShowDropdown(!showDropdown)
-        //                 // setCurrentId(row?._id)
-        //             }}
-        //         />
-        //
-        //
-        //     ),
-        //
-        // },
+        }
     ]
+
     const { userData } = useGetLocalStorage()
-    const { items } = useGetCustomListingData<InbooundCallerListResponse>({
+    const { items } = useGetCustomListingData<OrderListResponse>({
         useEndPointHook: useGetPaginationInboundCallerQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
