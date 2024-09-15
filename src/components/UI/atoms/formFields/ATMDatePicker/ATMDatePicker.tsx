@@ -52,7 +52,7 @@ const ATMDatePicker = ({
     disabled = false,
     isSubmitting = true,
     labelClass = 'font-medium text-sm',
-    dateTimeFormat = 'MM/DD/YYYY',
+    dateTimeFormat = 'DD/MM/YYYY',
     minDate,
     textTransform = 'firstLetterCapitalonly',
     inputSize = '16px',

@@ -43,9 +43,7 @@ const GRNListing = ({ columns, rows }: Props) => {
 
     return (
         <div
-            className={`px-4 ${
-                route ? ' h-[calc(100vh-55px)]' : 'h-[calc(50%)] pb-2'
-            } `}
+            className={`px-4 ${ route ? 'h-[calc(100vh-55px)]' : 'h-[calc(50%)] pb-2'} `}
         >
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
@@ -69,7 +67,7 @@ const GRNListing = ({ columns, rows }: Props) => {
                 />
 
                 {/* Table */}
-                <div className="grow overflow-auto  ">
+                <div className="grow overflow-auto">
                     <ATMTable
                         isLoading={isTableLoading}
                         columns={columns}

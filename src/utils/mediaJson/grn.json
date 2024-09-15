@@ -35,6 +35,14 @@
                     "fieldValue": "defectiveQuantity"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_GRN_EDIT",
+            "actionUrl": "",
+            "actionName": "EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

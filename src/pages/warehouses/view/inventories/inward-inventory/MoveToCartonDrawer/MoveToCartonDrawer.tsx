@@ -22,7 +22,6 @@ type Props = {
     productDetail: any[]
     wareHouse: string
     packaging: string
-    vendorId: string
 }
 
 const MoveToCartonDrawer = ({
@@ -30,7 +29,6 @@ const MoveToCartonDrawer = ({
     productDetail,
     wareHouse,
     packaging,
-    vendorId,
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -52,6 +50,8 @@ const MoveToCartonDrawer = ({
         const barcodeProduct = productDetail.map((ele) => {
             const {
                 // barcodeNumber,
+                vendorId,
+                vendorLabel,
                 isUsedFresh,
                 upperBarcodeNumber,
                 productGroupLabel,
@@ -70,7 +70,6 @@ const MoveToCartonDrawer = ({
                 cartonBoxId: packaging,
                 wareHouseId: wareHouse,
                 companyId: userData?.companyId,
-                vendorId: vendorId
             } // return the new object without the _id property
         })
 

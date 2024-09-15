@@ -61,7 +61,7 @@ const EditPurchaseOrder = ({
     const dispatch = useDispatch()
     const { values, setFieldValue } = formikProps
 
-    const handleSetFieldValue = (name: string, value: string | boolean) => {
+    const handleSetFieldValue = (name: string, value: string | boolean | number) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
@@ -89,9 +89,8 @@ const EditPurchaseOrder = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Update
                             </button>
@@ -149,20 +148,16 @@ const EditPurchaseOrder = ({
                             {/* Rate */}
                             <div className="flex-[2_2_0%]">
                                 <ATMTextField
-                                    required
                                     type="number"
                                     min={0}
                                     name={`purchaseOrder.rate`}
-                                    value={
-                                        values.purchaseOrder.rate?.toString() ||
-                                        ''
-                                    }
+                                    value={values.purchaseOrder.rate}
                                     label="Rate"
                                     placeholder="Rate"
                                     onChange={(e) =>
                                         handleSetFieldValue(
                                             `purchaseOrder.rate`,
-                                            e.target.value
+                                            parseInt(e.target.value)
                                         )
                                     }
                                     className="mt-0 rounded"
@@ -185,7 +180,7 @@ const EditPurchaseOrder = ({
                                     onChange={(e) =>
                                         handleSetFieldValue(
                                             `purchaseOrder.quantity`,
-                                            e.target.value
+                                            parseInt(e.target.value)
                                         )
                                     }
                                     className="mt-0 rounded"
@@ -195,12 +190,10 @@ const EditPurchaseOrder = ({
                             {/* Est. Receiving Date */}
                             <div className="flex-[3_3_0%] mt-4">
                                 <ATMDatePicker
-                                    required
+                                    // required
                                     labelClass="text-slate-700  text-sm font-medium mb-1"
                                     name={`purchaseOrder.estReceivingDate`}
-                                    value={
-                                        values.purchaseOrder.estReceivingDate
-                                    }
+                                    value={values.purchaseOrder.estReceivingDate}
                                     label="Est. Receiving Date"
                                     onChange={(newValue) =>
                                         handleSetFieldValue(

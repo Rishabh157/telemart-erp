@@ -4,16 +4,18 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { number, object, ref } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddItem from './AddGRN'
+import EditGRN from './EditGRN'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-import { useAddGRNMutation } from 'src/services/GRNService'
+import { useGetGrnByIdQuery, useUpdateGRNMutation } from 'src/services/GRNService'
 import { showToast } from 'src/utils'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { GRNListResponse } from 'src/models'
 
 // |-- Types --|
 
@@ -26,22 +28,29 @@ export type FormInitialValues = {
     companyId: string
 }
 
-const AddGRNWrapper = () => {
+const EditGRNWrapper = () => {
+
+
+    const params = useParams()
+    const Id = params.id
     const navigate = useNavigate()
-    const [addGRN] = useAddGRNMutation()
-    const { state } = useLocation()
+    const [updateGRN] = useUpdateGRNMutation()
 
     const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
+    const { items: selectedItems } = useGetDataByIdCustomQuery<GRNListResponse>({
+        useEndPointHook: useGetGrnByIdQuery(Id || '', { skip: !Id }),
+    })
+
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        poCode: state?.poCode || '',
-        itemId: state?.itemId || '',
-        companyId: state?.companyId || '',
-        receivedQuantity: 0,
-        goodQuantity: 0,
-        defectiveQuantity: 0,
+        poCode: selectedItems?.poCode || '',
+        itemId: selectedItems?.itemId || '',
+        companyId: selectedItems?.companyId || '',
+        receivedQuantity: selectedItems?.receivedQuantity || 0,
+        goodQuantity: selectedItems?.goodQuantity || 0,
+        defectiveQuantity: selectedItems?.defectiveQuantity || 0,
     }
 
     // Form Validation Schema
@@ -68,18 +77,24 @@ const AddGRNWrapper = () => {
     //    Form Submit Handler
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
+
         setTimeout(() => {
-            addGRN({
-                poCode: values.poCode,
-                itemId: values.itemId,
-                receivedQuantity: values.receivedQuantity,
-                goodQuantity: values.goodQuantity,
-                defectiveQuantity: values.defectiveQuantity,
-                companyId: userData?.companyId as string,
-            }).then((res) => {
+            updateGRN(
+                {
+                    id: Id || '',
+                    body: {
+                        poCode: values.poCode,
+                        itemId: values.itemId || '',
+                        receivedQuantity: values.receivedQuantity,
+                        goodQuantity: values.goodQuantity,
+                        defectiveQuantity: values.defectiveQuantity,
+                        companyId: userData?.companyId as string,
+                    }
+                }
+            ).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'GRN added successfully!')
+                        showToast('success', 'GRN update successfully!')
                         navigate('/grn')
                     } else {
                         showToast('error', res?.data?.message)
@@ -95,13 +110,14 @@ const AddGRNWrapper = () => {
     return (
         <SideNavLayout>
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmitHandler}
             >
                 {(formikProps) => {
                     return (
-                        <AddItem
+                        <EditGRN
                             formikProps={formikProps}
                             apiStatus={apiStatus}
                         />
@@ -112,4 +128,4 @@ const AddGRNWrapper = () => {
     )
 }
 
-export default AddGRNWrapper
+export default EditGRNWrapper

@@ -15,7 +15,6 @@ import { FormInitialValues } from './AddProductGroupWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { handleValidCharchater } from 'src/utils/methods/charchterMethods'
 
 // |-- Types --|
 type Props = {
@@ -99,20 +98,27 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 name="productGroupCode"
                                 value={values.productGroupCode}
                                 label="Product Group Code"
+                                maxLength={4}
                                 placeholder="Product Group Code"
                                 onChange={(e: any) => {
-                                    if (!e.target?.value) {
-                                        handleSetFieldValue(
-                                            'productGroupCode',
-                                            e.target.value
-                                        )
-                                    } else {
-                                        handleValidCharchater(e) &&
-                                            handleSetFieldValue(
-                                                'productGroupCode',
-                                                e.target.value
-                                            )
-                                    }
+
+                                    handleSetFieldValue(
+                                        'productGroupCode',
+                                        e.target.value
+                                    )
+
+                                    // if (!e.target?.value) {
+                                    //     handleSetFieldValue(
+                                    //         'productGroupCode',
+                                    //         e.target.value
+                                    //     )
+                                    // } else {
+                                    //     handleValidCharchater(e) &&
+                                    //         handleSetFieldValue(
+                                    //             'productGroupCode',
+                                    //             e.target.value
+                                    //         )
+                                    // }
                                 }}
                             />
 

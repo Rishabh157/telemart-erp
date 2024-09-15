@@ -63,10 +63,11 @@ const AddPurchaseOrder = ({
 
     const dispatch = useDispatch()
     const { values, setFieldValue } = formikProps
-    const handleSetFieldValue = (name: string, value: string | boolean) => {
+    const handleSetFieldValue = (name: string, value: string | boolean | number) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+    
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="flex flex-col gap-2 p-4 ">
@@ -91,9 +92,8 @@ const AddPurchaseOrder = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -163,7 +163,6 @@ const AddPurchaseOrder = ({
                                                             {/* Item Name */}
                                                             <div className="flex-[3_3_0%] -mt-4">
                                                                 <ATMSelectSearchable
-                                                                    required
                                                                     name={`purchaseOrder[${itemIndex}].itemId`}
                                                                     value={
                                                                         itemId
@@ -201,26 +200,18 @@ const AddPurchaseOrder = ({
                                                             {/* Rate */}
                                                             <div className="flex-[2_2_0%] ">
                                                                 <ATMTextField
-                                                                    required
+                                                                    // required
                                                                     type="number"
                                                                     min={0}
                                                                     name={`purchaseOrder[${itemIndex}].rate`}
-                                                                    value={
-                                                                        rate ===
-                                                                        0
-                                                                            ? ''
-                                                                            : rate?.toString()
-                                                                    }
+                                                                    value={rate}
                                                                     label="Rate"
                                                                     placeholder="Rate"
                                                                     onChange={(
                                                                         e
                                                                     ) =>
                                                                         handleSetFieldValue(
-                                                                            `purchaseOrder[${itemIndex}].rate`,
-                                                                            e
-                                                                                .target
-                                                                                .value
+                                                                            `purchaseOrder[${itemIndex}].rate`, parseInt(e.target.value)
                                                                         )
                                                                     }
                                                                     className="mt-0 rounded"
@@ -234,12 +225,7 @@ const AddPurchaseOrder = ({
                                                                     type="number"
                                                                     min={0}
                                                                     name={`purchaseOrder[${itemIndex}].quantity`}
-                                                                    value={
-                                                                        quantity ===
-                                                                        0
-                                                                            ? ''
-                                                                            : quantity?.toString()
-                                                                    }
+                                                                    value={quantity}
                                                                     label="Quantity"
                                                                     placeholder="Quantity"
                                                                     onChange={(
@@ -247,9 +233,7 @@ const AddPurchaseOrder = ({
                                                                     ) =>
                                                                         handleSetFieldValue(
                                                                             `purchaseOrder[${itemIndex}].quantity`,
-                                                                            e
-                                                                                .target
-                                                                                .value
+                                                                            parseInt(e.target.value)
                                                                         )
                                                                     }
                                                                     className="rounded"
@@ -259,7 +243,7 @@ const AddPurchaseOrder = ({
                                                             {/* Est. Receiving Date */}
                                                             <div className="flex-[3_3_0%] mt-4">
                                                                 <ATMDatePicker
-                                                                    required
+                                                                    // required
                                                                     labelClass="text-slate-700  text-sm font-medium mb-1"
                                                                     name={`purchaseOrder[${itemIndex}].estReceivingDate`}
                                                                     value={
@@ -282,20 +266,20 @@ const AddPurchaseOrder = ({
                                                                 .purchaseOrder
                                                                 ?.length >
                                                                 1 && (
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                itemIndex
-                                                                            )
-                                                                        }}
-                                                                        className="p-2 text-white bg-red-500 rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    itemIndex
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 text-white bg-red-500 rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                         </div>
                                                     )
                                                 }

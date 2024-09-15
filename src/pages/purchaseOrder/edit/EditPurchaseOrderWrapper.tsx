@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { date, number, object, string } from 'yup'
+import { number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -38,7 +38,7 @@ export type FormInitialValues = {
         itemId: string
         rate: number
         quantity: number
-        estReceivingDate: string
+        estReceivingDate: string | null
     }
 }
 
@@ -94,13 +94,11 @@ const EditPurchaseOrderWrapper = (props: Props) => {
         purchaseOrder: object({
             id: string(),
             itemId: string().required('Please select a Item'),
-            rate: number()
-                .min(0, 'Rate must be greater than 0')
-                .required('Please enter rate'),
+            rate: number().min(0, 'Rate must be greater then or rqual to 0'),
             quantity: number()
-                .min(0, 'Quantity must be greater than 0')
+                .min(1, 'Quantity must be greater than 0')
                 .required('Please enter quantity'),
-            estReceivingDate: date().required('Please select date'),
+            estReceivingDate: string().nullable().notRequired(),
         }),
     })
 
@@ -116,9 +114,9 @@ const EditPurchaseOrderWrapper = (props: Props) => {
             itemId: values?.purchaseOrder?.itemId,
             rate: values?.purchaseOrder?.rate,
             quantity: values?.purchaseOrder?.quantity,
-            estReceivingDate: moment(
+            estReceivingDate: values?.purchaseOrder?.estReceivingDate ? moment(
                 values?.purchaseOrder?.estReceivingDate
-            ).format('YYYY/MM/D'),
+            ).format('YYYY/MM/DD') : null,
         }
 
         setTimeout(() => {

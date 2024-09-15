@@ -332,6 +332,7 @@ import OutwardEcomOrderTab from './pages/warehouses/view/inventories/outward/Eco
 import OutwardAmazonTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Amazon/OutwardAmazonTabsListingWrapper'
 import OutwardFlipkartTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Flipkart/OutwardFlipkartTabsListingWrapper'
 import PageMasterLayout from './pages/pageMaster/PageMasterLayout'
+import EditGRNWrapper from './pages/grn/edit/EditGRNWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -1567,10 +1568,21 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<AddGRNWrapper />}
-                            permission={UserModuleNameTypes.ACTION_GRN_ADD}
+                            permission={UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN}
                         />
                     }
                 />
+              
+                <Route
+                    path="/grn/edit/:id"
+                    element={
+                        <Authorization
+                            children={<EditGRNWrapper />}
+                            permission={UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN}
+                        />
+                    }
+                />
+                
                 {/* Multi Order Search */}
                 <Route
                     path="/multi-order-search"

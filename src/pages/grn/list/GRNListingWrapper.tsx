@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
@@ -16,55 +16,16 @@ import { RootState } from 'src/redux/store'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { isAuthorized } from 'src/utils/authorization'
+import { useNavigate } from 'react-router-dom'
 
-const columns: columnTypes[] = [
-    {
-        field: 'poCode',
-        headerName: 'PO Code',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: GRNListResponse) => <span> {row.poCode} </span>,
-        name: UserModuleNameTypes.GRN_LIST_PO_CODE,
-    },
-    {
-        field: 'itemName',
-        headerName: 'Item Name',
-        flex: 'flex-[1.5_1.5_0%]',
-        name: UserModuleNameTypes.GRN_LIST_ITEM_NAME,
-        renderCell: (row: GRNListResponse) => {
-            return <span> {row?.itemName} </span>
-        },
-    },
-    {
-        field: 'receivedQuantity',
-        headerName: 'Received Qnty.',
-        flex: 'flex-[1.5_1.5_0%]',
-        name: UserModuleNameTypes.GRN_LIST_RECEVIED_QUANTITY,
-        renderCell: (row: GRNListResponse) => {
-            return <span> {row?.receivedQuantity} </span>
-        },
-    },
-    {
-        field: 'goodQuantity',
-        headerName: 'Good Qnty.',
-        flex: 'flex-[1.5_1.5_0%]',
-        name: UserModuleNameTypes.GRN_LIST_GOOD_QUANTITY,
-        renderCell: (row: GRNListResponse) => {
-            return <span> {row.goodQuantity} </span>
-        },
-    },
-    {
-        field: 'defectiveQuantity',
-        headerName: 'Defective Qnty.',
-        flex: 'flex-[1.5_1.5_0%]',
-        name: UserModuleNameTypes.GRN_LIST_DEFECTIVE_QUANTITY,
-        renderCell: (row: GRNListResponse) => {
-            return <span> {row.defectiveQuantity} </span>
-        },
-    },
-]
 
 const GRNListingWrapper = () => {
     useUnmountCleanup()
+
+    const [currentId, setCurrentId] = useState<string>('');
+    const navigate = useNavigate()
 
     // state
     const listingPaginationState: any = useSelector(
@@ -92,6 +53,73 @@ const GRNListingWrapper = () => {
             isPaginationRequired: true,
         }),
     })
+
+
+    const columns: columnTypes[] = [
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            extraClasses: 'min-w-[100px]',
+            flex: 'flex-[0.8_0.8_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_GRN_EDIT
+                    )}
+                    handleEditActionButton={() => {
+                        navigate(`/grn/edit/${currentId}`)
+                    }}
+                    handleOnAction={() => {
+                        setCurrentId(row?._id)
+                    }}
+                />
+
+            ),
+        },
+        {
+            field: 'poCode',
+            headerName: 'PO Code',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: GRNListResponse) => <span> {row?.poCode} </span>,
+            name: UserModuleNameTypes.GRN_LIST_PO_CODE,
+        },
+        {
+            field: 'itemName',
+            headerName: 'Item Name',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.GRN_LIST_ITEM_NAME,
+            renderCell: (row: GRNListResponse) => {
+                return <span> {row?.itemName} </span>
+            },
+        },
+        {
+            field: 'receivedQuantity',
+            headerName: 'Received Qnty.',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.GRN_LIST_RECEVIED_QUANTITY,
+            renderCell: (row: GRNListResponse) => {
+                return <span> {row?.receivedQuantity} </span>
+            },
+        },
+        {
+            field: 'goodQuantity',
+            headerName: 'Good Qnty.',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.GRN_LIST_GOOD_QUANTITY,
+            renderCell: (row: GRNListResponse) => {
+                return <span> {row?.goodQuantity} </span>
+            },
+        },
+        {
+            field: 'defectiveQuantity',
+            headerName: 'Defective Qnty.',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.GRN_LIST_DEFECTIVE_QUANTITY,
+            renderCell: (row: GRNListResponse) => {
+                return <span> {row?.defectiveQuantity} </span>
+            },
+        },
+    ]
 
     return (
         <SideNavLayout>

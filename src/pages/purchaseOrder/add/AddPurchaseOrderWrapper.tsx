@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { array, date, number, object, string } from 'yup'
+import { array, number, object, string } from 'yup'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
@@ -33,7 +33,7 @@ export type FormInitialValues = {
         itemId: string
         rate: number
         quantity: number
-        estReceivingDate: string
+        estReceivingDate: string | null
     }[]
 }
 
@@ -70,7 +70,7 @@ const AddPurchaseOrderWrapper = (props: Props) => {
                 itemId: '',
                 rate: 0,
                 quantity: 0,
-                estReceivingDate: '',
+                estReceivingDate: null,
             },
         ],
     }
@@ -83,15 +83,13 @@ const AddPurchaseOrderWrapper = (props: Props) => {
         purchaseOrder: array().of(
             object().shape({
                 itemId: string().required('Please select a Item'),
-                rate: number()
-                    .min(1, 'Rate must be greater than 0')
-                    .required('Please enter rate'),
+                rate: number().min(0, 'Rate must be greater then or rqual to 0'),
                 quantity: number()
                     .min(1, 'Quantity must be greater than 0')
                     .required('Please enter quantity'),
-                estReceivingDate: date()
-                    .typeError('Invalid Date')
-                    .required('Please select date'),
+                estReceivingDate: string().nullable().notRequired(),
+                // .typeError('Invalid Date')
+                // .required('Please select date'),
             })
         ),
     })
@@ -100,13 +98,14 @@ const AddPurchaseOrderWrapper = (props: Props) => {
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         dispatch(setFieldCustomized(false))
-        const purchaseOrder = values.purchaseOrder.map((ele: any) => {
+        const purchaseOrder = values?.purchaseOrder?.map((ele: any) => {
             return {
                 ...ele,
-                estReceivingDate: moment(
-                    ele.estReceivingDate,
+                quantity: parseInt(ele?.quantity),
+                estReceivingDate: ele?.estReceivingDate ? moment(
+                    ele?.estReceivingDate,
                     'YYYY/MM/DD'
-                ).format('YYYY/MM/D'),
+                ).format('YYYY/MM/DD') : null,
             }
         })
 
@@ -158,4 +157,5 @@ const AddPurchaseOrderWrapper = (props: Props) => {
         </SideNavLayout>
     )
 }
+
 export default AddPurchaseOrderWrapper

@@ -1,5 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable react-hooks/exhaustive-deps */
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -17,6 +15,7 @@ import { SelectBoxOption } from './InwardInventoryWrapper'
 import MoveToCartonDrawer from './MoveToCartonDrawer/MoveToCartonDrawer'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { useGetVendorsQuery } from 'src/services/VendorServices'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 
 // |-- Types --|
 type Props = {
@@ -28,10 +27,12 @@ export type renderBarcodType = {
     productGroupLabel: string
     productGroupNumber: string
     barcodeNumber: string
+    vendorId: string
     isUsed: boolean
 }
 const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [packaging, setPackaging] = React.useState('')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [vendorId, setVendorId] = React.useState('')
     const { id: warehouseId } = useParams()
     const breadcrumbs: BreadcrumbType[] = [
@@ -44,20 +45,22 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         },
     ]
     const [wareHouse] = React.useState(warehouseId)
-    const [barcodes, setBarcodes] = React.useState<renderBarcodType[]>([])
     const [barcode, setBarcode] = React.useState('')
+    const [barcodes, setBarcodes] = React.useState<renderBarcodType[]>([])
     const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
         React.useState(false)
+
 
     // Get all vendors
     const { options: vendorOptions } = useCustomOptions({
         useEndPointHook: useGetVendorsQuery(''),
-        keyName: 'vendorCode',
+        keyName: 'companyName',
         value: '_id',
     })
 
-    // const { data, isLoading, isFetching } = useGetAllBarcodeQuery('')
     const [getBarcodeById] = useGetByBarcodeMutation()
+    const updateBarcodeStatus = useUpdateBarcodeFreezedStatus(); // Get the function from the hook
+
 
     // fetching the barcode
     const handleBarCode = (barcodeId: string) => {
@@ -65,13 +68,11 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             if (res?.data?.data) {
                 const barc = [...barcodes]
                 const isExist = barc.find(
-                    (ele) => ele.barcodeNumber === res?.data?.data.barcodeNumber
+                    (ele) => ele?.barcodeNumber === res?.data?.data.barcodeNumber
                 )
                 if (!isExist) {
                     barc.push(res?.data?.data)
                 }
-                setBarcodes([...barc])
-                setBarcode('')
             }
         })
     }
@@ -83,6 +84,31 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         }
         return false
     }
+
+    React.useEffect(() => {
+        if (barcodes?.length) {
+            const toBeFreezedBarcode = barcodes.map((ele) => ele?.barcodeNumber);
+            // freeze the barcode status when barcodes change
+            updateBarcodeStatus({
+                status: true,
+                barcodes: toBeFreezedBarcode
+            });
+            // console.log('Barcode status updated', toBeFreezedBarcode);
+        }
+
+        return () => {
+            if (barcodes?.length) {
+                const toBeUnfreezedBarcode = barcodes?.map((ele) => ele?.barcodeNumber);
+                // freeze the barcode status on unmount
+                updateBarcodeStatus({
+                    status: false,
+                    barcodes: toBeUnfreezedBarcode
+                });
+                // console.log('Inside Hook (unmount)', toBeUnfreezedBarcode);
+            }
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodes]);
 
     return (
         <div className="p-4 h-[calc(100vh-95px)] overflow-auto ">
@@ -106,6 +132,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
 
             <div className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat p-2">
                 <div className="grid grid-cols-4 gap-5 px-3">
+
                     <ATMSelect
                         name=""
                         isDisabled={true}
@@ -116,6 +143,18 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         options={wareHouseOption}
                         label="Warehouse"
                     />
+
+                    <ATMSelect
+                        name=""
+                        isDisabled={true}
+                        value={barcodes?.[0]?.vendorId || vendorId}
+                        options={vendorOptions}
+                        label="Vendor"
+                        onChange={(e) => {
+                            // setVendorId(e.target.value)
+                        }}
+                    />
+
                     <ATMSelect
                         name=""
                         value={packaging}
@@ -126,17 +165,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         }}
                         options={cartonBoxOption}
                         label="Packaging"
-                    />
-
-                    <ATMSelect
-                        required
-                        name=""
-                        value={vendorId}
-                        options={vendorOptions}
-                        label="Vendor"
-                        onChange={(e) => {
-                            setVendorId(e.target.value)
-                        }}
                     />
 
                     <ATMTextField
@@ -193,7 +221,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     productDetail={barcodes}
                     wareHouse={wareHouse as string}
                     packaging={packaging}
-                    vendorId={vendorId}
                     onClose={() => setIsOpenMoveToCartonDrawer(false)}
                 />
             )}

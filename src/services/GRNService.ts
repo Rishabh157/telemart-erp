@@ -1,5 +1,5 @@
 // |-- Internal Dependencies --|
-import { AddGRN, UpdateGRN } from 'src/models'
+import { AddGRN } from 'src/models'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
@@ -25,10 +25,19 @@ export const grnApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** Get By Id *****/
+        getGrnById: builder.query({
+            providesTags: ['GRN', 'PurchaseOrder'],
+            query: (id: string) => ({
+                url: `/grn/${id}`,
+                method: 'GET',
+            }),
+        }),
+
         //***** Update *****/
         updateGRN: builder.mutation({
             invalidatesTags: ['GRN'],
-            query: ({ body, id }: UpdateGRN) => ({
+            query: ({ body, id }) => ({
                 url: `/grn/${id}`,
                 method: 'PUT',
                 body,
@@ -56,6 +65,7 @@ export const grnApi = apiSlice.injectEndpoints({
 export const {
     useAddGRNMutation,
     useUpdateGRNMutation,
+    useGetGrnByIdQuery,
     useGetPaginationGRNQuery,
     useGetGRNByPOCodeQuery,
 } = grnApi

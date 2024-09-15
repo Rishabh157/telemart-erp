@@ -47,7 +47,7 @@ const ProductGroupDetailCard = ({
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
-            
+
             const allBarcodes = data?.data?.map((ele: any) => {
                 return {
                     barcodeNumber: ele?.barcodeNumber,
@@ -84,8 +84,8 @@ const ProductGroupDetailCard = ({
                                     //onBarcodeClick(barcode)
                                 }}
                                 className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer ${false
-                                        ? ' border-red-500'
-                                        : 'border-slate-200'
+                                    ? ' border-red-500'
+                                    : 'border-slate-200'
                                     }`}
                             >
                                 {/*Checkbox */}
@@ -116,6 +116,23 @@ ${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}`}
                                         <HiDotsVertical />
                                     </div> */}
                                 </div>
+
+                                <div className="flex justify-between">
+                                    <div className=" text-slate-500 mr-10 w-34">
+                                        Vendor Name :-
+                                    </div>
+                                    <div className="text-primary-main font-medium grow flex items-end">
+                                        {barcode?.vendorLabel}{' '}
+                                    </div>
+                                </div>
+                                <div className="flex justify-between">
+                                    <div className=" text-slate-500 mr-10 w-34">
+                                        Product group :-
+                                    </div>
+                                    <div className="text-primary-main font-medium grow flex items-end">
+                                        {barcode?.productGroupLabel}{' '}
+                                    </div>
+                                </div>
                                 <div className="flex justify-between">
                                     <div className=" text-slate-500 mr-10 w-34">
                                         Created Date :-
@@ -138,10 +155,10 @@ ${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}`}
                                 </div>
                                 <div className="flex justify-between">
                                     <div className=" text-slate-500 mr-10 w-34">
-                                        Product group :-
+                                        Barocde Numbers :-
                                     </div>
                                     <div className="text-primary-main font-medium grow flex items-end">
-                                        {barcode?.productGroupLabel}{' '}
+                                        {barcode?.barcodeLength}{' '}
                                     </div>
                                 </div>
                                 <ATMLoadingButton

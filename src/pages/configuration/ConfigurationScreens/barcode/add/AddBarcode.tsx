@@ -18,6 +18,8 @@ import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import moment from 'moment'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetVendorsQuery } from 'src/services/VendorServices'
 
 // |-- Types --|
 type Props = {
@@ -40,11 +42,19 @@ const breadcrumbs: BreadcrumbType[] = [
 const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
     const { values, setFieldValue } = formikProps
 
+    // Get all vendors
+    const { options: vendorOptions } = useCustomOptions({
+        useEndPointHook: useGetVendorsQuery(''),
+        keyName: 'companyName',
+        value: '_id',
+    })
+
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
     return (
         <MainLayout>
             <div className="p-4 flex flex-col gap-2  ">
@@ -83,6 +93,20 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                     {/* Form */}
                     <div className="grow py-8 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
+
+                            <ATMSelectSearchable
+                                required
+                                name="vendorId"
+                                value={values.vendorId}
+                                // selectLabel=''
+                                label="Vendor"
+                                onChange={(e) =>
+                                    handleSetFieldValue('vendorId', e)
+                                }
+                                options={vendorOptions}
+                            />
+
+
                             <ATMTextField
                                 required
                                 name="lotNumber"
@@ -145,14 +169,13 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 }}
                             />
 
-                            <div className='mt-4'>
+                            <div className='mt-5'>
                                 <ATMDatePicker
-                                    required
                                     label="Expiry Date"
                                     name="expiryDate"
-                                    // size="xs"
                                     value={values.expiryDate}
-                                    dateTimeFormat="DD/MM/YY"
+                                    placeholder='DD/MM/YYYY'
+                                    dateTimeFormat="DD/MM/YYYY"
                                     onChange={(e) => {
                                         setFieldValue(
                                             'expiryDate',

@@ -19,7 +19,7 @@ export type BarcodeListResponseType = {
     status: string
     companyId: string
     isDeleted: boolean
-    invoiceNumber : string
+    invoiceNumber: string
     isActive: boolean
     isFreezed: boolean
     expiryDate: boolean
@@ -35,15 +35,18 @@ export type ProductBarcodeGroupResponse = {
     companyId: string
     createdAt: string
     productGroupLabel: string
+    vendorLabel: string
+    barcodeLength: number
 }
 
 export type AddBarcode = {
+    vendorId: string
     productGroupId: string
     barcodeGroupNumber: string
     lotNumber: string
     invoiceNumber: string
     quantity: number
-    expiryDate: string
+    expiryDate: string | null
 }
 
 export type UpdateBarcode = {

@@ -49,7 +49,7 @@ const PurchaseOrderListingWrapper = () => {
         useEndPointHook: useGetPurchaseOrderQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['poCode', 'wareHouseId'],
+            params: ['poCode'],
             page: page,
             filterBy: [
                 {
@@ -121,20 +121,20 @@ const PurchaseOrderListingWrapper = () => {
                         {isAuthorized(
                             UserModuleNameTypes.ACTION_PURCHASE_ORDER_GENRATE_GRN
                         ) && (
-                            <button
-                                onClick={() => {
-                                    dispatch(setFilterValue([row?.poCode]))
-                                    navigate('/grn', {
-                                        state: {
-                                            poCode: row?.poCode,
-                                        },
-                                    })
-                                }}
-                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                                View GRN
-                            </button>
-                        )}
+                                <button
+                                    onClick={() => {
+                                        dispatch(setFilterValue([row?.poCode]))
+                                        navigate('/grn', {
+                                            state: {
+                                                poCode: row?.poCode,
+                                            },
+                                        })
+                                    }}
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                >
+                                    View GRN
+                                </button>
+                            )}
                     </>
                 </ActionPopup>
             ),
@@ -146,7 +146,7 @@ const PurchaseOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_PO_CODE,
             renderCell: (row: PurchaseOrderListResponse) => (
-                <span> {row.poCode} </span>
+                <span> {row?.poCode} </span>
             ),
         },
         {
@@ -220,9 +220,9 @@ const PurchaseOrderListingWrapper = () => {
                     <span>
                         {row?.purchaseOrder?.estReceivingDate
                             ? moment(
-                                  row?.purchaseOrder?.estReceivingDate,
-                                  'YYYY/MM/DD'
-                              ).format('DD-MM-YYYY')
+                                row?.purchaseOrder?.estReceivingDate,
+                                'YYYY/MM/DD'
+                            ).format('DD-MM-YYYY')
                             : '-'}
                     </span>
                 )
@@ -252,9 +252,9 @@ const PurchaseOrderListingWrapper = () => {
                                             next: (res) => {
                                                 return res.isConfirmed
                                                     ? handleComplete(
-                                                          row?._id,
-                                                          1
-                                                      )
+                                                        row?._id,
+                                                        1
+                                                    )
                                                     : false
                                             },
                                         })
@@ -280,9 +280,9 @@ const PurchaseOrderListingWrapper = () => {
                                             next: (res) => {
                                                 return res.isConfirmed
                                                     ? handleComplete(
-                                                          row?._id,
-                                                          2
-                                                      )
+                                                        row?._id,
+                                                        2
+                                                    )
                                                     : false
                                             },
                                         })

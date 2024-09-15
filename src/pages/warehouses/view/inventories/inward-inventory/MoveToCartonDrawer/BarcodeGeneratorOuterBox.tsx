@@ -88,10 +88,10 @@ function BarcodeGeneratorOuterBox() {
                         </div>
                     </div>
                     <div
-                        className={`flex flex-col  justify-center   gap-x-4 w-full shadow relative px-2 py-2  custom-border border-2 border-slate-700   `}
+                        className={`flex flex-col  justify-center gap-x-4 w-[33%] shadow relative px-2 py-2  custom-border border-2 border-slate-700   `}
                     >
                         <Barcode value={outerBoxCode} />
-                        <div className="w-full flex justify-center items-center p-0 tracking-[.90em] text-[0.90rem] ">
+                        <div className="w-full flex justify-center items-center p-0 tracking-[.70em] text-[0.90rem] ">
                             {outerBoxCode}
                         </div>
                     </div>
@@ -109,6 +109,7 @@ function BarcodeGeneratorOuterBox() {
                     </div>
                 ))}
             </div> */}
+            
             <Divider className="mt-3" />
             <div className="grid grid-cols-4 md:grid-cols-4 gap-x-3 gap-y-1 mt-5 ">
                 {barcodeValues?.map((barcode: {

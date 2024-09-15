@@ -39,7 +39,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
 
     const initialValues: FormInitialValues = {
         groupName: '',
-        productGroupCode : '',
+        productGroupCode: '',
         dealerSalePrice: 0,
         gst: 0,
         sgst: 0,
@@ -51,7 +51,9 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
     // Form Validation Schema
     const validationSchema = object({
         groupName: string().required('Group name is required'),
-        productGroupCode: string().required('Product group code is required'),
+        productGroupCode: string()
+            .required('Product group code is required')
+            .max(4, 'Product group code must be at most 4 characters long'),
         dealerSalePrice: number().required('Dealer sale price is required'),
         gst: number(),
         sgst: number(),
@@ -68,7 +70,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
         setTimeout(() => {
             addProductGroup({
                 dealerSalePrice: values.dealerSalePrice,
-                productGroupCode : values.productGroupCode,
+                productGroupCode: values.productGroupCode,
                 groupName: values.groupName,
                 gst: values.gst,
                 sgst: values.sgst,

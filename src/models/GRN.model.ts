@@ -26,8 +26,8 @@ export type AddGRN = {
 
 export type UpdateGRN = {
     body: {
-        itemCode: string
-        itemName: string
+        poCode: string
+        itemId: string
         defectiveQuantity: number
         goodQuantity: number
         receivedQuantity: number
