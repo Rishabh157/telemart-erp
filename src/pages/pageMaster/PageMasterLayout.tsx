@@ -29,13 +29,13 @@ const configurationNavigation: NavItemType[] = [
     {
         label: 'Sales',
         icon: MdViewTimeline,
-        path: '/caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
+        path: '/caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound&companyCode=SAP',
         name: UserModuleNameTypes.NAV_SALES_PAGE,
     },
     {
         label: 'Customer Care',
         icon: MdViewTimeline,
-        path: '/customer-care?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound',
+        path: '/customer-care?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound&companyCode=SAP',
         // https://out.onetelemart.com:445/calling/default.aspx?phone={{PHONENUMBER}}\&userlogin={{USERLOGIN}}\&postalcode=111\&dstphone={{dnis}}\&campaignId={{CAMPNAME}}
         name: UserModuleNameTypes.NAV_CUSTOMER_CARE_PAGE,
     },

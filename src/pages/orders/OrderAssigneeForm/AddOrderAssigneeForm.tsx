@@ -92,9 +92,7 @@ const AddOrderAssigneeForm = ({
                                     options={dropdownOptions.dealerOptions}
                                     label="Dealer"
                                     // menuPosition="absolute"
-                                    isDisabled={
-                                        values.wareHouseId !== '' ? true : false
-                                    }
+                                    isDisabled={values.wareHouseId !== '' ? true : false}
                                 />
                             </div>
 
@@ -108,9 +106,7 @@ const AddOrderAssigneeForm = ({
                                     }
                                     options={dropdownOptions.warehouseOptions}
                                     label="Warehouse (Company)"
-                                    isDisabled={
-                                        values.dealerId !== '' ? true : false
-                                    }
+                                    isDisabled={values.dealerId !== '' ? true : false}
                                 />
                             </div>
                         </div>

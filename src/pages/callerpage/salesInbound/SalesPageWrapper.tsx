@@ -140,6 +140,7 @@ const SalesPageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
+    const companyCode = queryParams.get('companyCode')
     // const dstphone = queryParams.get('dstphone')
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
@@ -208,8 +209,14 @@ const SalesPageWrapper = () => {
             // use object destructuring to remove the _id property
             AddCallerForm({
                 ...rest,
+                companyCode,
                 preffered_delivery_date: preffered_delivery_date || '',
             }).then((res: any) => {
+
+                console.log('res: ', res)
+
+
+
                 if ('data' in res) {
                     if (res?.data?.status) {
                         if (res?.data?.data?._id) {
@@ -230,7 +237,7 @@ const SalesPageWrapper = () => {
                         showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                 }
             })
         }

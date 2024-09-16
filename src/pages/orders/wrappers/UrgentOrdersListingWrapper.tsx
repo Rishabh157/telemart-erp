@@ -57,7 +57,7 @@ const UrgentOrdersListingWrapper = () => {
             //     value: orderStatusEnum.urgent,
             // },
             {
-                fieldName: 'isUrgent',
+                fieldName: 'isUrgentOrder',
                 value: true,
             },
             {

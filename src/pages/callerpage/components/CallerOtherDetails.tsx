@@ -177,7 +177,7 @@ const CallerOtherDetails = ({
                             <ATMCheckbox
                                 disabled={isDisabled?.isSocialMediaFacebook}
                                 extraClasses="mt-2"
-                                required
+                                // required
                                 label="Facebook"
                                 inputClasses="h-3 w-3"
                                 labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
@@ -211,7 +211,7 @@ const CallerOtherDetails = ({
                             <ATMCheckbox
                                 disabled={isDisabled?.isSocialMediaInstagram}
                                 extraClasses="mt-2"
-                                required
+                                // required
                                 label="Instagram"
                                 inputClasses="h-3 w-3"
                                 labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"

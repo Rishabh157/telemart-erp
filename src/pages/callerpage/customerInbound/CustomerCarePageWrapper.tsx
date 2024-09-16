@@ -121,6 +121,7 @@ const CustomerCarePageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
+    const companyCode = queryParams.get('companyCode')
 
     //product data
     const {
@@ -512,6 +513,7 @@ const CustomerCarePageWrapper = () => {
             // use object destructuring to remove the _id property
             AddCallerForm({
                 ...rest,
+                companyCode,
                 preffered_delivery_date: preffered_delivery_date || '',
             }).then((res: any) => {
                 if ('data' in res) {

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:AddOrderAssigneeFormWrapper.tsx
-// Type: Add Component
-// Last Updated: FEB 07, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 
@@ -124,7 +117,7 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder, handleClose }: Props) => {
                         showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                 }
                 setApiStatus(false)
             })

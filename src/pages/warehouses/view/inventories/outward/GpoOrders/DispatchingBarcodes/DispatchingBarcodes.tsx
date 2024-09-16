@@ -129,8 +129,8 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                 // set the barcode if barcode is founded , isAlredayExist is false and length is equal to schemeQuantity
                 barcode:
                     barcodeObj &&
-                    isAlredyExist === false &&
-                    totalQuantityOfBarocde !== ele?.barcode?.length
+                        isAlredyExist === false &&
+                        totalQuantityOfBarocde !== ele?.barcode?.length
                         ? [...ele?.barcode, barcodeObj]
                         : [...ele?.barcode],
             }
@@ -172,6 +172,14 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
             ],
         })
             .then((res: any) => {
+
+
+                if ('error' in res) {
+                    showToast("error", res?.error?.data?.message)
+                    return
+                }
+
+                console.log('resres', res)
                 if (res?.data?.status) {
                     dispatch(setFieldCustomized(false))
                     setOrderNumber(null)
@@ -183,8 +191,7 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                 } else {
                     showToast('error', res?.data?.message)
                 }
-            })
-            .catch((err: any) => {
+            }).catch((err: any) => {
                 console.error(err)
             })
     }
@@ -333,7 +340,7 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                                                 }
                                                 productGroupLabel={capitalizeFirstLetter(
                                                     barcode?.productGroupLabel ||
-                                                        ''
+                                                    ''
                                                 )}
                                                 handleRemoveBarcode={() => {
                                                     handleRemoveBarcode(

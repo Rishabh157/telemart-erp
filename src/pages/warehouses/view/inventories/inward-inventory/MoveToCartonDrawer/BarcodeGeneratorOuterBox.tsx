@@ -91,7 +91,7 @@ function BarcodeGeneratorOuterBox() {
                         className={`flex flex-col  justify-center gap-x-4 w-[33%] shadow relative px-2 py-2  custom-border border-2 border-slate-700   `}
                     >
                         <Barcode value={outerBoxCode} />
-                        <div className="w-full flex justify-center items-center p-0 tracking-[.70em] text-[0.90rem] ">
+                        <div className="w-full flex justify-center items-center p-0 tracking-[.40em] text-[0.90rem] ">
                             {outerBoxCode}
                         </div>
                     </div>
@@ -124,7 +124,7 @@ function BarcodeGeneratorOuterBox() {
                             {barcode?.upperBarcodeNumber}
                         </p>
                         <Barcode value={barcode?.barcodeNumber} />
-                        <div className="w-full flex justify-center p-0 tracking-[.60em] text-[0.60rem] ">
+                        <div className="w-full flex justify-center p-0 tracking-[.30em] text-[0.60rem] ">
                             {barcode?.barcodeNumber}
                         </div>
                     </div>
