@@ -40,6 +40,9 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
+
+
+    const [vendorId, setVendorId] = React.useState<string>('');
     const { values, setFieldValue } = formikProps
 
     // Get all vendors
@@ -50,6 +53,7 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
     })
 
     const dispatch = useDispatch()
+
     const handleSetFieldValue = (name: string, value: string) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
@@ -97,19 +101,22 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                             <ATMSelectSearchable
                                 required
                                 name="vendorId"
-                                value={values.vendorId}
+                                value={vendorId}
                                 // selectLabel=''
                                 label="Vendor"
-                                onChange={(e) =>
-                                    handleSetFieldValue('vendorId', e)
-                                }
+                                isValueWithLable
                                 options={vendorOptions}
+                                onChange={(e) => {
+                                    setVendorId(e?.value)
+                                    handleSetFieldValue('vendorId', e?.label)
+                                }}
                             />
 
 
                             <ATMTextField
                                 required
                                 name="lotNumber"
+                                maxLength={6}
                                 value={values.lotNumber}
                                 label="Batch Number"
                                 placeholder="Batch Number"

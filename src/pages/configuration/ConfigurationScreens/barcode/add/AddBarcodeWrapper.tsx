@@ -55,7 +55,9 @@ const AddBarcodeWrapper = (props: Props) => {
         quantity: number()
             .moreThan(0, 'Quantity must be greater than 0')
             .required('Quantity is required'),
-        lotNumber: string().required('Batch number is required'),
+        lotNumber: string()
+            .max(6, 'Batch number should be less then 4 digit')
+            .required('Batch number is required'),
         invoiceNumber: string().required('Invoice number is required'),
         expiryDate: string().nullable().notRequired(),
     })
@@ -68,7 +70,7 @@ const AddBarcodeWrapper = (props: Props) => {
         const uniqueGrouId = uuidv4()
 
         await addBarcode({
-            vendorId: values.vendorId,
+            vendorLabel: values.vendorId, // going here vendor label
             productGroupId: values.productGroup,
             barcodeGroupNumber: uniqueGrouId,
             quantity: Number(values?.quantity),

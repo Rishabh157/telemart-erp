@@ -42,6 +42,8 @@ export type FormInitialValues = {
         state: string
         district: string
         pincode: string
+        gstNumber: string
+        gstCertificate: string
     }
     billing_address: {
         phone: string
@@ -88,6 +90,11 @@ const steps = [
                 country: string().required('Please select a country'),
                 state: string().required('Please select a state'),
                 district: string().required('Please select a district'),
+                gstNumber: string().matches(
+                    validationofGst,
+                    'gst number must be 15 digit'
+                ),
+                gstCertificate: string(),
                 pincode: string().required('Please select a pincode'),
             }),
             billing_address: object().shape({
@@ -163,6 +170,8 @@ const EditWarehouseWrapper = () => {
         email: selectedItem?.email || '',
         isDefault: selectedItem?.isDefault || false,
         regd_address: {
+            gstNumber: selectedItem?.registrationAddress?.gstNumber || '',
+            gstCertificate: selectedItem?.registrationAddress?.gstCertificate || '',
             phone: selectedItem?.registrationAddress?.phone || '',
             address: selectedItem?.registrationAddress?.address || '',
             country: selectedItem?.registrationAddress?.countryId || '',
@@ -208,6 +217,9 @@ const EditWarehouseWrapper = () => {
                         email: values.email,
                         isDefault: values.isDefault,
                         registrationAddress: {
+                            gstNumber: values.regd_address.gstNumber,
+                            gstCertificate:
+                                values.regd_address.gstCertificate,
                             phone: values.regd_address.phone,
                             address: values.regd_address.address,
                             countryId: values.regd_address.country,

@@ -283,6 +283,7 @@ const OutwardRTVTabsListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                vendorLabel,
                 isUsedFresh,
                 upperBarcodeNumber,
                 invoiceNumber,

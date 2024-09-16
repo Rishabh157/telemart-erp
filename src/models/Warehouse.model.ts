@@ -54,6 +54,8 @@ export type AddWarehouse = {
     email: string
     isDefault: boolean
     registrationAddress: {
+        gstNumber: string
+        gstCertificate: string
         phone: string
         address: string
         countryId: string
@@ -89,6 +91,8 @@ export type UpdateWarehouse = {
         email: string
         isDefault: boolean
         registrationAddress: {
+            gstNumber: string
+            gstCertificate: string
             phone: string
             address: string
             countryId: string

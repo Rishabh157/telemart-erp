@@ -288,6 +288,7 @@ const OutwardSampleTabsListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                vendorLabel,
                 isUsedFresh,
                 upperBarcodeNumber,
                 invoiceNumber,

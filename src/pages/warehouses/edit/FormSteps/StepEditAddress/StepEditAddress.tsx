@@ -317,8 +317,17 @@ const StepEditAddress = ({
                                                                 phone,
                                                                 pincode,
                                                                 state,
-                                                            } =
-                                                                values.regd_address
+                                                                gstNumber,
+                                                                gstCertificate,
+                                                            } = values.regd_address
+                                                            setFieldValue(
+                                                                'billing_address.gstNumber',
+                                                                gstNumber
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.gstCertificate',
+                                                                gstCertificate
+                                                            )
                                                             setFieldValue(
                                                                 'billing_address.address',
                                                                 address
@@ -344,6 +353,14 @@ const StepEditAddress = ({
                                                                 state
                                                             )
                                                         } else {
+                                                            setFieldValue(
+                                                                'billing_address.gstNumber',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.gstCertificate',
+                                                                ''
+                                                            )
                                                             setFieldValue(
                                                                 'billing_address.address',
                                                                 ''

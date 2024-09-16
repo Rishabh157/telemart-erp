@@ -22,6 +22,8 @@ type Props = {
     productDetail: any[]
     wareHouse: string
     packaging: string
+    vendorId: string
+    vendorLabel: string
 }
 
 const MoveToCartonDrawer = ({
@@ -29,6 +31,8 @@ const MoveToCartonDrawer = ({
     productDetail,
     wareHouse,
     packaging,
+    vendorId,
+    vendorLabel,
 }: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
@@ -50,8 +54,7 @@ const MoveToCartonDrawer = ({
         const barcodeProduct = productDetail.map((ele) => {
             const {
                 // barcodeNumber,
-                vendorId,
-                vendorLabel,
+                // vendorLabel,
                 isUsedFresh,
                 upperBarcodeNumber,
                 productGroupLabel,
@@ -67,6 +70,8 @@ const MoveToCartonDrawer = ({
 
             return {
                 ...rest,
+                vendorId,
+                vendorLabel,
                 cartonBoxId: packaging,
                 wareHouseId: wareHouse,
                 companyId: userData?.companyId,
@@ -104,6 +109,7 @@ const MoveToCartonDrawer = ({
             setApiStatus(false)
         })
     }
+
     return (
         <ATMDrawer open={true} onClose={onClose}>
             <div className="w-[300px] p-3">

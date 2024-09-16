@@ -298,6 +298,7 @@ const InwardWarehouseTabsListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                vendorLabel,
                 isUsedFresh,
                 upperBarcodeNumber,
                 invoiceNumber,

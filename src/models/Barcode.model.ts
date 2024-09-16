@@ -3,6 +3,7 @@
 export type BarcodeListResponseType = {
     _id: string
     productGroupId: string
+    vendorLabel : string
     upperBarcodeNumber: string
     isUsedFresh: boolean
     barcodeNumber: string
@@ -40,7 +41,7 @@ export type ProductBarcodeGroupResponse = {
 }
 
 export type AddBarcode = {
-    vendorId: string
+    vendorLabel: string
     productGroupId: string
     barcodeGroupNumber: string
     lotNumber: string

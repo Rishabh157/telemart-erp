@@ -491,6 +491,7 @@ const InwardDealerTabsListingWrapper = () => {
     const handleDispatchBarcode = () => {
         const filterValue = barcodeList?.flat(1)?.map((ele: any) => {
             const {
+                vendorLabel,
                 isUsedFresh,
                 upperBarcodeNumber,
                 invoiceNumber,

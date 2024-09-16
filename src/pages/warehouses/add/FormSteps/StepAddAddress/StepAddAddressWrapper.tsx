@@ -46,6 +46,19 @@ const formFields: {
         sectionName: 'Registration Address',
         fields: [
             {
+                name: 'regd_address.gstNumber',
+                label: 'GST Number',
+                placeholder: 'GST Number',
+                required : false
+            },
+            {
+                name: 'regd_address.gstCertificate',
+                label: 'GST Certificate',
+                placeholder: 'GST Certificate',
+                type: 'file-picker',
+                required : false
+            },
+            {
                 name: 'regd_address.phone',
                 label: 'Phone',
                 placeholder: 'Phone',

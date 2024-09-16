@@ -49,11 +49,10 @@ const AddSaleOrder = ({
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: `${params.dealerId ? ' Dealers Sale Order' : 'Sale Order'}`,
-            path: `${
-                params.dealerId
-                    ? `/dealers/${params.dealerId}/sale-order`
-                    : '/sale-order'
-            }`,
+            path: `${params.dealerId
+                ? `/dealers/${params.dealerId}/sale-order`
+                : '/sale-order'
+                }`,
         },
         {
             label: 'Add Sale Order',
@@ -123,9 +122,8 @@ const AddSaleOrder = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -138,6 +136,7 @@ const AddSaleOrder = ({
                             {/* Dealer */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
+                                    required
                                     name="dealerId"
                                     value={values.dealerId}
                                     onChange={(e) => {
@@ -150,6 +149,7 @@ const AddSaleOrder = ({
                             {/* Dealer Warehouse */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
+                                    required
                                     name="dealerWareHouseId"
                                     value={values.dealerWareHouseId}
                                     onChange={(e) =>
@@ -165,6 +165,7 @@ const AddSaleOrder = ({
                             {/* Warehouse */}
                             <div className="-mt-2">
                                 <ATMSelectSearchable
+                                    required
                                     name="companyWareHouseId"
                                     value={values.companyWareHouseId}
                                     onChange={(e) =>
@@ -177,8 +178,9 @@ const AddSaleOrder = ({
                                     label="Warehouse"
                                 />
                             </div>
-                           
+
                             <ATMDatePicker
+                                required
                                 name="expectedDeliveryDate"
                                 value={values.expectedDeliveryDate}
                                 label="Expected Delivery Date"
@@ -218,6 +220,7 @@ const AddSaleOrder = ({
                                                             {/* Product Name */}
                                                             <div className="flex-1 ">
                                                                 <ATMSelectSearchable
+                                                                    required
                                                                     name={`productSalesOrder[${index}].productGroupId`}
                                                                     value={
                                                                         productGroupId
@@ -264,6 +267,7 @@ const AddSaleOrder = ({
                                                             {/* Rate */}
                                                             <div className="flex-1">
                                                                 <ATMTextField
+                                                                    required
                                                                     type="number"
                                                                     disabled={
                                                                         true
@@ -274,7 +278,7 @@ const AddSaleOrder = ({
                                                                     placeholder="Rate"
                                                                     onChange={(
                                                                         e
-                                                                    ) => {}}
+                                                                    ) => { }}
                                                                     className="mt-0 rounded"
                                                                 />
                                                             </div>
@@ -282,12 +286,13 @@ const AddSaleOrder = ({
                                                             {/* Quantity */}
                                                             <div className="flex-1">
                                                                 <ATMTextField
+                                                                    required
                                                                     type="number"
                                                                     min={0}
                                                                     name={`productSalesOrder[${index}].quantity`}
                                                                     value={
                                                                         quantity ===
-                                                                        0
+                                                                            0
                                                                             ? ''
                                                                             : quantity?.toString()
                                                                     }
@@ -312,20 +317,20 @@ const AddSaleOrder = ({
                                                                 .productSalesOrder
                                                                 ?.length >
                                                                 1 && (
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                index
-                                                                            )
-                                                                        }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    index
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                         </div>
                                                     )
                                                 }

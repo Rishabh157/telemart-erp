@@ -303,6 +303,7 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
             if (!ele) return ele
 
             const {
+                vendorLabel,
                 upperBarcodeNumber,
                 isUsedFresh,
                 invoiceNumber,

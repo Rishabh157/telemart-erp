@@ -298,6 +298,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
 
             const {
                 // barcodeNumber,
+                vendorLabel,
                 isUsedFresh,
                 upperBarcodeNumber,
                 invoiceNumber,

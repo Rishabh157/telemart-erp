@@ -109,9 +109,8 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-9 px-7 ${
-                            index !== formFields?.length - 1 && 'border-b'
-                        }  border-slate-300`}
+                        className={`py-9 px-7 ${index !== formFields?.length - 1 && 'border-b'
+                            }  border-slate-300`}
                     >
                         <div className="pb-2 text-lg font-medium text-primary-main">
                             {sectionName}
@@ -136,7 +135,7 @@ const StepAddAddress = ({
                                                 maxLength={
                                                     name ===
                                                         'regd_address.phone' ||
-                                                    name ===
+                                                        name ===
                                                         'billing_address.phone'
                                                         ? 10
                                                         : 100
@@ -145,16 +144,16 @@ const StepAddAddress = ({
                                                 value={
                                                     name.includes('.')
                                                         ? values[
-                                                              name.split('.')[0]
-                                                          ][name.split('.')[1]]
+                                                        name.split('.')[0]
+                                                        ][name.split('.')[1]]
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
                                                     if (
                                                         name ===
-                                                            'regd_address.phone' ||
+                                                        'regd_address.phone' ||
                                                         name ===
-                                                            'billing_address.phone'
+                                                        'billing_address.phone'
                                                     ) {
                                                         const inputValue =
                                                             e.target.value
@@ -205,7 +204,7 @@ const StepAddAddress = ({
                                                     disabled={false}
                                                 />
                                                 {loaderState === name &&
-                                                imageApiStatus ? (
+                                                    imageApiStatus ? (
                                                     <div className="mt-3">
                                                         <CircularProgress
                                                             size={18}
@@ -217,10 +216,9 @@ const StepAddAddress = ({
                                     case 'select':
                                         return (
                                             <div
-                                                className={`"-mt-2" ${
-                                                    label === 'Pincode' &&
+                                                className={`"-mt-2" ${label === 'Pincode' &&
                                                     'flex gap-x-4'
-                                                }`}
+                                                    }`}
                                                 key={name}
                                             >
                                                 <ATMSelectSearchable
@@ -230,14 +228,14 @@ const StepAddAddress = ({
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     selectLabel={label}
@@ -246,8 +244,8 @@ const StepAddAddress = ({
                                                     }}
                                                     options={
                                                         dropdownOptions[
-                                                            field.optionAccessKey ||
-                                                                'counrtyOptions'
+                                                        field.optionAccessKey ||
+                                                        'counrtyOptions'
                                                         ]
                                                     }
                                                     isSubmitting={isSubmitting}
@@ -279,7 +277,7 @@ const StepAddAddress = ({
                                                             fullWidth={false}
                                                             isOpen={
                                                                 isOpenSearchPincode[
-                                                                    name
+                                                                name
                                                                 ]
                                                             }
                                                             handleClose={() =>
@@ -303,13 +301,13 @@ const StepAddAddress = ({
                                                                         name="pincodeSearch"
                                                                         value={
                                                                             name ===
-                                                                            'billing_address.pincode'
+                                                                                'billing_address.pincode'
                                                                                 ? values[
-                                                                                      'billing_address.pincodeSearch'
-                                                                                  ]
+                                                                                'billing_address.pincodeSearch'
+                                                                                ]
                                                                                 : values[
-                                                                                      'regd_address.pincodeSearch'
-                                                                                  ]
+                                                                                'regd_address.pincodeSearch'
+                                                                                ]
                                                                         }
                                                                         onChange={(
                                                                             newValue
@@ -349,8 +347,18 @@ const StepAddAddress = ({
                                                                 phone,
                                                                 pincode,
                                                                 state,
-                                                            } =
-                                                                values.regd_address
+                                                                gstNumber,
+                                                                gstCertificate
+                                                            } = values.regd_address
+                                                            
+                                                            setFieldValue(
+                                                                'billing_address.gstNumber',
+                                                                gstNumber
+                                                            )
+                                                            setFieldValue(
+                                                                'billing_address.gstCertificate',
+                                                                gstCertificate
+                                                            )
                                                             setFieldValue(
                                                                 'billing_address.address',
                                                                 address
@@ -419,14 +427,14 @@ const StepAddAddress = ({
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {

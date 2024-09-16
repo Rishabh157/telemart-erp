@@ -21,7 +21,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
-import { orderStatusEnum } from 'src/utils/constants/enums'
+// import { orderStatusEnum } from 'src/utils/constants/enums'
 
 const UrgentOrdersListingWrapper = () => {
     const navigate = useNavigate()
@@ -52,9 +52,13 @@ const UrgentOrdersListingWrapper = () => {
                 fieldName: 'mobileNo',
                 value: [mobileNumberSearchValue],
             },
+            // {
+            //     fieldName: 'status',
+            //     value: orderStatusEnum.urgent,
+            // },
             {
-                fieldName: 'status',
-                value: orderStatusEnum.urgent,
+                fieldName: 'isUrgent',
+                value: true,
             },
             {
                 fieldName: 'approved',
@@ -109,7 +113,7 @@ const UrgentOrdersListingWrapper = () => {
                     handleViewActionButton={() => {
                         navigate(`/orders/view/${row?._id}`)
                     }}
-                    handleOnAction={() => {}}
+                    handleOnAction={() => { }}
                 />
             ),
         },
@@ -198,9 +202,9 @@ const UrgentOrdersListingWrapper = () => {
                                     if (res.isConfirmed || res?.isDenied) {
                                         return res.isConfirmed
                                             ? handleOrderApproval(
-                                                  row?._id,
-                                                  res?.value
-                                              )
+                                                row?._id,
+                                                res?.value
+                                            )
                                             : null
                                     }
                                 }}
@@ -253,7 +257,7 @@ const UrgentOrdersListingWrapper = () => {
                             row?.firstCallApproval ? (
                                 <p className="text-green-500"> Approved </p>
                             ) : row?.firstCallState ===
-                              FirstCallApprovalStatus.CANCEL ? (
+                                FirstCallApprovalStatus.CANCEL ? (
                                 <p className="text-red-500"> Cancelled </p>
                             ) : (
                                 <p className="text-orange-500"> Pending </p>
@@ -504,8 +508,8 @@ const UrgentOrdersListingWrapper = () => {
                     <span>
                         {row?.preffered_delivery_date
                             ? moment(row?.preffered_delivery_date).format(
-                                  'DD-MM-YYYY'
-                              )
+                                'DD-MM-YYYY'
+                            )
                             : '-'}
                     </span>
                 )

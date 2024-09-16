@@ -30,10 +30,12 @@ export type renderBarcodType = {
     vendorId: string
     isUsed: boolean
 }
+
 const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [packaging, setPackaging] = React.useState('')
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [vendorId, setVendorId] = React.useState('')
+    const [vendorLabel, setVendorLabel] = React.useState('')
     const { id: warehouseId } = useParams()
     const breadcrumbs: BreadcrumbType[] = [
         {
@@ -59,6 +61,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     })
 
     const [getBarcodeById] = useGetByBarcodeMutation()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const updateBarcodeStatus = useUpdateBarcodeFreezedStatus(); // Get the function from the hook
 
 
@@ -68,11 +71,18 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
             if (res?.data?.data) {
                 const barc = [...barcodes]
                 const isExist = barc.find(
-                    (ele) => ele?.barcodeNumber === res?.data?.data.barcodeNumber
+                    (ele) => ele?.barcodeNumber === res?.data?.data?.barcodeNumber
                 )
                 if (!isExist) {
                     barc.push(res?.data?.data)
                 }
+                // updateBarcodeStatus({
+                //     status: true,
+                //     barcodes: [barcodeId]
+                // });
+
+                setBarcodes([...barc])
+                setBarcode('')
             }
         })
     }
@@ -85,30 +95,30 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         return false
     }
 
-    React.useEffect(() => {
-        if (barcodes?.length) {
-            const toBeFreezedBarcode = barcodes.map((ele) => ele?.barcodeNumber);
-            // freeze the barcode status when barcodes change
-            updateBarcodeStatus({
-                status: true,
-                barcodes: toBeFreezedBarcode
-            });
-            // console.log('Barcode status updated', toBeFreezedBarcode);
-        }
+    // React.useEffect(() => {
+    //     // if (barcodes?.length) {
+    //     //     const toBeFreezedBarcode = barcodes.map((ele) => ele?.barcodeNumber);
+    //     //     // freeze the barcode status when barcodes change
+    //     //     updateBarcodeStatus({
+    //     //         status: true,
+    //     //         barcodes: toBeFreezedBarcode
+    //     //     });
+    //     console.log('Barcode status updated');
+    //     // }
 
-        return () => {
-            if (barcodes?.length) {
-                const toBeUnfreezedBarcode = barcodes?.map((ele) => ele?.barcodeNumber);
-                // freeze the barcode status on unmount
-                updateBarcodeStatus({
-                    status: false,
-                    barcodes: toBeUnfreezedBarcode
-                });
-                // console.log('Inside Hook (unmount)', toBeUnfreezedBarcode);
-            }
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [barcodes]);
+    //     return () => {
+    //         if (barcodes?.length) {
+    //             const toBeUnfreezedBarcode = barcodes?.map((ele) => ele?.barcodeNumber);
+    //             // freeze the barcode status on unmount
+    //             updateBarcodeStatus({
+    //                 status: false,
+    //                 barcodes: toBeUnfreezedBarcode
+    //             });
+    //             console.log('Inside Hook (unmount)', toBeUnfreezedBarcode);
+    //         }
+    //     };
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
     return (
         <div className="p-4 h-[calc(100vh-95px)] overflow-auto ">
@@ -146,12 +156,14 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
 
                     <ATMSelect
                         name=""
-                        isDisabled={true}
                         value={barcodes?.[0]?.vendorId || vendorId}
                         options={vendorOptions}
                         label="Vendor"
                         onChange={(e) => {
-                            // setVendorId(e.target.value)
+                            setVendorId(e?.target?.value)
+                            // getting vendor label
+                            const vendorLabel = vendorOptions?.find((ele) => ele?.value === e?.target?.value)
+                            setVendorLabel(vendorLabel?.label || '')
                         }}
                     />
 
@@ -221,6 +233,8 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     productDetail={barcodes}
                     wareHouse={wareHouse as string}
                     packaging={packaging}
+                    vendorId={vendorId}
+                    vendorLabel={vendorLabel}
                     onClose={() => setIsOpenMoveToCartonDrawer(false)}
                 />
             )}

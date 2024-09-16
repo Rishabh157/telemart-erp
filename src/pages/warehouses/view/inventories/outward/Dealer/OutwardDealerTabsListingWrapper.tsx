@@ -442,6 +442,7 @@ const OutwardDealerTabsListingWrapper = () => {
 
                 const {
                     // barcodeNumber,
+                    vendorLabel,
                     isUsedFresh,
                     upperBarcodeNumber,
                     invoiceNumber,
