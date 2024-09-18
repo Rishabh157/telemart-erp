@@ -21,7 +21,7 @@ export type AddGRN = {
     defectiveQuantity: number
     goodQuantity: number
     receivedQuantity: number
-    companyId: string
+    // companyId: string
 }
 
 export type UpdateGRN = {
@@ -31,7 +31,7 @@ export type UpdateGRN = {
         defectiveQuantity: number
         goodQuantity: number
         receivedQuantity: number
-        companyId: string
+        // companyId: string
     }
     id: string
 }

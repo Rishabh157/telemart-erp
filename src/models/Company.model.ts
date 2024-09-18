@@ -29,6 +29,7 @@ export type AddCompany = {
     gstNo: string
     address: string
     phoneNo: string
+    companyLogo: string
     bankDetails: bankDetails[]
 }
 export type SelectedCompany = {
@@ -38,6 +39,7 @@ export type SelectedCompany = {
     gstNo: string
     address: string
     phoneNo: string
+    companyLogo: string
     bankDetails: bankDetails[]
 }
 
@@ -49,6 +51,8 @@ export type UpdateCompany = {
         address: string
         gstNo: string
         phoneNo: string
+        companyLogo: string
+
         bankDetails: bankDetails[]
     }
     id: string
