@@ -1,19 +1,16 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
-import { useLocation } from 'react-router-dom'
-// import { MdExpandMore } from 'react-icons/md'
-// import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+
 
 // |-- Internal Dependencies --|
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import { FormInitialValues } from './EditGRNWrapper'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
+import { FormInitialValues } from './EditGRNWrapper'
 
 // |-- Types --|
 type Props = {
@@ -28,26 +25,24 @@ const breadcrumbs: BreadcrumbType[] = [
         path: '/grn',
     },
     {
-        label: 'Add GRN',
+        label: 'Edit GRN',
     },
 ]
 
 const EditGRN = ({ formikProps, apiStatus }: Props) => {
-    const { state } = useLocation()
-    const { poCode, itemName, quantity, receivedQuantity } = state || {}
     const { values, setFieldValue } = formikProps
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div >
+                <div>
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
                 {/* Page Heading */}
                 <div className="pt-1">
-                    <ATMPageHeading> Add GRN </ATMPageHeading>
+                    <ATMPageHeading> Edit GRN </ATMPageHeading>
                 </div>
 
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
@@ -61,7 +56,9 @@ const EditGRN = ({ formikProps, apiStatus }: Props) => {
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''}`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
+                                    true ? 'disabled:opacity-25' : ''
+                                }`}
                                 onClick={() => {
                                     formikProps.handleSubmit()
                                 }}
@@ -77,33 +74,32 @@ const EditGRN = ({ formikProps, apiStatus }: Props) => {
                                 <div className="text-[18px] font-medium text-primary-main">
                                     PO Code :
                                     <span className=" text-black px-2">
-                                        {poCode ? poCode : 'sd'}
+                                        {values?.poCode || ''}
                                     </span>
                                 </div>
                                 <div>|</div>
                                 <div className="text-[18px] font-medium text-primary-main">
                                     Item Name :
                                     <span className=" text-black px-2">
-                                        {itemName}
+                                        {values?.itemName || ''}
                                     </span>
                                 </div>
                             </div>
 
-                            <div className="flex gap-5">
+                            {/* <div className="flex gap-5">
                                 <div className="text-[18px] font-medium text-primary-main">
                                     Requested Qnty :
                                     <span className=" text-black px-2">
-                                        {quantity}
+                                        {values?.receivedQuantity || ''}
                                     </span>
                                 </div>
                                 <div>|</div>
                                 <div className="text-[18px] font-medium text-primary-main">
                                     Total Received Qnty:
                                     <span className=" text-black px-2">
-                                        {receivedQuantity | 0}
                                     </span>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* <div className="text-[18px] font-medium text-primary-main">
                                 Req Qnty : {quantity} | Received Qnty:

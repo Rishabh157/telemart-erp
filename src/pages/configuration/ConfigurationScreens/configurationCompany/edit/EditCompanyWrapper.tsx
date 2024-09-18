@@ -35,6 +35,8 @@ export type FormInitialValues = {
     gstNo: string
     address: string
     phoneNo: string
+    companyLogo:string
+
     bankDetails: {
         bankName: string
         branchName: string
@@ -69,18 +71,24 @@ const steps = [
         validationSchema: object({
             bankDetails: array().of(
                 object().shape({
-                    bankName: string().required('Bank name is required'),
-                    branchName: string().required('Branch name is required'),
-                    accountHolderName: string().required(
-                        'Account holder name is required'
-                    ),
-                    accountNumber: string().required(
-                        'Account number is required'
-                    ),
-                    ifscNumber: string().required('IFSC number is required'),
-                    accountType: string().required(
-                        'Please select account type'
-                    ),
+                    bankName: string(),
+                    // required('Bank name is required'),
+                    branchName: string(),
+                    // .required('Branch name is required'),
+                    accountHolderName: string(),
+                    // //.required(
+                    //     'Account holder name is required'
+                    // ),
+                    accountNumber: string(),
+                    // .required(
+                    //     'Account number is required'
+                    // ),
+                    ifscNumber: string(),
+                    // .required('IFSC number is required'),
+                    accountType: string(),
+                    // .required(
+                    //     'Please select account type'
+                    // ),
                 })
             ),
         }),
@@ -121,6 +129,7 @@ const EditCompanyWrapper = () => {
         companyName: selectedCompany?.companyName || '',
         panNumber: selectedCompany?.panNumber || '',
         websiteUrl: selectedCompany?.websiteUrl || '',
+        companyLogo:selectedCompany?.companyLogo || '',
         gstNo: selectedCompany?.gstNo || '',
         address: selectedCompany?.address || '',
         phoneNo: selectedCompany?.phoneNo || '',
@@ -151,6 +160,7 @@ const EditCompanyWrapper = () => {
                         websiteUrl: values.websiteUrl,
                         gstNo: values.gstNo,
                         address: values.address,
+                        companyLogo: values.companyLogo,
                         phoneNo: values.phoneNo,
                         bankDetails: bankDetail,
                     },

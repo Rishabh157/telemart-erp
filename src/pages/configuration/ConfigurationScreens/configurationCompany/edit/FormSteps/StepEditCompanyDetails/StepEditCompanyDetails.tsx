@@ -13,7 +13,10 @@ import { FormInitialValues } from '../../EditCompanyWrapper'
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
-
+import { CircularProgress } from '@mui/material'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 // |-- Types --|
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -30,6 +33,35 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
+    const [imageApiStatus, setImageApiStatus] = React.useState<boolean>(false)
+    const [uploadFile] = useAddFileUrlMutation()
+
+    const handleFileUpload = async (file: File, setFieldValue: any) => {
+        let fileUrl = ''
+        let formData = new FormData()
+
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        try {
+            // call the file manager api
+            const res = await uploadFile(formData)
+            if ('data' in res) {
+                setImageApiStatus(false)
+                fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue('companyLogo', fileUrl)
+                return fileUrl
+            }
+        } catch (error) {
+            console.error('Error uploading file:', error)
+            // Handle error here if needed
+        }
+    }
     return (
         <div className="py-9 px-7">
             <div className="grid grid-cols-3 gap-4 gap-y-5">
@@ -103,7 +135,8 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                     className="shadow bg-white rounded"
                     isSubmitting={isSubmitting}
                 />
-
+  </div>
+  <div className="grid grid-cols-3 gap-4 gap-y-5">
                 <div className='mt-2'>
                     <ATMTextArea
                         required
@@ -117,8 +150,24 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                         onChange={(newValue) => setFieldValue('address', newValue)}
                     />
                 </div>
-
-            </div>
+                <div className="w-ful mt-5 ">
+                    <ATMFilePickerWrapper
+                        name="companyLogo"
+                        label="logo"
+                        placeholder={'Select File'}
+                        selectedFile={values.companyLogo}
+                        onSelect={(newFile: any) => {
+                            handleFileUpload(newFile, setFieldValue)
+                        }}
+                        // isSubmitting={false}
+                    />
+                    {imageApiStatus ? (
+                        <div className="mt-3">
+                            <CircularProgress size={18} />
+                        </div>
+                    ) : null}
+                </div>
+                </div>
         </div>
     )
 }
