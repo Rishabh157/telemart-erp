@@ -212,11 +212,6 @@ const SalesPageWrapper = () => {
                 companyCode,
                 preffered_delivery_date: preffered_delivery_date || '',
             }).then((res: any) => {
-
-                console.log('res: ', res)
-
-
-
                 if ('data' in res) {
                     if (res?.data?.status) {
                         if (res?.data?.data?._id) {

@@ -36,6 +36,7 @@ import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 import { SalesOrderFormInitialValuesFilterWithLabel } from './filter/SalesOrderFilterWrapper'
 
 const SaleOrderListingWrapper = () => {
+
     useUnmountCleanup()
     const salesOrderState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -344,7 +345,7 @@ const SaleOrderListingWrapper = () => {
             field: 'totalInvoiceAmount',
             headerName: 'Total Invoice Amount',
             extraClasses: 'min-w-[150px]',
-            flex: 'flex-[1_1_0%]',
+            flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_TOTAL_AMOUNT_INVOICE,
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?.totalInvoiceAmount} </span>
@@ -391,7 +392,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[200px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ITEM_QUANTITY,
             align: 'center',
@@ -481,7 +482,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApprovedActionBy',
             headerName: 'Account Approved By',
-            extraClasses: 'min-w-[160px]',
+            extraClasses: 'min-w-[180px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_BY,
             align: 'center',
@@ -675,7 +676,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'generateCancelGrn',
             headerName: 'Generate/Cancel IRN',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'min-w-[180px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_GENERATE_CANCEL_IRN,
             align: 'center',
@@ -686,8 +687,8 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'expectedDeliveryDate',
             headerName: 'Expected Delivery Date',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'min-w-[180px]',
+            flex: 'flex-[2_2_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
@@ -764,7 +765,6 @@ const SaleOrderListingWrapper = () => {
             {uploadFileInfo?.isLoading ? <div className="absolute opacity-70 z-50 top-0 flex items-center justify-center h-[100vh] w-full bg-white">
                 <CircularProgress />
             </div> : null}
-
 
             {/* Do Not Delete This */}
             {/* {pdfFile && (

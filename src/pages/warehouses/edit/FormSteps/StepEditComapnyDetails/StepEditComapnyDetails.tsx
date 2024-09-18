@@ -40,7 +40,7 @@ const StepEditComapnyDetails = ({
     }
     return (
         <div className="py-9 px-7">
-            <div className="grid grid-cols-3 gap-4 gap-y-5">
+            <div className="grid grid-cols-2 gap-4 gap-y-5">
                 {formFields?.map((field: FieldType) => {
                     const {
                         type = 'text',

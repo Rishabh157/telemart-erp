@@ -173,13 +173,11 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
         })
             .then((res: any) => {
 
-
                 if ('error' in res) {
                     showToast("error", res?.error?.data?.message)
                     return
                 }
 
-                console.log('resres', res)
                 if (res?.data?.status) {
                     dispatch(setFieldCustomized(false))
                     setOrderNumber(null)

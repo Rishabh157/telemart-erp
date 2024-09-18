@@ -344,7 +344,7 @@ const AddDealerWrapper = () => {
                     zonalManagerId: values.zonalManagerId || null,
                     zonalExecutiveId: values.zonalExecutiveId || null,
                     zonalExecutiveAreaId: values.zonalExecutiveAreaId || [],
-                }).then((res) => {
+                }).then((res:any) => {
                     if ('data' in res) {
                         if (res?.data?.status) {
                             showToast('success', 'Dealer added successfully!')
@@ -353,7 +353,7 @@ const AddDealerWrapper = () => {
                             showToast('error', res?.data?.message)
                         }
                     } else {
-                        showToast('error', 'Something went wrong')
+                        showToast('error', res?.error?.data?.message)
                     }
                 })
                 setApiStatus(false)

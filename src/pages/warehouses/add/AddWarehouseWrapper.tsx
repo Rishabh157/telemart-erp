@@ -22,7 +22,6 @@ import StepAddContactWrapper from './FormSteps/StepAddContact/StepAddContactWrap
 // TYPE-  Form Intial Values
 export type FormInitialValues = {
     warehouseName: string
-    country: string
     email: string
     isDefault: boolean
     regd_address: {
@@ -64,11 +63,8 @@ const steps = [
         component: StepAddCompanyDetailsWrapper,
         validationSchema: object({
             warehouseName: string().required('Warehouse name is required'),
-            country: string().required('Please select country'),
             email: string()
-                .email('Invalid Email')
-                .required('Email is required')
-                .email('Email address is invalid'),
+                .email('Invalid Email'),
         }),
     },
     {
@@ -153,9 +149,8 @@ const AddWarehouseWrapper = () => {
     // From Initial Values
     const initialValues: FormInitialValues = {
         warehouseName: '',
-        isDefault: false,
-        country: '',
         email: '',
+        isDefault: false,
         regd_address: {
             gstNumber: '',
             gstCertificate: '',
@@ -203,9 +198,9 @@ const AddWarehouseWrapper = () => {
             dispatch(setFieldCustomized(false))
             setTimeout(() => {
                 addWareHouse({
+                    dealerId: null,
                     wareHouseName: values.warehouseName,
                     isDefault: values.isDefault,
-                    country: values.country,
                     email: values.email,
                     registrationAddress: {
                         gstNumber: values.regd_address.gstNumber,

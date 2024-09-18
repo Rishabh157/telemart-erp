@@ -54,11 +54,14 @@ const AddPurchaseOrderWrapper = (props: Props) => {
         keyName: 'wareHouseName',
         value: '_id',
     })
+
     const { options: vendorOptions } = useCustomOptions({
         useEndPointHook: useGetVendorsQuery(userData?.companyId),
-        keyName: 'companyName',
+        keyName: ['companyName', 'vendorCode'],
         value: '_id',
     })
+    
+    console.log('vendorOptions: ', vendorOptions)
 
     // Form Initial Values
     const initialValues: FormInitialValues = {

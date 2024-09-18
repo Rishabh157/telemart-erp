@@ -42,6 +42,8 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                 return values?.document?.gstCertificate
             case 'document.adharCard':
                 return values?.document?.adharCard
+            case 'document.panCard':
+                return values?.document?.panCard
             default:
                 return ''
         }

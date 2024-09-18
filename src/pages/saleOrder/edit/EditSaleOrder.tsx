@@ -122,9 +122,8 @@ const EditSaleOrder = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Update SO
                             </button>
@@ -173,6 +172,7 @@ const EditSaleOrder = ({
                                 label="Dealer Warehouse"
                                 selectLabel="Select Dealer Warehouse"
                             />
+
                             {/* Warehouse */}
                             <ATMSelectSearchable
                                 name="companyWareHouseId"
@@ -181,9 +181,10 @@ const EditSaleOrder = ({
                                     handleSetFieldValue('companyWareHouseId', e)
                                 }
                                 options={dropdownOptions.warehouseOptions}
-                                label="Warehouse"
                                 selectLabel="Select Warehouse"
+                                label="Company Warehouse"
                             />
+
                             <ATMDatePicker
                                 name="expectedDeliveryDate"
                                 value={values.expectedDeliveryDate}
@@ -195,6 +196,7 @@ const EditSaleOrder = ({
                                     )
                                 }}
                             />
+
                         </div>
                     </div>
 
@@ -280,7 +282,7 @@ const EditSaleOrder = ({
                                                                     placeholder="Rate"
                                                                     onChange={(
                                                                         e
-                                                                    ) => {}}
+                                                                    ) => { }}
                                                                     className="mt-0 rounded"
                                                                 />
                                                             </div>
@@ -293,7 +295,7 @@ const EditSaleOrder = ({
                                                                     name={`productSalesOrder[${index}].quantity`}
                                                                     value={
                                                                         quantity ===
-                                                                        0
+                                                                            0
                                                                             ? ''
                                                                             : quantity?.toString()
                                                                     }
@@ -318,20 +320,20 @@ const EditSaleOrder = ({
                                                                 .productSalesOrder
                                                                 ?.length >
                                                                 1 && (
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                index
-                                                                            )
-                                                                        }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    index
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                         </div>
                                                     )
                                                 }

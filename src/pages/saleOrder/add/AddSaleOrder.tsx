@@ -175,7 +175,7 @@ const AddSaleOrder = ({
                                         )
                                     }
                                     options={dropdownOptions.warehouseOptions}
-                                    label="Warehouse"
+                                    label="Company Warehouse"
                                 />
                             </div>
 

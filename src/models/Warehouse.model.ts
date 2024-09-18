@@ -49,8 +49,8 @@ export type WarehousesListResponse = {
 }
 
 export type AddWarehouse = {
+    dealerId: null
     wareHouseName: string
-    country: string
     email: string
     isDefault: boolean
     registrationAddress: {
@@ -86,8 +86,8 @@ export type AddWarehouse = {
 
 export type UpdateWarehouse = {
     body: {
+        dealerId: null
         wareHouseName: string
-        country: string
         email: string
         isDefault: boolean
         registrationAddress: {

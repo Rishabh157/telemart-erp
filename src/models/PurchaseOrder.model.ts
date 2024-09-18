@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:PurchaseOrder.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type PurchaseOrderListResponse = {
     poCode: string
@@ -20,12 +13,14 @@ export type PurchaseOrderListResponse = {
         quantity: number
         estReceivingDate: string
         receivedQuantity: string
+        _id: string
     }
     approval: {
         approvalLevel: number
         approvalByName: string
         approvalById: string
         time: string
+        _id: string
     }[]
     isActive: boolean
     isDeleted: boolean

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { OrderListResponse } from 'src/models'
-import { useGetOrderQuery } from 'src/services/OrderService'
+import { useGetOrderBatchesQuery } from 'src/services/OrderService'
 
 // |-- Redux --|
 import moment from 'moment'
@@ -68,7 +68,7 @@ const CreateBatchOrderListingWrapper = () => {
 
     // pagination api
     const { items } = useGetCustomListingData<OrderListResponse[]>({
-        useEndPointHook: useGetOrderQuery({
+        useEndPointHook: useGetOrderBatchesQuery({
             limit: rowsPerPage,
             searchValue: '',
             params: ['didNo', 'mobileNo'],

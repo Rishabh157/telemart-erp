@@ -768,7 +768,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                     required
                                                     name="distance"
                                                     value={values.distance}
-                                                    label="Distance"
+                                                    label="Distance in (km.)"
                                                     placeholder="Distance"
                                                     className="mt-0 rounded"
                                                     onChange={(e) => {
@@ -784,7 +784,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                     name="vehicleNumber"
                                                     value={values.vehicleNumber}
                                                     label="Vehicle No."
-                                                    placeholder="Distance"
+                                                    placeholder="vehicle no."
                                                     className="mt-0 rounded"
                                                     onChange={(e) => {
                                                         setFieldValue(
@@ -820,7 +820,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                         values.transportDocNo
                                                     }
                                                     label="Transport document no."
-                                                    placeholder="Distance"
+                                                    placeholder="document no."
                                                     className="mt-0 rounded"
                                                     onChange={(e) => {
                                                         setFieldValue(
@@ -858,7 +858,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                 <ATMTextField
                                                     name=""
                                                     value={values.totalWeight}
-                                                    label="Total weight"
+                                                    label="Total weight in (gm.)"
                                                     placeholder="Total weight"
                                                     onChange={(e) => {
                                                         setFieldValue(

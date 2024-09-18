@@ -77,9 +77,8 @@ const StepAddAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`pb-6 pt-2 px-7 ${
-                            index !== formFields.length - 1 && 'border-b'
-                        }  border-slate-300`}
+                        className={`pb-6 pt-2 px-7 ${index !== formFields.length - 1 && 'border-b'
+                            }  border-slate-300`}
                     >
                         {sectionName && (
                             <div className="text-primary-main text-lg pb-2 font-medium">
@@ -107,16 +106,16 @@ const StepAddAddress = ({
                                                 value={
                                                     name.includes('.')
                                                         ? values[
-                                                              name.split('.')[0]
-                                                          ][name.split('.')[1]]
+                                                        name.split('.')[0]
+                                                        ][name.split('.')[1]]
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
                                                     if (
                                                         name ===
-                                                            'registrationAddress.phone' ||
+                                                        'registrationAddress.phone' ||
                                                         name ===
-                                                            'billingAddress.phone'
+                                                        'billingAddress.phone'
                                                     ) {
                                                         const inputValue =
                                                             e.target.value
@@ -147,30 +146,32 @@ const StepAddAddress = ({
                                             />
                                         )
                                     case 'select':
+                                        console.log('label ***' , label ) ;                                        
                                         return (
                                             <React.Fragment key={name}>
-                                                <div className="-mt-4">
+                                                <div className={`-mt-4" ${label === 'Pincode' && 'flex gap-x-1'}`}>
                                                     <ATMSelectSearchable
+                                                        componentClass='w-full'
                                                         required={required}
                                                         label={label}
                                                         name={name}
                                                         value={
                                                             name.includes('.')
                                                                 ? values[
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[0]
-                                                                  ][
-                                                                      name.split(
-                                                                          '.'
-                                                                      )[1]
-                                                                  ]
+                                                                name.split(
+                                                                    '.'
+                                                                )[0]
+                                                                ][
+                                                                name.split(
+                                                                    '.'
+                                                                )[1]
+                                                                ]
                                                                 : values[name]
                                                         }
                                                         options={
                                                             dropdownOptions[
-                                                                field.optionAccessKey ||
-                                                                    'counrtyOptions'
+                                                            field.optionAccessKey ||
+                                                            'counrtyOptions'
                                                             ]
                                                         }
                                                         onChange={(e) => {
@@ -185,83 +186,83 @@ const StepAddAddress = ({
                                                             isSubmitting
                                                         }
                                                     />
+                                                    {label === 'Pincode' && (
+                                                        <>
+                                                            <div
+                                                                className="flex justify-center items-center bg-slate-400 w-8 h-9 rounded mt-7 cursor-pointer"
+                                                                onClick={() => {
+                                                                    setIsOpenSearchPincode(
+                                                                        (
+                                                                            prev: any
+                                                                        ) => {
+                                                                            return {
+                                                                                ...prev,
+                                                                                [name]: true,
+                                                                            }
+                                                                        }
+                                                                    )
+                                                                }}
+                                                            >
+                                                                <CiSearch
+                                                                    size={20}
+                                                                    color="bg-blue-400"
+                                                                />
+                                                            </div>
+                                                            <DialogLogBox
+                                                                fullWidth={false}
+                                                                isOpen={
+                                                                    isOpenSearchPincode[
+                                                                    name
+                                                                    ] || false
+                                                                }
+                                                                handleClose={() =>
+                                                                    setIsOpenSearchPincode(
+                                                                        (
+                                                                            prev: any
+                                                                        ) => {
+                                                                            return {
+                                                                                ...prev,
+                                                                                [name]: false,
+                                                                            }
+                                                                        }
+                                                                    )
+                                                                }
+                                                                component={
+                                                                    <div className="px-4 py-2">
+                                                                        <ATMTextField
+                                                                            required={
+                                                                                required
+                                                                            }
+                                                                            name="name"
+                                                                            value={
+                                                                                name ===
+                                                                                    'billingAddress.pincode'
+                                                                                    ? values[
+                                                                                    'billingAddress.pincodeSearch'
+                                                                                    ]
+                                                                                    : values[
+                                                                                    'registrationAddress.pincodeSearch'
+                                                                                    ]
+                                                                            }
+                                                                            onChange={(
+                                                                                newValue
+                                                                            ) => {
+                                                                                handleAutoSearchPincode(
+                                                                                    name,
+                                                                                    newValue
+                                                                                )
+                                                                            }}
+                                                                            label="Search Pincode"
+                                                                            placeholder="Enter Pincode"
+                                                                            className="shadow bg-white rounded"
+                                                                        />
+                                                                    </div>
+                                                                }
+                                                            />
+                                                        </>
+                                                    )}
                                                 </div>
 
-                                                {label === 'Pincode' && (
-                                                    <>
-                                                        <div
-                                                            className="flex justify-center items-center bg-slate-400 w-8 h-9 rounded mt-8 cursor-pointer"
-                                                            onClick={() => {
-                                                                setIsOpenSearchPincode(
-                                                                    (
-                                                                        prev: any
-                                                                    ) => {
-                                                                        return {
-                                                                            ...prev,
-                                                                            [name]: true,
-                                                                        }
-                                                                    }
-                                                                )
-                                                            }}
-                                                        >
-                                                            <CiSearch
-                                                                size={20}
-                                                                color="bg-blue-400"
-                                                            />
-                                                        </div>
-                                                        <DialogLogBox
-                                                            fullWidth={false}
-                                                            isOpen={
-                                                                isOpenSearchPincode[
-                                                                    name
-                                                                ] || false
-                                                            }
-                                                            handleClose={() =>
-                                                                setIsOpenSearchPincode(
-                                                                    (
-                                                                        prev: any
-                                                                    ) => {
-                                                                        return {
-                                                                            ...prev,
-                                                                            [name]: false,
-                                                                        }
-                                                                    }
-                                                                )
-                                                            }
-                                                            component={
-                                                                <div className="px-4 py-2">
-                                                                    <ATMTextField
-                                                                        required={
-                                                                            required
-                                                                        }
-                                                                        name="name"
-                                                                        value={
-                                                                            name ===
-                                                                            'billingAddress.pincode'
-                                                                                ? values[
-                                                                                      'billingAddress.pincodeSearch'
-                                                                                  ]
-                                                                                : values[
-                                                                                      'registrationAddress.pincodeSearch'
-                                                                                  ]
-                                                                        }
-                                                                        onChange={(
-                                                                            newValue
-                                                                        ) => {
-                                                                            handleAutoSearchPincode(
-                                                                                name,
-                                                                                newValue
-                                                                            )
-                                                                        }}
-                                                                        label="Search Pincode"
-                                                                        placeholder="Enter Pincode"
-                                                                        className="shadow bg-white rounded"
-                                                                    />
-                                                                </div>
-                                                            }
-                                                        />
-                                                    </>
-                                                )}
                                             </React.Fragment>
                                         )
                                     case 'checkbox':
@@ -347,7 +348,7 @@ const StepAddAddress = ({
                                         )
                                     case 'textarea':
                                         return (
-                                            <div className="-mt-4" key={name}>
+                                            <div className="-mt-3" key={name}>
                                                 <ATMTextArea
                                                     required={required}
                                                     name={name}
@@ -355,14 +356,14 @@ const StepAddAddress = ({
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
@@ -370,7 +371,8 @@ const StepAddAddress = ({
                                                     }}
                                                     label={label}
                                                     placeholder={placeholder}
-                                                    className="shadow bg-white rounded"
+                                                    labelClass='text-slate-700 text-sm font-medium mb-0'
+                                                    className="shadow bg-white rounded mt-1"
                                                     isSubmitting={isSubmitting}
                                                 />
                                             </div>

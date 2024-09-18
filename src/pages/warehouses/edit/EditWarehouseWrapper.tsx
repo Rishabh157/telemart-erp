@@ -31,8 +31,8 @@ import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 export type FormInitialValues = {
+    dealerId : null
     warehouseName: string
-    country: string
     email: string
     isDefault: boolean
     regd_address: {
@@ -72,8 +72,7 @@ const steps = [
         component: StepEditCompanyDetailsWrapper,
         validationSchema: object({
             warehouseName: string().required('warehouse Name is required'),
-            country: string().required('please select country'),
-            email: string().required('Required').email('Invalid email'),
+            email: string().email('Invalid email'),
         }),
     },
     {
@@ -165,8 +164,8 @@ const EditWarehouseWrapper = () => {
 
     // From Initial Values
     const initialValues: FormInitialValues = {
+        dealerId : null,
         warehouseName: selectedItem?.wareHouseName || '',
-        country: selectedItem?.country || '',
         email: selectedItem?.email || '',
         isDefault: selectedItem?.isDefault || false,
         regd_address: {
@@ -212,8 +211,8 @@ const EditWarehouseWrapper = () => {
             setTimeout(() => {
                 editWareHouse({
                     body: {
+                        dealerId : null,
                         wareHouseName: values.warehouseName,
-                        country: values.country,
                         email: values.email,
                         isDefault: values.isDefault,
                         registrationAddress: {
@@ -255,7 +254,7 @@ const EditWarehouseWrapper = () => {
                             showToast('error', res?.data?.message)
                         }
                     } else {
-                        showToast('error', 'Something went wrong')
+                        showToast('error', res?.error?.data?.message)
                     }
                     setApiStatus(false)
                 })

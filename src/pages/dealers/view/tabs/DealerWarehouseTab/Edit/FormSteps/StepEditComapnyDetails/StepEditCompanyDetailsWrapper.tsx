@@ -1,11 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:StepEditCompanyDetailsWrapper.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -36,14 +29,6 @@ const formFields: FieldType[] = [
         placeholder: 'Warehouse Name',
     },
     {
-        name: 'country',
-        label: 'Country',
-        placeholder: 'Country',
-        type: 'select',
-        optionAccessKey: 'countryOptions',
-    },
-
-    {
         name: 'email',
         label: 'Email',
         placeholder: 'Email',
@@ -59,13 +44,11 @@ const StepEditCompanyDetailsWrapper = ({ formikProps, allCountry }: Props) => {
     }
 
     return (
-        <>
-            <StepEditComapnyDetails
-                formikProps={formikProps}
-                dropdownOptions={dropdownOptions}
-                formFields={formFields}
-            />
-        </>
+        <StepEditComapnyDetails
+            formikProps={formikProps}
+            dropdownOptions={dropdownOptions}
+            formFields={formFields}
+        />
     )
 }
 

@@ -146,7 +146,14 @@ const PurchaseOrderListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_PO_CODE,
             renderCell: (row: PurchaseOrderListResponse) => (
-                <span> {row?.poCode} </span>
+                <span
+                    className='text-primary-main cursor-pointer'
+                    onClick={() => {
+                        navigate(`/purchase-order/view/${row?._id}`)
+                    }}
+                >
+                    {row?.poCode}
+                </span>
             ),
         },
         {

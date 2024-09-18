@@ -58,17 +58,18 @@ const DealerWarehouseListing = ({
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_ADD
                 ) && (
-                    <button
-                        onClick={() =>
-                            navigate(`${AddpathName}`, {
-                                state: { params },
-                            })
-                        }
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        + Add
-                    </button>
-                )}
+                        <button
+                            hidden
+                            onClick={() =>
+                                navigate(`${AddpathName}`, {
+                                    state: { params },
+                                })
+                            }
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Add
+                        </button>
+                    )}
                 {/* )} */}
             </div>
 
@@ -84,8 +85,8 @@ const DealerWarehouseListing = ({
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
-                    // onFilterClick={() => setIsFilterOpen(true)}
+                // isFilter
+                // onFilterClick={() => setIsFilterOpen(true)}
                 />
 
                 {/* Table */}
@@ -93,7 +94,7 @@ const DealerWarehouseListing = ({
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        
+
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

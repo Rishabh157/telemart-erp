@@ -92,7 +92,6 @@ export type AddDealerWarehouse = {
 export type UpdateDealerWarehouse = {
     body: {
         wareHouseName: string
-        country: string
         email: string
         registrationAddress: {
             phone: string

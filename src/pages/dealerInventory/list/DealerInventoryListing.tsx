@@ -45,7 +45,7 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
             const filteredOptions = data?.data?.map(
                 (ele: DealersListResponse) => {
                     return {
-                        label: ele?.firstName + ' ' + ele?.lastName,
+                        label: ele?.firstName + ' ' + ele?.lastName + ' ( '+ ele?.dealerCode +' )',
                         value: ele?._id,
                     }
                 }
@@ -66,7 +66,7 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
                 {/*Table Header */}
                 <div className="flex justify-between mb-4 px-2">
-                    <div className="w-[15%] z-[100000]">
+                    <div className="w-[20%] z-[100000]">
                         <ATMSelectSearchable
                             name=""
                             label=""

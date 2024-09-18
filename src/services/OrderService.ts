@@ -13,6 +13,16 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+      
+        //***** GET *****/
+        getOrderBatches: builder.query({
+            providesTags: ['order', 'batch-order'],
+            query: (body: PaginationType) => ({
+                url: '/order-inquiry/get-batch',
+                method: 'POST',
+                body,
+            }),
+        }),
 
         //***** GET ORDER MUTATION *****/
         getOrderForExport: builder.mutation({
@@ -312,6 +322,7 @@ export const OrderApi = apiSlice.injectEndpoints({
 
 export const {
     useGetOrderQuery,
+    useGetOrderBatchesQuery,
     useGetOrderForExportMutation,
     useGetOrderByIdQuery,
     useGetWarehouseNdrOrderByPhoneNumberQuery,

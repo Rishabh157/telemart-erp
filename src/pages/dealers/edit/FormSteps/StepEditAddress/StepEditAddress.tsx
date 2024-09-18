@@ -57,7 +57,7 @@ const StepEditAddress = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
-        formikProps
+    formikProps
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
@@ -73,9 +73,8 @@ const StepEditAddress = ({
                 return (
                     <div
                         key={index}
-                        className={`py-4 px-7 ${
-                            index !== formFields.length - 1 && 'border-b'
-                        }  border-slate-300`}
+                        className={`py-4 px-7 ${index !== formFields.length - 1 && 'border-b'
+                            }  border-slate-300`}
                     >
                         {sectionName && (
                             <div className="text-primary-main text-lg pb-4 font-medium">
@@ -103,16 +102,16 @@ const StepEditAddress = ({
                                                 value={
                                                     name.includes('.')
                                                         ? values[
-                                                              name.split('.')[0]
-                                                          ][name.split('.')[1]]
+                                                        name.split('.')[0]
+                                                        ][name.split('.')[1]]
                                                         : values[name]
                                                 }
                                                 onChange={(e) => {
                                                     if (
                                                         name ===
-                                                            'registrationAddress.phone' ||
+                                                        'registrationAddress.phone' ||
                                                         name ===
-                                                            'billingAddress.phone'
+                                                        'billingAddress.phone'
                                                     ) {
                                                         const inputValue =
                                                             e.target.value
@@ -152,20 +151,20 @@ const StepEditAddress = ({
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     options={
                                                         dropdownOptions[
-                                                            field.optionAccessKey ||
-                                                                'counrtyOptions'
+                                                        field.optionAccessKey ||
+                                                        'counrtyOptions'
                                                         ]
                                                     }
                                                     onChange={(e) => {
@@ -256,7 +255,7 @@ const StepEditAddress = ({
                                         )
                                     case 'textarea':
                                         return (
-                                            <div className="-mt-4" key={name}>
+                                            <div className="-mt-2" key={name}>
                                                 <ATMTextArea
                                                     required={required}
                                                     name={name}
@@ -264,14 +263,14 @@ const StepEditAddress = ({
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
@@ -282,7 +281,8 @@ const StepEditAddress = ({
                                                     }}
                                                     label={label}
                                                     placeholder={placeholder}
-                                                    className="shadow bg-white rounded"
+                                                    labelClass='text-slate-700 text-sm font-medium mb-0'
+                                                    className="shadow bg-white rounded mt-1"
                                                     isSubmitting={isSubmitting}
                                                 />
                                             </div>

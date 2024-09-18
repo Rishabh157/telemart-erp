@@ -45,12 +45,16 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
+    console.log('values: ', values);
+
     const getTheValueByNameKey = (name: string) => {
         switch (name) {
             case 'document.gstCertificate':
                 return values?.document?.gstCertificate
             case 'document.adharCard':
                 return values?.document?.adharCard
+            case 'document.panCard':
+                return values?.document?.panCard
             default:
                 return ''
         }
@@ -92,8 +96,10 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
 
     return (
         <div >
-            {formFields?.map((formField, index) => {
+            {formFields?.map((formField:any, index:number) => {
+                
                 const { sectionName, fields } = formField
+
                 return (
                     <div
                         key={index}

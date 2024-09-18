@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ViewPurchaseOrder.tsx
-// Type: View Component
-// Last Updated: JULY 04, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -16,11 +9,12 @@ import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeadin
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { GRNListResponse } from 'src/models'
+import { PurchaseOrderListResponse } from 'src/models/PurchaseOrder.model'
 import GRNListing from 'src/pages/grn/list/GRNListing'
 
 // |-- Types --|'
 type Props = {
-    items: any
+    items: PurchaseOrderListResponse
     grnitems: any
 }
 
@@ -178,13 +172,13 @@ const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
                         <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
                             Approval Details
                         </div>
-                        {items?.approval?.map((index: any, item: any) => (
+                        {items?.approval?.map((item) => (
                             <div
                                 className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2"
-                                key={index}
+                                key={item?._id}
                             >
                                 <h1 className="text-gray-600  font-semibold">
-                                    Approval Level{' '}
+                                    Approval Level
                                 </h1>
                                 <p className=" col-span-1"> - </p>
                                 <p className="text-slate-600">
@@ -200,10 +194,12 @@ const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
                                 </p>
 
                                 <h1 className="text-gray-600  font-semibold">
-                                    Approval Time{' '}
+                                    Approval Time
                                 </h1>
                                 <p className=" col-span-1"> - </p>
-                                <p className="text-slate-600">{item?.time}</p>
+                                <p className="text-slate-600">
+                                    {item?.time}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -215,7 +211,7 @@ const ViewPurchaseOrder = ({ items, grnitems }: Props) => {
                     </div>
                     {/*Table Header */}
                     <div className="flex flex-col gap-y-5">
-                        <div className=" h-[80%]  ">
+                        <div className=" h-[80%]">
                             <GRNListing columns={GRNColumns} rows={grnitems} />
                         </div>
                     </div>

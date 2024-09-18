@@ -107,19 +107,27 @@ const AddUserWrapper = (props: Props) => {
         //         ? schema.required('Team lead is required')
         //         : schema.notRequired()
         // }),
+
         floorManagerId: string().when(['isAgent'], (isAgent, schema) => {
             return isAgent[0]
                 ? schema.required('Floor manager is required')
                 : schema.notRequired()
         }),
-        callCenterId: string().when(
-            'userDepartment',
-            (userDepartment: any, schema: any) => {
-                return userDepartment.includes('SALES_DEPARTMENT')
-                    ? schema.required(
-                          'Call center is required for Sales department'
-                      )
-                    : schema.notRequired()
+
+        callCenterId: string().when('userDepartment', (userDepartment: any, schema: any) => {
+                if (
+                    userDepartment?.includes('SALES_DEPARTMENT') ||
+                    userDepartment?.includes('CUSTOMER_CARE_DEPARTMENT')
+                ) {
+                    return schema.required('Call center is required for Sales or Customer Care department');
+                } else {
+                    return schema.notRequired();
+                }
+                // return userDepartment.includes('SALES_DEPARTMENT' || 'CUSTOMER_CARE_DEPARTMENT')
+                //     ? schema.required(
+                //         'Call center is required for Sales department'
+                //     )
+                //     : schema.notRequired()
             }
         ),
 

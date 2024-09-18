@@ -32,7 +32,6 @@ import { AppDispatch, RootState } from 'src/redux/store'
 // |-- Types --|
 export type FormInitialValues = {
     warehouseName: string
-    country: string
     email: string
     dealerId: any
     regd_address: {
@@ -70,8 +69,7 @@ const steps = [
         component: StepEditCompanyDetailsWrapper,
         validationSchema: object({
             warehouseName: string().required('warehouse Name is required'),
-            country: string().required('please select country'),
-            email: string().required('Required').email('Invalid email'),
+            email: string().email('Invalid email'),
         }),
     },
     {
@@ -154,9 +152,7 @@ const EditDealerWarehouseWrapper = () => {
     // From Initial Values
     const initialValues: FormInitialValues = {
         warehouseName: selectedItem?.wareHouseName || '',
-        country: selectedItem?.country || '',
         email: selectedItem?.email || '',
-
         regd_address: {
             phone: selectedItem?.registrationAddress?.phone || '',
             address: selectedItem?.registrationAddress?.address || '',
@@ -200,7 +196,6 @@ const EditDealerWarehouseWrapper = () => {
                 updateDealerWarehouse({
                     body: {
                         wareHouseName: values.warehouseName,
-                        country: values.country,
                         email: values.email,
                         registrationAddress: {
                             phone: values.regd_address.phone,

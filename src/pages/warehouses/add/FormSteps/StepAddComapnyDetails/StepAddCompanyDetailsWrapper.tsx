@@ -30,18 +30,10 @@ const formFields: FieldType[] = [
         required: true,
     },
     {
-        name: 'country',
-        label: 'Country',
-        placeholder: 'Country',
-        type: 'select',
-        optionAccessKey: 'countryOptions',
-        required: true,
-    },
-    {
         name: 'email',
         label: 'Email',
         placeholder: 'Email',
-        required: true,
+        required: false,
     },
     {
         name: 'isDefault',

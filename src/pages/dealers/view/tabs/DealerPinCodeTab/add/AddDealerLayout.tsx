@@ -63,7 +63,7 @@ const AddDealerLayout = ({
                     }}
                 />
             </div>
-            {/* TEHSIL */}
+
             <div className="flex-[1_1_0%]">
                 <ATMSelectSearchable
                     fontSizePlaceHolder="14px"
@@ -75,46 +75,37 @@ const AddDealerLayout = ({
                     value={value.tehsilId || ''}
                     options={tehsilOptionsByDistrict || []}
                     onChange={(e) => {
-                        if (
-                            !values?.pincodeDetail?.find(
-                                (f) => f.tehsilId === e
-                            )
-                        ) {
-                            setFieldValue(
-                                `pincodeDetail[${itemIndex}].tehsilId`,
-                                e
-                            )
+                        if (!values?.pincodeDetail?.find((f) => f.tehsilId === e)) {
+                            setFieldValue(`pincodeDetail[${itemIndex}].tehsilId`, e)
                         } else {
                             showToast('error', 'Tehsil Already Added!')
                         }
                     }}
                 />
             </div>
-            {/* Item Name */}
+
             <div className="flex-[3_3_0%]">
+
                 <ATMSelectSearchable
+                    isAllSelect
                     size="small"
                     isMulti
                     name={`pincodeDetail[${itemIndex}].pincode`}
                     value={value.pincode}
                     onChange={(e) => {
-                        if (
-                            !values?.pincodeDetail?.find((f) => f.pincode === e)
-                        ) {
-                            setFieldValue(
-                                `pincodeDetail[${itemIndex}].pincode`,
-                                e
-                            )
+                        if (!values?.pincodeDetail?.find((f) => f.pincode === e)) {
+                            setFieldValue(`pincodeDetail[${itemIndex}].pincode`, e)
                         } else {
                             showToast('error', 'Pincode Already Added!')
                         }
                     }}
-                    options={pincodeOptionByTehsil}
+                    options={pincodeOptionByTehsil || []}
                     label="Pincode"
                 />
+
+              
             </div>
 
-            {/* Rate */}
             <div className="flex-[1_1_0%]">
                 <ATMTextField
                     size="small"

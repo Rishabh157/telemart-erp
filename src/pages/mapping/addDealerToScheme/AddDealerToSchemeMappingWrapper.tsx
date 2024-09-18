@@ -75,7 +75,7 @@ const AddDealerToSchemeMappingWrapper = (props: Props) => {
         if (!isDealerListFetching && !isDealerListLoading) {
             const schemeList = dealerListData?.data?.map((dealer: any) => {
                 return {
-                    label: dealer?.firstName?.concat(' ', dealer?.lastName),
+                    label: `${dealer?.firstName?.concat(' ', dealer?.lastName)} (${dealer?.dealerCode})`,
                     value: dealer?._id,
                 }
             })

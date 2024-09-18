@@ -1,12 +1,3 @@
-/// ==============================================
-// Filename:FilterDialog.tsx
-// Type: Card Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Built-in Dependencies --|
-
 // |-- External Dependencies --|
 import { Avatar } from '@mui/material'
 import { IconType } from 'react-icons'
@@ -20,9 +11,7 @@ import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
 // |-- Redux --|
-// import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useParams } from 'react-router-dom'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -82,18 +71,22 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
             </div>
 
             {/* Firm Name */}
-            <div className="flex justify-center">{selectedItem?.firmName}</div>
+            <div className="flex mx-1 justify-center"
+                title={selectedItem?.firmName}
+            >
+                <h2 className='truncate w-full text-center'>
+                    {selectedItem?.firmName}
+                </h2>
+            </div>
 
             {/* Chips */}
             <div className="flex gap-2 justify-center">
                 <span className="rounded-full px-3 py-[2px] bg-slate-100 text-[10px]">
                     Dealer
                 </span>
-                <span
-                    className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 ${
-                        selectedItem?.isActive
-                            ? 'bg-green-100 text-green-500'
-                            : 'bg-red-100 text-red-700'
+                <span className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 ${selectedItem?.isActive
+                    ? 'bg-green-100 text-green-500'
+                    : 'bg-red-100 text-red-700'
                     }`}
                 >
                     {selectedItem?.isActive ? (
@@ -105,93 +98,78 @@ const DealerInfoCard = ({ dealerData, actionIcons }: Props) => {
                 </span>
             </div>
 
-            <div className="  text-slate-500  ">
+            <div className="text-black px-4 space-y-3 mt-4">
                 {/* Dealer Name */}
-                <div className=" text-black text-[13px] grid grid-flow-col grid-cols-3 justify-stretch  px-4  ">
-                    <h2 className="grid-cols-1"> Name </h2>{' '}
-                    <h2 className="grid-cols-1 text-center">: </h2>
-                    <p className="font-bold text-start grid-cols-1">
-                        {selectedItem?.firstName}
+                <div className="flex items-center">
+                    <h2 className="text-[14px] font-bold w-2/3">Name</h2>
+                    <h2 className="text-[14px] font-bold mr-[6px] text-center">:</h2>
+                    <p className="text-[12px] font-bold w-2/3 truncate"
+                        title={selectedItem?.firstName?.concat(' ', selectedItem?.lastName)}
+                    >
+                        {selectedItem?.firstName?.concat(' ', selectedItem?.lastName) || "N/A"}
                     </p>
                 </div>
 
-                {/* Mobile */}
-                <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4  ">
-                    <h2 className="grid-cols-1"> Mobile No. </h2>{' '}
-                    <h2 className="grid-cols-1 text-center ">: </h2>
-                    <p className="font-bold text-start grid-cols-1">
-                        {selectedItem?.registrationAddress.phone}
+                {/* Dealer Code */}
+                <div className="flex items-center">
+                    <h2 className="text-[14px] font-bold w-2/3">Dealer Code</h2>
+                    <h2 className="text-[14px] font-bold mr-[6px] text-center">:</h2>
+                    <p className="text-[12px] font-bold w-2/3 truncate"
+                        title={selectedItem?.dealerCode}
+                    >
+                        {selectedItem?.dealerCode || "N/A"}
                     </p>
                 </div>
-                <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4  ">
-                    <h2 className="grid-cols-1"> Zo. Manager </h2>{' '}
-                    <h2 className="grid-cols-1 text-center">: </h2>
-                    <p className="font-bold text-start grid-cols-1">
-                        {selectedItem?.zonalManagerLabel}
+
+                {/* Mobile No. */}
+                <div className="flex items-center">
+                    <h2 className="text-[14px] font-bold w-2/3">Mobile No.</h2>
+                    <h2 className="text-[14px] font-bold mr-[6px] text-center">:</h2>
+                    <p className="text-[12px] font-bold w-2/3 truncate"
+                        title={selectedItem?.registrationAddress?.phone}
+                    >
+                        {selectedItem?.registrationAddress?.phone || "N/A"}
                     </p>
                 </div>
-                <div className=" text-black text-[13px] grid grid-cols-3 grid-flow-col justify-stretch  px-4 ">
-                    <h2 className="grid-cols-1">Zo. Executive. </h2>{' '}
-                    <h2 className="grid-cols-1 text-center">: </h2>
-                    <p className="font-bold text-start grid-cols-1">
-                        {selectedItem?.zonalExecutiveLabel}
+
+                {/* Zonal Manager */}
+                <div className="flex items-center">
+                    <h2 className="text-[14px] font-bold w-2/3">Zo. Manager</h2>
+                    <h2 className="text-[14px] font-bold mr-[6px] text-center">:</h2>
+                    <p className="text-[12px] font-bold w-2/3 truncate"
+                        title={selectedItem?.zonalManagerLabel}
+                    >
+                        {selectedItem?.zonalManagerLabel || "N/A"}
                     </p>
                 </div>
-                {/*                 
-                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
-                    <h2> Mobile No. </h2> <h2>: </h2>
-                    <p className="font-bold text-start">
-                        {selectedItem?.registrationAddress.phone}
+
+                {/* Zonal Executive */}
+                <div className="flex items-center">
+                    <h2 className="text-[14px] font-bold w-2/3">Zo. Executive</h2>
+                    <h2 className="text-[14px] font-bold mr-[6px] text-center">:</h2>
+                    <p className="text-[12px] font-bold w-2/3 truncate"
+                        title={selectedItem?.zonalExecutiveLabel}
+                    >
+                        {selectedItem?.zonalExecutiveLabel || "N/A"}
                     </p>
                 </div>
-                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4  ">
-                    <h2> Zo. Manager </h2> <h2>: </h2>
-                    <p className="font-bold text-start">
-                        {selectedItem?.zonalManagerLabel}
-                    </p>
-                </div>
-                <div className=" text-black text-[13px] grid grid-flow-col justify-stretch  px-4 ">
-                    <h2>Zo. Executive. </h2> <h2>: </h2>
-                    <p className="font-bold text-start">
-                        {selectedItem?.zonalExecutiveLabel}
-                    </p>
-                </div> */}
             </div>
 
             {/* Action Icon */}
-            <div
-                className={`flex gap-4 border-b justify-center items-center pt-1 pb-3`}
-            >
-                {/* {actionIcons?.map((icon, index) => {
-          return (
-            <div
-              key={index}
-              onClick={() => {
-                icon.onClick();
-              }}
-              className="text-lg text-slate-500 cursor-pointer flex justify-center flex-col"
-            >
-              <div className="flex justify-center">
-                <icon.icon />
-              </div>
-              <div className="text-[11px]"> {icon.label} </div>
-            </div>
-          );
-        })} */}
+            <div className={`flex gap-4 border-b justify-center items-center pt-1 pb-3`}>
                 <span
                     onClick={() =>
                         isAuthorized(
                             UserModuleNameTypes.ACTION_DEALER_ACTIVATE_DEACTIVATE
                         ) && changeStatus()
                     }
-                    className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 cursor-pointer ${
-                        !selectedItem?.isActive
-                            ? 'bg-green-100 text-green-500'
-                            : 'bg-red-100 text-red-700'
-                    }`}
+                    className={`rounded-full px-3 py-[2px] text-[10px] font-medium flex items-center gap-1 cursor-pointer ${!selectedItem?.isActive
+                        ? 'bg-green-100 text-green-500'
+                        : 'bg-red-100 text-red-700'
+                        }`}
                 >
                     {selectedItem?.isActive ? 'Deactivate ' : 'Activate '}
-                    Dealer{' '}
+                    Dealer
                 </span>
             </div>
         </div>
