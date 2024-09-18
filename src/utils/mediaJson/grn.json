@@ -33,6 +33,16 @@
                     "fieldId": "GRN_LIST_DEFECTIVE_QUANTITY",
                     "fieldName": "Defective Qnty.",
                     "fieldValue": "defectiveQuantity"
+                },
+                {
+                    "fieldId": "GRN_LIST_CREATED_DATE",
+                    "fieldName": "Created Date",
+                    "fieldValue": "createdAt"
+                },
+                {
+                    "fieldId": "GRN_LIST_UPDATED_DATE",
+                    "fieldName": "Updated Date",
+                    "fieldValue": "updatedAt"
                 }
             ]
         },

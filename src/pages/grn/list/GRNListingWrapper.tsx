@@ -19,6 +19,7 @@ import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { isAuthorized } from 'src/utils/authorization'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 
 const GRNListingWrapper = () => {
@@ -118,6 +119,40 @@ const GRNListingWrapper = () => {
             renderCell: (row: GRNListResponse) => {
                 return <span> {row?.defectiveQuantity} </span>
             },
+        },
+        {
+            field: 'createdAt',
+            headerName: 'Created Date',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.GRN_LIST_CREATED_DATE,
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: GRNListResponse) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {moment(row?.createdAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(row?.createdAt).format('hh:mm A')}
+                    </div>
+                </div>
+            ),
+        },
+        {
+            field: 'updatedAt',
+            headerName: 'updated Date',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.GRN_LIST_UPDATED_DATE,
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: GRNListResponse) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {moment(row?.updatedAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(row?.updatedAt).format('hh:mm A')}
+                    </div>
+                </div>
+            ),
         },
     ]
 

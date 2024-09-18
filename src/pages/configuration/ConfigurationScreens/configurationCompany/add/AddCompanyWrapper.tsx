@@ -32,6 +32,7 @@ export type FormInitialValues = {
     address: string
     phoneNo: string
     panNumber: string
+    companyLogo:string
     bankDetails: {
         bankName: string
         branchName: string
@@ -111,6 +112,7 @@ const AddCompanyWrapper = () => {
         gstNo: '',
         address: '',
         phoneNo: '',
+        companyLogo:'',
         bankDetails: [
             {
                 bankName: '',
@@ -142,6 +144,7 @@ const AddCompanyWrapper = () => {
                     gstNo: values.gstNo,
                     address: values.address,
                     phoneNo: values.phoneNo,
+                    companyLogo:values.companyLogo,
                     bankDetails: values.bankDetails,
                 }).then((res) => {
                     if ('data' in res) {

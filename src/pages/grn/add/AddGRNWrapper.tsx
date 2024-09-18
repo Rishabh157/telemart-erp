@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
@@ -8,12 +8,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { number, object, ref } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddItem from './AddGRN'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { useAddGRNMutation } from 'src/services/GRNService'
 import { showToast } from 'src/utils'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import AddItem from './AddGRN'
 
 // |-- Types --|
 
@@ -31,7 +29,6 @@ const AddGRNWrapper = () => {
     const [addGRN] = useAddGRNMutation()
     const { state } = useLocation()
 
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const [apiStatus, setApiStatus] = useState(false)
 
     // Form Initial Values
@@ -75,8 +72,7 @@ const AddGRNWrapper = () => {
                 receivedQuantity: values.receivedQuantity,
                 goodQuantity: values.goodQuantity,
                 defectiveQuantity: values.defectiveQuantity,
-                companyId: userData?.companyId as string,
-            }).then((res) => {
+            }).then((res:any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
                         showToast('success', 'GRN added successfully!')
@@ -85,7 +81,7 @@ const AddGRNWrapper = () => {
                         showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                 }
                 setApiStatus(false)
             })
