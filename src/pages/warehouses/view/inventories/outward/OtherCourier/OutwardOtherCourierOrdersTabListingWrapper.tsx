@@ -698,7 +698,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         {
             field: 'preffered_delivery_date',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_PREFFERED_DELIVERY_DATE,
-            headerName: 'Preffred Delivery Date Time',
+            headerName: 'Preffred Delivery Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',

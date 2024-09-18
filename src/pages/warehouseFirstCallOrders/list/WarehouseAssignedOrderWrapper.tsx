@@ -509,7 +509,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
 
         {
             field: 'preffered_delivery_date',
-            headerName: 'Preffred Delivery Date Time',
+            headerName: 'Preffred Delivery Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',

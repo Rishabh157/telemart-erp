@@ -107,16 +107,6 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'wareHouseCountryName',
-            headerName: 'Country',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_LIST_COUNTRY,
-            renderCell: (row: WarehousesListResponse) => (
-                <span> {row.wareHouseCountryName} </span>
-            ),
-        },
-        {
             field: 'registrationStateName',
             headerName: 'State',
             extraClasses: 'min-w-[150px]',

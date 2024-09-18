@@ -494,7 +494,7 @@ const HoldOrdersListingWrapper = () => {
         },
         {
             field: 'preffered_delivery_date',
-            headerName: 'Preffred Delivery Date Time',
+            headerName: 'Preffred Delivery Date',
             flex: 'flex-[3_3_0%]',
             name: UserModuleNameTypes.ORDER_HOLD_TAB_LIST_PREFFERED_DELIVERY_DATE,
             align: 'start',

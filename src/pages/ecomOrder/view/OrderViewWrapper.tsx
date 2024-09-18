@@ -66,7 +66,7 @@ const OrderViewWrapper = () => {
                                     size="small"
                                 />
                             ) : row?.firstCallState ===
-                              FirstCallApprovalStatus.CANCEL ? (
+                                FirstCallApprovalStatus.CANCEL ? (
                                 <Chip
                                     className="cursor-pointer"
                                     label="Cancled"
@@ -376,13 +376,12 @@ const OrderViewWrapper = () => {
         },
         {
             field: 'preffered_delivery_date',
-            headerName: 'Preffred Delivery Date Time',
+            headerName: 'Preffred Delivery Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
             // hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) =>
-                formatedDateTimeIntoIst(row?.preffered_delivery_date) || '-',
+            renderCell: (row: OrderListResponse) => formatedDateTimeIntoIst(row?.preffered_delivery_date) || '-',
         },
         {
             field: 'preffered_delivery_date',

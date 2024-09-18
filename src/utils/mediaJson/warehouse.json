@@ -20,11 +20,6 @@
                     "fieldValue": "wareHouseName"
                 },
                 {
-                    "fieldId": "WAREHOUSE_LIST_COUNTRY",
-                    "fieldName": "Country",
-                    "fieldValue": "wareHouseCountryName"
-                },
-                {
                     "fieldId": "WAREHOUSE_LIST_STATE",
                     "fieldName": "State",
                     "fieldValue": "registrationStateName"

@@ -1,6 +1,7 @@
 import moment from 'moment'
 
 export const formatedDateTimeIntoIst = (date: string) => {
-    let formattedDate = moment(date).format('DD-MM-YYYY, HH:mm A')
+    console.log('date: ***** ', date)
+    let formattedDate = date ? moment(date).format('DD-MM-YYYY') : '-'
     return formattedDate
 }
