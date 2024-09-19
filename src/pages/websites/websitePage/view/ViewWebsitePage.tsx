@@ -25,7 +25,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const ViewWebsitePage = ({ items }: Props) => {
     return (
-        <div className="px-4 h-[calc(100vh-55px)]  ">
+        <div className="px-4 h-[calc(100vh-45px)]  ">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div >

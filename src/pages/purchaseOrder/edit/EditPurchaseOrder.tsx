@@ -66,7 +66,7 @@ const EditPurchaseOrder = ({
         dispatch(setFieldCustomized(true))
     }
     return (
-        <div className="px-4 h-[calc(100vh-55px)] bg-white">
+        <div className="px-4 h-[calc(100vh-45px)] bg-white">
             <div className="flex flex-col gap-2 p-4 ">
                 {/* Breadcrumbs */}
                 <div >

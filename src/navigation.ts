@@ -67,6 +67,12 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_DELEAR_RATIO,
     },
     {
+        label: 'Dealers Serviceability',
+        icon: TfiLayoutMediaOverlayAlt2,
+        path: '/dealers-serviceability',
+        name: UserModuleNameTypes.NAV_DELEAR_RATIO,
+    },
+    {
         label: 'Users',
         icon: FiUsers,
         path: '/users',

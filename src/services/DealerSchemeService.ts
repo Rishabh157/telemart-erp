@@ -79,6 +79,15 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        getCheckServiceability: builder.query({
+            providesTags: ['dealerScheme'],
+            query: ({ body, query }: any) => ({
+                url: '/dealer-scheme/check-serviceability',
+                method: 'POST',
+                params: { limit: query?.limit, page: query?.page },
+                body,
+            }),
+        }),
     }),
 })
 
@@ -90,5 +99,6 @@ export const {
     useDeleteDealerSchemeMutation,
     useDeactiveDealerSchemeMutation,
     useGetDealerSchemeByIdQuery,
+    useGetCheckServiceabilityQuery,
     useGetAllDealerSchemeByDealerIdQuery,
 } = dealerSchemeApi
