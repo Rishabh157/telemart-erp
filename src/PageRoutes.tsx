@@ -333,6 +333,7 @@ import OutwardAmazonTabsListingWrapper from './pages/warehouses/view/inventories
 import OutwardFlipkartTabsListingWrapper from './pages/warehouses/view/inventories/outward/Ecom/Flipkart/OutwardFlipkartTabsListingWrapper'
 import PageMasterLayout from './pages/pageMaster/PageMasterLayout'
 import EditGRNWrapper from './pages/grn/edit/EditGRNWrapper'
+import DealerServiceabilityListingWrapper from './pages/dealerServiceability/list/DealerServiceabilityListingWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -716,6 +717,15 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<DealersRatioListingWrapper />}
+                            permission={UserModuleNameTypes.NAV_DELEAR_RATIO}
+                        />
+                    }
+                />
+                <Route
+                    path="/dealers-serviceability"
+                    element={
+                        <Authorization
+                            children={<DealerServiceabilityListingWrapper />}
                             permission={UserModuleNameTypes.NAV_DELEAR_RATIO}
                         />
                     }

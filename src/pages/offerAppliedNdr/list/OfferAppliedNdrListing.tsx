@@ -35,7 +35,7 @@ const OfferAppliedNdrListing = ({ columns, rows, setShowDropdown }: Props) => {
         offerAppliedNdrState
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] bg-white ">
+        <div className="px-4 h-[calc(100vh-45px)] bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Offer Apply NDR </ATMPageHeading>

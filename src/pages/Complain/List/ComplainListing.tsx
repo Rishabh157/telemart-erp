@@ -47,7 +47,7 @@ const ComplainListing = ({ columns, rows, setShowDropdown }: Props) => {
         useState<boolean>(false)
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] bg-white ">
+        <div className="px-4 h-[calc(100vh-45px)] bg-white ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Complaint </ATMPageHeading>
