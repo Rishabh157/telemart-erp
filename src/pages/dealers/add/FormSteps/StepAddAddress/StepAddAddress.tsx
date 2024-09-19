@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
@@ -18,6 +18,10 @@ import { RootState } from 'src/redux/store'
 import { setFormSubmitting } from 'src/redux/slices/authSlice'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import { CircularProgress } from '@mui/material'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -70,6 +74,48 @@ const StepAddAddress = ({
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
+
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    const [loaderState, setLoaderState] = useState<string>('')
+    const [uploadFile] = useAddFileUrlMutation()
+
+    console.log('valuesvaluesvalues' , values);    
+
+    const getTheValueByNameKey = (name: string) => {
+        switch (name) {
+            case 'registrationAddress.gstCertificate':
+                return values?.registrationAddress?.gstCertificate
+            case 'billingAddress.gstCertificate':
+                return values?.billingAddress?.gstCertificate
+            default:
+                return ''
+        }
+    }
+
+
+    const handleFileUpload = (file: File, name: string) => {
+        let formData = new FormData()
+        setLoaderState(name)
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                setLoaderState('')
+                setImageApiStatus(false)
+            }
+        })
+    }
+
     return (
         <div >
             {formFields?.map((formField, index) => {
@@ -141,12 +187,11 @@ const StepAddAddress = ({
                                                 label={label}
                                                 placeholder={placeholder}
                                                 className="shadow bg-white rounded"
-                                                extraClassField="mt-2"
+                                                extraClassField="mt-1"
                                                 isSubmitting={isSubmitting}
                                             />
                                         )
                                     case 'select':
-                                        console.log('label ***' , label ) ;                                        
                                         return (
                                             <React.Fragment key={name}>
                                                 <div className={`-mt-4" ${label === 'Pincode' && 'flex gap-x-1'}`}>
@@ -287,6 +332,8 @@ const StepAddAddress = ({
                                                                 phone,
                                                                 pincode,
                                                                 state,
+                                                                gstNumber,
+                                                                gstCertificate
                                                             } =
                                                                 values.registrationAddress
                                                             setFieldValue(
@@ -313,6 +360,14 @@ const StepAddAddress = ({
                                                                 'billingAddress.state',
                                                                 state
                                                             )
+                                                            setFieldValue(
+                                                                'billingAddress.gstNumber',
+                                                                gstNumber
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.gstCertificate',
+                                                                gstCertificate
+                                                            )
                                                         } else {
                                                             setFieldValue(
                                                                 'billingAddress.address',
@@ -336,6 +391,14 @@ const StepAddAddress = ({
                                                             )
                                                             setFieldValue(
                                                                 'billingAddress.state',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.gstNumber',
+                                                                ''
+                                                            )
+                                                            setFieldValue(
+                                                                'billingAddress.gstCertificate',
                                                                 ''
                                                             )
                                                         }
@@ -375,6 +438,32 @@ const StepAddAddress = ({
                                                     className="shadow bg-white rounded mt-1"
                                                     isSubmitting={isSubmitting}
                                                 />
+                                            </div>
+                                        )
+                                    case 'file-picker':
+                                        return (
+                                            <div
+                                                className="mt-1"
+                                                key={name || index}
+                                            >
+                                                <ATMFilePickerWrapper
+                                                    name={name}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    selectedFile={getTheValueByNameKey(name)}
+                                                    onSelect={(newFile) => {
+                                                        handleFileUpload(newFile, name)
+                                                    }}
+                                                    isSubmitting={isSubmitting}
+                                                />
+                                                {loaderState === name &&
+                                                    imageApiStatus ? (
+                                                    <div className="mt-3">
+                                                        <CircularProgress
+                                                            size={18}
+                                                        />
+                                                    </div>
+                                                ) : null}
                                             </div>
                                         )
                                     default:

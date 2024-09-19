@@ -56,6 +56,7 @@ const formFields: {
                 placeholder: 'Country',
                 type: 'select',
                 optionAccessKey: 'counrtyOptions',
+                required: true,
             },
             {
                 name: 'registrationAddress.state',
@@ -63,6 +64,7 @@ const formFields: {
                 placeholder: 'State',
                 type: 'select',
                 optionAccessKey: 'stateOptions',
+                required: true,
             },
             {
                 name: 'registrationAddress.district',
@@ -70,6 +72,7 @@ const formFields: {
                 placeholder: 'District',
                 type: 'select',
                 optionAccessKey: 'districtOptions',
+                required: true,
             },
             {
                 name: 'registrationAddress.pincode',
@@ -77,6 +80,7 @@ const formFields: {
                 placeholder: 'Pincode',
                 type: 'select',
                 optionAccessKey: 'pincodeOptions',
+                required: true,
             },
             {
                 name: 'registrationAddress.address',
@@ -84,6 +88,19 @@ const formFields: {
                 type: 'textarea',
                 placeholder: 'Address',
                 required: true,
+            },
+            {
+                name: 'registrationAddress.gstNumber',
+                label: 'GST No.',
+                placeholder: 'GST No.',
+                type: 'text',
+            },
+            {
+                name: 'registrationAddress.gstCertificate',
+                label: 'GST Certificate',
+                placeholder: 'GST Certificate',
+                type: 'file-picker',
+                offset: 1,
             },
         ],
     },
@@ -113,6 +130,7 @@ const formFields: {
                 placeholder: 'Country',
                 type: 'select',
                 optionAccessKey: 'billingCounrtyOptions',
+                required: true,
             },
             {
                 name: 'billingAddress.state',
@@ -120,6 +138,7 @@ const formFields: {
                 placeholder: 'State',
                 type: 'select',
                 optionAccessKey: 'billingStateOptions',
+                required: true,
             },
             {
                 name: 'billingAddress.district',
@@ -127,6 +146,7 @@ const formFields: {
                 placeholder: 'District',
                 type: 'select',
                 optionAccessKey: 'billingDistrictOptions',
+                required: true,
             },
             {
                 name: 'billingAddress.pincode',
@@ -134,6 +154,7 @@ const formFields: {
                 placeholder: 'Pincode',
                 type: 'select',
                 optionAccessKey: 'billingPincodeOptions',
+                required: true,
             },
             {
                 name: 'billingAddress.address',
@@ -141,6 +162,19 @@ const formFields: {
                 type: 'textarea',
                 placeholder: 'Address',
                 required: true,
+            },
+            {
+                name: 'billingAddress.gstNumber',
+                label: 'GST No.',
+                placeholder: 'GST No.',
+                type: 'text',
+            },
+            {
+                name: 'billingAddress.gstCertificate',
+                label: 'GST Certificate',
+                placeholder: 'GST Certificate',
+                type: 'file-picker',
+                offset: 1,
             },
         ],
     },

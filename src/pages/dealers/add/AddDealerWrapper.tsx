@@ -52,6 +52,8 @@ export type FormInitialValues = {
         district: string
         pincode: string
         pincodeSearch: string
+        gstNumber: string,
+        gstCertificate: string,
     }
     billingAddress: {
         phone: string
@@ -61,6 +63,8 @@ export type FormInitialValues = {
         district: string
         pincode: string
         pincodeSearch: string
+        gstNumber: string,
+        gstCertificate: string,
     }
     contactInformation: {
         name: string
@@ -242,6 +246,8 @@ const AddDealerWrapper = () => {
             district: '',
             pincode: '',
             pincodeSearch: '',
+            gstNumber: '',
+            gstCertificate: '',
         },
 
         billingAddress: {
@@ -252,6 +258,8 @@ const AddDealerWrapper = () => {
             district: '',
             pincode: '',
             pincodeSearch: '',
+            gstNumber: '',
+            gstCertificate: '',
         },
         contactInformation: [
             {
@@ -321,6 +329,8 @@ const AddDealerWrapper = () => {
                         stateId: values.registrationAddress.state,
                         districtId: values.registrationAddress.district,
                         pincodeId: values.registrationAddress.pincode,
+                        gstNumber: values.registrationAddress.gstNumber,
+                        gstCertificate: values.registrationAddress.gstCertificate,
                     },
                     billingAddress: {
                         phone: values.billingAddress.phone,
@@ -329,6 +339,8 @@ const AddDealerWrapper = () => {
                         stateId: values.billingAddress.state,
                         districtId: values.billingAddress.district,
                         pincodeId: values.billingAddress.pincode,
+                        gstNumber: values.billingAddress.gstNumber,
+                        gstCertificate: values.billingAddress.gstCertificate,
                     },
                     contactInformation: values.contactInformation,
                     document: {

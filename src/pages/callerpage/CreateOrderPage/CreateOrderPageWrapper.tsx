@@ -115,6 +115,7 @@ type LocalUserStorage = {
     mobileNo: string
     orderID: string
 }
+
 const CreateOrderPageWrapper = () => {
     const [orderData, setOrderData] = useState<any>({})
     const [customerReputationType, setCustomerReputationType] =
@@ -125,10 +126,12 @@ const CreateOrderPageWrapper = () => {
         SelectOption[] | []
     >([])
     const [addApi, setAddApi] = useState(false)
+    
     const [callerLoacalStorage, setcallerLoacalStorage] =
         useState<LocalUserStorage>()
 
     const locationUrl = useLocation()
+    console.log('locationUrl: ', locationUrl)
     const queryParams = new URLSearchParams(locationUrl.search)
     const createOrderState = locationUrl.state
     const phoneNumber = queryParams.get('phone')
@@ -136,10 +139,15 @@ const CreateOrderPageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
+    const companyCode = queryParams.get('companyCode')
     // const dstphone = queryParams.get('dstphone')
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
     )
+    
+    console.log('agentName: ', agentName)
+    console.log('companyCode: ', companyCode)
+
     const navigate = useNavigate()
     const { items, isTableLoading } = inboundCallerState
     // Table Data with MobileNo filtered
@@ -170,7 +178,7 @@ const CreateOrderPageWrapper = () => {
         }
     )
     const {
-        data: singleCallerListingData ,
+        data: singleCallerListingData,
         isFetching: singleIsCallerFetching,
         isLoading: singleIsCallerLoading,
     } = useGetOrderNumberCallerDataQuery<any>(
@@ -203,6 +211,7 @@ const CreateOrderPageWrapper = () => {
             // use object destructuring to remove the _id property
             addCallerForm({
                 ...rest,
+                companyCode:createOrderState?.companyCode,
                 preffered_delivery_date: preffered_delivery_date || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -241,7 +250,7 @@ const CreateOrderPageWrapper = () => {
         if (!singleIsCallerFetching && !singleIsCallerLoading) {
             setOrderData(singleCallerListingData?.data)
             setCustomerReputationType(
-                singleCallerListingData?.customerReputation 
+                singleCallerListingData?.customerReputation
             )
             setAddApi(true)
         }
@@ -418,8 +427,8 @@ const CreateOrderPageWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>

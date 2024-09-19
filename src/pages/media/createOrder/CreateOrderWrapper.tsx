@@ -24,6 +24,7 @@ export type FormInitialValues = {
     campaignName: string
     mobileNumber: string
     callType: string
+    companyCode: string
 }
 
 export const regIndiaPhone = RegExp(/^[0]?[6789]\d{9}$/)
@@ -41,6 +42,7 @@ const CreateOrderWrapper = (props: Props) => {
         campaignName: '',
         mobileNumber: '',
         callType: '',
+        companyCode: '',
     }
 
     // Form Validation Schema
@@ -54,6 +56,7 @@ const CreateOrderWrapper = (props: Props) => {
             .matches(regIndiaPhone, 'Invalid Mobile number')
             .required('Mobile number is required'),
         callType: string().required('Calltype is required'),
+        companyCode: string().required('Company code is required'),
     })
 
     //    Form Submit Handler
@@ -62,7 +65,7 @@ const CreateOrderWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             setApiStatus(false)
-            navigate('/page-master/order-creation', {
+            navigate('/order-creation', {
                 state: values,
             })
         }, 1000)

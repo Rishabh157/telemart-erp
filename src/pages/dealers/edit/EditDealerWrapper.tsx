@@ -53,6 +53,8 @@ export type FormInitialValues = {
         stateId: string
         districtId: string
         pincodeId: string
+        gstNumber: string
+        gstCertificate: string
     }
     billingAddress: {
         phone: string
@@ -61,6 +63,8 @@ export type FormInitialValues = {
         stateId: string
         districtId: string
         pincodeId: string
+        gstNumber: string
+        gstCertificate: string
     }
     contactInformation: {
         name: string
@@ -121,6 +125,10 @@ const steps = [
         component: StepEditAddressWrapper,
         validationSchema: object({
             registrationAddress: object().shape({
+                gstNumber: string().matches(
+                    validationofGst,
+                    'gst number must be valid'
+                ),
                 phone: string()
                     .max(10, 'maximum 10 digits')
                     .min(10, 'minimum 10 digits')
@@ -133,6 +141,10 @@ const steps = [
                 pincodeId: string().required('Please select a pincode'),
             }),
             billingAddress: object().shape({
+                gstNumber: string().matches(
+                    validationofGst,
+                    'gst number must be valid'
+                ),
                 phone: string()
                     .max(10, 'maximum 10 digits')
                     .matches(regIndiaPhone, 'Invalid Mobile Number')
@@ -220,7 +232,7 @@ const EditDealerWrapper = () => {
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetDealerByIdQuery(Id),
     })
-    
+
     // From Initial Values
     const initialValues: FormInitialValues = {
         dealerCode: selectedItem?.dealerCode || '',
@@ -242,6 +254,8 @@ const EditDealerWrapper = () => {
             stateId: selectedItem?.registrationAddress.stateId || '',
             districtId: selectedItem?.registrationAddress.districtId || '',
             pincodeId: selectedItem?.registrationAddress.pincodeId || '',
+            gstNumber: selectedItem?.registrationAddress.gstNumber || '',
+            gstCertificate: selectedItem?.registrationAddress.gstCertificate || '',
         },
         billingAddress: {
             phone: selectedItem?.billingAddress.phone || '',
@@ -250,6 +264,8 @@ const EditDealerWrapper = () => {
             stateId: selectedItem?.billingAddress.stateId || '',
             districtId: selectedItem?.billingAddress.districtId || '',
             pincodeId: selectedItem?.billingAddress.pincodeId || '',
+            gstNumber: selectedItem?.billingAddress.gstNumber || '',
+            gstCertificate: selectedItem?.billingAddress.gstCertificate || '',
         },
         contactInformation: selectedItem?.contactInformation || [],
         document: {
@@ -315,6 +331,8 @@ const EditDealerWrapper = () => {
                             stateId: values.registrationAddress.stateId,
                             districtId: values.registrationAddress.districtId,
                             pincodeId: values.registrationAddress.pincodeId,
+                            gstNumber: values.registrationAddress.pincodeId,
+                            gstCertificate: ''
                         },
                         billingAddress: {
                             phone: values.billingAddress.phone,
@@ -323,6 +341,8 @@ const EditDealerWrapper = () => {
                             stateId: values.billingAddress.stateId,
                             districtId: values.billingAddress.districtId,
                             pincodeId: values.billingAddress.pincodeId,
+                            gstNumber: '',
+                            gstCertificate: ''
                         },
                         contactInformation: contactInformation,
                         document: {

@@ -22,27 +22,27 @@ const configurationNavigation: NavItemType[] = [
     {
         label: 'Dealer Ndr',
         icon: MdViewTimeline,
-        path: '/dealer-ndrcalling?phone=9009648665&username=rishabh.gour',
+        path: '/dealer-ndrcalling?phone=9009648665&username=test',
         // ?phone={{PHONENUMBER}}&user={{USERLOGIN}}&postalcode={{postalcode}}&verve=111&dstphone={{dnis}}&campaignId={{CAMPNAME}}
         name: UserModuleNameTypes.NAV_DEALER_NDR_PAGE,
     },
     {
         label: 'Sales',
         icon: MdViewTimeline,
-        path: '/caller-page?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound&companyCode=SAP',
+        path: '/caller-page?phone=9009648665&username=test&campaign=DHUANDHAAR&didnumber=+914035279009&calltype=inbound&companyCode=SKYTEL',
         name: UserModuleNameTypes.NAV_SALES_PAGE,
     },
     {
         label: 'Customer Care',
         icon: MdViewTimeline,
-        path: '/customer-care?phone=9009648665&username=rishabh.gour&campaign=DHUANDHAAR&didnumber=6629300&calltype=inbound&companyCode=SAP',
+        path: '/customer-care?phone=9009648665&username=test&campaign=DHUANDHAAR&didnumber=+914035279009&calltype=inbound&companyCode=SKYTEL',
         // https://out.onetelemart.com:445/calling/default.aspx?phone={{PHONENUMBER}}\&userlogin={{USERLOGIN}}\&postalcode=111\&dstphone={{dnis}}\&campaignId={{CAMPNAME}}
         name: UserModuleNameTypes.NAV_CUSTOMER_CARE_PAGE,
     },
     {
         label: 'Courier NDR',
         icon: MdViewTimeline,
-        path: '/courier-ndr?phone=9009648665&username=rishabh.gour&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR',
+        path: '/courier-ndr?phone=9009648665&username=test&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR&companyCode=SKYTEL',
         name: UserModuleNameTypes.NAV_COURIER_NDR_PAGE,
     },
 ]

@@ -47,6 +47,8 @@ export type registrationAddress = {
     stateId: string
     districtId: string
     pincodeId: string
+    gstNumber: string
+    gstCertificate: string
 }
 
 export type billingAddress = {
@@ -56,7 +58,10 @@ export type billingAddress = {
     stateId: string
     districtId: string
     pincodeId: string
+    gstNumber: string
+    gstCertificate: string
 }
+
 export type contactInformation = {
     name: string
     department: string

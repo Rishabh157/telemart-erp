@@ -11,6 +11,8 @@ import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import { FormInitialValues } from './CreateOrderWrapper'
 import { FormikProps } from 'formik'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllCompaniesQuery } from 'src/services/CompanyServices'
 
 // |-- Types --|
 type Props = {
@@ -20,6 +22,7 @@ type Props = {
 
 const CreateOrder = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+    console.log('values: ', values)
 
     const dispatch = useDispatch()
 
@@ -43,6 +46,13 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
             value: 'MANUAL',
         },
     ]
+
+
+    const { options: allCompaniesOptions } = useCustomOptions({
+        useEndPointHook: useGetAllCompaniesQuery(''),
+        keyName: 'companyCode',
+        value: 'companyCode',
+    })
 
     return (
         <MainLayout>
@@ -69,9 +79,8 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                                 onClick={() => formikProps.handleSubmit()}
                             >
                                 Redirect
@@ -90,7 +99,7 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
                                 value={values?.userName}
                                 label="User Name"
                                 placeholder="Enter username"
-                                onChange={(e) => {}}
+                                onChange={(e) => { }}
                             />
 
                             <ATMTextField
@@ -147,6 +156,18 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
                                 value={values?.callType}
                                 onChange={(e) => {
                                     handleSetFieldValue('callType', e)
+                                }}
+                            />
+
+                            {/* Branch Name */}
+                            <ATMSelectSearchable
+                                required
+                                name="companyCode"
+                                label="Company Code"
+                                options={allCompaniesOptions}
+                                value={values?.companyCode}
+                                onChange={(e) => {
+                                    handleSetFieldValue('companyCode', e)
                                 }}
                             />
                         </div>

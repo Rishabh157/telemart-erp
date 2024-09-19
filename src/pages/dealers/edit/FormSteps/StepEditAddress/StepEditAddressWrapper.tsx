@@ -38,110 +38,144 @@ const formFields: {
         | 'billingPincodeOptions'
     >[]
 }[] = [
-    {
-        sectionName: 'Regd. Address',
-        fields: [
-            {
-                name: 'registrationAddress.phone',
-                label: 'Phone',
-                placeholder: 'Phone',
-                required: true,
-            },
-            {
-                name: 'registrationAddress.countryId',
-                label: 'Country',
-                placeholder: 'Country',
-                type: 'select',
-                optionAccessKey: 'counrtyOptions',
-            },
-            {
-                name: 'registrationAddress.stateId',
-                label: 'State',
-                placeholder: 'State',
-                type: 'select',
-                optionAccessKey: 'stateOptions',
-            },
-            {
-                name: 'registrationAddress.districtId',
-                label: 'District',
-                placeholder: 'District',
-                type: 'select',
-                optionAccessKey: 'districtOptions',
-            },
-            {
-                name: 'registrationAddress.pincodeId',
-                label: 'Pincode',
-                placeholder: 'Pincode',
-                type: 'select',
-                optionAccessKey: 'pincodeOptions',
-            },
-            {
-                name: 'registrationAddress.address',
-                label: 'Address',
-                type: 'textarea',
-                placeholder: 'Address',
-                required: true,
-            },
-        ],
-    },
-    {
-        sectionName: '',
-        fields: [
-            {
-                name: 'checkbox',
-                label: 'As Above values',
-                type: 'checkbox',
-                placeholder: 'checbox',
-            },
-        ],
-    },
-    {
-        sectionName: 'Billing Address',
-        fields: [
-            {
-                name: 'billingAddress.phone',
-                label: 'Phone',
-                placeholder: 'Phone',
-                required: true,
-            },
-            {
-                name: 'billingAddress.countryId',
-                label: 'Country',
-                placeholder: 'Country',
-                type: 'select',
-                optionAccessKey: 'billingCounrtyOptions',
-            },
-            {
-                name: 'billingAddress.stateId',
-                label: 'State',
-                placeholder: 'State',
-                type: 'select',
-                optionAccessKey: 'billingStateOptions',
-            },
-            {
-                name: 'billingAddress.districtId',
-                label: 'District',
-                placeholder: 'District',
-                type: 'select',
-                optionAccessKey: 'billingDistrictOptions',
-            },
-            {
-                name: 'billingAddress.pincodeId',
-                label: 'Pincode',
-                placeholder: 'Pincode',
-                type: 'select',
-                optionAccessKey: 'billingPincodeOptions',
-            },
-            {
-                name: 'billingAddress.address',
-                label: 'Address',
-                type: 'textarea',
-                placeholder: 'Address',
-                required: true,
-            },
-        ],
-    },
-]
+        {
+            sectionName: 'Regd. Address',
+            fields: [
+                {
+                    name: 'registrationAddress.phone',
+                    label: 'Phone',
+                    placeholder: 'Phone',
+                    required: true,
+                },
+                {
+                    name: 'registrationAddress.countryId',
+                    label: 'Country',
+                    placeholder: 'Country',
+                    type: 'select',
+                    optionAccessKey: 'counrtyOptions',
+                    required: true,
+                },
+                {
+                    name: 'registrationAddress.stateId',
+                    label: 'State',
+                    placeholder: 'State',
+                    type: 'select',
+                    optionAccessKey: 'stateOptions',
+                    required: true,
+                },
+                {
+                    name: 'registrationAddress.districtId',
+                    label: 'District',
+                    placeholder: 'District',
+                    type: 'select',
+                    optionAccessKey: 'districtOptions',
+                    required: true,
+                },
+                {
+                    name: 'registrationAddress.pincodeId',
+                    label: 'Pincode',
+                    placeholder: 'Pincode',
+                    type: 'select',
+                    optionAccessKey: 'pincodeOptions',
+                    required: true,
+                },
+                {
+                    name: 'registrationAddress.address',
+                    label: 'Address',
+                    type: 'textarea',
+                    placeholder: 'Address',
+                    required: true,
+                },
+                {
+                    name: 'registrationAddress.gstNumber',
+                    label: 'GST No.',
+                    placeholder: 'GST No.',
+                    type: 'text',
+                },
+                {
+                    name: 'registrationAddress.gstCertificate',
+                    label: 'GST Certificate',
+                    placeholder: 'GST Certificate',
+                    type: 'file-picker',
+                    offset: 1,
+                },
+            ],
+        },
+        {
+            sectionName: '',
+            fields: [
+                {
+                    name: 'checkbox',
+                    label: 'As Above values',
+                    type: 'checkbox',
+                    placeholder: 'checbox',
+                },
+            ],
+        },
+        {
+            sectionName: 'Billing Address',
+            fields: [
+                {
+                    name: 'billingAddress.phone',
+                    label: 'Phone',
+                    placeholder: 'Phone',
+                    required: true,
+                },
+                {
+                    name: 'billingAddress.countryId',
+                    label: 'Country',
+                    placeholder: 'Country',
+                    type: 'select',
+                    optionAccessKey: 'billingCounrtyOptions',
+                    required: true,
+                },
+                {
+                    name: 'billingAddress.stateId',
+                    label: 'State',
+                    placeholder: 'State',
+                    type: 'select',
+                    optionAccessKey: 'billingStateOptions',
+                    required: true,
+                },
+                {
+                    name: 'billingAddress.districtId',
+                    label: 'District',
+                    placeholder: 'District',
+                    type: 'select',
+                    optionAccessKey: 'billingDistrictOptions',
+                    required: true,
+                },
+                {
+                    name: 'billingAddress.pincodeId',
+                    label: 'Pincode',
+                    placeholder: 'Pincode',
+                    type: 'select',
+                    optionAccessKey: 'billingPincodeOptions',
+                    required: true,
+                },
+                {
+                    name: 'billingAddress.address',
+                    label: 'Address',
+                    type: 'textarea',
+                    placeholder: 'Address',
+                    required: true,
+                },
+                {
+                    name: 'billingAddress.gstNumber',
+                    label: 'GST No.',
+                    placeholder: 'GST No.',
+                    type: 'text',
+                },
+                {
+                    name: 'billingAddress.gstCertificate',
+                    label: 'GST Certificate',
+                    placeholder: 'GST Certificate',
+                    type: 'file-picker',
+                    offset: 1,
+                },
+            ],
+        },
+    ]
 
 const StepEditAddressWrapper = ({ formikProps }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
@@ -259,13 +293,11 @@ const StepEditAddressWrapper = ({ formikProps }: Props) => {
     }
 
     return (
-        <>
-            <StepAddAddress
-                formikProps={formikProps}
-                formFields={formFields}
-                dropdownOptions={dropdownOptions}
-            />
-        </>
+        <StepAddAddress
+            formikProps={formikProps}
+            formFields={formFields}
+            dropdownOptions={dropdownOptions}
+        />
     )
 }
 

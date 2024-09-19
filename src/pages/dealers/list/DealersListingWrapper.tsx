@@ -182,16 +182,6 @@ const DealersListingWrapper = () => {
             },
         },
         {
-            field: 'billingAddressDistrictName',
-            headerName: 'District',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.DEALER_LIST_DISTRICT,
-            renderCell: (row: DealersListResponse) => {
-                return <span> {row.billingAddressDistrictName} </span>
-            },
-        },
-        {
             field: 'billingAddressStateName',
             headerName: 'State',
             extraClasses: 'min-w-[150px]',
@@ -199,6 +189,16 @@ const DealersListingWrapper = () => {
             name: UserModuleNameTypes.DEALER_LIST_STATE,
             renderCell: (row: DealersListResponse) => {
                 return <span> {row.billingAddressStateName} </span>
+            },
+        },
+        {
+            field: 'billingAddressDistrictName',
+            headerName: 'District',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1.5_1.5_0%]',
+            name: UserModuleNameTypes.DEALER_LIST_DISTRICT,
+            renderCell: (row: DealersListResponse) => {
+                return <span> {row.billingAddressDistrictName} </span>
             },
         },
         {

@@ -45,6 +45,7 @@ export type OrderListResponse = {
     callType: string
     campaign: string
     customerName: string
+    orderInvoice: string
     deliveryTimeAndDate: string
     countryId: string | null
     stateId: string
@@ -54,6 +55,7 @@ export type OrderListResponse = {
     schemeName: string
     schemeCode: string
     isOrderAssigned: boolean
+    batchId : string | null
     pincodeId: string
     pincodeSecondId: string | null
     areaId: string

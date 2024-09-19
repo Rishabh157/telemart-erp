@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { FormikProps } from 'formik'
@@ -19,6 +19,10 @@ import {
     setFormSubmitting,
 } from 'src/redux/slices/authSlice'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { CircularProgress } from '@mui/material'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -57,7 +61,7 @@ const StepEditAddress = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue }: { values: any; setFieldValue: any } =
-    formikProps
+        formikProps
     const { formSubmitting: isSubmitting } = useSelector(
         (state: RootState) => state?.auth
     )
@@ -66,6 +70,46 @@ const StepEditAddress = ({
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+
+    const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
+    const [loaderState, setLoaderState] = useState<string>('')
+    const [uploadFile] = useAddFileUrlMutation()
+
+    const getTheValueByNameKey = (name: string) => {
+        switch (name) {
+            case 'registrationAddress.gstCertificate':
+                return values?.registrationAddress?.gstCertificate
+            case 'billingAddress.gstCertificate':
+                return values?.billingAddress?.gstCertificate
+            default:
+                return ''
+        }
+    }
+
+    const handleFileUpload = (file: File, name: string) => {
+        let formData = new FormData()
+        setLoaderState(name)
+        setImageApiStatus(true)
+        formData.append(
+            'type',
+            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
+        )
+        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('file', file || '', file?.name)
+
+        // call the file manager api
+        uploadFile(formData).then((res: any) => {
+            if ('data' in res) {
+                setImageApiStatus(false)
+                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                setFieldValue(name, fileUrl)
+                setLoaderState('')
+                setImageApiStatus(false)
+            }
+        })
+    }
+
     return (
         <div >
             {formFields?.map((formField, index) => {
@@ -198,6 +242,8 @@ const StepEditAddress = ({
                                                             phone,
                                                             pincodeId,
                                                             stateId,
+                                                            gstNumber,
+                                                            gstCertificate
                                                         } =
                                                             values.registrationAddress
                                                         handleSetFieldValue(
@@ -224,6 +270,14 @@ const StepEditAddress = ({
                                                             'billingAddress.stateId',
                                                             stateId
                                                         )
+                                                        setFieldValue(
+                                                            'billingAddress.gstNumber',
+                                                            gstNumber
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.gstCertificate',
+                                                            gstCertificate
+                                                        )
                                                     } else {
                                                         handleSetFieldValue(
                                                             'billingAddress.address',
@@ -247,6 +301,14 @@ const StepEditAddress = ({
                                                         )
                                                         handleSetFieldValue(
                                                             'billingAddress.stateId',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.gstNumber',
+                                                            ''
+                                                        )
+                                                        setFieldValue(
+                                                            'billingAddress.gstCertificate',
                                                             ''
                                                         )
                                                     }
@@ -285,6 +347,32 @@ const StepEditAddress = ({
                                                     className="shadow bg-white rounded mt-1"
                                                     isSubmitting={isSubmitting}
                                                 />
+                                            </div>
+                                        )
+                                    case 'file-picker':
+                                        return (
+                                            <div
+                                                className="mt-1"
+                                                key={name || index}
+                                            >
+                                                <ATMFilePickerWrapper
+                                                    name={name}
+                                                    label={label}
+                                                    placeholder={placeholder}
+                                                    selectedFile={getTheValueByNameKey(name)}
+                                                    onSelect={(newFile) => {
+                                                        handleFileUpload(newFile, name)
+                                                    }}
+                                                    isSubmitting={isSubmitting}
+                                                />
+                                                {loaderState === name &&
+                                                    imageApiStatus ? (
+                                                    <div className="mt-3">
+                                                        <CircularProgress
+                                                            size={18}
+                                                        />
+                                                    </div>
+                                                ) : null}
                                             </div>
                                         )
                                     default:

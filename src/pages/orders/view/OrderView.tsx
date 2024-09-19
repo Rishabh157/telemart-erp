@@ -7,10 +7,12 @@ import ATMBreadCrumbs, {
 } from '../../../components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from '../../../components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { OrderListResponse } from 'src/models'
+import moment from 'moment'
 
 // |-- Types --|
 type Props = {
-    items: any
+    items: OrderListResponse
     historyColumns: any
     orderHistory: any
 }
@@ -37,500 +39,503 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
 
                 {/* Page Heading */}
                 <div className="pt-1 ">
-                    <ATMPageHeading> Order</ATMPageHeading>
+                    <ATMPageHeading>All Order Details</ATMPageHeading>
                 </div>
 
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
-                    <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
-                        {/* Form Step Label */}
-                        <div className="text-xl font-medium pl-2">
-                            {' '}
-                            All Details{' '}
-                        </div>
-                        {/* BUTTON - Add SO */}
-                        <div></div>
-                    </div>
+                {/* General Information */}
+                <div className='bg-white shadow border p-4 rounded-lg'>
+                    {/* Heading */}
+                    <p className='border-l-[3px] border-fuchsia-600 px-2 py-1 font font-medium text-md bg-white text-fuchsia-600'>
+                        General Information
+                    </p>
 
-                    {/* General Infromation */}
+                    {/* Border */}
+                    {/* <p className='border-b border-slate-300 mt-2'>  </p> */}
 
-                    <div className="grow px-3 ">
-                        <div className="grid grid-cols-1">
-                            <div className="grow py-8 px-3">
-                                <div className=" flex col-span-2 text-lg pb-2 font-medium text-primary-main pl-2">
-                                    General Information
+                    {/* Information */}
+                    <div className='grid grid-cols-12 md:gap-8 xs:gap-4 md:py-0 xs:py-4'>
+                        <div className='xl:col-span-4 md:col-span-6 xs:col-span-12 md:py-4'>
+                            <div className='flex flex-col gap-4 px-4'>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Order Number
+                                    </span>
+                                    <span className='text-sm text-primary-main font-semibold'># {items?.orderNumber}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Call Type
+                                    </span>
+                                    <span className='text-sm font-bold uppercase'>{items?.callType}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Status
+                                    </span>
+                                    <span className='text-sm font-bold text-green-600 uppercase'>{items?.status}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Agent Name
+                                    </span>
+                                    <span className='text-sm font-bold capitalize'>{items?.agentName}</span>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-3 pl-6 py-6 border border-l-2">
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
-                                            Order Number{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-primary-main col-span-1">
-                                            {items?.orderNumber === ''
-                                                ? 'NA'
-                                                : ` # ${items?.orderNumber}`}
-                                        </p>
-                                    </div>
+                            </div>
+                        </div>
 
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
-                                            DID Number{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-slate-600  col-span-1">
-                                            {items?.didNo === ''
-                                                ? 'NA'
-                                                : items?.didNo}
-                                        </p>
-                                    </div>
+                        <div className='xl:col-span-4 md:col-span-6 xs:col-span-12 md:py-4'>
+                            <div className='flex flex-col gap-4 px-4'>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        DID Number
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.didNo}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Campaign
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.campaign}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Mobile Number
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.mobileNo}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Alternate Number
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.alternateNo || '-'}</span>
+                                </div>
+                            </div>
+                        </div>
 
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
-                                            In/Out Bound{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-slate-600 col-span-1 capitalize">
-                                            {items?.callType === ''
-                                                ? 'NA'
-                                                : items?.callType}
-                                        </p>
-                                    </div>
-
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
-                                            Incomming Caller No{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-slate-600">
-                                            {items?.incomingCallerNo === ''
-                                                ? 'NA'
-                                                : items?.incomingCallerNo}
-                                        </p>
-                                    </div>
-
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
-                                            Mobile Number{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-slate-600 col-span-1">
-                                            {items?.mobileNo === ''
-                                                ? 'NA'
-                                                : items?.mobileNo}
-                                        </p>
-                                    </div>
-
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
-                                            Scheme Name{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-slate-600 col-span-1">
-                                            {items?.schemeName === ''
-                                                ? 'NA'
-                                                : items?.schemeName}
-                                        </p>
-                                    </div>
-
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
-                                            Whatsapp No.{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-slate-600 col-span-1">
-                                            {items?.whatsappNo === ''
-                                                ? 'NA'
-                                                : items?.whatsappNo}
-                                        </p>
-                                    </div>
-                                    <div className="grid grid-cols-3">
-                                        <h1 className="text-gray-800 col-span-1">
-                                            Assigned To{' '}
-                                        </h1>
-                                        <p className=" col-span-1 text-center">
-                                            {' '}
-                                            -{' '}
-                                        </p>
-                                        <p className="text-slate-600 col-span-1">
-                                            {items?.assignWarehouseId !==
-                                                null ||
-                                                items?.assignDealerId !== null
-                                                ? items?.assignDealerLabel + ` ( ${items?.assignDealerCode} ) ` ||
-                                                items?.assignWarehouseLabel
-                                                : 'NA'}
-                                        </p>
-                                    </div>
+                        <div className='xl:col-span-4 md:col-span-6 xs:col-span-12 md:py-4'>
+                            <div className='flex flex-col gap-4 px-4'>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Assigne To {items?.assignDealerId === null ? 'Warehouse' : 'Dealer'}
+                                    </span>
+                                    <span className='text-sm font-bold'>
+                                        {items?.assignDealerId === null ? items?.assignWarehouseLabel : `${items?.assignDealerLabel} + (${items?.assignDealerCode})`}
+                                    </span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Customer Name
+                                    </span>
+                                    <span className='text-sm font-bold capitalize'>{items?.customerName || '-'}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Customer Email
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.emailId || '-'}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Whatsapp Number
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.whatsappNo || '-'}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="grow  px-3 ">
-                        <div className="grid grid-cols-2">
-                            {/*  Address Information  */}
-                            <div className="grow py-1 px-3">
-                                <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
-                                    Personal Information
-                                </div>
-                                <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-2">
-                                    <h1 className="text-gray-800">
-                                        Agent Name{' '}
-                                    </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.agentName === ''
-                                            ? 'NA'
-                                            : items?.agentName}
-                                    </p>
+                {/* Cards Tabs */}
+                <div className="grid grid-cols-12 gap-6">
 
-                                    <h1 className="text-gray-800">Name</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.customerName === ''
-                                            ? 'NA'
-                                            : items?.customerName}
-                                    </p>
+                    {/*  Address */}
+                    <div className='p-4 xl:col-span-4 md:col-span-6 xs:col-span-12 shadow mt-3 bg-white rounded-lg'>
 
-                                    <h1 className="text-gray-800">Age </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.age === '' ? 'NA' : items?.age}
-                                    </p>
+                        {/* Heading */}
+                        <p className='border-l-[3px] border-indigo-600 px-2 py-1 font font-medium text-md bg-white text-indigo-600'>
+                            Address
+                        </p>
 
-                                    <h1 className="text-gray-800">Address</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.autoFillingShippingAddress ===
-                                            ''
-                                            ? 'NA'
-                                            : items?.autoFillingShippingAddress}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Relation</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.relation === ''
-                                            ? 'NA'
-                                            : items?.relation}
-                                    </p>
-
-                                    <h1 className="text-gray-800">District </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.districtLabel === ''
-                                            ? 'NA'
-                                            : items?.districtLabel}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Landmark </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.landmark === ''
-                                            ? 'NA'
-                                            : items?.landmark}
-                                    </p>
-
-                                    <h1 className="text-gray-800">
-                                        Alternate No{' '}
-                                    </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.mobileNo === ''
-                                            ? 'NA'
-                                            : items?.mobileNo}
-                                    </p>
-
-                                    <h1 className="text-gray-800">
-                                        Whatsapp No{' '}
-                                    </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.whatsappNo === ''
-                                            ? 'NA'
-                                            : items?.whatsappNo}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Gender </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.gender === ''
-                                            ? 'NA'
-                                            : items?.gender}
-                                    </p>
-
-                                    {/* <h1 className="text-gray-800">Channel </h1>
-																		<p >-</p>
-                                    <p className="text-slate-600">
-                                        {(items?.channelLabel === "")? "NA": items?.channelLabel}
-                                    </p> */}
-
-                                    <h1 className="text-gray-800">Email</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.emailId === ''
-                                            ? 'NA'
-                                            : items?.emailId}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Prepaid</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.prepaid === false
-                                            ? 'No'
-                                            : 'Yes'}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Remarks</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.remark === ''
-                                            ? 'NA'
-                                            : items?.remark}
-                                    </p>
-                                </div>
+                        <div className='flex flex-col gap-4 px-3 py-4'>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Full Address
+                                </span>
+                                <span
+                                    className='text-sm font-semibold w-[70%] truncate'
+                                    title={items?.autoFillingShippingAddress}
+                                >
+                                    {items?.autoFillingShippingAddress}
+                                </span>
                             </div>
-
-                            {/*  Address Information  */}
-                            <div className="grow py-1 px-3">
-                                <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
-                                    Address Information
-                                </div>
-                                <div className="grid grid-cols-3 gap-3 pl-6 py-6 border border-l-2">
-                                    <h1 className="text-gray-800">
-                                        Delivery Charges{' '}
-                                    </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.deliveryCharges === ''
-                                            ? 'NA'
-                                            : items?.deliveryCharges}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Discount</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.discount === ''
-                                            ? 'NA'
-                                            : items?.discount}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Total </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.totalAmount === ''
-                                            ? 'NA'
-                                            : items?.totalAmount}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Country</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.countryLabel === ''
-                                            ? 'NA'
-                                            : items?.countryLabel}
-                                    </p>
-
-                                    <h1 className="text-gray-800">State</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.stateLabel === ''
-                                            ? 'NA'
-                                            : items?.stateLabel}
-                                    </p>
-
-                                    <h1 className="text-gray-800">District </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.districtLabel === ''
-                                            ? 'NA'
-                                            : items?.districtLabel}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Tehsil </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.tehsilLabel === ''
-                                            ? 'NA'
-                                            : items?.tehsilLabel}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Pincode </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.pincodeLabel === ''
-                                            ? 'NA'
-                                            : items?.pincodeLabel}
-                                    </p>
-
-                                    <h1 className="text-gray-800">Area</h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.areaLabel === ''
-                                            ? 'NA'
-                                            : items?.areaLabel}
-                                    </p>
-
-                                    <h1 className="text-gray-800">
-                                        Expected Delivery Date{' '}
-                                    </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.expectedDeliveryDate === ''
-                                            ? 'NA'
-                                            : items?.expectedDeliveryDate}
-                                    </p>
-
-                                    <h1 className="text-gray-800">
-                                        Delivered By{' '}
-                                    </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.profileDeliveredBy === ''
-                                            ? 'NA'
-                                            : items?.profileDeliveredBy}
-                                    </p>
-
-                                    <h1 className="text-gray-800">
-                                        Complaint Details{' '}
-                                    </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.complaintDetails === ''
-                                            ? 'NA'
-                                            : items?.complaintDetails}
-                                    </p>
-
-                                    <h1 className="text-gray-800">
-                                        Complaint No{' '}
-                                    </h1>
-                                    <p className="text-center">-</p>
-                                    <p className="text-slate-600">
-                                        {items?.complaintNo === ''
-                                            ? 'NA'
-                                            : items?.complaintNo}
-                                    </p>
-                                </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    State
+                                </span>
+                                <span className='text-sm capitalize font-semibold'>
+                                    {items?.stateLabel}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    District
+                                </span>
+                                <span className='text-sm capitalize font-semibold'>
+                                    {items?.districtLabel}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Tehsil
+                                </span>
+                                <span className='text-sm capitalize font-semibold'>
+                                    {items?.tehsilLabel}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Pincode
+                                </span>
+                                <span className='text-sm font-semibold'>
+                                    {items?.pincodeLabel}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Area
+                                </span>
+                                <span className='text-sm capitalize font-semibold'>
+                                    {items?.areaLabel}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    House Number
+                                </span>
+                                <span className='text-sm capitalize font-semibold'>
+                                    {items?.houseNumber || '-'}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Landmark
+                                </span>
+                                <span className='text-sm capitalize font-semibold'>
+                                    {items?.landmark || '-'}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Street Number
+                                </span>
+                                <span className='text-sm capitalize font-semibold'>
+                                    {items?.streetNumber || '-'}
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    {/*  NDR Information  */}
-                    <div className="grow px-3 py-8">
-                        <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
-                            NDR Information
-                        </div>
+                    {/* Scheme Products & Price Details */}
+                    <div className='p-4 xl:col-span-4 md:col-span-6 xs:col-span-12 shadow mt-3 bg-white rounded-lg'>
 
-                        <div className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2">
-                            <h1 className="text-gray-800"> Remark </h1>
-                            <p >-</p>
-                            <p className="text-slate-600">
-                                {items?.ndrRemark === ''
-                                    ? 'NA'
-                                    : items?.ndrRemark}
-                            </p>
-                            <h1 className="text-gray-800">
-                                Discount Applicable{' '}
-                            </h1>
-                            <p >-</p>
-                            <p className="text-slate-600">
-                                {items?.ndrDiscountApplicable ? 'YES' : 'NO'}
-                            </p>
-                            <h1 className="text-gray-800">Approved By </h1>
-                            <p >-</p>
-                            <p className="text-slate-600">
-                                {items?.ndrApprovedBy === ''
-                                    ? 'NA'
-                                    : items?.ndrApprovedBy}
-                            </p>
+                        {/* Heading */}
+                        <p className='border-l-[3px] border-indigo-600 px-2 py-1 font font-medium text-md bg-white text-indigo-600'>
+                            Scheme Products & Price Details
+                        </p>
 
-                            <h1 className="text-gray-800">
-                                RTO Reattempt reason{' '}
-                            </h1>
-                            <p >-</p>
-                            <p className="text-slate-600">
-                                {items?.ndrRtoReattemptReason === null
-                                    ? 'NA'
-                                    : items?.ndrRtoReattemptReason}
-                            </p>
-                            <h1 className="text-gray-800">Call Disposition </h1>
-                            <p >-</p>
-                            <p className="text-slate-600">
-                                {items?.ndrCallDisposition === ''
-                                    ? 'NA'
-                                    : items?.ndrCallDisposition}
-                            </p>
-                            <h1 className="text-gray-800">Dealer Remark </h1>
-                            <p >-</p>
-                            <p className="text-slate-600">
-                                {items?.dealerValidRemark === ''
-                                    ? 'NA'
-                                    : items?.dealerValidRemark}
-                            </p>
+                        <div className='flex flex-col gap-4 px-3 py-4'>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Scheme Name
+                                </span>
+                                <span className='text-sm text-[#ce7909] font-semibold'>
+                                    {items?.schemeName || '-'}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Scheme Quantity
+                                </span>
+                                <span className='text-sm text-primary-main font-semibold'>
+                                    {items?.shcemeQuantity}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    HSN Code
+                                </span>
+                                <span className='text-sm font-semibold'>
+                                    {items?.hsnCode || '-'}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Transaction ID
+                                </span>
+                                <span className='text-sm font-semibold'>
+                                    {items?.transactionId || 'NA'}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Order Invoice
+                                </span>
+                                <span className='text-sm font-semibold'>
+                                    {items?.orderInvoice ?
+                                        <a className='text-primary-main hover:underline'
+                                            href={`${items?.orderInvoice}`}
+                                            target='_blank'
+                                            rel="noreferrer"
+                                        >
+                                            PDF
+                                        </a> : 'NA'
+                                    }
+                                </span>
+                            </div>
+
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Payment Mode
+                                </span>
+                                <span className='text-sm font-semibold text-green-500'>
+                                    {items?.paymentMode}
+                                </span>
+                            </div>
+
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Price
+                                </span>
+                                <span className='text-sm text-primary-main font-semibold'>
+                                    &#x20B9; {items?.price || 0} /-
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Delivery Charges
+                                </span>
+                                <span className='text-sm text-primary-main font-semibold'>
+                                    &#x20B9; {items?.deliveryCharges || 0} /-
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Total Amount
+                                </span>
+                                <span className='text-sm text-primary-main font-semibold'>
+                                    &#x20B9; {items?.totalAmount || 0} /-
+                                </span>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="grow px-3 py-8">
-                        <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
-                            Other Information
-                        </div>
-                        <div className="grid grid-cols-3 gap-2 pl-6 py-6 border border-l-2">
-                            <h1 className="text-gray-800">
-                                Disposition Level Two{' '}
-                            </h1>
-                            <p >-</p>
-                            <p className="text-slate-600">
-                                {items?.dispositionLevelTwo === ''
-                                    ? 'NA'
-                                    : items?.dispositionLevelTwo}
-                            </p>
-                            <h1 className="text-gray-800">
-                                Disposition Level Three{' '}
-                            </h1>
-                            <p >-</p>
-                            <p className="text-slate-600">
-                                {items?.dispositionLevelThree === ''
-                                    ? 'NA'
-                                    : items?.dispositionLevelThree}
-                            </p>
+
+                    {/* Reason Of Order */}
+                    <div className='p-4 xl:col-span-4 md:col-span-6 xs:col-span-12 shadow mt-3 bg-white rounded-lg'>
+
+                        {/* Heading */}
+                        <p className='border-l-[3px] border-indigo-600 px-2 py-1 font font-medium text-md bg-white text-indigo-600'>
+                            Delivery Details
+                        </p>
+
+                        <div className='flex flex-col gap-4 px-3 py-4'>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Preffered Time
+                                </span>
+                                <span className='text-sm text-primary-main font-semibold'>
+                                    {items?.preffered_delivery_start_time?.replaceAll('_', ' ') + ' - ' + items?.preffered_delivery_end_time?.replaceAll('_', ' ')}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Preffered Date
+                                </span>
+                                <span className='text-sm text-primary-main font-semibold'>
+                                    {moment(items?.preffered_delivery_date).format('DD-MM-YYYY') || '-'}
+                                </span>
+                            </div>
+
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Delivery Time And Date
+                                </span>
+                                <span className='text-sm font-bold'>{items?.deliveryTimeAndDate || 'NA'}</span>
+                            </div>
+
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Type of Address
+                                </span>
+                                <span className='text-sm font-bold'>{items?.typeOfAddress || 'NA'}</span>
+                            </div>
+
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    AWB Number
+                                </span>
+                                <span className='text-sm font-bold'>{items?.awbNumber || 'NA'}</span>
+                            </div>
+
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Assigned  Courier
+                                </span>
+                                <span className='text-sm font-bold text-green-500'>{items?.orderAssignedToCourier || 'NA'}</span>
+                            </div>
+
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Preship Cancelation Date
+                                </span>
+                                <span className='text-sm font-bold'>
+                                    {items?.preShipCancelationDate ? items?.preShipCancelationDate : 'NA'}
+                                </span>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    {/*  History  */}
-                    <div className="grow px-3 py-2">
-                        <div className=" text-lg pb-2 font-medium text-primary-main pl-2">
-                            Order History
+                <div className='bg-white shadow border p-4 rounded-lg mt-4'>
+                    {/* Heading */}
+                    <p className='border-l-[3px] border-orange-600 px-2 py-1 font font-medium text-md bg-white text-orange-600'>
+                        Other Information
+                    </p>
+
+                    {/* Information */}
+                    <div className='grid grid-cols-12 md:gap-8 xs:gap-4 md:py-0 xs:py-4'>
+                        <div className='xl:col-span-4 md:col-span-6 xs:col-span-12 md:py-4'>
+                            <div className='flex flex-col gap-4 px-4'>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Disposition One
+                                    </span>
+                                    <span className='text-sm font-semibold capitalize'>{items?.dispositionLevelTwoLabel}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Disposition Two
+                                    </span>
+                                    <span className='text-sm font-bold capitalize'>{items?.dispositionLevelThreeLabel}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Age Group
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.ageGroup || '-'}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Batch ID
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.batchId || 'NA'}</span>
+                                </div>
+
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Dealer Reason
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.dealerReason || 'NA'}</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="grow overflow-auto  ">
-                            <ATMTable
-                                columns={historyColumns}
-                                rows={orderHistory}
-                                extraClasses="max-h-full overflow-auto"
-                            // isLoading={isTableLoading}
-                            />
+                        <div className='xl:col-span-4 md:col-span-6 xs:col-span-12 md:py-4'>
+                            <div className='flex flex-col gap-4 px-4'>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Order MBK Number
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.orderMBKNumber || 'NA'}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Inquiry Number
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.inquiryNumber || 'NA'}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Order Reference Number
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.orderReferenceNumber || 'NA'}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Flag Status
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.flagStatus || 'NA'}</span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Incoming Caller No.
+                                    </span>
+                                    <span className='text-sm font-bold'>{items?.incomingCallerNo || 'NA'}</span>
+                                </div>
+                            </div>
                         </div>
+
+                        <div className='xl:col-span-4 md:col-span-6 xs:col-span-12 md:py-4'>
+                            <div className='flex flex-col gap-4 px-4'>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Medical Issues
+                                    </span>
+                                    <span className='text-sm font-bold capitalize text-end'>
+                                        {items?.medicalIssue?.length ? items?.medicalIssue?.join(',')?.replaceAll('_', ' ') : 'NA'}
+                                    </span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Order For
+                                    </span>
+                                    <span className='text-sm font-bold capitalize text-end'>
+                                        {items?.orderFor?.length ? items?.orderFor?.join(',')?.replaceAll('_', ' ') : 'NA'}
+                                    </span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Remark
+                                    </span>
+                                    <span className='text-sm font-semibold w-[70%] text-end truncate'>
+                                        {items?.remark || 'NA'}
+                                    </span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Facebook
+                                    </span>
+                                    <span className='text-sm font-semibold'>
+                                        {items?.socialMedia?.facebook || 'NA'}
+                                    </span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Instagram
+                                    </span>
+                                    <span className='text-sm font-semibold'>
+                                        {items?.socialMedia?.instagram || 'NA'}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Order Flow Table */}
+                <div className='bg-white shadow border p-4 rounded-lg'>
+                    {/* Heading */}
+                    <p className='sticky top-0 border-l-[3px] border-fuchsia-600 px-2 py-1 font font-medium text-md bg-white text-fuchsia-600'>
+                        Order Flow
+                    </p>
+                    <div className="grow overflow-auto mt-4">
+                        <ATMTable
+                            columns={historyColumns}
+                            rows={orderHistory}
+                            extraClasses="max-h-full overflow-auto max-h-[50vh]"
+                        // isLoading={isTableLoading}
+                        />
                     </div>
                 </div>
             </div>
