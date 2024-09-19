@@ -9,10 +9,12 @@ import ATMPageHeading from '../../../components/UI/atoms/ATMPageHeading/ATMPageH
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { OrderListResponse } from 'src/models'
 import moment from 'moment'
+import { CircularProgress } from '@mui/material'
 
 // |-- Types --|
 type Props = {
     items: OrderListResponse
+    isLoading: boolean
     historyColumns: any
     orderHistory: any
 }
@@ -28,9 +30,18 @@ const breadcrumbs: BreadcrumbType[] = [
     },
 ]
 
-const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
+const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) => {
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
+
+
+            {isLoading && (
+                <div className="absolute inset-0 flex justify-center items-center z-10 bg-slate-100 opacity-50">
+                    <CircularProgress />
+                </div>
+            )}
+
+
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
                 <div >

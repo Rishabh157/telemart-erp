@@ -40,7 +40,7 @@ const useGetCustomListingData = <T>({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data])
 
-    return { items ,refetch}
+    return { items ,refetch , isLoading}
 }
 
 export default useGetCustomListingData

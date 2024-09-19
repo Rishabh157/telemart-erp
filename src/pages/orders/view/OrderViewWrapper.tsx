@@ -34,7 +34,7 @@ const OrderViewWrapper = () => {
     const id: any = params.id
 
     // Get Order Details
-    const { items } = useGetCustomListingData<OrderListResponse>({
+    const { items, isLoading } = useGetCustomListingData<OrderListResponse>({
         useEndPointHook: useGetOrderByIdQuery(id, {
             skip: !id,
         }),
@@ -102,6 +102,7 @@ const OrderViewWrapper = () => {
         <SideNavLayout>
             <OrderView
                 items={items as any}
+                isLoading={isLoading}
                 historyColumns={columns}
                 orderHistory={orderHistory || []}
             />
