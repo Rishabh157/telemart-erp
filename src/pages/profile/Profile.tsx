@@ -18,7 +18,7 @@ const Profile = ({ tabs }: { tabs: Tabs[] }) => {
     const [activeTab, setActiveTab] = useState('My Profile')
 
     return (
-        <div className="px-4 h-[calc(100vh-55px)] bg-white ">
+        <div className="px-4 h-[calc(100vh-45px)] bg-white ">
             <ATMPageHeading> Profile </ATMPageHeading>
             <div className="flex shadow rounded h-[45px] items-center gap-3 bg-white w-full overflow-auto px-3 ">
                 {tabs.map((tab, tabIndex) => {
