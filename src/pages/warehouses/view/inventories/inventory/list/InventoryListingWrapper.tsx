@@ -10,7 +10,6 @@ import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeForma
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
-
 const columns: columnTypes[] = [
     {
         field: 'productName',
@@ -22,7 +21,7 @@ const columns: columnTypes[] = [
         ),
     },
     {
-        field: 'totalFreshCount',
+        field: 'avaliableQuantity',
         headerName: 'Fresh Count',
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FRESH_COUNT,
@@ -31,7 +30,7 @@ const columns: columnTypes[] = [
         ),
     },
     {
-        field: 'totalFreshCount',
+        field: 'avaliableUsedQuantity',
         headerName: 'Avaliable Used Quantity',
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FRESH_COUNT,
@@ -54,10 +53,16 @@ const columns: columnTypes[] = [
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_MISSING_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
-            <span className="p-1">
-                ---
-                {/* {row.missingQuantity} */}
-            </span>
+            <span className="p-1">{row.missingQuantity}</span>
+        ),
+    },
+    {
+        field: 'lostQuantity',
+        headerName: 'Lost Count',
+        flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_LOST_COUNT,
+        renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
+            <span className="p-1">{row.lostQuantity}</span>
         ),
     },
     {
@@ -66,10 +71,7 @@ const columns: columnTypes[] = [
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_RTV_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
-            <span className="p-1">
-                ---
-                {/* {row.rtvQuantity} */}
-            </span>
+            <span className="p-1">{row.rtvQuantity}</span>
         ),
     },
     {
@@ -78,9 +80,7 @@ const columns: columnTypes[] = [
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FAKE_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
-            <span className="p-1">
-                {row.fakeQuantity}
-            </span>
+            <span className="p-1">{row.fakeQuantity}</span>
         ),
     },
     {
@@ -89,9 +89,7 @@ const columns: columnTypes[] = [
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FAKE_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
-            <span className="p-1">
-                {row.freezeQuantity}
-            </span>
+            <span className="p-1">{row.freezeQuantity}</span>
         ),
     },
     {
@@ -101,8 +99,7 @@ const columns: columnTypes[] = [
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_EXPIRED_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
             <span className="p-1">
-                ---
-                {/* {row?.expiredQuantity}  */}
+                {row?.expiredQuantity} 
             </span>
         ),
     },
@@ -113,8 +110,7 @@ const columns: columnTypes[] = [
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CLOSED_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
             <span className="p-1">
-                ---
-                {/* {row?.closedQuantity}  */}
+                {row?.closedQuantity} 
             </span>
         ),
     },
@@ -129,7 +125,6 @@ const columns: columnTypes[] = [
 ]
 
 const InventoryListingWrapper = () => {
-
     const params = useParams()
     const wareHouseId = params.id
 
@@ -169,7 +164,13 @@ const InventoryListingWrapper = () => {
     //     }),
     // })
 
-    return <InventoryListing columns={columns} rows={items || []} isTableLoading={isLoading} />
+    return (
+        <InventoryListing
+            columns={columns}
+            rows={items || []}
+            isTableLoading={isLoading}
+        />
+    )
 }
 
 export default InventoryListingWrapper
