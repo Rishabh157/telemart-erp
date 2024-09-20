@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditDealerDetails.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -63,12 +56,10 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
 
 const StepEditContactWrapper = ({ formikProps }: Props) => {
     return (
-        <>
-            <StepEditContact
-                formikProps={formikProps}
-                formFields={formFields}
-            />
-        </>
+        <StepEditContact
+            formikProps={formikProps}
+            formFields={formFields}
+        />
     )
 }
 

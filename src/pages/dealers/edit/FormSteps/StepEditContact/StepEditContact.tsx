@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepEditDealerDetails.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -190,8 +183,8 @@ const StepEditContact = ({ formikProps, formFields }: Props) => {
                                             department: '',
                                             designation: '',
                                             email: '',
-                                            mobile_number: '',
-                                            landline: '',
+                                            mobileNumber: '',
+                                            landLine: '',
                                         })
                                     }
                                     className="bg-transparent text-blue-700 font-semibold py-2 px-2 border border-blue-500 rounded-full flex items-center "

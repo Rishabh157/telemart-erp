@@ -19,9 +19,13 @@ import { ThemeContext } from 'src/App'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import ATMSelectSearchable from '../atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import NotificationCard from './NotificationCard/NotificationCard'
+import { IoNotifications } from 'react-icons/io5'
 
 const Header = () => {
     const [isShowProfileCard, setIsShowProfileCard] = useState(false)
+    const [isShowNotification, setIsShowNotification] = useState(false)
+    const [isNewNotificationsAvailable, setIsNewNotificationsAvailable] = useState(true)
 
     const { theme, toggleTheme } = useContext(ThemeContext)
     const dispatch = useDispatch<AppDispatch>()
@@ -114,17 +118,15 @@ const Header = () => {
                         <>
                             <div
                                 onClick={toggleTheme}
-                                className={`${
-                                    theme === 'black' ? 'text-[#dd9c4c]' : ''
-                                } p-1 px-2 text-sm font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
+                                className={`${theme === 'black' ? 'text-[#dd9c4c]' : ''
+                                    } p-1 px-2 text-sm font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
                             >
                                 <BsMoon /> Dark
                             </div>
                             <div
                                 onClick={toggleTheme}
-                                className={`${
-                                    theme === 'white' ? 'text-[#dd9c4c]' : ''
-                                } p-1 px-2 text-sm font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
+                                className={`${theme === 'white' ? 'text-[#dd9c4c]' : ''
+                                    } p-1 px-2 text-sm font-normal flex gap-x-2 items-center hover:bg-slate-100 cursor-pointer`}
                             >
                                 <BsSun /> Light
                             </div>
@@ -168,19 +170,22 @@ const Header = () => {
                     </span>
                 )}
 
-                {/* <button
-                    onClick={() => setIsShowNotification((prev) => !prev)}
+                <button
+                    onClick={() => {
+                        setIsShowNotification((prev) => !prev)
+                        setIsNewNotificationsAvailable(false)
+                    }}
                     className="relative text-lg text-slate-700 transition-all duration-800 hover:bg-slate-200 p-3 rounded-full"
                     aria-label="Toggle Notifications"
                 >
-                    {/* <IoNotifications /> */}
-                {/* {isNewNotificationsAvailable && (
+                    <IoNotifications />
+                    {isNewNotificationsAvailable && (
                         <span className="flex h-2 w-2 absolute top-2 right-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
                         </span>
-                    )} */}
-                {/* </button>  */}
+                    )}
+                </button>
 
                 <button
                     onClick={() => setIsShowProfileCard((prev) => !prev)}
@@ -196,11 +201,11 @@ const Header = () => {
                         onClickAway={() => setIsShowProfileCard(false)}
                     />
                 )}
-                {/* {isShowNotification && (
+                {isShowNotification && (
                     <NotificationCard
                         onClickAway={() => setIsShowNotification(false)}
                     />
-                )} */}
+                )}
             </div>
         </div>
     )

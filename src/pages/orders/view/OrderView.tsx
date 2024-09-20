@@ -172,7 +172,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     Full Address
                                 </span>
                                 <span
-                                    className='text-sm font-semibold w-[70%] truncate'
+                                    className='text-sm font-semibold w-[70%] truncate capitalize'
                                     title={items?.autoFillingShippingAddress}
                                 >
                                     {items?.autoFillingShippingAddress}

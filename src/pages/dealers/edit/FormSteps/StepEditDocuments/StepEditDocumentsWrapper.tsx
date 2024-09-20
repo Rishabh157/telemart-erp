@@ -83,12 +83,10 @@ const formFields: { sectionName: string; fields: FieldType[] }[] = [
 
 const StepEditDocumentsWrapper = ({ formikProps }: Props) => {
     return (
-        <>
-            <StepEditDocuments
-                formikProps={formikProps}
-                formFields={formFields}
-            />
-        </>
+        <StepEditDocuments
+            formikProps={formikProps}
+            formFields={formFields}
+        />
     )
 }
 

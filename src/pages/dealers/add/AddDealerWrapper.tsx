@@ -217,7 +217,7 @@ const steps = [
 const AddDealerWrapper = () => {
     // States
     const navigate = useNavigate()
-    const [activeStep, setActiveStep] = React.useState(0)
+    const [activeStep, setActiveStep] = React.useState(3)
     const [apiStatus, setApiStatus] = React.useState<boolean>(false)
     const [addDealer] = useAddDealerMutation()
     const { userData } = useSelector((state: RootState) => state?.auth)

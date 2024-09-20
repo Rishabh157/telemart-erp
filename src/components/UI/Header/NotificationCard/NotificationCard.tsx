@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:NotificationCard.tsx
-// Type: Utils Component
-// Last Updated: JULY 06, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 
@@ -14,27 +7,27 @@ import { ClickAwayListener } from '@mui/material'
 const notications = [
     {
         date: '24 Nov 2022 03:20 PM',
-        message: 'Dealer Login ',
+        message: 'Notifications are currently under development and will be available soon.',
     },
     {
         date: '24 Nov 2022 03:20 PM',
-        message: 'Order Status Changed to Completed',
+        message: 'Notifications are currently under development and will be available soon.',
     },
     {
         date: '24 Nov 2022 03:20 PM',
-        message: 'Dealer Login',
+        message: 'Notifications are currently under development and will be available soon.',
     },
     {
         date: '24 Nov 2022 03:20 PM',
-        message: 'Dealer Login',
+        message: 'Notifications are currently under development and will be available soon.',
     },
     {
         date: '24 Nov 2022 03:20 PM',
-        message: 'Dealer Login',
+        message: 'Notifications are currently under development and will be available soon.',
     },
     {
         date: '24 Nov 2022 03:20 PM',
-        message: 'Dealer Login',
+        message: 'Notifications are currently under development and will be available soon.',
     },
 ]
 
@@ -54,10 +47,9 @@ const NotificationCard = ({ onClickAway }: NotificationCardPropTypes) => {
                         return (
                             <div
                                 key={index}
-                                className={`flex flex-col px-2 text-slate-500  ${
-                                    index !== notications.length - 1 &&
+                                className={`flex flex-col px-2 text-slate-500  ${index !== notications.length - 1 &&
                                     'border-b'
-                                } border-slate-100`}
+                                    } border-slate-100`}
                             >
                                 <div > {option.message} </div>
                                 <div className="flex text-[13px] text-slate-400">

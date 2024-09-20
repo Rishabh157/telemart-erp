@@ -42,14 +42,17 @@ const EditDealers = ({
     const breadcrumbs = [
         {
             label: 'Dealers',
-            onClick: () => {},
+            onClick: () => { },
             path: '/dealers',
         },
         {
             label: 'Update Dealer',
-            onClick: () => {},
+            onClick: () => { },
         },
     ]
+
+
+    console.log('***********************', formikProps.values)
 
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto px-4 mt-3">
@@ -89,9 +92,8 @@ const EditDealers = ({
                                     dispatch(setFormSubmitting(true))
                                     formikProps.handleSubmit()
                                 }}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                                 disabled={apiStatus}
                             >
                                 {activeStep === steps?.length - 1

@@ -24,7 +24,7 @@ const DealerActivityTab = (props: Props) => {
                         </div> */}
 
                         <div className='text-center'>
-                            Comming Soon
+                            Dealer Activity are currently under development and will be available soon.
                         </div>
                     </div>
                 ))}

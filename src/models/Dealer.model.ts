@@ -1,19 +1,17 @@
-/// ==============================================
-// Filename:Dealer.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type DealersListResponse = {
+    dealerCode: string
     firstName: string
     lastName: string
     creditLimit: number
+    dealersCategoryName: string
+    zonalManagerLabel: string
+    zonalExecutiveLabel: string
     openingBalance: number
-    autoMapping: boolean
+    isAutoMapping: boolean
+    isCheckCreditLimit: boolean
+    isCheckAvailableQuotient: boolean
     quantityQuotient: number
-    dealerCode: string
     firmName: string
     dealerCategoryId: String
     email: string

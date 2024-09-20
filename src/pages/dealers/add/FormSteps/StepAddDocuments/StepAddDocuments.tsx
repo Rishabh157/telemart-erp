@@ -105,14 +105,14 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     value={
                                                         name.includes('.')
                                                             ? values[
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[0]
-                                                              ][
-                                                                  name.split(
-                                                                      '.'
-                                                                  )[1]
-                                                              ]
+                                                            name.split(
+                                                                '.'
+                                                            )[0]
+                                                            ][
+                                                            name.split(
+                                                                '.'
+                                                            )[1]
+                                                            ]
                                                             : values[name]
                                                     }
                                                     onChange={(e) => {
@@ -150,9 +150,9 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                         ) {
                                                             if (
                                                                 name ===
-                                                                    'document.adharCardNumber' &&
+                                                                'document.adharCardNumber' &&
                                                                 formattedValue.length <=
-                                                                    14
+                                                                14
                                                             ) {
                                                                 setFieldValue(
                                                                     name,
@@ -198,7 +198,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     isSubmitting={isSubmitting}
                                                 />
                                                 {loaderState === name &&
-                                                imageApiStatus ? (
+                                                    imageApiStatus ? (
                                                     <div className="mt-3">
                                                         <CircularProgress
                                                             size={18}
@@ -236,18 +236,18 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                 {/* Delete Button */}
                                                 {values.otherDocument?.length >
                                                     1 && (
-                                                    <button
-                                                        type="button"
-                                                        onClick={() =>
-                                                            remove(
-                                                                otherDocumentIndex
-                                                            )
-                                                        }
-                                                        className="p-1 text-white bg-red-500 rounded"
-                                                    >
-                                                        <MdDeleteOutline className="text-2xl" />
-                                                    </button>
-                                                )}
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                remove(
+                                                                    otherDocumentIndex
+                                                                )
+                                                            }
+                                                            className="p-1 text-white bg-red-500 rounded"
+                                                        >
+                                                            <MdDeleteOutline className="text-2xl" />
+                                                        </button>
+                                                    )}
                                             </div>
 
                                             <div className="grid grid-cols-3 gap-4 gap-y-5">
@@ -270,7 +270,23 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     className="bg-white rounded shadow"
                                                 />
 
-                                                <ATMTextField
+
+                                                <div className="mt-5">
+                                                    <ATMFilePickerWrapper
+                                                        name={`otherDocument[${otherDocumentIndex}].documentFile`}
+                                                        label='Document File'
+                                                        placeholder='Document File'
+                                                        selectedFile={otherDocument?.documentFile}
+                                                        onSelect={(newFile) => {
+                                                            handleFileUpload(
+                                                                newFile,
+                                                                `otherDocument[${otherDocumentIndex}].documentFile`,
+                                                            )
+                                                        }}
+                                                    />
+                                                </div>
+
+                                                {/* <ATMTextField
                                                     name={`otherDocument[${otherDocumentIndex}].documentFile`}
                                                     label={'Document File'}
                                                     placeholder={
@@ -288,7 +304,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     isSubmitting={isSubmitting}
                                                     className="mt-0 bg-white rounded shadow"
                                                     // selectedFile={otherDocument.documentFile}
-                                                />
+                                                /> */}
 
                                                 <div></div>
                                             </div>

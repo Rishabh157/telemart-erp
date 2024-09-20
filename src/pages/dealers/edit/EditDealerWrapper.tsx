@@ -331,8 +331,8 @@ const EditDealerWrapper = () => {
                             stateId: values.registrationAddress.stateId,
                             districtId: values.registrationAddress.districtId,
                             pincodeId: values.registrationAddress.pincodeId,
-                            gstNumber: values.registrationAddress.pincodeId,
-                            gstCertificate: ''
+                            gstNumber: values.registrationAddress.gstNumber,
+                            gstCertificate: values.registrationAddress.gstCertificate
                         },
                         billingAddress: {
                             phone: values.billingAddress.phone,
@@ -341,8 +341,8 @@ const EditDealerWrapper = () => {
                             stateId: values.billingAddress.stateId,
                             districtId: values.billingAddress.districtId,
                             pincodeId: values.billingAddress.pincodeId,
-                            gstNumber: '',
-                            gstCertificate: ''
+                            gstNumber: values.billingAddress.gstNumber,
+                            gstCertificate: values.billingAddress.gstCertificate
                         },
                         contactInformation: contactInformation,
                         document: {
