@@ -41,7 +41,7 @@ const ListDealerSchemeTabWrapper = () => {
         useEndPointHook: useGetDealerSchemeQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['schemeName', 'price'],
+            params: ['schemeName'],
             page: page,
             filterBy: [
                 {
@@ -72,17 +72,17 @@ const ListDealerSchemeTabWrapper = () => {
                         {isAuthorized(
                             UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_EDIT
                         ) && (
-                            <button
-                                onClick={() => {
-                                    navigate(
-                                        `/dealers/${dealerId}/scheme/edit/${row?._id}`
-                                    )
-                                }}
-                                className="block w-full text-left px-2 py-1  hover:bg-gray-100"
-                            >
-                                Edit
-                            </button>
-                        )}
+                                <button
+                                    onClick={() => {
+                                        navigate(
+                                            `/dealers/${dealerId}/scheme/edit/${row?._id}`
+                                        )
+                                    }}
+                                    className="block w-full text-left px-2 py-1  hover:bg-gray-100"
+                                >
+                                    Edit
+                                </button>
+                            )}
                     </>
                 </ActionPopup>
             ),
@@ -158,11 +158,10 @@ const ListDealerSchemeTabWrapper = () => {
                                     onClick={() => {
                                         showConfirmationDialog({
                                             title: 'Deactive Scheme',
-                                            text: `Do you want to ${
-                                                row.isActive
-                                                    ? 'Deactive'
-                                                    : 'Active'
-                                            }`,
+                                            text: `Do you want to ${row.isActive
+                                                ? 'Deactive'
+                                                : 'Active'
+                                                }`,
                                             showCancelButton: true,
                                             next: (res) => {
                                                 return res.isConfirmed
@@ -182,11 +181,10 @@ const ListDealerSchemeTabWrapper = () => {
                                     onClick={() => {
                                         showConfirmationDialog({
                                             title: 'Deactive Scheme',
-                                            text: `Do you want to ${
-                                                row.isActive
-                                                    ? 'Deactive'
-                                                    : 'Active'
-                                            }`,
+                                            text: `Do you want to ${row.isActive
+                                                ? 'Deactive'
+                                                : 'Active'
+                                                }`,
                                             showCancelButton: true,
                                             next: (res) => {
                                                 return res.isConfirmed

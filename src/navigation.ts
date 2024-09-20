@@ -257,6 +257,6 @@ export const navigation: NavItemType[] = [
         label: 'Reports',
         icon: MdWeb,
         path: '/reports/agent-details',
-        name: UserModuleNameTypes.NAV_ALL_WEBSITE,
+        name: UserModuleNameTypes.NAV_REPORTS_MASTER,
     },
 ]

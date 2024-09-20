@@ -244,8 +244,8 @@ export enum GRNUserAccessTypes {
     GRN_LIST_RECEVIED_QUANTITY = 'GRN_LIST_RECEVIED_QUANTITY',
     GRN_LIST_GOOD_QUANTITY = 'GRN_LIST_GOOD_QUANTITY',
     GRN_LIST_DEFECTIVE_QUANTITY = 'GRN_LIST_DEFECTIVE_QUANTITY',
-    GRN_LIST_CREATED_DATE='GRN_LIST_CREATED_DATE',
-    GRN_LIST_UPDATED_DATE='GRN_LIST_UPDATED_DATE',
+    GRN_LIST_CREATED_DATE = 'GRN_LIST_CREATED_DATE',
+    GRN_LIST_UPDATED_DATE = 'GRN_LIST_UPDATED_DATE',
 }
 
 export enum InventoryFlowUserAccessTypes {
@@ -1217,6 +1217,125 @@ export enum pageMasterUserAccessType {
     NAV_PAGE_MASTER = 'NAV_PAGE_MASTER',
 }
 
+export enum reportsMasterUserAccessType {
+    NAV_REPORTS_MASTER = 'NAV_REPORTS_MASTER',
+}
+
+export enum agentsDetailsReportsUserAccessTypes {
+    NAV_AGENT_DETAILS_REPORTS = 'NAV_AGENT_DETAILS_REPORTS',
+
+    // TABS
+    ACTION_REPORTS_AGENT_HIERARCHY = 'ACTION_REPORTS_AGENT_HIERARCHY',
+    ACTION_REPORTS_AGENT_ORDER_STATUS = 'ACTION_REPORTS_AGENT_ORDER_STATUS',
+    ACTION_REPORTS_AGENT_WISE_COMPLAINT = 'ACTION_REPORTS_AGENT_WISE_COMPLAINT',
+    ACTION_REPORTS_AGENT_WISE_ENQUIRY = 'ACTION_REPORTS_AGENT_WISE_ENQUIRY',
+    ACTION_REPORTS_AGENT_WISE_PRODUCT = 'ACTION_REPORTS_AGENT_WISE_PRODUCT',
+    ACTION_REPORTS_AGENT_DETAILS_CALL_BACK = 'ACTION_REPORTS_AGENT_DETAILS_CALL_BACK',
+    ACTION_REPORTS_DAY_WISE_AGENT_PERFORMANCE = 'ACTION_REPORTS_DAY_WISE_AGENT_PERFORMANCE',
+}
+
+export enum allOrdersReportsUserAccessTypes {
+    NAV_ALL_ORDERS_REPORTS = 'NAV_ALL_ORDERS_REPORTS',
+
+    // TABS
+}
+
+export enum carriersReportsUserAccessTypes {
+    NAV_CARRIERS_ORDERS_REPORTS = 'NAV_CARRIERS_ORDERS_REPORTS',
+
+    // TABS
+}
+
+export enum dealerReportsUserAccessTypes {
+    NAV_DEALER_REPORTS = 'NAV_DEALER_REPORTS',
+
+    // TABS
+}
+
+export enum dispatchReportsUserAccessTypes {
+    NAV_DISPATCH_REPORTS = 'NAV_DISPATCH_REPORTS',
+
+    // TABS
+}
+
+export enum distributionMasterReportsUserAccessTypes {
+    NAV_DISTRIBUTION_REPORTS = 'NAV_DISTRIBUTION_REPORTS',
+
+    // TABS
+}
+
+export enum fcpReportsUserAccessTypes {
+    NAV_FCP_REPORTS = 'NAV_FCP_REPORTS',
+
+    // TABS
+}
+
+export enum fcpDetailsReportsUserAccessTypes {
+    NAV_FCP_DETAILS_REPORTS = 'NAV_FCP_DETAILS_REPORTS',
+
+    // TABS
+}
+
+export enum ndrReportsUserAccessTypes {
+    NAV_NDR_REPORTS = 'NAV_NDR_REPORTS',
+
+    // TABS
+}
+
+export enum orderDetailReportsUserAccessTypes {
+    NAV_ORDER_DETAILS_REPORTS = 'NAV_ORDER_DETAILS_REPORTS',
+
+    // TABS
+}
+
+export enum orderReportsUserAccessTypes {
+    NAV_ORDER_REPORTS = 'NAV_ORDER_REPORTS',
+
+    // TABS
+}
+
+export enum reportsOtherReportsUserAccessTypes {
+    NAV_OTHER_REPORTS = 'NAV_OTHER_REPORTS',
+
+    // TABS
+}
+
+export enum salesReportUserAccessTypes {
+    NAV_SALES_REPORTS = 'NAV_SALES_REPORTS',
+
+    // TABS
+}
+
+export enum scmReportUserAccessTypes {
+    NAV_SCM_REPORTS = 'NAV_SCM_REPORTS',
+
+    // TABS
+}
+
+export enum stockReportsUserAccessTypes {
+    NAV_STOCK_REPORTS = 'NAV_STOCK_REPORTS',
+
+    // TABS
+}
+
+export enum stockReportReportsUserAccessTypes {
+    NAV_STOCK_REPORTS_REPORTS = 'NAV_STOCK_REPORTS_REPORTS',
+
+    // TABS
+}
+
+export enum systemReportsUserAccessTypes {
+    NAV_SYSTEM_REPORTS = 'NAV_SYSTEM_REPORTS',
+
+    // TABS
+}
+
+export enum warehousePutAwayReportsUserAccessTypes {
+    NAV_WAREHOUSE_PUT_AWAY_REPORTS = 'NAV_CARRIERS_ORDERS_REPORTS',
+
+    // TABS
+}
+
 export enum mediaUserAccessType {
     NAV_MEDIA = 'NAV_MEDIA',
 }
@@ -1741,6 +1860,25 @@ export const UserModuleNameTypes = {
     ...barcodeUserAccessType,
     ...configurationUserAccessType,
     ...pageMasterUserAccessType,
+    ...reportsMasterUserAccessType,
+    ...agentsDetailsReportsUserAccessTypes,
+    ...allOrdersReportsUserAccessTypes,
+    ...carriersReportsUserAccessTypes,
+    ...dealerReportsUserAccessTypes,
+    ...dispatchReportsUserAccessTypes,
+    ...distributionMasterReportsUserAccessTypes,
+    ...fcpReportsUserAccessTypes,
+    ...fcpDetailsReportsUserAccessTypes,
+    ...ndrReportsUserAccessTypes,
+    ...orderDetailReportsUserAccessTypes,
+    ...orderReportsUserAccessTypes,
+    ...reportsOtherReportsUserAccessTypes,
+    ...salesReportUserAccessTypes,
+    ...scmReportUserAccessTypes,
+    ...stockReportsUserAccessTypes,
+    ...stockReportReportsUserAccessTypes,
+    ...systemReportsUserAccessTypes,
+    ...warehousePutAwayReportsUserAccessTypes,
     ...mediaUserAccessType,
     ...assetsUserAccessType,
     ...dispositionUserAccessType,

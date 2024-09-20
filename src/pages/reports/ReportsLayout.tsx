@@ -13,133 +13,116 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import Header from 'src/components/UI/Header/Header'
 import VerticalNavBar from 'src/components/UI/VerticalNavBar/VerticalNavBar'
 import { ThemeContext } from 'src/App'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const ReportsNavigation: NavItemType[] = [
     {
         label: 'Agent Details',
         icon: CgWebsite,
         path: 'agent-details/agent-hierarchy',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_AGENT_DETAILS_REPORTS
     },
     {
         label: 'All Orders',
         icon: CgWebsite,
         path: 'all-orders',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_ALL_ORDERS_REPORTS
     },
     {
         label: 'Carriers',
         icon: CgWebsite,
         path: 'carriers',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_CARRIERS_ORDERS_REPORTS
     },
     {
         label: 'Dealer',
         icon: CgWebsite,
         path: 'dealer',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_DEALER_REPORTS
     },
     {
         label: 'Dispatch',
         icon: CgWebsite,
         path: 'dispatch',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_DISPATCH_REPORTS
     },
     {
         label: 'Distribution Master',
         icon: CgWebsite,
         path: 'distribution-master',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_DISTRIBUTION_REPORTS
     },
     {
         label: 'FCP',
         icon: CgWebsite,
         path: 'fcp',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_FCP_REPORTS
     },
     {
         label: 'FCP Details',
         icon: CgWebsite,
         path: 'fcp-details',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_FCP_DETAILS_REPORTS
     },
     {
         label: 'NDR',
         icon: CgWebsite,
         path: 'ndr',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_NDR_REPORTS
     },
     {
         label: 'Order Details',
         icon: CgWebsite,
         path: 'order-details',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_ORDER_DETAILS_REPORTS
     },
     {
         label: 'Order Reports',
         icon: CgWebsite,
         path: 'order-reports',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_ORDER_REPORTS
     },
     {
         label: 'Others',
         icon: CgWebsite,
         path: 'others',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_OTHER_REPORTS
     },
     {
         label: 'Sales Report',
         icon: CgWebsite,
         path: 'sales-report',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_SALES_REPORTS
     },
     {
         label: 'Scm Report',
         icon: CgWebsite,
         path: 'scm-report',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_SCM_REPORTS
     },
     {
         label: 'Stock',
         icon: CgWebsite,
         path: 'stock',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_STOCK_REPORTS
     },
     {
         label: 'Stock Report',
         icon: CgWebsite,
         path: 'stock-report',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_STOCK_REPORTS_REPORTS
     },
     {
         label: 'System Report',
         icon: CgWebsite,
         path: 'system-report',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_SYSTEM_REPORTS
     },
     {
         label: 'Warehouse Put Away',
         icon: CgWebsite,
         path: 'warehouse-put-away',
-        name: ""
-        // name: UserModuleNameTypes.NAV_Reports
+        name: UserModuleNameTypes.NAV_WAREHOUSE_PUT_AWAY_REPORTS
     },
 ]
 
@@ -158,7 +141,7 @@ const ReportsLayout = ({ children }: Props) => {
 
     const currentPath = `${location.pathname?.split('/')[2]}`
     const { theme } = React.useContext(ThemeContext)
-    
+
     return (
         <div className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''}`}>
             {/* Side Navigation Bar */}

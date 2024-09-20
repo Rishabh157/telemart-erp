@@ -1,0 +1,63 @@
+{
+    "moduleId": "NAV_AGENT_DETAILS_REPORTS",
+    "moduleName": "NAV_AGENT_DETAILS_REPORTS",
+    "parentGroup": ["NAV_REPORTS_MASTER"],
+    "moduleAction": [
+        {
+            "actionId": "ACTION_REPORTS_AGENT_HIERARCHY",
+            "actionUrl": "",
+            "actionName": "AGENT_HIERARCHY_REPORTS_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_REPORTS_AGENT_ORDER_STATUS",
+            "actionUrl": "",
+            "actionName": "AGENT_ORDER_STATUS_REPORTS_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_REPORTS_AGENT_WISE_COMPLAINT",
+            "actionUrl": "",
+            "actionName": "AGENT_WISE_COMPLAINT_REPORTS_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_REPORTS_AGENT_WISE_ENQUIRY",
+            "actionUrl": "",
+            "actionName": "AGENT_WISE_ENQUIRY_REPORTS_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_REPORTS_AGENT_WISE_PRODUCT",
+            "actionUrl": "",
+            "actionName": "AGENT_WISE_PRODUCT_REPORTS_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_REPORTS_AGENT_DETAILS_CALL_BACK",
+            "actionUrl": "",
+            "actionName": "AGENT_DETAILS_CALL_BACK_REPORTS_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_REPORTS_DAY_WISE_AGENT_PERFORMANCE",
+            "actionUrl": "",
+            "actionName": "AGENT_DAY_WISE_PERFORMANCE_REPORTS_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

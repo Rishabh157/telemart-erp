@@ -1,0 +1,6 @@
+{
+    "moduleId": "NAV_ORDER_DETAILS_REPORTS",
+    "moduleName": "NAV_ORDER_DETAILS_REPORTS",
+    "parentGroup": ["NAV_REPORTS_MASTER"],
+    "moduleAction": []
+}

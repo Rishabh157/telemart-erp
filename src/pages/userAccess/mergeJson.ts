@@ -93,6 +93,24 @@ import { default as dealerToDealerRequestJson } from '../../utils/mediaJson/deal
 import { default as courierMasterJson } from '../../utils/mediaJson/CourierMaster.json'
 import { default as gpoAwbNumber } from '../../utils/mediaJson/gpoAwbNumber.json'
 import { default as orderCancelRequest } from '../../utils/mediaJson/orderCancelRequest.json'
+import { default as agentDetailsReports } from '../../utils/mediaJson/agentDetailsReports.json'
+import { default as allOrdersReports } from '../../utils/mediaJson/allOrdersReports.json'
+import { default as carriersOrdersReports } from '../../utils/mediaJson/carriersOrdersReports.json'
+import { default as dealerReports } from '../../utils/mediaJson/dealerReports.json'
+import { default as dispatchReports } from '../../utils/mediaJson/dispatchReports.json'
+import { default as distributionReports } from '../../utils/mediaJson/distributionReports.json'
+import { default as fcpReports } from '../../utils/mediaJson/fcpReports.json'
+import { default as fcpDetailsReports } from '../../utils/mediaJson/fcpDetailsReports.json'
+import { default as ndrReports } from '../../utils/mediaJson/ndrReports.json'
+import { default as orderDetailsReports } from '../../utils/mediaJson/orderDetailsReports.json'
+import { default as orderReports } from '../../utils/mediaJson/orderReports.json'
+import { default as otherReports } from '../../utils/mediaJson/otherReports.json'
+import { default as salesReports } from '../../utils/mediaJson/salesReports.json'
+import { default as scmReports } from '../../utils/mediaJson/scmReports.json'
+import { default as stockReports } from '../../utils/mediaJson/stockReports.json'
+import { default as stockReportsReports } from '../../utils/mediaJson/stockReportsReports.json'
+import { default as systemReports } from '../../utils/mediaJson/systemReports.json'
+import { default as warehousePutAwayReports } from '../../utils/mediaJson/warehousePutAwayReports.json'
 
 const orderTabsMerge = {
     ...ordersJson,
@@ -197,4 +215,22 @@ export const mergeUserModules = [
     { ...websitesTagsJson },
     { ...websiteLeadsJson },
     { ...multiMappingJson },
+    { ...agentDetailsReports },
+    { ...allOrdersReports },
+    { ...carriersOrdersReports },
+    { ...dealerReports },
+    { ...dispatchReports },
+    { ...distributionReports },
+    { ...fcpReports },
+    { ...fcpDetailsReports },
+    { ...ndrReports },
+    { ...orderDetailsReports },
+    { ...orderReports },
+    { ...otherReports },
+    { ...salesReports },
+    { ...scmReports },
+    { ...stockReports },
+    { ...stockReportsReports },
+    { ...systemReports },
+    { ...warehousePutAwayReports },
 ]

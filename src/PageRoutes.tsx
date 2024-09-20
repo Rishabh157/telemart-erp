@@ -1582,7 +1582,7 @@ const PageRoutes = () => {
                         />
                     }
                 />
-              
+
                 <Route
                     path="/grn/edit/:id"
                     element={
@@ -1592,7 +1592,7 @@ const PageRoutes = () => {
                         />
                     }
                 />
-                
+
                 {/* Multi Order Search */}
                 <Route
                     path="/multi-order-search"
@@ -3874,7 +3874,7 @@ const PageRoutes = () => {
                     element={
                         <Authorization
                             children={<ReportsLayout />}
-                            permission={UserModuleNameTypes.NAV_ALL_WEBSITE}
+                            permission={UserModuleNameTypes.NAV_REPORTS_MASTER}
                         />
                     }
                 >
@@ -3885,7 +3885,7 @@ const PageRoutes = () => {
                                 children={<AgentDetails />}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_AGENT_DETAILS_REPORTS
                                 }
                             />
                         }
@@ -3895,7 +3895,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
-                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_HIERARCHY}
                                 />
                             }
                         />
@@ -3904,25 +3904,27 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<AgentOrderStatusWrapper />}
-                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_ORDER_STATUS}
                                 />
                             }
                         />
+
                         <Route
                             path="agent-wise-complaint"
                             element={
                                 <Authorization
                                     children={<AgentWiseComplaintWrapper />}
-                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_COMPLAINT}
                                 />
                             }
                         />
+
                         <Route
                             path="agent-wise-enquiry"
                             element={
                                 <Authorization
                                     children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
-                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_ENQUIRY}
                                 />
                             }
                         />
@@ -3931,7 +3933,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
-                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT}
                                 />
                             }
                         />
@@ -3940,7 +3942,7 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
-                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_DETAILS_CALL_BACK}
                                 />
                             }
                         />
@@ -3949,11 +3951,12 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
-                                    permission={UserModuleNameTypes.NAV_ORDER}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_DAY_WISE_AGENT_PERFORMANCE}
                                 />
                             }
                         />
-                        <Route
+
+                        {/* <Route
                             path="detailed-performance"
                             element={
                                 <Authorization
@@ -3988,8 +3991,7 @@ const PageRoutes = () => {
                                     permission={UserModuleNameTypes.NAV_ORDER}
                                 />
                             }
-                        />
-
+                        /> */}
                     </Route>
 
                     <Route
@@ -3999,7 +4001,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_ALL_ORDERS_REPORTS
                                 }
                             />
                         }
@@ -4011,7 +4013,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_CARRIERS_ORDERS_REPORTS
                                 }
                             />
                         }
@@ -4023,7 +4025,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_DEALER_REPORTS
                                 }
                             />
                         }
@@ -4035,7 +4037,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_DISPATCH_REPORTS
                                 }
                             />
                         }
@@ -4047,7 +4049,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_DISTRIBUTION_REPORTS
                                 }
                             />
                         }
@@ -4059,7 +4061,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_FCP_REPORTS
                                 }
                             />
                         }
@@ -4071,7 +4073,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_FCP_DETAILS_REPORTS
                                 }
                             />
                         }
@@ -4083,7 +4085,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_NDR_REPORTS
                                 }
                             />
                         }
@@ -4095,7 +4097,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_ORDER_DETAILS_REPORTS
                                 }
                             />
                         }
@@ -4107,7 +4109,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_ORDER_REPORTS
                                 }
                             />
                         }
@@ -4119,7 +4121,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_OTHER_REPORTS
                                 }
                             />
                         }
@@ -4131,7 +4133,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_SALES_REPORTS
                                 }
                             />
                         }
@@ -4143,7 +4145,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_SCM_REPORTS
                                 }
                             />
                         }
@@ -4155,7 +4157,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_STOCK_REPORTS
                                 }
                             />
                         }
@@ -4167,7 +4169,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_STOCK_REPORTS_REPORTS
                                 }
                             />
                         }
@@ -4179,7 +4181,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_SYSTEM_REPORTS
                                 }
                             />
                         }
@@ -4191,7 +4193,7 @@ const PageRoutes = () => {
                                 children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
                                 // children={<WebsitePageListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.NAV_WEBSITES_PAGES
+                                    UserModuleNameTypes.NAV_WAREHOUSE_PUT_AWAY_REPORTS
                                 }
                             />
                         }

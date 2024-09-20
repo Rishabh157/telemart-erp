@@ -1,0 +1,6 @@
+{
+    "moduleId": "NAV_SCM_REPORTS",
+    "moduleName": "NAV_SCM_REPORTS",
+    "parentGroup": ["NAV_REPORTS_MASTER"],
+    "moduleAction": []
+}

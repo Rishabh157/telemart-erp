@@ -67,7 +67,7 @@ const PageMasterLayout = ({ children }: Props) => {
         <div className={`flex h-screen w-screen relative ${theme === 'black' ? 'bg-invert' : ''}`}>
             {/* Side Navigation Bar */}
             <div
-                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out   bg-white  ${isCollapsed
+                className={`border-r border-slate-300 h-full transition-all duration-500 ease-in-out bg-white ${isCollapsed
                     ? 'min-w-[50px] w-[50px]'
                     : 'min-w-[250px] w-[250px]'
                     }`}
