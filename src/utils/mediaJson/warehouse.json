@@ -970,6 +970,18 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_MARK_AS_DELIVERED",
+            "actionUrl": "",
+            "actionName": "TAB_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_GET_MARK_AS_DELIVERD",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "VIEW",
+                "TAB_WAREHOUSE_INVENTORIES",
+                "TAB_WAREHOUSE_OUTWARD_INVENTORIES_GPO"
+            ],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS",
             "actionUrl": "",
             "actionName": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS",
