@@ -41,7 +41,7 @@ const ListDealerSchemeTabWrapper = () => {
         useEndPointHook: useGetDealerSchemeQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['schemeName', 'price'],
+            params: ['schemeName'],
             page: page,
             filterBy: [
                 {
