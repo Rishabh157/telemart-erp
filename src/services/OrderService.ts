@@ -13,7 +13,7 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-      
+
         //***** GET *****/
         getOrderBatches: builder.query({
             providesTags: ['order', 'batch-order'],
@@ -317,6 +317,13 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body: { dateFilter: dateFilter },
             }),
         }),
+        getStatusMarkAsDeleiverd: builder.mutation({
+            invalidatesTags: ['order'],
+            query: ({ orderId }: { orderId: string }) => ({
+                url: `order-inquiry/mark-as-delivered/${orderId}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 
@@ -353,4 +360,5 @@ export const {
     useDispatchManualOrdersMutation,
     useGetGpoOrderStatusQuery,
     useGetShipayaariOrderStatusQuery,
+    useGetStatusMarkAsDeleiverdMutation,
 } = OrderApi

@@ -6,7 +6,7 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import  React,{ useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,6 +25,8 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import { useUploadDealerSchemeMutation } from 'src/services/FilePickerServices'
+import { showToast } from 'src/utils'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
@@ -37,10 +39,34 @@ type Props = {
 const DealerSchemeListing = ({ columns, rows }: Props) => {
     const params = useParams()
     const dealerId: any = params.dealerId
+    const fileInputRef = React.useRef<HTMLInputElement>(null)
+    const { userData }: any = useSelector((state: RootState) => state.auth)
+
     const dispatch = useDispatch<AppDispatch>()
     const schemeState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
+    const [uploadDealerPincode] = useUploadDealerSchemeMutation()
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files
+
+        if (files && files[0]) {
+            const file = files[0]
+            // Create a new FormData instance
+            const formData = new FormData()
+            // Append the file
+            formData.append('data', file)
+            uploadDealerPincode({ userId: userData?.userId, body: formData })
+                .then((res: any) => {
+                    if ('data' in res) {
+                        showToast('success', 'Import successfully')
+                    }
+                })
+                .catch((err: any) => {
+                    console.error('error', err)
+                })
+        }
+    }
     const navigate = useNavigate()
     const [selectedRows, setSelectedRows] = useState([])
 
@@ -52,6 +78,25 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
+              
+                <div className='gap-1 flex'>
+                <input
+                    type="file"
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    ref={fileInputRef}
+                    className="hidden"
+                    onChange={handleFileChange} // Assuming addExcelFile can handle the file input change event
+                />
+                {isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_BULK_UPLOAD
+                    ) && (
+                        <button
+                            onClick={() => fileInputRef?.current?.click()}
+                            className="bg-primary-main text-white rounded py-1 px-3"
+                        >
+                            + Bulk Upload
+                        </button>
+                    )}
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_ADD
                 ) && (
@@ -65,6 +110,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
                         + Add Scheme{' '}
                     </button>
                 )}
+                </div>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">

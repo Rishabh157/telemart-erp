@@ -17,11 +17,15 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { OrderListResponse } from 'src/models'
 import { SaleOrderStatus } from 'src/models/SaleOrder.model'
 import { RootState } from 'src/redux/store'
-import { useGetOrderQuery } from 'src/services/OrderService'
+import { useGetOrderQuery, useGetStatusMarkAsDeleiverdMutation } from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FormInitialValuesFilterWithLabel } from './Filters/OutwardGpoOrderFilterFormWrapper'
 import DispatchingBarcodes from './DispatchingBarcodes/DispatchingBarcodes'
-import { courierCompanyEnum } from 'src/utils/constants/enums'
+import { courierCompanyEnum, orderStatusEnum } from 'src/utils/constants/enums'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
+import { isAuthorized } from 'src/utils/authorization'
+import { showToast } from 'src/utils'
 // import { MdLabelImportantOutline } from 'react-icons/md'
 
 // |-- Types --|
@@ -37,6 +41,8 @@ enum FirstCallApprovalStatus {
 }
 
 const OutwardGpoOrdersTabListingWrapper = () => {
+    const [currentId, setCurrentId] = useState('')
+
     // order number search
     const [orderNumberSearchValue, setOrderNumberSearchValue] =
         useState<string>('')
@@ -75,6 +81,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         (state: RootState) => state.listingPagination
     )
     const { page, rowsPerPage, searchValue } = outwardCustomerState
+    const [updateDeleveredStatus] = useGetStatusMarkAsDeleiverdMutation()
 
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetOrderQuery({
@@ -102,7 +109,50 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         }),
     })
 
+    const handleDeliveredStatus = () => {
+        updateDeleveredStatus({orderId:currentId}).then((res:any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', 'Status updated successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
     const columns: columnTypes[] = [
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    customBtnText='Mark As Devivered'
+                    isCustomBtn={isAuthorized(
+                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_MARK_AS_DELIVERED
+                    ) && row?.status===orderStatusEnum.intransit}
+                  
+                    handleCustomActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Mark As Delivered',
+                            text: 'Do you want to update status Delivered',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed ? handleDeliveredStatus() : null
+                            },
+                        })
+                    }}
+                    handleOnAction={() => {
+                        setCurrentId(row?._id)
+                    }}
+                />
+            ),
+        },
         {
             field: 'invoice',
             headerName: 'Invoice',

@@ -185,6 +185,14 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_DEALER_DEALER_PINCODE_BULK_UPLOAD",
+            "actionUrl": "",
+            "actionName": "DEALER_PINCODE_BULK_UPLOAD",
+            "compulsoryFields": [],
+            "parentGroup": ["VIEW", "DEALER_PINCODE"],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_DEALER_DEALER_PINCODE_DELETE",
             "actionUrl": "",
             "actionName": "DEALER_PINCODE_ADD_DELETE",
@@ -233,6 +241,14 @@
             "actionId": "ACTION_DEALER_DEALER_SCHEME_ADD",
             "actionUrl": "",
             "actionName": "DEALER_SCHEME_ADD",
+            "compulsoryFields": [],
+            "parentGroup": ["VIEW", "DEALER_SCHEME"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_DEALER_DEALER_SCHEME_BULK_UPLOAD",
+            "actionUrl": "",
+            "actionName": "DEALER_SCHEME_BULK_UPLOAD",
             "compulsoryFields": [],
             "parentGroup": ["VIEW", "DEALER_SCHEME"],
             "fields": []

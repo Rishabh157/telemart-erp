@@ -29,8 +29,10 @@ import { RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import ChangePasswordWrapper from '../ChangePassword/ChangePasswordWrapper'
+import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 
 const DealersListingWrapper = () => {
+    useUnmountCleanup()
     const dealerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
