@@ -100,6 +100,11 @@
                     "fieldValue": "totalMissingCount"
                 },
                 {
+                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_LOST_COUNT",
+                    "fieldName": "Lost Count",
+                    "fieldValue": "lostQuantity"
+                },
+                {
                     "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CREATED_DATE",
                     "fieldName": "Created Date",
                     "fieldValue": "createdAt"
