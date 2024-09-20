@@ -16,7 +16,24 @@ export const filePickerSlice = createApi({
                 body,
             }),
         }),
+        uploadDealerPincode: builder.mutation({
+            query: ({ userId, body }) => ({
+                url: '/upload-dealer-pincode',
+                method: 'POST',
+                body,
+                params: { userId },
+            }),
+        }),
+        uploadDealerScheme: builder.mutation({
+            query: ({ userId, body }) => ({
+                url: '/upload-dealer-scheme',
+                method: 'POST',
+                body,
+                params: { userId },
+            }),
+        }),
     }),
 })
 
-export const { useAddFileUrlMutation } = filePickerSlice
+export const { useAddFileUrlMutation, useUploadDealerPincodeMutation,useUploadDealerSchemeMutation } =
+    filePickerSlice
