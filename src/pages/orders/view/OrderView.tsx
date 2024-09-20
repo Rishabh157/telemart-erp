@@ -32,7 +32,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) => {
     return (
-         <div className="px-4 h-[calc(100vh-55px)] bg-white">
+        <div className="px-4 h-[calc(100vh-55px)] bg-white">
 
             {isLoading && (
                 <div className="absolute inset-0 flex justify-center items-center z-10 bg-slate-100 opacity-50">
@@ -505,14 +505,6 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
-                                        Remark
-                                    </span>
-                                    <span className='text-sm font-semibold w-[70%] text-end truncate'>
-                                        {items?.remark || 'NA'}
-                                    </span>
-                                </div>
-                                <div className='flex justify-between items-center'>
-                                    <span className='text-neutral font-medium text-sm'>
                                         Facebook
                                     </span>
                                     <span className='text-sm font-semibold'>
@@ -525,6 +517,14 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     </span>
                                     <span className='text-sm font-semibold'>
                                         {items?.socialMedia?.instagram || 'NA'}
+                                    </span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Remark
+                                    </span>
+                                    <span className='text-sm font-semibold w-[70%] text-end truncate'>
+                                        {items?.remark || 'NA'}
                                     </span>
                                 </div>
                             </div>
