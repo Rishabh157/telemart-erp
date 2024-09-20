@@ -50,8 +50,6 @@ const AddSchemeToDealerMapping = ({
         skip: !values?.schemeId,
     })
 
-    // console.log('dealerListDatadealerListDatadealerListData' , dealerListData);    
-
     // Get Dealer by scheme id
     useEffect(() => {
         if (!isDealerListFetching && !isDealerListLoading) {

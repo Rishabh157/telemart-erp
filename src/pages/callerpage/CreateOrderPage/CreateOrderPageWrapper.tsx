@@ -131,7 +131,6 @@ const CreateOrderPageWrapper = () => {
         useState<LocalUserStorage>()
 
     const locationUrl = useLocation()
-    console.log('locationUrl: ', locationUrl)
     const queryParams = new URLSearchParams(locationUrl.search)
     const createOrderState = locationUrl.state
     const phoneNumber = queryParams.get('phone')
@@ -145,9 +144,6 @@ const CreateOrderPageWrapper = () => {
         (state: RootState) => state.inboundCaller
     )
     
-    console.log('agentName: ', agentName)
-    console.log('companyCode: ', companyCode)
-
     const navigate = useNavigate()
     const { items, isTableLoading } = inboundCallerState
     // Table Data with MobileNo filtered

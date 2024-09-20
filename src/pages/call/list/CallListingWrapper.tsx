@@ -7,8 +7,6 @@ import { useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import CallListing from './CallListing'
-
-// import { OrderListResponse } from 'src/models/configurationModel/InboundCaller.model'
 import { useGetPaginationInboundCallerQuery } from 'src/services/CallerService'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
@@ -19,6 +17,8 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import { OrderListResponse } from 'src/models'
+import { CallListFilterFormValues } from './CallListingFilter/CallListingFilterWrapper'
+import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 
 const CallListingWrapper = () => {
     useUnmountCleanup()
@@ -30,7 +30,32 @@ const CallListingWrapper = () => {
 
     const { page, rowsPerPage, searchValue } = inboundCallerState
 
+
+    // listing filters states
+    const [filter, setFilter] =
+        React.useState<CallListFilterFormValues>({
+            dispositionOneId: { fieldName: '', label: '', value: '' },
+            dispositionTwoId: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            startDate: {
+                fieldName: '',
+                label: '',
+                value: '',
+            },
+            endDate: { fieldName: '', label: '', value: '' },
+        })
+
     const columns: columnTypes[] = [
+        {
+            field: 'createdAt',
+            headerName: 'Create Date',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_CREATE_DATE,
+            renderCell: (row: OrderListResponse) => formatedDateTimeIntoIst(row?.createdAt),
+        },
         {
             field: 'didNo',
             headerName: 'DID No',
@@ -73,6 +98,12 @@ const CallListingWrapper = () => {
             ),
         },
         {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.CALL_LIST_STATUS,
+        },
+        {
             field: 'schemeName',
             headerName: 'Scheme',
             flex: 'flex-[1_1_0%]',
@@ -92,9 +123,19 @@ const CallListingWrapper = () => {
                     fieldName: 'companyId',
                     value: userData?.companyId,
                 },
+                {
+                    fieldName: 'dispositionLevelTwoId',
+                    value: filter?.dispositionOneId?.value,
+                },
+                {
+                    fieldName: 'dispositionLevelThreeId',
+                    value: filter?.dispositionTwoId?.value,
+                },
             ],
-            dateFilter: {},
-            orderBy: 'createdAt',
+            dateFilter: {
+                startDate: filter.startDate.value as string,
+                endDate: filter.endDate.value as string,
+            }, orderBy: 'createdAt',
             orderByValue: -1,
             isPaginationRequired: true,
         }),
@@ -106,6 +147,8 @@ const CallListingWrapper = () => {
                 columns={columns}
                 rows={items}
                 setShowDropdown={setShowDropdown}
+                filter={filter}
+                setFilter={setFilter}
             />
         </SideNavLayout>
     )

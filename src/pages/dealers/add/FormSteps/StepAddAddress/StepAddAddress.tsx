@@ -78,9 +78,7 @@ const StepAddAddress = ({
     const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)
     const [loaderState, setLoaderState] = useState<string>('')
     const [uploadFile] = useAddFileUrlMutation()
-
-    console.log('valuesvaluesvalues' , values);    
-
+    
     const getTheValueByNameKey = (name: string) => {
         switch (name) {
             case 'registrationAddress.gstCertificate':

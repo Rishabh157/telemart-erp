@@ -11,6 +11,11 @@
             "parentGroup": [],
             "fields": [
                 {
+                    "fieldId": "CALL_LIST_CREATE_DATE",
+                    "fieldName": "Create Date",
+                    "fieldValue": "createdAt"
+                },
+                {
                     "fieldId": "CALL_LIST_DID_NUMBER",
                     "fieldName": "DID No",
                     "fieldValue": "didNo"
@@ -34,6 +39,11 @@
                     "fieldId": "CALL_LIST_DISPOSITION",
                     "fieldName": "Dispositions",
                     "fieldValue": "dispositionLevelTwoLabel"
+                },
+                {
+                    "fieldId": "CALL_LIST_STATUS",
+                    "fieldName": "Status",
+                    "fieldValue": "status"
                 },
                 {
                     "fieldId": "CALL_LIST_SCHEME",

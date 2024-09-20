@@ -134,9 +134,7 @@ const DealerServiceabilityListingWrapper = () => {
             renderCell: (row: any) => <span>{row?.schemeName}</span>,
         },
     ]
-
-    console.log('items', items)
-
+    
     return (
         <SideNavLayout>
             <DealerServiceabilityListing

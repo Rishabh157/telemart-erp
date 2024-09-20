@@ -44,8 +44,6 @@ const EditGRNWrapper = () => {
         }
     )
 
-    console.log("selectedItems",selectedItems)
-
     // Form Initial Values
     const initialValues: FormInitialValues = {
         poCode: selectedItems?.poCode || '',

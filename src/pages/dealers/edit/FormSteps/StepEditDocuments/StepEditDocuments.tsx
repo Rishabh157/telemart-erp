@@ -45,8 +45,6 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
         dispatch(setFieldCustomized(true))
     }
 
-    console.log('values: ', values);
-
     const getTheValueByNameKey = (name: string) => {
         switch (name) {
             case 'document.gstCertificate':

@@ -17,22 +17,64 @@ import {
 
 // |-- Redux --|
 import { AppDispatch, RootState } from 'src/redux/store'
+import CallListingFilterWrapper, { CallListFilterFormValues } from './CallListingFilter/CallListingFilterWrapper'
+import { Chip, Stack } from '@mui/material'
 
 // |-- Types --|
 type Props = {
     columns: any[]
     rows: any[]
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    setFilter: React.Dispatch<React.SetStateAction<CallListFilterFormValues>>
+    filter: CallListFilterFormValues
 }
 
-const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
+const CallListing = ({ columns, rows, setShowDropdown, filter, setFilter, }: Props) => {
+
+    // state
+    const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
+        useState<boolean>(false)
+    const [selectedRows, setSelectedRows] = useState([])
+
     const dispatch = useDispatch<AppDispatch>()
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    const [selectedRows, setSelectedRows] = useState([])
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         inboundCallerState
+
+    // Filter Reset
+    const handleReset = () => {
+        setFilter((prev) => ({
+            ...prev,
+            dispositionOneId: { fieldName: '', value: '', label: '' },
+            dispositionTwoId: { fieldName: '', value: '', label: '' },
+            startDate: { fieldName: '', value: '', label: '' },
+            endDate: { fieldName: '', value: '', label: '' },
+        }))
+    }
+
+    // For Showing UI Filter Applied 
+    const filterShow = (filter: CallListFilterFormValues) => {
+        return (
+            <span className="capitalize">
+                <Stack direction="row" spacing={1}>
+                    {Object.entries(filter).map(([key, value], index) => {
+                        return value.value ? (
+                            <Chip
+                                key={index}
+                                label={`${value.fieldName}: ${value.label}`}
+                                color="primary"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : null
+                    })}
+                </Stack>
+            </span>
+        )
+    }
+
 
     return (
         <div className="px-4 h-[calc(100vh-45px)] bg-white ">
@@ -53,8 +95,23 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
                         dispatch(setRowsPerPage(newValue))
                     }
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
-                    // isFilter
+                    isFilter
+                    onFilterClick={() => {
+                        setIsOpenFilterFormDialog(true)
+                    }}
+                    isFilterRemover
+                    onFilterRemoverClick={handleReset}
+                    filterShow={filterShow(filter)}
                 />
+
+                {isOpenFilterFormDialog && (
+                    <CallListingFilterWrapper
+                        open
+                        onClose={() => setIsOpenFilterFormDialog(false)}
+                        setFilter={setFilter}
+                        filter={filter}
+                    />
+                )}
 
                 {/* Table */}
                 <div className="grow overflow-auto h-full ">
@@ -71,7 +128,6 @@ const CallListing = ({ columns, rows, setShowDropdown }: Props) => {
                 </div>
 
                 {/* Pagination */}
-
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}

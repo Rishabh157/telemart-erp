@@ -22,7 +22,6 @@ type Props = {
 
 const CreateOrder = ({ formikProps, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
-    console.log('values: ', values)
 
     const dispatch = useDispatch()
 

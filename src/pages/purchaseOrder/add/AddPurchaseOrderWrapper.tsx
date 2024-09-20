@@ -61,8 +61,6 @@ const AddPurchaseOrderWrapper = (props: Props) => {
         value: '_id',
     })
     
-    console.log('vendorOptions: ', vendorOptions)
-
     // Form Initial Values
     const initialValues: FormInitialValues = {
         vendorId: '',
