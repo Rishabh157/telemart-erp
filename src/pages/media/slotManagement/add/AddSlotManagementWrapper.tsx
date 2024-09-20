@@ -19,6 +19,7 @@ import { useGetAllChannelQuery } from 'src/services/media/ChannelManagementServi
 import { useGetAllTapeMangementQuery } from 'src/services/media/TapeManagementServices'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import moment from 'moment'
 
 // |-- Types --|
 export type FormInitialValues = {
@@ -122,10 +123,10 @@ const AddSlotManagementWrapper = () => {
             remarks: values.remarks,
             slotPrice: values.slotPrice,
             slotDay: values.slotDay,
-            slotStartTime: values.slotStartTime,
             slotStartDate: values.slotStartDate,
             slotRenewal: values.slotRenewal,
-            slotEndTime: values.slotEndTime,
+            slotStartTime: values.slotStartTime ? moment(values.slotStartTime).utcOffset("+05:30").format('hh:mm A') : '',
+            slotEndTime: values.slotEndTime ? moment(values.slotEndTime).utcOffset("+05:30").format('hh:mm A') : '',
             slotContinueStatus: values.slotContinueStatus,
             companyId: values.companyId || '',
         }).then((res: any) => {

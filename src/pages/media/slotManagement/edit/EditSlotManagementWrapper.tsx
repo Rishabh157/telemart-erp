@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Formik, FormikProps } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 import { array, boolean, number, object, string } from 'yup'
+import moment from 'moment'
 
 // |-- Internal Dependencies --|
 import { showToast } from 'src/utils'
@@ -31,8 +32,8 @@ export type FormInitialValues = {
     channelGroupId: string
     slotPrice: number
     slotDay: string[]
-    slotStartTime: string
-    slotEndTime: string
+    slotStartTime: string | any
+    slotEndTime: string | any
     slotRenewal: string
     slotContinueStatus: boolean
     type: string
@@ -88,8 +89,8 @@ const EditSlotManagementWrapper = () => {
         channelNameId: items?.channelNameId || '',
         slotPrice: items?.slotPrice || 0,
         slotDay: items?.slotDay || [],
-        slotStartTime: items?.slotStartTime || '',
-        slotEndTime: items?.slotEndTime || '',
+        slotStartTime: moment(items?.slotStartTime, 'hh:mm A').toDate() || '',
+        slotEndTime: moment(items?.slotEndTime, 'hh:mm A').toDate() || '',
         slotRenewal: items?.slotRenewal || '',
         slotContinueStatus: items?.slotContinueStatus || false,
         channelTrp: items?.channelTrp || '',
@@ -101,7 +102,7 @@ const EditSlotManagementWrapper = () => {
     // Form Validation Schema
     const validationSchema = object({
         slotName: string().required('Required'),
-        channelGroup: string().required('Required'),
+        channelGroupId: string().required('Required'),
         type: string().required('Required'),
         slotPrice: number().required('Required'),
         slotStartDate: string().required('Required'),
@@ -112,8 +113,8 @@ const EditSlotManagementWrapper = () => {
         slotStartTime: string().required('Required'),
         slotEndTime: string().required('Required'),
         slotContinueStatus: boolean().required('Required'),
-        tapeName: string().required('Required'),
-        channelName: string().required('Required'),
+        tapeNameId: string().required('Required'),
+        channelNameId: string().required('Required'),
         channelTrp: string(),
         remarks: string(),
     })
@@ -133,8 +134,8 @@ const EditSlotManagementWrapper = () => {
                     remarks: values?.remarks,
                     slotPrice: values.slotPrice,
                     slotDay: values.slotDay,
-                    slotStartTime: values.slotStartTime,
-                    slotEndTime: values.slotEndTime,
+                    slotStartTime: values.slotStartTime ? moment(values.slotStartTime).utcOffset("+05:30").format('hh:mm A') : '',
+                    slotEndTime: values.slotEndTime ? moment(values.slotEndTime).utcOffset("+05:30").format('hh:mm A') : '',
                     slotRenewal: values.slotRenewal,
                     slotContinueStatus: values.slotContinueStatus,
                     slotStartDate: values.slotStartDate,

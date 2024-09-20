@@ -48,8 +48,9 @@ const EditSlotManagement = ({
     apiStatus,
     dropdownOptions,
 }: Props) => {
-    const { values, setFieldValue } = formikProps
-
+    const { values, errors,setFieldValue } = formikProps
+    
+    console.log('errors: ', errors)
     const options = [
         {
             label: 'Fixed',

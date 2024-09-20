@@ -6,6 +6,7 @@ import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment';
 
 // |-- Internal Dependencies --|
 import AddCompetitor from './Addcompetitor'
@@ -118,8 +119,8 @@ const AddCompetitorWrapper = (props: Props) => {
                 websiteLink: values.websiteLink || '',
                 ytLink: values.ytLink || '',
                 mobileNumber: values.mobileNumber || '',
-                startTime: values.startTime || '',
-                endTime: values.endTime || '',
+                startTime: values.startTime ? moment(values.startTime).utcOffset("+05:30").format('hh:mm A') : '',
+                endTime: values.endTime ? moment(values.endTime).utcOffset("+05:30").format('hh:mm A') : '',
                 languageId: values.languageId || '',
                 image: values?.images?.map((ele) => ele?.image) || [],
             }).then((res) => {

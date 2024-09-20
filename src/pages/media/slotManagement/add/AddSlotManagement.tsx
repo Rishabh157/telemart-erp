@@ -34,6 +34,7 @@ type Props = {
         tapeManagementOptions: SelectOption[]
     }
 }
+
 const breadcrumbs: BreadcrumbType[] = [
     {
         label: ' Slot Management',
@@ -50,7 +51,7 @@ const AddSlotManagement = ({
     dropdownOptions,
 }: Props) => {
     const { values, setFieldValue, handleSubmit } = formikProps
-
+    
     const options = [
         {
             label: 'Fixed',
@@ -61,6 +62,7 @@ const AddSlotManagement = ({
             value: 'FLEXIBLE',
         },
     ]
+    console.log('values: ', values)
 
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string | boolean) => {
