@@ -138,7 +138,6 @@ const CreateOrderPageWrapper = () => {
     const didNumber = queryParams.get('didnumber')
     const campaignId = queryParams.get('campaign')
     const calltype = queryParams.get('calltype')
-    const companyCode = queryParams.get('companyCode')
     // const dstphone = queryParams.get('dstphone')
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
