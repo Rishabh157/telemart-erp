@@ -33,3 +33,8 @@ code {
     margin-top: 10px !important;
     padding-top: 5px !important;
 }
+
+/* for disable the watermark of charts */
+.canvasjs-chart-credit {
+    display: none !important;
+}
