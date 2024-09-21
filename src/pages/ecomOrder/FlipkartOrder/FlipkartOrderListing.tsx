@@ -29,6 +29,50 @@ type Props = {
     rows: any[]
 }
 
+const orderDataFields = [
+    "order_item_id", 
+    "order_id", 
+    "fulfilment_source", 
+    "fulfilment_type", 
+    "order_date", 
+    "order_approval_date", 
+    "order_item_status", 
+    "sku", 
+    "fsn", 
+    "label", 
+    "productCode", 
+    "product_title", 
+    "quantity", 
+    "pickup_logistics_partner", 
+    "itemPrice", 
+    "delivery_tracking_id", 
+    "forward_logistics_form", 
+    "forward_logistics_form_no", 
+    "order_cancellation_date", 
+    "cancellation_reason", 
+    "cancellation_sub_reason", 
+    "order_return_approval_date", 
+    "return_id", 
+    "return_reason", 
+    "return_sub_reason", 
+    "procurement_dispatch_sla", 
+    "dispatch_after_date", 
+    "dispatch_by_date", 
+    "order_ready_for_dispatch_on_date", 
+    "dispatched_date", 
+    "dispatch_sla_breached", 
+    "seller_pickup_reattempts", 
+    "delivery_sla", 
+    "deliver_by_date", 
+    "order_delivery_date", 
+    "delivery_sla_breached", 
+    "order_service_completion_date", 
+    "service_by_date", 
+    "service_completion_sla", 
+    "service_sla_breached"
+  ];
+  
+
 const FlipkartOrderListing = ({ columns, rows }: Props) => {
 
     // Hooks
@@ -138,6 +182,7 @@ const FlipkartOrderListing = ({ columns, rows }: Props) => {
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_FLIPKART_ORDER_IMPORT_SHEET_BUTTON
                     ) && (
+                        <>
                             <ATMExportButton
                                 isLoading={false}
                                 headers={[]}
@@ -151,6 +196,17 @@ const FlipkartOrderListing = ({ columns, rows }: Props) => {
                                     fileInputUploadSheetRef?.current?.click()
                                 }}
                             />
+                            <ATMExportButton
+                                isLoading={false}
+                                headers={orderDataFields}
+                                fileName=""
+                                btnName="Import sample"
+                                btnType='UPLOAD'
+                                loadingText="..."
+                                className='py-2 mt-[5px] h-[36px]'
+                               onClick={(done)=>done()}
+                            />
+                            </>
                         )}
 
                     {isAuthorized(
