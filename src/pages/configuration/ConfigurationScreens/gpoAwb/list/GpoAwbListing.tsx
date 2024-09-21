@@ -28,7 +28,6 @@ import { useGetAwbCouriersQuery } from 'src/services/CourierMasterService'
 import { showToast } from 'src/utils'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import AtmExcelDownload from 'src/components/UI/atoms/AtmExcelDownload'
 
 // |-- Types --|
 type Props = {
@@ -100,6 +99,8 @@ Props) => {
         }
     }
 
+    const headers = ['awbNumber', 'orderNumber']
+
     return (
         <div className="px-4 h-full pt-3">
             {/* Breadcrumbs */}
@@ -151,11 +152,27 @@ Props) => {
                                 fileInputRef?.current?.click()
                             }}
                         />
-
-                        <AtmExcelDownload
-                            fileName={'awbFile.xlsx'}
-                            downloadUrl="/excel-format/awbsheet.xlsx"
-                        />
+                        <div
+                            className="mt-1"
+                            hidden={!selectedCourier.length ? true : false}
+                        >
+                            <ATMExportButton
+                                data={[]}
+                                isLoading={false}
+                                headers={
+                                    selectedCourier === 'GPO'
+                                        ? ['awbNumber']
+                                        : headers
+                                }
+                                fileName={selectedCourier}
+                                onClick={(done) => {
+                                    done()
+                                }}
+                                btnName="Download CSV"
+                                btnType="DOWNLOAD"
+                                loadingText="..."
+                            />
+                        </div>
                     </div>
                 )}
             </div>

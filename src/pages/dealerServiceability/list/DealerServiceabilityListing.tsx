@@ -188,7 +188,7 @@ const DealerServiceabilityListing = ({
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)
                         }
-                        extraClasses="max-h-[calc(100%-150px)] overflow-auto"
+                        extraClasses="max-h-[calc(100%-70px)] overflow-auto"
                         isLoading={isTableLoading}
                     />
                 </div>

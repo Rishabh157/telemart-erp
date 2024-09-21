@@ -20,7 +20,10 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useAddAmzoneOrderSheetMutation, useUpdateEcomOrderSheetMutation } from 'src/services/EcomOrdersMasterService'
+import {
+    useAddAmzoneOrderSheetMutation,
+    useUpdateEcomOrderSheetMutation,
+} from 'src/services/EcomOrdersMasterService'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
@@ -30,7 +33,6 @@ type Props = {
 }
 
 const AmazonOrderListing = ({ columns, rows }: Props) => {
-
     // Hooks
     const dispatch = useDispatch<AppDispatch>()
 
@@ -38,11 +40,12 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
         (state: RootState) => state.listingPagination
     )
 
-    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } = amazonOrderState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
+        amazonOrderState
 
     // Sheet Upload API
     const [addAmazonOrderSheet] = useAddAmzoneOrderSheetMutation()
-    // Update Order Status API 
+    // Update Order Status API
     const [updateStatusOrder] = useUpdateEcomOrderSheetMutation()
 
     const fileInputUploadSheetRef = React.useRef<HTMLInputElement>(null)
@@ -72,7 +75,7 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
                     }
                 })
                 .catch((err: any) => {
-                    console.error('err', err?.error);
+                    console.error('err', err?.error)
                 })
         }
     }
@@ -101,15 +104,14 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
                     }
                 })
                 .catch((err: any) => {
-                    console.error('err', err?.error);
+                    console.error('err', err?.error)
                 })
         }
     }
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
-
-            <div className='flex justify-between'>
+            <div className="flex justify-between">
                 <div className="flex justify-between items-center h-[45px]">
                     <ATMPageHeading>Amazon Orders</ATMPageHeading>
                 </div>
@@ -136,38 +138,63 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_AMAZON_ORDER_IMPORT_SHEET_BUTTON
                     ) && (
-                            < ATMExportButton
+                        <>
+                            <ATMExportButton
                                 isLoading={false}
                                 headers={[]}
                                 fileName=""
-                                btnName="Import"
-                                btnType='UPLOAD'
+                                btnName="Import order"
+                                btnType="UPLOAD"
                                 loadingText="..."
-                                className='py-2 mt-[5px] h-[36px]'
+                                className="py-2 mt-[5px] h-[36px]"
                                 // disabled={!selectedCourier ? true : false}
                                 onImport={() => {
                                     fileInputUploadSheetRef?.current?.click()
                                 }}
                             />
-                        )}
+                            <ATMExportButton
+                                isLoading={false}
+                                headers={['Agent','OrderId','Status']}
+                                fileName=""
+                                btnName="Sapmle order "
+                                btnType="Download"
+                                loadingText="..."
+                                className="py-2 mt-[5px] h-[36px]"
+                              onClick={(done)=>done()}
+                            />
+                        </>
+                    )}
 
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_AMAZON_ORDER_UPDATE_ORDER_SHEET_BUTTON
                     ) && (
-                            <ATMExportButton
+                        <>
+                           <ATMExportButton
+                            isLoading={false}
+                            headers={[]}
+                            fileName=""
+                            btnName="Update Status"
+                            btnType="UPLOAD"
+                            loadingText="..."
+                            className="py-2 mt-[5px] h-[36px]"
+                            // disabled={!selectedCourier ? true : false}
+                            onImport={() => {
+                                fileInputUpdateStatusSheetRef?.current?.click()
+                            }}
+                        />
+                             <ATMExportButton
                                 isLoading={false}
-                                headers={[]}
+                                headers={['Agent','OrderId','Status']}
                                 fileName=""
-                                btnName="Update Status"
-                                btnType='UPLOAD'
+                                btnName="Sapmle status"
+                                btnType="Download"
                                 loadingText="..."
-                                className='py-2 mt-[5px] h-[36px]'
-                                // disabled={!selectedCourier ? true : false}
-                                onImport={() => {
-                                    fileInputUpdateStatusSheetRef?.current?.click()
-                                }}
+                                className="py-2 mt-[5px] h-[36px]"
+                              onClick={(done)=>done()}
                             />
-                        )}
+                        </>
+                     
+                    )}
                 </div>
             </div>
 
@@ -183,9 +210,7 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
                     onRowsPerPageChange={(newValue) =>
                         dispatch(setRowsPerPage(newValue))
                     }
-                    onSearch={(newValue) =>
-                        dispatch(setSearchValue(newValue))
-                    }
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
 
                 {/* Table */}
