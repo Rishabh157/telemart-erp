@@ -30,8 +30,8 @@ const RetailILabel = ({ items }: { items: OrderListResponse }) => {
                     <span className="font-medium">To</span>
                     <span className="font-medium">{items?.customerName}</span>
                     <span className="font-medium">
-                        {items?.houseNumber},, PINCOD 403512MOB NO ,9209162825,
-                        NEAR BY COLLEGE,,,
+                        {items?.houseNumber}, PINCOD 403512 MOB NO ,9209162825,
+                        NEAR BY COLLEGE,
                     </span>
                     <div>
                         <span className="font-medium">

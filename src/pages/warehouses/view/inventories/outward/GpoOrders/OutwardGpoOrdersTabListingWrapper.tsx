@@ -110,7 +110,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
     })
 
     const handleDeliveredStatus = () => {
-        updateDeleveredStatus({orderId:currentId}).then((res:any) => {
+        updateDeleveredStatus({ orderId: currentId }).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Status updated successfully!')
@@ -135,8 +135,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                     customBtnText='Mark As Devivered'
                     isCustomBtn={isAuthorized(
                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_MARK_AS_DELIVERED
-                    ) && row?.status===orderStatusEnum.intransit}
-                  
+                    ) && row?.status === orderStatusEnum.intransit}
                     handleCustomActionButton={() => {
                         showConfirmationDialog({
                             title: 'Mark As Delivered',
@@ -179,17 +178,17 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                             color="red"
                             size={22}
                             className="cursor-pointer"
-                            onClick={() =>{
+                            onClick={() => {
 
                                 // window.open(
-                                    //     `/gpo/invoice?orderNumber=${row.orderNumber}`,
-                                    //     '_blank'
-                                    // )
-                                    window.open(
-                                        `/gpo/label-invoice?orderNumber=${row.orderNumber}`,
-                                        '_blank'
-                                    )
-                                }
+                                //     `/gpo/invoice?orderNumber=${row.orderNumber}`,
+                                //     '_blank'
+                                // )
+                                window.open(
+                                    `/gpo/label-invoice?orderNumber=${row.orderNumber}`,
+                                    '_blank'
+                                )
+                            }
                             }
                         />
                     </div>
@@ -215,7 +214,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
+                            FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -225,7 +224,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => {}}
+                                onClick={() => { }}
                                 className="cursor-pointer"
                                 label="Pending"
                                 color="error"
@@ -611,8 +610,8 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                     <span>
                         {row?.preffered_delivery_date
                             ? moment(row?.preffered_delivery_date).format(
-                                  'DD-MM-YYYY'
-                              )
+                                'DD-MM-YYYY'
+                            )
                             : '-'}
                     </span>
                 )

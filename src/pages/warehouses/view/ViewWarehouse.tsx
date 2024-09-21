@@ -191,8 +191,6 @@ const ViewWarehouse = ({ items }: Props) => {
                 </div>
             </div>
         </div>
-
-        // {items?.contactInformation  }
     )
 }
 
