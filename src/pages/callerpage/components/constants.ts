@@ -121,3 +121,10 @@ export const relationOptionns: SelectOption[] = [
 ]
 export const AlertText =
     'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
+
+
+
+
+export const getGstCalculation=()=>{
+
+}

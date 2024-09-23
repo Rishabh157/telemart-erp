@@ -2,9 +2,9 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetInvoiceByOrderNumberQuery } from 'src/services/OrderService'
-import { OrderListResponse } from 'src/models'
 import RetailILabel from './RetailILabel'
 import RetailInvoice from './RetailInvoice'
+import { OrderInvoiceAndLabelListResponse } from 'src/models/Order.model'
 
 type Props = {
     type: 'LABEL' | 'INVOICE' | 'BOTH'
@@ -16,24 +16,24 @@ const GpoInvoiceAndLabelWrapper = ({ type }: Props) => {
     const queryParams = new URLSearchParams(search)
     const orderNumber = queryParams.get('orderNumber')
 
-    const { items } = useGetDataByIdCustomQuery<OrderListResponse>({
+    const { items } = useGetDataByIdCustomQuery<OrderInvoiceAndLabelListResponse>({
         useEndPointHook: useGetInvoiceByOrderNumberQuery(orderNumber, {
             skip: !orderNumber,
         }),
     })
 
     React.useEffect(() => {
-        const printFunc = setTimeout(() => {
-            window?.print()
-        }, 1000)
+        // const printFunc = setTimeout(() => {
+        //     window?.print()
+        // }, 1000)
 
         const handleAfterPrint = () => {
-            navigate(state.pathname)
+            navigate(state?.pathname)
             // Your custom logic after print dialog is closed
         }
 
         const handleCancelPrint = () => {
-            navigate(state.pathname)
+            navigate(state?.pathname)
             // Your custom logic when the print dialog is cancelled
         }
 
@@ -43,7 +43,7 @@ const GpoInvoiceAndLabelWrapper = ({ type }: Props) => {
             window.addEventListener('beforeprint', handleCancelPrint) // Listen for beforeprint event
 
         return () => {
-            clearInterval(printFunc)
+            // clearInterval(printFunc)
             type === 'BOTH' &&
                 window.removeEventListener('afterprint', handleAfterPrint)
             type === 'BOTH' &&
@@ -58,22 +58,22 @@ const GpoInvoiceAndLabelWrapper = ({ type }: Props) => {
                 switch (type) {
                     case 'LABEL':
                         return (
-                            <RetailILabel items={items as OrderListResponse} />
+                            <RetailILabel items={items as OrderInvoiceAndLabelListResponse} />
                         )
                     case 'INVOICE':
                         return (
-                            <RetailInvoice items={items as OrderListResponse} />
+                            <RetailInvoice items={items as OrderInvoiceAndLabelListResponse} />
                         )
                     case 'BOTH':
                         return (
-                            <>
+                            <React.Fragment>
                                 <RetailILabel
-                                    items={items as OrderListResponse}
+                                    items={items as OrderInvoiceAndLabelListResponse}
                                 />
                                 <RetailInvoice
-                                    items={items as OrderListResponse}
+                                    items={items as OrderInvoiceAndLabelListResponse}
                                 />
-                            </>
+                            </React.Fragment>
                         )
                     default:
                         return null

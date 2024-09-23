@@ -1,58 +1,71 @@
+import moment from 'moment'
 import React from 'react'
-import { OrderListResponse } from 'src/models'
+import { OrderInvoiceAndLabelListResponse } from 'src/models/Order.model'
+import { useBarcode } from '@createnextapp/react-barcode'
 
-const RetailILabel = ({ items }: { items: OrderListResponse }) => {
-    const totalPrice: number =
-        (items?.shcemeQuantity || 0) * (items?.price || 0)
+
+const RetailILabel = ({ items }: { items: OrderInvoiceAndLabelListResponse }) => {
+
+    function Barcode({ value }: { value: string }) {
+        const { inputRef } = useBarcode({
+            value,
+            options: {
+                displayValue: false,
+                background: '#ffffff',
+            },
+        })
+        return <canvas ref={inputRef} className="h-full w-full" />
+    }
+
 
     return (
-        <div className="bg-white p-4 py-2">
-            <div className="flex py-6 items-center border-b border-gray-400 gap-x-8">
-                <div>
-                    <img src="/logo.jpg" className="h-20 w-half" alt="logo" />
+        <div className="bg-white p-4 py-2 text-sm h-auto">
+            <div className="grid grid-cols-12 py-6 items-center border-b border-gray-400 gap-x-8">
+
+                <div className='col-span-4'>
+                    <img
+                        src={items?.companyDetails?.companyLogo ? items?.companyDetails?.companyLogo : "/logo.jpg"}
+                        className="h-20 w-full"
+                        alt={items?.companyDetails?.companyName + ' logo'}
+                    />
                 </div>
-                <div className="flex flex-col font-medium">
-                    <p className="text-2xl font-bold text-center ">Telemart</p>
-                    <span >
-                        Regd. Office:701 Atulya IT Park, Khandwa Road, Near
-                        Crystal IT Park,Indore,Madhya
+
+                <div className="flex flex-col font-medium col-span-8">
+                    <p className="text-2xl font-bold text-center uppercase">{items?.companyDetails?.companyName}</p>
+                    <span className='font-semibold text-wrap'>
+                        {items?.companyAddress || items?.companyDetails?.address}
                     </span>
-                    <div className="flex flex-col items-center">
-                        <span> Pradesh-452001,India, </span>
-                        <span> Phone :7770884999 </span>
-                        <span> GSTIN : 23AATFT1962F1ZZ </span>
+
+                    <div className="flex flex-col items-center font-semibold">
+                        <span> Phone : {items?.companyDetails?.phoneNo} </span>
+                        <span> GSTIN : {items?.companyDetails?.gstNo} </span>
                     </div>
+
                 </div>
             </div>
 
-            <div className="flex justify-between gap-4 border-b-[1px] border-gray-400 ">
-                <div className="flex flex-col border-r-[1px] border-gray-400 pr-10 pb-20">
-                    <span className="font-medium">To</span>
-                    <span className="font-medium">{items?.customerName}</span>
+            <div className="flex justify-between gap-4 border-b-[1px] border-gray-400">
+                <div className="flex flex-col border-r-[1px] border-gray-400 pr-10 pb-10">
+                    <span className="font-semibold">To</span>
                     <span className="font-medium">
-                        {items?.houseNumber}, PINCOD 403512 MOB NO ,9209162825,
-                        NEAR BY COLLEGE,
+                        {items?.customerName}
                     </span>
-                    <div>
-                        <span className="font-medium">
-                            CITY :{' '}
-                            <span className="font-normal">NORTH GOA</span>
-                        </span>
-                        <span className="font-medium">
-                            {' '}
-                            STATE : <span className="font-normal">GOA</span>
-                        </span>
-                        <span className="font-medium">
-                            {' '}
-                            PIN : <span className="font-normal">403512</span>
-                        </span>
-                    </div>
-                    <span className="font-medium">MOBILE : 9209162825</span>
+                    <span className="font-medium text-wrap">
+                        {(items?.houseNumber && items?.streetNumber && items?.landmark) ?
+                            items?.houseNumber + ' ,, ' + items?.streetNumber + ' ,, ' + items?.landmark :
+                            items?.autoFillingShippingAddress}
+                        <div className='capitalize'>
+                            <span className='font-bold'> CITY </span> : {items?.districtLabel}
+                            <span className='font-bold'> STATE </span> : {items?.stateLabel}
+                            <span className='font-bold'> PIN </span> : {items?.pincodeLabel} <br />
+                            <span className='font-bold'> MOBILE </span> : {items?.mobileNo}
+                        </div>
+                    </span>
                 </div>
-                <div className="flex items-center flex-col font-bold text-[17px] p-2">
-                    <span> CASH ON DELIVERY</span>
-                    <span>AMOUNT TO COLLECT</span>
-                    <span>Rs {totalPrice?.toFixed(2)}</span>
+                <div className="text-wrap text-lg font-semibold p-2">
+                    <span> CASH ON DELIVERY AMOUNT TO COLLECT</span>
+                    <p></p>
+                    <span>Rs {items?.totalAmount?.toFixed(2)}</span>
                 </div>
             </div>
 
@@ -62,32 +75,32 @@ const RetailILabel = ({ items }: { items: OrderListResponse }) => {
                         <div className="flex gap-x-8">
                             <span className="font-semibold">Invoice No:</span>
                             <span className="font-semibold">
-                                RI-Y24-0216617{' '}
+                                {items?.orderInvoice || ' --RI-Y24-0216617--'}
                             </span>
                         </div>
-                        <div className="flex gap-x-5 mt-4">
+                        <div className="flex gap-x-5 mt-2">
                             <span className="font-semibold">Invoice Date:</span>
-                            <span className="font-semibold">14-Dec-2023</span>
+                            <span className="font-semibold">{items?.orderInvoiceDate ? moment(items?.orderInvoiceDate).format('DD MMM YYYY') : '-'}</span>
                         </div>
                     </div>
                     <span className="font-bold text-md">CASH ON DELIVERY</span>
                 </div>
 
-                <div className="flex flex-col justify-center items-center">
-                    <div className="ml-32">
+                <div className="flex justify-center items-center ml-32">
+                    <div className='text-center'>
                         <span className="font-bold text-md">
-                            Maersk Courier
+                            {items?.orderAssignedToCourier || 'GPO-'}
                         </span>
                         <span className="pl-32 text-md font-bold">
-                            - Delhivery
+                            {items?.secondaryCourierPartner || 'Shipyaari-'}
                         </span>
-                        <img
-                            className=" w-[300px] h-[60px] mt-2"
-                            src="https://static.vecteezy.com/system/resources/thumbnails/008/506/948/small/abstract-digital-code-scanner-barcode-template-for-social-media-payment-market-and-design-png.png"
-                            alt=""
-                        />
+
+                        <div className="w-[300px] h-[60px] mt-1">
+                            <Barcode value={items?.awbNumber} />
+                        </div>
+
                         <p className="font-bold text-center text-md mt-1">
-                            AWB No. : {items?.awbNumber || '-'}
+                            AWB No. : {items?.awbNumber}
                         </p>
                     </div>
                 </div>
@@ -125,22 +138,22 @@ const RetailILabel = ({ items }: { items: OrderListResponse }) => {
                         <tbody>
                             <tr>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    -SC00147-
+                                    {items?.schemeCode}
                                 </td>
-                                <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
+                                <td className="font-semibold text-wrap border-l border-r text-[14px] border-black text-center py-1">
                                     {items?.schemeName}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
                                     {items?.shcemeQuantity}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    {totalPrice?.toFixed(2)}
+                                    {items?.price?.toFixed(2)}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    -
+                                    {Number(0).toFixed(2)}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
-                                    {items?.deliveryCharges}
+                                    {items?.deliveryCharges?.toFixed(2)}
                                 </td>
                                 <td className="font-semibold border-l border-r text-[14px] border-black text-center py-1">
                                     Rs. {items?.totalAmount?.toFixed(2)}
@@ -155,45 +168,40 @@ const RetailILabel = ({ items }: { items: OrderListResponse }) => {
                                 <span className="font-bold text-md">
                                     Total Pieces :{' '}
                                 </span>
-                                <span className="font-bold text-md">1</span>
+                                <span className="font-bold text-md">{items?.shcemeQuantity}</span>
                             </div>
                         </div>
 
-                        <div className="flex flex-col justify-center w-1/2">
-                            <div className="ml-32">
-                                <img
-                                    className=" w-[300px] h-[60px] mt-2"
-                                    src="https://static.vecteezy.com/system/resources/thumbnails/008/506/948/small/abstract-digital-code-scanner-barcode-template-for-social-media-payment-market-and-design-png.png"
-                                    alt=""
-                                />
-                                <p className="font-bold text-start text-md mt-1">
+                        <div className="flex justify-center w-full">
+                            <div className="text-center">
+                                <div className="w-[300px] h-[60px] mt-2">
+                                    <Barcode value={items?.orderNumber?.toString()} />
+                                </div>
+                                <span className="font-bold text-start text-md mt-1">
                                     Order No. : {items?.orderNumber}
-                                </p>
+                                </span>
                             </div>
                         </div>
                     </div>
 
                     <div className="flex justify-between gap-4 border-t-[1px] border-b-[1px] border-gray-400 ">
                         <div className="flex flex-col ">
-                            <span className="text-md font-semibold">
+                            <span>
                                 If undelivered then return to :
                             </span>
-                            <span className="text-md font-semibold">
-                                Telemart
+                            <span className="font-semibold uppercase w-10/12">
+                                {items?.companyDetails?.companyName}
                             </span>
-                            <span className="text-md font-semibold">
-                                Godown Address: 188 Gayatri Nagar, Palda, Near
-                                Goyal Flour Mill,,Indore
+                            <span className="text-wrap">
+                                {items?.warehouseBillingInfo?.address}
                             </span>
-                            <span className="text-md font-semibold">
-                                Madhya Pradesh,India-452020
+                            <span className="font-semibold capitalize">
+                                {items?.warehouseBillingInfo?.stateLable} ,
+                                {items?.warehouseBillingInfo?.countryLable}-{items?.warehouseBillingInfo?.pincodeLable}
                             </span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="text-end text-md font-semibold">
-                Madhya Pradesh,India-452020
             </div>
         </div>
     )

@@ -38,3 +38,14 @@ code {
 .canvasjs-chart-credit {
     display: none !important;
 }
+
+/* For Remove the Extra Print Page */
+@media print {
+    /* Hide the browser's default headers and footers */
+    @page {
+        margin: 0; /* Remove the default margin */
+    }
+    body {
+        margin: 0; /* Remove any additional margins from the body */
+    }
+}
