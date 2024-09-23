@@ -14,16 +14,17 @@ import { showToast } from 'src/utils'
 // |-- Redux --|
 import { AppDispatch } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
-import { useGetBarcodeOfEcomOrderMutation, useDispatchBarcodeOfEcomOrderMutation } from 'src/services/EcomOrdersMasterService'
+import {
+    useGetBarcodeOfEcomOrderMutation,
+    useDispatchBarcodeOfEcomOrderMutation,
+} from 'src/services/EcomOrdersMasterService'
 import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
-
 
 type Props = {
     ecomType: string
 }
 
 const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
-
     const [barcodeNumber, setBarcodeNumber] = useState<any>('')
     const [orderDetails, setOrderDetails] = useState({
         orderNumber: null,
@@ -32,53 +33,53 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
         quantity: 0,
         itemPrice: 0,
         barcode: [],
-    });
+    })
 
-    const updateBarcodeStatus = useUpdateBarcodeFreezedStatus(); // Get the function from the hook
+    const { updateStatus } = useUpdateBarcodeFreezedStatus() // Get the function from the hook
     const [getBarCode] = useGetBarcodeOfEcomOrderMutation()
-    const [barcodeDispatch, barcodeDispatchInfo] = useDispatchBarcodeOfEcomOrderMutation()
-    const dispatch = useDispatch<AppDispatch>();
+    const [barcodeDispatch, barcodeDispatchInfo] =
+        useDispatchBarcodeOfEcomOrderMutation()
+    const dispatch = useDispatch<AppDispatch>()
 
     const params = useParams()
     const warehouseId = params.id
 
     // Getting the barcode while scanned
     const handleBarcodeSubmit = (barcodeNumber: string, index: number) => {
-
         getBarCode({
             barcodeNumber,
             type: ecomType,
-        }).then((res: any) => {
-
-            if (res?.data?.status) {
-                if (res?.data?.data) {
-                    const {
-                        orderNumber,
-                        orderId,
-                        productCode,
-                        quantity,
-                        itemPrice,
-                        barcode,
-                    } = res?.data?.data
-
-                    // setting the data with previous data
-                    if (!orderDetails?.orderNumber) {
-                        handleNewData(
+        })
+            .then((res: any) => {
+                if (res?.data?.status) {
+                    if (res?.data?.data) {
+                        const {
                             orderNumber,
                             orderId,
                             productCode,
                             quantity,
                             itemPrice,
                             barcode,
-                        )
-                    } else {
-                        handleExistingData(barcode)
+                        } = res?.data?.data
+
+                        // setting the data with previous data
+                        if (!orderDetails?.orderNumber) {
+                            handleNewData(
+                                orderNumber,
+                                orderId,
+                                productCode,
+                                quantity,
+                                itemPrice,
+                                barcode
+                            )
+                        } else {
+                            handleExistingData(barcode)
+                        }
                     }
+                } else {
+                    showToast('error', res?.data?.message)
                 }
-            } else {
-                showToast('error', res?.data?.message);
-            }
-        })
+            })
             .catch((err) => console.error(err))
     }
 
@@ -89,7 +90,7 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
         productCode: string,
         quantity: number,
         itemPrice: number,
-        barcode: any,
+        barcode: any
     ) => {
         setOrderDetails((prev: any) => ({
             ...prev,
@@ -98,77 +99,84 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
             productCode,
             quantity,
             itemPrice,
-            barcode: [{ ...barcode }]
+            barcode: [{ ...barcode }],
         }))
 
         dispatch(setFieldCustomized(true))
 
         // freezed the barcode status
-        updateBarcodeStatus({
+
+        updateStatus({
             status: true,
-            barcodes: [barcode?.barcodeNumber]
-        });
+            barcodes: [barcode?.barcodeNumber],
+        })
     }
 
     // after set the order number then gettting the barcode
-    const handleExistingData = async (
-        barcode: BarcodeListResponseType
-    ) => {
-        const isBarcodeExist = orderDetails?.barcode?.some((ele: BarcodeListResponseType) => ele?.barcodeNumber === barcode?.barcodeNumber);
+    const handleExistingData = async (barcode: BarcodeListResponseType) => {
+        const isBarcodeExist = orderDetails?.barcode?.some(
+            (ele: BarcodeListResponseType) =>
+                ele?.barcodeNumber === barcode?.barcodeNumber
+        )
 
         if (!isBarcodeExist) {
             setOrderDetails((prev: any) => ({
                 ...prev,
-                barcode: [...prev.barcode, barcode]
+                barcode: [...prev.barcode, barcode],
             }))
 
             // freezed the barcode status
-            updateBarcodeStatus({
-                status: true,
-                barcodes: [barcode?.barcodeNumber]
-            });
 
+            updateStatus({
+                status: true,
+                barcodes: [barcode?.barcodeNumber],
+            })
         } else {
-            showToast('error', 'Barcode already scanned!');
+            showToast('error', 'Barcode already scanned!')
         }
     }
 
     // remove barcode
     const handleRemoveBarcode = async (barcodeNumber: string) => {
-        const isBarcodeExist = orderDetails?.barcode?.some((ele: BarcodeListResponseType) => ele?.barcodeNumber === barcodeNumber);
+        const isBarcodeExist = orderDetails?.barcode?.some(
+            (ele: BarcodeListResponseType) =>
+                ele?.barcodeNumber === barcodeNumber
+        )
 
         const filteredObj = orderDetails?.barcode?.filter(
-            (item: BarcodeListResponseType) => item?.barcodeNumber !== barcodeNumber
+            (item: BarcodeListResponseType) =>
+                item?.barcodeNumber !== barcodeNumber
         )
 
         if (isBarcodeExist) {
             setOrderDetails((prev: any) => ({
                 ...prev,
-                barcode: filteredObj
+                barcode: filteredObj,
             }))
 
             // freezed the barcode status
-            updateBarcodeStatus({
-                status: false,
-                barcodes: [barcodeNumber]
-            });
 
+            updateStatus({
+                status: false,
+                barcodes: [barcodeNumber],
+            })
         }
     }
 
     // FINAL DISPATCHING THE BARCODES
     const handleDispatchBarcode = async () => {
-
         const payloadValue = {
             orderNumber: orderDetails.orderNumber,
             type: ecomType,
             warehouseId: warehouseId,
-            barcodes: orderDetails?.barcode?.map((ele: BarcodeListResponseType) => {
-                return {
-                    barcode: ele?.barcodeNumber,
-                    barcodeId: ele?._id
+            barcodes: orderDetails?.barcode?.map(
+                (ele: BarcodeListResponseType) => {
+                    return {
+                        barcode: ele?.barcodeNumber,
+                        barcodeId: ele?._id,
+                    }
                 }
-            }),
+            ),
         }
 
         barcodeDispatch(payloadValue)
@@ -196,14 +204,33 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
     }
 
     // for disable the input barcode number field and enable the dispatch button
-    const handleDisableDispatchButton = () => orderDetails?.quantity === orderDetails?.barcode?.length
+    const handleDisableDispatchButton = () =>
+        orderDetails?.quantity === orderDetails?.barcode?.length
 
+    React.useEffect(() => {
+        return () => {
+            if (orderDetails?.barcode?.length) {
+                const barcodeNumbers = orderDetails?.barcode?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [orderDetails])
     return (
         <React.Fragment>
             <div className="border-b-slate-300 border-[1px] shadow p-4 my-4 rounded">
                 <div className="mt-2 grid grid-cols-4 gap-x-4">
                     <ATMTextField
-                        disabled={orderDetails?.orderNumber ? handleDisableDispatchButton() : false}
+                        disabled={
+                            orderDetails?.orderNumber
+                                ? handleDisableDispatchButton()
+                                : false
+                        }
                         name=""
                         value={barcodeNumber}
                         label="Barcode Number"
@@ -282,14 +309,13 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
                         ) => (
                             <BarcodeCard
                                 key={barcodeIndex}
-                                barcodeNumber={
-                                    barcode?.barcodeNumber
-                                }
+                                barcodeNumber={barcode?.barcodeNumber}
                                 productGroupLabel={capitalizeFirstLetter(
-                                    barcode?.productGroupLabel ||
-                                    ''
+                                    barcode?.productGroupLabel || ''
                                 )}
-                                handleRemoveBarcode={() => handleRemoveBarcode(barcode?.barcodeNumber)}
+                                handleRemoveBarcode={() =>
+                                    handleRemoveBarcode(barcode?.barcodeNumber)
+                                }
                             />
                         )
                     )}
@@ -304,7 +330,6 @@ const DispatchingEcomBarcodes = ({ ecomType }: Props) => {
                         loadingText="Dispatching"
                         onClick={() => handleDispatchBarcode()}
                         className="bg-primary-main text-white flex items-center py-1 px-4 rounded"
-
                     >
                         Dispatch
                     </ATMLoadingButton>

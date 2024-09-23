@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Chip, Stack } from '@mui/material'
@@ -39,6 +39,7 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { useGetAllBarcodeOfDealerOutWardDispatchMutation } from 'src/services/BarcodeService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 
 // |-- Types --|
 export type Tabs = {
@@ -90,6 +91,7 @@ const InwardDealerTabsListingWrapper = () => {
     const [barcodeDispatch, barcodeDispatchInfo] =
         useInwardDealerBarcodeMutation()
     const [updateInwardDealerApproval] = useUpdateInwardDealerApprovalMutation()
+    const { updateStatus } = useUpdateBarcodeFreezedStatus()
 
     const columns: columnTypes[] = [
         {
@@ -440,7 +442,10 @@ const InwardDealerTabsListingWrapper = () => {
         })
         let barcode = [...barcodeList]
         barcode[ind] = [...filteredObj]
-
+        updateStatus({
+            status: false,
+            barcodes: [barcodeNumber],
+        })
         setBarcodeList(barcode)
     }
 
@@ -459,6 +464,10 @@ const InwardDealerTabsListingWrapper = () => {
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data && res?.data?.data[0] !== null) {
+                        updateStatus({
+                            status: true,
+                            barcodes: [barcodeNumber],
+                        })
                         let newBarc = [...barcodeList]
                         if (!newBarc[index]) {
                             newBarc[index] = [...res?.data?.data]
@@ -546,7 +555,20 @@ const InwardDealerTabsListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
-
+    React.useEffect(() => {
+        return () => {
+            if (barcodeList?.length) {
+                const barcodeNumbers = barcodeList?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodeList])
     return (
         <>
             {/* <SideNavLayout> */}

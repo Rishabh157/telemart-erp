@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
@@ -33,6 +33,7 @@ import { useInwardWarehouseToWarehouseBarcodeMutation } from 'src/services/Wareh
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 
 // |-- Types --|
 export type Tabs = {
@@ -94,6 +95,7 @@ const InwardSampleTabsListingWrapper = () => {
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useInwardWarehouseToWarehouseBarcodeMutation()
+    const { updateStatus } = useUpdateBarcodeFreezedStatus()
 
     const columns: columnTypes[] = [
         {
@@ -107,7 +109,7 @@ const InwardSampleTabsListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => { }}
+                        handleOnAction={() => {}}
                         isCustomBtn={true}
                         customBtnText="Inward"
                         handleCustomActionButton={() => {
@@ -228,6 +230,10 @@ const InwardSampleTabsListingWrapper = () => {
         })
         let barcode = [...barcodeList]
         barcode[ind] = [...filteredObj]
+        updateStatus({
+            status: false,
+            barcodes: [barcodeNumber],
+        })
 
         setBarcodeList(barcode)
     }
@@ -242,11 +248,15 @@ const InwardSampleTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.wts,
-            isSendingToDealer: false
+            isSendingToDealer: false,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
+                        updateStatus({
+                            status: true,
+                            barcodes: [barcodeNumber],
+                        })
                         let newBarcode = [...barcodeList]
                         if (!newBarcode[index]) {
                             newBarcode[index] = [...res?.data?.data]
@@ -334,6 +344,20 @@ const InwardSampleTabsListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
+    React.useEffect(() => {
+        return () => {
+            if (barcodeList?.length) {
+                const barcodeNumbers = barcodeList?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodeList])
 
     return (
         <>
@@ -354,9 +378,7 @@ const InwardSampleTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">WTS Number</div>
                                     {':'}
-                                    <div >
-                                        {selectedItemsTobeDispatch?._id}
-                                    </div>
+                                    <div>{selectedItemsTobeDispatch?._id}</div>
                                 </div>
                             </div>
 
@@ -366,7 +388,7 @@ const InwardSampleTabsListingWrapper = () => {
                                         Receiver Name
                                     </div>
                                     {':'}
-                                    <div >
+                                    <div>
                                         {
                                             selectedItemsTobeDispatch
                                                 ?.documents[0]?.toName
@@ -484,7 +506,7 @@ const InwardSampleTabsListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                            ''
+                                                                ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(
