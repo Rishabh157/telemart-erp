@@ -12,21 +12,24 @@ import OutwardOtherCourierOrdersTabListing from './OutwardOtherCourierOrdersTabL
 // |-- Redux --|
 import { Chip } from '@mui/material'
 import moment from 'moment'
+import { PDFDocument } from 'pdf-lib'
+import { FaRegFilePdf } from 'react-icons/fa'
+import { MdLabelImportantOutline } from 'react-icons/md'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useMarkAsDelivered from 'src/hooks/useMarkAsDelivered'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { OrderListResponse } from 'src/models'
+import { RootState } from 'src/redux/store'
 import {
     useGetGenerateCouriorLabelByAwbNumberMutation,
     useGetGenerateInvoiceByAwbNumberMutation,
     useGetOrderQuery,
 } from 'src/services/OrderService'
+import { isAuthorized } from 'src/utils/authorization'
+import { orderStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import { FaRegFilePdf } from 'react-icons/fa'
-import { MdLabelImportantOutline } from 'react-icons/md'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
-import { OrderListResponse } from 'src/models'
-import { SaleOrderStatus } from 'src/models/SaleOrder.model'
-import { RootState } from 'src/redux/store'
-import { PDFDocument } from 'pdf-lib'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispatchingBarcodes from '../GpoOrders/DispatchingBarcodes/DispatchingBarcodes'
 // import { courierCompanyEnum } from 'src/utils/constants/enums'
 
@@ -63,7 +66,6 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
     const { id } = useParams()
 
     const { userData }: any = useSelector((state: RootState) => state?.auth)
-    const [, setSelectedItemsTobeDispatch] = useState<any>(null)
     const [selectedCourier, setSelectedCourier] = useState<string>('')
 
     const outwardCustomerState: any = useSelector(
@@ -223,28 +225,41 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         const byteArray = new Uint8Array(byteNumbers)
         return new Blob([byteArray], { type: 'application/pdf' })
     }
+    const { handleDeliveredStatus } = useMarkAsDelivered()
 
     const columns: columnTypes[] = [
         {
-            field: 'actions',
-            headerName: 'Dispatch',
+            field: 'action',
+            headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            hidden: true,
-            renderCell: (row: OrderListResponse) =>
-                row?.orderStatus === SaleOrderStatus.complete ? (
-                    'Dispatched'
-                ) : row?.orderStatus === SaleOrderStatus.dispatched ? (
-                    ''
-                ) : (
-                    <ActionPopup
-                        handleOnAction={() => { }}
-                        isCustomBtn={true}
-                        customBtnText="Dispatch"
-                        handleCustomActionButton={() => {
-                            setSelectedItemsTobeDispatch(row)
-                        }}
-                    />
-                ),
+
+            renderCell: (row: OrderListResponse) => (
+                <ActionPopup
+                    customBtnText="Mark As Devivered"
+                    isCustomBtn={
+                        isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_MARK_AS_DELIVERED
+                        ) && row?.status === orderStatusEnum.intransit
+                    }
+                    handleCustomActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Mark As Delivered',
+                            text: 'Do you want to update status Delivered',
+                            showCancelButton: true,
+                            next: (res: any) => {
+                                return res.isConfirmed
+                                    ? handleDeliveredStatus({
+                                          orderId: row?._id,
+                                      })
+                                    : null
+                            },
+                        })
+                    }}
+                    handleOnAction={() => {
+                        // setCurrentId(row?._id)
+                    }}
+                />
+            ),
         },
         {
             field: 'awbBill',
@@ -299,7 +314,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                            FirstCallApprovalStatus.CANCEL ? (
+                          FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-default"
                                 label="Cancled"
@@ -309,7 +324,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => { }}
+                                onClick={() => {}}
                                 className="cursor-default"
                                 label="Pending"
                                 color="error"
@@ -709,8 +724,8 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                    'DD-MM-YYYY'
-                                )
+                                      'DD-MM-YYYY'
+                                  )
                                 : '-'}
                         </span>
                         {/* <span>
@@ -784,7 +799,9 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                 selectedCourier={selectedCourier}
                 onSelectCourier={(newValue) => setSelectedCourier(newValue)}
             />
-            {selectedCourier ? <DispatchingBarcodes courierType={selectedCourier} /> : null}
+            {selectedCourier ? (
+                <DispatchingBarcodes courierType={selectedCourier} />
+            ) : null}
         </>
     )
 }
