@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
@@ -35,6 +35,7 @@ import {
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 
 // |-- Types --|
 export type Tabs = {
@@ -94,6 +95,8 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
     })
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
+    const { updateStatus } = useUpdateBarcodeFreezedStatus()
+
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchWarehouseToCompanyBarcodeMutation()
 
@@ -246,6 +249,11 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
         const filteredObj = barcodeList[ind]?.filter((item: any) => {
             if (item?.barcodeNumber !== barcodeNumber) {
                 return item
+            } else {
+                updateStatus({
+                    status: false,
+                    barcodes: [barcodeNumber],
+                })
             }
         })
         let barcode = [...barcodeList]
@@ -288,6 +296,10 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
                             )
                             newBarcode[index] = [...uniqueArray]
                         }
+                        updateStatus({
+                            status: true,
+                            barcodes: [barcodeNumber],
+                        })
 
                         setBarcodeList([...newBarcode])
                     }
@@ -351,6 +363,20 @@ const OutwardWarehouseToComapnyListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
+    React.useEffect(() => {
+        return () => {
+            if (barcodeList?.length) {
+                const barcodeNumbers = barcodeList?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodeList])
 
     return (
         <>

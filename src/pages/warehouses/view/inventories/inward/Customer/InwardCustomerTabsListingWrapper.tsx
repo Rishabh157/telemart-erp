@@ -35,6 +35,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { useGetCustomerWarehouseReturnQuery } from 'src/services/WareHouseService'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 
 // |-- Types --|
 export type Tabs = {
@@ -130,9 +131,14 @@ const InwardCustomerTabsListingWrapper = () => {
     const [getBarCode] = useGetCustomerReturnBarcodeMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useAddCustomerInwardBarcodesMutation()
+        const { updateStatus } = useUpdateBarcodeFreezedStatus()
 
     // remove barcode
     const handleRemoveBarcode = (barcodeNumber: string) => {
+        updateStatus({
+            status: false,
+            barcodes: [barcodeNumber],
+        })
         setBarcodeList(
             barcodeList?.filter(
                 (item: BarcodeListResponseType) =>
@@ -164,6 +170,10 @@ const InwardCustomerTabsListingWrapper = () => {
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
+                        updateStatus({
+                            status: true,
+                            barcodes: [barcodeNumber],
+                        })
                         const isExist = barcodeList?.some((ele: any) => {
                             return (
                                 ele.barcodeNumber ===
@@ -286,6 +296,20 @@ const InwardCustomerTabsListingWrapper = () => {
             ),
         },
     ]
+    React.useEffect(() => {
+        return () => {
+            if (barcodeList?.length) {
+                const barcodeNumbers = barcodeList?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodeList])
 
     const getActualInwardingBarcodeLenght = (
         schemeQuantity: number,
