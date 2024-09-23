@@ -17,7 +17,9 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { OrderListResponse } from 'src/models'
 import { SaleOrderStatus } from 'src/models/SaleOrder.model'
 import { RootState } from 'src/redux/store'
-import { useGetOrderQuery, useGetStatusMarkAsDeleiverdMutation } from 'src/services/OrderService'
+import {
+    useGetOrderQuery,
+} from 'src/services/OrderService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FormInitialValuesFilterWithLabel } from './Filters/OutwardGpoOrderFilterFormWrapper'
 import DispatchingBarcodes from './DispatchingBarcodes/DispatchingBarcodes'
@@ -25,7 +27,7 @@ import { courierCompanyEnum, orderStatusEnum } from 'src/utils/constants/enums'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { isAuthorized } from 'src/utils/authorization'
-import { showToast } from 'src/utils'
+import useMarkAsDelivered from 'src/hooks/useMarkAsDelivered'
 // import { MdLabelImportantOutline } from 'react-icons/md'
 
 // |-- Types --|
@@ -41,7 +43,7 @@ enum FirstCallApprovalStatus {
 }
 
 const OutwardGpoOrdersTabListingWrapper = () => {
-    const [currentId, setCurrentId] = useState('')
+    // const [currentId, setCurrentId] = useState('')
 
     // order number search
     const [orderNumberSearchValue, setOrderNumberSearchValue] =
@@ -81,7 +83,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         (state: RootState) => state.listingPagination
     )
     const { page, rowsPerPage, searchValue } = outwardCustomerState
-    const [updateDeleveredStatus] = useGetStatusMarkAsDeleiverdMutation()
+    const { handleDeliveredStatus } = useMarkAsDelivered()
 
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetOrderQuery({
@@ -109,45 +111,35 @@ const OutwardGpoOrdersTabListingWrapper = () => {
         }),
     })
 
-    const handleDeliveredStatus = () => {
-        updateDeleveredStatus({ orderId: currentId }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Status updated successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
     const columns: columnTypes[] = [
         {
-            field: 'actions',
+            field: 'action',
             headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    customBtnText='Mark As Devivered'
-                    isCustomBtn={isAuthorized(
-                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_MARK_AS_DELIVERED
-                    ) && row?.status === orderStatusEnum.intransit}
+                    customBtnText="Mark As Devivered"
+                    isCustomBtn={
+                        isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_MARK_AS_DELIVERED
+                        ) && row?.status === orderStatusEnum.intransit
+                    }
                     handleCustomActionButton={() => {
                         showConfirmationDialog({
                             title: 'Mark As Delivered',
                             text: 'Do you want to update status Delivered',
                             showCancelButton: true,
                             next: (res) => {
-                                return res.isConfirmed ? handleDeliveredStatus() : null
+                                return res.isConfirmed
+                                    ? handleDeliveredStatus({
+                                          orderId: row?._id,
+                                      })
+                                    : null
                             },
                         })
                     }}
                     handleOnAction={() => {
-                        setCurrentId(row?._id)
+                        // setCurrentId(row?._id)
                     }}
                 />
             ),
@@ -179,7 +171,6 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                             size={22}
                             className="cursor-pointer"
                             onClick={() => {
-
                                 // window.open(
                                 //     `/gpo/invoice?orderNumber=${row.orderNumber}`,
                                 //     '_blank'
@@ -188,8 +179,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                                     `/gpo/label-invoice?orderNumber=${row.orderNumber}`,
                                     '_blank'
                                 )
-                            }
-                            }
+                            }}
                         />
                     </div>
                 ) : null
@@ -214,7 +204,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                            FirstCallApprovalStatus.CANCEL ? (
+                          FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -224,7 +214,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => { }}
+                                onClick={() => {}}
                                 className="cursor-pointer"
                                 label="Pending"
                                 color="error"
@@ -610,8 +600,8 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                     <span>
                         {row?.preffered_delivery_date
                             ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
+                                  'DD-MM-YYYY'
+                              )
                             : '-'}
                     </span>
                 )

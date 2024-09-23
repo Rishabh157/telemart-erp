@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React from 'react'
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
 import { useSelector } from 'react-redux'
@@ -12,23 +12,25 @@ import OutwardShipyaariOrdersTabListing from './OutwardShipyaariOrdersTabListing
 // |-- Redux --|
 import { Chip } from '@mui/material'
 import moment from 'moment'
+import { PDFDocument } from 'pdf-lib'
+import { FaRegFilePdf } from 'react-icons/fa'
+import { MdLabelImportantOutline } from 'react-icons/md'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
+import useMarkAsDelivered from 'src/hooks/useMarkAsDelivered'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { OrderListResponse } from 'src/models'
+import { RootState } from 'src/redux/store'
 import {
     useGetGenerateCouriorLabelByAwbNumberMutation,
     useGetGenerateInvoiceByAwbNumberMutation,
     useGetOrderQuery,
 } from 'src/services/OrderService'
+import { isAuthorized } from 'src/utils/authorization'
+import { courierCompanyEnum, orderStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import { FaRegFilePdf } from 'react-icons/fa'
-import { MdLabelImportantOutline } from 'react-icons/md'
-import ActionPopup from 'src/components/utilsComponent/ActionPopup'
-import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
-import { OrderListResponse } from 'src/models'
-import { SaleOrderStatus } from 'src/models/SaleOrder.model'
-import { RootState } from 'src/redux/store'
-import { PDFDocument } from 'pdf-lib'
+import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispatchingBarcodes from '../GpoOrders/DispatchingBarcodes/DispatchingBarcodes'
-import { courierCompanyEnum } from 'src/utils/constants/enums'
 import { FormInitialValuesFilterWithLabel } from '../GpoOrders/Filters/OutwardGpoOrderFilterFormWrapper'
 
 // |-- Types --|
@@ -48,7 +50,6 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
     const { id } = useParams()
 
     const { userData }: any = useSelector((state: RootState) => state?.auth)
-    const [, setSelectedItemsTobeDispatch] = useState<any>(null)
 
     const outwardCustomerState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -190,28 +191,51 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         const byteArray = new Uint8Array(byteNumbers)
         return new Blob([byteArray], { type: 'application/pdf' })
     }
-
+    const { handleDeliveredStatus } = useMarkAsDelivered()
     const columns: columnTypes[] = [
         {
-            field: 'actions',
-            headerName: 'Dispatch',
+            field: 'action',
+            headerName: 'Actions',
             flex: 'flex-[0.5_0.5_0%]',
-            hidden: true,
             renderCell: (row: OrderListResponse) =>
-                row?.orderStatus === SaleOrderStatus.complete ? (
-                    'Dispatched'
-                ) : row?.orderStatus === SaleOrderStatus.dispatched ? (
-                    ''
-                ) : (
+                // row?.orderStatus === SaleOrderStatus.complete ? (
+                //     'Dispatched'
+                // ) : row?.orderStatus === SaleOrderStatus.dispatched ? (
                     <ActionPopup
-                        handleOnAction={() => {}}
-                        isCustomBtn={true}
-                        customBtnText="Dispatch"
+                        customBtnText="Mark As Devivered"
+                        isCustomBtn={
+                            isAuthorized(
+                                UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_MARK_AS_DELIVERED
+                            ) && row?.status === orderStatusEnum.intransit
+                        }
                         handleCustomActionButton={() => {
-                            setSelectedItemsTobeDispatch(row)
+                            showConfirmationDialog({
+                                title: 'Mark As Delivered',
+                                text: 'Do you want to update status Delivered',
+                                showCancelButton: true,
+                                next: (res) => {
+                                    return res.isConfirmed
+                                        ? handleDeliveredStatus({
+                                              orderId: row?._id,
+                                          })
+                                        : null
+                                },
+                            })
+                        }}
+                        handleOnAction={() => {
+                            // setCurrentId(row?._id)
                         }}
                     />
-                ),
+                // ) : (
+                //     <ActionPopup
+                //         handleOnAction={() => {}}
+                //         isCustomBtn={true}
+                //         customBtnText="Dispatch"
+                //         handleCustomActionButton={() => {
+                //             setSelectedItemsTobeDispatch(row)
+                //         }}
+                //     />
+                // ),
         },
         {
             field: 'awbBill',
@@ -429,7 +453,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
         {
             field: 'shippingCharges',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_ORDERS_TAB_LIST_SHIPPING_CHARGES,
-             headerName: 'Shippgig Charges',
+            headerName: 'Shippgig Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px] text-xs',
