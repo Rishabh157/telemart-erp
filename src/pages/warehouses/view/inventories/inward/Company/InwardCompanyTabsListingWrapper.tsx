@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
@@ -34,6 +34,7 @@ import { useGetPaginationWarehouseToComapnyByGroupQuery } from 'src/services/War
 import { useInwardWarehouseToWarehouseBarcodeMutation } from 'src/services/WarehouseTransferService'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 
 // |-- Types --|
 export type Tabs = {
@@ -89,6 +90,7 @@ const InwardCompanyTabsListingWrapper = () => {
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useInwardWarehouseToWarehouseBarcodeMutation()
+    const { updateStatus } = useUpdateBarcodeFreezedStatus()
 
     const columns: columnTypes[] = [
         {
@@ -243,7 +245,10 @@ const InwardCompanyTabsListingWrapper = () => {
         })
         let barcode = [...barcodeList]
         barcode[ind] = [...filteredObj]
-
+        updateStatus({
+            status: false,
+            barcodes: [barcodeNumber],
+        })
         setBarcodeList(barcode)
     }
 
@@ -257,11 +262,15 @@ const InwardCompanyTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.wtc,
-            isSendingToDealer: false
+            isSendingToDealer: false,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
+                        updateStatus({
+                            status: true,
+                            barcodes: [barcodeNumber],
+                        })
                         let newBarcode = [...barcodeList]
                         if (!newBarcode[index]) {
                             newBarcode[index] = [...res?.data?.data]
@@ -350,6 +359,20 @@ const InwardCompanyTabsListingWrapper = () => {
     const handleDisableDispatchButton = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
+    React.useEffect(() => {
+        return () => {
+            if (barcodeList?.length) {
+                const barcodeNumbers = barcodeList?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodeList])
 
     return (
         <>
@@ -370,9 +393,7 @@ const InwardCompanyTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">WTC Number</div>
                                     {':'}
-                                    <div >
-                                        {selectedItemsTobeDispatch?._id}
-                                    </div>
+                                    <div>{selectedItemsTobeDispatch?._id}</div>
                                 </div>
                             </div>
 
@@ -382,7 +403,7 @@ const InwardCompanyTabsListingWrapper = () => {
                                         From Warehouse Name
                                     </div>
                                     {':'}
-                                    <div >
+                                    <div>
                                         {capitalizeFirstLetter(
                                             selectedItemsTobeDispatch?.fromWarehouseLabel ||
                                                 ''

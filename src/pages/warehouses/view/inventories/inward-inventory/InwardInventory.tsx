@@ -1,11 +1,9 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // |-- Internal Dependencies --|
 import { useParams } from 'react-router-dom'
-import ATMBreadCrumbs, {
-    BreadcrumbType,
-} from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import ATMBreadCrumbs, { BreadcrumbType } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
@@ -33,7 +31,6 @@ export type renderBarcodType = {
 
 const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [packaging, setPackaging] = React.useState('')
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [vendorId, setVendorId] = React.useState('')
     const [vendorLabel, setVendorLabel] = React.useState('')
     const { id: warehouseId } = useParams()
@@ -49,9 +46,7 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     const [wareHouse] = React.useState(warehouseId)
     const [barcode, setBarcode] = React.useState('')
     const [barcodes, setBarcodes] = React.useState<renderBarcodType[]>([])
-    const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] =
-        React.useState(false)
-
+    const [isOpenMoveToCartonDrawer, setIsOpenMoveToCartonDrawer] = React.useState(false)
 
     // Get all vendors
     const { options: vendorOptions } = useCustomOptions({
@@ -61,11 +56,9 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
     })
 
     const [getBarcodeById] = useGetByBarcodeMutation()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const updateBarcodeStatus = useUpdateBarcodeFreezedStatus(); // Get the function from the hook
+    const { updateStatus } = useUpdateBarcodeFreezedStatus() // Get the function from the hook
 
-
-    // fetching the barcode
+    // Fetching the barcode
     const handleBarCode = (barcodeId: string) => {
         getBarcodeById(barcodeId).then((res: any) => {
             if (res?.data?.data) {
@@ -76,10 +69,10 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                 if (!isExist) {
                     barc.push(res?.data?.data)
                 }
-                // updateBarcodeStatus({
-                //     status: true,
-                //     barcodes: [barcodeId]
-                // });
+                updateStatus({
+                    status: true,
+                    barcodes: [barcodeId],
+                })
 
                 setBarcodes([...barc])
                 setBarcode('')
@@ -95,33 +88,21 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
         return false
     }
 
-    // React.useEffect(() => {
-    //     // if (barcodes?.length) {
-    //     //     const toBeFreezedBarcode = barcodes.map((ele) => ele?.barcodeNumber);
-    //     //     // freeze the barcode status when barcodes change
-    //     //     updateBarcodeStatus({
-    //     //         status: true,
-    //     //         barcodes: toBeFreezedBarcode
-    //     //     });
-    //     console.log('Barcode status updated');
-    //     // }
-
-    //     return () => {
-    //         if (barcodes?.length) {
-    //             const toBeUnfreezedBarcode = barcodes?.map((ele) => ele?.barcodeNumber);
-    //             // freeze the barcode status on unmount
-    //             updateBarcodeStatus({
-    //                 status: false,
-    //                 barcodes: toBeUnfreezedBarcode
-    //             });
-    //             console.log('Inside Hook (unmount)', toBeUnfreezedBarcode);
-    //         }
-    //     };
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
+    useEffect(() => {
+        return () => {
+            if (barcodes?.length) {
+                const barcodeNumbers = barcodes.map((barcode) => barcode.barcodeNumber)
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodes])
 
     return (
-        <div className="p-4 h-[calc(100vh-95px)] overflow-auto ">
+        <div className="p-4 h-[calc(100vh-95px)] overflow-auto">
             <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
 
             {/* Page Header */}
@@ -142,14 +123,11 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
 
             <div className="grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat p-2">
                 <div className="grid grid-cols-4 gap-5 px-3">
-
                     <ATMSelect
                         name=""
                         isDisabled={true}
                         value={wareHouse}
-                        onChange={() => {
-                            //setWareHouse(e.target.value)
-                        }}
+                        onChange={() => {}}
                         options={wareHouseOption}
                         label="Warehouse"
                     />
@@ -161,8 +139,9 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                         label="Vendor"
                         onChange={(e) => {
                             setVendorId(e?.target?.value)
-                            // getting vendor label
-                            const vendorLabel = vendorOptions?.find((ele) => ele?.value === e?.target?.value)
+                            const vendorLabel = vendorOptions?.find(
+                                (ele) => ele?.value === e?.target?.value
+                            )
                             setVendorLabel(vendorLabel?.label || '')
                         }}
                     />
@@ -192,7 +171,6 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                             if (e.target.value.length > 6) {
                                 handleBarCode(e.target.value)
                             }
-                            //setShouldPrint(true)
                         }}
                         extraClassField="mt-3"
                         label="Barcode"
@@ -201,35 +179,28 @@ const InwardInventory = ({ cartonBoxOption, wareHouseOption }: Props) => {
                     />
                 </div>
 
-                <div className="mt-5 py-3 px-3 grid grid-cols-6 gap-4  ">
-                    {barcodes?.map((barcode, index) => {
-                        return (
-                            <div
-                                key={index}
-                                className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
-                            >
-                                <div className="flex justify-between">
-                                    <div>
-                                        <div className="text-[12px] text-slate-500">
-                                            Barcode No.
-                                        </div>
-                                        <div> {barcode?.barcodeNumber} </div>
-                                    </div>
-                                </div>
-
-                                <div className="text-primary-main font-medium grow flex items-end">
-                                    {barcode?.productGroupLabel}
+                <div className="mt-5 py-3 px-3 grid grid-cols-6 gap-4">
+                    {barcodes.map((barcode, index) => (
+                        <div
+                            key={index}
+                            className="flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer"
+                        >
+                            <div className="flex justify-between">
+                                <div>
+                                    <div className="text-[12px] text-slate-500">Barcode No.</div>
+                                    <div>{barcode?.barcodeNumber}</div>
                                 </div>
                             </div>
-                        )
-                    })}
+                            <div className="text-primary-main font-medium grow flex items-end">
+                                {barcode?.productGroupLabel}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
 
             {isOpenMoveToCartonDrawer && (
                 <MoveToCartonDrawer
-                    // productGroupName={filterBarcode[0]?.productGroupLabel}
-                    // groupBarcodeNumber={filterBarcode[0]?.productGroupNumber}
                     productDetail={barcodes}
                     wareHouse={wareHouse as string}
                     packaging={packaging}
