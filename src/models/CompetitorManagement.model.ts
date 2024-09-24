@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:CompetitorManagement.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type CompetitorManagementListResponse = {
     _id: string

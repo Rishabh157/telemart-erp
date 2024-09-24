@@ -1,12 +1,3 @@
-/// ==============================================
-// Filename:WarehouseToComapny.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// import { WarehouseToComapnyStatus } from "./OutwardRequest.model"
-
 // |-- Types --|
 export type productSalesOrder = {
     productGroupId: string

@@ -1,12 +1,4 @@
-/// ==============================================
-// Filename:InwardRequest.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
-// Warehouse Transfer list
 export interface InwardDealerRequstListResponse {
     _id: string
     fromWarehouseLabel: string

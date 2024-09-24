@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:InventoryManagement.model.ts
-// Type: Model Component
-// Last Updated: JULy 10, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type InventoryManagementListResponse = {
     dummy1: string

@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:ReturnToVendor.model.ts
-// Type: Model Component
-// Last Updated: OCOTOBER 11, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type productSalesOrder = {
     productGroupId: string

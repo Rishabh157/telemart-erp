@@ -1,13 +1,3 @@
-/// ==============================================
-// Filename:ProductCategory.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Internal Dependencies --|
-import { companyApi } from './../services/CompanyServices'
-
 // |-- Types --|
 export type ProductCategoryListResponse = {
     categoryCode: string

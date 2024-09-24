@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Users.model.ts
-// Type: Model Component
-// Last Updated: FEB 28, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type UsersListResponse = {
     _id: string

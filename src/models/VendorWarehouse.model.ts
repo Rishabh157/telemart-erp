@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:VendorWarehouse.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 export type VendorWarehousesListResponse = {
     wareHouseCode: string
     wareHouseName: string

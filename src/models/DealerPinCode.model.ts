@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:DealerPincode.model.ts
-// Type: Model Component
-// Last Updated: JUNE 28, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 export type DealersPincodeListResponse = {
     dealerId: string
     pincode: string[]

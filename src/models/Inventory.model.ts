@@ -6,11 +6,6 @@ export type InventoryListResponse = {
     wareHouse: string
     count: number
     _id: string
-    // is_active: boolean;
-    // is_deleted: boolean;
-    // createdAt: string;
-    // updatedAt: string;
-    // __v: number;
 }
 
 export type AddInventory = {

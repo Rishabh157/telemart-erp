@@ -1,12 +1,4 @@
-/// ==============================================
-// Filename:InventoryFlow.modal.ts
-// Type: Model Component
-// Last Updated: OCTOBER 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
-
 export type BarcodeFlowDataListResponsee = {
     _id: string
     productGroupId: string

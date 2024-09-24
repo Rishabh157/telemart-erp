@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:Moneyback.model.ts
-// Type: Model Component
-// Last Updated: March 14, 2024
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Types --|
 export type MoneybackListResponse = {
     _id: string

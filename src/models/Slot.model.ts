@@ -89,13 +89,9 @@ export type AddSlotManagement = {
     slotStartTime: string
     slotEndTime: string
     slotContinueStatus: boolean
-    // slotStartDate: string
     runYoutubeLink: string | ''
     run: boolean
     slotRunImage: string
-    // slotRunVideo: string
-    // runStartTime: string
-    // runEndTime: string
     showOk: boolean
     reasonNotShow: string | null
     runRemark: string

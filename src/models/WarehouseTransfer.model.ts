@@ -31,21 +31,6 @@ export type UpdateWarehouseTransfer = {
     id: string
 }
 
-// export type UpdateWarehouseTransferApproval = {
-//   body: {
-//       type: 'DH' | 'ACC'
-//       dhApprovedAt?: string
-//       accApprovedAt?: string
-//       accApprovedById?: string
-//       dhApprovedById?: string
-//       dhApprovedActionBy?: string
-//       accApprovedActionBy?: string
-//       dhApproved?: boolean | null
-//       accApproved?: boolean | null
-//   }
-//   id: string
-// }
-
 export type UpdateWarehouseTransferApproval = {
     body: {
         type: 'FIRST' | 'SECOND'
