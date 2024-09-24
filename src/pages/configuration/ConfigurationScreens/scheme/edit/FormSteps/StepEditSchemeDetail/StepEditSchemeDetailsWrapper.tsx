@@ -15,9 +15,6 @@ import { FormikProps } from 'formik'
 import { Field, SelectOption } from 'src/models/FormField/FormField.model'
 import { FormInitialValues } from '../../EditSchemeWrapper'
 import StepEditSchemeDetail from './StepEditScheme'
-//import { useGetAllProductSubCategoryQuery, useGetProductCategoryIdSubCategoryQuery } from "src/services/ProductSubCategoryService";
-
-//import { useGetAllProductSubCategoryQuery } from "src/services/ProductSubCategoryService";
 
 // |-- Types --|
 type Props = {

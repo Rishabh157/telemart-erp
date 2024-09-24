@@ -102,7 +102,7 @@ const DealerServiceabilityListing = ({
         <div className="h-[calc(100vh-60px)] px-4">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px] p-1">
-                <ATMPageHeading> Dealer's Serviceability </ATMPageHeading>
+                <ATMPageHeading>Pincode Serviceability</ATMPageHeading>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">

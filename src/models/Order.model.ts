@@ -255,6 +255,8 @@ export type OrderInvoiceAndLabelListResponse = {
         productGroupName: string
         productGroupId: string
         productQuantity: number
+        productSubCategory: string
+        hsnCode: string
         _id: string
         dealerSalePrice: number
         gst: number

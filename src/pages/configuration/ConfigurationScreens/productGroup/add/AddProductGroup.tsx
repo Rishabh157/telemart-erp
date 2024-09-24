@@ -15,6 +15,9 @@ import { FormInitialValues } from './AddProductGroupWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllProductSubCategoryQuery } from 'src/services/ProductSubCategoryService'
 
 // |-- Types --|
 type Props = {
@@ -40,6 +43,14 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+    const { options: productSubCategoryOption } = useCustomOptions({
+        useEndPointHook: useGetAllProductSubCategoryQuery(''),
+        keyName: 'subCategoryName',
+        value: '_id',
+    })
+
+    console.log('productSubCategoryOption', productSubCategoryOption)
 
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
@@ -77,7 +88,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grid gap-4 px-3 pt-2 grow pb-9 ">
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-4 gap-4">
                             {/* Product Group Name  */}
                             <ATMTextField
                                 required
@@ -138,6 +149,21 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                     }
                                 }}
                             />
+
+                            <div className="-mt-[0.05rem]">
+                                <ATMSelectSearchable
+                                    required
+                                    name={'productSubCategoryId'}
+                                    value={values.productSubCategoryId}
+                                    label="Product Sub Category"
+                                    selectLabel="Select Product Sub Category"
+                                    options={productSubCategoryOption || []}
+                                    onChange={(e) => {
+                                        handleSetFieldValue('productSubCategoryId', e)
+                                    }}
+                                />
+                            </div>
+
                         </div>
 
                         <div className="grid grid-cols-4 gap-4">

@@ -21,6 +21,7 @@ export type FormInitialValues = {
     groupName: string
     productGroupCode: string
     dealerSalePrice: number
+    productSubCategoryId: string
     gst: number
     sgst: number
     cgst: number
@@ -41,6 +42,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
         groupName: '',
         productGroupCode: '',
         dealerSalePrice: 0,
+        productSubCategoryId: '',
         gst: 0,
         sgst: 0,
         cgst: 0,
@@ -54,6 +56,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
         productGroupCode: string()
             .required('Product group code is required')
             .max(4, 'Product group code must be at most 4 characters long'),
+        productSubCategoryId: string().required('Product sub category is required'),
         dealerSalePrice: number().required('Dealer sale price is required'),
         gst: number(),
         sgst: number(),
@@ -72,6 +75,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
                 dealerSalePrice: values.dealerSalePrice,
                 productGroupCode: values.productGroupCode,
                 groupName: values.groupName,
+                productSubCategoryId: values.productSubCategoryId,
                 gst: values.gst,
                 sgst: values.sgst,
                 cgst: values.cgst,

@@ -68,6 +68,7 @@ import { default as schemeJson } from '../../utils/mediaJson/scheme.json'
 import { default as slotManagementJson } from '../../utils/mediaJson/slotManagement.json'
 import { default as tapeManagementJson } from '../../utils/mediaJson/tapeManagement.json'
 import { default as userJson } from '../../utils/mediaJson/user.json'
+import { default as pincodeServiceabilityJson } from '../../utils/mediaJson/pincodeServiceability.json'
 import { default as vendorJson } from '../../utils/mediaJson/vendor.json'
 import { default as warehouseJson } from '../../utils/mediaJson/warehouse.json'
 import { default as warehouseTransferJson } from '../../utils/mediaJson/warehouseTransfer.json'
@@ -140,6 +141,7 @@ export const mergeUserModules = [
     { ...dealerJson },
     { ...dealersInventoryJson },
     // dealer ratio
+    { ...pincodeServiceabilityJson },
     { ...userJson },
     { ...warehouseJson },
     { ...ASRJson },

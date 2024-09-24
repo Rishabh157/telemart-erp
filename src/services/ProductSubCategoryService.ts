@@ -21,12 +21,12 @@ export const productSubCategoryApi = apiSlice.injectEndpoints({
         //***** GET *****/
         getAllProductSubCategory: builder.query({
             providesTags: ['ProductSubCategory'],
-            query: (companyId) => ({
-                url: `/product-sub-category/comppany/${companyId}`,
+            query: () => ({
+                url: `/product-sub-category`,
                 method: 'GET',
-                // body,
             }),
         }),
+
         //***** GET BY PARENT CATEGORY*****/
         getSubCategoryByParent: builder.query({
             providesTags: ['ProductSubCategory'],

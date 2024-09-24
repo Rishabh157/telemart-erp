@@ -2,6 +2,7 @@
 export type ProductGroupListResponse = {
     companyId: string
     productGroupCode: string
+    // productSubCategoryId: strings
     groupName: string
     gst: number
     dealerSalePrice: number
@@ -21,6 +22,7 @@ export type AddProductGroup = {
     groupName: string
     productGroupCode: string
     dealerSalePrice: number
+    productSubCategoryId: string
     companyId: string
     gst: number
     sgst: number
@@ -33,6 +35,7 @@ export type UpdateProductGroup = {
     body: {
         dealerSalePrice: number
         // productGroupCode: number
+        productSubCategoryId: string
         groupName: string
         gst: number
         sgst: number

@@ -98,7 +98,7 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
 
                 <div>
                     <p className="font-bold text-[20px] border-b border-black py-2">
-                        COD FOR Rs :{items?.totalAmount?.toFixed(2)}
+                        COD FOR Rs : {items?.totalAmount?.toFixed(2)}
                     </p>
                 </div>
 
@@ -157,7 +157,7 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
                                     <span>&#64;{ele?.sgst?.toFixed(2)}&#37;</span>
                                 </td>
                                 <td className={tableCell}>
-                                    {items?.totalAmount}{' '}
+                                    {items?.totalAmount}
                                 </td>
                             </tr>
                         ))}

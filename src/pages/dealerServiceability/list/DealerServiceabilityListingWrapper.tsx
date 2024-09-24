@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 // |-- Internal Dependencies --|
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-// import { useGetDealersInventoryQuery } from 'src/services/BarcodeService'
 
 // |-- Redux --|
 import Chip from '@mui/material/Chip'
@@ -57,8 +56,15 @@ const DealerServiceabilityListingWrapper = () => {
         dealerId: null,
         schemeId: null,
     })
+
+    // Helper function to check if any value is present
+    const shouldSkipApi = Object.values(filerDealerServiceability).some(
+        (value) => value !== null && value !== undefined
+    );
+
     const { page, rowsPerPage } = dealerInventoryState
 
+    console.log('shouldSkipApi: ', shouldSkipApi);
     // pagination api
     const { items } = useGetCustomListingData<
         DealerServiceabilityListingWrapperTypes[]
@@ -72,10 +78,10 @@ const DealerServiceabilityListingWrapper = () => {
                 body: {
                     ...filerDealerServiceability,
                 },
+            },
+            {
+                skip: !shouldSkipApi, // Skip the query if any value is present
             }
-            // {
-            //     skip: !filerDealerServiceability, // Skip the query if `selectedDealer` is false
-            // }
         ),
     })
 
@@ -97,44 +103,31 @@ const DealerServiceabilityListingWrapper = () => {
     const columns: columnTypes[] = [
         {
             field: 'pincode',
-            headerName: 'pincodes',
+            headerName: 'Pincodes',
             flex: 'flex-[1_5_0%]',
             renderCell: renderCell,
-
-            // (row: any) => (
-            //     <WrappedStack direction="row" spacing={1}>
-            //     {row?.pincodes?.map((ele: any, index: any) => (
-            //         <PincodeChip
-            //             key={index}
-            //             label={ele}
-            //             color="primary"
-            //             variant="outlined"
-            //             size="small"
-            //         />
-            //     ))}
-            // </WrappedStack>
-            // ),
-        },
-        {
-            field: 'dealerCode',
-            headerName: 'Dealer Code',
-            flex: 'flex-[1_5_0%]',
-            renderCell: (row: any) => <span>{row?.dealerCode}</span>,
         },
         {
             field: 'dealerName',
-            headerName: 'dealerName',
+            headerName: 'Dealer Name',
             flex: 'flex-[1_5_0%]',
-            renderCell: (row: any) => <span>{row?.dealerName}</span>,
+            renderCell: (row: any) => (
+                <div className='text-center'>
+                    {row?.dealerName} <br />
+                    <span className='text-primary-main'>
+                        ( {row?.dealerCode} )
+                    </span>
+                </div>
+            )
         },
         {
             field: 'schemeName',
-            headerName: 'scheme Name',
+            headerName: 'Scheme Name',
             flex: 'flex-[1_5_0%]',
             renderCell: (row: any) => <span>{row?.schemeName}</span>,
         },
     ]
-    
+
     return (
         <SideNavLayout>
             <DealerServiceabilityListing

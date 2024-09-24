@@ -27,6 +27,7 @@ type Props = {}
 export type FormInitialValues = {
     groupName: string
     dealerSalePrice: number
+    productSubCategoryId: string
     gst: number
     sgst: number
     cgst: number
@@ -53,6 +54,7 @@ const EditProductGroupWrapper = (props: Props) => {
     const initialValues: FormInitialValues = {
         groupName: items?.groupName || '',
         dealerSalePrice: items?.dealerSalePrice || 0,
+        productSubCategoryId: items?.productSubCategoryId,
         gst: items?.gst || 0,
         sgst: items?.sgst || 0,
         cgst: items?.cgst || 0,
@@ -64,6 +66,7 @@ const EditProductGroupWrapper = (props: Props) => {
     const validationSchema = object({
         groupName: string().required('Group name is required'),
         dealerSalePrice: number().required('Dealer sale price is required'),
+        productSubCategoryId: string().required('Product sub category is required'),
         gst: number(),
         sgst: number(),
         cgst: number(),
@@ -81,6 +84,7 @@ const EditProductGroupWrapper = (props: Props) => {
                 body: {
                     groupName: values.groupName,
                     dealerSalePrice: values.dealerSalePrice,
+                    productSubCategoryId: values.productSubCategoryId,
                     gst: values.gst,
                     sgst: values.sgst,
                     cgst: values.cgst,

@@ -67,10 +67,10 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_DELEAR_RATIO,
     },
     {
-        label: 'Dealers Serviceability',
+        label: 'Pincode Serviceability',
         icon: TfiLayoutMediaOverlayAlt2,
-        path: '/dealers-serviceability',
-        name: UserModuleNameTypes.NAV_DELEAR_RATIO,
+        path: '/pincode-serviceability',
+        name: UserModuleNameTypes.NAV_PINCODE_SERVICEABILITY,
     },
     {
         label: 'Users',

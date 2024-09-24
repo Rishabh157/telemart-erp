@@ -722,7 +722,7 @@ const PageRoutes = () => {
                     }
                 />
                 <Route
-                    path="/dealers-serviceability"
+                    path="/pincode-serviceability"
                     element={
                         <Authorization
                             children={<DealerServiceabilityListingWrapper />}
@@ -1323,11 +1323,13 @@ const PageRoutes = () => {
                         />
                     }
                 />
-                {/* Sale Order Invoice */}
+
+                {/* REMOVE IT -> Sale Order Invoice By So Number */}
                 <Route
                     path="/sale-order/:id/invoice"
                     element={<DispatchedInvoiceWrapper />}
                 />
+
                 <Route
                     path="/sale-order/add-sale-order"
                     element={

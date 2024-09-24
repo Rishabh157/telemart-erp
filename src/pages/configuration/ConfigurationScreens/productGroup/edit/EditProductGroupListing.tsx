@@ -15,6 +15,9 @@ import { FormInitialValues } from './EditProductGroupWrapper'
 
 // |-- Redux --|
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllProductSubCategoryQuery } from 'src/services/ProductSubCategoryService'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 // |-- Types --|
 type Props = {
@@ -40,6 +43,12 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
         setFieldValue(name, value)
         dispatch(setFieldCustomized(true))
     }
+
+    const { options: productSubCategoryOption } = useCustomOptions({
+        useEndPointHook: useGetAllProductSubCategoryQuery(''),
+        keyName: 'subCategoryName',
+        value: '_id',
+    })
 
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
@@ -75,7 +84,7 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
 
                     {/* Form */}
                     <div className="grow pb-9 pt-2 px-3 ">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-3 gap-4">
                             {/* Product Group Name  */}
                             <ATMTextField
                                 required
@@ -109,6 +118,20 @@ const EditProductGroupListing = ({ formikProps, apiStatus }: Props) => {
                                     }
                                 }}
                             />
+
+                            <div className="-mt-[0.05rem]">
+                                <ATMSelectSearchable
+                                    required
+                                    name={'productSubCategoryId'}
+                                    value={values.productSubCategoryId}
+                                    label="Product Sub Category"
+                                    selectLabel="Select Product Sub Category"
+                                    options={productSubCategoryOption || []}
+                                    onChange={(e) => {
+                                        handleSetFieldValue('productSubCategoryId', e)
+                                    }}
+                                />
+                            </div>
                         </div>
                         <div className="grid grid-cols-4 gap-4">
                             <ATMTextField

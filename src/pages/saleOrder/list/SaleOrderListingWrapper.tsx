@@ -74,6 +74,7 @@ const SaleOrderListingWrapper = () => {
     const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
+
     // Upload File Mutation
     const [uploadFile, uploadFileInfo] = useAddFileUrlMutation()
 
@@ -115,15 +116,14 @@ const SaleOrderListingWrapper = () => {
         }),
     })
 
-    const { items: invoiceData } =
-        useGetDataByIdCustomQuery<SalesOrderInvoiceResponse>({
-            useEndPointHook: useGetInvoiceOfSaleOrderByIdQuery(
-                invoiceSoNumber || ' ',
-                {
-                    skip: !invoiceSoNumber,
-                }
-            ),
-        })
+    const { items: invoiceData } = useGetDataByIdCustomQuery<SalesOrderInvoiceResponse>({
+        useEndPointHook: useGetInvoiceOfSaleOrderByIdQuery(
+            invoiceSoNumber || ' ',
+            {
+                skip: !invoiceSoNumber,
+            }
+        ),
+    })
 
     const handleUpload = (
         base64Data: any,
@@ -743,7 +743,7 @@ const SaleOrderListingWrapper = () => {
             },
         },
     ]
-  
+
 
     return (
         <SideNavLayout>
@@ -756,16 +756,18 @@ const SaleOrderListingWrapper = () => {
                     filter={filter}
                 />
             </div>
-            <div className="absolute top-0 opacity-0 -z-10">
-                <DispatchedInvoiceTemplate
-                    ref={saleOrderInvoiceRef}
-                    invoice={invoiceData || null}
-                />
-            </div>
 
             {uploadFileInfo?.isLoading ? <div className="absolute opacity-70 z-50 top-0 flex items-center justify-center h-[100vh] w-full bg-white">
                 <CircularProgress />
             </div> : null}
+
+            <div className="absolute top-0 opacity-0 -z-10">
+                <DispatchedInvoiceTemplate
+                    ref={saleOrderInvoiceRef}
+                    items={invoiceData || null}
+                />
+            </div>
+
 
             {/* Do Not Delete This */}
             {/* {pdfFile && (
