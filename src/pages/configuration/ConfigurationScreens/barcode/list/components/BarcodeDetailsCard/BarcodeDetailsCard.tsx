@@ -66,6 +66,7 @@ const BarcodeDetailsCard = ({
                         <div className="flex justify-between">
                             <div>
                                 <div className="text-[10px] text-slate-500">Barcode No.</div>
+                                <div>{barcode?.status} </div>
                                 <div>{barcode?.barcodeNumber} </div>
 
                                 <div className="relative">

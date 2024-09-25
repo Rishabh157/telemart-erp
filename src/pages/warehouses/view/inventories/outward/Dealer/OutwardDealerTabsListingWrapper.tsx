@@ -2,8 +2,8 @@
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { IconType } from 'react-icons'
 import { Formik, FormikProps } from 'formik'
+import { IconType } from 'react-icons'
 import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
@@ -26,29 +26,29 @@ import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeForma
 import OutwardRequestListing from './OutwardDealerTabs'
 
 // |-- Redux --|
+import { CircularProgress } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
+import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
-    useGetAllBarcodeOfDealerOutWardDispatchMutation,
-    useUpdateBarcodeFreezeStatusMutation,
     useDispatchDealerBarcodeMutation,
+    useGetAllBarcodeOfDealerOutWardDispatchMutation,
 } from 'src/services/BarcodeService'
-import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
-import { barcodeStatusEnum } from 'src/utils/constants/enums'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
-import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-import { useCustomOptions } from 'src/hooks/useCustomOptions'
-import { useGetTransportQuery } from 'src/services/transportServiceses'
-import { getTransportTypeOptions } from 'src/utils/constants/customeTypes'
-import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
+import { useGetTransportQuery } from 'src/services/transportServiceses'
 import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
-import { CircularProgress } from '@mui/material'
+import { getTransportTypeOptions } from 'src/utils/constants/customeTypes'
+import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import { FormInitialValuesFilterWithLabel } from './Filters/OutwardDealerTabFilterFormWrapper';
+import { FormInitialValuesFilterWithLabel } from './Filters/OutwardDealerTabFilterFormWrapper'
 // import moment from 'moment'
 
 // |-- Types --|
@@ -110,7 +110,7 @@ const OutwardDealerTabsListingWrapper = () => {
             endDate: {
                 fieldName: '',
                 label: '',
-                value: ''
+                value: '',
             },
             startTime: {
                 fieldName: '',
@@ -151,7 +151,7 @@ const OutwardDealerTabsListingWrapper = () => {
                     },
                     {
                         fieldName: 'status',
-                        value: filter?.orderStatus?.value
+                        value: filter?.orderStatus?.value,
                     },
                 ],
                 dateFilter: {
@@ -172,7 +172,7 @@ const OutwardDealerTabsListingWrapper = () => {
     })
 
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
-    const [updateBarcodeStatus] = useUpdateBarcodeFreezeStatusMutation()
+    const { updateStatus } = useUpdateBarcodeFreezedStatus()
 
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchDealerBarcodeMutation()
@@ -227,7 +227,7 @@ const OutwardDealerTabsListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => { }}
+                        handleOnAction={() => {}}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -355,14 +355,10 @@ const OutwardDealerTabsListingWrapper = () => {
             if (item?.barcodeNumber !== barcodeNumber) {
                 return item
             } else {
-                updateBarcodeStatus({
+                updateStatus({
                     status: false,
-                    body: {
-                        bcode: [barcodeNumber],
-                    },
+                    barcodes: [barcodeNumber],
                 })
-                    .then((res) => { })
-                    .catch((err) => console.error(err))
             }
         })
         let barcode = [...barcodeList]
@@ -381,11 +377,15 @@ const OutwardDealerTabsListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
-            isSendingToDealer: true
+            isSendingToDealer: true,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
+                        updateStatus({
+                            status: false,
+                            barcodes: [barcodeNumber],
+                        })
                         let newBarcode = [...barcodeList]
                         if (!newBarcode[index]) {
                             newBarcode[index] = [...res?.data?.data]
@@ -409,16 +409,8 @@ const OutwardDealerTabsListingWrapper = () => {
                     }
 
                     // Freezed Api
-                    updateBarcodeStatus({
-                        status: true,
-                        body: {
-                            bcode: [barcodeNumber],
-                        },
-                    })
-                        .then((res) => { })
-                        .catch((err) => console.error(err))
+                   
                 }
-
 
                 // error messages
                 if (!res?.data?.status) {
@@ -428,13 +420,24 @@ const OutwardDealerTabsListingWrapper = () => {
                 if (res?.error) {
                     showToast('error', res?.error?.data?.message)
                 }
-
             })
             .catch((err) => console.error(err))
     }
-
+    React.useEffect(() => {
+        return () => {
+            if (barcodeList?.length) {
+                const barcodeNumbers = barcodeList?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodeList])
     const onSubmitHandler = (values: FormInitialValues) => {
-
         const filterValue = barcodeList
             ?.flat(1)
             ?.map((ele: BarcodeListResponseType) => {
@@ -462,7 +465,7 @@ const OutwardDealerTabsListingWrapper = () => {
                 } = ele
                 return {
                     ...rest,
-                    dealerId: selectedItemsTobeDispatch?.documents[0]?.dealerId
+                    dealerId: selectedItemsTobeDispatch?.documents[0]?.dealerId,
                 }
             })
 
@@ -488,14 +491,10 @@ const OutwardDealerTabsListingWrapper = () => {
                     showToast('success', 'dispatched successfully')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))
-                    updateBarcodeStatus({
+                    updateStatus({
                         status: true,
-                        body: {
-                            bcode: dispatchBarcodeList,
-                        },
+                        barcodes: dispatchBarcodeList,
                     })
-                        .then((res) => { })
-                        .catch((err) => console.error(err))
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -560,9 +559,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">So Number</div>
                                     {':'}
-                                    <div >
-                                        {selectedItemsTobeDispatch?._id}
-                                    </div>
+                                    <div>{selectedItemsTobeDispatch?._id}</div>
                                 </div>
                             </div>
 
@@ -687,7 +684,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                            ''
+                                                                ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(
@@ -741,7 +738,9 @@ const OutwardDealerTabsListingWrapper = () => {
                                                 <ATMTextField
                                                     // required
                                                     name="transporterGST"
-                                                    value={values.transporterGST}
+                                                    value={
+                                                        values.transporterGST
+                                                    }
                                                     label="Transporter GST"
                                                     placeholder="transporter GST"
                                                     className="mt-0 rounded"
@@ -931,7 +930,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                                 setFieldValue
                                                             )
                                                         }}
-                                                    // isSubmitting={false}
+                                                        // isSubmitting={false}
                                                     />
                                                     {imageApiStatus ? (
                                                         <div className="mt-3">

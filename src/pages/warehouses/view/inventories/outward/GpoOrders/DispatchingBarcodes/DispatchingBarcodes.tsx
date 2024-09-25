@@ -10,6 +10,7 @@ import BarcodeCard from 'src/components/UI/Barcode/BarcodeCard'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 import { BarcodeListResponseType } from 'src/models'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
@@ -41,6 +42,8 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
     const [getBarCode] = useGetWarehouseBarcodeMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchGPOOrdersToWarehouseMutation()
+        const { updateStatus } = useUpdateBarcodeFreezedStatus()
+
 
     const handleBarcodeSubmit = (barcodeNumber: string, index: number) => {
         getBarCode({
@@ -52,6 +55,10 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
+                        updateStatus({
+                            status: true,
+                            barcodes: [barcodeNumber],
+                        })
                         const {
                             products: productsOfRes,
                             barcode: barcodeOfRes,
@@ -151,6 +158,10 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                 barcode: [...filteredObj],
             }
         })
+        updateStatus({
+            status: false,
+            barcodes: [barcodeNumber],
+        })
         setProducts(newData)
     }
 
@@ -228,6 +239,20 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [products])
 
+    React.useEffect(() => {
+        return () => {
+            if (products?.barcode?.length) {
+                const barcodeNumbers = products?.barcode?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [products?.barcode])
     return (
         <React.Fragment>
             <div className="border-b-slate-300 border-[1px] shadow p-4 my-4 rounded">

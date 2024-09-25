@@ -26,5 +26,5 @@ export const useUpdateBarcodeFreezedStatus = () => {
         }
     }
 
-    return updateStatus
+    return { updateStatus }
 }

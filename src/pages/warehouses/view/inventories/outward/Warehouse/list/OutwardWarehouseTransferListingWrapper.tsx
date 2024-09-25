@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { IconType } from 'react-icons'
@@ -38,6 +38,7 @@ import {
 } from 'src/services/WarehouseTransferService'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 
 // |-- Types --|
 export type Tabs = {
@@ -100,6 +101,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchWarehouseToWarehouseBarcodeMutation()
+    const { updateStatus } = useUpdateBarcodeFreezedStatus()
 
     const columns: columnTypes[] = [
         {
@@ -240,6 +242,11 @@ const OutwardWarehouseTransferListingWrapper = () => {
         const filteredObj = barcodeList[ind]?.filter((item: any) => {
             if (item?.barcodeNumber !== barcodeNumber) {
                 return item
+            } else {
+                updateStatus({
+                    status: false,
+                    barcodes: [barcodeNumber],
+                })
             }
         })
         let barcode = [...barcodeList]
@@ -258,7 +265,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
-            isSendingToDealer: false
+            isSendingToDealer: false,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -284,6 +291,10 @@ const OutwardWarehouseTransferListingWrapper = () => {
                         }
 
                         setBarcodeList([...newBarcode])
+                        updateStatus({
+                            status: true,
+                            barcodes: [barcodeNumber],
+                        })
                     }
                 } else {
                     // showToast('error', 'barcode number is not matched')
@@ -343,6 +354,21 @@ const OutwardWarehouseTransferListingWrapper = () => {
         return barcodeQuantity === barcodeList?.flat(1)?.length
     }
 
+    React.useEffect(() => {
+        return () => {
+            if (barcodeList?.length) {
+                const barcodeNumbers = barcodeList?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodeList])
+
     return (
         <>
             <OutwardWarehouseTransferListing columns={columns} rows={items} />
@@ -362,9 +388,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
                                 <div className="flex gap-1 items-center">
                                     <div className="font-bold">WTW Number</div>
                                     {':'}
-                                    <div >
-                                        {selectedItemsTobeDispatch?._id}
-                                    </div>
+                                    <div>{selectedItemsTobeDispatch?._id}</div>
                                 </div>
                             </div>
 
@@ -374,7 +398,7 @@ const OutwardWarehouseTransferListingWrapper = () => {
                                         To Warehouse Name
                                     </div>
                                     {':'}
-                                    <div >
+                                    <div>
                                         {
                                             selectedItemsTobeDispatch?.toWarehouseLabel
                                         }
@@ -400,9 +424,11 @@ const OutwardWarehouseTransferListingWrapper = () => {
                                                         :
                                                     </span>
                                                     <span>
-                                                        {document
+                                                        {
+                                                            document
                                                                 ?.productSalesOrder
-                                                                ?.groupName}
+                                                                ?.groupName
+                                                        }
                                                     </span>
                                                 </div>
 

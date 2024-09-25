@@ -15,6 +15,7 @@ import { useDispatchManualOrdersMutation } from 'src/services/OrderService'
 import { showToast } from 'src/utils'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { setSearchValue } from 'src/redux/slices/ListingPaginationSlice'
+import { useUpdateBarcodeFreezedStatus } from 'src/hooks/useUpdateBarcodeFreezedStatus'
 
 type Props = {
     items: OrderListResponse
@@ -30,6 +31,7 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const [barcodeDispatch, barcodeDispatchInfo] =
         useDispatchManualOrdersMutation()
+        const { updateStatus } = useUpdateBarcodeFreezedStatus()
 
     const handleBarcodeSubmit = (
         barcodeNumber: string,
@@ -45,6 +47,10 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
             .then((res: any) => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
+                        updateStatus({
+                            status: true,
+                            barcodes: [barcodeNumber],
+                        })
                         let newBarcode = [...barcodeList]
                         if (!newBarcode[index]) {
                             newBarcode[index] = [...res?.data?.data]
@@ -84,6 +90,10 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
         })
         let barcode = [...barcodeList]
         barcode[ind] = [...filteredObj]
+        updateStatus({
+            status: false,
+            barcodes: [barcodeNumber],
+        })
         setBarcodeList(barcode)
     }
 
@@ -142,6 +152,21 @@ const DispatchingBarcodesOfManualMapping = ({ items }: Props) => {
 
         setProducts(barcodeOfProducts)
     }, [items])
+
+    React.useEffect(() => {
+        return () => {
+            if (barcodeList?.length) {
+                const barcodeNumbers = barcodeList?.map(
+                    (barcode: any) => barcode.barcodeNumber
+                )
+                updateStatus({
+                    status: false,
+                    barcodes: [...barcodeNumbers],
+                })
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barcodeList])
 
     return (
         <React.Fragment>
