@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WHInvoice = () => {
+const WarehouseTransferInvoice = () => {
     const tableHead = 'border-r border-slate-900 py-1'
     const tableCell = 'border-r border-slate-900 p-[5px] text-center'
     return (
@@ -283,4 +283,4 @@ const WHInvoice = () => {
     )
 }
 
-export default WHInvoice
+export default WarehouseTransferInvoice

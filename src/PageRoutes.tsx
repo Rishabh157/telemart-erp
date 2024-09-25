@@ -334,6 +334,10 @@ import OutwardFlipkartTabsListingWrapper from './pages/warehouses/view/inventori
 import PageMasterLayout from './pages/pageMaster/PageMasterLayout'
 import EditGRNWrapper from './pages/grn/edit/EditGRNWrapper'
 import DealerServiceabilityListingWrapper from './pages/dealerServiceability/list/DealerServiceabilityListingWrapper'
+import EwbInvoice from './Receipt/EwbInvoice'
+import DealerInvoice from './Receipt/DEALERInvoice'
+import { DealerTaxInvoice } from './Receipt/DealerTaxInvoice'
+import WarehouseTransferInvoice from './Receipt/WarehouseTransferInvoice'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -1328,6 +1332,28 @@ const PageRoutes = () => {
                 <Route
                     path="/sale-order/:id/invoice"
                     element={<DispatchedInvoiceWrapper />}
+                />
+
+                {/* REMOVE IT -> Sale Order Invoice By So Number */}
+                <Route
+                    path="/ewb/invoice"
+                    element={<EwbInvoice />}
+                />
+
+                {/* REMOVE IT -> Sale Order Invoice By So Number */}
+                <Route
+                    path="/dealer/invoice"
+                    element={<DealerInvoice />}
+                />
+                <Route
+                    path="/dealer-tax/invoice"
+                    element={<DealerTaxInvoice />}
+                />
+
+                {/* REMOVE IT -> Sale Order Invoice By So Number */}
+                <Route
+                    path="/warehouse-transfer/invoice"
+                    element={<WarehouseTransferInvoice />}
                 />
 
                 <Route

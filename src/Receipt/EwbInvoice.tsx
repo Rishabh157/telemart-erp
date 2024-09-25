@@ -1,8 +1,8 @@
 import React from 'react'
 
 const EwbInvoice = () => {
-    const tableHead = 'border-r   text-start'
-    const tableCell = 'border-r '
+    const tableHead = 'border-r text-start'
+    const tableCell = 'border-r'
     return (
         <>
             <div className="bg-slate-500 py-10">

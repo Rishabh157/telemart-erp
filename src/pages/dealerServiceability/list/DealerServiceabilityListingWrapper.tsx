@@ -9,7 +9,6 @@ import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 
 // |-- Redux --|
 import Chip from '@mui/material/Chip'
-
 import { useState } from 'react'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
@@ -64,7 +63,6 @@ const DealerServiceabilityListingWrapper = () => {
 
     const { page, rowsPerPage } = dealerInventoryState
 
-    console.log('shouldSkipApi: ', shouldSkipApi);
     // pagination api
     const { items } = useGetCustomListingData<
         DealerServiceabilityListingWrapperTypes[]
@@ -84,6 +82,11 @@ const DealerServiceabilityListingWrapper = () => {
             }
         ),
     })
+
+
+    // useEffect(()=>{
+
+    // },[items?.data?.[0]?.wareHouseCode])
 
     const renderCell = (row: any) => (
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -109,13 +112,13 @@ const DealerServiceabilityListingWrapper = () => {
         },
         {
             field: 'dealerName',
-            headerName: 'Dealer Name',
+            headerName: 'Dealer or Warehouse Name',
             flex: 'flex-[1_5_0%]',
             renderCell: (row: any) => (
                 <div className='text-center'>
-                    {row?.dealerName} <br />
+                    {row?.dealerName || row?.wareHouseName} <br />
                     <span className='text-primary-main'>
-                        ( {row?.dealerCode} )
+                        ( {row?.dealerCode || row?.wareHouseCode} )
                     </span>
                 </div>
             )
