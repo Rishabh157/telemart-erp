@@ -235,7 +235,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
 
             renderCell: (row: OrderListResponse) => (
                 <ActionPopup
-                    customBtnText="Mark As Devivered"
+                    customBtnText="Mark As Delivered"
                     isCustomBtn={
                         isAuthorized(
                             UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_MARK_AS_DELIVERED

@@ -81,7 +81,17 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     <span className='text-neutral font-medium text-sm'>
                                         Status
                                     </span>
-                                    <span className='text-sm font-bold text-green-600 uppercase'>{items?.status}</span>
+                                    <span className='text-sm font-bold text-green-600 uppercase'>
+                                        {items?.status}
+                                        </span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <span className='text-neutral font-medium text-sm'>
+                                        Order Type
+                                    </span>
+                                    <span className='text-sm font-bold text-green-600'>
+                                        {items?.isUrgentOrder ? 'Urgent' : '-'}
+                                    </span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>

@@ -259,12 +259,14 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 warehouseId,
                 barcode,
                 status,
+                getOrder,
             }: {
                 warehouseId: string
                 barcode: string
                 status: string
+                getOrder: boolean
             }) => ({
-                url: `/bar-code/dispatch-warehouse-order-barcode/${warehouseId}/barcode/${barcode}/status/${status}`,
+                url: `/bar-code/dispatch-warehouse-order-barcode/${warehouseId}/barcode/${barcode}/status/${status}/${getOrder}`,
                 method: 'GET',
             }),
         }),

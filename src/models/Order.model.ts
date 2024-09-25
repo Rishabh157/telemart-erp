@@ -37,6 +37,7 @@ export type OrderListResponse = {
     companyAddress: string
     hsnCode: string
     approved: boolean
+    isUrgentOrder: boolean
     didNo: string
     ageGroup: string
     alternateNo: string

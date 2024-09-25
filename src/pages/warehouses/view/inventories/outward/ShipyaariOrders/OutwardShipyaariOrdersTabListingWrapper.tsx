@@ -202,7 +202,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                 //     'Dispatched'
                 // ) : row?.orderStatus === SaleOrderStatus.dispatched ? (
                     <ActionPopup
-                        customBtnText="Mark As Devivered"
+                        customBtnText="Mark As Delivered"
                         isCustomBtn={
                             isAuthorized(
                                 UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_MARK_AS_DELIVERED
