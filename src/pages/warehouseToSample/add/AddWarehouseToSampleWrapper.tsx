@@ -29,7 +29,6 @@ interface ProductSalesOrder {
 }
 
 export type FormInitialValues = {
-    wtsNumber: string
     fromWarehouseId: string
     toName: string
     companyId: string
@@ -69,7 +68,6 @@ const AddWarehouseToSampleWrapper = (props: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        wtsNumber: '',
         fromWarehouseId: '',
         toName: '',
         companyId: '',
@@ -85,15 +83,6 @@ const AddWarehouseToSampleWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        wtsNumber: string()
-            .required(
-                'warehouse to sample order number is required'
-                // eslint-disable-next-line no-useless-escape
-            )
-            .matches(
-                /^[a-zA-Z]+[^\\/\\]*$/,
-                'Only alphabetical characters are allowed, except / and \\'
-            ),
         fromWarehouseId: string().required('please select a warehouse'),
         toName: string().required('please enter receiver name'),
         productSalesOrder: array().of(
@@ -117,7 +106,6 @@ const AddWarehouseToSampleWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             AddWarehouseToSample({
-                wtsNumber: values.wtsNumber,
                 fromWarehouseId: values.fromWarehouseId,
                 toName: values.toName,
                 companyId: userData?.companyId || '',
@@ -132,7 +120,7 @@ const AddWarehouseToSampleWrapper = (props: Props) => {
                         showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                 }
                 setApiStatus(false)
             })

@@ -48,11 +48,10 @@ const EditWarehouseToComapny = ({
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: `${params.dealerId ? 'WTC transfer' : 'WTC  Transfer'}`,
-            path: `${
-                params.dealerId
-                    ? `/dealers/${params.dealerId}/warehouse-to-company`
-                    : '/warehouse-to-company'
-            }`,
+            path: `${params.dealerId
+                ? `/dealers/${params.dealerId}/warehouse-to-company`
+                : '/warehouse-to-company'
+                }`,
         },
         {
             label: 'Add warehouse transfer',
@@ -107,8 +106,7 @@ const EditWarehouseToComapny = ({
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium">
-                            {' '}
-                            Warwhouse Transfer Details{' '}
+                            Warwhouse Transfer Details
                         </div>
                         {/* BUTTON - Add SO */}
                         <div>
@@ -116,9 +114,8 @@ const EditWarehouseToComapny = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -128,24 +125,7 @@ const EditWarehouseToComapny = ({
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
                         <div className="grid grid-cols-3 gap-4">
-                            {/* SO Number */}
-                            <ATMTextField
-                                readOnly={true}
-                                disabled={true}
-                                name="wtcNumber"
-                                value={values.wtcNumber}
-                                label="Warehouse transfer No."
-                                placeholder="WT Number"
-                                className="rounded"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'wtcNumber',
-                                        e.target.value
-                                    )
-                                }
-                            />
 
-                            {/* from Warehouse */}
                             <ATMSelectSearchable
                                 name="fromWarehouseId"
                                 value={values.fromWarehouseId}
@@ -163,6 +143,7 @@ const EditWarehouseToComapny = ({
                                 label="From warehouse (company)"
                                 selectLabel="Select Warehouse"
                             />
+
                             <ATMSelectSearchable
                                 name="toCompanyId"
                                 value={values.toCompanyId}
@@ -173,7 +154,7 @@ const EditWarehouseToComapny = ({
                                 label="to Company"
                                 selectLabel="Select company"
                             />
-                            {/* to Warehouse */}
+
                             <ATMSelectSearchable
                                 name="toWarehouseId"
                                 value={values?.toWarehouseId}
@@ -213,7 +194,7 @@ const EditWarehouseToComapny = ({
                 {/*  Sales Order  */}
                 <div className="px-3">
                     <div className=" text-lg pb-2 font-medium text-primary-main">
-                        Add ProductGroup to Warehouse company
+                        Product details
                     </div>
 
                     <FieldArray name="productSalesOrder">
@@ -288,7 +269,7 @@ const EditWarehouseToComapny = ({
                                                                 placeholder="Rate"
                                                                 onChange={(
                                                                     e
-                                                                ) => {}}
+                                                                ) => { }}
                                                                 className="mt-0 rounded"
                                                             />
                                                         </div>
@@ -301,7 +282,7 @@ const EditWarehouseToComapny = ({
                                                                 name={`productSalesOrder[${index}].quantity`}
                                                                 value={
                                                                     quantity ===
-                                                                    0
+                                                                        0
                                                                         ? ''
                                                                         : quantity?.toString()
                                                                 }
@@ -324,20 +305,20 @@ const EditWarehouseToComapny = ({
                                                         {values
                                                             .productSalesOrder
                                                             ?.length > 1 && (
-                                                            <div>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => {
-                                                                        remove(
-                                                                            index
-                                                                        )
-                                                                    }}
-                                                                    className="p-2 bg-red-500 text-white rounded"
-                                                                >
-                                                                    <MdDeleteOutline className="text-2xl" />
-                                                                </button>
-                                                            </div>
-                                                        )}
+                                                                <div>
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => {
+                                                                            remove(
+                                                                                index
+                                                                            )
+                                                                        }}
+                                                                        className="p-2 bg-red-500 text-white rounded"
+                                                                    >
+                                                                        <MdDeleteOutline className="text-2xl" />
+                                                                    </button>
+                                                                </div>
+                                                            )}
                                                     </div>
                                                 )
                                             }

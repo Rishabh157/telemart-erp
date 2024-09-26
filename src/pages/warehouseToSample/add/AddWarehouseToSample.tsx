@@ -91,7 +91,6 @@ const AddWarehouseToSample = ({
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium">
-                            {' '}
                             Warehouse To Sample Details
                         </div>
                         {/* BUTTON - Add SO */}
@@ -111,23 +110,7 @@ const AddWarehouseToSample = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
-                            {/* SO Number */}
-                            <ATMTextField
-                                name="wtsNumber"
-                                value={values.wtsNumber}
-                                label="Warehouse To Sample Transfer No."
-                                placeholder="enter wts number"
-                                className="rounded mt-0"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'wtsNumber',
-                                        e.target.value
-                                    )
-                                }
-                            />
-
-                            {/* from Warehouse */}
+                        <div className="grid grid-cols-2 gap-4">                            
                             <ATMSelectSearchable
                                 name="fromWarehouseId"
                                 value={values.fromWarehouseId}
@@ -138,7 +121,7 @@ const AddWarehouseToSample = ({
                                     handleSetFieldValue('fromWarehouseId', e)
                                 }}
                             />
-                            {/* to Warehouse */}
+
                             <ATMTextField
                                 name="toName"
                                 value={values.toName}
@@ -174,7 +157,7 @@ const AddWarehouseToSample = ({
                 {/*  Sales Order  */}
                 <div className="px-3">
                     <div className=" text-lg pb-2 font-medium text-primary-main">
-                        Add ProductGroup to sale order
+                    Product details
                     </div>
 
                     <FieldArray name="productSalesOrder">

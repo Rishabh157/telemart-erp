@@ -11,7 +11,6 @@ interface ProductSalesOrder {
     quantity: number
 }
 export type AddWarehouseToComapny = {
-    wtcNumber: string
     toCompanyId: string
     fromWarehouseId: string
     toWarehouseId: string

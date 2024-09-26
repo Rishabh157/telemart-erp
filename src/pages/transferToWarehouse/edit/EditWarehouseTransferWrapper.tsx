@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable react-hooks/exhaustive-deps */
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -181,12 +179,6 @@ const EditWarehouseTransferWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        wtNumber: string()
-            .required('WTW number is required')
-            .matches(
-                /^[a-zA-Z]+[^\/\\]*$/,
-                'Only alphabetical characters are allowed, except / and \\'
-            ),
         fromWarehouseId: string().required('please select warehouse'),
         toWarehouseId: string().required('please select warehouse'),
         remark: string(),

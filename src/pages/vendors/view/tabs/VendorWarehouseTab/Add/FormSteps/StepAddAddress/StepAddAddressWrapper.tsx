@@ -1,11 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/// ==============================================
-// Filename:StepAddAddressWrapper.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 19, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import { useEffect, useState } from 'react'
 
@@ -48,115 +40,115 @@ const formFields: {
     sectionName: string
     fields: FieldType[]
 }[] = [
-    {
-        sectionName: 'Regd. Address',
-        fields: [
-            {
-                name: 'regd_address.phone',
-                label: 'Phone',
-                placeholder: 'Phone',
-            },
-            {
-                name: 'regd_address.address',
-                label: 'Address',
-                placeholder: 'Address',
-            },
-            {
-                name: 'regd_address.country',
-                label: 'Country',
-                placeholder: 'Country',
-                type: 'select',
-                optionAccessKey: 'counrtyOptions',
-            },
-            {
-                name: 'regd_address.state',
-                label: 'State',
-                placeholder: 'State',
-                type: 'select',
-                optionAccessKey: 'stateOptions',
-            },
-            {
-                name: 'regd_address.district',
-                label: 'District',
-                placeholder: 'District',
-                type: 'select',
-                optionAccessKey: 'districtOptions',
-            },
-            {
-                name: 'regd_address.pincode',
-                label: 'Pincode',
-                placeholder: 'Pincode',
-                type: 'select',
-                optionAccessKey: 'pincodeOptions',
-            },
-        ],
-    },
-    {
-        sectionName: '',
-        fields: [
-            {
-                name: 'checkbox',
-                label: 'As Above values',
-                type: 'checkbox',
-                placeholder: 'checbox',
-            },
-        ],
-    },
-    {
-        sectionName: 'Billing Address',
-        fields: [
-            {
-                name: 'billing_address.phone',
-                label: 'Phone',
-                placeholder: 'Phone',
-            },
-            {
-                name: 'billing_address.address',
-                label: 'Address',
-                placeholder: 'Address',
-            },
-            {
-                name: 'billing_address.country',
-                label: 'Country',
-                placeholder: 'Country',
-                type: 'select',
-                optionAccessKey: 'billingCounrtyOptions',
-            },
-            {
-                name: 'billing_address.state',
-                label: 'State',
-                placeholder: 'State',
-                type: 'select',
-                optionAccessKey: 'billingStateOptions',
-            },
-            {
-                name: 'billing_address.district',
-                label: 'District',
-                placeholder: 'District',
-                type: 'select',
-                optionAccessKey: 'billingDistrictOptions',
-            },
-            {
-                name: 'billing_address.pincode',
-                label: 'Pincode',
-                placeholder: 'Pincode',
-                type: 'select',
-                optionAccessKey: 'billingPincodeOptions',
-            },
-            {
-                name: 'billing_address.gstNumber',
-                label: 'GST Number',
-                placeholder: 'GST Number',
-            },
-            {
-                name: 'billing_address.gstCertificate',
-                label: 'GST Certificate',
-                placeholder: 'GST Certificate',
-                type: 'file-picker',
-            },
-        ],
-    },
-]
+        {
+            sectionName: 'Regd. Address',
+            fields: [
+                {
+                    name: 'regd_address.phone',
+                    label: 'Phone',
+                    placeholder: 'Phone',
+                },
+                {
+                    name: 'regd_address.address',
+                    label: 'Address',
+                    placeholder: 'Address',
+                },
+                {
+                    name: 'regd_address.country',
+                    label: 'Country',
+                    placeholder: 'Country',
+                    type: 'select',
+                    optionAccessKey: 'counrtyOptions',
+                },
+                {
+                    name: 'regd_address.state',
+                    label: 'State',
+                    placeholder: 'State',
+                    type: 'select',
+                    optionAccessKey: 'stateOptions',
+                },
+                {
+                    name: 'regd_address.district',
+                    label: 'District',
+                    placeholder: 'District',
+                    type: 'select',
+                    optionAccessKey: 'districtOptions',
+                },
+                {
+                    name: 'regd_address.pincode',
+                    label: 'Pincode',
+                    placeholder: 'Pincode',
+                    type: 'select',
+                    optionAccessKey: 'pincodeOptions',
+                },
+            ],
+        },
+        {
+            sectionName: '',
+            fields: [
+                {
+                    name: 'checkbox',
+                    label: 'As Above values',
+                    type: 'checkbox',
+                    placeholder: 'checbox',
+                },
+            ],
+        },
+        {
+            sectionName: 'Billing Address',
+            fields: [
+                {
+                    name: 'billing_address.phone',
+                    label: 'Phone',
+                    placeholder: 'Phone',
+                },
+                {
+                    name: 'billing_address.address',
+                    label: 'Address',
+                    placeholder: 'Address',
+                },
+                {
+                    name: 'billing_address.country',
+                    label: 'Country',
+                    placeholder: 'Country',
+                    type: 'select',
+                    optionAccessKey: 'billingCounrtyOptions',
+                },
+                {
+                    name: 'billing_address.state',
+                    label: 'State',
+                    placeholder: 'State',
+                    type: 'select',
+                    optionAccessKey: 'billingStateOptions',
+                },
+                {
+                    name: 'billing_address.district',
+                    label: 'District',
+                    placeholder: 'District',
+                    type: 'select',
+                    optionAccessKey: 'billingDistrictOptions',
+                },
+                {
+                    name: 'billing_address.pincode',
+                    label: 'Pincode',
+                    placeholder: 'Pincode',
+                    type: 'select',
+                    optionAccessKey: 'billingPincodeOptions',
+                },
+                {
+                    name: 'billing_address.gstNumber',
+                    label: 'GST Number',
+                    placeholder: 'GST Number',
+                },
+                {
+                    name: 'billing_address.gstCertificate',
+                    label: 'GST Certificate',
+                    placeholder: 'GST Certificate',
+                    type: 'file-picker',
+                },
+            ],
+        },
+    ]
 
 const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
@@ -228,6 +220,7 @@ const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
         if (pincodeByDistrict) {
             dispatch(setAllPincodes(pincodeByDistrict))
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pincodeByDistrict])
     //billing
     useEffect(() => {
@@ -271,13 +264,11 @@ const StepAddAddressWrapper = ({ formikProps, allCountry }: Props) => {
         billingPincodeOptions,
     }
     return (
-        <>
-            <StepAddAddress
-                formikProps={formikProps}
-                formFields={formFields}
-                dropdownOptions={dropdownOptions}
-            />
-        </>
+        <StepAddAddress
+            formikProps={formikProps}
+            formFields={formFields}
+            dropdownOptions={dropdownOptions}
+        />
     )
 }
 

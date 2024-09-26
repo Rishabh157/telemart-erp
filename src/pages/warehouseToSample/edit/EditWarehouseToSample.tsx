@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // |-- Built-in Dependencies --|
 import React, { useEffect, useState } from 'react'
 
@@ -77,6 +76,7 @@ const EditWarehouseToSample = ({
         } else {
             setFieldValue(`productSalesOrder[${i}].rate`, '')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
@@ -101,8 +101,7 @@ const EditWarehouseToSample = ({
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
                         <div className="text-xl font-medium">
-                            {' '}
-                            Sample Details{' '}
+                            Warehouse To Sample Details
                         </div>
                         {/* BUTTON - Add SO */}
                         <div>
@@ -110,9 +109,7 @@ const EditWarehouseToSample = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''}`}
                             >
                                 Update
                             </button>
@@ -121,25 +118,7 @@ const EditWarehouseToSample = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
-                            {/* SO Number */}
-                            <ATMTextField
-                                disabled={true}
-                                readOnly={true}
-                                name="wtsNumber"
-                                value={values.wtsNumber}
-                                label="Warehouse Transfer Number"
-                                placeholder="WT Number"
-                                className="rounded mt-0"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'wtsNumber',
-                                        e.target.value
-                                    )
-                                }
-                            />
-
-                            {/* from Warehouse */}
+                        <div className="grid grid-cols-2 gap-4">
                             <ATMSelectSearchable
                                 name="fromWarehouseId"
                                 value={values.fromWarehouseId}
@@ -151,7 +130,6 @@ const EditWarehouseToSample = ({
                                 selectLabel="Select Warehouse"
                             />
 
-                            {/* to Warehouse */}
                             <ATMTextField
                                 name="toName"
                                 value={values.toName}
@@ -186,7 +164,7 @@ const EditWarehouseToSample = ({
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Update ProductGroup to sale order
+                            Product details
                         </div>
 
                         <FieldArray name="productSalesOrder">
@@ -265,7 +243,7 @@ const EditWarehouseToSample = ({
                                                                     placeholder="Rate"
                                                                     onChange={(
                                                                         e
-                                                                    ) => {}}
+                                                                    ) => { }}
                                                                     className="mt-0 rounded"
                                                                 />
                                                             </div>
@@ -278,7 +256,7 @@ const EditWarehouseToSample = ({
                                                                     name={`productSalesOrder[${index}].quantity`}
                                                                     value={
                                                                         quantity ===
-                                                                        0
+                                                                            0
                                                                             ? ''
                                                                             : quantity?.toString()
                                                                     }
@@ -303,20 +281,20 @@ const EditWarehouseToSample = ({
                                                                 .productSalesOrder
                                                                 ?.length >
                                                                 1 && (
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                index
-                                                                            )
-                                                                        }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    index
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                         </div>
                                                     )
                                                 }

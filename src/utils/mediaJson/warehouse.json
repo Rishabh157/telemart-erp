@@ -173,6 +173,16 @@
                     "fieldValue": "items"
                 },
                 {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_PDF",
+                    "fieldName": "PDF",
+                    "fieldValue": "invoice"
+                },
+                {
+                    "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_EWB_BILL",
+                    "fieldName": "EWB Bill",
+                    "fieldValue": "printWeb"
+                },
+                {
                     "fieldId": "TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_INSERTED_DATE",
                     "fieldName": "Inserted Date",
                     "fieldValue": "createdAt"

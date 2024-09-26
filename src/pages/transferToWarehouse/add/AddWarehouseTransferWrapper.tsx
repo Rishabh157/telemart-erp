@@ -1,7 +1,3 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable react-hooks/exhaustive-deps */
-// |-- Built-in Dependencies --|
-
 import { useState } from 'react'
 
 // |-- External Dependencies --|
@@ -88,12 +84,6 @@ const AddWarehouseTransferWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        wtNumber: string()
-            .required('WTW number is required')
-            .matches(
-                /^[a-zA-Z]+[^\/\\]*$/,
-                'Only alphabetical characters are allowed, except / and \\'
-            ),
         fromWarehouseId: string().required('please select warehouse'),
         toWarehouseId: string().required('please select warehouse'),
         remark: string(),
@@ -118,7 +108,6 @@ const AddWarehouseTransferWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             AddWarehouseTransferApi({
-                wtNumber: values.wtNumber,
                 fromWarehouseId: values.fromWarehouseId,
                 toWarehouseId: values.toWarehouseId,
                 productSalesOrder: values.productSalesOrder,
@@ -133,7 +122,7 @@ const AddWarehouseTransferWrapper = (props: Props) => {
                         showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                 }
                 setApiStatus(false)
             })

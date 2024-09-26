@@ -64,7 +64,7 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
     }
     return (
         <div className="py-9 px-7">
-            <div className="grid grid-cols-3 gap-4 gap-y-5">
+            <div className="grid grid-cols-4 gap-4 gap-y-5">
                 {/* Company Name */}
                 <ATMTextField
                     required
@@ -151,26 +151,35 @@ const StepAddCompanyDetails = ({ formikProps }: Props) => {
                         }
                     />
                 </div>
-                </div>
-                <div className="grid grid-cols-3 gap-4 gap-y-5">
+
+
                 <div className="w-ful mt-5">
                     <ATMFilePickerWrapper
                         name="companyLogo"
-                        label="Logo"
-                        placeholder={'Select File'}
+                        label="Company Logo"
+                        placeholder='Select logo image'
                         selectedFile={values.companyLogo}
                         onSelect={(newFile: any) => {
                             handleFileUpload(newFile, setFieldValue)
                         }}
-                        // isSubmitting={false}
+                    // isSubmitting={false}
                     />
+                    <span className="font-poppins text-[14px] text-start text-orange-400 text-wrap">
+                        Caution: Please ensure that the company logo is appropriate for invoices. The
+                        logo background should be white, and the image should be cropped neatly from
+                        the edges to maintain a clean appearance.
+                    </span>
                     {imageApiStatus ? (
                         <div className="mt-3">
                             <CircularProgress size={18} />
                         </div>
                     ) : null}
                 </div>
+
             </div>
+            {/* <div className="grid grid-cols-3 gap-4 gap-y-5">
+              
+            </div> */}
         </div>
     )
 }

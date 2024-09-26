@@ -49,11 +49,10 @@ const AddWarehouseToComapnyTransfer = ({
     const breadcrumbs: BreadcrumbType[] = [
         {
             label: `${params.dealerId ? 'WTC transfer' : 'WTC  Transfer'}`,
-            path: `${
-                params.dealerId
-                    ? `/dealers/${params.dealerId}/warehouse-to-company`
-                    : '/warehouse-to-company'
-            }`,
+            path: `${params.dealerId
+                ? `/dealers/${params.dealerId}/warehouse-to-company`
+                : '/warehouse-to-company'
+                }`,
         },
         {
             label: 'Add warehouse transfer',
@@ -117,9 +116,8 @@ const AddWarehouseToComapnyTransfer = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -128,24 +126,8 @@ const AddWarehouseToComapnyTransfer = ({
 
                     {/* Form */}
                     <div className="px-3 grow py-9 ">
-                        <div className="grid grid-cols-4 gap-4">
-                            {/* SO Number */}
-                            <ATMTextField
-                                required
-                                name="wtcNumber"
-                                value={values.wtcNumber}
-                                label="Warehouse transfer No."
-                                placeholder="WTC Number"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'wtcNumber',
-                                        e.target.value
-                                    )
-                                }
-                                className="rounded"
-                            />
+                        <div className="grid grid-cols-3 gap-4">
 
-                            {/* from Warehouse */}
                             <ATMSelectSearchable
                                 required
                                 name="fromWarehouseId"
@@ -176,7 +158,7 @@ const AddWarehouseToComapnyTransfer = ({
                                 label="to Company"
                                 selectLabel="Select company"
                             />
-                            {/* to Warehouse */}
+
                             <ATMSelectSearchable
                                 required
                                 name="toWarehouseId"
@@ -208,9 +190,9 @@ const AddWarehouseToComapnyTransfer = ({
                                     onChange={(e) =>
                                         handleSetFieldValue('remark', e)
                                     }
-                                    // options={dropdownOptions.warehouseOptions}
                                 />
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -218,7 +200,7 @@ const AddWarehouseToComapnyTransfer = ({
                 {/*  Sales Order  */}
                 <div className="px-3">
                     <div className="pb-2 text-lg font-medium text-primary-main">
-                        Add ProductGroup to Warehouse company
+                        Product details
                     </div>
 
                     <FieldArray name="productSalesOrder">
@@ -295,7 +277,7 @@ const AddWarehouseToComapnyTransfer = ({
                                                                 placeholder="Rate"
                                                                 onChange={(
                                                                     e
-                                                                ) => {}}
+                                                                ) => { }}
                                                                 className="mt-0 rounded"
                                                             />
                                                         </div>
@@ -309,7 +291,7 @@ const AddWarehouseToComapnyTransfer = ({
                                                                 name={`productSalesOrder[${index}].quantity`}
                                                                 value={
                                                                     quantity ===
-                                                                    0
+                                                                        0
                                                                         ? ''
                                                                         : quantity?.toString()
                                                                 }
@@ -332,20 +314,20 @@ const AddWarehouseToComapnyTransfer = ({
                                                         {values
                                                             .productSalesOrder
                                                             ?.length > 1 && (
-                                                            <div>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => {
-                                                                        remove(
-                                                                            index
-                                                                        )
-                                                                    }}
-                                                                    className="p-2 text-white bg-red-500 rounded"
-                                                                >
-                                                                    <MdDeleteOutline className="text-2xl" />
-                                                                </button>
-                                                            </div>
-                                                        )}
+                                                                <div>
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => {
+                                                                            remove(
+                                                                                index
+                                                                            )
+                                                                        }}
+                                                                        className="p-2 text-white bg-red-500 rounded"
+                                                                    >
+                                                                        <MdDeleteOutline className="text-2xl" />
+                                                                    </button>
+                                                                </div>
+                                                            )}
                                                     </div>
                                                 )
                                             }

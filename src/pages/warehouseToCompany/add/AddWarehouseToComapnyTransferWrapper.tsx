@@ -31,7 +31,6 @@ interface ProductSalesOrder {
 }
 
 export type FormInitialValues = {
-    wtcNumber: string
     fromWarehouseId: string
     toWarehouseId: string
     productSalesOrder: ProductSalesOrder[]
@@ -85,7 +84,6 @@ const AddWarehouseToComapnyTransferWrapper = (props: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        wtcNumber: '',
         fromWarehouseId: '',
         toWarehouseId: '',
         productSalesOrder: [
@@ -102,13 +100,6 @@ const AddWarehouseToComapnyTransferWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        wtcNumber: string()
-            .required('WTC order number is required')
-            .matches(
-                // eslint-disable-next-line no-useless-escape
-                /^[a-zA-Z]+[^\/\\]*$/,
-                'Only alphabetical characters are allowed, except / and \\'
-            ),
         fromWarehouseId: string().required('Please select warehouse'),
         toCompanyId: string().required('Please select company'),
         toWarehouseId: string().required('Please select warehouse'),
@@ -134,7 +125,6 @@ const AddWarehouseToComapnyTransferWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             AddWarehouseToComapnyApi({
-                wtcNumber: values.wtcNumber,
                 fromWarehouseId: values.fromWarehouseId,
                 toWarehouseId: values.toWarehouseId,
                 productSalesOrder: values.productSalesOrder,
@@ -150,7 +140,7 @@ const AddWarehouseToComapnyTransferWrapper = (props: Props) => {
                         showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                 }
                 setApiStatus(false)
             })

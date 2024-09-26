@@ -64,7 +64,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
     }
     return (
         <div className="py-9 px-7">
-            <div className="grid grid-cols-3 gap-4 gap-y-5">
+            <div className="grid grid-cols-4 gap-4 gap-y-5">
                 {/* Company Name */}
                 <ATMTextField
                     required
@@ -135,8 +135,7 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                     className="shadow bg-white rounded"
                     isSubmitting={isSubmitting}
                 />
-  </div>
-  <div className="grid grid-cols-3 gap-4 gap-y-5">
+
                 <div className='mt-2'>
                     <ATMTextArea
                         required
@@ -150,24 +149,47 @@ const StepEditCompanyDetails = ({ formikProps }: Props) => {
                         onChange={(newValue) => setFieldValue('address', newValue)}
                     />
                 </div>
+
                 <div className="w-ful mt-5 ">
                     <ATMFilePickerWrapper
                         name="companyLogo"
-                        label="logo"
-                        placeholder={'Select File'}
+                        label="Company logo"
+                        placeholder='Select logo image'
                         selectedFile={values.companyLogo}
                         onSelect={(newFile: any) => {
                             handleFileUpload(newFile, setFieldValue)
                         }}
-                        // isSubmitting={false}
+                    // isSubmitting={false}
                     />
+                    <span className="font-poppins text-[14px] text-start text-orange-400 text-wrap">
+                        Caution: Please ensure that the company logo is appropriate for invoices. The
+                        logo background should be white, and the image should be cropped neatly from
+                        the edges to maintain a clean appearance.
+                    </span>
                     {imageApiStatus ? (
                         <div className="mt-3">
                             <CircularProgress size={18} />
                         </div>
                     ) : null}
                 </div>
-                </div>
+
+            </div>
+            <div className="grid grid-cols-3 gap-4 gap-y-5">
+                {/* <div className='mt-2'>
+                    <ATMTextArea
+                        required
+                        name="address"
+                        value={values.address}
+                        label="Address"
+                        minRows={4}
+                        className='rounded mt-0'
+                        labelClass='text-slate-700 text-sm font-medium mb-1'
+                        placeholder="Address"
+                        onChange={(newValue) => setFieldValue('address', newValue)}
+                    />
+                </div> */}
+
+            </div>
         </div>
     )
 }

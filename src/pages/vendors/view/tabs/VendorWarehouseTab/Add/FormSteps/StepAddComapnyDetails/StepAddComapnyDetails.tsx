@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:StepAddCompanyDetails.tsx
-// Type: View-Tab Component
-// Last Updated: JULY 19, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React from 'react'
 

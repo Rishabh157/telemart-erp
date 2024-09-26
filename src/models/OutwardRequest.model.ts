@@ -27,6 +27,9 @@ export type OutwardRequestDealerListResponse = {
         dhApprovedActionBy: string
         dhApprovedAt: string
         accApprovedById: string
+        invoice: string
+        invoiceDate: string
+        invoiceNumber: string
         accApproved: boolean
         accApprovedActionBy: string
         accApprovedAt: string
