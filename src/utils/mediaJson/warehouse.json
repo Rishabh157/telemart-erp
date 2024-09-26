@@ -95,11 +95,6 @@
                     "fieldValue": "totalRtvCount"
                 },
                 {
-                    "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_MISSING_COUNT",
-                    "fieldName": "Missing Count",
-                    "fieldValue": "totalMissingCount"
-                },
-                {
                     "fieldId": "TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_LOST_COUNT",
                     "fieldName": "Lost Count",
                     "fieldValue": "lostQuantity"
