@@ -117,21 +117,7 @@ const EditRTVendor = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
-                            {/* SO Number */}
-                            <ATMTextField
-                                disabled={true}
-                                readOnly={true}
-                                name="rtvNo"
-                                value={values.rtvNo || ''}
-                                label="RTV No."
-                                placeholder="enter rtv number"
-                                onChange={(e) =>
-                                    handleSetFieldValue('rtvNo', e.target.value)
-                                }
-                            />
-
-                            {/* Dealer */}
+                        <div className="grid grid-cols-2 gap-4">
                             <ATMSelectSearchable
                                 name="vendorId"
                                 value={values?.vendorId || ''}
@@ -144,7 +130,6 @@ const EditRTVendor = ({
                                 selectLabel="Select Vendor"
                             />
 
-                            {/* Warehouse */}
                             <ATMSelectSearchable
                                 name="warehouseId"
                                 value={values.warehouseId}
@@ -155,6 +140,7 @@ const EditRTVendor = ({
                                 label="Warehouse"
                                 selectLabel="Select Warehouse"
                             />
+
                             <div className="-mt-1">
                                 <ATMTextArea
                                     label="Remark"
@@ -175,7 +161,7 @@ const EditRTVendor = ({
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Update ProductGroup to Return To Vendor
+                        Product details
                         </div>
 
                         <FieldArray name="productSalesOrder">

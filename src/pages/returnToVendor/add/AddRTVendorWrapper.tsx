@@ -25,7 +25,6 @@ import { useGetVendorsQuery } from 'src/services/VendorServices'
 type Props = {}
 
 export type FormInitialValues = {
-    rtvNo: string
     vendorId: string
     remark: string
     warehouseId: string
@@ -74,7 +73,6 @@ const AddRTVendorWrapper = (props: Props) => {
 
     // Form Initial Values
     const initialValues: FormInitialValues = {
-        rtvNo: '',
         vendorId: '',
         warehouseId: '',
         remark: '',
@@ -90,17 +88,9 @@ const AddRTVendorWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        // eslint-disable-next-line no-useless-escape
-        rtvNo: string()
-            .required('return to vendor number is required')
-            .matches(
-                // eslint-disable-next-line no-useless-escape
-                /^[a-zA-Z]+[^\/\\]*$/,
-                'Only alphabetical characters are allowed, except / and \\'
-            ),
-        remark: string(),
         vendorId: string().required('please select a vendor'),
         warehouseId: string().required('please select warehouse'),
+        remark: string(),
         productSalesOrder: array().of(
             object().shape({
                 productGroupId: string().required(
@@ -122,7 +112,6 @@ const AddRTVendorWrapper = (props: Props) => {
         dispatch(setFieldCustomized(false))
         setTimeout(() => {
             addReturnToVendor({
-                rtvNumber: values?.rtvNo,
                 remark: values?.remark,
                 vendorId: values?.vendorId,
                 warehouseId: values?.warehouseId,
@@ -140,7 +129,7 @@ const AddRTVendorWrapper = (props: Props) => {
                         showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                 }
                 setApiStatus(false)
             })

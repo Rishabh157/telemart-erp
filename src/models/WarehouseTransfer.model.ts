@@ -11,7 +11,6 @@ interface ProductSalesOrder {
     quantity: number
 }
 export type AddWarehouseTransfer = {
-    wtNumber: string
     fromWarehouseId: string
     toWarehouseId: string
     productSalesOrder: ProductSalesOrder[]

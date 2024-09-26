@@ -187,16 +187,9 @@ const EditRTVendorWrapper = (props: Props) => {
 
     // Form Validation Schema
     const validationSchema = object({
-        rtvNo: string()
-            .required('return to vendor number is required')
-            .matches(
-                // eslint-disable-next-line no-useless-escape
-                /^[a-zA-Z]+[^\/\\]*$/,
-                'Only alphabetical characters are allowed, except / and \\'
-            ),
-        remark: string(),
         vendorId: string().required('please select a vendor'),
         warehouseId: string().required('please select warehouse'),
+        remark: string(),
         productSalesOrder: array().of(
             object().shape({
                 productGroupId: string().required(
@@ -260,7 +253,7 @@ const EditRTVendorWrapper = (props: Props) => {
                         showToast('error', res?.data?.message)
                     }
                 } else {
-                    showToast('error', 'Something went wrong')
+                    showToast('error', res?.error?.data?.message)
                 }
                 setApiStatus(false)
             })

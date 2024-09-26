@@ -651,7 +651,7 @@ const SaleOrderListingWrapper = () => {
             name: UserModuleNameTypes.SALE_ORDER_LIST_STATUS,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> {row?.documents?.[0]?.status} </span>
+                return <span> {row?.documents?.[0]?.status?.replaceAll('_', ' ')}</span>
             },
         },
         {
@@ -670,7 +670,7 @@ const SaleOrderListingWrapper = () => {
                     >
                         PDF
                     </a>
-                ) : null
+                ) : <span title='Invoice is generated after the account approval' className="text-blue-500 cursor-default select-none opacity-50">PDF</span>
             },
         },
         {
@@ -728,17 +728,9 @@ const SaleOrderListingWrapper = () => {
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
-                    <>
-                        {
-                            <span
-                                className="underline text-primary-main"
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => { }}
-                            >
-                                PRINT EWB
-                            </span>
-                        }
-                    </>
+                    <span className="text-primary-main select-none opacity-50 cursor-default" style={{ cursor: 'pointer' }}>
+                        PRINT EWB
+                    </span>
                 )
             },
         },

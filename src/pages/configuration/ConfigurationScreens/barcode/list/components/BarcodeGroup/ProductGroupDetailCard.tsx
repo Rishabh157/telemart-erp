@@ -118,11 +118,14 @@ ${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}`}
                                 </div>
 
                                 <div className="flex justify-between">
-                                    <div className=" text-slate-500 mr-10 w-34">
+                                    <div className=" text-slate-500 w-1/2">
                                         Vendor Name :-
                                     </div>
-                                    <div className="text-primary-main font-medium grow flex items-end">
-                                        {barcode?.vendorLabel}{' '}
+                                    <div className="text-primary-main font-medium w-full truncate grow flex items-end">
+                                        <span className='w-full truncate'
+                                            title={barcode?.vendorLabel}>
+                                            {barcode?.vendorLabel}
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="flex justify-between">

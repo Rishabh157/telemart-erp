@@ -9,7 +9,6 @@ interface ProductSalesOrder {
 }
 
 export type AddWarehouseToSamplePayload = {
-    wtsNumber: string
     fromWarehouseId: string
     toName: string
     companyId: string

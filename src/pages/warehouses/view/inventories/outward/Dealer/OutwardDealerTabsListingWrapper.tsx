@@ -68,7 +68,6 @@ type FormInitialValues = {
     transportDocNo: string
     documnetDate: string
     roadPermitNumber: string
-    lrNo: string
     totalWeight: string
     totalPackages: string
     fileUrl: string
@@ -119,9 +118,9 @@ const OutwardDealerTabsListingWrapper = () => {
             },
             endTime: { fieldName: '', label: '', value: '' },
             orderStatus: {
-                fieldName: 'orderStatus',
-                label: 'Not Dispatched',
-                value: 'NOT_DISPATCHED',
+                fieldName: '',
+                label: '',
+                value: '',
             },
         })
 
@@ -188,7 +187,6 @@ const OutwardDealerTabsListingWrapper = () => {
         transportDocNo: '',
         documnetDate: '',
         roadPermitNumber: '',
-        lrNo: '',
         totalWeight: '',
         totalPackages: '',
         fileUrl: '',
@@ -199,7 +197,7 @@ const OutwardDealerTabsListingWrapper = () => {
         transportnameId: string().required('Please select a transportname'),
         // transporterGST: string().required('Please select a transporter GST'),
         mode: string().required('Please select a mode'),
-        distance: string().required('Please select a distance'),
+        distance: string(),
         vehicleNumber: string().required('Please select a vehicle no.'),
         vehicleType: string().required(
             'Please select a transport document no.'
@@ -209,7 +207,6 @@ const OutwardDealerTabsListingWrapper = () => {
         ),
         documnetDate: string().required('Please select a documnet date'),
         roadPermitNumber: string(),
-        lrNo: string(),
         totalWeight: string(),
         totalPackages: string(),
         fileUrl: string(),
@@ -227,7 +224,7 @@ const OutwardDealerTabsListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => {}}
+                        handleOnAction={() => { }}
                         isCustomBtn={true}
                         customBtnText="Dispatch"
                         handleCustomActionButton={() => {
@@ -303,6 +300,40 @@ const OutwardDealerTabsListingWrapper = () => {
             },
         },
         {
+            field: 'invoice',
+            headerName: 'PDF',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_PDF,
+            align: 'center',
+            renderCell: (row: OutwardRequestDealerListResponse) => {
+                return row?.documents?.[0]?.invoice ? (
+                    <a
+                        href={row.documents[0].invoice}
+                        download={`Invoice_${row._id}.pdf`}
+                        className="text-blue-500 hover:underline"
+                    >
+                        PDF
+                    </a>
+                ) : <span title='Invoice is generated after the account approval' className="text-blue-500 cursor-default select-none opacity-50">PDF</span>
+            },
+        },
+        {
+            field: 'printWeb',
+            headerName: 'PRINT EWB',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_EWB_BILL,
+            align: 'center',
+            renderCell: (row: OutwardRequestDealerListResponse) => {
+                return (
+                    <span className="text-primary-main select-none opacity-50 cursor-default">
+                        PRINT EWB
+                    </span>
+                )
+            },
+        },
+        {
             field: 'createdAt',
             headerName: 'Inserted Date',
             flex: 'flex-[1_1_0%]',
@@ -329,7 +360,7 @@ const OutwardDealerTabsListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_STATUS,
             align: 'center',
             renderCell: (row: OutwardRequestDealerListResponse) => (
-                <span>{row?.documents[0]?.status}</span>
+                <span>{row?.documents[0]?.status?.replaceAll('_', ' ')}</span>
             ),
         },
     ]
@@ -409,7 +440,7 @@ const OutwardDealerTabsListingWrapper = () => {
                     }
 
                     // Freezed Api
-                   
+
                 }
 
                 // error messages
@@ -423,6 +454,7 @@ const OutwardDealerTabsListingWrapper = () => {
             })
             .catch((err) => console.error(err))
     }
+
     React.useEffect(() => {
         return () => {
             if (barcodeList?.length) {
@@ -437,6 +469,7 @@ const OutwardDealerTabsListingWrapper = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [barcodeList])
+
     const onSubmitHandler = (values: FormInitialValues) => {
         const filterValue = barcodeList
             ?.flat(1)
@@ -684,7 +717,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                                ''
+                                                            ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(
@@ -764,7 +797,6 @@ const OutwardDealerTabsListingWrapper = () => {
                                                 />
 
                                                 <ATMTextField
-                                                    required
                                                     name="distance"
                                                     value={values.distance}
                                                     label="Distance in (km.)"
@@ -883,21 +915,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                         )
                                                     }}
                                                 />
-
-                                                <ATMTextField
-                                                    name=""
-                                                    value={values.lrNo}
-                                                    label="LR No."
-                                                    placeholder="Lr no."
-                                                    className="mt-0 rounded"
-                                                    onChange={(e) => {
-                                                        setFieldValue(
-                                                            'lrNo',
-                                                            e?.target?.value
-                                                        )
-                                                    }}
-                                                />
-
+ 
                                                 <ATMTextField
                                                     name=""
                                                     value={values.totalPackages}
@@ -930,7 +948,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                                 setFieldValue
                                                             )
                                                         }}
-                                                        // isSubmitting={false}
+                                                    // isSubmitting={false}
                                                     />
                                                     {imageApiStatus ? (
                                                         <div className="mt-3">

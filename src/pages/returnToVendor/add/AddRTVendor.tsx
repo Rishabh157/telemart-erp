@@ -93,9 +93,8 @@ const AddRTVendor = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounzded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounzded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -104,19 +103,7 @@ const AddRTVendor = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
-                            {/* SO Number */}
-                            <ATMTextField
-                                name="rtvNo"
-                                value={values.rtvNo}
-                                label="RTV No."
-                                placeholder="enter rtv number"
-                                className="rounded"
-                                extraClassField="mt-3"
-                                onChange={(e) =>
-                                    handleSetFieldValue('rtvNo', e.target.value)
-                                }
-                            />
+                        <div className="grid grid-cols-2 gap-4">
 
                             {/* Dealer */}
                             <div className="-mt-2">
@@ -162,7 +149,7 @@ const AddRTVendor = ({
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Add ProductGroup to sale order
+                            Product details
                         </div>
 
                         <FieldArray name="productSalesOrder">
@@ -241,7 +228,7 @@ const AddRTVendor = ({
                                                                     placeholder="Rate"
                                                                     onChange={(
                                                                         e
-                                                                    ) => {}}
+                                                                    ) => { }}
                                                                     className="mt-0 rounded"
                                                                 />
                                                             </div>
@@ -254,7 +241,7 @@ const AddRTVendor = ({
                                                                     name={`productSalesOrder[${index}].quantity`}
                                                                     value={
                                                                         quantity ===
-                                                                        0
+                                                                            0
                                                                             ? ''
                                                                             : quantity?.toString()
                                                                     }
@@ -279,20 +266,20 @@ const AddRTVendor = ({
                                                                 .productSalesOrder
                                                                 ?.length >
                                                                 1 && (
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                index
-                                                                            )
-                                                                        }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    index
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                         </div>
                                                     )
                                                 }

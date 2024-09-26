@@ -55,7 +55,7 @@ const WarehouseToComapnyListing = ({
         >
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Warehouse Transfer </ATMPageHeading>
+                <ATMPageHeading> Warehouse To Company Transfer </ATMPageHeading>
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_ADD
                 ) && (

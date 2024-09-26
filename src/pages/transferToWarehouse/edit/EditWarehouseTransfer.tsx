@@ -93,16 +93,20 @@ const EditWarehouseTransfer = ({
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
-                        <div className="text-xl font-medium"> SO Details </div>
-                        {/* BUTTON - Add SO */}
+                        <div className="text-xl font-medium">Warwhouse Transfer Details</div>
                         <div>
                             <button
                                 type="button"
                                 disabled={apiStatus}
-                                onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                onClick={() => {
+                                    if (values?.fromWarehouseId !== values?.toWarehouseId) {
+                                        formikProps.handleSubmit()
+                                    } else {
+                                        showToast('error', 'Same Warehouse')
+                                        return
+                                    }
+                                }}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''}`}
                             >
                                 Update
                             </button>
@@ -111,35 +115,19 @@ const EditWarehouseTransfer = ({
 
                     {/* Form */}
                     <div className="grow py-9 px-3 ">
-                        <div className="grid grid-cols-3 gap-4">
-                            {/* SO Number */}
-                            <ATMTextField
-                                readOnly={true}
-                                disabled={true}
-                                name="wtNumber"
-                                value={values.wtNumber}
-                                label="Warehouse Transfer Number"
-                                placeholder="WT Number"
-                                onChange={(e) =>
-                                    handleSetFieldValue(
-                                        'wtNumber',
-                                        e.target.value
-                                    )
-                                }
-                            />
-
+                        <div className="grid grid-cols-2 gap-4">
                             {/* from Warehouse */}
                             <ATMSelectSearchable
                                 name="fromWarehouseId"
                                 value={values.fromWarehouseId}
                                 onChange={(e) => {
-                                    if (values.toWarehouseId.match(e)) {
-                                        showToast(
-                                            'error',
-                                            'warehouse same as to warehouse'
-                                        )
-                                        return
-                                    }
+                                    // if (values.toWarehouseId.match(e)) {
+                                    //     showToast(
+                                    //         'error',
+                                    //         'warehouse same as to warehouse'
+                                    //     )
+                                    //     return
+                                    // }
                                     handleSetFieldValue('fromWarehouseId', e)
                                 }}
                                 options={dropdownOptions.warehouseOptions}
@@ -151,17 +139,17 @@ const EditWarehouseTransfer = ({
                                 name="toWarehouseId"
                                 value={values?.toWarehouseId}
                                 onChange={(e) => {
-                                    if (values.fromWarehouseId.match(e)) {
-                                        showToast(
-                                            'error',
-                                            'warehouse same as from warehouse'
-                                        )
-                                        return
-                                    }
+                                    // if (values.fromWarehouseId.match(e)) {
+                                    //     showToast(
+                                    //         'error',
+                                    //         'warehouse same as from warehouse'
+                                    //     )
+                                    //     return
+                                    // }
                                     handleSetFieldValue('toWarehouseId', e)
                                 }}
                                 options={dropdownOptions.warehouseOptions}
-                                label="To Warehouse"
+                                label="To Warehouse (company)"
                                 selectLabel="Select Warehouse"
                             />
                             <div className="-mt-[0.3rem]">
@@ -262,7 +250,7 @@ const EditWarehouseTransfer = ({
                                                                     placeholder="Rate"
                                                                     onChange={(
                                                                         e
-                                                                    ) => {}}
+                                                                    ) => { }}
                                                                     className="mt-0 rounded"
                                                                 />
                                                             </div>
@@ -275,7 +263,7 @@ const EditWarehouseTransfer = ({
                                                                     name={`productSalesOrder[${index}].quantity`}
                                                                     value={
                                                                         quantity ===
-                                                                        0
+                                                                            0
                                                                             ? ''
                                                                             : quantity?.toString()
                                                                     }
@@ -300,20 +288,20 @@ const EditWarehouseTransfer = ({
                                                                 .productSalesOrder
                                                                 ?.length >
                                                                 1 && (
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            remove(
-                                                                                index
-                                                                            )
-                                                                        }}
-                                                                        className="p-2 bg-red-500 text-white rounded"
-                                                                    >
-                                                                        <MdDeleteOutline className="text-2xl" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
+                                                                    <div>
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={() => {
+                                                                                remove(
+                                                                                    index
+                                                                                )
+                                                                            }}
+                                                                            className="p-2 bg-red-500 text-white rounded"
+                                                                        >
+                                                                            <MdDeleteOutline className="text-2xl" />
+                                                                        </button>
+                                                                    </div>
+                                                                )}
                                                         </div>
                                                     )
                                                 }
