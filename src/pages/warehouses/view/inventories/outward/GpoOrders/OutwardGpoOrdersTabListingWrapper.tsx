@@ -118,7 +118,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
-                    customBtnText="Mark As Devivered"
+                    customBtnText="Mark As Delivered"
                     isCustomBtn={
                         isAuthorized(
                             UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_GPO_MARK_AS_DELIVERED

@@ -324,6 +324,15 @@ export const OrderApi = apiSlice.injectEndpoints({
                 method: 'PUT',
             }),
         }),
+
+
+        orderStatusFreezed: builder.mutation({
+            invalidatesTags: ['order'],
+            query: ({ orderId }: { orderId: string }) => ({
+                url: `order-inquiry/unfreeze-order/${orderId}`,
+                method: 'PUT',
+            }),
+        }),
     }),
 })
 
@@ -361,4 +370,5 @@ export const {
     useGetGpoOrderStatusQuery,
     useGetShipayaariOrderStatusQuery,
     useGetStatusMarkAsDeleiverdMutation,
+    useOrderStatusFreezedMutation
 } = OrderApi

@@ -1407,7 +1407,7 @@ export const getCourierRtoRequestStatusOptions = () => {
             value: CourierRtoTypeRequestStatus.fake,
         },
         {
-            label: 'Lost',
+            label: 'Lost / Missing',
             value: CourierRtoTypeRequestStatus.lost,
         },
     ]

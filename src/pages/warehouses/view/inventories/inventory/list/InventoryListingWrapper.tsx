@@ -48,17 +48,8 @@ const columns: columnTypes[] = [
         ),
     },
     {
-        field: 'missingQuantity',
-        headerName: 'Missing Count',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_MISSING_COUNT,
-        renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
-            <span className="p-1">{row.missingQuantity}</span>
-        ),
-    },
-    {
         field: 'lostQuantity',
-        headerName: 'Lost Count',
+        headerName: 'Lost / Missing Count',
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_LOST_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
@@ -98,9 +89,7 @@ const columns: columnTypes[] = [
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_EXPIRED_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
-            <span className="p-1">
-                {row?.expiredQuantity} 
-            </span>
+            <span className="p-1">{row?.expiredQuantity}</span>
         ),
     },
     {
@@ -109,9 +98,7 @@ const columns: columnTypes[] = [
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_CLOSED_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
-            <span className="p-1">
-                {row?.closedQuantity} 
-            </span>
+            <span className="p-1">{row?.closedQuantity}</span>
         ),
     },
     {

@@ -50,6 +50,7 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
             warehouseId: (warehouseId as string) || '',
             barcode: barcodeNumber,
             status: courierType,
+            getOrder: orderNumber ? false : true,
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -136,8 +137,8 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                 // set the barcode if barcode is founded , isAlredayExist is false and length is equal to schemeQuantity
                 barcode:
                     barcodeObj &&
-                        isAlredyExist === false &&
-                        totalQuantityOfBarocde !== ele?.barcode?.length
+                    isAlredyExist === false &&
+                    totalQuantityOfBarocde !== ele?.barcode?.length
                         ? [...ele?.barcode, barcodeObj]
                         : [...ele?.barcode],
             }
@@ -183,9 +184,8 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
             ],
         })
             .then((res: any) => {
-
                 if ('error' in res) {
-                    showToast("error", res?.error?.data?.message)
+                    showToast('error', res?.error?.data?.message)
                     return
                 }
 
@@ -200,7 +200,8 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                 } else {
                     showToast('error', res?.data?.message)
                 }
-            }).catch((err: any) => {
+            })
+            .catch((err: any) => {
                 console.error(err)
             })
     }
@@ -363,7 +364,7 @@ const DispatchingBarcodes = ({ courierType }: Props) => {
                                                 }
                                                 productGroupLabel={capitalizeFirstLetter(
                                                     barcode?.productGroupLabel ||
-                                                    ''
+                                                        ''
                                                 )}
                                                 handleRemoveBarcode={() => {
                                                     handleRemoveBarcode(
