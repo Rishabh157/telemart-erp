@@ -1,4 +1,5 @@
 import { SelectOption } from 'src/models/FormField/FormField.model'
+import { orderStatusEnum } from 'src/utils/constants/enums'
 
 // Static Option For Gander Radio Box , Payment Mode Option & Medical issue
 export const genderOption: SelectOption[] = [
@@ -122,9 +123,9 @@ export const relationOptionns: SelectOption[] = [
 export const AlertText =
     'Your changes have not been saved. To stay on the page so that you can save your changes, click Cancel.'
 
+export const getGstCalculation = () => {}
 
-
-
-export const getGstCalculation=()=>{
-
-}
+export const getWarehouseStatus = () => [
+    { label: orderStatusEnum.rto, value: orderStatusEnum.rto },
+    { label: orderStatusEnum.delivered, value: orderStatusEnum.delivered },
+]
