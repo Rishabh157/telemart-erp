@@ -22,7 +22,7 @@ const Dashboard = () => {
 
             {/* Admin Dashboard */}
             {userData?.userRole === "ADMIN" ? (
-                <div className='grid grid-cols-2 gap-6'>
+                <div className='grid gap-6 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 ms:grid-cols-1'>
                     <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
                         <PieChart />
                     </div>
