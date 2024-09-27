@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { Chip, Stack } from '@mui/material'
+import { Chip } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -203,10 +203,10 @@ const RTVListingWrapper = () => {
                         )}
                         isDelete={
                             row.firstApproved === null &&
-                            row.secondApproved === null
+                                row.secondApproved === null
                                 ? isAuthorized(
-                                      UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
-                                  )
+                                    UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_DELETE
+                                )
                                 : false
                         }
                         handleEditActionButton={() => {
@@ -241,6 +241,167 @@ const RTVListingWrapper = () => {
                 <span> {row?._id} </span>
             ),
         },
+        // First Approval
+        {
+            field: 'firstApproved',
+            headerName: 'First Approval',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVAL,
+            align: 'center',
+            renderCell: (row: ReturnToVendorListResponse) => {
+                return (
+                    <div className="z-0">
+                        {row?.firstApproved === null ? (
+                            <Chip onClick={() => {
+                                // here only admin and user who has rights can approve the request
+                                if (isAuthorized(UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_LIST_FIRST_APPROVAL)) {
+                                    showConfirmationDialog({
+                                        title: 'First Approve',
+                                        text: 'Do you want to Approve First Level ?',
+                                        showCancelButton: true,
+                                        showDenyButton: true,
+                                        denyButtonText: 'Reject',
+                                        next: (res) => {
+                                            if (res.isConfirmed) {
+                                                return handleFirstLevelomplete(
+                                                    row?._id,
+                                                    res?.isConfirmed,
+                                                    'Approval'
+                                                )
+                                            }
+                                            if (res.isDenied) {
+                                                return handleFirstLevelomplete(
+                                                    row?._id,
+                                                    !res.isDenied,
+                                                    'Rejected'
+                                                )
+                                            }
+                                        },
+                                    })
+                                } else {
+                                    showToast('error', "You don't have permission to approve the request")
+                                }
+                            }}
+                                label="First Pending"
+                                color="warning"
+                                variant="outlined"
+                                size="small"
+                                clickable={true}
+                            />
+                        ) : (
+                            <Chip
+                                label={row?.firstApproved === true ? "First Approved" : "First Rejected"}
+                                color={row?.firstApproved === true ? "success" : "error"}
+                                variant="outlined"
+                                size="small"
+                                clickable={false}
+                            />
+                        )}
+                    </div>
+                )
+            },
+        },
+        {
+            field: 'firstApprovedActionBy',
+            headerName: 'First Approved By',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED_BY,
+            align: 'center',
+            renderCell: (row: ReturnToVendorListResponse) => {
+                return <div>
+                    <div className="font-medium">
+                        {row?.firstApprovedActionBy}
+                    </div>
+                    <div className="text-[12px] text-slate-500 font-medium">
+                        {row?.firstApprovedAt}
+                    </div>
+                </div>
+            },
+        },
+        // Second Approval
+        {
+            field: 'secondApproved',
+            headerName: 'Second Approval',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_APPROVAL,
+            align: 'center',
+            renderCell: (row: ReturnToVendorListResponse) => {
+                return (
+                    <div className="z-0">
+                        {row?.secondApproved === null ? (
+                            <Chip onClick={() => {
+                                if (isAuthorized(UserModuleNameTypes.ACTION_RETURN_TO_VENDOR_LIST_SECOND_APPROVAL)) {
+                                    if (row?.firstApproved) {
+                                        showConfirmationDialog({
+                                            title: 'Second Approval',
+                                            text: 'Do you want to Approve Second Level ?',
+                                            showCancelButton: true,
+                                            showDenyButton: true,
+                                            denyButtonText: 'Reject',
+                                            next: (res) => {
+                                                if (res.isConfirmed) {
+                                                    return handleSecondLevelComplete(
+                                                        row?._id,
+                                                        res?.isConfirmed,
+                                                        'Approval'
+                                                    )
+                                                }
+                                                if (res.isDenied) {
+                                                    return handleSecondLevelComplete(
+                                                        row?._id,
+                                                        !res.isDenied,
+                                                        'Rejected'
+                                                    )
+                                                }
+                                            },
+                                        })
+                                    } else {
+                                        showToast('error', `First approval is still ${row?.firstApproved === null ? 'pending' : 'rejected'}`)
+                                    }
+                                } else {
+                                    showToast('error', "You don't have permission to approve the request")
+                                }
+                            }}
+                                label="Second Pending"
+                                color="warning"
+                                variant="outlined"
+                                size="small"
+                                clickable={true}
+                            />
+                        ) : (
+                            <Chip
+                                label={row?.secondApproved === true ? "Second Approved" : "Second Rejected"}
+                                color={row?.secondApproved === true ? "success" : "error"}
+                                variant="outlined"
+                                size="small"
+                                clickable={false}
+                            />
+                        )}
+                    </div>
+                )
+            },
+        },
+        {
+            field: 'secondApprovedActionBy',
+            headerName: 'Second Approved By',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_APPROVED_BY,
+            align: 'center',
+            renderCell: (row: ReturnToVendorListResponse) => {
+                return <div>
+                    <div className="font-medium">
+                        {row?.secondApprovedActionBy}
+                    </div>
+                    <div className="text-[12px] text-slate-500 font-medium">
+                        {row?.secondApprovedAt}
+                    </div>
+                </div>
+            },
+        },
         {
             field: 'items',
             headerName: 'Items / Quantity',
@@ -271,87 +432,20 @@ const RTVListingWrapper = () => {
             },
         },
         {
-            field: 'firstApproved',
-            headerName: 'First level Status',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED,
-            align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
-                return (
-                    <span>
-                        {row?.firstApproved
-                            ? 'Done'
-                            : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}{' '}
-                    </span>
-                )
-            },
-        },
-        {
-            field: 'firstApprovedActionBy',
-            headerName: 'First Approved By',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED_ACTION_BY,
-            align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
-                return <span> {row?.firstApprovedActionBy} </span>
-            },
-        },
-        {
-            field: 'firstApprovedAt',
-            headerName: 'First Approved Date',
+            field: 'vendorLabel',
+            headerName: 'Vendor',
             extraClasses: 'min-w-[160px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_FIRST_APPROVED_DATE,
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_VENDOR,
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
-                return <span> {row?.firstApprovedAt} </span>
-            },
         },
         {
-            field: 'secondApproved',
-            headerName: 'Second Level Status',
+            field: 'warehouseLabel',
+            headerName: 'Warehouse',
             extraClasses: 'min-w-[160px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_LEVEL_STATUS,
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_WAREHOUSE,
             align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
-                return (
-                    <span>
-                        {' '}
-                        {row?.secondApproved
-                            ? 'Done'
-                            : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
-                    </span>
-                )
-            },
-        },
-        {
-            field: 'secondApprovedActionBy',
-            headerName: 'Second Approved By',
-            extraClasses: 'min-w-[170px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_APPROVED_ACTION_BY,
-            align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
-                return <span> {row?.secondApprovedActionBy} </span>
-            },
-        },
-        {
-            field: 'secondApprovedAt',
-            headerName: 'Second Approved Date',
-            extraClasses: 'min-w-[180px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_SECOND_APPROVED_DATE,
-            align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
-                return <span> {row?.secondApprovedAt} </span>
-            },
         },
         {
             field: 'createdAt',
@@ -375,159 +469,16 @@ const RTVListingWrapper = () => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
-        {
-            field: 'Approved',
-            headerName: 'Approval Level',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[1.0_1.0_0%]',
-            name: UserModuleNameTypes.RETURN_TO_VENDOR_LIST_APPROVAL_LEVEL,
-            align: 'center',
-            renderCell: (row: ReturnToVendorListResponse) => {
-                return (
-                    <div >
-                        {!row?.firstApproved ? (
-                            <Stack direction="row" spacing={1}>
-                                {row?.firstApproved === null ? (
-                                    <button
-                                        id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
-                                        onClick={() => {
-                                            showConfirmationDialog({
-                                                title: 'First Approve',
-                                                text: 'Do you want to Approve First Level ?',
-                                                showCancelButton: true,
-                                                showDenyButton: true,
-                                                denyButtonText: 'Reject',
-                                                next: (res) => {
-                                                    if (res.isConfirmed) {
-                                                        return handleFirstLevelomplete(
-                                                            row?._id,
-                                                            res?.isConfirmed,
-                                                            'Approval'
-                                                        )
-                                                    }
-                                                    if (res.isDenied) {
-                                                        return handleFirstLevelomplete(
-                                                            row?._id,
-                                                            !res.isDenied,
-                                                            'Rejected'
-                                                        )
-                                                    }
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <Chip
-                                            label="First Pending"
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="First Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                )}
-                            </Stack>
-                        ) : (
-                            <Stack direction="row" spacing={1}>
-                                {row?.secondApproved === null ? (
-                                    <button
-                                        id="btn"
-                                        className="overflow-hidden cursor-pointer z-0"
-                                        onClick={() => {
-                                            showConfirmationDialog({
-                                                title: 'Second Approval',
-                                                text: 'Do you want to Approve Second Level ?',
-                                                showCancelButton: true,
-                                                showDenyButton: true,
-                                                denyButtonText: 'Reject',
-                                                next: (res) => {
-                                                    if (res.isConfirmed) {
-                                                        return handleSecondLevelComplete(
-                                                            row?._id,
-                                                            res?.isConfirmed,
-                                                            'Approval'
-                                                        )
-                                                    }
-                                                    if (res.isDenied) {
-                                                        return handleSecondLevelComplete(
-                                                            row?._id,
-                                                            !res.isDenied,
-                                                            'Rejected'
-                                                        )
-                                                    }
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <Chip
-                                            label="Second Pending "
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : row?.secondApproved ? (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="Second Approved"
-                                            color="success"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="Second Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                )}
-                            </Stack>
-                        )}
-                    </div>
-                )
-            },
-        },
     ]
 
     return (
-        <>
-            <SideNavLayout>
-                <RTVendor
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <RTVendor
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </SideNavLayout>
     )
 }
 

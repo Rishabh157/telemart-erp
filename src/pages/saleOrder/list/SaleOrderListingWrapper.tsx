@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react'
 
 // |-- External Dependencies --|
-import { Chip, CircularProgress, Stack } from '@mui/material'
+import { Chip, CircularProgress } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -316,6 +316,168 @@ const SaleOrderListingWrapper = () => {
                 <span> {row?._id} </span>
             ),
         },
+        // Dh
+        {
+            field: 'dhApproved',
+            headerName: 'DH First Approval',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVAL,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return (
+                    <div className="z-0">
+                        {row?.dhApproved === null ? (
+                            <Chip onClick={() => {
+                                // here only admin and user who has rights can approve the request
+                                if (isAuthorized(UserModuleNameTypes.ACTION_SALE_ORDER_LIST_FIRST_APPROVAL)) {
+                                    showConfirmationDialog({
+                                        title: 'DH Approve',
+                                        text: 'Do you want to Approve ?',
+                                        showCancelButton: true,
+                                        showDenyButton: true,
+                                        denyButtonText: 'Reject',
+                                        next: (res) => {
+                                            if (res.isConfirmed) {
+                                                return handleDHComplete(
+                                                    row?._id,
+                                                    res?.isConfirmed,
+                                                    'Approval'
+                                                )
+                                            }
+                                            if (res.isDenied) {
+                                                return handleDHComplete(
+                                                    row?._id,
+                                                    !res.isDenied,
+                                                    'Rejected'
+                                                )
+                                            }
+                                        },
+                                    })
+                                } else {
+                                    showToast('error', "You don't have permission to approve the request")
+                                }
+                            }}
+                                label="DH Pending"
+                                color="warning"
+                                variant="outlined"
+                                size="small"
+                                clickable={true}
+                            />
+                        ) : (
+                            <Chip
+                                label={row?.dhApproved === true ? "DH Approved" : "DH Rejected"}
+                                color={row?.dhApproved === true ? "success" : "error"}
+                                variant="outlined"
+                                size="small"
+                                clickable={false}
+                            />
+                        )}
+                    </div>
+                )
+            },
+        },
+        {
+            field: 'dhApprovedActionBy',
+            headerName: 'DH Approved By',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return <div>
+                    <div className="font-medium">
+                        {row?.dhApprovedActionBy}
+                    </div>
+                    <div className="text-[12px] text-slate-500 font-medium">
+                        {row?.dhApprovedAt}
+                    </div>
+                </div>
+            },
+        },
+        // Acc Approval
+        {
+            field: 'accApproved',
+            headerName: 'Acc Second Approval',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_ACC_APPROVAL,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return (
+                    <div className="z-0">
+                        {row?.accApproved === null ? (
+                            <Chip onClick={() => {
+                                if (isAuthorized(UserModuleNameTypes.ACTION_SALE_ORDER_LIST_SECOND_APPROVAL)) {
+                                    if (row?.dhApproved) {
+                                        setInvoiceSoNumber(row?._id) // for genrating pdf
+                                        showConfirmationDialog({
+                                            title: 'Account Approval',
+                                            text: 'Do you want to Approve ?',
+                                            showCancelButton: true,
+                                            showDenyButton: true,
+                                            denyButtonText: 'Reject',
+                                            next: (res) => {
+                                                if (res.isConfirmed) {
+                                                    return handleClick(
+                                                        row?._id,
+                                                        res?.isConfirmed,
+                                                        'Approval'
+                                                    )
+                                                }
+                                                if (res.isDenied) {
+                                                    return handleClick(
+                                                        row?._id,
+                                                        !res.isDenied,
+                                                        'Rejected'
+                                                    )
+                                                }
+                                            },
+                                        })
+                                    } else {
+                                        showToast('error', `First approval is still ${row?.dhApproved === null ? 'pending' : 'rejected'}`)
+                                    }
+                                } else {
+                                    showToast('error', "You don't have permission to approve the request")
+                                }
+                            }}
+                                label="Acc Pending"
+                                color="warning"
+                                variant="outlined"
+                                size="small"
+                                clickable={true}
+                            />
+                        ) : (
+                            <Chip
+                                label={row?.accApproved === true ? "Acc Approved" : "Acc Rejected"}
+                                color={row?.accApproved === true ? "success" : "error"}
+                                variant="outlined"
+                                size="small"
+                                clickable={false}
+                            />
+                        )}
+                    </div>
+                )
+            },
+        },
+        {
+            field: 'accApprovedActionBy',
+            headerName: 'Acc Approved By',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_ACC_APPROVED_BY,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                return <div>
+                    <div className="font-medium">
+                        {row?.accApprovedActionBy}
+                    </div>
+                    <div className="text-[12px] text-slate-500 font-medium">
+                        {row?.accApprovedAt}
+                    </div>
+                </div>
+            },
+        },
         {
             field: 'invoiceNumber',
             headerName: 'Invoice No',
@@ -419,231 +581,6 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
-            field: 'dhApprovedActionStatus',
-            headerName: 'DH Status',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_STATUS,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return (
-                    <span>
-                        {row?.dhApproved
-                            ? 'Done'
-                            : row?.dhApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}{' '}
-                    </span>
-                )
-            },
-        },
-        {
-            field: 'dhApprovedActionBy',
-            headerName: 'DH Approved By',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> {row?.dhApprovedActionBy} </span>
-            },
-        },
-        {
-            field: 'dhApprovedAt',
-            headerName: 'DH Approved Date',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_DATE,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> {row?.dhApprovedAt} </span>
-            },
-        },
-        {
-            field: 'accApprovedActionByStatus',
-            headerName: 'Account Status',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return (
-                    <span>
-                        {' '}
-                        {row?.accApproved
-                            ? 'Done'
-                            : row?.accApproved === null
-                                ? 'Pending'
-                                : 'Rejected'}
-                    </span>
-                )
-            },
-        },
-        {
-            field: 'accApprovedActionBy',
-            headerName: 'Account Approved By',
-            extraClasses: 'min-w-[180px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_ACCOUNT_APPROVED_BY,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> {row?.accApprovedActionBy} </span>
-            },
-        },
-        {
-            field: 'Approved',
-            headerName: 'Approval',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[1.0_1.0_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_APPROVAL,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return (
-                    <div className="z-0">
-                        {!row?.dhApproved ? (
-                            <Stack direction="row" spacing={1}>
-                                {row?.dhApproved === null ? (
-                                    <button
-                                        id="btn"
-                                        className="z-0 overflow-hidden cursor-pointer "
-                                        onClick={() => {
-                                            showConfirmationDialog({
-                                                title: 'DH Approve',
-                                                text: 'Do you want to Approve ?',
-                                                showCancelButton: true,
-                                                showDenyButton: true,
-                                                denyButtonText: 'Reject',
-                                                next: (res) => {
-                                                    if (res.isConfirmed) {
-                                                        return handleDHComplete(
-                                                            row?._id,
-                                                            res?.isConfirmed,
-                                                            'Approval'
-                                                        )
-                                                    }
-                                                    if (res.isDenied) {
-                                                        return handleDHComplete(
-                                                            row?._id,
-                                                            !res.isDenied,
-                                                            'Rejected'
-                                                        )
-                                                    }
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <Chip
-                                            label="DH Pending"
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="DH Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                )}
-                            </Stack>
-                        ) : (
-                            <Stack direction="row" spacing={1}>
-                                {row?.accApproved === null ? (
-                                    <button
-                                        id="btn"
-                                        className="z-0 overflow-hidden cursor-pointer "
-                                        onClick={() => {
-                                            setInvoiceSoNumber(row?._id) // for genrating pdf
-                                            showConfirmationDialog({
-                                                title: 'Account Approval',
-                                                text: 'Do you want to Approve ?',
-                                                showCancelButton: true,
-                                                showDenyButton: true,
-                                                denyButtonText: 'Reject',
-                                                next: (res) => {
-                                                    if (res.isConfirmed) {
-                                                        return handleClick(
-                                                            row?._id,
-                                                            res?.isConfirmed,
-                                                            'Approval'
-                                                        )
-                                                        // return handleAccComplete(
-                                                        //     row?._id,
-                                                        //     res?.isConfirmed,
-                                                        //     'Approval'
-                                                        // )
-                                                    }
-                                                    if (res.isDenied) {
-                                                        return handleClick(
-                                                            row?._id,
-                                                            !res.isDenied,
-                                                            'Rejected'
-                                                        )
-                                                        // return handleAccComplete(
-                                                        //     row?._id,
-                                                        //     !res.isDenied,
-                                                        //     'Rejected'
-                                                        // )
-                                                    }
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <Chip
-                                            className="z-0"
-                                            label="ACC Pending "
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : row?.accApproved ? (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="Acc  Approved"
-                                            color="success"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label=" Acc Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                )}
-                            </Stack>
-                        )}
-                    </div>
-                )
-            },
-        },
-        {
             field: 'status',
             headerName: 'STATUS',
             extraClasses: 'min-w-[150px]',
@@ -736,7 +673,6 @@ const SaleOrderListingWrapper = () => {
         },
     ]
 
-
     return (
         <SideNavLayout>
             <div className="relative z-50">
@@ -759,7 +695,6 @@ const SaleOrderListingWrapper = () => {
                     items={invoiceData || null}
                 />
             </div>
-
 
             {/* Do Not Delete This */}
             {/* {pdfFile && (

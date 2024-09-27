@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     useAddUserAccessMutation,
     useGetUserAccessQuery,
-    // useIsUserExistsQuery,
 } from 'src/services/useraccess/UserAccessServices'
 import { RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
@@ -42,7 +41,7 @@ const UserAccessWrapper = () => {
     const { userAccessItems } = useSelector(
         (state: RootState) => state.userAccess
     )
-        
+
     const handleUserAccessSubmit = () => {
         setApiStatus(true)
         setTimeout(() => {

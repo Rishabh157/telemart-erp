@@ -30,34 +30,24 @@
                     "fieldValue": "items"
                 },
                 {
-                    "fieldId": "WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_STATUS",
-                    "fieldName": "First level Status",
+                    "fieldId": "WAREHOUSE_TRANSFER_LIST_FIRST_APPROVAL",
+                    "fieldName": "First Approval",
                     "fieldValue": "firstApproved"
                 },
                 {
-                    "fieldId": "WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_APPROVED_BY",
-                    "fieldName": "Level first Approved By",
-                    "fieldValue": "firstApprovedActionBy"
+                    "fieldId": "WAREHOUSE_TRANSFER_LIST_FIRST_APPROVED_BY",
+                    "fieldName": "First Approved By",
+                    "fieldValue": "firstApprovedBy"
                 },
                 {
-                    "fieldId": "WAREHOUSE_TRANSFER_LIST_FIRST_LEVEL_APPROVED_DATE",
-                    "fieldName": "First Approved Date",
-                    "fieldValue": "firstApprovedAt"
-                },
-                {
-                    "fieldId": "WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_STATUS",
-                    "fieldName": "Second Level Status",
+                    "fieldId": "WAREHOUSE_TRANSFER_LIST_SECOND_APPROVAL",
+                    "fieldName": "Second Approval",
                     "fieldValue": "secondApproved"
                 },
                 {
-                    "fieldId": "WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_APPROVED_BY",
-                    "fieldName": "Level Second Approved By",
-                    "fieldValue": "secondApprovedActionBy"
-                },
-                {
-                    "fieldId": "WAREHOUSE_TRANSFER_LIST_SECOND_LEVEL_APPROVED_DATE",
-                    "fieldName": "Second Approved Date",
-                    "fieldValue": "secondApprovedAt"
+                    "fieldId": "WAREHOUSE_TRANSFER_LIST_SECOND_APPROVED_BY",
+                    "fieldName": "Second Approved By",
+                    "fieldValue": "secondApproved"
                 },
                 {
                     "fieldId": "WAREHOUSE_TRANSFER_LIST_INSERTED_DATE",
@@ -68,13 +58,24 @@
                     "fieldId": "WAREHOUSE_TRANSFER_LIST_UPDATED_DATE",
                     "fieldName": "Updated Date",
                     "fieldValue": "updatedAt"
-                },
-                {
-                    "fieldId": "WAREHOUSE_TRANSFER_LIST_APPROVEL_LEVEL",
-                    "fieldName": "Approval Level",
-                    "fieldValue": "Approved"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_TRANSFER_LIST_FIRST_APPROVAL",
+            "actionUrl": "",
+            "actionName": "WAREHOUSE_TRANSFER_FIRST_APPROVAL",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_WAREHOUSE_TRANSFER_LIST_SECOND_APPROVAL",
+            "actionUrl": "",
+            "actionName": "WAREHOUSE_TRANSFER_SECOND_APPROVAL",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
             "actionId": "ACTION_WAREHOUSE_TRANSFER_ADD",

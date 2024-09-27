@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { Chip, Stack } from '@mui/material'
+import { Chip } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -30,6 +30,117 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 const WarehouseToComapnyListingWrapper = () => {
     useUnmountCleanup()
+
+
+    const WarehouseToComapnyState: any = useSelector(
+        (state: RootState) => state.listingPagination
+    )
+    const { page, rowsPerPage, searchValue } = WarehouseToComapnyState
+    const navigate = useNavigate()
+    const [currentId, setCurrentId] = useState('')
+    const [showDropdown, setShowDropdown] = useState(false)
+    const [deleteWarehouseToComapny] = useDeleteWarehouseToComapnyMutation()
+    const [updateWarehouseToComapny] =
+        useUpdateWarehouseToComapnyApprovalMutation()
+    const { userData }: any = useSelector((state: RootState) => state.auth)
+
+    const { items } = useGetCustomListingData({
+        useEndPointHook: useGetPaginationWarehouseToComapnyByGroupQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['wtcNumber'],
+            page: page,
+            filterBy: [
+                {
+                    fieldName: 'companyId',
+                    value: userData?.companyId as string,
+                },
+                {
+                    fieldName: '',
+                    value: [],
+                },
+            ],
+            dateFilter: {},
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: true,
+        }),
+    })
+
+    const handleDelete = () => {
+        setShowDropdown(false)
+        deleteWarehouseToComapny(currentId).then((res) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', ' deleted successfully!')
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast(
+                    'error',
+                    'Something went wrong, Please try again later'
+                )
+            }
+        })
+    }
+
+    const handleFirstComplete = (
+        _id: string,
+        value: boolean,
+        message: string
+    ) => {
+        const currentDate = new Date().toLocaleDateString('en-GB')
+        updateWarehouseToComapny({
+            body: {
+                firstApproved: value,
+                type: 'FIRST',
+                firstApprovedById: userData?.userId,
+                firstApprovedAt: currentDate,
+                firstApprovedActionBy: userData?.userName,
+            },
+            id: _id,
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', ` ${message} is successfully!`)
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
+    }
+
+    const handleSecondComplete = (
+        _id: string,
+        value: boolean,
+        message: string
+    ) => {
+        const currentDate = new Date().toLocaleDateString('en-GB')
+        updateWarehouseToComapny({
+            body: {
+                secondApproved: value,
+                type: 'SECOND',
+                secondApprovedById: userData?.userId,
+                secondApprovedAt: currentDate,
+                secondApprovedActionBy: userData?.userName,
+            },
+            id: _id,
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast('success', ` ${message} is successfully!`)
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
+    }
+
     const columns: columnTypes[] = [
         {
             field: 'actions',
@@ -116,7 +227,7 @@ const WarehouseToComapnyListingWrapper = () => {
             headerName: 'Items / Quantity',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_ITEM_QUANTITY,
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_APPROVAL,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
@@ -140,86 +251,165 @@ const WarehouseToComapnyListingWrapper = () => {
                 )
             },
         },
+        // First Approval
         {
             field: 'firstApproved',
-            headerName: 'First Status',
+            headerName: 'First Approval',
             extraClasses: 'min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED,
+            flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_APPROVAL,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
-                    <span>
-                        {row?.firstApproved
-                            ? 'Done'
-                            : row?.firstApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
-                    </span>
+                    <div className="z-0">
+                        {row?.firstApproved === null ? (
+                            <Chip onClick={() => {
+                                // here only admin and user who has rights can approve the request
+                                if (isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_APPROVAL)) {
+                                    showConfirmationDialog({
+                                        title: 'First Approve',
+                                        text: 'Do you want to Approve ?',
+                                        showCancelButton: true,
+                                        showDenyButton: true,
+                                        denyButtonText: 'Reject',
+                                        next: (res) => {
+                                            if (res.isConfirmed) {
+                                                return handleFirstComplete(
+                                                    row?._id,
+                                                    res?.isConfirmed,
+                                                    'Approval'
+                                                )
+                                            }
+                                            if (res.isDenied) {
+                                                return handleFirstComplete(
+                                                    row?._id,
+                                                    !res.isDenied,
+                                                    'Rejected'
+                                                )
+                                            }
+                                        },
+                                    })
+                                } else {
+                                    showToast('error', "You don't have permission to approve the request")
+                                }
+                            }}
+                                label="First Pending"
+                                color="warning"
+                                variant="outlined"
+                                size="small"
+                                clickable={true}
+                            />
+                        ) : (
+                            <Chip
+                                label={row?.firstApproved === true ? "First Approved" : "First Rejected"}
+                                color={row?.firstApproved === true ? "success" : "error"}
+                                variant="outlined"
+                                size="small"
+                                clickable={false}
+                            />
+                        )}
+                    </div>
                 )
             },
         },
         {
             field: 'firstApprovedActionBy',
             headerName: 'First Approved By',
-            extraClasses: 'min-w-[170px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_BY,
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_APPROVED_BY,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
-                return <span> {row?.firstApprovedActionBy} </span>
+                return <div>
+                    <div className="font-medium">
+                        {row?.firstApprovedActionBy}
+                    </div>
+                    <div className="text-[12px] text-slate-500 font-medium">
+                        {row?.firstApprovedAt}
+                    </div>
+                </div>
             },
         },
-        {
-            field: 'firstApprovedAt',
-            headerName: 'First Approved Date',
-            extraClasses: 'min-w-[170px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_FIRST_LEVEL_APPROVED_DATE,
-            align: 'center',
-            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
-                return <span> {row?.firstApprovedAt} </span>
-            },
-        },
+        // Second Approval
         {
             field: 'secondApproved',
-            headerName: 'Second Status',
-            extraClasses: 'min-w-[170px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_STATUS,
+            headerName: 'Second Approval',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1.0_1.0_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_APPROVAL,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
                 return (
-                    <span>
-                        {row?.secondApproved
-                            ? 'Done'
-                            : row?.secondApproved === null
-                            ? 'Pending'
-                            : 'Rejected'}
-                    </span>
+                    <div className="z-0">
+                        {row?.secondApproved === null ? (
+                            <Chip onClick={() => {
+                                if (isAuthorized(UserModuleNameTypes.ACTION_WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_APPROVAL)) {
+                                    if (row?.firstApproved) {
+                                        showConfirmationDialog({
+                                            title: 'Second Approval',
+                                            text: 'Do you want to Approve ?',
+                                            showCancelButton: true,
+                                            showDenyButton: true,
+                                            denyButtonText: 'Reject',
+                                            next: (res) => {
+                                                if (res.isConfirmed) {
+                                                    return handleSecondComplete(
+                                                        row?._id,
+                                                        res?.isConfirmed,
+                                                        'Approval'
+                                                    )
+                                                }
+                                                if (res.isDenied) {
+                                                    return handleSecondComplete(
+                                                        row?._id,
+                                                        !res.isDenied,
+                                                        'Rejected'
+                                                    )
+                                                }
+                                            },
+                                        })
+                                    } else {
+                                        showToast('error', `First approval is still ${row?.firstApproved === null ? 'pending' : 'rejected'}`)
+                                    }
+                                } else {
+                                    showToast('error', "You don't have permission to approve the request")
+                                }
+                            }}
+                                label="Second Pending"
+                                color="warning"
+                                variant="outlined"
+                                size="small"
+                                clickable={true}
+                            />
+                        ) : (
+                            <Chip
+                                label={row?.secondApproved === true ? "Second Approved" : "Second Rejected"}
+                                color={row?.secondApproved === true ? "success" : "error"}
+                                variant="outlined"
+                                size="small"
+                                clickable={false}
+                            />
+                        )}
+                    </div>
                 )
             },
         },
         {
             field: 'secondApprovedActionBy',
             headerName: 'Second Approved By',
-            extraClasses: 'min-w-[170px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_BY,
+            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_APPROVED_BY,
             align: 'center',
             renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
-                return <span> {row?.secondApprovedActionBy} </span>
-            },
-        },
-        {
-            field: 'secondApprovedAt',
-            headerName: 'Second Approved Date',
-            extraClasses: 'min-w-[180px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_SECOND_LEVEL_APPROVED_DATE,
-            align: 'center',
-            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
-                return <span> {row?.secondApprovedAt} </span>
+                return <div>
+                    <div className="font-medium">
+                        {row?.secondApprovedActionBy}
+                    </div>
+                    <div className="text-[12px] text-slate-500 font-medium">
+                        {row?.secondApprovedAt}
+                    </div>
+                </div>
             },
         },
         {
@@ -244,268 +434,16 @@ const WarehouseToComapnyListingWrapper = () => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
         },
-        {
-            field: 'Approved',
-            headerName: 'Approval',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[1.0_1.0_0%]',
-            name: UserModuleNameTypes.WAREHOUSE_TO_COMPANY_TRANSFER_LIST_APPROVAL_LEVEL,
-            align: 'center',
-            renderCell: (row: OutwardRequestWarehouseToCompanyListResponse) => {
-                return (
-                    <div>
-                        {!row?.firstApproved ? (
-                            <Stack direction="row" spacing={1}>
-                                {row?.firstApproved === null ? (
-                                    <button
-                                        id="btn"
-                                        className=" overflow-hidden cursor-pointer z-0"
-                                        onClick={() => {
-                                            showConfirmationDialog({
-                                                title: 'First Approve',
-                                                text: 'Do you want to Approve ?',
-                                                showCancelButton: true,
-                                                showDenyButton: true,
-                                                denyButtonText: 'Reject',
-                                                next: (res) => {
-                                                    if (res.isConfirmed) {
-                                                        return handleFirstComplete(
-                                                            row?._id,
-                                                            res?.isConfirmed,
-                                                            'Approval'
-                                                        )
-                                                    }
-                                                    if (res.isDenied) {
-                                                        return handleFirstComplete(
-                                                            row?._id,
-                                                            !res.isDenied,
-                                                            'Rejected'
-                                                        )
-                                                    }
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <Chip
-                                            label="First Pending"
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="First Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                )}
-                            </Stack>
-                        ) : (
-                            <Stack direction="row" spacing={1}>
-                                {row?.secondApproved === null ? (
-                                    <button
-                                        id="btn"
-                                        className=" overflow-hidden cursor-pointer z-0"
-                                        onClick={() => {
-                                            showConfirmationDialog({
-                                                title: 'Second Approval',
-                                                text: 'Do you want to Approve ?',
-                                                showCancelButton: true,
-                                                showDenyButton: true,
-                                                denyButtonText: 'Reject',
-                                                next: (res) => {
-                                                    if (res.isConfirmed) {
-                                                        return handleAccComplete(
-                                                            row?._id,
-                                                            res?.isConfirmed,
-                                                            'Approval'
-                                                        )
-                                                    }
-                                                    if (res.isDenied) {
-                                                        return handleAccComplete(
-                                                            row?._id,
-                                                            !res.isDenied,
-                                                            'Rejected'
-                                                        )
-                                                    }
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <Chip
-                                            label="Second Pending "
-                                            color="warning"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : row?.secondApproved ? (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label="Second Approved"
-                                            color="success"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                ) : (
-                                    <button
-                                        id="btn"
-                                        disabled={true}
-                                        className="cursor-pointer"
-                                    >
-                                        <Chip
-                                            label=" Second Rejected"
-                                            color="error"
-                                            variant="outlined"
-                                            size="small"
-                                            clickable={true}
-                                        />
-                                    </button>
-                                )}
-                            </Stack>
-                        )}
-                    </div>
-                )
-            },
-        },
     ]
 
-    const WarehouseToComapnyState: any = useSelector(
-        (state: RootState) => state.listingPagination
-    )
-    const { page, rowsPerPage, searchValue } = WarehouseToComapnyState
-    const navigate = useNavigate()
-    const [currentId, setCurrentId] = useState('')
-    const [showDropdown, setShowDropdown] = useState(false)
-    const [deleteWarehouseToComapny] = useDeleteWarehouseToComapnyMutation()
-    const [updateWarehouseToComapny] =
-        useUpdateWarehouseToComapnyApprovalMutation()
-    const { userData }: any = useSelector((state: RootState) => state.auth)
-
-    const { items } = useGetCustomListingData({
-        useEndPointHook: useGetPaginationWarehouseToComapnyByGroupQuery({
-            limit: rowsPerPage,
-            searchValue: searchValue,
-            params: ['wtcNumber'],
-            page: page,
-            filterBy: [
-                {
-                    fieldName: 'companyId',
-                    value: userData?.companyId as string,
-                },
-                {
-                    fieldName: '',
-                    value: [],
-                },
-            ],
-            dateFilter: {},
-            orderBy: 'createdAt',
-            orderByValue: -1,
-            isPaginationRequired: true,
-        }),
-    })
-
-    const handleDelete = () => {
-        setShowDropdown(false)
-        deleteWarehouseToComapny(currentId).then((res) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', ' deleted successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
-
-    const handleFirstComplete = (
-        _id: string,
-        value: boolean,
-        message: string
-    ) => {
-        const currentDate = new Date().toLocaleDateString('en-GB')
-        updateWarehouseToComapny({
-            body: {
-                firstApproved: value,
-                type: 'FIRST',
-                firstApprovedById: userData?.userId,
-                firstApprovedAt: currentDate,
-                firstApprovedActionBy: userData?.userName,
-            },
-            id: _id,
-        }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', ` ${message} is successfully!`)
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-        })
-    }
-
-    const handleAccComplete = (
-        _id: string,
-        value: boolean,
-        message: string
-    ) => {
-        const currentDate = new Date().toLocaleDateString('en-GB')
-        updateWarehouseToComapny({
-            body: {
-                secondApproved: value,
-                type: 'SECOND',
-                secondApprovedById: userData?.userId,
-                secondApprovedAt: currentDate,
-                secondApprovedActionBy: userData?.userName,
-            },
-            id: _id,
-        }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', ` ${message} is successfully!`)
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast('error', 'Something went wrong')
-            }
-        })
-    }
-
     return (
-        <>
-            <SideNavLayout>
-                <WarehouseToComapnyListing
-                    columns={columns}
-                    rows={items}
-                    setShowDropdown={setShowDropdown}
-                />
-            </SideNavLayout>
-        </>
+        <SideNavLayout>
+            <WarehouseToComapnyListing
+                columns={columns}
+                rows={items}
+                setShowDropdown={setShowDropdown}
+            />
+        </SideNavLayout>
     )
 }
 

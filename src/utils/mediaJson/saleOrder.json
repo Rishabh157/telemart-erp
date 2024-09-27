@@ -15,6 +15,27 @@
                     "fieldValue": "soNumber"
                 },
                 {
+                    "fieldId": "SALE_ORDER_LIST_DH_APPROVAL",
+                    "fieldName": "DH First Approval",
+                    "fieldValue": "dhApproved"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_DH_APPROVED_BY",
+                    "fieldName": "DH Approved By",
+                    "fieldValue": "dhApprovedBy"
+                },
+
+                {
+                    "fieldId": "SALE_ORDER_LIST_ACC_APPROVAL",
+                    "fieldName": "Acc Second Approval",
+                    "fieldValue": "accApproved"
+                },
+                {
+                    "fieldId": "SALE_ORDER_LIST_ACC_APPROVED_BY",
+                    "fieldName": "Acc Approved By",
+                    "fieldValue": "accApprovedBy"
+                },
+                {
                     "fieldId": "SALE_ORDER_LIST_INVOICE_NUMBER",
                     "fieldName": "Invoice Number",
                     "fieldValue": "invoiceNumber"
@@ -44,36 +65,7 @@
                     "fieldName": "Item Quantity",
                     "fieldValue": "groupName"
                 },
-                {
-                    "fieldId": "SALE_ORDER_LIST_DH_APPROVED_STATUS",
-                    "fieldName": "DH Approved Status",
-                    "fieldValue": "dhApproved"
-                },
-                {
-                    "fieldId": "SALE_ORDER_LIST_DH_APPROVED_BY",
-                    "fieldName": "DH Approved By",
-                    "fieldValue": "dhApprovedActionBy"
-                },
-                {
-                    "fieldId": "SALE_ORDER_LIST_DH_APPROVED_DATE",
-                    "fieldName": "DH Approved Date",
-                    "fieldValue": "dhApprovedAt"
-                },
-                {
-                    "fieldId": "SALE_ORDER_LIST_ACCOUNT_APPROVED_STATUS",
-                    "fieldName": "Acc Approved Status",
-                    "fieldValue": "accApproved"
-                },
-                {
-                    "fieldId": "SALE_ORDER_LIST_ACCOUNT_APPROVED_BY",
-                    "fieldName": "Acc Approved By",
-                    "fieldValue": "accApprovedActionBy"
-                },
-                {
-                    "fieldId": "SALE_ORDER_LIST_APPROVAL",
-                    "fieldName": "Approval",
-                    "fieldValue": "accApproved"
-                },
+
                 {
                     "fieldId": "SALE_ORDER_LIST_PDF",
                     "fieldName": "PDF",
@@ -105,6 +97,22 @@
                     "fieldValue": "printWeb"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_SALE_ORDER_LIST_FIRST_APPROVAL",
+            "actionUrl": "",
+            "actionName": "SALE_ORDER_DH_FIRST_APPROVAL",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        },
+        {
+            "actionId": "ACTION_SALE_ORDER_LIST_SECOND_APPROVAL",
+            "actionUrl": "",
+            "actionName": "SALE_ORDER_DH_SECOND_APPROVAL",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
         },
         {
             "actionId": "ACTION_SALE_ORDER_ADD",
