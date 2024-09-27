@@ -325,12 +325,25 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
-
         orderStatusFreezed: builder.mutation({
             invalidatesTags: ['order'],
             query: ({ orderId }: { orderId: string }) => ({
                 url: `order-inquiry/unfreeze-order/${orderId}`,
                 method: 'PUT',
+            }),
+        }),
+        orderStatusUpdateFromWarehouse: builder.mutation({
+            invalidatesTags: ['order'],
+            query: ({
+                warehouseId,
+                body,
+            }: {
+                warehouseId: string
+                body: any
+            }) => ({
+                url: `order-inquiry/bulk-upload/status-change/${warehouseId}`,
+                method: 'POST',
+                body,
             }),
         }),
     }),
@@ -370,5 +383,6 @@ export const {
     useGetGpoOrderStatusQuery,
     useGetShipayaariOrderStatusQuery,
     useGetStatusMarkAsDeleiverdMutation,
-    useOrderStatusFreezedMutation
+    useOrderStatusFreezedMutation,
+    useOrderStatusUpdateFromWarehouseMutation
 } = OrderApi

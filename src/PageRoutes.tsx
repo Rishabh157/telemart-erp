@@ -338,6 +338,7 @@ import EwbInvoice from './Receipt/EwbInvoice'
 import DealerInvoice from './Receipt/DEALERInvoice'
 import { DealerTaxInvoice } from './Receipt/DealerTaxInvoice'
 import WarehouseTransferInvoice from './Receipt/WarehouseTransferInvoice'
+import WarehouseOrderStatusMarkWrapper from './pages/warehouses/view/inventories/outward/warehouseOrderStatus/WarehouseOrderStatusMarkWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -1070,6 +1071,19 @@ const PageRoutes = () => {
                                 <Authorization
                                     children={
                                         <OutwardOtherCourierOrdersTabListingWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS
+                                    }
+                                />
+                            }
+                        />
+                        <Route
+                            path="status-mark"
+                            element={
+                                <Authorization
+                                    children={
+                                        <WarehouseOrderStatusMarkWrapper />
                                     }
                                     permission={
                                         UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS
