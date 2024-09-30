@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import {
+    BASE_URL_FILE_PICKER,
+    REACT_APP_FILE_API_KEY,
+} from 'src/utils/constants'
 
 export const filePickerSlice = createApi({
     reducerPath: 'filePickerSlice',
@@ -14,26 +17,32 @@ export const filePickerSlice = createApi({
                 url: '/upload',
                 method: 'POST',
                 body,
+                params: { api_key: REACT_APP_FILE_API_KEY },
             }),
         }),
+
         uploadDealerPincode: builder.mutation({
             query: ({ userId, body }) => ({
                 url: '/upload-dealer-pincode',
                 method: 'POST',
                 body,
-                params: { userId },
+                params: { api_key: REACT_APP_FILE_API_KEY },
             }),
         }),
+
         uploadDealerScheme: builder.mutation({
             query: ({ userId, body }) => ({
                 url: '/upload-dealer-scheme',
                 method: 'POST',
                 body,
-                params: { userId },
+                params: { api_key: REACT_APP_FILE_API_KEY },
             }),
         }),
     }),
 })
 
-export const { useAddFileUrlMutation, useUploadDealerPincodeMutation,useUploadDealerSchemeMutation } =
-    filePickerSlice
+export const {
+    useAddFileUrlMutation,
+    useUploadDealerPincodeMutation,
+    useUploadDealerSchemeMutation,
+} = filePickerSlice
