@@ -96,6 +96,13 @@ const OutwardTabs = (props: Props) => {
             path: 'other-courier',
             name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS,
         },
+    
+        {
+            label: 'Status Mark',
+            icon: MdOutbond,
+            path: 'status-mark',
+            name: UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS,
+        },
     ]
 
     const params = useParams()
