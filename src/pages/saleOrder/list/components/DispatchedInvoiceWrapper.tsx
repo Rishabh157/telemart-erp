@@ -1,13 +1,9 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-// import { useReactToPrint } from 'react-to-print'
-// import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
-// import { showToast } from 'src/utils'
 import DispatchedInvoiceTemplate from './DispatchedInvoiceTemplate'
 import { useGetInvoiceOfSaleOrderByIdQuery } from 'src/services/SalesOrderService'
 import { CircularProgress } from '@mui/material'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-// import { generatePdf } from 'src/utils/formUtils/HtmlToPdf'
 import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 
@@ -18,6 +14,7 @@ interface ProductSalesOrder {
     _id: string,
     dealerSalePrice: number
     productGroupLabel: string
+    productGroupCode: string
     gst: number
     cgst: number
     sgst: number
@@ -57,6 +54,7 @@ export interface SalesOrderInvoiceResponse {
             maskedPhoneNo: string
             address: string
             countryId: string
+            isUnion: boolean
             stateId: string
             districtId: string
             pincodeId: string
@@ -159,12 +157,9 @@ const DispatchedInvoiceWrapper = () => {
     const saleOrderInvoiceRef = React.useRef(null)
 
     const { items, isFetching } = useGetDataByIdCustomQuery<SalesOrderInvoiceResponse>({
-        useEndPointHook: useGetInvoiceOfSaleOrderByIdQuery(
-            soNumber || '4',
-            // {
-            //     skip: !soNumber,
-            // }
-        ),
+        useEndPointHook: useGetInvoiceOfSaleOrderByIdQuery(soNumber, {
+            skip: !soNumber,
+        }),
     })
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -207,6 +202,9 @@ const DispatchedInvoiceWrapper = () => {
         //     console.error('Error generating PDF and uploading:', error)
         // }
     }
+
+
+
 
     return (
         <div>

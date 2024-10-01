@@ -1366,7 +1366,7 @@ const PageRoutes = () => {
 
                 {/* REMOVE IT -> Sale Order Invoice By So Number */}
                 <Route
-                    path="/warehouse-transfer/invoice"
+                    path="/warehouse-transfer/:id/invoice"
                     element={<WarehouseTransferInvoice />}
                 />
 

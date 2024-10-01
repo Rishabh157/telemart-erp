@@ -68,12 +68,12 @@ export const WarehouseTransferApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
         //***** Update *****/
         updateSoLevel: builder.mutation({
             invalidatesTags: ['WarehouseTransfer'],
             query: ({ body, id }: UpdateSOApprovalLevel) => ({
                 url: `/wtw-master/approval-level/${id}`,
-
                 method: 'PUT',
                 body,
             }),
@@ -120,6 +120,15 @@ export const WarehouseTransferApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** Get Invoice Data *****/
+        getWarehouseTransferInvoiceDetails: builder.query({
+            providesTags: ['WarehouseTransfer'],
+            query: (wtwNumber: string) => ({
+                url: `wtw-master/get-wtw-invoice/${wtwNumber}`,
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -135,4 +144,5 @@ export const {
     useUpdateSoLevelMutation,
     useDispatchWarehouseToWarehouseBarcodeMutation,
     useInwardWarehouseToWarehouseBarcodeMutation,
+    useGetWarehouseTransferInvoiceDetailsQuery
 } = WarehouseTransferApi

@@ -1,7 +1,7 @@
-import React from 'react'
-import { SalesOrderInvoiceResponse } from './DispatchedInvoiceWrapper'
 import moment from 'moment'
+import React from 'react'
 import { NumberToWordsConverter } from 'src/utils/numberToEnglishWord'
+import { SalesOrderInvoiceResponse } from './DispatchedInvoiceWrapper'
 
 type Props = {
     ref?: any
@@ -10,9 +10,96 @@ type Props = {
 
 const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) => {
 
-    let TOTAL_QUANTITY: number = 0
-    let TOTAL_RATE_PER_UNIT: number = 0
-    let TOTAL_AMOUNT: number = 0
+    let totalFigure = {
+        quantity: 0,
+        taxableAmount: 0,
+        tSGST: 0,
+        tCGST: 0,
+        tIGST: 0,
+        tUGST: 0,
+        totalAmount: 0
+    }
+
+
+    interface TaxCalculation {
+        totalTaxableValue: number;
+        actualValue: number;
+        cgstPer: number;
+        sgstPer: number;
+        igstPer: number;
+        utgstPer: number;
+        cgstValue: number;
+        sgstValue: number;
+        igstValue: number;
+        utgstValue: number;
+        totalAmount: number;
+    }
+
+
+
+    const calculatedValue = (increasedValue: number, percentage: number) => {
+        return increasedValue / (1 + percentage / 100);
+    };
+
+    const getReverseCalculation = (product: any): TaxCalculation => {
+        const companyStateId = items?.companyWarehouse?.billingAddress?.stateId;
+        const warehouseStateId = items?.dealerWarehouse?.billingAddress?.stateId;
+        const warehouseStateIsUnion = items?.dealerWarehouse?.billingAddress?.isUnion;
+
+        const dealerSalePrice = product?.dealerSalePrice || 0; // Dealer sale price including tax
+        const cgstRate = product?.cgst || 0;
+        const sgstRate = product?.sgst || 0;
+        const igstRate = product?.igst || 0;
+        const utgstRate = product?.utgst || 0;
+
+        let actualValue = 0;
+        let totalTaxableValue = 0;
+        let cgstValue = 0, sgstValue = 0, igstValue = 0, utgstValue = 0;
+        let cgstPer = 0, sgstPer = 0, igstPer = 0, utgstPer = 0;
+
+        if (companyStateId === warehouseStateId) {
+            // Intrastate transaction (CGST + SGST)
+            const totalTaxRate = cgstRate + sgstRate;
+            actualValue = calculatedValue(dealerSalePrice, totalTaxRate);
+            totalTaxableValue = dealerSalePrice - actualValue;
+
+            cgstValue = (cgstRate / 100) * actualValue;
+            sgstValue = (sgstRate / 100) * actualValue;
+
+            cgstPer = cgstRate;
+            sgstPer = sgstRate;
+        } else if (warehouseStateIsUnion) {
+            // Union Territory, UTGST applicable
+            actualValue = calculatedValue(dealerSalePrice, utgstRate);
+            totalTaxableValue = dealerSalePrice - actualValue;
+
+            utgstValue = (utgstRate / 100) * actualValue;
+            utgstPer = utgstRate;
+        } else {
+            // Interstate transaction, IGST applicable
+            actualValue = calculatedValue(dealerSalePrice, igstRate);
+            totalTaxableValue = dealerSalePrice - actualValue;
+
+            igstValue = (igstRate / 100) * actualValue;
+            igstPer = igstRate;
+        }
+
+        return {
+            totalTaxableValue: Number(totalTaxableValue.toFixed(2)),
+            actualValue: Number(actualValue.toFixed(2)),
+            cgstPer,
+            sgstPer,
+            igstPer,
+            utgstPer,
+            cgstValue: Number(cgstValue.toFixed(2)),
+            sgstValue: Number(sgstValue.toFixed(2)),
+            igstValue: Number(igstValue.toFixed(2)),
+            utgstValue: Number(utgstValue.toFixed(2)),
+            totalAmount: dealerSalePrice
+        };
+    };
+
+
 
     return (
         <div
@@ -132,7 +219,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         <span>{items?.dealerWarehouse?.billingAddress?.gstNumber || '-'}</span>
                     </div>
 
-                    <div>
+                    <div className='hidden'>
                         <span className="font-bold">
                             STATE CODE
                         </span>
@@ -215,7 +302,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                                     I-GST
                                 </th>
                                 <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
-                                    CESS
+                                    U-GST
                                 </th>
                                 <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                     AMOUNT(RS.)
@@ -224,20 +311,31 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         </thead>
                         <tbody>
                             {/* Table Items Row */}
+
                             {items?.productSalesOrder?.map(
                                 (ele, index) => {
-                                    TOTAL_QUANTITY += ele?.quantity
-                                    TOTAL_RATE_PER_UNIT += ele?.rate
-                                    TOTAL_AMOUNT += ele?.rate
+
+                                    const { actualValue, totalAmount, cgstPer, cgstValue, sgstPer, sgstValue, igstPer, igstValue, utgstPer, utgstValue } = getReverseCalculation(ele)
+
+                                    // Assuming ele is defined and has properties needed for calculations
+                                    // Update totalFigure properties
+                                    totalFigure.quantity += ele?.quantity || 0;  // Add quantity, defaulting to 0 if undefined
+                                    totalFigure.taxableAmount += parseFloat((actualValue * (ele?.quantity || 0)).toFixed(2));  // Add taxable amount
+                                    totalFigure.tSGST += parseFloat((sgstValue * (ele?.quantity || 0)).toFixed(2));  // Add SGST value
+                                    totalFigure.tCGST += parseFloat((cgstValue * (ele?.quantity || 0)).toFixed(2));  // Add CGST value
+                                    totalFigure.tIGST += parseFloat((igstValue * (ele?.quantity || 0)).toFixed(2));  // Add IGST value
+                                    totalFigure.tUGST += parseFloat((utgstValue * (ele?.quantity || 0)).toFixed(2));  // Add UTGST value
+                                    totalFigure.totalAmount += parseFloat((totalAmount * (ele?.quantity || 0)).toFixed(2));  // Update total amount
+
                                     return (
                                         <tr key={index}>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
                                                 {index + 1}
                                             </td>
-                                            <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                                - 362325 -
+                                            <td className="border-l border-r text-[14px] border-black text-center py-1 uppercase">
+                                                {ele?.productGroupCode}
                                             </td>
-                                            <td className="border-l border-r text-[14px] border-black text-center py-1">
+                                            <td className="border-l border-r text-[14px] border-black text-center py-1 capitalize">
                                                 {ele?.productGroupLabel}
                                             </td>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
@@ -247,26 +345,31 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                                                 {ele?.quantity}
                                             </td>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                                {ele?.rate?.toFixed(2)}
+                                                {actualValue.toFixed(2)}
                                             </td>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                                - 50.00 -
+                                                {(actualValue * ele?.quantity).toFixed(2)}
                                             </td>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                                {ele?.sgst?.toFixed(2)}
+                                                {(sgstValue * ele?.quantity).toFixed(2)}<br />
+                                                {sgstPer}%
                                             </td>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                                {ele?.cgst?.toFixed(2)}
+                                                {(cgstValue * ele?.quantity).toFixed(2)}<br />
+                                                {cgstPer}%
                                             </td>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                                {ele?.igst?.toFixed(2)}
+                                                {(igstValue * ele?.quantity).toFixed(2)}<br />
+                                                {igstPer}%
                                             </td>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                                {ele?.utgst?.toFixed(2)}
+                                                {(utgstValue * ele?.quantity).toFixed(2)}<br />
+                                                {utgstPer}%
                                             </td>
                                             <td className="border-l border-r text-[14px] border-black text-center py-1">
-                                                {(ele?.quantity * ele?.rate)?.toFixed(2)}
+                                                {(ele?.quantity * totalAmount).toFixed(2)}
                                             </td>
+
                                         </tr>
                                     )
                                 }
@@ -284,28 +387,25 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                                     className="text-[14px] font-bold text-center py-1"
                                     colSpan={1}
                                 >
-                                    {TOTAL_QUANTITY}
+                                    {totalFigure.quantity}
                                 </td>
-                                <td
-                                    className=" text-[14px] text-center py-1"
-                                    colSpan={2}
-                                >
-                                    {TOTAL_RATE_PER_UNIT?.toFixed(2)}
+                                <td className="text-[14px] text-center py-1" colSpan={2}>
+                                    {totalFigure?.taxableAmount?.toFixed(2) || '0.00'}
                                 </td>
                                 <td className="text-[14px] text-center py-1">
-                                    - 0 -
+                                    {totalFigure?.tSGST?.toFixed(2) || '0.00'}
                                 </td>
                                 <td className="text-[14px] text-center py-1">
-                                    - 0 -
+                                    {totalFigure?.tCGST?.toFixed(2) || '0.00'}
                                 </td>
                                 <td className="text-[14px] text-center py-1">
-                                    - 0 -
+                                    {totalFigure?.tIGST?.toFixed(2) || '0.00'}
                                 </td>
                                 <td className="text-[14px] text-center py-1">
-                                    - 0 -
+                                    {totalFigure?.tUGST?.toFixed(2) || '0.00'}
                                 </td>
                                 <td className="text-[14px] font-bold text-center py-1">
-                                    {TOTAL_AMOUNT?.toFixed(2)}
+                                    {totalFigure?.totalAmount?.toFixed(2) || '0.00'}
                                 </td>
                             </tr>
                         </tbody>
@@ -320,7 +420,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         <span>TOTAL RUPEES (IN WORDS) </span>
                         <span className="pr-4 pl-1"> : </span>
                         <span className='uppercase'>
-                            RUPEE{' '}{NumberToWordsConverter.convert(TOTAL_AMOUNT)}{' '}ONLY
+                            RUPEE{' '}{NumberToWordsConverter.convert(totalFigure?.totalAmount)}{' '}ONLY
                         </span>
                     </h2>
                 </div>
