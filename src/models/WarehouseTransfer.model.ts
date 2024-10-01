@@ -83,6 +83,7 @@ export type WarehouseTransferListResponse = {
     firstApproved: boolean | null
     firstApprovedActionBy: string
     firstApprovedAt: string
+    invoice: string
     secondApprovedById: string | null
     secondApproved: boolean | null
     secondApprovedActionBy: string

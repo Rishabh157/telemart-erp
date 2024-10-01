@@ -396,6 +396,25 @@ const WarehouseTransferListingWrapper = () => {
             },
         },
         {
+            field: 'invoice',
+            headerName: 'PDF',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.WAREHOUSE_TRANSFER_LIST_PDF,
+            align: 'center',
+            renderCell: (row: GroupByWarehouseTransferResponseTypes) => {
+                return row?.documents?.[0]?.invoice ? (
+                    <a
+                        href={row.documents[0].invoice} // Provide the URL to the invoice file
+                        download={`Invoice_${row._id}.pdf`} // Set the filename for the downloaded file
+                        className="text-blue-500 hover:underline"
+                    >
+                        PDF
+                    </a>
+                ) : <span title='Invoice is generated after the second approval' className="text-blue-500 cursor-default select-none opacity-50">PDF</span>
+            },
+        },
+        {
             field: 'createdAt',
             headerName: 'Inserted Date',
             extraClasses: 'min-w-[170px]',

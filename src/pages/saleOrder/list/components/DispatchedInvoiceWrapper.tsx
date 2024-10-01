@@ -157,12 +157,9 @@ const DispatchedInvoiceWrapper = () => {
     const saleOrderInvoiceRef = React.useRef(null)
 
     const { items, isFetching } = useGetDataByIdCustomQuery<SalesOrderInvoiceResponse>({
-        useEndPointHook: useGetInvoiceOfSaleOrderByIdQuery(
-            soNumber || '4',
-            // {
-            //     skip: !soNumber,
-            // }
-        ),
+        useEndPointHook: useGetInvoiceOfSaleOrderByIdQuery(soNumber, {
+            skip: !soNumber,
+        }),
     })
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

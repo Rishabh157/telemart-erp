@@ -50,6 +50,11 @@
                     "fieldValue": "secondApproved"
                 },
                 {
+                    "fieldId": "WAREHOUSE_TRANSFER_LIST_PDF",
+                    "fieldName": "Inserted Date",
+                    "fieldValue": "createdAt"
+                },
+                {
                     "fieldId": "WAREHOUSE_TRANSFER_LIST_INSERTED_DATE",
                     "fieldName": "Inserted Date",
                     "fieldValue": "createdAt"

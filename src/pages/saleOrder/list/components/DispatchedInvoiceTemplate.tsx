@@ -101,8 +101,6 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
 
 
 
-
-
     return (
         <div
             ref={ref}
@@ -131,7 +129,6 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         </p>
                         <p className="text-xs">STATE CODE:(23)</p> */}
                         <p className="text-xs">
-
                             GSTIN : {items?.companyDetails?.gstNo}, PAN : {items?.companyDetails?.panNumber}
                         </p>
                     </div>
@@ -305,7 +302,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                                     I-GST
                                 </th>
                                 <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
-                                    CESS
+                                    U-GST
                                 </th>
                                 <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
                                     AMOUNT(RS.)
