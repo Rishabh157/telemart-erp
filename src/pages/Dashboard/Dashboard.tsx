@@ -12,30 +12,38 @@ import PieChart from './admin/PieChart'
 import SplineChart from './admin/SplineChart'
 import MultiseriesChart from './admin/MultiseriesChart'
 import StackedAreaChart from './admin/StackedAreaChart'
+import BarChart from './admin/BarChart'
 
 const Dashboard = () => {
 
     const { userData } = useGetLocalStorage() || null
 
     return (
-        <div className=" h-[calc(100vh-55px)] bg-white p-5">
+        <div className="h-[calc(100vh-55px)] bg-white p-5">
 
             {/* Admin Dashboard */}
             {userData?.userRole === "ADMIN" ? (
-                <div className='grid gap-6 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 ms:grid-cols-1'>
-                    <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
-                        <PieChart />
+                <>
+                    <div className='grid gap-6 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 ms:grid-cols-1'>
+                        <div>
+                            <BarChart />
+                        </div>
+                        <div></div>
+
+                        <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
+                            <PieChart />
+                        </div>
+                        <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
+                            <SplineChart />
+                        </div>
+                        <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
+                            <MultiseriesChart />
+                        </div>
+                        <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
+                            <StackedAreaChart />
+                        </div>
                     </div>
-                    <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
-                        <SplineChart />
-                    </div>
-                    <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
-                        <MultiseriesChart />
-                    </div>
-                    <div className='shadow-md border-t-[1px] border-r-[1px] border-slate-300'>
-                        <StackedAreaChart />
-                    </div>
-                </div>
+                </>
             ) : null}
 
             {showTheDashboardGraphToDeparment(userData?.userDepartment) && (

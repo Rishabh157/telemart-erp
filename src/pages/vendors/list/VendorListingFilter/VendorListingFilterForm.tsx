@@ -43,73 +43,74 @@ const VendorListingFilterForm = ({
     })
 
     return (
-        <div className="flex flex-col gap-4 px-4 py-2">
+        <div className="flex flex-col gap-4 px-4 py-2 h-[40vh] justify-between">
             {/* Heading & Clear Button */}
-            <div className="flex justify-between items-center sticky top-0 z-50 bg-white">
-                <div className="text-xl font-medium"> Filter </div>
-                <button
-                    type="button"
-                    className="text-red-600 hover:text-red-400 font-medium"
-                    onClick={onReset}
-                >
-                    Clear Filters
-                </button>
+            <div>
+                <div className="flex justify-between items-center sticky top-0 z-50 bg-white">
+                    <div className="text-xl font-medium"> Filter </div>
+                    <button
+                        type="button"
+                        className="text-red-600 hover:text-red-400 font-medium"
+                        onClick={onReset}
+                    >
+                        Clear Filters
+                    </button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-x-6">
+
+                    {/* District & Tehsil */}
+                    <ATMSelectSearchable
+                        label="State"
+                        selectLabel="Select state"
+                        name="stateId"
+                        isValueWithLable
+                        value={values.stateId.value}
+                        options={stateOption}
+                        isLoading={isStateOptionLoading}
+                        onChange={(e) => {
+                            setFieldValue('stateId', {
+                                fieldName: 'State',
+                                label: e.label,
+                                value: e.value,
+                            })
+                        }}
+                    />
+
+                    <ATMSelectSearchable
+                        label="District"
+                        selectLabel="Select district"
+                        name="districtId"
+                        value={values.districtId.value}
+                        isValueWithLable
+                        options={districtOptions}
+                        onChange={(e) => {
+                            setFieldValue('districtId', {
+                                fieldName: 'District',
+                                label: e.label,
+                                value: e.value,
+                            })
+                        }}
+                    />
+
+                    <ATMSelectSearchable
+                        label="Company Type"
+                        selectLabel="Select company type"
+                        name="companyType"
+                        value={values.companyType.value}
+                        isValueWithLable
+                        options={companyTypeOptions()}
+                        onChange={(e) => {
+                            setFieldValue('companyType', {
+                                fieldName: 'Company Type',
+                                label: e.label,
+                                value: e.value,
+                            })
+                        }}
+                    />
+
+                </div>
             </div>
-
-            <div className="grid grid-cols-2 gap-x-6">
-
-                {/* District & Tehsil */}
-                <ATMSelectSearchable
-                    label="State"
-                    selectLabel="Select state"
-                    name="stateId"
-                    isValueWithLable
-                    value={values.stateId.value}
-                    options={stateOption}
-                    isLoading={isStateOptionLoading}
-                    onChange={(e) => {
-                        setFieldValue('stateId', {
-                            fieldName: 'State',
-                            label: e.label,
-                            value: e.value,
-                        })
-                    }}
-                />
-
-                <ATMSelectSearchable
-                    label="District"
-                    selectLabel="Select district"
-                    name="districtId"
-                    value={values.districtId.value}
-                    isValueWithLable
-                    options={districtOptions}
-                    onChange={(e) => {
-                        setFieldValue('districtId', {
-                            fieldName: 'District',
-                            label: e.label,
-                            value: e.value,
-                        })
-                    }}
-                />
-
-                <ATMSelectSearchable
-                    label="Company Type"
-                    selectLabel="Select company type"
-                    name="companyType"
-                    value={values.companyType.value}
-                    isValueWithLable
-                    options={companyTypeOptions()}
-                    onChange={(e) => {
-                        setFieldValue('companyType', {
-                            fieldName: 'Company Type',
-                            label: e.label,
-                            value: e.value,
-                        })
-                    }}
-                />
-
-            </div>
-
             {/* Apply & Cancel Buttons */}
             <div className="flex gap-2  sticky bottom-0 bg-white mt-4">
                 <ATMLoadingButton

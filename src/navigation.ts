@@ -60,12 +60,12 @@ export const navigation: NavItemType[] = [
         path: '/dealers-inventory',
         name: UserModuleNameTypes.NAV_DEALERS_INVENTORY,
     },
-    {
-        label: 'Dealers-ratio',
-        icon: TfiLayoutMediaOverlayAlt2,
-        path: '/dealers-ratio',
-        name: UserModuleNameTypes.NAV_DELEAR_RATIO,
-    },
+    // {
+    //     label: 'Dealers-ratio',
+    //     icon: TfiLayoutMediaOverlayAlt2,
+    //     path: '/dealers-ratio',
+    //     name: UserModuleNameTypes.NAV_DELEAR_RATIO,
+    // },
     {
         label: 'Pincode Serviceability',
         icon: TfiLayoutMediaOverlayAlt2,
@@ -130,7 +130,7 @@ export const navigation: NavItemType[] = [
         label: 'RTV Transfer',
         icon: FiUsers,
         path: '/return-to-vendor',
-        name: UserModuleNameTypes.NAV_RETURN_TO_VENDOR, // check
+        name: UserModuleNameTypes.NAV_RETURN_TO_VENDOR,
     },
     {
         label: 'Warehouse Transfer',

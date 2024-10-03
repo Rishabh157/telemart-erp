@@ -90,6 +90,15 @@ export const customerComplainApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        // Get Basic Admin Information
+        getBasicAdminDashboardData: builder.query({
+            providesTags: ['dashboard'],
+            query: () => ({
+                url: 'dashboard/admin-basicinfo',
+                method: 'GET',
+            }),
+        }),
     }),
 })
 
@@ -102,4 +111,5 @@ export const {
     useGetWHInwardInventoryByWarehouseIdQuery,
     useGetWHOutwardInventoryByWarehouseIdQuery,
     useGetSalesDepartmentDataQuery,
+    useGetBasicAdminDashboardDataQuery,
 } = customerComplainApi
