@@ -43,7 +43,6 @@ const ATMFileUploader = ({
     const getImageName = (imgUrl: string) =>
         imgUrl?.slice(imgUrl.indexOf('images'))?.split('/')?.[1]
 
-    console.log('selectedFileselectedFileselectedFile' , selectedFile)    
     return (
         <div>
             {label && (

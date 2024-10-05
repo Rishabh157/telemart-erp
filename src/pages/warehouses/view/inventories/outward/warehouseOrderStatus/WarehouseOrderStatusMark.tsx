@@ -53,7 +53,6 @@ const WarehouseOrderStatusMark = ({ formikProps, apiStatus }: Props) => {
             label: 'Status Marking',
         },
     ]
-    console.log('values?.shippingProvider', values?.orderNumber)
     return (
         <div className=" h-[calc(100vh-200px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">

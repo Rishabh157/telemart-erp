@@ -50,8 +50,6 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
         value: '_id',
     })
 
-    console.log('productSubCategoryOption', productSubCategoryOption)
-
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="flex flex-col gap-2 p-4 ">
