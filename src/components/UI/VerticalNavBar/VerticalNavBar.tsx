@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:VeritcalNavBar.tsx
-// Type: Utils Component
-// Last Updated: JULY 20, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useEffect } from 'react'
 
@@ -71,10 +64,6 @@ const VerticalNavBar = ({
             navigate(`/configurations/${path}`)
             return
         }
-        if (pathLocal === 'sales&marketing') {
-            navigate(`/sales&marketing/${path}`)
-            return
-        }
         if (pathLocal === 'welcome') {
             navigate(`/${pathLocal}`)
         }
@@ -82,12 +71,12 @@ const VerticalNavBar = ({
     }
 
     React.useEffect(() => {
-        // Check if the function has been executed before
+        // Exit as soon as if the function has been executed
         const hasExecuted = localStorage.getItem('hasExecuted')
         if (userData?.userRole === 'ADMIN') {
             return
         }
-        if (hasExecuted) {
+        if (hasExecuted && !(userData?.userRole === 'ADMIN')) {
             return // Exit early if the function has been executed
         }
         for (const nav of navigation) {
@@ -119,11 +108,8 @@ const VerticalNavBar = ({
     return (
         <div className="h-full  overflow-auto bg-white ">
             {/* Logo & Menu Icon */}
-
             <div
-                className={`flex px-3 py-2 items-center  bg-white sticky top-0 ${
-                    isCollapsed ? 'justify-between' : 'justify-between'
-                }`}
+                className={`flex px-3 py-2 items-center bg-white sticky top-0 ${isCollapsed ? 'justify-between' : 'justify-between'}`}
             >
                 {/* Logo */}
                 {!isCollapsed && (
@@ -138,24 +124,13 @@ const VerticalNavBar = ({
 
                 {/* Menu Icon */}
                 <div
+                    className="flex flex-col gap-1 cursor-pointer p-1"
                     onClick={toggleCollapse}
-                    className="flex flex-col gap-1 cursor-pointer p-1  "
                 >
-                    <div
-                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500    ${
-                            !isCollapsed &&
-                            'origin-top-left translate-x-[1.5px]  rotate-45 -mt-3'
-                        }`}
+                    <div className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500 ${!isCollapsed && 'origin-top-left translate-x-[1.5px]  rotate-45 -mt-3'}`}
                     ></div>
-                    {isCollapsed && (
-                        <div className={`h-[1.5px] w-5 bg-slate-500  `}> </div>
-                    )}
-                    <div
-                        className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500  ${
-                            !isCollapsed &&
-                            'origin-top-left translate-y-2  -rotate-45 '
-                        }`}
-                    ></div>
+                    {isCollapsed && (<div className={`h-[1.5px] w-5 bg-slate-500`}> </div>)}
+                    <div className={`h-[1.5px] w-5 bg-slate-500 transition-all duration-500  ${!isCollapsed && 'origin-top-left translate-y-2 -rotate-45'}`}></div>
                 </div>
             </div>
 
@@ -174,12 +149,10 @@ const VerticalNavBar = ({
                                 onClick={() => {
                                     getCheckNavigate(navItem.name as string)
                                     if (customized) {
-                                        const confirmValue: boolean =
-                                            window.confirm(AlertText)
+                                        const confirmValue: boolean = window.confirm(AlertText)
                                         if (confirmValue) {
                                             dispatch(setFieldCustomized(false))
-                                            navItem.path &&
-                                                navigate(navItem.path)
+                                            navItem.path && navigate(navItem.path)
                                         }
                                     } else {
                                         navItem.path && navigate(navItem.path)
@@ -192,18 +165,16 @@ const VerticalNavBar = ({
                 rounded 
                 px-1
                 py-2
-                 
                 cursor-pointer  
                 hover:bg-sky-50 
                 transition-all
                 duration-500
                 text-normal
                 ${isCollapsed && 'justify-center'} 
-                ${
-                    isPathEqualtoNavItem(navItem)
-                        ? 'bg-sky-50 text-sky-500 font-semibold'
-                        : 'text-slate-500'
-                } 
+                ${isPathEqualtoNavItem(navItem)
+                                        ? 'bg-sky-50 text-sky-500 font-semibold'
+                                        : 'text-slate-500'
+                                    } 
                 `}
                             >
                                 <div className="py-1">

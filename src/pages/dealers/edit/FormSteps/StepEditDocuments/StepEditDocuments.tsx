@@ -33,7 +33,6 @@ const StepEditDocuments = ({ formikProps, formFields }: Props) => {
         (state: RootState) => state?.auth
     )
 
-    console.log('values: ', values);
     const [uploadFile] = useAddFileUrlMutation()
 
     const [imageApiStatus, setImageApiStatus] = useState<boolean>(false)

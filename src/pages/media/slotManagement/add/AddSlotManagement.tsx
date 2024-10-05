@@ -62,7 +62,6 @@ const AddSlotManagement = ({
             value: 'FLEXIBLE',
         },
     ]
-    console.log('values: ', values)
 
     const dispatch = useDispatch()
     const handleSetFieldValue = (name: string, value: string | boolean) => {

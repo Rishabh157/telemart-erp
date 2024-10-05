@@ -55,10 +55,6 @@ const BarChart = () => {
     ],
   };
 
-
-
-  console.log('items, isFetching: ', items, isFetching)
-
   return (
     <div>
       {isFetching && (

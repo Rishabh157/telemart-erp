@@ -52,8 +52,6 @@ const EditDealers = ({
     ]
 
 
-    console.log('***********************', formikProps.values)
-
     return (
         <div className="h-[calc(100vh-55px)] overflow-auto px-4 mt-3">
             <div className="flex flex-col gap-2  ">
