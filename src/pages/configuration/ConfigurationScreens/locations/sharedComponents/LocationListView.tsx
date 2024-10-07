@@ -82,7 +82,7 @@ const LocationListView = ({
                     onChange={(e) => {
                         OnSearchChange(e.target.value)
                     }}
-                    placeholder="Search"
+                    placeholder="Search..."
                     className="h-[30px] border-none"
                 />
             </div>
