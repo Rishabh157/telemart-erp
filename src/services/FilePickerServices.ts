@@ -26,7 +26,7 @@ export const filePickerSlice = createApi({
                 url: '/upload-dealer-pincode',
                 method: 'POST',
                 body,
-                params: { api_key: REACT_APP_FILE_API_KEY },
+                params: { api_key: REACT_APP_FILE_API_KEY, userId },
             }),
         }),
 
