@@ -20,6 +20,7 @@ type Props = {
     preDeny?: (result: SweetAlertResult<any>) => void
     html?: any
     denyButtonColor?: string
+    confirmButtonDisabled?: boolean
 }
 
 export const showConfirmationDialog = ({
@@ -40,6 +41,7 @@ export const showConfirmationDialog = ({
     preConfirm,
     preDeny,
     html,
+    confirmButtonDisabled = false,
 }: Props) => {
     return Swal.fire({
         title,
@@ -60,5 +62,17 @@ export const showConfirmationDialog = ({
         preDeny,
         html,
         allowOutsideClick: () => !Swal.isLoading(),
+
+        // For Disable the Specific Button 
+        confirmButtonAriaLabel: confirmButtonDisabled ? "Disabled" : "Confirm", // Optional for accessibility
+        allowEscapeKey: !confirmButtonDisabled, // Prevent Escape key when disabled
+        allowEnterKey: !confirmButtonDisabled,  // Prevent Enter key from triggering confirm
+        didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            if (confirmButton) {
+                confirmButton.disabled = confirmButtonDisabled; // Set button to disabled state
+            }
+        }
+
     }).then(next)
 }

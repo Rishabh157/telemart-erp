@@ -106,7 +106,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
+                            FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -122,23 +122,32 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                     ) &&
                                         showConfirmationDialog({
                                             title: 'Approval',
-                                            text: `Do you want to ${
-                                                row.firstCallApproval
-                                                    ? 'Disapprove '
-                                                    : 'Approval '
-                                            }`,
+                                            text: `Do you want to ${row.firstCallApproval
+                                                ? 'Disapprove '
+                                                : 'Approval '
+                                                }`,
                                             html: `<div className='flex gap-x-8'>
-                                            <h1>Payment Mode: ${
-                                                row?.paymentMode
-                                            }</h1>
-                                            ${
-                                                row?.paymentMode === 'PREPAID'
+                                            <h1>Payment Mode: ${row?.paymentMode
+                                                }</h1>
+                                            <h1>State:
+                                                ${row?.stateLabel} 
+                                            </span> </h1>
+                                            <h1>District:
+                                                ${row?.districtLabel} 
+                                            </span> </h1>
+                                            <h1>Pincode:
+                                                ${row?.pincodeLabel} 
+                                            </span> </h1>
+                                            <h1>Area:
+                                                ${row?.areaLabel ? row?.areaLabel : 'NA'} 
+                                            </span> </h1>
+                                            ${row?.paymentMode === 'PREPAID'
                                                     ? `<h2>
                                                         Transaction ID:
                                                         ${row?.transactionId}
                                                     </h2>`
                                                     : ``
-                                            }
+                                                }
                                           </div>`,
                                             showCancelButton: true,
                                             showDenyButton: true,
@@ -146,32 +155,32 @@ const WarehouseAssignedOrderListingWrapper = () => {
                                             denyButtonText: 'Order cancled',
                                             confirmButtonColor: '#239B56',
                                             denyButtonColor: '#F1948A',
-
+                                            confirmButtonDisabled: row?.areaLabel ? false : true, // Disable the confirm button
                                             next: (res) => {
                                                 if (res.isConfirmed) {
                                                     return res.isConfirmed
                                                         ? handleApproval(
-                                                              row?._id,
-                                                              FirstCallApprovalStatus.APPROVED,
-                                                              row?.assignWarehouseId,
-                                                              row?.schemeProducts?.map(
-                                                                  (ele) =>
-                                                                      ele?.productGroupId
-                                                              )
-                                                          )
+                                                            row?._id,
+                                                            FirstCallApprovalStatus.APPROVED,
+                                                            row?.assignWarehouseId,
+                                                            row?.schemeProducts?.map(
+                                                                (ele) =>
+                                                                    ele?.productGroupId
+                                                            )
+                                                        )
                                                         : setShowDropdown(false)
                                                 }
                                                 if (res.isDenied) {
                                                     return res.isDenied
                                                         ? handleApproval(
-                                                              row?._id,
-                                                              FirstCallApprovalStatus.CANCEL,
-                                                              row?.assignWarehouseId,
-                                                              row?.schemeProducts?.map(
-                                                                  (ele) =>
-                                                                      ele?.productGroupId
-                                                              )
-                                                          )
+                                                            row?._id,
+                                                            FirstCallApprovalStatus.CANCEL,
+                                                            row?.assignWarehouseId,
+                                                            row?.schemeProducts?.map(
+                                                                (ele) =>
+                                                                    ele?.productGroupId
+                                                            )
+                                                        )
                                                         : setShowDropdown(false)
                                                 }
                                             },
@@ -520,8 +529,8 @@ const WarehouseAssignedOrderListingWrapper = () => {
                         <span>
                             {row?.preffered_delivery_date
                                 ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
+                                    'DD-MM-YYYY'
+                                )
                                 : '-'}
                         </span>
                         {/* <span>

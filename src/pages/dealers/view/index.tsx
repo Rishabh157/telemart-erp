@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // |-- External Dependencies --|
 import { AiOutlineRise } from 'react-icons/ai'
@@ -7,7 +7,10 @@ import { BiBlock, BiMessageDetail } from 'react-icons/bi'
 import { BsArrowRepeat } from 'react-icons/bs'
 import { MdOutlinePeopleAlt } from 'react-icons/md'
 import { RiBillLine } from 'react-icons/ri'
-import { useDispatch, useSelector } from 'react-redux'
+import {
+    // useDispatch, 
+    useSelector
+} from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -20,8 +23,10 @@ import ListItemCard from '../components/listItemCard/ListItemCard'
 // |-- Redux --|
 import AccessDenied from 'src/AccessDenied'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
-import { setSearchValue } from 'src/redux/slices/ListingPaginationSlice'
-import { AppDispatch, RootState } from 'src/redux/store'
+import {
+    // AppDispatch,
+    RootState
+} from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
@@ -109,7 +114,8 @@ const breadcrumbs: BreadcrumbType[] = [
 ]
 
 const ViewDealer = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    // const dispatch = useDispatch<AppDispatch>()
+    const [dealerSearch, setDealerSearch] = useState<string>('')
     const { userData } = useSelector((state: RootState) => state?.auth)
 
     const navigate = useNavigate()
@@ -157,11 +163,12 @@ const ViewDealer = () => {
     const dealerState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
-    const { page, rowsPerPage, searchValue } = dealerState
+    const { page, rowsPerPage, } = dealerState
+
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetDealersQuery({
             limit: rowsPerPage,
-            searchValue: searchValue,
+            searchValue: dealerSearch,
             params: ['firstName', 'lastName'],
             page: page,
             filterBy: [
@@ -204,10 +211,11 @@ const ViewDealer = () => {
                     renderListItem={(item: any) => (
                         <ListItemCard item={item} key={item._id} />
                     )}
-                    searchValue={searchValue}
-                    onSearch={(newValue: any) =>
-                        dispatch(setSearchValue(newValue))
-                    }
+                    searchValue={dealerSearch}
+                    onSearch={(newValue: any) => {
+                        setDealerSearch(newValue)
+                        // dispatch(setSearchValue(newValue))
+                    }}
                     breadcrumbs={breadcrumbs}
                 />
             ) : (

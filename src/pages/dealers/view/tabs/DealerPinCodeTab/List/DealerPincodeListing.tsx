@@ -29,6 +29,8 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { showToast } from 'src/utils'
 import { useUploadDealerPincodeMutation } from 'src/services/FilePickerServices'
+import { CircularProgress } from '@mui/material'
+import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
 
 // |-- Types --|
 type Props = {
@@ -38,6 +40,7 @@ type Props = {
 
 const DealerPincodeListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
+    const [apiStatus, setApiStatus] = useState<boolean>(false);
     const fileInputRef = React.useRef<HTMLInputElement>(null)
 
     const params = useParams()
@@ -54,7 +57,9 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
     const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
         pincodeState
     const [uploadDealerPincode] = useUploadDealerPincodeMutation()
+
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setApiStatus(true)
         const files = event.target.files
 
         if (files && files[0]) {
@@ -66,54 +71,93 @@ const DealerPincodeListing = ({ columns, rows }: Props) => {
             uploadDealerPincode({ userId: userData?.userId, body: formData })
                 .then((res: any) => {
                     if ('data' in res) {
-                        showToast('success', 'Import successfully')
+                        if (res?.data?.status) {
+                            showToast('success', res?.data?.message)
+                        } else {
+                            showToast('error', res?.data?.message)
+                        }
                     }
+                    setApiStatus(false)
                 })
                 .catch((err: any) => {
+                    setApiStatus(false)
                     console.error('error', err)
                 })
         }
     }
+
     return (
-        <div className="px-4 h-[calc(100vh-195px)] ">
+        <div className="px-4 h-[calc(100vh-195px)]">
+            {apiStatus && (
+                <div className="absolute w-[100%] h-[100%] flex justify-center items-center z-10 bg-slate-100 opacity-50">
+                    <CircularProgress />
+                </div>
+            )}
+
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Pincode</ATMPageHeading>
                 <div className='gap-1 flex'>
-                <input
-                    type="file"
-                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                    ref={fileInputRef}
-                    className="hidden"
-                    onChange={handleFileChange} // Assuming addExcelFile can handle the file input change event
-                />
-                   {isAuthorized(
+                    <input
+                        type="file"
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                        ref={fileInputRef}
+                        className="hidden"
+                        onChange={handleFileChange} // Assuming addExcelFile can handle the file input change event
+                    />
+
+                    {/* <ATMExportButton
+                        isLoading={false}
+                        headers={['DEALERCODE', 'PINCODE']}
+                        fileName="dealerspincodes"
+                        btnName="Sample Pincode "
+                        btnType="Download"
+                        loadingText="..."
+                        className="py-2 h-[36px]"
+                        onClick={(done) => done()}
+                    /> */}
+
+                    <ATMExportButton
+                        data={[]}
+                        isLoading={false}
+                        headers={['DEALERCODE', 'PINCODE']}
+                        fileName='dealerspincodes'
+                        onClick={(done) => {
+                            done()
+                        }}
+                        btnName="Download CSV"
+                        btnType="DOWNLOAD"
+                        loadingText="..."
+                    />
+
+                    {isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_DEALER_PINCODE_BULK_UPLOAD
                     ) && (
-                        <button
-                            onClick={() => fileInputRef?.current?.click()}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Bulk Upload
-                        </button>
-                    )}
-                {isAuthorized(
-                    UserModuleNameTypes.ACTION_DEALER_DEALER_PINCODE_ADD
-                ) && (
-                    <button
-                        onClick={() =>
-                            navigate('/dealers/' + dealerId + '/pincode/add')
-                        }
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        {' '}
-                        + Add Pincode{' '}
-                    </button>
-                )}
+                            <button
+                                onClick={() => fileInputRef?.current?.click()}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Bulk Upload
+                            </button>
+                        )}
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_PINCODE_ADD
+                    ) && (
+                            <button
+                                onClick={() =>
+                                    navigate('/dealers/' + dealerId + '/pincode/add')
+                                }
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                {' '}
+                                + Add Pincode{' '}
+                            </button>
+                        )}
                 </div>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-35px)] rounded bg-white">
+
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}

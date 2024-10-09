@@ -12,6 +12,8 @@ import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMD
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { handleValidNumber } from 'src/utils/methods/numberMethods'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllAreaByPincodeQuery } from 'src/services/AreaService'
 
 type Props = {
     formikProps: FormikProps<FormInitialValues>
@@ -21,6 +23,7 @@ type Props = {
     apiStatus: boolean
     paymentMode: string
     txnId: string
+    pincodeId: string
 }
 
 const WarehouseFirstCallPage: React.FC<Props> = ({
@@ -30,6 +33,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
     apiStatus,
     paymentMode,
     txnId,
+    pincodeId,
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
     const {
@@ -45,7 +49,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
         district,
         tehsil,
         pincode,
-        area,
+        // area,
         // Listing
         schemeCode,
         schemeName,
@@ -54,6 +58,21 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
         deliveryCharges,
         discount,
     } = orderDetails
+
+
+    console.log('orderDetails', orderDetails)
+    console.log('pincodeIdpincodeId', pincodeId);
+
+    // Hook
+    const { options: areaOptions } = useCustomOptions({
+        useEndPointHook: useGetAllAreaByPincodeQuery(pincodeId || '', {
+            skip: !pincodeId
+        }),
+        keyName: 'area',
+        value: '_id',
+    })
+
+    console.log('areaOptions', areaOptions)
 
     return (
         <div className="bg-white px-2 h-[calc(100vh-55px)]">
@@ -256,7 +275,31 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             }}
                         />
 
-                        <ATMTextField
+
+                        <ATMSelectSearchable
+                            // isDisabled={isDisabled?.isArea}
+                            fontSizePlaceHolder="14px"
+                            fontSizeOptionsClass="13px"
+                            minHeight="25px"
+                            componentClass="mt-1"
+                            label="Area"
+                            size="xxs"
+                            labelSize="xxs"
+                            selectLabel=" area"
+                            labelDirection="horizontal"
+                            labelClass="text-slate-700 text-xs font-medium"
+                            classDirection="grid grid-cols-3"
+                            name="areaId"
+                            value={'true'}
+                            options={areaOptions || []}
+                            isValueWithLable
+                            onChange={(e) => {
+                                setFieldValue('areaId', e?.value || '')
+                                setFieldValue('areaLabel', e?.label || '')
+                            }}
+                        />
+
+                        {/* <ATMTextField
                             label="Area"
                             labelSize="xxs"
                             size="xxs"
@@ -272,7 +315,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             onChange={(e) => {
                                 // setFieldValue('customerName', e.target.value)
                             }}
-                        />
+                        /> */}
 
                         <div className="flex gap-x-[5.4rem]">
                             <span className="text-slate-700 capitalize text-xs">
@@ -451,11 +494,10 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                     onClick={() => {
                         setFieldValue('status', 'CALLBACK')
                     }}
-                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        values.status === 'CALLBACK'
-                            ? 'bg-primary-main'
-                            : 'bg-gray-600 text-white opacity-80'
-                    }`}
+                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${values.status === 'CALLBACK'
+                        ? 'bg-primary-main'
+                        : 'bg-gray-600 text-white opacity-80'
+                        }`}
                 >
                     CallBack
                 </ATMLoadingButton>
@@ -469,11 +511,10 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                         setFieldValue('status', 'APPROVED')
                         setFieldValue('callbackDate', '')
                     }}
-                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        values.status === 'APPROVED'
-                            ? 'bg-primary-main'
-                            : 'bg-gray-600 text-white opacity-80'
-                    }`}
+                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${values.status === 'APPROVED'
+                        ? 'bg-primary-main'
+                        : 'bg-gray-600 text-white opacity-80'
+                        }`}
                 >
                     Approved
                 </ATMLoadingButton>
@@ -487,11 +528,10 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                         setFieldValue('status', 'LANGUAGEBARRIER')
                         setFieldValue('callbackDate', '')
                     }}
-                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        values.status === 'LANGUAGEBARRIER'
-                            ? 'bg-primary-main'
-                            : 'bg-gray-600 text-white opacity-80'
-                    }`}
+                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${values.status === 'LANGUAGEBARRIER'
+                        ? 'bg-primary-main'
+                        : 'bg-gray-600 text-white opacity-80'
+                        }`}
                 >
                     Language Barrier
                 </ATMLoadingButton>
@@ -504,11 +544,10 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                         setFieldValue('status', 'CANCEL')
                         setFieldValue('callbackDate', '')
                     }}
-                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${
-                        values.status === 'CANCEL'
-                            ? 'bg-primary-main'
-                            : 'bg-gray-600 text-white opacity-80'
-                    }`}
+                    className={`text-white flex items-center py-1 px-2 rounded w-50 ${values.status === 'CANCEL'
+                        ? 'bg-primary-main'
+                        : 'bg-gray-600 text-white opacity-80'
+                        }`}
                 >
                     Cancel
                 </ATMLoadingButton>

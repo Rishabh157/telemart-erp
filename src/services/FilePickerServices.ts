@@ -22,6 +22,7 @@ export const filePickerSlice = createApi({
         }),
 
         uploadDealerPincode: builder.mutation({
+            invalidatesTags: ['file-picker', 'dealerPincode'] as any,
             query: ({ userId, body }) => ({
                 url: '/upload-dealer-pincode',
                 method: 'POST',
@@ -35,7 +36,7 @@ export const filePickerSlice = createApi({
                 url: '/upload-dealer-scheme',
                 method: 'POST',
                 body,
-                params: { api_key: REACT_APP_FILE_API_KEY },
+                params: { api_key: REACT_APP_FILE_API_KEY, userId },
             }),
         }),
     }),
