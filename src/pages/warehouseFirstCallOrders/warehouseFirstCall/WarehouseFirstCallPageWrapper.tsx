@@ -18,6 +18,7 @@ export type FormInitialValues = {
     callbackDate: string
     status: string
     alternateNo: string
+    areaId: string | null
 }
 
 export interface OrderDetailsPropsTypes {
@@ -41,6 +42,7 @@ export interface OrderDetailsPropsTypes {
     totalAmount: number
     deliveryCharges: number
     discount?: number
+    areaId: string | null
 }
 
 const WarehouseFirstCallPageWrapper = () => {
@@ -74,15 +76,13 @@ const WarehouseFirstCallPageWrapper = () => {
         totalAmount: 0,
         deliveryCharges: 0,
         discount: 0,
+        areaId: ''
     })
 
     // get the order details
     const { isLoading, isFetching, data } = useGetOrderByIdQuery(orderId, {
         skip: !orderId,
     })
-
-
-    console.log('data?.datadata?.data' , data?.data);    
 
     useEffect(() => {
         if (!isLoading && !isFetching) {
@@ -108,6 +108,7 @@ const WarehouseFirstCallPageWrapper = () => {
                 totalAmount: orderData?.totalAmount || 0,
                 deliveryCharges: orderData?.deliveryCharges || 0,
                 discount: orderData?.deliveryCharges || 0,
+                areaId: orderData?.areaId || null
             })
             setPaymentMode(orderData?.status)
             setTxnId(orderData?.transactionId)
@@ -180,12 +181,14 @@ const WarehouseFirstCallPageWrapper = () => {
         remark: '',
         callbackDate: '',
         status: '',
-        alternateNo: orderDetails.alternateNumber,
+        alternateNo: orderDetails?.alternateNumber,
+        areaId: orderDetails?.areaId,
     }
 
     const validationSchema = object({
         address: string().required('address is required'),
         remark: string().required('remark is required'),
+        areaId: string().required('area is required'),
         callbackDate: string().when(['status'], (status, schema) => {
             return status[0] === 'CALLBACK'
                 ? schema.required('Callback date is required')
@@ -201,6 +204,7 @@ const WarehouseFirstCallPageWrapper = () => {
             ...values,
             warehouseId: assignedWarehouseId,
             productData,
+            areaId: values.areaId
         }
 
         setTimeout(() => {
