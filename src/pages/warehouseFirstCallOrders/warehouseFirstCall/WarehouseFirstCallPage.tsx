@@ -59,10 +59,6 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
         discount,
     } = orderDetails
 
-
-    console.log('orderDetails', orderDetails)
-    console.log('pincodeIdpincodeId', pincodeId);
-
     // Hook
     const { options: areaOptions } = useCustomOptions({
         useEndPointHook: useGetAllAreaByPincodeQuery(pincodeId || '', {
@@ -72,12 +68,10 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
         value: '_id',
     })
 
-    console.log('areaOptions', areaOptions)
-
     return (
         <div className="bg-white px-2 h-[calc(100vh-55px)]">
             {/* <CallerPageTopNav agentName={values.agentName as string} /> */}
-            <div>
+            <div className='z-50'>
                 {apiStatus && (
                     <div className="absolute w-[100%] h-[100%] flex justify-center items-center z-[500000] bg-slate-100 opacity-50">
                         <CircularProgress size={26} />
@@ -277,7 +271,6 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
 
 
                         <ATMSelectSearchable
-                            // isDisabled={isDisabled?.isArea}
                             fontSizePlaceHolder="14px"
                             fontSizeOptionsClass="13px"
                             minHeight="25px"
@@ -285,17 +278,37 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             label="Area"
                             size="xxs"
                             labelSize="xxs"
-                            selectLabel=" area"
+                            selectLabel="area"
                             labelDirection="horizontal"
                             labelClass="text-slate-700 text-xs font-medium"
                             classDirection="grid grid-cols-3"
                             name="areaId"
-                            value={'true'}
+                            value={(values?.areaId || null) as any}
                             options={areaOptions || []}
                             isValueWithLable
                             onChange={(e) => {
                                 setFieldValue('areaId', e?.value || '')
-                                setFieldValue('areaLabel', e?.label || '')
+                                console.log(values?.address);
+
+
+                                function fillEmptySpacesInAddress(addressString: any, areaValue: any) {
+                                    // Split the address string by line breaks to get each part of the address
+                                    const addressParts = addressString?.split('\n').map((part: any) => part?.trim());
+
+                                    // Replace empty or blank parts with the area value
+                                    const filledAddress = addressParts?.map((part: any) => {
+                                        if (!part) {
+                                            return areaValue; // Replace empty spaces with the area value
+                                        }
+                                        return part;
+                                    });
+
+                                    // Join the address parts back into a single string
+                                    return filledAddress?.join('\n');
+                                }
+
+                                const filledAddress = fillEmptySpacesInAddress(values.address, e?.label);
+                                setFieldValue('address', filledAddress)
                             }}
                         />
 
@@ -317,7 +330,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             }}
                         /> */}
 
-                        <div className="flex gap-x-[5.4rem]">
+                        <div className="flex gap-x-2">
                             <span className="text-slate-700 capitalize text-xs">
                                 Address
                             </span>
@@ -343,7 +356,7 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                 <h1 className="text-sm font-semibold px-2">Scheme Detail : </h1>
                 <div className="border-[1px] border-grey-700 max-h-[150px] overflow-y-scroll">
                     <ATMTable
-                        // headerClassName="bg-[#cdddf2] py-2 text-white z-0"
+                        headerClassName="z-0"
                         columns={column || []}
                         rows={[
                             {
