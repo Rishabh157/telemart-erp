@@ -8,7 +8,7 @@ export const dealerPincodeApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         //***** GET PAGINATION DATA *****/
         getDealerPincode: builder.query({
-            providesTags: ['dealerPincode'],
+            providesTags: ['dealerPincode', 'file-picker'],
             query: (body: PaginationType) => ({
                 url: '/dealer-pincode',
                 method: 'POST',

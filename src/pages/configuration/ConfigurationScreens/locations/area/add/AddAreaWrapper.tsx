@@ -3,13 +3,16 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
-import { object, string } from 'yup'
+import { array, object, string } from 'yup'
 import { Formik } from 'formik'
 
 // |-- Internal Dependencies --|
 import AddAreaDialog from './AddAreaDialog'
 import { showToast } from 'src/utils'
-import { useAddAreaMutation } from 'src/services/AreaService'
+import {
+    // useAddAreaMutation , 
+    useAddMultipleAreaMutation
+} from 'src/services/AreaService'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -20,11 +23,16 @@ type Props = {
 }
 
 export type FormInitialValues = {
-    area: string
+    area: { areaName: string }[]
 }
 
 const AddAreaWrapper = ({ onClose }: Props) => {
-    const [AddArea] = useAddAreaMutation()
+
+    // for add single area
+    // const [AddArea] = useAddAreaMutation()
+
+    // for add multiple area
+    const [addMultipleArea] = useAddMultipleAreaMutation()
     const [apiStatus, setApiStatus] = useState(false)
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state?.country
@@ -43,16 +51,27 @@ const AddAreaWrapper = ({ onClose }: Props) => {
     )
 
     const initialValues: FormInitialValues = {
-        area: '',
+        area: [
+            { areaName: '' },
+        ],
     }
     const validationSchema = object({
-        area: string().required('Area is required'),
+        // area: string().required('Area is required'),
+        area: array().of(
+            object().shape({
+                areaName: string().required(
+                    'Enter area name'
+                ),
+
+            })
+        ),
     })
+
     const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
         setTimeout(() => {
-            AddArea({
-                area: values.area,
+            addMultipleArea({
+                area: values?.area?.map((ele) => ele?.areaName),
                 pincodeId: selectedLocationPincode || '',
                 tehsilId: selectedLocationTehsil || '',
                 districtId: selectedLocationDistrict || '',

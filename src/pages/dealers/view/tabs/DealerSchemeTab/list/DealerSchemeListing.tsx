@@ -6,11 +6,12 @@
 // ==============================================
 
 // |-- Built-in Dependencies --|
-import  React,{ useState } from 'react'
+import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
+import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -78,38 +79,50 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Schemes</ATMPageHeading>
-              
+
                 <div className='gap-1 flex'>
-                <input
-                    type="file"
-                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                    ref={fileInputRef}
-                    className="hidden"
-                    onChange={handleFileChange} // Assuming addExcelFile can handle the file input change event
-                />
-                {isAuthorized(
+                    <input
+                        type="file"
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                        ref={fileInputRef}
+                        className="hidden"
+                        onChange={handleFileChange} // Assuming addExcelFile can handle the file input change event
+                    />
+
+                    <ATMExportButton
+                        isLoading={false}
+                        headers={['DEALERCODE', 'PINCODE', 'SCHEMECODE']}
+                        fileName="schemespincodes"
+                        btnName="Sample Scheme"
+                        btnType="DOWNLOAD"
+                        loadingText="..."
+                        className="py-3 h-[36px]"
+                        onClick={(done) => done()}
+                    />
+
+                    {isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_BULK_UPLOAD
                     ) && (
-                        <button
-                            onClick={() => fileInputRef?.current?.click()}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Bulk Upload
-                        </button>
-                    )}
-                {isAuthorized(
-                    UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_ADD
-                ) && (
-                    <button
-                        onClick={() =>
-                            navigate('/dealers/' + dealerId + '/scheme/add')
-                        }
-                        className="bg-primary-main text-white rounded py-1 px-3"
-                    >
-                        {' '}
-                        + Add Scheme{' '}
-                    </button>
-                )}
+                            <button
+                                onClick={() => fileInputRef?.current?.click()}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Bulk Upload
+                            </button>
+                        )}
+                    {isAuthorized(
+                        UserModuleNameTypes.ACTION_DEALER_DEALER_SCHEME_ADD
+                    ) && (
+                            <button
+                                onClick={() =>
+                                    navigate('/dealers/' + dealerId + '/scheme/add')
+                                }
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                {' '}
+                                + Add Scheme{' '}
+                            </button>
+                        )}
                 </div>
             </div>
 
@@ -134,7 +147,7 @@ const DealerSchemeListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        
+
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

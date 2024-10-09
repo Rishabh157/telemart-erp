@@ -1,5 +1,5 @@
 // |-- Internal Dependencies --|
-import { AddArea, UpdateArea } from 'src/models/Area.model'
+import { AddArea, AddMultipleArea, UpdateArea } from 'src/models/Area.model'
 import { PaginationType } from 'src/models/common/paginationType'
 import apiSlice from './ApiSlice'
 
@@ -53,6 +53,16 @@ export const areaApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** ADD Multiple *****/
+        addMultipleArea: builder.mutation({
+            invalidatesTags: ['Area'],
+            query: (body: AddMultipleArea) => ({
+                url: '/area/multi-add',
+                method: 'POST',
+                body,
+            }),
+        }),
+
         //***** Update *****/
         updateArea: builder.mutation({
             invalidatesTags: ['Area'],
@@ -99,6 +109,7 @@ export const areaApi = apiSlice.injectEndpoints({
 export const {
     useGetAreaQuery,
     useAddAreaMutation,
+    useAddMultipleAreaMutation,
     useUpdateAreaMutation,
     useGetAreaByIdQuery,
     useExportAreaDataMutation,

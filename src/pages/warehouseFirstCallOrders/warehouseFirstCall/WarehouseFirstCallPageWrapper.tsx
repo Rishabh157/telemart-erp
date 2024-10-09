@@ -81,6 +81,9 @@ const WarehouseFirstCallPageWrapper = () => {
         skip: !orderId,
     })
 
+
+    console.log('data?.datadata?.data' , data?.data);    
+
     useEffect(() => {
         if (!isLoading && !isFetching) {
             const orderData: OrderListResponse = data?.data
@@ -240,6 +243,7 @@ const WarehouseFirstCallPageWrapper = () => {
                             apiStatus={apiStatus}
                             paymentMode={paymentMode}
                             txnId={txnId}
+                            pincodeId={data?.data?.pincodeId}
                         />
                     )
                 }}

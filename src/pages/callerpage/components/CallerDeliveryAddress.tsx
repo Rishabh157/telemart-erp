@@ -177,7 +177,7 @@ const CallerDeliveryAddress = ({
                     setFieldValue('districtId', res?.data?.districtData[0]?._id)
                     setFieldValue('tehsilId', res?.data?.tehsilData[0]?._id)
                     setFieldValue('pincodeId', res?.data?.pincodeData?._id)
-                    setFieldValue('areaId', res?.data?.areaData[0]?._id)
+                    setFieldValue('areaId', res?.data?.areaData[0]?._id || null)
                     // lable
                     setFieldValue(
                         'stateLabel',
@@ -195,7 +195,7 @@ const CallerDeliveryAddress = ({
                         'pincodeLabel',
                         res?.data?.pincodeData?.pincode
                     )
-                    setFieldValue('areaLabel', res?.data?.areaData[0]?.area)
+                    setFieldValue('areaLabel', res?.data?.areaData[0]?.area || '')
                 } else {
                     showToast('error', res?.data?.message)
                     setFieldValue('stateId', '')

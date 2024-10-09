@@ -138,63 +138,63 @@ const AmazonOrderListing = ({ columns, rows }: Props) => {
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_AMAZON_ORDER_IMPORT_SHEET_BUTTON
                     ) && (
-                        <>
-                            <ATMExportButton
-                                isLoading={false}
-                                headers={[]}
-                                fileName=""
-                                btnName="Import order"
-                                btnType="UPLOAD"
-                                loadingText="..."
-                                className="py-2 mt-[5px] h-[36px]"
-                                // disabled={!selectedCourier ? true : false}
-                                onImport={() => {
-                                    fileInputUploadSheetRef?.current?.click()
-                                }}
-                            />
-                            <ATMExportButton
-                                isLoading={false}
-                                headers={['Agent','OrderId','Status']}
-                                fileName=""
-                                btnName="Sapmle order "
-                                btnType="Download"
-                                loadingText="..."
-                                className="py-2 mt-[5px] h-[36px]"
-                              onClick={(done)=>done()}
-                            />
-                        </>
-                    )}
+                            <>
+                                <ATMExportButton
+                                    isLoading={false}
+                                    headers={[]}
+                                    fileName=""
+                                    btnName="Import order"
+                                    btnType="UPLOAD"
+                                    loadingText="..."
+                                    className="py-2 mt-[5px] h-[36px]"
+                                    // disabled={!selectedCourier ? true : false}
+                                    onImport={() => {
+                                        fileInputUploadSheetRef?.current?.click()
+                                    }}
+                                />
+                                <ATMExportButton
+                                    isLoading={false}
+                                    headers={['Agent', 'OrderId', 'Status']}
+                                    fileName=""
+                                    btnName="Sample order "
+                                    btnType="DOWNLOAD"
+                                    loadingText="..."
+                                    className="py-2 mt-[5px] h-[36px]"
+                                    onClick={(done) => done()}
+                                />
+                            </>
+                        )}
 
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_AMAZON_ORDER_UPDATE_ORDER_SHEET_BUTTON
                     ) && (
-                        <>
-                           <ATMExportButton
-                            isLoading={false}
-                            headers={[]}
-                            fileName=""
-                            btnName="Update Status"
-                            btnType="UPLOAD"
-                            loadingText="..."
-                            className="py-2 mt-[5px] h-[36px]"
-                            // disabled={!selectedCourier ? true : false}
-                            onImport={() => {
-                                fileInputUpdateStatusSheetRef?.current?.click()
-                            }}
-                        />
-                             <ATMExportButton
-                                isLoading={false}
-                                headers={['Agent','OrderId','Status']}
-                                fileName=""
-                                btnName="Sapmle status"
-                                btnType="Download"
-                                loadingText="..."
-                                className="py-2 mt-[5px] h-[36px]"
-                              onClick={(done)=>done()}
-                            />
-                        </>
-                     
-                    )}
+                            <>
+                                <ATMExportButton
+                                    isLoading={false}
+                                    headers={[]}
+                                    fileName=""
+                                    btnName="Update Status"
+                                    btnType="UPLOAD"
+                                    loadingText="..."
+                                    className="py-2 mt-[5px] h-[36px]"
+                                    // disabled={!selectedCourier ? true : false}
+                                    onImport={() => {
+                                        fileInputUpdateStatusSheetRef?.current?.click()
+                                    }}
+                                />
+                                <ATMExportButton
+                                    isLoading={false}
+                                    headers={['Agent', 'OrderId', 'Status']}
+                                    fileName=""
+                                    btnName="Sample status"
+                                    btnType="DOWNLOAD"
+                                    loadingText="..."
+                                    className="py-2 mt-[5px] h-[36px]"
+                                    onClick={(done) => done()}
+                                />
+                            </>
+
+                        )}
                 </div>
             </div>
 
