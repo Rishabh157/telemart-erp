@@ -20,6 +20,8 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    countryId?: string
+    stateId?: string
     districtName: string
     preferredCourier: any[]
     isFixed: boolean

@@ -19,6 +19,10 @@ type Props = {
     onClose: () => void
 }
 export type FormInitialValues = {
+    countryId?: string
+    stateId?: string
+    districtId?: string
+    tehsilId?: string
     pincode: string
     preferredCourier: any[]
     isFixed: boolean
@@ -32,10 +36,10 @@ const AddPincodeWrapper = ({ onClose }: Props) => {
     const { selectedLocationState }: any = useSelector(
         (state: RootState) => state?.states
     )
-    const { 
-        selectedLocationTehsil, 
+    const {
+        selectedLocationTehsil,
         // preffredCourier
-     }: any = useSelector(
+    }: any = useSelector(
         (state: RootState) => state?.tehsils
     )
     const { selectedLocationDistrict }: any = useSelector(

@@ -165,6 +165,19 @@
                 "TEHSILS_LIST"
             ],
             "fields": []
+        },
+        {
+            "actionId": "ACTION_AREA_EDIT",
+            "actionUrl": "",
+            "actionName": "AREA_EDIT",
+            "compulsoryFields": [],
+            "parentGroup": [
+                "COUNTRY_LIST",
+                "STATE_LIST",
+                "DISTRICTS_LIST",
+                "TEHSILS_LIST"
+            ],
+            "fields": []
         }
     ]
 }

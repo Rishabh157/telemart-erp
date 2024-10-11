@@ -23,13 +23,11 @@ export type AddTehsil = {
 
 export type UpdateTehsil = {
     body: {
-        // tehsilName: string
-        // districtId: string
-        // stateId: string
+        countryId: string
+        stateId: string
+        districtId: string
         preferredCourier: any[]
         isFixed: boolean
-        // companyId: string
-        // countryId: string
     }
     id: string
 }

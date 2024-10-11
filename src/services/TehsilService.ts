@@ -34,7 +34,7 @@ export const tehsilApi = apiSlice.injectEndpoints({
         // distric wise tehsil auth
         getAllTehsilByDistrict: builder.query({
             providesTags: ['Tehsil'],
-            query: (id: string) => ({
+            query: (id) => ({
                 url: `/tehsil/get-district-tehsil/${id}`,
                 method: 'GET',
             }),

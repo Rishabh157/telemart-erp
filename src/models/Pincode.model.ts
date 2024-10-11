@@ -26,14 +26,12 @@ export type AddPincode = {
 
 export type UpdatePincode = {
     body: {
-        // pincode: string
+        countryId: string
+        stateId: string
+        districtId: string
+        tehsilId: string
         preferredCourier: any[]
         isFixed: boolean
-        // tehsilId: string
-        // districtId: string
-        // stateId: string
-        // companyId: string
-        // countryId: string
     }
     id: string
 }

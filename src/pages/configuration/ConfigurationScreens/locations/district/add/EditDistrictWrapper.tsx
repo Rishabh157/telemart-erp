@@ -3,8 +3,8 @@ import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik } from 'formik'
-import { useDispatch } from 'react-redux'
-import { array, object } from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { array, object , string } from 'yup'
 
 // |-- Internal Dependencies --|
 import {
@@ -17,7 +17,7 @@ import AddDistrictDialog from './AddDistrictDialog'
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { setSelctedDistrictPreffredCourier } from 'src/redux/slices/districtSlice'
-import { AppDispatch } from 'src/redux/store'
+import { AppDispatch, RootState } from 'src/redux/store'
 
 // |-- Types --|
 type Props = {
@@ -26,6 +26,8 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    countryId: string
+    stateId: string
     districtName: string
     preferredCourier: any[]
     isFixed: boolean
@@ -42,7 +44,16 @@ const EditDistrictWrapper = ({ id, onClose }: Props) => {
         }),
     })
 
+    const { selectedLocationCountries }: any = useSelector(
+        (state: RootState) => state?.country
+    )
+    const { selectedLocationState }: any = useSelector(
+        (state: RootState) => state?.states
+    )
+
     const initialValues: FormInitialValues = {
+        countryId: selectedLocationCountries,
+        stateId: selectedLocationState,
         districtName: selectedItem?.districtName,
         preferredCourier:
             selectedItem?.preferredCourier?.map((ele: any) => ({
@@ -53,6 +64,8 @@ const EditDistrictWrapper = ({ id, onClose }: Props) => {
     }
 
     const validationSchema = object({
+        countryId: string().required('Country is required'),
+        stateId: string().required('State is required'),
         preferredCourier: array()
             .of(object())
             .required('Preferred courier is required')
@@ -72,11 +85,10 @@ const EditDistrictWrapper = ({ id, onClose }: Props) => {
             updateDistrict({
                 id,
                 body: {
-                    // stateName: values.stateName,
+                    countryId: values.countryId || '',
+                    stateId: values.stateId || '',
                     preferredCourier: formatedPriority || [],
                     isFixed: values.isFixed,
-                    // countryId: selectedLocationCountries || '',
-                    // companyId: userData?.companyId || '',
                 },
             }).then((res: any) => {
                 if ('data' in res) {
@@ -113,7 +125,7 @@ const EditDistrictWrapper = ({ id, onClose }: Props) => {
                     <AddDistrictDialog
                         onClose={onClose}
                         apiStatus={apiStatus}
-                        formikProps={formikProps}
+                        formikProps={formikProps as any}
                         formType="EDIT"
                     />
                 )

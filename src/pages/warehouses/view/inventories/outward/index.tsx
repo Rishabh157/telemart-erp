@@ -175,7 +175,6 @@ const OutwardTabs = (props: Props) => {
 
     // Filter tabs based on isDefault value
     // const filteredTabs = items?.isDefault ? allowedTabs : allowedTabs?.filter((tab: Tabs) => tab?.path !== 'ecom')
-    // console.log('filteredTabs: ', filteredTabs);
 
     return (
         <div className="w-full flex  h-[calc(100vh-95px)] bg-white">

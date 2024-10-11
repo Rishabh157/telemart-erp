@@ -288,8 +288,6 @@ const WarehouseFirstCallPage: React.FC<Props> = ({
                             isValueWithLable
                             onChange={(e) => {
                                 setFieldValue('areaId', e?.value || '')
-                                console.log(values?.address);
-
 
                                 function fillEmptySpacesInAddress(addressString: any, areaValue: any) {
                                     // Split the address string by line breaks to get each part of the address

@@ -109,7 +109,7 @@
         {
             "actionId": "ACTION_SALE_ORDER_LIST_SECOND_APPROVAL",
             "actionUrl": "",
-            "actionName": "SALE_ORDER_DH_SECOND_APPROVAL",
+            "actionName": "SALE_ORDER_ACC_SECOND_APPROVAL",
             "compulsoryFields": [],
             "parentGroup": ["LIST"],
             "fields": []

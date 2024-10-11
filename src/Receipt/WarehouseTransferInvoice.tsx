@@ -85,9 +85,6 @@ type WarehouseTransferInvoiceTypes = {
     invoiceNumber: string;
     productSalesOrder: ProductSalesOrder[];
 };
-
-
-
 interface TaxCalculation {
     totalTaxableValue: number;
     actualValue: number;
@@ -197,8 +194,6 @@ const WarehouseTransferInvoice = () => {
             totalAmount: dealerSalePrice
         };
     };
-
-
 
     return (
         <>
@@ -329,7 +324,7 @@ const WarehouseTransferInvoice = () => {
                                             <td className={tableCell}>{ele?.hsnCode}</td>
                                             <td className={tableCell}>{ele?.quantity}</td>
                                             <td className={tableCell}> {actualValue.toFixed(2)}</td>
-                                            <td className={tableCell}>  {(actualValue * ele?.quantity).toFixed(2)}</td>
+                                            <td className={tableCell}>  {(actualValue * ele?.quantity).toFixed(2)} </td>
                                             <td className={tableCell}>
                                                 {(sgstValue * ele?.quantity).toFixed(2)}<br />
                                                 {sgstPer}%

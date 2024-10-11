@@ -30,12 +30,12 @@ const LocationListView = ({
     onAddClick,
     listData,
     searchValue = '',
-    OnSearchChange = (newValue: string) => {},
-    onListItemClick = (item: any) => {},
+    OnSearchChange = (newValue: string) => { },
+    onListItemClick = (item: any) => { },
     disabled = false,
     isAddButton = true,
     isEditButton = false,
-    onEditListItemClick = (item: any) => {},
+    onEditListItemClick = (item: any) => { },
 }: Props) => {
     const { selectedLocationCountries }: any = useSelector(
         (state: RootState) => state.country
@@ -95,25 +95,25 @@ const LocationListView = ({
                             onClick={() => {
                                 onListItemClick(listItem)
                             }}
-                            className={`flex justify-between items-center border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm group ${
-                                listItem.value !== undefined &&
+                            className={`flex justify-between items-center border-b border-slate-100 py-1 px-2 text-black-500 cursor-pointer text-sm group ${listItem.value !== undefined &&
                                 (selectedLocationCountries === listItem.value ||
                                     selectedLocationState === listItem.value ||
                                     selectedLocationDistrict ===
-                                        listItem.value ||
+                                    listItem.value ||
                                     selectedLocationTehsil === listItem.value ||
                                     selectedLocationPincode ===
-                                        listItem.value ||
+                                    listItem.value ||
                                     selectedLocationArea === listItem.value)
-                                    ? 'bg-gray-300'
-                                    : ''
-                            }`}
+                                ? 'bg-gray-300'
+                                : ''
+                                }`}
                         >
                             {listItem.label}
 
                             {isEditButton && (
                                 <span
-                                    onClick={() => {
+                                    onClick={(event) => {
+                                        event.stopPropagation() // Prevent click event from bubbling to the parent
                                         onEditListItemClick(listItem)
                                     }}
                                     className="transition-all opacity-0 group-hover:opacity-100 hover:bg-gray-200 rounded flex-shrink-0 overflow-hidden cursor-pointer p-1"
