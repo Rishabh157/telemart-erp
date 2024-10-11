@@ -23,6 +23,11 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    countryId?: string
+    stateId?: string
+    districtId?: string
+    tehsilId?: string
+    pincodeId?: string
     area: { areaName: string }[]
 }
 
@@ -105,6 +110,7 @@ const AddAreaWrapper = ({ onClose }: Props) => {
                         onClose={onClose}
                         apiStatus={apiStatus}
                         formikProps={formikProps}
+                        formType='ADD'
                     />
                 )
             }}

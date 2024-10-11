@@ -16,9 +16,14 @@ import { FormInitialValues } from './AddPincodeWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { useGetAllCourierMasterQuery } from 'src/services/CourierMasterService'
 import PrirorityTable from '../../PrirorityTable'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllCountryQuery } from 'src/services/CountryService'
+import { useGetAllStateByCountryQuery } from 'src/services/StateService'
+import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
+import { useGetAllTehsilByDistrictQuery } from 'src/services/TehsilService'
+
 
 // |-- Types --|
 type Props = {
@@ -36,6 +41,37 @@ const AddPincodeDialog = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
 
+    // Hook
+    const { options: countryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllCountryQuery(''),
+        keyName: 'countryName',
+        value: '_id',
+    })
+
+    const { options: stateOptions } = useCustomOptions({
+        useEndPointHook: useGetAllStateByCountryQuery(values?.countryId, {
+            skip: !values?.countryId
+        }),
+        keyName: 'stateName',
+        value: '_id',
+    })
+
+    const { options: districtOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDistrictByStateQuery(values?.stateId, {
+            skip: !values?.stateId
+        }),
+        keyName: 'districtName',
+        value: '_id',
+    })
+
+    const { options: tehsilOptions } = useCustomOptions({
+        useEndPointHook: useGetAllTehsilByDistrictQuery(values?.districtId, {
+            skip: !values?.districtId
+        }),
+        keyName: 'tehsilName',
+        value: '_id',
+    })
+
     const { options: couriersOptions } = useCustomOptions({
         useEndPointHook: useGetAllCourierMasterQuery(''),
         keyName: 'courierName',
@@ -48,7 +84,56 @@ const AddPincodeDialog = ({
                 {formType === 'EDIT' ? 'Edit' : 'Add'} Pincode
             </DialogTitle>
             <DialogContent className='h-[50vh]'>
+
+
+
                 <div>
+
+                    {formType === 'EDIT' &&
+                        <>
+                            <ATMSelectSearchable
+                                label="Country"
+                                selectLabel="country"
+                                name="countryId"
+                                value={values?.countryId}
+                                options={countryOptions}
+                                onChange={(e) => {
+                                    setFieldValue('countryId', e || '')
+                                }}
+                            />
+                            <ATMSelectSearchable
+                                label="State"
+                                selectLabel="state"
+                                name="stateId"
+                                value={values?.stateId}
+                                options={stateOptions}
+                                onChange={(e) => {
+                                    setFieldValue('stateId', e || '')
+                                }}
+                            />
+                            <ATMSelectSearchable
+                                label="District"
+                                selectLabel="district"
+                                name="districtId"
+                                value={values?.districtId}
+                                options={districtOptions}
+                                onChange={(e) => {
+                                    setFieldValue('districtId', e || '')
+                                }}
+                            />
+                            <ATMSelectSearchable
+                                label="Tehsil"
+                                selectLabel="tehsil"
+                                name="tehsilId"
+                                value={values?.tehsilId}
+                                options={tehsilOptions}
+                                onChange={(e) => {
+                                    setFieldValue('tehsilId', e || '')
+                                }}
+                            />
+                        </>
+                    }
+
                     <ATMTextField
                         required
                         disabled={formType === 'EDIT'}
@@ -59,6 +144,7 @@ const AddPincodeDialog = ({
                         }}
                         placeholder="Pincode"
                         label="Pincode Number"
+                        className="mt-0 rounded"
                     />
 
                     <ATMSelectSearchable

@@ -17,6 +17,7 @@ import { showToast } from 'src/utils'
 import { RootState, AppDispatch } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+import EditAreaWrapper from '../add/EditAreaWrapper'
 
 // |-- Types --|
 type Props = {
@@ -25,6 +26,7 @@ type Props = {
 
 const AreaListing = ({ areas }: Props) => {
     const [isOpenAddForm, setisOpenAddForm] = useState(false)
+    const [editAreatId, setEditAreatId] = useState<string>('')
     const dispatch = useDispatch<AppDispatch>()
     const { searchValue }: any = useSelector((state: RootState) => state.areas)
     const { selectedLocationPincode }: any = useSelector(
@@ -67,10 +69,23 @@ const AreaListing = ({ areas }: Props) => {
                 isAddButton={
                     isAuthorized(UserModuleNameTypes.ACTION_AREA_ADD) as boolean
                 }
+                isEditButton={isAuthorized(
+                    UserModuleNameTypes.ACTION_AREA_EDIT
+                )}
+                onEditListItemClick={(newValue) => {
+                    setEditAreatId(newValue?.value)
+                }}
             />
 
             {isOpenAddForm && (
                 <AddAreaWrapper onClose={() => setisOpenAddForm(false)} />
+            )}
+
+            {editAreatId && (
+                <EditAreaWrapper
+                    id={editAreatId}
+                    onClose={() => setEditAreatId('')}
+                />
             )}
         </>
     )

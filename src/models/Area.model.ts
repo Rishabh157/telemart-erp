@@ -35,13 +35,13 @@ export type AddMultipleArea = {
 
 export type UpdateArea = {
     body: {
-        area: string
+        // area: string
         pincodeId: string
         tehsilId: string
         districtId: string
         stateId: string
-        companyId: string
         countryId: string
+        // companyId: string
     }
     id: string
 }

@@ -16,9 +16,12 @@ import { FormInitialValues } from './AddDistrictWrapper'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
-import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import { useGetAllCourierMasterQuery } from 'src/services/CourierMasterService'
 import PrirorityTable from '../../PrirorityTable'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { useGetAllCountryQuery } from 'src/services/CountryService'
+import { useGetAllStateByCountryQuery } from 'src/services/StateService'
+
 
 // |-- Types --|
 type Props = {
@@ -36,6 +39,23 @@ const AddDistrictDialog = ({
 }: Props) => {
     const { values, setFieldValue } = formikProps
 
+
+    // Hook
+    const { options: countryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllCountryQuery(''),
+        keyName: 'countryName',
+        value: '_id',
+    })
+
+    const { options: stateOptions } = useCustomOptions({
+        useEndPointHook: useGetAllStateByCountryQuery(values?.countryId, {
+            skip: !values?.countryId
+        }),
+        keyName: 'stateName',
+        value: '_id',
+    })
+
+
     const { options: couriersOptions } = useCustomOptions({
         useEndPointHook: useGetAllCourierMasterQuery(''),
         keyName: 'courierName',
@@ -48,6 +68,31 @@ const AddDistrictDialog = ({
                 {formType === 'ADD' ? 'Add' : 'Edit'} District
             </DialogTitle>
             <DialogContent className='h-[50vh]'>
+
+                {formType === 'EDIT' &&
+                    <>
+                        <ATMSelectSearchable
+                            label="Country"
+                            selectLabel="country"
+                            name="countryId"
+                            value={values?.countryId}
+                            options={countryOptions}
+                            onChange={(e) => {
+                                setFieldValue('countryId', e || '')
+                            }}
+                        />
+                        <ATMSelectSearchable
+                            label="State"
+                            selectLabel="state"
+                            name="stateId"
+                            value={values?.stateId}
+                            options={stateOptions}
+                            onChange={(e) => {
+                                setFieldValue('stateId', e || '')
+                            }}
+                        />
+                    </>
+                }
                 <ATMTextField
                     disabled={formType === 'EDIT'}
                     required
@@ -58,6 +103,7 @@ const AddDistrictDialog = ({
                     }}
                     placeholder="Name"
                     label="District Name"
+                    className="mt-0 rounded"
                 />
 
                 <ATMSelectSearchable
@@ -107,7 +153,7 @@ const AddDistrictDialog = ({
                     Submit
                 </ATMLoadingButton>
             </DialogActions>
-        </Dialog>
+        </Dialog >
     )
 }
 

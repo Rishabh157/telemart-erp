@@ -4,9 +4,22 @@ import { OrderInvoiceAndLabelListResponse } from 'src/models/Order.model'
 import { useBarcode } from '@createnextapp/react-barcode'
 import { NumberToWordsConverter } from 'src/utils/numberToEnglishWord'
 
-
 const tableHead = 'border-r border-black p-2 text-start border-l'
 const tableCell = 'border-r border-black p-2 text-center border-l'
+
+interface TaxCalculation {
+    totalTaxableValue: number;
+    actualValue: number;
+    cgstPer: number;
+    sgstPer: number;
+    igstPer: number;
+    utgstPer: number;
+    cgstValue: number;
+    sgstValue: number;
+    igstValue: number;
+    utgstValue: number;
+    totalAmount: number;
+}
 
 const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) => {
 
@@ -21,6 +34,81 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
         })
         return <canvas ref={inputRef} className="h-full w-full" />
     }
+
+    let totalFigure = {
+        quantity: 0,
+        taxableAmount: 0,
+        tSGST: 0,
+        tCGST: 0,
+        tIGST: 0,
+        tUGST: 0,
+        totalAmount: 0
+    }
+
+    const calculatedValue = (increasedValue: number, percentage: number) => {
+        return increasedValue / (1 + percentage / 100);
+    };
+
+    const getReverseCalculation = (product: any): TaxCalculation => {
+        // const companyStateId = items?.fromWarehouseData?.billingAddress?.stateId;
+        // const warehouseStateId = items?.toWarehouseData?.billingAddress?.stateId;
+        // const warehouseStateIsUnion = items?.toWarehouseData?.billingAddress?.isUnion;
+        const companyStateId = true
+        const warehouseStateId = true
+        const warehouseStateIsUnion = false
+
+        const dealerSalePrice = product?.dealerSalePrice || 0; // Dealer sale price including tax
+        const cgstRate = product?.cgst || 0;
+        const sgstRate = product?.sgst || 0;
+        const igstRate = product?.igst || 0;
+        const utgstRate = product?.utgst || 0;
+
+        let actualValue = 0;
+        let totalTaxableValue = 0;
+        let cgstValue = 0, sgstValue = 0, igstValue = 0, utgstValue = 0;
+        let cgstPer = 0, sgstPer = 0, igstPer = 0, utgstPer = 0;
+
+        if (companyStateId === warehouseStateId) {
+            // Intrastate transaction (CGST + SGST)
+            const totalTaxRate = cgstRate + sgstRate;
+            actualValue = calculatedValue(dealerSalePrice, totalTaxRate);
+            totalTaxableValue = dealerSalePrice - actualValue;
+
+            cgstValue = (cgstRate / 100) * actualValue;
+            sgstValue = (sgstRate / 100) * actualValue;
+
+            cgstPer = cgstRate;
+            sgstPer = sgstRate;
+        } else if (warehouseStateIsUnion) {
+            // Union Territory, UTGST applicable
+            actualValue = calculatedValue(dealerSalePrice, utgstRate);
+            totalTaxableValue = dealerSalePrice - actualValue;
+
+            utgstValue = (utgstRate / 100) * actualValue;
+            utgstPer = utgstRate;
+        } else {
+            // Interstate transaction, IGST applicable
+            actualValue = calculatedValue(dealerSalePrice, igstRate);
+            totalTaxableValue = dealerSalePrice - actualValue;
+
+            igstValue = (igstRate / 100) * actualValue;
+            igstPer = igstRate;
+        }
+
+        return {
+            totalTaxableValue: Number(totalTaxableValue.toFixed(2)),
+            actualValue: Number(actualValue.toFixed(2)),
+            cgstPer,
+            sgstPer,
+            igstPer,
+            utgstPer,
+            cgstValue: Number(cgstValue.toFixed(2)),
+            sgstValue: Number(sgstValue.toFixed(2)),
+            igstValue: Number(igstValue.toFixed(2)),
+            utgstValue: Number(utgstValue.toFixed(2)),
+            totalAmount: dealerSalePrice
+        };
+    };
 
     return (
         <div className="bg-white p-4 text-sm">
@@ -117,66 +205,99 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
                             <th className={tableHead}>S-GST</th>
                             <th className={tableHead}>C-GST</th>
                             <th className={tableHead}>I-GST</th>
-                            <th className={tableHead}>CESS</th>
+                            <th className={tableHead}>U-GST</th>
                             <th className={tableHead}>AMOUNT</th>
                         </tr>
                     </thead>
                     <tbody className="border-b-[0px] border-black">
-                        {items?.schemeProducts?.map((ele, index) => (
-                            <tr key={ele?.productGroupId}>
-                                <td className={tableCell}>{(index + 1)}</td>
-                                <td className={tableCell}>
-                                    {ele?.productGroupName}
-                                </td>
-                                <td className={tableCell}>{items?.hsnCode}</td>
-                                <td className={tableCell}>
-                                    {ele?.productQuantity}
-                                </td>
-                                <td className={tableCell}> {items?.price}</td>
-                                <td className={tableCell}>{Number(0)?.toFixed(2)}</td>
-                                <td className={tableCell}>{Number(0)?.toFixed(2)}</td>
-                                <td className={tableCell}>---</td>
-                                <td className={tableCell}>
-                                    {ele?.sgst?.toFixed(2)}
-                                    <br />
-                                    <span>&#64;{ele?.sgst?.toFixed(2)}&#37;</span>
-                                </td>
-                                <td className={tableCell}>
-                                    {ele?.cgst?.toFixed(2)}
-                                    <br />
-                                    <span>&#64;{ele?.sgst?.toFixed(2)}&#37;</span>
-                                </td>
-                                <td className={tableCell}>
-                                    {ele?.igst?.toFixed(2)}
-                                    <br />
-                                    <span>&#64;{ele?.sgst?.toFixed(2)}&#37;</span>
-                                </td>
-                                <td className={tableCell}>
-                                    {ele?.utgst?.toFixed(2)}
-                                    <br />
-                                    <span>&#64;{ele?.sgst?.toFixed(2)}&#37;</span>
-                                </td>
-                                <td className={tableCell}>
-                                    {items?.totalAmount}
-                                </td>
-                            </tr>
-                        ))}
+                        {items?.schemeProducts?.map((ele, index) => {
+
+                            const { actualValue, totalAmount, cgstPer, cgstValue, sgstPer, sgstValue, igstPer, igstValue, utgstPer, utgstValue } = getReverseCalculation(ele)
+
+                            // Assuming ele is defined and has properties needed for calculations
+                            // Update totalFigure properties
+                            totalFigure.quantity += ele?.productQuantity || 0;  // Add quantity, defaulting to 0 if undefined
+                            totalFigure.taxableAmount += parseFloat((actualValue * (ele?.productQuantity || 0)).toFixed(2));  // Add taxable amount
+                            totalFigure.tSGST += parseFloat((sgstValue * (ele?.productQuantity || 0)).toFixed(2));  // Add SGST value
+                            totalFigure.tCGST += parseFloat((cgstValue * (ele?.productQuantity || 0)).toFixed(2));  // Add CGST value
+                            totalFigure.tIGST += parseFloat((igstValue * (ele?.productQuantity || 0)).toFixed(2));  // Add IGST value
+                            totalFigure.tUGST += parseFloat((utgstValue * (ele?.productQuantity || 0)).toFixed(2));  // Add UTGST value
+                            totalFigure.totalAmount += parseFloat((totalAmount * (ele?.productQuantity || 0)).toFixed(2));  // Update total amount
+
+
+                            return (
+                                <tr key={ele?.productGroupId}>
+                                    <td className={tableCell}>{(index + 1)}</td>
+                                    <td className={tableCell}>
+                                        {ele?.productGroupName}
+                                    </td>
+                                    <td className={tableCell}>{items?.hsnCode}</td>
+                                    <td className={tableCell}>
+                                        {ele?.productQuantity}
+                                    </td>
+                                    <td className={tableCell}>
+                                        {actualValue.toFixed(2)}
+                                    </td>
+                                    <td className={tableCell}>{Number(0)?.toFixed(2)}</td>
+                                    <td className={tableCell}>{Number(0)?.toFixed(2)}</td>
+                                    <td className={tableCell}>
+                                        -- {(actualValue * ele?.productQuantity).toFixed(2)} --
+                                    </td>
+
+                                    <td className={tableCell}>
+                                        {(sgstValue * ele?.productQuantity).toFixed(2)}<br />
+                                        {sgstPer}%
+                                    </td>
+                                    <td className={tableCell}>
+                                        {(cgstValue * ele?.productQuantity).toFixed(2)}<br />
+                                        {cgstPer}%
+                                    </td>
+                                    <td className={tableCell}>
+                                        {(igstValue * ele?.productQuantity).toFixed(2)}<br />
+                                        {igstPer}%
+                                    </td>
+                                    <td className={tableCell}>
+                                        {(utgstValue * ele?.productQuantity).toFixed(2)}<br />
+                                        {utgstPer}%
+                                    </td>
+                                    <td className={tableCell}>
+                                        {(ele?.productQuantity * totalAmount).toFixed(2)}
+                                    </td>
+                                </tr>
+                            )
+                        }
+                        )}
 
                         <tr className="border-black border-l border-t py-1">
                             <td colSpan={2} className={tableCell}>
                                 TOTAL
                             </td>
                             <td className={tableCell}></td>
-                            <td className={tableCell}>1</td>
-                            <td className={tableCell}>2232.14</td>
+                            <td className={tableCell}>
+                                {totalFigure.quantity}
+                            </td>
+                            <td className={tableCell}>
+                                {totalFigure?.taxableAmount?.toFixed(2) || '0.00'}
+                            </td>
                             <td className={tableCell}>0</td>
                             <td className={tableCell}>0.00</td>
-                            <td className={tableCell}>2232.14</td>
-                            <td className={tableCell}>0.00 %</td>
-                            <td className={tableCell}>0.00 %</td>
-                            <td className={tableCell}>267.86 %</td>
-                            <td className={tableCell}>0.00 %</td>
-                            <td className={tableCell}>2500.00 </td>
+                            <td className={tableCell}>-- 00.00 --</td>
+                            <td className="text-[14px] text-center py-1">
+                                {totalFigure?.tSGST?.toFixed(2) || '0.00'}
+                            </td>
+                            <td className={tableCell}>
+                                {totalFigure?.tCGST?.toFixed(2) || '0.00'}
+                            </td>
+                            <td className={tableCell}>
+                                {totalFigure?.tIGST?.toFixed(2) || '0.00'}
+                            </td>
+                            <td className={tableCell}>
+                                {totalFigure?.tUGST?.toFixed(2) || '0.00'}
+                            </td>
+                            <td className={tableCell}>
+                                {totalFigure?.totalAmount?.toFixed(2) || '0.00'}
+                            </td>
+
                         </tr>
                     </tbody>
                 </table>

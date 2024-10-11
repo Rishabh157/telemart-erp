@@ -2,9 +2,9 @@
 import React, { useState } from 'react'
 
 // |-- External Dependencies --|
-import { object, array } from 'yup'
+import { object, array, string } from 'yup'
 import { Formik } from 'formik'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import AddTehsilDialog from './AddTehsilDialog'
@@ -16,7 +16,7 @@ import { showToast } from 'src/utils'
 
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-import { AppDispatch } from 'src/redux/store'
+import { AppDispatch, RootState } from 'src/redux/store'
 import { setSelctedTehsilPreffredCourier } from 'src/redux/slices/tehsilSlice'
 
 // |-- Types --|
@@ -26,6 +26,9 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    countryId: string
+    stateId: string
+    districtId: string
     tehsilName: string
     preferredCourier: any[]
     isFixed: boolean
@@ -42,7 +45,20 @@ const EditTehsiltWrapper = ({ id, onClose }: Props) => {
         }),
     })
 
+    const { selectedLocationCountries }: any = useSelector(
+        (state: RootState) => state?.country
+    )
+    const { selectedLocationState }: any = useSelector(
+        (state: RootState) => state?.states
+    )
+    const { selectedLocationDistrict }: any = useSelector(
+        (state: RootState) => state?.district
+    )
+
     const initialValues: FormInitialValues = {
+        countryId: selectedLocationCountries,
+        stateId: selectedLocationState,
+        districtId: selectedLocationDistrict,
         tehsilName: selectedItem?.tehsilName,
         preferredCourier:
             selectedItem?.preferredCourier?.map((ele: any) => ({
@@ -53,6 +69,9 @@ const EditTehsiltWrapper = ({ id, onClose }: Props) => {
     }
 
     const validationSchema = object({
+        countryId: string().required('Country is required'),
+        stateId: string().required('State is required'),
+        districtId: string().required('District is required'),
         preferredCourier: array()
             .of(object())
             .required('Preferred courier is required')
@@ -72,11 +91,11 @@ const EditTehsiltWrapper = ({ id, onClose }: Props) => {
             updateTehsil({
                 id,
                 body: {
-                    // stateName: values.stateName,
+                    countryId: values.countryId || '',
+                    stateId: values.stateId || '',
+                    districtId: values.districtId || '',
                     preferredCourier: formatedPriority || [],
                     isFixed: values.isFixed,
-                    // countryId: selectedLocationCountries || '',
-                    // companyId: userData?.companyId || '',
                 },
             }).then((res: any) => {
                 if ('data' in res) {
@@ -113,7 +132,7 @@ const EditTehsiltWrapper = ({ id, onClose }: Props) => {
                     <AddTehsilDialog
                         onClose={onClose}
                         apiStatus={apiStatus}
-                        formikProps={formikProps}
+                        formikProps={formikProps as any}
                         formType="EDIT"
                     />
                 )

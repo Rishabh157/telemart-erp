@@ -1419,6 +1419,7 @@ export enum locationUserAccessType {
     ACTION_PINCODES_EDIT = 'ACTION_PINCODES_EDIT',
     ACTION_AREA_LIST = 'ACTION_AREA_LIST',
     ACTION_AREA_ADD = 'ACTION_AREA_ADD',
+    ACTION_AREA_EDIT = 'ACTION_AREA_EDIT',
 }
 
 export enum productUserAccessType {

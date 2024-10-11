@@ -20,6 +20,9 @@ type Props = {
 }
 
 export type FormInitialValues = {
+    countryId?: string
+    stateId?: string
+    districtId?: string
     tehsilName: string
     preferredCourier: any[]
     isFixed: boolean
@@ -33,9 +36,9 @@ const AddTehsilWrapper = ({ onClose }: Props) => {
     const { selectedLocationState }: any = useSelector(
         (state: RootState) => state?.states
     )
-    const { selectedLocationDistrict, 
+    const { selectedLocationDistrict,
         // preffredCourier
-     }: any = useSelector(
+    }: any = useSelector(
         (state: RootState) => state?.district
     )
 

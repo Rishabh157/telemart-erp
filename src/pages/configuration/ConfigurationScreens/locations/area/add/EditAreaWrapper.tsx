@@ -1,22 +1,19 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
-import { object, array, string } from 'yup'
 import { Formik } from 'formik'
+import { useSelector } from 'react-redux'
+import { object, string } from 'yup'
 
 // |-- Internal Dependencies --|
-import AddPincodeDialog from './AddPincodeDialog'
-import {
-    useGetPincodeByIdQuery,
-    useUpdatePincodeMutation,
-} from 'src/services/PinCodeService'
+import AddAreaDialog from './AddAreaDialog'
 import { showToast } from 'src/utils'
+import { RootState } from 'src/redux/store'
 
 // |-- Redux --|
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-import { useSelector } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { useGetAreaByIdQuery, useUpdateAreaMutation } from 'src/services/AreaService'
 
 // |-- Types --|
 type Props = {
@@ -29,17 +26,17 @@ export type FormInitialValues = {
     stateId: string
     districtId: string
     tehsilId: string
-    pincode: string
-    preferredCourier: any[]
-    isFixed: boolean
+    pincodeId: string
+    area: { areaName: string }[]
 }
 
-const EditPincodeWrapper = ({ id, onClose }: Props) => {
+const EditAreaWrapper = ({ id, onClose }: Props) => {
+
     const [apiStatus, setApiStatus] = useState(false)
-    const [updatePincode] = useUpdatePincodeMutation()
+    const [updateArea] = useUpdateAreaMutation()
 
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetPincodeByIdQuery(id || '', {
+        useEndPointHook: useGetAreaByIdQuery(id || '', {
             skip: !id,
         }),
     })
@@ -56,59 +53,46 @@ const EditPincodeWrapper = ({ id, onClose }: Props) => {
     const { selectedLocationTehsil }: any = useSelector(
         (state: RootState) => state.tehsils
     )
+    const { selectedLocationPincode }: any = useSelector(
+        (state: RootState) => state.pincode
+    )
 
     const initialValues: FormInitialValues = {
         countryId: selectedLocationCountries,
         stateId: selectedLocationState,
         districtId: selectedLocationDistrict,
         tehsilId: selectedLocationTehsil,
-        pincode: selectedItem?.[0]?.pincode,
-        preferredCourier:
-            selectedItem?.[0]?.preferredCourier?.map((ele: any) => ({
-                label: ele?.courierName,
-                value: ele?.courierId,
-            })) || [],
-        isFixed: selectedItem?.[0]?.isFixed,
+        pincodeId: selectedLocationPincode,
+        area: [
+            { areaName: selectedItem?.area || '' }
+        ]
     }
 
     const validationSchema = object({
-
         countryId: string().required('Country is required'),
         stateId: string().required('State is required'),
         districtId: string().required('District is required'),
         tehsilId: string().required('Tehsil is required'),
-        preferredCourier: array()
-            .of(object())
-            .required('Preferred courier is required')
-            .min(1, 'At least one courier is required'),
+        pincodeId: string().required('Pincode is required'),
     })
 
-    const onSubmitHandler: any = (values: FormInitialValues) => {
+    const onSubmitHandler = (values: FormInitialValues) => {
         setApiStatus(true)
-
-        const formatedPriority = values?.preferredCourier?.map(
-            (ele: any, ind: number) => ({
-                courierId: ele?.value,
-                courierName: ele?.label,
-                priority: ind + 1,
-            })
-        )
-
         setTimeout(() => {
-            updatePincode({
+            updateArea({
                 id,
                 body: {
                     countryId: values.countryId || '',
                     stateId: values.stateId || '',
                     districtId: values.districtId || '',
                     tehsilId: values.tehsilId || '',
-                    preferredCourier: formatedPriority || [],
-                    isFixed: values.isFixed,
+                    pincodeId: values.pincodeId || '',
+                    // area: values?.area?.map((ele) => ele?.areaName),
                 },
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'State added successfully!')
+                        showToast('success', 'Area Updated successfully!')
                         onClose()
                         setApiStatus(false)
                     } else {
@@ -132,7 +116,7 @@ const EditPincodeWrapper = ({ id, onClose }: Props) => {
         >
             {(formikProps) => {
                 return (
-                    <AddPincodeDialog
+                    <AddAreaDialog
                         onClose={onClose}
                         apiStatus={apiStatus}
                         formikProps={formikProps as any}
@@ -144,4 +128,4 @@ const EditPincodeWrapper = ({ id, onClose }: Props) => {
     )
 }
 
-export default EditPincodeWrapper
+export default EditAreaWrapper

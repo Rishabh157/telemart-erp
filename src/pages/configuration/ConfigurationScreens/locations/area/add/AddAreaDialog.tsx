@@ -16,38 +16,132 @@ import { FormInitialValues } from './AddAreaWrapper'
 import ATMLoadingButton from 'src/components/UI/atoms/ATMLoadingButton/ATMLoadingButton'
 import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import { useGetAllCountryQuery } from 'src/services/CountryService'
+import { useGetAllStateByCountryQuery } from 'src/services/StateService'
+import { useGetAllDistrictByStateQuery } from 'src/services/DistricService'
+import { useGetAllTehsilByDistrictQuery } from 'src/services/TehsilService'
+import { useGetAllPincodeByTehsilQuery } from 'src/services/PinCodeService'
 
 // |-- Types --|
 type Props = {
     onClose: () => void
     formikProps: FormikProps<FormInitialValues>
     apiStatus: boolean
+    formType: 'ADD' | 'EDIT'
 }
 
-const AddAreaDialog = ({ onClose, formikProps, apiStatus }: Props) => {
+const AddAreaDialog = ({ onClose, formikProps, formType, apiStatus }: Props) => {
     const { values, setFieldValue } = formikProps
+
+    // Hook
+    const { options: countryOptions } = useCustomOptions({
+        useEndPointHook: useGetAllCountryQuery(''),
+        keyName: 'countryName',
+        value: '_id',
+    })
+
+    const { options: stateOptions } = useCustomOptions({
+        useEndPointHook: useGetAllStateByCountryQuery(values?.countryId, {
+            skip: !values?.countryId
+        }),
+        keyName: 'stateName',
+        value: '_id',
+    })
+
+    const { options: districtOptions } = useCustomOptions({
+        useEndPointHook: useGetAllDistrictByStateQuery(values?.stateId, {
+            skip: !values?.stateId
+        }),
+        keyName: 'districtName',
+        value: '_id',
+    })
+
+    const { options: tehsilOptions } = useCustomOptions({
+        useEndPointHook: useGetAllTehsilByDistrictQuery(values?.districtId, {
+            skip: !values?.districtId
+        }),
+        keyName: 'tehsilName',
+        value: '_id',
+    })
+
+    const { options: pincodeOptions } = useCustomOptions({
+        useEndPointHook: useGetAllPincodeByTehsilQuery(values?.tehsilId, {
+            skip: !values?.tehsilId
+        }),
+        keyName: 'pincode',
+        value: '_id',
+    })
 
     return (
         <Dialog open={true} onClose={onClose} fullWidth>
-            <DialogTitle className="text-primary-main">Add Area</DialogTitle>
-            <DialogContent>
-                {/* <ATMTextField
-                    required
-                    name="area"
-                    value={values.area}
-                    onChange={(e) => {
-                        setFieldValue('area', e.target.value)
-                    }}
-                    placeholder="Name "
-                    label="Area Name"
-                /> */}
+            <DialogTitle className="text-primary-main">
+                {formType === 'ADD' ? 'Add' : 'Edit'} Area
+            </DialogTitle>
+            <DialogContent className='h-[50vh]'>
+
+                {formType === 'EDIT' &&
+                    <>
+                        <ATMSelectSearchable
+                            label="Country"
+                            selectLabel="country"
+                            name="countryId"
+                            value={values?.countryId}
+                            options={countryOptions}
+                            onChange={(e) => {
+                                setFieldValue('countryId', e || '')
+                            }}
+                        />
+                        <ATMSelectSearchable
+                            label="State"
+                            selectLabel="state"
+                            name="stateId"
+                            value={values?.stateId}
+                            options={stateOptions}
+                            onChange={(e) => {
+                                setFieldValue('stateId', e || '')
+                            }}
+                        />
+                        <ATMSelectSearchable
+                            label="District"
+                            selectLabel="district"
+                            name="districtId"
+                            value={values?.districtId}
+                            options={districtOptions}
+                            onChange={(e) => {
+                                setFieldValue('districtId', e || '')
+                            }}
+                        />
+                        <ATMSelectSearchable
+                            label="Tehsil"
+                            selectLabel="tehsil"
+                            name="tehsilId"
+                            value={values?.tehsilId}
+                            options={tehsilOptions}
+                            onChange={(e) => {
+                                setFieldValue('tehsilId', e || '')
+                            }}
+                        />
+                        <ATMSelectSearchable
+                            label="Pincode"
+                            selectLabel="pincode"
+                            name="pincodeId"
+                            value={values?.pincodeId}
+                            options={pincodeOptions}
+                            onChange={(e) => {
+                                setFieldValue('pincodeId', e || '')
+                            }}
+                        />
+                    </>
+                }
 
                 <FieldArray name="area">
                     {({ push, remove }) => {
                         return (
                             <>
                                 <div className="grid grid-cols-2 gap-3 gap-y-5">
-                                    {values.area?.map(
+                                    {values?.area?.map(
                                         (item, index) => {
                                             const { areaName } = item
                                             return (
@@ -57,6 +151,7 @@ const AddAreaDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                                                 >
                                                     <ATMTextField
                                                         required
+                                                        disabled={formType === 'EDIT'}
                                                         type="text"
                                                         name={`area[${index}].areaName`}
                                                         value={areaName}
@@ -92,7 +187,7 @@ const AddAreaDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                                 </div>
 
                                 {/* BUTTON - Add More Area */}
-                                <div className="flex justify-self-start py-9">
+                                {formType === 'ADD' && <div className="flex justify-self-start py-9">
                                     <button
                                         type="button"
                                         onClick={() =>
@@ -104,7 +199,7 @@ const AddAreaDialog = ({ onClose, formikProps, apiStatus }: Props) => {
                                     >
                                         <HiPlus size="20" /> Add More
                                     </button>
-                                </div>
+                                </div>}
                             </>
                         )
                     }}

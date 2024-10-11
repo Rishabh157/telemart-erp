@@ -63,7 +63,7 @@ export const areaApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Update *****/
+        //**** Update ****/
         updateArea: builder.mutation({
             invalidatesTags: ['Area'],
             query: ({ body, id }: UpdateArea) => ({
@@ -82,25 +82,11 @@ export const areaApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //**** Export
-        exportAreaData: builder.mutation({
-            query: (body: PaginationType) => ({
-                url: '',
-                params: {
-                    _page: body.page,
-                    _limit: body.limit,
-                },
-                method: 'GET',
-                // body,
-            }),
-        }),
-
         // **** Delete
         deleteArea: builder.mutation({
             invalidatesTags: ['Area', 'areaGroup'],
             query: (id) => ({
                 url: `/area/${id}`,
-
                 method: 'DELETE',
             }),
         }),
@@ -112,7 +98,6 @@ export const {
     useAddMultipleAreaMutation,
     useUpdateAreaMutation,
     useGetAreaByIdQuery,
-    useExportAreaDataMutation,
     useDeleteAreaMutation,
     useGetAllAreaQuery,
     useGetAllAreaUnauthQuery,
