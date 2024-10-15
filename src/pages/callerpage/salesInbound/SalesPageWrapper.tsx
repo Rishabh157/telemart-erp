@@ -217,8 +217,8 @@ const SalesPageWrapper = () => {
                         if (res?.data?.data?._id) {
                             let callerData = {
                                 orderID: res?.data?.data?._id,
-                                mobileNo: initialValues.mobileNo,
-                                didNo: initialValues.didNo,
+                                mobileNo: initialValues?.mobileNo,
+                                didNo: initialValues?.didNo,
                                 companyId: res?.data?.data?.companyId,
                                 agentId: res?.data?.data?.agentId,
                             }

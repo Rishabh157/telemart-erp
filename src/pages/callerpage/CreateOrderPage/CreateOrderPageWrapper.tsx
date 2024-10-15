@@ -126,23 +126,26 @@ const CreateOrderPageWrapper = () => {
         SelectOption[] | []
     >([])
     const [addApi, setAddApi] = useState(false)
-    
+
     const [callerLoacalStorage, setcallerLoacalStorage] =
         useState<LocalUserStorage>()
 
     const locationUrl = useLocation()
-    const queryParams = new URLSearchParams(locationUrl.search)
+    // const queryParams = new URLSearchParams(locationUrl.search)
     const createOrderState = locationUrl.state
-    const phoneNumber = queryParams.get('phone')
-    const agentName = queryParams.get('username')
-    const didNumber = queryParams.get('didnumber')
-    const campaignId = queryParams.get('campaign')
-    const calltype = queryParams.get('calltype')
+    // const phoneNumber = queryParams.get('phone')
+    // const agentName = queryParams.get('username')
+    // const didNumber = queryParams.get('didnumber')
+    // const campaignId = queryParams.get('campaign')
+    // const calltype = queryParams.get('calltype')
     // const dstphone = queryParams.get('dstphone')
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
     )
-    
+
+    // console.log('phoneNumber', phoneNumber);
+    // console.log('createOrderState', createOrderState);
+
     const navigate = useNavigate()
     const { items, isTableLoading } = inboundCallerState
     // Table Data with MobileNo filtered
@@ -152,9 +155,9 @@ const CreateOrderPageWrapper = () => {
     // get DID number by
     const { items: didItems } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetByDidNumberByAuthQuery(
-            didNumber || createOrderState?.didNumber,
+            createOrderState?.didNumber,
             {
-                skip: !didNumber && !createOrderState?.didNumber,
+                skip: !createOrderState?.didNumber,
             }
         ),
     })
@@ -165,21 +168,22 @@ const CreateOrderPageWrapper = () => {
         isLoading: isCallerLoading,
     } = useGetPaginationCallerDataQuery<any>(
         {
-            phoneNo: phoneNumber || createOrderState?.mobileNumber || '',
+            phoneNo: createOrderState?.mobileNumber || '',
             type: activeTab,
         },
         {
-            skip: !phoneNumber,
+            skip: !createOrderState?.mobileNumber,
         }
     )
+
     const {
         data: singleCallerListingData,
         isFetching: singleIsCallerFetching,
         isLoading: singleIsCallerLoading,
     } = useGetOrderNumberCallerDataQuery<any>(
-        { phoneNo: phoneNumber || createOrderState?.mobileNumber || '' },
+        { phoneNo: createOrderState?.mobileNumber || '' },
         {
-            skip: !phoneNumber,
+            skip: !createOrderState?.mobileNumber,
         }
     )
 
@@ -206,7 +210,7 @@ const CreateOrderPageWrapper = () => {
             // use object destructuring to remove the _id property
             addCallerForm({
                 ...rest,
-                companyCode:createOrderState?.companyCode,
+                companyCode: createOrderState?.companyCode,
                 preffered_delivery_date: preffered_delivery_date || '',
             }).then((res: any) => {
                 if ('data' in res) {
@@ -248,6 +252,7 @@ const CreateOrderPageWrapper = () => {
                 singleCallerListingData?.customerReputation
             )
             setAddApi(true)
+            console.log('singleCallerListingData', singleCallerListingData);
         }
     }, [singleCallerListingData, singleIsCallerFetching, singleIsCallerLoading])
 
@@ -292,7 +297,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Order No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderNumber === null ? '-' : row.orderNumber}</span>
             ),
@@ -302,7 +307,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Enquiry No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
@@ -311,7 +316,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Agent Name',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.agentName} </span>
@@ -322,7 +327,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Agent ID',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
@@ -331,7 +336,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'EDP Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
@@ -340,7 +345,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Customer Name',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.customerName} </span>
@@ -351,7 +356,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Scheme',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row.schemeName} </span>
             ),
@@ -361,7 +366,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Quantity',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.shcemeQuantity} </span>
@@ -372,7 +377,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Disposition',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.dispositionLevelThreeLabel} </span>
@@ -383,7 +388,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'District',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.districtLabel} </span>
@@ -394,7 +399,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Pincode',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row.pincodeLabel} </span>
@@ -405,7 +410,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Agent Remark',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> {row.remark} </span>,
         },
@@ -414,7 +419,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Preffred Delivery Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -441,7 +446,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
@@ -467,7 +472,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Dealer Code',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.assignDealerCode} </span>
@@ -478,7 +483,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Dealer Status',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
@@ -487,7 +492,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Status Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             // renderCell: (row: OrderListResponse) => (
             //     <span> {row?.dealerCode} </span>
@@ -498,7 +503,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'CC Name',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.callCenterLabel} </span>
@@ -509,7 +514,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Warehouse',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.wareHouseLabel} </span>
@@ -520,7 +525,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Tracking No.',
             flex: 'flex-[3_3_0%]',
             align: 'end',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
@@ -530,7 +535,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Complaint No.',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -538,7 +543,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Customer Number',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -546,7 +551,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Order Status',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.orderStatus} </span>
@@ -557,7 +562,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'IC One',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -565,7 +570,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'IC Two',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -573,7 +578,7 @@ const CreateOrderPageWrapper = () => {
             headerName: 'IC Three',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
         {
@@ -581,18 +586,18 @@ const CreateOrderPageWrapper = () => {
             headerName: 'Remark',
             flex: 'flex-[3_3_0%]',
             align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
         },
     ]
 
     const initialValues: FormInitialValues = {
-        agentName: agentName || createOrderState?.userName,
-        campaign: campaignId || (createOrderState?.campaignName as string),
-        callType: calltype || (createOrderState?.callType as string),
+        agentName: createOrderState?.userName,
+        campaign: createOrderState?.campaignName,
+        callType: createOrderState?.callType,
         incomingCallerNo: '',
         customerName: orderData?.customerName || '',
-        didNo: didNumber || (createOrderState?.didNumber as string),
+        didNo: createOrderState?.didNumber,
         flagStatus: '',
         productGroupId: didItems?.schemeProductGroup?.[0]?.productGroup || null,
         productGroupLabel: '',
@@ -625,7 +630,7 @@ const CreateOrderPageWrapper = () => {
         houseNumber: orderData?.houseNumber || '',
         streetNumber: orderData?.streetNumber || '',
         landmark: orderData?.landmark || '',
-        mobileNo: phoneNumber || (createOrderState?.mobileNumber as string),
+        mobileNo: createOrderState?.mobileNumber,
         whatsappNo: orderData?.whatsappNo || '',
         autoFillingShippingAddress: orderData?.autoFillingShippingAddress || '',
         // isRecording: false,

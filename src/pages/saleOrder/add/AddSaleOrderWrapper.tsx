@@ -48,7 +48,7 @@ const AddSaleOrderWrapper = (props: Props) => {
 
     const { options: dealerOptions } = useCustomOptions({
         useEndPointHook: useGetAllDealersQuery(''),
-        keyName: ['firstName', 'lastName'],
+        keyName: ['firstName', 'lastName', ` ( dealerCode )`],
         value: '_id',
     })
 
