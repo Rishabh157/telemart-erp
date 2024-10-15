@@ -37,7 +37,7 @@ export const callerPageApi = apiSlice.injectEndpoints({
         getOrderNumberCallerData: builder.query({
             providesTags: ['call'],
             query: ({ phoneNo }: { phoneNo: string }) => ({
-                url: `/order-inquiry/unauth/${phoneNo}/get-by-phnumber`,
+                url: `/order-inquiry/${phoneNo}/get-by-phnumber`,
                 method: 'GET',
             }),
         }),
