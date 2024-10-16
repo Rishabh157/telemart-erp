@@ -48,10 +48,6 @@ const SchemeListingWrapper = () => {
                     fieldName: 'companyId',
                     value: userData?.companyId as string,
                 },
-                {
-                    fieldName: '',
-                    value: [],
-                },
             ],
             dateFilter: {},
             orderBy: 'createdAt',
