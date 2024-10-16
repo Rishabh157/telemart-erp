@@ -50,11 +50,11 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
     };
 
     const getReverseCalculation = (product: any): TaxCalculation => {
-        // const companyStateId = items?.fromWarehouseData?.billingAddress?.stateId;
-        // const warehouseStateId = items?.toWarehouseData?.billingAddress?.stateId;
+        const companyStateId = items?.warehouseBillingInfo?.stateId;
+        const warehouseStateId = items?.stateId;
         // const warehouseStateIsUnion = items?.toWarehouseData?.billingAddress?.isUnion;
-        const companyStateId = true
-        const warehouseStateId = true
+        // const companyStateId = true
+        // const warehouseStateId = true
         const warehouseStateIsUnion = false
 
         const dealerSalePrice = product?.dealerSalePrice || 0; // Dealer sale price including tax

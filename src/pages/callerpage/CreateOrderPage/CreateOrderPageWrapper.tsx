@@ -131,20 +131,10 @@ const CreateOrderPageWrapper = () => {
         useState<LocalUserStorage>()
 
     const locationUrl = useLocation()
-    // const queryParams = new URLSearchParams(locationUrl.search)
     const createOrderState = locationUrl.state
-    // const phoneNumber = queryParams.get('phone')
-    // const agentName = queryParams.get('username')
-    // const didNumber = queryParams.get('didnumber')
-    // const campaignId = queryParams.get('campaign')
-    // const calltype = queryParams.get('calltype')
-    // const dstphone = queryParams.get('dstphone')
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
     )
-
-    // console.log('phoneNumber', phoneNumber);
-    // console.log('createOrderState', createOrderState);
 
     const navigate = useNavigate()
     const { items, isTableLoading } = inboundCallerState
@@ -252,7 +242,6 @@ const CreateOrderPageWrapper = () => {
                 singleCallerListingData?.customerReputation
             )
             setAddApi(true)
-            console.log('singleCallerListingData', singleCallerListingData);
         }
     }, [singleCallerListingData, singleIsCallerFetching, singleIsCallerLoading])
 

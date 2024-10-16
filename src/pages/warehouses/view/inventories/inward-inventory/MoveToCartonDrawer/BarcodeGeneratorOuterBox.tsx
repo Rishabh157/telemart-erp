@@ -83,7 +83,7 @@ function BarcodeGeneratorOuterBox() {
                         <div className="flex gap-4">
                             <span> Expiry Date: </span>
                             <span>
-                                {moment(expiryDate).format('DD-MM-YYYY')}
+                                {expiryDate  ? moment(expiryDate).format('DD-MM-YYYY') : 'NA'}
                             </span>
                         </div>
                     </div>
@@ -109,7 +109,7 @@ function BarcodeGeneratorOuterBox() {
                     </div>
                 ))}
             </div> */}
-            
+
             <Divider className="mt-3" />
             <div className="grid grid-cols-4 md:grid-cols-4 gap-x-3 gap-y-1 mt-5 ">
                 {barcodeValues?.map((barcode: {
@@ -120,7 +120,7 @@ function BarcodeGeneratorOuterBox() {
                         key={barcode?.barcodeNumber}
                         className={`flex flex-col gap-x-4 shadow relative w-full py-4 px-4 custom-border border-2 border-indigo-500 `}
                     >
-                        <p className="flex justify-center font-normal text-[0.6rem] tracking-[.25em]">
+                        <p className="flex justify-center font-semibold text-[0.6rem] tracking-[.25em]">
                             {barcode?.upperBarcodeNumber}
                         </p>
                         <Barcode value={barcode?.barcodeNumber} />

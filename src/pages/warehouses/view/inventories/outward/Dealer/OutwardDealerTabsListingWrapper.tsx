@@ -394,7 +394,6 @@ const OutwardDealerTabsListingWrapper = () => {
         })
         let barcode = [...barcodeList]
         barcode[ind] = [...filteredObj]
-
         setBarcodeList(barcode)
     }
 
@@ -414,7 +413,7 @@ const OutwardDealerTabsListingWrapper = () => {
                 if (res?.data?.status) {
                     if (res?.data?.data) {
                         updateStatus({
-                            status: false,
+                            status: true,
                             barcodes: [barcodeNumber],
                         })
                         let newBarcode = [...barcodeList]
@@ -437,10 +436,16 @@ const OutwardDealerTabsListingWrapper = () => {
                             newBarcode[index] = [...uniqueArray]
                         }
                         setBarcodeList([...newBarcode])
+
+
+                        // Clear the barcode input for this index
+                        setBarcodeNumber((prev: any) => {
+                            const updatedArray = [...prev];
+                            updatedArray[index] = ""; // Clear the input at the given index
+                            return updatedArray;
+                        });
+
                     }
-
-                    // Freezed Api
-
                 }
 
                 // error messages
@@ -502,14 +507,6 @@ const OutwardDealerTabsListingWrapper = () => {
                 }
             })
 
-        const dispatchBarcodeList = barcodeList
-            ?.flat(1)
-            ?.map((ele: BarcodeListResponseType) => {
-                if (!ele) return ele
-
-                return ele?.barcodeNumber
-            })
-
         const soid = selectedItemsTobeDispatch?.documents?.map(
             (ele: any) => ele?._id as string
         )
@@ -521,13 +518,9 @@ const OutwardDealerTabsListingWrapper = () => {
         })
             .then((res: any) => {
                 if (res?.data?.status) {
-                    showToast('success', 'dispatched successfully')
+                    showToast('success', 'Dispatched successfully!')
                     setIsShow(false)
                     dispatch(setFieldCustomized(false))
-                    updateStatus({
-                        status: true,
-                        barcodes: dispatchBarcodeList,
-                    })
                 } else {
                     showToast('error', res?.data?.message)
                 }
@@ -915,7 +908,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                         )
                                                     }}
                                                 />
- 
+
                                                 <ATMTextField
                                                     name=""
                                                     value={values.totalPackages}

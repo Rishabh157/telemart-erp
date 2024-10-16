@@ -39,6 +39,15 @@ const columns: columnTypes[] = [
         ),
     },
     {
+        field: 'freezeQuantity',
+        headerName: 'Freeze Count',
+        flex: 'flex-[1_1_0%]',
+        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FAKE_COUNT,
+        renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
+            <span className="p-1">{row.freezeQuantity}</span>
+        ),
+    },
+    {
         field: 'damageQuantity',
         headerName: 'Damage Count',
         flex: 'flex-[1_1_0%]',
@@ -72,15 +81,6 @@ const columns: columnTypes[] = [
         name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FAKE_COUNT,
         renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
             <span className="p-1">{row.fakeQuantity}</span>
-        ),
-    },
-    {
-        field: 'freezeQuantity',
-        headerName: 'Freeze Count',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_WAREHOUSE_WAREHOUSE_INVENTORIES_LIST_FAKE_COUNT,
-        renderCell: (row: WareHouseInventoryOfProductSummaryListResponse) => (
-            <span className="p-1">{row.freezeQuantity}</span>
         ),
     },
     {
