@@ -479,7 +479,7 @@ const InquiryOrdersListingWrapper = () => {
             ),
         },
         {
-            field: 'agent',
+            field: 'agentName',
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_INQUIRY_TAB_LIST_AGENT,

@@ -22,9 +22,21 @@ export const reportsApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** Get Agent Order Status *****/
+        getAgentWiseEnquiry: builder.query({
+            // providesTags: ['agent-report'],
+            query: (body) => ({
+                url: '/report/all-inquiry',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
+
 export const {
     useGetAgentOrderStatusReportsQuery,
     useGetAgentWiseComplaintQuery,
+    useGetAgentWiseEnquiryQuery
 } = reportsApi
