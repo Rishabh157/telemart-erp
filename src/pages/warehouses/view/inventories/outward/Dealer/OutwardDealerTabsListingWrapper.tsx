@@ -49,7 +49,6 @@ import { getTransportTypeOptions } from 'src/utils/constants/customeTypes'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FormInitialValuesFilterWithLabel } from './Filters/OutwardDealerTabFilterFormWrapper'
-// import moment from 'moment'
 
 // |-- Types --|
 export type Tabs = {
