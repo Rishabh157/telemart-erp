@@ -232,6 +232,7 @@ const CustomerComplainWrapper = () => {
                     } else {
                         showToast('error', res?.data?.message)
                         setApiStatus(false)
+                        setComplaintContactNo('') // set contact number for complaint data api
                         setCustomerDetails({
                             name: '',
                             emailOfDetails: '',
