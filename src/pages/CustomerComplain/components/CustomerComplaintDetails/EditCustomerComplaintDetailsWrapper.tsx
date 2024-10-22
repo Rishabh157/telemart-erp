@@ -17,9 +17,10 @@ type Props = {
 }
 
 const EditCustomerComplaintDetailsWrapper = ({
-    complaintId,
+    complaintId = '',
     handleClose,
 }: Props) => {
+
     const [complaintOrderDetails, setComplaintOrderDetails] =
         React.useState<any>()
     const [complaintLogs, setComplaintLogs] = React.useState<any[]>([])

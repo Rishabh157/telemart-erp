@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import moment from 'moment'
 import { CiEdit } from 'react-icons/ci'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
@@ -11,21 +11,16 @@ type Props = {
     rows?: any[]
 }
 
-const ComplaintListing = ({ rows }: Props) => {
-    const [selectedComplaintId, setSelectedComplaintId] =
-        React.useState<string>('')
-    const [
-        isOpenCustomerComplaitDetailModel,
-        setIsOpenCustomerComplaitDetailModel,
-    ] = React.useState<boolean>(false)
-    const [isFlowDialogShow, setIsFlowDialogShow] =
-        React.useState<boolean>(false)
+const isDisableEdit = [
+    'MONEYBACK',
+    'PRODUCTREPLACEMENT',
+    'DELIVERYBOYHOUSEARRESTCASE',
+]
 
-    const isDisableEdit = [
-        'MONEYBACK',
-        'PRODUCTREPLACEMENT',
-        'DELIVERYBOYHOUSEARRESTCASE',
-    ]
+const ComplaintListing = ({ rows }: Props) => {
+    const [selectedComplaintId, setSelectedComplaintId] = useState<string>('')
+    const [isOpenCustomerComplaitDetailModel, setIsOpenCustomerComplaitDetailModel] = useState<boolean>(false)
+    const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
 
     return (
         <div className="mt-1 w-full">
@@ -110,9 +105,9 @@ const ComplaintListing = ({ rows }: Props) => {
                             <tr className="bg-#cdddf2" key={ind}>
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
                                     {ele?.status !== 'CLOSED' &&
-                                    !isDisableEdit?.includes(
-                                        ele?.icOneLabel
-                                    ) ? (
+                                        !isDisableEdit?.includes(
+                                            ele?.icOneLabel
+                                        ) ? (
                                         <div className="flex justify-center items-center">
                                             <CiEdit
                                                 onClick={() => {
@@ -134,17 +129,17 @@ const ComplaintListing = ({ rows }: Props) => {
                                                 size={18}
                                                 onClick={() => {
                                                     setIsFlowDialogShow(true)
-                                                    setSelectedComplaintId(
-                                                        ele?._id
-                                                    )
+                                                    setSelectedComplaintId(ele?._id)
                                                 }}
                                             />
                                         </div>
                                     )}
                                 </td>
+
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
                                     {ele?.complaintNumber}
                                 </td>
+
                                 <td className="border border-gray-400 py-2 px-4 text-sm text-center text-[#406698] font-semibold">
                                     <div className="flex flex-col">
                                         <span>
