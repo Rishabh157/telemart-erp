@@ -186,7 +186,9 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
 
                 <div>
                     <p className="font-bold text-[20px] border-b border-black py-2">
-                        COD FOR Rs : {items?.totalAmount?.toFixed(2)}
+                    {/* COD FOR Rs : {items?.totalAmount?.toFixed(2)} */}
+                       
+                        COD FOR Rs : {totalFigure?.totalAmount?.toFixed(2) || '0.00'}
                     </p>
                 </div>
 
@@ -213,7 +215,6 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
                         {items?.schemeProducts?.map((ele, index) => {
 
                             const { actualValue, totalAmount, cgstPer, cgstValue, sgstPer, sgstValue, igstPer, igstValue, utgstPer, utgstValue } = getReverseCalculation(ele)
-
                             // Assuming ele is defined and has properties needed for calculations
                             // Update totalFigure properties
                             totalFigure.quantity += ele?.productQuantity || 0;  // Add quantity, defaulting to 0 if undefined
@@ -223,7 +224,6 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
                             totalFigure.tIGST += parseFloat((igstValue * (ele?.productQuantity || 0)).toFixed(2));  // Add IGST value
                             totalFigure.tUGST += parseFloat((utgstValue * (ele?.productQuantity || 0)).toFixed(2));  // Add UTGST value
                             totalFigure.totalAmount += parseFloat((totalAmount * (ele?.productQuantity || 0)).toFixed(2));  // Update total amount
-
 
                             return (
                                 <tr key={ele?.productGroupId}>
@@ -241,7 +241,7 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
                                     <td className={tableCell}>{Number(0)?.toFixed(2)}</td>
                                     <td className={tableCell}>{Number(0)?.toFixed(2)}</td>
                                     <td className={tableCell}>
-                                        -- {(actualValue * ele?.productQuantity).toFixed(2)} --
+                                     {(actualValue * ele?.productQuantity).toFixed(2)}
                                     </td>
 
                                     <td className={tableCell}>
@@ -276,12 +276,12 @@ const RetailInvoice = ({ items }: { items: OrderInvoiceAndLabelListResponse }) =
                             <td className={tableCell}>
                                 {totalFigure.quantity}
                             </td>
-                            <td className={tableCell}>
-                                {totalFigure?.taxableAmount?.toFixed(2) || '0.00'}
+                            {/* <td className={tableCell}>
+                                {totalFigure.totalAmount?.toFixed(2) || '0.00'}
                             </td>
                             <td className={tableCell}>0</td>
-                            <td className={tableCell}>0.00</td>
-                            <td className={tableCell}>-- 00.00 --</td>
+                            <td className={tableCell}>0.00</td> */}
+                            <td colSpan={4} className={tableCell}>{totalFigure.taxableAmount?.toFixed(2) || '0.00'}</td>
                             <td className="text-[14px] text-center py-1">
                                 {totalFigure?.tSGST?.toFixed(2) || '0.00'}
                             </td>
