@@ -75,6 +75,7 @@ const CustomerComplainHeader = ({
                         <ATMTextField
                             label="Order No."
                             labelSize="xxs"
+                            autoFocus={true}
                             size="xxs"
                             labelClass=""
                             extraClassField="mt-0"

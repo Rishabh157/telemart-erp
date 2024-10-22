@@ -280,21 +280,13 @@ const CustomerCarePageWrapper = () => {
             hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <>
-                        <span>
-                            {row?.preffered_delivery_date
-                                ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
-                                : '-'}
-                        </span>
-                        {/* <span>
-                            {' '}
-                            {moment(row?.preffered_delivery_date).format(
-                                'hh:mm:ss A'
-                            )}
-                        </span>, */}
-                    </>
+                    <span>
+                        {row?.preffered_delivery_date
+                            ? moment(row?.preffered_delivery_date).format(
+                                'DD-MM-YYYY'
+                            )
+                            : '-'}
+                    </span>
                 )
             },
         },
@@ -462,7 +454,7 @@ const CustomerCarePageWrapper = () => {
 
     // get DID number by
     const { items: didItems } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetByDidNumberQuery({didNumber , companyId : callerDataItem?.companyId }, {
+        useEndPointHook: useGetByDidNumberQuery({ didNumber, companyId: callerDataItem?.companyId }, {
             skip: !didNumber,
         }),
     })

@@ -441,15 +441,13 @@ const CreateBatchOrderListingWrapper = () => {
             // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <>
-                        <span>
-                            {row?.preffered_delivery_date
-                                ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
-                                : '-'}
-                        </span>
-                    </>
+                    <span>
+                        {row?.preffered_delivery_date
+                            ? moment(row?.preffered_delivery_date).format(
+                                'DD-MM-YYYY'
+                            )
+                            : '-'}
+                    </span>
                 )
             },
         },

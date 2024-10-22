@@ -26,7 +26,7 @@ const CustomerComplain: React.FC<Props> = ({
     customerDetails,
     column,
     apiStatus,
-    contactNumber,
+    contactNumber = '',
 }) => {
     const { values, setFieldValue, handleSubmit } = formikProps
     const [selectedOrderId, setSelectedOrderId] = React.useState<string>('')
@@ -99,7 +99,7 @@ const CustomerComplain: React.FC<Props> = ({
                     <ATMTable
                         // headerClassName="bg-[#cdddf2] py-2 text-white z-0"
                         columns={column || []}
-                        rows={customerDetails?.orderListing}
+                        rows={customerDetails?.orderListing || []}
                         onRowClick={(row) => {
                             setIsOpenCustomerComplaitDetailModel(true)
                             setSelectedOrderId(row?._id)

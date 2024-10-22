@@ -201,41 +201,41 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                 // row?.orderStatus === SaleOrderStatus.complete ? (
                 //     'Dispatched'
                 // ) : row?.orderStatus === SaleOrderStatus.dispatched ? (
-                    <ActionPopup
-                        customBtnText="Mark As Delivered"
-                        isCustomBtn={
-                            isAuthorized(
-                                UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_MARK_AS_DELIVERED
-                            ) && row?.status === orderStatusEnum.intransit
-                        }
-                        handleCustomActionButton={() => {
-                            showConfirmationDialog({
-                                title: 'Mark As Delivered',
-                                text: 'Do you want to update status Delivered',
-                                showCancelButton: true,
-                                next: (res) => {
-                                    return res.isConfirmed
-                                        ? handleDeliveredStatus({
-                                              orderId: row?._id,
-                                          })
-                                        : null
-                                },
-                            })
-                        }}
-                        handleOnAction={() => {
-                            // setCurrentId(row?._id)
-                        }}
-                    />
-                // ) : (
-                //     <ActionPopup
-                //         handleOnAction={() => {}}
-                //         isCustomBtn={true}
-                //         customBtnText="Dispatch"
-                //         handleCustomActionButton={() => {
-                //             setSelectedItemsTobeDispatch(row)
-                //         }}
-                //     />
-                // ),
+                <ActionPopup
+                    customBtnText="Mark As Delivered"
+                    isCustomBtn={
+                        isAuthorized(
+                            UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_SHIPYAARI_MARK_AS_DELIVERED
+                        ) && row?.status === orderStatusEnum.intransit
+                    }
+                    handleCustomActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Mark As Delivered',
+                            text: 'Do you want to update status Delivered',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed
+                                    ? handleDeliveredStatus({
+                                        orderId: row?._id,
+                                    })
+                                    : null
+                            },
+                        })
+                    }}
+                    handleOnAction={() => {
+                        // setCurrentId(row?._id)
+                    }}
+                />
+            // ) : (
+            //     <ActionPopup
+            //         handleOnAction={() => {}}
+            //         isCustomBtn={true}
+            //         customBtnText="Dispatch"
+            //         handleCustomActionButton={() => {
+            //             setSelectedItemsTobeDispatch(row)
+            //         }}
+            //     />
+            // ),
         },
         {
             field: 'awbBill',
@@ -290,7 +290,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
+                            FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -300,7 +300,7 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => {}}
+                                onClick={() => { }}
                                 className="cursor-pointer"
                                 label="Pending"
                                 color="error"
@@ -684,21 +684,13 @@ const OutwardShipyaariOrdersTabListingWrapper = () => {
             // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <>
-                        <span>
-                            {row?.preffered_delivery_date
-                                ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
-                                : '-'}
-                        </span>
-                        {/* <span>
-                                {' '}
-                                {moment(row?.preffered_delivery_date).format(
-                                    'hh:mm:ss A'
-                                )}
-                            </span>, */}
-                    </>
+                    <span>
+                        {row?.preffered_delivery_date
+                            ? moment(row?.preffered_delivery_date).format(
+                                'DD-MM-YYYY'
+                            )
+                            : '-'}
+                    </span>
                 )
             },
         },

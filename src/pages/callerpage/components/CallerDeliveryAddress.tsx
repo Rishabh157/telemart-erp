@@ -211,15 +211,11 @@ const CallerDeliveryAddress = ({
     }
 
     const handleAutoFillShippingAddress = (values: FormInitialValues) => {
-        const addressLabels = `${
-            values.stateLabel ? values.stateLabel + '\n' : ''
-        }${values.districtLabel ? values.districtLabel + '\n' : ''}${
-            values.tehsilLabel ? values.tehsilLabel + '\n' : ''
-        }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${
-            values.areaLabel ? values.areaLabel + '\n' : ''
-        }${values.houseNumber ? values.houseNumber + '\n' : ''}${
-            values.streetNumber ? values.streetNumber + '\n' : ''
-        }${values.landmark ? values.landmark + '\n' : ''}`
+        const addressLabels = `${values.stateLabel ? values.stateLabel + '\n' : ''
+            }${values.districtLabel ? values.districtLabel + '\n' : ''}${values.tehsilLabel ? values.tehsilLabel + '\n' : ''
+            }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${values.areaLabel ? values.areaLabel + '\n' : ''
+            }${values.houseNumber ? values.houseNumber + '\n' : ''}${values.streetNumber ? values.streetNumber + '\n' : ''
+            }${values.landmark ? values.landmark + '\n' : ''}`
         return addressLabels
     }
 
@@ -670,6 +666,8 @@ const CallerDeliveryAddress = ({
                                                 'preffered_delivery_date',
                                                 e
                                             )
+                                            // const formattedDate = moment(e).format('YYYY-MM-DD'); // Convert to YYYY-MM-DD format
+                                            // setFieldValue('preffered_delivery_date', formattedDate);
                                         }}
                                     />
                                 </div>

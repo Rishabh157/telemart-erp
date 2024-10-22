@@ -339,6 +339,7 @@ import DealerInvoice from './Receipt/DEALERInvoice'
 import { DealerTaxInvoice } from './Receipt/DealerTaxInvoice'
 import WarehouseTransferInvoice from './Receipt/WarehouseTransferInvoice'
 import WarehouseOrderStatusMarkWrapper from './pages/warehouses/view/inventories/outward/warehouseOrderStatus/WarehouseOrderStatusMarkWrapper'
+import AgentWiseEnquiryWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseEnquiryWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -3965,7 +3966,7 @@ const PageRoutes = () => {
                             path="agent-wise-enquiry"
                             element={
                                 <Authorization
-                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    children={<AgentWiseEnquiryWrapper />}
                                     permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_ENQUIRY}
                                 />
                             }
