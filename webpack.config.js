@@ -1,5 +1,6 @@
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
     mode: 'development',
@@ -34,6 +35,12 @@ module.exports = {
         splitChunks: {
             chunks: 'all',
         },
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                parallel: true, // Enable parallel processing for faster builds
+            }),
+        ],
     },
     devServer: {
         port: 8080,
