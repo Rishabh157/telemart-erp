@@ -56,7 +56,7 @@ const CustomerComplaintDetailsForm = ({
     apiStatus,
     formType,
     complaintLogs,
-    complainImages,
+    complainImages = [],
     onClickSetImage = (newValue) => [],
     onClickRemoveImage = (index) => index,
 }: Props) => {
@@ -319,9 +319,7 @@ const CustomerComplaintDetailsForm = ({
                     </div>
 
                     {/* FILE PICKER */}
-                    {isShowImageUploadOptionInInitialCallerOneCase?.includes(
-                        values.icOneLabel
-                    ) && (
+                    {isShowImageUploadOptionInInitialCallerOneCase?.includes(values.icOneLabel) && formType === 'ADD' && (
                         <div className="w-[25%] px-2">
                             <ATMFilePickerWrapper
                                 isMultiple={true}
@@ -336,38 +334,34 @@ const CustomerComplaintDetailsForm = ({
                             />
                         </div>
                     )}
-
-                    <div className="grid grid-cols-4 gap-6 p-2">
-                        {Array.from(complainImages)?.map((file: any, index) => {
-                            return (
-                                <div
-                                    key={index}
-                                    className="border-b border-[1px] h-[200px] relative group cursor-pointer rounded"
-                                >
-                                    <img
-                                        src={
-                                            typeof file === 'string'
-                                                ? file
-                                                : URL.createObjectURL(file)
-                                        }
-                                        alt=""
-                                        className="h-full w-full rounded"
-                                    />
-                                    <div className="absolute transition-all bg-black opacity-90 group-hover:h-[50%] h-[0%] w-full bottom-0 flex justify-center items-center">
-                                        <span
-                                            className="font-bold text-sm text-white opacity-0 group-hover:opacity-100 hover:text-red-500 hover:underline"
-                                            onClick={() => {
-                                                onClickRemoveImage(index)
-                                            }}
-                                        >
-                                            Remove
-                                        </span>
+                    {formType === 'ADD' &&
+                        <div className="grid grid-cols-4 gap-6 p-2">
+                            {Array.from(complainImages)?.map((file: any, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className="border-b border-[1px] h-[200px] relative group cursor-pointer rounded"
+                                    >
+                                        <img
+                                            src={typeof file === 'string' ? file : URL.createObjectURL(file)}
+                                            alt=""
+                                            className="h-full w-full rounded"
+                                        />
+                                        <div className="absolute transition-all bg-black opacity-90 group-hover:h-[50%] h-[0%] w-full bottom-0 flex justify-center items-center">
+                                            <span
+                                                className="font-bold text-sm text-white opacity-0 group-hover:opacity-100 hover:text-red-500 hover:underline"
+                                                onClick={() => {
+                                                    onClickRemoveImage(index)
+                                                }}
+                                            >
+                                                Remove
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        })}
-                    </div>
-
+                                )
+                            })}
+                        </div>
+                    }
                     <div className="flex justify-center mt-2">
                         <ATMLoadingButton
                             className="w-28"

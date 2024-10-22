@@ -8,7 +8,9 @@ type Props = {
 }
 
 const ComplaintListingWrapper = ({ contactNumber }: Props) => {
+
     const [complaintListing, setComplaintListing] = React.useState<any[]>([])
+
     const { data, isFetching, isLoading, refetch } =
         useGetComplaintByMobileNoQuery<any>(contactNumber, {
             skip: !contactNumber || contactNumber.length !== 10,
@@ -28,7 +30,7 @@ const ComplaintListingWrapper = ({ contactNumber }: Props) => {
         }
     }, [contactNumber, refetch])
 
-    return <ComplaintListing rows={complaintListing} />
+    return <ComplaintListing rows={complaintListing || []} />
 }
 
 export default ComplaintListingWrapper

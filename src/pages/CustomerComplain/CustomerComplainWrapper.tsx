@@ -232,6 +232,23 @@ const CustomerComplainWrapper = () => {
                     } else {
                         showToast('error', res?.data?.message)
                         setApiStatus(false)
+                        setCustomerDetails({
+                            name: '',
+                            emailOfDetails: '',
+                            gender: '',
+                            incomingNumberOfDetails: '',
+                            mobileNumber: '',
+                            alternateNo1: '',
+                            alternateNo2: '',
+                            address1: '',
+                            address2: '',
+                            address3: '',
+                            address4: '',
+                            district: '',
+                            state: '',
+                            pincode: '',
+                            orderListing: [],
+                        })
                     }
                 } else {
                     showToast('error', 'Something went wrong')

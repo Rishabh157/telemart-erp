@@ -9,6 +9,7 @@ type Props = {
 }
 
 const SingleComplaintListingLogsWrapper = ({ complaintId }: Props) => {
+    
     const [complaintListing, setComplaintListing] = React.useState<any[]>([])
     const [apiStatus, setapiStatus] = React.useState<boolean>(false)
 
@@ -94,7 +95,7 @@ const SingleComplaintListingLogsWrapper = ({ complaintId }: Props) => {
         },
     ]
 
-    // get complaint logs by id
+    // Get complaint logs by id
     const {
         isLoading: isComplaintLogsLoading,
         isFetching: isComplaintLogsFetching,

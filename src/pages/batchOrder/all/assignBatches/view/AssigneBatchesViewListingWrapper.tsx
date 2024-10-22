@@ -63,18 +63,18 @@ const AssigneBatchesViewListingWrapper = () => {
                             setIsOrderAssigneeFormOpen(true)
                             setSelectedOrder(row)
                         }}
-                        // children={
-                        //     <>
-                        //         <button
-                        //             onClick={() => {
-                        //                 navigate(`/orders/view/${row?._id}`)
-                        //             }}
-                        //             className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                        //         >
-                        //             View
-                        //         </button>
-                        //     </>
-                        // }
+                    // children={
+                    //     <>
+                    //         <button
+                    //             onClick={() => {
+                    //                 navigate(`/orders/view/${row?._id}`)
+                    //             }}
+                    //             className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                    //         >
+                    //             View
+                    //         </button>
+                    //     </>
+                    // }
                     />
                 ),
         },
@@ -416,21 +416,13 @@ const AssigneBatchesViewListingWrapper = () => {
             // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
-                    <>
-                        <span>
-                            {row?.preffered_delivery_date
-                                ? moment(row?.preffered_delivery_date).format(
-                                      'DD-MM-YYYY'
-                                  )
-                                : '-'}
-                        </span>
-                        {/* <span>
-                            {' '}
-                            {moment(row?.preffered_delivery_date).format(
-                                'hh:mm:ss A'
-                            )}
-                        </span>, */}
-                    </>
+                    <span>
+                        {row?.preffered_delivery_date
+                            ? moment(row?.preffered_delivery_date).format(
+                                'DD-MM-YYYY'
+                            )
+                            : '-'}
+                    </span>
                 )
             },
         },
