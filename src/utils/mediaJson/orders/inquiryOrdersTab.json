@@ -15,11 +15,6 @@
                     "fieldValue": "inquiryNumber"
                 },
                 {
-                    "fieldId": "ORDER_INQUIRY_TAB_LIST_ORDER_NUMBER",
-                    "fieldName": "Order Number",
-                    "fieldValue": "Order Number"
-                },
-                {
                     "fieldId": "ORDER_INQUIRY_TAB_LIST_ASSIGNED_DEALER",
                     "fieldName": "Assigned Dealer",
                     "fieldValue": "assignDealerLabel"

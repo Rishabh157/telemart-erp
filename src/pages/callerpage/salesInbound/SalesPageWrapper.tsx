@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { number, object, string } from 'yup'
+import { object, string } from 'yup'
 import { showToast } from 'src/utils'
 import { Formik, FormikProps } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -644,49 +644,48 @@ const SalesPageWrapper = () => {
         status: statusProps.fresh,
     }
 
-    // Form validation schema
     // eslint-disable-next-line
     const validationSchema = object({
-        productGroupId: string().required('product group id is required'),
+        // productGroupId: string().required('product group id is required'),
         // DELEVERY ADDRESS SELECT OPTIONS
-        countryId: string(),
-        // pincodeId: string(),
-        // stateId: string(),
+        // countryId: string(),
+        pincodeId: string().required('pincode is required'),
+        stateId: string().required('state is required'),
+        districtId: string().required('district is required'),
+        tehsilId: string().required('tehsil is required'),
         // areaId: string(),
-        // districtId: string(),
-        // tehsilId: string(),
-        typeOfAddress: string(),
-        deliveryTimeAndDate: string(),
-        houseNumber: string(),
-        streetNumber: string(),
-        landmark: string(),
-        mobileNo: string(),
-        whatsappNo: string()
+        // typeOfAddress: string(),
+        // deliveryTimeAndDate: string(),
+        // houseNumber: string(),
+        // streetNumber: string(),
+        // landmark: string(),
+        // mobileNo: string(),
+        // whatsappNo: string()
+        //     .min(10, 'mobile number is not valid')
+        //     .max(10, 'mobile number is not valid'),
+        // autoFillingShippingAddress: string(),
+        // // isRecording: boolean(),
+        // gender: string(),
+        // schemeQuantity: number()
+        //     .integer()
+        //     .min(1, 'Scheme quantity must be at least 1')
+        //     .max(9, 'Scheme quantity cannot exceed 9')
+        //     .required('Scheme quantity is required'),
+        // // orderFor: string(),
+        // orderForOtherText: string(),
+        // ageGroup: string(),
+        // emailId: string().email('invalid email'),
+        // // medicalIssue: array().of(string()),
+        // remark: string(),
+        alternateNo: string()
             .min(10, 'mobile number is not valid')
             .max(10, 'mobile number is not valid'),
-        autoFillingShippingAddress: string(),
-        // isRecording: boolean(),
-        gender: string(),
-        schemeQuantity: number()
-            .integer()
-            .min(1, 'Scheme quantity must be at least 1')
-            .max(9, 'Scheme quantity cannot exceed 9')
-            .required('Scheme quantity is required'),
-        // orderFor: string(),
-        orderForOtherText: string(),
-        ageGroup: string(),
-        emailId: string().email('invalid email'),
-        // medicalIssue: array().of(string()),
-        remark: string(),
         dispositionLevelTwoId: string().required(
             'disposition level one is required'
         ),
         dispositionLevelThreeId: string().required(
             'disposition level two is required'
         ),
-        alternateNo: string()
-            .min(10, 'mobile number is not valid')
-            .max(10, 'mobile number is not valid'),
     })
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {

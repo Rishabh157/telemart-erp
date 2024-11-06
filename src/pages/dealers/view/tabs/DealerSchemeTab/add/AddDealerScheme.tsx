@@ -53,9 +53,8 @@ const AddDealerScheme = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()} //handleSubmit
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Add Scheme
                             </button>
@@ -105,6 +104,7 @@ const AddDealerScheme = ({
                                                             }}
                                                             options={allOptions}
                                                             label="Scheme"
+
                                                         />
                                                     </div>
                                                     {/* <div className='flex-[1_1_0%]'>
@@ -135,6 +135,7 @@ const AddDealerScheme = ({
                                                     {/* pincodes */}
                                                     <div className="flex-[3_3_0%]">
                                                         <ATMSelectSearchable
+                                                            isAllSelect
                                                             name={`details[${index}].pincodes`}
                                                             value={
                                                                 pincodes || []
@@ -159,20 +160,20 @@ const AddDealerScheme = ({
                                                     {/* BUTTON - Delete */}
                                                     {values.details?.length >
                                                         1 && (
-                                                        <div>
-                                                            <button
-                                                                type="button"
-                                                                onClick={() => {
-                                                                    remove(
-                                                                        index
-                                                                    )
-                                                                }}
-                                                                className="p-2 bg-red-500 text-white rounded"
-                                                            >
-                                                                <MdDeleteOutline className="text-2xl" />
-                                                            </button>
-                                                        </div>
-                                                    )}
+                                                            <div>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => {
+                                                                        remove(
+                                                                            index
+                                                                        )
+                                                                    }}
+                                                                    className="p-2 bg-red-500 text-white rounded"
+                                                                >
+                                                                    <MdDeleteOutline className="text-2xl" />
+                                                                </button>
+                                                            </div>
+                                                        )}
                                                 </div>
                                             )
                                         })}

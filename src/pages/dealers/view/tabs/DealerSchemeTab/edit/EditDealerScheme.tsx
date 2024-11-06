@@ -58,9 +58,8 @@ const EditDealerScheme = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()} //handleSubmit
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Edit Scheme
                             </button>
@@ -83,6 +82,7 @@ const EditDealerScheme = ({
                         {/* pincodes */}
                         <div className="col-span-9">
                             <ATMSelectSearchable
+                                isAllSelect
                                 name={'pincodes'}
                                 value={values?.pincodes || []}
                                 onChange={(value) =>
