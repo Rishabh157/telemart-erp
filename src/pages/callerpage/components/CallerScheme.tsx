@@ -92,7 +92,7 @@ const CallerScheme = ({
         <>
             <div className="grid grid-cols-12 px-2 pb-[1px]">
                 <div className="col-span-2 mt-3 text-[10px] font-semibold">
-                    Search By Scheme
+                    Search By Scheme <span className="text-red-500"> * </span>
                 </div>
                 <div className="col-span-3 px-2">
                     <div className="mr-2 -mt-4">

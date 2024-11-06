@@ -67,7 +67,6 @@ const CallerDeliveryAddress = ({
     isDisabled,
 }: Props) => {
 
-    // address dialog modal open
     // const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false)
     const [pinCodeSearch, setPinCodeSearch] = React.useState<string>('')
     const [endTimeOptionsList, setEndTimeOptionsList] = React.useState<
@@ -77,9 +76,6 @@ const CallerDeliveryAddress = ({
     const currentDate = moment() // Get today's date
     const maxDate = currentDate.clone().add(15, 'days') // Calculate 15 days from today
 
-    // const [isRecording, setIsRecording] = React.useState<boolean>(false)
-
-    // /////////////////////////////////////////////////////////////////////////////////////////////////////////
     const dispatch = useDispatch()
     const { allStates }: any = useSelector((state: RootState) => state.states)
     const { allDistricts }: any = useSelector(
@@ -169,6 +165,9 @@ const CallerDeliveryAddress = ({
     const [getAllInfoByPincode] = useGetAllInfoByPincodeMutation()
 
     const handlePincodeSearch = () => {
+
+        if (pinCodeSearch === '') return showToast('error', 'Please enter pincode')
+
         getAllInfoByPincode(pinCodeSearch)
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -208,6 +207,7 @@ const CallerDeliveryAddress = ({
             .catch((err) => {
                 console.error(err)
             })
+
     }
 
     const handleAutoFillShippingAddress = (values: FormInitialValues) => {
@@ -347,7 +347,7 @@ const CallerDeliveryAddress = ({
                     <div className="grid grid-cols-12">
                         <div className="col-span-2 flex items-center">
                             <span className="text-slate-700 text-xs font-medium mb-1">
-                                Pincode
+                                Pincode  <span className="text-red-500"> * </span>
                             </span>
                         </div>
                         <div className="col-span-10">
@@ -361,7 +361,7 @@ const CallerDeliveryAddress = ({
                                         componentClass=""
                                         size="xxs"
                                         name="pincodeId"
-                                        selectLabel=" pincode"
+                                        selectLabel="pincode"
                                         value={values.pincodeId || ''}
                                         isValueWithLable={true}
                                         options={
@@ -428,6 +428,7 @@ const CallerDeliveryAddress = ({
                     </div>
 
                     <ATMSelectSearchable
+                        required
                         isDisabled={isDisabled?.isState}
                         fontSizePlaceHolder="14px"
                         fontSizeOptionsClass="13px"
@@ -452,7 +453,17 @@ const CallerDeliveryAddress = ({
                             }
                         }}
                     />
+
+                    {/* {
+                        errors?.stateId && <p className="grid grid-cols-3 font-poppins text-xs mt-0 text-red-500">
+                            <div></div>
+                            <span>state is required</span>
+                        </p>
+                    } */}
+
+
                     <ATMSelectSearchable
+                        required
                         isDisabled={isDisabled?.isDistrict}
                         fontSizePlaceHolder="14px"
                         fontSizeOptionsClass="13px"
@@ -481,6 +492,7 @@ const CallerDeliveryAddress = ({
 
                 <div className="col-span-4 pb-1 px-2 border-r-[1px]">
                     <ATMSelectSearchable
+                        required
                         isDisabled={isDisabled?.isTehsil}
                         fontSizePlaceHolder="14px"
                         fontSizeOptionsClass="13px"
