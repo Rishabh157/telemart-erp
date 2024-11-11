@@ -18,7 +18,7 @@ const CallerHeader = ({
     DidNumber,
     customerReputationType,
 }: // Status,
-CallerHeaderPropsTypes) => {
+    CallerHeaderPropsTypes) => {
     const getCustomerReputation = (value: string) => {
         switch (value) {
             case 'RED':
@@ -64,7 +64,7 @@ CallerHeaderPropsTypes) => {
 
                 <div className="w-full">
                     <h3 className="text-white font-semibold text-[10px]">
-                        CUSTOMER
+                        REPUTATION
                     </h3>
                     <div
                         className={`${getCustomerReputation(
