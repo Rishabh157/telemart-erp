@@ -559,26 +559,6 @@ const CallerDeliveryAddress = ({
             {/*  Billing Address */}
             <div className="grid grid-cols-12 border-[1px] mt-1 border-grey-700">
                 <div className="col-span-6 pb-1 gap-x-4 border-r-[1px] px-2 border-grey-800">
-                    <ATMSelectSearchable
-                        isDisabled={isDisabled?.isTypeOfAddress}
-                        fontSizePlaceHolder="14px"
-                        fontSizeOptionsClass="13px"
-                        minHeight="25px"
-                        componentClass="mt-1"
-                        labelDirection="horizontal"
-                        labelSize="xxs"
-                        label="Type of Address"
-                        size="xxs"
-                        selectLabel="select address"
-                        labelClass="text-slate-700 text-xs font-medium"
-                        name="typeOfAddress"
-                        value={values.typeOfAddress || ''}
-                        options={addressOptions}
-                        onChange={(e) => {
-                            setFieldValue('typeOfAddress', e)
-                        }}
-                    />
-
                     <ATMTextField
                         disabled={isDisabled?.isCustomerName}
                         label="Customer Name"
@@ -686,6 +666,26 @@ const CallerDeliveryAddress = ({
                             </div>
                         </div>
                     </div>
+
+                    <ATMSelectSearchable
+                        isDisabled={isDisabled?.isTypeOfAddress}
+                        fontSizePlaceHolder="14px"
+                        fontSizeOptionsClass="13px"
+                        minHeight="25px"
+                        componentClass="mb-3"
+                        labelDirection="horizontal"
+                        labelSize="xxs"
+                        label="Type of Address"
+                        size="xxs"
+                        selectLabel="select address"
+                        labelClass="text-slate-700 text-xs font-medium"
+                        name="typeOfAddress"
+                        value={values.typeOfAddress || ''}
+                        options={addressOptions}
+                        onChange={(e) => {
+                            setFieldValue('typeOfAddress', e)
+                        }}
+                    />
 
                     <ATMTextField
                         disabled={isDisabled?.isHouseFlat}
