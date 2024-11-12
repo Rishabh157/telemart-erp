@@ -83,14 +83,14 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     </span>
                                     <span className='text-sm font-bold text-green-600 uppercase'>
                                         {items?.status}
-                                        </span>
+                                    </span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
                                         Order Type
                                     </span>
-                                    <span className='text-sm font-bold text-green-600'>
-                                        {items?.isUrgentOrder ? 'Urgent' : '-'}
+                                    <span className='text-sm font-bold'>
+                                        {items?.orderType}
                                     </span>
                                 </div>
                                 <div className='flex justify-between items-center'>
@@ -109,7 +109,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     <span className='text-neutral font-medium text-sm'>
                                         DID Number
                                     </span>
-                                    <span className='text-sm font-bold'>{items?.didNo}</span>
+                                    <span className='text-sm font-bold'>{items?.didNo ?? 'NA'}</span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
