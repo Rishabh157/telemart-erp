@@ -190,10 +190,12 @@ const CustomerCarePage: React.FC<Props> = ({
                         name="dispositionLevelTwoId"
                         value={values.dispositionLevelTwoId || ''}
                         // isSubmitting
+                        isValueWithLable
                         options={dropdownOptions.dispositionTwoOptions || []}
                         menuPosition="absolute"
                         onChange={(e) => {
-                            setFieldValue('dispositionLevelTwoId', e)
+                            setFieldValue('dispositionLevelTwoId', e?.value)
+                            setFieldValue('dispositionLevelTwoLabel', e?.label)
                         }}
                     />
                 </div>
@@ -212,9 +214,14 @@ const CustomerCarePage: React.FC<Props> = ({
                         name="dispositionLevelThreeId"
                         value={values.dispositionLevelThreeId || ''}
                         // isSubmitting
+                        isValueWithLable
                         options={dropdownOptions.dispositionThreeOptions || []}
                         onChange={(e) => {
-                            setFieldValue('dispositionLevelThreeId', e)
+                            setFieldValue('dispositionLevelThreeId', e?.value)
+                            setFieldValue(
+                                'dispositionLevelThreeLabel',
+                                e?.label
+                            )
                         }}
                     />
                 </div>
@@ -244,8 +251,8 @@ const CustomerCarePage: React.FC<Props> = ({
             <div className="flex gap-x-4 mt-2 mb-1">
                 <div
                     className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.history
-                            ? 'bg-[#87527c] text-white'
-                            : 'bg-slate-200'
+                        ? 'bg-[#87527c] text-white'
+                        : 'bg-slate-200'
                         }`}
                     onClick={() => setActiveTab(TabTypes.history)}
                 >
@@ -256,8 +263,8 @@ const CustomerCarePage: React.FC<Props> = ({
                 </div>
                 <div
                     className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.order
-                            ? 'bg-[#87527c] text-white'
-                            : 'bg-slate-200'
+                        ? 'bg-[#87527c] text-white'
+                        : 'bg-slate-200'
                         }`}
                     onClick={() => setActiveTab(TabTypes.order)}
                 >
@@ -268,8 +275,8 @@ const CustomerCarePage: React.FC<Props> = ({
                 </div>
                 <div
                     className={`flex px-1 py-0 font-semibold cursor-pointer rounded items-center ${TabTypes[activeTab] === TabTypes.complaint
-                            ? 'bg-[#87527c] text-white'
-                            : 'bg-slate-200'
+                        ? 'bg-[#87527c] text-white'
+                        : 'bg-slate-200'
                         }`}
                     onClick={() => setActiveTab(TabTypes.complaint)}
                 >

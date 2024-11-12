@@ -81,7 +81,9 @@ export type FormInitialValues = {
     deliveryCharges: number
     totalAmount: number
     dispositionLevelTwoId: string | null
+    dispositionLevelTwoLabel?: string | null
     dispositionLevelThreeId: string | null
+    dispositionLevelThreeLabel?: string | null
     status: string
 }
 
@@ -604,7 +606,9 @@ const CustomerCarePageWrapper = () => {
         paymentMode: 'COD',
         remark: '',
         dispositionLevelTwoId: null,
+        dispositionLevelTwoLabel: '',
         dispositionLevelThreeId: null,
+        dispositionLevelThreeLabel: '',
         alternateNo: orderData?.alternateNo || '',
         status: statusProps.fresh,
     }
