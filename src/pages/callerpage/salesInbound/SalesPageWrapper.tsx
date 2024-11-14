@@ -146,7 +146,10 @@ const SalesPageWrapper = () => {
         (state: RootState) => state.inboundCaller
     )
 
-    const isInbound = didNumber !== null
+    const isInbound = didNumber ? true : false
+
+
+    // console.log('didNumber', didNumber)
 
     const navigate = useNavigate()
     const { items, isTableLoading } = inboundCallerState
