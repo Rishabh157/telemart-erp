@@ -83,7 +83,7 @@ function BarcodeGeneratorOuterBox() {
                         <div className="flex gap-4">
                             <span> Expiry Date: </span>
                             <span>
-                                {expiryDate  ? moment(expiryDate).format('DD-MM-YYYY') : 'NA'}
+                                {expiryDate ? moment(expiryDate).format('DD-MM-YYYY') : 'NA'}
                             </span>
                         </div>
                     </div>

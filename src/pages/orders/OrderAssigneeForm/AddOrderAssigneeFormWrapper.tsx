@@ -55,15 +55,11 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder, handleClose }: Props) => {
             setCompanyWarehouse(dealerOfOrderData?.companyWarehouse)
             setDealer(dealerOfOrderData?.dealerData)
         }
-    }, [
-        dealerOfOrderData,
-        isDealerOfOrderDataFetching,
-        isDealerOfOrderDataLoading,
-    ])
+    }, [dealerOfOrderData, isDealerOfOrderDataFetching, isDealerOfOrderDataLoading])
 
     const dealerOptions = dealer?.map((ele: any) => {
         return {
-            label: ele?.dealerName,
+            label: ele?.dealerCode,
             value: ele?.dealerId,
         }
     })
@@ -111,7 +107,7 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder, handleClose }: Props) => {
             }).then((res: any) => {
                 if ('data' in res) {
                     if (res?.data?.status) {
-                        showToast('success', 'assign order successfully!')
+                        showToast('success', 'Assign order successfully!')
                         handleClose()
                     } else {
                         showToast('error', res?.data?.message)
@@ -123,12 +119,6 @@ const AddOrderAssigneeFormWrapper = ({ selectedOrder, handleClose }: Props) => {
             })
         }, 1000)
     }
-
-    // const dropdownOptions : DropdownOptions = {
-    //   vendorOptions,
-    //   warehouseOptions,
-    //   itemOptions,
-    // }
 
     return (
         <Formik

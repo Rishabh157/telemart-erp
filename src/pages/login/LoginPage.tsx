@@ -19,7 +19,6 @@ import {
     setUserData,
 } from 'src/redux/slices/authSlice'
 import { AppDispatch } from 'src/redux/store'
-// import { navigation } from 'src/navigation'
 
 const LoginPage = ({ pathName }: any) => {
     const [isShowPassword, setIsShowPassword] = useState(false)
@@ -30,7 +29,6 @@ const LoginPage = ({ pathName }: any) => {
     const navigate = useNavigate()
 
     const dispatch = useDispatch<AppDispatch>()
-
     const [login, loginInfo] = useLoginMutation()
 
     const handleLogin = async () => {
@@ -83,10 +81,7 @@ const LoginPage = ({ pathName }: any) => {
                                 setApiError(res?.data?.message)
                             }
                         } else {
-                            showToast(
-                                'error',
-                                'Something went wrong. Please try again later'
-                            )
+                            showToast('error', 'Something went wrong. Please try again later')
                         }
                     })
                     .catch((err) => {
@@ -111,7 +106,6 @@ const LoginPage = ({ pathName }: any) => {
 
                 <form className="space-y-4">
                     <div>
-                        {/* <label className="block text-gray-600">Username</label> */}
                         <ATMTextField
                             autoFocus
                             placeholder="Enter your username"
@@ -128,18 +122,11 @@ const LoginPage = ({ pathName }: any) => {
                         <span className="text-red-500 text-sm">
                             {!userName && errorInitiate ? 'Please enter username' : ''}
                         </span>
-                        {/* <input
-                            autoFocus
-                            type="text"
-                            className="w-full px-4 py-2 mt-1 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your username"
-                        /> */}
                     </div>
                     <div>
                         <label className="block text-gray-600 text-base">Password</label>
                         <div>
                             <ATMInputAdormant
-                                // label="Password"
                                 name=""
                                 placeholder="Enter your password"
                                 type={isShowPassword ? 'text' : 'password'}

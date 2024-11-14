@@ -85,10 +85,9 @@ const EditSaleOrderWrapper = (props: Props) => {
     const { items: selectedItem } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetSalesOrderByIdQuery(Id || ''),
     })
-
     const { options: dealerOptions } = useCustomOptions({
         useEndPointHook: useGetAllDealersQuery(''),
-        keyName: ['firstName', 'lastName'],
+        keyName: 'dealerCode',
         value: '_id',
     })
     const { options: warehouseOptions } = useCustomOptions({
@@ -96,13 +95,11 @@ const EditSaleOrderWrapper = (props: Props) => {
         keyName: 'wareHouseName',
         value: '_id',
     })
-
     const { options: productGroupOptions } = useCustomOptions({
         useEndPointHook: useGetAllProductGroupQuery(''),
         keyName: 'groupName',
         value: '_id',
     })
-
     const { options: productPriceOptions } = useCustomOptions({
         useEndPointHook: useGetAllProductGroupQuery(''),
         keyName: 'dealerSalePrice',

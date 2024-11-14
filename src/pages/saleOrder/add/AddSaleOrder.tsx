@@ -81,6 +81,9 @@ const AddSaleOrder = ({
         value: '_id',
     })
 
+
+    console.log('dealerWarehouseOptions', dealerWarehouseOptions)
+
     useEffect(() => {
         const val: any = productPriceOptions?.find(
             (e: any) => e['value'] === productGroup
@@ -122,8 +125,7 @@ const AddSaleOrder = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
-                                    }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''}`}
                             >
                                 Submit
                             </button>
@@ -137,13 +139,17 @@ const AddSaleOrder = ({
                             <div className="-mt-2">
                                 <ATMSelectSearchable
                                     required
+                                    label="Dealer"
                                     name="dealerId"
                                     value={values.dealerId}
+                                    options={dropdownOptions.dealerOptions}
                                     onChange={(e) => {
                                         handleSetFieldValue('dealerId', e)
+
+                                        if (e === '') {
+                                            return handleSetFieldValue('dealerWareHouseId', '')
+                                        }
                                     }}
-                                    options={dropdownOptions.dealerOptions}
-                                    label="Dealer"
                                 />
                             </div>
                             {/* Dealer Warehouse */}
@@ -153,10 +159,7 @@ const AddSaleOrder = ({
                                     name="dealerWareHouseId"
                                     value={values.dealerWareHouseId}
                                     onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'dealerWareHouseId',
-                                            e
-                                        )
+                                        handleSetFieldValue('dealerWareHouseId', e)
                                     }
                                     options={dealerWarehouseOptions}
                                     label="Dealer Warehouse"

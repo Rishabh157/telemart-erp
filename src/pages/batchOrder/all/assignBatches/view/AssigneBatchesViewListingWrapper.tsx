@@ -178,7 +178,7 @@ const AssigneBatchesViewListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.deliveryCharges}</span>
-            ),
+            )
         },
         {
             field: 'schemeName',
