@@ -53,10 +53,11 @@ const CallListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Create Date',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.CALL_LIST_CREATE_DATE,
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
+                    <div className="text-xs text-slate-700 font-medium">
                         {moment(row?.createdAt).format('DD MMM YYYY')}
                     </div>
                     <div className="text-[10px] text-slate-500 font-medium">
@@ -69,24 +70,29 @@ const CallListingWrapper = () => {
             field: 'didNo',
             headerName: 'DID No',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.CALL_LIST_DID_NUMBER,
         },
         {
             field: 'callType',
             headerName: 'Call Type',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.CALL_LIST_CALL_TYPE,
+            renderCell: (row: OrderListResponse) => <span className='uppercase'>{row?.callType}</span>,
         },
         {
             field: 'campaign',
             headerName: 'Campaign',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.CALL_LIST_CAMPAIGN,
         },
         {
             field: 'mobileNo',
             headerName: 'Mobile Number',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.CALL_LIST_MOBILE,
         },
         {
@@ -94,7 +100,7 @@ const CallListingWrapper = () => {
             headerName: 'Disposition (One/Two)',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.CALL_LIST_DISPOSITION,
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div>
                     <div className="text-sm text-slate-700 font-medium">
@@ -110,12 +116,14 @@ const CallListingWrapper = () => {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.CALL_LIST_STATUS,
         },
         {
             field: 'schemeName',
             headerName: 'Scheme',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.CALL_LIST_SCHEME,
         }
     ]

@@ -82,6 +82,7 @@ const DealerInventoryListingWrapper = () => {
             field: 'productGroupLabel',
             headerName: 'Product Group',
             flex: 'flex-[1_5_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: DealersInventoryListResponse) => (
                 <span>{row?.firstDocument?.productGroupLabel}</span>
             ),
@@ -90,6 +91,7 @@ const DealerInventoryListingWrapper = () => {
             field: 'count',
             headerName: 'Count',
             flex: 'flex-[1_5_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: DealersInventoryListResponse) => (
                 <span>{row?.count}</span>
             ),
@@ -98,6 +100,7 @@ const DealerInventoryListingWrapper = () => {
             field: 'wareHouseLabel',
             headerName: 'Warehouse',
             flex: 'flex-[1_5_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: DealersInventoryListResponse) => (
                 <span>{row?.firstDocument?.wareHouseLabel}</span>
             ),

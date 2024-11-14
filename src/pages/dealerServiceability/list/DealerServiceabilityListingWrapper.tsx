@@ -108,12 +108,14 @@ const DealerServiceabilityListingWrapper = () => {
             field: 'pincode',
             headerName: 'Pincodes',
             flex: 'flex-[1_5_0%]',
+            extraClasses: 'text-xs',
             renderCell: renderCell,
         },
         {
             field: 'dealerName',
             headerName: 'Dealer or Warehouse Name',
             flex: 'flex-[1_5_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: any) => (
                 <div className='text-center'>
                     {row?.dealerName || row?.wareHouseName} <br />
@@ -127,6 +129,7 @@ const DealerServiceabilityListingWrapper = () => {
             field: 'schemeName',
             headerName: 'Scheme Name',
             flex: 'flex-[1_5_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: any) => <span>{row?.schemeName}</span>,
         },
     ]

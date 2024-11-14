@@ -37,7 +37,7 @@ const DealersListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            extraClasses: 'min-w-[100px]',
+            extraClasses: 'text-xs min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
@@ -80,17 +80,13 @@ const DealersListingWrapper = () => {
         {
             field: 'wareHouseCode',
             headerName: 'Warehouse Code',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_WAREHOUSE_CODE,
             renderCell: (row: WarehousesListResponse) => (
                 <span
                     className="text-primary-main cursor-pointer"
-                    onClick={() => {
-                        navigate(
-                            `/warehouse/view/${row?._id}/warehouse-details`
-                        )
-                    }}
+                    onClick={() => navigate(`/warehouse/view/${row?._id}/warehouse-details`)}
                 >
                     {row?.wareHouseCode}
                 </span>
@@ -99,41 +95,41 @@ const DealersListingWrapper = () => {
         {
             field: 'wareHouseName',
             headerName: 'Warehouse Name',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_WAREHOUSE_NAME,
             renderCell: (row: WarehousesListResponse) => {
-                return <span> {row.wareHouseName} </span>
+                return <span> {row?.wareHouseName} </span>
             },
         },
         {
             field: 'registrationStateName',
             headerName: 'State',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_STATE,
             renderCell: (row: WarehousesListResponse) => {
-                return <span> {row.registrationStateName} </span>
+                return <span> {row?.registrationStateName} </span>
             },
         },
         {
             field: 'registrationDistrictName',
             headerName: 'District',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_DISTRICT,
             renderCell: (row: WarehousesListResponse) => {
-                return <span> {row.registrationDistrictName} </span>
+                return <span> {row?.registrationDistrictName} </span>
             },
         },
         {
             field: 'registrationPincodeName',
             headerName: 'Pincode',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.WAREHOUSE_LIST_PINCODE,
             renderCell: (row: WarehousesListResponse) => {
-                return <span> {row.registrationPincodeName} </span>
+                return <span> {row?.registrationPincodeName} </span>
             },
         },
     ]

@@ -60,7 +60,7 @@ const GRNListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            extraClasses: 'min-w-[100px]',
+            extraClasses: 'text-xs min-w-[100px]',
             flex: 'flex-[0.8_0.8_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
@@ -81,6 +81,7 @@ const GRNListingWrapper = () => {
             field: 'poCode',
             headerName: 'PO Code',
             flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs',
             renderCell: (row: GRNListResponse) => <span> {row?.poCode} </span>,
             name: UserModuleNameTypes.GRN_LIST_PO_CODE,
         },
@@ -88,6 +89,7 @@ const GRNListingWrapper = () => {
             field: 'itemName',
             headerName: 'Item Name',
             flex: 'flex-[1.5_1.5_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.GRN_LIST_ITEM_NAME,
             renderCell: (row: GRNListResponse) => {
                 return <span> {row?.itemName} </span>
@@ -97,6 +99,7 @@ const GRNListingWrapper = () => {
             field: 'receivedQuantity',
             headerName: 'Received Qnty.',
             flex: 'flex-[1.5_1.5_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.GRN_LIST_RECEVIED_QUANTITY,
             renderCell: (row: GRNListResponse) => {
                 return <span> {row?.receivedQuantity} </span>
@@ -106,6 +109,7 @@ const GRNListingWrapper = () => {
             field: 'goodQuantity',
             headerName: 'Good Qnty.',
             flex: 'flex-[1.5_1.5_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.GRN_LIST_GOOD_QUANTITY,
             renderCell: (row: GRNListResponse) => {
                 return <span> {row?.goodQuantity} </span>
@@ -115,6 +119,7 @@ const GRNListingWrapper = () => {
             field: 'defectiveQuantity',
             headerName: 'Defective Qnty.',
             flex: 'flex-[1.5_1.5_0%]',
+            extraClasses: 'text-xs',
             name: UserModuleNameTypes.GRN_LIST_DEFECTIVE_QUANTITY,
             renderCell: (row: GRNListResponse) => {
                 return <span> {row?.defectiveQuantity} </span>
@@ -125,7 +130,7 @@ const GRNListingWrapper = () => {
             headerName: 'Created Date',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.GRN_LIST_CREATED_DATE,
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: GRNListResponse) => (
                 <div className="py-0">
                     <div className="text-[12px] text-slate-700 font-medium">
@@ -142,7 +147,7 @@ const GRNListingWrapper = () => {
             headerName: 'updated Date',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.GRN_LIST_UPDATED_DATE,
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: GRNListResponse) => (
                 <div className="py-0">
                     <div className="text-[12px] text-slate-700 font-medium">

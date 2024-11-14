@@ -86,7 +86,7 @@ const DealersListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            extraClasses: 'min-w-[100px]',
+            extraClasses: 'text-xs min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: any) => (
                 <ActionPopup
@@ -135,7 +135,7 @@ const DealersListingWrapper = () => {
         {
             field: 'dealerCode',
             headerName: 'Dealer Code',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_LIST_VENDOR_CODE,
             renderCell: (row: DealersListResponse) => (
@@ -152,7 +152,7 @@ const DealersListingWrapper = () => {
         {
             field: 'firmName',
             headerName: 'Firm Name',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_FIRM_NAME,
             renderCell: (row: DealersListResponse) => {
@@ -162,7 +162,7 @@ const DealersListingWrapper = () => {
         {
             field: 'firstName',
             headerName: 'Name',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_NAME,
             renderCell: (row: DealersListResponse) => (
@@ -172,7 +172,7 @@ const DealersListingWrapper = () => {
         {
             field: 'billingAddress',
             headerName: 'Phone',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_LIST_PHONE,
             renderCell: (row: any) => {
@@ -182,7 +182,7 @@ const DealersListingWrapper = () => {
         {
             field: 'billingAddressStateName',
             headerName: 'State',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_STATE,
             renderCell: (row: DealersListResponse) => {
@@ -192,7 +192,7 @@ const DealersListingWrapper = () => {
         {
             field: 'billingAddressDistrictName',
             headerName: 'District',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_DISTRICT,
             renderCell: (row: DealersListResponse) => {
@@ -202,7 +202,7 @@ const DealersListingWrapper = () => {
         {
             field: 'document',
             headerName: 'GST Verified',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.DEALER_LIST_IS_GST_VEEIFIED,
             renderCell: (row: DealersListResponse) => {
@@ -212,7 +212,7 @@ const DealersListingWrapper = () => {
         {
             field: 'isApproved',
             headerName: 'Approval',
-            extraClasses: 'min-w-[170px]',
+            extraClasses: 'text-xs min-w-[170px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_APPROVAL,
             renderCell: (row: any) => {
@@ -269,7 +269,7 @@ const DealersListingWrapper = () => {
         {
             field: 'status',
             headerName: 'Status',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.DEALER_LIST_STATUS,
             renderCell: (row: any) => {
