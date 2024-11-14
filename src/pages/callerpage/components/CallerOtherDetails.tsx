@@ -151,7 +151,7 @@ const CallerOtherDetails = ({
                         }}
                     />
 
-                    <ATMTextField
+                    {/* <ATMTextField
                         disabled={isDisabled?.isEmailId}
                         extraClassField="mt-2"
                         label="Email-ID"
@@ -165,9 +165,9 @@ const CallerOtherDetails = ({
                         onChange={(e) => {
                             setFieldValue('emailId', e.target.value)
                         }}
-                    />
+                    /> */}
 
-                    <div className="grid grid-cols-12">
+                    {/* <div className="grid grid-cols-12">
                         <div className="col-span-4 pt-3">
                             <span className="text-slate-700 text-xs font-medium">
                                 Social Media
@@ -237,7 +237,7 @@ const CallerOtherDetails = ({
                                 />
                             )}
                         </div>
-                    </div>
+                    </div> */}
                     <div className="h-[145px]">
                         <ATMSelectSearchable
                             isDisabled={isDisabled?.isMedicalIssue}
@@ -265,31 +265,121 @@ const CallerOtherDetails = ({
 
                 <div className="col-span-6 py-2 px-2 border-r-[1px]">
                     {!isCaller && (
-                        <div className="grid grid-cols-12">
-                            <div className="col-span-3"></div>
-                            <div className="col-span-9 bg-slate-300 px-6 border-[1px]">
-                                <div className="-mt-6 p-4">
-                                    <ATMRadioButton
-                                        label="Payment Mode :"
-                                        labelCalassName="text-xs"
-                                        name="paymentMode"
-                                        value={values.paymentMode || ''}
-                                        className="mt-1"
-                                        options={paymentModeOptions}
+                        <div>
+                            <ATMTextField
+                                disabled={isDisabled?.isEmailId}
+                                extraClassField="mt-2"
+                                label="Email-ID"
+                                size="xs"
+                                labelSize="xs"
+                                labelDirection="horizontal"
+                                // isSubmitting
+                                name="emailId"
+                                placeholder="enter email"
+                                value={values.emailId}
+                                onChange={(e) => {
+                                    setFieldValue('emailId', e.target.value)
+                                }}
+                            />
+
+                            <div className="grid grid-cols-12">
+                                <div className="col-span-4 pt-3">
+                                    <span className="text-slate-700 text-xs font-medium">
+                                        Social Media
+                                    </span>
+                                </div>
+                                <div className="col-span-8 flex gap-x-4 px-1 items-center">
+                                    <ATMCheckbox
+                                        disabled={isDisabled?.isSocialMediaFacebook}
+                                        extraClasses="mt-2"
+                                        // required
+                                        label="Facebook"
+                                        inputClasses="h-3 w-3"
+                                        labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
+                                        checked={isFacebookId}
+                                        onChange={(e) => setFacebookId(e)}
+                                    />
+
+                                    {isFacebookId && (
+                                        <div className="ml-1">
+                                            <ATMTextField
+                                                extraClassField="mt-2"
+                                                size="xs"
+                                                placeholder="Name ID"
+                                                name="socialMedia.facebook"
+                                                value={
+                                                    values.socialMedia?.facebook || ''
+                                                }
+                                                onChange={(e) =>
+                                                    setFieldValue(
+                                                        'socialMedia.facebook',
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="col-span-4"></div>
+                                <div className="col-span-8 flex gap-x-4 px-1 items-center">
+                                    <ATMCheckbox
+                                        disabled={isDisabled?.isSocialMediaInstagram}
+                                        extraClasses="mt-2"
+                                        // required
+                                        label="Instagram"
+                                        inputClasses="h-3 w-3"
+                                        labelClasses="text-slate-700 text-[10px] font-medium pt-1 mb-1 select-none"
+                                        checked={isInstagramId}
                                         onChange={(e) => {
-                                            setFieldValue('paymentMode', e)
+                                            setInstagramId(e)
                                         }}
                                     />
-                                    <div>
-                                        {values.paymentMode === 'ONLINE' ? (
-                                            <a
-                                                href={'media/caller-page'}
-                                                className="underline"
-                                            >
-                                                {' '}
-                                                Send Payment Link
-                                            </a>
-                                        ) : null}
+
+                                    {isInstagramId && (
+                                        <ATMTextField
+                                            extraClassField="mt-2"
+                                            size="xs"
+                                            placeholder="Name ID"
+                                            name="socialMedia.instagram"
+                                            value={values.socialMedia?.instagram || ''}
+                                            onChange={(e) => {
+                                                setFieldValue(
+                                                    'socialMedia.instagram',
+                                                    e.target.value
+                                                )
+                                            }}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="grid-cols-12 hidden">
+                                <div className="col-span-3"></div>
+                                <div className="col-span-9 bg-slate-300 px-6 border-[1px]">
+                                    <div className="-mt-6 p-4">
+                                        <ATMRadioButton
+                                            label="Payment Mode :"
+                                            labelCalassName="text-xs"
+                                            name="paymentMode"
+                                            value={values.paymentMode || ''}
+                                            className="mt-1"
+                                            options={paymentModeOptions}
+                                            onChange={(e) => {
+                                                setFieldValue('paymentMode', e)
+                                            }}
+                                        />
+                                        <div>
+                                            {values.paymentMode === 'ONLINE' ? (
+                                                <a
+                                                    href={'media/caller-page'}
+                                                    className="underline"
+                                                >
+                                                    {' '}
+                                                    Send Payment Link
+                                                </a>
+                                            ) : null}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -301,7 +391,7 @@ const CallerOtherDetails = ({
                             name="remark"
                             value={values.remark}
                             placeholder="Other Remarks"
-                            minRows={8}
+                            minRows={6}
                             onChange={(value) => {
                                 setFieldValue('remark', value)
                             }}

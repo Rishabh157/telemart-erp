@@ -82,7 +82,7 @@ const CallerHeader = ({
                         DID NO
                     </h3>
                     <div className=" bg-white p-1 text-center rounded bedge text-[#15616E] font-semibold text-[10px]">
-                        {DidNumber}
+                        {DidNumber || '-'}
                     </div>
                 </div>
             </div>

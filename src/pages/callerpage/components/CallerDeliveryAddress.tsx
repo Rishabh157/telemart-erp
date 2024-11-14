@@ -34,7 +34,10 @@ import { PincodeListResponse } from 'src/models/Pincode.model'
 import { setAllPincodes } from 'src/redux/slices/pincodeSlice'
 
 // Area
-import { useGetAllAreaUnauthQuery } from 'src/services/AreaService'
+import {
+    // useGetAllAreaUnauthQuery,
+    useGetAllAreaByTehsilUnauthQuery
+} from 'src/services/AreaService'
 import { AreaListResponse } from 'src/models/Area.model'
 import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
 
@@ -145,23 +148,40 @@ const CallerDeliveryAddress = ({
     }, [pinCodeData, dispatch, pinCodeFetching, pinCodeLoading])
 
     // Area Options
+    // const {
+    //     data: areaData,
+    //     isLoading: areaIsLoading,
+    //     isFetching: areaIsFetching,
+    // } = useGetAllAreaUnauthQuery(values?.pincodeId || '', {
+    //     skip: !values?.pincodeId,
+    // })
+
+    // Area Options By Tehsils
     const {
-        data: areaData,
-        isLoading: areaIsLoading,
-        isFetching: areaIsFetching,
-    } = useGetAllAreaUnauthQuery(values?.pincodeId || '', {
-        skip: !values?.pincodeId,
+        data: areaByTehsilData,
+        isLoading: areaByTehsilIsLoading,
+        isFetching: areaByTehsilIsFetching,
+    } = useGetAllAreaByTehsilUnauthQuery(values?.tehsilId || '', {
+        skip: !values?.tehsilId,
     })
 
+    // useEffect(() => {
+    //     if (!areaIsFetching && !areaIsLoading) {
+    //         dispatch(setAreaItems(areaData?.data))
+    //     }
+    //     // eslint-disable-next-line
+    // }, [areaData, areaIsLoading, areaIsFetching, dispatch])
+
+    // Get Area's By Tehsils Selections
     useEffect(() => {
-        if (!areaIsFetching && !areaIsLoading) {
-            dispatch(setAreaItems(areaData?.data))
+        if (!areaByTehsilIsFetching && !areaByTehsilIsLoading) {
+            dispatch(setAreaItems(areaByTehsilData?.data))
         }
         // eslint-disable-next-line
-    }, [areaData, areaIsLoading, areaIsFetching, dispatch])
+    }, [areaByTehsilData, areaByTehsilIsLoading, areaByTehsilIsFetching, dispatch])
+
 
     // All Option By Pincode
-
     const [getAllInfoByPincode] = useGetAllInfoByPincodeMutation()
 
     const handlePincodeSearch = () => {
@@ -303,7 +323,7 @@ const CallerDeliveryAddress = ({
             return { label: ele?.pincode, value: ele?._id }
         }),
         areaOptions: allArea?.map((ele: AreaListResponse) => {
-            return { label: ele?.area, value: ele?._id }
+            return { label: ele?.area, value: ele?._id, pincodeId: ele?.pincodeId }
         }),
     }
 
@@ -536,9 +556,13 @@ const CallerDeliveryAddress = ({
                         value={values.areaId || ''}
                         options={dropdownOptions.areaOptions || []}
                         isValueWithLable
+                        restOptions
                         onChange={(e) => {
                             setFieldValue('areaId', e?.value || '')
                             setFieldValue('areaLabel', e?.label || '')
+
+                            // Case : When Customer didn't know the pincode then we auto select the pincode accroding to the Area selection
+                            setFieldValue('pincodeId', e?.pincodeId || '')
                         }}
                     />
                 </div>

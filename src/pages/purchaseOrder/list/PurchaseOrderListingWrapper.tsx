@@ -140,6 +140,94 @@ const PurchaseOrderListingWrapper = () => {
             ),
         },
         {
+            field: 'isConfirmed',
+            headerName: 'Approval level',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_APPROVAL_LEVEL,
+            renderCell: (row: PurchaseOrderListResponse) => {
+                const approvalLength = row?.approval?.length
+                return (
+                    <span className="z-10">
+                        {' '}
+                        <Stack direction="row" spacing={1}>
+                            {approvalLength === 0 ? (
+                                <button
+                                    id="btn"
+                                    className=" overflow-hidden cursor-pointer z-0"
+                                    onClick={() => {
+                                        showConfirmationDialog({
+                                            title: 'Approve level 1',
+                                            text: 'Do you want to Approve PO  ?',
+                                            showCancelButton: true,
+                                            next: (res) => {
+                                                return res.isConfirmed
+                                                    ? handleComplete(
+                                                        row?._id,
+                                                        1
+                                                    )
+                                                    : false
+                                            },
+                                        })
+                                    }}
+                                >
+                                    <Chip
+                                        label="Level 0"
+                                        color="error"
+                                        variant="outlined"
+                                        size="small"
+                                        clickable={true}
+                                    />
+                                </button>
+                            ) : approvalLength === 1 ? (
+                                <button
+                                    id="btn"
+                                    className="cursor-pointer"
+                                    onClick={() => {
+                                        showConfirmationDialog({
+                                            title: 'Approve level 2',
+                                            text: 'Do you want to Approve PO  ?',
+                                            showCancelButton: true,
+                                            next: (res) => {
+                                                return res.isConfirmed
+                                                    ? handleComplete(
+                                                        row?._id,
+                                                        2
+                                                    )
+                                                    : false
+                                            },
+                                        })
+                                    }}
+                                >
+                                    <Chip
+                                        label="Level 1"
+                                        color="warning"
+                                        variant="outlined"
+                                        size="small"
+                                        clickable={true}
+                                    />
+                                </button>
+                            ) : (
+                                <button
+                                    id="btn"
+                                    disabled={approvalLength >= 2}
+                                    className="cursor-pointer"
+                                >
+                                    <Chip
+                                        label="Approved"
+                                        color="success"
+                                        variant="outlined"
+                                        size="small"
+                                        clickable={true}
+                                    />
+                                </button>
+                            )}
+                        </Stack>{' '}
+                    </span>
+                )
+            },
+        },
+        {
             field: 'poCode',
             headerName: 'PO Code',
             extraClasses: 'min-w-[150px]',
@@ -231,94 +319,6 @@ const PurchaseOrderListingWrapper = () => {
                                 'YYYY/MM/DD'
                             ).format('DD-MM-YYYY')
                             : '-'}
-                    </span>
-                )
-            },
-        },
-        {
-            field: 'isConfirmed',
-            headerName: 'Approval level',
-            extraClasses: 'min-w-[150px]',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.PURCHASE_ORDER_LIST_APPROVAL_LEVEL,
-            renderCell: (row: PurchaseOrderListResponse) => {
-                const approvalLength = row?.approval?.length
-                return (
-                    <span className="z-10">
-                        {' '}
-                        <Stack direction="row" spacing={1}>
-                            {approvalLength === 0 ? (
-                                <button
-                                    id="btn"
-                                    className=" overflow-hidden cursor-pointer z-0"
-                                    onClick={() => {
-                                        showConfirmationDialog({
-                                            title: 'Approve level 1',
-                                            text: 'Do you want to Approve PO  ?',
-                                            showCancelButton: true,
-                                            next: (res) => {
-                                                return res.isConfirmed
-                                                    ? handleComplete(
-                                                        row?._id,
-                                                        1
-                                                    )
-                                                    : false
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <Chip
-                                        label="Level 0"
-                                        color="error"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            ) : approvalLength === 1 ? (
-                                <button
-                                    id="btn"
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        showConfirmationDialog({
-                                            title: 'Approve level 2',
-                                            text: 'Do you want to Approve PO  ?',
-                                            showCancelButton: true,
-                                            next: (res) => {
-                                                return res.isConfirmed
-                                                    ? handleComplete(
-                                                        row?._id,
-                                                        2
-                                                    )
-                                                    : false
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <Chip
-                                        label="Level 1"
-                                        color="warning"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            ) : (
-                                <button
-                                    id="btn"
-                                    disabled={approvalLength >= 2}
-                                    className="cursor-pointer"
-                                >
-                                    <Chip
-                                        label="Approved"
-                                        color="success"
-                                        variant="outlined"
-                                        size="small"
-                                        clickable={true}
-                                    />
-                                </button>
-                            )}
-                        </Stack>{' '}
                     </span>
                 )
             },

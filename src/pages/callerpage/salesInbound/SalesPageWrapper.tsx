@@ -31,7 +31,7 @@ import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 export type FormInitialValues = {
     agentName: string | null
-    didNo: string
+    didNo: string | null
     ageGroup: string
     mobileNo: string
     alternateNo: string
@@ -145,6 +145,9 @@ const SalesPageWrapper = () => {
     const inboundCallerState: any = useSelector(
         (state: RootState) => state.inboundCaller
     )
+
+    const isInbound = didNumber !== null
+
     const navigate = useNavigate()
     const { items, isTableLoading } = inboundCallerState
     // Table Data with MobileNo filtered
@@ -175,6 +178,8 @@ const SalesPageWrapper = () => {
             skip: !phoneNumber,
         }
     )
+
+    // Order Data
     const {
         data: singleCallerListingData,
         isFetching: singleIsCallerFetching,
@@ -218,7 +223,7 @@ const SalesPageWrapper = () => {
                             let callerData = {
                                 orderID: res?.data?.data?._id,
                                 mobileNo: initialValues?.mobileNo,
-                                didNo: initialValues?.didNo,
+                                didNo: initialValues?.didNo || null,
                                 companyId: res?.data?.data?.companyId,
                                 agentId: res?.data?.data?.agentId,
                             }
@@ -226,7 +231,7 @@ const SalesPageWrapper = () => {
                                 'callerPageData',
                                 JSON.stringify(callerData)
                             )
-                            setcallerLoacalStorage(callerData)
+                            setcallerLoacalStorage(callerData as any)
                         }
                     } else {
                         showToast('error', res?.data?.message)
@@ -587,11 +592,11 @@ const SalesPageWrapper = () => {
         callType: calltype || (createOrderState?.callType as string),
         incomingCallerNo: '',
         customerName: orderData?.customerName || '',
-        didNo: didNumber || (createOrderState?.didNumber as string),
+        didNo: isInbound ? didNumber || (createOrderState?.didNumber as string) : null,
         flagStatus: '',
-        productGroupId: didItems?.schemeProductGroup?.[0]?.productGroup || null,
+        productGroupId: isInbound ? didItems?.schemeProductGroup?.[0]?.productGroup || null : orderData?.productGroupId || null,
         productGroupLabel: '',
-        schemeId: didItems?.schemeId || null,
+        schemeId: isInbound ? didItems?.schemeId || null : orderData?.schemeId || null,
         schemeName: '',
         shcemeQuantity: 1,
         price: 0,
@@ -604,14 +609,13 @@ const SalesPageWrapper = () => {
         pincodeLabel: orderData?.pincodeLabel || '',
         stateId: orderData?.stateId || null,
         stateLabel: orderData?.stateLabel || '',
-        // villageId: null,
         areaId: orderData?.areaId || null,
         areaLabel: orderData?.areaLabel || '',
         districtId: orderData?.districtId || null,
         districtLabel: orderData?.districtLabel || '',
         tehsilId: orderData?.tehsilId || null,
         tehsilLabel: orderData?.tehsilLabel || '',
-        typeOfAddress: '',
+        typeOfAddress: orderData?.typeOfAddress || '',
         preffered_delivery_start_time:
             orderData?.preffered_delivery_start_time || '',
         preffered_delivery_end_time:
@@ -646,37 +650,10 @@ const SalesPageWrapper = () => {
 
     // eslint-disable-next-line
     const validationSchema = object({
-        // productGroupId: string().required('product group id is required'),
-        // DELEVERY ADDRESS SELECT OPTIONS
-        // countryId: string(),
         pincodeId: string().required('pincode is required'),
         stateId: string().required('state is required'),
         districtId: string().required('district is required'),
         tehsilId: string().required('tehsil is required'),
-        // areaId: string(),
-        // typeOfAddress: string(),
-        // deliveryTimeAndDate: string(),
-        // houseNumber: string(),
-        // streetNumber: string(),
-        // landmark: string(),
-        // mobileNo: string(),
-        // whatsappNo: string()
-        //     .min(10, 'mobile number is not valid')
-        //     .max(10, 'mobile number is not valid'),
-        // autoFillingShippingAddress: string(),
-        // // isRecording: boolean(),
-        // gender: string(),
-        // schemeQuantity: number()
-        //     .integer()
-        //     .min(1, 'Scheme quantity must be at least 1')
-        //     .max(9, 'Scheme quantity cannot exceed 9')
-        //     .required('Scheme quantity is required'),
-        // // orderFor: string(),
-        // orderForOtherText: string(),
-        // ageGroup: string(),
-        // emailId: string().email('invalid email'),
-        // // medicalIssue: array().of(string()),
-        // remark: string(),
         alternateNo: string()
             .min(10, 'mobile number is not valid')
             .max(10, 'mobile number is not valid'),
@@ -687,6 +664,7 @@ const SalesPageWrapper = () => {
             'disposition level two is required'
         ),
     })
+
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
         setApiStatus(true)

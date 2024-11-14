@@ -57,6 +57,7 @@ type Props = {
     fontSizePlaceHolder?: string
     fontSizeOptionsClass?: string
     textTransform?: textTransform
+    restOptions?: boolean
 }
 
 const ATMSelectSearchable = ({
@@ -93,6 +94,7 @@ const ATMSelectSearchable = ({
     minHeight = '36px',
     fontSizePlaceHolder = '13px',
     fontSizeOptionsClass = '16px',
+    restOptions = false,
 }: Props) => {
     const selectStyles = {
         control: (provided: any) => ({
@@ -172,6 +174,7 @@ const ATMSelectSearchable = ({
     let selectOptions = options?.map((option) => ({
         value: option.value,
         label: option.label,
+
     }))
     if (isMulti && isAllSelect) {
         const selectOptions2 = [
@@ -205,7 +208,14 @@ const ATMSelectSearchable = ({
             }
         } else {
             if (isValueWithLable) {
-                onChange(selectedOption?.value ? selectedOption : '')
+                if (restOptions) {
+
+                    let resOptionsSelected = options?.find((ele) => ele?.value === selectedOption?.value)
+                    onChange(resOptionsSelected?.value ? resOptionsSelected : '')
+                } else {
+
+                    onChange(selectedOption?.value ? selectedOption : '')
+                }
             } else {
                 onChange(selectedOption?.value ? selectedOption?.value : '')
             }
@@ -237,21 +247,19 @@ const ATMSelectSearchable = ({
     return (
         <div className={`${componentClass} relative`} hidden={isHidden}>
             <div
-                className={`  ${labelDirection === 'horizontal'
+                className={`${labelDirection === 'horizontal'
                     ? `  gap-2 w-full  ${classDirection}`
                     : ' '
                     }`}
             >
                 <div
                     className={`flex gap-1 mb-1 ${labelDirection === 'horizontal'
-                        ? `  ${labelSpan} w-full h-full flex items-center `
-                        : ' '
-                        }`}
+                        ? ` ${labelSpan} w-full h-full flex items-center ` : ' '}`}
                 >
                     {label && (
                         <label
                             className={twMerge(
-                                `text-slate-700   ${getLabelFont(labelSize)}`,
+                                `text-slate-700 ${getLabelFont(labelSize)}`,
                                 `${labelClass}`
                             )}
                         >

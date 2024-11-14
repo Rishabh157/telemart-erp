@@ -41,7 +41,7 @@ const CreateOrderWrapper = (props: Props) => {
         didNumber: '',
         campaignName: '',
         mobileNumber: '',
-        callType: '',
+        callType: 'OUTBOUND',
         companyCode: '',
     }
 

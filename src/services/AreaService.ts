@@ -33,6 +33,15 @@ export const areaApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+     
+        getAllAreaByTehsilUnauth: builder.query({
+            providesTags: ['Area'],
+            query: (id) => ({
+                url: `area/get-area-by-tehsil/unauth/${id}`,
+                method: 'GET',
+                // body,
+            }),
+        }),
 
         getAllAreaByPincode: builder.query({
             providesTags: ['Area'],
@@ -101,5 +110,6 @@ export const {
     useDeleteAreaMutation,
     useGetAllAreaQuery,
     useGetAllAreaUnauthQuery,
+    useGetAllAreaByTehsilUnauthQuery,
     useGetAllAreaByPincodeQuery,
 } = areaApi
