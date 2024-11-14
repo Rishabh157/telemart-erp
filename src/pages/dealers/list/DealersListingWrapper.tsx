@@ -41,8 +41,7 @@ const DealersListingWrapper = () => {
     const [dealerCode, setDealerCode] = useState('')
 
     const [showDropdown, setShowDropdown] = useState(false)
-    const [changePasswordDialogOpen, setChangePasswordDialogOpen] =
-        useState(false)
+    const [changePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false)
     const navigate = useNavigate()
     const [deletedealer] = useDeleteDealerMutation()
     const [approveDealer] = useApproveDealerStatusMutation()
@@ -60,10 +59,7 @@ const DealersListingWrapper = () => {
                     showToast('error', res?.data?.message)
                 }
             } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
+                showToast('error', res?.error?.data?.message)
             }
         })
     }
@@ -105,9 +101,9 @@ const DealersListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DEALER_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_DEALER_DELETE
+                    // )}
                     isCustomBtn={isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_CHANGE_PASSWORD
                     )}

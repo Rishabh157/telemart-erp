@@ -75,6 +75,7 @@ export type OrderListResponse = {
     paymentMode: string
     productGroupId: string
     remark: string
+    orderType : string
     shcemeQuantity: number
     firstCallApproval: null | boolean
     firstCallRemark: string

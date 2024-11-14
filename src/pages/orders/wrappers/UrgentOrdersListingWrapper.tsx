@@ -231,7 +231,7 @@ const UrgentOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_URGENT_TAB_LIST_CUSTOMER_NAME,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.customerName || '-'}</div>
+                <div className="py-0" title={row?.customerName}>{row?.customerName || '-'}</div>
             ),
         },
         {

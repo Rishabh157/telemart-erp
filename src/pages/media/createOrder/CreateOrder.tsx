@@ -33,17 +33,13 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
 
     const callTypeOptions = [
         {
-            label: 'Inbound',
-            value: 'INBOUND',
-        },
-        {
             label: 'Outbound',
             value: 'OUTBOUND',
         },
-        {
-            label: 'Manual',
-            value: 'MANUAL',
-        },
+        // {
+        //     label: 'Manual',
+        //     value: 'MANUAL',
+        // },
     ]
 
 
@@ -56,10 +52,6 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
     return (
         <MainLayout>
             <div className="flex flex-col gap-2 p-4 ">
-                {/* Breadcrumbs */}
-                {/* <div className="font-bold text-black ">
-                    <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
-                </div> */}
 
                 {/* Page Heading */}
                 <div className="pt-1">
@@ -149,6 +141,7 @@ const CreateOrder = ({ formikProps, apiStatus }: Props) => {
                             {/* Branch Name */}
                             <ATMSelectSearchable
                                 required
+                                isDisabled
                                 name="callType"
                                 label="Calltype"
                                 options={callTypeOptions}

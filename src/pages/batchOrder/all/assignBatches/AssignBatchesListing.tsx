@@ -5,7 +5,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { CircularProgress } from '@mui/material'
-import { MdOutlineAssignmentReturn } from 'react-icons/md'
+import { CgDetailsMore } from "react-icons/cg";
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
@@ -22,11 +22,56 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
+import moment from 'moment'
 
 // |-- Types --|
 type Props = {
     columns?: any[]
     rows: any[]
+}
+
+interface InfoCardPropTypes {
+    batchNumber: number
+    bucketOders: number
+    batchCreatedBy: string
+    createdAt: string
+    onClick: () => void
+}
+
+function BatchInfoCard({ batchNumber, bucketOders, batchCreatedBy, createdAt, onClick }: InfoCardPropTypes) {
+    return (
+        <div className="p-6 bg-white rounded-lg shadow-md border-[1px] border-gray-500 ">
+
+            <div className="text-xs text-gray-500 mb-4 flex items-center gap-x-4 ">
+                Batch Number : <span className="text-xl text-black font-semibold">{batchNumber}</span>
+            </div>
+
+            <div className="text-xs text-gray-500 mb-4 flex items-center gap-x-4 ">
+                Created By : <span className="px-3 py-1 bg-gray-200 text-black font-semibold rounded-full text-xs">{batchCreatedBy}</span>
+            </div>
+
+            <div className="text-xs text-gray-500 mb-4 flex items-center gap-x-4 ">
+                Orders Buckets : <span className="px-3 py-1 bg-gray-200 text-black font-semibold rounded-full text-xs">{bucketOders}</span>
+            </div>
+
+
+            <div className="text-xs text-gray-500 mb-4 flex gap-x-4">
+                Create Date :
+                <div className="py-0">
+                    <div className="text-xs text-slate-700 font-medium">
+                        {moment(createdAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(createdAt).format('hh:mm A')}
+                    </div>
+                </div>
+            </div>
+
+            <button onClick={onClick} className="w-full py-2 flex justify-center items-center gap-x-1 text-white bg-primary-main hover:bg-primary-hover rounded-md focus:outline-none">
+                <span className="mr-2"><CgDetailsMore /></span> View
+            </button>
+        </div>
+    );
 }
 
 const AssignBatchesListing = ({ columns, rows }: Props) => {
@@ -67,57 +112,16 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
                 {/* Table */}
                 <div className="h-[calc(100%-110px)] overflow-auto ">
                     {!isTableLoading ? (
-                        <div className="grid grid-cols-3 gap-4 p-4">
-                            {rows?.map(
-                                (
-                                    batch: BatchesListResponseTypes,
-                                    ind: number
-                                ) => (
-                                    <div
-                                        key={ind}
-                                        className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 group`}
-                                        onClick={() => {}}
-                                    >
-                                        <div className="flex justify-between">
-                                            <div>
-                                                <div className="text-[12px] text-slate-500">
-                                                    Batch No.
-                                                </div>
-                                                <div>{batch?.batchNumber}</div>
-                                            </div>
-                                            <div className="transition-all opacity-0 group-hover:opacity-100 hover:text-slate-500">
-                                                <MdOutlineAssignmentReturn
-                                                    className="cursor-pointer"
-                                                    size={23}
-                                                    onClick={() => {
-                                                        navigate(
-                                                            `${batch?._id}`
-                                                        )
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-1">
-                                            <div className="text-[12px] text-slate-500">
-                                                Number Of Orders In This Batch.
-                                            </div>
-                                            <div>{batch?.orders?.length}</div>
-                                        </div>
-
-                                        <div className="mt-1">
-                                            <div className="text-[12px] text-slate-500">
-                                                Created By
-                                            </div>
-                                            <div>
-                                                {capitalizeFirstLetter(
-                                                    batch?.batchCreatedByLabel ||
-                                                        ''
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
+                        <div className="grid grid-cols-4 gap-4 p-4">
+                            {rows?.map((batch: BatchesListResponseTypes) =>
+                                <BatchInfoCard
+                                    key={batch?._id}
+                                    batchNumber={batch?.batchNumber}
+                                    bucketOders={batch?.orders?.length}
+                                    batchCreatedBy={capitalizeFirstLetter(batch?.batchCreatedByLabel)}
+                                    createdAt={batch?.createdAt}
+                                    onClick={() => navigate(`${batch?._id}`)}
+                                />
                             )}
                         </div>
                     ) : (

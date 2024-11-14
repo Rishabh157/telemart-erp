@@ -77,6 +77,7 @@ const ProductGroupDetailCard = ({
                             selectedProductGroupBarcodes.findIndex(
                                 (selected) => selected._id === barcode._id
                             ) !== -1
+
                         return (
                             <div
                                 key={barcode._id}
@@ -141,9 +142,7 @@ ${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}`}
                                         Created Date :-
                                     </div>
                                     <div className="text-primary-main font-medium grow flex items-end">
-                                        {moment(barcode?.createdAt).format(
-                                            'YYYY/MM/D'
-                                        )}
+                                        {moment(barcode?.createdAt).format('YYYY/MM/D')}
                                     </div>
                                 </div>
                                 <div className="flex justify-between">
@@ -151,9 +150,7 @@ ${isBarcodeSeleted ? 'bg-green-500 text-white' : 'bg-white'}`}
                                         Created Time :-
                                     </div>
                                     <div className="text-primary-main font-medium grow flex items-end">
-                                        {moment(barcode?.createdAt).format(
-                                            'hh:mm A'
-                                        )}
+                                        {moment(barcode?.createdAt).format('hh:mm A')}
                                     </div>
                                 </div>
                                 <div className="flex justify-between">

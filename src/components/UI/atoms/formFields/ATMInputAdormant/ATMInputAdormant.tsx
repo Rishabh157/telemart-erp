@@ -63,7 +63,7 @@ const ATMInputAdormant = ({
     const [isFocus, setIsFocus] = useState(false)
 
     return (
-        <div >
+        <div>
             {label && (
                 <label className="text-slate-500">
                     {getLabelTextTransform(label, textTransform)}

@@ -151,7 +151,7 @@ const SalesPage: React.FC<Props> = ({
                 CallType={values.callType}
                 IncomingNo={values.mobileNo}
                 CustomerName={''}
-                DidNumber={values.didNo}
+                DidNumber={values.didNo || ''}
                 customerReputationType={customerReputationType}
             />
             <CallerScheme

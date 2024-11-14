@@ -80,7 +80,7 @@ const GlobalSearchOrdersListingWrapper = () => {
                     handleViewActionButton={() => {
                         navigate(`/orders/view/${row?._id}`)
                     }}
-                    handleOnAction={() => {}}
+                    handleOnAction={() => { }}
                 />
             ),
         },
@@ -169,9 +169,9 @@ const GlobalSearchOrdersListingWrapper = () => {
                                     if (res.isConfirmed || res?.isDenied) {
                                         return res.isConfirmed
                                             ? handleOrderApproval(
-                                                  row?._id,
-                                                  res?.value
-                                              )
+                                                row?._id,
+                                                res?.value
+                                            )
                                             : null
                                     }
                                 }}
@@ -198,7 +198,7 @@ const GlobalSearchOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_GLOBAL_TAB_LIST_CUSTOMER_NAME,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.customerName || '-'}</div>
+                <div className="py-0" title={row?.customerName}>{row?.customerName || '-'}</div>
             ),
         },
         {
@@ -224,7 +224,7 @@ const GlobalSearchOrdersListingWrapper = () => {
                             row?.firstCallApproval ? (
                                 <p className="text-green-500"> Approved </p>
                             ) : row?.firstCallState ===
-                              FirstCallApprovalStatus.CANCEL ? (
+                                FirstCallApprovalStatus.CANCEL ? (
                                 <p className="text-red-500"> Cancelled </p>
                             ) : (
                                 <p className="text-orange-500"> Pending </p>
@@ -475,8 +475,8 @@ const GlobalSearchOrdersListingWrapper = () => {
                     <span>
                         {row?.preffered_delivery_date
                             ? moment(row?.preffered_delivery_date).format(
-                                  'DD-MM-YYYY'
-                              )
+                                'DD-MM-YYYY'
+                            )
                             : '-'}
                     </span>
                 )

@@ -92,458 +92,458 @@ const DeliveredOrdersListingWrapper = () => {
         })
     }
 
-   // order column
-   const columns: columnTypes[] = [
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        extraClasses: 'text-xs mr-4',
-        renderCell: (row: OrderListResponse) => (
-            <ActionPopup
-                isView
-                handleViewActionButton={() => {
-                    navigate(`/orders/view/${row?._id}`)
-                }}
-                handleOnAction={() => {}}
-            />
-        ),
-    },
-    {
-        field: 'inquiryNumber',
-        headerName: 'Inquiry No.',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_INQUIRY_NUMBER,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        // renderCell: (row: OrderListResponse) => <span></span>,
-    },
-    {
-        field: 'orderNumber',
-        headerName: 'Order No.',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ORDER_NUMBER,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span className="text-primary-main "># {row.orderNumber}</span>
-        ),
-    },
-    {
-        field: 'assignDealerLabel',
-        headerName: 'Assigned Dealer',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ASSIGNED_DEALER,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) =>
-            row?.assignDealerLabel ? (
+    // order column
+    const columns: columnTypes[] = [
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 'flex-[0.5_0.5_0%]',
+            extraClasses: 'text-xs mr-4',
+            renderCell: (row: OrderListResponse) => (
+                <ActionPopup
+                    isView
+                    handleViewActionButton={() => {
+                        navigate(`/orders/view/${row?._id}`)
+                    }}
+                    handleOnAction={() => { }}
+                />
+            ),
+        },
+        {
+            field: 'inquiryNumber',
+            headerName: 'Inquiry No.',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_INQUIRY_NUMBER,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            // renderCell: (row: OrderListResponse) => <span></span>,
+        },
+        {
+            field: 'orderNumber',
+            headerName: 'Order No.',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ORDER_NUMBER,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span className="text-primary-main "># {row.orderNumber}</span>
+            ),
+        },
+        {
+            field: 'assignDealerLabel',
+            headerName: 'Assigned Dealer',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ASSIGNED_DEALER,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) =>
+                row?.assignDealerLabel ? (
+                    <div>
+                        <div className="text-xs text-slate-700 font-medium">
+                            {row?.assignDealerLabel || '-'}
+                        </div>
+                        <div className="text-xs text-primary-main font-medium">
+                            ({row?.assignDealerCode})
+                        </div>
+                    </div>
+                ) : null,
+        },
+        {
+            field: 'assignWarehouseLabel',
+            headerName: 'Assigned Warehouse',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ASSIGNED_WEARHOUSE,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[200px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.assignWarehouseLabel || '-'}</span>
+            ),
+        },
+        {
+            field: 'isApproved',
+            headerName: 'Approval',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_APPROVAL,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: any) => {
+                return (
+                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
+                        {row?.approved ? (
+                            <Chip
+                                className="cursor-pointer text-xs"
+                                label="Approved"
+                                color="success"
+                                variant="outlined"
+                                size="small"
+                            />
+                        ) : (
+                            <SwtAlertChipConfirm
+                                title="Approval"
+                                text="Do you want to Approve ?"
+                                color="warning"
+                                chipLabel="pending"
+                                errorMessage="please enter transaction id"
+                                input={'text'}
+                                inputPlaceholder="transaction id"
+                                showCancelButton
+                                showDenyButton={false}
+                                icon="warning"
+                                confirmButtonColor="#3085d6"
+                                cancelButtonColor="#dc3741"
+                                confirmButtonText="Yes"
+                                next={(res) => {
+                                    if (res.isConfirmed || res?.isDenied) {
+                                        return res.isConfirmed
+                                            ? handleOrderApproval(
+                                                row?._id,
+                                                res?.value
+                                            )
+                                            : null
+                                    }
+                                }}
+                            />
+                        )}
+                    </span>
+                )
+            },
+        },
+        {
+            field: 'mobileNo',
+            headerName: 'Mobile No.',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_MOBILE_NUMBER,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.mobileNo}</div>
+            ),
+        },
+        {
+            field: 'customerName',
+            headerName: 'Customer Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_CUSTOMER_NAME,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0" title={row?.customerName}>{row?.customerName || '-'}</div>
+            ),
+        },
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_STATUS,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
+        },
+        {
+            field: 'firstCallApproval',
+            headerName: '1st Call Approval',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_FIRST_CALL_APPROVAL,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <span className="block w-full px-2 py-1 text-left">
+                        {row?.assignWarehouseId ? (
+                            row?.firstCallApproval ? (
+                                <p className="text-green-500"> Approved </p>
+                            ) : row?.firstCallState ===
+                                FirstCallApprovalStatus.CANCEL ? (
+                                <p className="text-red-500"> Cancelled </p>
+                            ) : (
+                                <p className="text-orange-500"> Pending </p>
+                            )
+                        ) : null}
+                    </span>
+                )
+            },
+        },
+        {
+            field: 'firstCallRemark',
+            headerName: '1st call remark',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_FIRST_CALL_REMARK,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallRemark || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallState',
+            headerName: 'first Call State',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_FIRST_CALL_STATE,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallState || '-'}</span>
+            ),
+        },
+        {
+            field: 'firstCallCallBackDate',
+            headerName: 'call back date',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_FIRST_CALL_BACK_DATE,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.firstCallCallBackDate || '-'}</span>
+            ),
+        },
+        {
+            field: 'orderReferenceNumber',
+            headerName: 'Order Ref No.',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ORDER_REFRENCE_NUMBER,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row.orderReferenceNumber || '-'}</span>
+            ),
+        },
+        {
+            field: 'trackingNo',
+            headerName: 'Tracking No.',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_TRACKING_NUMBER,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => <span>NA</span>,
+        },
+        {
+            field: 'shippingCharges',
+            headerName: 'Shipping Charges',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_SHIPPING_CHARGES,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.deliveryCharges}</span>
+            ),
+        },
+        {
+            field: 'schemeName',
+            headerName: 'Scheme Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_SCHEME_NAME,
+            align: 'center',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.schemeName} </span>
+            ),
+        },
+        {
+            field: 'shcemeQuantity',
+            headerName: 'Quantity',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_SHCEME_QUANTITY,
+            align: 'center',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.shcemeQuantity} </span>
+            ),
+        },
+        {
+            field: 'price',
+            headerName: 'Price',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PRICE,
+            align: 'center',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
+        },
+        {
+            field: 'paymentMode',
+            headerName: 'Payment Mode',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PAYMENT_MODE,
+            align: 'center',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.paymentMode} </span>
+            ),
+        },
+        {
+            field: 'createdAt',
+            headerName: 'Order Date',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_CREATED_AT,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {moment(row?.createdAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(row?.createdAt).format('hh:mm A')}
+                    </div>
+                </div>
+            ),
+        },
+        {
+            field: 'edpDate',
+            headerName: 'EDP Date',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_EDP_DATE,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => <div>NA</div>,
+        },
+        {
+            field: 'dispositionLevelTwo',
+            headerName: 'Disposition (One/Two)',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_DISPOSITION_LEVELS,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
                 <div>
                     <div className="text-xs text-slate-700 font-medium">
-                        {row?.assignDealerLabel || '-'}
+                        {row?.dispositionLevelTwoLabel || '-'}
                     </div>
                     <div className="text-xs text-primary-main font-medium">
-                        ({row?.assignDealerCode})
+                        {row?.dispositionLevelThreeLabel}
                     </div>
                 </div>
-            ) : null,
-    },
-    {
-        field: 'assignWarehouseLabel',
-        headerName: 'Assigned Warehouse',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ASSIGNED_WEARHOUSE,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[200px]',
-        renderCell: (row: OrderListResponse) => (
-            <span>{row?.assignWarehouseLabel || '-'}</span>
-        ),
-    },
-    {
-        field: 'isApproved',
-        headerName: 'Approval',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_APPROVAL,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: any) => {
-            return (
-                <span className="block w-full px-2 py-1 text-left cursor-pointer">
-                    {row?.approved ? (
-                        <Chip
-                            className="cursor-pointer text-xs"
-                            label="Approved"
-                            color="success"
-                            variant="outlined"
-                            size="small"
-                        />
-                    ) : (
-                        <SwtAlertChipConfirm
-                            title="Approval"
-                            text="Do you want to Approve ?"
-                            color="warning"
-                            chipLabel="pending"
-                            errorMessage="please enter transaction id"
-                            input={'text'}
-                            inputPlaceholder="transaction id"
-                            showCancelButton
-                            showDenyButton={false}
-                            icon="warning"
-                            confirmButtonColor="#3085d6"
-                            cancelButtonColor="#dc3741"
-                            confirmButtonText="Yes"
-                            next={(res) => {
-                                if (res.isConfirmed || res?.isDenied) {
-                                    return res.isConfirmed
-                                        ? handleOrderApproval(
-                                              row?._id,
-                                              res?.value
-                                          )
-                                        : null
-                                }
-                            }}
-                        />
-                    )}
-                </span>
-            )
+            ),
         },
-    },
-    {
-        field: 'mobileNo',
-        headerName: 'Mobile No.',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_MOBILE_NUMBER,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">{row?.mobileNo}</div>
-        ),
-    },
-    {
-        field: 'customerName',
-        headerName: 'Customer Name',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_CUSTOMER_NAME,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">{row?.customerName || '-'}</div>
-        ),
-    },
-    {
-        field: 'status',
-        headerName: 'Status',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_STATUS,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
-    },
-    {
-        field: 'firstCallApproval',
-        headerName: '1st Call Approval',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_FIRST_CALL_APPROVAL,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => {
-            return (
-                <span className="block w-full px-2 py-1 text-left">
-                    {row?.assignWarehouseId ? (
-                        row?.firstCallApproval ? (
-                            <p className="text-green-500"> Approved </p>
-                        ) : row?.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
-                            <p className="text-red-500"> Cancelled </p>
-                        ) : (
-                            <p className="text-orange-500"> Pending </p>
-                        )
-                    ) : null}
-                </span>
-            )
+        {
+            field: 'districtLabel',
+            headerName: 'District',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_DISTRICT,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.districtLabel}</div>
+            ),
         },
-    },
-    {
-        field: 'firstCallRemark',
-        headerName: '1st call remark',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_FIRST_CALL_REMARK,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span>{row?.firstCallRemark || '-'}</span>
-        ),
-    },
-    {
-        field: 'firstCallState',
-        headerName: 'first Call State',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_FIRST_CALL_STATE,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span>{row?.firstCallState || '-'}</span>
-        ),
-    },
-    {
-        field: 'firstCallCallBackDate',
-        headerName: 'call back date',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_FIRST_CALL_BACK_DATE,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span>{row?.firstCallCallBackDate || '-'}</span>
-        ),
-    },
-    {
-        field: 'orderReferenceNumber',
-        headerName: 'Order Ref No.',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ORDER_REFRENCE_NUMBER,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span>{row.orderReferenceNumber || '-'}</span>
-        ),
-    },
-    {
-        field: 'trackingNo',
-        headerName: 'Tracking No.',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_TRACKING_NUMBER,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => <span>NA</span>,
-    },
-    {
-        field: 'shippingCharges',
-        headerName: 'Shipping Charges',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_SHIPPING_CHARGES,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span>{row?.deliveryCharges}</span>
-        ),
-    },
-    {
-        field: 'schemeName',
-        headerName: 'Scheme Name',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_SCHEME_NAME,
-        align: 'center',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span> {row?.schemeName} </span>
-        ),
-    },
-    {
-        field: 'shcemeQuantity',
-        headerName: 'Quantity',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_SHCEME_QUANTITY,
-        align: 'center',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span> {row?.shcemeQuantity} </span>
-        ),
-    },
-    {
-        field: 'price',
-        headerName: 'Price',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PRICE,
-        align: 'center',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
-    },
-    {
-        field: 'paymentMode',
-        headerName: 'Payment Mode',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PAYMENT_MODE,
-        align: 'center',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span> {row?.paymentMode} </span>
-        ),
-    },
-    {
-        field: 'createdAt',
-        headerName: 'Order Date',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_CREATED_AT,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">
-                <div className="text-[12px] text-slate-700 font-medium">
-                    {moment(row?.createdAt).format('DD MMM YYYY')}
-                </div>
-                <div className="text-[10px] text-slate-500 font-medium">
-                    {moment(row?.createdAt).format('hh:mm A')}
-                </div>
-            </div>
-        ),
-    },
-    {
-        field: 'edpDate',
-        headerName: 'EDP Date',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_EDP_DATE,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => <div>NA</div>,
-    },
-    {
-        field: 'dispositionLevelTwo',
-        headerName: 'Disposition (One/Two)',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_DISPOSITION_LEVELS,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div>
-                <div className="text-xs text-slate-700 font-medium">
-                    {row?.dispositionLevelTwoLabel || '-'}
-                </div>
-                <div className="text-xs text-primary-main font-medium">
-                    {row?.dispositionLevelThreeLabel}
-                </div>
-            </div>
-        ),
-    },
-    {
-        field: 'districtLabel',
-        headerName: 'District',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_DISTRICT,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">{row?.districtLabel}</div>
-        ),
-    },
-    {
-        field: 'tehsilLabel',
-        headerName: 'Taluk',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_TALUK,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span>{row?.tehsilLabel}</span>
-        ),
-    },
-    {
-        field: 'pincodeLabel',
-        headerName: 'Pincode',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PIN_CODE,
-        align: 'center',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <span> {row?.pincodeLabel} </span>
-        ),
-    },
-    {
-        field: 'areaLabel',
-        headerName: 'Area',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_AREA,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">{row?.areaLabel}</div>
-        ),
-    },
-    {
-        field: 'channelName',
-        headerName: 'Channel Name',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_CHANNEL_NAME,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">{row?.channelLabel?.[0]}</div>
-        ),
-    },
-    {
-        field: 'callCenterLabel',
-        headerName: 'CC Name',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_CALL_CENTER,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">{row?.callCenterLabel}</div>
-        ),
-    },
-    {
-        field: 'remark',
-        headerName: 'Remark',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_REMARK,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">{row?.remark}</div>
-        ),
-    },
-    {
-        field: 'agent',
-        headerName: 'Agent',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_AGENT,
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => (
-            <div className="py-0">{row?.agentName}</div>
-        ),
-    },
-    {
-        field: 'preffered_delivery_date',
-        headerName: 'Preffred Delivery Date',
-        flex: 'flex-[3_3_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PREFFERED_DELIVERY_DATE,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => {
-            return (
-                <span>
-                    {row?.preffered_delivery_date
-                        ? moment(row?.preffered_delivery_date).format(
-                              'DD-MM-YYYY'
-                          )
-                        : '-'}
-                </span>
-            )
+        {
+            field: 'tehsilLabel',
+            headerName: 'Taluk',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_TALUK,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.tehsilLabel}</span>
+            ),
         },
-    },
-    {
-        field: 'preffered_delivery_date',
-        headerName: 'Preffred Delivery Time',
-        flex: 'flex-[3_3_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PREFFERED_DELIVERY_TIME,
-        align: 'start',
-        extraClasses: 'text-xs min-w-[150px]',
-        renderCell: (row: OrderListResponse) => {
-            return row?.preffered_delivery_start_time &&
-                row?.preffered_delivery_end_time ? (
-                <span className="flex gap-1">
-                    {(row?.preffered_delivery_start_time).replaceAll(
-                        '_',
-                        ' '
-                    ) || '-'}{' '}
-                    -{' '}
-                    {(row?.preffered_delivery_end_time).replaceAll(
-                        '_',
-                        ' '
-                    ) || '-'}
-                </span>
-            ) : (
-                '-'
-            )
+        {
+            field: 'pincodeLabel',
+            headerName: 'Pincode',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PIN_CODE,
+            align: 'center',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.pincodeLabel} </span>
+            ),
         },
-    },
-    {
-        field: 'orderMBKNumber',
-        headerName: 'MBK Number',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ORDER_MBK_NUMBER,
-        extraClasses: 'text-xs min-w-[250px]',
-        renderCell: (row: any) => (
-            <span> {row.orderMBKNumber || '-'} </span>
-        ),
-    },
-]
+        {
+            field: 'areaLabel',
+            headerName: 'Area',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_AREA,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.areaLabel}</div>
+            ),
+        },
+        {
+            field: 'channelName',
+            headerName: 'Channel Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_CHANNEL_NAME,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.channelLabel?.[0]}</div>
+            ),
+        },
+        {
+            field: 'callCenterLabel',
+            headerName: 'CC Name',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_CALL_CENTER,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.callCenterLabel}</div>
+            ),
+        },
+        {
+            field: 'remark',
+            headerName: 'Remark',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_REMARK,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.remark}</div>
+            ),
+        },
+        {
+            field: 'agent',
+            headerName: 'Agent',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_AGENT,
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.agentName}</div>
+            ),
+        },
+        {
+            field: 'preffered_delivery_date',
+            headerName: 'Preffred Delivery Date',
+            flex: 'flex-[3_3_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PREFFERED_DELIVERY_DATE,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => {
+                return (
+                    <span>
+                        {row?.preffered_delivery_date
+                            ? moment(row?.preffered_delivery_date).format(
+                                'DD-MM-YYYY'
+                            )
+                            : '-'}
+                    </span>
+                )
+            },
+        },
+        {
+            field: 'preffered_delivery_date',
+            headerName: 'Preffred Delivery Time',
+            flex: 'flex-[3_3_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_PREFFERED_DELIVERY_TIME,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => {
+                return row?.preffered_delivery_start_time &&
+                    row?.preffered_delivery_end_time ? (
+                    <span className="flex gap-1">
+                        {(row?.preffered_delivery_start_time).replaceAll(
+                            '_',
+                            ' '
+                        ) || '-'}{' '}
+                        -{' '}
+                        {(row?.preffered_delivery_end_time).replaceAll(
+                            '_',
+                            ' '
+                        ) || '-'}
+                    </span>
+                ) : (
+                    '-'
+                )
+            },
+        },
+        {
+            field: 'orderMBKNumber',
+            headerName: 'MBK Number',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_DELIVERED_TAB_LIST_ORDER_MBK_NUMBER,
+            extraClasses: 'text-xs min-w-[250px]',
+            renderCell: (row: any) => (
+                <span> {row.orderMBKNumber || '-'} </span>
+            ),
+        },
+    ]
     return <OrderListing columns={columns} />
 }
 

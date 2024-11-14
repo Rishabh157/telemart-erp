@@ -18,7 +18,7 @@ import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import { OrderListResponse } from 'src/models'
 import { CallListFilterFormValues } from './CallListingFilter/CallListingFilterWrapper'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import moment from 'moment'
 
 const CallListingWrapper = () => {
     useUnmountCleanup()
@@ -54,7 +54,16 @@ const CallListingWrapper = () => {
             headerName: 'Create Date',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.CALL_LIST_CREATE_DATE,
-            renderCell: (row: OrderListResponse) => formatedDateTimeIntoIst(row?.createdAt),
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {moment(row?.createdAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(row?.createdAt).format('hh:mm A')}
+                    </div>
+                </div>
+            ),
         },
         {
             field: 'didNo',

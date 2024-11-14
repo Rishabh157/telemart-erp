@@ -107,9 +107,9 @@ const VendorsListingWrapper = () => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_VENDOR_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_VENDOR_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_VENDOR_DELETE
+                    // )}
                     handleOnAction={() => {
                         setCurrentId(row?._id)
                     }}

@@ -7,6 +7,7 @@ module.exports = {
             colors: {
                 primary: {
                     main: 'var(--primary-main)',
+                    hover: 'var(--primary-hover)',
                 },
             },
             backgroundImage: {
