@@ -287,6 +287,7 @@ const SalesPage: React.FC<Props> = ({
                     headerClassName="bg-[#87527c] py-2 text-white z-0"
                     columns={column || []}
                     rows={rows || []}
+                    noDataFoundClass='h-auto'
                     isLoading={isTableLoading}
                 />
             </div>

@@ -139,7 +139,7 @@ const ATMTable = <T extends {}>({
                         return (
                             <div
                                 key={index}
-                                className="animate-pulse  h-[50px] p-2"
+                                className="animate-pulse h-[50px] p-2"
                             >
                                 <div className="bg-slate-200 h-full rounded">
                                     {' '}

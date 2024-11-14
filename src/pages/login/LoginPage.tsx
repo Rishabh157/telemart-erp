@@ -106,8 +106,7 @@ const LoginPage = ({ pathName }: any) => {
                 <div className="text-center">
                     {/* <img src="/saptel-logo.png" alt="Saptel Logo" className="mx-auto w-24 h-24" /> */}
                     <img src="telemartLogo.png" alt="Saptel Logo" className="mx-auto w-auto h-24" />
-                    <h2 className="mt-4 text-2xl font-semibold text-gray-700">Login</h2>
-                    <p className="text-sm text-gray-500">Your Complete ERP Solution</p>
+                    <p className="text-sm text-gray-500 pt-2">Complete ERP Solution</p>
                 </div>
 
                 <form className="space-y-4">
