@@ -117,7 +117,7 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                                 ) => (
                                     <div
                                         key={ind}
-                                        className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
+                                        className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2`}
                                         onClick={onBarcodeClick}
                                     >
                                         <div className="flex justify-between">
@@ -129,7 +129,7 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                                                     {barcode?.barcodeNumber}
                                                 </div>
                                             </div>
-                                            <div>
+                                            <div className='cursor-pointer hover:bg-slate-300 rounded-full px-2 py-1 flex items-center justify-center'>
                                                 <HiDotsVertical
                                                     onClick={() => {
                                                         setIsFlowDialogShow(
