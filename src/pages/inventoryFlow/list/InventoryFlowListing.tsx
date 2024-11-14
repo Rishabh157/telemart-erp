@@ -27,6 +27,7 @@ import {
     BarcodeFlowDataListResponsee,
 } from 'src/models'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+// import moment from 'moment'
 // import { barcodeStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
@@ -155,9 +156,9 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                                                 ]?.status === ''
                                                     ? 'Created'
                                                     : barcode?.data[
-                                                          barcode?.data
-                                                              ?.length - 1
-                                                      ]?.status}
+                                                        barcode?.data
+                                                            ?.length - 1
+                                                    ]?.status}
                                             </div>
                                         </div>
 
