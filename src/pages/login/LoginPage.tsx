@@ -168,8 +168,8 @@ const LoginPage = ({ pathName }: any) => {
                     </button>
 
                     <div className="flex justify-between mt-4 text-sm text-gray-500">
-                        <span className="hover:underline cursor-pointer">Forgot Password?</span>
-                        <span className="hover:underline cursor-pointer">Contact Support</span>
+                        <span onClick={() => alert('coming soon')} className="hover:underline cursor-pointer">Forgot Password?</span>
+                        <span onClick={() => alert('coming soon')} className="hover:underline cursor-pointer">Contact Support</span>
                     </div>
                 </form>
             </div>
@@ -177,102 +177,6 @@ const LoginPage = ({ pathName }: any) => {
                 © 2024 Saptel. All rights reserved.
             </footer>
         </div>
-
-        // <div className="h-screen w-screen flex md:flex-row bg-white">
-        //     <div className="bg-slate-400 flex-1 hidden md:block ">
-        //         <div className="h-full">
-        //             <img src="bg.jpg" className="h-full w-full" alt="" />
-        //         </div>
-        //     </div>
-        //     <div className="flex flex-col h-full w-full justify-center items-center flex-1">
-        //         <div >
-        //             <div className="flex flex-col h-[100px] w-[250px] ">
-        //                 <img src="telemartLogo.png" alt="" />
-        //             </div>
-        //             <div className=" text-2xl font-semibold text-center ">
-        //                 Login
-        //             </div>
-        //             <div className="mt-5 flex flex-col gap-7">
-        //                 <div >
-        //                     <ATMTextField
-        //                         autoFocus
-        //                         name=""
-        //                         value={userName}
-        //                         onChange={(e) => {
-        //                             setUserName(e.target.value)
-        //                         }}
-        //                         label="User name"
-        //                         className="bg-slate-100 focus:bg-white h-[50px]"
-        //                     />
-        //                     <span className="text-red-500 ">
-        //                         {!userName && errorInitiate
-        //                             ? 'Please enter username'
-        //                             : ''}
-        //                     </span>
-        //                 </div>
-        //                 <div >
-        //                     <ATMInputAdormant
-        //                         name=""
-        //                         type={isShowPassword ? 'text' : 'password'}
-        //                         value={password}
-        //                         onChange={(e) => {
-        //                             setPassword(e.target.value)
-        //                         }}
-        //                         onKeyDown={(e) => {
-        //                             if (e.key === 'Enter') {
-        //                                 setErrorInitiate(true)
-        //                                 handleLogin()
-        //                             }
-        //                         }}
-        //                         label="Password"
-        //                         className="bg-slate-100 focus:bg-white h-[50px]"
-        //                         adormant={
-        //                             !isShowPassword ? (
-        //                                 <BiHide className="text-xl" />
-        //                             ) : (
-        //                                 <BiShow className="text-xl" />
-        //                             )
-        //                         }
-        //                         adormantProps={{
-        //                             position: 'end',
-        //                             extraClasses: 'bg-white border-none',
-        //                             onClick: () => {
-        //                                 setIsShowPassword(
-        //                                     (isShowPassword) => !isShowPassword
-        //                                 )
-        //                             },
-        //                         }}
-        //                     />
-        //                     <span className="text-red-500 ">
-        //                         {!password && errorInitiate
-        //                             ? 'Please enter password'
-        //                             : ''}
-        //                     </span>
-        //                 </div>
-        //                 <div >
-        //                     <span className="text-red-500 block mx-auto text-center">
-        //                         {apiError}
-        //                     </span>
-        //                     <button
-        //                         onClick={() => {
-        //                             setErrorInitiate(true)
-        //                             handleLogin()
-        //                         }}
-        //                         disabled={loginInfo?.isLoading}
-        //                         type="button"
-        //                         className={`w-full ${
-        //                             loginInfo?.isLoading
-        //                                 ? 'bg-slate-400'
-        //                                 : 'bg-primary-main'
-        //                         } text-white h-[50px] rounded-lg`}
-        //                     >
-        //                         Login
-        //                     </button>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 

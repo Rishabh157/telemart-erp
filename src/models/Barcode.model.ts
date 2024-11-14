@@ -3,7 +3,7 @@
 export type BarcodeListResponseType = {
     _id: string
     productGroupId: string
-    vendorLabel : string
+    vendorLabel: string
     upperBarcodeNumber: string
     isUsedFresh: boolean
     barcodeNumber: string
@@ -23,7 +23,7 @@ export type BarcodeListResponseType = {
     invoiceNumber: string
     isActive: boolean
     isFreezed: boolean
-    expiryDate: boolean
+    expiryDate: string | null
     __v: number
     createdAt: string
     updatedAt: string
