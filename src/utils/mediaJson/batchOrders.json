@@ -217,19 +217,9 @@
                     "fieldValue": "assignWarehouseLabel"
                 },
                 {
-                    "fieldId": "ASSIGN_BATCH_LIST_TRACKING_NUMBER",
-                    "fieldName": "Tracking No.",
-                    "fieldValue": "trackingNo"
-                },
-                {
                     "fieldId": "ASSIGN_BATCH_LIST_TALUK",
                     "fieldName": "Taluk",
                     "fieldValue": "tehsilLabel"
-                },
-                {
-                    "fieldId": "ASSIGN_BATCH_LIST_STATUS_DATE",
-                    "fieldName": "Status Date",
-                    "fieldValue": "statusDate"
                 },
                 {
                     "fieldId": "ASSIGN_BATCH_LIST_STATUS",
@@ -265,11 +255,6 @@
                     "fieldId": "ASSIGN_BATCH_LIST_PINCODE",
                     "fieldName": "Pincode",
                     "fieldValue": "pincodeLabel"
-                },
-                {
-                    "fieldId": "ASSIGN_BATCH_LIST_PAYMENT_MODE",
-                    "fieldName": "Payment Mode",
-                    "fieldValue": "paymentMode"
                 },
                 {
                     "fieldId": "ASSIGN_BATCH_LIST_ORDER_DATE",
@@ -355,11 +340,6 @@
                     "fieldId": "ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_TIME",
                     "fieldName": "Preffred Delivery Time",
                     "fieldValue": "preffered_delivery_date"
-                },
-                {
-                    "fieldId": "ASSIGN_BATCH_LIST_MBK_NUMBER",
-                    "fieldName": "MBK Number",
-                    "fieldValue": "orderMBKNumber"
                 }
             ]
         },

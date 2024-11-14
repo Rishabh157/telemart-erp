@@ -267,7 +267,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            extraClasses: 'min-w-[100px]',
+            extraClasses: 'text-xs min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: SaleOrderListResponseTypes) =>
                 row?.dhApproved === null &&
@@ -309,7 +309,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'soNumber',
             headerName: 'So Number',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
@@ -320,7 +320,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApproved',
             headerName: 'DH First Approval',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVAL,
             align: 'center',
@@ -380,7 +380,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedActionBy',
             headerName: 'DH Approved By',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
             align: 'center',
@@ -399,7 +399,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApproved',
             headerName: 'Acc Second Approval',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACC_APPROVAL,
             align: 'center',
@@ -463,7 +463,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApprovedActionBy',
             headerName: 'Acc Approved By',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACC_APPROVED_BY,
             align: 'center',
@@ -481,7 +481,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'invoiceNumber',
             headerName: 'Invoice No',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
@@ -496,7 +496,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'invoiceDate',
             headerName: 'Invoice Date',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_DATE,
             renderCell: (row: SaleOrderListResponseTypes) => (
@@ -506,7 +506,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'totalInvoiceAmount',
             headerName: 'Total Invoice Amount',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_TOTAL_AMOUNT_INVOICE,
             renderCell: (row: SaleOrderListResponseTypes) => (
@@ -516,7 +516,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DEALER_NAME,
             align: 'center',
@@ -543,7 +543,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'warehouseStateLabel',
             headerName: 'State',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_STATE,
             align: 'center',
@@ -554,7 +554,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
-            extraClasses: 'min-w-[200px]',
+            extraClasses: 'text-xs min-w-[200px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ITEM_QUANTITY,
             align: 'center',
@@ -583,7 +583,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'status',
             headerName: 'STATUS',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_STATUS,
             align: 'center',
@@ -594,7 +594,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'invoice',
             headerName: 'PDF',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_PDF,
             align: 'center',
@@ -613,7 +613,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'generateCancelGrn',
             headerName: 'Generate/Cancel IRN',
-            extraClasses: 'min-w-[180px]',
+            extraClasses: 'text-xs min-w-[180px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_GENERATE_CANCEL_IRN,
             align: 'center',
@@ -624,7 +624,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'expectedDeliveryDate',
             headerName: 'Expected Delivery Date',
-            extraClasses: 'min-w-[180px]',
+            extraClasses: 'text-xs min-w-[180px]',
             flex: 'flex-[2_2_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE,
             align: 'center',
@@ -637,18 +637,18 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'irnStatus',
             headerName: 'IRN Status',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_IRN_STATUS,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span>- </span>
+                return <span>-</span>
             },
         },
         {
             field: 'ackDate',
             headerName: 'ACK Date',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACK_DATE,
             align: 'center',
@@ -659,13 +659,13 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'printWeb',
             headerName: 'PRINT EWB',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_PRINT_WEB,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => {
                 return (
-                    <span className="text-primary-main select-none opacity-50 cursor-default" style={{ cursor: 'pointer' }}>
+                    <span className="text-primary-main select-none opacity-50 cursor-default">
                         PRINT EWB
                     </span>
                 )

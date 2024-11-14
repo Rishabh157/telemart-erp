@@ -93,7 +93,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: '1st Call Approval',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => {
                 return (
                     <span className="block w-full px-2 py-1 text-left cursor-pointer">
@@ -201,7 +201,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'orderNumber',
             headerName: 'Order No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <Link to={`/warehouse-first-call/${row?._id}`}>
                     <span className="text-primary-main">
@@ -214,7 +214,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'orderReferenceNumber',
             headerName: 'Order Ref No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row.orderReferenceNumber || '-'}</span>
             ),
@@ -224,7 +224,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Enquiry No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
@@ -232,7 +232,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: '1st call remark',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.firstCallRemark || '-'}</span>
             ),
@@ -242,7 +242,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'first Call State',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.firstCallState || '-'}</span>
             ),
@@ -252,7 +252,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'call back date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.firstCallCallBackDate || '-'}</span>
             ),
@@ -262,7 +262,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.assignWarehouseLabel || '-'}</span>
             ),
@@ -272,32 +272,22 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Tracking No.',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>-</span>,
-        },
-        {
-            field: 'tehsilLabel',
-            headerName: 'Taluk',
-            flex: 'flex-[1_1_0%]',
-            align: 'start',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.tehsilLabel}</span>
-            ),
         },
         {
             field: 'statusDate',
             headerName: 'Status Date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
         },
         {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
         },
         {
@@ -305,7 +295,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Shipping Charges',
             flex: 'flex-[1_1_0%]',
             align: 'start',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.deliveryCharges}</span>
             ),
@@ -315,7 +305,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.schemeName} </span>
             ),
@@ -325,7 +315,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Scheme Code',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.schemeCode} </span>
             ),
@@ -335,7 +325,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Quantity',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.shcemeQuantity} </span>
             ),
@@ -345,25 +335,15 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Price',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => <span> {row?.price} </span>,
-        },
-        {
-            field: 'pincodeLabel',
-            headerName: 'Pincode',
-            flex: 'flex-[1_1_0%]',
-            align: 'center',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.pincodeLabel} </span>
-            ),
         },
         {
             field: 'paymentMode',
             headerName: 'Payment Mode',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span> {row?.paymentMode} </span>
             ),
@@ -372,7 +352,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'createdAt',
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
                     <div className="text-[12px] text-slate-700 font-medium">
@@ -389,23 +369,52 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'edpDate',
             headerName: 'EDP Date',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => <div>-</div>,
         },
         {
             field: 'districtLabel',
             headerName: 'District',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.districtLabel}</div>
+            ),
+        },
+        {
+            field: 'tehsilLabel',
+            headerName: 'Taluk',
+            flex: 'flex-[1_1_0%]',
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span>{row?.tehsilLabel}</span>
+            ),
+        },
+        {
+            field: 'pincodeLabel',
+            headerName: 'Pincode',
+            flex: 'flex-[1_1_0%]',
+            align: 'center',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <span> {row?.pincodeLabel} </span>
+            ),
+        },
+        {
+            field: 'areaLabel',
+            headerName: 'Area',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row: OrderListResponse) => (
+                <div className="py-0">{row?.areaLabel}</div>
             ),
         },
         {
             field: 'dispositionLevelThreeLabel',
             headerName: 'Disposition',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.dispositionLevelThreeLabel}</div>
             ),
@@ -414,7 +423,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'dealerStatus',
             headerName: 'Dealer Status',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">
                     {/* {row?.dealerStatus === true ? 'Active' : 'DeActive'} */}
@@ -425,7 +434,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'dealerCode',
             headerName: 'Dealer Code',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.assignDealerCode || '-'}</div>
             ),
@@ -434,25 +443,16 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'customerName',
             headerName: 'Customer Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.customerName || '-'}</div>
-            ),
-        },
-        {
-            field: 'areaLabel',
-            headerName: 'Customer Address',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.areaLabel}</div>
             ),
         },
         {
             field: 'mobileNo',
             headerName: 'Contact No.',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.mobileNo}</div>
             ),
@@ -461,7 +461,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'channelName',
             headerName: 'Channel Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.channelLabel?.[0]}</div>
             ),
@@ -470,25 +470,16 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'callCenterLabel',
             headerName: 'CC Name',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.callCenterLabel}</div>
-            ),
-        },
-        {
-            field: 'areaLabel',
-            headerName: 'Area',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.areaLabel}</div>
             ),
         },
         {
             field: 'remark',
             headerName: 'Remark',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.remark}</div>
             ),
@@ -497,7 +488,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             field: 'agent',
             headerName: 'Agent',
             flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <div className="py-0">{row?.agentName}</div>
             ),
@@ -508,7 +499,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Delivery Charges',
             flex: 'flex-[1_1_0%]',
             align: 'center',
-            extraClasses: 'min-w-[150px]',
+            extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main ">
                     &#8377; {row.deliveryCharges}
@@ -522,7 +513,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            // hidden: activeTab === TabTypes?.complaint,
             renderCell: (row: OrderListResponse) => {
                 return (
                     <span>
@@ -559,15 +549,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
                     '-'
                 )
             },
-        },
-        {
-            field: 'orderMBKNumber',
-            headerName: 'MBK Number',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[250px]',
-            renderCell: (row: any) => (
-                <span> {row.orderMBKNumber || '-'} </span>
-            ),
         },
     ]
 

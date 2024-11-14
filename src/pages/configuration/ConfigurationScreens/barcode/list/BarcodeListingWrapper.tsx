@@ -181,12 +181,12 @@ const BarcodeListingWrapper = () => {
             icon: MdOutbond,
             name: UserModuleNameTypes.ACTION_BARCODE_LIST_TAB,
         },
-        {
-            label: 'Reprint Barcode / Outerbox',
-            icon: MdOutbond,
-            index: 1,
-            name: UserModuleNameTypes.ACTION_REPRINT_BARCODE_OUTERBOX_TAB,
-        },
+        // {
+        //     label: 'Reprint Barcode / Outerbox',
+        //     icon: MdOutbond,
+        //     index: 1,
+        //     name: UserModuleNameTypes.ACTION_REPRINT_BARCODE_OUTERBOX_TAB,
+        // },
         {
             label: 'Barcode Group',
             icon: MdOutbond,

@@ -67,9 +67,8 @@ const AddOrderAssigneeForm = ({
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -91,7 +90,6 @@ const AddOrderAssigneeForm = ({
                                     }
                                     options={dropdownOptions.dealerOptions}
                                     label="Dealer"
-                                    // menuPosition="absolute"
                                     isDisabled={values.wareHouseId !== '' ? true : false}
                                 />
                             </div>
