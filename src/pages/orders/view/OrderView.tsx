@@ -115,7 +115,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     <span className='text-neutral font-medium text-sm'>
                                         Campaign
                                     </span>
-                                    <span className='text-sm font-bold'>{items?.campaign}</span>
+                                    <span className='text-sm font-bold'>{items?.campaign?.replaceAll('_', ' ')}</span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
@@ -127,7 +127,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     <span className='text-neutral font-medium text-sm'>
                                         Alternate Number
                                     </span>
-                                    <span className='text-sm font-bold'>{items?.alternateNo || '-'}</span>
+                                    <span className='text-sm font-bold'>{items?.alternateNo || 'NA'}</span>
                                 </div>
                             </div>
                         </div>
@@ -152,13 +152,13 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     <span className='text-neutral font-medium text-sm'>
                                         Customer Email
                                     </span>
-                                    <span className='text-sm font-bold'>{items?.emailId || '-'}</span>
+                                    <span className='text-sm font-bold'>{items?.emailId || 'NA'}</span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
                                         Whatsapp Number
                                     </span>
-                                    <span className='text-sm font-bold'>{items?.whatsappNo || '-'}</span>
+                                    <span className='text-sm font-bold'>{items?.whatsappNo || 'NA'}</span>
                                 </div>
                             </div>
                         </div>
@@ -185,7 +185,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     className='text-sm font-semibold w-[70%] truncate capitalize'
                                     title={items?.autoFillingShippingAddress}
                                 >
-                                    {items?.autoFillingShippingAddress}
+                                    {items?.autoFillingShippingAddress || 'NA'}
                                 </span>
                             </div>
                             <div className='flex justify-between items-center'>
@@ -364,7 +364,10 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     Preffered Time
                                 </span>
                                 <span className='text-sm text-primary-main font-semibold'>
-                                    {items?.preffered_delivery_start_time?.replaceAll('_', ' ') + ' - ' + items?.preffered_delivery_end_time?.replaceAll('_', ' ')}
+                                    {items?.preffered_delivery_start_time ?
+                                        items?.preffered_delivery_start_time?.replaceAll('_', ' ') + ' - ' + items?.preffered_delivery_end_time?.replaceAll('_', ' ')
+                                        : 'NA'
+                                    }
                                 </span>
                             </div>
                             <div className='flex justify-between items-center'>
@@ -372,7 +375,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     Preffered Date
                                 </span>
                                 <span className='text-sm text-primary-main font-semibold'>
-                                    {moment(items?.preffered_delivery_date).format('DD-MM-YYYY') || '-'}
+                                    {items?.preffered_delivery_date ? moment(items?.preffered_delivery_date).format('DD-MM-YYYY') : 'NA'}
                                 </span>
                             </div>
 
@@ -546,7 +549,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                 <div className='bg-white shadow border p-4 rounded-lg'>
                     {/* Heading */}
                     <p className='sticky top-0 border-l-[3px] border-fuchsia-600 px-2 py-1 font font-medium text-md bg-white text-fuchsia-600'>
-                        Order Flow
+                        Order Flow Of <span className='font-semibold text-primary-main text-sm'># {items?.orderNumber} </span>
                     </p>
                     <div className="grow overflow-auto mt-4">
                         <ATMTable

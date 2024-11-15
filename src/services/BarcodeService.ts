@@ -71,14 +71,18 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 groupId,
                 status,
                 isSendingToDealer = false,
+                signal
             }: {
                 id: string
                 groupId: string
                 status: string
                 isSendingToDealer: boolean
+                signal?: AbortSignal;
             }) => ({
                 url: `/bar-code/productgroupid/${groupId}/barcode/${id}/status/${status}/${isSendingToDealer}`,
                 method: 'GET',
+                signal: signal // Pass the signal here directly
+            
             }),
         }),
 

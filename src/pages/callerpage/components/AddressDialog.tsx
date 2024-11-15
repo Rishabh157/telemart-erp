@@ -1,12 +1,3 @@
-/// ==============================================
-// Filename:AddressDialog.tsx
-// Type: List Component
-// Last Updated: SEPTEMBER 25, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
-// |-- Built-in Dependencies --|
-
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'

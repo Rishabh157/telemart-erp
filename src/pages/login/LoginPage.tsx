@@ -98,10 +98,10 @@ const LoginPage = ({ pathName }: any) => {
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
 
-                <div className="text-center">
+                <div className="text-end">
                     {/* <img src="/saptel-logo.png" alt="Saptel Logo" className="mx-auto w-24 h-24" /> */}
                     <img src="telemartLogo.png" alt="Saptel Logo" className="mx-auto w-auto h-24" />
-                    <p className="text-sm text-gray-500 pt-2">Complete ERP Solution</p>
+                    <p className="text-sm text-gray-500 pt-2 pr-9">Complete ERP Solution</p>
                 </div>
 
                 <form className="space-y-4">
@@ -169,12 +169,12 @@ const LoginPage = ({ pathName }: any) => {
 
                     <div className="flex justify-between mt-4 text-sm text-gray-500">
                         <span onClick={() => alert('coming soon')} className="hover:underline cursor-pointer">Forgot Password?</span>
-                        <span onClick={() => alert('coming soon')} className="hover:underline cursor-pointer">Contact Support</span>
+                        {/* <span onClick={() => alert('coming soon')} className="hover:underline cursor-pointer">Contact Support</span> */}
                     </div>
                 </form>
             </div>
             <footer className="absolute bottom-4 text-sm text-gray-400">
-                © 2024 Saptel. All rights reserved.
+                © 2024 <span className='font-semibold'> Provista IT Solutions. </span> All rights reserved.
             </footer>
         </div>
     )

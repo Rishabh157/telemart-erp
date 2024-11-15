@@ -50,38 +50,25 @@ const OrderViewWrapper = () => {
     // Order History Columns
     const columns: columnTypes[] = [
         {
-            field: 'orderReferenceNumber',
-            headerName: 'Order Ref. No.',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderFlowListResponse) => (
-                <div className="py-0">{row?.orderReferenceNumber}</div>
-            ),
-        },
-        {
-            field: 'createdBy',
-            headerName: 'Created By',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-        },
-        {
-            field: 'status',
-            headerName: 'Status',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-        },
-        {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[2_2_0%]',
             extraClasses: 'min-w-[180px]',
             renderCell: (row: OrderFlowListResponse) => (
-                <div className="w-full truncate">{row?.remark}</div>
+                <div className="w-full truncate" title={row?.remark}>
+                    {row?.remark}
+                </div>
             ),
         },
         {
+            field: 'createdBy',
+            headerName: 'Action Perform By',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+        },
+        {
             field: 'createdAt',
-            headerName: 'Action Date',
+            headerName: 'Action Perform Date',
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
@@ -94,6 +81,21 @@ const OrderViewWrapper = () => {
                         {moment(row?.createdAt).format('hh:mm A')}
                     </div>
                 </div>
+            ),
+        },
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+        },
+        {
+            field: 'orderReferenceNumber',
+            headerName: 'Order Ref. No.',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: OrderFlowListResponse) => (
+                <div className="py-0">{row?.orderReferenceNumber}</div>
             ),
         },
     ]

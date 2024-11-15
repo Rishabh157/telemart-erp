@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 // |-- External Dependencies --|
 import { Formik, FormikProps } from 'formik'
@@ -395,18 +395,27 @@ const OutwardDealerTabsListingWrapper = () => {
         barcode[ind] = [...filteredObj]
         setBarcodeList(barcode)
     }
-
+    // let currentAbortController: AbortController | null = null;
+    const currentAbortController = useRef<AbortController | null>(null);
     const handleBarcodeSubmit = (
         barcodeNumber: string,
         index: number,
         productGroupId: string
     ) => {
         dispatch(setFieldCustomized(true))
+        if (currentAbortController.current) {
+            currentAbortController.current.abort();
+        }
+
+        // Create a new AbortController for the latest request
+        const abortController = new AbortController();
+        currentAbortController.current = abortController;
         getBarCode({
             id: barcodeNumber,
             groupId: productGroupId,
             status: barcodeStatusEnum.atWarehouse,
             isSendingToDealer: true,
+            signal: abortController.signal
         })
             .then((res: any) => {
                 if (res?.data?.status) {
@@ -448,13 +457,15 @@ const OutwardDealerTabsListingWrapper = () => {
                 }
 
                 // error messages
-                if (!res?.data?.status) {
-                    showToast('error', res?.data?.message)
-                }
+                // if (!res?.data?.status) {
+                //     console.log("12121")
+                //     showToast('error', res?.data?.message)
+                // }
 
-                if (res?.error) {
-                    showToast('error', res?.error?.data?.message)
-                }
+                // if (res?.error) {
+                //     console.log("22222")
+                //     showToast('error', res?.error?.data?.message)
+                // }
             })
             .catch((err) => console.error(err))
     }
@@ -519,6 +530,7 @@ const OutwardDealerTabsListingWrapper = () => {
                 if (res?.data?.status) {
                     showToast('success', 'Dispatched successfully!')
                     setIsShow(false)
+                    setBarcodeList([])
                     dispatch(setFieldCustomized(false))
                 } else {
                     showToast('error', res?.data?.message)
@@ -668,12 +680,9 @@ const OutwardDealerTabsListingWrapper = () => {
                                                 value={barcodeNumber[docIndex]}
                                                 label="Barcode Number"
                                                 placeholder="enter barcode number"
-                                                className="shadow bg-white rounded w-[50%] "
+                                                className="shadow bg-white rounded w-[50%] uppercase"
                                                 onChange={(e) => {
-                                                    if (
-                                                        e.target.value?.length >
-                                                        6
-                                                    ) {
+                                                    if (e.target.value?.length > 14) {
                                                         handleBarcodeSubmit(
                                                             e.target.value,
                                                             docIndex,
