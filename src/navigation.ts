@@ -103,7 +103,7 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_GRN,
     },
     {
-        label: 'Inventory Flow',
+        label: 'Barcode Flow',
         icon: TiFlowSwitch,
         path: '/inventory-flow',
         name: UserModuleNameTypes.NAV_INVENTORY_FLOW,
