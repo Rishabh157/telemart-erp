@@ -94,13 +94,12 @@ const LoginPage = ({ pathName }: any) => {
     }
 
     return (
-
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
 
                 <div className="text-end">
                     {/* <img src="/saptel-logo.png" alt="Saptel Logo" className="mx-auto w-24 h-24" /> */}
-                    <img src="telemartLogo.png" alt="Saptel Logo" className="mx-auto w-auto h-24" />
+                    <img src="septel-logo.png" alt="Saptel Logo" className="mx-auto w-auto h-24" />
                     <p className="text-sm text-gray-500 pt-2 pr-9">Complete ERP Solution</p>
                 </div>
 
