@@ -8,15 +8,11 @@ import { MdOutbond } from 'react-icons/md'
 import { BiFilter } from 'react-icons/bi'
 
 // |-- Internal Dependencies --|
-import {
-    BarcodeListResponseType,
-    ProductBarcodeGroupResponse,
-} from 'src/models'
-
+import { ProductBarcodeGroupResponse } from 'src/models'
 import BarcodeListing from './BarcodeListing'
 import {
-    useGetBarcodeQuery,
     useGetProductGroupBarcodeQuery,
+    useGetBarcodeByBarcodeNumberQuery
 } from 'src/services/BarcodeService'
 import {
     setIsTableLoading as pgSetIsTableLoading,
@@ -30,9 +26,9 @@ import ProductGroupListing from './components/BarcodeGroup/ProductGroupBarcodeLi
 import { AppDispatch, RootState } from 'src/redux/store'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import ReprintOuterBoxBarcode from './components/ReprintOuterBoxBarcode/ReprintOuterBoxBarcode'
+import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 
 // |-- Types --|
 export type Tabs = {
@@ -50,43 +46,26 @@ export type barcodecardType = {
 }
 
 const BarcodeListingWrapper = () => {
+
     useUnmountCleanup()
     const barcodeState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
     const [groupBarcode, setGroupBarcode] = useState('')
     const [activeTabIndex, setActiveTabIndex] = useState(0)
-    const { page, rowsPerPage, searchValue } = barcodeState
+    const [selectedProductGroup, setSelectedProductGroup] = React.useState<ProductBarcodeGroupResponse[]>([])
+    const { searchValue } = barcodeState
     const dispatch = useDispatch<AppDispatch>()
-    const { userData } = useSelector((state: RootState) => state?.auth)
 
-    const { items } = useGetCustomListingData({
-        useEndPointHook: useGetBarcodeQuery({
-            limit: rowsPerPage,
-            searchValue: searchValue,
-            params: ['barcodeNumber', 'productGroupLabel'],
-            page: page,
-            filterBy: [
-                {
-                    fieldName: 'barcodeGroupNumber',
-                    value: [groupBarcode],
-                },
-                {
-                    fieldName: 'companyId',
-                    value: userData?.companyId,
-                },
-            ],
-            dateFilter: {},
+    // const { userData } = useSelector((state: RootState) => state?.auth)
 
-            orderBy: 'createdAt',
-            orderByValue: -1,
-            isPaginationRequired: true,
+    const { items } = useGetDataByIdCustomQuery({
+        useEndPointHook: useGetBarcodeByBarcodeNumberQuery(searchValue, {
+            skip: searchValue.length <= 8 // Skip if length is 14 or less
         }),
     })
 
-    const productGroupState: any = useSelector(
-        (state: RootState) => state.productGroupBarcode
-    )
+    const productGroupState: any = useSelector((state: RootState) => state.productGroupBarcode)
 
     const {
         page: pgPage,
@@ -128,14 +107,6 @@ const BarcodeListingWrapper = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pgIsLoading, pgIsFetching, pgData])
 
-    const [selectedBarcodes, setSelectedBarcodes] = React.useState<
-        BarcodeListResponseType[]
-    >([])
-
-    const [selectedProductGroup, setSelectedProductGroup] = React.useState<
-        ProductBarcodeGroupResponse[]
-    >([])
-
     const onProductGroupSelect = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
         barcode: ProductBarcodeGroupResponse,
@@ -153,25 +124,6 @@ const BarcodeListingWrapper = () => {
         }
 
         setSelectedProductGroup(newValue)
-    }
-    // Handle Barcode Select
-    const onBarcodeSelect = (
-        e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-        barcode: BarcodeListResponseType,
-        isBarcodeSeleted: boolean
-    ) => {
-        e.stopPropagation()
-        let newValue = []
-        if (isBarcodeSeleted) {
-            newValue = selectedBarcodes.filter(
-                (seleted: BarcodeListResponseType) =>
-                    seleted._id !== barcode._id
-            )
-        } else {
-            newValue = [...selectedBarcodes, barcode]
-        }
-
-        setSelectedBarcodes(newValue)
     }
 
     const tabs: Tabs[] = [
@@ -200,7 +152,7 @@ const BarcodeListingWrapper = () => {
             name: UserModuleNameTypes.ACTION_REPRINT_OUTERBOX_BARCODE,
         },
     ]
-    
+
     const allowedTabs = tabs
         ?.filter((nav) => {
             return isAuthorized(nav?.name as keyof typeof UserModuleNameTypes)
@@ -219,11 +171,10 @@ const BarcodeListingWrapper = () => {
                                 setActiveTabIndex(index)
                             }}
                             key={tabIndex}
-                            className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${
-                                activeTabIndex === index
-                                    ? 'bg-slate-100 text-primary-main '
-                                    : 'text-slate-500'
-                            }`}
+                            className={`flex items-center gap-2 px-4 h-[calc(100%-14px)] rounded transition-all duration-500 ${activeTabIndex === index
+                                ? 'bg-slate-100 text-primary-main '
+                                : 'text-slate-500'
+                                }`}
                         >
                             <div>
                                 {' '}
@@ -233,7 +184,7 @@ const BarcodeListingWrapper = () => {
                             {index === 0 && groupBarcode.length ? (
                                 <button
                                     onClick={() => setGroupBarcode('')}
-                                    className="bg-blue-400   flex items-center rounded border"
+                                    className="bg-blue-400 flex items-center rounded border"
                                 >
                                     <BiFilter
                                         color="white"
@@ -247,12 +198,7 @@ const BarcodeListingWrapper = () => {
             </div>
 
             {activeTabIndex === 0 ? (
-                <BarcodeListing
-                    rows={items}
-                    selectedBarcodes={selectedBarcodes}
-                    onBarcodeSelect={onBarcodeSelect}
-                    onBarcodeClick={() => {}}
-                />
+                <BarcodeListing items={items as any} />
             ) : activeTabIndex === 1 ? (
                 <CartonBoxBarcodeListing />
             ) : activeTabIndex === 2 ? (
