@@ -35,8 +35,6 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
         totalAmount: number;
     }
 
-
-
     const calculatedValue = (increasedValue: number, percentage: number) => {
         return increasedValue / (1 + percentage / 100);
     };
@@ -104,7 +102,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
     return (
         <div
             ref={ref}
-            className="bg-white border-[1px] border-black m-2 p-2 text-sm"
+            className="bg-white border-[1px] border-black m-2 p-6 text-sm"
         >
             {/* Top Header With Logo */}
             <div className="grid grid-cols-12 border-b-[1px] border-black">
@@ -124,7 +122,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                     </h1>
                     <div>
                         <h1 className="font-bold uppercase text-lg">{items?.companyDetails?.companyName}</h1>
-                        <p className="capitalize text-sm font-semibold">
+                        <p className="capitalize text-xs font-semibold">
                             {items?.companyDetails?.address}
                         </p>
                         {/* <p className="text-[13px]">
@@ -274,40 +272,40 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         {/* table head */}
                         <thead>
                             <tr>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
                                     SR. NO.
                                 </th>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
                                     ITEM CODE NO.
                                 </th>
-                                <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
                                     ITEM DESCRIPTION
                                 </th>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
                                     HSN CODE
                                 </th>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
                                     QTY
                                 </th>
-                                <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
                                     RATE PER UNITS(RS.)
                                 </th>
-                                <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                <th className="pb-3 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
                                     TAXABLE VALUE
                                 </th>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
-                                    S-GST
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
+                                    SGST
                                 </th>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
-                                    C-GST
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
+                                    CGST
                                 </th>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
-                                    I-GST
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
+                                    IGST
                                 </th>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
-                                    U-GST
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
+                                    UGST
                                 </th>
-                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[14px] border-t-none border-black">
+                                <th className="pb-3 px-1 border-r-[1px] border-b-[1px] border-l-[1px] text-[12px] border-t-none border-black">
                                     AMOUNT(RS.)
                                 </th>
                             </tr>
@@ -436,7 +434,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         GODOWN: {items?.companyDetails?.companyName}
                     </h2>
 
-                    <h2>
+                    <h2 className='text-xs'>
                         {items?.companyWarehouse?.billingAddress?.address}
                         <p>
                             Contact No : {items?.companyWarehouse?.billingAddress?.phone}
@@ -446,7 +444,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                 </div>
 
                 <div className="col-span-6 px-2 py-2">
-                    <h2>
+                    <h2 className='text-xs'>
                         I/We hereby declare that my/our Registration
                         Certificate under the GST act is in force on the
                         date on which the sale of the goods specified in
@@ -462,7 +460,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
             <div className="grid grid-cols-12 py-1 h-28">
                 <div className="col-span-8 pl-2 flex justify-between">
                     <div>
-                        <span>
+                        <span className='text-xs'>
                             This is System Generated Invoice hence no
                             Signature or Stamp required.
                         </span>

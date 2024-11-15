@@ -214,10 +214,13 @@ const DispatchedInvoiceWrapper = () => {
                 </div>
             )}
 
-            <DispatchedInvoiceTemplate
-                ref={saleOrderInvoiceRef}
-                items={items || null}
-            />
+
+            <div className='p-4'>
+                <DispatchedInvoiceTemplate
+                    ref={saleOrderInvoiceRef}
+                    items={items || null}
+                />
+            </div>
 
             <div className="flex justify-end gap-x-4 m-4">
                 <button
