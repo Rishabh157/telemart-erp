@@ -470,7 +470,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                     <div className="col-span-6 pr-2 flex flex-col justify-between">
                         <div>
                             <span className="font-bold">
-                                For Telemart
+                                For {items?.companyDetails?.companyName}
                             </span>
                         </div>
                         <div>
