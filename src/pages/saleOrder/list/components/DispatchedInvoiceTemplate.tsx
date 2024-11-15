@@ -421,7 +421,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         <span>TOTAL RUPEES (IN WORDS) </span>
                         <span className="pr-4 pl-1"> : </span>
                         <span className='uppercase'>
-                            RUPEE{' '}{NumberToWordsConverter.convert(totalFigure?.totalAmount)}{' '}ONLY
+                            {' '}{NumberToWordsConverter.convert(totalFigure?.totalAmount)}{' '}ONLY
                         </span>
                     </h2>
                 </div>
