@@ -352,6 +352,13 @@ const CallerDeliveryAddress = ({
         handleEndTime(values?.preffered_delivery_start_time)
     }, [values?.preffered_delivery_start_time])
 
+
+
+    useEffect(() => {
+        setFieldValue('autoFillingShippingAddress', values?.autoFillingShippingAddress)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values])
+
     return (
         <>
             <div className="bg-[#87527C] py-1 px-2">

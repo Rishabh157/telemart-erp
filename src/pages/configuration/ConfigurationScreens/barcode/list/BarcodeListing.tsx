@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:BarcodeListing.tsx
-// Type: List Component
-// Last Updated: JUNE 24, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -60,9 +53,7 @@ const BarcodeListing = ({
                 <ATMPageHeading> Barcode </ATMPageHeading>
                 {isAuthorized(UserModuleNameTypes.ACTION_BARCODE_ADD) && (
                     <button
-                        onClick={() => {
-                            navigate('add')
-                        }}
+                        onClick={() => navigate('add')}
                         className="bg-primary-main text-white rounded py-1 px-3"
                     >
                         + Add Barcode
@@ -86,15 +77,8 @@ const BarcodeListing = ({
                 />
 
                 {/* Barcode Detail Cards */}
-                <div className="grow overflow-auto  ">
-                    <BarcodeDetailsCard
-                        barcodeList={rows}
-                        selectedBarcodes={selectedBarcodes}
-                        onBarcodeSelect={onBarcodeSelect}
-                        onBarcodeClick={(barcode) => {
-                            onBarcodeClick(barcode)
-                        }}
-                    />
+                <div className="grow overflow-auto">
+                    <BarcodeDetailsCard barcodeList={rows} />
                 </div>
 
                 {/* Pagination */}

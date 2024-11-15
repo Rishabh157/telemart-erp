@@ -109,6 +109,25 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_INVENTORY_FLOW,
     },
     {
+        label: 'Orders',
+        icon: MdOutlineBorderColor,
+        path: '/orders',
+        name: UserModuleNameTypes.NAV_ORDER,
+    },
+    {
+        label: 'WH First Call',
+        icon: FiPhoneCall,
+        path: '/warehouse-first-call-orders',
+        // http://localhost:3000/calling-outcall?phone=9006666665&username=admin2 -> for dialar page
+        name: UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST,
+    },
+    {
+        label: 'Batch',
+        icon: MdOutlineBatchPrediction,
+        path: '/batch',
+        name: UserModuleNameTypes.NAV_BATCH_ORDER,
+    },
+    {
         label: 'Mapping',
         icon: FaSitemap,
         path: '/mapping',
@@ -157,22 +176,10 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_MUILTI_ORDER_SEARCH,
     },
     {
-        label: 'Orders',
-        icon: MdOutlineBorderColor,
-        path: '/orders',
-        name: UserModuleNameTypes.NAV_ORDER,
-    },
-    {
         label: 'Order Cancel Request',
         icon: FiPhoneCall,
         path: '/order-cancel-request',
         name: UserModuleNameTypes.NAV_ORDER_CANCEL_REQUEST,
-    },
-    {
-        label: 'Batch',
-        icon: MdOutlineBatchPrediction,
-        path: '/batch',
-        name: UserModuleNameTypes.NAV_BATCH_ORDER,
     },
     {
         label: 'Offer Apply NDR',
@@ -203,13 +210,6 @@ export const navigation: NavItemType[] = [
         icon: RiCustomerServiceLine,
         path: '/create-complain',
         name: UserModuleNameTypes.NAV_CUSTOMER_COMPLAIN,
-    },
-    {
-        label: 'WH First Call',
-        icon: FiPhoneCall,
-        path: '/warehouse-first-call-orders',
-        // http://localhost:3000/calling-outcall?phone=9006666665&username=admin2 -> for dialar page
-        name: UserModuleNameTypes.ACTION_WAREHOUSE_FIRST_CALL_ORDERS_TAB_LIST,
     },
     {
         label: 'Request',

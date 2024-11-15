@@ -284,11 +284,12 @@ const SalesPage: React.FC<Props> = ({
             {/* Data Table  */}
             <div className="border-[1px] border-grey-700 overflow-scroll">
                 <ATMTable
-                    headerClassName="bg-[#87527c] py-2 text-white z-0"
+                    headerClassName="bg-[#87527c] py-2 z-0"
+                    headerExtraClassName='text-white'
                     columns={column || []}
                     rows={rows || []}
-                    noDataFoundClass='h-auto'
                     isLoading={isTableLoading}
+                    noDataFoundClass='h-auto'
                 />
             </div>
         </div>

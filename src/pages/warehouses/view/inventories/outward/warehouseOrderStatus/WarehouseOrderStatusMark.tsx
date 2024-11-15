@@ -71,9 +71,8 @@ const WarehouseOrderStatusMark = ({ formikProps, apiStatus }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    apiStatus ? 'opacity-50' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${apiStatus ? 'opacity-50' : ''
+                                    }`}
                             >
                                 Submit
                             </button>
@@ -129,9 +128,9 @@ const WarehouseOrderStatusMark = ({ formikProps, apiStatus }: Props) => {
                                 onChange={(e) => {
                                     const value = e;
                                     if (/^[\d\n]*$/.test(value)) {  // Regular expression to allow only numbers
-                                      handleSetFieldValue('orderNumber', value);
+                                        handleSetFieldValue('orderNumber', value);
                                     } else {
-                                      console.log("Invalid input, only numbers are allowed");
+                                        console.log("Invalid input, only numbers are allowed");
                                     }
                                 }}
                             />

@@ -81,9 +81,6 @@ const AddSaleOrder = ({
         value: '_id',
     })
 
-
-    console.log('dealerWarehouseOptions', dealerWarehouseOptions)
-
     useEffect(() => {
         const val: any = productPriceOptions?.find(
             (e: any) => e['value'] === productGroup

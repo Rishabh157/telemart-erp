@@ -176,9 +176,9 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                                         <p className="text-slate-600 col-span-1">
                                             {items?.assignWarehouseId !==
                                                 null ||
-                                            items?.assignDealerId !== null
+                                                items?.assignDealerId !== null
                                                 ? items?.assignDealerLabel ||
-                                                  items?.assignWarehouseLabel
+                                                items?.assignWarehouseLabel
                                                 : 'NA'}
                                         </p>
                                     </div>
@@ -223,7 +223,7 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                                     <p className="text-center">-</p>
                                     <p className="text-slate-600">
                                         {items?.autoFillingShippingAddress ===
-                                        ''
+                                            ''
                                             ? 'NA'
                                             : items?.autoFillingShippingAddress}
                                     </p>
@@ -501,18 +501,14 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                             </h1>
                             <p >-</p>
                             <p className="text-slate-600">
-                                {items?.dispositionLevelTwo === ''
-                                    ? 'NA'
-                                    : items?.dispositionLevelTwo}
+                                {items?.dispositionLevelTwo === '' ? 'NA' : items?.dispositionLevelTwo}
                             </p>
                             <h1 className="text-gray-800">
                                 Disposition Level Three{' '}
                             </h1>
                             <p >-</p>
                             <p className="text-slate-600">
-                                {items?.dispositionLevelThree === ''
-                                    ? 'NA'
-                                    : items?.dispositionLevelThree}
+                                {items?.dispositionLevelThree === '' ? 'NA' : items?.dispositionLevelThree}
                             </p>
                         </div>
                     </div>
@@ -528,7 +524,7 @@ const OrderView = ({ items, historyColumns, orderHistory }: Props) => {
                                 columns={historyColumns}
                                 rows={orderHistory}
                                 extraClasses="max-h-full overflow-auto"
-                                // isLoading={isTableLoading}
+                            // isLoading={isTableLoading}
                             />
                         </div>
                     </div>

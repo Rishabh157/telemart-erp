@@ -146,16 +146,14 @@ const SalesPageWrapper = () => {
         (state: RootState) => state.inboundCaller
     )
 
+    // check the call is inbound or outbound
+    // (if didnumber is coming then the call should be inbound if did is not coming then call should be outbound)
     const isInbound = didNumber ? true : false
-
-
-    // console.log('didNumber', didNumber)
 
     const navigate = useNavigate()
     const { items, isTableLoading } = inboundCallerState
-    // Table Data with MobileNo filtered
-    const [AddCallerForm] = useAddCallerFormMutation()
 
+    const [AddCallerForm] = useAddCallerFormMutation()
     const [UpdateCallerForm] = useUpdateCallerFormMutation()
 
     // Get DID number by
@@ -331,15 +329,6 @@ const SalesPageWrapper = () => {
         {
             field: 'agendName',
             headerName: 'Agent ID',
-            flex: 'flex-[3_3_0%]',
-            align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
-            hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => <span> NA </span>,
-        },
-        {
-            field: 'edpDate',
-            headerName: 'EDP Date',
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
@@ -586,6 +575,15 @@ const SalesPageWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             hidden: !(activeTab === TabTypes?.complaint),
+        },
+        {
+            field: 'edpDate',
+            headerName: 'EDP Date',
+            flex: 'flex-[3_3_0%]',
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            hidden: activeTab === TabTypes?.complaint,
+            renderCell: (row: OrderListResponse) => <span> NA </span>,
         },
     ]
 

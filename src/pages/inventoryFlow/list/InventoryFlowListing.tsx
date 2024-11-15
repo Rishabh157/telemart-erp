@@ -1,5 +1,5 @@
 // |-- Built-in Dependencies --|
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,9 +26,7 @@ import {
     BarcodeFlowListResponse,
     BarcodeFlowDataListResponsee,
 } from 'src/models'
-import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
-// import moment from 'moment'
-// import { barcodeStatusEnum } from 'src/utils/constants/enums'
+import moment from 'moment'
 
 // |-- Types --|
 type Props = {
@@ -119,7 +117,7 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                                 ) => (
                                     <div
                                         key={ind}
-                                        className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2 cursor-pointer`}
+                                        className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2`}
                                         onClick={onBarcodeClick}
                                     >
                                         <div className="flex justify-between">
@@ -131,7 +129,7 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                                                     {barcode?.barcodeNumber}
                                                 </div>
                                             </div>
-                                            <div>
+                                            <div className='cursor-pointer hover:bg-slate-300 rounded-full px-2 py-1 flex items-center justify-center'>
                                                 <HiDotsVertical
                                                     onClick={() => {
                                                         setIsFlowDialogShow(
@@ -190,31 +188,18 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                     }}
                     component={
                         <div className="py-4  px-4">
-                            {/* <ATMPageHeading>Flow 12000002</ATMPageHeading> */}
                             <div className="flex justify-center">
                                 <Timeline>
-                                    {selectedFlowItem.map(
-                                        (
-                                            ele: BarcodeFlowDataListResponsee,
-                                            ind: number
-                                        ) => (
-                                            <Timeline.Item key={ind}>
-                                                <div className="text-[14px] text-gray-600">
-                                                    {formatedDateTimeIntoIst(
-                                                        ele?.createdAt
-                                                    )}
-                                                </div>
-                                                <div className="font-semibold text-[16px]">
-                                                    {ele?.barcodeLog}
-                                                    {/* {showBarcodeStatusText(
-                                                        ele?.status,
-                                                        ele?.wareHouseLabel ||
-                                                            '',
-                                                        ele?.companyLabel
-                                                    )} */}
-                                                </div>
-                                            </Timeline.Item>
-                                        )
+                                    {selectedFlowItem.map((barcode: BarcodeFlowDataListResponsee) => (
+                                        <Timeline.Item key={barcode?._id}>
+                                            <div className="text-[14px] text-gray-600">
+                                                {moment(barcode?.createdAt).format('DD MMM YYYY hh:mm A')}
+                                            </div>
+                                            <div className="text-xs font-semibold">
+                                                {barcode?.barcodeLog}
+                                            </div>
+                                        </Timeline.Item>
+                                    )
                                     )}
                                 </Timeline>
                             </div>

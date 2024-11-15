@@ -15,7 +15,7 @@ type Props = {
 
 const ATMPageHeading = ({ children }: Props) => {
     return (
-        <span className="text-xl font-semibold text-slate-600">{children}</span>
+        <span className="text-lg font-semibold text-slate-600">{children}</span>
     )
 }
 

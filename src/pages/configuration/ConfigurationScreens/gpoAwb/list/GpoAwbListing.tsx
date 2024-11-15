@@ -49,7 +49,7 @@ const GpoAwbListing = ({
     columns,
     rows,
 }: // addExcelFile,
-Props) => {
+    Props) => {
     const [selectedCourier, setSelectedCourier] = React.useState<string>('')
 
     const fileInputRef = React.useRef<HTMLInputElement>(null)
@@ -121,60 +121,57 @@ Props) => {
                 {isAuthorized(
                     UserModuleNameTypes.ACTION_GPO_AWB_NUMBER_ADD
                 ) && (
-                    <div className="flex gap-x-4 justify-end z-50">
-                        <ATMSelectSearchable
-                            name=""
-                            label=""
-                            value={selectedCourier}
-                            // value={selectedCourier}
-                            componentClass=""
-                            selectLabel="Select Courier"
-                            isLoading={false}
-                            options={courierAwbOptions?.map((ele) => ({
-                                label: ele?.label?.replaceAll('_', ' '),
-                                value: ele?.label,
-                            }))}
-                            onChange={(e) => {
-                                setSelectedCourier(e)
-                            }}
-                        />
-
-                        <ATMExportButton
-                            isLoading={false}
-                            headers={[]}
-                            fileName=""
-                            btnName="Import AWB CSV"
-                            btnType="UPLOAD"
-                            loadingText="..."
-                            className="py-2 mt-[5px] h-[36px]"
-                            disabled={!selectedCourier ? true : false}
-                            onImport={() => {
-                                fileInputRef?.current?.click()
-                            }}
-                        />
-                        <div
-                            className="mt-1"
-                            hidden={!selectedCourier.length ? true : false}
-                        >
-                            <ATMExportButton
-                                data={[]}
+                        <div className="flex gap-x-4 justify-end z-50">
+                            <ATMSelectSearchable
+                                name=""
+                                label=""
+                                value={selectedCourier}
+                                // value={selectedCourier}
+                                componentClass=""
+                                selectLabel="Select Courier"
                                 isLoading={false}
-                                headers={
-                                    selectedCourier === 'GPO'
-                                        ? ['awbNumber']
-                                        : headers
-                                }
-                                fileName={selectedCourier}
-                                onClick={(done) => {
-                                    done()
+                                options={courierAwbOptions?.map((ele) => ({
+                                    label: ele?.label?.replaceAll('_', ' '),
+                                    value: ele?.label,
+                                }))}
+                                onChange={(e) => {
+                                    setSelectedCourier(e)
                                 }}
-                                btnName="Download CSV"
-                                btnType="DOWNLOAD"
+                            />
+
+                            <div
+                                className="mt-1"
+                                hidden={!selectedCourier.length ? true : false}
+                            >
+                                <ATMExportButton
+                                    data={[]}
+                                    isLoading={false}
+                                    headers={selectedCourier === 'GPO' ? ['awbNumber'] : headers}
+                                    fileName={selectedCourier}
+                                    onClick={(done) => {
+                                        done()
+                                    }}
+                                    btnName="Download CSV"
+                                    btnType="DOWNLOAD"
+                                    loadingText="..."
+                                />
+                            </div>
+
+                            <ATMExportButton
+                                isLoading={false}
+                                headers={[]}
+                                fileName=""
+                                btnName="Import AWB CSV"
+                                btnType="UPLOAD"
                                 loadingText="..."
+                                className="py-2 mt-[5px] h-[36px]"
+                                disabled={!selectedCourier ? true : false}
+                                onImport={() => {
+                                    fileInputRef?.current?.click()
+                                }}
                             />
                         </div>
-                    </div>
-                )}
+                    )}
             </div>
 
             <div className="border flex flex-col h-[calc(100%-85px)] rounded bg-white -z-0">

@@ -39,6 +39,7 @@ interface ATMTablePropTypes<T> {
     setShowDropdown?: React.Dispatch<React.SetStateAction<boolean>>
     onClick?: (event: any) => void
     headerClassName?: string
+    headerExtraClassName?: string
     rowClassName?: string
     noDataFoundText?: string
     noDataFoundClass?: string
@@ -57,6 +58,7 @@ const ATMTable = <T extends {}>({
     isLoading = false,
     setShowDropdown,
     headerClassName = ' py-1 px-2',
+    headerExtraClassName,
     rowClassName = 'px-2 bg-white py-2',
     noDataFoundText = `${NOT_DATA_FOUND}`,
     noDataFoundClass = 'text-slate-500',
@@ -119,9 +121,7 @@ const ATMTable = <T extends {}>({
                             return (
                                 <div
                                     key={column.field + index}
-                                    className={`${column.flex
-                                        } text-xs text-black  font-semibold px-2 flex justify-${column.align || 'start'
-                                        }  ${column.extraClasses}`}
+                                    className={twMerge(`flex ${column.flex} justify-${column.align || 'start'} text-xs text-black font-semibold px-2 ${column.extraClasses}`, headerExtraClassName)}
                                 >
                                     {column.headerName}
                                 </div>

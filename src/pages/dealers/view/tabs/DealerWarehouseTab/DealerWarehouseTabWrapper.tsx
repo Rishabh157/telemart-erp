@@ -99,14 +99,6 @@ const DealerWarehouseTabWrapper = (props: Props) => {
             },
         },
         {
-            field: 'country',
-            headerName: 'Country',
-            flex: 'flex-[1_1_0%]',
-            renderCell: (row: WarehousesListResponse) => (
-                <span className=" "> {row.wareHouseCountryName} </span>
-            ),
-        },
-        {
             field: 'state',
             headerName: 'State',
             flex: 'flex-[1.5_1.5_0%]',
