@@ -52,6 +52,7 @@ export type SaleOrderListResponseTypes = {
     invoiceDate: string;
     invoiceNumber: string;
     transportnameId: string;
+    transportName: string;
     transporterGST: string;
     mode: string;
     distance: string;
@@ -103,8 +104,6 @@ const SaleOrderView = ({ items, isLoading }: Props) => {
 
     // Combine the all request into one
     const requestProducts = items?.map((ele: SaleOrderListResponseTypes) => ele?.productSalesOrder);
-
-    console.log('item ', item);
 
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white text-sm">
@@ -277,7 +276,7 @@ const SaleOrderView = ({ items, isLoading }: Props) => {
                                     <span className='text-neutral font-medium '>
                                         Transport name
                                     </span>
-                                    <span className='font-semibold capitalize'>{item?.transportnameId || 'NA'}</span>
+                                    <span className='font-semibold capitalize'>{item?.transportName || 'NA'}</span>
 
                                 </div>
                                 <div className='flex justify-between items-center'>

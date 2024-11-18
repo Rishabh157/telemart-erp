@@ -61,7 +61,7 @@ const BarcodeListingWrapper = () => {
 
     const { items } = useGetDataByIdCustomQuery({
         useEndPointHook: useGetBarcodeByBarcodeNumberQuery(searchValue, {
-            skip: searchValue.length <= 8 // Skip if length is 14 or less
+            skip: searchValue.length <= 6 // Skip if length is 14 or less
         }),
     })
 
