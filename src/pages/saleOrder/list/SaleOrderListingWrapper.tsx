@@ -16,6 +16,7 @@ import {
     useGetInvoiceOfSaleOrderByIdQuery,
     useGetPaginationSaleOrderByGroupQuery,
     useUpdateSalesOrderApprovalMutation,
+    useUpdateSalesOrderInvoiceUrlMutation,
 } from 'src/services/SalesOrderService'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
@@ -31,16 +32,14 @@ import { generatePdf } from 'src/utils/formUtils/HtmlToPdf'
 import DispatchedInvoiceTemplate from './components/DispatchedInvoiceTemplate'
 import { SalesOrderInvoiceResponse } from './components/DispatchedInvoiceWrapper'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 import { SalesOrderFormInitialValuesFilterWithLabel } from './filter/SalesOrderFilterWrapper'
+import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 
 const SaleOrderListingWrapper = () => {
 
     useUnmountCleanup()
-    const salesOrderState: any = useSelector(
-        (state: RootState) => state.listingPagination
-    )
+    const salesOrderState: any = useSelector((state: RootState) => state.listingPagination)
 
     // useRef
     const saleOrderInvoiceRef = useRef<any>(null)
@@ -71,12 +70,13 @@ const SaleOrderListingWrapper = () => {
         })
     const [showDropdown, setShowDropdown] = useState(false)
     const [deleteSaleOrder] = useDeleteSalesOrderMutation()
-    const [updateSalesOrder] = useUpdateSalesOrderApprovalMutation()
+    const [updateSalesOrder, updateSalesOrderInfo] = useUpdateSalesOrderApprovalMutation()
     const { userData }: any = useSelector((state: RootState) => state.auth)
 
 
     // Upload File Mutation
     const [uploadFile, uploadFileInfo] = useAddFileUrlMutation()
+    const [updateSoInvoice, updateSoInvoiceInfo] = useUpdateSalesOrderInvoiceUrlMutation()
 
     const { items } = useGetCustomListingData<SaleOrderListResponseTypes>({
         useEndPointHook: useGetPaginationSaleOrderByGroupQuery({
@@ -125,26 +125,82 @@ const SaleOrderListingWrapper = () => {
         ),
     })
 
-    const handleUpload = (
-        base64Data: any,
+    const handleAccApproval = async (
+        // base64Data: any,
         _id: string,
         value: boolean,
         message: string
     ) => {
-        const binaryData = atob(base64Data.split(',')[1])
-        const arrayBuffer = new ArrayBuffer(binaryData.length)
-        const byteArray = new Uint8Array(arrayBuffer)
 
-        for (let i = 0; i < binaryData.length; i++) {
-            byteArray[i] = binaryData.charCodeAt(i)
-        }
+        // Approval Api
+        const currentDate = new Date().toLocaleDateString('en-GB')
+        updateSalesOrder({
+            id: _id,
+            body: {
+                accApproved: value,
+                type: 'ACC',
+                accApprovedById: userData?.userId,
+                accApprovedAt: currentDate,
+                accApprovedActionBy: userData?.userName,
+            },
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
 
-        const blob = new Blob([arrayBuffer], { type: 'application/pdf' })
-        const file = new File(
-            [blob],
-            invoiceSoNumber ? `so-${invoiceSoNumber}.pdf` : 'so-generated.pdf',
-            { type: 'application/pdf' }
-        )
+                    showToast('success', `Account ${message} is successfully!`)
+
+
+                    if (value) {
+                        setInvoiceSoNumber(_id)
+
+                        setTimeout(async () => {
+
+                            const base64Data: any = await generatePdf(saleOrderInvoiceRef)
+                            // generating the pdf
+                            const binaryData = atob(base64Data?.split(',')[1])
+                            const arrayBuffer = new ArrayBuffer(binaryData.length)
+                            const byteArray = new Uint8Array(arrayBuffer)
+
+                            for (let i = 0; i < binaryData.length; i++) {
+                                byteArray[i] = binaryData.charCodeAt(i)
+                            }
+
+                            const blob = new Blob([arrayBuffer], { type: 'application/pdf' })
+                            const file = new File([blob], invoiceSoNumber ? `so-${invoiceSoNumber}.pdf` : 'so-generated.pdf', { type: 'application/pdf' })
+
+                            let formData: any = new FormData()
+                            formData.append('type', file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT')
+                            formData.append('file', file || '')
+                            formData.append('bucketName', FILE_BUCKET_NAME)
+
+                            // Updating the generated pdf after second approval is done
+                            uploadFile(formData).then((res: any) => {
+                                if ('data' in res) {
+                                    const fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+
+                                    // Updating the SO Order with generated Invoice of the acc approval
+                                    updateSoInvoice({
+                                        id: _id,
+                                        body: {
+                                            invoice: value ? fileUrl !== undefined ? fileUrl : '' : '',
+                                        }
+                                    }).then(() => { }).catch((err) => console.error('error', err))
+
+                                }
+                            })
+                        }, 500)
+                    }
+
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
+
+
+
 
         // This is for commented code preview of embeded
         // const [pdfFile, setPdfFile] = useState<any>() // state
@@ -157,65 +213,6 @@ const SaleOrderListingWrapper = () => {
         //     reader.readAsDataURL(file)
         // }
 
-        let formData: any = new FormData()
-        formData.append(
-            'type',
-            file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
-        )
-        formData.append('file', file || '')
-        formData.append('bucketName', 'SAPTEL_CRM')
-
-        // // call the file manager api
-        uploadFile(formData).then((res: any) => {
-            if ('data' in res) {
-                let fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
-
-                setTimeout(() => {
-                    const currentDate = new Date().toLocaleDateString('en-GB')
-                    updateSalesOrder({
-                        body: {
-                            accApproved: value,
-                            type: 'ACC',
-                            accApprovedById: userData?.userId,
-                            accApprovedAt: currentDate,
-                            accApprovedActionBy: userData?.userName,
-                            invoice: value
-                                ? fileUrl !== undefined
-                                    ? fileUrl
-                                    : ''
-                                : '',
-                        },
-                        id: _id,
-                    }).then((res: any) => {
-                        if ('data' in res) {
-                            if (res?.data?.status) {
-                                showToast(
-                                    'success',
-                                    `Account ${message} is successfully!`
-                                )
-                            } else {
-                                showToast('error', res?.data?.message)
-                            }
-                        } else {
-                            showToast('error', 'Something went wrong')
-                        }
-                    })
-                }, 1500)
-            }
-        })
-    }
-
-    const handleClick = async (
-        _id: string,
-        value: boolean,
-        message: string
-    ) => {
-        try {
-            const pdfUri = await generatePdf(saleOrderInvoiceRef) // Generate the PDF
-            handleUpload(pdfUri, _id, value, message) // Upload the PDF
-        } catch (error) {
-            console.error('Error generating PDF and uploading:', error)
-        }
     }
 
     const handleDelete = () => {
@@ -279,14 +276,6 @@ const SaleOrderListingWrapper = () => {
                         isDelete={isAuthorized(
                             UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
                         )}
-                        // isCustomBtn={false}
-                        // customBtnText="Invoice"
-                        // handleCustomActionButton={() => {
-                        //     navigate(`/sale-order/${row?._id}/invoice`)
-                        // }}
-                        // handleViewActionButton={() => {
-                        //     navigate(`/sale-order/view/${row?._id}`)
-                        // }}
                         handleEditActionButton={() => {
                             navigate(`/sale-order/edit-sale-order/${row?._id}`)
                         }}
@@ -413,7 +402,6 @@ const SaleOrderListingWrapper = () => {
                             <Chip onClick={() => {
                                 if (isAuthorized(UserModuleNameTypes.ACTION_SALE_ORDER_LIST_SECOND_APPROVAL)) {
                                     if (row?.dhApproved) {
-                                        setInvoiceSoNumber(row?._id) // for genrating pdf
                                         showConfirmationDialog({
                                             title: 'Account Approval',
                                             text: 'Do you want to Approve ?',
@@ -422,14 +410,14 @@ const SaleOrderListingWrapper = () => {
                                             denyButtonText: 'Reject',
                                             next: (res) => {
                                                 if (res.isConfirmed) {
-                                                    return handleClick(
+                                                    return handleAccApproval(
                                                         row?._id,
                                                         res?.isConfirmed,
                                                         'Approval'
                                                     )
                                                 }
                                                 if (res.isDenied) {
-                                                    return handleClick(
+                                                    return handleAccApproval(
                                                         row?._id,
                                                         !res.isDenied,
                                                         'Rejected'
@@ -480,31 +468,6 @@ const SaleOrderListingWrapper = () => {
                     </div>
                 </div>
             },
-        },
-        {
-            field: 'invoiceNumber',
-            headerName: 'Invoice No',
-            extraClasses: 'text-xs min-w-[150px]',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_NUMBER,
-            renderCell: (row: SaleOrderListResponseTypes) => (
-                <span
-                    title={row?.documents?.[0]?.invoiceNumber}
-                    className="min-w-[100px] truncate"
-                >
-                    {row?.documents?.[0]?.invoiceNumber}
-                </span>
-            ),
-        },
-        {
-            field: 'invoiceDate',
-            headerName: 'Invoice Date',
-            extraClasses: 'text-xs min-w-[150px]',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_DATE,
-            renderCell: (row: SaleOrderListResponseTypes) => (
-                <span> {row?.invoiceDate} </span>
-            ),
         },
         {
             field: 'totalInvoiceAmount',
@@ -614,6 +577,31 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
+            field: 'invoiceNumber',
+            headerName: 'Invoice No',
+            extraClasses: 'text-xs min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_NUMBER,
+            renderCell: (row: SaleOrderListResponseTypes) => (
+                <span
+                    title={row?.documents?.[0]?.invoiceNumber}
+                    className="min-w-[100px] truncate"
+                >
+                    {row?.documents?.[0]?.invoiceNumber}
+                </span>
+            ),
+        },
+        {
+            field: 'invoiceDate',
+            headerName: 'Invoice Date',
+            extraClasses: 'text-xs min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_DATE,
+            renderCell: (row: SaleOrderListResponseTypes) => (
+                <span> {row?.invoiceDate} </span>
+            ),
+        },
+        {
             field: 'generateCancelGrn',
             headerName: 'Generate/Cancel IRN',
             extraClasses: 'text-xs min-w-[180px]',
@@ -627,7 +615,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'expectedDeliveryDate',
             headerName: 'Expected Delivery Date',
-            extraClasses: 'text-xs min-w-[180px]',
+            extraClasses: 'text-xs min-w-[180px] capitalize',
             flex: 'flex-[2_2_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE,
             align: 'center',
@@ -688,15 +676,22 @@ const SaleOrderListingWrapper = () => {
                 />
             </div>
 
-            {uploadFileInfo?.isLoading ? <div className="absolute opacity-70 z-50 top-0 flex items-center justify-center h-[100vh] w-full bg-white">
-                <CircularProgress />
-            </div> : null}
+            {updateSalesOrderInfo?.isLoading || uploadFileInfo?.isLoading || updateSoInvoiceInfo?.isLoading ?
+                <div className="absolute flex flex-col opacity-70 z-50 top-0 items-center justify-center h-[100vh] w-full bg-white">
+                    <CircularProgress />
+                    {(uploadFileInfo?.isLoading || updateSoInvoiceInfo?.isLoading) &&
+                        <div className='text-black font-semibold'>
+                            Generating Invoice please wait .....
+                        </div>}
+                </div> : null
+            }
 
             <div className="absolute top-0 opacity-0 -z-10">
-                <DispatchedInvoiceTemplate
+                {<DispatchedInvoiceTemplate
                     ref={saleOrderInvoiceRef}
                     items={invoiceData || null}
                 />
+                }
             </div>
 
             {/* Do Not Delete This */}

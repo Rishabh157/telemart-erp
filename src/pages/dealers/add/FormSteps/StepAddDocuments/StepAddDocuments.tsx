@@ -14,7 +14,7 @@ import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTex
 import { FormInitialValues } from '../../AddDealerWrapper'
 import { FieldType } from './StepAddDocumentsWrapper'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -57,7 +57,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
             'type',
             file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
         )
-        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('bucketName', FILE_BUCKET_NAME)
         formData.append('file', file || '', file?.name)
 
         // call the file manager api

@@ -4,8 +4,8 @@ import DispatchedInvoiceTemplate from './DispatchedInvoiceTemplate'
 import { useGetInvoiceOfSaleOrderByIdQuery } from 'src/services/SalesOrderService'
 import { CircularProgress } from '@mui/material'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
+import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 
 interface ProductSalesOrder {
     productGroupId: string,
@@ -179,7 +179,7 @@ const DispatchedInvoiceWrapper = () => {
 
         formData.append('type', file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT')
         formData.append('file', file || '')
-        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('bucketName', FILE_BUCKET_NAME)
 
         // call the file manager api
         uploadFile(formData).then((res: any) => {
