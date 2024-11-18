@@ -24,9 +24,6 @@ type Props = {
 
 const BarcodeListing = ({ items }: Props) => {
 
-    
-    console.log('items: ', items);
-
     const [copiedBarcode, setCopiedBarcode] = useState<string | null>(null);
 
     const barcodeState: any = useSelector((state: RootState) => state.listingPagination)

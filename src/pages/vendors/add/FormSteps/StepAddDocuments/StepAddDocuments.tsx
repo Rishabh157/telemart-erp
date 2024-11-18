@@ -11,7 +11,7 @@ import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUplo
 import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { FormInitialValues } from '../../AddVendorWrapper'
 import { Field } from 'src/models/FormField/FormField.model'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -46,7 +46,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
             'type',
             file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
         )
-        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('bucketName', FILE_BUCKET_NAME)
         formData.append('file', file || '', file?.name)
 
         // call the file manager api
@@ -120,7 +120,7 @@ const StepAddDocuments = ({ formikProps, formFields }: Props) => {
                                                     selectedFile={values[name]}
                                                 />
                                                 {loaderState === name &&
-                                                imageApiStatus ? (
+                                                    imageApiStatus ? (
                                                     <div className="mt-3 text-center">
                                                         <CircularProgress
                                                             size={21}

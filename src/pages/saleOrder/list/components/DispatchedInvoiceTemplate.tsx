@@ -97,8 +97,6 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
         };
     };
 
-
-
     return (
         <div
             ref={ref}
@@ -158,7 +156,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                             </span>
                             {' '}:{' '}
                             <span className="text-[13px]">
-                                {moment(items?.invoiceDate).format('DD.MM.YYYY')}
+                                {items?.invoiceDate ? moment(items?.invoiceDate).format('DD.MM.YYYY') : ''}
                             </span>
                         </div>
                     </div>

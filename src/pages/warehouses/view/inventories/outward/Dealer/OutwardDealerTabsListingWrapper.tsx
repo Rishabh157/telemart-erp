@@ -44,7 +44,7 @@ import {
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 import { useGetPaginationSaleOrderByGroupQuery } from 'src/services/SalesOrderService'
 import { useGetTransportQuery } from 'src/services/transportServiceses'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 import { getTransportTypeOptions } from 'src/utils/constants/customeTypes'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
@@ -545,7 +545,7 @@ const OutwardDealerTabsListingWrapper = () => {
             'type',
             file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
         )
-        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('bucketName', FILE_BUCKET_NAME as string)
         formData.append('file', file || '', file?.name)
 
         try {

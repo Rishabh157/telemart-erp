@@ -23,7 +23,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import { CiSearch } from 'react-icons/ci'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { BASE_URL_FILE_PICKER , FILE_BUCKET_NAME } from 'src/utils/constants'
 
 type DropdownOptions = {
     counrtyOptions: SelectOption[]
@@ -87,7 +87,7 @@ const StepAddAddress = ({
             'type',
             file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
         )
-        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('bucketName', FILE_BUCKET_NAME)
         formData.append('file', file || '', file?.name)
 
         // call the file manager api

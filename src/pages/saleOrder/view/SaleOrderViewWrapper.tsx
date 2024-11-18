@@ -15,9 +15,6 @@ const SaleOrderViewWrapper = () => {
     const params = useParams<RouteParams>();
     const id = params?.id
 
-    console.log('sale order id : ', id);
-
-
     const { items, isLoading } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetSalesOrderByIdQuery(id || '', {
             skip: !id

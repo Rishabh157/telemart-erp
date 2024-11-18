@@ -26,7 +26,7 @@ import { FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { HiPlus } from 'react-icons/hi'
 import { getProductCategoryOptions } from 'src/utils/constants/customeTypes'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 
 // |-- Types --|
@@ -72,7 +72,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
             'type',
             file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
         )
-        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('bucketName', FILE_BUCKET_NAME)
         formData.append('file', file || '', file?.name)
 
         // call the file manager api
@@ -110,9 +110,8 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                 type="button"
                                 disabled={apiStatus}
                                 onClick={() => formikProps.handleSubmit()}
-                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${
-                                    true ? 'disabled:opacity-25' : ''
-                                }`}
+                                className={`bg-primary-main rounded py-1 px-5 text-white border border-primary-main ${true ? 'disabled:opacity-25' : ''
+                                    }`}
                             >
                                 Update
                             </button>
@@ -315,7 +314,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                                                             `images[${index}].image`
                                                                         )
                                                                     }}
-                                                                    // isSubmitting={false}
+                                                                // isSubmitting={false}
                                                                 />
                                                                 {/* {imageApiStatus ? (
                                                                     <div className="mt-3">
@@ -333,7 +332,7 @@ const EditCompetitor = ({ formikProps, apiStatus, dropdownOptions }: Props) => {
                                                                 ?.length &&
                                                                 values.images
                                                                     ?.length >
-                                                                    1 && (
+                                                                1 && (
                                                                     <div>
                                                                         <button
                                                                             type="button"

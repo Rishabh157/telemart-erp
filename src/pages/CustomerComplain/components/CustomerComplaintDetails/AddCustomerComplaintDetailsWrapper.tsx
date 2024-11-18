@@ -8,7 +8,7 @@ import { CircularProgress } from '@mui/material'
 import { useAddCustomerComplainMutation } from 'src/services/CustomerComplainServices'
 import { showToast } from 'src/utils'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 
 type Props = {
     orderId: string
@@ -102,7 +102,7 @@ const AddCustomerComplaintDetailsWrapper = ({
                 'type',
                 file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
             )
-            formData.append('bucketName', 'SAPTEL_CRM')
+            formData.append('bucketName', FILE_BUCKET_NAME)
             formData.append('file', file || '', file?.name)
 
             // Push the promise returned by the uploadFile function into the array

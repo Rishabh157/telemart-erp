@@ -18,7 +18,7 @@ import ATMCheckbox from 'src/components/UI/atoms/formFields/ATMCheckbox/ATMCheck
 import { RootState } from 'src/redux/store'
 import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
+import { BASE_URL_FILE_PICKER , FILE_BUCKET_NAME } from 'src/utils/constants'
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 
 // |-- Types --|
@@ -81,7 +81,7 @@ const StepEditAddress = ({
             'type',
             file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
         )
-        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('bucketName', FILE_BUCKET_NAME)
         formData.append('file', file || '', file?.name)
 
         // call the file manager api

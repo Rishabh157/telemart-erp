@@ -79,6 +79,16 @@ export const SalesOrderApi = apiSlice.injectEndpoints({
         }),
 
         //***** Update *****/
+        updateSalesOrderInvoiceUrl: builder.mutation({
+            invalidatesTags: ['SalesOrder'],
+            query: ({ body, id }: any) => ({
+                url: `/sales-order/update-incoice-url/${id}`,
+                method: 'PUT',
+                body,
+            }),
+        }),
+
+        //***** Update *****/
         updateSoLevel: builder.mutation({
             invalidatesTags: ['SalesOrder'],
             query: ({ body, id }: UpdateSOApprovalLevel) => ({
@@ -116,6 +126,7 @@ export const {
     useUpdateSalesOrderMutation,
     useGetInvoiceOfSaleOrderByIdQuery,
     useUpdateSalesOrderApprovalMutation,
+    useUpdateSalesOrderInvoiceUrlMutation,
     useGetSalesOrderByIdQuery,
     useDeleteSalesOrderMutation,
     useUpdateSoLevelMutation,

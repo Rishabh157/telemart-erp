@@ -21,8 +21,8 @@ import {
 import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextArea'
 import ATMFilePickerWrapper from 'src/components/UI/atoms/formFields/ATMFileUploader/ATMFileUploaderWrapper'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
-import { BASE_URL_FILE_PICKER } from 'src/utils/constants'
 import { CircularProgress } from '@mui/material'
+import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 
 // |-- Types --|
 type DropdownOptions = {
@@ -95,7 +95,7 @@ const StepEditAddress = ({
             'type',
             file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT'
         )
-        formData.append('bucketName', 'SAPTEL_CRM')
+        formData.append('bucketName', FILE_BUCKET_NAME)
         formData.append('file', file || '', file?.name)
 
         // call the file manager api
