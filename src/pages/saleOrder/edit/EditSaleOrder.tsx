@@ -203,7 +203,7 @@ const EditSaleOrder = ({
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Update ProductGroup to sale order
+                            Update Product Group In Sale order
                         </div>
 
                         <FieldArray name="productSalesOrder">

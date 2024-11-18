@@ -44,6 +44,15 @@ export const barcodeApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //*** Get The Single Barcode
+        getBarcodeByBarcodeNumber: builder.query({
+            providesTags: ['Barcode'],
+            query: (barcodeNumber) => ({
+                url: `/bar-code/getby-barcode/${barcodeNumber}`,
+                method: 'GET',
+            }),
+        }),
+
         //*** GET REPRINT OUTERBOX BARCODE
         getReprintOuterBoxBarcode: builder.query({
             providesTags: ['Barcode'],
@@ -71,18 +80,17 @@ export const barcodeApi = apiSlice.injectEndpoints({
                 groupId,
                 status,
                 isSendingToDealer = false,
-                signal
+                signal,
             }: {
                 id: string
                 groupId: string
                 status: string
                 isSendingToDealer: boolean
-                signal?: AbortSignal;
+                signal?: AbortSignal
             }) => ({
                 url: `/bar-code/productgroupid/${groupId}/barcode/${id}/status/${status}/${isSendingToDealer}`,
                 method: 'GET',
-                signal: signal // Pass the signal here directly
-            
+                signal: signal, // Pass the signal here directly
             }),
         }),
 
@@ -332,6 +340,7 @@ export const {
     useGetCustomerReturnBarcodeMutation,
     useGetAllBarcodeQuery,
     useGetProductGroupBarcodeQuery,
+    useGetBarcodeByBarcodeNumberQuery,
     useGetAllByGroupQuery,
     useGetByBarcodeMutation,
     useInwardInventoryBarcodeMutation,

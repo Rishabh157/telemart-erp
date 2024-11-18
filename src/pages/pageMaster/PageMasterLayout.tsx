@@ -45,6 +45,12 @@ const configurationNavigation: NavItemType[] = [
         path: '/courier-ndr?phone=9009648665&username=test&postalcode=461220&verve=111&dstphone=7898787897&campaignId=DHUANADAAR&companyCode=SKYTEL',
         name: UserModuleNameTypes.NAV_COURIER_NDR_PAGE,
     },
+    {
+        label: 'GPO Out Call',
+        icon: MdViewTimeline,
+        path: '/calling-outcall?phone=9009648665&username=test',
+        name: UserModuleNameTypes.NAV_COURIER_NDR_PAGE,
+    },
 ]
 
 type Props = {

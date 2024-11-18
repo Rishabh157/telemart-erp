@@ -48,6 +48,7 @@ export type OutwardRequestDealerListResponse = {
         createdAt: string
         updatedAt: string
         dealerLabel: string
+        dealerCode : string
         companyWarehouseLabel: string
         warehouseLabel: string
     }[]

@@ -107,11 +107,6 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
             {/* Top Header With Logo */}
             <div className="grid grid-cols-12 border-b-[1px] border-black">
                 <div className="col-span-4 p-2">
-                    {/* <img
-                        src={items?.companyDetails?.companyLogo ? items?.companyDetails?.companyLogo : "/logo.jpg"}
-                        className="h-auto w-full object-contain"
-                        alt={items?.companyDetails?.companyName + ' logo'}
-                    /> */}
                     <img src="/skyLogo.jpg"
                         className="h-[6rem] w-full object-contain"
                         alt='Saptel logo' />
@@ -125,10 +120,6 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         <p className="capitalize text-xs font-semibold">
                             {items?.companyDetails?.address}
                         </p>
-                        {/* <p className="text-[13px]">
-                            Pradesh,Pin Code:452001,India
-                        </p>
-                        <p className="text-xs">STATE CODE:(23)</p> */}
                         <p className="text-xs">
                             GSTIN : {items?.companyDetails?.gstNo}, PAN : {items?.companyDetails?.panNumber}
                         </p>

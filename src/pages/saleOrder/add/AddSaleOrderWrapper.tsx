@@ -129,12 +129,11 @@ const AddSaleOrderWrapper = (props: Props) => {
 
         setTimeout(() => {
             addSalesOrder({
-                // soNumber: values.soNumber,
                 dealerId: values.dealerId,
-                dealerWareHouseId: values.dealerWareHouseId,
-                companyWareHouseId: values.companyWareHouseId,
+                dealerWareHouseId: values?.dealerWareHouseId,
+                companyWareHouseId: values?.companyWareHouseId,
                 expectedDeliveryDate: formatedDate,
-                productSalesOrder: values.productSalesOrder,
+                productSalesOrder: values?.productSalesOrder,
                 companyId: userData?.companyId || '',
             }).then((res: any) => {
                 if ('data' in res) {

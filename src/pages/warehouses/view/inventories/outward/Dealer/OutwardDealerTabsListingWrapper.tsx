@@ -217,29 +217,33 @@ const OutwardDealerTabsListingWrapper = () => {
             headerName: 'Dispatch',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: OutwardRequestDealerListResponse) =>
-                row?.documents[0]?.status === SaleOrderStatus.complete ? (
-                    'Dispatched'
-                ) : row?.documents[0]?.status === SaleOrderStatus.dispatched ? (
-                    ''
-                ) : (
-                    <ActionPopup
-                        handleOnAction={() => { }}
-                        isCustomBtn={true}
-                        customBtnText="Dispatch"
-                        handleCustomActionButton={() => {
-                            setIsShow(true)
-                            const totalQuantity = row?.documents?.reduce(
-                                (sum, ele) => {
-                                    return (sum +=
-                                        ele?.productSalesOrder?.quantity)
-                                },
-                                0
-                            )
-                            setBarcodeQuantity(totalQuantity)
-                            setSelectedItemsTobeDispatch(row)
-                        }}
-                    />
-                ),
+                <ActionPopup
+                    isView
+                    handleViewActionButton={() => {
+                        navigate(`view/${row?._id}`)
+                    }}
+                    handleOnAction={() => { }}
+                    isCustomBtn={row?.documents[0]?.status === SaleOrderStatus.not_dispatched}
+                    customBtnText="Dispatch"
+                    handleCustomActionButton={() => {
+                        setIsShow(true)
+                        const totalQuantity = row?.documents?.reduce((sum, ele) => {
+                            return (sum += ele?.productSalesOrder?.quantity)
+                        }, 0)
+                        setBarcodeQuantity(totalQuantity)
+                        setSelectedItemsTobeDispatch(row)
+                    }}
+                />
+        },
+        {
+            field: 'status',
+            headerName: 'status',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_STATUS,
+            align: 'center',
+            renderCell: (row: OutwardRequestDealerListResponse) => (
+                <span>{row?.documents[0]?.status?.replaceAll('_', ' ')}</span>
+            ),
         },
         {
             field: 'soNumber',
@@ -258,15 +262,12 @@ const OutwardDealerTabsListingWrapper = () => {
             align: 'center',
             renderCell: (row: OutwardRequestDealerListResponse) => (
                 <span
-                    className="underline text-primary-main"
+                    className="hover:underline text-primary-main"
                     style={{ cursor: 'pointer' }}
-                    onClick={() =>
-                        navigate(
-                            `/dealers/${row?.documents[0]?.dealerId}/general-information`
-                        )
-                    }
+                    onClick={() => navigate(`/dealers/${row?.documents[0]?.dealerId}/general-information`)}
                 >
                     {capitalizeFirstLetter(row?.dealerName || '')}
+                    <div>({row?.documents?.[0]?.dealerCode})</div>
                 </span>
             ),
         },
@@ -351,16 +352,6 @@ const OutwardDealerTabsListingWrapper = () => {
             renderCell: (row: OutwardRequestDealerListResponse) => {
                 return <span> {formatedDateTimeIntoIst(row?.updatedAt)} </span>
             },
-        },
-        {
-            field: 'status',
-            headerName: 'status',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_STATUS,
-            align: 'center',
-            renderCell: (row: OutwardRequestDealerListResponse) => (
-                <span>{row?.documents[0]?.status?.replaceAll('_', ' ')}</span>
-            ),
         },
     ]
 
@@ -682,7 +673,7 @@ const OutwardDealerTabsListingWrapper = () => {
                                                 placeholder="enter barcode number"
                                                 className="shadow bg-white rounded w-[50%] uppercase"
                                                 onChange={(e) => {
-                                                    if (e.target.value?.length > 14) {
+                                                    if (e.target.value?.length > 9) {
                                                         handleBarcodeSubmit(
                                                             e.target.value,
                                                             docIndex,
