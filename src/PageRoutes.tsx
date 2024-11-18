@@ -340,6 +340,7 @@ import { DealerTaxInvoice } from './Receipt/DealerTaxInvoice'
 import WarehouseTransferInvoice from './Receipt/WarehouseTransferInvoice'
 import WarehouseOrderStatusMarkWrapper from './pages/warehouses/view/inventories/outward/warehouseOrderStatus/WarehouseOrderStatusMarkWrapper'
 import AgentWiseEnquiryWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseEnquiryWrapper'
+import SaleOrderViewWrapper from './pages/saleOrder/view/SaleOrderViewWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -908,6 +909,23 @@ const PageRoutes = () => {
                                 />
                             }
                         />
+                        <Route
+                            path="dealer/view/:id"
+                            element={
+                                <Authorization
+                                    children={
+                                        <SaleOrderViewWrapper />
+                                    }
+                                    permission={
+                                        UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_DEALER
+                                    }
+                                />
+                            }
+                        />
+
+
+
+
                         <Route
                             path="customer"
                             element={

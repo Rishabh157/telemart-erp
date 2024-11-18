@@ -82,9 +82,7 @@ const AddSaleOrder = ({
     })
 
     useEffect(() => {
-        const val: any = productPriceOptions?.find(
-            (e: any) => e['value'] === productGroup
-        )
+        const val: any = productPriceOptions?.find((e: any) => e['value'] === productGroup)
 
         if (val) {
             setFieldValue(`productSalesOrder[${i}].rate`, val['label'])
@@ -93,6 +91,12 @@ const AddSaleOrder = ({
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productGroup])
+
+    useEffect(() => {
+        if (values?.dealerId) {
+            setFieldValue(`dealerWareHouseId`, dealerWarehouseOptions?.[0]?.value)
+        }
+    }, [values.dealerId, dealerWarehouseOptions, setFieldValue])
 
     const handleSetFieldValue = (name: string, value: string | boolean) => {
         setFieldValue(name, value)
@@ -103,7 +107,7 @@ const AddSaleOrder = ({
         <div className="h-[calc(100vh-55px)] overflow-auto">
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
-                <div >
+                <div>
                     <ATMBreadCrumbs breadcrumbs={breadcrumbs} />
                 </div>
 
@@ -115,7 +119,7 @@ const AddSaleOrder = ({
                 <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Step Label */}
-                        <div className="text-xl font-medium"> SO Details </div>
+                        <div className="text-xl font-medium">SO Details</div>
                         {/* BUTTON - Add SO */}
                         <div>
                             <button
@@ -154,12 +158,10 @@ const AddSaleOrder = ({
                                 <ATMSelectSearchable
                                     required
                                     name="dealerWareHouseId"
-                                    value={values.dealerWareHouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue('dealerWareHouseId', e)
-                                    }
-                                    options={dealerWarehouseOptions}
                                     label="Dealer Warehouse"
+                                    value={values.dealerWareHouseId}
+                                    options={dealerWarehouseOptions}
+                                    onChange={(e) => handleSetFieldValue('dealerWareHouseId', e)}
                                 />
                             </div>
                             {/* Warehouse */}
@@ -167,15 +169,10 @@ const AddSaleOrder = ({
                                 <ATMSelectSearchable
                                     required
                                     name="companyWareHouseId"
-                                    value={values.companyWareHouseId}
-                                    onChange={(e) =>
-                                        handleSetFieldValue(
-                                            'companyWareHouseId',
-                                            e
-                                        )
-                                    }
-                                    options={dropdownOptions.warehouseOptions}
                                     label="Company Warehouse"
+                                    value={values.companyWareHouseId}
+                                    options={dropdownOptions.warehouseOptions}
+                                    onChange={(e) => handleSetFieldValue('companyWareHouseId', e)}
                                 />
                             </div>
 
@@ -197,7 +194,7 @@ const AddSaleOrder = ({
                     {/*  Sales Order  */}
                     <div className="px-3">
                         <div className=" text-lg pb-2 font-medium text-primary-main">
-                            Add ProductGroup to sale order
+                            Add Product Group In Sale order
                         </div>
 
                         <FieldArray name="productSalesOrder">

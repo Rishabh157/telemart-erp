@@ -279,11 +279,14 @@ const SaleOrderListingWrapper = () => {
                         isDelete={isAuthorized(
                             UserModuleNameTypes.ACTION_SALE_ORDER_DELETE
                         )}
-                        isCustomBtn={false}
-                        customBtnText="Invoice"
-                        handleCustomActionButton={() => {
-                            navigate(`/sale-order/${row?._id}/invoice`)
-                        }}
+                        // isCustomBtn={false}
+                        // customBtnText="Invoice"
+                        // handleCustomActionButton={() => {
+                        //     navigate(`/sale-order/${row?._id}/invoice`)
+                        // }}
+                        // handleViewActionButton={() => {
+                        //     navigate(`/sale-order/view/${row?._id}`)
+                        // }}
                         handleEditActionButton={() => {
                             navigate(`/sale-order/edit-sale-order/${row?._id}`)
                         }}
