@@ -1,3 +1,5 @@
+import { OrderStatusEnum } from "src/utils/constants/enums"
+
 // |-- Types --|
 interface MaerksResponseType {
     result: {
@@ -112,7 +114,7 @@ export type OrderListResponse = {
     preffered_delivery_date: string
     recordingStartTime: string
     recordingEndTime: string
-    status: string
+    status: OrderStatusEnum
     isDeleted: boolean
     isActive: boolean
     createdAt: string

@@ -1,3 +1,5 @@
+import { RequestStatus } from 'src/components/UI/atoms/ATMRequestStatus/ATMRequestStatus'
+
 // |-- Types --|
 export enum SaleOrderStatus {
     not_dispatched = 'NOT_DISPATCHED',
@@ -40,7 +42,7 @@ export type OutwardRequestDealerListResponse = {
             _id: string
             groupName: string
         }
-        status: SaleOrderStatus
+        status: RequestStatus
         companyId: string
         isDeleted: boolean
         isActive: boolean
@@ -48,7 +50,7 @@ export type OutwardRequestDealerListResponse = {
         createdAt: string
         updatedAt: string
         dealerLabel: string
-        dealerCode : string
+        dealerCode: string
         companyWarehouseLabel: string
         warehouseLabel: string
     }[]

@@ -21,7 +21,8 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
-import { orderStatusEnum } from 'src/utils/constants/enums'
+import { OrderStatusEnum } from 'src/utils/constants/enums'
+import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 const PndOrdersListingWrapper = () => {
     const navigate = useNavigate()
@@ -54,7 +55,7 @@ const PndOrdersListingWrapper = () => {
             },
             {
                 fieldName: 'status',
-                value: orderStatusEnum.pnd,
+                value: OrderStatusEnum.PND,
             },
             {
                 fieldName: 'approved',
@@ -237,7 +238,7 @@ const PndOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_PND_TAB_LIST_STATUS,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
+            renderCell: (row: OrderListResponse) => <ATMOrderStatus status={row?.status} />,
         },
         {
             field: 'firstCallApproval',
@@ -374,16 +375,7 @@ const PndOrdersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_PND_TAB_LIST_CREATED_AT,
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
+renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         {
             field: 'edpDate',
@@ -438,9 +430,7 @@ const PndOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_PND_TAB_LIST_PIN_CODE,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.pincodeLabel} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMPincodeDisplay pincode={row?.pincodeLabel} />,
         },
         {
             field: 'areaLabel',
