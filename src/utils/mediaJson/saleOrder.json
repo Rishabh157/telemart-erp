@@ -46,11 +46,6 @@
                     "fieldValue": "invoiceDate"
                 },
                 {
-                    "fieldId": "SALE_ORDER_LIST_TOTAL_AMOUNT_INVOICE",
-                    "fieldName": "Total Amount Invoice",
-                    "fieldValue": "totalAmountInvoice"
-                },
-                {
                     "fieldId": "SALE_ORDER_LIST_DEALER_NAME",
                     "fieldName": "Dealer",
                     "fieldValue": "dealerLabel"
@@ -72,24 +67,9 @@
                     "fieldValue": "PDF"
                 },
                 {
-                    "fieldId": "SALE_ORDER_LIST_GENERATE_CANCEL_IRN",
-                    "fieldName": "Generate/Cancel IRN",
-                    "fieldValue": "generateCancelIRN"
-                },
-                {
                     "fieldId": "SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE",
                     "fieldName": "Expected Delivery Date",
                     "fieldValue": "expectedDeliveryDate"
-                },
-                {
-                    "fieldId": "SALE_ORDER_LIST_IRN_STATUS",
-                    "fieldName": "IRN Status",
-                    "fieldValue": "irnStatus"
-                },
-                {
-                    "fieldId": "SALE_ORDER_LIST_ACK_DATE",
-                    "fieldName": "ACK Date",
-                    "fieldValue": "ackDate"
                 },
                 {
                     "fieldId": "SALE_ORDER_LIST_PRINT_WEB",

@@ -27,11 +27,11 @@ import {
     useGetOrderQuery,
 } from 'src/services/OrderService'
 import { isAuthorized } from 'src/utils/authorization'
-import { orderStatusEnum } from 'src/utils/constants/enums'
+import { OrderStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import DispatchingBarcodes from '../GpoOrders/DispatchingBarcodes/DispatchingBarcodes'
-// import { courierCompanyEnum } from 'src/utils/constants/enums'
+import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 type LabelValuePair = {
     fieldName: string
@@ -239,7 +239,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                     isCustomBtn={
                         isAuthorized(
                             UserModuleNameTypes.ACTION_WAREHOUSE_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_MARK_AS_DELIVERED
-                        ) && row?.status === orderStatusEnum.intransit
+                        ) && row?.status === OrderStatusEnum.IN_TRANSIT
                     }
                     handleCustomActionButton={() => {
                         showConfirmationDialog({
@@ -484,7 +484,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px] text-xs',
-            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
+            renderCell: (row: OrderListResponse) => <ATMOrderStatus status={row?.status} />,
         },
         {
             field: 'shippingCharges',
@@ -546,9 +546,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'center',
             extraClasses: 'min-w-[150px] text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.pincodeLabel} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMPincodeDisplay pincode={row?.pincodeLabel} />,
         },
         {
             field: 'paymentMode',
@@ -567,16 +565,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
+renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
 
         {

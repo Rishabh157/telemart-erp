@@ -11,7 +11,6 @@ import {
     useGetOrderHistoryQuery,
 } from '../../../services/OrderService'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
-import moment from 'moment'
 import { Chip } from '@mui/material'
 import { FirstCallApprovalStatus } from 'src/pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
 
@@ -21,6 +20,7 @@ import OrderView from './OrderView'
 import { OrderListResponse } from 'src/models'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
+import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 const OrderViewWrapper = () => {
     const params = useParams()
@@ -172,7 +172,7 @@ const OrderViewWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
+            renderCell: (row: OrderListResponse) => <ATMOrderStatus status={row?.status} />,
         },
         {
             field: 'shippingCharges',
@@ -228,9 +228,7 @@ const OrderViewWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'center',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.pincodeLabel} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMPincodeDisplay pincode={row?.pincodeLabel} />,
         },
         {
             field: 'paymentMode',
@@ -247,16 +245,7 @@ const OrderViewWrapper = () => {
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         // {
         //     field: 'onBackVerifiedDate',

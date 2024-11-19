@@ -19,7 +19,6 @@ import {
     BarcodeListResponseType,
     OutwardRequestDealerListResponse,
 } from 'src/models'
-import { SaleOrderStatus } from 'src/models/OutwardRequest.model'
 import { AlertText } from 'src/pages/callerpage/components/constants'
 import { showToast } from 'src/utils'
 import { formatedDateTimeIntoIst } from 'src/utils/dateTimeFormate/dateTimeFormate'
@@ -49,6 +48,7 @@ import { getTransportTypeOptions } from 'src/utils/constants/customeTypes'
 import { barcodeStatusEnum } from 'src/utils/constants/enums'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { FormInitialValuesFilterWithLabel } from './Filters/OutwardDealerTabFilterFormWrapper'
+import ATMRequestStatus, { RequestStatus } from 'src/components/UI/atoms/ATMRequestStatus/ATMRequestStatus'
 
 // |-- Types --|
 export type Tabs = {
@@ -223,7 +223,7 @@ const OutwardDealerTabsListingWrapper = () => {
                         navigate(`view/${row?._id}`)
                     }}
                     handleOnAction={() => { }}
-                    isCustomBtn={row?.documents[0]?.status === SaleOrderStatus.not_dispatched}
+                    isCustomBtn={row?.documents[0]?.status === RequestStatus.NOT_DISPATCHED}
                     customBtnText="Dispatch"
                     handleCustomActionButton={() => {
                         setIsShow(true)
@@ -235,15 +235,27 @@ const OutwardDealerTabsListingWrapper = () => {
                     }}
                 />
         },
+        // {
+        //     field: 'status',
+        //     headerName: 'status',
+        //     flex: 'flex-[1_1_0%]',
+        //     name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_STATUS,
+        //     align: 'center',
+        //     renderCell: (row: OutwardRequestDealerListResponse) => (
+        //         <span>{row?.documents[0]?.status?.replaceAll('_', ' ')}</span>
+        //     ),
+        // },
         {
             field: 'status',
-            headerName: 'status',
-            flex: 'flex-[1_1_0%]',
+            headerName: 'Request Status',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_DEALER_LIST_STATUS,
             align: 'center',
-            renderCell: (row: OutwardRequestDealerListResponse) => (
-                <span>{row?.documents[0]?.status?.replaceAll('_', ' ')}</span>
-            ),
+            renderCell: (row: OutwardRequestDealerListResponse) => {
+                const status = row?.documents?.[0]?.status as RequestStatus;
+                return <ATMRequestStatus status={status} />;
+            },
         },
         {
             field: 'soNumber',
@@ -386,6 +398,7 @@ const OutwardDealerTabsListingWrapper = () => {
         barcode[ind] = [...filteredObj]
         setBarcodeList(barcode)
     }
+
     // let currentAbortController: AbortController | null = null;
     const currentAbortController = useRef<AbortController | null>(null);
     const handleBarcodeSubmit = (
@@ -522,6 +535,7 @@ const OutwardDealerTabsListingWrapper = () => {
                     showToast('success', 'Dispatched successfully!')
                     setIsShow(false)
                     setBarcodeList([])
+                    setBarcodeNumber([])
                     dispatch(setFieldCustomized(false))
                 } else {
                     showToast('error', res?.data?.message)

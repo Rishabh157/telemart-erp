@@ -22,6 +22,7 @@ import { showToast } from 'src/utils'
 import { OrderListResponse } from 'src/models'
 import moment from 'moment'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 export type FormInitialValues = {
     orderNumbers: string
@@ -191,7 +192,7 @@ const MultiOrderSearchListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
+            renderCell: (row: OrderListResponse) => <ATMOrderStatus status={row?.status} />,
         },
         {
             field: 'shippingCharges',
@@ -247,9 +248,7 @@ const MultiOrderSearchListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'center',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.pincodeLabel} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMPincodeDisplay pincode={row?.pincodeLabel} />,
         },
         {
             field: 'paymentMode',
@@ -266,16 +265,7 @@ const MultiOrderSearchListingWrapper = () => {
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
+renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         // {
         //     field: 'onBackVerifiedDate',

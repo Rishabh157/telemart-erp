@@ -29,6 +29,7 @@ import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupServi
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ATMOrderStatus, ATMDateTimeDisplay, } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -300,16 +301,7 @@ const CourierNdrDialerPageWrapper = () => {
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         {
             field: 'inquiryNumber',
@@ -554,9 +546,7 @@ const CourierNdrDialerPageWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.orderStatus} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMOrderStatus status={row?.status} />,
         },
         {
             field: 'icOneLabel',

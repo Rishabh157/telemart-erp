@@ -21,7 +21,8 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
-import { orderStatusEnum } from 'src/utils/constants/enums'
+import { OrderStatusEnum } from 'src/utils/constants/enums'
+import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 const NonActionsOrdersListingWrapper = () => {
     const navigate = useNavigate()
@@ -54,7 +55,7 @@ const NonActionsOrdersListingWrapper = () => {
             },
             {
                 fieldName: 'status',
-                value: orderStatusEnum.nonAction,
+                value: OrderStatusEnum.NON_ACTION
             },
             {
                 fieldName: 'approved',
@@ -96,8 +97,8 @@ const NonActionsOrdersListingWrapper = () => {
         })
     }
 
-       // order column
-       const columns: columnTypes[] = [
+    // order column
+    const columns: columnTypes[] = [
         {
             field: 'actions',
             headerName: 'Actions',
@@ -109,7 +110,7 @@ const NonActionsOrdersListingWrapper = () => {
                     handleViewActionButton={() => {
                         navigate(`/orders/view/${row?._id}`)
                     }}
-                    handleOnAction={() => {}}
+                    handleOnAction={() => { }}
                 />
             ),
         },
@@ -198,9 +199,9 @@ const NonActionsOrdersListingWrapper = () => {
                                     if (res.isConfirmed || res?.isDenied) {
                                         return res.isConfirmed
                                             ? handleOrderApproval(
-                                                  row?._id,
-                                                  res?.value
-                                              )
+                                                row?._id,
+                                                res?.value
+                                            )
                                             : null
                                     }
                                 }}
@@ -237,7 +238,7 @@ const NonActionsOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_NON_ACTION_TAB_LIST_STATUS,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
+            renderCell: (row: OrderListResponse) => <ATMOrderStatus status={row?.status} />,
         },
         {
             field: 'firstCallApproval',
@@ -253,7 +254,7 @@ const NonActionsOrdersListingWrapper = () => {
                             row?.firstCallApproval ? (
                                 <p className="text-green-500"> Approved </p>
                             ) : row?.firstCallState ===
-                              FirstCallApprovalStatus.CANCEL ? (
+                                FirstCallApprovalStatus.CANCEL ? (
                                 <p className="text-red-500"> Cancelled </p>
                             ) : (
                                 <p className="text-orange-500"> Pending </p>
@@ -374,16 +375,7 @@ const NonActionsOrdersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_NON_ACTION_TAB_LIST_CREATED_AT,
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
+renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         {
             field: 'edpDate',
@@ -438,9 +430,7 @@ const NonActionsOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_NON_ACTION_TAB_LIST_PIN_CODE,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.pincodeLabel} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMPincodeDisplay pincode={row?.pincodeLabel} />,
         },
         {
             field: 'areaLabel',
@@ -504,8 +494,8 @@ const NonActionsOrdersListingWrapper = () => {
                     <span>
                         {row?.preffered_delivery_date
                             ? moment(row?.preffered_delivery_date).format(
-                                  'DD-MM-YYYY'
-                              )
+                                'DD-MM-YYYY'
+                            )
                             : '-'}
                     </span>
                 )

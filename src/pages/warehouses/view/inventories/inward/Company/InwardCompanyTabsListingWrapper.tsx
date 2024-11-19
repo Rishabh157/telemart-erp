@@ -104,7 +104,7 @@ const InwardCompanyTabsListingWrapper = () => {
                     ''
                 ) : (
                     <ActionPopup
-                        handleOnAction={() => {}}
+                        handleOnAction={() => { }}
                         isCustomBtn={true}
                         customBtnText="Inward"
                         handleCustomActionButton={() => {
@@ -406,7 +406,7 @@ const InwardCompanyTabsListingWrapper = () => {
                                     <div>
                                         {capitalizeFirstLetter(
                                             selectedItemsTobeDispatch?.fromWarehouseLabel ||
-                                                ''
+                                            ''
                                         )}
                                     </div>
                                 </div>
@@ -521,7 +521,7 @@ const InwardCompanyTabsListingWrapper = () => {
                                                         }
                                                         productGroupLabel={capitalizeFirstLetter(
                                                             barcode?.productGroupLabel ||
-                                                                ''
+                                                            ''
                                                         )}
                                                         handleRemoveBarcode={() => {
                                                             handleRemoveBarcode(

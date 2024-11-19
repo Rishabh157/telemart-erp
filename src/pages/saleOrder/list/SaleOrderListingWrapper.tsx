@@ -35,6 +35,8 @@ import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useAddFileUrlMutation } from 'src/services/FilePickerServices'
 import { SalesOrderFormInitialValuesFilterWithLabel } from './filter/SalesOrderFilterWrapper'
 import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
+import ATMRequestStatus, { RequestStatus } from 'src/components/UI/atoms/ATMRequestStatus/ATMRequestStatus'
+import moment from 'moment'
 
 const SaleOrderListingWrapper = () => {
 
@@ -153,42 +155,45 @@ const SaleOrderListingWrapper = () => {
                     if (value) {
                         setInvoiceSoNumber(_id)
 
-                        setTimeout(async () => {
+                        // setTimeout(async () => {
 
-                            const base64Data: any = await generatePdf(saleOrderInvoiceRef)
-                            // generating the pdf
-                            const binaryData = atob(base64Data?.split(',')[1])
-                            const arrayBuffer = new ArrayBuffer(binaryData.length)
-                            const byteArray = new Uint8Array(arrayBuffer)
+                        //     if (invoiceData) {
+                        //         const base64Data: any = await generatePdf(saleOrderInvoiceRef)
+                        //         // generating the pdf
+                        //         const binaryData = atob(base64Data?.split(',')[1])
+                        //         const arrayBuffer = new ArrayBuffer(binaryData.length)
+                        //         const byteArray = new Uint8Array(arrayBuffer)
 
-                            for (let i = 0; i < binaryData.length; i++) {
-                                byteArray[i] = binaryData.charCodeAt(i)
-                            }
+                        //         for (let i = 0; i < binaryData.length; i++) {
+                        //             byteArray[i] = binaryData.charCodeAt(i)
+                        //         }
 
-                            const blob = new Blob([arrayBuffer], { type: 'application/pdf' })
-                            const file = new File([blob], invoiceSoNumber ? `so-${invoiceSoNumber}.pdf` : 'so-generated.pdf', { type: 'application/pdf' })
+                        //         const blob = new Blob([arrayBuffer], { type: 'application/pdf' })
+                        //         const file = new File([blob], invoiceSoNumber ? `so-${invoiceSoNumber}.pdf` : 'so-generated.pdf', { type: 'application/pdf' })
 
-                            let formData: any = new FormData()
-                            formData.append('type', file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT')
-                            formData.append('file', file || '')
-                            formData.append('bucketName', FILE_BUCKET_NAME)
+                        //         let formData: any = new FormData()
+                        //         formData.append('type', file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT')
+                        //         formData.append('file', file || '')
+                        //         formData.append('bucketName', FILE_BUCKET_NAME)
 
-                            // Updating the generated pdf after second approval is done
-                            uploadFile(formData).then((res: any) => {
-                                if ('data' in res) {
-                                    const fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
+                        //         // Updating the generated pdf after second approval is done
+                        //         uploadFile(formData).then((res: any) => {
+                        //             if ('data' in res) {
+                        //                 const fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path
 
-                                    // Updating the SO Order with generated Invoice of the acc approval
-                                    updateSoInvoice({
-                                        id: _id,
-                                        body: {
-                                            invoice: value ? fileUrl !== undefined ? fileUrl : '' : '',
-                                        }
-                                    }).then(() => { }).catch((err) => console.error('error', err))
+                        //                 // Updating the SO Order with generated Invoice of the acc approval
+                        //                 updateSoInvoice({
+                        //                     id: _id,
+                        //                     body: {
+                        //                         invoice: value ? fileUrl !== undefined ? fileUrl : '' : '',
+                        //                     }
+                        //                 }).then(() => { }).catch((err) => console.error('error', err))
 
-                                }
-                            })
-                        }, 500)
+                        //             }
+                        //         })
+                        //     }
+
+                        // }, 1500)
                     }
 
                 } else {
@@ -264,7 +269,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'actions',
             headerName: 'Actions',
-            extraClasses: 'text-xs min-w-[100px]',
+            extraClasses: 'min-w-[100px]',
             flex: 'flex-[0.5_0.5_0%]',
             renderCell: (row: SaleOrderListResponseTypes) =>
                 row?.dhApproved === null &&
@@ -299,10 +304,23 @@ const SaleOrderListingWrapper = () => {
                 ),
         },
         {
+            field: 'status',
+            headerName: 'Request Status',
+            extraClasses: 'min-w-[150px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            name: UserModuleNameTypes.SALE_ORDER_LIST_STATUS,
+            align: 'center',
+            renderCell: (row: SaleOrderListResponseTypes) => {
+                const status = row?.documents?.[0]?.status as RequestStatus;
+                return <ATMRequestStatus status={status} />;
+            },
+        },
+        {
             field: 'soNumber',
             headerName: 'So Number',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
+            align: 'center',
             name: UserModuleNameTypes.SALE_ORDER_LIST_SO_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <span> {row?._id} </span>
@@ -312,7 +330,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApproved',
             headerName: 'DH First Approval',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVAL,
             align: 'center',
@@ -372,7 +390,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'dhApprovedActionBy',
             headerName: 'DH Approved By',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DH_APPROVED_BY,
             align: 'center',
@@ -391,7 +409,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApproved',
             headerName: 'Acc Second Approval',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACC_APPROVAL,
             align: 'center',
@@ -454,7 +472,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'accApprovedActionBy',
             headerName: 'Acc Approved By',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ACC_APPROVED_BY,
             align: 'center',
@@ -470,38 +488,28 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
-            field: 'totalInvoiceAmount',
-            headerName: 'Total Invoice Amount',
-            extraClasses: 'text-xs min-w-[150px]',
-            flex: 'flex-[1.5_1.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_TOTAL_AMOUNT_INVOICE,
-            renderCell: (row: SaleOrderListResponseTypes) => (
-                <span> {row?.totalInvoiceAmount} </span>
-            ),
-        },
-        {
             field: 'dealerLabel',
             headerName: 'Dealer Name',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_DEALER_NAME,
             align: 'center',
             renderCell: (row: SaleOrderListResponseTypes) => (
                 <>
                     {row?.documents?.[0]?.dealerId ? (
-                        <span
-                            className="underline text-primary-main"
-                            style={{ cursor: 'pointer' }}
-                            onClick={() =>
-                                navigate(
-                                    `/dealers/${row?.documents?.[0]?.dealerId}/general-information`
-                                )
-                            }
-                        >
-                            {row?.dealerName?.replaceAll('_', ' ') || '-'}
-                        </span>
+                        <div className="flex flex-col items-start">
+                            <span
+                                className="font-semibold cursor-pointer text-primary-main hover:underline"
+                                onClick={() =>
+                                    navigate(`/dealers/${row?.documents?.[0]?.dealerId}/general-information`)
+                                }
+                            >
+                                {row?.dealerName?.replaceAll('_', ' ') || '-'}
+                            </span>
+                            <span className="text-[10px] text-gray-500">({row?.dealerCode})</span>
+                        </div>
                     ) : (
-                        '-'
+                        <span className="text-gray-400">-</span>
                     )}
                 </>
             ),
@@ -509,7 +517,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'warehouseStateLabel',
             headerName: 'State',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_STATE,
             align: 'center',
@@ -520,7 +528,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'items',
             headerName: 'Items / Quantity',
-            extraClasses: 'text-xs min-w-[200px]',
+            extraClasses: 'min-w-[200px]',
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_ITEM_QUANTITY,
             align: 'center',
@@ -547,20 +555,9 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
-            field: 'status',
-            headerName: 'STATUS',
-            extraClasses: 'text-xs min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_STATUS,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> {row?.documents?.[0]?.status?.replaceAll('_', ' ')}</span>
-            },
-        },
-        {
             field: 'invoice',
             headerName: 'PDF',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_PDF,
             align: 'center',
@@ -579,7 +576,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'invoiceNumber',
             headerName: 'Invoice No',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_NUMBER,
             renderCell: (row: SaleOrderListResponseTypes) => (
@@ -594,7 +591,7 @@ const SaleOrderListingWrapper = () => {
         {
             field: 'invoiceDate',
             headerName: 'Invoice Date',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_DATE,
             renderCell: (row: SaleOrderListResponseTypes) => (
@@ -602,20 +599,9 @@ const SaleOrderListingWrapper = () => {
             ),
         },
         {
-            field: 'generateCancelGrn',
-            headerName: 'Generate/Cancel IRN',
-            extraClasses: 'text-xs min-w-[180px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_GENERATE_CANCEL_IRN,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> - </span>
-            },
-        },
-        {
             field: 'expectedDeliveryDate',
             headerName: 'Expected Delivery Date',
-            extraClasses: 'text-xs min-w-[180px] capitalize',
+            extraClasses: 'min-w-[180px] capitalize',
             flex: 'flex-[2_2_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_EXPECTED_DELIVERY_DATE,
             align: 'center',
@@ -626,31 +612,9 @@ const SaleOrderListingWrapper = () => {
             },
         },
         {
-            field: 'irnStatus',
-            headerName: 'IRN Status',
-            extraClasses: 'text-xs min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_IRN_STATUS,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span>-</span>
-            },
-        },
-        {
-            field: 'ackDate',
-            headerName: 'ACK Date',
-            extraClasses: 'text-xs min-w-[150px]',
-            flex: 'flex-[0.5_0.5_0%]',
-            name: UserModuleNameTypes.SALE_ORDER_LIST_ACK_DATE,
-            align: 'center',
-            renderCell: (row: SaleOrderListResponseTypes) => {
-                return <span> -</span>
-            },
-        },
-        {
             field: 'printWeb',
             headerName: 'PRINT EWB',
-            extraClasses: 'text-xs min-w-[150px]',
+            extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_PRINT_WEB,
             align: 'center',
@@ -662,7 +626,71 @@ const SaleOrderListingWrapper = () => {
                 )
             },
         },
+        {
+            field: 'createdAt',
+            headerName: 'Create Date',
+            flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_CREATED_AT,
+            extraClasses: 'min-w-[150px]',
+            renderCell: (row: SaleOrderListResponseTypes) => (
+                <div className="py-0">
+                    <div className="text-[12px] text-slate-700 font-medium">
+                        {moment(row?.createdAt).format('DD MMM YYYY')}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium">
+                        {moment(row?.createdAt).format('hh:mm A')}
+                    </div>
+                </div>
+            ),
+        },
     ]
+
+
+
+
+    React.useEffect(() => {
+        if (invoiceSoNumber && invoiceData) {
+            (async () => {
+                const base64Data: any = await generatePdf(saleOrderInvoiceRef);
+
+                const binaryData = atob(base64Data?.split(',')[1]);
+                const arrayBuffer = new ArrayBuffer(binaryData.length);
+                const byteArray = new Uint8Array(arrayBuffer);
+
+                for (let i = 0; i < binaryData.length; i++) {
+                    byteArray[i] = binaryData.charCodeAt(i);
+                }
+
+                const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
+                const file = new File([blob], `so-${invoiceSoNumber}.pdf`, { type: 'application/pdf' });
+
+                let formData: any = new FormData();
+                formData.append('type', file.type?.includes('image') ? 'IMAGE' : 'DOCUMENT');
+                formData.append('file', file || '');
+                formData.append('bucketName', FILE_BUCKET_NAME);
+
+                // Uploading the file
+                uploadFile(formData).then((res: any) => {
+                    if ('data' in res) {
+                        const fileUrl = BASE_URL_FILE_PICKER + '/' + res?.data?.file_path;
+
+                        setInvoiceSoNumber('')
+                        // Update the SO Order with the generated invoice
+                        updateSoInvoice({
+                            id: invoiceSoNumber,
+                            body: {
+                                invoice: fileUrl || '',
+                            },
+                        }).then(() => {
+                            showToast('success', 'Invoice updated successfully');
+                        }).catch((err) => console.error('Error updating invoice:', err));
+                    }
+                });
+            })();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [invoiceSoNumber, invoiceData]); // Run only when `invoiceSoNumber` or `invoiceData` changes
+
 
     return (
         <SideNavLayout>

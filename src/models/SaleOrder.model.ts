@@ -1,3 +1,5 @@
+import { RequestStatus } from 'src/components/UI/atoms/ATMRequestStatus/ATMRequestStatus'
+
 // |-- Types --|
 export type productSalesOrder = {
     productGroupId: string
@@ -14,6 +16,7 @@ export enum SaleOrderStatus {
 export type SaleOrderListResponseTypes = {
     _id: string
     dealerName: string
+    dealerCode: string
     totalInvoiceAmount: string
     invoiceDate: string
     dhApproved: boolean
@@ -48,7 +51,7 @@ export type SaleOrderListResponseTypes = {
             _id: string
             groupName: string
         }
-        status: SaleOrderStatus
+        status: RequestStatus
         companyId: string
         isDeleted: boolean
         isActive: boolean

@@ -24,6 +24,7 @@ import AssignedOrderListFilterFormDialogWrapper, {
 import { statusProps } from 'src/pages/orders'
 import { OrderListResponse } from 'src/models'
 import { Chip, Stack } from '@mui/material'
+import { OrderStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 type Props = {
@@ -58,9 +59,9 @@ const WarehouseAssignedOrdersListing = ({
             return 'bg-green-200'
         }
         switch (row?.status) {
-            case statusProps.pnd:
+            case OrderStatusEnum.PND:
                 return 'bg-amber-200'
-            case statusProps.urgent:
+            case OrderStatusEnum.URGENT:
                 return 'bg-rose-300'
             default:
         }
@@ -154,7 +155,7 @@ const WarehouseAssignedOrdersListing = ({
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        
+
                         selectedRows={selectedRows}
                         onRowSelect={(selectedRows) =>
                             setSelectedRows(selectedRows)

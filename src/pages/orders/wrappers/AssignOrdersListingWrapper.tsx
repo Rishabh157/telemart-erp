@@ -21,6 +21,7 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
+import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 const AssignOrdersListingWrapper = () => {
     const navigate = useNavigate()
@@ -104,7 +105,7 @@ const AssignOrdersListingWrapper = () => {
                     handleViewActionButton={() => {
                         navigate(`/orders/view/${row?._id}`)
                     }}
-                    handleOnAction={() => {}}
+                    handleOnAction={() => { }}
                 />
             ),
         },
@@ -193,9 +194,9 @@ const AssignOrdersListingWrapper = () => {
                                     if (res.isConfirmed || res?.isDenied) {
                                         return res.isConfirmed
                                             ? handleOrderApproval(
-                                                  row?._id,
-                                                  res?.value
-                                              )
+                                                row?._id,
+                                                res?.value
+                                            )
                                             : null
                                     }
                                 }}
@@ -232,7 +233,7 @@ const AssignOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_STATUS,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => <span>{row?.status}</span>,
+            renderCell: (row: OrderListResponse) => <ATMOrderStatus status={row?.status} />,
         },
         {
             field: 'firstCallApproval',
@@ -248,7 +249,7 @@ const AssignOrdersListingWrapper = () => {
                             row?.firstCallApproval ? (
                                 <p className="text-green-500"> Approved </p>
                             ) : row?.firstCallState ===
-                              FirstCallApprovalStatus.CANCEL ? (
+                                FirstCallApprovalStatus.CANCEL ? (
                                 <p className="text-red-500"> Cancelled </p>
                             ) : (
                                 <p className="text-orange-500"> Pending </p>
@@ -369,16 +370,7 @@ const AssignOrdersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_CREATED_AT,
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">
-                    <div className="text-[12px] text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         {
             field: 'edpDate',
@@ -433,9 +425,7 @@ const AssignOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_PREPAID_TAB_LIST_PIN_CODE,
             align: 'center',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span> {row?.pincodeLabel} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMPincodeDisplay pincode={row?.pincodeLabel} />,
         },
         {
             field: 'areaLabel',
@@ -499,8 +489,8 @@ const AssignOrdersListingWrapper = () => {
                     <span>
                         {row?.preffered_delivery_date
                             ? moment(row?.preffered_delivery_date).format(
-                                  'DD-MM-YYYY'
-                              )
+                                'DD-MM-YYYY'
+                            )
                             : '-'}
                     </span>
                 )
