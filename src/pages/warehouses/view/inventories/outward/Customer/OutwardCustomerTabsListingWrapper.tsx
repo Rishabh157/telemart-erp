@@ -12,7 +12,6 @@ import OutwardRequestListing from './OutwardCustomerTabs'
 import { RootState } from 'src/redux/store'
 
 import { Chip } from '@mui/material'
-import moment from 'moment'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { OrderListResponse } from 'src/models'
 import { useGetOrderQuery } from 'src/services/OrderService'
@@ -88,7 +87,7 @@ const OutwardCustomerTabsListingWrapper = () => {
                                 size="small"
                             />
                         ) : row.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
+                            FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -98,7 +97,7 @@ const OutwardCustomerTabsListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => {}}
+                                onClick={() => { }}
                                 className="cursor-pointer"
                                 label="Pending"
                                 color="error"
@@ -299,7 +298,7 @@ const OutwardCustomerTabsListingWrapper = () => {
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
-renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
 
         {
