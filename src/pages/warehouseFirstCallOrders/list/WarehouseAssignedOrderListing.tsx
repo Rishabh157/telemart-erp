@@ -21,7 +21,6 @@ import { AppDispatch, RootState } from 'src/redux/store'
 import AssignedOrderListFilterFormDialogWrapper, {
     FormInitialValuesFilterWithLabel,
 } from './assignedOrderFilter/AssignedOrderListFilterFormDialogWrapper'
-import { statusProps } from 'src/pages/orders'
 import { OrderListResponse } from 'src/models'
 import { Chip, Stack } from '@mui/material'
 import { OrderStatusEnum } from 'src/utils/constants/enums'
