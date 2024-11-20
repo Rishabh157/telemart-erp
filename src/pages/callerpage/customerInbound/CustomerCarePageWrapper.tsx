@@ -24,11 +24,11 @@ import { useLocation } from 'react-router-dom'
 import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices'
 import { statusProps } from '../../orders'
 import { useNavigate } from 'react-router-dom'
-import moment from 'moment'
 import { ProductGroupListResponse } from 'src/models/ProductGroup.model'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -260,9 +260,7 @@ const CustomerCarePageWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs  min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.pincodeLabel} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMPincodeDisplay pincode={row?.pincodeLabel} />,
         },
         {
             field: 'remark',
@@ -271,7 +269,7 @@ const CustomerCarePageWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs  min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => <span> {row.remark} </span>,
+            renderCell: (row: OrderListResponse) => <span> {row?.remark} </span>,
         },
         {
             field: 'preffered_delivery_date',
@@ -280,17 +278,7 @@ const CustomerCarePageWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs  min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',

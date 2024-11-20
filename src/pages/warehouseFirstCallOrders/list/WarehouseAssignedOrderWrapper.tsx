@@ -12,7 +12,6 @@ import WarehouseAssignedOrdersListing from './WarehouseAssignedOrderListing'
 
 // |-- Redux --|
 import { Chip } from '@mui/material'
-import moment from 'moment'
 import { useParams } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
@@ -354,7 +353,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
-renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
 
         {
@@ -503,17 +502,7 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
             flex: 'flex-[3_3_0%]',
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',

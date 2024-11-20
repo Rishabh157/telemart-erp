@@ -181,7 +181,7 @@ const InfluencerListingWrapper = () => {
             headerName: 'Website Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WebsiteListResponse) => (
-                <span> {row.productName} </span>
+                <span> {row?.productName} </span>
             ),
         },
     ]

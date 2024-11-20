@@ -10,7 +10,6 @@ import { OrderListResponse } from 'src/models'
 import { useGetOrderBatchesQuery } from 'src/services/OrderService'
 
 // |-- Redux --|
-import moment from 'moment'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
@@ -429,17 +428,7 @@ const CreateBatchOrderListingWrapper = () => {
             align: 'start',
             extraClasses: 'min-w-[180px]',
             // hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',

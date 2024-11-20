@@ -6,7 +6,6 @@ import { OrderListResponse } from 'src/models'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { Chip } from '@mui/material'
 import { FirstCallApprovalStatus } from 'src/pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
-import moment from 'moment'
 import {
     useApprovedOrderStatusMutation,
     useGetOrderQuery,
@@ -106,7 +105,7 @@ const ReattemptOrdersListingWrapper = () => {
                     handleViewActionButton={() => {
                         navigate(`/orders/view/${row?._id}`)
                     }}
-                    handleOnAction={() => {}}
+                    handleOnAction={() => { }}
                 />
             ),
         },
@@ -195,9 +194,9 @@ const ReattemptOrdersListingWrapper = () => {
                                     if (res.isConfirmed || res?.isDenied) {
                                         return res.isConfirmed
                                             ? handleOrderApproval(
-                                                  row?._id,
-                                                  res?.value
-                                              )
+                                                row?._id,
+                                                res?.value
+                                            )
                                             : null
                                     }
                                 }}
@@ -250,7 +249,7 @@ const ReattemptOrdersListingWrapper = () => {
                             row?.firstCallApproval ? (
                                 <p className="text-green-500"> Approved </p>
                             ) : row?.firstCallState ===
-                              FirstCallApprovalStatus.CANCEL ? (
+                                FirstCallApprovalStatus.CANCEL ? (
                                 <p className="text-red-500"> Cancelled </p>
                             ) : (
                                 <p className="text-orange-500"> Pending </p>
@@ -371,7 +370,7 @@ const ReattemptOrdersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_REATTEMPT_TAB_LIST_CREATED_AT,
             extraClasses: 'text-xs min-w-[150px]',
-renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         {
             field: 'edpDate',
@@ -485,17 +484,7 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
             name: UserModuleNameTypes.ORDER_REATTEMPT_TAB_LIST_PREFFERED_DELIVERY_DATE,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                  'DD-MM-YYYY'
-                              )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',

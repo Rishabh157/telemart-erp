@@ -126,7 +126,7 @@ const WebsitePageListingWrapper = () => {
             headerName: 'Page Name',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WebsitePageListResponse) => (
-                <span> {row.pageName} </span>
+                <span> {row?.pageName} </span>
             ),
             name: UserModuleNameTypes.WEBSITES_PAGES_LIST_WEBSITES_PAGES_NAME,
         },
@@ -135,7 +135,7 @@ const WebsitePageListingWrapper = () => {
             headerName: 'Page Url',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: WebsitePageListResponse) => (
-                <span> {row.pageUrl} </span>
+                <span> {row?.pageUrl} </span>
             ),
             name: UserModuleNameTypes.WEBSITES_PAGES_LIST_PAGE_URL,
         },

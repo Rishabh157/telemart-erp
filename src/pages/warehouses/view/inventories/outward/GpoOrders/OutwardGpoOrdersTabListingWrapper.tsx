@@ -640,7 +640,7 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
             extraClasses: 'text-xs min-w-[200px]',
             renderCell: (row: OrderListResponse) => (
                 <span>
-                    {row.barcodeData?.map((ele) => ele?.barcode)?.join(' , ') ||
+                    {row?.barcodeData?.map((ele) => ele?.barcode)?.join(' , ') ||
                         '-'}
                 </span>
             ),

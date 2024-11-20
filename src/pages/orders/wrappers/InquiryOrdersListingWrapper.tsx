@@ -4,16 +4,9 @@ import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import { OrderListResponse } from 'src/models'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-import { Chip } from '@mui/material'
 import { FirstCallApprovalStatus } from 'src/pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
 import moment from 'moment'
-import {
-    useApprovedOrderStatusMutation,
-    useGetOrderQuery,
-} from 'src/services/OrderService'
-import { showToast } from 'src/utils'
 import { useNavigate } from 'react-router-dom'
-import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -23,10 +16,10 @@ import {
 } from 'src/redux/slices/orderSlice'
 import { OrderStatusEnum } from 'src/utils/constants/enums'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { useGetInquiryQuery } from 'src/services/InquiryService'
 
 const InquiryOrdersListingWrapper = () => {
     const navigate = useNavigate()
-    const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
     const dispatch = useDispatch<AppDispatch>()
     const { userData } = useSelector((state: RootState) => state?.auth)
     const orderState: any = useSelector((state: RootState) => state.order)
@@ -35,7 +28,7 @@ const InquiryOrdersListingWrapper = () => {
     const { page, rowsPerPage, searchValue, mobileNumberSearchValue } =
         orderState
 
-    const { data, isLoading, isFetching } = useGetOrderQuery({
+    const { data, isLoading, isFetching } = useGetInquiryQuery({
         limit: rowsPerPage,
         searchValue: '',
         params: ['didNo', 'mobileNo'],
@@ -75,23 +68,6 @@ const InquiryOrdersListingWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
-
-    const handleOrderApproval = (orderId: string, transactionId: string) => {
-        approvedOrderStatus({ orderId, transactionId }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Status changed successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
 
     // order column
     const columns: columnTypes[] = [
@@ -148,54 +124,6 @@ const InquiryOrdersListingWrapper = () => {
             renderCell: (row: OrderListResponse) => (
                 <span>{row?.assignWarehouseLabel || '-'}</span>
             ),
-        },
-        {
-            field: 'isApproved',
-            headerName: 'Approval',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_INQUIRY_TAB_LIST_APPROVAL,
-            extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: any) => {
-                return (
-                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
-                        {row?.approved ? (
-                            <Chip
-                                className="cursor-pointer text-xs"
-                                label="Approved"
-                                color="success"
-                                variant="outlined"
-                                size="small"
-                            />
-                        ) : (
-                            <SwtAlertChipConfirm
-                                title="Approval"
-                                text="Do you want to Approve ?"
-                                color="warning"
-                                chipLabel="pending"
-                                errorMessage="please enter transaction id"
-                                input={'text'}
-                                inputPlaceholder="transaction id"
-                                showCancelButton
-                                showDenyButton={false}
-                                icon="warning"
-                                confirmButtonColor="#3085d6"
-                                cancelButtonColor="#dc3741"
-                                confirmButtonText="Yes"
-                                next={(res) => {
-                                    if (res.isConfirmed || res?.isDenied) {
-                                        return res.isConfirmed
-                                            ? handleOrderApproval(
-                                                row?._id,
-                                                res?.value
-                                            )
-                                            : null
-                                    }
-                                }}
-                            />
-                        )}
-                    </span>
-                )
-            },
         },
         {
             field: 'mobileNo',
@@ -475,17 +403,7 @@ const InquiryOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_INQUIRY_TAB_LIST_PREFFERED_DELIVERY_DATE,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',

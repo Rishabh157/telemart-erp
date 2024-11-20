@@ -2,30 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { OrderStatusEnum } from 'src/utils/constants/enums';
 
-
 /** Order Status **/
-// export enum OrderStatus {
-//   FRESH = "FRESH",
-//   ALL = "ALL",
-//   PREPAID = "PREPAID",
-//   DELIVERED = "DELIVERED",
-//   DOOR_CANCELLED = "DOORCANCELLED",
-//   HOLD = "HOLD",
-//   PSC = "PSC",
-//   UNA = "UNA",
-//   PND = "PND",
-//   URGENT = "URGENT",
-//   NON_ACTION = "NON_ACTION",
-//   RTO = "RTO",
-//   INQUIRY = "INQUIRY",
-//   REATTEMPT = "REATTEMPT",
-//   DELIVERY_OUT_OF_NETWORK = "DELIVERYOUTOFNETWORK",
-//   IN_TRANSIT = "INTRANSIT",
-//   NDR = "NDR",
-//   CANCEL = "CANCEL",
-//   CLOSED = "CLOSED",
-// }
-
 interface ATMOrderStatusProps {
   status: OrderStatusEnum;
 }
@@ -36,8 +13,6 @@ export const ATMOrderStatus: React.FC<ATMOrderStatusProps> = ({ status }) => {
     switch (status) {
       case OrderStatusEnum.FRESH:
         return { label: "Fresh", style: "text-green-700 bg-green-100" };
-      case OrderStatusEnum.ALL:
-        return { label: "All", style: "text-gray-700 bg-gray-100" };
       case OrderStatusEnum.PREPAID:
         return { label: "Prepaid", style: "text-blue-700 bg-blue-100" };
       case OrderStatusEnum.DELIVERED:
@@ -89,16 +64,46 @@ export const ATMOrderStatus: React.FC<ATMOrderStatusProps> = ({ status }) => {
 /** Date With Time **/
 interface ATMDateDisplayProps {
   createdAt: string | Date;
+  disableTime?: boolean;
+  format?: 'DEFAULT' | 'DD-MM-YYYY' | 'MM/DD/YYYY' | 'YYYY.MM.DD' | 'LONG'; // Add more formats as needed
 }
 
-export const ATMDateTimeDisplay: React.FC<ATMDateDisplayProps> = ({ createdAt }) => {
-  const orderDate = moment(createdAt).format('DD MMM YYYY');
-  const orderTime = moment(createdAt).format('hh:mm A');
+export const ATMDateTimeDisplay: React.FC<ATMDateDisplayProps> = ({ createdAt, disableTime, format = 'DEFAULT' }) => {
+
+  const getFormattedDate = (date: string | Date, format: string): string => {
+    const parsedDate = moment(date);
+
+    // Handle invalid dates
+    if (!parsedDate.isValid()) {
+      return 'N/A';
+    }
+
+    // Switch case for formats
+    switch (format) {
+      case 'DD-MM-YYYY':
+        return parsedDate.format('DD-MM-YYYY');
+      case 'MM/DD/YYYY':
+        return parsedDate.format('MM/DD/YYYY');
+      case 'YYYY.MM.DD':
+        return parsedDate.format('YYYY.MM.DD');
+      case 'LONG':
+        return parsedDate.format('dddd, MMMM Do YYYY');
+      case 'DEFAULT':
+      default:
+        return parsedDate.format('DD MMM YYYY');
+    }
+  };
+
+  // Get formatted date and time
+  const orderDate = getFormattedDate(createdAt, format);
+  const orderTime = moment(createdAt).isValid() ? moment(createdAt).format('hh:mm A') : 'N/A';
 
   return (
     <div className="flex flex-col items-start space-y-0.5">
       <span className="text-xs text-slate-700 font-semibold">{orderDate}</span>
-      <span className="text-[10px] text-gray-500">{orderTime}</span>
+      <span hidden={disableTime} className="text-[10px] text-gray-500">
+        {orderTime}
+      </span>
     </div>
   );
 };
