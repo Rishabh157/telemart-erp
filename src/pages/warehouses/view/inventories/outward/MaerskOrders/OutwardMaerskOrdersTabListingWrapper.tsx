@@ -11,7 +11,6 @@ import OutwardMaerskOrdersTabListing from './OutwardMaerskOrdersTabListing'
 
 // |-- Redux --|
 import { Chip } from '@mui/material'
-import moment from 'moment'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import {
     // useGetGenerateCouriorLabelByAwbNumberMutation,
