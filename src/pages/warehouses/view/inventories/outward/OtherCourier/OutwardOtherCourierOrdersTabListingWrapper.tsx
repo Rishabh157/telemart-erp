@@ -11,7 +11,6 @@ import OutwardOtherCourierOrdersTabListing from './OutwardOtherCourierOrdersTabL
 
 // |-- Redux --|
 import { Chip } from '@mui/material'
-import moment from 'moment'
 import { PDFDocument } from 'pdf-lib'
 import { FaRegFilePdf } from 'react-icons/fa'
 import { MdLabelImportantOutline } from 'react-icons/md'
