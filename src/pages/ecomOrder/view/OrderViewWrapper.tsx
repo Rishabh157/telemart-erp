@@ -134,7 +134,7 @@ const OrderViewWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span>{row.orderReferenceNumber || '-'}</span>
+                <span>{row?.orderReferenceNumber || '-'}</span>
             ),
         },
 

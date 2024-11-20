@@ -103,7 +103,7 @@ const ChannelManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME,
             renderCell: (row: ChannelManagementListResponse) => (
-                <span> {row.channelName} </span>
+                <span> {row?.channelName} </span>
             ),
         },
         {
@@ -112,7 +112,7 @@ const ChannelManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CHANNEL_NAME,
             renderCell: (row: ChannelManagementListResponse) => (
-                <span> {row.channelGroupLabel} </span>
+                <span> {row?.channelGroupLabel} </span>
             ),
         },
         {
@@ -121,7 +121,7 @@ const ChannelManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_CONTACT_PERSON,
             renderCell: (row: ChannelManagementListResponse) => (
-                <span> {row.contactPerson} </span>
+                <span> {row?.contactPerson} </span>
             ),
         },
         {
@@ -130,7 +130,7 @@ const ChannelManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_MOBILE,
             renderCell: (row: ChannelManagementListResponse) => (
-                <span> {row.mobile} </span>
+                <span> {row?.mobile} </span>
             ),
         },
         {
@@ -139,7 +139,7 @@ const ChannelManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.CHANNEL_MANAGEMENT_LIST_EMAIL,
             renderCell: (row: ChannelManagementListResponse) => (
-                <span> {row.email} </span>
+                <span> {row?.email} </span>
             ),
         },
     ]

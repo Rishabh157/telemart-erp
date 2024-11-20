@@ -321,8 +321,8 @@ const OutwardDealerTabsListingWrapper = () => {
             renderCell: (row: OutwardRequestDealerListResponse) => {
                 return row?.documents?.[0]?.invoice ? (
                     <a
-                        href={row.documents[0].invoice}
-                        download={`Invoice_${row._id}.pdf`}
+                        href={row?.documents[0].invoice}
+                        download={`Invoice_${row?._id}.pdf`}
                         className="text-blue-500 hover:underline"
                     >
                         PDF

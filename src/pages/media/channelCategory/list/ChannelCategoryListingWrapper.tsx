@@ -102,7 +102,7 @@ const ChannelCategoryListingWrapper = () => {
             name: UserModuleNameTypes.CATEGORY_LIST_CHANNEL_CATEGORY_NAME,
 
             renderCell: (row: ChannelCategoryListResponse) => (
-                <span> {row.channelCategory} </span>
+                <span> {row?.channelCategory} </span>
             ),
         },
     ]

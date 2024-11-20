@@ -100,7 +100,7 @@ const CompetitorManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.COMPETITOR_LIST_DATE,
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {moment(row.date).format('DD/MM/YYYY')} </span>
+                <span> {moment(row?.date).format('DD/MM/YYYY')} </span>
             ),
         },
         {
@@ -110,7 +110,7 @@ const CompetitorManagementListingWrapper = () => {
             name: UserModuleNameTypes.COMPETITOR_LIST_START_TIME,
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {formatTimeTo12Hour(row.startTime)} </span>
+                <span> {formatTimeTo12Hour(row?.startTime)} </span>
             ),
         },
         {
@@ -120,7 +120,7 @@ const CompetitorManagementListingWrapper = () => {
             name: UserModuleNameTypes.COMPETITOR_LIST_START_END,
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {formatTimeTo12Hour(row.endTime)} </span>
+                <span> {formatTimeTo12Hour(row?.endTime)} </span>
             ),
         },
         {
@@ -130,7 +130,7 @@ const CompetitorManagementListingWrapper = () => {
             name: UserModuleNameTypes.COMPETITOR_LIST_PRODUCT_NAME,
             align: 'center',
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.productName} </span>
+                <span> {row?.productName} </span>
             ),
         },
         {
@@ -140,7 +140,7 @@ const CompetitorManagementListingWrapper = () => {
             align: 'center',
             name: UserModuleNameTypes.COMPETITOR_LIST_MOBILE_NO,
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.mobileNumber} </span>
+                <span> {row?.mobileNumber} </span>
             ),
         },
 
@@ -151,7 +151,7 @@ const CompetitorManagementListingWrapper = () => {
             align: 'center',
             name: UserModuleNameTypes.COMPETITOR_LIST_PRICE_MRP,
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.schemePrice} </span>
+                <span> {row?.schemePrice} </span>
             ),
         },
         {
@@ -161,7 +161,7 @@ const CompetitorManagementListingWrapper = () => {
             align: 'center',
             name: UserModuleNameTypes.COMPETITOR_LIST_COMPETITOR_NAME,
             renderCell: (row: CompetitorManagementListResponse) => (
-                <span> {row.competitorName} </span>
+                <span> {row?.competitorName} </span>
             ),
         },
     ]

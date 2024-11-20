@@ -86,7 +86,7 @@ const MultiOrderSearchListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber}</span>
+                <span className="text-primary-main "># {row?.orderNumber}</span>
             ),
         },
         {
@@ -145,7 +145,7 @@ const MultiOrderSearchListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span>{row.orderReferenceNumber || '-'}</span>
+                <span>{row?.orderReferenceNumber || '-'}</span>
             ),
         },
         {
@@ -423,7 +423,7 @@ const MultiOrderSearchListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px]',
             renderCell: (row: any) => (
-                <span> {row.orderMBKNumber || '-'} </span>
+                <span> {row?.orderMBKNumber || '-'} </span>
             ),
         },
     ]

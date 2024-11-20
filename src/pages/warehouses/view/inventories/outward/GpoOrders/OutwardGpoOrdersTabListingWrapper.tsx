@@ -195,7 +195,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             renderCell: (row: OrderListResponse) => {
                 return (
                     <span className="block w-full px-2 py-1 text-left cursor-pointer">
-                        {row.firstCallApproval ? (
+                        {row?.firstCallApproval ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Approved"
@@ -203,7 +203,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                                 variant="outlined"
                                 size="small"
                             />
-                        ) : row.firstCallState ===
+                        ) : row?.firstCallState ===
                           FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
@@ -240,7 +240,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                             : 'text-red-600'
                     }
                 >
-                    {row.orderStatus.replaceAll('_', ' ')}
+                    {row?.orderStatus.replaceAll('_', ' ')}
                 </span>
             ),
         },
@@ -251,7 +251,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber}</span>
+                <span className="text-primary-main "># {row?.orderNumber}</span>
             ),
         },
         {
@@ -261,7 +261,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => (
-                <span>{row.orderReferenceNumber || '-'}</span>
+                <span>{row?.orderReferenceNumber || '-'}</span>
             ),
         },
         {
@@ -629,7 +629,7 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[250px]',
             renderCell: (row: OrderListResponse) => (
-                <span> {row.orderMBKNumber || '-'} </span>
+                <span> {row?.orderMBKNumber || '-'} </span>
             ),
         },
         {

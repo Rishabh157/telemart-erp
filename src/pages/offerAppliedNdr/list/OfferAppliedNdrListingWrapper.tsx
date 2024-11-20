@@ -92,7 +92,7 @@ const OfferAppliedNdrListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber}</span>
+                <span className="text-primary-main "># {row?.orderNumber}</span>
             ),
         },
         {
@@ -192,7 +192,7 @@ const OfferAppliedNdrListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span>{row.orderReferenceNumber || '-'}</span>
+                <span>{row?.orderReferenceNumber || '-'}</span>
             ),
         },
         {
@@ -447,7 +447,7 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
             extraClasses: 'min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
                 <span className="text-primary-main ">
-                    &#8377; {row.deliveryCharges}
+                    &#8377; {row?.deliveryCharges}
                 </span>
             ),
         },
@@ -502,7 +502,7 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
             align: 'end',
             // extraClasses: 'min-w-[250px]',
             renderCell: (row: any) => (
-                <span> {row.orderMBKNumber || '-'} </span>
+                <span> {row?.orderMBKNumber || '-'} </span>
             ),
         },
     ]

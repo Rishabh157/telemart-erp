@@ -13,7 +13,6 @@ import {
     setItems,
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
-import { OrderStatusEnum } from 'src/utils/constants/enums'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 import { useGetInquiryQuery } from 'src/services/InquiryService'
 
@@ -24,13 +23,12 @@ const InquiryOrdersListingWrapper = () => {
     const orderState: any = useSelector((state: RootState) => state.order)
 
     // Get All Order Data Query
-    const { page, rowsPerPage, searchValue, mobileNumberSearchValue } =
-        orderState
+    const { page, rowsPerPage, searchValue, mobileNumberSearchValue } = orderState
 
     const { data, isLoading, isFetching } = useGetInquiryQuery({
         limit: rowsPerPage,
-        searchValue: '',
-        params: ['didNo', 'mobileNo'],
+        searchValue: searchValue,
+        params: ['mobileNo'],
         page: page,
         filterBy: [
             {
@@ -38,17 +36,17 @@ const InquiryOrdersListingWrapper = () => {
                 value: userData?.companyId,
             },
             {
-                fieldName: 'inquiryNumber',
-                value: [searchValue],
-            },
-            {
                 fieldName: 'mobileNo',
                 value: [mobileNumberSearchValue],
             },
             {
-                fieldName: 'status',
-                value: OrderStatusEnum.INQUIRY,
+                fieldName: 'inquiryNumber',
+                value: [parseInt(searchValue)],
             },
+            // {
+            //     fieldName: 'status',
+            //     value: OrderStatusEnum.INQUIRY,
+            // },
         ],
         dateFilter: {},
         orderBy: 'createdAt',
@@ -64,7 +62,6 @@ const InquiryOrdersListingWrapper = () => {
         } else {
             dispatch(setIsTableLoading(true))
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
 
@@ -217,7 +214,7 @@ const InquiryOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_INQUIRY_TAB_LIST_ORDER_REFRENCE_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span>{row.orderReferenceNumber || '-'}</span>
+                <span>{row?.orderReferenceNumber || '-'}</span>
             ),
         },
         {

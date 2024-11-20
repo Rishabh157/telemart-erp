@@ -57,7 +57,7 @@ const ComplaintTabListingWrapper = () => {
             headerName: 'Order No',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: any) => <span> {row.orderNumber} </span>,
+            renderCell: (row: any) => <span> {row?.orderNumber} </span>,
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_ORDER_NUMBER,
         },
         {
@@ -76,7 +76,7 @@ const ComplaintTabListingWrapper = () => {
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_COMPLAINT_LABEL,
             renderCell: (row: any) => (
                 <span>
-                    {row.complaintbyLabel ? row.complaintbyLabel : 'NA'}
+                    {row?.complaintbyLabel ? row?.complaintbyLabel : 'NA'}
                 </span>
             ),
         },
@@ -86,7 +86,7 @@ const ComplaintTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_SCHEME_NAME,
-            renderCell: (row: any) => <span> {row.schemeName} </span>,
+            renderCell: (row: any) => <span> {row?.schemeName} </span>,
         },
         {
             field: 'initialCallOneLabel',
@@ -94,7 +94,7 @@ const ComplaintTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px]',
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_INITAL_CALL_ONE_LABEL,
-            renderCell: (row: any) => <span> {row.initialCallOneLabel} </span>,
+            renderCell: (row: any) => <span> {row?.initialCallOneLabel} </span>,
         },
         {
             field: 'initialCallTwoLabel',
@@ -102,7 +102,7 @@ const ComplaintTabListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[250px]',
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_INITAL_CALL_TWO_LABEL,
-            renderCell: (row: any) => <span> {row.initialCallTwoLabel} </span>,
+            renderCell: (row: any) => <span> {row?.initialCallTwoLabel} </span>,
         },
         {
             field: 'initialCallThreeLabel',
@@ -111,7 +111,7 @@ const ComplaintTabListingWrapper = () => {
             extraClasses: 'min-w-[250px]',
             name: UserModuleNameTypes.ACTION_ORDER_COMPAINT_LIST_INITAL_CALL_THREE_LABEL,
             renderCell: (row: any) => (
-                <span> {row.initialCallThreeLabel} </span>
+                <span> {row?.initialCallThreeLabel} </span>
             ),
         },
     ]

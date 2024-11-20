@@ -116,7 +116,7 @@ const FlipkartOrdersListingWrapper = () => {
             name: UserModuleNameTypes.FLIPKART_LIST_DISPATCHED,
             renderCell: (row: FlipkartOrderListingListResponse) => (
                 <div>
-                    {row.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
+                    {row?.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
                 </div>
             ),
         },

@@ -98,7 +98,7 @@ const InitialCallTwoListingWrapper = () => {
             extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_TWO_LIST_INITIAL_CALL_ONE,
             renderCell: (row: InitialCallerTwoListResponse) => (
-                <span> {row.initialCallDisplayName} </span>
+                <span> {row?.initialCallDisplayName} </span>
             ),
         },
         {
@@ -107,7 +107,7 @@ const InitialCallTwoListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_TWO_LIST_CALL_TYPE,
             renderCell: (row: InitialCallerTwoListResponse) => (
-                <span> {row.callType} </span>
+                <span> {row?.callType} </span>
             ),
         },
         {
@@ -117,7 +117,7 @@ const InitialCallTwoListingWrapper = () => {
             extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_TWO_LIST_INITIAL_CALL_ONE,
             renderCell: (row: InitialCallerTwoListResponse) => (
-                <span> {row.initialCallOneDisplayLabel} </span>
+                <span> {row?.initialCallOneDisplayLabel} </span>
             ),
         },
         {
@@ -128,13 +128,13 @@ const InitialCallTwoListingWrapper = () => {
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
-                        {row.isActive ? (
+                        {row?.isActive ? (
                             <Chip
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
                                         text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
+                                            row?.isActive ? 'Deactive' : 'Active'
                                         }`,
                                         showCancelButton: true,
                                         next: (res) => {
@@ -156,7 +156,7 @@ const InitialCallTwoListingWrapper = () => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
                                         text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
+                                            row?.isActive ? 'Deactive' : 'Active'
                                         }`,
                                         showCancelButton: true,
                                         next: (res) => {

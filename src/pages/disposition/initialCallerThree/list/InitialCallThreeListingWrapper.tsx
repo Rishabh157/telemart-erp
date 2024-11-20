@@ -104,7 +104,7 @@ const InitialCallThreeListingWrapper = () => {
             extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_THREE,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallDisplayName} </span>
+                <span> {row?.initialCallDisplayName} </span>
             ),
         },
         {
@@ -113,7 +113,7 @@ const InitialCallThreeListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_CALL_TYPE,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.callType} </span>
+                <span> {row?.callType} </span>
             ),
         },
         {
@@ -123,7 +123,7 @@ const InitialCallThreeListingWrapper = () => {
             extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_ONE,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallOneDisplayLabel} </span>
+                <span> {row?.initialCallOneDisplayLabel} </span>
             ),
         },
         {
@@ -133,7 +133,7 @@ const InitialCallThreeListingWrapper = () => {
             extraClasses: 'capitalize',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CALL_TWO,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.initialCallTwoDisplayLabel} </span>
+                <span> {row?.initialCallTwoDisplayLabel} </span>
             ),
         },
         {
@@ -142,7 +142,7 @@ const InitialCallThreeListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CANCEL_FLAG,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.cancelFlag ? 'Yes' : 'No'} </span>
+                <span> {row?.cancelFlag ? 'Yes' : 'No'} </span>
             ),
         },
         {
@@ -151,7 +151,7 @@ const InitialCallThreeListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.IC_THREE_LIST_INITIAL_CANCEL_PND,
             renderCell: (row: InitialCallerThreeListResponse) => (
-                <span> {row.isPnd ? 'Yes' : 'No'} </span>
+                <span> {row?.isPnd ? 'Yes' : 'No'} </span>
             ),
         },
         {
@@ -171,13 +171,13 @@ const InitialCallThreeListingWrapper = () => {
             renderCell: (row: any) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
-                        {row.isActive ? (
+                        {row?.isActive ? (
                             <Chip
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
                                         text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
+                                            row?.isActive ? 'Deactive' : 'Active'
                                         }`,
                                         showCancelButton: true,
                                         next: (res) => {
@@ -199,7 +199,7 @@ const InitialCallThreeListingWrapper = () => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
                                         text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
+                                            row?.isActive ? 'Deactive' : 'Active'
                                         }`,
                                         showCancelButton: true,
                                         next: (res) => {
