@@ -99,7 +99,7 @@ const ChannelGroupListingWrapper = () => {
             name: UserModuleNameTypes.CHANNEL_GROUP_LIST_CHANNEL_GROUP_NAME,
 
             renderCell: (row: ChannelGroupListResponse) => (
-                <span> {row.groupName} </span>
+                <span> {row?.groupName} </span>
             ),
         },
     ]

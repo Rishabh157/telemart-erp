@@ -44,21 +44,21 @@ const columns: columnTypes[] = [
         headerName: 'Order',
         flex: 'flex-[1_1_0%]',
         renderCell: (row: any) => (
-            <span className="text-primary-main "> # {row.order_no} </span>
+            <span className="text-primary-main "> # {row?.order_no} </span>
         ),
     },
     {
         field: 'date',
         headerName: 'Date',
         flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: any) => <span> {row.date} </span>,
+        renderCell: (row: any) => <span> {row?.date} </span>,
     },
     {
         field: 'status',
         headerName: 'Status',
         flex: 'flex-[1.5_1.5_0%]',
         renderCell: (row: any) => {
-            return renderorderStatus(row.status)
+            return renderorderStatus(row?.status)
         },
     },
     {
@@ -71,7 +71,7 @@ const columns: columnTypes[] = [
         headerName: 'Purchased',
         flex: 'flex-[2_2_0%]',
         renderCell: (row: any) => (
-            <span className="text-primary-main "> {row.purchased} </span>
+            <span className="text-primary-main "> {row?.purchased} </span>
         ),
     },
     {
@@ -79,7 +79,7 @@ const columns: columnTypes[] = [
         headerName: 'Total',
         flex: 'flex-[1.5_1.5_0%]',
         renderCell: (row: any) => (
-            <span className="text-slate-800"> &#8377; {row.total} </span>
+            <span className="text-slate-800"> &#8377; {row?.total} </span>
         ),
     },
 ]

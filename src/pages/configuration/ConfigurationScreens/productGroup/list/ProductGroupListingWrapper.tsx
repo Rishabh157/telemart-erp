@@ -114,7 +114,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_PRODUCT_GROUP_NAME,
             renderCell: (row: ProductGroupListResponse) => {
-                return <span> {row.groupName} </span>
+                return <span> {row?.groupName} </span>
             },
         },
         {
@@ -123,7 +123,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_PRODUCT_GROUP_CODE,
             renderCell: (row: ProductGroupListResponse) => {
-                return <span> {row.productGroupCode} </span>
+                return <span> {row?.productGroupCode} </span>
             },
         },
         {
@@ -132,7 +132,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_DEALER_SALE_PRICE,
             renderCell: (row: ProductGroupListResponse) => {
-                return <span> {row.dealerSalePrice} </span>
+                return <span> {row?.dealerSalePrice} </span>
             },
         },
         {
@@ -141,7 +141,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_SATE_GST,
             renderCell: (row: ProductGroupListResponse) => {
-                return <span> {row.sgst} </span>
+                return <span> {row?.sgst} </span>
             },
         },
         {
@@ -150,7 +150,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_CENTER_GST,
             renderCell: (row: ProductGroupListResponse) => {
-                return <span> {row.cgst} </span>
+                return <span> {row?.cgst} </span>
             },
         },
         {
@@ -159,7 +159,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_INTEGRATED_GST,
             renderCell: (row: ProductGroupListResponse) => {
-                return <span> {row.igst} </span>
+                return <span> {row?.igst} </span>
             },
         },
         {
@@ -168,7 +168,7 @@ const ProductGroupListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PRODUCT_GROUP_LIST_UNION_TERRITORY,
             renderCell: (row: ProductGroupListResponse) => {
-                return <span> {row.utgst} </span>
+                return <span> {row?.utgst} </span>
             },
         },
     ]

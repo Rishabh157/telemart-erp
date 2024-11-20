@@ -148,13 +148,13 @@ const NdrDispositionListingWrapper = () => {
             renderCell: (row: NdrDispositionListResponseType) => {
                 return (
                     <span className="block w-full text-left px-2 py-1 cursor-pointer">
-                        {row.isActive ? (
+                        {row?.isActive ? (
                             <Chip
                                 onClick={() => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
                                         text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
+                                            row?.isActive ? 'Deactive' : 'Active'
                                         }`,
                                         showCancelButton: true,
                                         next: (res) => {
@@ -176,7 +176,7 @@ const NdrDispositionListingWrapper = () => {
                                     showConfirmationDialog({
                                         title: 'Deactive ',
                                         text: `Do you want to ${
-                                            row.isActive ? 'Deactive' : 'Active'
+                                            row?.isActive ? 'Deactive' : 'Active'
                                         }`,
                                         showCancelButton: true,
                                         next: (res) => {

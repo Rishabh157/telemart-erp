@@ -100,7 +100,7 @@ const GlobalSearchOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_GLOBAL_TAB_LIST_ORDER_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber}</span>
+                <span className="text-primary-main "># {row?.orderNumber}</span>
             ),
         },
         {
@@ -274,7 +274,7 @@ const GlobalSearchOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_GLOBAL_TAB_LIST_ORDER_REFRENCE_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span>{row.orderReferenceNumber || '-'}</span>
+                <span>{row?.orderReferenceNumber || '-'}</span>
             ),
         },
         {
@@ -494,7 +494,7 @@ const GlobalSearchOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_GLOBAL_TAB_LIST_ORDER_MBK_NUMBER,
             extraClasses: 'text-xs min-w-[250px]',
             renderCell: (row: any) => (
-                <span> {row.orderMBKNumber || '-'} </span>
+                <span> {row?.orderMBKNumber || '-'} </span>
             ),
         },
     ]

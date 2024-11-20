@@ -105,7 +105,7 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_SLOT_NAME,
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.slotName} </span>
+                <span> {row?.slotName} </span>
             ),
         },
         {
@@ -114,7 +114,7 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_CHANNEL_GROUP,
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.groupNameLabel} </span>
+                <span> {row?.groupNameLabel} </span>
             ),
         },
         {
@@ -123,7 +123,7 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_CHANNEL_NAME,
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.channelLabel} </span>
+                <span> {row?.channelLabel} </span>
             ),
         },
         {
@@ -132,7 +132,7 @@ const SlotManagementListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_TAPE_NAME,
             renderCell: (row: SlotManagementListResponse) => (
-                <span> {row.tapeLabel} </span>
+                <span> {row?.tapeLabel} </span>
             ),
         },
         {
@@ -142,7 +142,7 @@ const SlotManagementListingWrapper = () => {
             name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_START_TIME,
             renderCell: (row: SlotManagementListResponse) => (
                 <span>
-                    {moment(row.slotStartTime, 'hh:mm A').format('hh:mm A')}
+                    {moment(row?.slotStartTime, 'hh:mm A').format('hh:mm A')}
                 </span>
             ),
         },
@@ -153,7 +153,7 @@ const SlotManagementListingWrapper = () => {
             name: UserModuleNameTypes.SLOT_MANAGEMENT_LIST_END_TIME,
             renderCell: (row: SlotManagementListResponse) => (
                 <span>
-                    {moment(row.slotEndTime, 'hh:mm A').format('hh:mm A')}
+                    {moment(row?.slotEndTime, 'hh:mm A').format('hh:mm A')}
                 </span>
             ),
         },
@@ -165,7 +165,7 @@ const SlotManagementListingWrapper = () => {
             renderCell: (row: SlotManagementListResponse) => (
                 <span>
                     {' '}
-                    {row.slotContinueStatus ? (
+                    {row?.slotContinueStatus ? (
                         <span>
                             <CiPause1
                                 onClick={() => handlePausePlay(row?._id)}

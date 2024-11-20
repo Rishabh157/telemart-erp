@@ -94,7 +94,7 @@ const AmazonOrdersListingWrapper = () => {
             name: UserModuleNameTypes.AMAZON_LIST_DISPATCHED,
             renderCell: (row: AmazonOrderListingListResponse) => (
                 <div>
-                    {row.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
+                    {row?.isDispatched ? <span className='text-green-500'>Dispatched</span> : <span className='text-orange-400'>Not Dispatched</span>}
                 </div>
             ),
         },

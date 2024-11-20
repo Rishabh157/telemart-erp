@@ -98,7 +98,7 @@ const ArtistListingWrapper = () => {
 
             name: UserModuleNameTypes.ARTIST_LIST_ARTIST_NAME,
             renderCell: (row: ArtistListResponse) => (
-                <span> {row.artistName} </span>
+                <span> {row?.artistName} </span>
             ),
         },
     ]
