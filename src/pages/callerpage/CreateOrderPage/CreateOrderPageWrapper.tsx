@@ -24,10 +24,10 @@ import { useLocation } from 'react-router-dom'
 import { statusProps } from '../../orders'
 import { useNavigate } from 'react-router-dom'
 import CreateOrderPage from './CreateOrderPage'
-import moment from 'moment'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
+import { ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 export type FormInitialValues = {
     agentName: string | null
@@ -390,9 +390,7 @@ const CreateOrderPageWrapper = () => {
             align: 'start',
             extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => (
-                <span> {row.pincodeLabel} </span>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMPincodeDisplay pincode={row?.pincodeLabel} />,
         },
         {
             field: 'remark',
@@ -410,20 +408,10 @@ const CreateOrderPageWrapper = () => {
             align: 'start',
             extraClasses: 'text-white text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
-            field: 'preffered_delivery_date',
+            field: 'preffered_delivery_start_time',
             headerName: 'Preffred Delivery Time',
             flex: 'flex-[3_3_0%]',
             align: 'start',

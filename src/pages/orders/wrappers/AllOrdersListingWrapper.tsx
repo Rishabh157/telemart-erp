@@ -6,7 +6,6 @@ import { OrderListResponse } from 'src/models'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { Chip } from '@mui/material'
 import { FirstCallApprovalStatus } from 'src/pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
-import moment from 'moment'
 import {
     useApprovedOrderStatusMutation,
     useGetOrderQuery,
@@ -119,7 +118,7 @@ const AllOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row.orderNumber}</span>
+                <span className="text-primary-main "># {row?.orderNumber}</span>
             ),
         },
         {
@@ -293,7 +292,7 @@ const AllOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_REFRENCE_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span>{row.orderReferenceNumber || '-'}</span>
+                <span>{row?.orderReferenceNumber || '-'}</span>
             ),
         },
         {
@@ -478,17 +477,7 @@ const AllOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_PREFFERED_DELIVERY_DATE,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',
@@ -523,7 +512,7 @@ const AllOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_MBK_NUMBER,
             extraClasses: 'text-xs min-w-[250px]',
             renderCell: (row: any) => (
-                <span> {row.orderMBKNumber || '-'} </span>
+                <span> {row?.orderMBKNumber || '-'} </span>
             ),
         },
     ]

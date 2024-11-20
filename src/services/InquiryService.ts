@@ -29,7 +29,6 @@ export const InquiryApi = apiSlice.injectEndpoints({
             invalidatesTags: ['inquiry'],
             query: (id) => ({
                 url: `/inquiry/completed/${id}`,
-
                 method: 'PUT',
             }),
         }),

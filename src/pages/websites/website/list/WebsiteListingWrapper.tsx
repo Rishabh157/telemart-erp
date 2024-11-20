@@ -179,7 +179,7 @@ const WebstieListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_LIST_WEBSITES_NAME,
             renderCell: (row: WebsiteListResponse) => (
-                <span> {row.productName} </span>
+                <span> {row?.productName} </span>
             ),
         },
         {
@@ -188,7 +188,7 @@ const WebstieListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_LIST_GA_TAG,
             renderCell: (row: WebsiteListResponse) => (
-                <span> {row.gaTagIp} </span>
+                <span> {row?.gaTagIp} </span>
             ),
         },
         {
@@ -196,7 +196,7 @@ const WebstieListingWrapper = () => {
             headerName: 'URL',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_LIST_URL,
-            renderCell: (row: WebsiteListResponse) => <span> {row.url} </span>,
+            renderCell: (row: WebsiteListResponse) => <span> {row?.url} </span>,
         },
     ]
     return (

@@ -126,7 +126,7 @@ const WebsiteTagListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_TAGS_LIST_WEBSITES_META_KEYWORD,
             renderCell: (row: WebsiteTagsListResponse) => (
-                <span> {row.metaKeyword} </span>
+                <span> {row?.metaKeyword} </span>
             ),
         },
         {
@@ -135,7 +135,7 @@ const WebsiteTagListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_OG_TYPE,
             renderCell: (row: WebsiteTagsListResponse) => (
-                <span> {row.metaOgType} </span>
+                <span> {row?.metaOgType} </span>
             ),
         },
         {
@@ -144,7 +144,7 @@ const WebsiteTagListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_TWITTER_TITLE,
             renderCell: (row: WebsiteTagsListResponse) => (
-                <span> {row.metaTwitterTitle} </span>
+                <span> {row?.metaTwitterTitle} </span>
             ),
         },
         {
@@ -153,7 +153,7 @@ const WebsiteTagListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_TAGS_LIST_META_TWITTER_CARD,
             renderCell: (row: WebsiteTagsListResponse) => (
-                <span> {row.metaTwitterCard} </span>
+                <span> {row?.metaTwitterCard} </span>
             ),
         },
     ]

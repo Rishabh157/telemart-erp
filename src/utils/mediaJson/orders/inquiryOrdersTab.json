@@ -25,11 +25,6 @@
                     "fieldValue": "assignWarehouseLabel"
                 },
                 {
-                    "fieldId": "ORDER_INQUIRY_TAB_LIST_APPROVAL",
-                    "fieldName": "Approval",
-                    "fieldValue": "approval"
-                },
-                {
                     "fieldId": "ORDER_INQUIRY_TAB_LIST_MOBILE_NUMBER",
                     "fieldName": "Mobile Number",
                     "fieldValue": "mobileNo"

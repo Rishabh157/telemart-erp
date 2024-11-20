@@ -2,7 +2,6 @@
 import { useState } from 'react'
 
 // |-- External Dependencies --|
-import moment from 'moment'
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
@@ -14,7 +13,6 @@ import AddOrderAssigneeFormWrapper from 'src/pages/orders/OrderAssigneeForm/AddO
 // |-- Redux --|
 import { useGetSingleBatchesOrdersQuery } from 'src/services/BatchesServices'
 import AssignBatchesViewListing from './AssignBatchesViewListing'
-// import { showToast } from 'src/utils'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { OrderListResponse } from 'src/models'
 import { isAuthorized } from 'src/utils/authorization'
@@ -364,7 +362,6 @@ const AssigneBatchesViewListingWrapper = () => {
                 </span>
             ),
         },
-
         {
             field: 'preffered_delivery_date',
             headerName: 'Preffred Delivery Date',
@@ -372,17 +369,7 @@ const AssigneBatchesViewListingWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             name: UserModuleNameTypes.ASSIGN_BATCH_LIST_PREFFRED_DELIVERY_DATE,
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',

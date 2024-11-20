@@ -21,8 +21,8 @@ const OrderOverviewDashboardWrapper = () => {
                 endDate: dateFilter.end_date
                     ? moment(dateFilter?.end_date).format('YYYY-MM-DD')
                     : dateFilter.end_date
-                    ? moment().format('YYYY-MM-DD')
-                    : '',
+                        ? moment().format('YYYY-MM-DD')
+                        : '',
             },
         }),
     })

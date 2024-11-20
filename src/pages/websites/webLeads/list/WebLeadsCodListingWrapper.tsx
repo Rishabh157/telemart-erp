@@ -95,7 +95,7 @@ const WebLeadsCodListingWrapper = () => {
             flex: 'flex-[0.7_0.7_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_STATUS,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span>{row.leadStatus}</span>
+                <span>{row?.leadStatus}</span>
             ),
         },
         {
@@ -122,7 +122,7 @@ const WebLeadsCodListingWrapper = () => {
             flex: 'flex-[0.7_0.7_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_ID_TAGS,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span>{row.idtag}</span>
+                <span>{row?.idtag}</span>
             ),
         },
         {
@@ -131,7 +131,7 @@ const WebLeadsCodListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_CUSTOMER_NAME,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row.name} </span>
+                <span> {row?.name} </span>
             ),
         },
         {
@@ -140,7 +140,7 @@ const WebLeadsCodListingWrapper = () => {
             flex: 'flex-[0.8_0.8_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_MOBILE_NUMBER,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row.phone} </span>
+                <span> {row?.phone} </span>
             ),
         },
         {
@@ -153,9 +153,9 @@ const WebLeadsCodListingWrapper = () => {
             renderCell: (row: WebLeadsListResponseType) => (
                 <span
                     className="w-[250px] whitespace-nowrap text-ellipsis overflow-hidden"
-                    title={row.email}
+                    title={row?.email}
                 >
-                    {row.email || '-'}
+                    {row?.email || '-'}
                 </span>
             ),
         },
@@ -166,7 +166,7 @@ const WebLeadsCodListingWrapper = () => {
             extraClasses: 'max-w-[350px]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PRODUCT_NAME,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row.product_name} </span>
+                <span> {row?.product_name} </span>
             ),
         },
         {
@@ -175,7 +175,7 @@ const WebLeadsCodListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_PRICE,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row.price || '-'} </span>
+                <span> {row?.price || '-'} </span>
             ),
         },
         {
@@ -220,7 +220,7 @@ const WebLeadsCodListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_CITY,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row.city || '-'} </span>
+                <span> {row?.city || '-'} </span>
             ),
         },
         {
@@ -229,7 +229,7 @@ const WebLeadsCodListingWrapper = () => {
             flex: 'flex-[0.5_0.5_0%]',
             name: UserModuleNameTypes.WEBSITES_LEADS_LIST_STATE,
             renderCell: (row: WebLeadsListResponseType) => (
-                <span> {row.state || '-'} </span>
+                <span> {row?.state || '-'} </span>
             ),
         },
     ]

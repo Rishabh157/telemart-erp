@@ -251,7 +251,7 @@ const PurchaseOrderListingWrapper = () => {
             flex: 'flex-[1.5_1.5_0%]',
             name: UserModuleNameTypes.PURCHASE_ORDER_LIST_ITEM_NAME,
             renderCell: (row: PurchaseOrderListResponse) => {
-                return <span> {row.purchaseOrder.itemName} </span>
+                return <span> {row.purchaseOrder?.itemName} </span>
             },
         },
         {

@@ -127,7 +127,7 @@ const ListWebsiteBlogWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_BLOG_LIST_WEBSITES_BLOG_NAME,
             renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogName} </span>
+                <span> {row?.blogName} </span>
             ),
         },
         {
@@ -136,7 +136,7 @@ const ListWebsiteBlogWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_TITLE,
             renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogTitle} </span>
+                <span> {row?.blogTitle} </span>
             ),
         },
         {
@@ -145,7 +145,7 @@ const ListWebsiteBlogWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.WEBSITES_BLOG_LIST_BLOG_SUBTITLE,
             renderCell: (row: WebsiteBlogListResponse) => (
-                <span> {row.blogSubtitle} </span>
+                <span> {row?.blogSubtitle} </span>
             ),
         },
     ]

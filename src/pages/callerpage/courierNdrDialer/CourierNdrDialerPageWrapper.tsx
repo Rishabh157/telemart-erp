@@ -24,7 +24,6 @@ import { useGetByDidNumberQuery } from 'src/services/media/DidManagementServices
 import { statusProps } from '../../orders'
 import { useNavigate } from 'react-router-dom'
 import CourierNdrDialerPage from './CourierNdrDialerPage'
-import moment from 'moment'
 import { useGetAllProductGroupUnAuthQuery } from 'src/services/ProductGroupService'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
@@ -422,17 +421,7 @@ const CourierNdrDialerPageWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',

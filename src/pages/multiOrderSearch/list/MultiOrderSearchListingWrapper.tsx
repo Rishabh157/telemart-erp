@@ -20,7 +20,6 @@ import {
 import MultiOrderSearchListing from './MultiOrderSearchListing'
 import { showToast } from 'src/utils'
 import { OrderListResponse } from 'src/models'
-import moment from 'moment'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
@@ -265,7 +264,7 @@ const MultiOrderSearchListingWrapper = () => {
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
-renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         // {
         //     field: 'onBackVerifiedDate',
@@ -391,17 +390,7 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             // hidden: activeTab === TabTypes?.complaint,
-            renderCell: (row: OrderListResponse) => {
-                return (
-                    <span>
-                        {row?.preffered_delivery_date
-                            ? moment(row?.preffered_delivery_date).format(
-                                'DD-MM-YYYY'
-                            )
-                            : '-'}
-                    </span>
-                )
-            },
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.preffered_delivery_date} disableTime />
         },
         {
             field: 'preffered_delivery_date',
