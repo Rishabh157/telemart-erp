@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
+// import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 
@@ -16,7 +16,7 @@ import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeade
 // |-- Redux --|
 import {
     setRowsPerPage,
-    setPage,
+    // setPage,
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
@@ -78,6 +78,8 @@ const VendorInventoryListing = ({ columns, rows, tabs }: Props) => {
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
                 {/*Table Header */}
                 <ATMTableHeader
+                    isDisableSearch
+                    isHiddenPagination
                     searchValue={searchValue}
                     page={page}
                     rowCount={totalItems}
@@ -110,7 +112,7 @@ const VendorInventoryListing = ({ columns, rows, tabs }: Props) => {
                 {/* Pagination */}
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
-                    <ATMPagination
+                    {/* <ATMPagination
                         page={page}
                         rowCount={totalItems}
                         rows={rows}
@@ -118,7 +120,7 @@ const VendorInventoryListing = ({ columns, rows, tabs }: Props) => {
                         onPageChange={(newPage) =>
                             dispatch(setPage(newPage))
                         }
-                    />
+                    /> */}
                 </div>
             </div>
         </div>

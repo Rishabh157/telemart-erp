@@ -12,6 +12,7 @@ import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { RootState } from 'src/redux/store'
 import { useGetPurchaseOrderQuery } from 'src/services/PurchaseOrderService'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
+import { Chip, Stack } from '@mui/material'
 
 // |-- Types --|
 type Props = {}
@@ -32,7 +33,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
         useEndPointHook: useGetPurchaseOrderQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['poCode', 'wareHouseId'],
+            params: ['poCode'],
             page: page,
             filterBy: [
                 {
@@ -57,7 +58,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             headerName: 'PO Code',
             flex: 'flex-[1_1_0%]',
             renderCell: (row: PurchaseOrderListResponse) => (
-                <span> {row.poCode} </span>
+                <span> {row?.poCode} </span>
             ),
         },
         {
@@ -65,7 +66,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             headerName: 'Item Name',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
-                return <span> {row.purchaseOrder.itemName} </span>
+                return <span> {row?.purchaseOrder.itemName} </span>
             },
         },
         {
@@ -73,7 +74,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             headerName: 'Quantity',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
-                return <span> {row.purchaseOrder.quantity} </span>
+                return <span> {row?.purchaseOrder.quantity} </span>
             },
         },
         {
@@ -81,7 +82,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             headerName: 'rate',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
-                return <span> {row.purchaseOrder.rate} </span>
+                return <span> {row?.purchaseOrder.rate} </span>
             },
         },
         {
@@ -89,7 +90,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             headerName: 'Vendor',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
-                return <span> {row.vendorLabel} </span>
+                return <span> {row?.vendorLabel} </span>
             },
         },
         {
@@ -97,7 +98,7 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             headerName: 'warer house',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
-                return <span> {row.warehouseLabel} </span>
+                return <span> {row?.warehouseLabel} </span>
             },
         },
         {
@@ -105,7 +106,54 @@ const VendorPurchaseOrderTabWrapper = (props: Props) => {
             headerName: 'Est. Delivery Date',
             flex: 'flex-[1.5_1.5_0%]',
             renderCell: (row: PurchaseOrderListResponse) => {
-                return <span> {row.purchaseOrder.estReceivingDate} </span>
+                return <span> {row?.purchaseOrder.estReceivingDate} </span>
+            },
+        },
+        {
+            field: 'isConfirmed',
+            headerName: 'Approval level',
+            extraClasses: 'text-xs min-w-[150px]',
+            flex: 'flex-[1_1_0%]',
+            renderCell: (row: PurchaseOrderListResponse) => {
+                const approvalLength = row?.approval?.length
+                return (
+                    <span className="z-10">
+                        {' '}
+                        <Stack direction="row" spacing={1}>
+                            {approvalLength === 0 ? (
+                                <Chip
+                                    label="Level 1 Pending"
+                                    color="error"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={false}
+                                />
+                            ) : approvalLength === 1 ? (
+                                <Chip
+                                    label="Level 1 Approved"
+                                    color="warning"
+                                    variant="outlined"
+                                    size="small"
+                                    clickable={false}
+                                />
+                            ) : (
+                                <button
+                                    id="btn"
+                                    disabled={approvalLength >= 2}
+                                    className="cursor-pointer"
+                                >
+                                    <Chip
+                                        label="Level 2 Approved"
+                                        color="success"
+                                        variant="outlined"
+                                        size="small"
+                                        clickable={true}
+                                    />
+                                </button>
+                            )}
+                        </Stack>
+                    </span>
+                )
             },
         },
     ]

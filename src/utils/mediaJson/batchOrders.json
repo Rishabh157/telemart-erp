@@ -282,11 +282,6 @@
                     "fieldValue": "dealerStatus"
                 },
                 {
-                    "fieldId": "ASSIGN_BATCH_LIST_DEALER_CODE",
-                    "fieldName": "Dealer Code",
-                    "fieldValue": "dealerCode"
-                },
-                {
                     "fieldId": "ASSIGN_BATCH_LIST_CUSTOMER_NAME",
                     "fieldName": "Customer Name",
                     "fieldValue": "customerName"

@@ -112,7 +112,7 @@ const InquiryOrdersListingWrapper = () => {
         },
         {
             field: 'assignWarehouseLabel',
-            headerName: 'Assigned Warehouse',
+            headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_INQUIRY_TAB_LIST_ASSIGNED_WEARHOUSE,
             align: 'start',

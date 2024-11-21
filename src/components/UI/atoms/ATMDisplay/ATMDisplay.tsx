@@ -122,3 +122,21 @@ export const ATMPincodeDisplay: React.FC<ATMPincodeDisplayProps> = ({ pincode })
   );
 };
 
+/** Dealer & Dealer Code **/
+interface ATMDealerDisplayProps {
+  dealerLabel?: string;
+  dealerCode?: string;
+  disableName?: boolean
+  disableCode?: boolean
+}
+
+export const ATMDealerDisplay: React.FC<ATMDealerDisplayProps> = ({ dealerLabel, dealerCode, disableName, disableCode }) => {
+  if (!dealerCode) return null;
+
+  return (
+    <div>
+      <div className="text-xs text-slate-700 font-medium capitalize" hidden={disableName}>{dealerLabel || 'N/A'}</div>
+      <div className="text-[12px] text-primary-main font-medium" hidden={disableCode}>({dealerCode || 'N/A'})</div>
+    </div>
+  );
+};

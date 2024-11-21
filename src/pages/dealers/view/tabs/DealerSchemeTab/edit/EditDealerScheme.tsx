@@ -1,10 +1,3 @@
-/// ==============================================
-// Filename:EditDealerScheme.tsx
-// Type: Edit Component
-// Last Updated: JUNE 26, 2023
-// Project: TELIMART - Front End
-// ==============================================
-
 // |-- Built-in Dependencies --|
 import React, { useState, useEffect } from 'react'
 
@@ -12,8 +5,6 @@ import React, { useState, useEffect } from 'react'
 import { FormikProps } from 'formik'
 
 // |-- Internal Dependencies --|
-
-import ATMSelect from 'src/components/UI/atoms/formFields/ATMSelect/ATMSelect'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { SelectOption } from 'src/models/FormField/FormField.model'
 import { UpdateDealerSchemeInitialValues } from 'src/models/DealerScheme.model'
@@ -34,6 +25,7 @@ const EditDealerScheme = ({
 }: Props) => {
     const [allOptions, setAllOtions] = useState([])
     const [flag, setFlag] = useState(true)
+    const { values, setFieldValue } = formikProps
 
     useEffect(() => {
         if (flag && schemeOptions?.length) {
@@ -42,17 +34,14 @@ const EditDealerScheme = ({
         }
     }, [flag, schemeOptions])
 
-    const { values, setFieldValue } = formikProps
 
     return (
-        <div className="h-[calc(100%-55px)]">
-            <div className=" flex flex-col gap-2  ">
-                <div className="grow max-h-full bg-white border bg-1 rounded shadow  bg-form-bg bg-cover bg-no-repeat p-4">
+        <div>
+            <div className=" flex flex-col gap-2">
+                <div className="h-[calc(100vh-195px)] grow max-h-full bg-white border bg-1 rounded shadow bg-form-bg bg-cover bg-no-repeat p-4">
                     <div className="flex justify-between px-3 h-[60px] items-center border-b border-slate-300">
                         {/* Form Heading */}
                         <div className="text-xl font-medium"> Edit Scheme </div>
-
-                        {/* BUTTON - Edit Button */}
                         <div>
                             <button
                                 type="button"
@@ -65,33 +54,31 @@ const EditDealerScheme = ({
                             </button>
                         </div>
                     </div>
-                    <div className="grid grid-cols-12 gap-10 items-end pb-4">
-                        {/* Product Name */}
+                    <div className="grid grid-cols-12 gap-x-4 pb-4">
                         <div className="col-span-3">
-                            <ATMSelect
-                                name={'schemeId'}
-                                value={values?.schemeId || ''}
-                                onChange={(e) =>
-                                    setFieldValue('schemeId', e.target.value)
-                                }
-                                options={allOptions}
-                                label="Scheme"
-                            />
+                            <div className='mt-3'>
+                                <ATMSelectSearchable
+                                    isAllSelect
+                                    name='schemeId'
+                                    label="Scheme"
+                                    value={values?.schemeId}
+                                    options={allOptions || []}
+                                    selectClass='mt-2 select-margin' // max-h-11
+                                    onChange={(value) => setFieldValue('schemeId', value)}
+                                />
+                            </div>
                         </div>
 
-                        {/* pincodes */}
                         <div className="col-span-9">
                             <ATMSelectSearchable
                                 isAllSelect
-                                name={'pincodes'}
+                                name='pincodes'
                                 value={values?.pincodes || []}
-                                onChange={(value) =>
-                                    setFieldValue('pincodes', value)
-                                }
                                 options={pinCodeOptions}
                                 label="Pincode"
                                 isMulti={true}
-                                selectClass={' mt-2 max-h-11 select-margin'}
+                                selectClass='mt-2 ' // max-h-11
+                                onChange={(value) => setFieldValue('pincodes', value)}
                             />
                         </div>
                     </div>

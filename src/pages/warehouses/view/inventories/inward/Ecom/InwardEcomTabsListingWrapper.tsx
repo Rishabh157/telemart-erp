@@ -90,98 +90,8 @@ const columns: columnTypes[] = [
     },
 ]
 
-const rows = [
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 1,
-    },
-
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 2,
-    },
-
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 3,
-    },
-
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 4,
-    },
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 5,
-    },
-
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 6,
-    },
-
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 7,
-    },
-
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 8,
-    },
-
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 9,
-    },
-
-    {
-        ecomName: 'Amozon',
-        productName: 'Alco ban',
-        quantity: '1000',
-        address: '123 Warehouse, Indore',
-        creationDate: '21-07-2023',
-        _id: 10,
-    },
-]
-
 const InwardEcomTabsListingWrapper = () => {
+
     // const vendorState: any = useSelector((state: RootState) => state.vendor);
 
     // const {  page, rowsPerPage } = vendorState;
@@ -221,13 +131,8 @@ const InwardEcomTabsListingWrapper = () => {
     //   // eslint-disable-next-line react-hooks/exhaustive-deps
     // }, [isLoading, isFetching, data]);
 
-    return (
-        <>
-            {/* <SideNavLayout> */}
-            <InwardRequestListing columns={columns} rows={rows} />
-            {/* </SideNavLayout> */}
-        </>
-    )
+    return <span>Coming Soon</span>
+    // return <InwardRequestListing columns={columns} rows={[]} />
 }
 
 export default InwardEcomTabsListingWrapper

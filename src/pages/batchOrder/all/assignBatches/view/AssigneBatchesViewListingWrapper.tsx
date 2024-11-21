@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
-import AddOrderAssigneeFormWrapper from 'src/pages/orders/OrderAssigneeForm/AddOrderAssigneeFormWrapper'
+import AddOrderAssigneeFormWrapper from 'src/pages/batchOrder/all/assignBatches/OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 
 // |-- Redux --|
 import { useGetSingleBatchesOrdersQuery } from 'src/services/BatchesServices'
@@ -18,7 +18,7 @@ import { OrderListResponse } from 'src/models'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
-import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay, ATMDealerDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 const AssigneBatchesViewListingWrapper = () => {
     useUnmountCleanup()
@@ -87,30 +87,32 @@ const AssigneBatchesViewListingWrapper = () => {
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
         },
+        // {
+        //     field: 'assignDealerLabel',
+        //     headerName: 'Assigned Dealer',
+        //     flex: 'flex-[1_1_0%]',
+        //     name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ASSIGNED_DEALER,
+        //     align: 'start',
+        //     extraClasses: 'text-xs min-w-[150px]',
+        //     renderCell: (row: OrderListResponse) => (
+        //         <span>
+        //             {row?.assignDealerLabel || '-'}
+        //             {row?.assignDealerCode || '-'}
+        //         </span>
+        //     ),
+        // },
         {
             field: 'assignDealerLabel',
             headerName: 'Assigned Dealer',
             flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ASSIGNED_DEALER,
+            name: UserModuleNameTypes.ORDER_DOORCANCELLED_TAB_LIST_ASSIGNED_DEALER,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <span>{row?.assignDealerLabel || '-'}</span>
-            ),
-        },
-        {
-            field: 'assignDealerCode',
-            headerName: 'Dealer Code',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ASSIGN_BATCH_LIST_DEALER_CODE,
-            extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.assignDealerCode || '-'}</div>
-            ),
+            renderCell: (row: OrderListResponse) => <ATMDealerDisplay disableName dealerCode={row?.assignDealerCode} />,
         },
         {
             field: 'assignWarehouseLabel',
-            headerName: 'Assigned Warehouse',
+            headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ASSIGN_BATCH_LIST_WAREHOUSE,
             align: 'start',

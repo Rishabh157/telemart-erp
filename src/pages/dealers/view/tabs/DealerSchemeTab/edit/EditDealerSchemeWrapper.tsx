@@ -74,13 +74,13 @@ const EditDealerSchemeWrapper = () => {
         setApiStatus(true)
         setTimeout(() => {
             updateScheme({
+                id: schemeId || '',
                 body: {
                     dealerId: values.dealerId || '',
                     schemeId: values?.schemeId,
                     pincodes: values?.pincodes,
                     companyId: values.companyId || '',
                 },
-                id: schemeId || '',
             }).then((res) => {
                 if ('data' in res) {
                     if (res?.data?.status) {

@@ -45,8 +45,9 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
             const filteredOptions = data?.data?.map(
                 (ele: DealersListResponse) => {
                     return {
-                        label: ele?.firstName + ' ' + ele?.lastName + ' ( '+ ele?.dealerCode +' )',
+                        label: ele?.dealerCode,
                         value: ele?._id,
+                        // label: ele?.firstName + ' ' + ele?.lastName + ' ( '+ ele?.dealerCode +' )',
                     }
                 }
             )
@@ -60,7 +61,7 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
         <div className="h-[calc(100vh-60px)] px-4">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px] p-1">
-                <ATMPageHeading> Dealer's Inventory </ATMPageHeading>
+                <ATMPageHeading> Dealer's Inventory</ATMPageHeading>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
@@ -75,9 +76,7 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
                             selectLabel="Select Dealer"
                             isLoading={isLoading}
                             options={dealersOptions}
-                            onChange={(e) => {
-                                dispatch(setSelectedDealerFilter(e))
-                            }}
+                            onChange={(e) => dispatch(setSelectedDealerFilter(e))}
                         />
                     </div>
 
@@ -87,9 +86,7 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
                             <div className="text-sm"> Rows per page : </div>
                             <select
                                 value={rowsPerPage as number}
-                                onChange={(e) => {
-                                    dispatch(setRowsPerPage(e?.target?.value))
-                                }}
+                                onChange={(e) => dispatch(setRowsPerPage(e?.target?.value))}
                                 className={`rounded-lg p-1 outline-0 bg-slate-100 text-sm `}
                             >
                                 {[5, 10, 20, 50, 100]?.map((option: any) => {
@@ -115,11 +112,8 @@ const DealerInventoryListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        
                         selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
+                        onRowSelect={(selectedRows) => setSelectedRows(selectedRows)}
                         extraClasses="max-h-[calc(100%-150px)] overflow-auto"
                         isLoading={isTableLoading}
                     />
