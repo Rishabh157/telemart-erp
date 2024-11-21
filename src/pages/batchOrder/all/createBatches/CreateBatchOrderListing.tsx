@@ -54,8 +54,7 @@ const CreateBatchOrderListing = ({
         (state: RootState) => state.listingPagination
     )
 
-    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
-        createBatchState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } = createBatchState
     const handleReset = () => {
         setFilter((prev) => ({
             ...prev,

@@ -47,12 +47,12 @@ const NotificationCard = ({ onClickAway }: NotificationCardPropTypes) => {
                         return (
                             <div
                                 key={index}
-                                className={`flex flex-col px-2 text-slate-500  ${index !== notications.length - 1 &&
+                                className={`flex flex-col px-2 text-slate-500 text-xs  ${index !== notications.length - 1 &&
                                     'border-b'
                                     } border-slate-100`}
                             >
                                 <div > {option.message} </div>
-                                <div className="flex text-[13px] text-slate-400">
+                                <div className="flex text-[10px] text-slate-400">
                                     <div> 03:20 PM </div>
                                 </div>
                             </div>

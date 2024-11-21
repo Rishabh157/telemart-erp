@@ -21,7 +21,7 @@ import {
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
 import { OrderStatusEnum } from 'src/utils/constants/enums'
-import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay, ATMDealerDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 const PndOrdersListingWrapper = () => {
     const navigate = useNavigate()
@@ -139,21 +139,11 @@ const PndOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_PND_TAB_LIST_ASSIGNED_DEALER,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row: OrderListResponse) =>
-                row?.assignDealerLabel ? (
-                    <div>
-                        <div className="text-xs text-slate-700 font-medium">
-                            {row?.assignDealerLabel || '-'}
-                        </div>
-                        <div className="text-xs text-primary-main font-medium">
-                            ({row?.assignDealerCode})
-                        </div>
-                    </div>
-                ) : null,
+            renderCell: (row: OrderListResponse) => <ATMDealerDisplay disableName dealerCode={row?.assignDealerCode} />,
         },
         {
             field: 'assignWarehouseLabel',
-            headerName: 'Assigned Warehouse',
+            headerName: 'Warehouse',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_PND_TAB_LIST_ASSIGNED_WEARHOUSE,
             align: 'start',

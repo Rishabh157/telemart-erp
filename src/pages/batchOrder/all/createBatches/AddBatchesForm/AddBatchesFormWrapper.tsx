@@ -38,9 +38,7 @@ const AddBatchesFormWrapper = ({ selectedRows, handleClose }: Props) => {
     }
 
     const validationSchema = object({
-        batchAssignedTo: string().required(
-            'Please select batch assign memeber'
-        ),
+        batchAssignedTo: string().required('Please select batch assign memeber'),
     })
 
     const { options } = useCustomOptions({

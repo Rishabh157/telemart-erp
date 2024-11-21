@@ -26,7 +26,7 @@
                 },
                 {
                     "fieldId": "ORDER_NON_ACTION_TAB_LIST_ASSIGNED_WEARHOUSE",
-                    "fieldName": "Assigned Warehouse",
+                    "fieldName": "Warehouse",
                     "fieldValue": "assignWarehouseLabel"
                 },
                 {

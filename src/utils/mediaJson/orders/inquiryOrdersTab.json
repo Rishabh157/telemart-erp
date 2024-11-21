@@ -21,7 +21,7 @@
                 },
                 {
                     "fieldId": "ORDER_INQUIRY_TAB_LIST_ASSIGNED_WEARHOUSE",
-                    "fieldName": "Assigned Warehouse",
+                    "fieldName": "Warehouse",
                     "fieldValue": "assignWarehouseLabel"
                 },
                 {

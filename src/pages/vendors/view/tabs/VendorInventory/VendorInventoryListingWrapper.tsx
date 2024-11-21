@@ -32,63 +32,63 @@ const columns: columnTypes[] = [
         flex: 'flex-[1_1_0%]',
         name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_FRESH_COUNT,
         renderCell: (row: WareHouseInventory) => (
-            <span className="p-1"> {row.totalFreshCount} </span>
+            <span className="p-1"> {row?.count} </span>
         ),
     },
-    {
-        field: 'totalDamageCount',
-        headerName: 'Damage Count',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_DAMAGE_COUNT,
-        renderCell: (row: WareHouseInventory) => (
-            <span className="p-1"> {row.totalDamageCount} </span>
-        ),
-    },
-    {
-        field: 'totalMissingCount',
-        headerName: 'Missing Count',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_MISSING_COUNT,
-        renderCell: (row: WareHouseInventory) => (
-            <span className="p-1"> {row.totalMissingCount} </span>
-        ),
-    },
-    {
-        field: 'totalRtvCount',
-        headerName: 'RTV Count',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_RTV_COUNT,
-        renderCell: (row: WareHouseInventory) => (
-            <span className="p-1"> {row.totalRtvCount} </span>
-        ),
-    },
-    {
-        field: 'totalFakeCount',
-        headerName: 'Fake Count',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_FAKE_COUNT,
-        renderCell: (row: WareHouseInventory) => (
-            <span className="p-1"> {row.totalFakeCount} </span>
-        ),
-    },
-    {
-        field: 'expiredCount',
-        headerName: 'Expired Count',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_EXPIRED_COUNT,
-        renderCell: (row: WareHouseInventory) => (
-            <span className="p-1"> {row?.expiredCount} </span>
-        ),
-    },
-    {
-        field: 'closedCount',
-        headerName: 'Closed Count',
-        flex: 'flex-[1_1_0%]',
-        name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_CLOSED_COUNT,
-        renderCell: (row: WareHouseInventory) => (
-            <span className="p-1"> {row?.closedCount} </span>
-        ),
-    },
+    // {
+    //     field: 'totalDamageCount',
+    //     headerName: 'Damage Count',
+    //     flex: 'flex-[1_1_0%]',
+    //     name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_DAMAGE_COUNT,
+    //     renderCell: (row: WareHouseInventory) => (
+    //         <span className="p-1"> {row.totalDamageCount} </span>
+    //     ),
+    // },
+    // {
+    //     field: 'totalMissingCount',
+    //     headerName: 'Missing Count',
+    //     flex: 'flex-[1_1_0%]',
+    //     name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_MISSING_COUNT,
+    //     renderCell: (row: WareHouseInventory) => (
+    //         <span className="p-1"> {row.totalMissingCount} </span>
+    //     ),
+    // },
+    // {
+    //     field: 'totalRtvCount',
+    //     headerName: 'RTV Count',
+    //     flex: 'flex-[1_1_0%]',
+    //     name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_RTV_COUNT,
+    //     renderCell: (row: WareHouseInventory) => (
+    //         <span className="p-1"> {row.totalRtvCount} </span>
+    //     ),
+    // },
+    // {
+    //     field: 'totalFakeCount',
+    //     headerName: 'Fake Count',
+    //     flex: 'flex-[1_1_0%]',
+    //     name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_FAKE_COUNT,
+    //     renderCell: (row: WareHouseInventory) => (
+    //         <span className="p-1"> {row.totalFakeCount} </span>
+    //     ),
+    // },
+    // {
+    //     field: 'expiredCount',
+    //     headerName: 'Expired Count',
+    //     flex: 'flex-[1_1_0%]',
+    //     name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_EXPIRED_COUNT,
+    //     renderCell: (row: WareHouseInventory) => (
+    //         <span className="p-1"> {row?.expiredCount} </span>
+    //     ),
+    // },
+    // {
+    //     field: 'closedCount',
+    //     headerName: 'Closed Count',
+    //     flex: 'flex-[1_1_0%]',
+    //     name: UserModuleNameTypes.TAB_VENDOR_VIEW_INVENTORIES_LIST_CLOSED_COUNT,
+    //     renderCell: (row: WareHouseInventory) => (
+    //         <span className="p-1"> {row?.closedCount} </span>
+    //     ),
+    // },
     {
         field: 'createdAt',
         headerName: 'Created date',
@@ -115,19 +115,19 @@ const VendorInventoryListingWrapper = () => {
     const vendorId = params?.vendorId
 
     const { page, rowsPerPage, searchValue } = inventoriesState
-    // const { userData } = useSelector((state: RootState) => state?.auth)
+    const { userData } = useSelector((state: RootState) => state?.auth)
     const { items } = useGetCustomListingData({
         useEndPointHook: useGetVendorInventoriesByBarcodeQuery({
             body: {
                 limit: rowsPerPage,
                 searchValue: searchValue,
-                params: ['productGroupLabel', 'barcodeNumber'],
+                params: ['productGroupLabel'],
                 page: page,
                 filterBy: [
-                    // {
-                    //     fieldName: 'companyId',
-                    //     value: userData?.companyId as string,
-                    // },
+                    {
+                        fieldName: 'companyId',
+                        value: userData?.companyId as string,
+                    },
                     {
                         fieldName: 'vendorId',
                         value: vendorId,

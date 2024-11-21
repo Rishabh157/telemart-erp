@@ -21,28 +21,6 @@ export enum OrderStatusEnum {
     CANCEL = 'CANCEL',
 }
 
-/*** Order Status ****/
-// export enum orderStatusEnum {
-//     fresh = 'FRESH',
-//     all = 'ALL',
-//     prepaid = 'PREPAID',
-//     delivered = 'DELIVERED',
-//     doorCancelled = 'DOORCANCELLED',
-//     hold = 'HOLD',
-//     psc = 'PSC',
-//     una = 'UNA',
-//     pnd = 'PND',
-//     urgent = 'URGENT',
-//     nonAction = 'NON_ACTION',
-//     rto = 'RTO',
-//     inquiry = 'INQUIRY',
-//     reattempt = 'REATTEMPT',
-//     deliveryOutOfNetwork = 'DELIVERYOUTOFNETWORK',
-//     intransit = 'INTRANSIT',
-//     ndr = 'NDR',
-//     closed = 'CLOSED',
-// }
-
 /*** Barcode Status ****/
 export enum barcodeStatusEnum {
     atWarehouse = 'AT_WAREHOUSE',

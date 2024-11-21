@@ -44,13 +44,8 @@ type DealersInventoryListResponse = {
 const DealerInventoryListingWrapper = () => {
     // Hooks
     useUnmountCleanup()
-
-    const dealerInventoryState: any = useSelector(
-        (state: RootState) => state.listingPagination
-    )
-
-    const { page, rowsPerPage, searchValue, selectedDealer } =
-        dealerInventoryState
+    const dealerInventoryState: any = useSelector((state: RootState) => state.listingPagination)
+    const { page, rowsPerPage, searchValue, selectedDealer } = dealerInventoryState
 
     // pagination api
     const { items } = useGetCustomListingData<DealersInventoryListResponse[]>({
@@ -82,16 +77,15 @@ const DealerInventoryListingWrapper = () => {
             field: 'productGroupLabel',
             headerName: 'Product Group',
             flex: 'flex-[1_5_0%]',
-            extraClasses: 'text-xs',
             renderCell: (row: DealersInventoryListResponse) => (
                 <span>{row?.firstDocument?.productGroupLabel}</span>
             ),
         },
         {
             field: 'count',
-            headerName: 'Count',
+            headerName: 'Dealer Available Stock',
             flex: 'flex-[1_5_0%]',
-            extraClasses: 'text-xs',
+            extraClasses: 'min-w-[200px]',
             renderCell: (row: DealersInventoryListResponse) => (
                 <span>{row?.count}</span>
             ),
@@ -100,7 +94,6 @@ const DealerInventoryListingWrapper = () => {
             field: 'wareHouseLabel',
             headerName: 'Warehouse',
             flex: 'flex-[1_5_0%]',
-            extraClasses: 'text-xs',
             renderCell: (row: DealersInventoryListResponse) => (
                 <span>{row?.firstDocument?.wareHouseLabel}</span>
             ),
