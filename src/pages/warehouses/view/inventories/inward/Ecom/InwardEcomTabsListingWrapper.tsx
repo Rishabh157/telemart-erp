@@ -15,11 +15,11 @@ import { IconType } from 'react-icons'
 // import { useNavigate } from "react-router-dom";
 
 // |-- Internal Dependencies --|
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { InwardRequestEcomListResponse } from 'src/models/InwardRequest.model'
+// import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+// import { InwardRequestEcomListResponse } from 'src/models/InwardRequest.model'
 // import { useGetVendorsQuery } from "src/services/VendorServices";
-import InwardRequestListing from './InwardEcomTabs'
-import { HiDotsHorizontal } from 'react-icons/hi'
+// import InwardRequestListing from './InwardEcomTabs'
+// import { HiDotsHorizontal } from 'react-icons/hi'
 
 // |-- Redux --|
 // import {
@@ -36,59 +36,59 @@ export type Tabs = {
     path?: string
 }
 
-const columns: columnTypes[] = [
-    {
-        field: 'actions',
-        headerName: 'Actions',
-        flex: 'flex-[0.5_0.5_0%]',
-        renderCell: (row: any) => (
-            <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
-                {' '}
-                <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
-            </button>
-        ),
-    },
-    {
-        field: 'ecomName',
-        headerName: 'Ecommerce Name',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: InwardRequestEcomListResponse) => (
-            <span> {row.ecomName} </span>
-        ),
-    },
-    {
-        field: 'productName',
-        headerName: 'Product Name',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: InwardRequestEcomListResponse) => (
-            <span> {row.productName} </span>
-        ),
-    },
-    {
-        field: 'quantity',
-        headerName: 'Quantity',
-        flex: 'flex-[1_1_0%]',
-        renderCell: (row: InwardRequestEcomListResponse) => (
-            <span> {row.quantity} </span>
-        ),
-    },
-    {
-        field: 'address',
-        headerName: 'Address',
-        flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: InwardRequestEcomListResponse) => {
-            return <span> {row.address} </span>
-        },
-    },
-    {
-        field: 'creationDate',
-        headerName: 'Creation Date',
-        flex: 'flex-[1.5_1.5_0%]',
-        renderCell: (row: InwardRequestEcomListResponse) => {
-            return <span> {row.creationDate} </span>
-        },
-    },
-]
+// const columns: columnTypes[] = [
+//     {
+//         field: 'actions',
+//         headerName: 'Actions',
+//         flex: 'flex-[0.5_0.5_0%]',
+//         renderCell: (row: any) => (
+//             <button className="text-slate-600 font-bold  transition-all duration-[600ms] hover:bg-slate-100 p-2 rounded-full">
+//                 {' '}
+//                 <HiDotsHorizontal className="text-xl text-slate-600 font-bold " />{' '}
+//             </button>
+//         ),
+//     },
+//     {
+//         field: 'ecomName',
+//         headerName: 'Ecommerce Name',
+//         flex: 'flex-[1_1_0%]',
+//         renderCell: (row: InwardRequestEcomListResponse) => (
+//             <span> {row.ecomName} </span>
+//         ),
+//     },
+//     {
+//         field: 'productName',
+//         headerName: 'Product Name',
+//         flex: 'flex-[1_1_0%]',
+//         renderCell: (row: InwardRequestEcomListResponse) => (
+//             <span> {row.productName} </span>
+//         ),
+//     },
+//     {
+//         field: 'quantity',
+//         headerName: 'Quantity',
+//         flex: 'flex-[1_1_0%]',
+//         renderCell: (row: InwardRequestEcomListResponse) => (
+//             <span> {row.quantity} </span>
+//         ),
+//     },
+//     {
+//         field: 'address',
+//         headerName: 'Address',
+//         flex: 'flex-[1.5_1.5_0%]',
+//         renderCell: (row: InwardRequestEcomListResponse) => {
+//             return <span> {row.address} </span>
+//         },
+//     },
+//     {
+//         field: 'creationDate',
+//         headerName: 'Creation Date',
+//         flex: 'flex-[1.5_1.5_0%]',
+//         renderCell: (row: InwardRequestEcomListResponse) => {
+//             return <span> {row.creationDate} </span>
+//         },
+//     },
+// ]
 
 const InwardEcomTabsListingWrapper = () => {
 
