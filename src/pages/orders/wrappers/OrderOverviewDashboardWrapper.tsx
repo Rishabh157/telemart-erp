@@ -59,7 +59,7 @@ const OrderOverviewDashboardWrapper = () => {
     }
 
     return (
-        <div className="border border-slate-400 rounded p-2 h-full flex flex-col">
+        <div className="flex flex-col border border-slate-400 rounded p-2 h-auto">
             <div className="flex gap-2 items-center justify-end">
                 <ATMDatePicker
                     name=""

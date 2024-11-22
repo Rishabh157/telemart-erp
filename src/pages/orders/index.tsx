@@ -60,12 +60,12 @@ const tabs: tabsProps[] = [
         path: '/fresh',
         name: UserModuleNameTypes.ACTION_FRESH_ORDER_TAB_LIST,
     },
-    {
-        label: 'Assign Order',
-        icon: MdOutbond,
-        path: '/assign',
-        name: UserModuleNameTypes.ACTION_ASSIGN_ORDER_TAB_LIST,
-    },
+    // {
+    //     label: 'Assign Order',
+    //     icon: MdOutbond,
+    //     path: '/assign',
+    //     name: UserModuleNameTypes.ACTION_ASSIGN_ORDER_TAB_LIST,
+    // },
     {
         label: 'Prepaid Order',
         icon: MdOutbond,
