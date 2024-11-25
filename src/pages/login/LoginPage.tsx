@@ -100,7 +100,7 @@ const LoginPage = ({ pathName }: any) => {
                 <div className="text-end">
                     {/* <img src="/saptel-logo.png" alt="Saptel Logo" className="mx-auto w-24 h-24" /> */}
                     <img src="septel-logo.png" alt="Saptel Logo" className="mx-auto w-auto h-24" />
-                    <p className="text-sm text-gray-500 pt-2 pr-9">Complete ERP Solution</p>
+                    <p className="text-sm text-gray-500 pt-2 pr-10 text-focus-in">Complete ERP Solution</p>
                 </div>
 
                 <form className="space-y-4">
