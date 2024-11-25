@@ -17,7 +17,7 @@ const AgentOrderStatusWrapper = () => {
         start_date: `${moment().format('YYYY-MM-DD')}`,
         end_date: `${moment().format('YYYY-MM-DD')}`,
         callCenterId: '',
-        agentId: ''
+        agentId: null
     })
 
     const { userData } = useGetLocalStorage()
@@ -36,7 +36,8 @@ const AgentOrderStatusWrapper = () => {
                         ? moment().format('YYYY-MM-DD')
                         : '',
             },
-        }, { skip: !(filters.callCenterId && filters.agentId && filters.start_date && filters.end_date), }),
+        }, { skip: !(filters.callCenterId && filters.start_date && filters.end_date), }),
+        // }, { skip: !(filters.callCenterId && filters.agentId && filters.start_date && filters.end_date), }),
     })
 
 
@@ -68,6 +69,15 @@ const AgentOrderStatusWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             // renderCell: (row: OrderListResponse) => <span></span>,
+        },
+        {
+            field: 'userName',
+            headerName: 'User',
+            flex: 'flex-[1_1_0%]',
+            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
+            align: 'start',
+            extraClasses: 'text-xs min-w-[150px]',
+            renderCell: (row) => <span>{row?.userName}</span>,
         },
         {
             field: 'FRESH',
