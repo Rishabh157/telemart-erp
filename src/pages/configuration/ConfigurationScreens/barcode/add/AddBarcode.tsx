@@ -164,6 +164,7 @@ const AddBarcode = ({ formikProps, apiStatus, productGroupOption }: Props) => {
                                 name="quantity"
                                 value={values.quantity}
                                 label="Quantity"
+                                
                                 placeholder="Quantity"
                                 onChange={(e) => {
                                     const inputValue = e.target.value

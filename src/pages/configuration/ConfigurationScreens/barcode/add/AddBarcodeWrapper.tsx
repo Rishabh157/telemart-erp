@@ -56,7 +56,8 @@ const AddBarcodeWrapper = (props: Props) => {
             .moreThan(0, 'Quantity must be greater than 0')
             .required('Quantity is required'),
         lotNumber: string()
-            .max(6, 'Batch number should be less then 4 digit')
+            .min(6, 'Batch number should be more then 6 digit eg: DDMMYY')
+            .max(6, 'Batch number should be less then 4 digit eg: DDMMYY')
             .required('Batch number is required'),
         invoiceNumber: string().required('Invoice number is required'),
         expiryDate: string().nullable().notRequired(),
