@@ -407,8 +407,8 @@ const OutwardDealerTabsListingWrapper = () => {
         productGroupId: string
     ) => {
         dispatch(setFieldCustomized(true))
-        if (currentAbortController.current) {
-            currentAbortController.current.abort();
+        if (currentAbortController?.current) {
+            currentAbortController?.current.abort();
         }
 
         // Create a new AbortController for the latest request
@@ -438,7 +438,7 @@ const OutwardDealerTabsListingWrapper = () => {
                             ]
                             const uniqueArray = Array.from(
                                 new Set(
-                                    newBarcode[index].map((obj: any) => obj._id)
+                                    newBarcode[index]?.map((obj: any) => obj._id)
                                 )
                             ).map((id) =>
                                 newBarcode[index].find(
@@ -478,7 +478,7 @@ const OutwardDealerTabsListingWrapper = () => {
         return () => {
             if (barcodeList?.length) {
                 const barcodeNumbers = barcodeList?.map(
-                    (barcode: any) => barcode.barcodeNumber
+                    (barcode: any) => barcode?.barcodeNumber
                 )
                 updateStatus({
                     status: false,

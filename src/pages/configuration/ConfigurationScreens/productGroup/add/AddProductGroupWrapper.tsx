@@ -54,7 +54,7 @@ const AddProductGroupWrapper: React.FC<{}> = () => {
     const validationSchema = object({
         groupName: string().required('Group name is required'),
         productGroupCode: string()
-            .required('Product group code is required')
+            .required('Product group code is required').min(4, 'Product group code must be at least 4 characters long')
             .max(4, 'Product group code must be at most 4 characters long'),
         productSubCategoryId: string().required('Product sub category is required'),
         dealerSalePrice: number().required('Dealer sale price is required'),

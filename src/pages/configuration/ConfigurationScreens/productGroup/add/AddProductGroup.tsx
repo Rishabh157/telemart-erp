@@ -108,6 +108,7 @@ const AddProductGroup = ({ formikProps, apiStatus }: Props) => {
                                 value={values.productGroupCode}
                                 label="Product Group Code"
                                 maxLength={4}
+
                                 placeholder="Product Group Code"
                                 onChange={(e: any) => {
 
