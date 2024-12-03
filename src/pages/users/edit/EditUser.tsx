@@ -1,39 +1,41 @@
 // |-- Built-in Dependencies --|
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // |-- External Dependencies --|
-import { FormikProps, FieldArray } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { FieldArray, FormikProps } from 'formik'
+import {
+    useDispatch
+} from 'react-redux'
 
 // |-- Internal Dependencies --|
-import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
-import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
-import { FormInitialValues } from './EditUserWrapper'
+import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
 import ATMBreadCrumbs, {
     BreadcrumbType,
 } from 'src/components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
+import ATMTextField from 'src/components/UI/atoms/formFields/ATMTextField/ATMTextField'
 import { userDepartmentTypeOptions } from 'src/utils/constants/customeTypes'
 import {
     GetHierarchByDeptProps,
     getHierarchyByDept,
 } from 'src/utils/GetHierarchyByDept'
-import MainLayout from 'src/components/layouts/MainLayout/MainLayout'
+import { FormInitialValues } from './EditUserWrapper'
 
 // |-- Redux --|
-import { setFieldCustomized } from 'src/redux/slices/authSlice'
 import { HiPlus } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
-import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
 import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
+import { useCustomOptions } from 'src/hooks/useCustomOptions'
+import { SelectOption } from 'src/models/FormField/FormField.model'
+import { setFieldCustomized } from 'src/redux/slices/authSlice'
+// import { RootState } from 'src/redux/store'
+import { useGetAllCompaniesBranchQuery } from 'src/services/CompanyBranchService'
 import {
     useGetFloorMangerUserByCallCenterIdQuery,
     useGetSeniorUsersQuery,
-    useGetTeamLeadrUserByCallCenterIdQuery,
+    useGetTeamLeadUserByCallCenterIdQuery,
 } from 'src/services/UserServices'
-import { RootState } from 'src/redux/store'
-import { SelectOption } from 'src/models/FormField/FormField.model'
-import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|
 type Props = {
@@ -57,7 +59,7 @@ const breadcrumbs: BreadcrumbType[] = [
 
 const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const { values, setFieldValue } = formikProps
-    const { userData } = useSelector((state: RootState) => state?.auth)
+    // const { userData } = useSelector((state: RootState) => state?.auth)
     const [userRole, setuserRole] = useState<any[]>([])
 
     const dispatch = useDispatch()
@@ -96,7 +98,7 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
     const { options: florManagerOptionList } = useCustomOptions({
         useEndPointHook: useGetFloorMangerUserByCallCenterIdQuery(
             {
-                companyId: userData?.companyId as string,
+                // companyId: userData?.companyId as string,
                 callCenterId: values?.callCenterId as any,
                 departmentId: values?.userDepartment as any,
             },
@@ -110,9 +112,9 @@ const EditUser = ({ formikProps, apiStatus, dropDownOption }: Props) => {
 
     // Get Team Lead
     const { options: teamLeadOptionList } = useCustomOptions({
-        useEndPointHook: useGetTeamLeadrUserByCallCenterIdQuery(
+        useEndPointHook: useGetTeamLeadUserByCallCenterIdQuery(
             {
-                companyId: userData?.companyId as string,
+                // companyId: userData?.companyId as string,
                 callCenterId: values?.callCenterId as any,
                 departmentId: values?.userDepartment as any,
             },

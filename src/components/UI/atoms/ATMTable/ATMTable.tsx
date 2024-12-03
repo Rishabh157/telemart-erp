@@ -13,6 +13,10 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- External Dependencies --|
 import { twMerge } from 'tailwind-merge'
+// import { MdDelete } from "react-icons/md";
+// import { MdModeEditOutline } from "react-icons/md";
+// import { FaRegEye } from 'react-icons/fa'
+
 
 export interface columnTypes {
     field: string
@@ -43,6 +47,9 @@ interface ATMTablePropTypes<T> {
     rowClassName?: string
     noDataFoundText?: string
     noDataFoundClass?: string
+    onView?: (item: T) => void;
+    onEdit?: (item: T) => void;
+    onDelete?: (item: T) => void;
 }
 
 const NOT_DATA_FOUND = 'No Data Found'
@@ -62,8 +69,12 @@ const ATMTable = <T extends {}>({
     rowClassName = 'px-2 bg-white py-2',
     noDataFoundText = `${NOT_DATA_FOUND}`,
     noDataFoundClass = 'text-slate-500',
+    onView,
+    onEdit,
+    onDelete,
 }: ATMTablePropTypes<T>) => {
 
+    console.log('onEdit: ', onEdit);
     const tabsRender = columns?.some((nav) => {
         if (nav.field === 'action') {
             return false
@@ -150,7 +161,7 @@ const ATMTable = <T extends {}>({
                     <div
                         onClick={() => onRowClick && onRowClick(row)}
                         key={row[idKey] || rowIndex}
-                        className={`flex items-center font-semibold text-grey-800  ${rowClassName}  ${onRowClick && 'cursor-pointer'
+                        className={`flex items-center font-semibold text-grey-800 group group/action  ${rowClassName}  ${onRowClick && 'cursor-pointer'
                             }  ${rowExtraClasses && rowExtraClasses(row)}  ${rowIndex !== rows.length - 1 &&
                             'border-b border-slate-300'
                             } `}
@@ -190,6 +201,39 @@ const ATMTable = <T extends {}>({
                                 />
                             </div>
                         ) : null}
+
+                        {/* {!isLoading && (
+                            <div
+                                onClick={(e) => e.stopPropagation()}
+                                className={`min-w-[85px] md:invisible md:group-hover/action:visible transition-all duration-75`}>
+                                <div className="flex items-center h-full gap-2">
+                                    {onDelete !== undefined && (
+                                        <button
+                                            type="button"
+                                            onClick={() => onDelete?.(row)}
+                                            className="p-1.5 rounded-full text-primary-30 bg-primary-90 border hover:border-primary-main">
+                                            <MdDelete className="size-[0.75rem]" />
+                                        </button>
+                                    )}
+                                    {onEdit !== undefined && (
+                                        <button
+                                            type="button"
+                                            onClick={() => onEdit?.(row)}
+                                            className="p-1.5 rounded-full text-primary-30 bg-primary-90 border hover:border-primary-main">
+                                            <MdModeEditOutline className="size-[0.75rem]" />
+                                        </button>
+                                    )}
+                                    {onView !== undefined && (
+                                        <button
+                                            type="button"
+                                            onClick={() => onView?.(row)}
+                                            className="p-1.5 rounded-full text-primary-30 bg-primary-90 border hover:border-primary-main">
+                                            <FaRegEye className="size-[0.75rem]" />
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        )} */}
 
                         {columns
                             ?.filter((nav) => {

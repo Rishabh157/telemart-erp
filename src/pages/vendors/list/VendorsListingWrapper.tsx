@@ -1,6 +1,5 @@
 // |-- Built-in Dependencies --|
 import React, { useState } from 'react'
-
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -25,6 +24,7 @@ import { isAuthorized } from 'src/utils/authorization'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { VendorListFilterFormValues } from './VendorListingFilter/VendorListingFilterWrapper'
+// import { FaRegEye } from 'react-icons/fa'
 
 const VendorsListingWrapper = () => {
     useUnmountCleanup()
@@ -215,6 +215,16 @@ const VendorsListingWrapper = () => {
                 rows={items}
                 filter={filter}
                 setFilter={setFilter}
+            // onView={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW) && navigate(`${item?._id}/general-information`)}
+            // onEdit={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_EDIT) && navigate(`/vendors/edit-vendor/${item?._id}`)}
+            // onDelete={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_DELETE) && showConfirmationDialog({
+            //     title: 'Delete vendor',
+            //     text: 'Do you want to delete',
+            //     showCancelButton: true,
+            //     next: (res) => {
+            //         return res.isConfirmed ? handleDelete(item?._id) : null
+            //     },
+            // })}
             />
         </SideNavLayout>
     )

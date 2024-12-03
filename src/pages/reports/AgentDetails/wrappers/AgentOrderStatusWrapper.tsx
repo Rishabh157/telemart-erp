@@ -153,7 +153,7 @@ const AgentOrderStatusWrapper = () => {
                     value={filters?.agentId}
                     onChange={(newValue) => setFilters({
                         ...filters,
-                        agentId: newValue
+                        agentId: newValue ? newValue : null
                     })}
                     options={agentsOptions}
                     selectLabel="Select Agent"

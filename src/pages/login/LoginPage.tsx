@@ -94,11 +94,10 @@ const LoginPage = ({ pathName }: any) => {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <div className="flex items-center justify-center min-h-screen bg-[#e2ecf8]">
+            <div className="w-full p-8 space-y-6 bg-white rounded-lg shadow-login max-w-[450px]">
 
                 <div className="text-end">
-                    {/* <img src="/saptel-logo.png" alt="Saptel Logo" className="mx-auto w-24 h-24" /> */}
                     <img src="septel-logo.png" alt="Saptel Logo" className="mx-auto w-auto h-24" />
                     <p className="text-sm text-gray-500 pt-2 pr-10 text-focus-in">Complete ERP Solution</p>
                 </div>
@@ -156,7 +155,7 @@ const LoginPage = ({ pathName }: any) => {
                     <button
                         disabled={loginInfo?.isLoading}
                         type="button"
-                        className={`w-full py-2 text-white rounded-md transition-all bg-primary-main 
+                        className={`w-full py-3 text-white rounded-full transition-all bg-primary-main 
                             hover:bg-primary-hover focus:outline-none ${loginInfo?.isLoading && 'bg-primary-hover opacity-80'}`}
                         onClick={() => {
                             setErrorInitiate(true)
@@ -172,8 +171,8 @@ const LoginPage = ({ pathName }: any) => {
                     </div>
                 </form>
             </div>
-            <footer className="absolute bottom-4 text-sm text-gray-400">
-                © 2024 <span className='font-semibold'> Provista IT Solutions. </span> All rights reserved.
+            <footer className="absolute bottom-4 text-sm text-gray-500">
+                <span className='font-semibold text-sm'> &#169; </span> {new Date()?.getFullYear()} <span className='font-semibold'> Provista IT Solutions. </span> All rights reserved.
             </footer>
         </div>
     )

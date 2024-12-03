@@ -341,6 +341,7 @@ import WarehouseTransferInvoice from './Receipt/WarehouseTransferInvoice'
 import WarehouseOrderStatusMarkWrapper from './pages/warehouses/view/inventories/outward/warehouseOrderStatus/WarehouseOrderStatusMarkWrapper'
 import AgentWiseEnquiryWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseEnquiryWrapper'
 import SaleOrderViewWrapper from './pages/saleOrder/view/SaleOrderViewWrapper'
+import AgentWiseSchemeWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseSchemeWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -3990,10 +3991,10 @@ const PageRoutes = () => {
                             }
                         />
                         <Route
-                            path="agent-wise-product"
+                            path="agent-wise-scheme"
                             element={
                                 <Authorization
-                                    children={<div className='flex justify-center font-bold text-[32px]'>Comming Soon</div>}
+                                    children={<AgentWiseSchemeWrapper />}
                                     permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT}
                                 />
                             }

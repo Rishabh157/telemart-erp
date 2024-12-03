@@ -47,9 +47,9 @@ const tabs: tabsProps[] = [
         name: UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_ENQUIRY,
     },
     {
-        label: 'Agent Wise Product',
+        label: 'Agent Wise Scheme',
         icon: MdOutbond,
-        path: 'agent-wise-product',
+        path: 'agent-wise-scheme',
         name: UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT,
     },
     {
