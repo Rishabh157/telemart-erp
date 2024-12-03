@@ -22,6 +22,7 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
 import VendorListingFilterWrapper, { VendorListFilterFormValues } from './VendorListingFilter/VendorListingFilterWrapper'
 import { Chip, Stack } from '@mui/material'
+import { VendorsListResponse } from 'src/models'
 
 // |-- Types --|
 type Props = {
@@ -29,6 +30,9 @@ type Props = {
     rows: any[]
     setFilter: React.Dispatch<React.SetStateAction<VendorListFilterFormValues>>
     filter: VendorListFilterFormValues
+    onView?: (item: VendorsListResponse) => void;
+    onEdit?: (item: VendorsListResponse) => void;
+    onDelete?: (item: VendorsListResponse) => void;
 }
 
 const VendorsListing = ({
@@ -36,6 +40,9 @@ const VendorsListing = ({
     rows,
     setFilter,
     filter,
+    onView,
+    onEdit,
+    onDelete,
 }: Props) => {
     // state
     const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] =
@@ -137,6 +144,9 @@ const VendorsListing = ({
                         isLoading={isTableLoading}
                         columns={columns}
                         rows={rows}
+                        onView={onView}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
                     />
                 </div>
 
