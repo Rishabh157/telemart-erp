@@ -35,8 +35,7 @@ export enum FirstCallApprovalStatus {
 
 const WarehouseAssignedOrderListingWrapper = () => {
     useUnmountCleanup()
-    const [filter, setFilter] =
-        React.useState<FormInitialValuesFilterWithLabel>({
+    const [filter, setFilter] = React.useState<FormInitialValuesFilterWithLabel>({
             schemeId: { fieldName: '', label: '', value: '' },
             stateId: { fieldName: '', label: '', value: '' },
             districtId: {
