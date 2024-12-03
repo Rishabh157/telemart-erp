@@ -1,6 +1,5 @@
 // |-- Built-in Dependencies --|
-// import React, { useState } from 'react'
-import React from 'react';
+import React, { useState } from 'react'
 // |-- External Dependencies --|
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -16,7 +15,7 @@ import {
 import VendorsListing from './VendorsListing'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 import { showToast } from 'src/utils'
-// import ActionPopup from 'src/components/utilsComponent/ActionPopup'
+import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 
 // |-- Redux --|
 import { RootState } from 'src/redux/store'
@@ -31,7 +30,7 @@ const VendorsListingWrapper = () => {
     useUnmountCleanup()
 
     // state
-    // const [currentId, setCurrentId] = useState('')
+    const [currentId, setCurrentId] = useState('')
     const listingPaginationState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
@@ -95,52 +94,43 @@ const VendorsListingWrapper = () => {
     })
 
     const columns: columnTypes[] = [
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     extraClasses: 'text-xs min-w-[100px]',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     renderCell: (row: any) => (
-        //         <ActionPopup
-        //             isView={isAuthorized(
-        //                 UserModuleNameTypes.ACTION_VENDOR_VIEW
-        //             )}
-        //             isEdit={isAuthorized(
-        //                 UserModuleNameTypes.ACTION_VENDOR_EDIT
-        //             )}
-        //             // isDelete={isAuthorized(
-        //             //     UserModuleNameTypes.ACTION_VENDOR_DELETE
-        //             // )}
-        //             handleOnAction={() => {
-        //                 setCurrentId(row?._id)
-        //             }}
-        //             handleViewActionButton={() => {
-        //                 navigate(`${currentId}/general-information`)
-        //             }}
-        //             handleEditActionButton={() => {
-        //                 navigate(`/vendors/edit-vendor/${currentId}`)
-        //             }}
-        //             handleDeleteActionButton={() => {
-        //                 showConfirmationDialog({
-        //                     title: 'Delete vendor',
-        //                     text: 'Do you want to delete',
-        //                     showCancelButton: true,
-        //                     next: (res) => {
-        //                         return res.isConfirmed ? handleDelete() : null
-        //                     },
-        //                 })
-        //             }}
-        //         />
-        //     ),
-        // },
         {
-            field: 'vendorCode',
+            field: 'actions',
             headerName: 'Actions',
-            // flex: 'flex-[1_1_0%]',
-            extraClasses: 'text-xs min-w-[200px]',
-            align: 'start',
-            name: UserModuleNameTypes.VENDOR_LIST_VENDOR_CODE,
-            renderCell: (row: VendorsListResponse) => <></>,
+            extraClasses: 'text-xs min-w-[100px]',
+            flex: 'flex-[0.5_0.5_0%]',
+            renderCell: (row: any) => (
+                <ActionPopup
+                    isView={isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_VIEW
+                    )}
+                    isEdit={isAuthorized(
+                        UserModuleNameTypes.ACTION_VENDOR_EDIT
+                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_VENDOR_DELETE
+                    // )}
+                    handleOnAction={() => {
+                        setCurrentId(row?._id)
+                    }}
+                    handleViewActionButton={() => {
+                        navigate(`${currentId}/general-information`)
+                    }}
+                    handleEditActionButton={() => {
+                        navigate(`/vendors/edit-vendor/${currentId}`)
+                    }}
+                    handleDeleteActionButton={() => {
+                        showConfirmationDialog({
+                            title: 'Delete vendor',
+                            text: 'Do you want to delete',
+                            showCancelButton: true,
+                            next: (res) => {
+                                return res.isConfirmed ? handleDelete() : null
+                            },
+                        })
+                    }}
+                />
+            ),
         },
         {
             field: 'vendorCode',
@@ -201,8 +191,8 @@ const VendorsListingWrapper = () => {
         },
     ]
 
-    const handleDelete = (id: string) => {
-        deleteVendor(id).then((res: any) => {
+    const handleDelete = () => {
+        deleteVendor(currentId).then((res: any) => {
             if ('data' in res) {
                 if (res?.data?.status) {
                     showToast('success', 'Vendor deleted successfully!')
@@ -225,16 +215,16 @@ const VendorsListingWrapper = () => {
                 rows={items}
                 filter={filter}
                 setFilter={setFilter}
-                onView={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW) && navigate(`${item?._id}/general-information`)}
-                onEdit={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_EDIT) && navigate(`/vendors/edit-vendor/${item?._id}`)}
-                onDelete={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_DELETE) && showConfirmationDialog({
-                    title: 'Delete vendor',
-                    text: 'Do you want to delete',
-                    showCancelButton: true,
-                    next: (res) => {
-                        return res.isConfirmed ? handleDelete(item?._id) : null
-                    },
-                })}
+            // onView={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_VIEW) && navigate(`${item?._id}/general-information`)}
+            // onEdit={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_EDIT) && navigate(`/vendors/edit-vendor/${item?._id}`)}
+            // onDelete={(item) => isAuthorized(UserModuleNameTypes.ACTION_VENDOR_DELETE) && showConfirmationDialog({
+            //     title: 'Delete vendor',
+            //     text: 'Do you want to delete',
+            //     showCancelButton: true,
+            //     next: (res) => {
+            //         return res.isConfirmed ? handleDelete(item?._id) : null
+            //     },
+            // })}
             />
         </SideNavLayout>
     )

@@ -13,9 +13,9 @@ import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- External Dependencies --|
 import { twMerge } from 'tailwind-merge'
-import { MdDelete } from "react-icons/md";
-import { MdModeEditOutline } from "react-icons/md";
-import { FaRegEye } from 'react-icons/fa'
+// import { MdDelete } from "react-icons/md";
+// import { MdModeEditOutline } from "react-icons/md";
+// import { FaRegEye } from 'react-icons/fa'
 
 
 export interface columnTypes {
@@ -202,7 +202,7 @@ const ATMTable = <T extends {}>({
                             </div>
                         ) : null}
 
-                        {!isLoading && (
+                        {/* {!isLoading && (
                             <div
                                 onClick={(e) => e.stopPropagation()}
                                 className={`min-w-[85px] md:invisible md:group-hover/action:visible transition-all duration-75`}>
@@ -233,7 +233,7 @@ const ATMTable = <T extends {}>({
                                     )}
                                 </div>
                             </div>
-                        )}
+                        )} */}
 
                         {columns
                             ?.filter((nav) => {

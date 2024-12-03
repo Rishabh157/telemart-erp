@@ -66,7 +66,7 @@ const AgentWiseSchemeFormDialog = ({
             {
                 // companyId: userData?.companyId as string,
                 callCenterId: values?.callCenterId?.value as string,
-                departmentId: values?.callCenterId?.value as string,
+                departmentId: values?.userDepartment?.value as string,
             },
             {
                 skip: !values?.userDepartment?.value || !values?.callCenterId?.value, // Skip the query if isAgent is false or callCenterId is not available
@@ -200,6 +200,8 @@ const AgentWiseSchemeFormDialog = ({
                         })
                     }}
                 />
+
+                <div></div>
 
                 {/* From */}
                 <div className="mt-4">

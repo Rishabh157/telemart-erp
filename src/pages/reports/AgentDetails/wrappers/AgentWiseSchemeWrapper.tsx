@@ -63,9 +63,9 @@ const AgentWiseSchemeWrapper = () => {
             filterBy: [
                 { fieldName: 'callCenterId', value: filters?.callCenterId?.value || null },
                 { fieldName: 'agentId', value: filters?.agentId?.value || null },
-                { fieldName: 'floorManagerId', value: filters?.floorManagerId?.value || null },
-                { fieldName: 'userDepartment', value: filters?.userDepartment?.value || null },
-                { fieldName: 'teamLeadId', value: filters?.teamLeadId?.value || null },
+                { fieldName: 'agentFloorManagerId', value: filters?.floorManagerId?.value || null },
+                // { fieldName: 'userDepartment', value: filters?.userDepartment?.value || null },
+                { fieldName: 'agentTeamLeadId', value: filters?.teamLeadId?.value || null },
             ],
             dateFilter: {
                 startDate: filters.startDate.value
