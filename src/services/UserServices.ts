@@ -135,32 +135,32 @@ export const userApi = apiSlice.injectEndpoints({
         getFloorMangerUserByCallCenterId: builder.query({
             providesTags: ['user', 'newUser'],
             query: ({
-                companyId,
+                // companyId,
                 callCenterId,
                 departmentId,
             }: {
-                companyId: string
+                // companyId: string
                 callCenterId: string
                 departmentId: string
             }) => ({
-                url: `/user/get-floor-managers/company/${companyId}/call-center/${callCenterId}/department/${departmentId}`,
+                url: `/user/get-floor-managers/call-center/${callCenterId}/department/${departmentId}`,
                 method: 'GET',
             }),
         }),
 
         // ****  Floor manger by call center
-        getTeamLeadrUserByCallCenterId: builder.query({
+        getTeamLeadUserByCallCenterId: builder.query({
             providesTags: ['user', 'newUser'],
             query: ({
-                companyId,
+                // companyId,
                 callCenterId,
                 departmentId,
             }: {
-                companyId: string
+                // companyId: string
                 callCenterId: string
                 departmentId: string
             }) => ({
-                url: `/user/get-team-leads/company/${companyId}/call-center/${callCenterId}/department/${departmentId}`,
+                url: `/user/get-team-leads/call-center/${callCenterId}/department/${departmentId}`,
                 method: 'GET',
             }),
         }),
@@ -245,7 +245,7 @@ export const {
     useGetDistributionsRoleMutation,
     useDeactiveUserMutation,
     useGetFloorMangerUserByCallCenterIdQuery,
-    useGetTeamLeadrUserByCallCenterIdQuery,
+    useGetTeamLeadUserByCallCenterIdQuery,
     useGetSeniorUsersQuery,
     useChangeUserPasswordMutation,
     useGetSeniorExicutivesByZmIdQuery,

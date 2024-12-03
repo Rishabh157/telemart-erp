@@ -8,38 +8,57 @@ import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import { useGetAgentOrderStatusReportsQuery } from 'src/services/ReportsService'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
-import { useGetAllAgentsByCallCenterQuery } from 'src/services/UserServices'
-import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import {
+    useGetAllAgentsByCallCenterQuery,
+    useGetFloorMangerUserByCallCenterIdQuery,
+    useGetTeamLeadUserByCallCenterIdQuery,
+} from 'src/services/UserServices'
+import ATMTable, {
+    columnTypes,
+} from 'src/components/UI/atoms/ATMTable/ATMTable'
+import { GetHierarchByDeptProps } from 'src/utils/GetHierarchyByDept'
 
-const AgentOrderStatusWrapper = () => {
-
+const AgentWiseSchemeWrapper = () => {
     const [filters, setFilters] = useState<any>({
         start_date: `${moment().format('YYYY-MM-DD')}`,
         end_date: `${moment().format('YYYY-MM-DD')}`,
         callCenterId: '',
-        agentId: null
+        agentId: null,
+        floorManagerId: null,
+        userDepartment: null,
+        teamLeadId: null,
     })
 
     const { userData } = useGetLocalStorage()
 
     const { items, isFetching } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetAgentOrderStatusReportsQuery({
-            callCenterId: filters?.callCenterId,
-            agentId: filters?.agentId,
-            dateFilter: {
-                startDate: filters.start_date
-                    ? moment(filters?.start_date).format('YYYY-MM-DD')
-                    : '',
-                endDate: filters.end_date
-                    ? moment(filters?.end_date).format('YYYY-MM-DD')
-                    : filters.end_date
+        useEndPointHook: useGetAgentOrderStatusReportsQuery(
+            {
+                callCenterId: filters?.callCenterId,
+                // agentId: filters?.agentId,
+                // floorManagerId: filters?.floorManagerId,
+                agentId: filters?.agentId,
+                dateFilter: {
+                    startDate: filters.start_date
+                        ? moment(filters?.start_date).format('YYYY-MM-DD')
+                        : '',
+                    endDate: filters.end_date
+                        ? moment(filters?.end_date).format('YYYY-MM-DD')
+                        : filters.end_date
                         ? moment().format('YYYY-MM-DD')
                         : '',
+                },
             },
-        }, { skip: !(filters.callCenterId && filters.start_date && filters.end_date), }),
+            {
+                skip: !(
+                    filters.callCenterId &&
+                    filters.start_date &&
+                    filters.end_date
+                ),
+            }
+        ),
         // }, { skip: !(filters.callCenterId && filters.agentId && filters.start_date && filters.end_date), }),
     })
-
 
     // get call centers
     const { options: callCenterOptions } = useCustomOptions({
@@ -52,9 +71,40 @@ const AgentOrderStatusWrapper = () => {
 
     // get agents by call center id
     const { options: agentsOptions } = useCustomOptions({
-        useEndPointHook: useGetAllAgentsByCallCenterQuery(filters?.callCenterId, {
-            skip: !filters?.callCenterId,
-        }),
+        useEndPointHook: useGetAllAgentsByCallCenterQuery(
+            filters?.callCenterId,
+            {
+                skip: !filters?.callCenterId,
+            }
+        ),
+        keyName: 'userName',
+        value: '_id',
+    })
+    const { options: florManagerOptionList } = useCustomOptions({
+        useEndPointHook: useGetFloorMangerUserByCallCenterIdQuery(
+            {
+                // companyId: userData?.companyId as string,
+                callCenterId: filters?.callCenterId as any,
+                departmentId: filters?.userDepartment as any,
+            },
+            {
+                skip: !filters?.userDepartment || !filters?.callCenterId, // Skip the query if isAgent is false or callCenterId is not available
+            }
+        ),
+        keyName: 'userName',
+        value: '_id',
+    })
+    const { options: teamLeadOptionList } = useCustomOptions({
+        useEndPointHook: useGetTeamLeadUserByCallCenterIdQuery(
+            {
+                // companyId: userData?.companyId as string,
+                callCenterId: filters?.callCenterId as any,
+                departmentId: filters?.userDepartment as any,
+            },
+            {
+                skip: !filters?.isAgent || !filters?.callCenterId, // Skip the query if isAgent is false or callCenterId is not available
+            }
+        ),
         keyName: 'userName',
         value: '_id',
     })
@@ -130,6 +180,18 @@ const AgentOrderStatusWrapper = () => {
         },
     ]
 
+
+ 
+    const departmentoption:any=[
+        {
+        label:GetHierarchByDeptProps.SALES_DEPARTMENT,
+        value:GetHierarchByDeptProps.SALES_DEPARTMENT
+    
+    },
+    {
+        label:GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT,
+        value:GetHierarchByDeptProps.CUSTOMER_CARE_DEPARTMENT
+    }]
     return (
         <div className="border border-slate-400 rounded p-2 h-full flex flex-col">
             <div className="flex gap-2 items-center justify-end z-50">
@@ -137,24 +199,87 @@ const AgentOrderStatusWrapper = () => {
                     name=""
                     componentClass="m-0"
                     value={filters?.callCenterId}
-                    onChange={(newValue) => setFilters({
-                        ...filters,
-                        callCenterId: newValue
-                    })}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            callCenterId: newValue,
+                        })
+                    }
                     options={callCenterOptions}
                     selectLabel="Select Call Center"
                     label=""
                 />
+                <ATMSelectSearchable
+                    name=""
+                    componentClass="m-0"
+                    value={filters?.userDepartment}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            userDepartment: newValue,
+                        })
+                    }
+                    options={departmentoption}
+                    selectLabel="Select Department"
+                    label=""
+                />
 
+                <ATMSelectSearchable
+                    // isDisabled={filters?.callCenterId ? false : true}
+                    name=""
+                    componentClass="m-0"
+                    value={filters?.floorManagerId}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            floorManagerId: newValue ? newValue : null,
+                        })
+                    }
+                    options={florManagerOptionList}
+                    selectLabel="Select Floor Manager"
+                    label=""
+                />
+                <ATMSelectSearchable
+                    // isDisabled={filters?.teamLeadId ? false : true}
+                    name=""
+                    componentClass="m-0"
+                    value={filters?.teamLeadId}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            teamLeadId: newValue ? newValue : null,
+                        })
+                    }
+                    options={teamLeadOptionList}
+                    selectLabel="Select team lead"
+                    label=""
+                />
+                <ATMSelectSearchable
+                    // isDisabled={filters?.callCenterId ? false : true}
+                    name=""
+                    componentClass="m-0"
+                    value={filters?.agentId}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            agentId: newValue ? newValue : null,
+                        })
+                    }
+                    options={agentsOptions}
+                    selectLabel="Select Agent"
+                    label=""
+                />
                 <ATMSelectSearchable
                     isDisabled={filters?.callCenterId ? false : true}
                     name=""
                     componentClass="m-0"
                     value={filters?.agentId}
-                    onChange={(newValue) => setFilters({
-                        ...filters,
-                        agentId: newValue ? newValue : null
-                    })}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            agentId: newValue ? newValue : null,
+                        })
+                    }
                     options={agentsOptions}
                     selectLabel="Select Agent"
                     label=""
@@ -252,4 +377,4 @@ const AgentOrderStatusWrapper = () => {
     )
 }
 
-export default AgentOrderStatusWrapper
+export default AgentWiseSchemeWrapper
