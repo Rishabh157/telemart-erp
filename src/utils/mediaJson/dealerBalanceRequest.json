@@ -1,0 +1,73 @@
+{
+    "moduleId": "NAV_DEALER_BALANCE_REQUEST",
+    "moduleName": "NAV_DEALER_BALANCE_REQUEST",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_DEALER_BALANCE_REQUEST",
+            "actionUrl": "",
+            "actionName": "LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": [
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_SYNCED",
+                    "fieldName": "Synced",
+                    "fieldValue": "isSynced"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_AMOUNT",
+                    "fieldName": "Amount",
+                    "fieldValue": "amount"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_APPROVAL",
+                    "fieldName": "Acc Approval",
+                    "fieldValue": "accApproval"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_REFERENCE_NUMBER",
+                    "fieldName": "Reference Number",
+                    "fieldValue": "referenceNumber"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_TRANSFER_TYPE",
+                    "fieldName": "Transfer Type",
+                    "fieldValue": "transferType"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_REFERENCE_DATE",
+                    "fieldName": "Reference Date",
+                    "fieldValue": "referenceDate"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_TRANSFER_TYPE",
+                    "fieldName": "Transfer Type",
+                    "fieldValue": "transferType"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_BANK_ACCOUNT",
+                    "fieldName": "Bank Account",
+                    "fieldValue": "bankAccount"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_REMARK",
+                    "fieldName": "Remark",
+                    "fieldValue": "remark"
+                },
+                {
+                    "fieldId": "DEALER_BALANCE_REQUEST_LIST_CREATE_DATE",
+                    "fieldName": "Created Date",
+                    "fieldValue": "createdAt"
+                }
+            ]
+        },
+        {
+            "actionId": "ACTION_DEALER_BALANCE_REQUEST_ACCOUNT_APPROVAL",
+            "actionUrl": "",
+            "actionName": "DEALER_BALANCE_REQUEST_ACCOUNT_APPROVAL",
+            "compulsoryFields": [],
+            "parentGroup": ["LIST"],
+            "fields": []
+        }
+    ]
+}

@@ -3,14 +3,7 @@ import React from 'react'
 import { showConfirmationDialog } from './showConfirmationDialog'
 import Swal, { SweetAlertIcon, SweetAlertResult } from 'sweetalert2'
 type PropsChips = {
-    color:
-        | 'default'
-        | 'primary'
-        | 'secondary'
-        | 'error'
-        | 'info'
-        | 'success'
-        | 'warning'
+    color: | 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'
     chipLabel: string
     title: string
     text: string
@@ -31,6 +24,7 @@ type PropsChips = {
     html?: any
     errorMessage?: string
 }
+
 const SwtAlertChipConfirm = ({
     color = 'default',
     chipLabel,
@@ -44,7 +38,7 @@ const SwtAlertChipConfirm = ({
     cancelButtonColor = '#dc3741',
     confirmButtonText = 'Yes',
     reverseButtons = true,
-    next = () => {},
+    next = () => { },
     input,
     inputPlaceholder = 'Enter your reason',
     preConfirm,
@@ -54,54 +48,47 @@ const SwtAlertChipConfirm = ({
     html,
 }: PropsChips) => {
     return (
-        <div>
-            <button
-                id="btn"
-                disabled={disabled}
-                className="overflow-hidden cursor-pointer z-0"
-                onClick={() => {
-                    showConfirmationDialog({
-                        title,
-                        text,
-                        icon,
-                        showCancelButton,
-                        confirmButtonColor,
-                        showDenyButton,
-                        denyButtonText,
-                        cancelButtonColor,
-                        confirmButtonText,
-                        reverseButtons,
-                        next,
-                        input,
-                        inputPlaceholder,
-                        html,
-                        preConfirm: (inputValue) => {
-                            if (!inputValue) {
-                                Swal.showValidationMessage(errorMessage)
-                            }
-                        },
-                        preDeny: (res) => {
+        <Chip
+            className="z-0"
+            label={chipLabel}
+            color={color}
+            disabled={disabled}
+            variant="outlined"
+            size="small"
+            clickable={true}
+            onClick={() => {
+                showConfirmationDialog({
+                    title,
+                    text,
+                    icon,
+                    showCancelButton,
+                    confirmButtonColor,
+                    showDenyButton,
+                    denyButtonText,
+                    cancelButtonColor,
+                    confirmButtonText,
+                    reverseButtons,
+                    next,
+                    input,
+                    inputPlaceholder,
+                    html,
+                    preConfirm: (inputValue) => {
+                        if (!inputValue) {
                             Swal.showValidationMessage(errorMessage)
+                        }
+                    },
+                    preDeny: (res) => {
+                        Swal.showValidationMessage(errorMessage)
 
-                            if (!Swal.getInput()?.value) {
-                                return res
-                            } else {
-                                return Swal.getInput()?.value
-                            }
-                        },
-                    })
-                }}
-            >
-                <Chip
-                    className="z-0"
-                    label={chipLabel}
-                    color={color}
-                    variant="outlined"
-                    size="small"
-                    clickable={true}
-                />
-            </button>
-        </div>
+                        if (!Swal.getInput()?.value) {
+                            return res
+                        } else {
+                            return Swal.getInput()?.value
+                        }
+                    },
+                })
+            }}
+        />
     )
 }
 

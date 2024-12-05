@@ -3,7 +3,7 @@ import { RxDashboard } from 'react-icons/rx'
 import { FiUsers, FiPhoneCall } from 'react-icons/fi'
 import { TbBuildingWarehouse, TbCloudDataConnection } from 'react-icons/tb'
 import { HiOutlineTruck } from 'react-icons/hi'
-import { FaRegHandshake, FaSitemap } from 'react-icons/fa'
+import { FaRegHandshake, FaSitemap, FaMoneyBillAlt } from 'react-icons/fa'
 import { CiMemoPad, CiStickyNote } from 'react-icons/ci'
 import { CgNotes } from 'react-icons/cg'
 import {
@@ -132,6 +132,12 @@ export const navigation: NavItemType[] = [
         icon: FaSitemap,
         path: '/mapping',
         name: UserModuleNameTypes.NAV_MULTI_MAPPING,
+    },
+    {
+        label: 'Dealer Balance Request',
+        icon: FaMoneyBillAlt,
+        path: '/dealer-balance-request',
+        name: UserModuleNameTypes.NAV_DEALER_BALANCE_REQUEST,
     },
     {
         label: 'Dealer To Dealer',

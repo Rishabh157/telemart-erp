@@ -140,3 +140,34 @@ export const ATMDealerDisplay: React.FC<ATMDealerDisplayProps> = ({ dealerLabel,
     </div>
   );
 };
+
+
+/** Price & Currency Display **/
+interface ATMAmountDisplayProps {
+  priceLabel?: string;
+  amount?: number;
+  currencySymbol?: string;
+  disableLabel?: boolean;
+  disableAmount?: boolean;
+}
+
+export const ATMAmountDisplay: React.FC<ATMAmountDisplayProps> = ({
+  priceLabel,
+  amount,
+  currencySymbol = "₹",
+  disableLabel,
+  disableAmount
+}) => {
+  if (amount === undefined || amount === null) return null;
+
+  return (
+    <div>
+      <div className="text-xs text-slate-700 font-medium capitalize" hidden={disableLabel}>
+        {priceLabel || 'Price'}
+      </div>
+      <div className="text-[12px] text-primary-main font-medium" hidden={disableAmount}>
+        &#x20B9; {amount?.toLocaleString() || 'N/A'}
+      </div>
+    </div>
+  );
+};

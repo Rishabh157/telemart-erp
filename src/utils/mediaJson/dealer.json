@@ -161,6 +161,14 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_DEALER_BALANCE_REQUEST",
+            "actionUrl": "",
+            "actionName": "DEALER_BALANCE_REQUEST",
+            "compulsoryFields": [],
+            "parentGroup": ["VIEW"],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_DEALER_DEALER_ACTIVITY",
             "actionUrl": "",
             "actionName": "DEALER_ACTIVITY",

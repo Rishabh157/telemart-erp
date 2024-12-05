@@ -62,6 +62,12 @@ const tabsData = [
         name: UserModuleNameTypes.ACTION_DEALER_DEALER_ORDER_LEDGER,
     },
     {
+        label: 'Dealer Balance',
+        icon: RiBillLine,
+        path: `dealer-balance`,
+        name: UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST,
+    },
+    {
         label: 'Activity',
         icon: MdOutlinePeopleAlt,
         path: `activities`,

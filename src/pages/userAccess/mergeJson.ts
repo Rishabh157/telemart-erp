@@ -112,6 +112,7 @@ import { default as stockReports } from '../../utils/mediaJson/stockReports.json
 import { default as stockReportsReports } from '../../utils/mediaJson/stockReportsReports.json'
 import { default as systemReports } from '../../utils/mediaJson/systemReports.json'
 import { default as warehousePutAwayReports } from '../../utils/mediaJson/warehousePutAwayReports.json'
+import { default as dealerBalanceRequest } from '../../utils/mediaJson/dealerBalanceRequest.json'
 
 const orderTabsMerge = {
     ...ordersJson,
@@ -235,4 +236,5 @@ export const mergeUserModules = [
     { ...stockReportsReports },
     { ...systemReports },
     { ...warehousePutAwayReports },
+    { ...dealerBalanceRequest },
 ]

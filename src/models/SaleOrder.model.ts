@@ -18,7 +18,6 @@ export type SaleOrderListResponseTypes = {
     dealerName: string
     dealerCode: string
     totalInvoiceAmount: string
-    invoiceDate: string
     dhApproved: boolean
     dhApprovedActionBy: string
     dhApprovedAt: string
@@ -43,6 +42,7 @@ export type SaleOrderListResponseTypes = {
         accApprovedActionBy: string
         accApprovedAt: string
         invoice: string
+        invoiceDate : string
         expectedDeliveryDate: string
         productSalesOrder: {
             productGroupId: string
