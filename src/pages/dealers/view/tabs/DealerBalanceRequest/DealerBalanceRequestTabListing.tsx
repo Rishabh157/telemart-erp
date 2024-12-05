@@ -64,12 +64,12 @@ const DealerBalanceRequestTabListing = ({ columns, rows }: Props) => {
     }
 
 
-    function formatCustomAmount(amount: number) {
-        const amountString = amount.toString();
-        const reversed = amountString.split("").reverse().join(""); // Reverse the string
-        const grouped = reversed.match(/.{1,2}/g)?.join(",");       // Group every two characters
-        return grouped?.split("").reverse().join("");              // Reverse back and return
-    }
+    // function formatCustomAmount(amount: number) {
+    //     const amountString = amount.toString();
+    //     const reversed = amountString.split("").reverse().join(""); // Reverse the string
+    //     const grouped = reversed.match(/.{1,2}/g)?.join(",");       // Group every two characters
+    //     return grouped?.split("").reverse().join("");              // Reverse back and return
+    // }
 
 
     return (
