@@ -145,6 +145,7 @@ export type OrderListResponse = {
 // Invoice and Labels List Response
 export type OrderInvoiceAndLabelListResponse = {
     _id: string
+    isUnion:boolean
     orderNumber: number
     orderReferenceNumber: string | null
     orderMBKNumber: string | null
