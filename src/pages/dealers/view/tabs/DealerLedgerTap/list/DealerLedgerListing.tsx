@@ -25,6 +25,7 @@ import { AppDispatch, RootState } from 'src/redux/store'
 
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
+
 // |-- Types --|
 type Props = {
     columns: any[]
@@ -32,22 +33,14 @@ type Props = {
 }
 
 const DealerLedgerListing = ({ columns, rows }: Props) => {
-    const [openModel, setOpenModel] = useState<keyof typeof NoteType>(
-        'CREDIT_NOTE_CREATED'
-    )
+    const [openModel, setOpenModel] = useState<keyof typeof NoteType>('CREDIT_NOTE_CREATED')
     const [isOpenModel, setIsOpenModel] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
-    const dealerLedgerState: any = useSelector(
-        (state: RootState) => state.listingPagination
-    )
-
-    const [selectedRows, setSelectedRows] = useState([])
-
-    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } =
-        dealerLedgerState
+    const dealerLedgerState: any = useSelector((state: RootState) => state.listingPagination)
+    const { page, rowsPerPage, searchValue, totalItems, isTableLoading } = dealerLedgerState
 
     return (
-        <div className="px-4 h-[calc(100vh-200px)] ">
+        <div className="px-4 h-[calc(100vh-200px) ">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
                 <div className="flex gap-6">
@@ -92,43 +85,43 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_CREDIT_AMOUNT_ADD
                     ) && (
-                        <button
-                            onClick={() => {
-                                setIsOpenModel(true)
-                                setOpenModel(NoteType.DEALER_AMOUNT_CREDITED)
-                            }}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Cr. Amount
-                        </button>
-                    )}
+                            <button
+                                onClick={() => {
+                                    setIsOpenModel(true)
+                                    setOpenModel(NoteType.DEALER_AMOUNT_CREDITED)
+                                }}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Cr. Amount
+                            </button>
+                        )}
 
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_CREDIT_NOTE_ADD
                     ) && (
-                        <button
-                            onClick={() => {
-                                setIsOpenModel(true)
-                                setOpenModel(NoteType.CREDIT_NOTE_CREATED)
-                            }}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Cr. Note
-                        </button>
-                    )}
+                            <button
+                                onClick={() => {
+                                    setIsOpenModel(true)
+                                    setOpenModel(NoteType.CREDIT_NOTE_CREATED)
+                                }}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Cr. Note
+                            </button>
+                        )}
                     {isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_DEALER_LEDGER_DEBIT_NOTE_ADD
                     ) && (
-                        <button
-                            onClick={() => {
-                                setIsOpenModel(true)
-                                setOpenModel(NoteType.DEBIT_NOTE_CREATED)
-                            }}
-                            className="bg-primary-main text-white rounded py-1 px-3"
-                        >
-                            + Db. Note
-                        </button>
-                    )}
+                            <button
+                                onClick={() => {
+                                    setIsOpenModel(true)
+                                    setOpenModel(NoteType.DEBIT_NOTE_CREATED)
+                                }}
+                                className="bg-primary-main text-white rounded py-1 px-3"
+                            >
+                                + Db. Note
+                            </button>
+                        )}
                 </div>
             </div>
 
@@ -140,16 +133,12 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
-                    onRowsPerPageChange={(newValue) =>
-                        dispatch(setRowsPerPage(newValue))
-                    }
-                    // isFilter
+                    onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
                     isRefresh
                     isDateFilter
                     IsDaterFilterLoading={isTableLoading}
-                    onSubmitDateHandler={(values) => {
-                        dispatch(setFilterBy(values))
-                    }}
+                    onSubmitDateHandler={(values) => dispatch(setFilterBy(values))}
+                    // isFilter
                     // onFilterClick={() => setIsFilterOpen(true)}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
@@ -159,11 +148,6 @@ const DealerLedgerListing = ({ columns, rows }: Props) => {
                     <ATMTable
                         columns={columns}
                         rows={rows}
-                        
-                        selectedRows={selectedRows}
-                        onRowSelect={(selectedRows) =>
-                            setSelectedRows(selectedRows)
-                        }
                         extraClasses="h-full overflow-auto"
                         isLoading={isTableLoading}
                     />

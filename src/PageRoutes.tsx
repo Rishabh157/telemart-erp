@@ -342,7 +342,8 @@ import WarehouseOrderStatusMarkWrapper from './pages/warehouses/view/inventories
 import AgentWiseEnquiryWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseEnquiryWrapper'
 import SaleOrderViewWrapper from './pages/saleOrder/view/SaleOrderViewWrapper'
 import AgentWiseSchemeWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseSchemeWrapper'
-import DealerCreditAmountRequestListingWrapper from './pages/DealerCreditAmountRequest/list/DealerCreditAmountRequestListingWrapper'
+import DealerBalanceRequestListingWrapper from './pages/DealerCreditAmountRequest/list/DealerBalanceRequestListingWrapper'
+import DealerBalanceRequestTabListingWrapper from './pages/dealers/view/tabs/DealerBalanceRequest/DealerBalanceRequestTabListingWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -647,6 +648,17 @@ const PageRoutes = () => {
                                 children={<DealerOrderLedgerListTabWrapper />}
                                 permission={
                                     UserModuleNameTypes.ACTION_DEALER_DEALER_ORDER_LEDGER
+                                }
+                            />
+                        }
+                    />
+                    <Route
+                        path="dealer-balance"
+                        element={
+                            <Authorization
+                                children={<DealerBalanceRequestTabListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST
                                 }
                             />
                         }
@@ -1302,8 +1314,17 @@ const PageRoutes = () => {
                     />
                 </Route>
 
-
-                <Route path="/dealer-credit-request" element={<DealerCreditAmountRequestListingWrapper />} />
+                {/* Dealer Credit Amount Request */}
+                <Route path="/dealer-balance-request"
+                    element={
+                        <Authorization
+                            children={<DealerBalanceRequestListingWrapper />}
+                            permission={
+                                UserModuleNameTypes.NAV_DEALER_BALANCE_REQUEST
+                            }
+                        />
+                    }
+                />
 
                 {/* Warehouse First Call */}
                 <Route

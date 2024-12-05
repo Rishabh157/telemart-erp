@@ -134,10 +134,10 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_MULTI_MAPPING,
     },
     {
-        label: 'Dealer Credits Request',
+        label: 'Dealer Balance Request',
         icon: FaMoneyBillAlt,
-        path: '/dealer-credit-request',
-        name: UserModuleNameTypes.NAV_MULTI_MAPPING,
+        path: '/dealer-balance-request',
+        name: UserModuleNameTypes.NAV_DEALER_BALANCE_REQUEST,
     },
     {
         label: 'Dealer To Dealer',

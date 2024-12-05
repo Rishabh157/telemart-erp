@@ -34,7 +34,7 @@ const DealerCreditAmountRequestListing = ({ columns, rows }: Props) => {
         <div className="h-[calc(100vh-60px)] px-4">
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]  p-1">
-                <ATMPageHeading>Dealer Credit Request</ATMPageHeading>
+                <ATMPageHeading>Dealer Balance Request</ATMPageHeading>
             </div>
 
             <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white ">
