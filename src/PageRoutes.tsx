@@ -342,6 +342,7 @@ import WarehouseOrderStatusMarkWrapper from './pages/warehouses/view/inventories
 import AgentWiseEnquiryWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseEnquiryWrapper'
 import SaleOrderViewWrapper from './pages/saleOrder/view/SaleOrderViewWrapper'
 import AgentWiseSchemeWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseSchemeWrapper'
+import DealerCreditAmountRequestListingWrapper from './pages/DealerCreditAmountRequest/list/DealerCreditAmountRequestListingWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -1300,6 +1301,9 @@ const PageRoutes = () => {
                         }
                     />
                 </Route>
+
+
+                <Route path="/dealer-credit-request" element={<DealerCreditAmountRequestListingWrapper />} />
 
                 {/* Warehouse First Call */}
                 <Route

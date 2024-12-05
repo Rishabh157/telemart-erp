@@ -37,6 +37,7 @@ import { SalesOrderFormInitialValuesFilterWithLabel } from './filter/SalesOrderF
 import { BASE_URL_FILE_PICKER, FILE_BUCKET_NAME } from 'src/utils/constants'
 import ATMRequestStatus, { RequestStatus } from 'src/components/UI/atoms/ATMRequestStatus/ATMRequestStatus'
 import moment from 'moment'
+import { ATMDateTimeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 
 const SaleOrderListingWrapper = () => {
 
@@ -594,9 +595,10 @@ const SaleOrderListingWrapper = () => {
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.SALE_ORDER_LIST_INVOICE_DATE,
-            renderCell: (row: SaleOrderListResponseTypes) => (
-                <span> {row?.invoiceDate} </span>
-            ),
+            renderCell: (row: SaleOrderListResponseTypes) => <ATMDateTimeDisplay createdAt={row?.documents?.[0]?.invoiceDate} />
+            // renderCell: (row: SaleOrderListResponseTypes) => (
+            //     <span> {row?.documents?.[0]?.invoiceDate} </span>
+            // ),
         },
         {
             field: 'expectedDeliveryDate',
